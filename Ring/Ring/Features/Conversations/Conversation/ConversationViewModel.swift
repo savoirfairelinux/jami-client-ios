@@ -57,6 +57,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
     @Published var presence: PresenceStatus = .offline
     @Published var navUserName: String = ""
     @Published var isBlocked: Bool = false
+    @Published var hasPeerSharing: Bool = false
 
     /// Logger
     private let log = SwiftyBeaver.self
@@ -70,6 +71,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
     private let profileService: ProfilesService
     private let callService: CallsService
     private let locationSharingService: LocationSharingService
+    private let peerSharingService: PeerSharingService
     let dataTransferService: DataTransferService
 
     let injectionBag: InjectionBag
@@ -162,6 +164,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
         self.dataTransferService = injectionBag.dataTransferService
         self.callService = injectionBag.callService
         self.locationSharingService = injectionBag.locationSharingService
+        self.peerSharingService = injectionBag.peerSharingService
         let transferHelper = TransferHelper(injectionBag: injectionBag)
 
         swiftUIModel = MessagesListVM(injectionBag: self.injectionBag,
@@ -295,6 +298,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
             }
             subscribeConversationSynchronization()
             subscribeLocationEvents()
+            setupPeerSharingAvailability()
         }
     }
 
@@ -564,6 +568,16 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
         }
     }
 
+    func makePeerSharingViewModel() -> PeerSharingViewModel? {
+        guard conversation.isCoredialog(),
+              let jamiId = conversation.getParticipants().first?.jamiId else { return nil }
+        return PeerSharingViewModel(
+            accountId: conversation.accountId,
+            peerId: jamiId,
+            peerSharingService: peerSharingService
+        )
+    }
+
     func recordVideoFile() {
         closeAllPlayers()
         DispatchQueue.main.async { [weak self] in
@@ -827,6 +841,41 @@ extension ConversationViewModel {
             })
             .disposed(by: conversationBindingsDisposeBag)
     }
+
+    private func setupPeerSharingAvailability() {
+        hasPeerSharing = false
+        guard conversation.isCoredialog(),
+              !isBlocked,
+              let peerId = conversation.getParticipants().first?.jamiId else { return }
+
+        let accountId = conversation.accountId
+
+        peerSharingService.observePeerServices(accountId: accountId, peerId: peerId)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] result in
+                self?.applyPeerSharingResult(accountId: accountId, peerId: peerId, result: result)
+            })
+            .disposed(by: conversationBindingsDisposeBag)
+
+        peerSharingService.queryPeerServices(accountId: accountId, peerId: peerId)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] result in
+                self?.applyPeerSharingResult(accountId: accountId, peerId: peerId, result: result)
+            })
+            .disposed(by: conversationBindingsDisposeBag)
+    }
+
+    private func applyPeerSharingResult(accountId: String, peerId: String, result: PeerServicesResult) {
+        guard conversation.accountId == accountId,
+              conversation.isCoredialog(),
+              conversation.getParticipants().first?.jamiId == peerId else { return }
+        switch result.status {
+        case .success:                 hasPeerSharing = !result.services.isEmpty
+        case .noDevices, .unreachable: hasPeerSharing = false   // definitively offline
+        case .timeout, .internalError: break                    // ambiguous — don't flicker
+        }
+    }
+
 }
 
 // MARK: share message

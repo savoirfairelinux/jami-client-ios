@@ -69,7 +69,8 @@ final class ActiveCallsViewModelTests: XCTestCase {
                                     withCallsProvider: callsProvider,
                                     withLocationSharingService: locationSharingService,
                                     withRequestsService: requestsService,
-                                    withSystemService: systemService)
+                                    withSystemService: systemService,
+                                    withPeerSharingService: TestPeerSharingFactory.createService())
 
         conversationVM = ConversationViewModel(with: injectionBag)
         let conversation = ConversationModel(withId: conversationId1, accountId: accountId1, type: .publicChat)
