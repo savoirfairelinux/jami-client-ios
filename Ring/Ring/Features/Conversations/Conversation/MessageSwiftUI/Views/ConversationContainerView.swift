@@ -22,6 +22,8 @@ struct ConversationContainerView: View {
     @ObservedObject var viewModel: ConversationViewModel
     @StateObject private var mediaPreviewPresenter = MediaPreviewPresenter()
     @SwiftUI.State private var containerWidth: CGFloat = UIScreen.main.bounds.width
+    @SwiftUI.State private var showPeerServices = false
+    @SwiftUI.State private var peerSharingVM: PeerSharingViewModel?
 
     var body: some View {
         MessagesListView(model: viewModel.swiftUIModel)
@@ -53,6 +55,14 @@ struct ConversationContainerView: View {
                 }
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     trailingButtons
+                }
+            }
+            .sheet(isPresented: $showPeerServices, onDismiss: {
+                peerSharingVM?.closePeerSession()
+                peerSharingVM = nil
+            }) {
+                if let peerVM = peerSharingVM {
+                    PeerSharingSheet(viewModel: peerVM)
                 }
             }
     }
@@ -96,11 +106,26 @@ struct ConversationContainerView: View {
 
     @ViewBuilder private var trailingButtons: some View {
         if !viewModel.isBlocked {
+            if viewModel.hasPeerSharing {
+                peerServicesButton
+            }
             audioCallButton
             if !viewModel.isAccountSip {
                 videoCallButton
             }
         }
+    }
+
+    private var peerServicesButton: some View {
+        Button {
+            guard let peerVM = viewModel.makePeerSharingViewModel() else { return }
+            peerSharingVM = peerVM
+            showPeerServices = true
+        } label: {
+            Image(systemName: "network")
+        }
+        .foregroundColor(.jami)
+        .accessibilityLabel(L10n.PeerServices.title)
     }
 
     private var audioCallButton: some View {
@@ -126,7 +151,10 @@ struct ConversationContainerView: View {
         let sidePaddingReserve: CGFloat = 30
         let trailingButtonReserve: CGFloat = 60
         let avatarWidthReserve: CGFloat = 30 + 8
-        let trailingCount = viewModel.isBlocked ? 0 : (viewModel.isAccountSip ? 1 : 2)
+        var trailingCount = viewModel.isBlocked ? 0 : (viewModel.isAccountSip ? 1 : 2)
+        if viewModel.hasPeerSharing && !viewModel.isBlocked {
+            trailingCount += 1
+        }
 
         let totalReserved = backButtonReserve + (sidePaddingReserve * 2) +
             (trailingButtonReserve * CGFloat(trailingCount)) + avatarWidthReserve
