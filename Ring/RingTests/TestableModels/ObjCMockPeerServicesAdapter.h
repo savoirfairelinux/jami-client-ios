@@ -21,15 +21,18 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void (^ObjCMockPeerServicesQueryHandler)(NSString *accountId, NSString *peerUri);
+
 @interface ObjCMockPeerServicesAdapter : PeerServicesAdapter
 
 @property (nonatomic, assign) uint32_t queryReturnValue;
 @property (nonatomic, copy, nullable) NSString *openTunnelReturnValue;
 @property (nonatomic, assign) BOOL closeTunnelReturnValue;
-@property (nonatomic, copy, nullable) NSArray<NSDictionary<NSString*,NSString*>*> *activeTunnelsReturnValue;
+@property (nonatomic, copy, nullable) ObjCMockPeerServicesQueryHandler onQueryPeerServices;
 
 @property (nonatomic, assign) NSInteger closeServiceTunnelCallCount;
 @property (nonatomic, copy, nullable) NSString *lastClosedTunnelId;
+@property (nonatomic, assign) NSInteger openServiceTunnelCallCount;
 
 @end
 

@@ -1126,6 +1126,34 @@ internal enum L10n {
     /// New file
     internal static let newFile = L10n.tr("Localizable", "notifications.newFile", fallback: "New file")
   }
+  internal enum PeerServices {
+    /// Connect
+    internal static let connect = L10n.tr("Localizable", "peerServices.connect", fallback: "Connect")
+    /// Connecting…
+    internal static let connecting = L10n.tr("Localizable", "peerServices.connecting", fallback: "Connecting…")
+    /// Disconnect
+    internal static let disconnect = L10n.tr("Localizable", "peerServices.disconnect", fallback: "Disconnect")
+    /// Done
+    internal static let done = L10n.tr("Localizable", "peerServices.done", fallback: "Done")
+    /// No shared services available
+    internal static let empty = L10n.tr("Localizable", "peerServices.empty", fallback: "No shared services available")
+    /// Contact is offline
+    internal static let errorOffline = L10n.tr("Localizable", "peerServices.errorOffline", fallback: "Contact is offline")
+    /// Request timed out
+    internal static let errorTimeout = L10n.tr("Localizable", "peerServices.errorTimeout", fallback: "Request timed out")
+    /// Could not retrieve services
+    internal static let errorUnknown = L10n.tr("Localizable", "peerServices.errorUnknown", fallback: "Could not retrieve services")
+    /// Contact is unreachable
+    internal static let errorUnreachable = L10n.tr("Localizable", "peerServices.errorUnreachable", fallback: "Contact is unreachable")
+    /// Link copied to clipboard
+    internal static let linkCopied = L10n.tr("Localizable", "peerServices.linkCopied", fallback: "Link copied to clipboard")
+    /// Open
+    internal static let `open` = L10n.tr("Localizable", "peerServices.open", fallback: "Open")
+    /// Refresh services
+    internal static let refresh = L10n.tr("Localizable", "peerServices.refresh", fallback: "Refresh services")
+    /// Shared Services
+    internal static let title = L10n.tr("Localizable", "peerServices.title", fallback: "Shared Services")
+  }
   internal enum Scan {
     /// Bad QR code
     internal static let badQrCode = L10n.tr("Localizable", "scan.badQrCode", fallback: "Bad QR code")
