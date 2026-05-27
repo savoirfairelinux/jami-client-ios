@@ -70,7 +70,8 @@ final class AvatarProviderTests: XCTestCase {
                                     withCallsProvider: callsProvider,
                                     withLocationSharingService: locationSharingService,
                                     withRequestsService: requestsService,
-                                    withSystemService: systemService)
+                                    withSystemService: systemService,
+                                    withPeerSharingService: TestPeerSharingFactory.createService())
     }
 
     override func tearDownWithError() throws {
