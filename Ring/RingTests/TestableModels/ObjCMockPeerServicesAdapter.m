@@ -24,10 +24,10 @@
     self = [super init];
     if (self) {
         _queryReturnValue = 1;
-        _openTunnelReturnValue = @"tunnel-001";
+        _openTunnelReturnValue = @"test-tunnel-id";
         _closeTunnelReturnValue = YES;
-        _activeTunnelsReturnValue = @[];
         _closeServiceTunnelCallCount = 0;
+        _openServiceTunnelCallCount = 0;
     }
     return self;
 }
@@ -43,6 +43,7 @@
                                   serviceId:(NSString*)serviceId
                                 serviceName:(NSString*)serviceName
                                   localPort:(uint16_t)localPort {
+    self.openServiceTunnelCallCount++;
     return self.openTunnelReturnValue;
 }
 
@@ -51,10 +52,6 @@
     self.closeServiceTunnelCallCount++;
     self.lastClosedTunnelId = tunnelId;
     return self.closeTunnelReturnValue;
-}
-
-- (NSArray<NSDictionary<NSString*,NSString*>*>*)getActiveTunnelsWithAccountId:(NSString*)accountId {
-    return self.activeTunnelsReturnValue;
 }
 
 @end

@@ -26,10 +26,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) uint32_t queryReturnValue;
 @property (nonatomic, copy, nullable) NSString *openTunnelReturnValue;
 @property (nonatomic, assign) BOOL closeTunnelReturnValue;
-@property (nonatomic, copy, nullable) NSArray<NSDictionary<NSString*,NSString*>*> *activeTunnelsReturnValue;
 
 @property (nonatomic, assign) NSInteger closeServiceTunnelCallCount;
 @property (nonatomic, copy, nullable) NSString *lastClosedTunnelId;
+@property (nonatomic, assign) NSInteger openServiceTunnelCallCount;
 
 @end
 
