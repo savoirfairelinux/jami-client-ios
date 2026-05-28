@@ -391,6 +391,13 @@
 "accountPage.turnPassword" = "TURN password";
 "accountPage.turnRealm" = "TURN realm";
 "accountPage.upnpEnabled" = "Use UPnP";
+"accountPage.stunEnabled" = "Use STUN";
+"accountPage.stunServer" = "STUN address";
+"accountPage.publicAddressHeader" = "Public address";
+"accountPage.allowIPAutoRewrite" = "Allow IP auto rewrite";
+"accountPage.publishedSameAsLocal" = "Published same as local";
+"accountPage.publishedAddress" = "Address";
+"accountPage.publishedPort" = "Port";
 "accountPage.security" = "Security";
 "accountPage.enableSRTP" = "Enable SDES key exchange";
 "accountPage.encryptNegotiation" = "Encrypt negotiation (TLS)";
