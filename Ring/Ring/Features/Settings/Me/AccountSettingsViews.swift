@@ -274,6 +274,40 @@ struct SecuritySettingsView: View {
                     setAction: { newValue in model.enableSRTP(enable: newValue) }
                 )
             }
+
+            Section {
+                ToggleCell(
+                    toggleText: L10n.AccountPage.encryptNegotiation,
+                    getAction: { model.enableTLS },
+                    setAction: { newValue in model.enableTLS(enable: newValue) }
+                )
+
+                if model.enableTLS {
+                    ToggleCell(
+                        toggleText: L10n.AccountPage.tlsVerifyServerCertificates,
+                        getAction: { model.tlsVerifyServer },
+                        setAction: { newValue in model.setTlsVerifyServer(enable: newValue) }
+                    )
+
+                    ToggleCell(
+                        toggleText: L10n.AccountPage.tlsVerifyClientCertificates,
+                        getAction: { model.tlsVerifyClient },
+                        setAction: { newValue in model.setTlsVerifyClient(enable: newValue) }
+                    )
+
+                    ToggleCell(
+                        toggleText: L10n.AccountPage.tlsRequireTlsCertificate,
+                        getAction: { model.tlsRequireClientCertificate },
+                        setAction: { newValue in model.setTlsRequireClientCertificate(enable: newValue) }
+                    )
+
+                    ToggleCell(
+                        toggleText: L10n.AccountPage.tlsDisableSecureDlgCheck,
+                        getAction: { model.tlsDisableSecureDlgCheck },
+                        setAction: { newValue in model.setTlsDisableSecureDlgCheck(enable: newValue) }
+                    )
+                }
+            }
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle(L10n.AccountPage.security)

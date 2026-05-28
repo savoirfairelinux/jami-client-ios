@@ -36,6 +36,11 @@ class AccountSettings: ObservableObject {
     @Published var autoRegistrationEnabled: Bool = false
     @Published var autoRegistrationExpirationTime = ""
     @Published var enableSRTP: Bool = false
+    @Published var enableTLS: Bool = false
+    @Published var tlsVerifyServer: Bool = true
+    @Published var tlsVerifyClient: Bool = true
+    @Published var tlsRequireClientCertificate: Bool = true
+    @Published var tlsDisableSecureDlgCheck: Bool = true
 
     // turn
     @Published var turnServer = ""
@@ -243,6 +248,11 @@ extension AccountSettings {
         self.autoRegistrationEnabled = self.getBoolState(for: ConfigKey.keepAliveEnabled)
         self.autoRegistrationExpirationTime = self.getStringState(for: ConfigKey.registrationExpire)
         self.enableSRTP = self.getSRTPEnabled()
+        self.enableTLS = self.getBoolState(for: ConfigKey.tlsEnable)
+        self.tlsVerifyServer = self.getBoolState(for: ConfigKey.tlsVerifyServer)
+        self.tlsVerifyClient = self.getBoolState(for: ConfigKey.tlsVerifyClient)
+        self.tlsRequireClientCertificate = self.getBoolState(for: ConfigKey.tlsRequireClientCertificate)
+        self.tlsDisableSecureDlgCheck = self.getBoolState(for: ConfigKey.disableSecureDlgCheck)
     }
 
     func getSRTPEnabled() -> Bool {
@@ -255,6 +265,37 @@ extension AccountSettings {
         if self.enableSRTP == enable { return }
         self.accountService.enableSRTP(enable: enable, accountId: account.id)
         self.enableSRTP = enable
+    }
+
+    func enableTLS(enable: Bool) {
+        switchSipBoolProperty(ConfigKey.tlsEnable, current: enableTLS, enable: enable) { self.enableTLS = $0 }
+    }
+
+    func setTlsVerifyServer(enable: Bool) {
+        switchSipBoolProperty(ConfigKey.tlsVerifyServer, current: tlsVerifyServer, enable: enable) { self.tlsVerifyServer = $0 }
+    }
+
+    func setTlsVerifyClient(enable: Bool) {
+        switchSipBoolProperty(ConfigKey.tlsVerifyClient, current: tlsVerifyClient, enable: enable) { self.tlsVerifyClient = $0 }
+    }
+
+    func setTlsRequireClientCertificate(enable: Bool) {
+        switchSipBoolProperty(ConfigKey.tlsRequireClientCertificate, current: tlsRequireClientCertificate, enable: enable) {
+            self.tlsRequireClientCertificate = $0
+        }
+    }
+
+    func setTlsDisableSecureDlgCheck(enable: Bool) {
+        switchSipBoolProperty(ConfigKey.disableSecureDlgCheck, current: tlsDisableSecureDlgCheck, enable: enable) {
+            self.tlsDisableSecureDlgCheck = $0
+        }
+    }
+
+    private func switchSipBoolProperty(_ key: ConfigKey, current: Bool, enable: Bool, update: (Bool) -> Void) {
+        if current == enable { return }
+        let property = ConfigKeyModel(withKey: key)
+        self.accountService.switchAccountPropertyTo(state: enable, accountId: account.id, property: property)
+        update(enable)
     }
 
     func setExpirationTime() {
