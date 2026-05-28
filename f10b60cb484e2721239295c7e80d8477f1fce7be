@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa3a49db_33f751cf",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSettings.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-05-28T16:32:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7275d864_13787dcd",
+      "revId": "f10b60cb484e2721239295c7e80d8477f1fce7be",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e4fdaaa5_4eb7c0eb",
@@ -35,6 +53,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c4bff9b_705eb3ac",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSettingsViews.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-05-28T16:32:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4fdaaa5_4eb7c0eb",
+      "revId": "f10b60cb484e2721239295c7e80d8477f1fce7be",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1f8bc5c3_dbcaa8a1",
@@ -48,6 +84,24 @@
       "writtenOn": "2026-05-28T16:00:47Z",
       "side": 1,
       "message": "Line 302: `tlsDisableSecureDlgCheck` is a dangerous negative security setting exposed as a normal toggle without warning. Users may enable it without understanding that it weakens SIP dialog security checks. Prefer wording that describes the risk, or gate it behind an advanced/security warning section.",
+      "revId": "f10b60cb484e2721239295c7e80d8477f1fce7be",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe4fcc1b_c1a8cbbc",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSettingsViews.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-05-28T16:32:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f8bc5c3_dbcaa8a1",
       "revId": "f10b60cb484e2721239295c7e80d8477f1fce7be",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
