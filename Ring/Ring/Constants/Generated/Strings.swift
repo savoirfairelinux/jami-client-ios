@@ -343,10 +343,12 @@ internal enum L10n {
     internal static let enableBoothMode = L10n.tr("Localizable", "accountPage.enableBoothMode", fallback: "Enable Booth Mode")
     /// Enable notifications
     internal static let enableNotifications = L10n.tr("Localizable", "accountPage.enableNotifications", fallback: "Enable notifications")
-    /// Encrypt media streams (SRTP)
-    internal static let enableSRTP = L10n.tr("Localizable", "accountPage.enableSRTP", fallback: "Encrypt media streams (SRTP)")
+    /// Enable SDES key exchange
+    internal static let enableSRTP = L10n.tr("Localizable", "accountPage.enableSRTP", fallback: "Enable SDES key exchange")
     /// Password
     internal static let encryptAccount = L10n.tr("Localizable", "accountPage.encryptAccount", fallback: "Password")
+    /// Encrypt negotiation (TLS)
+    internal static let encryptNegotiation = L10n.tr("Localizable", "accountPage.encryptNegotiation", fallback: "Encrypt negotiation (TLS)")
     /// Generating PIN code…
     internal static let generatingPin = L10n.tr("Localizable", "accountPage.generatingPin", fallback: "Generating PIN code…")
     /// Invite friends

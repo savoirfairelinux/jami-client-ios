@@ -392,7 +392,8 @@
 "accountPage.turnRealm" = "TURN realm";
 "accountPage.upnpEnabled" = "Use UPnP";
 "accountPage.security" = "Security";
-"accountPage.enableSRTP" = "Encrypt media streams (SRTP)";
+"accountPage.enableSRTP" = "Enable SDES key exchange";
+"accountPage.encryptNegotiation" = "Encrypt negotiation (TLS)";
 "accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
 "accountPage.profileHeader" = "Profile";
 "accountPage.profileNameNotSelected" = "Name not selected";
