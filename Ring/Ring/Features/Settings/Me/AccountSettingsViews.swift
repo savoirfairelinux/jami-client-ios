@@ -188,6 +188,9 @@ struct ConnectivitySettingsView: View {
                 dhtConfigurationView()
             }
             connectivityView()
+            if model.account.type == .sip {
+                publicAddressView()
+            }
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle(L10n.AccountPage.connectivityAndConfiguration)
@@ -252,6 +255,65 @@ struct ConnectivitySettingsView: View {
                     model.saveTurnSettings()
                 })) {
                     FieldRowView(label: L10n.AccountPage.turnRealm, value: model.turnRealm)
+                }
+            }
+
+            if model.account.type == .sip {
+                ToggleCell(
+                    toggleText: L10n.AccountPage.stunEnabled,
+                    getAction: { model.stunEnabled },
+                    setAction: { newValue in model.enableStun(enable: newValue) }
+                )
+
+                if model.stunEnabled {
+                    NavigationLink(destination: EditableFieldView(value: $model.stunServer, title: L10n.AccountPage.stunServer, placeholder: L10n.AccountPage.stunServer, onDisappearAction: {
+                        model.saveStunSettings()
+                    }, validate: { AccountSettings.isValidStunServer($0) }, errorMessage: L10n.AccountPage.invalidAddress)) {
+                        FieldRowView(label: L10n.AccountPage.stunServer, value: model.stunServer)
+                    }
+                }
+            }
+        }
+    }
+
+    func publicAddressView() -> some View {
+        Section(header: Text(L10n.AccountPage.publicAddressHeader)) {
+            ToggleCell(
+                toggleText: L10n.AccountPage.allowIPAutoRewrite,
+                getAction: { model.allowIPAutoRewrite },
+                setAction: { newValue in model.enableAllowIPAutoRewrite(enable: newValue) }
+            )
+
+            if !model.allowIPAutoRewrite {
+                ToggleCell(
+                    toggleText: L10n.AccountPage.publishedSameAsLocal,
+                    getAction: { model.publishedSameAsLocal },
+                    setAction: { newValue in model.enablePublishedSameAsLocal(enable: newValue) }
+                )
+
+                if !model.publishedSameAsLocal {
+                    NavigationLink(destination: EditableFieldView(value: $model.publishedAddress,
+                                                                  title: L10n.AccountPage.publishedAddress,
+                                                                  placeholder: L10n.AccountPage.publishedAddress,
+                                                                  onDisappearAction: {
+                                                                    model.savePublishedAddress()
+                                                                  },
+                                                                  validate: { !$0.isEmpty },
+                                                                  errorMessage: L10n.AccountPage.invalidAddress)) {
+                        FieldRowView(label: L10n.AccountPage.publishedAddress, value: model.publishedAddress)
+                    }
+
+                    NavigationLink(destination: EditableFieldView(value: $model.publishedPort,
+                                                                  title: L10n.AccountPage.publishedPort,
+                                                                  placeholder: L10n.AccountPage.publishedPort,
+                                                                  onDisappearAction: {
+                                                                    model.savePublishedPort()
+                                                                  },
+                                                                  keyboardType: .numberPad,
+                                                                  validate: { AccountSettings.isValid($0, in: AccountSettings.publishedPortRange) },
+                                                                  errorMessage: L10n.AccountPage.invalidPort)) {
+                        FieldRowView(label: L10n.AccountPage.publishedPort, value: model.publishedPort)
+                    }
                 }
             }
         }
@@ -320,9 +382,23 @@ struct EditExpirationtime: View {
     @SwiftUI.State private var isTextFieldFocused = false
     @SwiftUI.State private var stepperValue: Int = 0
 
+    private var isValid: Bool {
+        AccountSettings.isValid(expirationtime, in: AccountSettings.registrationExpireRange)
+    }
+
+    @ViewBuilder
+    private var footer: some View {
+        if isValid {
+            Text(L10n.AccountPage.selectSipExpirationTime)
+        } else {
+            Text(L10n.AccountPage.invalidSipExpirationTime)
+                .foregroundColor(.red)
+        }
+    }
+
     var body: some View {
         Form {
-            Section(footer: Text(L10n.AccountPage.selectSipExpirationTime)) {
+            Section(footer: footer) {
                 HStack {
                     TextField(L10n.Global.time, text: $expirationtime)
                         .padding(.vertical, 10)
@@ -343,10 +419,11 @@ struct EditExpirationtime: View {
                             stepperValue
                         },
                         set: { newValue in
-                            stepperValue = newValue
-                            expirationtime = "\(newValue)"
+                            let range = AccountSettings.registrationExpireRange
+                            stepperValue = min(max(range.lowerBound, newValue), range.upperBound)
+                            expirationtime = "\(stepperValue)"
                         }
-                    ), in: 0...3600, step: 1)
+                    ), in: AccountSettings.registrationExpireRange, step: 1)
                 }
             }
         }
