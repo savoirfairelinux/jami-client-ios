@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7275d864_13787dcd",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSettings.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-28T16:00:47Z",
+      "side": 1,
+      "message": "[Critical] Line 42: The new TLS option `tlsDisableSecureDlgCheck` defaults to `true`, which means the UI can present and potentially persist an insecure SIP/TLS setting before account config is loaded or when the key is absent. A security-bypass option should default to the safe value and only be enabled explicitly from persisted configuration. Suggested fix:\n```suggestion\n    @Published var tlsDisableSecureDlgCheck: Bool \u003d false\n```",
+      "revId": "f10b60cb484e2721239295c7e80d8477f1fce7be",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4fdaaa5_4eb7c0eb",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSettingsViews.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-28T16:00:47Z",
+      "side": 1,
+      "message": "[Critical] Line 287: This view references several localization constants (`tlsVerifyServerCertificates`, `tlsVerifyClientCertificates`, `tlsRequireTlsCertificate`, `tlsDisableSecureDlgCheck`) that are not added in this patch\u0027s generated strings or English localization diff. If they do not already exist, this will fail to compile; if they do exist only in generated code, the English strings are still missing. Add the corresponding `Localizable.strings` entries and regenerate `Strings.swift`.",
+      "revId": "f10b60cb484e2721239295c7e80d8477f1fce7be",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f8bc5c3_dbcaa8a1",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSettingsViews.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-28T16:00:47Z",
+      "side": 1,
+      "message": "Line 302: `tlsDisableSecureDlgCheck` is a dangerous negative security setting exposed as a normal toggle without warning. Users may enable it without understanding that it weakens SIP dialog security checks. Prefer wording that describes the risk, or gate it behind an advanced/security warning section.",
+      "revId": "f10b60cb484e2721239295c7e80d8477f1fce7be",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
