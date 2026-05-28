@@ -48,6 +48,16 @@ class AccountSettings: ObservableObject {
     @Published var turnPassword = ""
     @Published var turnRealm = ""
 
+    // stun
+    @Published var stunEnabled: Bool = false
+    @Published var stunServer = ""
+
+    // public address
+    @Published var allowIPAutoRewrite: Bool = true
+    @Published var publishedSameAsLocal: Bool = true
+    @Published var publishedAddress = ""
+    @Published var publishedPort = ""
+
     @Published var proxyAddress = ""
     @Published var proxyListUrl = ""
     @Published var currentProxy = ""
@@ -247,6 +257,12 @@ extension AccountSettings {
     private func setUPSIPParameters() {
         self.autoRegistrationEnabled = self.getBoolState(for: ConfigKey.keepAliveEnabled)
         self.autoRegistrationExpirationTime = self.getStringState(for: ConfigKey.registrationExpire)
+        self.stunEnabled = self.getBoolState(for: ConfigKey.stunEnable)
+        self.stunServer = self.getStringState(for: ConfigKey.stunServer)
+        self.allowIPAutoRewrite = self.getBoolState(for: ConfigKey.allowIPAutoRewrite)
+        self.publishedSameAsLocal = self.getBoolState(for: ConfigKey.publishedSameAsLocal)
+        self.publishedAddress = self.getStringState(for: ConfigKey.publishedAddress)
+        self.publishedPort = self.getStringState(for: ConfigKey.publishedPort)
         self.enableSRTP = self.getSRTPEnabled()
         self.enableTLS = self.getBoolState(for: ConfigKey.tlsEnable)
         self.tlsVerifyServer = self.getBoolState(for: ConfigKey.tlsVerifyServer)
@@ -299,8 +315,9 @@ extension AccountSettings {
     }
 
     func setExpirationTime() {
-        let autoRegistrationExpirationTime = self.getStringState(for: ConfigKey.registrationExpire)
-        if self.autoRegistrationExpirationTime == autoRegistrationExpirationTime { return }
+        guard AccountSettings.isValid(autoRegistrationExpirationTime, in: AccountSettings.registrationExpireRange) else { return }
+        let saved = self.getStringState(for: ConfigKey.registrationExpire)
+        if self.autoRegistrationExpirationTime == saved { return }
         let property = ConfigKeyModel(withKey: ConfigKey.registrationExpire)
         self.accountService.setAccountProperty(property: property, value: self.autoRegistrationExpirationTime, accountId: account.id)
     }
@@ -310,5 +327,40 @@ extension AccountSettings {
         let property = ConfigKeyModel(withKey: ConfigKey.keepAliveEnabled)
         self.accountService.switchAccountPropertyTo(state: enable, accountId: account.id, property: property)
         self.autoRegistrationEnabled = enable
+    }
+
+    func enableAllowIPAutoRewrite(enable: Bool) {
+        switchSipBoolProperty(ConfigKey.allowIPAutoRewrite, current: allowIPAutoRewrite, enable: enable) {
+            self.allowIPAutoRewrite = $0
+        }
+    }
+
+    func enablePublishedSameAsLocal(enable: Bool) {
+        switchSipBoolProperty(ConfigKey.publishedSameAsLocal, current: publishedSameAsLocal, enable: enable) {
+            self.publishedSameAsLocal = $0
+        }
+    }
+
+    func savePublishedAddressSettings() {
+        guard AccountSettings.isValid(publishedPort, in: AccountSettings.publishedPortRange) else { return }
+        self.accountService.setPublishedAddressSettings(accountId: account.id, address: publishedAddress, port: publishedPort)
+    }
+
+    static let publishedPortRange = 0...Int(UInt16.max)
+    static let registrationExpireRange = 60...(7 * 24 * 3600)
+
+    static func isValid(_ value: String, in range: ClosedRange<Int>) -> Bool {
+        guard let number = Int(value) else { return false }
+        return range.contains(number)
+    }
+
+    func enableStun(enable: Bool) {
+        switchSipBoolProperty(ConfigKey.stunEnable, current: stunEnabled, enable: enable) {
+            self.stunEnabled = $0
+        }
+    }
+
+    func saveStunSettings() {
+        self.accountService.setStunSettings(accountId: account.id, server: stunServer)
     }
 }

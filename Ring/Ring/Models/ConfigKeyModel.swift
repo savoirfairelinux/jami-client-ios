@@ -30,6 +30,7 @@ enum ConfigKey: String {
     case ringtoneEnabled = "Account.ringtoneEnabled"
     case keepAliveEnabled = "Account.keepAliveEnabled"
     case localInterface = "Account.localInterface"
+    case allowIPAutoRewrite = "Account.allowIPAutoRewrite"
     case publishedSameAsLocal = "Account.publishedSameAsLocal"
     case localPort = "Account.localPort"
     case publishedPort = "Account.publishedPort"
@@ -130,6 +131,7 @@ struct ConfigKeyModel: Hashable {
                                   .videoEnabled,
                                   .ringtoneEnabled,
                                   .keepAliveEnabled,
+                                  .allowIPAutoRewrite,
                                   .publishedSameAsLocal,
                                   .stunEnable,
                                   .turnEnable,
