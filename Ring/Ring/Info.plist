@@ -39,6 +39,8 @@
 	<string>Used to share your location with your contacts</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>The microphone will be used for communication during a call.</string>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Jami uses the local network to discover your router (UPnP) and improve call connectivity.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Used to save selected images</string>
 	<key>NSPhotoLibraryUsageDescription</key>
