@@ -275,6 +275,8 @@ internal enum L10n {
     internal static let accountIdentity = L10n.tr("Localizable", "accountPage.accountIdentity", fallback: "Account identity")
     /// These settings will only apply to this account.
     internal static let accountSettingsExplanation = L10n.tr("Localizable", "accountPage.accountSettingsExplanation", fallback: "These settings will only apply to this account.")
+    /// Allow IP auto rewrite
+    internal static let allowIPAutoRewrite = L10n.tr("Localizable", "accountPage.allowIPAutoRewrite", fallback: "Allow IP auto rewrite")
     /// App settings
     internal static let appSettings = L10n.tr("Localizable", "accountPage.appSettings", fallback: "App settings")
     /// These settings will apply to the entire application.
@@ -351,6 +353,12 @@ internal enum L10n {
     internal static let encryptNegotiation = L10n.tr("Localizable", "accountPage.encryptNegotiation", fallback: "Encrypt negotiation (TLS)")
     /// Generating PIN code…
     internal static let generatingPin = L10n.tr("Localizable", "accountPage.generatingPin", fallback: "Generating PIN code…")
+    /// Enter a valid address
+    internal static let invalidAddress = L10n.tr("Localizable", "accountPage.invalidAddress", fallback: "Enter a valid address")
+    /// Enter a value between 0 and 65535
+    internal static let invalidPort = L10n.tr("Localizable", "accountPage.invalidPort", fallback: "Enter a value between 0 and 65535")
+    /// Enter a value between 60 and 604800 seconds
+    internal static let invalidSipExpirationTime = L10n.tr("Localizable", "accountPage.invalidSipExpirationTime", fallback: "Enter a value between 60 and 604800 seconds")
     /// Invite friends
     internal static let inviteFriends = L10n.tr("Localizable", "accountPage.inviteFriends", fallback: "Invite friends")
     /// Link another device
@@ -423,6 +431,14 @@ internal enum L10n {
     internal static let proxyListURL = L10n.tr("Localizable", "accountPage.proxyListURL", fallback: "Proxy list URL")
     /// Proxy address
     internal static let proxyPaceholder = L10n.tr("Localizable", "accountPage.proxyPaceholder", fallback: "Proxy address")
+    /// Public address
+    internal static let publicAddressHeader = L10n.tr("Localizable", "accountPage.publicAddressHeader", fallback: "Public address")
+    /// Address
+    internal static let publishedAddress = L10n.tr("Localizable", "accountPage.publishedAddress", fallback: "Address")
+    /// Port
+    internal static let publishedPort = L10n.tr("Localizable", "accountPage.publishedPort", fallback: "Port")
+    /// Published same as local
+    internal static let publishedSameAsLocal = L10n.tr("Localizable", "accountPage.publishedSameAsLocal", fallback: "Published same as local")
     /// The username is unavailable.
     internal static let registerNameErrorMessage = L10n.tr("Localizable", "accountPage.registerNameErrorMessage", fallback: "The username is unavailable.")
     /// Register a username to help others more easily find and reach you on Jami.
@@ -445,6 +461,10 @@ internal enum L10n {
     internal static let settingsHeader = L10n.tr("Localizable", "accountPage.settingsHeader", fallback: "Settings")
     /// Registration expiration time (seconds)
     internal static let sipExpirationTime = L10n.tr("Localizable", "accountPage.sipExpirationTime", fallback: "Registration expiration time (seconds)")
+    /// Use STUN
+    internal static let stunEnabled = L10n.tr("Localizable", "accountPage.stunEnabled", fallback: "Use STUN")
+    /// STUN address
+    internal static let stunServer = L10n.tr("Localizable", "accountPage.stunServer", fallback: "STUN address")
     /// This device
     internal static let thisDevice = L10n.tr("Localizable", "accountPage.thisDevice", fallback: "This device")
     /// Disable secure dialog check for incoming TLS data
