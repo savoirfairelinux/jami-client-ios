@@ -209,6 +209,7 @@ struct FocusableTextField: UIViewRepresentable {
     @Binding var isFirstResponder: Bool
     var placeholder: String = ""
     var identifier: String = ""
+    var keyboardType: UIKeyboardType = .default
 
     class Coordinator: NSObject, UITextFieldDelegate {
         @Binding var text: String
@@ -245,6 +246,7 @@ struct FocusableTextField: UIViewRepresentable {
         textField.autocorrectionType = .no
         textField.autocapitalizationType = .none
         textField.spellCheckingType = .no
+        textField.keyboardType = keyboardType
         textField.accessibilityIdentifier = identifier
         return textField
     }
@@ -333,11 +335,22 @@ struct EditableFieldView: View {
     var placeholder: String
     @SwiftUI.State private var isTextFieldFocused = true
     var onDisappearAction: () -> Void // Closure to handle save action on disappear
+    var keyboardType: UIKeyboardType = .default
+    var validate: ((String) -> Bool)?
+    var errorMessage: String = ""
+
+    @ViewBuilder
+    private var footer: some View {
+        if let validate = validate, !validate(value) {
+            Text(errorMessage)
+                .foregroundColor(.red)
+        }
+    }
 
     var body: some View {
         Form {
-            Section {
-                FocusableTextField(text: $value, isFirstResponder: $isTextFieldFocused, placeholder: placeholder)
+            Section(footer: footer) {
+                FocusableTextField(text: $value, isFirstResponder: $isTextFieldFocused, placeholder: placeholder, keyboardType: keyboardType)
             }
         }
         .navigationTitle(L10n.Global.edit + " \(title)")
