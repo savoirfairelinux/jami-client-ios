@@ -188,6 +188,9 @@ struct ConnectivitySettingsView: View {
                 dhtConfigurationView()
             }
             connectivityView()
+            if model.account.type == .sip {
+                publicAddressView()
+            }
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle(L10n.AccountPage.connectivityAndConfiguration)
@@ -252,6 +255,58 @@ struct ConnectivitySettingsView: View {
                     model.saveTurnSettings()
                 })) {
                     FieldRowView(label: L10n.AccountPage.turnRealm, value: model.turnRealm)
+                }
+            }
+
+            ToggleCell(
+                toggleText: L10n.AccountPage.stunEnabled,
+                getAction: { model.stunEnabled },
+                setAction: { newValue in model.enableStun(enable: newValue) }
+            )
+
+            if model.stunEnabled {
+                NavigationLink(destination: EditableFieldView(value: $model.stunServer, title: L10n.AccountPage.stunServer, placeholder: L10n.AccountPage.stunServer, onDisappearAction: {
+                    model.saveStunSettings()
+                })) {
+                    FieldRowView(label: L10n.AccountPage.stunServer, value: model.stunServer)
+                }
+            }
+        }
+    }
+
+    func publicAddressView() -> some View {
+        Section(header: Text(L10n.AccountPage.publicAddressHeader)) {
+            ToggleCell(
+                toggleText: L10n.AccountPage.allowIPAutoRewrite,
+                getAction: { model.allowIPAutoRewrite },
+                setAction: { newValue in model.enableAllowIPAutoRewrite(enable: newValue) }
+            )
+
+            if !model.allowIPAutoRewrite {
+                ToggleCell(
+                    toggleText: L10n.AccountPage.publishedSameAsLocal,
+                    getAction: { model.publishedSameAsLocal },
+                    setAction: { newValue in model.enablePublishedSameAsLocal(enable: newValue) }
+                )
+
+                if !model.publishedSameAsLocal {
+                    NavigationLink(destination: EditableFieldView(value: $model.publishedAddress,
+                                                                      title: L10n.AccountPage.publishedAddress,
+                                                                      placeholder: L10n.AccountPage.publishedAddress,
+                                                                      onDisappearAction: {
+                                                                        model.savePublishedAddressSettings()
+                                                                      })) {
+                        FieldRowView(label: L10n.AccountPage.publishedAddress, value: model.publishedAddress)
+                    }
+
+                    NavigationLink(destination: EditableFieldView(value: $model.publishedPort,
+                                                                      title: L10n.AccountPage.publishedPort,
+                                                                      placeholder: L10n.AccountPage.publishedPort,
+                                                                      onDisappearAction: {
+                                                                        model.savePublishedAddressSettings()
+                                                                      })) {
+                        FieldRowView(label: L10n.AccountPage.publishedPort, value: model.publishedPort)
+                    }
                 }
             }
         }
@@ -346,7 +401,7 @@ struct EditExpirationtime: View {
                             stepperValue = newValue
                             expirationtime = "\(newValue)"
                         }
-                    ), in: 0...3600, step: 1)
+                    ), in: 60...604800, step: 1)
                 }
             }
         }

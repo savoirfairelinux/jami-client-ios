@@ -48,6 +48,16 @@ class AccountSettings: ObservableObject {
     @Published var turnPassword = ""
     @Published var turnRealm = ""
 
+    // stun
+    @Published var stunEnabled: Bool = false
+    @Published var stunServer = ""
+
+    // public address
+    @Published var allowIPAutoRewrite: Bool = true
+    @Published var publishedSameAsLocal: Bool = true
+    @Published var publishedAddress = ""
+    @Published var publishedPort = ""
+
     @Published var proxyAddress = ""
     @Published var proxyListUrl = ""
     @Published var currentProxy = ""
@@ -113,6 +123,19 @@ class AccountSettings: ObservableObject {
 
     func saveTurnSettings() {
         self.accountService.setTurnSettings(accountId: account.id, server: turnServer, username: turnUsername, password: turnPassword, realm: turnRealm)
+    }
+
+    func enableStun(enable: Bool) {
+        if self.stunEnabled == enable {
+            return
+        }
+        let property = ConfigKeyModel(withKey: ConfigKey.stunEnable)
+        self.accountService.switchAccountPropertyTo(state: enable, accountId: account.id, property: property)
+        self.stunEnabled = enable
+    }
+
+    func saveStunSettings() {
+        self.accountService.setStunSettings(accountId: account.id, server: stunServer)
     }
 }
 
@@ -247,6 +270,12 @@ extension AccountSettings {
     private func setUPSIPParameters() {
         self.autoRegistrationEnabled = self.getBoolState(for: ConfigKey.keepAliveEnabled)
         self.autoRegistrationExpirationTime = self.getStringState(for: ConfigKey.registrationExpire)
+        self.stunEnabled = self.getBoolState(for: ConfigKey.stunEnable)
+        self.stunServer = self.getStringState(for: ConfigKey.stunServer)
+        self.allowIPAutoRewrite = self.getBoolState(for: ConfigKey.allowIPAutoRewrite)
+        self.publishedSameAsLocal = self.getBoolState(for: ConfigKey.publishedSameAsLocal)
+        self.publishedAddress = self.getStringState(for: ConfigKey.publishedAddress)
+        self.publishedPort = self.getStringState(for: ConfigKey.publishedPort)
         self.enableSRTP = self.getSRTPEnabled()
         self.enableTLS = self.getBoolState(for: ConfigKey.tlsEnable)
         self.tlsVerifyServer = self.getBoolState(for: ConfigKey.tlsVerifyServer)
@@ -310,5 +339,21 @@ extension AccountSettings {
         let property = ConfigKeyModel(withKey: ConfigKey.keepAliveEnabled)
         self.accountService.switchAccountPropertyTo(state: enable, accountId: account.id, property: property)
         self.autoRegistrationEnabled = enable
+    }
+
+    func enableAllowIPAutoRewrite(enable: Bool) {
+        switchSipBoolProperty(ConfigKey.allowIPAutoRewrite, current: allowIPAutoRewrite, enable: enable) {
+            self.allowIPAutoRewrite = $0
+        }
+    }
+
+    func enablePublishedSameAsLocal(enable: Bool) {
+        switchSipBoolProperty(ConfigKey.publishedSameAsLocal, current: publishedSameAsLocal, enable: enable) {
+            self.publishedSameAsLocal = $0
+        }
+    }
+
+    func savePublishedAddressSettings() {
+        self.accountService.setPublishedAddressSettings(accountId: account.id, address: publishedAddress, port: publishedPort)
     }
 }

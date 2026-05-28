@@ -822,6 +822,34 @@ extension AccountsService {
         self.accountAdapter.enableAccount(accountId, active: enable)
     }
 
+    func setStunSettings(accountId: String, server: String) {
+        guard let account = self.getAccount(fromAccountId: accountId),
+              let details = account.details else { return }
+
+        details.set(withConfigKeyModel: ConfigKeyModel(withKey: .stunServer), withValue: server)
+        let changed = AccountConfigModel(withDetails: [ConfigKey.stunServer.rawValue: server])
+        self.setAccountDetails(forAccountId: accountId, withDetails: changed)
+    }
+
+    func setPublishedAddressSettings(accountId: String, address: String, port: String) {
+        guard let account = self.getAccount(fromAccountId: accountId),
+              let details = account.details else { return }
+
+        let settings: [ConfigKey: String] = [
+            .publishedAddress: address,
+            .publishedPort: port
+        ]
+
+        var detailsToUpdate = [String: String]()
+        for (key, value) in settings {
+            details.set(withConfigKeyModel: ConfigKeyModel(withKey: key), withValue: value)
+            detailsToUpdate[key.rawValue] = value
+        }
+
+        let changed = AccountConfigModel(withDetails: detailsToUpdate)
+        self.setAccountDetails(forAccountId: accountId, withDetails: changed)
+    }
+
     func setTurnSettings(accountId: String, server: String, username: String, password: String, realm: String) {
         guard let account = self.getAccount(fromAccountId: accountId),
               let details = account.details else { return }
