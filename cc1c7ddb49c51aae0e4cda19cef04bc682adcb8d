@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26e165d2_4a02ac10",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSettingsViews.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-28T20:13:42Z",
+      "side": 1,
+      "message": "[Critical] Line 263: The STUN controls are added inside connectivityView(), which is rendered for both SIP and non-SIP accounts in body. The change subject is SIP connectivity, and these settings use SIP account config keys; exposing them for Jami accounts can save unsupported/irrelevant STUN settings. Gate the STUN section the same way publicAddressView() is gated, or move it into the SIP-only branch.\n```suggestion\nif model.account.type \u003d\u003d .sip {\n    ToggleCell(\n        toggleText: L10n.AccountPage.stunEnabled,\n        getAction: { model.stunEnabled },\n        setAction: { newValue in model.enableStun(enable: newValue) }\n    )\n\n    if model.stunEnabled {\n        NavigationLink(destination: EditableFieldView(value: $model.stunServer, title: L10n.AccountPage.stunServer, placeholder: L10n.AccountPage.stunServer, onDisappearAction: {\n            model.saveStunSettings()\n        })) {\n            FieldRowView(label: L10n.AccountPage.stunServer, value: model.stunServer)\n        }\n    }\n}\n```",
+      "revId": "cc1c7ddb49c51aae0e4cda19cef04bc682adcb8d",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b608ff19_59947800",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSettingsViews.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-28T20:13:42Z",
+      "side": 1,
+      "message": "[Critical] Line 286: The published port is edited as an unrestricted text field and saved directly to account details. This allows non-numeric or out-of-range values to be persisted, which can break SIP registration/connectivity and leaves validation to lower layers. Use a numeric editor or validate before saving, e.g. reject empty/non-integer values and enforce 1...65535 before calling setPublishedAddressSettings.\n```suggestion\nNavigationLink(destination: EditableFieldView(value: $model.publishedPort,\n                                                  title: L10n.AccountPage.publishedPort,\n                                                  placeholder: L10n.AccountPage.publishedPort,\n                                                  onDisappearAction: {\n                                                    guard let port \u003d Int(model.publishedPort), (1...65535).contains(port) else { return }\n                                                    model.savePublishedAddressSettings()\n                                                  })) {\n    FieldRowView(label: L10n.AccountPage.publishedPort, value: model.publishedPort)\n}\n```",
+      "revId": "cc1c7ddb49c51aae0e4cda19cef04bc682adcb8d",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89e8b6b5_f985884c",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSettingsViews.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-28T20:13:42Z",
+      "side": 1,
+      "message": "Line 402: Changing the SIP registration expiration stepper range from 0...3600 to 60...604800 is unrelated to the SIP connectivity feature and can make existing values outside that range unrepresentable. If this behavior change is intended, it should be handled separately with migration/validation and documented; otherwise keep the previous range in this patch.",
+      "revId": "cc1c7ddb49c51aae0e4cda19cef04bc682adcb8d",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
