@@ -48,6 +48,16 @@ class AccountSettings: ObservableObject {
     @Published var turnPassword = ""
     @Published var turnRealm = ""
 
+    // stun
+    @Published var stunEnabled: Bool = false
+    @Published var stunServer = ""
+
+    // public address
+    @Published var allowIPAutoRewrite: Bool = true
+    @Published var publishedSameAsLocal: Bool = true
+    @Published var publishedAddress = ""
+    @Published var publishedPort = ""
+
     @Published var proxyAddress = ""
     @Published var proxyListUrl = ""
     @Published var currentProxy = ""
@@ -247,6 +257,12 @@ extension AccountSettings {
     private func setUPSIPParameters() {
         self.autoRegistrationEnabled = self.getBoolState(for: ConfigKey.keepAliveEnabled)
         self.autoRegistrationExpirationTime = self.getStringState(for: ConfigKey.registrationExpire)
+        self.stunEnabled = self.getBoolState(for: ConfigKey.stunEnable)
+        self.stunServer = self.getStringState(for: ConfigKey.stunServer)
+        self.allowIPAutoRewrite = self.getBoolState(for: ConfigKey.allowIPAutoRewrite)
+        self.publishedSameAsLocal = self.getBoolState(for: ConfigKey.publishedSameAsLocal)
+        self.publishedAddress = self.getStringState(for: ConfigKey.publishedAddress)
+        self.publishedPort = self.getStringState(for: ConfigKey.publishedPort)
         self.enableSRTP = self.getSRTPEnabled()
         self.enableTLS = self.getBoolState(for: ConfigKey.tlsEnable)
         self.tlsVerifyServer = self.getBoolState(for: ConfigKey.tlsVerifyServer)
@@ -310,5 +326,46 @@ extension AccountSettings {
         let property = ConfigKeyModel(withKey: ConfigKey.keepAliveEnabled)
         self.accountService.switchAccountPropertyTo(state: enable, accountId: account.id, property: property)
         self.autoRegistrationEnabled = enable
+    }
+
+    func enableAllowIPAutoRewrite(enable: Bool) {
+        switchSipBoolProperty(ConfigKey.allowIPAutoRewrite, current: allowIPAutoRewrite, enable: enable) {
+            self.allowIPAutoRewrite = $0
+        }
+    }
+
+    func enablePublishedSameAsLocal(enable: Bool) {
+        switchSipBoolProperty(ConfigKey.publishedSameAsLocal, current: publishedSameAsLocal, enable: enable) {
+            self.publishedSameAsLocal = $0
+        }
+    }
+
+    func savePublishedAddressSettings() {
+        // A published port must be a valid TCP/UDP port.
+        publishedPort = sanitizedPort(publishedPort)
+        self.accountService.setPublishedAddressSettings(accountId: account.id, address: publishedAddress, port: publishedPort)
+    }
+
+    private func sanitizedPort(_ value: String) -> String {
+        // Restore the last saved value for empty/non-numeric input so an invalid
+        // port never reaches the daemon.
+        AccountSettings.clampedPort(value) ?? getStringState(for: ConfigKey.publishedPort)
+    }
+
+    // Clamp a numeric port to the valid TCP/UDP range (0...65535, the daemon's
+    // uint16_t). Returns nil for empty/non-numeric input.
+    static func clampedPort(_ value: String) -> String? {
+        guard let number = Int(value) else { return nil }
+        return "\(min(max(number, 0), Int(UInt16.max)))"
+    }
+
+    func enableStun(enable: Bool) {
+        switchSipBoolProperty(ConfigKey.stunEnable, current: stunEnabled, enable: enable) {
+            self.stunEnabled = $0
+        }
+    }
+
+    func saveStunSettings() {
+        self.accountService.setStunSettings(accountId: account.id, server: stunServer)
     }
 }
