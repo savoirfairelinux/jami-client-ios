@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0a36051_8ce11d96",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSettings.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-29T15:40:04Z",
+      "side": 1,
+      "message": "[🔴 Critical Issues - Must fix before merge] Line 324: savePublishedAddressSettings validates and saves address and port together, but the UI edits them in separate screens. If the untouched paired field is currently empty/invalid, the edited field is discarded on disappear, so a user cannot enter the two required values incrementally from an empty configuration. Save each field independently, or pass the edited field into the save method so only that value is validated and persisted. Suggested shape:\\n```suggestion\\nfunc savePublishedAddress() {\\n    guard !publishedAddress.isEmpty else {\\n        publishedAddress \u003d getStringState(for: ConfigKey.publishedAddress)\\n        return\\n    }\\n    accountService.setAccountProperty(property: ConfigKeyModel(withKey: .publishedAddress), value: publishedAddress, accountId: account.id)\\n}\\n\\nfunc savePublishedPort() {\\n    guard AccountSettings.isValid(publishedPort, in: AccountSettings.publishedPortRange) else {\\n        publishedPort \u003d getStringState(for: ConfigKey.publishedPort)\\n        return\\n    }\\n    accountService.setAccountProperty(property: ConfigKeyModel(withKey: .publishedPort), value: publishedPort, accountId: account.id)\\n}\\n```",
+      "revId": "61da227455dc9bfdfbcaf9ca3f1d1260d7904ec4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07be4c00_1b5b74ad",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSettings.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-29T15:40:04Z",
+      "side": 1,
+      "message": "[🟡 Suggestions - Improvements to consider] Line 341: isValidStunServer treats the first colon as a host/port separator, which rejects valid IPv6 literals and bracketed IPv6 STUN addresses. SIP/STUN connectivity commonly needs IPv6 support, so this validation blocks valid configurations. Use URLComponents-style parsing for host[:port] and [IPv6]:port, or at minimum support bracketed IPv6 literals. Add tests for `[2001:db8::1]:3478` and `2001:db8::1` if the daemon accepts them.",
+      "revId": "61da227455dc9bfdfbcaf9ca3f1d1260d7904ec4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0318286_e8c06541",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSettingsViews.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-29T15:40:04Z",
+      "side": 1,
+      "message": "[🟡 Suggestions - Improvements to consider] Line 420: The expiration Stepper no longer has an upper bound. It can generate values above the documented/validated maximum of 604800, after which leaving the screen silently reverts the setting. Keep the control constrained to the same range as validation so invalid values cannot be produced.\\n```suggestion\\nStepper(\\\"\\\", value: Binding(\\n    get: { stepperValue },\\n    set: { newValue in\\n        stepperValue \u003d newValue\\n        expirationtime \u003d \\\"\\\\(newValue)\\\"\\n    }\\n), in: AccountSettings.registrationExpireRange, step: 1)\\n```",
+      "revId": "61da227455dc9bfdfbcaf9ca3f1d1260d7904ec4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
