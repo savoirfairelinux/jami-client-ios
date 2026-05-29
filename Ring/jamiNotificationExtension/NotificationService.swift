@@ -458,7 +458,7 @@ class NotificationService: UNNotificationServiceExtension {
                 return
             }
 
-            var notifConfig = NotificationConfig(from: eventData.jamiId, url: nil, body: eventData.content,
+            var notifConfig = NotificationConfig(from: eventData.jamiId, url: nil, body: MessageMarkdownPlainText.display(from: eventData.content),
                                                  conversationId: eventData.conversationId, groupTitle: eventData.groupTitle)
 
             switch event {

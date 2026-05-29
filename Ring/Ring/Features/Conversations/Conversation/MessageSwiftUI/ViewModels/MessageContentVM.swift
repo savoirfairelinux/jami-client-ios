@@ -261,10 +261,23 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
         return backgroundIsLight ? .systemBlue : .white
     }
 
-    /// Attributed content for inline links (nil if no inline links, full URL, or iOS < 15)
-    var attributedContent: Any? {
-        guard #available(iOS 15.0, *), !isFullURL, urlInfo.hasInlineLinks else { return nil }
-        return urlInfo.attributedStringWithInlineLinks(linkColor: linkColor)
+    /// Plain-text preview for list, reply strip, and iOS 14.5 bubble fallback.
+    var displayContent: String {
+        MessageMarkdown.displayText(from: content)
+    }
+
+    /// Rich or stripped bubble body; URL branching stays in the view (full URL / preview card).
+    var bubbleTextBody: MessageBubbleTextBody {
+        let inlineLink: Any? = {
+            guard #available(iOS 15.0, *), !isFullURL else { return nil }
+            return urlInfo.attributedStringWithInlineLinks(linkColor: linkColor)
+        }()
+        return MessageMarkdown.resolveBubbleBody(
+            content: content,
+            linkColor: Color(linkColor),
+            baseFont: styling.textFont,
+            inlineLinkAttributed: inlineLink
+        )
     }
 
     @Published var username = "" {
