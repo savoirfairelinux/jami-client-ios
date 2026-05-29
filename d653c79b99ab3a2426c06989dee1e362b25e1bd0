@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a262149f_56216c36",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSettings.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-29T16:58:14Z",
+      "side": 1,
+      "message": "[🟡 Suggestion] Line 342: Published address validation only rejects the empty string, so whitespace or clearly invalid values can be saved and sent to the account backend. Use the same normalized address validation as the STUN server field, without the port portion if the port is configured separately, and trim before persisting.",
+      "revId": "d653c79b99ab3a2426c06989dee1e362b25e1bd0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "040b0c1f_71e0214a",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSettings.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-29T16:58:14Z",
+      "side": 1,
+      "message": "[🟡 Suggestion] Line 362: The STUN server validator treats the first \u0027:\u0027 as a host/port separator, so valid IPv6 STUN addresses are rejected and malformed hostnames containing whitespace are accepted when no colon is present. This makes the new SIP connectivity setting unusable for IPv6 deployments and weakens input validation. Parse bracketed IPv6/host:port explicitly and validate the host part after trimming whitespace, for example with URLComponents or a small parser that accepts \u0027host\u0027, \u0027host:port\u0027, \u0027[IPv6]\u0027, and \u0027[IPv6]:port\u0027.",
+      "revId": "d653c79b99ab3a2426c06989dee1e362b25e1bd0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
