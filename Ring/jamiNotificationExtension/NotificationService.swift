@@ -458,7 +458,8 @@ class NotificationService: UNNotificationServiceExtension {
                 return
             }
 
-            var notifConfig = NotificationConfig(from: eventData.jamiId, url: nil, body: eventData.content,
+            // Plain-text stripping only; avoid MessageMarkdown (SwiftUI bubble rendering) in this extension target.
+            var notifConfig = NotificationConfig(from: eventData.jamiId, url: nil, body: MessageMarkdownPlainText.display(from: eventData.content),
                                                  conversationId: eventData.conversationId, groupTitle: eventData.groupTitle)
 
             switch event {

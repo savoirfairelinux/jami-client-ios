@@ -76,7 +76,7 @@ struct ReplyHistory: View {
                                     }
                             )
                     } else {
-                        Text(target.content)
+                        Text(target.displayContent)
                             .modifier(MessageReplyStyle(model: target))
                             .font(target.styling.textFont)
                             .lineLimit(nil)
