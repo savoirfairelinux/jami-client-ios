@@ -653,7 +653,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
             if lastMessage.isMessageDeleted() {
                 self.lastMessage.accept(L10n.Conversation.lastMessageDeleted)
             } else {
-                self.lastMessage.accept(lastMessage.content)
+                self.lastMessage.accept(MessageMarkdown.displayText(from: lastMessage.content))
             }
         } else {
             // For contact messages, update when the display name is available.

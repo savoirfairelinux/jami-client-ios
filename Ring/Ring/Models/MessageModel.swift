@@ -434,11 +434,12 @@ public class MessageModel {
 
         switch messageType {
         case .text:
+            let spokenBody = MessageMarkdown.displayText(from: self.content)
             self.accessibilityLabelValue = self.content.isEmpty
                 ? L10n.Accessibility.textNotAvailable(timestamp)
                 : (self.incoming
-                    ? L10n.Accessibility.Text.receivedOn(self.content, timestamp)
-                    : L10n.Accessibility.Text.sentOn(self.content, timestamp))
+                    ? L10n.Accessibility.Text.receivedOn(spokenBody, timestamp)
+                    : L10n.Accessibility.Text.sentOn(spokenBody, timestamp))
 
         case .call:
             if self.content.contains(" - ") {

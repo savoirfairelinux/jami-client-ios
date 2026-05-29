@@ -100,6 +100,16 @@ extension UIColor {
     static var jamiMessageCellReceived: UIColor {
         return UIColor(named: "backgroundMsgReceived") ?? UIColor(red: 231, green: 235, blue: 235, alpha: 1.0)
     }
+
+    /// Resolves `.systemBlue` / `.white` from bubble background luminance per trait collection.
+    static func adaptiveMessageLinkColor(on background: UIColor) -> UIColor {
+        UIColor { traitCollection in
+            let resolved = background.resolvedColor(with: traitCollection)
+            let isLight = resolved.isLight(threshold: 0.8) ?? true
+            return isLight ? .systemBlue : .white
+        }
+    }
+
     static let jamiMessageCellReceivedText = UIColor(red: 48, green: 48, blue: 48, alpha: 1.0)
     static let jamiMessageCellTimeText = UIColor(red: 128, green: 128, blue: 128, alpha: 1.0)
     static var jamiMessageBackground: UIColor {

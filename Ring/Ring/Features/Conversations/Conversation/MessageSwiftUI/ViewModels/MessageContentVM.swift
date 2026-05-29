@@ -108,7 +108,12 @@ enum ContextualMenuItem: Identifiable {
 // swiftlint:disable type_body_length
 class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProtocol, NameObserver {
 
-    @Published var content = ""
+    @Published var content = "" {
+        didSet {
+            guard oldValue != content else { return }
+            invalidateTextPresentationCache()
+        }
+    }
     @Published var accessibilityLabelValue = ""
     @Published var metadata: LPLinkMetadata?
 
@@ -166,76 +171,35 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     }
 
     private struct URLInfo {
-        let trimmedContent: String
-        let originalContent: String
         let isFullURL: Bool
         let parsedURL: URL?
         let hasInlineLinks: Bool
-        let inlineLinkMatches: [NSTextCheckingResult]
 
         init(content: String) {
-            self.originalContent = content
             let trimmed = content.trimmingCharacters(in: .whitespacesAndNewlines)
-            self.trimmedContent = trimmed
+            let matches = MessageMarkdownSupport.allowedLinkMatches(in: trimmed)
 
-            guard let detector = try? NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue) else {
-                self.isFullURL = false
-                self.parsedURL = nil
-                self.hasInlineLinks = false
-                self.inlineLinkMatches = []
-                return
-            }
-
-            let matches = detector.matches(in: trimmed, options: [], range: NSRange(location: 0, length: trimmed.utf16.count))
-
-            // Check if entire content is a single URL
-            if let firstMatch = matches.first,
-               matches.count == 1,
-               firstMatch.range.length == trimmed.utf16.count {
+            if let normalizedURL = MessageMarkdownSupport.normalizedFullMessageURL(from: trimmed) {
                 self.isFullURL = true
-                // Try direct URL creation first, then with http:// prefix
-                if let url = URL(string: trimmed) {
-                    self.parsedURL = url
-                } else if !trimmed.hasPrefix("http://") && !trimmed.hasPrefix("https://") {
-                    self.parsedURL = URL(string: "http://" + trimmed)
-                } else {
-                    self.parsedURL = nil
-                }
+                self.parsedURL = normalizedURL
                 self.hasInlineLinks = false
-                self.inlineLinkMatches = []
             } else {
                 self.isFullURL = false
                 self.parsedURL = nil
-                let filteredMatches = matches.filter { match in
-                    guard let range = Range(match.range, in: trimmed) else { return false }
-                    let text = String(trimmed[range]).lowercased()
-                    return text.hasPrefix("http://") || text.hasPrefix("https://") || text.hasPrefix("www.")
-                }
-                self.hasInlineLinks = !filteredMatches.isEmpty
-                self.inlineLinkMatches = filteredMatches
+                self.hasInlineLinks = !matches.isEmpty
             }
-        }
-
-        @available(iOS 15.0, *)
-        func attributedStringWithInlineLinks(linkColor: UIColor) -> AttributedString? {
-            guard hasInlineLinks else { return nil }
-
-            var attributedString = AttributedString(originalContent)
-            for match in inlineLinkMatches {
-                guard let range = Range(match.range, in: originalContent),
-                      let url = match.url,
-                      let attributedRange = Range(range, in: attributedString) else { continue }
-
-                attributedString[attributedRange].link = url
-                attributedString[attributedRange].foregroundColor = Color(linkColor)
-                attributedString[attributedRange].underlineStyle = .single
-            }
-            return attributedString
         }
     }
 
     private var cachedURLInfo: URLInfo?
     private var lastContentForURLInfo: String = ""
+    private var cachedDisplayContent: String?
+    private var cachedBubbleTextBody: MessageBubbleTextBody?
+
+    private func invalidateTextPresentationCache() {
+        cachedDisplayContent = nil
+        cachedBubbleTextBody = nil
+    }
 
     /// Returns cached URL info, recomputing only when content changes.
     private var urlInfo: URLInfo {
@@ -257,14 +221,39 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     }
 
     var linkColor: UIColor {
-        let backgroundIsLight = backgroundColor.isLight(threshold: 0.8) ?? true
-        return backgroundIsLight ? .systemBlue : .white
+        UIColor.adaptiveMessageLinkColor(on: linkBackgroundUIColor)
     }
 
-    /// Attributed content for inline links (nil if no inline links, full URL, or iOS < 15)
-    var attributedContent: Any? {
-        guard #available(iOS 15.0, *), !isFullURL, urlInfo.hasInlineLinks else { return nil }
-        return urlInfo.attributedStringWithInlineLinks(linkColor: linkColor)
+    private var linkBackgroundUIColor: UIColor {
+        if type.isContact || content.containsOnlyEmoji && !messageDeleted && !messageEdited {
+            return .clear
+        }
+        return isIncoming ? UIColor.jamiMessageCellReceived : preferencesColor
+    }
+
+    /// Plain-text preview for list, reply strip, and iOS 14.5 bubble fallback.
+    var displayContent: String {
+        if let cached = cachedDisplayContent { return cached }
+        let value = MessageMarkdown.displayText(from: content)
+        cachedDisplayContent = value
+        return value
+    }
+
+    /// Rich or stripped bubble body; URL branching stays in the view (full URL / preview card).
+    var bubbleTextBody: MessageBubbleTextBody {
+        if let cached = cachedBubbleTextBody { return cached }
+        let hasInlineLinks: Bool = {
+            guard #available(iOS 15.0, *), !isFullURL else { return false }
+            return urlInfo.hasInlineLinks
+        }()
+        let body = MessageMarkdown.resolveBubbleBody(
+            content: content,
+            linkColor: Color(linkColor),
+            baseFont: styling.textFont,
+            hasInlineLinks: hasInlineLinks
+        )
+        cachedBubbleTextBody = body
+        return body
     }
 
     @Published var username = "" {
@@ -317,6 +306,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
         self.updateTextFont()
         self.updateInset()
         self.editionColor = self.isIncoming ? styling.secondaryTextColor : Color(red: 0.95, green: 0.95, blue: 0.95)
+        invalidateTextPresentationCache()
     }
 
     private func updateTextColor() {
@@ -584,6 +574,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
             guard let self = self else { return }
             self.preferencesColor = color
             self.updateBackgroundColor()
+            self.invalidateTextPresentationCache()
         }
     }
 
