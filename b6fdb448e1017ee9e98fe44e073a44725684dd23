@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7b06dce_d6349975",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSettingsViews.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-29T14:31:38Z",
+      "side": 1,
+      "message": "[🟡 Suggestions] Line 408: Removing the Stepper range makes the registration expiration value unbounded. Even if the daemon/registrar clamps or negotiates the final value, the UI can now generate unrealistic values and persist them through the bound string. Keep a reasonable upper UI bound while enforcing the 60s floor.\n```suggestion\n                    ), in: 60...3600, step: 1)\n```",
+      "revId": "b6fdb448e1017ee9e98fe44e073a44725684dd23",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2863819_7efacdc8",
+        "filename": "Ring/Ring/Services/AccountsService.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 825,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-29T14:31:38Z",
+      "side": 1,
+      "message": "[🟡 Suggestions] Line 825: The new SIP connectivity fields accept arbitrary strings for STUN server, published address, and published port, then pass them directly to account configuration. At minimum, publishedPort should be validated as a numeric TCP/UDP port in 1...65535 before persisting; otherwise invalid values can leave the SIP account in a broken connectivity state with no user feedback. Add validation in the view model/service and surface the existing settings error pattern instead of silently saving invalid input.",
+      "revId": "b6fdb448e1017ee9e98fe44e073a44725684dd23",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c7133d0_d523de94",
+        "filename": "Ring/Ring/Services/AccountsService.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 839,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-29T14:31:38Z",
+      "side": 1,
+      "message": "[🟡 Suggestions] Line 839: setPublishedAddressSettings() always updates and sends both publishedAddress and publishedPort even when neither value changed. Because the view calls this from each field\u0027s onDisappear, simply opening and closing either editor will still trigger an unnecessary account detail update/reconfiguration. Mirror setStunSettings() and only send changed keys.\n```suggestion\n        var detailsToUpdate \u003d [String: String]()\n        for (key, value) in settings {\n            let property \u003d ConfigKeyModel(withKey: key)\n            guard details.get(withConfigKeyModel: property) !\u003d value else { continue }\n            details.set(withConfigKeyModel: property, withValue: value)\n            detailsToUpdate[key.rawValue] \u003d value\n        }\n\n        guard !detailsToUpdate.isEmpty else { return }\n        let changed \u003d AccountConfigModel(withDetails: detailsToUpdate)\n        self.setAccountDetails(forAccountId: accountId, withDetails: changed)\n```",
+      "revId": "b6fdb448e1017ee9e98fe44e073a44725684dd23",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
