@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ced1ca1b_9213dd71",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSettings.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-05-29T16:55:21Z",
+      "side": 1,
+      "message": "same validation as on daemon",
+      "parentUuid": "af48b858_350192f0",
+      "revId": "5740829be273431250d19cb83f2f2179f1788462",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b17caaa4_7350dfef",
         "filename": "Ring/Ring/Features/Settings/Me/AccountSettingsViews.swift",
         "patchSetId": 6
