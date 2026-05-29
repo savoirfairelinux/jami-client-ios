@@ -53,6 +53,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "009d0d94_3b15c481",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSettingsViews.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-05-29T17:00:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05dceeb7_891386ed",
+      "revId": "7d66cb5f552b368d822a50d5e6d3719ca87749a6",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ffbea6be_1be1a35e",

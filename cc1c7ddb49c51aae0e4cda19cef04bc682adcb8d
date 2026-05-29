@@ -86,6 +86,24 @@
       "message": "Line 402: Changing the SIP registration expiration stepper range from 0...3600 to 60...604800 is unrelated to the SIP connectivity feature and can make existing values outside that range unrepresentable. If this behavior change is intended, it should be handled separately with migration/validation and documented; otherwise keep the previous range in this patch.",
       "revId": "cc1c7ddb49c51aae0e4cda19cef04bc682adcb8d",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87761177_78e7ff9c",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSettingsViews.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-05-29T17:00:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "89e8b6b5_f985884c",
+      "revId": "cc1c7ddb49c51aae0e4cda19cef04bc682adcb8d",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
