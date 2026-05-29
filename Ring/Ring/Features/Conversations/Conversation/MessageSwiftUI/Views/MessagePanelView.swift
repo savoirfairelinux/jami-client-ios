@@ -73,7 +73,7 @@ struct ReplyViewInMessagePanel: View {
                     .lineLimit(1)
                     .truncationMode(.tail)
                     .foregroundColor(model.styling.textColor)
-                Text(messageToReply.message.content)
+                Text(messageToReply.displayContent)
                     .font(model.styling.secondaryFont)
                     .lineLimit(1)
                     .truncationMode(.middle)

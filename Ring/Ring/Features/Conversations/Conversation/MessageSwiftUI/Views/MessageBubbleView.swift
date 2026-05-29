@@ -105,25 +105,16 @@ struct MessageBubbleView: View {
                         }
                         .messageGesture(onLongPress: receivedLongPress())
                 }
-            } else if #available(iOS 15.0, *),
-                      let attributed = model.attributedContent as? AttributedString {
-                MessageBubbleWithEditionWrapper(model: model) {
-                    Text(attributed)
-                        .font(model.styling.textFont)
-                        .lineLimit(nil)
-                        .messageGesture(onLongPress: receivedLongPress())
-                }
             } else {
-                renderPlainText()
+                renderBubbleTextBody()
             }
         }
     }
 
     @ViewBuilder
-    private func renderPlainText() -> some View {
+    private func renderBubbleTextBody() -> some View {
         MessageBubbleWithEditionWrapper(model: model) {
-            Text(model.content)
-                .font(model.styling.textFont)
+            MessageBubbleTextRenderer(textBody: model.bubbleTextBody, font: model.styling.textFont)
                 .lineLimit(nil)
                 .messageGesture(onLongPress: receivedLongPress())
         }
