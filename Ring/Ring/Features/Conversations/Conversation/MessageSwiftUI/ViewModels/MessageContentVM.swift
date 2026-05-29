@@ -108,7 +108,12 @@ enum ContextualMenuItem: Identifiable {
 // swiftlint:disable type_body_length
 class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProtocol, NameObserver {
 
-    @Published var content = ""
+    @Published var content = "" {
+        didSet {
+            guard oldValue != content else { return }
+            invalidateTextPresentationCache()
+        }
+    }
     @Published var accessibilityLabelValue = ""
     @Published var metadata: LPLinkMetadata?
 
@@ -236,6 +241,13 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
 
     private var cachedURLInfo: URLInfo?
     private var lastContentForURLInfo: String = ""
+    private var cachedDisplayContent: String?
+    private var cachedBubbleTextBody: MessageBubbleTextBody?
+
+    private func invalidateTextPresentationCache() {
+        cachedDisplayContent = nil
+        cachedBubbleTextBody = nil
+    }
 
     /// Returns cached URL info, recomputing only when content changes.
     private var urlInfo: URLInfo {
@@ -257,14 +269,39 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     }
 
     var linkColor: UIColor {
-        let backgroundIsLight = backgroundColor.isLight(threshold: 0.8) ?? true
-        return backgroundIsLight ? .systemBlue : .white
+        UIColor.adaptiveMessageLinkColor(on: linkBackgroundUIColor)
     }
 
-    /// Attributed content for inline links (nil if no inline links, full URL, or iOS < 15)
-    var attributedContent: Any? {
-        guard #available(iOS 15.0, *), !isFullURL, urlInfo.hasInlineLinks else { return nil }
-        return urlInfo.attributedStringWithInlineLinks(linkColor: linkColor)
+    private var linkBackgroundUIColor: UIColor {
+        if type.isContact || content.containsOnlyEmoji && !messageDeleted && !messageEdited {
+            return .clear
+        }
+        return isIncoming ? UIColor.jamiMessageCellReceived : preferencesColor
+    }
+
+    /// Plain-text preview for list, reply strip, and iOS 14.5 bubble fallback.
+    var displayContent: String {
+        if let cached = cachedDisplayContent { return cached }
+        let value = MessageMarkdown.displayText(from: content)
+        cachedDisplayContent = value
+        return value
+    }
+
+    /// Rich or stripped bubble body; URL branching stays in the view (full URL / preview card).
+    var bubbleTextBody: MessageBubbleTextBody {
+        if let cached = cachedBubbleTextBody { return cached }
+        let inlineLink: Any? = {
+            guard #available(iOS 15.0, *), !isFullURL else { return nil }
+            return urlInfo.attributedStringWithInlineLinks(linkColor: linkColor)
+        }()
+        let body = MessageMarkdown.resolveBubbleBody(
+            content: content,
+            linkColor: Color(linkColor),
+            baseFont: styling.textFont,
+            inlineLinkAttributed: inlineLink
+        )
+        cachedBubbleTextBody = body
+        return body
     }
 
     @Published var username = "" {
@@ -317,6 +354,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
         self.updateTextFont()
         self.updateInset()
         self.editionColor = self.isIncoming ? styling.secondaryTextColor : Color(red: 0.95, green: 0.95, blue: 0.95)
+        invalidateTextPresentationCache()
     }
 
     private func updateTextColor() {
@@ -584,6 +622,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
             guard let self = self else { return }
             self.preferencesColor = color
             self.updateBackgroundColor()
+            self.invalidateTextPresentationCache()
         }
     }
 
