@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05ac27ab_abc0de81",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSettings.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-29T15:20:30Z",
+      "side": 1,
+      "message": "[🟡 Suggestion] Line 318: Invalid expiration input is silently ignored, leaving the edited `autoRegistrationExpirationTime` in memory even though the saved account value is unchanged. This can make the settings screen display a value that was not persisted. Consider restoring the saved value or preventing navigation/save while invalid; at minimum, reset on failed validation.\n```suggestion\n        guard AccountSettings.isValid(autoRegistrationExpirationTime, in: AccountSettings.registrationExpireRange) else {\n            self.autoRegistrationExpirationTime \u003d self.getStringState(for: ConfigKey.registrationExpire)\n            return\n        }\n```",
+      "revId": "7d66cb5f552b368d822a50d5e6d3719ca87749a6",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05dceeb7_891386ed",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSettingsViews.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-29T15:20:30Z",
+      "side": 1,
+      "message": "[🟡 Suggestion] Line 418: The expiration Stepper no longer has an upper bound, so users can increment beyond the validated maximum of 604800 seconds. That leaves the view showing an invalid value that `setExpirationTime()` silently refuses to persist. Keep the control constrained to the same range used by validation.\n```suggestion\n                    ), in: AccountSettings.registrationExpireRange, step: 1)\n```",
+      "revId": "7d66cb5f552b368d822a50d5e6d3719ca87749a6",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffbea6be_1be1a35e",
+        "filename": "Ring/Ring/Services/AccountsService.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 839,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-29T15:20:30Z",
+      "side": 1,
+      "message": "[🟡 Suggestion] Line 839: `setPublishedAddressSettings` writes both published address and port on every disappear even when neither value changed. This can trigger unnecessary daemon updates and account reconfiguration while simply navigating back. Match the existing STUN/TURN pattern by only sending changed keys, and return if there are none.\n```suggestion\n        var detailsToUpdate \u003d [String: String]()\n        for (key, value) in settings {\n            let property \u003d ConfigKeyModel(withKey: key)\n            guard details.get(withConfigKeyModel: property) !\u003d value else { continue }\n            details.set(withConfigKeyModel: property, withValue: value)\n            detailsToUpdate[key.rawValue] \u003d value\n        }\n\n        guard !detailsToUpdate.isEmpty else { return }\n```",
+      "revId": "7d66cb5f552b368d822a50d5e6d3719ca87749a6",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
