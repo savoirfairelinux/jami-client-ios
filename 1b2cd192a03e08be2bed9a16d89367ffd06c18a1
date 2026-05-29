@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bada814_b2ff2bb7",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSettings.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-29T14:53:30Z",
+      "side": 1,
+      "message": "[🟡 Suggestion] Line 341: Invalid published port input is silently replaced with the previously saved value. This gives users no indication that their edit was rejected and makes it impossible to intentionally clear the field if the daemon accepts an empty value. Prefer validating at input/save time and surfacing the invalid value in the UI, or disable saving until the value is valid.\n```suggestion\n    static func clampedPort(_ value: String) -\u003e String? {\n        guard !value.isEmpty, let number \u003d UInt16(value) else { return nil }\n        return \"\\(number)\"\n    }\n```\nThen have savePublishedAddressSettings handle nil explicitly instead of silently restoring old state.",
+      "revId": "1b2cd192a03e08be2bed9a16d89367ffd06c18a1",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02ffbc1e_1a1d9e1d",
+        "filename": "Ring/Ring/Services/AccountsService.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 836,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-29T14:53:30Z",
+      "side": 1,
+      "message": "[🟡 Suggestion] Line 836: setPublishedAddressSettings always writes both publishedAddress and publishedPort, even when only one field changed or neither changed. This can cause unnecessary daemon reconfiguration and may overwrite concurrent/local detail changes with stale UI state. Mirror setStunSettings/setTurnSettings behavior by only including changed keys before calling setAccountDetails.\n```suggestion\n        var detailsToUpdate \u003d [String: String]()\n        for (key, value) in settings {\n            let property \u003d ConfigKeyModel(withKey: key)\n            guard details.get(withConfigKeyModel: property) !\u003d value else { continue }\n            details.set(withConfigKeyModel: property, withValue: value)\n            detailsToUpdate[key.rawValue] \u003d value\n        }\n\n        guard !detailsToUpdate.isEmpty else { return }\n        let changed \u003d AccountConfigModel(withDetails: detailsToUpdate)\n        self.setAccountDetails(forAccountId: accountId, withDetails: changed)\n```",
+      "revId": "1b2cd192a03e08be2bed9a16d89367ffd06c18a1",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
