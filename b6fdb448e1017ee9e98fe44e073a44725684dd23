@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "162e7a8d_271ec57c",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSettingsViews.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-05-29T16:59:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7b06dce_d6349975",
+      "revId": "b6fdb448e1017ee9e98fe44e073a44725684dd23",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b2863819_7efacdc8",
@@ -48,6 +66,24 @@
       "writtenOn": "2026-05-29T14:31:38Z",
       "side": 1,
       "message": "[🟡 Suggestions] Line 839: setPublishedAddressSettings() always updates and sends both publishedAddress and publishedPort even when neither value changed. Because the view calls this from each field\u0027s onDisappear, simply opening and closing either editor will still trigger an unnecessary account detail update/reconfiguration. Mirror setStunSettings() and only send changed keys.\n```suggestion\n        var detailsToUpdate \u003d [String: String]()\n        for (key, value) in settings {\n            let property \u003d ConfigKeyModel(withKey: key)\n            guard details.get(withConfigKeyModel: property) !\u003d value else { continue }\n            details.set(withConfigKeyModel: property, withValue: value)\n            detailsToUpdate[key.rawValue] \u003d value\n        }\n\n        guard !detailsToUpdate.isEmpty else { return }\n        let changed \u003d AccountConfigModel(withDetails: detailsToUpdate)\n        self.setAccountDetails(forAccountId: accountId, withDetails: changed)\n```",
+      "revId": "b6fdb448e1017ee9e98fe44e073a44725684dd23",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7c0785e_56e6ea36",
+        "filename": "Ring/Ring/Services/AccountsService.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 839,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-05-29T16:59:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c7133d0_d523de94",
       "revId": "b6fdb448e1017ee9e98fe44e073a44725684dd23",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }

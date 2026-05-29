@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2490a1c1_64ed286e",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSettingsViews.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-05-29T16:59:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "26e165d2_4a02ac10",
+      "revId": "cc1c7ddb49c51aae0e4cda19cef04bc682adcb8d",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b608ff19_59947800",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-05-28T20:13:42Z",
       "side": 1,
       "message": "[Critical] Line 286: The published port is edited as an unrestricted text field and saved directly to account details. This allows non-numeric or out-of-range values to be persisted, which can break SIP registration/connectivity and leaves validation to lower layers. Use a numeric editor or validate before saving, e.g. reject empty/non-integer values and enforce 1...65535 before calling setPublishedAddressSettings.\n```suggestion\nNavigationLink(destination: EditableFieldView(value: $model.publishedPort,\n                                                  title: L10n.AccountPage.publishedPort,\n                                                  placeholder: L10n.AccountPage.publishedPort,\n                                                  onDisappearAction: {\n                                                    guard let port \u003d Int(model.publishedPort), (1...65535).contains(port) else { return }\n                                                    model.savePublishedAddressSettings()\n                                                  })) {\n    FieldRowView(label: L10n.AccountPage.publishedPort, value: model.publishedPort)\n}\n```",
+      "revId": "cc1c7ddb49c51aae0e4cda19cef04bc682adcb8d",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3422eb51_2cc22083",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSettingsViews.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-05-29T16:59:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b608ff19_59947800",
       "revId": "cc1c7ddb49c51aae0e4cda19cef04bc682adcb8d",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },

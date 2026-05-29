@@ -35,6 +35,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b4a10f8_395472d0",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSettings.swift",
+        "patchSetId": 7
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-05-29T16:59:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31ce197e_0fc1ab31",
+      "revId": "f6ff9172ec21d4619fb771480540ca8ccae94c70",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8594305c_7fdd08f8",
@@ -48,6 +66,24 @@
       "writtenOn": "2026-05-29T16:55:33Z",
       "side": 1,
       "message": "[🟡 Suggestions] Line 351: The STUN server validator splits on the first \u0027:\u0027 character, so valid IPv6 literals such as \u0027[2001:db8::1]:3478\u0027 or \u00272001:db8::1\u0027 are rejected. SIP connectivity settings should not make IPv6 STUN servers impossible to configure. Parse bracketed IPv6 host:port explicitly and only treat a colon as a port separator when there is a single host/port separator, or use URLComponents/Network framework parsing.\n```suggestion\nstatic func isValidStunServer(_ value: String) -\u003e Bool {\n    let trimmed \u003d value.trimmingCharacters(in: .whitespacesAndNewlines)\n    guard !trimmed.isEmpty else { return false }\n\n    if trimmed.hasPrefix(\"[\") {\n        guard let end \u003d trimmed.firstIndex(of: \"]\") else { return false }\n        let host \u003d trimmed[trimmed.index(after: trimmed.startIndex)..\u003cend]\n        let remainder \u003d trimmed[trimmed.index(after: end)...]\n        guard !host.isEmpty else { return false }\n        if remainder.isEmpty { return true }\n        guard remainder.hasPrefix(\":\"), remainder.count \u003e 1 else { return false }\n        return isValid(String(remainder.dropFirst()), in: publishedPortRange)\n    }\n\n    let parts \u003d trimmed.split(separator: \":\", omittingEmptySubsequences: false)\n    if parts.count \u003d\u003d 1 { return true }\n    guard parts.count \u003d\u003d 2, !parts[0].isEmpty else { return false }\n    return isValid(String(parts[1]), in: publishedPortRange)\n}\n```",
+      "revId": "f6ff9172ec21d4619fb771480540ca8ccae94c70",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0de2601b_c8f84c3a",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSettings.swift",
+        "patchSetId": 7
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-05-29T16:59:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8594305c_7fdd08f8",
       "revId": "f6ff9172ec21d4619fb771480540ca8ccae94c70",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }

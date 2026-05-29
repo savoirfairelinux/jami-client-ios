@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "175a07e9_1b92aac3",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSettings.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-05-29T16:59:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0a36051_8ce11d96",
+      "revId": "61da227455dc9bfdfbcaf9ca3f1d1260d7904ec4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "07be4c00_1b5b74ad",
@@ -48,6 +66,24 @@
       "writtenOn": "2026-05-29T15:40:04Z",
       "side": 1,
       "message": "[🟡 Suggestions - Improvements to consider] Line 420: The expiration Stepper no longer has an upper bound. It can generate values above the documented/validated maximum of 604800, after which leaving the screen silently reverts the setting. Keep the control constrained to the same range as validation so invalid values cannot be produced.\\n```suggestion\\nStepper(\\\"\\\", value: Binding(\\n    get: { stepperValue },\\n    set: { newValue in\\n        stepperValue \u003d newValue\\n        expirationtime \u003d \\\"\\\\(newValue)\\\"\\n    }\\n), in: AccountSettings.registrationExpireRange, step: 1)\\n```",
+      "revId": "61da227455dc9bfdfbcaf9ca3f1d1260d7904ec4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbf62f1c_fd9da9fd",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSettingsViews.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-05-29T16:59:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0318286_e8c06541",
       "revId": "61da227455dc9bfdfbcaf9ca3f1d1260d7904ec4",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
