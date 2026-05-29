@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05b3d05a_efe0b6be",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSettings.swift",
+        "patchSetId": 7
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-29T16:55:33Z",
+      "side": 1,
+      "message": "[🟡 Suggestions] Line 328: Published address validation only rejects the empty string, while the UI tells users to enter a valid address. This allows whitespace-only or malformed values to be persisted to the SIP account and only fail later in the daemon/network stack. Use the same concrete address/host validation path as STUN, or introduce a dedicated host/IP validator, and trim whitespace before saving.\n```suggestion\nguard AccountSettings.isValidAddress(publishedAddress) else {\n    publishedAddress \u003d getStringState(for: ConfigKey.publishedAddress)\n    return\n}\n```",
+      "revId": "f6ff9172ec21d4619fb771480540ca8ccae94c70",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31ce197e_0fc1ab31",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSettings.swift",
+        "patchSetId": 7
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-29T16:55:33Z",
+      "side": 1,
+      "message": "[🟡 Suggestions] Line 334: The new `setPublishedAddressSettings(accountId:address:port:)` service method is never used; address and port are saved independently instead. That leaves a transient inconsistent published address configuration when the user edits both fields, and the added atomic service API is dead code. Either remove the unused service method or use it from a single save path after validating both fields.",
+      "revId": "f6ff9172ec21d4619fb771480540ca8ccae94c70",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8594305c_7fdd08f8",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSettings.swift",
+        "patchSetId": 7
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-29T16:55:33Z",
+      "side": 1,
+      "message": "[🟡 Suggestions] Line 351: The STUN server validator splits on the first \u0027:\u0027 character, so valid IPv6 literals such as \u0027[2001:db8::1]:3478\u0027 or \u00272001:db8::1\u0027 are rejected. SIP connectivity settings should not make IPv6 STUN servers impossible to configure. Parse bracketed IPv6 host:port explicitly and only treat a colon as a port separator when there is a single host/port separator, or use URLComponents/Network framework parsing.\n```suggestion\nstatic func isValidStunServer(_ value: String) -\u003e Bool {\n    let trimmed \u003d value.trimmingCharacters(in: .whitespacesAndNewlines)\n    guard !trimmed.isEmpty else { return false }\n\n    if trimmed.hasPrefix(\"[\") {\n        guard let end \u003d trimmed.firstIndex(of: \"]\") else { return false }\n        let host \u003d trimmed[trimmed.index(after: trimmed.startIndex)..\u003cend]\n        let remainder \u003d trimmed[trimmed.index(after: end)...]\n        guard !host.isEmpty else { return false }\n        if remainder.isEmpty { return true }\n        guard remainder.hasPrefix(\":\"), remainder.count \u003e 1 else { return false }\n        return isValid(String(remainder.dropFirst()), in: publishedPortRange)\n    }\n\n    let parts \u003d trimmed.split(separator: \":\", omittingEmptySubsequences: false)\n    if parts.count \u003d\u003d 1 { return true }\n    guard parts.count \u003d\u003d 2, !parts[0].isEmpty else { return false }\n    return isValid(String(parts[1]), in: publishedPortRange)\n}\n```",
+      "revId": "f6ff9172ec21d4619fb771480540ca8ccae94c70",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
