@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c71ec3fb_7391cf7c",
+        "filename": "Ring/Ring/Helpers/MessageMarkdown/MessageMarkdown.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-31T17:25:26Z",
+      "side": 1,
+      "message": "[Major] Line 26: `resolveBubbleBody` always computes `fallback` by stripping markdown before trying the existing inline-link attributed text. For plain text messages with bare URLs and no markdown, this is harmless, but for malformed/partial markdown plus a URL it can silently alter the visible fallback even though no markdown was actually rendered. Keep fallback equal to the original content unless `isRenderable` is true, or pass the original content as the fallback for the inline-link-only path.\n```suggestion\n        let fallback \u003d isRenderable ? MessageMarkdownPlainText.display(from: content, isRenderable: true) : content\n```",
+      "revId": "2103822cdd04c4e2830ad0fe33175b0af7c74665",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "840d3448_7d897dee",
+        "filename": "Ring/Ring/Helpers/MessageMarkdown/MessageMarkdown.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-31T17:25:26Z",
+      "side": 1,
+      "message": "[Major] Line 41: When a message contains block syntax, the bubble is rendered as plain stripped text and `inlineLinkAttributed` is ignored. This regresses existing inline URL tapping for messages such as `\u003e see https://example.com` or list items containing a URL, because the previous inline link renderer would still make the URL tappable. Preserve the inline-link fallback when markdown cannot be rendered richly.\n```suggestion\n        if #available(iOS 15.0, *), !hasBlockSyntax {\n            if let markdown \u003d attributedString(\n                from: content,\n                linkColor: linkColor,\n                baseFont: baseFont,\n                isRenderable: isRenderable\n            ) {\n                return .rich(markdown, fallbackPlain: fallback)\n            }\n        }\n        if #available(iOS 15.0, *), let inlineLinkAttributed \u003d inlineLinkAttributed as? AttributedString {\n            return .rich(inlineLinkAttributed, fallbackPlain: fallback)\n        }\n```",
+      "revId": "2103822cdd04c4e2830ad0fe33175b0af7c74665",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c696e61_f17b470d",
+        "filename": "Ring/Ring/Helpers/MessageMarkdown/MessageMarkdown.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-31T17:25:26Z",
+      "side": 1,
+      "message": "[Critical] Line 74: Markdown parsing accepts every link destination that Foundation turns into a link attribute. That lets remote message text create tappable links with non-web schemes, which is a behavior expansion from the existing bare-URL handling that only accepts http/https/www. Filter parsed markdown links to allowed schemes before returning the AttributedString.\n```suggestion\n        sanitizeLinks(in: \u0026result, linkColor: linkColor)\n```\nFor example, remove `run.link` unless `scheme` is `http` or `https`, then only style the remaining links.",
+      "revId": "2103822cdd04c4e2830ad0fe33175b0af7c74665",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
