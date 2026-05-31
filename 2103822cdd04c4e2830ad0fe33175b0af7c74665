@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "34a0608b_4c28db2b",
+        "filename": "Ring/Ring/Helpers/MessageMarkdown/MessageMarkdown.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-05-31T18:20:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c71ec3fb_7391cf7c",
+      "revId": "2103822cdd04c4e2830ad0fe33175b0af7c74665",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "840d3448_7d897dee",
@@ -35,6 +53,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4d1f941_61972767",
+        "filename": "Ring/Ring/Helpers/MessageMarkdown/MessageMarkdown.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-05-31T18:20:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "840d3448_7d897dee",
+      "revId": "2103822cdd04c4e2830ad0fe33175b0af7c74665",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1c696e61_f17b470d",
@@ -48,6 +84,24 @@
       "writtenOn": "2026-05-31T17:25:26Z",
       "side": 1,
       "message": "[Critical] Line 74: Markdown parsing accepts every link destination that Foundation turns into a link attribute. That lets remote message text create tappable links with non-web schemes, which is a behavior expansion from the existing bare-URL handling that only accepts http/https/www. Filter parsed markdown links to allowed schemes before returning the AttributedString.\n```suggestion\n        sanitizeLinks(in: \u0026result, linkColor: linkColor)\n```\nFor example, remove `run.link` unless `scheme` is `http` or `https`, then only style the remaining links.",
+      "revId": "2103822cdd04c4e2830ad0fe33175b0af7c74665",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf513b17_1813a2bd",
+        "filename": "Ring/Ring/Helpers/MessageMarkdown/MessageMarkdown.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-05-31T18:20:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c696e61_f17b470d",
       "revId": "2103822cdd04c4e2830ad0fe33175b0af7c74665",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
