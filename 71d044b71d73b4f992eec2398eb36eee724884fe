@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9056f79_5cbdffd9",
+        "filename": "Ring/Ring/Helpers/MessageMarkdown/MessageMarkdown.swift",
+        "patchSetId": 7
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-31T18:31:43Z",
+      "side": 1,
+      "message": "[🟡 Suggestion] Line 89: The Markdown parser uses `.returnPartiallyParsedIfPossible`, so malformed input can still produce partially rendered text that differs from the original message. For chat content, broken Markdown should generally display exactly as typed rather than dropping or reinterpreting markers. Consider `.failurePolicy \u003d .returnRaw` or falling back to plain text when parsing cannot fully succeed.\n```suggestion\noptions.failurePolicy \u003d .returnRaw\n```",
+      "revId": "71d044b71d73b4f992eec2398eb36eee724884fe",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c4dde06_89d13123",
+        "filename": "Ring/Ring/Helpers/MessageMarkdown/MessageMarkdownPlainText.swift",
+        "patchSetId": 7
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-31T18:31:43Z",
+      "side": 1,
+      "message": "[🟡 Suggestion] Line 35: Plain-text stripping trims leading/trailing whitespace and newlines from the whole message. That changes user-authored message content in conversation previews, reply snippets, accessibility text, and notifications whenever any renderable markdown is present. Preserve the original outer whitespace semantics, or only trim syntax-owned newlines from fenced-code bodies. Suggested fix: return `text` directly here instead of `text.trimmingCharacters(in: .whitespacesAndNewlines)`.",
+      "revId": "71d044b71d73b4f992eec2398eb36eee724884fe",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a28249cb_61d978e3",
+        "filename": "Ring/Ring/Helpers/MessageMarkdown/MessageMarkdownSupport.swift",
+        "patchSetId": 7
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-31T18:31:43Z",
+      "side": 1,
+      "message": "[🟡 Suggestion] Line 209: Markdown link parsing only extracts the raw substring between \u0027(\u0027 and \u0027)\u0027. Markdown also allows optional titles and whitespace, e.g. `[x](https://example.com \"title\")`; this makes `URL(string:)` fail and `containsDisallowedMarkdownLink` disables rich rendering for otherwise valid safe links, while `stripMarkdownLinks` also leaves them unstripped in previews/notifications. Parse the destination according to Markdown syntax before validating it, or delegate link validation to the parsed AttributedString runs. Example fix:\n```suggestion\nlet destination \u003d String(text[urlStart..\u003curlEnd])\n    .trimmingCharacters(in: .whitespacesAndNewlines)\n    .split(whereSeparator: { $0 \u003d\u003d \" \" || $0 \u003d\u003d \"\\t\" })\n    .first\n    .map(String.init)\nguard let destination else { return nil }\nreturn URL(string: destination)\n```",
+      "revId": "71d044b71d73b4f992eec2398eb36eee724884fe",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
