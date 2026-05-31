@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ebe7871_413c8303",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessageContentVM.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-31T18:25:22Z",
+      "side": 1,
+      "message": "[🟡 Suggestions] Line 248: `bubbleTextBody` is cached without including style-dependent inputs. `styling.textFont` and `linkColor` are embedded into the attributed result, but `invalidateTextPresentationCache()` is not called from `updateTextColor()` / `updateTextFont()`. Theme, incoming/outgoing state, or dynamic type changes can therefore leave stale link colors/fonts in already-rendered rich text. Invalidate the bubble cache whenever styling inputs change, or cache only the markdown/plain parsing and apply style at render time.",
+      "revId": "e36ed40c0293479b87925ceb25a4a0ebc65ae585",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc688a2c_0bf567e4",
+        "filename": "Ring/Ring/Helpers/MessageMarkdown/MessageMarkdownPlainText.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-31T18:25:22Z",
+      "side": 1,
+      "message": "[🟡 Suggestions] Line 60: `stripValidConstructs` always trims leading and trailing whitespace/newlines after stripping markdown. This changes message content in previews, replies, notification text, accessibility labels, and the iOS 14.5 bubble fallback. For example, a fenced code block containing leading/trailing blank lines or a deliberately spaced message will be displayed differently from what was sent. Avoid trimming the whole rendered body; only remove markdown syntax. \n```suggestion\nreturn text\n```",
+      "revId": "e36ed40c0293479b87925ceb25a4a0ebc65ae585",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf169296_df0aa9b6",
+        "filename": "Ring/Ring/Helpers/MessageMarkdown/MessageMarkdownSupport.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-31T18:25:22Z",
+      "side": 1,
+      "message": "[🔴 Critical Issues] Line 231: Markdown link syntax is treated as renderable regardless of the destination scheme. For a message like `[tap](javascript:alert(1))`, `containsRenderableMarkdown` returns true and plain-text surfaces display only `tap`, while the bubble renderer later strips the unsafe link. That makes the visible text differ from the stored/sent content and can hide a suspicious URL. Only consider markdown links renderable when their URL passes the same http/https allowlist used by `filterDisallowedLinks`, otherwise leave the original text unchanged. Suggested direction:\n```suggestion\nstatic func containsRenderableMarkdown(in text: String) -\u003e Bool {\n    guard text.contains(where: { markerCharacters.contains($0) }) ||\n            containsMatch(for: #\"(?m)\\#(orderedListLinePattern)\"#, in: text)\n    else { return false }\n    if markdownLinkRanges(in: text).contains(where: { isAllowedMarkdownLink(in: text, range: $0) }) {\n        return true\n    }\n    return renderablePatterns.contains { containsMatch(for: $0, in: text) }\n}\n```\nwhere `isAllowedMarkdownLink` extracts the URL portion and validates it with `normalizedBubbleLinkURL`.",
+      "revId": "e36ed40c0293479b87925ceb25a4a0ebc65ae585",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
