@@ -16,6 +16,24 @@
       "message": "[Critical] Line 85: The protected code bodies are never appended to `bodies`, so `restorePlaceholders` has nothing to restore and markdown/plain-text previews can display raw U+FFFC placeholders for inline and fenced code. Store the body before replacing the match.\n```suggestion\n            let index \u003d bodies.count\n            bodies.append(body)\n            let placeholder \u003d placeholder(idPrefix: idPrefix, index: index)\n            output.replaceSubrange(fullRange, with: placeholder)\n```",
       "revId": "b9589e405095043b5d41830b3833377c655ac06a",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63aa4f1a_964bf5a8",
+        "filename": "Ring/Ring/Helpers/MessageMarkdown/MessageMarkdownPlainText.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-05-31T18:22:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "716a5871_9865d74d",
+      "revId": "b9589e405095043b5d41830b3833377c655ac06a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
