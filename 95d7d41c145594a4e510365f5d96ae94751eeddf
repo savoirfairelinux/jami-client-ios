@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffd1e587_16e50274",
+        "filename": "Ring/Ring/Helpers/MessageMarkdown/MessageMarkdown.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-31T18:23:24Z",
+      "side": 1,
+      "message": "[🟡 Suggestions] Line 167: filterDisallowedLinks(in:) only clears `.link` and underline for rejected markdown links, but it leaves any foreground color/font/style produced by the Markdown parser. A message like `[text](javascript:alert(1))` will no longer open the URL, but can still look like an active link, which is misleading and creates a phishing-style UX issue. Clear all link styling for rejected links, or convert rejected markdown links to plain label text before parsing. For example:\n```suggestion\nattributed[run.range].link \u003d nil\nattributed[run.range].foregroundColor \u003d nil\nattributed[run.range].underlineStyle \u003d nil\n```",
+      "revId": "95d7d41c145594a4e510365f5d96ae94751eeddf",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9499db6e_316f4812",
+        "filename": "Ring/Ring/Helpers/MessageMarkdown/MessageMarkdownPlainText.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-31T18:23:24Z",
+      "side": 1,
+      "message": "[🟡 Suggestions] Line 57: display stripping trims leading and trailing whitespace/newlines from the whole message. This changes user-authored message text in previews/accessibility/notification output whenever any markdown construct is present, including code blocks where surrounding newlines may be meaningful. Prefer preserving the original outer whitespace after stripping constructs, or only remove syntax-owned whitespace such as fence delimiters.",
+      "revId": "95d7d41c145594a4e510365f5d96ae94751eeddf",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d51dec38_7fabab70",
+        "filename": "Ring/Ring/Helpers/MessageMarkdown/MessageMarkdownSupport.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-31T18:23:24Z",
+      "side": 1,
+      "message": "[🔴 Critical Issues] Line 206: stripMarkdownLinks(in:) mutates `result` while using ranges computed from the original `text`. Swift `String.Index` values are invalidated by mutation and are not guaranteed to remain valid for another String instance after replacement; multiple markdown links can therefore trap or replace the wrong span. Recompute the label and replacement range against `result` before each mutation, or perform replacements using NSRange offsets from the end. Suggested fix:\n```suggestion\nstatic func stripMarkdownLinks(in text: String) -\u003e String {\n    var result \u003d text\n    for originalRange in markdownLinkRanges(in: text).reversed() {\n        let lowerOffset \u003d text.distance(from: text.startIndex, to: originalRange.lowerBound)\n        let upperOffset \u003d text.distance(from: text.startIndex, to: originalRange.upperBound)\n        let lower \u003d result.index(result.startIndex, offsetBy: lowerOffset)\n        let upper \u003d result.index(result.startIndex, offsetBy: upperOffset)\n        let range \u003d lower..\u003cupper\n\n        guard let openBracket \u003d result[range].firstIndex(of: \"[\"),\n              let closeBracket \u003d result[range].firstIndex(of: \"]\") else { continue }\n        let labelStart \u003d result.index(after: openBracket)\n        result.replaceSubrange(range, with: String(result[labelStart..\u003ccloseBracket]))\n    }\n    return result\n}\n```",
+      "revId": "95d7d41c145594a4e510365f5d96ae94751eeddf",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
