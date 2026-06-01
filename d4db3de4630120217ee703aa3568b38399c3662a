@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf7b2b1a_6c8fdc52",
+        "filename": "Ring/Ring/Services/ConversationsManager.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 607,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-06-01T16:10:33Z",
+      "side": 1,
+      "message": "[Major] Line 607: This branch can mark an in-progress transfer as `.success` when `totalSize \u003d\u003d 0` but `progress \u003e 0` and a partial destination file already exists. A file path existing is not sufficient proof that an unknown-size transfer completed; partial downloads commonly create the file before completion. Restrict the local-file fallback to the zero-progress reload case, and keep positive progress as ongoing unless the transfer service reports completion explicitly.\n\n```suggestion\n            } else if progress \u003d\u003d 0 || newMessage.totalSize \u003d\u003d 0 {\n                if progress \u003d\u003d 0,\n                   let info \u003d self.dataTransferService.dataTransferInfo(withId: newMessage.daemonId, accountId: accountId, conversationId: conversationId, isSwarm: true),\n                   let filePath \u003d info.path, !filePath.isEmpty,\n                   FileManager.default.fileExists(atPath: filePath) {\n                    newMessage.transferStatus \u003d .success\n                } else if progress \u003d\u003d 0,\n                          newMessage.authorId \u003d\u003d account.jamiId,\n                          self.dataTransferService.getFileUrlForSwarm(fileName: newMessage.content, accountID: accountId, conversationID: conversationId) !\u003d nil {\n                    newMessage.transferStatus \u003d .success\n                } else if progress \u003e 0 {\n                    newMessage.transferStatus \u003d .ongoing\n                } else {\n                    newMessage.transferStatus \u003d .awaiting\n                }\n```",
+      "revId": "d4db3de4630120217ee703aa3568b38399c3662a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
