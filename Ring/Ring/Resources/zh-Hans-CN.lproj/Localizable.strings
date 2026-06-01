@@ -391,8 +391,16 @@
 "accountPage.turnPassword" = "TURN 密码";
 "accountPage.turnRealm" = "TURN 域";
 "accountPage.upnpEnabled" = "使用 UPnP";
+"accountPage.stunEnabled" = "使用 STUN";
+"accountPage.stunServer" = "STUN 地址";
+"accountPage.publicAddressHeader" = "公开地址";
+"accountPage.allowIPAutoRewrite" = "Allow IP auto rewrite";
+"accountPage.publishedSameAsLocal" = "公开参数与本地相同";
+"accountPage.publishedAddress" = "地址";
+"accountPage.publishedPort" = "端口";
 "accountPage.security" = "安全";
-"accountPage.enableSRTP" = "加密流媒体 (SRTP)";
+"accountPage.enableSRTP" = "启用 SDES 密钥交换";
+"accountPage.encryptNegotiation" = "加密协商 (TLS)";
 "accountPage.registerNameExplanation" = "选择一个用户名可以使他人更容易在 Jami 上找到您。";
 "accountPage.profileHeader" = "账户资料";
 "accountPage.profileNameNotSelected" = "未選擇名稱";
@@ -427,6 +435,9 @@
 "accountPage.tlsDisableSecureDlgCheck" = "禁用对入站 TLS 数据进行安全对话检查";
 "accountPage.editSipExpirationTime" = "超时时间";
 "accountPage.selectSipExpirationTime" = "设定注册超时（以秒计）";
+"accountPage.invalidSipExpirationTime" = "Enter a value between 60 and 604800 seconds";
+"accountPage.invalidPort" = "Enter a value between 0 and 65535";
+"accountPage.invalidAddress" = "Enter a valid address";
 "accountPage.thisDevice" = "此设备";
 "accountPage.otherDevices" = "其他关联设备";
 "accountPage.accountIdentity" = "账户身份";

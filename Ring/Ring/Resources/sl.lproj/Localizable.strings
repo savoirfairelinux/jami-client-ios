@@ -391,8 +391,16 @@
 "accountPage.turnPassword" = "Geslo TURN";
 "accountPage.turnRealm" = "Območje TURN";
 "accountPage.upnpEnabled" = "Uporabi UPnP";
+"accountPage.stunEnabled" = "Uporabi STUN";
+"accountPage.stunServer" = "Naslov STUN";
+"accountPage.publicAddressHeader" = "Javni naslov";
+"accountPage.allowIPAutoRewrite" = "Allow IP auto rewrite";
+"accountPage.publishedSameAsLocal" = "Objavljen enako kot krajevni";
+"accountPage.publishedAddress" = "Naslov";
+"accountPage.publishedPort" = "Vrata";
 "accountPage.security" = "Varnost";
-"accountPage.enableSRTP" = "Šifriranje pretoka podatkov (SRTP)";
+"accountPage.enableSRTP" = "Vklopi izmenjavo ključev SDES";
+"accountPage.encryptNegotiation" = "Šifriranje usklajevanja (TLS)";
 "accountPage.registerNameExplanation" = "Registrirajte uporabniško ime in s tem pomagajte drugim, da vas lažje poiščejo in dosežejo na Jamiju.";
 "accountPage.profileHeader" = "Profil";
 "accountPage.profileNameNotSelected" = "Ime ni izbrano";
@@ -427,6 +435,9 @@
 "accountPage.tlsDisableSecureDlgCheck" = "Onemogoči varno preverjanje pogovornega okna za dohodne podatke TLS";
 "accountPage.editSipExpirationTime" = "Čas poteka";
 "accountPage.selectSipExpirationTime" = "Določite čas (v s) za potek registracije";
+"accountPage.invalidSipExpirationTime" = "Enter a value between 60 and 604800 seconds";
+"accountPage.invalidPort" = "Enter a value between 0 and 65535";
+"accountPage.invalidAddress" = "Enter a valid address";
 "accountPage.thisDevice" = "Ta naprava";
 "accountPage.otherDevices" = "Druge povezane naprave";
 "accountPage.accountIdentity" = "Identiteta računa";

@@ -391,8 +391,16 @@
 "accountPage.turnPassword" = "Palavra-passe TURN";
 "accountPage.turnRealm" = "Domínio TURN";
 "accountPage.upnpEnabled" = "Usar UPnP";
+"accountPage.stunEnabled" = "Usar STUN";
+"accountPage.stunServer" = "Endereço STUN";
+"accountPage.publicAddressHeader" = "Endereço público";
+"accountPage.allowIPAutoRewrite" = "Allow IP auto rewrite";
+"accountPage.publishedSameAsLocal" = "Publicado tal como a local";
+"accountPage.publishedAddress" = "Endereço";
+"accountPage.publishedPort" = "Porta";
 "accountPage.security" = "Segurança";
-"accountPage.enableSRTP" = "Encriptar fluxos de multimédia (SRTP)";
+"accountPage.enableSRTP" = "Ativar a troca de chaves SDES";
+"accountPage.encryptNegotiation" = "Encriptar negociação (TLS)";
 "accountPage.registerNameExplanation" = "Registe um nome de utilizador para que os outros o possam encontrar e contactar mais facilmente no Jami.";
 "accountPage.profileHeader" = "Perfil";
 "accountPage.profileNameNotSelected" = "Nome não selecionado";
@@ -427,6 +435,9 @@
 "accountPage.tlsDisableSecureDlgCheck" = "Desativar a verificação de diálogo seguro para dados TLS de entrada";
 "accountPage.editSipExpirationTime" = "Tempo de expiração";
 "accountPage.selectSipExpirationTime" = "Definir o tempo (em segundos) para a expiração do registo";
+"accountPage.invalidSipExpirationTime" = "Enter a value between 60 and 604800 seconds";
+"accountPage.invalidPort" = "Enter a value between 0 and 65535";
+"accountPage.invalidAddress" = "Enter a valid address";
 "accountPage.thisDevice" = "Este dispositivo";
 "accountPage.otherDevices" = "Outros dispositivos conectados";
 "accountPage.accountIdentity" = "Identidade da conta";

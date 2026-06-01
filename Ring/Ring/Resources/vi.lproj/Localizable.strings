@@ -391,8 +391,16 @@
 "accountPage.turnPassword" = "Mật khẩu TURN";
 "accountPage.turnRealm" = "Vị trí của TURN";
 "accountPage.upnpEnabled" = "Sử dụng UPnP";
+"accountPage.stunEnabled" = "Dùng STUN";
+"accountPage.stunServer" = "Địa chỉ STUN";
+"accountPage.publicAddressHeader" = "Khối với công chúng";
+"accountPage.allowIPAutoRewrite" = "Allow IP auto rewrite";
+"accountPage.publishedSameAsLocal" = "Xuất bản cùng với cục bộ";
+"accountPage.publishedAddress" = "Địa chỉ";
+"accountPage.publishedPort" = "Cảng";
 "accountPage.security" = "An ninh";
-"accountPage.enableSRTP" = "Các dòng truyền thông mã hóa (SRTP)";
+"accountPage.enableSRTP" = "Khả năng trao đổi khóa SDES";
+"accountPage.encryptNegotiation" = "Hoạt động giao dịch mã hóa (TLS)";
 "accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
 "accountPage.profileHeader" = "Hồ sơ";
 "accountPage.profileNameNotSelected" = "Name not selected";
@@ -427,6 +435,9 @@
 "accountPage.tlsDisableSecureDlgCheck" = "Thiết lập kiểm tra đối thoại an toàn cho dữ liệu TLS nhập";
 "accountPage.editSipExpirationTime" = "Expiration time";
 "accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.invalidSipExpirationTime" = "Enter a value between 60 and 604800 seconds";
+"accountPage.invalidPort" = "Enter a value between 0 and 65535";
+"accountPage.invalidAddress" = "Enter a valid address";
 "accountPage.thisDevice" = "Thiết bị này";
 "accountPage.otherDevices" = "Các thiết bị liên kết khác";
 "accountPage.accountIdentity" = "Account identity";

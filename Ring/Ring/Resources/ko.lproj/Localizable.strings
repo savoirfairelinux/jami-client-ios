@@ -391,8 +391,16 @@
 "accountPage.turnPassword" = "TURN 비밀번호";
 "accountPage.turnRealm" = "스 영역";
 "accountPage.upnpEnabled" = "UPnP를 사용";
+"accountPage.stunEnabled" = "STUN 사용";
+"accountPage.stunServer" = "STUN 주소는";
+"accountPage.publicAddressHeader" = "공공 연설";
+"accountPage.allowIPAutoRewrite" = "Allow IP auto rewrite";
+"accountPage.publishedSameAsLocal" = "지역과 같은 출판";
+"accountPage.publishedAddress" = "주소";
+"accountPage.publishedPort" = "포트";
 "accountPage.security" = "보안";
-"accountPage.enableSRTP" = "미디어 스트림을 암호화 (SRTP)";
+"accountPage.enableSRTP" = "SDES 키 교환을 가능하게 합니다";
+"accountPage.encryptNegotiation" = "암호 협상 (TLS)";
 "accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
 "accountPage.profileHeader" = "프로필";
 "accountPage.profileNameNotSelected" = "이름 선택 안됨";
@@ -427,6 +435,9 @@
 "accountPage.tlsDisableSecureDlgCheck" = "입력 TLS 데이터에 대한 보안 대화정 확인을 비활성화";
 "accountPage.editSipExpirationTime" = "Expiration time";
 "accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.invalidSipExpirationTime" = "Enter a value between 60 and 604800 seconds";
+"accountPage.invalidPort" = "Enter a value between 0 and 65535";
+"accountPage.invalidAddress" = "Enter a valid address";
 "accountPage.thisDevice" = "이 장치";
 "accountPage.otherDevices" = "다른 연결된 장치";
 "accountPage.accountIdentity" = "계정 식별";

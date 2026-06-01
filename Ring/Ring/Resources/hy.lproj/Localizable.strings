@@ -391,8 +391,16 @@
 "accountPage.turnPassword" = "TURN գաղտնաբառ";
 "accountPage.turnRealm" = "ՏՈՐՆԻՍՏԵՐ";
 "accountPage.upnpEnabled" = "Օգտագործեք UPnP";
+"accountPage.stunEnabled" = "Օգտագործեք STUN";
+"accountPage.stunServer" = "STUN հասցեն";
+"accountPage.publicAddressHeader" = "Հանրային հասցե";
+"accountPage.allowIPAutoRewrite" = "Allow IP auto rewrite";
+"accountPage.publishedSameAsLocal" = "Տեղականի հետ նույնը";
+"accountPage.publishedAddress" = "Գիրք";
+"accountPage.publishedPort" = "Պորտ";
 "accountPage.security" = "Անվտանգություն";
-"accountPage.enableSRTP" = "ԶԼՄ-ների հոսքերը կոդավորեք (SRTP)";
+"accountPage.enableSRTP" = "Ստեղծել SDES բանալիների փոխանակում";
+"accountPage.encryptNegotiation" = "Գլխավորագրման բանակցություններ (TLS)";
 "accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
 "accountPage.profileHeader" = "Պրոֆիլ";
 "accountPage.profileNameNotSelected" = "Name not selected";
@@ -427,6 +435,9 @@
 "accountPage.tlsDisableSecureDlgCheck" = "Անջատեք մուտքագրվող TLS տվյալների անվտանգ երկխոսության ստուգումը";
 "accountPage.editSipExpirationTime" = "Expiration time";
 "accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.invalidSipExpirationTime" = "Enter a value between 60 and 604800 seconds";
+"accountPage.invalidPort" = "Enter a value between 0 and 65535";
+"accountPage.invalidAddress" = "Enter a valid address";
 "accountPage.thisDevice" = "Այս սարքը";
 "accountPage.otherDevices" = "Կապակցված այլ սարքեր";
 "accountPage.accountIdentity" = "Account identity";

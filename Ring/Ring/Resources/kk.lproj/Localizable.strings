@@ -391,8 +391,16 @@
 "accountPage.turnPassword" = "ТУРН паролі";
 "accountPage.turnRealm" = "ТУРН әлемі";
 "accountPage.upnpEnabled" = "UPnP- ды қолдану";
+"accountPage.stunEnabled" = "STUN қолданылсын";
+"accountPage.stunServer" = "STUN адресі";
+"accountPage.publicAddressHeader" = "Қоғамдық мекенжай";
+"accountPage.allowIPAutoRewrite" = "Allow IP auto rewrite";
+"accountPage.publishedSameAsLocal" = "Жергілікті баспамен бірдей";
+"accountPage.publishedAddress" = "Адрес";
+"accountPage.publishedPort" = "Порт";
 "accountPage.security" = "Қауіпсіздік";
-"accountPage.enableSRTP" = "Кіпшелеу медиа ағындары (SRTP)";
+"accountPage.enableSRTP" = "SDES кілттерін алмастыруды рұқсат ету";
+"accountPage.encryptNegotiation" = "Шифрлау келіссөздері (TLS)";
 "accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
 "accountPage.profileHeader" = "Профиль";
 "accountPage.profileNameNotSelected" = "Name not selected";
@@ -427,6 +435,9 @@
 "accountPage.tlsDisableSecureDlgCheck" = "TLS деректері үшін қауіпсіз диалог тексеруін өшіру";
 "accountPage.editSipExpirationTime" = "Expiration time";
 "accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.invalidSipExpirationTime" = "Enter a value between 60 and 604800 seconds";
+"accountPage.invalidPort" = "Enter a value between 0 and 65535";
+"accountPage.invalidAddress" = "Enter a valid address";
 "accountPage.thisDevice" = "Бұл құрылғы";
 "accountPage.otherDevices" = "Басқа қосылған құрылғылар";
 "accountPage.accountIdentity" = "Account identity";

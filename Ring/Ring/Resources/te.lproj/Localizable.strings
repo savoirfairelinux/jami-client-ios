@@ -391,8 +391,16 @@
 "accountPage.turnPassword" = "టర్న్ పాస్వర్డ్";
 "accountPage.turnRealm" = "టర్న్ రాజ్యం";
 "accountPage.upnpEnabled" = "UPnP ను ఉపయోగించండి";
+"accountPage.stunEnabled" = "STUN ను ఉపయోగించండి";
+"accountPage.stunServer" = "STUN చిరునామా";
+"accountPage.publicAddressHeader" = "ప్రజా ప్రసంగం";
+"accountPage.allowIPAutoRewrite" = "Allow IP auto rewrite";
+"accountPage.publishedSameAsLocal" = "స్థానిక ప్రచురణతో సమానం";
+"accountPage.publishedAddress" = "చిరునామా";
+"accountPage.publishedPort" = "పోర్ట్";
 "accountPage.security" = "భద్రత";
-"accountPage.enableSRTP" = "మీడియా స్ట్రీమ్లను (SRTP) గుప్తీకరించండి";
+"accountPage.enableSRTP" = "SDES కీల మార్పిడిని ప్రారంభించండి";
+"accountPage.encryptNegotiation" = "ఎన్క్రిప్ట్ చర్చలు (TLS)";
 "accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
 "accountPage.profileHeader" = "ప్రొఫైల్";
 "accountPage.profileNameNotSelected" = "Name not selected";
@@ -427,6 +435,9 @@
 "accountPage.tlsDisableSecureDlgCheck" = "ఇన్కమింగ్ TLS డేటా కోసం సురక్షిత డైలాగ్ తనిఖీని నిలిపివేయండి";
 "accountPage.editSipExpirationTime" = "Expiration time";
 "accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.invalidSipExpirationTime" = "Enter a value between 60 and 604800 seconds";
+"accountPage.invalidPort" = "Enter a value between 0 and 65535";
+"accountPage.invalidAddress" = "Enter a valid address";
 "accountPage.thisDevice" = "ఈ పరికరం";
 "accountPage.otherDevices" = "ఇతర అనుసంధాన పరికరాలు";
 "accountPage.accountIdentity" = "Account identity";
