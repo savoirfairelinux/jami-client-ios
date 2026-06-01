@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c47bc526_02329c4d",
+        "filename": "Ring/Ring/Services/ConversationsManager.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-06-01T14:28:33Z",
+      "side": 1,
+      "message": "[Critical] Line 602: The new progress \u003d\u003d 0 branch no longer preserves the existing `progress \u003d\u003d totalSize` success behavior for zero-byte file transfers. If `totalSize` is 0 and no local path is resolved, the message becomes `.awaiting` and may trigger an unnecessary download. Handle completed zero-byte transfers before the progress-zero fallback. Suggested fix:\\n```suggestion\\n            if progress \u003d\u003d newMessage.totalSize {\\n                newMessage.transferStatus \u003d .success\\n            } else if progress \u003d\u003d 0 {\\n```",
+      "revId": "ac5a67e7264f04029032646e1166dedb298f6a25",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e319b5e7_273597be",
+        "filename": "Ring/Ring/Services/ConversationsManager.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 610,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-06-01T14:28:33Z",
+      "side": 1,
+      "message": "[Critical] Line 610: This fallback marks a transfer successful solely because a file with the same display name exists locally. For incoming messages, a previous or unrelated file with the same name in the conversation directory can hide the download button even though this specific daemon transfer was never completed. Tie the success state to transfer metadata/id or restrict the filename fallback to outgoing messages where the local file is expected to pre-exist. Suggested fix:\\n```suggestion\\n                } else if newMessage.authorId \u003d\u003d account.jamiId,\\n                          let _ \u003d self.dataTransferService.getFileUrlForSwarm(fileName: newMessage.content, accountID: accountId, conversationID: conversationId) {\\n                    newMessage.transferStatus \u003d .success\\n```",
+      "revId": "ac5a67e7264f04029032646e1166dedb298f6a25",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
