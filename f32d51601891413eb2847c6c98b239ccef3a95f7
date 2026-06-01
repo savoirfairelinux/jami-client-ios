@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a70ca5d4_44bc1db1",
+        "filename": "Ring/Ring/Services/ConversationsManager.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-06-01T14:57:23Z",
+      "side": 1,
+      "message": "[Critical] Line 603: 🔴 Critical Issues - This changes the zero-progress/zero-size case from `.awaiting` to `.success` because `progress \u003d\u003d newMessage.totalSize` is checked before `progress \u003d\u003d 0`. If `totalSize` is unknown/defaulted to 0 during reload, an incoming or unavailable transfer can be marked successful without any local file check, hiding the download action incorrectly. Keep the zero-progress path first, and only mark success by size when the size is known/non-zero.\n\n```suggestion\n            if progress \u003d\u003d 0 {\n                // Daemon may return 0 progress due to race condition at startup or\n                // stale symlink. Check if the file actually exists locally before\n                // marking it as awaiting download.\n                if let info \u003d self.dataTransferService.dataTransferInfo(withId: newMessage.daemonId, accountId: accountId, conversationId: conversationId, isSwarm: true),\n                   let filePath \u003d info.path, !filePath.isEmpty,\n                   FileManager.default.fileExists(atPath: filePath) {\n                    newMessage.transferStatus \u003d .success\n                } else if newMessage.authorId \u003d\u003d account.jamiId,\n                          let _ \u003d self.dataTransferService.getFileUrlForSwarm(fileName: newMessage.content, accountID: accountId, conversationID: conversationId) {\n                    newMessage.transferStatus \u003d .success\n                } else {\n                    newMessage.transferStatus \u003d .awaiting\n                }\n            } else if progress \u003d\u003d newMessage.totalSize {\n                newMessage.transferStatus \u003d .success\n            } else {\n                newMessage.transferStatus \u003d .ongoing\n            }\n```",
+      "revId": "f32d51601891413eb2847c6c98b239ccef3a95f7",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
