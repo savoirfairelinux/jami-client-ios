@@ -391,8 +391,16 @@
 "accountPage.turnPassword" = "Hasło TURN";
 "accountPage.turnRealm" = "Sfera TURN";
 "accountPage.upnpEnabled" = "Użyj UPnP";
+"accountPage.stunEnabled" = "Użyj STUN";
+"accountPage.stunServer" = "Adres STUN";
+"accountPage.publicAddressHeader" = "Adres publiczny";
+"accountPage.allowIPAutoRewrite" = "Allow IP auto rewrite";
+"accountPage.publishedSameAsLocal" = "Opublikowano tak samo jak lokalny";
+"accountPage.publishedAddress" = "Adres";
+"accountPage.publishedPort" = "Port";
 "accountPage.security" = "Zabezpieczenia";
-"accountPage.enableSRTP" = "Szyfrowanie strumieni multimedialnych (SRTP)";
+"accountPage.enableSRTP" = "Włącz wymianę klucza SDES";
+"accountPage.encryptNegotiation" = "Negocjacja szyfrowania (TLS)";
 "accountPage.registerNameExplanation" = "Zarejestruj nazwę użytkownika, aby ułatwić innym znalezienie i dotarcie do Ciebie na Jami.";
 "accountPage.profileHeader" = "Profil";
 "accountPage.profileNameNotSelected" = "Nie wybrano nazwy";
@@ -427,6 +435,9 @@
 "accountPage.tlsDisableSecureDlgCheck" = "Wyłącz bezpieczny kontrolę dialogu dla danych TLS wchodzących";
 "accountPage.editSipExpirationTime" = "Czas wygaśnięcia";
 "accountPage.selectSipExpirationTime" = "Ustaw czas (w sekundach) wygaśnięcia rejestracji";
+"accountPage.invalidSipExpirationTime" = "Enter a value between 60 and 604800 seconds";
+"accountPage.invalidPort" = "Enter a value between 0 and 65535";
+"accountPage.invalidAddress" = "Enter a valid address";
 "accountPage.thisDevice" = "To urządzenie";
 "accountPage.otherDevices" = "Inne, połączone urządzenia";
 "accountPage.accountIdentity" = "Identyfikacja konta";

@@ -391,8 +391,16 @@
 "accountPage.turnPassword" = "TURN-lösenord";
 "accountPage.turnRealm" = "TURN-domän";
 "accountPage.upnpEnabled" = "Använd UPnP";
+"accountPage.stunEnabled" = "Använd STUN";
+"accountPage.stunServer" = "STUN-adress";
+"accountPage.publicAddressHeader" = "Publik adress";
+"accountPage.allowIPAutoRewrite" = "Allow IP auto rewrite";
+"accountPage.publishedSameAsLocal" = "Publicerad samma som lokal";
+"accountPage.publishedAddress" = "Adress";
+"accountPage.publishedPort" = "Port";
 "accountPage.security" = "Säkerhet";
-"accountPage.enableSRTP" = "Kryptera mediaströmmar (SRTP)";
+"accountPage.enableSRTP" = "Godkänn SDES nyckel utbyte";
+"accountPage.encryptNegotiation" = "Kryptera förhandling (TLS)";
 "accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
 "accountPage.profileHeader" = "Profil";
 "accountPage.profileNameNotSelected" = "Name not selected";
@@ -427,6 +435,9 @@
 "accountPage.tlsDisableSecureDlgCheck" = "Inaktivera säker dialogkontroll för inkommande TLS-data";
 "accountPage.editSipExpirationTime" = "Expiration time";
 "accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.invalidSipExpirationTime" = "Enter a value between 60 and 604800 seconds";
+"accountPage.invalidPort" = "Enter a value between 0 and 65535";
+"accountPage.invalidAddress" = "Enter a valid address";
 "accountPage.thisDevice" = "Denna enhet";
 "accountPage.otherDevices" = "Andra länkade enheter";
 "accountPage.accountIdentity" = "Account identity";

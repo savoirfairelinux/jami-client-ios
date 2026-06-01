@@ -391,8 +391,16 @@
 "accountPage.turnPassword" = "ТУРН пароле";
 "accountPage.turnRealm" = "ТОРН өлкәсе";
 "accountPage.upnpEnabled" = "UPnP куллан";
+"accountPage.stunEnabled" = "STUN куллан";
+"accountPage.stunServer" = "STUN адресы";
+"accountPage.publicAddressHeader" = "Халык алдындагы адрес";
+"accountPage.allowIPAutoRewrite" = "Allow IP auto rewrite";
+"accountPage.publishedSameAsLocal" = "Җирле кебек үк басылып чыга";
+"accountPage.publishedAddress" = "Адрес";
+"accountPage.publishedPort" = "Порт";
 "accountPage.security" = "Корылык";
-"accountPage.enableSRTP" = "Суркалар агымын шифрлау (SRTP)";
+"accountPage.enableSRTP" = "SDES ачкычларын алмаштыруны мөмкинләштерү";
+"accountPage.encryptNegotiation" = "Шифрлау сөйләшүләре (TLS)";
 "accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
 "accountPage.profileHeader" = "Профиль";
 "accountPage.profileNameNotSelected" = "Name not selected";
@@ -427,6 +435,9 @@
 "accountPage.tlsDisableSecureDlgCheck" = "Килгән TLS мәгълүматлары өчен куркынычсыз диалогны тикшерүне гамәлдән чыгару";
 "accountPage.editSipExpirationTime" = "Expiration time";
 "accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.invalidSipExpirationTime" = "Enter a value between 60 and 604800 seconds";
+"accountPage.invalidPort" = "Enter a value between 0 and 65535";
+"accountPage.invalidAddress" = "Enter a valid address";
 "accountPage.thisDevice" = "Бу корал";
 "accountPage.otherDevices" = "Башка бәйләнгән җайланмалар";
 "accountPage.accountIdentity" = "Account identity";

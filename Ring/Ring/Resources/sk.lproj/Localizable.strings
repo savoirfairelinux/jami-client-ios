@@ -391,8 +391,16 @@
 "accountPage.turnPassword" = "TURN heslo";
 "accountPage.turnRealm" = "TURN realm";
 "accountPage.upnpEnabled" = "Používať UPnP";
+"accountPage.stunEnabled" = "Použiť STUN";
+"accountPage.stunServer" = "STUN adresa";
+"accountPage.publicAddressHeader" = "Verejná adresa";
+"accountPage.allowIPAutoRewrite" = "Allow IP auto rewrite";
+"accountPage.publishedSameAsLocal" = "Publikovaný rovnaký ako miestny";
+"accountPage.publishedAddress" = "Adresa";
+"accountPage.publishedPort" = "Port";
 "accountPage.security" = "Bezpečnosť";
-"accountPage.enableSRTP" = "Zašifrovať mediálne streamy (SRTP)";
+"accountPage.enableSRTP" = "Umožniť výmenu SDES kľúčov";
+"accountPage.encryptNegotiation" = "Dohodnutie parametrov šifrovania (TLS)";
 "accountPage.registerNameExplanation" = "Zaregistrujte si používateľské meno, aby vás ostatní mohli ľahšie nájsť a kontaktovať na Jami.";
 "accountPage.profileHeader" = "Profil";
 "accountPage.profileNameNotSelected" = "Meno nie je vybraté";
@@ -427,6 +435,9 @@
 "accountPage.tlsDisableSecureDlgCheck" = "Znechytávajte zabezpečený dialógový overenie pre prichádzajúce údaje TLS";
 "accountPage.editSipExpirationTime" = "Čas expirácie";
 "accountPage.selectSipExpirationTime" = "Nastavte čas (v sekundách) do vypršania platnosti registrácie";
+"accountPage.invalidSipExpirationTime" = "Enter a value between 60 and 604800 seconds";
+"accountPage.invalidPort" = "Enter a value between 0 and 65535";
+"accountPage.invalidAddress" = "Enter a valid address";
 "accountPage.thisDevice" = "Toto zariadenie";
 "accountPage.otherDevices" = "Ostatné prepojené zariadenia";
 "accountPage.accountIdentity" = "Identita účtu";

@@ -391,8 +391,16 @@
 "accountPage.turnPassword" = "Parola TURN";
 "accountPage.turnRealm" = "Domeniul TURN";
 "accountPage.upnpEnabled" = "Folosește UPnP";
+"accountPage.stunEnabled" = "Folosește STUN";
+"accountPage.stunServer" = "Adresa STUN";
+"accountPage.publicAddressHeader" = "Adresa publică";
+"accountPage.allowIPAutoRewrite" = "Allow IP auto rewrite";
+"accountPage.publishedSameAsLocal" = "Public ca cel local";
+"accountPage.publishedAddress" = "Adresa";
+"accountPage.publishedPort" = "Port";
 "accountPage.security" = "Protecție";
-"accountPage.enableSRTP" = "Cifrează fluxurile Media (SRTP)";
+"accountPage.enableSRTP" = "Activează SDES pentru schimbul de chei";
+"accountPage.encryptNegotiation" = "Cifrează negocierea (TLS)";
 "accountPage.registerNameExplanation" = "Poți alege un nume de utilizator pentru a fi ușor de găsit și de contactat pe Jami.";
 "accountPage.profileHeader" = "Profilul";
 "accountPage.profileNameNotSelected" = "Niciun nume ales";
@@ -427,6 +435,9 @@
 "accountPage.tlsDisableSecureDlgCheck" = "Dezactivează verificarea dialogului sigur pentru datele TLS primite";
 "accountPage.editSipExpirationTime" = "Expirare";
 "accountPage.selectSipExpirationTime" = "Timpul de expirare al înregistrării (în secunde)";
+"accountPage.invalidSipExpirationTime" = "Enter a value between 60 and 604800 seconds";
+"accountPage.invalidPort" = "Enter a value between 0 and 65535";
+"accountPage.invalidAddress" = "Enter a valid address";
 "accountPage.thisDevice" = "Acest aparat";
 "accountPage.otherDevices" = "Alte aparate asociate";
 "accountPage.accountIdentity" = "Identitatea contului";

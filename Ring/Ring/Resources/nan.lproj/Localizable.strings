@@ -391,8 +391,16 @@
 "accountPage.turnPassword" = "TURN 密码";
 "accountPage.turnRealm" = "TURN realm";
 "accountPage.upnpEnabled" = "Use UPnP";
+"accountPage.stunEnabled" = "使用 STUN";
+"accountPage.stunServer" = "STUN 地址";
+"accountPage.publicAddressHeader" = "公開地址";
+"accountPage.allowIPAutoRewrite" = "Allow IP auto rewrite";
+"accountPage.publishedSameAsLocal" = "公開的與本機相同";
+"accountPage.publishedAddress" = "地址";
+"accountPage.publishedPort" = "端口";
 "accountPage.security" = "安全性";
-"accountPage.enableSRTP" = "對影音串流加密 (SRTP)";
+"accountPage.enableSRTP" = "启用 SDES 密钥交换";
+"accountPage.encryptNegotiation" = "加密协商 (TLS)";
 "accountPage.registerNameExplanation" = "您可以選擇一個用戶名，以幫助其他人更容易在Jami聯繫您。";
 "accountPage.profileHeader" = "账户资料";
 "accountPage.profileNameNotSelected" = "未選擇名稱";
@@ -427,6 +435,9 @@
 "accountPage.tlsDisableSecureDlgCheck" = "禁用安全对话框检查输入 TLS 数据";
 "accountPage.editSipExpirationTime" = "過期日";
 "accountPage.selectSipExpirationTime" = "設定註冊逾時時間（單位為秒）";
+"accountPage.invalidSipExpirationTime" = "Enter a value between 60 and 604800 seconds";
+"accountPage.invalidPort" = "Enter a value between 0 and 65535";
+"accountPage.invalidAddress" = "Enter a valid address";
 "accountPage.thisDevice" = "本设备";
 "accountPage.otherDevices" = "其他关联设备";
 "accountPage.accountIdentity" = "賬號身份";

@@ -391,8 +391,16 @@
 "accountPage.turnPassword" = "TURN slaptažodis";
 "accountPage.turnRealm" = "TURN sritis";
 "accountPage.upnpEnabled" = "Naudoti UPnP";
+"accountPage.stunEnabled" = "Naudoti STUN";
+"accountPage.stunServer" = "STUN adresas";
+"accountPage.publicAddressHeader" = "Viešasis adresas";
+"accountPage.allowIPAutoRewrite" = "Allow IP auto rewrite";
+"accountPage.publishedSameAsLocal" = "Paskelbtas toks pats kaip vietinis";
+"accountPage.publishedAddress" = "Adresas";
+"accountPage.publishedPort" = "Prievadas";
 "accountPage.security" = "Saugumas";
-"accountPage.enableSRTP" = "Šifruoti medija srautus (SRTP)";
+"accountPage.enableSRTP" = "Įjungti SDES raktų mainus";
+"accountPage.encryptNegotiation" = "Šifruoti derėjimąsi (TLS)";
 "accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
 "accountPage.profileHeader" = "Profilis";
 "accountPage.profileNameNotSelected" = "Name not selected";
@@ -427,6 +435,9 @@
 "accountPage.tlsDisableSecureDlgCheck" = "Disable secure dialog check for incoming TLS data";
 "accountPage.editSipExpirationTime" = "Expiration time";
 "accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.invalidSipExpirationTime" = "Enter a value between 60 and 604800 seconds";
+"accountPage.invalidPort" = "Enter a value between 0 and 65535";
+"accountPage.invalidAddress" = "Enter a valid address";
 "accountPage.thisDevice" = "Šis įrenginys";
 "accountPage.otherDevices" = "Kiti susieti įrenginiai";
 "accountPage.accountIdentity" = "Paskyros tapatybė";

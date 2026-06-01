@@ -391,8 +391,16 @@
 "accountPage.turnPassword" = "टर्न संकेतशब्द";
 "accountPage.turnRealm" = "टर्न क्षेत्र";
 "accountPage.upnpEnabled" = "UPnP वापरा";
+"accountPage.stunEnabled" = "STUN चा वापर करा";
+"accountPage.stunServer" = "STUN पत्ता";
+"accountPage.publicAddressHeader" = "सार्वजनिक पत्राचा";
+"accountPage.allowIPAutoRewrite" = "Allow IP auto rewrite";
+"accountPage.publishedSameAsLocal" = "स्थानिक सारखेच प्रकाशित";
+"accountPage.publishedAddress" = "पत्ता";
+"accountPage.publishedPort" = "बंदर";
 "accountPage.security" = "सुरक्षा";
-"accountPage.enableSRTP" = "एन्क्रिप्टेड मीडिया स्ट्रीम (SRTP)";
+"accountPage.enableSRTP" = "SDES चा की एक्सचेंज सक्षम करा";
+"accountPage.encryptNegotiation" = "एनक्रिप्टेड वाटाघाटी (टीएलएस)";
 "accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
 "accountPage.profileHeader" = "प्रोफाइल";
 "accountPage.profileNameNotSelected" = "Name not selected";
@@ -427,6 +435,9 @@
 "accountPage.tlsDisableSecureDlgCheck" = "TLS डेटासाठी सुरक्षित संवाद तपासणी अक्षम करा";
 "accountPage.editSipExpirationTime" = "Expiration time";
 "accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.invalidSipExpirationTime" = "Enter a value between 60 and 604800 seconds";
+"accountPage.invalidPort" = "Enter a value between 0 and 65535";
+"accountPage.invalidAddress" = "Enter a valid address";
 "accountPage.thisDevice" = "हे यंत्र";
 "accountPage.otherDevices" = "इतर जोडलेले उपकरणे";
 "accountPage.accountIdentity" = "Account identity";

@@ -391,8 +391,16 @@
 "accountPage.turnPassword" = "Обрати пароль";
 "accountPage.turnRealm" = "Простір TURN";
 "accountPage.upnpEnabled" = "Використовувати UPnP";
+"accountPage.stunEnabled" = "Використовувати STUN";
+"accountPage.stunServer" = "Адреса STUN";
+"accountPage.publicAddressHeader" = "Публічна адреса";
+"accountPage.allowIPAutoRewrite" = "Allow IP auto rewrite";
+"accountPage.publishedSameAsLocal" = "Опубліковано такий же як і локальний";
+"accountPage.publishedAddress" = "Адреса";
+"accountPage.publishedPort" = "Порт";
 "accountPage.security" = "Безпека";
-"accountPage.enableSRTP" = "Кодування потоку (SRTP)";
+"accountPage.enableSRTP" = "Обов'язково обміну SDES-ключами";
+"accountPage.encryptNegotiation" = "Шифрування переговорів (TLS)";
 "accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
 "accountPage.profileHeader" = "Профіль";
 "accountPage.profileNameNotSelected" = "Name not selected";
@@ -427,6 +435,9 @@
 "accountPage.tlsDisableSecureDlgCheck" = "Відключити безпечний перевірка діалогу для вхідних даних TLS";
 "accountPage.editSipExpirationTime" = "Expiration time";
 "accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.invalidSipExpirationTime" = "Enter a value between 60 and 604800 seconds";
+"accountPage.invalidPort" = "Enter a value between 0 and 65535";
+"accountPage.invalidAddress" = "Enter a valid address";
 "accountPage.thisDevice" = "Цей пристрій";
 "accountPage.otherDevices" = "Інші привʼязані пристрої";
 "accountPage.accountIdentity" = "Account identity";
