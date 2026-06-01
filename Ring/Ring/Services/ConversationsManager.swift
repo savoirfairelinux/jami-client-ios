@@ -599,7 +599,27 @@ extension  ConversationsManager: MessagesAdapterDelegate {
         guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
         if newMessage.type == .fileTransfer {
             let progress = self.dataTransferService.getTransferProgress(withId: newMessage.daemonId, accountId: accountId, conversationId: conversationId, isSwarm: true)
-            newMessage.transferStatus = progress == 0 ? .awaiting : progress == newMessage.totalSize ? .success : .ongoing
+            if progress == newMessage.totalSize && progress > 0 {
+                // Non-zero progress matches total size: definitely complete.
+                newMessage.transferStatus = .success
+            } else if progress == 0 || newMessage.totalSize == 0 {
+                // Either no progress yet, or size not yet known (defaults to 0).
+                // Verify the file actually exists before declaring success, to avoid
+                // marking an unavailable incoming transfer as done when both values
+                // happen to be 0.
+                if let info = self.dataTransferService.dataTransferInfo(withId: newMessage.daemonId, accountId: accountId, conversationId: conversationId, isSwarm: true),
+                   let filePath = info.path, !filePath.isEmpty,
+                   FileManager.default.fileExists(atPath: filePath) {
+                    newMessage.transferStatus = .success
+                } else if newMessage.authorId == account.jamiId,
+                          let _ = self.dataTransferService.getFileUrlForSwarm(fileName: newMessage.content, accountID: accountId, conversationID: conversationId) {
+                    newMessage.transferStatus = .success
+                } else {
+                    newMessage.transferStatus = .awaiting
+                }
+            } else {
+                newMessage.transferStatus = .ongoing
+            }
             if newMessage.transferStatus == .awaiting &&
                 (isDownloadingEnabled(for: newMessage.totalSize) || newMessage.authorId == account.jamiId) {
                 var filename = ""
