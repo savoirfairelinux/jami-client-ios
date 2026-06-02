@@ -204,7 +204,7 @@ std::map<std::string, std::string> nameServers;
         loadAccountAndConversation(std::string([accountId UTF8String]), loadAll, std::string([convId UTF8String]));
         return true;
     }
-    int flag = LIBJAMI_FLAG_IOS_EXTENSION | LIBJAMI_FLAG_NO_AUTOSYNC | LIBJAMI_FLAG_NO_LOCAL_AUDIO | LIBJAMI_FLAG_NO_AUTOLOAD;
+    int flag = LIBJAMI_FLAG_IOS_EXTENSION | LIBJAMI_FLAG_NO_AUTOSYNC | LIBJAMI_FLAG_NO_LOCAL_MEDIA | LIBJAMI_FLAG_NO_AUTOLOAD;
 #if DEBUG
     flag |= LIBJAMI_FLAG_CONSOLE_LOG | LIBJAMI_FLAG_DEBUG;
 #endif
