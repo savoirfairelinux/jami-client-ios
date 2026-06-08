@@ -702,3 +702,15 @@
 "shareExtension.accessibilitySelectedAccount" = "Kijelölt fiók: %@. Koppintson duplán a fiókváltáshoz.";
 "shareExtension.accessibilitySendButton" = "Koppintson duplán a kijelölt beszélgetésekbe küldéshez";
 "shareExtension.accessibilitySelectAccount" = "Koppintson duplán a fiók kijelöléséhez";
+
+// Peer Services
+"peerServices.title" = "Shared Services";
+"peerServices.refresh" = "Refresh services";
+"peerServices.empty" = "No shared services available";
+"peerServices.errorOffline" = "Contact is offline";
+"peerServices.errorUnreachable" = "Contact is unreachable";
+"peerServices.errorTimeout" = "Request timed out";
+"peerServices.errorUnknown" = "Could not retrieve services";
+"peerServices.done" = "Done";
+"peerServices.notSupported" = "Not supported";
+"peerServices.open" = "Open";

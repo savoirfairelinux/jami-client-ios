@@ -702,3 +702,15 @@
 "shareExtension.accessibilitySelectedAccount" = "Izbrani račun: %@. Dvakrat tapnite, da spremenite račun.";
 "shareExtension.accessibilitySendButton" = "Dvakrat tapnite, da pošljete izbrane pogovore";
 "shareExtension.accessibilitySelectAccount" = "Dvakrat tapnite, da izberete ta račun";
+
+// Peer Services
+"peerServices.title" = "Shared Services";
+"peerServices.refresh" = "Refresh services";
+"peerServices.empty" = "No shared services available";
+"peerServices.errorOffline" = "Contact is offline";
+"peerServices.errorUnreachable" = "Contact is unreachable";
+"peerServices.errorTimeout" = "Request timed out";
+"peerServices.errorUnknown" = "Could not retrieve services";
+"peerServices.done" = "Opravljeno";
+"peerServices.notSupported" = "Not supported";
+"peerServices.open" = "Odpri";

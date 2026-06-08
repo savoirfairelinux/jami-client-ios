@@ -391,16 +391,16 @@
 "accountPage.turnPassword" = "Contrasenya de TURN";
 "accountPage.turnRealm" = "REMIÓ DE VURT";
 "accountPage.upnpEnabled" = "Utilitza UPnP";
-"accountPage.stunEnabled" = "Use STUN";
-"accountPage.stunServer" = "STUN address";
-"accountPage.publicAddressHeader" = "Public address";
+"accountPage.stunEnabled" = "Utilitza STUN";
+"accountPage.stunServer" = "Direcció STUN";
+"accountPage.publicAddressHeader" = "Adres públic";
 "accountPage.allowIPAutoRewrite" = "Allow IP auto rewrite";
-"accountPage.publishedSameAsLocal" = "Published same as local";
-"accountPage.publishedAddress" = "Address";
+"accountPage.publishedSameAsLocal" = "Publica igual que la local";
+"accountPage.publishedAddress" = "Adreça";
 "accountPage.publishedPort" = "Port";
 "accountPage.security" = "Seguretat";
-"accountPage.enableSRTP" = "Enable SDES key exchange";
-"accountPage.encryptNegotiation" = "Encrypt negotiation (TLS)";
+"accountPage.enableSRTP" = "Permetre l'intercanvi de claus SDES";
+"accountPage.encryptNegotiation" = "Negociació de xifrat (TLS)";
 "accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
 "accountPage.profileHeader" = "Perfil";
 "accountPage.profileNameNotSelected" = "Name not selected";
@@ -702,3 +702,15 @@
 "shareExtension.accessibilitySelectedAccount" = "Selected account: %@. Double-tap to change account.";
 "shareExtension.accessibilitySendButton" = "Double-tap to send to selected conversations";
 "shareExtension.accessibilitySelectAccount" = "Double-tap to select this account";
+
+// Peer Services
+"peerServices.title" = "Shared Services";
+"peerServices.refresh" = "Refresh services";
+"peerServices.empty" = "No shared services available";
+"peerServices.errorOffline" = "Contact is offline";
+"peerServices.errorUnreachable" = "Contact is unreachable";
+"peerServices.errorTimeout" = "Request timed out";
+"peerServices.errorUnknown" = "Could not retrieve services";
+"peerServices.done" = "Done";
+"peerServices.notSupported" = "Not supported";
+"peerServices.open" = "Open";

@@ -391,16 +391,16 @@
 "accountPage.turnPassword" = "TURN-Passwort";
 "accountPage.turnRealm" = "TURN-Bereich";
 "accountPage.upnpEnabled" = "UPnP verwenden";
-"accountPage.stunEnabled" = "Use STUN";
-"accountPage.stunServer" = "STUN address";
-"accountPage.publicAddressHeader" = "Public address";
+"accountPage.stunEnabled" = "STUN verwenden";
+"accountPage.stunServer" = "STUN Adresse";
+"accountPage.publicAddressHeader" = "Öffentliche Adresse";
 "accountPage.allowIPAutoRewrite" = "Allow IP auto rewrite";
-"accountPage.publishedSameAsLocal" = "Published same as local";
-"accountPage.publishedAddress" = "Address";
+"accountPage.publishedSameAsLocal" = "Gleich wie lokal veröffentlicht";
+"accountPage.publishedAddress" = "Adresse";
 "accountPage.publishedPort" = "Port";
 "accountPage.security" = "Sicherheit";
-"accountPage.enableSRTP" = "Enable SDES key exchange";
-"accountPage.encryptNegotiation" = "Encrypt negotiation (TLS)";
+"accountPage.enableSRTP" = "SDES-Schlüsselaustausch aktivieren";
+"accountPage.encryptNegotiation" = "Verhandlung verschlüsseln (TLS)";
 "accountPage.registerNameExplanation" = "Registrieren Sie einen Benutzernamen, damit andere Sie auf Jami leichter finden und kontaktieren können.";
 "accountPage.profileHeader" = "Profil";
 "accountPage.profileNameNotSelected" = "Name nicht ausgewählt";
@@ -702,3 +702,15 @@
 "shareExtension.accessibilitySelectedAccount" = "Ausgewähltes Konto: %@. Doppeltippen, um das Konto zu wechseln.";
 "shareExtension.accessibilitySendButton" = "Doppeltippen, um an ausgewählte Unterhaltungen zu senden";
 "shareExtension.accessibilitySelectAccount" = "Doppeltippen, um dieses Konto auszuwählen.";
+
+// Peer Services
+"peerServices.title" = "Shared Services";
+"peerServices.refresh" = "Refresh services";
+"peerServices.empty" = "No shared services available";
+"peerServices.errorOffline" = "Contact is offline";
+"peerServices.errorUnreachable" = "Contact is unreachable";
+"peerServices.errorTimeout" = "Request timed out";
+"peerServices.errorUnknown" = "Could not retrieve services";
+"peerServices.done" = "Done";
+"peerServices.notSupported" = "Not supported";
+"peerServices.open" = "Open";
