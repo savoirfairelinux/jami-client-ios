@@ -129,6 +129,12 @@
 "smartlist.jamsResults" = "Search result";
 "smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "Conversations";
+"smartlist.conversationsSearchHint" = "Your conversations show up here.";
+"smartlist.publicDirectoryHint" = "New people you find show up here.";
+"smartlist.jamsDirectoryHint" = "People from your directory show up here.";
+"smartlist.dialpad" = "Dialpad";
+"smartlist.callANumber" = "Call a number";
+"smartlist.callANumberHint" = "Numbers you can call show up here.";
 "smartlist.noConversationsFound" = "No conversations match the search.";
 "smartlist.newContact" = "New contact";
 "smartlist.newGroup" = "New group";

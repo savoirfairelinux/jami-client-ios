@@ -68,6 +68,7 @@ class ConversationsViewModel: ObservableObject {
         didSet { updateSearchStatusIfNeeded() }
     }
     @Published var publicDirectoryTitle = L10n.Smartlist.results
+    @Published var publicDirectoryHint = L10n.Smartlist.publicDirectoryHint
     @Published var searchingLabel = ""
     @Published var connectionState: ConnectionType = .connected
     @Published var searchQuery: String = ""
@@ -124,9 +125,7 @@ class ConversationsViewModel: ObservableObject {
         self.observeNetworkState()
         self.observeAccountChange()
         self.setupFilteredConversations()
-        if let account = self.accountsService.currentAccount, account.isJams {
-            publicDirectoryTitle = L10n.Smartlist.jamsResults
-        }
+        self.updateDirectoryCopy(for: self.accountsService.currentAccount)
     }
 
     private func setupFilteredConversations() {
@@ -188,12 +187,15 @@ class ConversationsViewModel: ObservableObject {
         accountsService.currentAccountChanged
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] account in
-                guard let self = self else { return }
-                self.publicDirectoryTitle = account?.isJams == true
-                    ? L10n.Smartlist.jamsResults
-                    : L10n.Smartlist.results
+                self?.updateDirectoryCopy(for: account)
             })
             .disposed(by: disposeBag)
+    }
+
+    private func updateDirectoryCopy(for account: AccountModel?) {
+        let isJams = account?.isJams == true
+        publicDirectoryTitle = isJams ? L10n.Smartlist.jamsResults : L10n.Smartlist.results
+        publicDirectoryHint = isJams ? L10n.Smartlist.jamsDirectoryHint : L10n.Smartlist.publicDirectoryHint
     }
 
     private func observeNetworkState() {

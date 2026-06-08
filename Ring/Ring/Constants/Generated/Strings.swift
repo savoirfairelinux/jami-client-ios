@@ -1225,10 +1225,18 @@ internal enum L10n {
     internal static let accountsTitle = L10n.tr("Localizable", "smartlist.accountsTitle", fallback: "Accounts")
     /// + Add account
     internal static let addAccountButton = L10n.tr("Localizable", "smartlist.addAccountButton", fallback: "+ Add account")
+    /// Call a number
+    internal static let callANumber = L10n.tr("Localizable", "smartlist.callANumber", fallback: "Call a number")
+    /// Numbers you can call show up here.
+    internal static let callANumberHint = L10n.tr("Localizable", "smartlist.callANumberHint", fallback: "Numbers you can call show up here.")
     /// Ensure cellular access is granted in the settings.
     internal static let cellularAccess = L10n.tr("Localizable", "smartlist.cellularAccess", fallback: "Ensure cellular access is granted in the settings.")
     /// Conversations
     internal static let conversations = L10n.tr("Localizable", "smartlist.conversations", fallback: "Conversations")
+    /// Your conversations show up here.
+    internal static let conversationsSearchHint = L10n.tr("Localizable", "smartlist.conversationsSearchHint", fallback: "Your conversations show up here.")
+    /// Dialpad
+    internal static let dialpad = L10n.tr("Localizable", "smartlist.dialpad", fallback: "Dialpad")
     /// Not now
     internal static let disableDonation = L10n.tr("Localizable", "smartlist.disableDonation", fallback: "Not now")
     /// If you enjoy using Jami and believe in our mission, do you want to make a donation?
@@ -1241,6 +1249,8 @@ internal enum L10n {
     internal static let invitations = L10n.tr("Localizable", "smartlist.invitations", fallback: "Invitations")
     /// Invite friends
     internal static let inviteFriends = L10n.tr("Localizable", "smartlist.inviteFriends", fallback: "Invite friends")
+    /// People from your directory show up here.
+    internal static let jamsDirectoryHint = L10n.tr("Localizable", "smartlist.jamsDirectoryHint", fallback: "People from your directory show up here.")
     /// Search result
     internal static let jamsResults = L10n.tr("Localizable", "smartlist.jamsResults", fallback: "Search result")
     /// New contact
@@ -1257,6 +1267,8 @@ internal enum L10n {
     internal static let noNumber = L10n.tr("Localizable", "smartlist.noNumber", fallback: "Selected contact does not have any number")
     /// No results
     internal static let noResults = L10n.tr("Localizable", "smartlist.noResults", fallback: "No results")
+    /// New people you find show up here.
+    internal static let publicDirectoryHint = L10n.tr("Localizable", "smartlist.publicDirectoryHint", fallback: "New people you find show up here.")
     /// Public directory
     internal static let results = L10n.tr("Localizable", "smartlist.results", fallback: "Public directory")
     /// Search

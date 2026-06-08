@@ -37,11 +37,11 @@ struct SmartListContentView: View {
                         publicDirectorySearchView
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .contentShape(Rectangle())
+                        conversationsSearchHeaderView
+                            .hideRowSeparator()
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .contentShape(Rectangle())
                         if !model.searchQuery.isEmpty {
-                            conversationsSearchHeaderView
-                                .hideRowSeparator()
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .contentShape(Rectangle())
                             conversationsView
                         }
                     }
@@ -172,6 +172,7 @@ struct SmartListContentView: View {
         .onTapGesture(perform: action)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(title)
+        .accessibilityAddTraits(.isButton)
     }
 
     @ViewBuilder private var conversationsSearchHeaderView: some View {
@@ -183,28 +184,40 @@ struct SmartListContentView: View {
                 .multilineTextAlignment(.leading)
                 .hideRowSeparator()
                 .padding(.bottom, 3)
-            if model.filteredConversations.isEmpty {
-                Text(L10n.Smartlist.noConversationsFound)
-                    .font(.callout)
-                    .multilineTextAlignment(.leading)
-                    .hideRowSeparator()
+            if model.searchQuery.isEmpty {
+                sectionHint(L10n.Smartlist.conversationsSearchHint)
+            } else if model.filteredConversations.isEmpty {
+                sectionHint(L10n.Smartlist.noConversationsFound)
             }
         }
     }
 
+    private func sectionHint(_ text: String) -> some View {
+        Text(text)
+            .font(.callout)
+            .foregroundColor(.secondary)
+            .multilineTextAlignment(.leading)
+            .hideRowSeparator()
+    }
+
     @ViewBuilder private var publicDirectorySearchView: some View {
         VStack(alignment: .leading) {
-            if !model.isSipAccount() {
+            if model.isSipAccount() {
+                dialpadOption
+                    .padding(.vertical, 10)
+            } else {
                 newChatOptions
                     .padding(.vertical, 10)
             }
-            if !model.searchQuery.isEmpty {
-                if !model.isSipAccount() {
-                    Text(model.publicDirectoryTitle)
-                        .fontWeight(.semibold)
-                        .hideRowSeparator()
-                        .padding(.top)
-                }
+            Text(directorySectionTitle)
+                .fontWeight(.semibold)
+                .hideRowSeparator()
+                .padding(.top)
+            if model.searchQuery.isEmpty {
+                sectionHint(directorySectionHint)
+                    .padding(.bottom)
+                    .padding(.top, 3)
+            } else {
                 searchResultView
                     .hideRowSeparator()
                     .padding(.bottom)
@@ -214,6 +227,20 @@ struct SmartListContentView: View {
                 }
             }
         }
+    }
+
+    private var directorySectionTitle: String {
+        model.isSipAccount() ? L10n.Smartlist.callANumber : model.publicDirectoryTitle
+    }
+
+    private var directorySectionHint: String {
+        model.isSipAccount() ? L10n.Smartlist.callANumberHint : model.publicDirectoryHint
+    }
+
+    @ViewBuilder private var dialpadOption: some View {
+        actionItem(icon: "circle.grid.3x3.fill", title: L10n.Smartlist.dialpad, action: stateEmitter.showDialpad)
+            .hideRowSeparator()
+            .transition(.opacity)
     }
 
     @ViewBuilder private var searchResultView: some View {
