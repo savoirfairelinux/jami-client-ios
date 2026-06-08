@@ -72,8 +72,8 @@ struct SwipeActionsModifier: ViewModifier {
 
 extension View {
     @ViewBuilder
-    func conditionalSmartListSwipeActions(conversation: ConversationViewModel, model: ConversationsViewModel, target: ConversationsViewModel.Target) -> some View {
-        if #available(iOS 15.0, *), target == .smartList {
+    func conditionalSmartListSwipeActions(conversation: ConversationViewModel, model: ConversationsViewModel) -> some View {
+        if #available(iOS 15.0, *) {
             self.modifier(SwipeActionsModifier(conversation: conversation, model: model))
         } else {
             self

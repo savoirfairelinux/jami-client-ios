@@ -25,14 +25,6 @@ import RxRelay
 import Combine
 
 class ConversationStatePublisher: StatePublisher<ConversationState> {
-    func openNewMessagesWindow() {
-        self.stateSubject.onNext(ConversationState.compose)
-    }
-
-    func closeComposingMessage() {
-        self.stateSubject.onNext(ConversationState.closeComposingMessage)
-    }
-
     func showDialpad() {
         self.stateSubject.onNext(ConversationState.showDialpad(inCall: false))
     }
@@ -79,11 +71,6 @@ class ConversationsViewModel: ObservableObject {
     private let conversationsSource: ConversationDataSource
 
     @Published var filteredConversations: [ConversationViewModel] = []
-
-    enum Target {
-        case smartList
-        case newMessage
-    }
 
     var disposeBag = DisposeBag()
     let conversationsService: ConversationsService
