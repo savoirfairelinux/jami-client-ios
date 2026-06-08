@@ -94,7 +94,8 @@ private struct NavigationSearchControllerHost<Results: View>: UIViewControllerRe
         if self.deactivateSearch {
             DispatchQueue.main.async {
                 self.deactivateSearch = false
-                coordinator.dismissSearch(clearText: true)
+                // No animation: leaving search must snap back, never crossfade.
+                coordinator.dismissSearch(clearText: true, animated: false)
             }
             return
         }
@@ -121,7 +122,7 @@ private struct NavigationSearchControllerHost<Results: View>: UIViewControllerRe
         )
     }
 
-    class Coordinator: NSObject, UISearchResultsUpdating, UISearchControllerDelegate {
+    class Coordinator: NSObject, UISearchResultsUpdating, UISearchControllerDelegate, UISearchBarDelegate {
         @Binding var text: String
         @Binding var isActive: Bool
         @Binding var isSearchBarDisabled: Bool
@@ -149,6 +150,10 @@ private struct NavigationSearchControllerHost<Results: View>: UIViewControllerRe
 
             self.searchController.searchBar.text = self.text
             searchController.delegate = self
+            // Own the search bar so we can dismiss the Cancel button without UIKit's
+            // native animation. Activation is driven by the text field's first-responder
+            // state, not this delegate, so taking it over is safe.
+            searchController.searchBar.delegate = self
         }
 
         func updateResults(_ results: Results) {
@@ -226,10 +231,28 @@ private struct NavigationSearchControllerHost<Results: View>: UIViewControllerRe
             }
         }
 
+        func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+            // Dismiss through our non-animated path instead of UIKit's native, animated
+            // cancel: the native dismissal slides the nav bar back in and clips the top
+            // rows before the lower ones, so search appears to leave unevenly.
+            dismissSearch(clearText: true, animated: false)
+        }
+
+        func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+            // We own the search bar delegate (for cancel handling), so drive the query
+            // from here too rather than relying solely on searchResultsUpdater.
+            syncText(searchText)
+        }
+
         func updateSearchResults(for searchController: UISearchController) {
+            syncText(searchController.searchBar.text)
+        }
+
+        private func syncText(_ text: String?) {
+            guard let text = text else { return }
             // DispatchQueue.main.async is important to avoid "Modifying state during view update, this will cause undefined behavior." error
             DispatchQueue.main.async {
-                guard let text = searchController.searchBar.text else { return }
+                guard self.text != text else { return }
                 self.text = text
             }
         }

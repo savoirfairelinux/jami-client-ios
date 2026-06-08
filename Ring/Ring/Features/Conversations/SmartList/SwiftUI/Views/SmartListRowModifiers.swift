@@ -26,16 +26,20 @@ extension View {
             .hideRowSeparator()
     }
 
-    func conversationRowSeparator() -> some View {
-        self.modifier(ConversationRowSeparatorModifier())
+    func conversationRowSeparator(isFirstRow: Bool = false) -> some View {
+        self.modifier(ConversationRowSeparatorModifier(isFirstRow: isFirstRow))
     }
 }
 
 private struct ConversationRowSeparatorModifier: ViewModifier {
+    let isFirstRow: Bool
+
     func body(content: Content) -> some View {
         if #available(iOS 16.0, *) {
             content
-                .listRowSeparator(.visible)
+                .listRowSeparator(.visible, edges: .bottom)
+                // Hide the top separator the plain List draws above the first row.
+                .listRowSeparator(isFirstRow ? .hidden : .automatic, edges: .top)
                 .alignmentGuide(.listRowSeparatorLeading) { _ in
                     Constants.defaultAvatarSize
                 }
