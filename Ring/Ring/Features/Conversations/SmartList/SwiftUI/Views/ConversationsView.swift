@@ -110,7 +110,7 @@ struct ConversationsView: View {
                 .conditionalSmartListSwipeActions(conversation: conversation, model: model)
                 .listRowInsets(EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15))
                 .listRowBackground(Color.clear)
-                .conversationRowSeparator()
+                .conversationRowSeparator(isFirstRow: conversation.id == model.filteredConversations.first?.id)
             }
         }
         .navigationBarBackButtonHidden(true)

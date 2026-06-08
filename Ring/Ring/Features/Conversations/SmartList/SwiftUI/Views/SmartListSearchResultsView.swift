@@ -35,11 +35,14 @@ struct SmartListSearchResultsView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .contentShape(Rectangle())
                     .smartListRowStyle()
-                if !model.searchQuery.isEmpty {
-                    conversationsSearchHeaderView
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .contentShape(Rectangle())
-                        .smartListRowStyle()
+                conversationsSearchHeaderView
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .contentShape(Rectangle())
+                    .smartListRowStyle()
+                // When the query is empty, filteredConversations holds every
+                // conversation, so keep the full list visible; the hint only
+                // appears when there are none.
+                if !model.filteredConversations.isEmpty {
                     conversationsView
                 }
                 // Preserve tap-to-dismiss on the empty area below the results.
@@ -68,20 +71,23 @@ struct SmartListSearchResultsView: View {
     }
 
     @ViewBuilder private var newChatOptions: some View {
-        HStack {
+        // The paired Jami actions split the row into two equal halves: a fixed gap
+        // between them and fillWidth on each so both pills fill the width evenly.
+        HStack(spacing: 12) {
             actionItem(icon: "qrcode", title: L10n.Smartlist.newContact,
                        identifier: SmartListAccessibilityIdentifiers.newContactButton,
+                       fillWidth: true,
                        action: { isShowingScanner.toggle() })
-            Spacer()
             actionItem(icon: "person.2", title: L10n.Smartlist.newGroup,
                        identifier: SmartListAccessibilityIdentifiers.newGroupButton,
+                       fillWidth: true,
                        action: { [weak model] in model?.startSwarmCreation() })
         }
         .hideRowSeparator()
         .transition(.opacity)
     }
 
-    private func actionItem(icon: String, title: String, identifier: String, action: @escaping () -> Void) -> some View {
+    private func actionItem(icon: String, title: String, identifier: String, fillWidth: Bool = false, action: @escaping () -> Void) -> some View {
         HStack {
             Image(systemName: icon)
                 .resizable()
@@ -93,12 +99,15 @@ struct SmartListSearchResultsView: View {
         }
         .padding(.horizontal)
         .padding(.vertical, 10)
-        .frame(maxWidth: .infinity)
+        // Apply the fill before the background so the pill itself stretches, rather
+        // than an invisible frame around a content-sized pill.
+        .frame(maxWidth: fillWidth ? .infinity : nil)
         .background(Color.jamiTertiaryControl)
         .cornerRadius(12)
         .onTapGesture(perform: action)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(title)
+        .accessibilityAddTraits(.isButton)
         .accessibilityIdentifier(identifier)
     }
 
@@ -112,36 +121,75 @@ struct SmartListSearchResultsView: View {
                 .hideRowSeparator()
                 .padding(.bottom, 3)
             if model.filteredConversations.isEmpty {
-                Text(L10n.Smartlist.noConversationsFound)
-                    .font(.callout)
-                    .multilineTextAlignment(.leading)
-                    .hideRowSeparator()
+                if model.searchQuery.isEmpty {
+                    sectionHint(L10n.Smartlist.conversationsSearchHint)
+                } else {
+                    sectionHint(L10n.Smartlist.noConversationsFound)
+                }
             }
         }
     }
 
+    private func sectionHint(_ text: String) -> some View {
+        Text(text)
+            .font(.callout)
+            .foregroundColor(.secondary)
+            .multilineTextAlignment(.leading)
+            .hideRowSeparator()
+    }
+
     @ViewBuilder private var publicDirectorySearchView: some View {
         VStack(alignment: .leading) {
-            if !model.isSipAccount() {
+            if model.isSipAccount() {
+                dialpadOption
+                    .padding(.vertical, 10)
+            } else {
                 newChatOptions
                     .padding(.vertical, 10)
             }
-            if !model.searchQuery.isEmpty {
-                if !model.isSipAccount() {
-                    Text(model.publicDirectoryTitle)
-                        .fontWeight(.semibold)
-                        .hideRowSeparator()
-                        .padding(.top)
-                }
-                searchResultView
-                    .hideRowSeparator()
-                    .padding(.bottom)
-                    .padding(.top, 3)
-                if let conversation = model.blockedConversation {
-                    blockedcontactsView(conversation: conversation)
-                }
+            directoryCard
+        }
+    }
+
+    @ViewBuilder private var directoryCard: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(directorySectionTitle)
+                .fontWeight(.semibold)
+            directoryResultSlot
+            if !model.searchQuery.isEmpty, let conversation = model.blockedConversation {
+                blockedcontactsView(conversation: conversation)
             }
         }
+    }
+
+    @ViewBuilder private var directoryResultSlot: some View {
+        if model.searchQuery.isEmpty {
+            sectionHint(directorySectionHint)
+        } else {
+            searchResultView
+                .hideRowSeparator()
+        }
+    }
+
+    private var directorySectionTitle: String {
+        model.isSipAccount() ? L10n.Smartlist.callANumber : model.publicDirectoryTitle
+    }
+
+    private var directorySectionHint: String {
+        model.isSipAccount() ? L10n.Smartlist.callANumberHint : model.publicDirectoryHint
+    }
+
+    @ViewBuilder private var dialpadOption: some View {
+        // A lone action: keep it content-sized and leading, matching the size of
+        // a single Jami action pill rather than stretching the full width.
+        HStack {
+            actionItem(icon: "circle.grid.3x3.fill", title: L10n.Smartlist.dialpad,
+                       identifier: SmartListAccessibilityIdentifiers.dialpadButton,
+                       action: stateEmitter.showDialpad)
+            Spacer()
+        }
+        .hideRowSeparator()
+        .transition(.opacity)
     }
 
     @ViewBuilder private var searchResultView: some View {
@@ -202,9 +250,7 @@ struct SmartListSearchResultsView: View {
     }
 
     private var noResultView: some View {
-        VStack(alignment: .leading) {
-            Text(model.searchStatus.toString())
-                .font(.callout)
-        }
+        // Same helper-text style as the section hints (callout, secondary).
+        sectionHint(model.searchStatus.toString())
     }
 }
