@@ -702,3 +702,15 @@
 "shareExtension.accessibilitySelectedAccount" = "Contul ales: %@. Atinge de două ori pentru a schimba contul.";
 "shareExtension.accessibilitySendButton" = "Atinge de două ori pentru a trimite către conversațiile alese";
 "shareExtension.accessibilitySelectAccount" = "Atinge de două ori pentru a selecționa acest cont";
+
+// Peer Services
+"peerServices.title" = "Shared Services";
+"peerServices.refresh" = "Refresh services";
+"peerServices.empty" = "No shared services available";
+"peerServices.errorOffline" = "Contact is offline";
+"peerServices.errorUnreachable" = "Contact is unreachable";
+"peerServices.errorTimeout" = "Request timed out";
+"peerServices.errorUnknown" = "Could not retrieve services";
+"peerServices.done" = "Done";
+"peerServices.notSupported" = "Not supported";
+"peerServices.open" = "Open";

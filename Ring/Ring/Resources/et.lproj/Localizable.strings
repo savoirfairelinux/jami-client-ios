@@ -391,16 +391,16 @@
 "accountPage.turnPassword" = "TURN-serveri salasõna";
 "accountPage.turnRealm" = "TURN-serveri mõjuala";
 "accountPage.upnpEnabled" = "Kasuta UPnP'd";
-"accountPage.stunEnabled" = "Use STUN";
+"accountPage.stunEnabled" = "Kasuta STUN-serverit";
 "accountPage.stunServer" = "STUN-serveri aadress";
-"accountPage.publicAddressHeader" = "Public address";
-"accountPage.allowIPAutoRewrite" = "Allow IP auto rewrite";
-"accountPage.publishedSameAsLocal" = "Published same as local";
+"accountPage.publicAddressHeader" = "Avalik aadress";
+"accountPage.allowIPAutoRewrite" = "Luba IP-aadressid automaatselt asendada";
+"accountPage.publishedSameAsLocal" = "Kohalikuga sama avaldatud";
 "accountPage.publishedAddress" = "Aadress";
-"accountPage.publishedPort" = "Port";
+"accountPage.publishedPort" = "SIP-serveri port";
 "accountPage.security" = "Turvalisus";
-"accountPage.enableSRTP" = "Enable SDES key exchange";
-"accountPage.encryptNegotiation" = "Encrypt negotiation (TLS)";
+"accountPage.enableSRTP" = "Võimalda SDES võtmevahetust";
+"accountPage.encryptNegotiation" = "Krüpti sessiooni loomine (TLS)";
 "accountPage.registerNameExplanation" = "Selleks, et teised kasutajad saaksid sind kergemini Jami võrgus leida, võid valida endale kasutajanime.";
 "accountPage.profileHeader" = "Profiil";
 "accountPage.profileNameNotSelected" = "Nimi on valimata";
@@ -435,9 +435,9 @@
 "accountPage.tlsDisableSecureDlgCheck" = "Lülita TLS-andmete turvakontrollivaade välja";
 "accountPage.editSipExpirationTime" = "Aegumine";
 "accountPage.selectSipExpirationTime" = "Määra aeg (sekundites) registreerimise aegumiseks";
-"accountPage.invalidSipExpirationTime" = "Enter a value between 60 and 604800 seconds";
-"accountPage.invalidPort" = "Enter a value between 0 and 65535";
-"accountPage.invalidAddress" = "Enter a valid address";
+"accountPage.invalidSipExpirationTime" = "Sisesta väärtus vahemikust 60 kuni 604800 sekundit";
+"accountPage.invalidPort" = "Sisesta väärtus vahemikust 0 kuni 65535";
+"accountPage.invalidAddress" = "Palun sisesta korrektne aadress";
 "accountPage.thisDevice" = "See seade";
 "accountPage.otherDevices" = "Muud seotud seadmed";
 "accountPage.accountIdentity" = "Kasutajakonto identiteet";
@@ -702,3 +702,15 @@
 "shareExtension.accessibilitySelectedAccount" = "Valitud kasutajakonto: %@. Konto muutmiseks topeltklõpsa.";
 "shareExtension.accessibilitySendButton" = "Topeltklõpsa valitud vestluste edastamiseks";
 "shareExtension.accessibilitySelectAccount" = "Topeltklõpsa selle kasutajakonto valimiseks";
+
+// Peer Services
+"peerServices.title" = "Shared Services";
+"peerServices.refresh" = "Refresh services";
+"peerServices.empty" = "No shared services available";
+"peerServices.errorOffline" = "Contact is offline";
+"peerServices.errorUnreachable" = "Contact is unreachable";
+"peerServices.errorTimeout" = "Request timed out";
+"peerServices.errorUnknown" = "Could not retrieve services";
+"peerServices.done" = "Done";
+"peerServices.notSupported" = "Not supported";
+"peerServices.open" = "Open";

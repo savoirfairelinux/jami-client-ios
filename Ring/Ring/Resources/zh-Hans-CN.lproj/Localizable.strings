@@ -394,7 +394,7 @@
 "accountPage.stunEnabled" = "使用 STUN";
 "accountPage.stunServer" = "STUN 地址";
 "accountPage.publicAddressHeader" = "公开地址";
-"accountPage.allowIPAutoRewrite" = "Allow IP auto rewrite";
+"accountPage.allowIPAutoRewrite" = "允许IP自动重写";
 "accountPage.publishedSameAsLocal" = "公开参数与本地相同";
 "accountPage.publishedAddress" = "地址";
 "accountPage.publishedPort" = "端口";
@@ -435,9 +435,9 @@
 "accountPage.tlsDisableSecureDlgCheck" = "禁用对入站 TLS 数据进行安全对话检查";
 "accountPage.editSipExpirationTime" = "超时时间";
 "accountPage.selectSipExpirationTime" = "设定注册超时（以秒计）";
-"accountPage.invalidSipExpirationTime" = "Enter a value between 60 and 604800 seconds";
-"accountPage.invalidPort" = "Enter a value between 0 and 65535";
-"accountPage.invalidAddress" = "Enter a valid address";
+"accountPage.invalidSipExpirationTime" = "输入一个介于60秒至604800秒之间的值";
+"accountPage.invalidPort" = "输入一个介于 0 和 65535 之间的值";
+"accountPage.invalidAddress" = "输入有效地址";
 "accountPage.thisDevice" = "此设备";
 "accountPage.otherDevices" = "其他关联设备";
 "accountPage.accountIdentity" = "账户身份";
@@ -702,3 +702,15 @@
 "shareExtension.accessibilitySelectedAccount" = "已选择账户：%@。双击以更改账户。";
 "shareExtension.accessibilitySendButton" = "双击发送到选定的聊天";
 "shareExtension.accessibilitySelectAccount" = "双击选择此账户";
+
+// Peer Services
+"peerServices.title" = "共享服务";
+"peerServices.refresh" = "刷新服务";
+"peerServices.empty" = "无共享服务可用";
+"peerServices.errorOffline" = "联系人离线";
+"peerServices.errorUnreachable" = "无法联系";
+"peerServices.errorTimeout" = "请求超时";
+"peerServices.errorUnknown" = "无法检索服务";
+"peerServices.done" = "完成";
+"peerServices.notSupported" = "Not supported";
+"peerServices.open" = "打开";

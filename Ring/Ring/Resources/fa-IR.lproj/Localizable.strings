@@ -397,10 +397,10 @@
 "accountPage.allowIPAutoRewrite" = "Allow IP auto rewrite";
 "accountPage.publishedSameAsLocal" = "منتشر‌شده همانند محلی";
 "accountPage.publishedAddress" = "نشانی";
-"accountPage.publishedPort" = "Port";
+"accountPage.publishedPort" = "پرت";
 "accountPage.security" = "امنیت";
-"accountPage.enableSRTP" = "Enable SDES key exchange";
-"accountPage.encryptNegotiation" = "Encrypt negotiation (TLS)";
+"accountPage.enableSRTP" = "امکان تبادل کلید SDES را فراهم کنید";
+"accountPage.encryptNegotiation" = "رمزگذاری مذاکره (TLS)";
 "accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
 "accountPage.profileHeader" = "نمایه";
 "accountPage.profileNameNotSelected" = "Name not selected";
@@ -702,3 +702,15 @@
 "shareExtension.accessibilitySelectedAccount" = "Selected account: %@. Double-tap to change account.";
 "shareExtension.accessibilitySendButton" = "Double-tap to send to selected conversations";
 "shareExtension.accessibilitySelectAccount" = "Double-tap to select this account";
+
+// Peer Services
+"peerServices.title" = "Shared Services";
+"peerServices.refresh" = "Refresh services";
+"peerServices.empty" = "No shared services available";
+"peerServices.errorOffline" = "Contact is offline";
+"peerServices.errorUnreachable" = "Contact is unreachable";
+"peerServices.errorTimeout" = "Request timed out";
+"peerServices.errorUnknown" = "Could not retrieve services";
+"peerServices.done" = "Done";
+"peerServices.notSupported" = "Not supported";
+"peerServices.open" = "Open";

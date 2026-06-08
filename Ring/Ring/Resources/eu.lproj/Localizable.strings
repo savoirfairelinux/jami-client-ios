@@ -391,16 +391,16 @@
 "accountPage.turnPassword" = "TURN pasahitza";
 "accountPage.turnRealm" = "-TURN erreinua.";
 "accountPage.upnpEnabled" = "Erabili UPnP";
-"accountPage.stunEnabled" = "Use STUN";
+"accountPage.stunEnabled" = "STUN erabili";
 "accountPage.stunServer" = "Helbide STUN";
-"accountPage.publicAddressHeader" = "Public address";
+"accountPage.publicAddressHeader" = "Helbide publikoa";
 "accountPage.allowIPAutoRewrite" = "Allow IP auto rewrite";
-"accountPage.publishedSameAsLocal" = "Published same as local";
+"accountPage.publishedSameAsLocal" = "Bertakoak bezala argitaratua";
 "accountPage.publishedAddress" = "Helbidea";
-"accountPage.publishedPort" = "Port";
+"accountPage.publishedPort" = "Ataka";
 "accountPage.security" = "Segurtasuna";
-"accountPage.enableSRTP" = "Enable SDES key exchange";
-"accountPage.encryptNegotiation" = "Encrypt negotiation (TLS)";
+"accountPage.enableSRTP" = "SDES gakoen trukea ahalbidetu";
+"accountPage.encryptNegotiation" = "Enkriptatzeko negoziazioa (TLS)";
 "accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
 "accountPage.profileHeader" = "Profila";
 "accountPage.profileNameNotSelected" = "Name not selected";
@@ -702,3 +702,15 @@
 "shareExtension.accessibilitySelectedAccount" = "Selected account: %@. Double-tap to change account.";
 "shareExtension.accessibilitySendButton" = "Double-tap to send to selected conversations";
 "shareExtension.accessibilitySelectAccount" = "Double-tap to select this account";
+
+// Peer Services
+"peerServices.title" = "Shared Services";
+"peerServices.refresh" = "Refresh services";
+"peerServices.empty" = "No shared services available";
+"peerServices.errorOffline" = "Contact is offline";
+"peerServices.errorUnreachable" = "Contact is unreachable";
+"peerServices.errorTimeout" = "Request timed out";
+"peerServices.errorUnknown" = "Could not retrieve services";
+"peerServices.done" = "Done";
+"peerServices.notSupported" = "Not supported";
+"peerServices.open" = "Open";

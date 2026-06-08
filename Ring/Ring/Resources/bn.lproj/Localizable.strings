@@ -391,16 +391,16 @@
 "accountPage.turnPassword" = "টার্ন পাসওয়ার্ড";
 "accountPage.turnRealm" = "টার্ন রিয়াল";
 "accountPage.upnpEnabled" = "UPnP ব্যবহার করুন";
-"accountPage.stunEnabled" = "Use STUN";
-"accountPage.stunServer" = "STUN address";
-"accountPage.publicAddressHeader" = "Public address";
+"accountPage.stunEnabled" = "STUN ব্যবহার করুন";
+"accountPage.stunServer" = "STUN ঠিকানা";
+"accountPage.publicAddressHeader" = "জনসাধারণের উদ্দেশে ভাষণ";
 "accountPage.allowIPAutoRewrite" = "Allow IP auto rewrite";
-"accountPage.publishedSameAsLocal" = "Published same as local";
-"accountPage.publishedAddress" = "Address";
-"accountPage.publishedPort" = "Port";
+"accountPage.publishedSameAsLocal" = "স্থানীয় হিসাবে একই প্রকাশিত";
+"accountPage.publishedAddress" = "ঠিকানা";
+"accountPage.publishedPort" = "বন্দর";
 "accountPage.security" = "নিরাপত্তা";
-"accountPage.enableSRTP" = "Enable SDES key exchange";
-"accountPage.encryptNegotiation" = "Encrypt negotiation (TLS)";
+"accountPage.enableSRTP" = "SDES কী বিনিময় সক্ষম করুন";
+"accountPage.encryptNegotiation" = "এনক্রিপ্ট চুক্তি (TLS)";
 "accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
 "accountPage.profileHeader" = "প্রোফাইল";
 "accountPage.profileNameNotSelected" = "Name not selected";
@@ -702,3 +702,15 @@
 "shareExtension.accessibilitySelectedAccount" = "Selected account: %@. Double-tap to change account.";
 "shareExtension.accessibilitySendButton" = "Double-tap to send to selected conversations";
 "shareExtension.accessibilitySelectAccount" = "Double-tap to select this account";
+
+// Peer Services
+"peerServices.title" = "Shared Services";
+"peerServices.refresh" = "Refresh services";
+"peerServices.empty" = "No shared services available";
+"peerServices.errorOffline" = "Contact is offline";
+"peerServices.errorUnreachable" = "Contact is unreachable";
+"peerServices.errorTimeout" = "Request timed out";
+"peerServices.errorUnknown" = "Could not retrieve services";
+"peerServices.done" = "Done";
+"peerServices.notSupported" = "Not supported";
+"peerServices.open" = "Open";

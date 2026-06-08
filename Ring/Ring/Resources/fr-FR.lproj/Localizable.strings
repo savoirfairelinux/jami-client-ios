@@ -702,3 +702,15 @@
 "shareExtension.accessibilitySelectedAccount" = "Compte sélectionné : %@. Tapoter deux fois pour changer de compte.";
 "shareExtension.accessibilitySendButton" = "Tapoter deux fois pour envoyer aux conversations choisies";
 "shareExtension.accessibilitySelectAccount" = "Tapoter deux fois pour sélectionner ce compte";
+
+// Peer Services
+"peerServices.title" = "Shared Services";
+"peerServices.refresh" = "Refresh services";
+"peerServices.empty" = "No shared services available";
+"peerServices.errorOffline" = "Contact is offline";
+"peerServices.errorUnreachable" = "Contact is unreachable";
+"peerServices.errorTimeout" = "Request timed out";
+"peerServices.errorUnknown" = "Could not retrieve services";
+"peerServices.done" = "Done";
+"peerServices.notSupported" = "Not supported";
+"peerServices.open" = "Open";

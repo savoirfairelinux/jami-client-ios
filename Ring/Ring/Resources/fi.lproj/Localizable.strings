@@ -394,13 +394,13 @@
 "accountPage.stunEnabled" = "Käytä STUNia";
 "accountPage.stunServer" = "STUN osoite";
 "accountPage.publicAddressHeader" = "Julkinen osoite";
-"accountPage.allowIPAutoRewrite" = "Allow IP auto rewrite";
+"accountPage.allowIPAutoRewrite" = "Salli IP-osoitteen autom. uusinta";
 "accountPage.publishedSameAsLocal" = "Julkaisutapa sama kuin paikallinen";
 "accountPage.publishedAddress" = "Osoite";
-"accountPage.publishedPort" = "Port";
+"accountPage.publishedPort" = "Portti";
 "accountPage.security" = "Turvallisuus";
-"accountPage.enableSRTP" = "Enable SDES key exchange";
-"accountPage.encryptNegotiation" = "Encrypt negotiation (TLS)";
+"accountPage.enableSRTP" = "Käytä SDES-avainten vaihtoa";
+"accountPage.encryptNegotiation" = "Salaa neuvottelu (TLS)";
 "accountPage.registerNameExplanation" = "Rekisteröi käyttäjänimi auttaaksesi muita löytämään sinut helpommin Jamissa.";
 "accountPage.profileHeader" = "Profiili";
 "accountPage.profileNameNotSelected" = "Nimi ei ole valittuna";
@@ -435,9 +435,9 @@
 "accountPage.tlsDisableSecureDlgCheck" = "Poista saapuvan TLS-datan suojattu tarkistus käytöstä";
 "accountPage.editSipExpirationTime" = "Vanhenemisaika";
 "accountPage.selectSipExpirationTime" = "Aseta rekisteröinnin vanhenemisaika (sekunteina).";
-"accountPage.invalidSipExpirationTime" = "Enter a value between 60 and 604800 seconds";
-"accountPage.invalidPort" = "Enter a value between 0 and 65535";
-"accountPage.invalidAddress" = "Enter a valid address";
+"accountPage.invalidSipExpirationTime" = "Anna sekuntiarvo väliltä 60–604800";
+"accountPage.invalidPort" = "Anna arvo väliltä 60–65535";
+"accountPage.invalidAddress" = "Anna kelvollinen osoite";
 "accountPage.thisDevice" = "Tämä laite";
 "accountPage.otherDevices" = "Muut linkitetyt laitteet";
 "accountPage.accountIdentity" = "Tilin identiteetti";
@@ -702,3 +702,15 @@
 "shareExtension.accessibilitySelectedAccount" = "Valittu tili: %@. Vaihda tiliä painamalla kahdesti.";
 "shareExtension.accessibilitySendButton" = "Lähetä valittuihin keskusteluihin painamalla kahdesti";
 "shareExtension.accessibilitySelectAccount" = "Valitse tämä tili painamalla kahdesti";
+
+// Peer Services
+"peerServices.title" = "Shared Services";
+"peerServices.refresh" = "Refresh services";
+"peerServices.empty" = "No shared services available";
+"peerServices.errorOffline" = "Contact is offline";
+"peerServices.errorUnreachable" = "Contact is unreachable";
+"peerServices.errorTimeout" = "Request timed out";
+"peerServices.errorUnknown" = "Could not retrieve services";
+"peerServices.done" = "Done";
+"peerServices.notSupported" = "Not supported";
+"peerServices.open" = "Open";

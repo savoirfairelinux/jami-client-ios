@@ -391,16 +391,16 @@
 "accountPage.turnPassword" = "TURN password";
 "accountPage.turnRealm" = "TURN realm";
 "accountPage.upnpEnabled" = "Use UPnP";
-"accountPage.stunEnabled" = "Use STUN";
+"accountPage.stunEnabled" = "Usar STUN";
 "accountPage.stunServer" = "Dirección STUN";
-"accountPage.publicAddressHeader" = "Public address";
-"accountPage.allowIPAutoRewrite" = "Allow IP auto rewrite";
-"accountPage.publishedSameAsLocal" = "Published same as local";
+"accountPage.publicAddressHeader" = "Dirección pública";
+"accountPage.allowIPAutoRewrite" = "Permitir reescritura automática de IP";
+"accountPage.publishedSameAsLocal" = "Publicar el mismo puerto que el local";
 "accountPage.publishedAddress" = "Dirección";
-"accountPage.publishedPort" = "Port";
+"accountPage.publishedPort" = "Puerto";
 "accountPage.security" = "Security";
-"accountPage.enableSRTP" = "Enable SDES key exchange";
-"accountPage.encryptNegotiation" = "Encrypt negotiation (TLS)";
+"accountPage.enableSRTP" = "Activar intercambio de claves SDES";
+"accountPage.encryptNegotiation" = "Cifrar negociación (TLS)";
 "accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
 "accountPage.profileHeader" = "Profile";
 "accountPage.profileNameNotSelected" = "Name not selected";
@@ -435,9 +435,9 @@
 "accountPage.tlsDisableSecureDlgCheck" = "Disable secure dialog check for incoming TLS data";
 "accountPage.editSipExpirationTime" = "Expiration time";
 "accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
-"accountPage.invalidSipExpirationTime" = "Enter a value between 60 and 604800 seconds";
-"accountPage.invalidPort" = "Enter a value between 0 and 65535";
-"accountPage.invalidAddress" = "Enter a valid address";
+"accountPage.invalidSipExpirationTime" = "Ingrese un valor entre 60 y 604800 segundos";
+"accountPage.invalidPort" = "Ingresar un valor entre 0 y 65535";
+"accountPage.invalidAddress" = "Ingresr una dirección válida";
 "accountPage.thisDevice" = "This device";
 "accountPage.otherDevices" = "Other linked devices";
 "accountPage.accountIdentity" = "Account identity";
@@ -702,3 +702,15 @@
 "shareExtension.accessibilitySelectedAccount" = "Cuenta seleccionada: %@. Doble clic para cambiar de cuenta.";
 "shareExtension.accessibilitySendButton" = "Doble clic para enviar a conversaciones seleccionadas";
 "shareExtension.accessibilitySelectAccount" = "Doble clic para seleccionar esta cuenta";
+
+// Peer Services
+"peerServices.title" = "Shared Services";
+"peerServices.refresh" = "Refresh services";
+"peerServices.empty" = "No shared services available";
+"peerServices.errorOffline" = "Contact is offline";
+"peerServices.errorUnreachable" = "Contact is unreachable";
+"peerServices.errorTimeout" = "Request timed out";
+"peerServices.errorUnknown" = "Could not retrieve services";
+"peerServices.done" = "Done";
+"peerServices.notSupported" = "Not supported";
+"peerServices.open" = "Open";

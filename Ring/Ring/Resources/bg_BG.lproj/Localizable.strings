@@ -391,16 +391,16 @@
 "accountPage.turnPassword" = "Парола за TURN";
 "accountPage.turnRealm" = "СВЕЗНИЦА";
 "accountPage.upnpEnabled" = "Използвайте UPnP";
-"accountPage.stunEnabled" = "Use STUN";
-"accountPage.stunServer" = "STUN address";
-"accountPage.publicAddressHeader" = "Public address";
+"accountPage.stunEnabled" = "Използване на STUN";
+"accountPage.stunServer" = "Адрес на STUN";
+"accountPage.publicAddressHeader" = "Обществен адрес";
 "accountPage.allowIPAutoRewrite" = "Allow IP auto rewrite";
-"accountPage.publishedSameAsLocal" = "Published same as local";
-"accountPage.publishedAddress" = "Address";
-"accountPage.publishedPort" = "Port";
+"accountPage.publishedSameAsLocal" = "Публикуваният да е същият като местния";
+"accountPage.publishedAddress" = "Адрес";
+"accountPage.publishedPort" = "Порт";
 "accountPage.security" = "Сигурност";
-"accountPage.enableSRTP" = "Enable SDES key exchange";
-"accountPage.encryptNegotiation" = "Encrypt negotiation (TLS)";
+"accountPage.enableSRTP" = "Осигуряване на размяна на ключове на SDES";
+"accountPage.encryptNegotiation" = "Шифроване на договарянето (TLS)";
 "accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
 "accountPage.profileHeader" = "Профил";
 "accountPage.profileNameNotSelected" = "Name not selected";
@@ -702,3 +702,15 @@
 "shareExtension.accessibilitySelectedAccount" = "Selected account: %@. Double-tap to change account.";
 "shareExtension.accessibilitySendButton" = "Double-tap to send to selected conversations";
 "shareExtension.accessibilitySelectAccount" = "Double-tap to select this account";
+
+// Peer Services
+"peerServices.title" = "Shared Services";
+"peerServices.refresh" = "Refresh services";
+"peerServices.empty" = "No shared services available";
+"peerServices.errorOffline" = "Contact is offline";
+"peerServices.errorUnreachable" = "Contact is unreachable";
+"peerServices.errorTimeout" = "Request timed out";
+"peerServices.errorUnknown" = "Could not retrieve services";
+"peerServices.done" = "Done";
+"peerServices.notSupported" = "Not supported";
+"peerServices.open" = "Open";

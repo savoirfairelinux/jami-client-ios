@@ -394,7 +394,7 @@
 "accountPage.stunEnabled" = "Përdor STUN";
 "accountPage.stunServer" = "Adresë STUN";
 "accountPage.publicAddressHeader" = "Adresë publike";
-"accountPage.allowIPAutoRewrite" = "Allow IP auto rewrite";
+"accountPage.allowIPAutoRewrite" = "Lejo rishkrim të automatizuar IP-je";
 "accountPage.publishedSameAsLocal" = "Publikuar njësoj si vendorja";
 "accountPage.publishedAddress" = "Adresë";
 "accountPage.publishedPort" = "Portë";
@@ -435,9 +435,9 @@
 "accountPage.tlsDisableSecureDlgCheck" = "Çaktivizo kontroll dialogu të sigurt për të dhëna TLS ardhëse";
 "accountPage.editSipExpirationTime" = "Kohë skadimi";
 "accountPage.selectSipExpirationTime" = "Caktoni kohën (në sekonda) për skadim regjistrimi";
-"accountPage.invalidSipExpirationTime" = "Enter a value between 60 and 604800 seconds";
-"accountPage.invalidPort" = "Enter a value between 0 and 65535";
-"accountPage.invalidAddress" = "Enter a valid address";
+"accountPage.invalidSipExpirationTime" = "Jepni një vlerë mes 60 dhe 604800 sekondash";
+"accountPage.invalidPort" = "Jepni një vlerë mes 0 dhe 65535";
+"accountPage.invalidAddress" = "Jepni një adresë të vlefshme";
 "accountPage.thisDevice" = "Këtë pajisje";
 "accountPage.otherDevices" = "Të tjera pajisje të lidhura";
 "accountPage.accountIdentity" = "Identitet llogarie";
@@ -702,3 +702,15 @@
 "shareExtension.accessibilitySelectedAccount" = "Llogaria e përzgjedhur: %@. Që të ndryshoni llogari, prekeni dy herë.";
 "shareExtension.accessibilitySendButton" = "Që të dërgoni bisedat e përzgjedhura, prekeni dy herë";
 "shareExtension.accessibilitySelectAccount" = "Që të përzgjidhni këtë llogari, prekeni dy herë";
+
+// Peer Services
+"peerServices.title" = "Shërbime të Përbashkëta";
+"peerServices.refresh" = "Rifreskoji shërbimet";
+"peerServices.empty" = "S’ka shërbime të përbashkët";
+"peerServices.errorOffline" = "Kontakti s’është në linjë";
+"peerServices.errorUnreachable" = "Kontakti s’kapet dot";
+"peerServices.errorTimeout" = "Kërkesës i mbaroi koha";
+"peerServices.errorUnknown" = "S’u morën dot shërbime";
+"peerServices.done" = "Done";
+"peerServices.notSupported" = "Not supported";
+"peerServices.open" = "Hape";
