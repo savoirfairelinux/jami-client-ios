@@ -120,7 +120,7 @@ final class SmartListViewTests: JamiBaseOneAccountUITest {
         XCTAssertTrue(compose.waitForExistence(timeout: 10))
         compose.tap()
 
-        let newGroup = app.otherElements[SmartListAccessibilityIdentifiers.newGroupButton]
+        let newGroup = app.buttons[SmartListAccessibilityIdentifiers.newGroupButton]
         XCTAssertTrue(newGroup.waitForExistence(timeout: 15), "New group option should appear")
         XCTAssertTrue(newGroup.isHittable, "New group option should be tappable")
         newGroup.tap()
@@ -152,7 +152,7 @@ final class SmartListViewTests: JamiBaseOneAccountUITest {
         XCTAssertTrue(compose.waitForExistence(timeout: 10))
         compose.tap()
 
-        let newGroup = app.otherElements[SmartListAccessibilityIdentifiers.newGroupButton]
+        let newGroup = app.buttons[SmartListAccessibilityIdentifiers.newGroupButton]
         XCTAssertTrue(newGroup.waitForExistence(timeout: 15), "New group option should appear")
         newGroup.tap()
 

@@ -51,6 +51,8 @@ struct SmartListAccessibilityIdentifiers {
     static let composeButton = "composeButton"
     static let newContactButton = "newContactButton"
     static let newGroupButton = "newGroupButton"
+    static let dialpadButton = "dialpadButton"
+    static let contactsButton = "contactsButton"
     static let temporaryConversationRow = "temporaryConversationRow"
 
 }

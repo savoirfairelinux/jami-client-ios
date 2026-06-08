@@ -66,6 +66,7 @@ class ConversationsViewModel: ObservableObject {
         didSet { updateSearchStatusIfNeeded() }
     }
     @Published var publicDirectoryTitle = L10n.Smartlist.results
+    @Published var publicDirectoryHint = L10n.Smartlist.publicDirectoryHint
     @Published var searchingLabel = ""
     @Published var connectionState: ConnectionType = .connected
     @Published var searchQuery: String = ""
@@ -127,9 +128,7 @@ class ConversationsViewModel: ObservableObject {
         self.observeNetworkState()
         self.observeAccountChange()
         self.setupFilteredConversations()
-        if let account = self.accountsService.currentAccount, account.isJams {
-            publicDirectoryTitle = L10n.Smartlist.jamsResults
-        }
+        self.updateDirectoryCopy(for: self.accountsService.currentAccount)
     }
 
     private func setupFilteredConversations() {
@@ -150,9 +149,7 @@ class ConversationsViewModel: ObservableObject {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] conversation in
                 guard let self = self else { return }
-                withAnimation {
-                    self.temporaryConversation = conversation
-                }
+                self.temporaryConversation = conversation
             })
             .disposed(by: self.disposeBag)
 
@@ -161,9 +158,7 @@ class ConversationsViewModel: ObservableObject {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] conversation in
                 guard let self = self else { return }
-                withAnimation {
-                    self.blockedConversation = conversation
-                }
+                self.blockedConversation = conversation
             })
             .disposed(by: self.disposeBag)
 
@@ -172,9 +167,7 @@ class ConversationsViewModel: ObservableObject {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] conversations in
                 guard let self = self else { return }
-                withAnimation {
-                    self.jamsSearchResult = conversations
-                }
+                self.jamsSearchResult = conversations
             })
             .disposed(by: self.disposeBag)
         searchModel
@@ -193,11 +186,15 @@ class ConversationsViewModel: ObservableObject {
             .subscribe(onNext: { [weak self] account in
                 guard let self = self else { return }
                 self.currentAccountId = account?.id ?? ""
-                self.publicDirectoryTitle = account?.isJams == true
-                    ? L10n.Smartlist.jamsResults
-                    : L10n.Smartlist.results
+                self.updateDirectoryCopy(for: account)
             })
             .disposed(by: disposeBag)
+    }
+
+    private func updateDirectoryCopy(for account: AccountModel?) {
+        let isJams = account?.isJams == true
+        publicDirectoryTitle = isJams ? L10n.Smartlist.jamsResults : L10n.Smartlist.results
+        publicDirectoryHint = isJams ? L10n.Smartlist.jamsDirectoryHint : L10n.Smartlist.publicDirectoryHint
     }
 
     private func observeNetworkState() {
@@ -243,7 +240,7 @@ class ConversationsViewModel: ObservableObject {
 
     func showConversation(withConversationViewModel conversationViewModel: ConversationViewModel,
                           publisher: ConversationStatePublisher) {
-        presentedConversation.updatePresentedConversation(conversationViewModel: conversationViewModel)
+        markConversationPresented(conversationViewModel)
         let state = ConversationState
             .conversationDetail(conversationViewModel:
                                     conversationViewModel)
@@ -266,7 +263,7 @@ class ConversationsViewModel: ObservableObject {
             $0.conversation.isCoredialog() && $0.conversation.getParticipants().first?.jamiId == jamiId
         }) {
             // Update and show the existing conversation
-            presentedConversation.updatePresentedConversation(conversationViewModel: existingConversation)
+            markConversationPresented(existingConversation)
             let state = ConversationState
                 .conversationDetail(conversationViewModel:
                                         existingConversation)
@@ -276,7 +273,7 @@ class ConversationsViewModel: ObservableObject {
 
         // Attempt to find blocked conversation
         if let blockedConversation = conversationsSource.blockedConversation.first(where: { $0.isCoreConversationWith(jamiId: jamiId) }) {
-            presentedConversation.updatePresentedConversation(conversationViewModel: blockedConversation)
+            markConversationPresented(blockedConversation)
             let state = ConversationState
                 .conversationDetail(conversationViewModel:
                                         blockedConversation)
@@ -287,7 +284,7 @@ class ConversationsViewModel: ObservableObject {
         // Create a new temporary swarm conversation since no existing one matched
         let tempConversation = createTemporarySwarmConversation(with: jamiId, accountId: account.id)
         temporaryConversation = tempConversation
-        presentedConversation.updatePresentedConversation(conversationViewModel: tempConversation)
+        markConversationPresented(tempConversation)
         let state = ConversationState
             .conversationDetail(conversationViewModel:
                                     tempConversation)
@@ -357,16 +354,31 @@ class ConversationsViewModel: ObservableObject {
             return self.presentedId == temporaryConversationId
         }
 
-        func hasPresentedConversation() -> Bool {
-            return !presentedId.isEmpty
-        }
-
         mutating func resetPresentedConversation() {
             self.presentedId = ""
         }
     }
 
     var presentedConversation = PresentedConversation()
+
+    /// Set while a conversation opened from search results is on screen, holding the
+    /// query to restore on return. `nil` means search closed for another reason and
+    /// the query should be cleared instead.
+    private var suspendedSearchQuery: String?
+
+    private func markConversationPresented(_ conversationViewModel: ConversationViewModel) {
+        presentedConversation.updatePresentedConversation(conversationViewModel: conversationViewModel)
+        if searchFlow.isActive {
+            suspendedSearchQuery = searchQuery
+        }
+    }
+
+    func smartListDidReappear() -> Bool {
+        presentedConversation.resetPresentedConversation()
+        let suspended = suspendedSearchQuery
+        suspendedSearchQuery = nil
+        return !(suspended ?? "").isEmpty
+    }
 
     // MARK: - Search
     func updateSearchText(_ text: String) {
@@ -382,6 +394,16 @@ class ConversationsViewModel: ObservableObject {
 
     func setSearchActive(_ isActive: Bool) {
         searchFlow.isActive = isActive
+        if isActive {
+            // Fresh session: drop any restore a previous return failed to consume.
+            suspendedSearchQuery = nil
+            return
+        }
+        // Closing search clears the query, unless a result was opened from it — then
+        // markConversationPresented snapshotted the query and we keep it to restore.
+        guard suspendedSearchQuery == nil else { return }
+        searchFlow.text = ""
+        performSearch(query: "")
     }
 
     func setSearchBarDisabled(_ isDisabled: Bool) {
@@ -389,14 +411,13 @@ class ConversationsViewModel: ObservableObject {
     }
 
     private func dismissSearch() {
+        suspendedSearchQuery = nil
         searchFlow = SearchFlowState(text: "", isActive: false, isSearchBarDisabled: true)
         performSearch(query: "")
     }
 
     func performSearch(query: String) {
-        withAnimation {
-            self.searchQuery = query
-        }
+        self.searchQuery = query
         searchModel.searchBarText.accept(query)
     }
 

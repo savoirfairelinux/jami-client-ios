@@ -49,10 +49,7 @@ struct SmartListContentView: View {
         .id(model.currentAccountId)
         .onAppear { [weak model] in
             guard let model = model else { return }
-            // If there was an active search before presenting the conversation, restore
-            // it upon returning to the page. Otherwise, flickering will occur.
-            if model.presentedConversation.hasPresentedConversation() && !model.searchQuery.isEmpty {
-                model.presentedConversation.resetPresentedConversation()
+            if model.smartListDidReappear() {
                 onRestoreSearch?()
             }
         }
