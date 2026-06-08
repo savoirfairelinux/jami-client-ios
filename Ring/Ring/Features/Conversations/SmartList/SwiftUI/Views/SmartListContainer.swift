@@ -22,40 +22,6 @@ import SwiftUI
 import UIKit
 import Combine
 
-struct NewMessageView: View, StateEmittingView {
-    typealias StateEmitterType = ConversationStatePublisher
-
-    @StateObject var viewModel: ConversationsViewModel
-    var stateEmitter: ConversationStatePublisher
-    @SwiftUI.State private var isSearchBarActive = false // To track state initiated by the user
-
-    init(injectionBag: InjectionBag, source: ConversationDataSource) {
-        let emitter = ConversationStatePublisher()
-        self.stateEmitter = emitter
-        _viewModel = StateObject(wrappedValue:
-                                    ConversationsViewModel(with: injectionBag, conversationsSource: source, stateEmitter: emitter))
-    }
-
-    var body: some View {
-        SearchableConversationsView(model: viewModel,
-                                    stateEmitter: stateEmitter,
-                                    mode: .newMessage,
-                                    isSearchBarActive: $isSearchBarActive)
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle(L10n.Smartlist.newMessage)
-            .navigationBarItems(leading: leadingBarItem)
-    }
-
-    private var leadingBarItem: some View {
-        Button(action: {[weak stateEmitter] in
-            stateEmitter?.closeComposingMessage()
-        }, label: {
-            Text(L10n.Global.cancel)
-                .foregroundColor(Color.jami)
-        })
-    }
-}
-
 struct SmartListView: View, StateEmittingView {
     typealias StateEmitterType = ConversationStatePublisher
 
@@ -63,7 +29,7 @@ struct SmartListView: View, StateEmittingView {
     var stateEmitter: ConversationStatePublisher
     @SwiftUI.State var showAccountList = false
     @SwiftUI.State private var coverBackgroundOpacity: CGFloat = 0
-    @SwiftUI.State private var isSearchBarActive = false
+    @SwiftUI.State private var activateSearch = false
     @SwiftUI.State private var showingPicker = false
     @SwiftUI.State private var isSharing = false
     @SwiftUI.State private var isNavigatingToSettings = false
@@ -83,8 +49,7 @@ struct SmartListView: View, StateEmittingView {
         ZStack(alignment: .bottom) {
             SearchableConversationsView(model: model,
                                         stateEmitter: stateEmitter,
-                                        mode: .smartList,
-                                        isSearchBarActive: $isSearchBarActive)
+                                        activateSearch: $activateSearch)
                 .zIndex(0)
                 .accessibility(identifier: SmartListAccessibilityIdentifiers.conversationView)
             if showAccountList {
@@ -104,7 +69,7 @@ struct SmartListView: View, StateEmittingView {
             }
             .accessibility(identifier: SmartListAccessibilityIdentifiers.contactPicker)
         }
-        .onChange(of: isSearchBarActive) { _ in
+        .onChange(of: model.searchFlow.isActive) { _ in
             showAccountList = false
         }
     }
@@ -224,9 +189,8 @@ struct SmartListView: View, StateEmittingView {
     }
 
     private var composeButton: some View {
-        Button(action: { [weak stateEmitter] in
-            guard let stateEmitter = stateEmitter else { return }
-            stateEmitter.openNewMessagesWindow()
+        Button(action: {
+            activateSearch = true
         }, label: {
             Image(systemName: "square.and.pencil")
                 .foregroundColor(Color.jami)
@@ -297,28 +261,38 @@ struct SmartListView: View, StateEmittingView {
 struct SearchableConversationsView: View {
     @ObservedObject var model: ConversationsViewModel
     var stateEmitter: ConversationStatePublisher
-    @SwiftUI.State var mode: ConversationsViewModel.Target
-    @Binding var isSearchBarActive: Bool
-    @SwiftUI.State private var searchText = ""
-    @SwiftUI.State private var isSearchBarDisabled = false // To programmatically disable the search bar
-    @SwiftUI.State private var scrollViewOffset: CGFloat = 0
+    @Binding var activateSearch: Bool
+
     var body: some View {
         SmartListContentView(model: model,
                              stateEmitter: stateEmitter,
-                             mode: mode,
                              requestsModel: model.requestsModel,
-                             isSearchBarActive: $isSearchBarActive)
-            .navigationBarSearch(self.$searchText, isActive: $isSearchBarActive, isSearchBarDisabled: $isSearchBarDisabled)
-            .onChange(of: searchText) {[weak model] _ in
-                guard let model = model else { return }
-                model.performSearch(query: searchText.lowercased())
-            }
-            .onChange(of: model.conversationCreated) {[weak model] _ in
-                guard let model = model else { return }
-                if model.conversationCreated.isEmpty { return }
-                isSearchBarDisabled = true
-                searchText = ""
-            }
+                             isSearchBarActive: searchActiveBinding)
+            .navigationBarSearch(searchTextBinding,
+                                 isActive: searchActiveBinding,
+                                 isSearchBarDisabled: searchBarDisabledBinding,
+                                 activateSearch: $activateSearch)
+    }
+
+    private var searchTextBinding: Binding<String> {
+        Binding(
+            get: { model.searchFlow.text },
+            set: { model.updateSearchText($0) }
+        )
+    }
+
+    private var searchActiveBinding: Binding<Bool> {
+        Binding(
+            get: { model.searchFlow.isActive },
+            set: { model.setSearchActive($0) }
+        )
+    }
+
+    private var searchBarDisabledBinding: Binding<Bool> {
+        Binding(
+            get: { model.searchFlow.isSearchBarDisabled },
+            set: { model.setSearchBarDisabled($0) }
+        )
     }
 }
 

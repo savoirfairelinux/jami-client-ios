@@ -96,8 +96,6 @@ class ConversationsCoordinator: RootCoordinator, StateableResponsive, Conversati
                                           withAnimation: withAnimation)
                 case .openConversationFromCall(let conversation):
                     self.openConversationFromCall(conversationModel: conversation)
-                case .compose:
-                    self.presentCompose()
                 case .presentSwarmInfo(let swarmInfo):
                     self.presentSwarmInfo(swarmInfo: swarmInfo)
                 case .startCall(let contactRingId, let name):
@@ -310,24 +308,6 @@ extension ConversationsCoordinator {
     func openAboutJami() {
         let aboutJamiController = AboutViewController.instantiate()
         self.present(viewController: aboutJamiController, withStyle: .show, withAnimation: true, disposeBag: self.disposeBag)
-    }
-
-    func presentCompose() {
-        let composeCoordinator = ComposeNewMessageCoordinator(injectionBag: self.injectionBag)
-        composeCoordinator.conversationsSource = self.conversationsSource
-        composeCoordinator.parentCoordinator = self
-        self.addChildCoordinator(childCoordinator: composeCoordinator)
-        composeCoordinator.start()
-        let composeController = composeCoordinator.rootViewController
-        self.present(viewController: composeController,
-                     withStyle: .overCurrentContext,
-                     withAnimation: true,
-                     disposeBag: self.disposeBag)
-        composeController.rx.controllerWasDismissed
-            .subscribe(onNext: { [weak self, weak composeCoordinator] (_) in
-                self?.removeChildCoordinator(childCoordinator: composeCoordinator)
-            })
-            .disposed(by: self.disposeBag)
     }
 }
 

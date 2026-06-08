@@ -26,7 +26,6 @@ enum ConversationState: State {
     case startCall(contactRingId: String, userName: String)
     case startAudioCall(contactRingId: String, userName: String)
     case conversationDetail(conversationViewModel: ConversationViewModel)
-    case closeComposingMessage
     case contactDetail(conversationViewModel: ConversationModel)
     case qrCode
     case createSwarm
@@ -50,7 +49,6 @@ enum ConversationState: State {
                                            withAnimation: Bool)
     case reopenCall(viewController: CallViewController)
     case openAboutJami
-    case compose
     case showAccountSettings(account: AccountModel)
 }
 

@@ -23,10 +23,8 @@ import SwiftUI
 struct SmartListContentView: View {
     @ObservedObject var model: ConversationsViewModel
     let stateEmitter: ConversationStatePublisher
-    @SwiftUI.State var mode: ConversationsViewModel.Target
     @ObservedObject var requestsModel: RequestsViewModel
     @Binding var isSearchBarActive: Bool
-    @SwiftUI.State var currentSearchBarStatus: Bool = false
     @SwiftUI.State var isShowingScanner: Bool = false
 
     var body: some View {
@@ -39,11 +37,13 @@ struct SmartListContentView: View {
                         publicDirectorySearchView
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .contentShape(Rectangle())
-                        conversationsSearchHeaderView
-                            .hideRowSeparator()
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .contentShape(Rectangle())
-                        conversationsView
+                        if !model.searchQuery.isEmpty {
+                            conversationsSearchHeaderView
+                                .hideRowSeparator()
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .contentShape(Rectangle())
+                            conversationsView
+                        }
                     }
                     .padding(.horizontal, 15)
                 }
@@ -51,24 +51,16 @@ struct SmartListContentView: View {
             } else {
                 ScrollView {
                     LazyVStack(alignment: .leading) {
-                        if mode == .smartList {
-                            smartListTopView
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .contentShape(Rectangle())
-                        } else {
-                            newMessageTopView
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .contentShape(Rectangle())
-                        }
+                        smartListTopView
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .contentShape(Rectangle())
                         conversationsView
                     }
                     .padding(.horizontal, 15)
                 }
-                .transition(.identity)
-                .animation(nil, value: isSearchBarActive)
+                .transition(.opacity)
             }
         }
-        .animation(isSearchBarActive ? .easeIn(duration: 0.3) : nil, value: isSearchBarActive)
         .onAppear { [weak model] in
             guard let model = model else { return }
             // If there was an active search before presenting the conversation, the search results should remain the same upon returning to the page. Otherwise, flickering will occur.
@@ -152,15 +144,6 @@ struct SmartListContentView: View {
         }
     }
 
-    @ViewBuilder private var newMessageTopView: some View {
-        VStack {
-            newChatOptions
-        }
-        .padding(.bottom)
-        .listRowInsets(EdgeInsets(top: 0, leading: 15, bottom: 5, trailing: 15))
-        .hideRowSeparator()
-    }
-
     @ViewBuilder private var newChatOptions: some View {
         HStack {
             actionItem(icon: "qrcode", title: L10n.Smartlist.newContact, action: { isShowingScanner.toggle() })
@@ -168,7 +151,7 @@ struct SmartListContentView: View {
             actionItem(icon: "person.2", title: L10n.Smartlist.newGroup, action: stateEmitter.createSwarm)
         }
         .hideRowSeparator()
-        .animation(nil, value: isSearchBarActive)
+        .transition(.opacity)
     }
 
     private func actionItem(icon: String, title: String, action: @escaping () -> Void) -> some View {
@@ -195,18 +178,16 @@ struct SmartListContentView: View {
         VStack(alignment: .leading) {
             Spacer()
                 .frame(height: 10)
-            if !model.searchQuery.isEmpty {
-                Text(L10n.Smartlist.conversations)
-                    .fontWeight(.semibold)
+            Text(L10n.Smartlist.conversations)
+                .fontWeight(.semibold)
+                .multilineTextAlignment(.leading)
+                .hideRowSeparator()
+                .padding(.bottom, 3)
+            if model.filteredConversations.isEmpty {
+                Text(L10n.Smartlist.noConversationsFound)
+                    .font(.callout)
                     .multilineTextAlignment(.leading)
                     .hideRowSeparator()
-                    .padding(.bottom, 3)
-                if model.filteredConversations.isEmpty {
-                    Text(L10n.Smartlist.noConversationsFound)
-                        .font(.callout)
-                        .multilineTextAlignment(.leading)
-                        .hideRowSeparator()
-                }
             }
         }
     }
@@ -216,7 +197,6 @@ struct SmartListContentView: View {
             if !model.isSipAccount() {
                 newChatOptions
                     .padding(.vertical, 10)
-                    .animation(nil, value: isSearchBarActive)
             }
             if !model.searchQuery.isEmpty {
                 if !model.isSipAccount() {
@@ -224,16 +204,13 @@ struct SmartListContentView: View {
                         .fontWeight(.semibold)
                         .hideRowSeparator()
                         .padding(.top)
-                        .animation(nil, value: isSearchBarActive)
                 }
                 searchResultView
                     .hideRowSeparator()
                     .padding(.bottom)
                     .padding(.top, 3)
-                    .animation(nil, value: isSearchBarActive)
                 if let conversation = model.blockedConversation {
                     blockedcontactsView(conversation: conversation)
-                        .animation(nil, value: isSearchBarActive)
                 }
             }
         }

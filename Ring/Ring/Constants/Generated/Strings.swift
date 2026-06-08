@@ -1247,8 +1247,6 @@ internal enum L10n {
     internal static let newContact = L10n.tr("Localizable", "smartlist.newContact", fallback: "New contact")
     /// New group
     internal static let newGroup = L10n.tr("Localizable", "smartlist.newGroup", fallback: "New group")
-    /// New message
-    internal static let newMessage = L10n.tr("Localizable", "smartlist.newMessage", fallback: "New message")
     /// No conversations
     internal static let noConversation = L10n.tr("Localizable", "smartlist.noConversation", fallback: "No conversations")
     /// No conversations match the search.

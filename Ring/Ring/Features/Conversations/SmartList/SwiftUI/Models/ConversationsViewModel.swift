@@ -25,14 +25,6 @@ import RxRelay
 import Combine
 
 class ConversationStatePublisher: StatePublisher<ConversationState> {
-    func openNewMessagesWindow() {
-        self.stateSubject.onNext(ConversationState.compose)
-    }
-
-    func closeComposingMessage() {
-        self.stateSubject.onNext(ConversationState.closeComposingMessage)
-    }
-
     func showDialpad() {
         self.stateSubject.onNext(ConversationState.showDialpad(inCall: false))
     }
@@ -56,6 +48,12 @@ class ConversationStatePublisher: StatePublisher<ConversationState> {
 
 // swiftlint:disable type_body_length
 class ConversationsViewModel: ObservableObject {
+    struct SearchFlowState: Equatable {
+        var text = ""
+        var isActive = false
+        var isSearchBarDisabled = false
+    }
+
     // temporary conversation for jami or sip
     @Published var temporaryConversation: ConversationViewModel? {
         didSet { updateSearchStatusIfNeeded() }
@@ -73,17 +71,12 @@ class ConversationsViewModel: ObservableObject {
     @Published var searchingLabel = ""
     @Published var connectionState: ConnectionType = .connected
     @Published var searchQuery: String = ""
-    @Published var conversationCreated: String = ""
+    @Published private(set) var searchFlow = SearchFlowState()
     @Published var searchStatus: SearchStatus = .notSearching
 
     private let conversationsSource: ConversationDataSource
 
     @Published var filteredConversations: [ConversationViewModel] = []
-
-    enum Target {
-        case smartList
-        case newMessage
-    }
 
     var disposeBag = DisposeBag()
     let conversationsService: ConversationsService
@@ -237,14 +230,10 @@ class ConversationsViewModel: ObservableObject {
 
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
-            // If conversation created from temporary navigate back to smart list
             if self.presentedConversation.isTemporaryPresented() {
                 self.presentedConversation.resetPresentedConversation()
             }
-            // cleanup search
-            self.performSearch(query: "")
-            // disable search bar
-            conversationCreated = conversation.id
+            self.dismissSearchAfterTemporaryPromotion()
         }
     }
 
@@ -416,6 +405,24 @@ class ConversationsViewModel: ObservableObject {
     var presentedConversation = PresentedConversation()
 
     // MARK: - Search
+    func updateSearchText(_ text: String) {
+        searchFlow.text = text
+        performSearch(query: text.lowercased())
+    }
+
+    func setSearchActive(_ isActive: Bool) {
+        searchFlow.isActive = isActive
+    }
+
+    func setSearchBarDisabled(_ isDisabled: Bool) {
+        searchFlow.isSearchBarDisabled = isDisabled
+    }
+
+    private func dismissSearchAfterTemporaryPromotion() {
+        searchFlow = SearchFlowState(text: "", isActive: false, isSearchBarDisabled: true)
+        performSearch(query: "")
+    }
+
     func performSearch(query: String) {
         withAnimation {
             self.searchQuery = query
