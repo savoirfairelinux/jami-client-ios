@@ -68,40 +68,37 @@ class SwarmInfoVM: ObservableObject {
 
     let provider: AvatarProvider
 
-    var isCoreDialog: Bool {
-        return conversation?.isCoredialog() ?? false
-    }
-
     var removeConversationText: String {
         guard let conversation = self.conversation else {
             return L10n.Swarm.removeConversation
         }
-        return conversation.isDialog() || conversation.isOnlyLocalParticipant()
-            ? L10n.Swarm.removeConversation
-            : L10n.Swarm.leaveConversation
+        return ConversationDestructiveAction.removeConversation.title(for: conversation)
     }
 
     var removeConversationConfirmation: String {
         guard let conversation = self.conversation else {
             return L10n.Alerts.confirmLeaveConversation
         }
-        if isCoreDialog {
-            return L10n.Alerts.confirmRemoveOneToOneConversation
-        }
-        if conversation.isDialog() || conversation.isOnlyLocalParticipant() {
-            return L10n.Alerts.confirmDeleteConversation
-        }
-        return L10n.Alerts.confirmLeaveConversation
+        return ConversationDestructiveAction.removeConversation.confirmationMessage(for: conversation)
     }
 
     var removeConversationAlertButton: String {
         guard let conversation = self.conversation else {
             return L10n.Global.remove
         }
-        if conversation.isDialog() || conversation.isOnlyLocalParticipant() {
-            return L10n.Global.remove
-        }
-        return L10n.Global.leave
+        return ConversationDestructiveAction.removeConversation.confirmationButtonTitle(for: conversation)
+    }
+
+    var blockContactIcon: String {
+        destructiveActionIcon(.blockContact, fallback: "person.crop.circle.badge.xmark")
+    }
+
+    var removeContactIcon: String {
+        destructiveActionIcon(.removeContact, fallback: "person.crop.circle.badge.minus")
+    }
+
+    var removeConversationIcon: String {
+        destructiveActionIcon(.removeConversation, fallback: "trash")
     }
 
     // MARK: - Initialization
@@ -120,6 +117,13 @@ class SwarmInfoVM: ObservableObject {
         self.provider = AvatarProvider.from(swarmInfo: swarmInfo, profileService: self.profileService, size: Constants.AvatarSize.conversationInfo80)
 
         setupBindings()
+    }
+
+    private func destructiveActionIcon(_ action: ConversationDestructiveAction, fallback: String) -> String {
+        guard let conversation = self.conversation else {
+            return fallback
+        }
+        return action.icon(for: conversation)
     }
 
     // MARK: - Setup

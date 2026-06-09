@@ -71,6 +71,7 @@
 		0E72374A20460320006B0C7D /* ProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E72374920460320006B0C7D /* ProfileHeaderView.xib */; };
 		0E8E9A0520483E1200DA8E8B /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8E9A0420483E1200DA8E8B /* TitleView.swift */; };
 		0E983E6E1FC77C3E0082103E /* ConversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E983E6D1FC77C3E0082103E /* ConversationModel.swift */; };
+		0EDA00020000000000001002 /* ConversationDestructiveAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA00010000000000001001 /* ConversationDestructiveAction.swift */; };
 		0E99F1A022417A0400CF8BD6 /* JamiURI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E99F19F22417A0400CF8BD6 /* JamiURI.swift */; };
 		0EABD3852303600B00DE7ACF /* default.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0EABD3842303600B00DE7ACF /* default.wav */; };
 		0EBB72A92034F44200D88F46 /* ProfilesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB72A82034F44200D88F46 /* ProfilesService.swift */; };
@@ -239,6 +240,7 @@
 		260AE62929B8ECA400D66D5E /* TestableFilteredDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260AE62829B8ECA400D66D5E /* TestableFilteredDataSource.swift */; };
 		260AE62B29B8F97300D66D5E /* TestableSwarmInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260AE62A29B8F97300D66D5E /* TestableSwarmInfo.swift */; };
 		260AE62F29BA3B6900D66D5E /* ConversationModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260AE62E29BA3B6900D66D5E /* ConversationModelTests.swift */; };
+		0EDA00060000000000001006 /* ConversationDestructiveActionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA00050000000000001005 /* ConversationDestructiveActionTests.swift */; };
 		260AE63329BA5DF600D66D5E /* SwarmInfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260AE63229BA5DF600D66D5E /* SwarmInfoTests.swift */; };
 		260AE63529BE00F100D66D5E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260AE63429BE00F100D66D5E /* Constants.swift */; };
 		260AE63729BE177000D66D5E /* ContactUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260AE63629BE177000D66D5E /* ContactUtilsTests.swift */; };
@@ -324,6 +326,7 @@
 		26600A992BEA855900EFCFD1 /* ThreadSafeArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26600A982BEA855900EFCFD1 /* ThreadSafeArray.swift */; };
 		26625BB02BA4C47D009D2DDB /* SwarmProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26625BAF2BA4C47D009D2DDB /* SwarmProfile.swift */; };
 		26625BB52BA9DF67009D2DDB /* ConversationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26625BB42BA9DF67009D2DDB /* ConversationsView.swift */; };
+		0EDA00040000000000001004 /* SmartListRowModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA00030000000000001003 /* SmartListRowModifiers.swift */; };
 		26625BB72BA9DF81009D2DDB /* ConversationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26625BB62BA9DF81009D2DDB /* ConversationsViewModel.swift */; };
 		26625BB92BA9FEFC009D2DDB /* SmartListContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26625BB82BA9FEFC009D2DDB /* SmartListContentView.swift */; };
 		26625BBB2BAA0749009D2DDB /* SmartListContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26625BBA2BAA0749009D2DDB /* SmartListContainer.swift */; };
@@ -774,6 +777,7 @@
 		0E72374920460320006B0C7D /* ProfileHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileHeaderView.xib; sourceTree = "<group>"; };
 		0E8E9A0420483E1200DA8E8B /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		0E983E6D1FC77C3E0082103E /* ConversationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationModel.swift; sourceTree = "<group>"; };
+		0EDA00010000000000001001 /* ConversationDestructiveAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationDestructiveAction.swift; sourceTree = "<group>"; };
 		0E99F19F22417A0400CF8BD6 /* JamiURI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JamiURI.swift; sourceTree = "<group>"; };
 		0EABD3842303600B00DE7ACF /* default.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = default.wav; sourceTree = "<group>"; };
 		0EB12451224AB1030025F8CA /* ContactsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ContactsUI.framework; path = System/Library/Frameworks/ContactsUI.framework; sourceTree = SDKROOT; };
@@ -889,6 +893,7 @@
 		260AE62829B8ECA400D66D5E /* TestableFilteredDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestableFilteredDataSource.swift; sourceTree = "<group>"; };
 		260AE62A29B8F97300D66D5E /* TestableSwarmInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestableSwarmInfo.swift; sourceTree = "<group>"; };
 		260AE62E29BA3B6900D66D5E /* ConversationModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationModelTests.swift; sourceTree = "<group>"; };
+		0EDA00050000000000001005 /* ConversationDestructiveActionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationDestructiveActionTests.swift; sourceTree = "<group>"; };
 		260AE63229BA5DF600D66D5E /* SwarmInfoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwarmInfoTests.swift; sourceTree = "<group>"; };
 		260AE63429BE00F100D66D5E /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		260AE63629BE177000D66D5E /* ContactUtilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUtilsTests.swift; sourceTree = "<group>"; };
@@ -972,6 +977,7 @@
 		26600A982BEA855900EFCFD1 /* ThreadSafeArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ThreadSafeArray.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Models/ThreadSafeArray.swift; sourceTree = SOURCE_ROOT; };
 		26625BAF2BA4C47D009D2DDB /* SwarmProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwarmProfile.swift; sourceTree = "<group>"; };
 		26625BB42BA9DF67009D2DDB /* ConversationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConversationsView.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Views/ConversationsView.swift; sourceTree = SOURCE_ROOT; };
+		0EDA00030000000000001003 /* SmartListRowModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SmartListRowModifiers.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Views/SmartListRowModifiers.swift; sourceTree = SOURCE_ROOT; };
 		26625BB62BA9DF81009D2DDB /* ConversationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConversationsViewModel.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Models/ConversationsViewModel.swift; sourceTree = SOURCE_ROOT; };
 		26625BB82BA9FEFC009D2DDB /* SmartListContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SmartListContentView.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Views/SmartListContentView.swift; sourceTree = SOURCE_ROOT; };
 		26625BBA2BAA0749009D2DDB /* SmartListContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SmartListContainer.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Views/SmartListContainer.swift; sourceTree = SOURCE_ROOT; };
@@ -3110,6 +3116,7 @@
 				263C16822D9DBCE6008E102C /* ThreadSafeQueueHelper.swift */,
 				26A1B2C3D4E5F60700AABB01 /* ThreadSafeDictionary.swift */,
 				627F11F020348FBF006560B5 /* AvatarView.swift */,
+				0EDA00010000000000001001 /* ConversationDestructiveAction.swift */,
 				AFD989EC28085426384411E8 /* AvatarHelpers.swift */,
 				5FE00A4B452D77EC0CA26ED4 /* GroupAvatarRenderer.swift */,
 				BB6690032A99043200875848 /* SharedActionsPresenter.swift */,
@@ -3334,6 +3341,7 @@
 			children = (
 				260AE62629B8E89300D66D5E /* JamiSearchViewModelTests.swift */,
 				260AE62E29BA3B6900D66D5E /* ConversationModelTests.swift */,
+				0EDA00050000000000001005 /* ConversationDestructiveActionTests.swift */,
 				260AE63229BA5DF600D66D5E /* SwarmInfoTests.swift */,
 				26AVATAR0029BA000000000001 /* AvatarProviderTests.swift */,
 				26GRPAVT0029BA000000000001 /* GroupAvatarRendererTests.swift */,
@@ -3566,6 +3574,7 @@
 			children = (
 				265B759E2DCBAB1900CB1622 /* AccountMigrationView.swift */,
 				26625BB42BA9DF67009D2DDB /* ConversationsView.swift */,
+				0EDA00030000000000001003 /* SmartListRowModifiers.swift */,
 				26625BB82BA9FEFC009D2DDB /* SmartListContentView.swift */,
 				26625BBA2BAA0749009D2DDB /* SmartListContainer.swift */,
 				26E081212BC03AB3001B4C18 /* AccountLists.swift */,
@@ -4261,6 +4270,7 @@
 				260AE62529B65A4B00D66D5E /* ContactsUtils.swift in Sources */,
 				1A2D18C51F29180700B2C785 /* ContactModel.swift in Sources */,
 				26625BB52BA9DF67009D2DDB /* ConversationsView.swift in Sources */,
+				0EDA00040000000000001004 /* SmartListRowModifiers.swift in Sources */,
 				BB4C6E2629229131001C901A /* ColorExtension.swift in Sources */,
 				269DA09928E23D37007D51D6 /* MessageRowView.swift in Sources */,
 				26F1D8E62FC73C6E002AA754 /* PeerServicesAdapter.mm in Sources */,
@@ -4331,6 +4341,7 @@
 				1A20418B1F1EA58A00C08435 /* ViewModelBased.swift in Sources */,
 				1A5DC01E1F355DA70075E8EF /* ContactsAdapterDelegate.swift in Sources */,
 				0E983E6E1FC77C3E0082103E /* ConversationModel.swift in Sources */,
+				0EDA00020000000000001002 /* ConversationDestructiveAction.swift in Sources */,
 				26EF35EB28E38DA200D97E14 /* MessageContentVM.swift in Sources */,
 				26B37342263C4B3700E2EE28 /* CustomSearchBar.swift in Sources */,
 				0E3BD4362044B39F00A50DDF /* ProfileHeaderView.swift in Sources */,
@@ -4574,6 +4585,7 @@
 				2673D62A25261DD9000C56CB /* ConferenceMenuItemsManagerTest.swift in Sources */,
 				024B61311DF7656A00C4F9DE /* FixtureFailInitDRingAdapter.mm in Sources */,
 				260AE62F29BA3B6900D66D5E /* ConversationModelTests.swift in Sources */,
+				0EDA00060000000000001006 /* ConversationDestructiveActionTests.swift in Sources */,
 				2637E5612DD96BE000ACCF91 /* ActiveCallsHelperTests.swift in Sources */,
 				26A2B0522E8DC59E00A3E1B2 /* ActiveCallsViewModelTests.swift in Sources */,
 				260AE63729BE177000D66D5E /* ContactUtilsTests.swift in Sources */,

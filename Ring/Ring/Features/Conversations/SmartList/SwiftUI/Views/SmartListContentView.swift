@@ -32,32 +32,31 @@ struct SmartListContentView: View {
 
         return ZStack {
             if isSearchBarActive {
-                ScrollView {
-                    LazyVStack(alignment: .leading) {
-                        publicDirectorySearchView
+                List {
+                    publicDirectorySearchView
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .contentShape(Rectangle())
+                        .smartListRowStyle()
+                    if !model.searchQuery.isEmpty {
+                        conversationsSearchHeaderView
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .contentShape(Rectangle())
-                        if !model.searchQuery.isEmpty {
-                            conversationsSearchHeaderView
-                                .hideRowSeparator()
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .contentShape(Rectangle())
-                            conversationsView
-                        }
-                    }
-                    .padding(.horizontal, 15)
-                }
-                .transition(.opacity)
-            } else {
-                ScrollView {
-                    LazyVStack(alignment: .leading) {
-                        smartListTopView
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .contentShape(Rectangle())
+                            .smartListRowStyle()
                         conversationsView
                     }
-                    .padding(.horizontal, 15)
                 }
+                .listStyle(.plain)
+                .id(model.currentAccountId)
+                .transition(.opacity)
+            } else {
+                List {
+                    smartListTopView
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .contentShape(Rectangle())
+                    conversationsView
+                }
+                .listStyle(.plain)
+                .id(model.currentAccountId)
                 .transition(.opacity)
             }
         }
@@ -69,8 +68,6 @@ struct SmartListContentView: View {
                 model.presentedConversation.resetPresentedConversation()
             }
         }
-        .listStyle(.plain)
-        .hideRowSeparator()
         .sheet(isPresented: $requestsModel.requestViewOpened) {
             RequestsView(model: requestsModel)
         }
@@ -255,9 +252,7 @@ struct SmartListContentView: View {
                     model.showConversation(withConversationViewModel: conversation,
                                            publisher: stateEmitter)
                 }
-                .listRowInsets(EdgeInsets(top: 10, leading: 15, bottom: 0, trailing: 15))
                 .transition(.opacity)
-                .hideRowSeparator()
         }
     }
 
