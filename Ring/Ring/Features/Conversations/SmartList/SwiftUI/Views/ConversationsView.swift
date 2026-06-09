@@ -20,64 +20,71 @@
 
 import SwiftUI
 
-@available(iOS 15.0, *)
 struct SwipeActionsModifier: ViewModifier {
-    enum ActiveAlert: Identifiable {
-        case block, delete
-
-        var id: Self { self }
-    }
-
     let conversation: ConversationViewModel
     let model: ConversationsViewModel
-    @SwiftUI.State private var activeAlert: ActiveAlert?
+    @SwiftUI.State private var activeAction: ConversationDestructiveAction?
 
     func body(content: Content) -> some View {
-        content
-            .swipeActions(edge: .trailing) {
-                swipeButton(for: .block, color: .red, title: L10n.Global.block)
-                swipeButton(for: .delete, color: .orange, title: L10n.Actions.deleteAction)
+        let actions = ConversationDestructiveAction.availableActions(for: conversation.conversation)
+
+        return Group {
+            if #available(iOS 15.0, *) {
+                content
+                    .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                        ForEach(actions) { action in
+                            Button {
+                                activeAction = action
+                            } label: {
+                                Label(action.swipeActionTitle(for: conversation.conversation),
+                                      systemImage: action.icon(for: conversation.conversation))
+                            }
+                            .tint(tint(for: action))
+                        }
+                    }
+            } else {
+                content
+                    .contextMenu {
+                        ForEach(actions) { action in
+                            Button {
+                                activeAction = action
+                            } label: {
+                                Label(action.title(for: conversation.conversation),
+                                      systemImage: action.icon(for: conversation.conversation))
+                            }
+                        }
+                    }
             }
-            .alert(item: $activeAlert, content: alertForType)
+        }
+        .alert(item: $activeAction, content: alertForAction)
     }
 
-    private func swipeButton(for alertType: ActiveAlert, color: Color, title: String) -> some View {
-        Button {
-            activeAlert = alertType
-        } label: {
-            Text(title)
+    private func tint(for action: ConversationDestructiveAction) -> Color {
+        switch action {
+        case .blockContact:
+            return .jamiFailure
+        case .removeContact:
+            return .jamiWarning
+        case .removeConversation:
+            return Color(.systemGray)
         }
-        .tint(color)
     }
 
-    private func alertForType(_ alertType: ActiveAlert) -> Alert {
-        switch alertType {
-        case .block:
-            return Alert(
-                title: Text(L10n.Global.blockContact),
-                message: Text(L10n.Alerts.confirmBlockContact),
-                primaryButton: .default(Text(L10n.Global.cancel)),
-                secondaryButton: .destructive(Text(L10n.Global.block), action: { model.blockConversation(conversationViewModel: conversation) })
-            )
-        case .delete:
-            return Alert(
-                title: Text(L10n.Alerts.confirmDeleteConversationTitle),
-                message: Text(L10n.Alerts.confirmDeleteConversation),
-                primaryButton: .default(Text(L10n.Global.cancel)),
-                secondaryButton: .destructive(Text(L10n.Actions.deleteAction), action: { model.deleteConversation(conversationViewModel: conversation) })
-            )
-        }
+    private func alertForAction(_ action: ConversationDestructiveAction) -> Alert {
+        Alert(
+            title: Text(action.title(for: conversation.conversation)),
+            message: Text(action.confirmationMessage(for: conversation.conversation)),
+            primaryButton: .destructive(Text(action.confirmationButtonTitle(for: conversation.conversation))) {
+                model.performDestructiveAction(action, conversationViewModel: conversation)
+            },
+            secondaryButton: .cancel()
+        )
     }
 }
 
 extension View {
-    @ViewBuilder
     func conditionalSmartListSwipeActions(conversation: ConversationViewModel, model: ConversationsViewModel) -> some View {
-        if #available(iOS 15.0, *) {
-            self.modifier(SwipeActionsModifier(conversation: conversation, model: model))
-        } else {
-            self
-        }
+        self.modifier(SwipeActionsModifier(conversation: conversation, model: model))
     }
 }
 
@@ -86,20 +93,27 @@ struct ConversationsView: View {
     let stateEmitter: ConversationStatePublisher
     var body: some View {
         ForEach(model.filteredConversations) { [weak model] conversation in
-            ConversationRowView(model: conversation)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .contentShape(Rectangle())
-                .onTapGesture { [weak conversation, weak model] in
+            if let model = model {
+                Button(action: { [weak conversation, weak model] in
                     guard let conversation = conversation, let model = model else { return }
                     model.showConversation(withConversationViewModel: conversation,
                                            publisher: stateEmitter)
-                }
-                .listRowInsets(EdgeInsets(top: 10, leading: 15, bottom: 0, trailing: 15))
-                .transition(.opacity)
+                }, label: {
+                    // withSeparator: false — the in-content Divider() slides with the
+                    // row during a swipe (native separators stay pinned), which makes
+                    // the swipe reveal jumpy. Separator is handled by the List instead.
+                    ConversationRowView(model: conversation, withSeparator: false)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .contentShape(Rectangle())
+                })
+                .buttonStyle(.plain)
+                .conditionalSmartListSwipeActions(conversation: conversation, model: model)
+                .listRowInsets(EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15))
+                .listRowBackground(Color.clear)
+                .conversationRowSeparator()
+            }
         }
-        .hideRowSeparator()
         .navigationBarBackButtonHidden(true)
-        .transition(.opacity)
     }
 }
 
@@ -116,7 +130,6 @@ struct TempConversationsView: View {
                     model.showConversation(withConversationViewModel: conversation,
                                            publisher: state)
                 }
-                .listRowInsets(EdgeInsets(top: 10, leading: 15, bottom: 0, trailing: 15))
                 .transition(.opacity)
         }
     }
@@ -135,8 +148,6 @@ struct JamsSearchResultView: View {
                     model.showConversation(withConversationViewModel: conversation,
                                            publisher: state)
                 }
-                .transition(.opacity)
-                .listRowInsets(EdgeInsets(top: 10, leading: 15, bottom: 0, trailing: 15))
                 .transition(.opacity)
         }
     }
@@ -223,7 +234,6 @@ struct ConversationRowView: View {
                     .padding(.leading, Constants.defaultAvatarSize)
             }
         }
-        .transition(.opacity)
         .accessibilityElement(children: /*@START_MENU_TOKEN@*/.ignore/*@END_MENU_TOKEN@*/)
         .accessibilityLabel(constreuctChatRowAccessibilityLabel())
 

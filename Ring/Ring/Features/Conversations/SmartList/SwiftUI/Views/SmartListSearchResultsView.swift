@@ -30,30 +30,30 @@ struct SmartListSearchResultsView: View {
 
     var body: some View {
         GeometryReader { geometry in
-            ScrollView {
-                LazyVStack(alignment: .leading) {
-                    publicDirectorySearchView
+            List {
+                publicDirectorySearchView
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .contentShape(Rectangle())
+                    .smartListRowStyle()
+                if !model.searchQuery.isEmpty {
+                    conversationsSearchHeaderView
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .contentShape(Rectangle())
-                    if !model.searchQuery.isEmpty {
-                        conversationsSearchHeaderView
-                            .hideRowSeparator()
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .contentShape(Rectangle())
-                        conversationsView
-                    }
+                        .smartListRowStyle()
+                    conversationsView
                 }
-                .padding(.horizontal, 15)
-                .frame(minHeight: geometry.size.height, alignment: .top)
-                .background(
-                    Color.clear
-                        .contentShape(Rectangle())
-                        .onTapGesture(perform: onDismissEmptyArea)
-                )
+                // Preserve tap-to-dismiss on the empty area below the results.
+                Color.clear
+                    .frame(minHeight: geometry.size.height / 2)
+                    .contentShape(Rectangle())
+                    .listRowInsets(EdgeInsets())
+                    .listRowBackground(Color.clear)
+                    .hideRowSeparator()
+                    .onTapGesture(perform: onDismissEmptyArea)
             }
+            .listStyle(.plain)
+            .id(model.currentAccountId)
         }
-        .listStyle(.plain)
-        .hideRowSeparator()
         .sheet(isPresented: $isShowingScanner) {
             ScanView(onCodeScanned: { [weak model, weak stateEmitter] code in
                 defer {
