@@ -46,7 +46,7 @@ class SwarmInfoVM: ObservableObject {
     private let nameService: NameService
     let profileService: ProfilesService
     private let conversationService: ConversationsService
-    private let contactsService: ContactsService
+    private let destructiveActionExecutor: ConversationDestructiveActionExecutor
     let injectionBag: InjectionBag
 
     // MARK: - Computed Properties
@@ -68,40 +68,37 @@ class SwarmInfoVM: ObservableObject {
 
     let provider: AvatarProvider
 
-    var isCoreDialog: Bool {
-        return conversation?.isCoredialog() ?? false
-    }
-
     var removeConversationText: String {
         guard let conversation = self.conversation else {
             return L10n.Swarm.removeConversation
         }
-        return conversation.isDialog() || conversation.isOnlyLocalParticipant()
-            ? L10n.Swarm.removeConversation
-            : L10n.Swarm.leaveConversation
+        return ConversationDestructiveAction.removeConversation.title(for: conversation)
     }
 
     var removeConversationConfirmation: String {
         guard let conversation = self.conversation else {
             return L10n.Alerts.confirmLeaveConversation
         }
-        if isCoreDialog {
-            return L10n.Alerts.confirmRemoveOneToOneConversation
-        }
-        if conversation.isDialog() || conversation.isOnlyLocalParticipant() {
-            return L10n.Alerts.confirmDeleteConversation
-        }
-        return L10n.Alerts.confirmLeaveConversation
+        return ConversationDestructiveAction.removeConversation.confirmationMessage(for: conversation)
     }
 
     var removeConversationAlertButton: String {
         guard let conversation = self.conversation else {
             return L10n.Global.remove
         }
-        if conversation.isDialog() || conversation.isOnlyLocalParticipant() {
-            return L10n.Global.remove
-        }
-        return L10n.Global.leave
+        return ConversationDestructiveAction.removeConversation.confirmationButtonTitle(for: conversation)
+    }
+
+    var blockContactIcon: String {
+        destructiveActionIcon(.blockContact, fallback: "person.crop.circle.badge.xmark")
+    }
+
+    var removeContactIcon: String {
+        destructiveActionIcon(.removeContact, fallback: "person.crop.circle.badge.minus")
+    }
+
+    var removeConversationIcon: String {
+        destructiveActionIcon(.removeConversation, fallback: "trash")
     }
 
     // MARK: - Initialization
@@ -113,13 +110,20 @@ class SwarmInfoVM: ObservableObject {
         self.conversationService = injectionBag.conversationsService
         self.nameService = injectionBag.nameService
         self.profileService = injectionBag.profileService
-        self.contactsService = injectionBag.contactsService
+        self.destructiveActionExecutor = ConversationDestructiveActionExecutor(injectionBag: injectionBag)
 
         self.swarmInfo = swarmInfo
         self.conversation = swarmInfo.conversation
         self.provider = AvatarProvider.from(swarmInfo: swarmInfo, profileService: self.profileService, size: Constants.AvatarSize.conversationInfo80)
 
         setupBindings()
+    }
+
+    private func destructiveActionIcon(_ action: ConversationDestructiveAction, fallback: String) -> String {
+        guard let conversation = self.conversation else {
+            return fallback
+        }
+        return action.icon(for: conversation)
     }
 
     // MARK: - Setup
@@ -300,48 +304,25 @@ class SwarmInfoVM: ObservableObject {
 
     func removeContact(stateEmitter: ConversationStatePublisher) {
         guard let conversation = self.conversation else { return }
-
-        let conversationId = conversation.id
-        let accountId = conversation.accountId
-
-        if conversation.isCoredialog(),
-           let participant = conversation.getParticipants().first {
-            self.contactsService
-                .removeContact(withId: participant.jamiId,
-                               ban: false,
-                               withAccountId: accountId)
-                .asObservable()
-                .subscribe(onCompleted: {})
-                .disposed(by: self.disposeBag)
-        }
+        destructiveActionExecutor.perform(.removeContact,
+                                          on: conversation,
+                                          removeConversationAfterContactRemoval: false,
+                                          fallbackToConversationRemoval: false)
         stateEmitter.emitState(ConversationState.conversationRemoved)
     }
 
     func removeConversation(stateEmitter: ConversationStatePublisher) {
         guard let conversation = self.conversation else { return }
-
-        let conversationId = conversation.id
-        let accountId = conversation.accountId
-
-        self.conversationService
-            .removeConversation(conversationId: conversationId, accountId: accountId)
+        destructiveActionExecutor.perform(.removeConversation, on: conversation)
         stateEmitter.emitState(ConversationState.conversationRemoved)
     }
 
     func blockContact(stateEmitter: ConversationStatePublisher) {
-        guard let conversation = self.conversation,
-              let participantId = conversation.getParticipants().first?.jamiId else { return }
-
-        let accountId = conversation.accountId
-
-        contactsService
-            .removeContact(withId: participantId,
-                           ban: true,
-                           withAccountId: accountId)
-            .asObservable()
-            .subscribe(onCompleted: {})
-            .disposed(by: disposeBag)
-
+        guard let conversation = self.conversation else { return }
+        destructiveActionExecutor.perform(.blockContact,
+                                          on: conversation,
+                                          removeConversationAfterContactRemoval: false,
+                                          fallbackToConversationRemoval: false)
         stateEmitter.emitState(ConversationState.conversationRemoved)
     }
 }

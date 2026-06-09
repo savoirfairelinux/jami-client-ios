@@ -39,8 +39,8 @@ class ContactViewModel: ViewModel, Stateable {
     private let contactService: ContactsService
     private let profileService: ProfilesService
     private let accountService: AccountsService
-    private let conversationService: ConversationsService
     private let nameService: NameService
+    private let destructiveActionExecutor: ConversationDestructiveActionExecutor
     lazy var tableSection: Observable<[SectionModel<String, ContactActions>]> = {
         let jamiSettings =
             [SectionModel(model: "ProfileInfoCell",
@@ -145,8 +145,8 @@ class ContactViewModel: ViewModel, Stateable {
         self.contactService = injectionBag.contactsService
         self.profileService = injectionBag.profileService
         self.accountService = injectionBag.accountService
-        self.conversationService = injectionBag.conversationsService
         self.nameService = injectionBag.nameService
+        self.destructiveActionExecutor = ConversationDestructiveActionExecutor(injectionBag: injectionBag)
     }
     func startCall() {
         guard let jamiId = self.conversation.getParticipants().first?.jamiId else { return }
@@ -162,56 +162,18 @@ class ContactViewModel: ViewModel, Stateable {
     }
 
     func deleteConversation() {
-        let accountId = conversation.accountId
-        let conversationId = conversation.id
-        if conversation.isCoredialog(),
-           let participantId = conversation.getParticipants().first?.jamiId {
-            self.contactService
-                .removeContact(withId: participantId,
-                               ban: false,
-                               withAccountId: accountId)
-                .asObservable()
-                .subscribe(onCompleted: { [weak self, weak conversation] in
-                    guard let conversation = conversation,
-                          let self = self else { return }
-                    self.conversationService
-                        .removeConversationFromDB(conversation: conversation,
-                                                  keepConversation: false)
-                    self.stateSubject.onNext(ConversationState
-                                                .conversationRemoved)
-                })
-                .disposed(by: self.disposeBag)
-        } else {
-            self.conversationService.removeConversation(conversationId: conversationId, accountId: accountId)
-            self.stateSubject.onNext(ConversationState
-                                        .conversationRemoved)
-        }
+        destructiveActionExecutor.perform(.removeContact,
+                                          on: conversation,
+                                          completion: { [weak self] in self?.emitConversationRemoved() })
     }
 
     func blockContact() {
-        let accountId = conversation.accountId
-        let conversationId = conversation.id
-        if conversation.isCoredialog(),
-           let participantId = conversation.getParticipants().first?.jamiId {
-            self.contactService
-                .removeContact(withId: participantId,
-                               ban: true,
-                               withAccountId: accountId)
-                .asObservable()
-                .subscribe(onCompleted: { [weak self, weak conversation] in
-                    guard let conversation = conversation,
-                          let self = self else { return }
-                    self.conversationService
-                        .removeConversationFromDB(conversation: conversation,
-                                                  keepConversation: false)
-                    self.stateSubject.onNext(ConversationState
-                                                .conversationRemoved)
-                })
-                .disposed(by: self.disposeBag)
-        } else {
-            self.conversationService.removeConversation(conversationId: conversationId, accountId: accountId)
-            self.stateSubject.onNext(ConversationState
-                                        .conversationRemoved)
-        }
+        destructiveActionExecutor.perform(.blockContact,
+                                          on: conversation,
+                                          completion: { [weak self] in self?.emitConversationRemoved() })
+    }
+
+    private func emitConversationRemoved() {
+        stateSubject.onNext(ConversationState.conversationRemoved)
     }
 }

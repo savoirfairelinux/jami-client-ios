@@ -34,22 +34,19 @@ struct SmartListContentView: View {
 
     var body: some View {
         listContent
-            .listStyle(.plain)
-            .hideRowSeparator()
     }
 
     private var listContent: some View {
-        ScrollView {
-            LazyVStack(alignment: .leading) {
-                if !model.searchFlow.isActive {
-                    smartListTopView
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .contentShape(Rectangle())
-                    conversationsView
-                }
+        List {
+            if !model.searchFlow.isActive {
+                smartListTopView
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .contentShape(Rectangle())
+                conversationsView
             }
-            .padding(.horizontal, 15)
         }
+        .listStyle(.plain)
+        .id(model.currentAccountId)
         .onAppear { [weak model] in
             guard let model = model else { return }
             // If there was an active search before presenting the conversation, restore

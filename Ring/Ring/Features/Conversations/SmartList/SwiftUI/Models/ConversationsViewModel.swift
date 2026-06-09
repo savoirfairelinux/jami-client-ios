@@ -1,7 +1,5 @@
 /*
- *  Copyright (C) 2024 Savoir-faire Linux Inc.
- *
- *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Copyright (C) 2024-2026 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -78,13 +76,18 @@ class ConversationsViewModel: ObservableObject {
 
     @Published var filteredConversations: [ConversationViewModel] = []
 
+    /// Identity of the conversations `List`. Changing this (on account switch)
+    /// forces SwiftUI to discard and rebuild the entire list, releasing the
+    /// previous account's row hosting views (and the view models they retain in
+    /// the `UITableView` reuse pool) so they can deinit.
+    @Published var currentAccountId: String = ""
+
     var disposeBag = DisposeBag()
-    let conversationsService: ConversationsService
     let requestsService: RequestsService
     let accountsService: AccountsService
-    let contactsService: ContactsService
     let networkService: NetworkService
     let injectionBag: InjectionBag
+    private let destructiveActionExecutor: ConversationDestructiveActionExecutor
     let jamiImage = UIImage(asset: Asset.jamiIcon)!.resizeImageWith(newSize: CGSize(width: 20, height: 20), opaque: false)!
 
     lazy var accountsModel: AccountsViewModel = {
@@ -112,11 +115,11 @@ class ConversationsViewModel: ObservableObject {
 
     required init(with injectionBag: InjectionBag, conversationsSource: ConversationDataSource, stateEmitter: ConversationStatePublisher) {
         self.injectionBag = injectionBag
-        self.conversationsService = injectionBag.conversationsService
         self.requestsService = injectionBag.requestsService
         self.accountsService = injectionBag.accountService
-        self.contactsService = injectionBag.contactsService
         self.networkService = injectionBag.networkService
+        self.destructiveActionExecutor = ConversationDestructiveActionExecutor(injectionBag: injectionBag)
+        self.currentAccountId = injectionBag.accountService.currentAccount?.id ?? ""
         self.stateEmitter = stateEmitter
         self.conversationsSource = conversationsSource
         self.setupNewConversationHandler()
@@ -189,6 +192,7 @@ class ConversationsViewModel: ObservableObject {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] account in
                 guard let self = self else { return }
+                self.currentAccountId = account?.id ?? ""
                 self.publicDirectoryTitle = account?.isJams == true
                     ? L10n.Smartlist.jamsResults
                     : L10n.Smartlist.results
@@ -330,50 +334,10 @@ class ConversationsViewModel: ObservableObject {
         publisher.emitState(state)
     }
 
-    func deleteConversation(conversationViewModel: ConversationViewModel) {
+    func performDestructiveAction(_ action: ConversationDestructiveAction, conversationViewModel: ConversationViewModel) {
         conversationViewModel.closeAllPlayers()
-        let accountId = conversationViewModel.conversation.accountId
-        let conversationId = conversationViewModel.conversation.id
-        if conversationViewModel.conversation.isCoredialog(),
-           let participantId = conversationViewModel.conversation.getParticipants().first?.jamiId {
-            self.contactsService
-                .removeContact(withId: participantId,
-                               ban: false,
-                               withAccountId: accountId)
-                .asObservable()
-                .subscribe(onCompleted: { [weak self, weak conversationViewModel] in
-                    guard let conversationViewModel = conversationViewModel else { return }
-                    self?.conversationsService
-                        .removeConversationFromDB(conversation: conversationViewModel.conversation,
-                                                  keepConversation: false)
-                })
-                .disposed(by: self.disposeBag)
-        } else {
-            self.conversationsService.removeConversation(conversationId: conversationId, accountId: accountId)
-        }
-    }
-
-    func blockConversation(conversationViewModel: ConversationViewModel) {
-        conversationViewModel.closeAllPlayers()
-        let accountId = conversationViewModel.conversation.accountId
-        let conversationId = conversationViewModel.conversation.id
-        if conversationViewModel.conversation.isCoredialog(),
-           let participantId = conversationViewModel.conversation.getParticipants().first?.jamiId {
-            self.contactsService
-                .removeContact(withId: participantId,
-                               ban: true,
-                               withAccountId: accountId)
-                .asObservable()
-                .subscribe(onCompleted: { [weak self, weak conversationViewModel] in
-                    guard let conversationViewModel = conversationViewModel else { return }
-                    self?.conversationsService
-                        .removeConversationFromDB(conversation: conversationViewModel.conversation,
-                                                  keepConversation: false)
-                })
-                .disposed(by: self.disposeBag)
-        } else {
-            self.conversationsService.removeConversation(conversationId: conversationId, accountId: accountId)
-        }
+        guard let conversation = conversationViewModel.conversation else { return }
+        destructiveActionExecutor.perform(action, on: conversation)
     }
 
     // MARK: - PresentedConversation
