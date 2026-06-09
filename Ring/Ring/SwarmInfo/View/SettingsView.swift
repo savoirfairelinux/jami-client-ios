@@ -118,7 +118,7 @@ struct SettingsView: View {
             presentingAlert = .blockContact
         }, label: {
             HStack {
-                Image(systemName: "person.crop.circle.badge.xmark")
+                Image(systemName: viewmodel.blockContactIcon)
                     .foregroundColor(Color.jamiFailure)
                     .accessibility(hidden: true)
                 Text(L10n.Global.blockContact)
@@ -187,7 +187,7 @@ struct SettingsView: View {
             presentingAlert = .removeConversation
         }, label: {
             HStack {
-                Image(systemName: "arrow.right.circle")
+                Image(systemName: viewmodel.removeConversationIcon)
                     .foregroundColor(Color.jamiFailure)
                     .accessibility(hidden: true)
                 Text(viewmodel.removeConversationText)
@@ -203,7 +203,7 @@ struct SettingsView: View {
             presentingAlert = .removeContact
         }, label: {
             HStack {
-                Image(systemName: "person.crop.circle.badge.minus")
+                Image(systemName: viewmodel.removeContactIcon)
                     .foregroundColor(Color.jami)
                     .accessibility(hidden: true)
                 Text(L10n.Swarm.removeContact)
