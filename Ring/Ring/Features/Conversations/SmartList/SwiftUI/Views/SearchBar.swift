@@ -20,25 +20,48 @@
 
 import SwiftUI
 import UIKit
-import Combine
 
 public extension View {
-    func navigationBarSearch(_ searchText: Binding<String>, isActive: Binding<Bool>, isSearchBarDisabled: Binding<Bool>, activateSearch: Binding<Bool>) -> some View {
-        return overlay(SearchBar(text: searchText, isActive: isActive, isSearchBarDisabled: isSearchBarDisabled, activateSearch: activateSearch).frame(width: 0, height: 0))
+    /// Adds a native search bar to the hosting navigation item. The `results`
+    /// content is hosted inside the search controller's `searchResultsController`
+    /// so it is shown — and stays interactive — while the search is active. This
+    /// matters on iPadOS 26, where content rendered behind an active search
+    /// controller no longer receives taps.
+    func navigationBarSearch<Results: View>(_ searchText: Binding<String>,
+                                            isActive: Binding<Bool>,
+                                            isSearchBarDisabled: Binding<Bool>,
+                                            activateSearch: Binding<Bool>,
+                                            deactivateSearch: Binding<Bool> = .constant(false),
+                                            @ViewBuilder results: @escaping () -> Results) -> some View {
+        return overlay(
+            NavigationSearchControllerHost(
+                text: searchText,
+                isActive: isActive,
+                isSearchBarDisabled: isSearchBarDisabled,
+                activateSearch: activateSearch,
+                deactivateSearch: deactivateSearch,
+                results: results
+            )
+            .frame(width: 0, height: 0)
+        )
     }
 }
 
-private struct SearchBar: UIViewControllerRepresentable {
+private struct NavigationSearchControllerHost<Results: View>: UIViewControllerRepresentable {
     @Binding var text: String
     @Binding var isActive: Bool
     @Binding var isSearchBarDisabled: Bool
     @Binding var activateSearch: Bool
+    @Binding var deactivateSearch: Bool
+    let results: () -> Results
 
-    init(text: Binding<String>, isActive: Binding<Bool>, isSearchBarDisabled: Binding<Bool>, activateSearch: Binding<Bool>) {
+    init(text: Binding<String>, isActive: Binding<Bool>, isSearchBarDisabled: Binding<Bool>, activateSearch: Binding<Bool>, deactivateSearch: Binding<Bool>, results: @escaping () -> Results) {
         self._text = text
         self._isActive = isActive
         self._isSearchBarDisabled = isSearchBarDisabled
         self._activateSearch = activateSearch
+        self._deactivateSearch = deactivateSearch
+        self.results = results
     }
 
     func makeUIViewController(context: Context) -> SearchBarWrapperController {
@@ -48,6 +71,8 @@ private struct SearchBar: UIViewControllerRepresentable {
     func updateUIViewController(_ controller: SearchBarWrapperController, context: Context) {
         let coordinator = context.coordinator
         controller.searchController = coordinator.searchController
+        coordinator.updateResults(results())
+        coordinator.updateSearchText(text)
 
         // An explicit compose request always wins: re-enable the bar if it was
         // programmatically disabled (e.g. after creating a conversation) and activate it.
@@ -61,37 +86,77 @@ private struct SearchBar: UIViewControllerRepresentable {
             return
         }
 
+        // Request to leave search/compose mode (e.g. tapping the empty area of
+        // the results controller). Deferred because updateUIViewController is already
+        // inside SwiftUI's update cycle, and dismissing the UIKit search controller
+        // also mutates SwiftUI bindings via delegate callbacks.
+        if self.deactivateSearch {
+            DispatchQueue.main.async {
+                self.deactivateSearch = false
+                coordinator.dismissSearch(clearText: true)
+            }
+            return
+        }
+
         if self.isSearchBarDisabled {
-            coordinator.searchController.isActive = false
+            DispatchQueue.main.async {
+                self.isSearchBarDisabled = false
+                coordinator.dismissSearch(animated: false)
+            }
+            return
         }
     }
 
+    static func dismantleUIViewController(_ controller: SearchBarWrapperController, coordinator: Coordinator) {
+        controller.detachSearchController(coordinator.searchController)
+    }
+
     func makeCoordinator() -> Coordinator {
-        return Coordinator(text: $text, isActive: $isActive, isSearchBarDisabled: $isSearchBarDisabled)
+        return Coordinator(
+            text: $text,
+            isActive: $isActive,
+            isSearchBarDisabled: $isSearchBarDisabled,
+            initialResults: results()
+        )
     }
 
     class Coordinator: NSObject, UISearchResultsUpdating, UISearchControllerDelegate {
         @Binding var text: String
         @Binding var isActive: Bool
         @Binding var isSearchBarDisabled: Bool
+        private let hostingController: UIHostingController<Results>
         let searchController: UISearchController
         private var shouldFocusWhenPresented = false
 
-        init(text: Binding<String>, isActive: Binding<Bool>, isSearchBarDisabled: Binding<Bool>) {
+        init(text: Binding<String>, isActive: Binding<Bool>, isSearchBarDisabled: Binding<Bool>, initialResults: Results) {
             self._text = text
             self._isActive = isActive
             self._isSearchBarDisabled = isSearchBarDisabled
-            self.searchController = UISearchController(searchResultsController: nil)
+
+            self.hostingController = UIHostingController(rootView: initialResults)
+            self.searchController = UISearchController(searchResultsController: hostingController)
 
             super.init()
 
             searchController.searchResultsUpdater = self
             searchController.hidesNavigationBarDuringPresentation = true
             searchController.obscuresBackgroundDuringPresentation = false
+            // Show the results controller as soon as the search is active (even with an
+            // empty query) so the compose shortcuts are visible and tappable immediately.
+            searchController.showsSearchResultsController = true
             searchController.searchBar.searchTextField.accessibilityIdentifier = SmartListAccessibilityIdentifiers.searchBarTextField
 
             self.searchController.searchBar.text = self.text
             searchController.delegate = self
+        }
+
+        func updateResults(_ results: Results) {
+            hostingController.rootView = results
+        }
+
+        func updateSearchText(_ text: String) {
+            guard searchController.searchBar.text != text else { return }
+            searchController.searchBar.text = text
         }
 
         /// Programmatically open the search bar (e.g. from the compose button) and
@@ -99,7 +164,24 @@ private struct SearchBar: UIViewControllerRepresentable {
         func activateSearch() {
             guard !searchController.isActive else { return }
             shouldFocusWhenPresented = true
+            searchController.showsSearchResultsController = true
             searchController.isActive = true
+        }
+
+        func dismissSearch(clearText: Bool = false, animated: Bool = true) {
+            shouldFocusWhenPresented = false
+            if clearText {
+                text = ""
+                searchController.searchBar.text = ""
+            }
+            guard searchController.isActive else { return }
+            if animated {
+                searchController.isActive = false
+            } else {
+                UIView.performWithoutAnimation {
+                    searchController.isActive = false
+                }
+            }
         }
 
         func willPresentSearchController(_ searchController: UISearchController) {
@@ -138,6 +220,7 @@ private struct SearchBar: UIViewControllerRepresentable {
 
     class SearchBarWrapperController: UIViewController {
         var searchController: UISearchController?
+        private weak var attachedParent: UIViewController?
 
         override func didMove(toParent parent: UIViewController?) {
             super.didMove(toParent: parent)
@@ -156,8 +239,17 @@ private struct SearchBar: UIViewControllerRepresentable {
 
         private func attachSearchController() {
             guard let parent = self.parent else { return }
+            attachedParent = parent
             parent.navigationItem.searchController = self.searchController
             parent.navigationItem.hidesSearchBarWhenScrolling = false
+        }
+
+        func detachSearchController(_ searchController: UISearchController) {
+            if attachedParent?.navigationItem.searchController === searchController {
+                attachedParent?.navigationItem.searchController = nil
+            }
+            self.searchController = nil
+            attachedParent = nil
         }
     }
 }

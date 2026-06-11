@@ -24,66 +24,43 @@ struct SmartListContentView: View {
     @ObservedObject var model: ConversationsViewModel
     let stateEmitter: ConversationStatePublisher
     @ObservedObject var requestsModel: RequestsViewModel
-    @Binding var isSearchBarActive: Bool
-    @SwiftUI.State var isShowingScanner: Bool = false
+    /// Called (in `.list` mode) to re-open search when returning to a conversation
+    /// that was opened from search results.
+    var onRestoreSearch: (() -> Void)?
+
+    private var conversationsView: ConversationsView {
+        ConversationsView(model: model, stateEmitter: stateEmitter)
+    }
 
     var body: some View {
-        let conversationsView = ConversationsView(model: model, stateEmitter: stateEmitter)
+        listContent
+            .listStyle(.plain)
+            .hideRowSeparator()
+    }
 
-        return ZStack {
-            if isSearchBarActive {
-                ScrollView {
-                    LazyVStack(alignment: .leading) {
-                        publicDirectorySearchView
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .contentShape(Rectangle())
-                        if !model.searchQuery.isEmpty {
-                            conversationsSearchHeaderView
-                                .hideRowSeparator()
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .contentShape(Rectangle())
-                            conversationsView
-                        }
-                    }
-                    .padding(.horizontal, 15)
+    private var listContent: some View {
+        ScrollView {
+            LazyVStack(alignment: .leading) {
+                if !model.searchFlow.isActive {
+                    smartListTopView
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .contentShape(Rectangle())
+                    conversationsView
                 }
-                .transition(.opacity)
-            } else {
-                ScrollView {
-                    LazyVStack(alignment: .leading) {
-                        smartListTopView
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .contentShape(Rectangle())
-                        conversationsView
-                    }
-                    .padding(.horizontal, 15)
-                }
-                .transition(.opacity)
             }
+            .padding(.horizontal, 15)
         }
         .onAppear { [weak model] in
             guard let model = model else { return }
-            // If there was an active search before presenting the conversation, the search results should remain the same upon returning to the page. Otherwise, flickering will occur.
+            // If there was an active search before presenting the conversation, restore
+            // it upon returning to the page. Otherwise, flickering will occur.
             if model.presentedConversation.hasPresentedConversation() && !model.searchQuery.isEmpty {
-                isSearchBarActive = true
                 model.presentedConversation.resetPresentedConversation()
+                onRestoreSearch?()
             }
         }
-        .listStyle(.plain)
-        .hideRowSeparator()
         .sheet(isPresented: $requestsModel.requestViewOpened) {
             RequestsView(model: requestsModel)
-        }
-        .sheet(isPresented: $isShowingScanner) {
-            ScanView(onCodeScanned: { [weak model, weak stateEmitter] code in
-                defer {
-                    isShowingScanner = false
-                }
-                guard let model = model,
-                      let stateEmitter = stateEmitter else { return }
-                model.showConversationFromQRCode(jamiId: code,
-                                                 publisher: stateEmitter)
-            }, injectionBag: model.injectionBag)
         }
     }
 
@@ -141,142 +118,6 @@ struct SmartListContentView: View {
     private func openSettings() {
         if let url = URL(string: UIApplication.openSettingsURLString) {
             UIApplication.shared.open(url, completionHandler: nil)
-        }
-    }
-
-    @ViewBuilder private var newChatOptions: some View {
-        HStack {
-            actionItem(icon: "qrcode", title: L10n.Smartlist.newContact, action: { isShowingScanner.toggle() })
-            Spacer()
-            actionItem(icon: "person.2", title: L10n.Smartlist.newGroup, action: stateEmitter.createSwarm)
-        }
-        .hideRowSeparator()
-        .transition(.opacity)
-    }
-
-    private func actionItem(icon: String, title: String, action: @escaping () -> Void) -> some View {
-        HStack {
-            Image(systemName: icon)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 18, height: 18)
-                .foregroundColor(.jami)
-            Text(title)
-                .font(.callout)
-        }
-        .padding(.horizontal)
-        .padding(.vertical, 10)
-        .frame(maxWidth: .infinity)
-        .background(Color.jamiTertiaryControl)
-        .cornerRadius(12)
-        .onTapGesture(perform: action)
-        .accessibilityElement(children: .ignore)
-        .accessibilityLabel(title)
-    }
-
-    @ViewBuilder private var conversationsSearchHeaderView: some View {
-        VStack(alignment: .leading) {
-            Spacer()
-                .frame(height: 10)
-            Text(L10n.Smartlist.conversations)
-                .fontWeight(.semibold)
-                .multilineTextAlignment(.leading)
-                .hideRowSeparator()
-                .padding(.bottom, 3)
-            if model.filteredConversations.isEmpty {
-                Text(L10n.Smartlist.noConversationsFound)
-                    .font(.callout)
-                    .multilineTextAlignment(.leading)
-                    .hideRowSeparator()
-            }
-        }
-    }
-
-    @ViewBuilder private var publicDirectorySearchView: some View {
-        VStack(alignment: .leading) {
-            if !model.isSipAccount() {
-                newChatOptions
-                    .padding(.vertical, 10)
-            }
-            if !model.searchQuery.isEmpty {
-                if !model.isSipAccount() {
-                    Text(model.publicDirectoryTitle)
-                        .fontWeight(.semibold)
-                        .hideRowSeparator()
-                        .padding(.top)
-                }
-                searchResultView
-                    .hideRowSeparator()
-                    .padding(.bottom)
-                    .padding(.top, 3)
-                if let conversation = model.blockedConversation {
-                    blockedcontactsView(conversation: conversation)
-                }
-            }
-        }
-    }
-
-    @ViewBuilder private var searchResultView: some View {
-        switch model.searchStatus {
-        case .foundTemporary:
-            tempConversationsView
-                .hideRowSeparator()
-        case .foundJams:
-            jamsSearchResultContainerView
-        case .searching:
-            searchingView
-        case .noResult, .invalidId:
-            noResultView
-                .hideRowSeparator()
-        case .notSearching:
-            EmptyView()
-        }
-    }
-
-    private var searchingView: some View {
-        VStack {
-            HStack {
-                Spacer()
-                ProgressView()
-                Spacer()
-            }
-        }
-    }
-
-    func blockedcontactsView(conversation: ConversationViewModel) -> some View {
-        VStack(alignment: .leading) {
-            Text(L10n.AccountPage.blockedContacts)
-                .fontWeight(.semibold)
-            ConversationRowView(model: conversation, withSeparator: false)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .contentShape(Rectangle())
-                .onTapGesture { [weak conversation, weak model] in
-                    guard let conversation = conversation, let model = model else { return }
-                    model.showConversation(withConversationViewModel: conversation,
-                                           publisher: stateEmitter)
-                }
-                .listRowInsets(EdgeInsets(top: 10, leading: 15, bottom: 0, trailing: 15))
-                .transition(.opacity)
-                .hideRowSeparator()
-        }
-    }
-
-    private var tempConversationsView: some View {
-        VStack(alignment: .leading) {
-            TempConversationsView(model: model, state: stateEmitter)
-        }
-    }
-
-    private var jamsSearchResultContainerView: some View {
-        VStack(alignment: .leading) {
-            JamsSearchResultView(model: model, state: stateEmitter)
-        }
-    }
-
-    private var noResultView: some View {
-        VStack(alignment: .leading) {
-            Text(model.searchStatus.toString())
-                .font(.callout)
         }
     }
 }
