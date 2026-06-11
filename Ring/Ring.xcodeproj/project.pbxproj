@@ -327,6 +327,7 @@
 		26625BB72BA9DF81009D2DDB /* ConversationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26625BB62BA9DF81009D2DDB /* ConversationsViewModel.swift */; };
 		26625BB92BA9FEFC009D2DDB /* SmartListContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26625BB82BA9FEFC009D2DDB /* SmartListContentView.swift */; };
 		26625BBB2BAA0749009D2DDB /* SmartListContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26625BBA2BAA0749009D2DDB /* SmartListContainer.swift */; };
+		26625BBD2F5C9000009D2DDB /* SmartListSearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26625BBC2F5C9000009D2DDB /* SmartListSearchResultsView.swift */; };
 		2662FC7B246B216B00FA7782 /* JamiSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2662FC7A246B216B00FA7782 /* JamiSearchViewModel.swift */; };
 		266BC7582C4825C3006590AC /* AppDelegate+Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266BC7572C4825C3006590AC /* AppDelegate+Test.swift */; };
 		2671D8382ECFB55000B918E8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2671D8372ECFB55000B918E8 /* SceneDelegate.swift */; };
@@ -975,6 +976,7 @@
 		26625BB62BA9DF81009D2DDB /* ConversationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConversationsViewModel.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Models/ConversationsViewModel.swift; sourceTree = SOURCE_ROOT; };
 		26625BB82BA9FEFC009D2DDB /* SmartListContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SmartListContentView.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Views/SmartListContentView.swift; sourceTree = SOURCE_ROOT; };
 		26625BBA2BAA0749009D2DDB /* SmartListContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SmartListContainer.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Views/SmartListContainer.swift; sourceTree = SOURCE_ROOT; };
+		26625BBC2F5C9000009D2DDB /* SmartListSearchResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SmartListSearchResultsView.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Views/SmartListSearchResultsView.swift; sourceTree = SOURCE_ROOT; };
 		2662FC7A246B216B00FA7782 /* JamiSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JamiSearchViewModel.swift; sourceTree = "<group>"; };
 		266BC7572C4825C3006590AC /* AppDelegate+Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Test.swift"; sourceTree = "<group>"; };
 		266C1DB82539F3A300978E87 /* RxRelay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxRelay.framework; path = Carthage/Build/iOS/RxRelay.framework; sourceTree = "<group>"; };
@@ -3568,6 +3570,7 @@
 				26625BB42BA9DF67009D2DDB /* ConversationsView.swift */,
 				26625BB82BA9FEFC009D2DDB /* SmartListContentView.swift */,
 				26625BBA2BAA0749009D2DDB /* SmartListContainer.swift */,
+				26625BBC2F5C9000009D2DDB /* SmartListSearchResultsView.swift */,
 				26E081212BC03AB3001B4C18 /* AccountLists.swift */,
 				26E081252BC09534001B4C18 /* RequestsView.swift */,
 				26EEB19B2BD98CCA00B8B04B /* SearchBar.swift */,
@@ -4455,6 +4458,7 @@
 				265DFB0B292FD41100834B97 /* MessageSwiftUIViews.swift in Sources */,
 				564C445B1E8EA44E000F92B1 /* Durations.swift in Sources */,
 				26625BB92BA9FEFC009D2DDB /* SmartListContentView.swift in Sources */,
+				26625BBD2F5C9000009D2DDB /* SmartListSearchResultsView.swift in Sources */,
 				26F5442D2C5815770069A7A4 /* WelcomeView.swift in Sources */,
 				268C87FD2C1E6C7600593D7C /* SettingsSummaryView.swift in Sources */,
 				0E320D54224ADFD00070B515 /* DialpadViewModel.swift in Sources */,

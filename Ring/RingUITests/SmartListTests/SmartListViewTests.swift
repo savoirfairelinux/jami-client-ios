@@ -99,4 +99,74 @@ final class SmartListViewTests: JamiBaseOneAccountUITest {
         let cancelButton = app.buttons["Cancel"]
         cancelButton.tap()
     }
+
+    // Regression test for the iPad/iOS 26 bug where tapping a compose shortcut while
+    // the (empty) search was active only dismissed the search instead of opening the
+    // target screen. The compose content is now hosted in the search results controller.
+    func testComposeNewGroupOpens() throws {
+        XCTAssertTrue(smartListViewPage.conversationView.waitForExistence(timeout: 10))
+
+        // Restore the smart list even if an assertion below fails, so the shared app
+        // instance stays clean for the other tests in this class.
+        addTeardownBlock { [app] in
+            let navCancel = app.navigationBars.buttons["Cancel"].firstMatch
+            if navCancel.exists { navCancel.tap() }
+            let searchCancel = app.buttons["Cancel"]
+            if searchCancel.exists { searchCancel.tap() }
+        }
+
+        // Activate compose via the pencil button (the previously failing path).
+        let compose = app.buttons[SmartListAccessibilityIdentifiers.composeButton]
+        XCTAssertTrue(compose.waitForExistence(timeout: 10))
+        compose.tap()
+
+        let newGroup = app.otherElements[SmartListAccessibilityIdentifiers.newGroupButton]
+        XCTAssertTrue(newGroup.waitForExistence(timeout: 15), "New group option should appear")
+        XCTAssertTrue(newGroup.isHittable, "New group option should be tappable")
+        newGroup.tap()
+
+        let swarmNav = app.navigationBars[L10n.Swarm.selectContacts]
+        XCTAssertTrue(swarmNav.waitForExistence(timeout: 10), "Swarm creation should open after tapping New group")
+
+        // Return to the smart list so the shared app instance stays clean for other tests.
+        swarmNav.buttons["Cancel"].firstMatch.tap()
+        _ = smartListViewPage.conversationView.waitForExistence(timeout: 10)
+    }
+
+    func testSearchDoesNotReappearAfterPromotingTemporaryConversation() throws {
+        waitForElementToAppear(smartListViewPage.conversationView, timeout: 10)
+
+        let jamiId = "0000000000000000000000000000000000000001"
+
+        addTeardownBlock { [app] in
+            let back = app.navigationBars.buttons.element(boundBy: 0)
+            if back.exists && back.isHittable { back.tap() }
+            let searchCancel = app.buttons["Cancel"]
+            if searchCancel.exists { searchCancel.tap() }
+        }
+
+        let searchField = app.searchFields[SmartListAccessibilityIdentifiers.searchBarTextField]
+        waitForElementToAppear(searchField, timeout: 10)
+        searchField.tap()
+        searchField.typeText(jamiId)
+
+        let tempRow = app.cells.firstMatch
+        waitForElementToAppear(tempRow, timeout: 10)
+        tempRow.tap()
+
+        let messageField = app.textViews.firstMatch
+        waitForElementToAppear(messageField, timeout: 10)
+        messageField.tap()
+        messageField.typeText("hi")
+        let sendButton = app.buttons.matching(NSPredicate(format: "isHittable == true")).allElementsBoundByIndex.last
+        sendButton?.tap()
+
+        let back = app.navigationBars.buttons.element(boundBy: 0)
+        waitForElementToAppear(back, timeout: 10)
+        back.tap()
+
+        waitForElementToAppear(smartListViewPage.conversationView, timeout: 10)
+        XCTAssertFalse(app.buttons["Cancel"].exists,
+                       "Search must not still be active after promoting a temporary conversation")
+    }
 }
