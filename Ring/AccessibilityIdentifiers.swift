@@ -48,5 +48,13 @@ struct SmartListAccessibilityIdentifiers {
     static let closeAccountsList = "closeAccountsList"
     static let closeAboutView = "closeAboutView"
     static let requestsCloseButton = "requestsCloseButton"
+    static let composeButton = "composeButton"
+    static let newContactButton = "newContactButton"
+    static let newGroupButton = "newGroupButton"
+    static let temporaryConversationRow = "temporaryConversationRow"
 
+}
+
+struct ConversationAccessibilityIdentifiers {
+    static let sendInvitationButton = "sendInvitationButton"
 }

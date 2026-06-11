@@ -29,8 +29,8 @@ class ConversationStatePublisher: StatePublisher<ConversationState> {
         self.stateSubject.onNext(ConversationState.showDialpad(inCall: false))
     }
 
-    func createSwarm() {
-        self.stateSubject.onNext(ConversationState.createSwarm)
+    func createSwarm(onCreated: ((_ conversationId: String) -> Void)? = nil) {
+        self.stateSubject.onNext(ConversationState.createSwarm(onCreated: onCreated))
     }
 
     func scanQRCode() {
@@ -226,14 +226,14 @@ class ConversationsViewModel: ObservableObject {
     }
 
     func conversationFromTemporaryCreated(conversation: ConversationModel) {
-        if findMatchingTemporaryConversation(for: conversation) == nil { return }
+        guard findMatchingTemporaryConversation(for: conversation) != nil else { return }
 
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
             if self.presentedConversation.isTemporaryPresented() {
                 self.presentedConversation.resetPresentedConversation()
             }
-            self.dismissSearchAfterTemporaryPromotion()
+            self.dismissSearch()
         }
     }
 
@@ -410,6 +410,12 @@ class ConversationsViewModel: ObservableObject {
         performSearch(query: text.lowercased())
     }
 
+    func startSwarmCreation() {
+        stateEmitter.createSwarm(onCreated: { [weak self] _ in
+            self?.dismissSearch()
+        })
+    }
+
     func setSearchActive(_ isActive: Bool) {
         searchFlow.isActive = isActive
     }
@@ -418,7 +424,7 @@ class ConversationsViewModel: ObservableObject {
         searchFlow.isSearchBarDisabled = isDisabled
     }
 
-    private func dismissSearchAfterTemporaryPromotion() {
+    private func dismissSearch() {
         searchFlow = SearchFlowState(text: "", isActive: false, isSearchBarDisabled: true)
         performSearch(query: "")
     }
@@ -433,10 +439,10 @@ class ConversationsViewModel: ObservableObject {
     private func updateSearchStatus(with status: SearchStatus? = nil) {
         if let status = status {
             switch status {
-            case .searching, .notSearching, .invalidId:
-                searchStatus = status
-            default:
+            case .noResult:
                 evaluateSearchResults()
+            default:
+                searchStatus = status
             }
         } else {
             evaluateSearchResults()

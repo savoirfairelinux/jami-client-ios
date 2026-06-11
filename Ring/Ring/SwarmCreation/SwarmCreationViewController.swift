@@ -29,6 +29,9 @@ class SwarmCreationViewController: UIViewController, ViewModelBased, StoryboardB
     private let disposeBag = DisposeBag()
     let strSearchText = BehaviorRelay<String>(value: "")
 
+    /// Called with the new conversation id when the swarm is created (not on cancel).
+    var onSwarmCreated: ((_ conversationId: String) -> Void)?
+
     let searchController: CustomSearchController = {
         let searchController = CustomSearchController(searchResultsController: nil)
         searchController.searchBar.searchBarStyle = .minimal
@@ -51,6 +54,7 @@ class SwarmCreationViewController: UIViewController, ViewModelBased, StoryboardB
         guard let accountId = self.viewModel.currentAccount?.id else { return }
 
         let model = SwarmCreationUIModel(with: self.viewModel.injectionBag, accountId: accountId, strSearchText: strSearchText, swarmCreated: {[weak self] conversationId, accountId in
+            self?.onSwarmCreated?(conversationId)
             self?.viewModel.showConversation(withConversationId: conversationId, andWithAccountId: accountId)
         })
         let contentView = UIHostingController(rootView: SwarmCreationUI(list: model))

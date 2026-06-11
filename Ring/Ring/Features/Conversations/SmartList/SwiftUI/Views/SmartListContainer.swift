@@ -195,6 +195,7 @@ struct SmartListView: View, StateEmittingView {
             Image(systemName: "square.and.pencil")
                 .foregroundColor(Color.jami)
         })
+        .accessibility(identifier: SmartListAccessibilityIdentifiers.composeButton)
     }
 
     private var createSwarmButton: some View {
@@ -262,16 +263,25 @@ struct SearchableConversationsView: View {
     @ObservedObject var model: ConversationsViewModel
     var stateEmitter: ConversationStatePublisher
     @Binding var activateSearch: Bool
+    @SwiftUI.State private var deactivateSearch = false
 
     var body: some View {
         SmartListContentView(model: model,
                              stateEmitter: stateEmitter,
                              requestsModel: model.requestsModel,
-                             isSearchBarActive: searchActiveBinding)
+                             onRestoreSearch: { activateSearch = true })
             .navigationBarSearch(searchTextBinding,
                                  isActive: searchActiveBinding,
                                  isSearchBarDisabled: searchBarDisabledBinding,
-                                 activateSearch: $activateSearch)
+                                 activateSearch: $activateSearch,
+                                 deactivateSearch: $deactivateSearch,
+                                 results: {
+                                    SmartListSearchResultsView(
+                                        model: model,
+                                        stateEmitter: stateEmitter,
+                                        onDismissEmptyArea: { deactivateSearch = true }
+                                    )
+                                 })
     }
 
     private var searchTextBinding: Binding<String> {

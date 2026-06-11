@@ -469,6 +469,7 @@ private struct TemporaryConversationView: View {
                     .background(Color.jamiTertiaryControl)
                     .cornerRadius(12)
                 })
+                .accessibilityIdentifier(ConversationAccessibilityIdentifiers.sendInvitationButton)
                 .padding(.horizontal, textHorizontalPadding)
                 Spacer()
                 Spacer()
