@@ -433,10 +433,10 @@ class ConversationsViewModel: ObservableObject {
     private func updateSearchStatus(with status: SearchStatus? = nil) {
         if let status = status {
             switch status {
-            case .searching, .notSearching, .invalidId:
-                searchStatus = status
-            default:
+            case .noResult:
                 evaluateSearchResults()
+            default:
+                searchStatus = status
             }
         } else {
             evaluateSearchResults()
