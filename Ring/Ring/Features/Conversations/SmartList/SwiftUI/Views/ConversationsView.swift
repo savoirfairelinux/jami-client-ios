@@ -118,6 +118,7 @@ struct TempConversationsView: View {
                 }
                 .listRowInsets(EdgeInsets(top: 10, leading: 15, bottom: 0, trailing: 15))
                 .transition(.opacity)
+                .accessibilityIdentifier(SmartListAccessibilityIdentifiers.temporaryConversationRow)
         }
     }
 }
