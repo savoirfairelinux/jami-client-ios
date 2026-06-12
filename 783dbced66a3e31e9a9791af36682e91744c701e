@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55ea6d9f_ec228d4d",
+        "filename": ".agents/topics/code-analysis.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2026-06-12T13:25:49Z",
+      "side": 1,
+      "message": "this section is specific to the `jami-daemon` codebase and is TMI",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 62
+      },
+      "revId": "783dbced66a3e31e9a9791af36682e91744c701e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
