@@ -151,7 +151,6 @@
 "smartlist.disableDonation" = "现在不要";
 "smartlist.donationExplanation" = "如果您喜欢使用 Jami 并相信我们的使命，您愿意捐款吗？";
 "smartlist.inSynchronization" = "同步中…";
-"smartlist.newMessage" = "新消息";
 
 // Conversation
 "conversation.addToContactsButton" = "添加到联系人";
@@ -704,13 +703,13 @@
 "shareExtension.accessibilitySelectAccount" = "雙點以選擇此賬號";
 
 // Peer Services
-"peerServices.title" = "Shared Services";
-"peerServices.refresh" = "Refresh services";
-"peerServices.empty" = "No shared services available";
-"peerServices.errorOffline" = "Contact is offline";
-"peerServices.errorUnreachable" = "Contact is unreachable";
-"peerServices.errorTimeout" = "Request timed out";
-"peerServices.errorUnknown" = "Could not retrieve services";
-"peerServices.done" = "Done";
-"peerServices.notSupported" = "Not supported";
-"peerServices.open" = "Open";
+"peerServices.title" = "共享服务";
+"peerServices.refresh" = "刷新服务";
+"peerServices.empty" = "无共享服务可用";
+"peerServices.errorOffline" = "联系人处于离线状态";
+"peerServices.errorUnreachable" = "无法联系";
+"peerServices.errorTimeout" = "请求超时";
+"peerServices.errorUnknown" = "无法检索服务";
+"peerServices.done" = "完成";
+"peerServices.notSupported" = "不支持";
+"peerServices.open" = "開啟";

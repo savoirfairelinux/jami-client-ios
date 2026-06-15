@@ -151,7 +151,6 @@
 "smartlist.disableDonation" = "ਹਾਲੇ ਨਹੀਂ";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, do you want to make a donation?";
 "smartlist.inSynchronization" = "Syncing…";
-"smartlist.newMessage" = "New message";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
@@ -713,4 +712,4 @@
 "peerServices.errorUnknown" = "Could not retrieve services";
 "peerServices.done" = "Done";
 "peerServices.notSupported" = "Not supported";
-"peerServices.open" = "Open";
+"peerServices.open" = "ਖੋਲ੍ਹੋ";

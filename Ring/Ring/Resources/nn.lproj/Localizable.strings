@@ -151,7 +151,6 @@
 "smartlist.disableDonation" = "Ikkje no";
 "smartlist.donationExplanation" = "Dersom du likar å bruka Jami og trur på saka vår, har du lyst til å donera?";
 "smartlist.inSynchronization" = "Syncing…";
-"smartlist.newMessage" = "New message";
 
 // Conversation
 "conversation.addToContactsButton" = "Legg til i kontaktar";
@@ -711,6 +710,6 @@
 "peerServices.errorUnreachable" = "Contact is unreachable";
 "peerServices.errorTimeout" = "Request timed out";
 "peerServices.errorUnknown" = "Could not retrieve services";
-"peerServices.done" = "Done";
+"peerServices.done" = "Gjort";
 "peerServices.notSupported" = "Not supported";
-"peerServices.open" = "Open";
+"peerServices.open" = "Åpen";

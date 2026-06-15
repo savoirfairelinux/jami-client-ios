@@ -151,7 +151,6 @@
 "smartlist.disableDonation" = "Mačči tura";
 "smartlist.donationExplanation" = "Ma tḥemmleḍ ad tesqedceḍ Jami yerna ad tamneḍ s tuɣdaḍt-nneɣ, tebɣiḍ ad tmuddeḍ tawsa?";
 "smartlist.inSynchronization" = "Syncing…";
-"smartlist.newMessage" = "New message";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";

@@ -151,7 +151,6 @@
 "smartlist.disableDonation" = "ഇപ്പോൾ വേണ്ട";
 "smartlist.donationExplanation" = "താങ്കൾ ജാമി ഉപയോഗിക്കാൻ ഇഷ്ടപ്പെടുന്നുണ്ടെങ്കിൽ, ഞങ്ങളുടെ ദൗത്യത്തിൽ വിശ്വസിക്കുന്നുണ്ടെങ്കിൽ, ഈ സംരഭത്തിലേക്കു സംഭാവന ചെയ്യുവാൻ താത്പര്യമുണ്ടോ?";
 "smartlist.inSynchronization" = "Syncing…";
-"smartlist.newMessage" = "New message";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
@@ -711,6 +710,6 @@
 "peerServices.errorUnreachable" = "Contact is unreachable";
 "peerServices.errorTimeout" = "Request timed out";
 "peerServices.errorUnknown" = "Could not retrieve services";
-"peerServices.done" = "Done";
+"peerServices.done" = "പൂർത്തിയായി";
 "peerServices.notSupported" = "Not supported";
-"peerServices.open" = "Open";
+"peerServices.open" = "തുറന്ന";

@@ -151,7 +151,6 @@
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "Wenn Sie gerne Jami nutzen und an unsere Mission glauben, möchten Sie eine Spende leisten?";
 "smartlist.inSynchronization" = "Wird synchronisiert…";
-"smartlist.newMessage" = "Neue Nachricht";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
@@ -394,7 +393,7 @@
 "accountPage.stunEnabled" = "STUN benutzen";
 "accountPage.stunServer" = "STUN-Adresse";
 "accountPage.publicAddressHeader" = "Öffentliche Adresse";
-"accountPage.allowIPAutoRewrite" = "Allow IP auto rewrite";
+"accountPage.allowIPAutoRewrite" = "Automatisches Umschreiben von IP-Adressen zulassen";
 "accountPage.publishedSameAsLocal" = "Gleich wie lokal veröffentlicht";
 "accountPage.publishedAddress" = "Adresse";
 "accountPage.publishedPort" = "Port";
@@ -435,9 +434,9 @@
 "accountPage.tlsDisableSecureDlgCheck" = "Überprüfung des sicheren Dialogs für eingehende TLS-Daten deaktivieren";
 "accountPage.editSipExpirationTime" = "Ablaufzeit";
 "accountPage.selectSipExpirationTime" = "Zeit (in Sekunden) für den Ablauf der Registrierung festlegen";
-"accountPage.invalidSipExpirationTime" = "Enter a value between 60 and 604800 seconds";
-"accountPage.invalidPort" = "Enter a value between 0 and 65535";
-"accountPage.invalidAddress" = "Enter a valid address";
+"accountPage.invalidSipExpirationTime" = "Einen Wert zwischen 60 und 604800 Sekunden eingeben";
+"accountPage.invalidPort" = "Wert zwischen 0 und 65535 eingeben";
+"accountPage.invalidAddress" = "Eine gültige Adresse eingeben";
 "accountPage.thisDevice" = "This device";
 "accountPage.otherDevices" = "Andere verknüpfte Geräte";
 "accountPage.accountIdentity" = "Kontoidentität";
@@ -704,13 +703,13 @@
 "shareExtension.accessibilitySelectAccount" = "Doppeltippen, um dieses Konto auszuwählen.";
 
 // Peer Services
-"peerServices.title" = "Shared Services";
-"peerServices.refresh" = "Refresh services";
-"peerServices.empty" = "No shared services available";
-"peerServices.errorOffline" = "Contact is offline";
-"peerServices.errorUnreachable" = "Contact is unreachable";
-"peerServices.errorTimeout" = "Request timed out";
-"peerServices.errorUnknown" = "Could not retrieve services";
-"peerServices.done" = "Done";
-"peerServices.notSupported" = "Not supported";
-"peerServices.open" = "Open";
+"peerServices.title" = "Gemeinsam genutzte Dienste";
+"peerServices.refresh" = "Dienste aktualisieren";
+"peerServices.empty" = "Keine gemeinsam genutzten Dienste verfügbar";
+"peerServices.errorOffline" = "Kontakt ist offline";
+"peerServices.errorUnreachable" = "Kontakt ist nicht erreichbar";
+"peerServices.errorTimeout" = "Zeitüberschreitung der Anfrage";
+"peerServices.errorUnknown" = "Dienste konnten nicht abgerufen werden";
+"peerServices.done" = "Fertig";
+"peerServices.notSupported" = "Nicht unterstützt";
+"peerServices.open" = "Öffnen";

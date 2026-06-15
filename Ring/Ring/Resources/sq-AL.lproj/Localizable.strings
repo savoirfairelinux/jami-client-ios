@@ -151,7 +151,6 @@
 "smartlist.disableDonation" = "Jo tani";
 "smartlist.donationExplanation" = "Nëse ju shijon të përdorni Jami-n dhe besoni në misionin tonë, doni të bëni një dhurim?";
 "smartlist.inSynchronization" = "Po bëhet njëkohësim…";
-"smartlist.newMessage" = "Mesazh i ri";
 
 // Conversation
 "conversation.addToContactsButton" = "Shtoje te Kontaktet";
@@ -711,6 +710,6 @@
 "peerServices.errorUnreachable" = "Kontakti s’kapet dot";
 "peerServices.errorTimeout" = "Kërkesës i mbaroi koha";
 "peerServices.errorUnknown" = "S’u morën dot shërbime";
-"peerServices.done" = "Done";
-"peerServices.notSupported" = "Not supported";
+"peerServices.done" = "U bë";
+"peerServices.notSupported" = "S’mbulohet";
 "peerServices.open" = "Hape";
