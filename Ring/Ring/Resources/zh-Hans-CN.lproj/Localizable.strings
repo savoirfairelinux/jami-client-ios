@@ -151,7 +151,6 @@
 "smartlist.disableDonation" = "时机未到";
 "smartlist.donationExplanation" = "如果您喜欢使用 Jami 并相信我们的使命，您愿意捐款吗？";
 "smartlist.inSynchronization" = "同步中…";
-"smartlist.newMessage" = "新消息";
 
 // Conversation
 "conversation.addToContactsButton" = "添加到联系人";
@@ -712,5 +711,5 @@
 "peerServices.errorTimeout" = "请求超时";
 "peerServices.errorUnknown" = "无法检索服务";
 "peerServices.done" = "完成";
-"peerServices.notSupported" = "Not supported";
+"peerServices.notSupported" = "不支持";
 "peerServices.open" = "打开";

@@ -151,7 +151,6 @@
 "smartlist.disableDonation" = "Ei nyt";
 "smartlist.donationExplanation" = "Jos pidät Jamista ja uskot tehtäväämme, Haluatko tehdä lahjoituksen?";
 "smartlist.inSynchronization" = "Synkronoidaan...";
-"smartlist.newMessage" = "Uusi viesti";
 
 // Conversation
 "conversation.addToContactsButton" = "Lisää yhteystietoihin";
@@ -704,13 +703,13 @@
 "shareExtension.accessibilitySelectAccount" = "Valitse tämä tili painamalla kahdesti";
 
 // Peer Services
-"peerServices.title" = "Shared Services";
-"peerServices.refresh" = "Refresh services";
-"peerServices.empty" = "No shared services available";
-"peerServices.errorOffline" = "Contact is offline";
-"peerServices.errorUnreachable" = "Contact is unreachable";
-"peerServices.errorTimeout" = "Request timed out";
-"peerServices.errorUnknown" = "Could not retrieve services";
-"peerServices.done" = "Done";
-"peerServices.notSupported" = "Not supported";
-"peerServices.open" = "Open";
+"peerServices.title" = "Jaetut palvelut";
+"peerServices.refresh" = "Virkistä palvelut";
+"peerServices.empty" = "Ei jaettuja palveluita saatavilla";
+"peerServices.errorOffline" = "Henkilö on offline-tilassa";
+"peerServices.errorUnreachable" = "Henkilöön ei saada yhteyttä";
+"peerServices.errorTimeout" = "Pyyntö aikakatkaistu";
+"peerServices.errorUnknown" = "Palveluiden haku epäonnistui";
+"peerServices.done" = "Valmis";
+"peerServices.notSupported" = "Ei tuettu";
+"peerServices.open" = "Avaa";

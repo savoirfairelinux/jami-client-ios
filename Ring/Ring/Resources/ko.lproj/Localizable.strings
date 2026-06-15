@@ -151,7 +151,6 @@
 "smartlist.disableDonation" = "나중에";
 "smartlist.donationExplanation" = "Jami를 잘 사용 중이고 우리의 사명을 응원한다면 후원해 주시겠습니까?";
 "smartlist.inSynchronization" = "Syncing…";
-"smartlist.newMessage" = "새 메시지";
 
 // Conversation
 "conversation.addToContactsButton" = "연락처에 추가";
@@ -711,6 +710,6 @@
 "peerServices.errorUnreachable" = "Contact is unreachable";
 "peerServices.errorTimeout" = "Request timed out";
 "peerServices.errorUnknown" = "Could not retrieve services";
-"peerServices.done" = "Done";
+"peerServices.done" = "완료";
 "peerServices.notSupported" = "Not supported";
-"peerServices.open" = "Open";
+"peerServices.open" = "열리";

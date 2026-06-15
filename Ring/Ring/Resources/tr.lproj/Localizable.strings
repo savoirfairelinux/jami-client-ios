@@ -151,7 +151,6 @@
 "smartlist.disableDonation" = "Şimdi değil";
 "smartlist.donationExplanation" = "Jami'yi kullanmaktan hoşlanıyor ve misyonumuza güveniyorsan bağış yapmak ister misin?";
 "smartlist.inSynchronization" = "Syncing…";
-"smartlist.newMessage" = "Yeni ileti";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";

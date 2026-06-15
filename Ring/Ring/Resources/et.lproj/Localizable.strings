@@ -151,7 +151,6 @@
 "smartlist.disableDonation" = "Mitte praegu";
 "smartlist.donationExplanation" = "Kui sulle Jami meeldib ja sa usud meie visiooni, siis kas sa oleksid nõus meid rahaliselt toetama?";
 "smartlist.inSynchronization" = "Sünkroonin andmeid...";
-"smartlist.newMessage" = "Uus sõnum";
 
 // Conversation
 "conversation.addToContactsButton" = "Lisa kontaktitele";
@@ -704,13 +703,13 @@
 "shareExtension.accessibilitySelectAccount" = "Topeltklõpsa selle kasutajakonto valimiseks";
 
 // Peer Services
-"peerServices.title" = "Shared Services";
-"peerServices.refresh" = "Refresh services";
-"peerServices.empty" = "No shared services available";
-"peerServices.errorOffline" = "Contact is offline";
-"peerServices.errorUnreachable" = "Contact is unreachable";
-"peerServices.errorTimeout" = "Request timed out";
-"peerServices.errorUnknown" = "Could not retrieve services";
-"peerServices.done" = "Done";
-"peerServices.notSupported" = "Not supported";
-"peerServices.open" = "Open";
+"peerServices.title" = "Jagatud teenused";
+"peerServices.refresh" = "Laadi teenused uuesti";
+"peerServices.empty" = "Jagatud teenuseid pole saadaval";
+"peerServices.errorOffline" = "Kontakt pole võrgus";
+"peerServices.errorUnreachable" = "Kontakt pole leitav";
+"peerServices.errorTimeout" = "Päring aegus";
+"peerServices.errorUnknown" = "Teenuste laadimine ei õnnestunud";
+"peerServices.done" = "Tehtud";
+"peerServices.notSupported" = "Pole toetatud";
+"peerServices.open" = "Avatud";

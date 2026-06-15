@@ -151,7 +151,6 @@
 "smartlist.disableDonation" = "Non adesso";
 "smartlist.donationExplanation" = "Se ti piace usare Jami e pensi che la nostra missione sia importante, vuoi fare una donazione?";
 "smartlist.inSynchronization" = "Sincronizzazione…";
-"smartlist.newMessage" = "Nuovo messaggio";
 
 // Conversation
 "conversation.addToContactsButton" = "Aggiungi ai contatti";
@@ -711,6 +710,6 @@
 "peerServices.errorUnreachable" = "Contact is unreachable";
 "peerServices.errorTimeout" = "Request timed out";
 "peerServices.errorUnknown" = "Could not retrieve services";
-"peerServices.done" = "Done";
+"peerServices.done" = "Fatto";
 "peerServices.notSupported" = "Not supported";
-"peerServices.open" = "Open";
+"peerServices.open" = "Apri";

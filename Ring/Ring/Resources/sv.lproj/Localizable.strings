@@ -151,7 +151,6 @@
 "smartlist.disableDonation" = "Inte nu";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, do you want to make a donation?";
 "smartlist.inSynchronization" = "Syncing…";
-"smartlist.newMessage" = "Nytt meddelande";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";

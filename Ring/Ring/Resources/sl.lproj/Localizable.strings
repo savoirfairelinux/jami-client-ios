@@ -151,7 +151,6 @@
 "smartlist.disableDonation" = "Ne zdaj";
 "smartlist.donationExplanation" = "Če vam je Jami všeč in verjamete v naše poslanstvo - bi prispevali projektu?";
 "smartlist.inSynchronization" = "Syncing…";
-"smartlist.newMessage" = "Novo sporočilo";
 
 // Conversation
 "conversation.addToContactsButton" = "Dodaj med stike";

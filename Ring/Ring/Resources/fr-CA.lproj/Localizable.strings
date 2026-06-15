@@ -151,7 +151,6 @@
 "smartlist.disableDonation" = "Pas maintenant";
 "smartlist.donationExplanation" = "Si vous appréciez Jami et que vous croyez à notre mission, feriez-vous un don ?";
 "smartlist.inSynchronization" = "Syncing…";
-"smartlist.newMessage" = "Nouveau message";
 
 // Conversation
 "conversation.addToContactsButton" = "Ajouter aux contcats";
@@ -711,6 +710,6 @@
 "peerServices.errorUnreachable" = "Contact is unreachable";
 "peerServices.errorTimeout" = "Request timed out";
 "peerServices.errorUnknown" = "Could not retrieve services";
-"peerServices.done" = "Done";
+"peerServices.done" = "Effectué";
 "peerServices.notSupported" = "Not supported";
-"peerServices.open" = "Open";
+"peerServices.open" = "Ouvrir";

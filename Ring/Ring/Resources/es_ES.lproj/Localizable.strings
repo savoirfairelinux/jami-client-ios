@@ -151,7 +151,6 @@
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, do you want to make a donation?";
 "smartlist.inSynchronization" = "Sincronizando…";
-"smartlist.newMessage" = "New message";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
@@ -704,13 +703,13 @@
 "shareExtension.accessibilitySelectAccount" = "Doble clic para seleccionar esta cuenta";
 
 // Peer Services
-"peerServices.title" = "Shared Services";
-"peerServices.refresh" = "Refresh services";
-"peerServices.empty" = "No shared services available";
-"peerServices.errorOffline" = "Contact is offline";
-"peerServices.errorUnreachable" = "Contact is unreachable";
-"peerServices.errorTimeout" = "Request timed out";
-"peerServices.errorUnknown" = "Could not retrieve services";
-"peerServices.done" = "Done";
-"peerServices.notSupported" = "Not supported";
-"peerServices.open" = "Open";
+"peerServices.title" = "Servicios Compartidos";
+"peerServices.refresh" = "Servicios de actualización";
+"peerServices.empty" = "No hay servicios compartidos disponibles";
+"peerServices.errorOffline" = "El contacto está desconectado";
+"peerServices.errorUnreachable" = "El contacto es inalcanzable";
+"peerServices.errorTimeout" = "Tiempo de espera agotado";
+"peerServices.errorUnknown" = "No se pudieron recuperar los servicios";
+"peerServices.done" = "Hecho";
+"peerServices.notSupported" = "No soportado";
+"peerServices.open" = "Abrir";
