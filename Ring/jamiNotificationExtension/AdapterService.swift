@@ -123,8 +123,7 @@ class AdapterService {
             if let last = components.last, components.count > 2 {
                 return PeerConnectionRequestType.gitMessage(convId: last)
             }
-            // TODO: In the future, when all platforms send the convId, we can simply ignore cases where the convId is not set.
-            return PeerConnectionRequestType.gitMessage(convId: "")
+            return .unknown
         }
         switch type {
         case "videoCall":
