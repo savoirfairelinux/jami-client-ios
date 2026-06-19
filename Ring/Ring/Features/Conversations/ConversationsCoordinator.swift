@@ -270,13 +270,15 @@ extension ConversationsCoordinator {
     }
 
     func showDialpad(inCall: Bool) {
-        let dialpadViewController = DialpadViewController.instantiate(with: self.injectionBag)
-        dialpadViewController.viewModel.inCallDialpad = inCall
+        let viewModel = DialpadViewModel(with: self.injectionBag)
+        viewModel.inCallDialpad = inCall
+        let dialpadViewController = createHostingVC(DialpadView(viewModel: viewModel))
+
         if !inCall {
             self.present(viewController: dialpadViewController,
                          withStyle: .present,
                          withAnimation: true,
-                         withStateable: dialpadViewController.viewModel)
+                         withStateable: viewModel)
             return
         }
         if let controller = self.navigationController.visibleViewController as? CallViewController {
