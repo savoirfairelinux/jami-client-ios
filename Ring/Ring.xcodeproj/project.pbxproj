@@ -43,6 +43,7 @@
 		04399AAD1D1C304300E99CD9 /* DRingAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04399AA81D1C304300E99CD9 /* DRingAdapter.mm */; };
 		04399AAE1D1C304300E99CD9 /* Utils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04399AAB1D1C304300E99CD9 /* Utils.mm */; };
 		0586C94B1F684DF600613517 /* UIImage+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0586C94A1F684DF600613517 /* UIImage+Helpers.swift */; };
+		0769ACCE032643E496BC13A5 /* PeerSharingSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE8CA20E60048678054756B /* PeerSharingSheet.swift */; };
 		0E0FF1AA1FC3843E003898C2 /* DBContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0FF1A91FC3843E003898C2 /* DBContainer.swift */; };
 		0E0FF1AF1FC38CBC003898C2 /* ProfileDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0FF1AE1FC38CBC003898C2 /* ProfileDataHelper.swift */; };
 		0E0FF1B51FC3947B003898C2 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0FF1B41FC3947B003898C2 /* DBManager.swift */; };
@@ -70,13 +71,15 @@
 		0E72374A20460320006B0C7D /* ProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E72374920460320006B0C7D /* ProfileHeaderView.xib */; };
 		0E8E9A0520483E1200DA8E8B /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8E9A0420483E1200DA8E8B /* TitleView.swift */; };
 		0E983E6E1FC77C3E0082103E /* ConversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E983E6D1FC77C3E0082103E /* ConversationModel.swift */; };
-		0EDA00020000000000001002 /* ConversationDestructiveAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA00010000000000001001 /* ConversationDestructiveAction.swift */; };
 		0E99F1A022417A0400CF8BD6 /* JamiURI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E99F19F22417A0400CF8BD6 /* JamiURI.swift */; };
 		0EABD3852303600B00DE7ACF /* default.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0EABD3842303600B00DE7ACF /* default.wav */; };
 		0EBB72A92034F44200D88F46 /* ProfilesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB72A82034F44200D88F46 /* ProfilesService.swift */; };
 		0ECB4E2822B2D4840097CD7B /* CallsProviderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECB4E2722B2D4840097CD7B /* CallsProviderService.swift */; };
 		0ECB4E2A22B2D4BB0097CD7B /* CallKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ECB4E2922B2D4BB0097CD7B /* CallKit.framework */; };
 		0ECEE9A3220D1935000E1CF4 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ECEE9A2220D1935000E1CF4 /* VideoToolbox.framework */; };
+		0EDA00020000000000001002 /* ConversationDestructiveAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA00010000000000001001 /* ConversationDestructiveAction.swift */; };
+		0EDA00040000000000001004 /* SmartListRowModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA00030000000000001003 /* SmartListRowModifiers.swift */; };
+		0EDA00060000000000001006 /* ConversationDestructiveActionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA00050000000000001005 /* ConversationDestructiveActionTests.swift */; };
 		0EDCC8601F98150500B121D7 /* UIView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDCC85F1F98150500B121D7 /* UIView+Rx.swift */; };
 		0EE1B5501F75AD4700BA98EE /* VCardUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE1B54F1F75AD4700BA98EE /* VCardUtils.swift */; };
 		0EF49AA123828CBC0064CD98 /* ParticipantProfileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF49AA023828CBC0064CD98 /* ParticipantProfileInfo.swift */; };
@@ -151,7 +154,6 @@
 		26001C3E2D78E1A3009A8E23 /* libpjlib-util.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BF82D78E19C009A8E23 /* libpjlib-util.xcframework */; };
 		26001C402D78E1A3009A8E23 /* libargon2.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BF92D78E19C009A8E23 /* libargon2.xcframework */; };
 		26001C422D78E1A3009A8E23 /* libpj.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BFA2D78E19C009A8E23 /* libpj.xcframework */; };
-		26001C442D78E1A3009A8E23 /* libhttp_parser.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BFB2D78E19C009A8E23 /* libhttp_parser.xcframework */; };
 		26001C462D78E1A3009A8E23 /* libopus.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BFC2D78E19D009A8E23 /* libopus.xcframework */; };
 		26001C482D78E1A3009A8E23 /* libdhtnet.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BFD2D78E19D009A8E23 /* libdhtnet.xcframework */; };
 		26001C4A2D78E1A3009A8E23 /* libjsoncpp.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BFE2D78E19D009A8E23 /* libjsoncpp.xcframework */; };
@@ -183,7 +185,6 @@
 		26001C7C2D78E3E5009A8E23 /* libgmp.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BED2D78E19A009A8E23 /* libgmp.xcframework */; };
 		26001C7E2D78E3E5009A8E23 /* libgnutls.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BE42D78E199009A8E23 /* libgnutls.xcframework */; };
 		26001C802D78E3E5009A8E23 /* libhogweed.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BEC2D78E19A009A8E23 /* libhogweed.xcframework */; };
-		26001C822D78E3E5009A8E23 /* libhttp_parser.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BFB2D78E19C009A8E23 /* libhttp_parser.xcframework */; };
 		26001C842D78E3E5009A8E23 /* libixml.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BE92D78E19A009A8E23 /* libixml.xcframework */; };
 		26001C882D78E3E6009A8E23 /* libjsoncpp.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BFE2D78E19D009A8E23 /* libjsoncpp.xcframework */; };
 		26001C8A2D78E3E6009A8E23 /* libllhttp.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001C0A2D78E1A1009A8E23 /* libllhttp.xcframework */; };
@@ -239,7 +240,6 @@
 		260AE62929B8ECA400D66D5E /* TestableFilteredDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260AE62829B8ECA400D66D5E /* TestableFilteredDataSource.swift */; };
 		260AE62B29B8F97300D66D5E /* TestableSwarmInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260AE62A29B8F97300D66D5E /* TestableSwarmInfo.swift */; };
 		260AE62F29BA3B6900D66D5E /* ConversationModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260AE62E29BA3B6900D66D5E /* ConversationModelTests.swift */; };
-		0EDA00060000000000001006 /* ConversationDestructiveActionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA00050000000000001005 /* ConversationDestructiveActionTests.swift */; };
 		260AE63329BA5DF600D66D5E /* SwarmInfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260AE63229BA5DF600D66D5E /* SwarmInfoTests.swift */; };
 		260AE63529BE00F100D66D5E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260AE63429BE00F100D66D5E /* Constants.swift */; };
 		260AE63729BE177000D66D5E /* ContactUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260AE63629BE177000D66D5E /* ContactUtilsTests.swift */; };
@@ -325,7 +325,6 @@
 		26600A992BEA855900EFCFD1 /* ThreadSafeArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26600A982BEA855900EFCFD1 /* ThreadSafeArray.swift */; };
 		26625BB02BA4C47D009D2DDB /* SwarmProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26625BAF2BA4C47D009D2DDB /* SwarmProfile.swift */; };
 		26625BB52BA9DF67009D2DDB /* ConversationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26625BB42BA9DF67009D2DDB /* ConversationsView.swift */; };
-		0EDA00040000000000001004 /* SmartListRowModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA00030000000000001003 /* SmartListRowModifiers.swift */; };
 		26625BB72BA9DF81009D2DDB /* ConversationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26625BB62BA9DF81009D2DDB /* ConversationsViewModel.swift */; };
 		26625BB92BA9FEFC009D2DDB /* SmartListContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26625BB82BA9FEFC009D2DDB /* SmartListContentView.swift */; };
 		26625BBB2BAA0749009D2DDB /* SmartListContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26625BBA2BAA0749009D2DDB /* SmartListContainer.swift */; };
@@ -458,12 +457,10 @@
 		26EFD7FC2E2EBA4500B63F74 /* Utils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04399AAB1D1C304300E99CD9 /* Utils.mm */; };
 		26F1D8E22FC73C39002AA754 /* PeerServicesAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F1D8E02FC73C39002AA754 /* PeerServicesAdapterDelegate.swift */; };
 		26F1D8E32FC73C39002AA754 /* PeerSharingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F1D8E12FC73C39002AA754 /* PeerSharingService.swift */; };
-		FB726FE5280249DA8219EDE9 /* PeerSharingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECD5DF711D545048AA5E270 /* PeerSharingViewModel.swift */; };
-		0769ACCE032643E496BC13A5 /* PeerSharingSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE8CA20E60048678054756B /* PeerSharingSheet.swift */; };
 		26F1D8E62FC73C6E002AA754 /* PeerServicesAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26F1D8E52FC73C6E002AA754 /* PeerServicesAdapter.mm */; };
 		26F1D8F02FC76A78002AA754 /* PeerSharingServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F1D8EF2FC76A78002AA754 /* PeerSharingServiceTests.swift */; };
-		26F1D9A12FC76A78002AA754 /* PeerSharingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F1D9A02FC76A78002AA754 /* PeerSharingViewModelTests.swift */; };
 		26F1D8F32FC76A8B002AA754 /* ObjCMockPeerServicesAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F1D8F22FC76A8B002AA754 /* ObjCMockPeerServicesAdapter.m */; };
+		26F1D9A12FC76A78002AA754 /* PeerSharingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F1D9A02FC76A78002AA754 /* PeerSharingViewModelTests.swift */; };
 		26F5442D2C5815770069A7A4 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F5442C2C5815770069A7A4 /* WelcomeView.swift */; };
 		26F544A32C5AABD20069A7A4 /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F544A22C5AABD20069A7A4 /* CreateAccountView.swift */; };
 		26F82D042D7A09AF00954A7B /* libnatpmp.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F82D032D7A09AE00954A7B /* libnatpmp.xcframework */; };
@@ -492,7 +489,6 @@
 		3D4181892DDE312F001BAD76 /* libgmp.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BED2D78E19A009A8E23 /* libgmp.xcframework */; };
 		3D41818B2DDE3131001BAD76 /* libgnutls.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BE42D78E199009A8E23 /* libgnutls.xcframework */; };
 		3D41818D2DDE3133001BAD76 /* libhogweed.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BEC2D78E19A009A8E23 /* libhogweed.xcframework */; };
-		3D41818F2DDE3136001BAD76 /* libhttp_parser.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BFB2D78E19C009A8E23 /* libhttp_parser.xcframework */; };
 		3D4181912DDE3138001BAD76 /* libixml.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BE92D78E19A009A8E23 /* libixml.xcframework */; };
 		3D4181952DDE313D001BAD76 /* libjsoncpp.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BFE2D78E19D009A8E23 /* libjsoncpp.xcframework */; };
 		3D4181972DDE3140001BAD76 /* libllhttp.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001C0A2D78E1A1009A8E23 /* libllhttp.xcframework */; };
@@ -633,6 +629,7 @@
 		BBB76E412966062C00A42DF5 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB76E402966062C00A42DF5 /* MapView.swift */; };
 		BBD3D751297B4CA00098DB02 /* SwarmInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD3D750297B4CA00098DB02 /* SwarmInfoView.swift */; };
 		E8ACE0B8E94AB3DEABA30A1A /* AvatarHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD989EC28085426384411E8 /* AvatarHelpers.swift */; };
+		FB726FE5280249DA8219EDE9 /* PeerSharingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECD5DF711D545048AA5E270 /* PeerSharingViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -776,7 +773,6 @@
 		0E72374920460320006B0C7D /* ProfileHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileHeaderView.xib; sourceTree = "<group>"; };
 		0E8E9A0420483E1200DA8E8B /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		0E983E6D1FC77C3E0082103E /* ConversationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationModel.swift; sourceTree = "<group>"; };
-		0EDA00010000000000001001 /* ConversationDestructiveAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationDestructiveAction.swift; sourceTree = "<group>"; };
 		0E99F19F22417A0400CF8BD6 /* JamiURI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JamiURI.swift; sourceTree = "<group>"; };
 		0EABD3842303600B00DE7ACF /* default.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = default.wav; sourceTree = "<group>"; };
 		0EB12451224AB1030025F8CA /* ContactsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ContactsUI.framework; path = System/Library/Frameworks/ContactsUI.framework; sourceTree = SDKROOT; };
@@ -785,6 +781,9 @@
 		0ECB4E2922B2D4BB0097CD7B /* CallKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CallKit.framework; path = System/Library/Frameworks/CallKit.framework; sourceTree = SDKROOT; };
 		0ECEE9A2220D1935000E1CF4 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
 		0ED6660F1F9FED1C00743D42 /* AMPopTip.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPopTip.framework; path = Carthage/Build/iOS/AMPopTip.framework; sourceTree = "<group>"; };
+		0EDA00010000000000001001 /* ConversationDestructiveAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationDestructiveAction.swift; sourceTree = "<group>"; };
+		0EDA00030000000000001003 /* SmartListRowModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SmartListRowModifiers.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Views/SmartListRowModifiers.swift; sourceTree = SOURCE_ROOT; };
+		0EDA00050000000000001005 /* ConversationDestructiveActionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationDestructiveActionTests.swift; sourceTree = "<group>"; };
 		0EDCC85F1F98150500B121D7 /* UIView+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Rx.swift"; sourceTree = "<group>"; };
 		0EE1B54F1F75AD4700BA98EE /* VCardUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCardUtils.swift; sourceTree = "<group>"; };
 		0EEFBA3B1F83DA21000EDBAD /* libsecp256k1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsecp256k1.a; path = ../DEPS/arm64/lib/libsecp256k1.a; sourceTree = "<group>"; };
@@ -892,7 +891,6 @@
 		260AE62829B8ECA400D66D5E /* TestableFilteredDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestableFilteredDataSource.swift; sourceTree = "<group>"; };
 		260AE62A29B8F97300D66D5E /* TestableSwarmInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestableSwarmInfo.swift; sourceTree = "<group>"; };
 		260AE62E29BA3B6900D66D5E /* ConversationModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationModelTests.swift; sourceTree = "<group>"; };
-		0EDA00050000000000001005 /* ConversationDestructiveActionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationDestructiveActionTests.swift; sourceTree = "<group>"; };
 		260AE63229BA5DF600D66D5E /* SwarmInfoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwarmInfoTests.swift; sourceTree = "<group>"; };
 		260AE63429BE00F100D66D5E /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		260AE63629BE177000D66D5E /* ContactUtilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUtilsTests.swift; sourceTree = "<group>"; };
@@ -976,7 +974,6 @@
 		26600A982BEA855900EFCFD1 /* ThreadSafeArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ThreadSafeArray.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Models/ThreadSafeArray.swift; sourceTree = SOURCE_ROOT; };
 		26625BAF2BA4C47D009D2DDB /* SwarmProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwarmProfile.swift; sourceTree = "<group>"; };
 		26625BB42BA9DF67009D2DDB /* ConversationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConversationsView.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Views/ConversationsView.swift; sourceTree = SOURCE_ROOT; };
-		0EDA00030000000000001003 /* SmartListRowModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SmartListRowModifiers.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Views/SmartListRowModifiers.swift; sourceTree = SOURCE_ROOT; };
 		26625BB62BA9DF81009D2DDB /* ConversationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConversationsViewModel.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Models/ConversationsViewModel.swift; sourceTree = SOURCE_ROOT; };
 		26625BB82BA9FEFC009D2DDB /* SmartListContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SmartListContentView.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Views/SmartListContentView.swift; sourceTree = SOURCE_ROOT; };
 		26625BBA2BAA0749009D2DDB /* SmartListContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SmartListContainer.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Views/SmartListContainer.swift; sourceTree = SOURCE_ROOT; };
@@ -1148,14 +1145,12 @@
 		26EFD8012E2ED72400B63F74 /* ObjcTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjcTypes.h; sourceTree = "<group>"; };
 		26F1D8E02FC73C39002AA754 /* PeerServicesAdapterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerServicesAdapterDelegate.swift; sourceTree = "<group>"; };
 		26F1D8E12FC73C39002AA754 /* PeerSharingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerSharingService.swift; sourceTree = "<group>"; };
-		EECD5DF711D545048AA5E270 /* PeerSharingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerSharingViewModel.swift; sourceTree = "<group>"; };
-		DDE8CA20E60048678054756B /* PeerSharingSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerSharingSheet.swift; sourceTree = "<group>"; };
 		26F1D8E42FC73C6E002AA754 /* PeerServicesAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PeerServicesAdapter.h; sourceTree = "<group>"; };
 		26F1D8E52FC73C6E002AA754 /* PeerServicesAdapter.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PeerServicesAdapter.mm; sourceTree = "<group>"; };
 		26F1D8EF2FC76A78002AA754 /* PeerSharingServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerSharingServiceTests.swift; sourceTree = "<group>"; };
-		26F1D9A02FC76A78002AA754 /* PeerSharingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerSharingViewModelTests.swift; sourceTree = "<group>"; };
 		26F1D8F12FC76A8B002AA754 /* ObjCMockPeerServicesAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjCMockPeerServicesAdapter.h; sourceTree = "<group>"; };
 		26F1D8F22FC76A8B002AA754 /* ObjCMockPeerServicesAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjCMockPeerServicesAdapter.m; sourceTree = "<group>"; };
+		26F1D9A02FC76A78002AA754 /* PeerSharingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerSharingViewModelTests.swift; sourceTree = "<group>"; };
 		26F5442C2C5815770069A7A4 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		26F544A22C5AABD20069A7A4 /* CreateAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
 		26F5E11A26F91D98001BECCE /* NotificationService-release.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "NotificationService-release.entitlements"; sourceTree = "<group>"; };
@@ -1878,6 +1873,8 @@
 		BB91FAA9292EA26900BB41C1 /* EventData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventData.swift; sourceTree = "<group>"; };
 		BBB76E402966062C00A42DF5 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		BBD3D750297B4CA00098DB02 /* SwarmInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwarmInfoView.swift; sourceTree = "<group>"; };
+		DDE8CA20E60048678054756B /* PeerSharingSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerSharingSheet.swift; sourceTree = "<group>"; };
+		EECD5DF711D545048AA5E270 /* PeerSharingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerSharingViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -1953,7 +1950,6 @@
 				26001C3C2D78E1A3009A8E23 /* libpjmedia-audiodev.xcframework in Frameworks */,
 				04399A941D1C2F5800E99CD9 /* libiconv.tbd in Frameworks */,
 				26001C602D78E1A4009A8E23 /* libgit2.xcframework in Frameworks */,
-				26001C442D78E1A3009A8E23 /* libhttp_parser.xcframework in Frameworks */,
 				04399A2C1D1C2DE900E99CD9 /* AVFoundation.framework in Frameworks */,
 				26001C2A2D78E1A2009A8E23 /* libyaml-cpp.xcframework in Frameworks */,
 				26001C502D78E1A3009A8E23 /* libspeex.xcframework in Frameworks */,
@@ -2018,7 +2014,6 @@
 				26001C742D78E3E5009A8E23 /* libcrypto.xcframework in Frameworks */,
 				26A88C7826700B7500888EED /* libc++.tbd in Frameworks */,
 				26001C9A2D78E3E6009A8E23 /* libpjmedia-videodev.xcframework in Frameworks */,
-				26001C822D78E3E5009A8E23 /* libhttp_parser.xcframework in Frameworks */,
 				26001CA62D78E3E7009A8E23 /* libpjsua.xcframework in Frameworks */,
 				26001CB82D78E3E7009A8E23 /* libtls.xcframework in Frameworks */,
 				26001CC62D7918E4009A8E23 /* libvpx.xcframework in Frameworks */,
@@ -2085,7 +2080,6 @@
 				3D4181D92DDE3448001BAD76 /* libiconv.2.tbd in Frameworks */,
 				3D4181C32DDE3177001BAD76 /* libswresample.xcframework in Frameworks */,
 				3D4181C72DDE317C001BAD76 /* libtls.xcframework in Frameworks */,
-				3D41818F2DDE3136001BAD76 /* libhttp_parser.xcframework in Frameworks */,
 				3D4181B72DDE3168001BAD76 /* libpjsua2.xcframework in Frameworks */,
 				3D4181CB2DDE3181001BAD76 /* libvpx.xcframework in Frameworks */,
 				3D4181812DDE3125001BAD76 /* libcrypto.xcframework in Frameworks */,
@@ -3251,15 +3245,6 @@
 			path = Smartlist;
 			sourceTree = "<group>";
 		};
-		3C5BC51ADFD347D4A4A9253D /* PeerSharing */ = {
-			isa = PBXGroup;
-			children = (
-				EECD5DF711D545048AA5E270 /* PeerSharingViewModel.swift */,
-				DDE8CA20E60048678054756B /* PeerSharingSheet.swift */,
-			);
-			path = PeerSharing;
-			sourceTree = "<group>";
-		};
 		1A2D18AE1F29153F00B2C785 /* Conversation */ = {
 			isa = PBXGroup;
 			children = (
@@ -3757,6 +3742,15 @@
 				26A34ED92C6EB7C800A41DD4 /* BackupAccount.swift */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		3C5BC51ADFD347D4A4A9253D /* PeerSharing */ = {
+			isa = PBXGroup;
+			children = (
+				EECD5DF711D545048AA5E270 /* PeerSharingViewModel.swift */,
+				DDE8CA20E60048678054756B /* PeerSharingSheet.swift */,
+			);
+			path = PeerSharing;
 			sourceTree = "<group>";
 		};
 		3D0E69782DDCD9C80046FA3D /* jamiShareExtension */ = {
