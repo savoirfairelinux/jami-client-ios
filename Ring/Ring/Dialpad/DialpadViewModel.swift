@@ -1,7 +1,5 @@
 /*
- *  Copyright (C) 2019 Savoir-faire Linux Inc.
- *
- *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Copyright (C) 2026-2026 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,49 +16,56 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
+import Combine
+import AudioToolbox
 import RxSwift
 
-class DialpadViewModel: ViewModel, Stateable {
+class DialpadViewModel: ObservableObject, ViewModel, Stateable {
+    /// Small asterisk used as the on-screen label for the "*" key, since
+    /// the regular "*" doesn't render well at large sizes.
+    static let displayStar = "﹡"
+
     private let stateSubject = PublishSubject<State>()
-    lazy var state: Observable<State> = {
-        return self.stateSubject.asObservable()
-    }()
+    var state: Observable<State> { stateSubject.asObservable() }
 
     private let callService: CallsService
 
-    let observableNumber = BehaviorSubject<String>(value: "")
+    /// The number being composed, shown in the display label.
+    @Published var phoneNumber: String = ""
 
+    /// When `true` the dialpad is shown during a call and sends DTMF tones,
+    /// otherwise it composes a number and can start a new call.
     var inCallDialpad = false
 
-    var playDefaultSound = BehaviorSubject<Bool>(value: false)
-
-    var phoneNumber: String = "" {
-        willSet {
-            observableNumber.onNext(newValue)
-        }
-    }
+    /// The place-call button is only relevant when starting a new call.
+    var showsCallButton: Bool { !inCallDialpad }
 
     required init(with injectionBag: InjectionBag) {
         self.callService = injectionBag.callService
     }
 
-    func numberPressed(number: String) {
-        self.phoneNumber += number
+    func numberPressed(_ number: String) {
+        phoneNumber += number
         if inCallDialpad {
-            let formatedNumber = number.replacingOccurrences(of: String("﹡"), with: "*")
-            self.callService.playDTMF(code: formatedNumber)
+            callService.playDTMF(code: toDTMF(number))
         } else {
-            playDefaultSound.onNext(true)
+            AudioServicesPlaySystemSound(1057)
+        }
+    }
+
+    func deleteLast() {
+        if !phoneNumber.isEmpty {
+            phoneNumber.removeLast()
         }
     }
 
     func startCall() {
-        if inCallDialpad {
-            return
-        }
-        let name = phoneNumber.replacingOccurrences(of: String("﹡"), with: "*")
-        self.stateSubject.onNext(ConversationState
-                                    .startAudioCall(contactRingId: name, userName: name))
+        guard !inCallDialpad else { return }
+        let name = toDTMF(phoneNumber)
+        stateSubject.onNext(ConversationState.startAudioCall(contactRingId: name, userName: name))
+    }
+
+    private func toDTMF(_ value: String) -> String {
+        value.replacingOccurrences(of: Self.displayStar, with: "*")
     }
 }

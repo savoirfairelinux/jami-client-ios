@@ -1231,8 +1231,8 @@ internal enum L10n {
     internal static let conversations = L10n.tr("Localizable", "smartlist.conversations", fallback: "Conversations")
     /// You don't have any conversations yet.
     internal static let conversationsSearchHint = L10n.tr("Localizable", "smartlist.conversationsSearchHint", fallback: "You don't have any conversations yet.")
-    /// Dialpad
-    internal static let dialpad = L10n.tr("Localizable", "smartlist.dialpad", fallback: "Dialpad")
+    /// Keypad
+    internal static let dialpad = L10n.tr("Localizable", "smartlist.dialpad", fallback: "Keypad")
     /// Not now
     internal static let disableDonation = L10n.tr("Localizable", "smartlist.disableDonation", fallback: "Not now")
     /// If you enjoy using Jami and believe in our mission, do you want to make a donation?

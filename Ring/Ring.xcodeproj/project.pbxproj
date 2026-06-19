@@ -49,8 +49,7 @@
 		0E0FF1B71FC398B3003898C2 /* ConversationDataHepler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0FF1B61FC398B3003898C2 /* ConversationDataHepler.swift */; };
 		0E0FF1B91FC398C5003898C2 /* InteractionDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0FF1B81FC398C5003898C2 /* InteractionDataHelper.swift */; };
 		0E13A91C22B844B100A12A54 /* NSUserActivity+Call.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E13A91B22B844B100A12A54 /* NSUserActivity+Call.swift */; };
-		0E320D50224ADF840070B515 /* DialpadViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E320D4F224ADF840070B515 /* DialpadViewController.storyboard */; };
-		0E320D52224ADF930070B515 /* DialpadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E320D51224ADF930070B515 /* DialpadViewController.swift */; };
+		0E320D52224ADF930070B515 /* DialpadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E320D51224ADF930070B515 /* DialpadView.swift */; };
 		0E320D54224ADFD00070B515 /* DialpadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E320D53224ADFD00070B515 /* DialpadViewModel.swift */; };
 		0E3BD4242044776300A50DDF /* ContactViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E3BD4232044776300A50DDF /* ContactViewController.storyboard */; };
 		0E3BD4262044778100A50DDF /* ContactViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3BD4252044778100A50DDF /* ContactViewModel.swift */; };
@@ -752,8 +751,7 @@
 		0E0FF1B61FC398B3003898C2 /* ConversationDataHepler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationDataHepler.swift; sourceTree = "<group>"; };
 		0E0FF1B81FC398C5003898C2 /* InteractionDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionDataHelper.swift; sourceTree = "<group>"; };
 		0E13A91B22B844B100A12A54 /* NSUserActivity+Call.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSUserActivity+Call.swift"; sourceTree = "<group>"; };
-		0E320D4F224ADF840070B515 /* DialpadViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DialpadViewController.storyboard; sourceTree = "<group>"; };
-		0E320D51224ADF930070B515 /* DialpadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialpadViewController.swift; sourceTree = "<group>"; };
+		0E320D51224ADF930070B515 /* DialpadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialpadView.swift; sourceTree = "<group>"; };
 		0E320D53224ADFD00070B515 /* DialpadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialpadViewModel.swift; sourceTree = "<group>"; };
 		0E3BD4232044776300A50DDF /* ContactViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ContactViewController.storyboard; sourceTree = "<group>"; };
 		0E3BD4252044778100A50DDF /* ContactViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewModel.swift; sourceTree = "<group>"; };
@@ -3091,8 +3089,7 @@
 		0E320D4E224ADF570070B515 /* Dialpad */ = {
 			isa = PBXGroup;
 			children = (
-				0E320D4F224ADF840070B515 /* DialpadViewController.storyboard */,
-				0E320D51224ADF930070B515 /* DialpadViewController.swift */,
+				0E320D51224ADF930070B515 /* DialpadView.swift */,
 				0E320D53224ADFD00070B515 /* DialpadViewModel.swift */,
 			);
 			path = Dialpad;
@@ -4158,7 +4155,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E320D50224ADF840070B515 /* DialpadViewController.storyboard in Resources */,
 				267D55402E9EB2A8006BA9BE /* AppIcon.icon in Resources */,
 				1ABE07DC1F0D915100D36361 /* Localizable.strings in Resources */,
 				0E3BD4242044776300A50DDF /* ContactViewController.storyboard in Resources */,
@@ -4532,7 +4528,7 @@
 				26454FBF2B7FDEE900CFF06C /* AboutSwiftUIVM.swift in Sources */,
 				267B54222F57A32000565A0E /* ConversationViewController.swift in Sources */,
 				26EFD7E42E2E944100B63F74 /* CommonHelpers.swift in Sources */,
-				0E320D52224ADF930070B515 /* DialpadViewController.swift in Sources */,
+				0E320D52224ADF930070B515 /* DialpadView.swift in Sources */,
 				BB6690042A99043200875848 /* SharedActionsPresenter.swift in Sources */,
 				0E49096E1FEAC0DE005CAA50 /* CallsService.swift in Sources */,
 				267B95F92C2B5FB000353B01 /* LinkDeviceView.swift in Sources */,
