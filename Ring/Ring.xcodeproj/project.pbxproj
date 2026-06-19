@@ -300,10 +300,8 @@
 		26454FBF2B7FDEE900CFF06C /* AboutSwiftUIVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26454FBE2B7FDEE900CFF06C /* AboutSwiftUIVM.swift */; };
 		26455C222C061F070000BA3F /* SmartListViewPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26455C212C061F070000BA3F /* SmartListViewPage.swift */; };
 		26455C242C0620040000BA3F /* SmartListViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26455C232C0620040000BA3F /* SmartListViewTests.swift */; };
-		264EA87E2977080300B6FB6F /* LogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264EA87D2977080300B6FB6F /* LogViewModel.swift */; };
 		264EA8802977082A00B6FB6F /* LogUIViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264EA87F2977082A00B6FB6F /* LogUIViewModel.swift */; };
 		264EA8842977085C00B6FB6F /* LogUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264EA8832977085C00B6FB6F /* LogUI.swift */; };
-		264EA8862977089C00B6FB6F /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264EA8852977089C00B6FB6F /* LogViewController.swift */; };
 		264FB66229775B1C00BEFBBF /* SystemService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264FB66129775B1C00BEFBBF /* SystemService.swift */; };
 		264FB66629775B9B00BEFBBF /* SystemAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264FB66529775B9B00BEFBBF /* SystemAdapterDelegate.swift */; };
 		2657CBA72B858CF20078D6B1 /* AccessibilityIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2657CBA62B858CF20078D6B1 /* AccessibilityIdentifiers.swift */; };
@@ -401,7 +399,6 @@
 		26A88C7626700ABC00888EED /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399A961D1C2F6100E99CD9 /* libz.tbd */; };
 		26A88C7826700B7500888EED /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6452144124B4AC9F007203D5 /* libc++.tbd */; };
 		26A88C7926700BC500888EED /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399A931D1C2F5800E99CD9 /* libiconv.tbd */; };
-		26AF9F3D2977126500C7069A /* LogViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26AF9F3C2977126500C7069A /* LogViewController.storyboard */; };
 		26AVATAR0129BA000000000001 /* AvatarProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AVATAR0029BA000000000001 /* AvatarProviderTests.swift */; };
 		26B37339263C439B00E2EE28 /* CustomSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B37337263C439B00E2EE28 /* CustomSearchController.swift */; };
 		26B37342263C4B3700E2EE28 /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B37341263C4B3700E2EE28 /* CustomSearchBar.swift */; };
@@ -950,10 +947,8 @@
 		26454FBE2B7FDEE900CFF06C /* AboutSwiftUIVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSwiftUIVM.swift; sourceTree = "<group>"; };
 		26455C212C061F070000BA3F /* SmartListViewPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartListViewPage.swift; sourceTree = "<group>"; };
 		26455C232C0620040000BA3F /* SmartListViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartListViewTests.swift; sourceTree = "<group>"; };
-		264EA87D2977080300B6FB6F /* LogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViewModel.swift; sourceTree = "<group>"; };
 		264EA87F2977082A00B6FB6F /* LogUIViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogUIViewModel.swift; sourceTree = "<group>"; };
 		264EA8832977085C00B6FB6F /* LogUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogUI.swift; sourceTree = "<group>"; };
-		264EA8852977089C00B6FB6F /* LogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
 		264FB66129775B1C00BEFBBF /* SystemService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemService.swift; sourceTree = "<group>"; };
 		264FB66529775B9B00BEFBBF /* SystemAdapterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemAdapterDelegate.swift; sourceTree = "<group>"; };
 		2657CBA62B858CF20078D6B1 /* AccessibilityIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityIdentifiers.swift; sourceTree = "<group>"; };
@@ -1094,7 +1089,6 @@
 		26A88C74267009EC00888EED /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		26A88C7A26700C0500888EED /* libz.1.2.11.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.11.tbd; path = usr/lib/libz.1.2.11.tbd; sourceTree = SDKROOT; };
 		26A88C7C26700C8C00888EED /* Xcode.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = Xcode.app; path = ../../../../../../../Applications/Xcode.app; sourceTree = "<group>"; };
-		26AF9F3C2977126500C7069A /* LogViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LogViewController.storyboard; sourceTree = "<group>"; };
 		26AVATAR0029BA000000000001 /* AvatarProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarProviderTests.swift; sourceTree = "<group>"; };
 		26B37337263C439B00E2EE28 /* CustomSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchController.swift; sourceTree = "<group>"; };
 		26B37341263C4B3700E2EE28 /* CustomSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
@@ -3480,11 +3474,8 @@
 		264EA8782977078C00B6FB6F /* Diagnostic */ = {
 			isa = PBXGroup;
 			children = (
-				264EA87D2977080300B6FB6F /* LogViewModel.swift */,
 				264EA87F2977082A00B6FB6F /* LogUIViewModel.swift */,
 				264EA8832977085C00B6FB6F /* LogUI.swift */,
-				264EA8852977089C00B6FB6F /* LogViewController.swift */,
-				26AF9F3C2977126500C7069A /* LogViewController.storyboard */,
 			);
 			path = Diagnostic;
 			sourceTree = "<group>";
@@ -4162,7 +4153,6 @@
 				0E4909751FEAC943005CAA50 /* CallViewController.storyboard in Resources */,
 				04399A031D1C2D9D00E99CD9 /* Images.xcassets in Resources */,
 				0EABD3852303600B00DE7ACF /* default.wav in Resources */,
-				26AF9F3D2977126500C7069A /* LogViewController.storyboard in Resources */,
 				6613A612214AFF4700B497D1 /* ScanViewController.storyboard in Resources */,
 				1ABE07DF1F0D91A800D36361 /* LaunchScreen.storyboard in Resources */,
 				5CE66F751FBF769B00EE9291 /* InitialLoadingViewController.storyboard in Resources */,
@@ -4278,7 +4268,6 @@
 				269DA09D28E23F57007D51D6 /* MessagesListView.swift in Sources */,
 				04399AAC1D1C304300E99CD9 /* AccountAdapter.mm in Sources */,
 				26E0731C2A918F7A006B6F03 /* SwiftUIViews.swift in Sources */,
-				264EA8862977089C00B6FB6F /* LogViewController.swift in Sources */,
 				1D4EE84D29252AD000ED2010 /* SwarmCreationUIModel.swift in Sources */,
 				267B53FE2F54D94400565A0E /* ContextMenuSnapshotWindowCoordinator.swift in Sources */,
 				0E68571120238546008B0717 /* ConversationNavigation.swift in Sources */,
@@ -4403,7 +4392,6 @@
 				0E48F9D31FDF150700D6CC08 /* GeneratedInteractionsManager.swift in Sources */,
 				265C436A286254C900B4BE73 /* Constants.swift in Sources */,
 				26E081222BC03AB3001B4C18 /* AccountLists.swift in Sources */,
-				264EA87E2977080300B6FB6F /* LogViewModel.swift in Sources */,
 				62B60AF92048A40D001BEACF /* DataTransferAdapter.mm in Sources */,
 				1A20417C1F1E56FF00C08435 /* WelcomeVM.swift in Sources */,
 				265DFB09292FD25000834B97 /* DefaultTransferView.swift in Sources */,
