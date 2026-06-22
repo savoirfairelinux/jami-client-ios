@@ -20,12 +20,58 @@ ENV["FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT"] = "120"
 platform :ios do
   desc "Runs all the tests"
   lane :test do
-    run_tests(
-       scheme: "Ring",
-       reset_simulator: true,
-       # Retry a failed test before failing the build, to absorb transient flakiness.
-       number_of_retries: 2
-    )
+    require "json"
+
+    # Create a fresh, factory-clean simulator per job.
+    # Treat an empty env var the same as unset.
+    device  = ENV["TEST_SOURCE_DEVICE"]&.then { |d| d.empty? ? nil : d } || "iPhone 16"
+    runtime = ENV["TEST_SOURCE_RUNTIME"]&.then { |r| r.empty? ? nil : r }
+
+    device_types = JSON.parse(sh("xcrun simctl list devicetypes -j"))["devicetypes"]
+    matching_type = device_types.find { |d| d["name"] == device }
+    UI.user_error!("No simulator device type named '#{device}'") unless matching_type
+    device_type_id = matching_type["identifier"]
+
+    runtimes = JSON.parse(sh("xcrun simctl list runtimes -j"))["runtimes"]
+               .select { |r| r["isAvailable"] && r["identifier"].include?(".iOS-") }
+    runtimes = runtimes.select { |r| r["name"].include?(runtime) } if runtime
+    runtimes = runtimes.select do |r|
+      (r["supportedDeviceTypes"] || []).any? { |s| s["identifier"] == device_type_id }
+    end
+    UI.user_error!("No available iOS runtime for '#{device}' #{runtime}") if runtimes.empty?
+    # Pin to one runtime: the one requested, else the newest available.
+    runtime_id = runtimes.max_by { |r| Gem::Version.new(r["version"]) }["identifier"]
+
+    reclaim_ttl = 4 * 60 * 60
+    now = Time.now.to_i
+    JSON.parse(sh("xcrun simctl list devices -j"))["devices"].each_value do |devices|
+      devices.each do |d|
+        next unless d["name"].start_with?("Ring-CI-")
+        created = d["name"][/-(\d+)\z/, 1].to_i
+        next if created != 0 && now - created < reclaim_ttl
+        sh("xcrun simctl shutdown '#{d["udid"]}' 2>/dev/null || true") if d["state"] == "Booted"
+        sh("xcrun simctl delete '#{d["udid"]}' 2>/dev/null || true")
+      end
+    end
+
+    job_id = (ENV["BUILD_TAG"] || ENV["BUILD_NUMBER"] || Process.pid).to_s.gsub(/[^A-Za-z0-9_-]/, "-")
+    # Trailing "-<unix-time>" lets the reclaim loop age out leaked devices.
+    device_name = "Ring-CI-#{job_id}-#{now}"
+    udid = sh("xcrun simctl create '#{device_name}' '#{device_type_id}' '#{runtime_id}'").strip
+
+    begin
+      sh("xcrun simctl bootstatus '#{udid}' -b")
+      run_tests(
+        scheme: "Ring",
+        destination: "platform=iOS Simulator,id=#{udid}",
+        number_of_retries: 2,
+        # Cap a single test so a network/DHT stall can't hang the job.
+        xcargs: "-test-timeouts-enabled YES -default-test-execution-time-allowance 120"
+      )
+    ensure
+      sh("xcrun simctl shutdown '#{udid}' 2>/dev/null || true")
+      sh("xcrun simctl delete '#{udid}' 2>/dev/null || true")
+    end
   end
 
   desc "Test build without packaging"
