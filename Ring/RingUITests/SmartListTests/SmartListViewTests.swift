@@ -58,12 +58,8 @@ final class SmartListViewTests: JamiBaseOneAccountUITest {
     }
 
     func testMenuButton() throws {
-        XCTAssertTrue(smartListViewPage.conversationView.exists)
-        let menuButton = smartListViewPage.menuButton
-        XCTAssertTrue(menuButton.exists)
-        XCTAssertTrue(menuButton.isHittable)
-
-        menuButton.tap()
+        XCTAssertTrue(smartListViewPage.conversationView.waitForExistence(timeout: 10))
+        tapWhenReady(smartListViewPage.menuButton)
 
         let settings = app.collectionViews.buttons[L10n.AccountPage.settingsHeader]
 
@@ -71,10 +67,10 @@ final class SmartListViewTests: JamiBaseOneAccountUITest {
 
         XCTAssertTrue(settings.exists)
 
-        // Tap outside the menu to dismiss it
+        // Tap outside to dismiss the menu.
         let coordinate = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
         coordinate.tap()
-        waitForSeconds(1)
+        waitForElementToDisappear(settings)
     }
 
     func testBackgroundCoverTap() throws {
@@ -89,15 +85,16 @@ final class SmartListViewTests: JamiBaseOneAccountUITest {
     }
 
     func testActivateSearchBar() throws {
-        XCTAssertTrue(smartListViewPage.conversationView.exists)
+        XCTAssertTrue(smartListViewPage.conversationView.waitForExistence(timeout: 10))
         let searchField = app.searchFields[SmartListAccessibilityIdentifiers.searchBarTextField]
-
-        XCTAssertTrue(searchField.exists)
+        waitForElementToAppear(searchField)
 
         searchField.tap()
 
-        let cancelButton = app.buttons["Cancel"]
-        cancelButton.tap()
+        // Search hides the nav bar (no Cancel button); the compose shortcuts appearing
+        // is the signal that search activated.
+        let newGroup = app.buttons[SmartListAccessibilityIdentifiers.newGroupButton]
+        XCTAssertTrue(newGroup.waitForExistence(timeout: 10), "Search did not activate")
     }
 
     // Regression test for the iPad/iOS 26 bug where tapping a compose shortcut while

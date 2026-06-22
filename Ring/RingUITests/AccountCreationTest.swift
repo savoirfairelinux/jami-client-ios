@@ -79,10 +79,9 @@ final class AccountCreationTest: JamiBaseNoAccountUITest {
         }
 
         let joinJamiButton = app.buttons[AccessibilityIdentifiers.joinJamiButton]
-        XCTAssertTrue(joinJamiButton.waitForExistence(timeout: 10), "joinJamiButton did not appear in time")
-        joinJamiButton.tap()
+        tapWhenReady(joinJamiButton)
 
-        waitForElementToAppear(createAccountWindow, timeout: 10)
+        waitForElementToAppear(createAccountWindow)
     }
 
     func closeAccountCreationView() {
@@ -91,9 +90,8 @@ final class AccountCreationTest: JamiBaseNoAccountUITest {
             return
         }
         cancelButton.tap()
-        waitForSeconds(2)
         let createAccountWindow = app.otherElements[AccessibilityIdentifiers.createAccountView]
-        XCTAssertFalse(createAccountWindow.exists, "Create account view should be dismissed")
+        waitForElementToDisappear(createAccountWindow)
     }
 
     func getRandomName() -> String {
@@ -121,12 +119,11 @@ final class AccountCreationTest: JamiBaseNoAccountUITest {
 
         // Verify that account creation view dismissed
         let createAccountWindow = app.otherElements[AccessibilityIdentifiers.createAccountView]
-        waitForSeconds(1)
-        XCTAssertFalse(createAccountWindow.exists)
+        waitForElementToDisappear(createAccountWindow)
 
         // Verify that welcome view is presented
         let welcomeWindow = app.images[AccessibilityIdentifiers.welcomeWindow]
-        XCTAssertTrue(welcomeWindow.exists)
+        waitForElementToAppear(welcomeWindow)
     }
 
     func testJoinTitle() {
@@ -139,33 +136,16 @@ final class AccountCreationTest: JamiBaseNoAccountUITest {
         closeAccountCreationView()
     }
 
-    func testMessageOnValidName() {
+    func testValidNameShowsValidMessageAndEnablesJoin() {
         openAccountCreation()
+
         let nameToRegister = getRandomName()
-
         enterName(nameToRegister)
-        // wait for answer from name server
-        waitForSeconds(1)
 
-        // Verify the text
+        // Random name is available: valid message shown and Join enabled.
         let label = app.staticTexts[AccessibilityIdentifiers.createAccountErrorLabel]
+        waitForLabel(label, toEqual: L10n.CreateAccount.usernameValid)
 
-        let expectedText = L10n.CreateAccount.usernameValid
-
-        // Check the label's text
-        XCTAssertEqual(label.label, expectedText, "Explanation label is not correct")
-        closeAccountCreationView()
-    }
-
-    func testJoinButtonEnabledOnValidName() {
-        openAccountCreation()
-
-        let nameToRegister = getRandomName()
-        enterName(nameToRegister)
-        // wait for answer from name server
-        waitForSeconds(1)
-
-        // Verify the state of the "Join" button
         let joinButton = app.buttons[AccessibilityIdentifiers.joinButton]
         XCTAssertTrue(joinButton.isEnabled, "The Join button is not enabled")
         closeAccountCreationView()
@@ -185,28 +165,25 @@ final class AccountCreationTest: JamiBaseNoAccountUITest {
         // 1 register name
         let name = getRandomName()
         enterName(name)
-        // wait for answer from name server
-        waitForSeconds(1)
+
+        let validLabel = app.staticTexts[AccessibilityIdentifiers.createAccountErrorLabel]
+        waitForLabel(validLabel, toEqual: L10n.CreateAccount.usernameValid)
 
         let joinButton = app.buttons[AccessibilityIdentifiers.joinButton]
         joinButton.tap()
 
         let conversationWindow = app.otherElements[SmartListAccessibilityIdentifiers.conversationView]
-        waitForSeconds(3)
         handleNotificationAlertIfPresent()
-        waitForElementToAppear(conversationWindow, timeout: 10)
-        waitForSeconds(2)
+        waitForElementToAppear(conversationWindow)
 
         // try to create account with registered name
         openAccountCreation()
 
         enterName(name)
-        waitForSeconds(1)
 
         // Verify the error text
         let label = app.staticTexts[AccessibilityIdentifiers.createAccountErrorLabel]
-        let expectedText = L10n.CreateAccount.usernameAlreadyTaken
-        XCTAssertEqual(label.label, expectedText, "Explanation label is incorrect")
+        waitForLabel(label, toEqual: L10n.CreateAccount.usernameAlreadyTaken)
 
         // Verify the state of the "Join" button
         let secondJoinButton = app.buttons[AccessibilityIdentifiers.joinButton]

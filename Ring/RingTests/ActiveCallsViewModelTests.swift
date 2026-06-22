@@ -115,7 +115,8 @@ final class ActiveCallsViewModelTests: XCTestCase {
         injectionBag.callService.activeCallsChanged(conversationId: conversationId1, calls: calls, account: account1)
         injectionBag.callService.activeCallsChanged(conversationId: conversationId1, calls: calls, account: account2)
 
-        wait(for: [emissions], timeout: 1.0)
+        // Generous ceiling for a loaded CI sim; fulfils as soon as both emissions arrive.
+        wait(for: [emissions], timeout: 5.0)
 
         let allRows = viewModel.callsByAccount.values.flatMap { $0 }
         XCTAssertEqual(allRows.count, 1, "same remote call mirrored across two trackers must collapse to a single row")
