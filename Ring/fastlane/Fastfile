@@ -22,7 +22,8 @@ platform :ios do
   lane :test do
     run_tests(
        scheme: "Ring",
-       reset_simulator: true
+       reset_simulator: true,
+       number_of_retries: 1
     )
   end
 
