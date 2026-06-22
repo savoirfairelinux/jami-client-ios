@@ -20,12 +20,56 @@ ENV["FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT"] = "120"
 platform :ios do
   desc "Runs all the tests"
   lane :test do
-    run_tests(
-       scheme: "Ring",
-       reset_simulator: true,
-       # Retry a failed test before failing the build, to absorb transient flakiness.
-       number_of_retries: 2
-    )
+    require "json"
+
+    # Clone a private simulator per job so parallel Jenkins jobs never reset each
+    # other's simulator. TEST_SOURCE_DEVICE + optional TEST_SOURCE_RUNTIME are an
+    # explicit CI contract, resolved to exactly one UDID below.
+    device  = ENV["TEST_SOURCE_DEVICE"]  || "iPhone 16"
+    runtime = ENV["TEST_SOURCE_RUNTIME"]
+
+    # Reclaim leaked clones, but keep the TTL longer than a test run so a sibling
+    # job's still-running simulator is never deleted.
+    clone_ttl = 2 * 60 * 60
+    now = Time.now.to_i
+    JSON.parse(sh("xcrun simctl list devices -j"))["devices"].each_value do |devices|
+      devices.each do |d|
+        next unless d["name"].start_with?("Ring-CI-")
+        created = d["name"][/-(\d+)\z/, 1].to_i
+        next if created != 0 && now - created < clone_ttl
+        sh("xcrun simctl shutdown '#{d["udid"]}' 2>/dev/null || true")
+        sh("xcrun simctl delete '#{d["udid"]}' 2>/dev/null || true")
+      end
+    end
+
+    matches = JSON.parse(sh("xcrun simctl list devices available -j"))["devices"].flat_map do |rt, devices|
+      next [] if runtime && !rt.include?(runtime)
+      devices.select { |d| d["name"] == device }.map { |d| d["udid"] }
+    end
+    UI.user_error!("No available simulator matching '#{device}' #{runtime}") if matches.empty?
+    UI.user_error!("Ambiguous source simulator '#{device}' #{runtime}: #{matches}") if matches.size > 1
+    source_udid = matches.first
+
+    job_id = (ENV["BUILD_TAG"] || ENV["BUILD_NUMBER"] || Process.pid).to_s.gsub(/[^A-Za-z0-9_-]/, "-")
+    # Trailing "-<unix-time>" lets the reclaim loop age out leaked clones.
+    clone_name = "Ring-CI-#{job_id}-#{now}"
+    # simctl clone requires the source to be shut down.
+    sh("xcrun simctl shutdown '#{source_udid}' 2>/dev/null || true")
+    udid = sh("xcrun simctl clone '#{source_udid}' '#{clone_name}'").strip
+
+    begin
+      sh("xcrun simctl bootstatus '#{udid}' -b")
+      run_tests(
+        scheme: "Ring",
+        destination: "platform=iOS Simulator,id=#{udid}",
+        number_of_retries: 2,
+        # Cap a single test so a network/DHT stall can't hang the job.
+        xcargs: "-test-timeouts-enabled YES -default-test-execution-time-allowance 120"
+      )
+    ensure
+      sh("xcrun simctl shutdown '#{udid}' 2>/dev/null || true")
+      sh("xcrun simctl delete '#{udid}' 2>/dev/null || true")
+    end
   end
 
   desc "Test build without packaging"
