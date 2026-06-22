@@ -33,7 +33,6 @@
 		043999F71D1C2D9D00E99CD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043999F61D1C2D9D00E99CD9 /* AppDelegate.swift */; };
 		04399A031D1C2D9D00E99CD9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04399A021D1C2D9D00E99CD9 /* Images.xcassets */; };
 		04399A111D1C2D9D00E99CD9 /* RingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04399A101D1C2D9D00E99CD9 /* RingTests.swift */; };
-		04399A1C1D1C2D9D00E99CD9 /* RingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04399A1B1D1C2D9D00E99CD9 /* RingUITests.swift */; };
 		04399A2A1D1C2DE300E99CD9 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399A291D1C2DE300E99CD9 /* CoreMedia.framework */; };
 		04399A2C1D1C2DE900E99CD9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399A2B1D1C2DE900E99CD9 /* AVFoundation.framework */; };
 		04399A941D1C2F5800E99CD9 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399A931D1C2F5800E99CD9 /* libiconv.tbd */; };
@@ -723,7 +722,6 @@
 		04399A101D1C2D9D00E99CD9 /* RingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingTests.swift; sourceTree = "<group>"; };
 		04399A121D1C2D9D00E99CD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04399A171D1C2D9D00E99CD9 /* RingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		04399A1B1D1C2D9D00E99CD9 /* RingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingUITests.swift; sourceTree = "<group>"; };
 		04399A1D1D1C2D9D00E99CD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04399A291D1C2DE300E99CD9 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		04399A2B1D1C2DE900E99CD9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -3026,7 +3024,6 @@
 			children = (
 				26455C202C061EE80000BA3F /* SmartListTests */,
 				26EB613B2B7680F100183FF4 /* Helpers */,
-				04399A1B1D1C2D9D00E99CD9 /* RingUITests.swift */,
 				04399A1D1D1C2D9D00E99CD9 /* Info.plist */,
 				26EB61332B75724000183FF4 /* AccountCreationTest.swift */,
 			);
@@ -4610,7 +4607,6 @@
 				26EB61342B75724000183FF4 /* AccountCreationTest.swift in Sources */,
 				26455C242C0620040000BA3F /* SmartListViewTests.swift in Sources */,
 				2657CBAA2B8596290078D6B1 /* XCTestCase + Helpers.swift in Sources */,
-				04399A1C1D1C2D9D00E99CD9 /* RingUITests.swift in Sources */,
 				267B95F62C2B40C600353B01 /* Strings.swift in Sources */,
 				2657CBA82B858CF20078D6B1 /* AccessibilityIdentifiers.swift in Sources */,
 				26455C222C061F070000BA3F /* SmartListViewPage.swift in Sources */,
