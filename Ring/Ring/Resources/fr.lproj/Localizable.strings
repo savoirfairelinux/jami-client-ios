@@ -126,9 +126,12 @@
 // Smartlist
 "smartlist.yesterday" = "Hier";
 "smartlist.results" = "Répertoire public";
-"smartlist.jamsResults" = "Résultats de la recherche";
-"smartlist.jamsResults" = "Résultats de la recherche";
+"smartlist.jamsResults" = "Organization directory";
 "smartlist.conversations" = "Conversations";
+"smartlist.conversationsSearchHint" = "You don't have any conversations yet.";
+"smartlist.publicDirectoryHint" = "People on Jami outside your contacts.";
+"smartlist.jamsDirectoryHint" = "People in your organization outside your contacts.";
+"smartlist.dialpad" = "Keypad";
 "smartlist.noConversationsFound" = "Aucune conversation ne correspond à votre recherche";
 "smartlist.newContact" = "Nouveau contact";
 "smartlist.newGroup" = "Nouveau groupe";
@@ -150,7 +153,7 @@
 "smartlist.accounts" = "Comptes";
 "smartlist.disableDonation" = "Pas maintenant";
 "smartlist.donationExplanation" = "Si vous appréciez Jami et que vous croyez à notre mission, feriez-vous un don ?";
-"smartlist.inSynchronization" = "Syncing…";
+"smartlist.inSynchronization" = "Synchronisation…";
 
 // Conversation
 "conversation.addToContactsButton" = "Ajouter aux contacts";
@@ -158,17 +161,17 @@
 "conversation.addToContactsLabel" = "Ajouter aux contacts ?";
 "conversation.notContactLabel" = " %@ ne fait pas partie de vos contacts.";
 "conversation.messagePlaceholder" = "Écrire à";
-"conversation.imageSaved" = "Saved";
-"conversation.errorSavingImage" = "Could not save image";
-"conversation.errorSavingImageMessage" = "An error occurred while saving the image to the photo library.";
-"conversation.photoAccessRequiredMessage" = "Jami needs access to your photo library to save images. You can enable this in Settings.";
+"conversation.imageSaved" = "Enregistré";
+"conversation.errorSavingImage" = "Impossible d'enregistrer l'image";
+"conversation.errorSavingImageMessage" = "Une erreur s'est produite lors de l'enregistrement de l'image dans la bibliothèque de photos.";
+"conversation.photoAccessRequiredMessage" = "Jami a besoin d'accéder à votre bibliothèque de photos pour enregistrer des images. Vous pouvez l'autoriser dans les paramètres.";
 "conversation.receivedRequest" = "%@ vous a envoyé une invitation.";
 "conversation.incomingRequest" = "vous a envoyé une demande de conversation";
 "conversation.requestMessage" = "Bonjour, souhaitez-vous rejoindre la conversation ?";
 "conversation.sendRequest" = "Envoyer leur une invitation afin de discuter";
 "conversation.sendRequestTitle" = "Envoyer une invitation";
 "conversation.synchronizationTitle" = "Vous avez accepté la demande de conversation.";
-"conversation.syncingTitle" = "Syncing conversation";
+"conversation.syncingTitle" = "Synchronisation de la conversation";
 "conversation.synchronizationMessage" = "Nous attendons que %@ se connecte afin de synchroniser la conversation.";
 "conversation.inReplyTo" = "En réponse à";
 "conversation.repliedTo" = "%@ a répondu à %@";
@@ -340,7 +343,7 @@
 "accountPage.proxyListURL" = "URL de la liste des serveurs mandataires DHT";
 "accountPage.proxyExplanation" = "Les notifications sont acheminées par un serveur mandataire. Vous pouvez soit utiliser la valeur par défaut ou bien fournir l'adresse d'un mandataire, ou bien l'URL d'une liste de serveurs mandataires.";
 "accountPage.proxyHeader" = "Serveur mandataire";
-"accountPage.currentProxy" = "Current proxy";
+"accountPage.currentProxy" = "Proxy actuel";
 "accountPage.enableNotifications" = "Activer les notifications";
 "accountPage.proxyDisabledAlertTitle" = "Nœud délégataire désactivé ";
 "accountPage.proxyDisabledAlertBody" = "Pour recevoir des notifications, veuillez activer le serveur mandataire ";
@@ -393,7 +396,7 @@
 "accountPage.stunEnabled" = "Utiliser STUN";
 "accountPage.stunServer" = "Adresse du serveur STUN";
 "accountPage.publicAddressHeader" = "Adresse publique";
-"accountPage.allowIPAutoRewrite" = "Allow IP auto rewrite";
+"accountPage.allowIPAutoRewrite" = "Autoriser la réécriture automatique de l'IP";
 "accountPage.publishedSameAsLocal" = "Identique aux paramètres locaux";
 "accountPage.publishedAddress" = "Adresse";
 "accountPage.publishedPort" = "Port";
@@ -411,7 +414,7 @@
 "accountPage.encryptAccount" = "Mot de passe";
 "accountPage.passwordExplanation" = "Votre compte Jami est enregistré uniquement sur cet appareil en tant qu'archive contenant les clés de votre compte. L'accès à cette archive peut être protégé par un mot de passe.";
 "accountPage.passwordsDoNotMatch" = "Les mots de passe ne correspondent pas.";
-"accountPage.passwordCreated" = "Password set";
+"accountPage.passwordCreated" = "Mot de passe défini";
 "accountPage.passwordUpdated" = "Mot de passe modifié";
 "accountPage.linkedDevices" = "Appareils associés";
 "accountPage.unlink" = "Déassocier";
@@ -434,9 +437,9 @@
 "accountPage.tlsDisableSecureDlgCheck" = "Désactiver la vérification du dialogue sécurisé pour les données TLS entrantes";
 "accountPage.editSipExpirationTime" = "Heure d'expiration";
 "accountPage.selectSipExpirationTime" = "Entrée le temps (en secondes) pour l'expiration de l'enregistrement";
-"accountPage.invalidSipExpirationTime" = "Enter a value between 60 and 604800 seconds";
-"accountPage.invalidPort" = "Enter a value between 0 and 65535";
-"accountPage.invalidAddress" = "Enter a valid address";
+"accountPage.invalidSipExpirationTime" = "Entrez une valeur entre 60 et 604800 secondes";
+"accountPage.invalidPort" = "Entrez une valeur entre 0 et 65535";
+"accountPage.invalidAddress" = "Entrez une adresse valide";
 "accountPage.thisDevice" = "Cet appareil";
 "accountPage.otherDevices" = "Autres appareils liés";
 "accountPage.accountIdentity" = "Identité du compte";
@@ -703,13 +706,13 @@
 "shareExtension.accessibilitySelectAccount" = "Tapoter deux fois pour sélectionner ce compte";
 
 // Peer Services
-"peerServices.title" = "Shared Services";
-"peerServices.refresh" = "Refresh services";
-"peerServices.empty" = "No shared services available";
-"peerServices.errorOffline" = "Contact is offline";
-"peerServices.errorUnreachable" = "Contact is unreachable";
-"peerServices.errorTimeout" = "Request timed out";
-"peerServices.errorUnknown" = "Could not retrieve services";
+"peerServices.title" = "Services partagés";
+"peerServices.refresh" = "Actualiser les services";
+"peerServices.empty" = "Aucun service partagé disponible";
+"peerServices.errorOffline" = "Le contact est hors ligne";
+"peerServices.errorUnreachable" = "Le contact est injoignable";
+"peerServices.errorTimeout" = "Délai d'attente dépassé";
+"peerServices.errorUnknown" = "Impossible de récupérer les services";
 "peerServices.done" = "Effectué";
-"peerServices.notSupported" = "Not supported";
+"peerServices.notSupported" = "Non pris en charge";
 "peerServices.open" = "Ouvrir";

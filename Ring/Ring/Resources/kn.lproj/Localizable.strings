@@ -44,7 +44,7 @@
 "global.search" = "ಹುಡುಕುತ್ತಿರುವ.";
 "global.supportJami" = "Support Jami project";
 "global.deleteMessage" = "ಸಂದೇಶವನ್ನು ಅಳಿಸಿ";
-"global.deleteFile" = "Delete file from device";
+"global.deleteFile" = "ಸಾಧನದಿಂದ ಫೈಲ್ ಅಳಿಸಿ";
 "global.editMessage" = "ಸಂದೇಶವನ್ನು ಸಂಪಾದಿಸಿ";
 "global.editing" = "Editing";
 "global.create" = "ರಚಿಸಿ";
@@ -65,7 +65,7 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.addDescription" = "Add description";
+"swarmcreation.addDescription" = "ವಿವರಣೆ ಸೇರಿಸಿ";
 // Swarm
 "swarm.muteConversation" = "ಮೂಕ ಸಂಭಾಷಣೆ";
 "swarm.leaveConversation" = "ಸಂಭಾಷಣೆಯನ್ನು ಬಿಟ್ಟುಬಿಡಿ";
@@ -74,17 +74,17 @@
 "swarm.restartConversation" = "Restart conversation";
 "swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "ಸಂಭಾಷಣೆ ಬಣ್ಣ";
-"swarm.typeOfSwarm" = "Conversation type";
+"swarm.typeOfSwarm" = "ಸಂಭಾಷಣೆ ಪ್ರಕಾರ";
 "swarm.identifier" = "ಗುರುತಿನ ಚೀಟಿ";
 "swarm.conversationId" = "Conversation ID";
 "swarm.settings" = "ಸೆಟ್ಟಿಂಗ್ಗಳು";
 "swarm.members" = "ಸದಸ್ಯರು";
-"swarm.addDescription" = "Add description";
+"swarm.addDescription" = "ವಿವರಣೆ ಸೇರಿಸಿ";
 "swarm.titlePlaceholder" = "Enter title";
 "swarm.titleAlertHeader" = "Edit group title";
 "swarm.descriptionAlertHeader" = "Edit group description";
 "swarm.descriptionPlaceholder" = "Enter title";
-"swarm.contactHeader" = "Contact";
+"swarm.contactHeader" = "ಸಂಪರ್ಕ";
 "swarm.showContactQRCode" = "Show contact QR code";
 "swarm.shareContactInfo" = "Share contact information";
 "swarm.accessibilityContactQRCode" = "Show contact QR code";
@@ -102,17 +102,17 @@
 "swarm.member" = "ಸದಸ್ಯ";
 "swarm.invited" = "ಆಹ್ವಾನಿತರು";
 "swarm.admin" = "ನಿರ್ವಾಹಕ";
-"swarm.blocked" = "Blocked";
+"swarm.blocked" = "ನಿರ್ಬಂಧಿಸಲಾಗಿದೆ";
 "swarm.unknown" = "ಅಜ್ಞಾತ";
 "swarm.left" = "Left";
-"swarm.inviteMembers" = "Invite members";
+"swarm.inviteMembers" = "ಸದಸ್ಯರನ್ನು ಆಹ್ವಾನಿಸಿ";
 "swarm.inviteSelectedMembers" = "Invite selected contacts";
 "swarm.inviteMembersSelected" = "Selected";
 "swarm.inviteMembersNotSelected" = "Not selected";
-"swarm.confirmLeaveConversation" = "Do you want to leave this conversation?";
+"swarm.confirmLeaveConversation" = "ಈ ಸಂಭಾಷಣೆಯನ್ನು ತೊರೆಯಲು ನೀವು ಬಯಸುವಿರಾ?";
 "swarm.Leave" = "ಹೊರಟುಹೋಗು";
-"swarm.newGroup" = "Create new group";
-"swarm.namePlaceholder" = "Group name";
+"swarm.newGroup" = "ಹೊಸ ಗುಂಪು ರಚಿಸಿ";
+"swarm.namePlaceholder" = "ಗುಂಪಿನ ಹೆಸರು";
 "swarm.explanationText" = "Members can be invited at any time after the group has been created.";
 "swarm.customizeProfile" = "Customize group profile";
 "swarm.changePicture" = "Change group picture";
@@ -126,9 +126,12 @@
 // Smartlist
 "smartlist.yesterday" = "ನಿನ್ನೆ";
 "smartlist.results" = "ಸಾರ್ವಜನಿಕ ಡೈರೆಕ್ಟರಿ";
-"smartlist.jamsResults" = "Search result";
-"smartlist.jamsResults" = "Search result";
+"smartlist.jamsResults" = "Organization directory";
 "smartlist.conversations" = "ಸಂಭಾಷಣೆ";
+"smartlist.conversationsSearchHint" = "You don't have any conversations yet.";
+"smartlist.publicDirectoryHint" = "People on Jami outside your contacts.";
+"smartlist.jamsDirectoryHint" = "People in your organization outside your contacts.";
+"smartlist.dialpad" = "Keypad";
 "smartlist.noConversationsFound" = "No conversations match the search.";
 "smartlist.newContact" = "New contact";
 "smartlist.newGroup" = "New group";
@@ -149,7 +152,7 @@
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "ಖಾತೆಗಳು";
 "smartlist.disableDonation" = "ಈಗ ಬೇಡ";
-"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, do you want to make a donation?";
+"smartlist.donationExplanation" = "ನೀವು Jami ಬಳಸುವುದನ್ನು ಆನಂದಿಸಿದರೆ ಮತ್ತು ನಮ್ಮ ಧ್ಯೇಯದಲ್ಲಿ ನಂಬಿಕೆ ಇಟ್ಟರೆ, ನೀವು ದಾನ ಮಾಡಲು ಬಯಸುವಿರಾ?";
 "smartlist.inSynchronization" = "Syncing…";
 
 // Conversation
@@ -164,7 +167,7 @@
 "conversation.photoAccessRequiredMessage" = "Jami needs access to your photo library to save images. You can enable this in Settings.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
 "conversation.incomingRequest" = "sent you a conversation invitation.";
-"conversation.requestMessage" = "Hello,\nDo you want to join the conversation?";
+"conversation.requestMessage" = "ನಮಸ್ಕಾರ,\nನೀವು ಸಂಭಾಷಣೆಗೆ ಸೇರಲು ಬಯಸುವಿರಾ?";
 "conversation.sendRequest" = "Send them an invitation to be able converse.";
 "conversation.sendRequestTitle" = "Send conversation invitation";
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
@@ -183,13 +186,13 @@
 "conversation.typingIndicatorTwoUsers" = "%1@ and %2@ are typing";
 "conversation.typingIndicatorOtherUsers" = "%1@, %2@ and %3@ other are typing";
 "conversation.typingIndicatorOthersUsers" = "%1@, %2@ and %3@ others are typing";
-"conversation.lastMessageDeleted" = "(deleted message)";
+"conversation.lastMessageDeleted" = "(ಅಳಿಸಲಾದ ಸಂದೇಶ)";
 
 // Invitations
 "invitations.noInvitations" = "ಆಹ್ವಾನಗಳಿಲ್ಲ";
 "invitations.accepted" = "ಒಪ್ಪಿಕೊಂಡಿದ್ದಾರೆ";
 "invitations.declined" = "Declined";
-"invitations.blocked" = "Blocked";
+"invitations.blocked" = "ನಿರ್ಬಂಧಿಸಲಾಗಿದೆ";
 "invitations.list" = "Invitations received";
 
 // Walkthrough
@@ -222,7 +225,7 @@
 "createAccount.UsernameNotRegisteredMessage" = "ಖಾತೆಯನ್ನು ರಚಿಸಲಾಗಿದೆ ಆದರೆ ಬಳಕೆದಾರ ಹೆಸರು ನೋಂದಾಯಿಸಲಾಗಿಲ್ಲ";
 "createAccount.timeoutTitle" = "ಖಾತೆ ರಚನೆ";
 "createAccount.timeoutMessage" = "Username registration is in progress. Please wait…";
-"createAccount.sipConfigure" = "Configure existing SIP account";
+"createAccount.sipConfigure" = "ಅಸ್ತಿತ್ವದಲ್ಲಿರುವ SIP ಖಾತೆ ಕಾನ್ಫಿಗರ್ ಮಾಡಿ";
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "ಜಾಮಿಯಲ್ಲಿ ನಿಮ್ಮನ್ನು ಸುಲಭವಾಗಿ ಹುಡುಕಲು ಮತ್ತು ತಲುಪಲು ಸಹಾಯ ಮಾಡಲು ನೀವು ಬಳಕೆದಾರ ಹೆಸರನ್ನು ಆಯ್ಕೆ ಮಾಡಬಹುದು.";
 "createAccount.newAccount" = "New account";
@@ -237,7 +240,7 @@
 "linkToAccount.showQrCode" = "ಕ್ಯೂಆರ್ ಕೋಡ್";
 "linkToAccount.showPinCode" = "Authentication code";
 "linkToAccount.actionRequired" = "Action required.\nPlease confirm account on the source device.";
-"linkToAccount.allSet" = "The account was imported successfully.";
+"linkToAccount.allSet" = "ಖಾತೆಯನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಆಮದು ಮಾಡಲಾಗಿದೆ.";
 "linkToAccount.goToAccounts" = "Go to imported account";
 "linkToAccount.exportInstructions" = "On the source device, initiate the exportation.";
 "linkToAccount.exportInstructionsPath" = "Select Account → Account Settings → Link new device.";
@@ -251,7 +254,7 @@
 
 // Import from Archive
 "importFromArchive.explanation" = "ಜಾಮಿ ಖಾತೆಯನ್ನು ಸ್ಥಳೀಯ ಆರ್ಕೈವ್ ಫೈಲ್ನಿಂದ ಆಮದು ಮಾಡಿಕೊಳ್ಳಿ.";
-"importFromArchive.passwordExplanation" = "If the account is password protected, please fill the following field.";
+"importFromArchive.passwordExplanation" = "ಖಾತೆ ಪಾಸ್‌ವರ್ಡ್ ರಕ್ಷಿತವಾಗಿದ್ದರೆ, ದಯವಿಟ್ಟು ಕೆಳಗಿನ ಕ್ಷೇತ್ರವನ್ನು ಭರ್ತಿ ಮಾಡಿ.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "ಆಮದು";
 "importFromArchive.selectArchiveButton" = "ಆರ್ಕೈವ್ ಫೈಲ್ ಆಯ್ಕೆಮಾಡಿ";
@@ -259,9 +262,9 @@
 // Link to Jami Account Management Server (JAMS) form
 "linkToAccountManager.signIn" = "Sign in";
 "linkToAccountManager.title" = "Management server account";
-"linkToAccountManager.accountManagerPlaceholder" = "Management server URL";
-"linkToAccountManager.accountManagerLabel" = "Enter the management server URL";
-"linkToAccountManager.jamsExplanation" = "Enter the management server URL";
+"linkToAccountManager.accountManagerPlaceholder" = "ನಿರ್ವಹಣೆ ಸರ್ವರ್ URL";
+"linkToAccountManager.accountManagerLabel" = "ನಿರ್ವಹಣೆ ಸರ್ವರ್ URL ನಮೂದಿಸಿ";
+"linkToAccountManager.jamsExplanation" = "ನಿರ್ವಹಣೆ ಸರ್ವರ್ URL ನಮೂದಿಸಿ";
 "linkToAccountManager.enterCredentials" = "Enter the management server credentials";
 
 // Alerts
@@ -279,11 +282,11 @@
 "alerts.dbFailedMessage" = "ದಯವಿಟ್ಟು ಅರ್ಜಿಯನ್ನು ಮುಚ್ಚಿ ಮತ್ತೆ ತೆರೆಯಲು ಪ್ರಯತ್ನಿಸಿ";
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmDeleteConversation" = "Do you want to remove this conversation permanently?";
-"alerts.confirmLeaveConversation" = "Do you want to leave this conversation?";
+"alerts.confirmLeaveConversation" = "ಈ ಸಂಭಾಷಣೆಯನ್ನು ತೊರೆಯಲು ನೀವು ಬಯಸುವಿರಾ?";
 "alerts.confirmRemoveOneToOneConversation" = "Do you want to remove this conversation? The existing history will be deleted. A new conversation may be started if you do not have other conversations with this contact.";
 "alerts.confimRemoveContact" = "Do you want to remove this contact? The existing history will be deleted.";
 "alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "Delete conversation";
+"alerts.confirmDeleteConversationTitle" = "ಸಂಭಾಷಣೆ ಅಳಿಸಿ";
 "alerts.noMediaPermissionsTitle" = "ಮಾಧ್ಯಮ ಅನುಮತಿ ನೀಡಿಲ್ಲ";
 "alerts.noLibraryPermissionsTitle" = "ಫೋಟೋ ಲೈಬ್ರರಿಗೆ ಪ್ರವೇಶವನ್ನು ನೀಡಿಲ್ಲ";
 "alerts.noLocationPermissionsTitle" = "ಸ್ಥಳಕ್ಕೆ ಪ್ರವೇಶವನ್ನು ನೀಡಿಲ್ಲ";
@@ -320,12 +323,12 @@
 "calls.setModerator" = "ಮಾಡರೇಟರ್ ಅನ್ನು ಹೊಂದಿಸಿ";
 "calls.removeModerator" = "ಡಿಸ್ಇನ್ಸೆಟ್ ಮಾಡರೇಟರ್";
 "calls.muteAudio" = "ಮೂಕ ಮೈಕ್ರೊಫೋನ್";
-"calls.unmuteAudio" = "Unmute microphone";
+"calls.unmuteAudio" = "ಮೈಕ್ರೊಫೋನ್ ಅನ್‌ಮ್ಯೂಟ್ ಮಾಡಿ";
 "calls.lowerHand" = "ಕೆಳ ಕೈ";
 "calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
 "calls.activeCallInConversation" = "ಕರೆ ನಡೆಯುತ್ತಿದೆ. ನೀವು ಕರೆ ಸೇರಲು ಬಯಸುವಿರಾ?";
-"calls.acceptWithAudio" = "Accept with audio";
-"calls.acceptWithVideo" = "Accept with video";
+"calls.acceptWithAudio" = "ಆಡಿಯೊದೊಂದಿಗೆ ಸ್ವೀಕರಿಸಿ";
+"calls.acceptWithVideo" = "ವೀಡಿಯೊದೊಂದಿಗೆ ಸ್ವೀಕರಿಸಿ";
 
 // Account Page
 "accountPage.devicesListHeader" = "ಉಪಕರಣಗಳು";
@@ -337,14 +340,14 @@
 "accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "ಪ್ರಾಕ್ಸಿ ವಿಳಾಸ";
 "accountPage.useProxyList" = "Use proxy list";
-"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyListURL" = "ಪ್ರಾಕ್ಸಿ ಪಟ್ಟಿ URL";
 "accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
 "accountPage.proxyHeader" = "ಪ್ರಾಕ್ಸಿ";
 "accountPage.currentProxy" = "Current proxy";
 "accountPage.enableNotifications" = "ಅಧಿಸೂಚನೆಗಳನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ";
 "accountPage.proxyDisabledAlertTitle" = "ಪ್ರಾಕ್ಸಿ ಸರ್ವರ್ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ";
 "accountPage.proxyDisabledAlertBody" = "ಅಧಿಸೂಚನೆಗಳನ್ನು ಸ್ವೀಕರಿಸಲು, ದಯವಿಟ್ಟು ಪ್ರಾಕ್ಸಿ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ";
-"accountPage.removeDeviceTitle" = "Remove device";
+"accountPage.removeDeviceTitle" = "ಸಾಧನ ತೆಗೆದುಹಾಕಿ";
 "accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "ರದ್ದು";
 "accountPage.revokeDevicePlaceholder" = "ಖಾತೆ ಪಾಸ್ವರ್ಡ್ ನಮೂದಿಸಿ";
@@ -357,7 +360,7 @@
 "accountPage.deviceRevocationError" = "ಸಾಧನ ರದ್ದುಗೊಳಿಸುವಿಕೆ ದೋಷ";
 "accountPage.linkDeviceTitle" = "ಮತ್ತೊಂದು ಸಾಧನವನ್ನು ಸಂಪರ್ಕಿಸಿ";
 "accountPage.other" = "ಇತರರು";
-"accountPage.removeAccountMessage" = "If the account has not been backed up or added to another device, the account and registered username will be IRREVOCABLY LOST.";
+"accountPage.removeAccountMessage" = "ಖಾತೆಯನ್ನು ಬ್ಯಾಕಪ್ ಮಾಡದಿದ್ದರೆ ಅಥವಾ ಇನ್ನೊಂದು ಸಾಧನಕ್ಕೆ ಸೇರಿಸದಿದ್ದರೆ, ಖಾತೆ ಮತ್ತು ನೋಂದಾಯಿತ ಬಳಕೆದಾರಹೆಸರು ಮರಳಿಸಲಾಗದಂತೆ ಕಳೆದುಹೋಗುತ್ತದೆ.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "ಜಾಮಿ ಬಗ್ಗೆ ನನ್ನನ್ನು ಸಂಪರ್ಕಿಸಿ!";
 "accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
@@ -368,7 +371,7 @@
 "accountPage.usernameRegisterAction" = "ನೋಂದಣಿ";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
 "accountPage.usernameRegistrationFailed" = "Please check the account password.";
-"accountPage.createPassword" = "Set password";
+"accountPage.createPassword" = "ಪಾಸ್‌ವರ್ಡ್ ಹೊಂದಿಸಿ";
 "accountPage.changePassword" = "ಪಾಸ್ವರ್ಡ್ ಬದಲಾಯಿಸಿ";
 "accountPage.currentPasswordPlaceholder" = "ಪ್ರಸ್ತುತ ಪಾಸ್ವರ್ಡ್ ನಮೂದಿಸಿ";
 "accountPage.newPasswordPlaceholder" = "ಹೊಸ ಪಾಸ್ವರ್ಡ್ ನಮೂದಿಸಿ";
@@ -409,7 +412,7 @@
 "accountPage.editProfile" = "Edit Profile";
 "accountPage.manageAccount" = "ಖಾತೆಯನ್ನು ನಿರ್ವಹಿಸಿ";
 "accountPage.encryptAccount" = "ಪಾಸ್ವರ್ಡ್";
-"accountPage.passwordExplanation" = "Your Jami account is registered only on this device as an archive containing the keys of your account. Access to this archive can be protected with a password.";
+"accountPage.passwordExplanation" = "ನಿಮ್ಮ Jami ಖಾತೆ ಈ ಸಾಧನದಲ್ಲಿ ಮಾತ್ರ ನಿಮ್ಮ ಖಾತೆಯ ಕೀಲಿಗಳನ್ನು ಒಳಗೊಂಡ ಆರ್ಕೈವ್ ಆಗಿ ನೋಂದಾಯಿಸಲಾಗಿದೆ. ಈ ಆರ್ಕೈವ್‌ಗೆ ಪ್ರವೇಶವನ್ನು ಪಾಸ್‌ವರ್ಡ್‌ನೊಂದಿಗೆ ರಕ್ಷಿಸಬಹುದು.";
 "accountPage.passwordsDoNotMatch" = "Passwords do not match.";
 "accountPage.passwordCreated" = "Password set";
 "accountPage.passwordUpdated" = "Password updated";
@@ -487,11 +490,11 @@
 // Link New Device
 "linkDevice.title" = "ಹೊಸ ಸಾಧನ ಲಿಂಕ್";
 "linkDevice.networkError" = "A network error occurred while exporting the account.";
-"linkDevice.errorWrongPassword" = "An authentication error occurred while linking the device. Please check credentials and try again.";
-"linkDevice.errorNetwork" = "A network error occurred while linking the account. Please verify your connection and try again.";
-"linkDevice.errorTimeout" = "The operation timed out. Please try again.";
+"linkDevice.errorWrongPassword" = "ಸಾಧನವನ್ನು ಲಿಂಕ್ ಮಾಡುವಾಗ ದೃಢೀಕರಣ ದೋಷ ಸಂಭವಿಸಿದೆ. ದಯವಿಟ್ಟು ರುಜುವಾತುಗಳನ್ನು ಪರಿಶೀಲಿಸಿ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.";
+"linkDevice.errorNetwork" = "ಖಾತೆಯನ್ನು ಲಿಂಕ್ ಮಾಡುವಾಗ ನೆಟ್‌ವರ್ಕ್ ದೋಷ ಸಂಭವಿಸಿದೆ. ದಯವಿಟ್ಟು ನಿಮ್ಮ ಸಂಪರ್ಕವನ್ನು ಪರಿಶೀಲಿಸಿ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.";
+"linkDevice.errorTimeout" = "ಕಾರ್ಯಾಚರಣೆ ಸಮಯ ಮೀರಿದೆ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.";
 "linkDevice.errorCode" = "An error occurred while generating the code. Please try again.";
-"linkDevice.errorWrongData" = "An error occurred while exporting the account. Please try again.";
+"linkDevice.errorWrongData" = "ಖಾತೆಯನ್ನು ರಫ್ತು ಮಾಡುವಾಗ ದೋಷ ಸಂಭವಿಸಿದೆ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.";
 "linkDevice.initialInfo" = "On the new device, initiate a new account.";
 "linkDevice.infoAddAccount" = "Select Add Account → Connect from another device.";
 "linkDevice.infoQRCode" = "When ready, scan the QR code.";
@@ -500,7 +503,7 @@
 "linkDevice.authenticationInfo" = "New device found at the following IP address. Is that you? To continue the export account operation, tap Confirm.";
 "linkDevice.newDeviceIP" = "New device IP address: %1@";
 "linkDevice.code" = "code";
-"linkDevice.wrongEntry" = "Unrecognized new device identifier. Please follow the instructions above.";
+"linkDevice.wrongEntry" = "ಗುರುತಿಸಲಾಗದ ಹೊಸ ಸಾಧನ ಗುರುತಿಸುವಿಕೆ. ದಯವಿಟ್ಟು ಮೇಲಿನ ಸೂಚನೆಗಳನ್ನು ಅನುಸರಿಸಿ.";
 "linkDevice.exportInProgress" = "The export account operation to the new device is in progress. Please confirm import on the new device.";
 "linkDevice.completed" = "The account was imported successfully on the new device.";
 
@@ -536,7 +539,7 @@
 "generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
 "generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
-"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.youJoined" = "ನೀವು ಸಂಭಾಷಣೆಗೆ ಸೇರಿದ್ದೀರಿ.";
 "generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
 "generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "ಹೊರಹೋಗುವ ಕರೆ";
@@ -558,7 +561,7 @@
 "generalSettings.limitLocationSharingDuration" = "ಸ್ಥಳ ಹಂಚಿಕೆಯ ಅವಧಿಯನ್ನು ಮಿತಿಗೊಳಿಸಿ";
 "generalSettings.locationSharingDuration" = "ಸ್ಥಾನದ ಪಾಲಿನ ಅವಧಿ";
 "generalSettings.donationCampaign" = "Donation campaign";
-"generalSettings.enableDonationCampaign" = "Enable donation campaign";
+"generalSettings.enableDonationCampaign" = "ದಾನ ಅಭಿಯಾನ ಸಕ್ರಿಯಗೊಳಿಸಿ";
 
 // Log View
 "logView.title" = "ರೋಗನಿರ್ಣಯ";
@@ -584,12 +587,12 @@
 "aboutJami.noWarranty2" = "version 3 or later for details.";
 "aboutJami.contribute" = "ಕೊಡುಗೆ";
 "aboutJami.feedback" = "ಪ್ರತಿಕ್ರಿಯೆ";
-"aboutJami.developers" = "Developers";
+"aboutJami.developers" = "ಡೆವಲಪರ್‌ಗಳು";
 "aboutJami.media" = "ಮಾಧ್ಯಮಗಳು";
-"aboutJami.communityManagement" = "Community Management";
-"aboutJami.specialThanks" = "Special thanks to";
-"aboutJami.info" = "This is a list of people who have made a significant investment of time, with useful results, into Jami. Any such contributors who want to be added to the list should contact us.";
-"aboutJami.header" = "We would like to thank our contributors, whose efforts over many years have made this software what it is.";
+"aboutJami.communityManagement" = "ಸಮುದಾಯ ನಿರ್ವಹಣೆ";
+"aboutJami.specialThanks" = "ವಿಶೇಷ ಧನ್ಯವಾದಗಳು";
+"aboutJami.info" = "ಇದು Jami ನಲ್ಲಿ ಉಪಯುಕ್ತ ಫಲಿತಾಂಶಗಳೊಂದಿಗೆ ಗಮನಾರ್ಹ ಸಮಯವನ್ನು ಹೂಡಿಕೆ ಮಾಡಿದ ಜನರ ಪಟ್ಟಿ. ಪಟ್ಟಿಗೆ ಸೇರಲು ಬಯಸುವ ಅಂತಹ ಕೊಡುಗೆದಾರರು ನಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸಬೇಕು.";
+"aboutJami.header" = "ನಮ್ಮ ಕೊಡುಗೆದಾರರಿಗೆ ನಾವು ಧನ್ಯವಾದ ಹೇಳಲು ಬಯಸುತ್ತೇವೆ, ಅವರ ಹಲವು ವರ್ಷಗಳ ಪ್ರಯತ್ನಗಳು ಈ ಸಾಫ್ಟ್‌ವೇರ್ ಅನ್ನು ಇಂದಿನ ಸ್ಥಿತಿಗೆ ತಂದಿವೆ.";
 
 // Accessibility
 "accessibility.close" = "ಹತ್ತಿರ";
@@ -618,13 +621,13 @@
 "accessibility.conversationRowSyncing" = "Synchronization in progress";
 "accessibility.conversationRowLastMessage" = "Last message at %@";
 "accessibility.userPresenceOnline" = "ಆನ್ಲೈನ್";
-"accessibility.userPresenceAvailable" = "Available";
+"accessibility.userPresenceAvailable" = "ಲಭ್ಯವಿದೆ";
 "accessibility.pendingRequestsRowPlural" = "Invitations received: %@ pending invitations";
 "accessibility.pendingRequestsRowSingular" = "Invitation received: %@ pending invitation";
 "accessibility.pendingRequestsRowHint" = "Double-tap to review and reply to invitations you received";
 "accessibility.pendingRequestsListBlockUser" = "Block invitation sender";
-"accessibility.pendingRequestsListRejectInvitation" = "Decline invitation";
-"accessibility.pendingRequestsListAcceptInvitation" = "Accept invitation";
+"accessibility.pendingRequestsListRejectInvitation" = "ಆಹ್ವಾನ ತಿರಸ್ಕರಿಸಿ";
+"accessibility.pendingRequestsListAcceptInvitation" = "ಆಹ್ವಾನ ಸ್ವೀಕರಿಸಿ";
 "accessibility.messageBubbleDeleted" = "Message deleted";
 "accessibility.messageBubbleEdited" = "ಸಂಪಾದನೆ";
 "accessibility.messageBubbleRead" = "Read";
@@ -638,7 +641,7 @@
 "accessibility.fileTransfer.sentOn" = "File: %1@, sent on %2@";
 "accessibility.call.lasted" = "Lasted %@";
 "accessibility.calls.default.toggleAudio" = "ಮೂಕ ಮೈಕ್ರೊಫೋನ್";
-"accessibility.calls.default.toggleVideo" = "Start camera";
+"accessibility.calls.default.toggleVideo" = "ಕ್ಯಾಮೆರಾ ಪ್ರಾರಂಭಿಸಿ";
 "accessibility.calls.default.pauseCall" = "ವಿರಾಮ ಕರೆ";
 "accessibility.calls.default.endCall" = "ಕರೆ ಅಂತ್ಯಗೊಳಿಸು";
 "accessibility.calls.default.addParticipant" = "ಭಾಗವಹಿಸುವವರನ್ನು ಸೇರಿಸುವುದು";
@@ -648,7 +651,7 @@
 "accessibility.calls.default.showDialpad" = "Show dialpad";
 "accessibility.calls.default.raiseHand" = "ಕೈ ಎತ್ತಿ";
 
-"accessibility.calls.alter.toggleAudio" = "Unmute microphone";
+"accessibility.calls.alter.toggleAudio" = "ಮೈಕ್ರೊಫೋನ್ ಅನ್‌ಮ್ಯೂಟ್ ಮಾಡಿ";
 "accessibility.calls.alter.toggleVideo" = "ಕ್ಯಾಮೆರಾ ನಿಲ್ಲಿಸಿ";
 "accessibility.calls.alter.pauseCall" = "ಪುನರಾರಂಭ ಕರೆ";
 "accessibility.calls.alter.endCall" = "ಕರೆ ಅಂತ್ಯಗೊಳಿಸು";

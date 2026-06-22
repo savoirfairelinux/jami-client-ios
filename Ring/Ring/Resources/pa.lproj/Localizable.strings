@@ -126,9 +126,12 @@
 // Smartlist
 "smartlist.yesterday" = "ਕੱਲ੍ਹ";
 "smartlist.results" = "ਜਨਤਕ ਨਾਮਾਵਲੀ";
-"smartlist.jamsResults" = "Search result";
-"smartlist.jamsResults" = "Search result";
+"smartlist.jamsResults" = "Organization directory";
 "smartlist.conversations" = "ਗੱਲਾਂਬਾਤਾਂ";
+"smartlist.conversationsSearchHint" = "You don't have any conversations yet.";
+"smartlist.publicDirectoryHint" = "People on Jami outside your contacts.";
+"smartlist.jamsDirectoryHint" = "People in your organization outside your contacts.";
+"smartlist.dialpad" = "Keypad";
 "smartlist.noConversationsFound" = "No conversations match the search.";
 "smartlist.newContact" = "New contact";
 "smartlist.newGroup" = "New group";

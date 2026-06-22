@@ -44,7 +44,7 @@
 "global.search" = "Kutafuta...";
 "global.supportJami" = "Support Jami project";
 "global.deleteMessage" = "Ondoa ujumbe";
-"global.deleteFile" = "Delete file from device";
+"global.deleteFile" = "Futa faili kutoka kifaa";
 "global.editMessage" = "Hariri ujumbe";
 "global.editing" = "Editing";
 "global.create" = "Kujenga";
@@ -65,7 +65,7 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.addDescription" = "Add description";
+"swarmcreation.addDescription" = "Ongeza maelezo";
 // Swarm
 "swarm.muteConversation" = "Mazungumzo ya kimya";
 "swarm.leaveConversation" = "Acha mazungumzo";
@@ -74,17 +74,17 @@
 "swarm.restartConversation" = "Restart conversation";
 "swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "Rangi ya mazungumzo";
-"swarm.typeOfSwarm" = "Conversation type";
+"swarm.typeOfSwarm" = "Aina ya mazungumzo";
 "swarm.identifier" = "Kitambulisho";
 "swarm.conversationId" = "Conversation ID";
 "swarm.settings" = "Mipangilio";
 "swarm.members" = "Wajumbe";
-"swarm.addDescription" = "Add description";
+"swarm.addDescription" = "Ongeza maelezo";
 "swarm.titlePlaceholder" = "Enter title";
 "swarm.titleAlertHeader" = "Edit group title";
 "swarm.descriptionAlertHeader" = "Edit group description";
 "swarm.descriptionPlaceholder" = "Enter title";
-"swarm.contactHeader" = "Contact";
+"swarm.contactHeader" = "Anwani";
 "swarm.showContactQRCode" = "Show contact QR code";
 "swarm.shareContactInfo" = "Share contact information";
 "swarm.accessibilityContactQRCode" = "Show contact QR code";
@@ -102,17 +102,17 @@
 "swarm.member" = "Mshiriki";
 "swarm.invited" = "Mwaliko";
 "swarm.admin" = "Msimamizi";
-"swarm.blocked" = "Blocked";
+"swarm.blocked" = "Imezuiwa";
 "swarm.unknown" = "Haijulikani";
 "swarm.left" = "Left";
-"swarm.inviteMembers" = "Invite members";
+"swarm.inviteMembers" = "Alika wanachama";
 "swarm.inviteSelectedMembers" = "Invite selected contacts";
 "swarm.inviteMembersSelected" = "Selected";
 "swarm.inviteMembersNotSelected" = "Not selected";
-"swarm.confirmLeaveConversation" = "Do you want to leave this conversation?";
+"swarm.confirmLeaveConversation" = "Je, ungependa kuondoka kwenye mazungumzo haya?";
 "swarm.Leave" = "Ondoka";
-"swarm.newGroup" = "Create new group";
-"swarm.namePlaceholder" = "Group name";
+"swarm.newGroup" = "Unda kikundi kipya";
+"swarm.namePlaceholder" = "Jina la kikundi";
 "swarm.explanationText" = "Members can be invited at any time after the group has been created.";
 "swarm.customizeProfile" = "Customize group profile";
 "swarm.changePicture" = "Change group picture";
@@ -126,9 +126,12 @@
 // Smartlist
 "smartlist.yesterday" = "Jana";
 "smartlist.results" = "Orodha ya umma";
-"smartlist.jamsResults" = "Search result";
-"smartlist.jamsResults" = "Search result";
+"smartlist.jamsResults" = "Organization directory";
 "smartlist.conversations" = "Mazungumzo";
+"smartlist.conversationsSearchHint" = "You don't have any conversations yet.";
+"smartlist.publicDirectoryHint" = "People on Jami outside your contacts.";
+"smartlist.jamsDirectoryHint" = "People in your organization outside your contacts.";
+"smartlist.dialpad" = "Keypad";
 "smartlist.noConversationsFound" = "No conversations match the search.";
 "smartlist.newContact" = "New contact";
 "smartlist.newGroup" = "New group";
@@ -148,8 +151,8 @@
 "smartlist.aboutJami" = "Kuhusu Jami";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Malipo";
-"smartlist.disableDonation" = "Not now";
-"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, do you want to make a donation?";
+"smartlist.disableDonation" = "Si sasa";
+"smartlist.donationExplanation" = "Ikiwa unafurahia kutumia Jami na unaamini katika dhamira yetu, je, ungependa kutoa mchango?";
 "smartlist.inSynchronization" = "Syncing…";
 
 // Conversation
@@ -164,7 +167,7 @@
 "conversation.photoAccessRequiredMessage" = "Jami needs access to your photo library to save images. You can enable this in Settings.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
 "conversation.incomingRequest" = "sent you a conversation invitation.";
-"conversation.requestMessage" = "Hello,\nDo you want to join the conversation?";
+"conversation.requestMessage" = "Habari,\nJe, ungependa kujiunga na mazungumzo?";
 "conversation.sendRequest" = "Send them an invitation to be able converse.";
 "conversation.sendRequestTitle" = "Send conversation invitation";
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
@@ -183,13 +186,13 @@
 "conversation.typingIndicatorTwoUsers" = "%1@ and %2@ are typing";
 "conversation.typingIndicatorOtherUsers" = "%1@, %2@ and %3@ other are typing";
 "conversation.typingIndicatorOthersUsers" = "%1@, %2@ and %3@ others are typing";
-"conversation.lastMessageDeleted" = "(deleted message)";
+"conversation.lastMessageDeleted" = "(ujumbe uliofutwa)";
 
 // Invitations
 "invitations.noInvitations" = "Hakuna mwaliko";
 "invitations.accepted" = "Kubaliwa";
 "invitations.declined" = "Declined";
-"invitations.blocked" = "Blocked";
+"invitations.blocked" = "Imezuiwa";
 "invitations.list" = "Invitations received";
 
 // Walkthrough
@@ -222,7 +225,7 @@
 "createAccount.UsernameNotRegisteredMessage" = "Akaunti iliundwa lakini jina la mtumiaji halikuandikishwa";
 "createAccount.timeoutTitle" = "Akaunti Iliyotengenezwa";
 "createAccount.timeoutMessage" = "Username registration is in progress. Please wait…";
-"createAccount.sipConfigure" = "Configure existing SIP account";
+"createAccount.sipConfigure" = "Sanidi akaunti ya SIP iliyopo";
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "Unaweza kuchagua jina la mtumiaji ili kuwasaidia wengine kupata na kukufikia kwa urahisi zaidi kwenye Jami.";
 "createAccount.newAccount" = "New account";
@@ -237,7 +240,7 @@
 "linkToAccount.showQrCode" = "Nambari ya QR";
 "linkToAccount.showPinCode" = "Authentication code";
 "linkToAccount.actionRequired" = "Action required.\nPlease confirm account on the source device.";
-"linkToAccount.allSet" = "The account was imported successfully.";
+"linkToAccount.allSet" = "Akaunti imeingizwa kwa mafanikio.";
 "linkToAccount.goToAccounts" = "Go to imported account";
 "linkToAccount.exportInstructions" = "On the source device, initiate the exportation.";
 "linkToAccount.exportInstructionsPath" = "Select Account → Account Settings → Link new device.";
@@ -251,7 +254,7 @@
 
 // Import from Archive
 "importFromArchive.explanation" = "Kuagiza akaunti Jami kutoka faili ya kumbukumbu ya ndani.";
-"importFromArchive.passwordExplanation" = "If the account is password protected, please fill the following field.";
+"importFromArchive.passwordExplanation" = "Ikiwa akaunti imelindwa kwa nenosiri, tafadhali jaza sehemu ifuatayo.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "Uagizaji";
 "importFromArchive.selectArchiveButton" = "Chagua faili ya kumbukumbu";
@@ -259,9 +262,9 @@
 // Link to Jami Account Management Server (JAMS) form
 "linkToAccountManager.signIn" = "Sign in";
 "linkToAccountManager.title" = "Management server account";
-"linkToAccountManager.accountManagerPlaceholder" = "Management server URL";
-"linkToAccountManager.accountManagerLabel" = "Enter the management server URL";
-"linkToAccountManager.jamsExplanation" = "Enter the management server URL";
+"linkToAccountManager.accountManagerPlaceholder" = "URL ya seva ya usimamizi";
+"linkToAccountManager.accountManagerLabel" = "Weka URL ya seva ya usimamizi";
+"linkToAccountManager.jamsExplanation" = "Weka URL ya seva ya usimamizi";
 "linkToAccountManager.enterCredentials" = "Enter the management server credentials";
 
 // Alerts
@@ -279,11 +282,11 @@
 "alerts.dbFailedMessage" = "Tafadhali fungua maombi na jaribu kuifungua tena";
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmDeleteConversation" = "Do you want to remove this conversation permanently?";
-"alerts.confirmLeaveConversation" = "Do you want to leave this conversation?";
+"alerts.confirmLeaveConversation" = "Je, ungependa kuondoka kwenye mazungumzo haya?";
 "alerts.confirmRemoveOneToOneConversation" = "Do you want to remove this conversation? The existing history will be deleted. A new conversation may be started if you do not have other conversations with this contact.";
 "alerts.confimRemoveContact" = "Do you want to remove this contact? The existing history will be deleted.";
 "alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "Delete conversation";
+"alerts.confirmDeleteConversationTitle" = "Futa mazungumzo";
 "alerts.noMediaPermissionsTitle" = "Utoaji wa ruhusa wa vyombo vya habari haukupewa";
 "alerts.noLibraryPermissionsTitle" = "Ufikiaji wa maktaba ya picha haukupewa";
 "alerts.noLocationPermissionsTitle" = "Ufikiaji wa eneo la tukio haukupewa";
@@ -320,12 +323,12 @@
 "calls.setModerator" = "Weka moderator";
 "calls.removeModerator" = "Moderator kutoweka";
 "calls.muteAudio" = "Kipaza sauti";
-"calls.unmuteAudio" = "Unmute microphone";
+"calls.unmuteAudio" = "Ondoa unyamazishaji wa maikrofoni";
 "calls.lowerHand" = "Mkono wa chini";
 "calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
 "calls.activeCallInConversation" = "Simu inachukua hatua. Je, unataka kujiunga na simu?";
-"calls.acceptWithAudio" = "Accept with audio";
-"calls.acceptWithVideo" = "Accept with video";
+"calls.acceptWithAudio" = "Kubali kwa sauti";
+"calls.acceptWithVideo" = "Kubali kwa video";
 
 // Account Page
 "accountPage.devicesListHeader" = "Vifaa";
@@ -337,14 +340,14 @@
 "accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "Anwani ya Wakala";
 "accountPage.useProxyList" = "Use proxy list";
-"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyListURL" = "URL ya orodha ya proksi";
 "accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
 "accountPage.proxyHeader" = "Wakala wa kuwakilisha";
 "accountPage.currentProxy" = "Current proxy";
 "accountPage.enableNotifications" = "Kuwezesha taarifa";
 "accountPage.proxyDisabledAlertTitle" = "Seva ya Proxy Imelemazwa";
 "accountPage.proxyDisabledAlertBody" = "Ili kupokea taarifa, tafadhali kuwezesha proxy";
-"accountPage.removeDeviceTitle" = "Remove device";
+"accountPage.removeDeviceTitle" = "Ondoa kifaa";
 "accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Kuondolewa";
 "accountPage.revokeDevicePlaceholder" = "Ingiza nenosiri la akaunti";
@@ -357,7 +360,7 @@
 "accountPage.deviceRevocationError" = "Kosa la kurudia kifaa";
 "accountPage.linkDeviceTitle" = "Unganisha kifaa kingine";
 "accountPage.other" = "Vinginevyo";
-"accountPage.removeAccountMessage" = "If the account has not been backed up or added to another device, the account and registered username will be IRREVOCABLY LOST.";
+"accountPage.removeAccountMessage" = "Iwapo akaunti haijahifadhiwa nakala au kuongezwa kwenye kifaa kingine, akaunti na jina la mtumiaji lililosajiliwa YATAPOTEA KABISA.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Wasiliana nami juu ya Jami!";
 "accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
@@ -368,7 +371,7 @@
 "accountPage.usernameRegisterAction" = "Kujiandikisha";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
 "accountPage.usernameRegistrationFailed" = "Please check the account password.";
-"accountPage.createPassword" = "Set password";
+"accountPage.createPassword" = "Weka nenosiri";
 "accountPage.changePassword" = "Badilisha password";
 "accountPage.currentPasswordPlaceholder" = "Ingiza nywila ya sasa";
 "accountPage.newPasswordPlaceholder" = "Ingiza nywila mpya";
@@ -409,7 +412,7 @@
 "accountPage.editProfile" = "Edit Profile";
 "accountPage.manageAccount" = "Kusimamia akaunti";
 "accountPage.encryptAccount" = "Nambari";
-"accountPage.passwordExplanation" = "Your Jami account is registered only on this device as an archive containing the keys of your account. Access to this archive can be protected with a password.";
+"accountPage.passwordExplanation" = "Akaunti yako ya Jami imesajiliwa kwenye kifaa hiki pekee kama kumbukumbu inayobeba funguo za akaunti yako. Ufikiaji wa kumbukumbu hii unaweza kulindwa kwa nenosiri.";
 "accountPage.passwordsDoNotMatch" = "Passwords do not match.";
 "accountPage.passwordCreated" = "Password set";
 "accountPage.passwordUpdated" = "Password updated";
@@ -487,11 +490,11 @@
 // Link New Device
 "linkDevice.title" = "Unganisha kifaa kipya";
 "linkDevice.networkError" = "A network error occurred while exporting the account.";
-"linkDevice.errorWrongPassword" = "An authentication error occurred while linking the device. Please check credentials and try again.";
-"linkDevice.errorNetwork" = "A network error occurred while linking the account. Please verify your connection and try again.";
-"linkDevice.errorTimeout" = "The operation timed out. Please try again.";
+"linkDevice.errorWrongPassword" = "Hitilafu ya uthibitishaji imetokea wakati wa kuunganisha kifaa. Tafadhali angalia stakabadhi na ujaribu tena.";
+"linkDevice.errorNetwork" = "Hitilafu ya mtandao imetokea wakati wa kuunganisha akaunti. Tafadhali thibitisha muunganisho wako na ujaribu tena.";
+"linkDevice.errorTimeout" = "Operesheni imekwisha muda. Tafadhali jaribu tena.";
 "linkDevice.errorCode" = "An error occurred while generating the code. Please try again.";
-"linkDevice.errorWrongData" = "An error occurred while exporting the account. Please try again.";
+"linkDevice.errorWrongData" = "Hitilafu imetokea wakati wa kuhamisha akaunti. Tafadhali jaribu tena.";
 "linkDevice.initialInfo" = "On the new device, initiate a new account.";
 "linkDevice.infoAddAccount" = "Select Add Account → Connect from another device.";
 "linkDevice.infoQRCode" = "When ready, scan the QR code.";
@@ -500,7 +503,7 @@
 "linkDevice.authenticationInfo" = "New device found at the following IP address. Is that you? To continue the export account operation, tap Confirm.";
 "linkDevice.newDeviceIP" = "New device IP address: %1@";
 "linkDevice.code" = "code";
-"linkDevice.wrongEntry" = "Unrecognized new device identifier. Please follow the instructions above.";
+"linkDevice.wrongEntry" = "Kitambulisho cha kifaa kipya hakitambuliki. Tafadhali fuata maelekezo hapo juu.";
 "linkDevice.exportInProgress" = "The export account operation to the new device is in progress. Please confirm import on the new device.";
 "linkDevice.completed" = "The account was imported successfully on the new device.";
 
@@ -536,7 +539,7 @@
 "generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
 "generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
-"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.youJoined" = "Ulijiunga na mazungumzo.";
 "generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
 "generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Kuondoka simu";
@@ -558,7 +561,7 @@
 "generalSettings.limitLocationSharingDuration" = "Kupanua muda wa kushiriki eneo";
 "generalSettings.locationSharingDuration" = "Muda wa hisa za nafasi";
 "generalSettings.donationCampaign" = "Donation campaign";
-"generalSettings.enableDonationCampaign" = "Enable donation campaign";
+"generalSettings.enableDonationCampaign" = "Washa kampeni ya uchangiaji";
 
 // Log View
 "logView.title" = "Utambuzi";
@@ -584,12 +587,12 @@
 "aboutJami.noWarranty2" = "version 3 or later for details.";
 "aboutJami.contribute" = "Shiriki";
 "aboutJami.feedback" = "Maoni ya kurudia";
-"aboutJami.developers" = "Developers";
+"aboutJami.developers" = "Wasanidi programu";
 "aboutJami.media" = "Vyombo vya habari";
-"aboutJami.communityManagement" = "Community Management";
-"aboutJami.specialThanks" = "Special thanks to";
-"aboutJami.info" = "This is a list of people who have made a significant investment of time, with useful results, into Jami. Any such contributors who want to be added to the list should contact us.";
-"aboutJami.header" = "We would like to thank our contributors, whose efforts over many years have made this software what it is.";
+"aboutJami.communityManagement" = "Usimamizi wa Jamii";
+"aboutJami.specialThanks" = "Shukrani maalum kwa";
+"aboutJami.info" = "Hii ni orodha ya watu ambao wamewekeza muda mwingi, kwa matokeo yenye manufaa, katika Jami. Wachangiaji wowote wa namna hiyo wanaotaka kuongezwa kwenye orodha wanapaswa kuwasiliana nasi.";
+"aboutJami.header" = "Tungependa kuwashukuru wachangiaji wetu, ambao juhudi zao kwa miaka mingi zimeifanya programu hii kuwa ilivyo.";
 
 // Accessibility
 "accessibility.close" = "Karibu";
@@ -618,13 +621,13 @@
 "accessibility.conversationRowSyncing" = "Synchronization in progress";
 "accessibility.conversationRowLastMessage" = "Last message at %@";
 "accessibility.userPresenceOnline" = "Mtandaoni";
-"accessibility.userPresenceAvailable" = "Available";
+"accessibility.userPresenceAvailable" = "Inapatikana";
 "accessibility.pendingRequestsRowPlural" = "Invitations received: %@ pending invitations";
 "accessibility.pendingRequestsRowSingular" = "Invitation received: %@ pending invitation";
 "accessibility.pendingRequestsRowHint" = "Double-tap to review and reply to invitations you received";
 "accessibility.pendingRequestsListBlockUser" = "Block invitation sender";
-"accessibility.pendingRequestsListRejectInvitation" = "Decline invitation";
-"accessibility.pendingRequestsListAcceptInvitation" = "Accept invitation";
+"accessibility.pendingRequestsListRejectInvitation" = "Kataa mwaliko";
+"accessibility.pendingRequestsListAcceptInvitation" = "Kubali mwaliko";
 "accessibility.messageBubbleDeleted" = "Message deleted";
 "accessibility.messageBubbleEdited" = "Iliyohaririwa";
 "accessibility.messageBubbleRead" = "Read";
@@ -638,7 +641,7 @@
 "accessibility.fileTransfer.sentOn" = "File: %1@, sent on %2@";
 "accessibility.call.lasted" = "Lasted %@";
 "accessibility.calls.default.toggleAudio" = "Kipaza sauti";
-"accessibility.calls.default.toggleVideo" = "Start camera";
+"accessibility.calls.default.toggleVideo" = "Anzisha kamera";
 "accessibility.calls.default.pauseCall" = "Kuomba kwa muda";
 "accessibility.calls.default.endCall" = "Maliza simu hii";
 "accessibility.calls.default.addParticipant" = "Ongeza mshiriki";
@@ -648,7 +651,7 @@
 "accessibility.calls.default.showDialpad" = "Show dialpad";
 "accessibility.calls.default.raiseHand" = "Kuinua mkono";
 
-"accessibility.calls.alter.toggleAudio" = "Unmute microphone";
+"accessibility.calls.alter.toggleAudio" = "Ondoa unyamazishaji wa maikrofoni";
 "accessibility.calls.alter.toggleVideo" = "Stop kamera";
 "accessibility.calls.alter.pauseCall" = "Kuendelea wito";
 "accessibility.calls.alter.endCall" = "Maliza simu hii";

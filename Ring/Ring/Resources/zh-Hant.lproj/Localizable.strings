@@ -18,27 +18,27 @@
 
 // Global
 "global.accountSettings" = "账户设置";
-"global.username" = "Username";
-"global.recommended" = "Recommended";
+"global.username" = "用户名";
+"global.recommended" = "推荐";
 "global.password" = "密码";
 "global.registerAUsername" = "注册用户名";
 "global.enterPassword" = "输入密码";
 "global.enterUsername" = "输入用户名";
-"global.cancel" = "Cancel";
+"global.cancel" = "取消";
 "global.blockContact" = "阻擋連絡人";
-"global.removeAccount" = "Remove account";
+"global.removeAccount" = "移除帳戶";
 "global.incomingCall" = "来电";
 "global.ok" = "確定";
 "global.close" = "关闭";
-"global.share" = "Share";
-"global.forward" = "Forward";
-"global.save" = "Save";
-"global.resend" = "Resend";
+"global.share" = "共享";
+"global.forward" = "轉發";
+"global.save" = "儲存";
+"global.resend" = "重新傳送";
 "global.preview" = "预览";
-"global.accept" = "Accept";
-"global.block" = "Block";
+"global.accept" = "接受";
+"global.block" = "屏蔽";
 "global.decline" = "拒接";
-"global.name" = "Name";
+"global.name" = "名稱";
 "global.copy" = "复制";
 "global.reply" = "回覆";
 "global.search" = "正在搜索…";
@@ -78,7 +78,7 @@
 "swarm.identifier" = "标识符";
 "swarm.conversationId" = "對話 ID";
 "swarm.settings" = "設定";
-"swarm.members" = "Members";
+"swarm.members" = "成员";
 "swarm.addDescription" = "添加描述";
 "swarm.titlePlaceholder" = "輸入標題";
 "swarm.titleAlertHeader" = "编辑群名称";
@@ -98,7 +98,7 @@
 "swarm.adminInvitesOnly" = "私人群组(受限制邀请)";
 "swarm.invitesOnly" = "私密群组";
 "swarm.publicChat" = "公开群组";
-"swarm.others" = "Others";
+"swarm.others" = "其他";
 "swarm.member" = "成員";
 "swarm.invited" = "已邀請";
 "swarm.admin" = "管理員";
@@ -126,26 +126,29 @@
 // Smartlist
 "smartlist.yesterday" = "昨天";
 "smartlist.results" = "公共目录";
-"smartlist.jamsResults" = "搜索结果";
-"smartlist.jamsResults" = "搜索结果";
+"smartlist.jamsResults" = "Organization directory";
 "smartlist.conversations" = "会话";
+"smartlist.conversationsSearchHint" = "You don't have any conversations yet.";
+"smartlist.publicDirectoryHint" = "People on Jami outside your contacts.";
+"smartlist.jamsDirectoryHint" = "People in your organization outside your contacts.";
+"smartlist.dialpad" = "Keypad";
 "smartlist.noConversationsFound" = "无匹配的对话。";
 "smartlist.newContact" = "新联系人";
 "smartlist.newGroup" = "新群组";
 "smartlist.accounts" = "账户";
 "smartlist.invitationReceived" = "邀请已发送";
-"smartlist.noResults" = "No results";
+"smartlist.noResults" = "沒有結果";
 "smartlist.noConversation" = "无对话";
 "smartlist.searchBarPlaceholder" = "输入名字…";
 "smartlist.searchBar" = "搜索";
-"smartlist.noNetworkConnectivity" = "No network connectivity";
+"smartlist.noNetworkConnectivity" = "无网络连接";
 "smartlist.cellularAccess" = "请确保蜂窝移动网络权限已开启。";
-"smartlist.accountsTitle" = "Accounts";
+"smartlist.accountsTitle" = "账户";
 "smartlist.addAccountButton" = "+ 添加账户";
-"smartlist.noNumber" = "Selected contact does not have any number";
-"smartlist.selectOneNumber" = "Select one of the numbers";
+"smartlist.noNumber" = "所選聯絡人沒有任何號碼";
+"smartlist.selectOneNumber" = "選擇其中一個號碼";
 "smartlist.invitations" = "邀请";
-"smartlist.aboutJami" = "About Jami";
+"smartlist.aboutJami" = "关于 Jami";
 "smartlist.inviteFriends" = "邀請好友";
 "smartlist.accounts" = "账户";
 "smartlist.disableDonation" = "现在不要";
@@ -195,8 +198,8 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Share, freely and privately with Jami";
-"welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
+"welcome.title" = "使用 Jami 自由、私密地分享";
+"welcome.text" = "Jami 是一個自由且通用的通訊平台，保護使用者的隱私與自由";
 "welcome.haveAccount" = "我已經有一個賬戶";
 "welcome.linkDevice" = "从其他设备导入";
 "welcome.linkBackup" = "從封存備份匯入";
@@ -204,23 +207,23 @@
 "welcome.connectToJAMS" = "連線到管理伺服器";
 
 // Creation Profile Screen
-"createProfile.skipCreateProfile" = "Skip";
-"createProfile.profileCreated" = "Next";
+"createProfile.skipCreateProfile" = "跳过";
+"createProfile.profileCreated" = "下一步";
 "createProfile.title" = "自定義您的個人資料";
 "createProfile.enterNameLabel" = "选择一个显示名称";
-"createProfile.enterNamePlaceholder" = "Enter name";
+"createProfile.enterNamePlaceholder" = "輸入名稱";
 "createProfile.subtitle" = "您的個人資料僅與您的聯絡人共享。您可以隨時定製您的個人資料。";
 "createProfile.createProfilePicture" = "新增個人照片";
 
 // Create Account form
-"createAccount.createAccountFormTitle" = "Join Jami";
+"createAccount.createAccountFormTitle" = "加入 Jami";
 "createAccount.lookingForUsernameAvailability" = "检查用户名是否可用...";
 "createAccount.invalidUsername" = "無效的用戶名，請輸入正確的用戶名稱。";
 "createAccount.usernameAlreadyTaken" = "已取得的使用者名稱";
 "createAccount.usernameValid" = "用户名可用。";
-"createAccount.UsernameNotRegisteredTitle" = "Network error";
-"createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
-"createAccount.timeoutTitle" = "Account Created";
+"createAccount.UsernameNotRegisteredTitle" = "網路錯誤";
+"createAccount.UsernameNotRegisteredMessage" = "帳戶已建立，但使用者名稱未註冊";
+"createAccount.timeoutTitle" = "帳戶已建立";
 "createAccount.timeoutMessage" = "用户名正在注册中。请稍候...";
 "createAccount.sipConfigure" = "配置现有 SIP 帐户";
 "createAccount.creatingAccount" = "正在建立帳號……";
@@ -273,8 +276,8 @@
 "alerts.accountDefaultErrorTitle" = "无法找到账户";
 "alerts.accountDefaultErrorMessage" = "创建帐户时出错";
 "alerts.profileTakePhoto" = "拍照";
-"alerts.profileUploadPhoto" = "Upload photo";
-"alerts.accountLinkedTitle" = "Linking account";
+"alerts.profileUploadPhoto" = "上傳相片";
+"alerts.accountLinkedTitle" = "正在連結帳戶";
 "alerts.dbFailedTitle" = "當啟動 Jami 時發生錯誤";
 "alerts.dbFailedMessage" = "请关闭并重新打开应用。";
 "alerts.confirmBlockContact" = "要封鎖此聯絡人嗎？與此聯絡人的所有對話將被刪除。";
@@ -284,9 +287,9 @@
 "alerts.confimRemoveContact" = "要刪除此聯絡人嗎？現有對話將被刪除。";
 "alerts.confirmDeleteConversationFromContact" = "您確定您想要刪除與此聯絡人的對話嗎？";
 "alerts.confirmDeleteConversationTitle" = "删除对话";
-"alerts.noMediaPermissionsTitle" = "Media permission not granted";
-"alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
-"alerts.noLocationPermissionsTitle" = "Access to location not granted";
+"alerts.noMediaPermissionsTitle" = "未授予媒體權限";
+"alerts.noLibraryPermissionsTitle" = "未授予相片庫存取權限";
+"alerts.noLocationPermissionsTitle" = "未授予位置存取權限";
 "alerts.errorWrongCredentials" = "在連接到管理伺服器時出現問題，請重試。如果問題持續，請聯絡系統管理員。";
 "alerts.recordVideoMessage" = "錄製影片訊息";
 "alerts.recordAudioMessage" = "录制音频消息";
@@ -294,27 +297,27 @@
 "alerts.uploadPhoto" = "打开相册";
 "alerts.sendPhoto" = "寄送照片";
 "alerts.locationServiceIsDisabled" = "開啟「位置服務」以讓「Jami」確定您的位置。";
-"alerts.locationSharing" = "Share my location";
-"alerts.alreadylocationSharing" = "Already sharing location with this user";
-"alerts.locationSharingDurationTitle" = "How long should the location sharing be?";
-"alerts.locationSharingDuration10min" = "10 min";
-"alerts.locationSharingDuration1hour" = "1 hour";
-"alerts.mapInformation" = "Map information";
-"alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
-"alerts.openStreetMapCopyrightMoreInfo" = "Learn more";
+"alerts.locationSharing" = "分享我的位置";
+"alerts.alreadylocationSharing" = "已在與此使用者分享位置";
+"alerts.locationSharingDurationTitle" = "位置分享應持續多久？";
+"alerts.locationSharingDuration10min" = "10 分鐘";
+"alerts.locationSharingDuration1hour" = "1 小時";
+"alerts.mapInformation" = "地图信息";
+"alerts.openStreetMapCopyright" = "© OpenStreetMap 貢獻者";
+"alerts.openStreetMapCopyrightMoreInfo" = "瞭解更多";
 
 // Actions
-"actions.deleteAction" = "Delete";
+"actions.deleteAction" = "删除";
 "actions.backAction" = "上一步";
-"actions.doneAction" = "Done";
-"actions.goToSettings" = "Go to Settings";
-"actions.stopLocationSharing" = "Stop sharing";
+"actions.doneAction" = "完成";
+"actions.goToSettings" = "前往設定";
+"actions.stopLocationSharing" = "停止分享";
 
 // Calls
-"calls.ringing" = "Ringing…";
-"calls.connecting" = "Connecting…";
-"calls.callFinished" = "Call finished";
-"calls.currentCallWith" = "Call with ";
+"calls.ringing" = "正在響鈴…";
+"calls.connecting" = "正在連線…";
+"calls.callFinished" = "通話結束";
+"calls.currentCallWith" = "通話對象：";
 "calls.maximize" = "最大化";
 "calls.minimize" = "最小化";
 "calls.setModerator" = "設定主持人";
@@ -328,68 +331,68 @@
 "calls.acceptWithVideo" = "接受视频";
 
 // Account Page
-"accountPage.devicesListHeader" = "Devices";
+"accountPage.devicesListHeader" = "裝置";
 "accountPage.settingsHeader" = "设置";
 "accountPage.notificationsHeader" = "通知";
-"accountPage.blockedContacts" = "Blocked contacts";
+"accountPage.blockedContacts" = "已屏蔽的联系人";
 "accountPage.unblockContact" = "取消屏蔽";
-"accountPage.proxyAddressAlert" = "Provide proxy address";
+"accountPage.proxyAddressAlert" = "請提供代理位址";
 "accountPage.noProxyExplanationLabel" = "在代理伺服器停用時無法收取通知。";
-"accountPage.proxyPaceholder" = "Proxy address";
+"accountPage.proxyPaceholder" = "代理位址";
 "accountPage.useProxyList" = "使用代理列表";
 "accountPage.proxyListURL" = "代理服务器列表 URL";
 "accountPage.proxyExplanation" = "通知須透過代理伺服器發送。你可以使用預設的代理伺服器，或者輸入自定義的代理伺服器地址，又或者輸入代理伺服器列表的URL。";
 "accountPage.proxyHeader" = "代理服務器";
 "accountPage.currentProxy" = "当前使用的代理";
 "accountPage.enableNotifications" = "启用通知";
-"accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
+"accountPage.proxyDisabledAlertTitle" = "代理伺服器已停用";
 "accountPage.proxyDisabledAlertBody" = "为了接收通知，请开启代理";
 "accountPage.removeDeviceTitle" = "移除设备";
 "accountPage.revokeDeviceMessage" = "你想要撤銷此裝置嗎？這個動作無法復原。";
-"accountPage.revokeDeviceButton" = "Revoke";
+"accountPage.revokeDeviceButton" = "撤銷";
 "accountPage.revokeDevicePlaceholder" = "输入账户密码";
-"accountPage.deviceRevoked" = "Device revocation completed";
+"accountPage.deviceRevoked" = "裝置撤銷完成";
 "accountPage.deviceRevocationProgress" = "移除中...";
 "accountPage.deviceRevocationSuccess" = "裝置已移除";
-"accountPage.deviceRevocationTryAgain" = "Try again";
-"accountPage.deviceRevocationWrongPassword" = "Incorrect password";
-"accountPage.deviceRevocationUnknownDevice" = "Unknown device";
-"accountPage.deviceRevocationError" = "Device revocation error";
-"accountPage.linkDeviceTitle" = "Link another device";
-"accountPage.other" = "Other";
+"accountPage.deviceRevocationTryAgain" = "重試";
+"accountPage.deviceRevocationWrongPassword" = "密碼錯誤";
+"accountPage.deviceRevocationUnknownDevice" = "未知裝置";
+"accountPage.deviceRevocationError" = "裝置撤銷錯誤";
+"accountPage.linkDeviceTitle" = "連結另一個裝置";
+"accountPage.other" = "其他";
 "accountPage.removeAccountMessage" = "如果该帐户未备份或添加到其他设备，则该帐户和注册用户名将不可找回地丢失。";
 "accountPage.inviteFriends" = "邀請好友";
-"accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
+"accountPage.contactMeOnJamiTitle" = "在 Jami 上聯絡我！";
 "accountPage.contactMeOnJamiContant" = "在 Jami 分散式通訊平臺 (https://jami.net) 上使用「%s」聯絡我";
 "accountPage.passwordPlaceholder" = "输入账户密码";
-"accountPage.usernamePlaceholder" = "Enter desired username";
+"accountPage.usernamePlaceholder" = "輸入想要的使用者名稱";
 "accountPage.registerNameErrorMessage" = "用户名不可用。";
-"accountPage.usernameRegistering" = "Registering";
+"accountPage.usernameRegistering" = "正在註冊";
 "accountPage.usernameRegisterAction" = "注册";
 "accountPage.usernameRegistrationFailedTitle" = "註冊失敗";
 "accountPage.usernameRegistrationFailed" = "請檢查您的帳號密碼";
 "accountPage.createPassword" = "设置密码";
 "accountPage.changePassword" = "修改密码";
 "accountPage.currentPasswordPlaceholder" = "輸入目前密碼";
-"accountPage.newPasswordPlaceholder" = "Enter new password";
-"accountPage.newPasswordConfirmPlaceholder" = "Confirm new password";
+"accountPage.newPasswordPlaceholder" = "輸入新密碼";
+"accountPage.newPasswordConfirmPlaceholder" = "確認新密碼";
 "accountPage.changePasswordError" = "密码错误";
-"accountPage.enableBoothMode" = "Enable Booth Mode";
-"accountPage.disableBoothMode" = "Disable Booth Mode";
+"accountPage.enableBoothMode" = "啟用展台模式";
+"accountPage.disableBoothMode" = "停用展台模式";
 "accountPage.disableBoothModeExplanation" = "請提供您的帳號密碼";
 "accountPage.boothModeExplanation" = "话亭模式不会保存聊天历史，并且仅允许外拨电话。启用话亭模式后，现有聊天将全部被删除。";
 "accountPage.noBoothMode" = "要啟用藍牙模式，您必須先建立帳號密碼。";
 "accountPage.boothModeAlertMessage" = "在啟用展示模式後，所有的對話都會被移除。";
 "accountPage.peerDiscovery" = "启用本地对等方发现";
 "accountPage.peerDiscoveryExplanation" = "连接至在本地网络宣告的 DHT 节点";
-"accountPage.autoRegistration" = "Auto register after expiration";
-"accountPage.connectivityHeader" = "Connectivity";
+"accountPage.autoRegistration" = "到期後自動註冊";
+"accountPage.connectivityHeader" = "連線";
 "accountPage.turnEnabled" = "啟動TURN";
-"accountPage.turnServer" = "TURN address";
+"accountPage.turnServer" = "TURN 位址";
 "accountPage.turnUsername" = "TURN 用户名";
 "accountPage.turnPassword" = "TURN 密码";
-"accountPage.turnRealm" = "TURN realm";
-"accountPage.upnpEnabled" = "Use UPnP";
+"accountPage.turnRealm" = "TURN 領域";
+"accountPage.upnpEnabled" = "使用 UPnP";
 "accountPage.stunEnabled" = "使用 STUN";
 "accountPage.stunServer" = "STUN 地址";
 "accountPage.publicAddressHeader" = "公開地址";
@@ -466,23 +469,23 @@
 "account.port" = "端口";
 "account.proxyServer" = "代理服务器";
 "account.createSipAccount" = "設定 SIP 賬戶";
-"account.sipAccount" = "SIP Account";
+"account.sipAccount" = "SIP 帳戶";
 "account.configure" = "設定";
 "account.advancedFeatures" = "進階功能";
-"account.serverLabel" = "Enter Address";
-"account.portLabel" = "Enter Port Number";
-"account.accountStatus" = "Account Status";
-"account.enableAccount" = "Enable Account";
-"account.statusOnline" = "Online";
-"account.statusOffline" = "Offline";
+"account.serverLabel" = "輸入位址";
+"account.portLabel" = "輸入連接埠號碼";
+"account.accountStatus" = "帳戶狀態";
+"account.enableAccount" = "啟用帳戶";
+"account.statusOnline" = "上線";
+"account.statusOffline" = "離線";
 "account.statusConnecting" = "正在连接";
-"account.statusUnknown" = "Unknown";
-"account.statusConnectionerror" = "Connection Error";
+"account.statusUnknown" = "未知";
+"account.statusConnectionerror" = "連線錯誤";
 "account.needMigration" = "帳號須遷移";
 "account.me" = "我";
 
 // Block List Page
-"blockListPage.noBlockedContacts" = "No blocked contacts";
+"blockListPage.noBlockedContacts" = "没有被屏蔽的联系人";
 
 // Link New Device
 "linkDevice.title" = "关联新设备";
@@ -511,22 +514,22 @@
 "contactPage.leaveConversation" = "离开谈话";
 
 // DataTransfer
-"dataTransfer.readableStatusCreated" = "Initializing…";
-"dataTransfer.readableStatusError" = "Error";
+"dataTransfer.readableStatusCreated" = "正在初始化…";
+"dataTransfer.readableStatusError" = "错误";
 "dataTransfer.readableStatusAwaiting" = "验证中…";
 "dataTransfer.readableStatusOngoing" = "传送中";
-"dataTransfer.readableStatusCanceled" = "Canceled";
+"dataTransfer.readableStatusCanceled" = "已取消";
 "dataTransfer.sendingFailed" = "發送時出現問題。";
-"dataTransfer.readableStatusSuccess" = "Complete";
+"dataTransfer.readableStatusSuccess" = "完成";
 "dataTransfer.recordInBackgroundWarning" = "在多個程式多工運算時會降低錄影質素。為確保最佳結果，在錄影時不要進行多工運算。";
 
 // Notifications
-"notifications.missedCall" = "Missed Call";
-"notifications.newFile" = "New file";
-"notifications.locationSharingStarted" = "Incoming location sharing started";
-"notifications.locationSharingStopped" = "Incoming location sharing stopped";
+"notifications.missedCall" = "未接來電";
+"notifications.newFile" = "新檔案";
+"notifications.locationSharingStarted" = "收到的位置分享已開始";
+"notifications.locationSharingStopped" = "收到的位置分享已停止";
 "dataTransfer.readableStatusDecline" = "拒接";
-"dataTransfer.readableStatusAccept" = "Accept";
+"dataTransfer.readableStatusAccept" = "接受";
 "dataTransfer.infoMessage" = "按下以開始錄製";
 "dataTransfer.sendMessage" = "发送";
 
@@ -542,18 +545,18 @@
 "generatedMessage.outgoingCall" = "去电";
 "generatedMessage.missedOutgoingCall" = "呼叫失败";
 "generatedMessage.missedIncomingCall" = "未接来电";
-"generatedMessage.liveLocationSharing" = "Live location sharing";
+"generatedMessage.liveLocationSharing" = "即時位置分享";
 "generatedMessage.contactLeftConversation" = "%@已退出對話。";
 "generatedMessage.nonSwarmInvitationReceived" = "你已寄出邀請。";
 "generatedMessage.nonSwarmInvitationAccepted" = "你的邀請已被接受";
 
 // General Settings
 "generalSettings.videoSettings" = "視訊設定";
-"generalSettings.videoAcceleration" = "Enable video acceleration";
-"generalSettings.fileTransfer" = "File transfer";
+"generalSettings.videoAcceleration" = "啟用視訊加速";
+"generalSettings.fileTransfer" = "文件传输";
 "generalSettings.locationSharing" = "位置共享";
-"generalSettings.automaticAcceptIncomingFiles" = "Automatically accept incoming files";
-"generalSettings.acceptTransferLimit" = "Accept transfer limit";
+"generalSettings.automaticAcceptIncomingFiles" = "自動接受傳入檔案";
+"generalSettings.acceptTransferLimit" = "接受傳輸限制";
 "generalSettings.acceptTransferLimitDescription" = "（MB，0 = 無限制）";
 "generalSettings.limitLocationSharingDuration" = "限制位置共享的時間";
 "generalSettings.locationSharingDuration" = "位置分享持續時間";
@@ -561,21 +564,21 @@
 "generalSettings.enableDonationCampaign" = "启用捐赠活动";
 
 // Log View
-"logView.title" = "Diagnostics";
-"logView.description" = "Open diagnostic log settings";
+"logView.title" = "诊断";
+"logView.description" = "打开诊断日志设置";
 "logView.startLogging" = "開始記錄";
 "logView.stopLogging" = "停止记录";
 "logView.saveError" = "儲存文件時出現問題。";
 "logView.shareError" = "共享文件时出错。";
 
 // Migrate Account
-"migrateAccount.title" = "Account migration";
-"migrateAccount.migrateButton" = "Migrate Account";
+"migrateAccount.title" = "账户迁移";
+"migrateAccount.migrateButton" = "遷移帳戶";
 "migrateAccount.explanation" = "需要帳號遷移";
 "migrateAccount.passwordExplanation" = "請輸入密碼以繼續進行賬號遷移";
 "migrateAccount.error" = "遷移賬號時出現問題，請重試，或者刪除此賬號。";
 "migrateAccount.migrating" = "正在遷移……";
-"migrateAccount.migrateAnother" = "Migrate Another Account";
+"migrateAccount.migrateAnother" = "遷移另一個帳戶";
 
 // About Jami
 "aboutJami.declaration1" = "Jami 是一個 GNU 套件，是通用且分散式點對點通訊的軟體，尊重使用者的自由和隱私。請造訪 ";

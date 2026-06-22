@@ -32,7 +32,7 @@
 "global.close" = "Close";
 "global.share" = "Bḍu ";
 "global.forward" = "Forward";
-"global.save" = "Save";
+"global.save" = "Sekles";
 "global.resend" = "Resend";
 "global.preview" = "Taskant";
 "global.accept" = "Qbel";
@@ -48,7 +48,7 @@
 "global.editMessage" = "Ẓreg izen";
 "global.editing" = "Editing";
 "global.create" = "Snulfu";
-"global.edit" = "Edit";
+"global.edit" = "Ẓreg";
 "global.remove" = "Remove";
 "global.call" = "Call";
 "global.video" = "tavidyut ";
@@ -126,9 +126,12 @@
 // Smartlist
 "smartlist.yesterday" = "Iḍelli";
 "smartlist.results" = "Akaram azayez";
-"smartlist.jamsResults" = "Search result";
-"smartlist.jamsResults" = "Search result";
+"smartlist.jamsResults" = "Organization directory";
 "smartlist.conversations" = "Idiwenniten";
+"smartlist.conversationsSearchHint" = "You don't have any conversations yet.";
+"smartlist.publicDirectoryHint" = "People on Jami outside your contacts.";
+"smartlist.jamsDirectoryHint" = "People in your organization outside your contacts.";
+"smartlist.dialpad" = "Keypad";
 "smartlist.noConversationsFound" = "No conversations match the search.";
 "smartlist.newContact" = "New contact";
 "smartlist.newGroup" = "New group";
@@ -368,7 +371,7 @@
 "accountPage.usernameRegisterAction" = " Jerred";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
 "accountPage.usernameRegistrationFailed" = "Please check the account password.";
-"accountPage.createPassword" = "Set password";
+"accountPage.createPassword" = "Sbadu awal uffir";
 "accountPage.changePassword" = "Change password";
 "accountPage.currentPasswordPlaceholder" = "Enter current password";
 "accountPage.newPasswordPlaceholder" = "Enter new password";
@@ -641,8 +644,8 @@
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "Pause call";
 "accessibility.calls.default.endCall" = "Fak tiɣri";
-"accessibility.calls.default.addParticipant" = "Add participant";
-"accessibility.calls.default.switchCamera" = "Switch camera";
+"accessibility.calls.default.addParticipant" = "Rnu amttekki";
+"accessibility.calls.default.switchCamera" = "Beddel takamiṛat";
 "accessibility.calls.default.toggleSpeaker" = "Rmed amsawal";
 "accessibility.calls.default.openConversation" = "Open conversation";
 "accessibility.calls.default.showDialpad" = "Show dialpad";
@@ -652,8 +655,8 @@
 "accessibility.calls.alter.toggleVideo" = "Stop camera";
 "accessibility.calls.alter.pauseCall" = "Resume call";
 "accessibility.calls.alter.endCall" = "Fak tiɣri";
-"accessibility.calls.alter.addParticipant" = "Add participant";
-"accessibility.calls.alter.switchCamera" = "Switch camera";
+"accessibility.calls.alter.addParticipant" = "Rnu amttekki";
+"accessibility.calls.alter.switchCamera" = "Beddel takamiṛat";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
 "accessibility.calls.alter.openConversation" = "Open conversation";
 "accessibility.calls.alter.showDialpad" = "Show dialpad";
@@ -703,13 +706,13 @@
 "shareExtension.accessibilitySelectAccount" = "Double-tap to select this account";
 
 // Peer Services
-"peerServices.title" = "Shared Services";
-"peerServices.refresh" = "Refresh services";
-"peerServices.empty" = "No shared services available";
-"peerServices.errorOffline" = "Contact is offline";
-"peerServices.errorUnreachable" = "Contact is unreachable";
-"peerServices.errorTimeout" = "Request timed out";
-"peerServices.errorUnknown" = "Could not retrieve services";
+"peerServices.title" = "Imeẓla yemẓallan";
+"peerServices.refresh" = "Smiren imeẓla";
+"peerServices.empty" = "Ulac imeẓla yemẓallan yellan";
+"peerServices.errorOffline" = "Anermis beṛṛa n tuqqna";
+"peerServices.errorUnreachable" = "Anermis ur yettwassaweḍ ara";
+"peerServices.errorTimeout" = "Yezri wakud n usuter";
+"peerServices.errorUnknown" = "Ur izmir ara ad d-yawi imeẓla";
 "peerServices.done" = "Done";
 "peerServices.notSupported" = "Not supported";
 "peerServices.open" = "Open";

@@ -126,9 +126,12 @@
 // Smartlist
 "smartlist.yesterday" = "Ieri";
 "smartlist.results" = "Lista publică";
-"smartlist.jamsResults" = "Rezultatele căutării";
-"smartlist.jamsResults" = "Rezultatele căutării";
+"smartlist.jamsResults" = "Organization directory";
 "smartlist.conversations" = "Conversații";
+"smartlist.conversationsSearchHint" = "You don't have any conversations yet.";
+"smartlist.publicDirectoryHint" = "People on Jami outside your contacts.";
+"smartlist.jamsDirectoryHint" = "People in your organization outside your contacts.";
+"smartlist.dialpad" = "Keypad";
 "smartlist.noConversationsFound" = "Nicio conversație nu corespunde căutării.";
 "smartlist.newContact" = "Contact nou";
 "smartlist.newGroup" = "Grup nou";
@@ -393,7 +396,7 @@
 "accountPage.stunEnabled" = "Folosește STUN";
 "accountPage.stunServer" = "Adresa STUN";
 "accountPage.publicAddressHeader" = "Adresa publică";
-"accountPage.allowIPAutoRewrite" = "Allow IP auto rewrite";
+"accountPage.allowIPAutoRewrite" = "Permite rescrierea automată a IP-ului";
 "accountPage.publishedSameAsLocal" = "Public ca cel local";
 "accountPage.publishedAddress" = "Adresa";
 "accountPage.publishedPort" = "Port";
@@ -434,9 +437,9 @@
 "accountPage.tlsDisableSecureDlgCheck" = "Dezactivează verificarea dialogului sigur pentru datele TLS primite";
 "accountPage.editSipExpirationTime" = "Expirare";
 "accountPage.selectSipExpirationTime" = "Timpul de expirare al înregistrării (în secunde)";
-"accountPage.invalidSipExpirationTime" = "Enter a value between 60 and 604800 seconds";
-"accountPage.invalidPort" = "Enter a value between 0 and 65535";
-"accountPage.invalidAddress" = "Enter a valid address";
+"accountPage.invalidSipExpirationTime" = "Introduceți o valoare între 60 și 604800 de secunde";
+"accountPage.invalidPort" = "Introduceți o valoare între 0 și 65535";
+"accountPage.invalidAddress" = "Introduceți o adresă validă";
 "accountPage.thisDevice" = "Acest aparat";
 "accountPage.otherDevices" = "Alte aparate asociate";
 "accountPage.accountIdentity" = "Identitatea contului";
@@ -703,13 +706,13 @@
 "shareExtension.accessibilitySelectAccount" = "Atinge de două ori pentru a selecționa acest cont";
 
 // Peer Services
-"peerServices.title" = "Shared Services";
-"peerServices.refresh" = "Refresh services";
-"peerServices.empty" = "No shared services available";
-"peerServices.errorOffline" = "Contact is offline";
-"peerServices.errorUnreachable" = "Contact is unreachable";
-"peerServices.errorTimeout" = "Request timed out";
-"peerServices.errorUnknown" = "Could not retrieve services";
+"peerServices.title" = "Servicii partajate";
+"peerServices.refresh" = "Reîmprospătează serviciile";
+"peerServices.empty" = "Niciun serviciu partajat disponibil";
+"peerServices.errorOffline" = "Contactul este offline";
+"peerServices.errorUnreachable" = "Contactul nu poate fi contactat";
+"peerServices.errorTimeout" = "Cererea a expirat";
+"peerServices.errorUnknown" = "Serviciile nu au putut fi preluate";
 "peerServices.done" = "Făcut";
-"peerServices.notSupported" = "Not supported";
+"peerServices.notSupported" = "Neimplementat";
 "peerServices.open" = "Deschide";
