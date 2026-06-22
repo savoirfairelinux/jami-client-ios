@@ -135,6 +135,16 @@ class ConversationsManager {
                     if let payload: [String: String] = serviceEvent.getEventInput(.content),
                        !payload.isEmpty {
                         self.accountsService.pushNotificationReceived(data: payload)
+                        // A call push does not carry the conversation commit that records the
+                        // call, so the call-history interaction is never fetched on its own and
+                        // the caller never gets a delivery receipt — especially for an unanswered
+                        // call, where the app may never come to the foreground to sync. Proactively
+                        // synchronize the conversation with the caller so the interaction reaches
+                        // "delivered".
+                        if let peerId = payload["peerId"], !peerId.isEmpty,
+                           let accountId = payload["accountId"], !accountId.isEmpty {
+                            self.conversationService.syncConversationsWith(uri: peerId, accountId: accountId)
+                        }
                     }
                     // Reload conversations updated in the background if required.
                     DispatchQueue.global(qos: .background).async { [weak self] in

@@ -164,6 +164,14 @@ class ConversationsService {
         self.conversationsAdapter.reloadConversationsAndRequests(accountId)
     }
 
+    /// Proactively (re)synchronize every conversation shared with `uri`, fetching any new
+    /// commits from that peer. Used when the app woke up for something that does not carry a
+    /// conversation push (e.g. an incoming call) so the related interaction (such as a
+    /// call-history entry) can reach "delivered" without a separate message notification.
+    func syncConversationsWith(uri: String, accountId: String) {
+        self.conversationsAdapter.syncConversationsWithPeer(uri, accountId: accountId)
+    }
+
     private func addSwarm(conversationId: String, accountId: String, accountURI: String, to conversations: inout [ConversationModel]) {
         if let info = conversationsAdapter.getConversationInfo(forAccount: accountId, conversationId: conversationId) as? [String: String],
            let participantsInfo = conversationsAdapter.getConversationMembers(accountId, conversationId: conversationId) {

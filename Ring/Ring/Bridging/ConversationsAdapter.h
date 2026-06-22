@@ -64,6 +64,7 @@
 
 - (void)sendSwarmMessage:(NSString*)accountId conversationId:(NSString*)conversationId message:(NSString*)message parentId:(NSString*)parentId flag:(int32_t)flag;
 - (void)reloadConversationsAndRequests:(NSString*)accountId;
+- (void)syncConversationsWithPeer:(NSString*)uri accountId:(NSString*)accountId;
 - (void)clearCasheForConversationId:(NSString*)conversationId
                           accountId:(NSString*)accountId;
 @end

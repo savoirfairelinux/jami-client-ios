@@ -311,6 +311,10 @@ static id <MessagesAdapterDelegate> _messagesDelegate;
     reloadConversationsAndRequests(std::string([accountId UTF8String]));
 }
 
+- (void)syncConversationsWithPeer:(NSString*)uri accountId:(NSString*)accountId {
+    syncConversationsWith(std::string([accountId UTF8String]), std::string([uri UTF8String]));
+}
+
 - (void)clearCasheForConversationId:(NSString*)conversationId
                           accountId:(NSString*)accountId {
     clearCache(std::string([accountId UTF8String]), std::string([conversationId UTF8String]));
