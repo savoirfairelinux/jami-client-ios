@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35139ef3_0930df0a",
+        "filename": "Ring/Ring/Services/ConversationsManager.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-06-22T00:01:05Z",
+      "side": 1,
+      "message": "[Critical] Line 146: This synchronizes using the raw `peerId` from the push payload. In the call push flow, peer identifiers are often transported in the same external format used by call signaling, which can include a `ring:`/`jami:` scheme or otherwise differ from the normalized URI used by conversation membership. Passing the unnormalized value can make `syncConversationsWith` a no-op, so the incoming call still may not be delivered. Normalize the peer id with the same helper/path used elsewhere before syncing, and only sync if normalization succeeds.\n```suggestion\nlet normalizedPeerId \u003d JamiURI(schema: URIType.ring, infoHach: peerId).uriString\nself.conversationService.syncConversationsWith(uri: normalizedPeerId, accountId: accountId)\n```",
+      "revId": "11c3ad264a1d17dde8a31efcd7fe44d8b2c1dde4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
