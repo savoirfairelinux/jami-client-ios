@@ -30,7 +30,8 @@ class SmartListViewPage {
     var conversationView: XCUIElement { app.otherElements[SmartListAccessibilityIdentifiers.conversationView] }
     var backgroundCover: XCUIElement { app.otherElements[SmartListAccessibilityIdentifiers.backgroundCover] }
     var accountListView: XCUIElement { app.otherElements[SmartListAccessibilityIdentifiers.accountListView] }
-    var menuButton: XCUIElement { app.images[SmartListAccessibilityIdentifiers.openMenuInSmartList] }
+    // SwiftUI Menu exposes the id on a hittable Button, not the inner Image.
+    var menuButton: XCUIElement { app.buttons[SmartListAccessibilityIdentifiers.openMenuInSmartList].firstMatch }
     var bookButton: XCUIElement { app.buttons[SmartListAccessibilityIdentifiers.bookButton] }
     var contactPicker: XCUIElement { app.buttons[SmartListAccessibilityIdentifiers.contactPicker] }
 }
