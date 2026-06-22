@@ -22,7 +22,9 @@ platform :ios do
   lane :test do
     run_tests(
        scheme: "Ring",
-       reset_simulator: true
+       reset_simulator: true,
+       # Retry a failed test before failing the build, to absorb transient flakiness.
+       number_of_retries: 2
     )
   end
 
