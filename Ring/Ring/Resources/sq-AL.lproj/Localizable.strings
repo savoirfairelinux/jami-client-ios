@@ -126,9 +126,12 @@
 // Smartlist
 "smartlist.yesterday" = "Dje";
 "smartlist.results" = "Drejtori publike";
-"smartlist.jamsResults" = "Përfundime kërkimi";
-"smartlist.jamsResults" = "Përfundime kërkimi";
+"smartlist.jamsResults" = "Organization directory";
 "smartlist.conversations" = "Biseda";
+"smartlist.conversationsSearchHint" = "You don't have any conversations yet.";
+"smartlist.publicDirectoryHint" = "People on Jami outside your contacts.";
+"smartlist.jamsDirectoryHint" = "People in your organization outside your contacts.";
+"smartlist.dialpad" = "Keypad";
 "smartlist.noConversationsFound" = "S’ka ndonjë bisedë që përkon me kërkimin.";
 "smartlist.newContact" = "Kontakt i ri";
 "smartlist.newGroup" = "Grup i ri";
@@ -388,7 +391,7 @@
 "accountPage.turnServer" = "Adresë TURN";
 "accountPage.turnUsername" = "Emër përdoruesi TURN";
 "accountPage.turnPassword" = "Fjalëkalim TURN";
-"accountPage.turnRealm" = "TURN realm";
+"accountPage.turnRealm" = "Realmi TURN";
 "accountPage.upnpEnabled" = "Përdor UPnP";
 "accountPage.stunEnabled" = "Përdor STUN";
 "accountPage.stunServer" = "Adresë STUN";
@@ -675,9 +678,9 @@
 "swarmColors.indigoBlue" = "Blu indigo";
 "swarmColors.skyBlue" = "E kaltër";
 "swarmColors.cyan" = "Blu e gjelbër";
-"swarmColors.teal" = "Teal";
+"swarmColors.teal" = "Gjelbërblu";
 "swarmColors.green" = "E gjelbër";
-"swarmColors.limeGreen" = "Lime green";
+"swarmColors.limeGreen" = "Jeshile limoni";
 "swarmColors.mediumGray" = "Gri mesatare";
 "swarmColors.yellowGreen" = "E verdhë e gjelbër";
 "swarmColors.amber" = "Ngjyrë mjalti";

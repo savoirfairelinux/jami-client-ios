@@ -44,7 +44,7 @@
 "global.search" = "খোঁজ...";
 "global.supportJami" = "Support Jami project";
 "global.deleteMessage" = "বার্তা মুছে ফেলুন";
-"global.deleteFile" = "Delete file from device";
+"global.deleteFile" = "ডিভাইস থেকে ফাইল মুছুন";
 "global.editMessage" = "বার্তা সম্পাদনা করুন";
 "global.editing" = "Editing";
 "global.create" = "তৈরি করুন";
@@ -65,7 +65,7 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.addDescription" = "Add description";
+"swarmcreation.addDescription" = "বিবরণ যোগ করুন";
 // Swarm
 "swarm.muteConversation" = "নিঃশব্দ কথোপকথন";
 "swarm.leaveConversation" = "কথোপকথন ছেড়ে দিন";
@@ -74,17 +74,17 @@
 "swarm.restartConversation" = "Restart conversation";
 "swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "কথোপকথনের রঙ";
-"swarm.typeOfSwarm" = "Conversation type";
+"swarm.typeOfSwarm" = "কথোপকথনের ধরন";
 "swarm.identifier" = "সনাক্তকরণ";
 "swarm.conversationId" = "Conversation ID";
 "swarm.settings" = "সেটিং";
 "swarm.members" = "সদস্য";
-"swarm.addDescription" = "Add description";
+"swarm.addDescription" = "বিবরণ যোগ করুন";
 "swarm.titlePlaceholder" = "Enter title";
 "swarm.titleAlertHeader" = "Edit group title";
 "swarm.descriptionAlertHeader" = "Edit group description";
 "swarm.descriptionPlaceholder" = "Enter title";
-"swarm.contactHeader" = "Contact";
+"swarm.contactHeader" = "পরিচিতি";
 "swarm.showContactQRCode" = "Show contact QR code";
 "swarm.shareContactInfo" = "Share contact information";
 "swarm.accessibilityContactQRCode" = "Show contact QR code";
@@ -102,17 +102,17 @@
 "swarm.member" = "সদস্য";
 "swarm.invited" = "আমন্ত্রিত";
 "swarm.admin" = "প্রশাসক";
-"swarm.blocked" = "Blocked";
+"swarm.blocked" = "ব্লক করা হয়েছে";
 "swarm.unknown" = "অজানা";
 "swarm.left" = "Left";
-"swarm.inviteMembers" = "Invite members";
+"swarm.inviteMembers" = "সদস্যদের আমন্ত্রণ জানান";
 "swarm.inviteSelectedMembers" = "Invite selected contacts";
 "swarm.inviteMembersSelected" = "Selected";
 "swarm.inviteMembersNotSelected" = "Not selected";
-"swarm.confirmLeaveConversation" = "Do you want to leave this conversation?";
+"swarm.confirmLeaveConversation" = "আপনি কি এই কথোপকথনটি ছেড়ে যেতে চান?";
 "swarm.Leave" = "চলে যাও";
 "swarm.newGroup" = "নতুন গোষ্ঠী বানান";
-"swarm.namePlaceholder" = "Group name";
+"swarm.namePlaceholder" = "গ্রুপের নাম";
 "swarm.explanationText" = "Members can be invited at any time after the group has been created.";
 "swarm.customizeProfile" = "Customize group profile";
 "swarm.changePicture" = "Change group picture";
@@ -126,9 +126,12 @@
 // Smartlist
 "smartlist.yesterday" = "গতকাল";
 "smartlist.results" = "পাবলিক ডিরেক্টরি";
-"smartlist.jamsResults" = "Search result";
-"smartlist.jamsResults" = "Search result";
+"smartlist.jamsResults" = "Organization directory";
 "smartlist.conversations" = "কথোপকথন";
+"smartlist.conversationsSearchHint" = "You don't have any conversations yet.";
+"smartlist.publicDirectoryHint" = "People on Jami outside your contacts.";
+"smartlist.jamsDirectoryHint" = "People in your organization outside your contacts.";
+"smartlist.dialpad" = "Keypad";
 "smartlist.noConversationsFound" = "No conversations match the search.";
 "smartlist.newContact" = "New contact";
 "smartlist.newGroup" = "New group";
@@ -149,7 +152,7 @@
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "অ্যাকাউন্ট";
 "smartlist.disableDonation" = "এখন না";
-"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, do you want to make a donation?";
+"smartlist.donationExplanation" = "আপনি যদি Jami ব্যবহার করতে উপভোগ করেন এবং আমাদের লক্ষ্যে বিশ্বাস করেন, আপনি কি একটি দান করতে চান?";
 "smartlist.inSynchronization" = "Syncing…";
 
 // Conversation
@@ -164,7 +167,7 @@
 "conversation.photoAccessRequiredMessage" = "Jami needs access to your photo library to save images. You can enable this in Settings.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
 "conversation.incomingRequest" = "sent you a conversation invitation.";
-"conversation.requestMessage" = "Hello,\nDo you want to join the conversation?";
+"conversation.requestMessage" = "হ্যালো,\nআপনি কি কথোপকথনে যোগ দিতে চান?";
 "conversation.sendRequest" = "Send them an invitation to be able converse.";
 "conversation.sendRequestTitle" = "Send conversation invitation";
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
@@ -183,13 +186,13 @@
 "conversation.typingIndicatorTwoUsers" = "%1@ and %2@ are typing";
 "conversation.typingIndicatorOtherUsers" = "%1@, %2@ and %3@ other are typing";
 "conversation.typingIndicatorOthersUsers" = "%1@, %2@ and %3@ others are typing";
-"conversation.lastMessageDeleted" = "(deleted message)";
+"conversation.lastMessageDeleted" = "(মুছে ফেলা বার্তা)";
 
 // Invitations
 "invitations.noInvitations" = "আমন্ত্রণ নেই";
 "invitations.accepted" = "গ্রহণ করা হয়েছে";
 "invitations.declined" = "Declined";
-"invitations.blocked" = "Blocked";
+"invitations.blocked" = "ব্লক করা হয়েছে";
 "invitations.list" = "Invitations received";
 
 // Walkthrough
@@ -222,7 +225,7 @@
 "createAccount.UsernameNotRegisteredMessage" = "অ্যাকাউন্ট তৈরি করা হয়েছে কিন্তু ব্যবহারকারীর নাম নিবন্ধিত হয়নি";
 "createAccount.timeoutTitle" = "অ্যাকাউন্ট তৈরি করা হয়েছে";
 "createAccount.timeoutMessage" = "Username registration is in progress. Please wait…";
-"createAccount.sipConfigure" = "Configure existing SIP account";
+"createAccount.sipConfigure" = "বিদ্যমান SIP অ্যাকাউন্ট কনফিগার করুন";
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "আপনি অন্যদের সহজেই জামিতে আপনার কাছে পৌঁছাতে সাহায্য করার জন্য একটি ব্যবহারকারীর নাম নির্বাচন করতে পারেন।";
 "createAccount.newAccount" = "New account";
@@ -237,7 +240,7 @@
 "linkToAccount.showQrCode" = "QR কোড";
 "linkToAccount.showPinCode" = "Authentication code";
 "linkToAccount.actionRequired" = "Action required.\nPlease confirm account on the source device.";
-"linkToAccount.allSet" = "The account was imported successfully.";
+"linkToAccount.allSet" = "অ্যাকাউন্ট সফলভাবে আমদানি করা হয়েছে।";
 "linkToAccount.goToAccounts" = "Go to imported account";
 "linkToAccount.exportInstructions" = "On the source device, initiate the exportation.";
 "linkToAccount.exportInstructionsPath" = "Select Account → Account Settings → Link new device.";
@@ -251,7 +254,7 @@
 
 // Import from Archive
 "importFromArchive.explanation" = "স্থানীয় আর্কাইভ ফাইল থেকে জামি অ্যাকাউন্ট আমদানি করুন।";
-"importFromArchive.passwordExplanation" = "If the account is password protected, please fill the following field.";
+"importFromArchive.passwordExplanation" = "অ্যাকাউন্ট যদি পাসওয়ার্ড সুরক্ষিত হয়, অনুগ্রহ করে নিম্নলিখিত ক্ষেত্রটি পূরণ করুন।";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "আমদানি";
 "importFromArchive.selectArchiveButton" = "আর্কাইভ ফাইল নির্বাচন করুন";
@@ -259,9 +262,9 @@
 // Link to Jami Account Management Server (JAMS) form
 "linkToAccountManager.signIn" = "Sign in";
 "linkToAccountManager.title" = "Management server account";
-"linkToAccountManager.accountManagerPlaceholder" = "Management server URL";
-"linkToAccountManager.accountManagerLabel" = "Enter the management server URL";
-"linkToAccountManager.jamsExplanation" = "Enter the management server URL";
+"linkToAccountManager.accountManagerPlaceholder" = "ব্যবস্থাপনা সার্ভার URL";
+"linkToAccountManager.accountManagerLabel" = "ব্যবস্থাপনা সার্ভার URL লিখুন";
+"linkToAccountManager.jamsExplanation" = "ব্যবস্থাপনা সার্ভার URL লিখুন";
 "linkToAccountManager.enterCredentials" = "Enter the management server credentials";
 
 // Alerts
@@ -279,11 +282,11 @@
 "alerts.dbFailedMessage" = "দয়া করে আবেদনটি বন্ধ করে আবার খুলতে চেষ্টা করুন।";
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmDeleteConversation" = "Do you want to remove this conversation permanently?";
-"alerts.confirmLeaveConversation" = "Do you want to leave this conversation?";
+"alerts.confirmLeaveConversation" = "আপনি কি এই কথোপকথনটি ছেড়ে যেতে চান?";
 "alerts.confirmRemoveOneToOneConversation" = "Do you want to remove this conversation? The existing history will be deleted. A new conversation may be started if you do not have other conversations with this contact.";
 "alerts.confimRemoveContact" = "Do you want to remove this contact? The existing history will be deleted.";
 "alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "Delete conversation";
+"alerts.confirmDeleteConversationTitle" = "কথোপকথন মুছুন";
 "alerts.noMediaPermissionsTitle" = "মিডিয়া অনুমতি দেওয়া হয়নি";
 "alerts.noLibraryPermissionsTitle" = "ফটো লাইব্রেরিতে অ্যাক্সেস অনুমোদিত নয়";
 "alerts.noLocationPermissionsTitle" = "স্থান অ্যাক্সেস অনুমোদিত নয়";
@@ -320,12 +323,12 @@
 "calls.setModerator" = "সেট মডারেটর";
 "calls.removeModerator" = "অপসারণকারী";
 "calls.muteAudio" = "নিঃশব্দ মাইক্রোফোন";
-"calls.unmuteAudio" = "Unmute microphone";
+"calls.unmuteAudio" = "মাইক্রোফোনের শব্দ চালু করুন";
 "calls.lowerHand" = "নীচের হাত";
 "calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
 "calls.activeCallInConversation" = "একটা কল চলছে, তুমি কি যোগ দিতে চাও?";
-"calls.acceptWithAudio" = "Accept with audio";
-"calls.acceptWithVideo" = "Accept with video";
+"calls.acceptWithAudio" = "অডিও দিয়ে গ্রহণ করুন";
+"calls.acceptWithVideo" = "ভিডিও দিয়ে গ্রহণ করুন";
 
 // Account Page
 "accountPage.devicesListHeader" = "ডিভাইস";
@@ -337,14 +340,14 @@
 "accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "প্রক্সি ঠিকানা";
 "accountPage.useProxyList" = "Use proxy list";
-"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyListURL" = "প্রক্সি তালিকার URL";
 "accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
 "accountPage.proxyHeader" = "প্রক্সি";
 "accountPage.currentProxy" = "Current proxy";
 "accountPage.enableNotifications" = "বিজ্ঞপ্তি সক্ষম করুন";
 "accountPage.proxyDisabledAlertTitle" = "প্রক্সি সার্ভার অক্ষম";
 "accountPage.proxyDisabledAlertBody" = "বিজ্ঞপ্তি পেতে, প্রক্সি সক্ষম করুন";
-"accountPage.removeDeviceTitle" = "Remove device";
+"accountPage.removeDeviceTitle" = "ডিভাইস সরান";
 "accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "বাতিল";
 "accountPage.revokeDevicePlaceholder" = "অ্যাকাউন্টের পাসওয়ার্ড লিখুন";
@@ -357,7 +360,7 @@
 "accountPage.deviceRevocationError" = "ডিভাইস প্রত্যাহার ত্রুটি";
 "accountPage.linkDeviceTitle" = "অন্য ডিভাইস লিঙ্ক করুন";
 "accountPage.other" = "অন্যান্য";
-"accountPage.removeAccountMessage" = "If the account has not been backed up or added to another device, the account and registered username will be IRREVOCABLY LOST.";
+"accountPage.removeAccountMessage" = "যদি অ্যাকাউন্টটি ব্যাকআপ না করা হয় বা অন্য ডিভাইসে যোগ না করা হয়, তবে অ্যাকাউন্ট এবং নিবন্ধিত ব্যবহারকারীর নাম অপরিবর্তনীয়ভাবে হারিয়ে যাবে।";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "জামিতে আমার সাথে যোগাযোগ করুন!";
 "accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
@@ -368,7 +371,7 @@
 "accountPage.usernameRegisterAction" = "নিবন্ধন";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
 "accountPage.usernameRegistrationFailed" = "Please check the account password.";
-"accountPage.createPassword" = "Set password";
+"accountPage.createPassword" = "পাসওয়ার্ড সেট করুন";
 "accountPage.changePassword" = "পাসওয়ার্ড পরিবর্তন করুন";
 "accountPage.currentPasswordPlaceholder" = "বর্তমান পাসওয়ার্ড লিখুন";
 "accountPage.newPasswordPlaceholder" = "নতুন পাসওয়ার্ড লিখুন";
@@ -409,7 +412,7 @@
 "accountPage.editProfile" = "Edit Profile";
 "accountPage.manageAccount" = "অ্যাকাউন্ট পরিচালনা";
 "accountPage.encryptAccount" = "পাসওয়ার্ড";
-"accountPage.passwordExplanation" = "Your Jami account is registered only on this device as an archive containing the keys of your account. Access to this archive can be protected with a password.";
+"accountPage.passwordExplanation" = "আপনার Jami অ্যাকাউন্ট শুধুমাত্র এই ডিভাইসে আপনার অ্যাকাউন্টের কী ধারণকারী একটি সংরক্ষণাগার হিসাবে নিবন্ধিত। এই সংরক্ষণাগারে অ্যাক্সেস একটি পাসওয়ার্ড দিয়ে সুরক্ষিত করা যেতে পারে।";
 "accountPage.passwordsDoNotMatch" = "Passwords do not match.";
 "accountPage.passwordCreated" = "Password set";
 "accountPage.passwordUpdated" = "Password updated";
@@ -487,11 +490,11 @@
 // Link New Device
 "linkDevice.title" = "নতুন ডিভাইস লিঙ্ক";
 "linkDevice.networkError" = "A network error occurred while exporting the account.";
-"linkDevice.errorWrongPassword" = "An authentication error occurred while linking the device. Please check credentials and try again.";
-"linkDevice.errorNetwork" = "A network error occurred while linking the account. Please verify your connection and try again.";
-"linkDevice.errorTimeout" = "The operation timed out. Please try again.";
+"linkDevice.errorWrongPassword" = "ডিভাইস লিঙ্ক করার সময় একটি প্রমাণীকরণ ত্রুটি ঘটেছে। অনুগ্রহ করে শংসাপত্র পরীক্ষা করুন এবং আবার চেষ্টা করুন।";
+"linkDevice.errorNetwork" = "অ্যাকাউন্ট লিঙ্ক করার সময় একটি নেটওয়ার্ক ত্রুটি ঘটেছে। অনুগ্রহ করে আপনার সংযোগ যাচাই করুন এবং আবার চেষ্টা করুন।";
+"linkDevice.errorTimeout" = "অপারেশনের সময় শেষ হয়ে গেছে। অনুগ্রহ করে আবার চেষ্টা করুন।";
 "linkDevice.errorCode" = "An error occurred while generating the code. Please try again.";
-"linkDevice.errorWrongData" = "An error occurred while exporting the account. Please try again.";
+"linkDevice.errorWrongData" = "অ্যাকাউন্ট রপ্তানি করার সময় একটি ত্রুটি ঘটেছে। অনুগ্রহ করে আবার চেষ্টা করুন।";
 "linkDevice.initialInfo" = "On the new device, initiate a new account.";
 "linkDevice.infoAddAccount" = "Select Add Account → Connect from another device.";
 "linkDevice.infoQRCode" = "When ready, scan the QR code.";
@@ -500,7 +503,7 @@
 "linkDevice.authenticationInfo" = "New device found at the following IP address. Is that you? To continue the export account operation, tap Confirm.";
 "linkDevice.newDeviceIP" = "New device IP address: %1@";
 "linkDevice.code" = "code";
-"linkDevice.wrongEntry" = "Unrecognized new device identifier. Please follow the instructions above.";
+"linkDevice.wrongEntry" = "অচেনা নতুন ডিভাইস শনাক্তকারী। অনুগ্রহ করে উপরের নির্দেশাবলী অনুসরণ করুন।";
 "linkDevice.exportInProgress" = "The export account operation to the new device is in progress. Please confirm import on the new device.";
 "linkDevice.completed" = "The account was imported successfully on the new device.";
 
@@ -536,7 +539,7 @@
 "generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
 "generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
-"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.youJoined" = "আপনি কথোপকথনে যোগ দিয়েছেন।";
 "generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
 "generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "প্রস্থান কল";
@@ -558,7 +561,7 @@
 "generalSettings.limitLocationSharingDuration" = "অবস্থান ভাগ করার সময়সীমা সীমাবদ্ধ করুন";
 "generalSettings.locationSharingDuration" = "পজিশন শেয়ারের সময়কাল";
 "generalSettings.donationCampaign" = "Donation campaign";
-"generalSettings.enableDonationCampaign" = "Enable donation campaign";
+"generalSettings.enableDonationCampaign" = "দান অভিযান সক্ষম করুন";
 
 // Log View
 "logView.title" = "রোগ নির্ণয়";
@@ -584,12 +587,12 @@
 "aboutJami.noWarranty2" = "version 3 or later for details.";
 "aboutJami.contribute" = "অবদান";
 "aboutJami.feedback" = "প্রতিক্রিয়া";
-"aboutJami.developers" = "Developers";
+"aboutJami.developers" = "ডেভেলপার";
 "aboutJami.media" = "মিডিয়া";
-"aboutJami.communityManagement" = "Community Management";
-"aboutJami.specialThanks" = "Special thanks to";
-"aboutJami.info" = "This is a list of people who have made a significant investment of time, with useful results, into Jami. Any such contributors who want to be added to the list should contact us.";
-"aboutJami.header" = "We would like to thank our contributors, whose efforts over many years have made this software what it is.";
+"aboutJami.communityManagement" = "কমিউনিটি ব্যবস্থাপনা";
+"aboutJami.specialThanks" = "বিশেষ ধন্যবাদ";
+"aboutJami.info" = "এটি এমন ব্যক্তিদের একটি তালিকা যারা Jami-তে উপযোগী ফলাফল সহ উল্লেখযোগ্য সময় বিনিয়োগ করেছেন। তালিকায় যোগ হতে ইচ্ছুক এমন যেকোনো অবদানকারীর আমাদের সাথে যোগাযোগ করা উচিত।";
+"aboutJami.header" = "আমরা আমাদের অবদানকারীদের ধন্যবাদ জানাতে চাই, যাদের বহু বছরের প্রচেষ্টা এই সফটওয়্যারটিকে আজকের অবস্থানে এনেছে।";
 
 // Accessibility
 "accessibility.close" = "বন্ধ";
@@ -618,13 +621,13 @@
 "accessibility.conversationRowSyncing" = "Synchronization in progress";
 "accessibility.conversationRowLastMessage" = "Last message at %@";
 "accessibility.userPresenceOnline" = "অনলাইন";
-"accessibility.userPresenceAvailable" = "Available";
+"accessibility.userPresenceAvailable" = "উপলব্ধ";
 "accessibility.pendingRequestsRowPlural" = "Invitations received: %@ pending invitations";
 "accessibility.pendingRequestsRowSingular" = "Invitation received: %@ pending invitation";
 "accessibility.pendingRequestsRowHint" = "Double-tap to review and reply to invitations you received";
 "accessibility.pendingRequestsListBlockUser" = "Block invitation sender";
-"accessibility.pendingRequestsListRejectInvitation" = "Decline invitation";
-"accessibility.pendingRequestsListAcceptInvitation" = "Accept invitation";
+"accessibility.pendingRequestsListRejectInvitation" = "আমন্ত্রণ প্রত্যাখ্যান করুন";
+"accessibility.pendingRequestsListAcceptInvitation" = "আমন্ত্রণ গ্রহণ করুন";
 "accessibility.messageBubbleDeleted" = "Message deleted";
 "accessibility.messageBubbleEdited" = "সম্পাদনা";
 "accessibility.messageBubbleRead" = "Read";
@@ -638,7 +641,7 @@
 "accessibility.fileTransfer.sentOn" = "File: %1@, sent on %2@";
 "accessibility.call.lasted" = "Lasted %@";
 "accessibility.calls.default.toggleAudio" = "নিঃশব্দ মাইক্রোফোন";
-"accessibility.calls.default.toggleVideo" = "Start camera";
+"accessibility.calls.default.toggleVideo" = "ক্যামেরা চালু করুন";
 "accessibility.calls.default.pauseCall" = "বিরতি কল";
 "accessibility.calls.default.endCall" = "কল শেষ";
 "accessibility.calls.default.addParticipant" = "অংশগ্রহণকারী যোগ করুন";
@@ -648,7 +651,7 @@
 "accessibility.calls.default.showDialpad" = "Show dialpad";
 "accessibility.calls.default.raiseHand" = "হাত বাড়াও";
 
-"accessibility.calls.alter.toggleAudio" = "Unmute microphone";
+"accessibility.calls.alter.toggleAudio" = "মাইক্রোফোনের শব্দ চালু করুন";
 "accessibility.calls.alter.toggleVideo" = "স্টপ ক্যামেরা";
 "accessibility.calls.alter.pauseCall" = "পুনরায় কল";
 "accessibility.calls.alter.endCall" = "কল শেষ";

@@ -126,9 +126,12 @@
 // Smartlist
 "smartlist.yesterday" = "ഇന്നലെ";
 "smartlist.results" = "പൊതുവായ ഡയറക്ടറി";
-"smartlist.jamsResults" = "Search result";
-"smartlist.jamsResults" = "Search result";
+"smartlist.jamsResults" = "Organization directory";
 "smartlist.conversations" = "സംഭാഷണങ്ങൾ";
+"smartlist.conversationsSearchHint" = "You don't have any conversations yet.";
+"smartlist.publicDirectoryHint" = "People on Jami outside your contacts.";
+"smartlist.jamsDirectoryHint" = "People in your organization outside your contacts.";
+"smartlist.dialpad" = "Keypad";
 "smartlist.noConversationsFound" = "No conversations match the search.";
 "smartlist.newContact" = "New contact";
 "smartlist.newGroup" = "New group";
@@ -251,7 +254,7 @@
 
 // Import from Archive
 "importFromArchive.explanation" = "ജാമി അക്കൌണ്ട് പ്രാദേശിക ആർക്കൈവ് ഫയലിൽ നിന്നും ഇറക്കുമതി ചെയ്യുക.";
-"importFromArchive.passwordExplanation" = "If the account is password protected, please fill the following field.";
+"importFromArchive.passwordExplanation" = "അക്കൗണ്ട് പാസ്‌വേഡ് പരിരക്ഷിതമാണെങ്കിൽ, ദയവായി താഴെയുള്ള ഫീൽഡ് പൂരിപ്പിക്കുക.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "ഇറക്കുമതി";
 "importFromArchive.selectArchiveButton" = "ആർക്കൈവ് ഫയൽ തിരഞ്ഞെടുക്കുക";
@@ -259,9 +262,9 @@
 // Link to Jami Account Management Server (JAMS) form
 "linkToAccountManager.signIn" = "Sign in";
 "linkToAccountManager.title" = "Management server account";
-"linkToAccountManager.accountManagerPlaceholder" = "Management server URL";
-"linkToAccountManager.accountManagerLabel" = "Enter the management server URL";
-"linkToAccountManager.jamsExplanation" = "Enter the management server URL";
+"linkToAccountManager.accountManagerPlaceholder" = "മാനേജ്മെന്റ് സെർവർ URL";
+"linkToAccountManager.accountManagerLabel" = "മാനേജ്മെന്റ് സെർവർ URL നൽകുക";
+"linkToAccountManager.jamsExplanation" = "മാനേജ്മെന്റ് സെർവർ URL നൽകുക";
 "linkToAccountManager.enterCredentials" = "Enter the management server credentials";
 
 // Alerts
@@ -368,7 +371,7 @@
 "accountPage.usernameRegisterAction" = "രജിസ്റ്റർ ചെയ്യുക";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
 "accountPage.usernameRegistrationFailed" = "Please check the account password.";
-"accountPage.createPassword" = "Set password";
+"accountPage.createPassword" = "പാസ്‌വേഡ് സജ്ജമാക്കുക";
 "accountPage.changePassword" = "പാസ്വേഡ് മാറ്റുക";
 "accountPage.currentPasswordPlaceholder" = "നിലവിലെ പാസ്വേഡ് നൽകുക";
 "accountPage.newPasswordPlaceholder" = "പുതിയ പാസ്വേഡ് നൽകുക";

@@ -126,9 +126,12 @@
 // Smartlist
 "smartlist.yesterday" = "Včeraj";
 "smartlist.results" = "Javni imenik";
-"smartlist.jamsResults" = "Rezultati iskanja";
-"smartlist.jamsResults" = "Rezultati iskanja";
+"smartlist.jamsResults" = "Organization directory";
 "smartlist.conversations" = "Pogovori";
+"smartlist.conversationsSearchHint" = "You don't have any conversations yet.";
+"smartlist.publicDirectoryHint" = "People on Jami outside your contacts.";
+"smartlist.jamsDirectoryHint" = "People in your organization outside your contacts.";
+"smartlist.dialpad" = "Keypad";
 "smartlist.noConversationsFound" = "Noben pogovor se ne ujema z vašim iskanim nizom.";
 "smartlist.newContact" = "Nov stik";
 "smartlist.newGroup" = "Nova skupina";
@@ -150,7 +153,7 @@
 "smartlist.accounts" = "Računi";
 "smartlist.disableDonation" = "Ne zdaj";
 "smartlist.donationExplanation" = "Če vam je Jami všeč in verjamete v naše poslanstvo - bi prispevali projektu?";
-"smartlist.inSynchronization" = "Syncing…";
+"smartlist.inSynchronization" = "Sinhroniziranje…";
 
 // Conversation
 "conversation.addToContactsButton" = "Dodaj med stike";
@@ -158,17 +161,17 @@
 "conversation.addToContactsLabel" = "Dodam med stike?";
 "conversation.notContactLabel" = "%@ ni na seznamu stikov.";
 "conversation.messagePlaceholder" = "Piši";
-"conversation.imageSaved" = "Saved";
-"conversation.errorSavingImage" = "Could not save image";
-"conversation.errorSavingImageMessage" = "An error occurred while saving the image to the photo library.";
-"conversation.photoAccessRequiredMessage" = "Jami needs access to your photo library to save images. You can enable this in Settings.";
+"conversation.imageSaved" = "Shranjeno";
+"conversation.errorSavingImage" = "Slike ni mogoče shraniti";
+"conversation.errorSavingImageMessage" = "Pri shranjevanju slike v knjižnico fotografij je prišlo do napake.";
+"conversation.photoAccessRequiredMessage" = "Jami potrebuje dostop do vaše knjižnice fotografij za shranjevanje slik. To lahko omogočite v Nastavitvah.";
 "conversation.receivedRequest" = "%@ vam je poslal(a) povabilo na pogovor.";
 "conversation.incomingRequest" = "vam je poslal(a) povabilo na pogovor.";
 "conversation.requestMessage" = "Pozdravljeni,\nse želite pridružiti pogovoru?";
 "conversation.sendRequest" = "Pošljite jim povabilo, da se boste lahko pogovarjali.";
 "conversation.sendRequestTitle" = "Pošlji vabilo na pogovor";
 "conversation.synchronizationTitle" = "Sprejeli ste vabilo na pogovor.";
-"conversation.syncingTitle" = "Syncing conversation";
+"conversation.syncingTitle" = "Sinhroniziranje pogovora";
 "conversation.synchronizationMessage" = "Čakamo, da se %@ poveže, da sinhroniziramo pogovor ...";
 "conversation.inReplyTo" = "Kot odgovor";
 "conversation.repliedTo" = "%@ je odgovoril_a %@";
@@ -340,7 +343,7 @@
 "accountPage.proxyListURL" = "URL posredniškega strežnika";
 "accountPage.proxyExplanation" = "Obvestila so usmerjena prek posredniškega strežnika. Uporabite lahko privzeti posredni strežnika, vnesete naslov posrednega strežnika po meri ali podate URL s seznamom posrednih strežnikov.";
 "accountPage.proxyHeader" = "Posredniški strežnik";
-"accountPage.currentProxy" = "Current proxy";
+"accountPage.currentProxy" = "Trenutni posredniški strežnik";
 "accountPage.enableNotifications" = "Omogoči obvestila";
 "accountPage.proxyDisabledAlertTitle" = "Posredniški strežnik je onemogočen";
 "accountPage.proxyDisabledAlertBody" = "Če želite prejemati obvestila, omogočite posredniški strežnik";
@@ -393,7 +396,7 @@
 "accountPage.stunEnabled" = "Uporabi STUN";
 "accountPage.stunServer" = "Naslov STUN";
 "accountPage.publicAddressHeader" = "Javni naslov";
-"accountPage.allowIPAutoRewrite" = "Allow IP auto rewrite";
+"accountPage.allowIPAutoRewrite" = "Dovoli samodejno prepisovanje IP-naslova";
 "accountPage.publishedSameAsLocal" = "Objavljen enako kot krajevni";
 "accountPage.publishedAddress" = "Naslov";
 "accountPage.publishedPort" = "Vrata";
@@ -411,7 +414,7 @@
 "accountPage.encryptAccount" = "Geslo";
 "accountPage.passwordExplanation" = "Vaš račun Jami je registriran samo na tej napravi kot arhiv, ki vsebuje ključe vašega računa. Dostop do tega arhiva lahko zaščitite z geslom.";
 "accountPage.passwordsDoNotMatch" = "Gesli se ne ujemata.";
-"accountPage.passwordCreated" = "Password set";
+"accountPage.passwordCreated" = "Geslo nastavljeno";
 "accountPage.passwordUpdated" = "Geslo posodobljeno";
 "accountPage.linkedDevices" = "Povezane naprave";
 "accountPage.unlink" = "Odstrani povezavo";
@@ -434,9 +437,9 @@
 "accountPage.tlsDisableSecureDlgCheck" = "Onemogoči varno preverjanje pogovornega okna za dohodne podatke TLS";
 "accountPage.editSipExpirationTime" = "Čas poteka";
 "accountPage.selectSipExpirationTime" = "Določite čas (v s) za potek registracije";
-"accountPage.invalidSipExpirationTime" = "Enter a value between 60 and 604800 seconds";
-"accountPage.invalidPort" = "Enter a value between 0 and 65535";
-"accountPage.invalidAddress" = "Enter a valid address";
+"accountPage.invalidSipExpirationTime" = "Vnesite vrednost med 60 in 604800 sekundami";
+"accountPage.invalidPort" = "Vnesite vrednost med 0 in 65535";
+"accountPage.invalidAddress" = "Vnesite veljaven naslov";
 "accountPage.thisDevice" = "Ta naprava";
 "accountPage.otherDevices" = "Druge povezane naprave";
 "accountPage.accountIdentity" = "Identiteta računa";
@@ -703,13 +706,13 @@
 "shareExtension.accessibilitySelectAccount" = "Dvakrat tapnite, da izberete ta račun";
 
 // Peer Services
-"peerServices.title" = "Shared Services";
-"peerServices.refresh" = "Refresh services";
-"peerServices.empty" = "No shared services available";
-"peerServices.errorOffline" = "Contact is offline";
-"peerServices.errorUnreachable" = "Contact is unreachable";
-"peerServices.errorTimeout" = "Request timed out";
-"peerServices.errorUnknown" = "Could not retrieve services";
+"peerServices.title" = "Skupne storitve";
+"peerServices.refresh" = "Osveži storitve";
+"peerServices.empty" = "Ni razpoložljivih skupnih storitev";
+"peerServices.errorOffline" = "Stik ni povezan";
+"peerServices.errorUnreachable" = "Stik ni dosegljiv";
+"peerServices.errorTimeout" = "Zahteva je potekla";
+"peerServices.errorUnknown" = "Storitev ni bilo mogoče pridobiti";
 "peerServices.done" = "Opravljeno";
-"peerServices.notSupported" = "Not supported";
+"peerServices.notSupported" = "Ni podprto";
 "peerServices.open" = "Odpri";

@@ -126,9 +126,12 @@
 // Smartlist
 "smartlist.yesterday" = "Gestern";
 "smartlist.results" = "Öffentliches Verzeichnis";
-"smartlist.jamsResults" = "Suchergebnis";
-"smartlist.jamsResults" = "Suchergebnis";
+"smartlist.jamsResults" = "Organization directory";
 "smartlist.conversations" = "Unterhaltungen";
+"smartlist.conversationsSearchHint" = "You don't have any conversations yet.";
+"smartlist.publicDirectoryHint" = "People on Jami outside your contacts.";
+"smartlist.jamsDirectoryHint" = "People in your organization outside your contacts.";
+"smartlist.dialpad" = "Keypad";
 "smartlist.noConversationsFound" = "Keine Unterhaltungen entsprechen der Suche.";
 "smartlist.newContact" = "Neuer Kontakt";
 "smartlist.newGroup" = "Neue Gruppe";
@@ -703,9 +706,9 @@
 "shareExtension.accessibilitySelectAccount" = "Doppeltippen, um dieses Konto auszuwählen.";
 
 // Peer Services
-"peerServices.title" = "Gemeinsam genutzte Dienste";
+"peerServices.title" = "Geteilte Dienste";
 "peerServices.refresh" = "Dienste aktualisieren";
-"peerServices.empty" = "Keine gemeinsam genutzten Dienste verfügbar";
+"peerServices.empty" = "Keine geteilten Dienste verfügbar";
 "peerServices.errorOffline" = "Kontakt ist offline";
 "peerServices.errorUnreachable" = "Kontakt ist nicht erreichbar";
 "peerServices.errorTimeout" = "Zeitüberschreitung der Anfrage";

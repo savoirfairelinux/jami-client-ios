@@ -126,9 +126,12 @@
 // Smartlist
 "smartlist.yesterday" = "Ieri";
 "smartlist.results" = "Elenco pubblico";
-"smartlist.jamsResults" = "Risultati ricerca";
-"smartlist.jamsResults" = "Risultati ricerca";
+"smartlist.jamsResults" = "Organization directory";
 "smartlist.conversations" = "Conversazioni";
+"smartlist.conversationsSearchHint" = "You don't have any conversations yet.";
+"smartlist.publicDirectoryHint" = "People on Jami outside your contacts.";
+"smartlist.jamsDirectoryHint" = "People in your organization outside your contacts.";
+"smartlist.dialpad" = "Keypad";
 "smartlist.noConversationsFound" = "Nessuna conversazione corrisponde.";
 "smartlist.newContact" = "Nuovo contatto";
 "smartlist.newGroup" = "Nuovo gruppo";
@@ -393,7 +396,7 @@
 "accountPage.stunEnabled" = "Utilizza STUN";
 "accountPage.stunServer" = "Indirizzo STUN";
 "accountPage.publicAddressHeader" = "Indirizzo pubblico";
-"accountPage.allowIPAutoRewrite" = "Allow IP auto rewrite";
+"accountPage.allowIPAutoRewrite" = "Consenti la riscrittura automatica dell'IP";
 "accountPage.publishedSameAsLocal" = "Pubblico uguale a quello locale";
 "accountPage.publishedAddress" = "Indirizzo";
 "accountPage.publishedPort" = "Porta";
@@ -434,9 +437,9 @@
 "accountPage.tlsDisableSecureDlgCheck" = "Disattiva il controllo della finestra di dialogo sicura per i dati TLS in arrivo";
 "accountPage.editSipExpirationTime" = "Scadenza";
 "accountPage.selectSipExpirationTime" = " Scadenza della registrazione (secondi)";
-"accountPage.invalidSipExpirationTime" = "Enter a value between 60 and 604800 seconds";
-"accountPage.invalidPort" = "Enter a value between 0 and 65535";
-"accountPage.invalidAddress" = "Enter a valid address";
+"accountPage.invalidSipExpirationTime" = "Inserisci un valore compreso tra 60 e 604800 secondi";
+"accountPage.invalidPort" = "Inserisci un valore compreso tra 0 e 65535";
+"accountPage.invalidAddress" = "Inserisci un indirizzo valido";
 "accountPage.thisDevice" = "Questo dispositivo";
 "accountPage.otherDevices" = "Altri dispositivi associati";
 "accountPage.accountIdentity" = "Identità dell'account";
@@ -703,13 +706,13 @@
 "shareExtension.accessibilitySelectAccount" = "Tocca due volte per selezionare questo account";
 
 // Peer Services
-"peerServices.title" = "Shared Services";
-"peerServices.refresh" = "Refresh services";
-"peerServices.empty" = "No shared services available";
-"peerServices.errorOffline" = "Contact is offline";
-"peerServices.errorUnreachable" = "Contact is unreachable";
-"peerServices.errorTimeout" = "Request timed out";
-"peerServices.errorUnknown" = "Could not retrieve services";
+"peerServices.title" = "Servizi condivisi";
+"peerServices.refresh" = "Aggiorna i servizi";
+"peerServices.empty" = "Nessun servizio condiviso disponibile";
+"peerServices.errorOffline" = "Il contatto è offline";
+"peerServices.errorUnreachable" = "Il contatto è irraggiungibile";
+"peerServices.errorTimeout" = "Richiesta scaduta";
+"peerServices.errorUnknown" = "Impossibile recuperare i servizi";
 "peerServices.done" = "Fatto";
-"peerServices.notSupported" = "Not supported";
+"peerServices.notSupported" = "Non supportato";
 "peerServices.open" = "Apri";
