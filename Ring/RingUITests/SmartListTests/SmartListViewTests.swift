@@ -22,15 +22,10 @@ final class SmartListViewTests: JamiBaseOneAccountUITest {
 
     var smartListViewPage: SmartListViewPage!
 
-    private static var isAppLaunched = false
-
     override func setUpWithError() throws {
         try super.setUpWithError()
 
-        if !SmartListViewTests.isAppLaunched {
-            app.launch()
-            SmartListViewTests.isAppLaunched = true
-        }
+        app.launch()
         smartListViewPage = SmartListViewPage(app: app)
     }
 
