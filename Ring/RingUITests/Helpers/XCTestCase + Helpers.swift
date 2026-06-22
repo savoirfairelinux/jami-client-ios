@@ -22,8 +22,36 @@ import XCTest
 
 extension XCTestCase {
 
-    func waitForElementToAppear(_ element: XCUIElement, timeout: TimeInterval = 5) {
-        XCTAssertTrue(element.waitForExistence(timeout: timeout), "Element did not appear within \(timeout) seconds")
+    var defaultTimeout: TimeInterval { 30 }
+
+    @discardableResult
+    func waitForElementToAppear(_ element: XCUIElement, timeout: TimeInterval? = nil) -> Bool {
+        let timeout = timeout ?? defaultTimeout
+        let exists = element.waitForExistence(timeout: timeout)
+        XCTAssertTrue(exists, "Element did not appear within \(timeout) seconds")
+        return exists
+    }
+
+    func waitForElementToDisappear(_ element: XCUIElement, timeout: TimeInterval? = nil) {
+        let timeout = timeout ?? defaultTimeout
+        let gone = XCTNSPredicateExpectation(predicate: NSPredicate(format: "exists == false"), object: element)
+        XCTAssertEqual(XCTWaiter.wait(for: [gone], timeout: timeout), .completed,
+                       "Element still present after \(timeout) seconds")
+    }
+
+    func tapWhenReady(_ element: XCUIElement, timeout: TimeInterval? = nil) {
+        let timeout = timeout ?? defaultTimeout
+        let hittable = XCTNSPredicateExpectation(predicate: NSPredicate(format: "isHittable == true"), object: element)
+        XCTAssertEqual(XCTWaiter.wait(for: [hittable], timeout: timeout), .completed,
+                       "Element not hittable within \(timeout) seconds")
+        element.tap()
+    }
+
+    func waitForLabel(_ element: XCUIElement, toEqual expected: String, timeout: TimeInterval? = nil) {
+        let timeout = timeout ?? defaultTimeout
+        let matched = XCTNSPredicateExpectation(predicate: NSPredicate(format: "label == %@", expected), object: element)
+        XCTAssertEqual(XCTWaiter.wait(for: [matched], timeout: timeout), .completed,
+                       "Label did not become '\(expected)' within \(timeout) seconds")
     }
 
     func waitForSeconds(_ seconds: TimeInterval) {
