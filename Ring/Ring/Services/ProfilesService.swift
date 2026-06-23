@@ -198,8 +198,10 @@ class ProfilesService {
             .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe { profile in
                 profileObservable.onNext(profile)
-            } onError: { error in
-                profileObservable.onError(error)
+            } onError: { [weak self] error in
+                // Emit an empty profile instead of erroring so the cached subject stays alive for a later real profile.
+                self?.log.debug("No profile for \(uri): \(error). Emitting empty placeholder.")
+                profileObservable.onNext(Profile.empty)
             }
             .disposed(by: self.disposeBag)
     }
@@ -242,8 +244,9 @@ extension ProfilesService {
             .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe(onNext: { profile in
                 profileObservable.onNext(profile)
-            }, onError: { (_) in
-                profileObservable.onNext(Profile(uri: "", alias: nil, photo: nil, type: ""))
+            }, onError: { [weak self] error in
+                self?.log.debug("No account profile for \(accountId): \(error). Emitting empty placeholder.")
+                profileObservable.onNext(Profile.empty)
             })
             .disposed(by: self.disposeBag)
     }
