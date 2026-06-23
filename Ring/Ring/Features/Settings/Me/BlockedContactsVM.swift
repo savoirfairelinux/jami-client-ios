@@ -63,7 +63,7 @@ class BlockedContactsRowVM: AvatarProvider, Identifiable {
                         }
                     }
 
-                    if let name = profile.alias {
+                    if let name = profile.alias, !name.isEmpty {
                         DispatchQueue.main.async { [weak self] in
                             guard let self = self else { return }
                             self.profileName = name

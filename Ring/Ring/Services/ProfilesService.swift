@@ -62,13 +62,19 @@ class ProfilesService {
 
     let dbManager: DBManager
 
+    // Injectable so tests can resolve synchronously instead of racing a background queue.
+    private let scheduler: ImmediateSchedulerType
+
     let disposeBag = DisposeBag()
 
-    init(withProfilesAdapter adapter: ProfilesAdapter, dbManager: DBManager) {
+    init(withProfilesAdapter adapter: ProfilesAdapter,
+         dbManager: DBManager,
+         scheduler: ImmediateSchedulerType = ConcurrentDispatchQueueScheduler(qos: .background)) {
         self.profiles = ThreadSafeDictionary(lock: profilesLock)
         self.accountProfiles = ThreadSafeDictionary(lock: profilesLock)
         profilesAdapter = adapter
         self.dbManager = dbManager
+        self.scheduler = scheduler
         NotificationCenter.default.addObserver(self, selector: #selector(self.messageReceived(_:)),
                                                name: NSNotification.Name(rawValue: ProfileNotifications.messageReceived.rawValue),
                                                object: nil)
@@ -195,11 +201,13 @@ class ProfilesService {
         }
         self.dbManager
             .profileObservable(for: uri, createIfNotExists: createIfNotexists, accountId: accountId)
-            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
+            .subscribe(on: self.scheduler)
             .subscribe { profile in
                 profileObservable.onNext(profile)
-            } onError: { error in
-                profileObservable.onError(error)
+            } onError: { [weak self] error in
+                // Emit an empty profile instead of erroring so the cached subject stays alive for a later real profile.
+                self?.log.debug("No profile for \(uri): \(error). Emitting empty placeholder.")
+                profileObservable.onNext(Profile.empty)
             }
             .disposed(by: self.disposeBag)
     }
@@ -209,11 +217,13 @@ class ProfilesService {
             ReplaySubject<Profile>.create(bufferSize: 1)
         }
         if inserted {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+            self.scheduler.schedule(()) { [weak self] _ in
                 self?.triggerProfileSignal(uri: uri,
                                            createIfNotexists: createIfNotexists,
                                            accountId: accountId)
+                return Disposables.create()
             }
+            .disposed(by: self.disposeBag)
         }
         return subject.asObservable().share()
     }
@@ -226,9 +236,11 @@ extension ProfilesService {
             ReplaySubject<Profile>.create(bufferSize: 1)
         }
         if inserted {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+            self.scheduler.schedule(()) { [weak self] _ in
                 self?.triggerAccountProfileSignal(accountId: accountId)
+                return Disposables.create()
             }
+            .disposed(by: self.disposeBag)
         }
         return subject.asObservable().share()
     }
@@ -239,11 +251,12 @@ extension ProfilesService {
         }
         self.dbManager
             .accountProfileObservable(for: accountId)
-            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
+            .subscribe(on: self.scheduler)
             .subscribe(onNext: { profile in
                 profileObservable.onNext(profile)
-            }, onError: { (_) in
-                profileObservable.onNext(Profile(uri: "", alias: nil, photo: nil, type: ""))
+            }, onError: { [weak self] error in
+                self?.log.debug("No account profile for \(accountId): \(error). Emitting empty placeholder.")
+                profileObservable.onNext(Profile.empty)
             })
             .disposed(by: self.disposeBag)
     }

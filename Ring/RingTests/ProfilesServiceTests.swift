@@ -50,7 +50,10 @@ final class ProfilesServiceTests: XCTestCase {
                                  conversationHelper: ConversationDataHelper(),
                                  interactionHepler: InteractionDataHelper(),
                                  dbConnections: DBContainer())
-        service = ProfilesService(withProfilesAdapter: ProfilesAdapter(), dbManager: database)
+        // Resolve synchronously instead of racing a background queue under a timeout.
+        service = ProfilesService(withProfilesAdapter: ProfilesAdapter(),
+                                  dbManager: database,
+                                  scheduler: CurrentThreadScheduler.instance)
         bag = DisposeBag()
     }
 
@@ -68,8 +71,6 @@ final class ProfilesServiceTests: XCTestCase {
         database.seed[.init(uri: uri, accountId: accountId2)] =
             Profile(uri: uri, alias: profileName2, photo: nil, type: ProfileType.ring.rawValue)
 
-        let exp1 = expectation(description: "account 1 resolved")
-        let exp2 = expectation(description: "account 2 resolved")
         var alias1: String?
         var alias2: String?
 
@@ -79,7 +80,6 @@ final class ProfilesServiceTests: XCTestCase {
             .take(1)
             .subscribe(onNext: { profile in
                 alias1 = profile.alias
-                exp1.fulfill()
             })
             .disposed(by: bag)
 
@@ -89,11 +89,8 @@ final class ProfilesServiceTests: XCTestCase {
             .take(1)
             .subscribe(onNext: { profile in
                 alias2 = profile.alias
-                exp2.fulfill()
             })
             .disposed(by: bag)
-
-        wait(for: [exp1, exp2], timeout: 2.0)
 
         XCTAssertEqual(alias1, profileName1,
                        "account 1 should resolve to its own seeded profile")

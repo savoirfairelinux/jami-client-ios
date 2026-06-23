@@ -45,6 +45,10 @@ struct Profile {
     var alias: String?
     var photo: String?
     var type: String
+
+    static var empty: Profile {
+        Profile(uri: "", alias: nil, photo: nil, type: "")
+    }
 }
 
 enum ProfileType: String {
