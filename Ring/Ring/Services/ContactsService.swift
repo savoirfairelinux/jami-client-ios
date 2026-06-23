@@ -61,7 +61,7 @@ class ContactsService {
             self.loadSipContacts(withAccount: account)
             return
         }
-        loadAndSaveJamiContacts(withAccount: account)
+        loadJamiContacts(withAccountId: account.id)
     }
 
     private func loadSipContacts(withAccount account: AccountModel) {
@@ -78,16 +78,6 @@ class ContactsService {
         }
         self.contacts.accept(values)
     }
-    private func loadAndSaveJamiContacts(withAccount account: AccountModel) {
-        self.loadJamiContacts(withAccountId: account.id)
-        if account.isJams {
-            self.contacts.value.forEach { (contact) in
-                guard let uriString = contact.uriString else { return }
-                _ = dbManager.createConversationsFor(contactUri: uriString, accountId: account.id)
-            }
-        }
-    }
-
     private func loadJamiContacts(withAccountId accountId: String) {
         // Load contacts from daemon
         let contactsDictionaries = self.contactsAdapter.contacts(withAccountId: accountId)
@@ -104,17 +94,6 @@ class ContactsService {
             self.contacts.accept(values)
         }
     }
-    /**
-     Create a conversations for a linked account. If a conversation is swarm, conversationReady signal will be received and conversation for contact should be removed from the db.
-     */
-    func saveContactsForLinkedAccount(accountId: String) {
-        loadJamiContacts(withAccountId: accountId)
-        self.contacts.value.forEach { (contact) in
-            guard let uriString = contact.uriString else { return }
-            _ = dbManager.createConversationsFor(contactUri: uriString, accountId: accountId)
-        }
-    }
-
     // MARK: contact getter
 
     func contact(withUri uri: String) -> ContactModel? {
