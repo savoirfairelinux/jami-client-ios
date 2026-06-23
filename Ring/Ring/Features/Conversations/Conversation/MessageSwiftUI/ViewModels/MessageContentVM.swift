@@ -140,6 +140,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     var fileSize: Int64 = 0
     var transferStatus: DataTransferStatus = .unknown
     var dataTransferProgressUpdater: Timer?
+    private var isLoadingThumbnail = false
 
     // view parameters
     var borderColor: Color = .clear
@@ -458,7 +459,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
         }
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            _ = self.getImage(maxSize: self.imageSize)
+            self.loadThumbnailIfNeeded()
         }
     }
 
@@ -641,26 +642,22 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
         return self.url?.pathExtension == "gif"
     }
 
-    func getImage(maxSize: CGFloat) -> UIImage? {
-        guard let url = self.url else { return nil }
-
-        // If maxSize is 0, load the biggest size possible for preview
-        if maxSize == 0 {
-            return loadImage(from: url, withMaxSize: maxSize)
+    func loadThumbnailIfNeeded() {
+        guard self.type == .fileTransfer, self.finalImage == nil,
+              !self.isLoadingThumbnail, let url = self.url else { return }
+        self.isLoadingThumbnail = true
+        let maxSize = self.imageSize
+        let isGif = self.isGifImage()
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            let image = isGif
+                ? UIImage.gifImageWithUrl(url, maxSize: maxSize)
+                : UIImage.getImagefromURL(fileURL: url, maxSize: maxSize)
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                self.finalImage = image
+                self.isLoadingThumbnail = false
+            }
         }
-
-        // Return cached image if available
-        if let image = self.finalImage {
-            return image
-        }
-
-        // Load and cache the image
-        self.finalImage = loadImage(from: url, withMaxSize: maxSize)
-        return self.finalImage
-    }
-
-    private func loadImage(from url: URL, withMaxSize maxSize: CGFloat) -> UIImage? {
-        return isGifImage() ? UIImage.gifImageWithUrl(url, maxSize: maxSize) : UIImage.getImagefromURL(fileURL: url, maxSize: maxSize)
     }
 
     var maxDimension: CGFloat {
@@ -684,7 +681,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
         if self.type == .fileTransfer {
             self.transferState.onNext(TransferState.getPlayer(viewModel: self))
             self.transferState.onNext(TransferState.getURL(viewModel: self))
-            _ = getImage(maxSize: self.imageSize)
+            loadThumbnailIfNeeded()
         }
         updateMenuitems()
     }
