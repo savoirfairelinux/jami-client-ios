@@ -198,8 +198,12 @@ class ProfilesService {
             .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe { profile in
                 profileObservable.onNext(profile)
-            } onError: { error in
-                profileObservable.onError(error)
+            } onError: { _ in
+                // No vCard on disk yet. Emit an empty profile instead of erroring so the subject
+                // stays alive: a later profileReceived -> triggerProfileSignal can then deliver the
+                // real profile to existing subscribers (e.g. swarm member vCards that sync after the
+                // conversation opens). Mirrors triggerAccountProfileSignal.
+                profileObservable.onNext(Profile(uri: "", alias: nil, photo: nil, type: ""))
             }
             .disposed(by: self.disposeBag)
     }
