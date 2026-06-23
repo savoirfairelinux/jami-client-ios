@@ -1123,6 +1123,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
             .subscribe(onNext: { [weak self] lookupNameResponse in
                 guard let self = self else { return }
                 // Update name
+                if !(self.names[id]?.value.isEmpty ?? true) { return }
                 if let name = lookupNameResponse.name, !name.isEmpty {
                     self.updateName(name: name, jamiId: id)
                 } else {
@@ -1137,13 +1138,6 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
         DispatchQueue.global(qos: .background).async {[weak self] in
             guard let self = self else { return }
             guard let account = self.accountService.getAccount(fromAccountId: self.conversation.accountId) else { return }
-            if self.contactsService.contact(withHash: id) == nil {
-                DispatchQueue.main.async { [weak self] in
-                    self?.updateName(name: id, jamiId: id)
-                    self?.nameLookup(id: id)
-                }
-                return
-            }
             let schema: URIType = account.type == .sip ? .sip : .ring
             guard let contactURI = JamiURI(schema: schema, infoHash: id).uriString else { return }
             self.profileService
@@ -1159,12 +1153,11 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
                     if let data = profile.photo?.toImageData() {
                         self.updateAvatar(imageData: data, jamiId: id)
                     }
-                    let name = self.names[id]?.value
-                    if name?.isEmpty ?? true {
-                        self.nameLookup(id: id)
-                    }
-                })
+                }, onError: { _ in })
                 .disposed(by: self.disposeBag)
+            DispatchQueue.main.async { [weak self] in
+                self?.nameLookup(id: id)
+            }
         }
     }
 
