@@ -201,8 +201,13 @@ do
   echo "DEVPATH: $DEVPATH"
   echo "MIN_IOS: $MIN_IOS"
 
+  CACHE_ARGS=""
+  if [ -d "${CACHE_DIR:-}" ]; then
+    CACHE_ARGS="--cache-dir=$CACHE_DIR --cache-builds"
+  fi
+
   # Pass IOS_TARGET_PLATFORM to bootstrap so it can be used in rules.mak files
-  SDKROOT="$SDKROOT" ../bootstrap --host="$HOST" --disable-libav --disable-plugin --disable-libarchive --enable-ffmpeg --prefix="$CONTRIB_FOLDER"
+  SDKROOT="$SDKROOT" ../bootstrap --host="$HOST" --disable-libav --disable-plugin --disable-libarchive --enable-ffmpeg --prefix="$CONTRIB_FOLDER" $CACHE_ARGS
 
   echo "Building contrib"
   make fetch
