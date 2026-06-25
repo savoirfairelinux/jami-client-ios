@@ -271,7 +271,7 @@ static id <AccountAdapterDelegate> _delegate;
     updateProfile(std::string([accountId UTF8String]),
                   std::string([displayName UTF8String]),
                   std::string([avatar UTF8String]),
-                  std::string([fileType UTF8String]), 1);
+                  std::string([fileType UTF8String]), "", 1);
 }
 
 -(void)setAccountsActive:(BOOL) active {
