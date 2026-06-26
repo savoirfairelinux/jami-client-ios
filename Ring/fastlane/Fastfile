@@ -74,6 +74,15 @@ platform :ios do
     end
   end
 
+  desc "Runs unit tests only"
+  lane :unit do
+    run_tests(
+      scheme: "Ring",
+      only_testing: ["RingTests"],
+      number_of_retries: 1
+    )
+  end
+
   desc "Test build without packaging"
   lane :build do
     unlock_keychain
