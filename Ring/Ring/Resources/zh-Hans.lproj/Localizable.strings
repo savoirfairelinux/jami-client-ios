@@ -126,9 +126,12 @@
 // Smartlist
 "smartlist.yesterday" = "昨天";
 "smartlist.results" = "公開目錄";
-"smartlist.jamsResults" = "";
-"smartlist.jamsResults" = "";
+"smartlist.jamsResults" = "组织目录";
 "smartlist.conversations" = "對話";
+"smartlist.conversationsSearchHint" = "你还没有任何对话。";
+"smartlist.publicDirectoryHint" = "不在联系人列表中的jami用户。";
+"smartlist.jamsDirectoryHint" = "您组织中不在您的联系人列表中的人员。";
+"smartlist.dialpad" = "键盘";
 "smartlist.noConversationsFound" = "";
 "smartlist.newContact" = "";
 "smartlist.newGroup" = "";

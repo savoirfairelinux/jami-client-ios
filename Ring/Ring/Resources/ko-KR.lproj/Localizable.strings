@@ -51,7 +51,7 @@
 "global.edit" = "편집";
 "global.remove" = "제거";
 "global.call" = "통화";
-"global.video" = "비디오";
+"global.video" = "영상";
 "global.time" = "시간";
 "global.editPassword" = "암호 수정";
 "global.confirmPassword" = "암호 확인";
@@ -64,7 +64,7 @@
 "scan.badQrCode" = "나쁜 QR 코드";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "Search for contact…";
+"swarmcreation.searchBar" = "연락처 검색…";
 "swarmcreation.addDescription" = "설명 추가";
 // Swarm
 "swarm.muteConversation" = "침묵의 대화";
@@ -88,12 +88,12 @@
 "swarm.showContactQRCode" = "연락처 QR 코드 표시";
 "swarm.shareContactInfo" = "연락처 정보 공유";
 "swarm.accessibilityContactQRCode" = "연락처 QR 코드 표시";
-"swarm.accessibilityContactQRCodeHint" = "Opens a screen with contact's QR code";
-"swarm.accessibilityContactShareHint" = "Opens sharing options for contact information";
-"swarm.accessibilityColorPicker" = "Conversation color picker";
+"swarm.accessibilityContactQRCodeHint" = "연락처의 QR 코드 화면을 엽니다";
+"swarm.accessibilityContactShareHint" = "연락처 정보 공유 옵션을 엽니다";
+"swarm.accessibilityColorPicker" = "대화 색상 선택기";
 "swarm.editTextHint" = "더블 탭하여 수정";
 "swarm.conversationHeader" = "대화";
-"swarm.shareContactMessage" = "You can add this contact, %1@, on the Jami distributed communication platform: https://jami.net";
+"swarm.shareContactMessage" = "Jami 분산 통신 플랫폼에서 이 연락처 %1@님을 추가할 수 있습니다: https://jami.net";
 "swarm.oneToOne" = "개인";
 "swarm.adminInvitesOnly" = "개인 그룹 (제한 초청)";
 "swarm.invitesOnly" = "개인 그룹";
@@ -113,8 +113,8 @@
 "swarm.Leave" = "나가기";
 "swarm.newGroup" = "새 그룹 만들기";
 "swarm.namePlaceholder" = "모임 이름";
-"swarm.explanationText" = "Members can be invited at any time after the group has been created.";
-"swarm.customizeProfile" = "Customize group profile";
+"swarm.explanationText" = "그룹이 생성된 후 언제든지 구성원을 초대할 수 있습니다.";
+"swarm.customizeProfile" = "그룹 프로필 사용자 지정";
 "swarm.changePicture" = "모임 사진 변경";
 "swarm.customize" = "모임 사용자 지정";
 "swarm.selectContacts" = "연락처를 선택";
@@ -126,10 +126,13 @@
 // Smartlist
 "smartlist.yesterday" = "어제";
 "smartlist.results" = "공공 디렉토리";
-"smartlist.jamsResults" = "검색 결과";
-"smartlist.jamsResults" = "검색 결과";
+"smartlist.jamsResults" = "Organization directory";
 "smartlist.conversations" = "대화";
-"smartlist.noConversationsFound" = "No conversations match the search.";
+"smartlist.conversationsSearchHint" = "You don't have any conversations yet.";
+"smartlist.publicDirectoryHint" = "People on Jami outside your contacts.";
+"smartlist.jamsDirectoryHint" = "People in your organization outside your contacts.";
+"smartlist.dialpad" = "Keypad";
+"smartlist.noConversationsFound" = "검색과 일치하는 대화가 없습니다.";
 "smartlist.newContact" = "새 연락처";
 "smartlist.newGroup" = "새 모임";
 "smartlist.accounts" = "회계";
@@ -139,7 +142,7 @@
 "smartlist.searchBarPlaceholder" = "이름 입력...";
 "smartlist.searchBar" = "검색";
 "smartlist.noNetworkConnectivity" = "네트워크 연결이 없습니다";
-"smartlist.cellularAccess" = "Ensure cellular access is granted in the settings.";
+"smartlist.cellularAccess" = "설정에서 셀룰러 접근이 허용되어 있는지 확인하세요.";
 "smartlist.accountsTitle" = "계정";
 "smartlist.addAccountButton" = "+ 계정 추가";
 "smartlist.noNumber" = "선택된 연락처는 번호가 없습니다";
@@ -150,28 +153,28 @@
 "smartlist.accounts" = "회계";
 "smartlist.disableDonation" = "나중에";
 "smartlist.donationExplanation" = "Jami를 잘 사용 중이고 우리의 사명을 응원한다면 후원해 주시겠습니까?";
-"smartlist.inSynchronization" = "Syncing…";
+"smartlist.inSynchronization" = "동기화 중…";
 
 // Conversation
 "conversation.addToContactsButton" = "연락처에 추가";
-"conversation.sendInvitationButton" = "Send Invitation";
+"conversation.sendInvitationButton" = "초대 보내기";
 "conversation.addToContactsLabel" = "연락처를 추가할 수 있을까요?";
-"conversation.notContactLabel" = "%@ is not in the contact list";
+"conversation.notContactLabel" = "%@님은 연락처 목록에 없습니다";
 "conversation.messagePlaceholder" = "작성하기";
 "conversation.imageSaved" = "저장됨";
-"conversation.errorSavingImage" = "Could not save image";
-"conversation.errorSavingImageMessage" = "An error occurred while saving the image to the photo library.";
-"conversation.photoAccessRequiredMessage" = "Jami needs access to your photo library to save images. You can enable this in Settings.";
-"conversation.receivedRequest" = "%@ sent you a conversation invitation.";
-"conversation.incomingRequest" = "sent you a conversation invitation.";
-"conversation.requestMessage" = "Hello,\nDo you want to join the conversation?";
-"conversation.sendRequest" = "Send them an invitation to be able converse.";
+"conversation.errorSavingImage" = "이미지를 저장할 수 없습니다";
+"conversation.errorSavingImageMessage" = "사진 보관함에 이미지를 저장하는 중 오류가 발생했습니다.";
+"conversation.photoAccessRequiredMessage" = "이미지를 저장하려면 Jami가 사진 보관함에 접근해야 합니다. 설정에서 활성화할 수 있습니다.";
+"conversation.receivedRequest" = "%@님이 대화 초대를 보냈습니다.";
+"conversation.incomingRequest" = "님이 대화 초대를 보냈습니다.";
+"conversation.requestMessage" = "안녕하세요,\n대화에 참여하시겠습니까?";
+"conversation.sendRequest" = "대화하려면 초대를 보내세요.";
 "conversation.sendRequestTitle" = "대화 초대 전송";
-"conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
-"conversation.syncingTitle" = "Syncing conversation";
-"conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
+"conversation.synchronizationTitle" = "대화 초대를 수락했습니다.";
+"conversation.syncingTitle" = "대화 동기화 중";
+"conversation.synchronizationMessage" = "대화를 동기화하기 위해 %@님의 연결을 기다리는 중…";
 "conversation.inReplyTo" = "이에 대한 답변";
-"conversation.repliedTo" = "%@ replied to %@";
+"conversation.repliedTo" = "%@님이 %@에 답장했습니다";
 "conversation.yourself" = "- 네";
 "conversation.edited" = "편집";
 "conversation.deletedMessage" = "%@님이 메시지를 삭제했습니다";
@@ -179,11 +182,11 @@
 // An ellipsis is not directly shown in the following typing indicator strings.
 // An ellipsis animation is shown when messages are being typed in the view.
 // An ellipsis "…" is visually displayed as ".", "..", or "..." using a timer.
-"conversation.typingIndicatorOneUser" = "%@ is typing";
-"conversation.typingIndicatorTwoUsers" = "%1@ and %2@ are typing";
-"conversation.typingIndicatorOtherUsers" = "%1@, %2@ and %3@ other are typing";
-"conversation.typingIndicatorOthersUsers" = "%1@, %2@ and %3@ others are typing";
-"conversation.lastMessageDeleted" = "(deleted message)";
+"conversation.typingIndicatorOneUser" = "%@님이 입력 중";
+"conversation.typingIndicatorTwoUsers" = "%1@님과 %2@님이 입력 중";
+"conversation.typingIndicatorOtherUsers" = "%1@, %2@님 외 %3@명이 입력 중";
+"conversation.typingIndicatorOthersUsers" = "%1@, %2@님 외 %3@명이 입력 중";
+"conversation.lastMessageDeleted" = "(삭제된 메시지)";
 
 // Invitations
 "invitations.noInvitations" = "초대도 없습니다";
@@ -195,63 +198,63 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Share, freely and privately with Jami";
+"welcome.title" = "Jami로 자유롭고 비공개로 공유하세요";
 "welcome.text" = "Jami는 사용자의 프라이버시와 자유를 보호하는 자유롭고 보편적인 커뮤니케이션 플랫폼입니다";
 "welcome.haveAccount" = "이미 계좌가 있어요";
 "welcome.linkDevice" = "다른 장치에서 수입";
 "welcome.linkBackup" = "파일 백업에서 가져온";
 "welcome.createAccount" = "Jami 계정 생성";
-"welcome.connectToJAMS" = "Connect to a management server";
+"welcome.connectToJAMS" = "관리 서버에 연결";
 
 // Creation Profile Screen
 "createProfile.skipCreateProfile" = "건너뛰기";
 "createProfile.profileCreated" = "다음";
-"createProfile.title" = "Personalize your profile";
+"createProfile.title" = "프로필 개인 설정";
 "createProfile.enterNameLabel" = "표시 이름을 입력";
 "createProfile.enterNamePlaceholder" = "이름 입력";
-"createProfile.subtitle" = "Your profile is only shared with your contacts. The profile can be changed at any time.";
-"createProfile.createProfilePicture" = "Create profile picture";
+"createProfile.subtitle" = "프로필은 연락처에게만 공유됩니다. 프로필은 언제든지 변경할 수 있습니다.";
+"createProfile.createProfilePicture" = "프로필 사진 만들기";
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Jami와 함께하기";
 "createAccount.lookingForUsernameAvailability" = "사용자 이름 사용 가능 여부 확인 중…";
-"createAccount.invalidUsername" = "Invalid username. Please enter the correct username.";
+"createAccount.invalidUsername" = "잘못된 사용자 이름입니다. 올바른 사용자 이름을 입력하세요.";
 "createAccount.usernameAlreadyTaken" = "이미  사용 중인 사용자 이름";
 "createAccount.usernameValid" = "사용자 이름이 사용 가능합니다.";
 "createAccount.UsernameNotRegisteredTitle" = "네트워크 오류";
 "createAccount.UsernameNotRegisteredMessage" = "계정이 생성되었지만 사용자 이름이 등록되지 않았습니다";
 "createAccount.timeoutTitle" = "계정 생성됨";
-"createAccount.timeoutMessage" = "Username registration is in progress. Please wait…";
-"createAccount.sipConfigure" = "Configure existing SIP account";
+"createAccount.timeoutMessage" = "사용자 이름 등록이 진행 중입니다. 기다려 주십시오…";
+"createAccount.sipConfigure" = "기존 SIP 계정 구성";
 "createAccount.creatingAccount" = "계정 생성 중";
 "createAccount.nameExplanation" = "다른 사람들이 더 쉽게 Jami에서 당신을 찾아서 연락할 수 있도록 사용자 이름을 선택할 수 있습니다.";
 "createAccount.newAccount" = "새 계정";
 "createAccount.encryptionEnabled" = "암호 보호 활성화됨";
 "createAccount.encrypt" = "암호 보호";
 "createAccount.customize" = "사용자 정의";
-"createAccount.encryptTitle" = "Password protect account";
-"createAccount.encryptExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
+"createAccount.encryptTitle" = "비밀번호로 계정 보호";
+"createAccount.encryptExplanation" = "Jami 계정은 계정 키가 포함된 보관 파일로 이 기기에만 로컬로 생성되어 저장됩니다. 보관 파일에 대한 접근은 선택적으로 비밀번호로 보호할 수 있습니다.";
 
 // Link To Account form
 "linkToAccount.importAccount" = "계정 불러오기";
 "linkToAccount.showQrCode" = "QR 코드";
 "linkToAccount.showPinCode" = "인증 코드";
-"linkToAccount.actionRequired" = "Action required.\nPlease confirm account on the source device.";
+"linkToAccount.actionRequired" = "작업이 필요합니다.\n원본 기기에서 계정을 확인하세요.";
 "linkToAccount.allSet" = "계정을 성공적으로 불러왔습니다.";
-"linkToAccount.goToAccounts" = "Go to imported account";
-"linkToAccount.exportInstructions" = "On the source device, initiate the exportation.";
-"linkToAccount.exportInstructionsPath" = "Select Account → Account Settings → Link new device.";
+"linkToAccount.goToAccounts" = "가져온 계정으로 이동";
+"linkToAccount.exportInstructions" = "원본 기기에서 내보내기를 시작하세요.";
+"linkToAccount.exportInstructionsPath" = "계정 → 계정 설정 → 새 기기 연결을 선택하세요.";
 "linkToAccount.scanQrCode" = "준비되면 QR 코드를 스캔하세요.";
-"linkToAccount.enterProvidedCode" = "When ready, enter the authentication code.";
-"linkToAccount.accountLockedWithPassword" = "The account is password protected. To continue, enter the account password.";
+"linkToAccount.enterProvidedCode" = "준비되면 인증 코드를 입력하세요.";
+"linkToAccount.accountLockedWithPassword" = "계정이 비밀번호로 보호되어 있습니다. 계속하려면 계정 비밀번호를 입력하세요.";
 "linkToAccount.exit" = "종료";
-"linkToAccount.shareMessage" = "Your code is: %@";
-"linkToAccount.alertTile" = "Do you want to stop linking the account?";
-"linkToAccount.alertMessage" = "Stopping will cancel the import account operation.";
+"linkToAccount.shareMessage" = "코드: %@";
+"linkToAccount.alertTile" = "계정 연결을 중단하시겠습니까?";
+"linkToAccount.alertMessage" = "중지하면 계정 가져오기 작업이 취소됩니다.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Jami 계정을 로컬 아카이브 파일에서 가져오세요.";
-"importFromArchive.passwordExplanation" = "If the account is password protected, please fill the following field.";
+"importFromArchive.passwordExplanation" = "계정이 비밀번호로 보호되어 있으면 다음 필드를 입력하세요.";
 "importFromArchive.title" = "아카이브로부터 불러오기";
 "importFromArchive.buttonTitle" = "가져오기";
 "importFromArchive.selectArchiveButton" = "파일 파일 선택";
@@ -262,14 +265,14 @@
 "linkToAccountManager.accountManagerPlaceholder" = "관리 서버 URL";
 "linkToAccountManager.accountManagerLabel" = "관리 서버 URL 입력";
 "linkToAccountManager.jamsExplanation" = "관리 서버 URL 입력";
-"linkToAccountManager.enterCredentials" = "Enter the management server credentials";
+"linkToAccountManager.enterCredentials" = "관리 서버 자격 증명을 입력하세요";
 
 // Alerts
 "alerts.accountCannotBeFoundTitle" = "계정 오류";
-"alerts.accountCannotBeFoundMessage" = "Unable to find account on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
+"alerts.accountCannotBeFoundMessage" = "Jami 네트워크에서 계정을 찾을 수 없습니다. 기존 기기에서 Jami로 내보냈는지, 제공된 자격 증명이 올바른지 확인하십시오.";
 "alerts.accountAddedTitle" = "계정 추가됨";
 "alerts.accountNoNetworkTitle" = "네트워크 오류";
-"alerts.accountNoNetworkMessage" = "A connectivity error occurred while adding Jami account to the distributed network. Please try again. If the problem persists, contact your system administrator.";
+"alerts.accountNoNetworkMessage" = "분산 네트워크에 Jami 계정을 추가하는 중 연결 오류가 발생했습니다. 다시 시도하세요. 문제가 계속되면 시스템 관리자에게 문의하세요.";
 "alerts.accountDefaultErrorTitle" = "계정 오류";
 "alerts.accountDefaultErrorMessage" = "계정 생성 중 오류가 발생했습니다.";
 "alerts.profileTakePhoto" = "사진 찍기";
@@ -280,20 +283,20 @@
 "alerts.confirmBlockContact" = "이 연락처를 차단하시겠습니까? 이 연락처와의 대화 기록이 영구적으로 삭제됩니다.";
 "alerts.confirmDeleteConversation" = "이 대화를 영구적으로 삭제하시겠습니까?";
 "alerts.confirmLeaveConversation" = "대화를 나가시겠습니까?";
-"alerts.confirmRemoveOneToOneConversation" = "Do you want to remove this conversation? The existing history will be deleted. A new conversation may be started if you do not have other conversations with this contact.";
-"alerts.confimRemoveContact" = "Do you want to remove this contact? The existing history will be deleted.";
+"alerts.confirmRemoveOneToOneConversation" = "이 대화를 삭제하시겠습니까? 기존 기록이 삭제됩니다. 이 연락처와 다른 대화가 없으면 새 대화가 시작될 수 있습니다.";
+"alerts.confimRemoveContact" = "이 연락처를 삭제하시겠습니까? 기존 기록이 삭제됩니다.";
 "alerts.confirmDeleteConversationFromContact" = "이 연락처와의 대화를 삭제하시겠습니까?";
 "alerts.confirmDeleteConversationTitle" = "대화 삭제";
 "alerts.noMediaPermissionsTitle" = "언론 허가 받지 않은";
 "alerts.noLibraryPermissionsTitle" = "사진 라이브러리에 대한 접근 권한이 부여되지 않았습니다";
 "alerts.noLocationPermissionsTitle" = "장소 접근은 허용되지 않습니다";
-"alerts.errorWrongCredentials" = "An error occurred while connecting to the management server. Please try again. If the problem persists, contact your system administrator.";
+"alerts.errorWrongCredentials" = "관리 서버에 연결하는 중 오류가 발생했습니다. 다시 시도하세요. 문제가 계속되면 시스템 관리자에게 문의하세요.";
 "alerts.recordVideoMessage" = "영상 메시지 녹화";
 "alerts.recordAudioMessage" = "음성 메시지 녹음";
 "alerts.uploadFile" = "파일 보내기";
 "alerts.uploadPhoto" = "개장 갤러리";
 "alerts.sendPhoto" = "사진 보내기";
-"alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
+"alerts.locationServiceIsDisabled" = "“Jami”가 기기 위치를 확인할 수 있도록 “위치 서비스”를 켜세요.";
 "alerts.locationSharing" = "내 위치를 공유";
 "alerts.alreadylocationSharing" = "이미 이 사용자와 위치를 공유";
 "alerts.locationSharingDurationTitle" = "위치 공유는 얼마나 오래 걸릴까요?";
@@ -322,7 +325,7 @@
 "calls.muteAudio" = "무음 마이크";
 "calls.unmuteAudio" = "마이크 음소거 해제";
 "calls.lowerHand" = "하위 손";
-"calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
+"calls.activeCallLabel" = "통화가 진행 중입니다. 통화에 참여하시겠습니까? 나중에 대화에서 통화에 참여할 수도 있습니다.";
 "calls.activeCallInConversation" = "통화가 진행 중입니다. 통화에 참가하시겠습니까?";
 "calls.acceptWithAudio" = "음성과 함께 수락";
 "calls.acceptWithVideo" = "영상과 함께 수락";
@@ -334,18 +337,18 @@
 "accountPage.blockedContacts" = "차단된 연락처";
 "accountPage.unblockContact" = "차단 해제";
 "accountPage.proxyAddressAlert" = "프록시 주소를 입력";
-"accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
+"accountPage.noProxyExplanationLabel" = "프록시가 비활성화되면 알림을 받을 수 없습니다.";
 "accountPage.proxyPaceholder" = "프록시 주소는";
-"accountPage.useProxyList" = "Use proxy list";
+"accountPage.useProxyList" = "프록시 목록 사용";
 "accountPage.proxyListURL" = "프록시 목록 URL";
-"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyExplanation" = "알림은 프록시를 통해 전달됩니다. 기본 프록시를 사용하거나, 사용자 지정 프록시 주소를 입력하거나, 프록시 목록이 있는 URL을 제공할 수 있습니다.";
 "accountPage.proxyHeader" = "프록시";
 "accountPage.currentProxy" = "현재 프록시";
 "accountPage.enableNotifications" = "알람 사용하기";
 "accountPage.proxyDisabledAlertTitle" = "프록시 서버 비활성화";
 "accountPage.proxyDisabledAlertBody" = "알림을 받기 위해 프록시를 활성화하십시오";
 "accountPage.removeDeviceTitle" = "기기 제거";
-"accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
+"accountPage.revokeDeviceMessage" = "이 기기를 삭제하시겠습니까? 이 작업은 취소할 수 없습니다.";
 "accountPage.revokeDeviceButton" = "취소";
 "accountPage.revokeDevicePlaceholder" = "계정 암호 입력";
 "accountPage.deviceRevoked" = "장치 취소 완료";
@@ -357,17 +360,17 @@
 "accountPage.deviceRevocationError" = "장치 취소 오류";
 "accountPage.linkDeviceTitle" = "다른 장치를 연결";
 "accountPage.other" = "다른";
-"accountPage.removeAccountMessage" = "If the account has not been backed up or added to another device, the account and registered username will be IRREVOCABLY LOST.";
+"accountPage.removeAccountMessage" = "계정이 백업되지 않았거나 다른 장치에 추가되지 않은 경우, 계정과 등록된 사용자 이름은 돌이킬 수 없이 손실됩니다.";
 "accountPage.inviteFriends" = "친구 초대";
 "accountPage.contactMeOnJamiTitle" = "Jami로 연락해!";
-"accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Jami 분산 통신 플랫폼에서 “%s”(으)로 저에게 연락하세요: https://jami.net";
 "accountPage.passwordPlaceholder" = "계정 암호 입력";
 "accountPage.usernamePlaceholder" = "원하는 사용자 이름 입력";
-"accountPage.registerNameErrorMessage" = "The username is unavailable.";
+"accountPage.registerNameErrorMessage" = "이 사용자 이름은 사용할 수 없습니다.";
 "accountPage.usernameRegistering" = "등록";
 "accountPage.usernameRegisterAction" = "등록";
 "accountPage.usernameRegistrationFailedTitle" = "등록 실패함";
-"accountPage.usernameRegistrationFailed" = "Please check the account password.";
+"accountPage.usernameRegistrationFailed" = "계정 비밀번호를 확인하세요.";
 "accountPage.createPassword" = "암호 설정";
 "accountPage.changePassword" = "암호 변경";
 "accountPage.currentPasswordPlaceholder" = "현재 암호 입력";
@@ -376,10 +379,10 @@
 "accountPage.changePasswordError" = "잘못된 암호";
 "accountPage.enableBoothMode" = "부스 모드를 활성화";
 "accountPage.disableBoothMode" = "부스 모드를 비활성화";
-"accountPage.disableBoothModeExplanation" = "Please provide the account password";
+"accountPage.disableBoothModeExplanation" = "계정 비밀번호를 입력하세요";
 "accountPage.boothModeExplanation" = "부시 모드에서는 대화의 역사가 저장되지 않고, 출력 통화로 Jami 기능이 제한됩니다. 부시 모드를 활성화하면 모든 대화가 삭제됩니다.";
-"accountPage.noBoothMode" = "To enable Booth mode, password protect the account first.";
-"accountPage.boothModeAlertMessage" = "After enabling booth mode, all the conversations will be removed.";
+"accountPage.noBoothMode" = "부스 모드를 활성화하려면 먼저 비밀번호로 계정을 보호하세요.";
+"accountPage.boothModeAlertMessage" = "부스 모드를 활성화하면 모든 대화가 삭제됩니다.";
 "accountPage.peerDiscovery" = "지역 동시 발견을 가능하게 합니다";
 "accountPage.peerDiscoveryExplanation" = "우리의 로컬 네트워크에 광고하는 다른 DHT 노드에 연결";
 "accountPage.autoRegistration" = "만료 후 자동 등록";
@@ -393,14 +396,14 @@
 "accountPage.stunEnabled" = "STUN 사용";
 "accountPage.stunServer" = "STUN 주소";
 "accountPage.publicAddressHeader" = "공공 연설";
-"accountPage.allowIPAutoRewrite" = "Allow IP auto rewrite";
+"accountPage.allowIPAutoRewrite" = "IP 자동 재작성 허용";
 "accountPage.publishedSameAsLocal" = "지역과 같은 출판";
 "accountPage.publishedAddress" = "주소";
 "accountPage.publishedPort" = "포트";
 "accountPage.security" = "보안";
 "accountPage.enableSRTP" = "SDES 키 교환 활성화";
 "accountPage.encryptNegotiation" = "암호 협상 (TLS)";
-"accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
+"accountPage.registerNameExplanation" = "다른 사람들이 Jami에서 더 쉽게 회원님을 찾고 연락할 수 있도록 사용자 이름을 등록하세요.";
 "accountPage.profileHeader" = "프로필";
 "accountPage.profileNameNotSelected" = "이름 선택 안됨";
 "accountPage.accountHeader" = "계정";
@@ -409,34 +412,34 @@
 "accountPage.editProfile" = "프로필 수정";
 "accountPage.manageAccount" = "계정을 관리";
 "accountPage.encryptAccount" = "암호";
-"accountPage.passwordExplanation" = "Your Jami account is registered only on this device as an archive containing the keys of your account. Access to this archive can be protected with a password.";
+"accountPage.passwordExplanation" = "귀하의 Jami 계정은 계정 키가 포함된 아카이브로 이 장치에만 등록되어 있습니다. 이 아카이브에 대한 접근은 비밀번호로 보호할 수 있습니다.";
 "accountPage.passwordsDoNotMatch" = "암호가 일치하지 않습니다.";
 "accountPage.passwordCreated" = "암호 설정";
 "accountPage.passwordUpdated" = "암호 갱신됨";
 "accountPage.linkedDevices" = "연결된 장치";
 "accountPage.unlink" = "연결 해제";
 "accountPage.generatingPin" = "PIN 코드 생성 중...";
-"accountPage.passwordForPin" = "The account is password protected. Enter the password to generate a PIN code.";
-"accountPage.pinExplanationTitle" = "On another device";
-"accountPage.pinExplanationMessage" = "Install and launch Jami. Select “Import from another device,” and scan the QR code. Alternatively, enter the PIN code manually.";
-"accountPage.pinError" = "An error occurred while generating the PIN code.";
+"accountPage.passwordForPin" = "계정이 비밀번호로 보호되어 있습니다. PIN 코드를 생성하려면 비밀번호를 입력하세요.";
+"accountPage.pinExplanationTitle" = "다른 기기에서";
+"accountPage.pinExplanationMessage" = "Jami를 설치하고 실행하십시오. “다른 기기에서 가져오기”를 선택하고 QR 코드를 스캔하십시오. 또는 PIN 코드를 수동으로 입력하십시오.";
+"accountPage.pinError" = "PIN 코드를 생성하는 중 오류가 발생했습니다.";
 "accountPage.notificationTitle" = "통지";
-"accountPage.notificationError" = "Notifications for Jami are disabled. Enable it in device settings in order to use this feature.";
+"accountPage.notificationError" = "Jami 알림이 비활성화되어 있습니다. 이 기능을 사용하려면 기기 설정에서 활성화하세요.";
 "accountPage.callsFromUnknownContacts" = "알 수 없는 연락처로부터 통화를 허용합니다.";
-"accountPage.accountSettingsExplanation" = "These settings will only apply to this account.";
+"accountPage.accountSettingsExplanation" = "이 설정은 이 계정에만 적용됩니다.";
 "accountPage.appSettings" = "앱 설정";
-"accountPage.appSettingsExplanation" = "These settings will apply to the entire application.";
-"accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
+"accountPage.appSettingsExplanation" = "이 설정은 전체 애플리케이션에 적용됩니다.";
+"accountPage.connectivityAndConfiguration" = "연결 및 구성";
 "accountPage.sipExpirationTime" = "등록 만료시간 (초)";
 "accountPage.tlsVerifyServerCertificates" = "서버 TLS 인증서를 확인";
-"accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
-"accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
+"accountPage.tlsVerifyClientCertificates" = "클라이언트 TLS 인증서 확인";
+"accountPage.tlsRequireTlsCertificate" = "수신 TLS 연결에 인증서 요구";
 "accountPage.tlsDisableSecureDlgCheck" = "입력 TLS 데이터에 대한 보안 대화정 확인을 비활성화";
-"accountPage.editSipExpirationTime" = "Expiration time";
-"accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
-"accountPage.invalidSipExpirationTime" = "Enter a value between 60 and 604800 seconds";
-"accountPage.invalidPort" = "Enter a value between 0 and 65535";
-"accountPage.invalidAddress" = "Enter a valid address";
+"accountPage.editSipExpirationTime" = "만료 시간";
+"accountPage.selectSipExpirationTime" = "등록 만료 시간 설정(초 단위)";
+"accountPage.invalidSipExpirationTime" = "60에서 604800초 사이의 값을 입력하세요";
+"accountPage.invalidPort" = "0에서 65535 사이의 값을 입력하세요";
+"accountPage.invalidAddress" = "유효한 주소를 입력하세요";
 "accountPage.thisDevice" = "이 장치";
 "accountPage.otherDevices" = "다른 연결된 장치";
 "accountPage.accountIdentity" = "계정 식별";
@@ -445,21 +448,21 @@
 "accountPage.nameServer" = "이름 서버";
 "accountPage.chats" = "대화";
 "accountPage.typingIndicator" = "타이핑 지표";
-"accountPage.typingIndicatorExplanation" = "Indicate when messages are being typed.";
+"accountPage.typingIndicatorExplanation" = "메시지가 입력 중일 때 표시합니다.";
 
 // Backup Account
-"backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
+"backupAccount.explanation" = "이 Jami 계정은 이 기기에만 존재합니다. 이 기기를 분실하거나 애플리케이션을 제거하면 계정이 손실됩니다. 이 계정을 백업하는 것이 좋습니다.";
 "backupAccount.title" = "백업 계좌";
 "backupAccount.creating" = "백업 생성 중";
-"backupAccount.archiveName" = "Select a name for the archive.";
+"backupAccount.archiveName" = "보관 파일의 이름을 선택하세요.";
 "backupAccount.archiveNamePlaceholder" = "아카이브 이름";
 "backupAccount.passwordRequest" = "계정 암호를 입력하세요.";
 "backupAccount.backupButton" = "백업";
 "backupAccount.documentPickerButton" = "백업 위치 열기";
 "backupAccount.exportSuccess" = "백업 생성됨";
-"backupAccount.errorWrongLocation" = "The selected file path is invalid. Please choose a different location.";
-"backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
-"backupAccount.errorFailed" = "An error occurred while exporting the account.";
+"backupAccount.errorWrongLocation" = "선택한 파일 경로가 잘못되었습니다. 다른 위치를 선택하세요.";
+"backupAccount.errorAccessDenied" = "선택한 위치에 대한 접근이 거부되었습니다.";
+"backupAccount.errorFailed" = "계정을 내보내는 중 오류가 발생했습니다.";
 
 // Account
 "account.sipServer" = "서버";
@@ -478,7 +481,7 @@
 "account.statusConnecting" = "연결 중";
 "account.statusUnknown" = "알 수 없는";
 "account.statusConnectionerror" = "연결 오류";
-"account.needMigration" = "Account requires migration.";
+"account.needMigration" = "계정에 마이그레이션이 필요합니다.";
 "account.me" = "나";
 
 // Block List Page
@@ -486,18 +489,18 @@
 
 // Link New Device
 "linkDevice.title" = "새로운 장치를 연결";
-"linkDevice.networkError" = "A network error occurred while exporting the account.";
-"linkDevice.errorWrongPassword" = "An authentication error occurred while linking the device. Please check credentials and try again.";
-"linkDevice.errorNetwork" = "A network error occurred while linking the account. Please verify your connection and try again.";
-"linkDevice.errorTimeout" = "The operation timed out. Please try again.";
-"linkDevice.errorCode" = "An error occurred while generating the code. Please try again.";
-"linkDevice.errorWrongData" = "An error occurred while exporting the account. Please try again.";
-"linkDevice.initialInfo" = "On the new device, initiate a new account.";
-"linkDevice.infoAddAccount" = "Select Add Account → Connect from another device.";
+"linkDevice.networkError" = "계정을 내보내는 중 네트워크 오류가 발생했습니다.";
+"linkDevice.errorWrongPassword" = "장치를 연결하는 중 인증 오류가 발생했습니다. 자격 증명을 확인하고 다시 시도하세요.";
+"linkDevice.errorNetwork" = "계정을 연결하는 중 네트워크 오류가 발생했습니다. 연결을 확인하고 다시 시도하세요.";
+"linkDevice.errorTimeout" = "작업 시간이 초과되었습니다. 다시 시도하세요.";
+"linkDevice.errorCode" = "코드를 생성하는 중 오류가 발생했습니다. 다시 시도하세요.";
+"linkDevice.errorWrongData" = "계정을 내보내는 중 오류가 발생했습니다. 다시 시도하세요.";
+"linkDevice.initialInfo" = "새 기기에서 새 계정 생성을 시작하세요.";
+"linkDevice.infoAddAccount" = "계정 추가 → 다른 기기에서 연결을 선택하세요.";
 "linkDevice.infoQRCode" = "준비되면 QR 코드를 스캔하세요.";
-"linkDevice.infoCode" = "When ready, enter the code and tap Connect.";
-"linkDevice.connecting" = "Connecting to your new device…";
-"linkDevice.authenticationInfo" = "New device found at the following IP address. Is that you? To continue the export account operation, tap Confirm.";
+"linkDevice.infoCode" = "준비되면 코드를 입력하고 연결을 누르세요.";
+"linkDevice.connecting" = "새 기기에 연결하는 중…";
+"linkDevice.authenticationInfo" = "다음 IP 주소에서 새 기기를 찾았습니다. 본인이 맞습니까? 계정 내보내기 작업을 계속하려면 확인을 누르세요.";
 "linkDevice.newDeviceIP" = "새 기기 IP 주소: %1@";
 "linkDevice.code" = "코드";
 "linkDevice.wrongEntry" = "알 수 없는 새 기기 식별자입니다. 상단의 설명을 따르세요.";
@@ -518,7 +521,7 @@
 "dataTransfer.readableStatusCanceled" = "취소됨";
 "dataTransfer.sendingFailed" = "전송 중 오류가 발생했습니다.";
 "dataTransfer.readableStatusSuccess" = "완료";
-"dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
+"dataTransfer.recordInBackgroundWarning" = "여러 앱으로 멀티태스킹하면서 비디오를 녹화하면 비디오 품질이 낮아질 수 있습니다. 최상의 결과를 위해 멀티태스킹을 하지 않을 때 녹화하세요";
 
 // Notifications
 "notifications.missedCall" = "부재중 전화";
@@ -527,16 +530,16 @@
 "notifications.locationSharingStopped" = "유입 위치 공유가 중단";
 "dataTransfer.readableStatusDecline" = "감소";
 "dataTransfer.readableStatusAccept" = "수락";
-"dataTransfer.infoMessage" = "Tap to start recording";
+"dataTransfer.infoMessage" = "탭하여 녹음 시작";
 "dataTransfer.sendMessage" = "보내기";
 
 
 // Generated Message
 "generatedMessage.contactAdded" = "초대 받은 것";
 "generatedMessage.swarmCreated" = "대화 생성됨";
-"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
+"generatedMessage.invitationReceived" = "%@이(가) 대화에 초대되었습니다.";
 "generatedMessage.invitationAccepted" = "%@님이 대화에 참여했습니다.";
-"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.youJoined" = "대화에 참여했습니다.";
 "generatedMessage.contactBlocked" = "%@님이 대화에서 차단되었습니다.";
 "generatedMessage.contactUnblocked" = "%@님이 대화에서 차단 해제되었습니다.";
 "generatedMessage.outgoingCall" = "출력 전화";
@@ -544,99 +547,99 @@
 "generatedMessage.missedIncomingCall" = "부재중 수신 전화";
 "generatedMessage.liveLocationSharing" = "실시간 위치 공유";
 "generatedMessage.contactLeftConversation" = "%@님이 대화를 떠났습니다.";
-"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
-"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
+"generatedMessage.nonSwarmInvitationReceived" = "초대를 보냈습니다.";
+"generatedMessage.nonSwarmInvitationAccepted" = "초대가 수락되었습니다.";
 
 // General Settings
 "generalSettings.videoSettings" = "영상 설정";
-"generalSettings.videoAcceleration" = "비디오 가속을 활성화";
+"generalSettings.videoAcceleration" = "영상 가속 활성화";
 "generalSettings.fileTransfer" = "파일 전송";
 "generalSettings.locationSharing" = "위치 공유";
 "generalSettings.automaticAcceptIncomingFiles" = "자동으로 입력 파일을 받아";
 "generalSettings.acceptTransferLimit" = "환승 제한을 받아 들인다";
-"generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
+"generalSettings.acceptTransferLimitDescription" = "(MB, 0 = 무제한)";
 "generalSettings.limitLocationSharingDuration" = "위치 공유 기간을 제한";
 "generalSettings.locationSharingDuration" = "위치 공유 기간";
-"generalSettings.donationCampaign" = "Donation campaign";
-"generalSettings.enableDonationCampaign" = "Enable donation campaign";
+"generalSettings.donationCampaign" = "기부 캠페인";
+"generalSettings.enableDonationCampaign" = "기부 캠페인 활성화";
 
 // Log View
 "logView.title" = "진단";
 "logView.description" = "진단 로그 열 설정";
-"logView.startLogging" = "Start logging";
+"logView.startLogging" = "로그 기록 시작";
 "logView.stopLogging" = "나무를 끊어라";
-"logView.saveError" = "An error occurred while saving the file.";
+"logView.saveError" = "파일을 저장하는 중 오류가 발생했습니다.";
 "logView.shareError" = "파일 공유 중 오류가 발생했습니다.";
 
 // Migrate Account
 "migrateAccount.title" = "계정 마이그레이션";
 "migrateAccount.migrateButton" = "마이그레이션 계좌";
-"migrateAccount.explanation" = "Account migration required.";
-"migrateAccount.passwordExplanation" = "To continue with the account migration, enter the account password.";
-"migrateAccount.error" = "An error occurred while migrating the account. Retry or delete the account.";
-"migrateAccount.migrating" = "Migrating…";
+"migrateAccount.explanation" = "계정 마이그레이션이 필요합니다.";
+"migrateAccount.passwordExplanation" = "계정 마이그레이션을 계속하려면 계정 비밀번호를 입력하세요.";
+"migrateAccount.error" = "계정을 마이그레이션하는 중 오류가 발생했습니다. 다시 시도하거나 계정을 삭제하세요.";
+"migrateAccount.migrating" = "마이그레이션 중…";
 "migrateAccount.migrateAnother" = "다른 계정 을 마이그레이션";
 
 // About Jami
-"aboutJami.declaration1" = "Jami, a GNU package, is software for universal and distributed peer-to-peer communication that respects the freedom and privacy of its users. Visit";
-"aboutJami.declaration2" = "to learn more.";
-"aboutJami.noWarranty1" = "This program comes with absolutely no warranty. See the";
-"aboutJami.noWarranty2" = "version 3 or later for details.";
+"aboutJami.declaration1" = "GNU 패키지인 Jami는 사용자의 자유와 개인정보를 존중하는 보편적이고 분산된 P2P 통신 소프트웨어입니다. 방문:";
+"aboutJami.declaration2" = "자세히 알아보려면.";
+"aboutJami.noWarranty1" = "이 프로그램은 어떠한 보증도 제공하지 않습니다. 다음을 참조하세요:";
+"aboutJami.noWarranty2" = "자세한 내용은 버전 3 이상을 참조하세요.";
 "aboutJami.contribute" = "기여";
 "aboutJami.feedback" = "피드백";
 "aboutJami.developers" = "개발자";
 "aboutJami.media" = "미디어";
 "aboutJami.communityManagement" = "커뮤니티 관리";
-"aboutJami.specialThanks" = "Special thanks to";
-"aboutJami.info" = "This is a list of people who have made a significant investment of time, with useful results, into Jami. Any such contributors who want to be added to the list should contact us.";
-"aboutJami.header" = "We would like to thank our contributors, whose efforts over many years have made this software what it is.";
+"aboutJami.specialThanks" = "특별히 감사드립니다";
+"aboutJami.info" = "이것은 유용한 결과와 함께 Jami에 상당한 시간을 투자한 사람들의 목록입니다. 목록에 추가되기를 원하는 기여자는 저희에게 연락해 주세요.";
+"aboutJami.header" = "수년간의 노력으로 이 소프트웨어를 지금의 모습으로 만들어 준 기여자들에게 감사드립니다.";
 
 // Accessibility
 "accessibility.close" = "가까이";
 "accessibility.smartListSwitchAccounts" = "계정 전환";
-"accessibility.smartListConnectedAs" = "The current account is %@";
+"accessibility.smartListConnectedAs" = "현재 계정은 %@입니다";
 "accessibility.smartListAddAccount" = "계정 추가";
 "accessibility.aboutJamiTitle" = "Jami에 관하여";
 "accessibility.welcomeToJamiTitle" = "Jami에 오신 것을 환영합니다";
-"accessibility.createAccountVerifyUsernamePrompt" = "Enter username to check availability.";
+"accessibility.createAccountVerifyUsernamePrompt" = "사용 가능 여부를 확인하려면 사용자 이름을 입력하세요.";
 "accessibility.profilePicturePicker" = "프로필 사진";
-"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
+"accessibility.profilePicturePickerHint" = "두 번 탭하여 사진을 찍거나 보관함에서 사진을 선택하세요";
 "accessibility.swarmPicturePicker" = "모임 사진";
 "accessibility.accountSummaryQrCode" = "QR 코드";
-"accessibility.accountSummaryQrCodeHint" = "Double-tap to view the account QR code";
-"accessibility.accountSummaryEditProfileHint" = "Double-tap to edit the profile";
+"accessibility.accountSummaryQrCodeHint" = "두 번 탭하여 계정 QR 코드를 보세요";
+"accessibility.accountSummaryEditProfileHint" = "두 번 탭하여 프로필을 편집하세요";
 "accessibility.accountSummaryEditSettingsButton" = "설정";
 "accessibility.conversationStartVoiceCall" = "%@님과 음성 통화 시작";
 "accessibility.conversationStartVideoCall" = "%@님과 영상 통화 시작";
-"accessibility.conversationComposeMessage" = "Compose a message";
+"accessibility.conversationComposeMessage" = "메시지 작성";
 "accessibility.conversationShareMedia" = "미디어 공유";
-"accessibility.conversationCameraHint" = "Double-tap to open camera";
+"accessibility.conversationCameraHint" = "두 번 탭하여 카메라를 여세요";
 "accessibility.audioPlayerPlay" = "재생";
 "accessibility.audioPlayerPause" = "멈춤";
-"accessibility.conversationRowUnreadCount" = "%@ unread messages.";
+"accessibility.conversationRowUnreadCount" = "읽지 않은 메시지 %@개.";
 "accessibility.conversationRowBlocked" = "대화 차단됨";
-"accessibility.conversationRowSyncing" = "Synchronization in progress";
-"accessibility.conversationRowLastMessage" = "Last message at %@";
+"accessibility.conversationRowSyncing" = "동기화 진행 중";
+"accessibility.conversationRowLastMessage" = "마지막 메시지 %@";
 "accessibility.userPresenceOnline" = "온라인";
 "accessibility.userPresenceAvailable" = "사용 가능";
-"accessibility.pendingRequestsRowPlural" = "Invitations received: %@ pending invitations";
-"accessibility.pendingRequestsRowSingular" = "Invitation received: %@ pending invitation";
-"accessibility.pendingRequestsRowHint" = "Double-tap to review and reply to invitations you received";
-"accessibility.pendingRequestsListBlockUser" = "Block invitation sender";
+"accessibility.pendingRequestsRowPlural" = "받은 초대: 대기 중인 초대 %@개";
+"accessibility.pendingRequestsRowSingular" = "받은 초대: 대기 중인 초대 %@개";
+"accessibility.pendingRequestsRowHint" = "두 번 탭하여 받은 초대를 검토하고 응답하세요";
+"accessibility.pendingRequestsListBlockUser" = "초대 발신자 차단";
 "accessibility.pendingRequestsListRejectInvitation" = "초대 거절";
 "accessibility.pendingRequestsListAcceptInvitation" = "초대 수락";
 "accessibility.messageBubbleDeleted" = "메시지 삭제됨";
 "accessibility.messageBubbleEdited" = "편집";
 "accessibility.messageBubbleRead" = "읽음";
 "accessibility.messageBubbleUnread" = "읽지 않음";
-"accessibility.textNotAvailable" = "Empty text message received on %@. This might not have been sent correctly.";
-"accessibility.fileTransferNoName" = "File received on %@, name not available";
-"accessibility.inReply" = "In reply to message";
-"accessibility.text.receivedOn" = "%1@, message received on %2@";
-"accessibility.text.sentOn" = "%1@, message sent on %2@";
-"accessibility.fileTransfer.receivedOn" = "File: %1@ , received on %2@";
-"accessibility.fileTransfer.sentOn" = "File: %1@, sent on %2@";
-"accessibility.call.lasted" = "Lasted %@";
+"accessibility.textNotAvailable" = "%@에 빈 텍스트 메시지가 수신되었습니다. 올바르게 전송되지 않았을 수 있습니다.";
+"accessibility.fileTransferNoName" = "%@에 파일 수신됨, 이름을 사용할 수 없음";
+"accessibility.inReply" = "메시지에 대한 답장";
+"accessibility.text.receivedOn" = "%1@, %2@에 메시지 수신됨";
+"accessibility.text.sentOn" = "%1@, %2@에 메시지 전송됨";
+"accessibility.fileTransfer.receivedOn" = "파일: %1@, %2@에 수신됨";
+"accessibility.fileTransfer.sentOn" = "파일: %1@, %2@에 전송됨";
+"accessibility.call.lasted" = "%@ 동안 지속됨";
 "accessibility.calls.default.toggleAudio" = "무음 마이크";
 "accessibility.calls.default.toggleVideo" = "카메라 시작";
 "accessibility.calls.default.pauseCall" = "통화 정지";
@@ -654,7 +657,7 @@
 "accessibility.calls.alter.endCall" = "통화 종료";
 "accessibility.calls.alter.addParticipant" = "참가자를 추가";
 "accessibility.calls.alter.switchCamera" = "카메라 전환";
-"accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
+"accessibility.calls.alter.toggleSpeaker" = "스피커 끄기";
 "accessibility.calls.alter.openConversation" = "열린 대화";
 "accessibility.calls.alter.showDialpad" = "다이얼패드 표시";
 "accessibility.calls.alter.raiseHand" = "하위 손";
@@ -666,50 +669,50 @@
 "accessibility.conference.unmuteAudio" = "음소거 해제";
 "accessibility.conference.endCall" = "통화 종료";
 "accessibility.conference.lowerHand" = "하위 손";
-"accessibility.account.tokenQRcode" = "Token QR code";
+"accessibility.account.tokenQRcode" = "토큰 QR 코드";
 
 // Swarm Colors
-"swarmColors.vibrantPink" = "Vibrant pink";
+"swarmColors.vibrantPink" = "선명한 분홍색";
 "swarmColors.purple" = "진보라색";
 "swarmColors.violet" = "연보라색";
-"swarmColors.indigoBlue" = "Indigo blue";
-"swarmColors.skyBlue" = "Sky blue";
+"swarmColors.indigoBlue" = "남색";
+"swarmColors.skyBlue" = "하늘색";
 "swarmColors.cyan" = "연청록색";
 "swarmColors.teal" = "진청록색";
 "swarmColors.green" = "초록색";
-"swarmColors.limeGreen" = "Lime green";
-"swarmColors.mediumGray" = "Medium gray";
+"swarmColors.limeGreen" = "라임색";
+"swarmColors.mediumGray" = "중간 회색";
 "swarmColors.yellowGreen" = "연두색";
 "swarmColors.amber" = "황갈색";
-"swarmColors.brightOrange" = "Bright orange";
+"swarmColors.brightOrange" = "밝은 주황색";
 "swarmColors.brown" = "갈색";
-"swarmColors.steelBlue" = "Steel blue";
+"swarmColors.steelBlue" = "강철 파란색";
 
 // Share extension
-"shareExtension.noAccount.title" = "Account not found";
-"shareExtension.noAccount.description" = "To continue, create an account in the main application.";
+"shareExtension.noAccount.title" = "계정을 찾을 수 없음";
+"shareExtension.noAccount.description" = "계속하려면 메인 애플리케이션에서 계정을 만드세요.";
 "shareExtension.unsupportedType.title" = "지원되지 않는 콘텐츠";
-"shareExtension.unsupportedType.description" = "The sharing of the selected content is currently unsupported.";
+"shareExtension.unsupportedType.description" = "선택한 콘텐츠 공유는 현재 지원되지 않습니다.";
 "shareExtension.sending" = "전송 중...";
-"shareExtension.noSearchResults" = "No conversations match your search";
-"shareExtension.tryDifferentFilter" = "Try a different filter";
-"shareExtension.sendToConversation" = "Send to %d conversation";
-"shareExtension.sendToConversationsPlural" = "Send to %d conversations";
+"shareExtension.noSearchResults" = "검색과 일치하는 대화가 없습니다";
+"shareExtension.tryDifferentFilter" = "다른 필터를 시도하세요";
+"shareExtension.sendToConversation" = "%d개 대화로 보내기";
+"shareExtension.sendToConversationsPlural" = "%d개 대화로 보내기";
 "shareExtension.selectAccountTitle" = "계정 선택";
 "shareExtension.searchConversations" = "대화 검색";
 "shareExtension.accessibilitySelectConversation" = "더블 탭하여 이 대화 선택";
-"shareExtension.accessibilitySelectedAccount" = "Selected account: %@. Double-tap to change account.";
-"shareExtension.accessibilitySendButton" = "Double-tap to send to selected conversations";
-"shareExtension.accessibilitySelectAccount" = "Double-tap to select this account";
+"shareExtension.accessibilitySelectedAccount" = "선택한 계정: %@. 두 번 탭하여 계정을 변경하세요.";
+"shareExtension.accessibilitySendButton" = "두 번 탭하여 선택한 대화로 보내세요";
+"shareExtension.accessibilitySelectAccount" = "두 번 탭하여 이 계정을 선택하세요";
 
 // Peer Services
-"peerServices.title" = "Shared Services";
-"peerServices.refresh" = "Refresh services";
-"peerServices.empty" = "No shared services available";
-"peerServices.errorOffline" = "Contact is offline";
-"peerServices.errorUnreachable" = "Contact is unreachable";
-"peerServices.errorTimeout" = "Request timed out";
-"peerServices.errorUnknown" = "Could not retrieve services";
+"peerServices.title" = "공유 서비스";
+"peerServices.refresh" = "서비스 새로 고침";
+"peerServices.empty" = "사용 가능한 공유 서비스가 없습니다";
+"peerServices.errorOffline" = "연락처가 오프라인입니다";
+"peerServices.errorUnreachable" = "연락처에 연결할 수 없습니다";
+"peerServices.errorTimeout" = "요청 시간이 초과되었습니다";
+"peerServices.errorUnknown" = "서비스를 가져올 수 없습니다";
 "peerServices.done" = "완료";
-"peerServices.notSupported" = "Not supported";
+"peerServices.notSupported" = "지원되지 않음";
 "peerServices.open" = "열리";

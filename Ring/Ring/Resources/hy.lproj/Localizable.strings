@@ -44,7 +44,7 @@
 "global.search" = "Փնտրում եմ...";
 "global.supportJami" = "Support Jami project";
 "global.deleteMessage" = "Հաղորդագրությունը ջնջել";
-"global.deleteFile" = "Delete file from device";
+"global.deleteFile" = "Ջնջել ֆայլը սարքից";
 "global.editMessage" = "Տարբերել հաղորդագրությունը";
 "global.editing" = "Editing";
 "global.create" = "Ստեղծել";
@@ -65,7 +65,7 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.addDescription" = "Add description";
+"swarmcreation.addDescription" = "Ավելացնել նկարագրություն";
 // Swarm
 "swarm.muteConversation" = "Լռական զրույց";
 "swarm.leaveConversation" = "Թող խոսակցությունը";
@@ -74,17 +74,17 @@
 "swarm.restartConversation" = "Restart conversation";
 "swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "Զրույցի գույնը";
-"swarm.typeOfSwarm" = "Conversation type";
+"swarm.typeOfSwarm" = "Զրույցի տեսակ";
 "swarm.identifier" = "Հնազեկիչ";
 "swarm.conversationId" = "Conversation ID";
 "swarm.settings" = "Կարգավորումներ";
 "swarm.members" = "Անդամներ";
-"swarm.addDescription" = "Add description";
+"swarm.addDescription" = "Ավելացնել նկարագրություն";
 "swarm.titlePlaceholder" = "Enter title";
 "swarm.titleAlertHeader" = "Edit group title";
 "swarm.descriptionAlertHeader" = "Edit group description";
 "swarm.descriptionPlaceholder" = "Enter title";
-"swarm.contactHeader" = "Contact";
+"swarm.contactHeader" = "Կոնտակտ";
 "swarm.showContactQRCode" = "Show contact QR code";
 "swarm.shareContactInfo" = "Share contact information";
 "swarm.accessibilityContactQRCode" = "Show contact QR code";
@@ -102,17 +102,17 @@
 "swarm.member" = "Անդամ";
 "swarm.invited" = "հրավիրված";
 "swarm.admin" = "Վարչապետ";
-"swarm.blocked" = "Blocked";
+"swarm.blocked" = "Արգելափակված";
 "swarm.unknown" = "Անհայտ";
 "swarm.left" = "Left";
-"swarm.inviteMembers" = "Invite members";
+"swarm.inviteMembers" = "Հրավիրել անդամներ";
 "swarm.inviteSelectedMembers" = "Invite selected contacts";
 "swarm.inviteMembersSelected" = "Selected";
 "swarm.inviteMembersNotSelected" = "Not selected";
-"swarm.confirmLeaveConversation" = "Do you want to leave this conversation?";
+"swarm.confirmLeaveConversation" = "Ցանկանո՞ւմ եք լքել այս զրույցը։";
 "swarm.Leave" = "Գնացեք";
 "swarm.newGroup" = "Ստեղծել նոր խումբ";
-"swarm.namePlaceholder" = "Group name";
+"swarm.namePlaceholder" = "Խմբի անուն";
 "swarm.explanationText" = "Members can be invited at any time after the group has been created.";
 "swarm.customizeProfile" = "Customize group profile";
 "swarm.changePicture" = "Change group picture";
@@ -126,9 +126,12 @@
 // Smartlist
 "smartlist.yesterday" = "Երեկ";
 "smartlist.results" = "Հանրային ցուցակ";
-"smartlist.jamsResults" = "Search result";
-"smartlist.jamsResults" = "Search result";
+"smartlist.jamsResults" = "Organization directory";
 "smartlist.conversations" = "Զրույցներ";
+"smartlist.conversationsSearchHint" = "You don't have any conversations yet.";
+"smartlist.publicDirectoryHint" = "People on Jami outside your contacts.";
+"smartlist.jamsDirectoryHint" = "People in your organization outside your contacts.";
+"smartlist.dialpad" = "Keypad";
 "smartlist.noConversationsFound" = "No conversations match the search.";
 "smartlist.newContact" = "New contact";
 "smartlist.newGroup" = "New group";
@@ -149,7 +152,7 @@
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Հաշվետոմսեր";
 "smartlist.disableDonation" = "Ոչ հիմա";
-"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, do you want to make a donation?";
+"smartlist.donationExplanation" = "Եթե ձեզ դուր է գալիս օգտագործել Jami-ն և հավատում եք մեր առաքելությանը, ցանկանո՞ւմ եք նվիրատվություն կատարել։";
 "smartlist.inSynchronization" = "Syncing…";
 
 // Conversation
@@ -164,7 +167,7 @@
 "conversation.photoAccessRequiredMessage" = "Jami needs access to your photo library to save images. You can enable this in Settings.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
 "conversation.incomingRequest" = "sent you a conversation invitation.";
-"conversation.requestMessage" = "Hello,\nDo you want to join the conversation?";
+"conversation.requestMessage" = "Բարև,\nցանկանո՞ւմ եք միանալ զրույցին։";
 "conversation.sendRequest" = "Send them an invitation to be able converse.";
 "conversation.sendRequestTitle" = "Send conversation invitation";
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
@@ -183,13 +186,13 @@
 "conversation.typingIndicatorTwoUsers" = "%1@ and %2@ are typing";
 "conversation.typingIndicatorOtherUsers" = "%1@, %2@ and %3@ other are typing";
 "conversation.typingIndicatorOthersUsers" = "%1@, %2@ and %3@ others are typing";
-"conversation.lastMessageDeleted" = "(deleted message)";
+"conversation.lastMessageDeleted" = "(ջնջված հաղորդագրություն)";
 
 // Invitations
 "invitations.noInvitations" = "Ոչ մի հրավիրում";
 "invitations.accepted" = "ընդունված";
 "invitations.declined" = "Declined";
-"invitations.blocked" = "Blocked";
+"invitations.blocked" = "Արգելափակված";
 "invitations.list" = "Invitations received";
 
 // Walkthrough
@@ -222,7 +225,7 @@
 "createAccount.UsernameNotRegisteredMessage" = "Հաշիվ է ստեղծվել, բայց օգտատերերի անունը չի գրանցվել";
 "createAccount.timeoutTitle" = "Հաշիվ ստեղծվել";
 "createAccount.timeoutMessage" = "Username registration is in progress. Please wait…";
-"createAccount.sipConfigure" = "Configure existing SIP account";
+"createAccount.sipConfigure" = "Կարգավորել առկա SIP հաշիվը";
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "Դուք կարող եք ընտրել օգտատերու անուն, որպեսզի ուրիշները ավելի հեշտությամբ գտնեն եւ հասնեն ձեզ Ջամիում:";
 "createAccount.newAccount" = "New account";
@@ -237,7 +240,7 @@
 "linkToAccount.showQrCode" = "QR կոդ";
 "linkToAccount.showPinCode" = "Authentication code";
 "linkToAccount.actionRequired" = "Action required.\nPlease confirm account on the source device.";
-"linkToAccount.allSet" = "The account was imported successfully.";
+"linkToAccount.allSet" = "Հաշիվը հաջողությամբ ներմուծվեց։";
 "linkToAccount.goToAccounts" = "Go to imported account";
 "linkToAccount.exportInstructions" = "On the source device, initiate the exportation.";
 "linkToAccount.exportInstructionsPath" = "Select Account → Account Settings → Link new device.";
@@ -251,7 +254,7 @@
 
 // Import from Archive
 "importFromArchive.explanation" = "Ներմուծել Ջամի հաշիվը տեղական արխիվային ֆայլից:";
-"importFromArchive.passwordExplanation" = "If the account is password protected, please fill the following field.";
+"importFromArchive.passwordExplanation" = "Եթե հաշիվը պաշտպանված է գաղտնաբառով, խնդրում ենք լրացնել հետևյալ դաշտը։";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "Արտահանման համար";
 "importFromArchive.selectArchiveButton" = "Ընտրեք արխիվային ֆայլը";
@@ -259,9 +262,9 @@
 // Link to Jami Account Management Server (JAMS) form
 "linkToAccountManager.signIn" = "Sign in";
 "linkToAccountManager.title" = "Management server account";
-"linkToAccountManager.accountManagerPlaceholder" = "Management server URL";
-"linkToAccountManager.accountManagerLabel" = "Enter the management server URL";
-"linkToAccountManager.jamsExplanation" = "Enter the management server URL";
+"linkToAccountManager.accountManagerPlaceholder" = "Կառավարման սերվերի URL";
+"linkToAccountManager.accountManagerLabel" = "Մուտքագրեք կառավարման սերվերի URL-ը";
+"linkToAccountManager.jamsExplanation" = "Մուտքագրեք կառավարման սերվերի URL-ը";
 "linkToAccountManager.enterCredentials" = "Enter the management server credentials";
 
 // Alerts
@@ -279,11 +282,11 @@
 "alerts.dbFailedMessage" = "Խնդրում ենք փակել դիմումը եւ փորձել նորից բացել այն";
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmDeleteConversation" = "Do you want to remove this conversation permanently?";
-"alerts.confirmLeaveConversation" = "Do you want to leave this conversation?";
+"alerts.confirmLeaveConversation" = "Ցանկանո՞ւմ եք լքել այս զրույցը։";
 "alerts.confirmRemoveOneToOneConversation" = "Do you want to remove this conversation? The existing history will be deleted. A new conversation may be started if you do not have other conversations with this contact.";
 "alerts.confimRemoveContact" = "Do you want to remove this contact? The existing history will be deleted.";
 "alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "Delete conversation";
+"alerts.confirmDeleteConversationTitle" = "Ջնջել զրույցը";
 "alerts.noMediaPermissionsTitle" = "ԶԼՄ-ների թույլտվությունը չի տրվել";
 "alerts.noLibraryPermissionsTitle" = "Լուսանկարների գրադարան մուտք չի տրվել";
 "alerts.noLocationPermissionsTitle" = "Տեղի մուտք չի տրվել";
@@ -320,12 +323,12 @@
 "calls.setModerator" = "Կազմել մոդերատոր";
 "calls.removeModerator" = "Կարգավորիչը անսահմանված";
 "calls.muteAudio" = "Միկրոֆոն անջատ";
-"calls.unmuteAudio" = "Unmute microphone";
+"calls.unmuteAudio" = "Միացնել խոսափողի ձայնը";
 "calls.lowerHand" = "Նվազագույն ձեռքը";
 "calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
 "calls.activeCallInConversation" = "Հեռախոսազանգ է ընթանում։ Ցանկանում եք միանալ զանգին։";
-"calls.acceptWithAudio" = "Accept with audio";
-"calls.acceptWithVideo" = "Accept with video";
+"calls.acceptWithAudio" = "Ընդունել ձայնով";
+"calls.acceptWithVideo" = "Ընդունել տեսանյութով";
 
 // Account Page
 "accountPage.devicesListHeader" = "սարքավորումներ";
@@ -337,14 +340,14 @@
 "accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "Փոխանակման հասցե";
 "accountPage.useProxyList" = "Use proxy list";
-"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyListURL" = "Պրոքսի ցանկի URL";
 "accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
 "accountPage.proxyHeader" = "Պրոկսի";
 "accountPage.currentProxy" = "Current proxy";
 "accountPage.enableNotifications" = "Հրավերների հնարավորություն";
 "accountPage.proxyDisabledAlertTitle" = "Պրոքսի սերվերները անջատված են";
 "accountPage.proxyDisabledAlertBody" = "Հրավերներ ստանալու համար խնդրում ենք ակտիվացնել proxy- ը";
-"accountPage.removeDeviceTitle" = "Remove device";
+"accountPage.removeDeviceTitle" = "Հեռացնել սարքը";
 "accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Վերադարձ";
 "accountPage.revokeDevicePlaceholder" = "Գրեք հաշիվի գաղտնաբառը";
@@ -357,7 +360,7 @@
 "accountPage.deviceRevocationError" = "սարքի հետադարձ անվավերացման սխալ";
 "accountPage.linkDeviceTitle" = "Կապակցեք այլ սարք";
 "accountPage.other" = "Մյուսներ";
-"accountPage.removeAccountMessage" = "If the account has not been backed up or added to another device, the account and registered username will be IRREVOCABLY LOST.";
+"accountPage.removeAccountMessage" = "Եթե հաշիվը չի պահուստավորվել կամ ավելացվել այլ սարքին, հաշիվը և գրանցված օգտանունը ԱՆՎԵՐԱԴԱՐՁ ԿԿՈՐՉԵՆ։";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Կապվեք ինձ հետ Ջամիի մասին:";
 "accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
@@ -368,7 +371,7 @@
 "accountPage.usernameRegisterAction" = "Գրանցվել";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
 "accountPage.usernameRegistrationFailed" = "Please check the account password.";
-"accountPage.createPassword" = "Set password";
+"accountPage.createPassword" = "Սահմանել գաղտնաբառ";
 "accountPage.changePassword" = "Փոխել գաղտնաբառը";
 "accountPage.currentPasswordPlaceholder" = "Ներկայումս մուտքագրեք գաղտնաբառ";
 "accountPage.newPasswordPlaceholder" = "Ներբեռնեք նոր գաղտնաբառ";
@@ -409,7 +412,7 @@
 "accountPage.editProfile" = "Edit Profile";
 "accountPage.manageAccount" = "Հաշիվի կառավարում";
 "accountPage.encryptAccount" = "Անձանագրություն";
-"accountPage.passwordExplanation" = "Your Jami account is registered only on this device as an archive containing the keys of your account. Access to this archive can be protected with a password.";
+"accountPage.passwordExplanation" = "Ձեր Jami հաշիվը գրանցված է միայն այս սարքում որպես արխիվ, որը պարունակում է ձեր հաշվի բանալիները։ Այս արխիվ մուտքը կարող է պաշտպանվել գաղտնաբառով։";
 "accountPage.passwordsDoNotMatch" = "Passwords do not match.";
 "accountPage.passwordCreated" = "Password set";
 "accountPage.passwordUpdated" = "Password updated";
@@ -487,11 +490,11 @@
 // Link New Device
 "linkDevice.title" = "Կապակցեք նոր սարքը";
 "linkDevice.networkError" = "A network error occurred while exporting the account.";
-"linkDevice.errorWrongPassword" = "An authentication error occurred while linking the device. Please check credentials and try again.";
-"linkDevice.errorNetwork" = "A network error occurred while linking the account. Please verify your connection and try again.";
-"linkDevice.errorTimeout" = "The operation timed out. Please try again.";
+"linkDevice.errorWrongPassword" = "Սարքը կապելիս նույնականացման սխալ տեղի ունեցավ։ Խնդրում ենք ստուգել հավատարմագրերը և կրկին փորձել։";
+"linkDevice.errorNetwork" = "Հաշիվը կապելիս ցանցային սխալ տեղի ունեցավ։ Խնդրում ենք ստուգել ձեր կապը և կրկին փորձել։";
+"linkDevice.errorTimeout" = "Գործողության ժամկետը լրացավ։ Խնդրում ենք կրկին փորձել։";
 "linkDevice.errorCode" = "An error occurred while generating the code. Please try again.";
-"linkDevice.errorWrongData" = "An error occurred while exporting the account. Please try again.";
+"linkDevice.errorWrongData" = "Հաշիվն արտահանելիս սխալ տեղի ունեցավ։ Խնդրում ենք կրկին փորձել։";
 "linkDevice.initialInfo" = "On the new device, initiate a new account.";
 "linkDevice.infoAddAccount" = "Select Add Account → Connect from another device.";
 "linkDevice.infoQRCode" = "When ready, scan the QR code.";
@@ -500,7 +503,7 @@
 "linkDevice.authenticationInfo" = "New device found at the following IP address. Is that you? To continue the export account operation, tap Confirm.";
 "linkDevice.newDeviceIP" = "New device IP address: %1@";
 "linkDevice.code" = "code";
-"linkDevice.wrongEntry" = "Unrecognized new device identifier. Please follow the instructions above.";
+"linkDevice.wrongEntry" = "Չճանաչված նոր սարքի նույնացուցիչ։ Խնդրում ենք հետևել վերը նշված ցուցումներին։";
 "linkDevice.exportInProgress" = "The export account operation to the new device is in progress. Please confirm import on the new device.";
 "linkDevice.completed" = "The account was imported successfully on the new device.";
 
@@ -536,7 +539,7 @@
 "generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
 "generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
-"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.youJoined" = "Դուք միացաք զրույցին։";
 "generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
 "generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Արտաքին զանգ";
@@ -558,7 +561,7 @@
 "generalSettings.limitLocationSharingDuration" = "Կարգավորեք տեղակայման ժամանակահատվածը";
 "generalSettings.locationSharingDuration" = "Պաշտոնային բաժնետոմսերի տեւողությունը";
 "generalSettings.donationCampaign" = "Donation campaign";
-"generalSettings.enableDonationCampaign" = "Enable donation campaign";
+"generalSettings.enableDonationCampaign" = "Միացնել նվիրատվության արշավը";
 
 // Log View
 "logView.title" = "Վիրահատականներ";
@@ -584,12 +587,12 @@
 "aboutJami.noWarranty2" = "version 3 or later for details.";
 "aboutJami.contribute" = "Մասնակցեք";
 "aboutJami.feedback" = "Վերադարձ կապ";
-"aboutJami.developers" = "Developers";
+"aboutJami.developers" = "Մշակողներ";
 "aboutJami.media" = "ԶԼՄ-ներ";
-"aboutJami.communityManagement" = "Community Management";
-"aboutJami.specialThanks" = "Special thanks to";
-"aboutJami.info" = "This is a list of people who have made a significant investment of time, with useful results, into Jami. Any such contributors who want to be added to the list should contact us.";
-"aboutJami.header" = "We would like to thank our contributors, whose efforts over many years have made this software what it is.";
+"aboutJami.communityManagement" = "Համայնքի կառավարում";
+"aboutJami.specialThanks" = "Հատուկ շնորհակալություն";
+"aboutJami.info" = "Սա այն մարդկանց ցանկն է, ովքեր զգալի ժամանակ են ներդրել՝ օգտակար արդյունքներով, Jami-ում։ Ցանկում ավելացվել ցանկացող նման ներդրողները պետք է կապվեն մեզ հետ։";
+"aboutJami.header" = "Ցանկանում ենք շնորհակալություն հայտնել մեր ներդրողներին, որոնց ջանքերը երկար տարիների ընթացքում այս ծրագրաշարը դարձրել են այնպիսին, ինչպիսին այն կա։";
 
 // Accessibility
 "accessibility.close" = "Մոտակայքում";
@@ -618,13 +621,13 @@
 "accessibility.conversationRowSyncing" = "Synchronization in progress";
 "accessibility.conversationRowLastMessage" = "Last message at %@";
 "accessibility.userPresenceOnline" = "Ինտերնետում";
-"accessibility.userPresenceAvailable" = "Available";
+"accessibility.userPresenceAvailable" = "Հասանելի";
 "accessibility.pendingRequestsRowPlural" = "Invitations received: %@ pending invitations";
 "accessibility.pendingRequestsRowSingular" = "Invitation received: %@ pending invitation";
 "accessibility.pendingRequestsRowHint" = "Double-tap to review and reply to invitations you received";
 "accessibility.pendingRequestsListBlockUser" = "Block invitation sender";
-"accessibility.pendingRequestsListRejectInvitation" = "Decline invitation";
-"accessibility.pendingRequestsListAcceptInvitation" = "Accept invitation";
+"accessibility.pendingRequestsListRejectInvitation" = "Մերժել հրավերը";
+"accessibility.pendingRequestsListAcceptInvitation" = "Ընդունել հրավերը";
 "accessibility.messageBubbleDeleted" = "Message deleted";
 "accessibility.messageBubbleEdited" = "Կարգավորվել";
 "accessibility.messageBubbleRead" = "Read";
@@ -638,7 +641,7 @@
 "accessibility.fileTransfer.sentOn" = "File: %1@, sent on %2@";
 "accessibility.call.lasted" = "Lasted %@";
 "accessibility.calls.default.toggleAudio" = "Միկրոֆոն անջատ";
-"accessibility.calls.default.toggleVideo" = "Start camera";
+"accessibility.calls.default.toggleVideo" = "Գործարկել տեսախցիկը";
 "accessibility.calls.default.pauseCall" = "Հանգիստ զանգ";
 "accessibility.calls.default.endCall" = "Վերջնական զանգը";
 "accessibility.calls.default.addParticipant" = "Մասնակիցը ավելացնել";
@@ -648,7 +651,7 @@
 "accessibility.calls.default.showDialpad" = "Show dialpad";
 "accessibility.calls.default.raiseHand" = "Բարձրացրեք ձեռքը";
 
-"accessibility.calls.alter.toggleAudio" = "Unmute microphone";
+"accessibility.calls.alter.toggleAudio" = "Միացնել խոսափողի ձայնը";
 "accessibility.calls.alter.toggleVideo" = "Հեռուստացույցը կանգնեցրեք";
 "accessibility.calls.alter.pauseCall" = "Վերսկսել զանգը";
 "accessibility.calls.alter.endCall" = "Վերջնական զանգը";

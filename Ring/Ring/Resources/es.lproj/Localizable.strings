@@ -126,9 +126,12 @@
 // Smartlist
 "smartlist.yesterday" = "Ayer";
 "smartlist.results" = "Directorio público";
-"smartlist.jamsResults" = "Resultado de la búsqueda";
-"smartlist.jamsResults" = "Resultado de la búsqueda";
+"smartlist.jamsResults" = "Directorio de la organización";
 "smartlist.conversations" = "Conversaciones";
+"smartlist.conversationsSearchHint" = "Aún no tienes conversaciones.";
+"smartlist.publicDirectoryHint" = "Usuarios de Jami que no son contactos tuyos.";
+"smartlist.jamsDirectoryHint" = "Personas de tu organización que no son contactos tuyos.";
+"smartlist.dialpad" = "Teclado";
 "smartlist.noConversationsFound" = "Ninguna conversación coincide con la búsqueda.";
 "smartlist.newContact" = "Nuevo contacto";
 "smartlist.newGroup" = "Nuevo grupo";

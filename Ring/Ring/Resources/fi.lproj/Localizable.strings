@@ -126,9 +126,12 @@
 // Smartlist
 "smartlist.yesterday" = "Eilen";
 "smartlist.results" = "Julkinen kansio";
-"smartlist.jamsResults" = "Hakutulokset";
-"smartlist.jamsResults" = "Hakutulokset";
+"smartlist.jamsResults" = "Organisointikansio";
 "smartlist.conversations" = "Keskustelu";
+"smartlist.conversationsSearchHint" = "Sinulla ei ole vielä keskusteluja.";
+"smartlist.publicDirectoryHint" = "Henkilöt Jami-yhteystietojen ulkopuolella.";
+"smartlist.jamsDirectoryHint" = "Henkilöt organisaatiosi ulkopuolella.";
+"smartlist.dialpad" = "Näppäimistö";
 "smartlist.noConversationsFound" = "Hakua vastaavaa keskustelua ei löytynyt.";
 "smartlist.newContact" = "Uusi henkilö";
 "smartlist.newGroup" = "Uusi ryhmä";

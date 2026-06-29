@@ -126,9 +126,12 @@
 // Smartlist
 "smartlist.yesterday" = "Eile";
 "smartlist.results" = "Avalik kataloog";
-"smartlist.jamsResults" = "Otsingutulemus";
-"smartlist.jamsResults" = "Otsingutulemus";
+"smartlist.jamsResults" = "Organisatsiooni kataloog";
 "smartlist.conversations" = "Vestlused";
+"smartlist.conversationsSearchHint" = "Sul pole veel ühtegi vestlust.";
+"smartlist.publicDirectoryHint" = "Inimesed Jami võrgus väljaspool sinu aadressiraamatut.";
+"smartlist.jamsDirectoryHint" = "Inimesed sinu organisatsioonis väljaspool sinu aadressiraamatut.";
+"smartlist.dialpad" = "Klahvistik";
 "smartlist.noConversationsFound" = "Ühtegi vestlust ei vasta sinu otsingule.";
 "smartlist.newContact" = "Uus kontakt";
 "smartlist.newGroup" = "Uus grupp";
