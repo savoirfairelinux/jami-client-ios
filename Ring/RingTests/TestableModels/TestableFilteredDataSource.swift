@@ -19,12 +19,14 @@
  */
 
 import Foundation
+import RxSwift
 @testable import Ring
 
 class TestableFilteredDataSource: ConversationDataSource {
 
     init(conversations: [Ring.ConversationViewModel], injectionBag: InjectionBag) {
         super.init(with: injectionBag)
+        self.disposeBag = DisposeBag()
         self.conversationViewModels = conversations
     }
 }
