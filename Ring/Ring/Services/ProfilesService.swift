@@ -62,6 +62,10 @@ class ProfilesService {
 
     let dbManager: DBManager
 
+    // Shared scheduler for profile resolution so we don't allocate a new
+    // background queue on every resolution request.
+    private let resolutionScheduler = ConcurrentDispatchQueueScheduler(qos: .background)
+
     let disposeBag = DisposeBag()
 
     init(withProfilesAdapter adapter: ProfilesAdapter, dbManager: DBManager) {
@@ -195,7 +199,7 @@ class ProfilesService {
         }
         self.dbManager
             .profileObservable(for: uri, createIfNotExists: createIfNotexists, accountId: accountId)
-            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
+            .subscribe(on: self.resolutionScheduler)
             .subscribe { profile in
                 profileObservable.onNext(profile)
             } onError: { [weak self] error in
@@ -241,7 +245,7 @@ extension ProfilesService {
         }
         self.dbManager
             .accountProfileObservable(for: accountId)
-            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
+            .subscribe(on: self.resolutionScheduler)
             .subscribe(onNext: { profile in
                 profileObservable.onNext(profile)
             }, onError: { [weak self] error in
