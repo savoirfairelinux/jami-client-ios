@@ -4,7 +4,7 @@ Jami is a secure, distributed (peer-to-peer) messaging and audio/video calling c
 
 ## General rules
 
-- Use the relevant skill or topic file before starting work
+- Before any task — implementing, reviewing, or debugging — read the relevant Skill or Topic(s) for its domain first.
 - Prefer small, focused changes over large sweeping ones
 - For behavior changes, add/update tests first.
 
@@ -17,3 +17,6 @@ Jami is a secure, distributed (peer-to-peer) messaging and audio/video calling c
 - Build/test workflow → [build-test.md](.agents/topics/build-test.md).
 - UI / view work → [ui-design.md](.agents/topics/ui-design.md).
 - App logic — services, view models, or navigation → [architecture.md](.agents/topics/architecture.md).
+- Notifications, push & connectivity — push/VoIP pushes, incoming calls & call
+  delivery/receipts, background↔foreground, account-active/registration, sync
+  on wake → [notifications.md](.agents/topics/notifications.md).
