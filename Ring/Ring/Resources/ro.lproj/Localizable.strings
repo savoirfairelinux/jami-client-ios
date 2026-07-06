@@ -126,12 +126,12 @@
 // Smartlist
 "smartlist.yesterday" = "Ieri";
 "smartlist.results" = "Lista publică";
-"smartlist.jamsResults" = "Organization directory";
+"smartlist.jamsResults" = "Lista organizației";
 "smartlist.conversations" = "Conversații";
-"smartlist.conversationsSearchHint" = "You don't have any conversations yet.";
-"smartlist.publicDirectoryHint" = "People on Jami outside your contacts.";
-"smartlist.jamsDirectoryHint" = "People in your organization outside your contacts.";
-"smartlist.dialpad" = "Keypad";
+"smartlist.conversationsSearchHint" = "Încă nu ai conversații.";
+"smartlist.publicDirectoryHint" = "Persoane de pe Jami din afara contactelor tale.";
+"smartlist.jamsDirectoryHint" = "Persoane din organizația ta din afara contactelor tale.";
+"smartlist.dialpad" = "Tastatura numerică";
 "smartlist.noConversationsFound" = "Nicio conversație nu corespunde căutării.";
 "smartlist.newContact" = "Contact nou";
 "smartlist.newGroup" = "Grup nou";
@@ -712,7 +712,7 @@
 "peerServices.errorOffline" = "Contact neconectat";
 "peerServices.errorUnreachable" = "Contact inaccesibil";
 "peerServices.errorTimeout" = "Cererea a expirat";
-"peerServices.errorUnknown" = "Serviciile nu au putut fi preluate";
+"peerServices.errorUnknown" = "Nu s-au putut accesa serviciile";
 "peerServices.done" = "Făcut";
 "peerServices.notSupported" = "Neimplementat";
 "peerServices.open" = "Deschide";
