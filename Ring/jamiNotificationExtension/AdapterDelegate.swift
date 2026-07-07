@@ -30,6 +30,7 @@ protocol AdapterDelegate {
     func newInteraction(conversationId: String, accountId: String, message: [String: String])
     func dataTransferEvent(withFileId transferId: String, withEventCode eventCode: Int, accountId: String, conversationId: String, interactionId: String)
     func conversationSyncCompleted(accountId: String)
+    func conversationFetchFinished(accountId: String, conversationId: String)
     func conversationCloned(accountId: String)
     func receivedConversationRequest(accountId: String, conversationId: String, metadata: [String: String])
     func activeCallsChanged(conversationId: String, accountId: String, calls: [[String: String]])

@@ -445,12 +445,7 @@ class NotificationService: UNNotificationServiceExtension {
             return
         }
 
-        if !self.originalNotificationData.isEmpty {
-            self.adapterService.pushNotificationReceived(accountId: self.accountId, data: self.originalNotificationData)
-        }
-
         let accountJamiId = self.adapterService.getAccountJamiId(accountId: self.accountId)
-
         jamiTaskId = UUID().uuidString
         self.autoDispatchGroup.enter(id: jamiTaskId)
         self.adapterService.startAccountsWithListener(accountId: self.accountId, convId: convId, loadAll: loadAll) { [weak self] event, eventData in
@@ -486,7 +481,16 @@ class NotificationService: UNNotificationServiceExtension {
                     self.verifyTasksStatus()
                 }
             case .syncCompleted:
-                self.taskPropertyQueue.sync { self.syncCompleted = true }
+                self.taskPropertyQueue.sync {
+                    if loadAll || convId.isEmpty {
+                        self.syncCompleted = true
+                    }
+                }
+                self.verifyTasksStatus()
+            case .conversationFetchFinished:
+                if !loadAll && eventData.conversationId == convId {
+                    self.taskPropertyQueue.sync { self.syncCompleted = true }
+                }
                 self.verifyTasksStatus()
             case .fileTransferInProgress:
                 if accountJamiId == eventData.jamiId {
@@ -513,6 +517,10 @@ class NotificationService: UNNotificationServiceExtension {
                 self.taskPropertyQueue.sync { self.itemsToPresent += 1 }
                 self.configureAndPresentCallNotification(config: notifConfig, calls: calls, accountId: eventData.accountId)
             }
+        }
+
+        if !self.originalNotificationData.isEmpty {
+            self.adapterService.pushNotificationReceived(accountId: self.accountId, data: self.originalNotificationData)
         }
     }
 

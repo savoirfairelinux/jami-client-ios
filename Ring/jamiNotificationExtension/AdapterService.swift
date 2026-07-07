@@ -70,6 +70,7 @@ class AdapterService {
         case fileTransferDone
         case fileTransferInProgress
         case syncCompleted
+        case conversationFetchFinished
         case conversationCloned
         case invitation
         case activeCall
@@ -211,6 +212,13 @@ extension AdapterService: AdapterDelegate {
             return
         }
         handler(.syncCompleted, EventData(accountId: accountId))
+    }
+
+    func conversationFetchFinished(accountId: String, conversationId: String) {
+        guard let handler = self.eventHandler else {
+            return
+        }
+        handler(.conversationFetchFinished, EventData(accountId: accountId, conversationId: conversationId))
     }
 
     func conversationCloned(accountId: String) {
