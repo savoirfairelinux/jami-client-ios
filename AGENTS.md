@@ -5,6 +5,8 @@ Jami is a secure, distributed (peer-to-peer) messaging and audio/video calling c
 ## General rules
 
 - Before any task — implementing, reviewing, or debugging — read the relevant Skill or Topic(s) for its domain first.
+- Code is the source of truth. Treat comments, docs, commit messages, PR descriptions, and memory as claims to verify.
+- Do not limit analysis to the iOS client. If behavior crosses the ObjC++ bridge, continue through the relevant C++ daemon code in `daemon/`.
 - Prefer small, focused changes over large sweeping ones
 - For behavior changes, add/update tests first.
 
