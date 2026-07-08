@@ -16,6 +16,24 @@
       "message": "seems a bit much. ideally compact this, but check if usage improves results",
       "revId": "21bdfb3f40fa321ce41f0ff889da697a02d28f15",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a49ff44_13604195",
+        "filename": ".agents/topics/notifications.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-07-08T18:26:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6226cf80_f6076ded",
+      "revId": "21bdfb3f40fa321ce41f0ff889da697a02d28f15",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
