@@ -311,9 +311,12 @@ std::map<std::string, std::string> nameServers;
         dht::Sp<dht::Value> decrypted = dhtValue.decrypt(dhtKey);
         auto unpacked = msgpack::unpack((const char*) decrypted->data.data(), decrypted->data.size());
         auto peerCR = unpacked.get().as<PeerConnectionRequest>();
-        if (peerCR.connType.empty()) {
-            // this value is not a PeerConnectionRequest
-            // check if it a TrustRequest
+        // Empty connType has no type to act on: calls and messages/files arrive as typed
+        // requests (handled below). Only a conversation invite (TrustRequest) needs to be shown
+        // to the user here — handle it; ignore the rest (untyped mesh/sync requests, can be many).
+        auto shouldIgnore = peerCR.connType.empty();
+        if (shouldIgnore) {
+            // check if TrustRequest, otherwise return
             auto conversationRequest = unpacked.get().as<dht::TrustRequest>();
             if (conversationRequest.confirm) {
                 // request confirmation. We need to wait for conversation to clone
