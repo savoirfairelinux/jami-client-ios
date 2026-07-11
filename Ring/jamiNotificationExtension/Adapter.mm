@@ -312,6 +312,18 @@ std::map<std::string, std::string> nameServers;
         auto unpacked = msgpack::unpack((const char*) decrypted->data.data(), decrypted->data.size());
         auto peerCR = unpacked.get().as<PeerConnectionRequest>();
         if (peerCR.connType.empty()) {
+            // A genuine PeerConnectionRequest always carries an ICE message, even
+            // when the sender did not set a connType (e.g. "msg:" or "sync" channel
+            // requests). Answers intentionally follow the same path: the daemon
+            // must resume the outgoing ICE negotiation that produced the request.
+            // Start it so the pending exchange can complete; otherwise queued
+            // messages may remain undelivered.
+            if (!peerCR.ice_msg.empty()) {
+                if (isMessageTreated(peerCR.id, [treatedMessagesPath UTF8String])) {
+                    return {};
+                }
+                return @{@"": @"application/im-gitmessage-id"};
+            }
             // this value is not a PeerConnectionRequest
             // check if it a TrustRequest
             auto conversationRequest = unpacked.get().as<dht::TrustRequest>();
