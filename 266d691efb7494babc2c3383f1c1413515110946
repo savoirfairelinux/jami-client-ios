@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78b48927_230728fd",
+        "filename": "Ring/jamiNotificationExtension/Adapter.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-07-11T01:19:16Z",
+      "side": 1,
+      "message": "[info] Line 319: The `ice_msg` check reliably distinguishes a genuine PeerConnectionRequest from a TrustRequest unpacked via MSGPACK_DEFINE_MAP (TrustRequest has no `ice_msg` key, so it stays empty), which is a good discriminator. However, this branch also fires for connection *answers* (`isAnswer \u003d\u003d true`), since only `connType` and `ice_msg` are inspected. Receiving a push for an answer would now spin up the daemon and trigger a full sync (loadAll). Consider guarding with `!peerCR.isAnswer` if answers are not expected to require daemon startup here, or add a comment explaining why answers are intentionally handled the same way.",
+      "revId": "266d691efb7494babc2c3383f1c1413515110946",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
