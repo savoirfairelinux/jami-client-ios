@@ -1,0 +1,22 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e47b6a35_0bc9c58d",
+        "filename": "Ring/jamiNotificationExtension/Adapter.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 617
+      },
+      "writtenOn": "2026-07-12T18:06:05Z",
+      "side": 1,
+      "message": "Confirmed: answers are intentionally handled. They can complete a pending outgoing msg/sync ICE negotiation, and dropping the push here would leave that exchange stalled until the app is foregrounded. Patch set 2 documents this explicitly.",
+      "parentUuid": "78b48927_230728fd",
+      "revId": "a9747b30a1595c6e46da9f02932a8b3383292e05",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
