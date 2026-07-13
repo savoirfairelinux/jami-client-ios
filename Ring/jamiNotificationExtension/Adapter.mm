@@ -322,10 +322,11 @@ std::map<std::string, std::string> nameServers;
                 // request confirmation. We need to wait for conversation to clone
                 return @{@"": @"application/clone"};
             }
-            if (!conversationRequest.conversationId.empty()) {
+            auto conversationId = conversationRequest.conversationId;
+            if (!conversationId.empty()) {
                 if (conversationRequest.service == "cx.ring") {
                     // return git message type to start daemon
-                    return @{@"": @"application/im-gitmessage-id"};
+                    return @{@"": [NSString stringWithFormat:@"application/im-gitmessage-id/%s", conversationId.c_str()]};
                 }
             }
             return {};
