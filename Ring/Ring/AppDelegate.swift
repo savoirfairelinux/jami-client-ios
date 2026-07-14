@@ -349,6 +349,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func sceneWillEnterForeground() {
         self.updateNotificationAvailability()
+        // While the app is suspended, network transitions are missed and the
+        // NWPathMonitor status deduplication filters them out on wake, leaving
+        // the daemon with stale connections. Ask the daemon to revalidate them.
+        self.daemonService.connectivityChanged()
         guard let account = self.accountService.currentAccount else { return }
         self.presenceService.subscribeBuddies(withAccount: account.id, withContacts: self.contactsService.contacts.value, subscribe: true)
     }
