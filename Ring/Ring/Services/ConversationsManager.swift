@@ -45,7 +45,12 @@ class ConversationsManager {
     private var maxSizeForAutoaccept: Int {
         return UserDefaults.standard.integer(forKey: acceptTransferLimitKey) * 1024 * 1024
     }
-    private let appState = BehaviorRelay<ServiceEventType>(value: .appEnterForeground)
+    private var accountActivationManager: AccountActivationManager!
+    // Keeps the process alive so the daemon's DHT-unregister can flush before suspend.
+    private var deactivationTaskId: UIBackgroundTaskIdentifier = .invalid
+    private let bgTaskLock = NSLock()
+    // Backstop against a dropped call-ended event pinning the account active in background.
+    private var callActiveWatchdog: Timer?
 
     // swiftlint:disable cyclomatic_complexity
     init(with conversationService: ConversationsService,
@@ -90,12 +95,17 @@ class ConversationsManager {
         self.controlAccountsState()
     }
 
-    // When the application is inactive, the accounts should also be inactive. Except when when handling incoming call.
     private func controlAccountsState() {
-        // Subscribe to app state changes
+        // Seed from the real launch state: a background launch must not activate.
+        let foreground = UIApplication.shared.applicationState != .background
+        self.accountActivationManager = AccountActivationManager(
+            isForeground: foreground,
+            apply: { [weak self] active in
+                self?.applyAccountsActive(active)
+            })
+
         NotificationCenter.default.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(appMovedForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
-        // calls events
         let callProviderEvents = callsProvider.sharedResponseStream
             .filter({ (event) in
                 return event.eventType == .callProviderDeclineCall ||
@@ -106,24 +116,6 @@ class ConversationsManager {
                 return  event.eventType == .callEnded
             })
 
-        appState
-            .asObservable()
-            .subscribe(onNext: { [weak self] eventType in
-                guard let self = self else { return }
-                switch eventType {
-                case .appEnterBackground:
-                    self.updateBackgroundState()
-                case .appEnterForeground:
-                    DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-                        guard let self = self else { return }
-                        self.updateForegroundState()
-                    }
-                default:
-                    break
-                }
-            })
-            .disposed(by: self.disposeBag)
-
         Observable.of(callProviderEvents.asObservable(),
                       callEndedEvents.asObservable())
             .merge()
@@ -131,7 +123,7 @@ class ConversationsManager {
                 guard let self = self else { return }
                 switch serviceEvent.eventType {
                 case .callProviderPreviewPendingCall:
-                    self.accountsService.setAccountsActive(active: true)
+                    self.accountActivationManager.setCallActive(true)
                     if let payload: [String: String] = serviceEvent.getEventInput(.content),
                        !payload.isEmpty {
                         self.accountsService.pushNotificationReceived(data: payload)
@@ -145,12 +137,9 @@ class ConversationsManager {
                         self.reloadConversationsAndRequests(accountIds: accountIds)
                     }
                 case .callEnded, .callProviderDeclineCall:
-                    DispatchQueue.main.async {
-                        let state = UIApplication.shared.applicationState
-                        if state == .background {
-                            self.updateBackgroundState()
-                        }
-                    }
+                    let active = self.callsProvider.hasActiveCalls()
+                    self.accountActivationManager.setCallActive(active)
+                    if !active { self.stopCallWatchdog() }
                 default:
                     break
                 }
@@ -159,16 +148,59 @@ class ConversationsManager {
             .disposed(by: self.disposeBag)
     }
 
-    /*
-     When the app is in the background, the account should not be active, and
-     the notification extension should handle incoming notifications unless there is a pending call.
-     */
-    func updateBackgroundState() {
-        if self.callsProvider.hasActiveCalls() { return }
-        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-            appDelegate.updateCallScreenState(presenting: false)
+    // Invoked on the activation manager's serial queue, so the daemon calls stay ordered.
+    private func applyAccountsActive(_ active: Bool) {
+        if active {
+            self.accountsService.setAccountsActive(active: true)
+            self.endDeactivationTask()
+        } else {
+            self.beginDeactivationTask()
+            self.accountsService.setAccountsActive(active: false)
+            DispatchQueue.global(qos: .utility).asyncAfter(deadline: .now() + 3) { [weak self] in
+                self?.endDeactivationTask()
+            }
         }
-        self.accountsService.setAccountsActive(active: false)
+    }
+
+    private func beginDeactivationTask() {
+        bgTaskLock.lock()
+        defer { bgTaskLock.unlock() }
+        if deactivationTaskId != .invalid {
+            UIApplication.shared.endBackgroundTask(deactivationTaskId)
+        }
+        deactivationTaskId = UIApplication.shared
+            .beginBackgroundTask(withName: "cx.ring.accountDeactivate") { [weak self] in
+                self?.endDeactivationTask()
+            }
+    }
+
+    private func endDeactivationTask() {
+        bgTaskLock.lock()
+        defer { bgTaskLock.unlock() }
+        guard deactivationTaskId != .invalid else { return }
+        UIApplication.shared.endBackgroundTask(deactivationTaskId)
+        deactivationTaskId = .invalid
+    }
+
+    private func startCallWatchdogIfNeeded() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self,
+                  self.callActiveWatchdog == nil,
+                  self.callsProvider.hasActiveCalls() else { return }
+            self.callActiveWatchdog = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { [weak self] _ in
+                guard let self = self else { return }
+                let active = self.callsProvider.hasActiveCalls()
+                self.accountActivationManager.setCallActive(active)
+                if !active { self.stopCallWatchdog() }
+            }
+        }
+    }
+
+    private func stopCallWatchdog() {
+        DispatchQueue.main.async { [weak self] in
+            self?.callActiveWatchdog?.invalidate()
+            self?.callActiveWatchdog = nil
+        }
     }
 
     func cleanConversationData() {
@@ -185,19 +217,13 @@ class ConversationsManager {
         return userDefaults.object(forKey: Constants.updatedConversations) as? [[String: String]]
     }
 
-    func updateForegroundState() {
-        guard let updatedConversations = self.getConversationData() else {
-            self.accountsService.setAccountsActive(active: true)
-            return
-        }
+    // Reload what the extension recorded while backgrounded; activation is the manager's.
+    func reloadStateOnForeground() {
+        guard let updatedConversations = self.getConversationData() else { return }
         self.cleanConversationData()
-        // ask daemon to reload conversations and request from file
         let accountIds = extractAccountIds(from: updatedConversations)
         self.reloadConversationsAndRequests(accountIds: accountIds)
-        self.accountsService.setAccountsActive(active: true)
-        // get requests from the daemon
         self.updateRequests(accountIds: accountIds)
-        // get interactions from the daemon
         self.reloadConversationMessages(updatedConversations: updatedConversations)
     }
 
@@ -236,12 +262,21 @@ class ConversationsManager {
 
     @objc
     func appMovedToBackground() {
-        appState.accept(.appEnterBackground)
+        if !self.callsProvider.hasActiveCalls(),
+           let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+            appDelegate.updateCallScreenState(presenting: false)
+        }
+        self.accountActivationManager.setForeground(false)
+        self.startCallWatchdogIfNeeded()
     }
 
     @objc
     func appMovedForeground() {
-        appState.accept(.appEnterForeground)
+        self.stopCallWatchdog()
+        self.accountActivationManager.setForeground(true)
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            self?.reloadStateOnForeground()
+        }
     }
 
     private func subscribeRequestEvents() {

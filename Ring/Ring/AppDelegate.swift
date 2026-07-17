@@ -630,6 +630,12 @@ extension AppDelegate {
         didReceiveRemoteNotification userInfo: [AnyHashable: Any],
         fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void
     ) {
+        // Low-priority pushes (presence, expired values): a no-op while the account
+        // is inactive, and we must not activate it in the background. Ignore them.
+        guard application.applicationState != .background else {
+            completionHandler(.noData)
+            return
+        }
         var dictionary = [String: String]()
         for key in userInfo.keys {
             if let value = userInfo[key] {

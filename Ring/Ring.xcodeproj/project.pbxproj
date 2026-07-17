@@ -453,8 +453,10 @@
 		26EFD7FC2E2EBA4500B63F74 /* Utils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04399AAB1D1C304300E99CD9 /* Utils.mm */; };
 		26F1D8E22FC73C39002AA754 /* PeerServicesAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F1D8E02FC73C39002AA754 /* PeerServicesAdapterDelegate.swift */; };
 		26F1D8E32FC73C39002AA754 /* PeerSharingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F1D8E12FC73C39002AA754 /* PeerSharingService.swift */; };
+		ACC0D8E12FC73C39002AA752 /* AccountActivationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC0D8E12FC73C39002AA751 /* AccountActivationManager.swift */; };
 		26F1D8E62FC73C6E002AA754 /* PeerServicesAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26F1D8E52FC73C6E002AA754 /* PeerServicesAdapter.mm */; };
 		26F1D8F02FC76A78002AA754 /* PeerSharingServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F1D8EF2FC76A78002AA754 /* PeerSharingServiceTests.swift */; };
+		ACC0D8E12FC73C39002AA755 /* AccountActivationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC0D8E12FC73C39002AA753 /* AccountActivationManagerTests.swift */; };
 		26F1D8F32FC76A8B002AA754 /* ObjCMockPeerServicesAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F1D8F22FC76A8B002AA754 /* ObjCMockPeerServicesAdapter.m */; };
 		26F1D9A12FC76A78002AA754 /* PeerSharingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F1D9A02FC76A78002AA754 /* PeerSharingViewModelTests.swift */; };
 		26F5442D2C5815770069A7A4 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F5442C2C5815770069A7A4 /* WelcomeView.swift */; };
@@ -1137,9 +1139,11 @@
 		26EFD8012E2ED72400B63F74 /* ObjcTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjcTypes.h; sourceTree = "<group>"; };
 		26F1D8E02FC73C39002AA754 /* PeerServicesAdapterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerServicesAdapterDelegate.swift; sourceTree = "<group>"; };
 		26F1D8E12FC73C39002AA754 /* PeerSharingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerSharingService.swift; sourceTree = "<group>"; };
+		ACC0D8E12FC73C39002AA751 /* AccountActivationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountActivationManager.swift; sourceTree = "<group>"; };
 		26F1D8E42FC73C6E002AA754 /* PeerServicesAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PeerServicesAdapter.h; sourceTree = "<group>"; };
 		26F1D8E52FC73C6E002AA754 /* PeerServicesAdapter.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PeerServicesAdapter.mm; sourceTree = "<group>"; };
 		26F1D8EF2FC76A78002AA754 /* PeerSharingServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerSharingServiceTests.swift; sourceTree = "<group>"; };
+		ACC0D8E12FC73C39002AA753 /* AccountActivationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountActivationManagerTests.swift; sourceTree = "<group>"; };
 		26F1D8F12FC76A8B002AA754 /* ObjCMockPeerServicesAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjCMockPeerServicesAdapter.h; sourceTree = "<group>"; };
 		26F1D8F22FC76A8B002AA754 /* ObjCMockPeerServicesAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjCMockPeerServicesAdapter.m; sourceTree = "<group>"; };
 		26F1D9A02FC76A78002AA754 /* PeerSharingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerSharingViewModelTests.swift; sourceTree = "<group>"; };
@@ -2811,6 +2815,7 @@
 				56BBC9A11ED714DF00CDAF8B /* ConversationsService.swift */,
 				26F1D8E02FC73C39002AA754 /* PeerServicesAdapterDelegate.swift */,
 				26F1D8E12FC73C39002AA754 /* PeerSharingService.swift */,
+				ACC0D8E12FC73C39002AA751 /* AccountActivationManager.swift */,
 				02B22E081DF7585F000358C9 /* DaemonService.swift */,
 				02B22DFE1DF755DB000358C9 /* AccountsService.swift */,
 				0273C2FE1E0C438F00CF00BA /* AccountAdapterDelegate.swift */,
@@ -3014,6 +3019,7 @@
 				260AE64129C266B300D66D5E /* CallsTests */,
 				AA0003010000000000000003 /* MediaPreviewModelSaveTests.swift */,
 				26F1D8EF2FC76A78002AA754 /* PeerSharingServiceTests.swift */,
+				ACC0D8E12FC73C39002AA753 /* AccountActivationManagerTests.swift */,
 				26F1D9A02FC76A78002AA754 /* PeerSharingViewModelTests.swift */,
 			);
 			path = RingTests;
@@ -4515,6 +4521,7 @@
 				1A2D18A41F27EF5200B2C785 /* AppCoordinator.swift in Sources */,
 				26F1D8E22FC73C39002AA754 /* PeerServicesAdapterDelegate.swift in Sources */,
 				26F1D8E32FC73C39002AA754 /* PeerSharingService.swift in Sources */,
+				ACC0D8E12FC73C39002AA752 /* AccountActivationManager.swift in Sources */,
 				FB726FE5280249DA8219EDE9 /* PeerSharingViewModel.swift in Sources */,
 				0769ACCE032643E496BC13A5 /* PeerSharingSheet.swift in Sources */,
 				26D87CEB2BBB4A5F0086E4AA /* AccountsViewModel.swift in Sources */,
@@ -4569,6 +4576,7 @@
 				26A2B0522E8DC59E00A3E1B2 /* ActiveCallsViewModelTests.swift in Sources */,
 				260AE63729BE177000D66D5E /* ContactUtilsTests.swift in Sources */,
 				26F1D8F02FC76A78002AA754 /* PeerSharingServiceTests.swift in Sources */,
+				ACC0D8E12FC73C39002AA755 /* AccountActivationManagerTests.swift in Sources */,
 				26F1D9A12FC76A78002AA754 /* PeerSharingViewModelTests.swift in Sources */,
 				260AE63A29C0C81300D66D5E /* CallProviderDelegateTests.swift in Sources */,
 				260AE62B29B8F97300D66D5E /* TestableSwarmInfo.swift in Sources */,
