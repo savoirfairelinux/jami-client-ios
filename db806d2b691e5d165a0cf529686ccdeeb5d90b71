@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfc65f19_0f1d9e14",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-07-17T15:28:49Z",
+      "side": 1,
+      "message": "On foreground the app calls setAccountsActive(true), which re-registers each account and refreshes connectivity. If we return from a suspended state and find an account was still active from the previous run, that\u0027s a bug that must be fixed.",
+      "revId": "db806d2b691e5d165a0cf529686ccdeeb5d90b71",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
