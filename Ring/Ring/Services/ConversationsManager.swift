@@ -46,6 +46,7 @@ class ConversationsManager {
         return UserDefaults.standard.integer(forKey: acceptTransferLimitKey) * 1024 * 1024
     }
     private let appState = BehaviorRelay<ServiceEventType>(value: .appEnterForeground)
+    private var pendingCallBackgroundTask: UIBackgroundTaskIdentifier = .invalid
 
     // swiftlint:disable cyclomatic_complexity
     init(with conversationService: ConversationsService,
@@ -132,6 +133,7 @@ class ConversationsManager {
                 switch serviceEvent.eventType {
                 case .callProviderPreviewPendingCall:
                     self.accountsService.setAccountsActive(active: true)
+                    self.beginPendingCallBackgroundTask()
                     if let payload: [String: String] = serviceEvent.getEventInput(.content),
                        !payload.isEmpty {
                         self.accountsService.pushNotificationReceived(data: payload)
@@ -146,10 +148,13 @@ class ConversationsManager {
                     }
                 case .callEnded, .callProviderDeclineCall:
                     DispatchQueue.main.async {
-                        let state = UIApplication.shared.applicationState
-                        if state == .background {
+                        // Deactivate whenever the app is not actively in the foreground, so a
+                        // pending push call that ends while the app is inactive or in the
+                        // background does not leave the account active for the next run.
+                        if UIApplication.shared.applicationState != .active {
                             self.updateBackgroundState()
                         }
+                        self.endPendingCallBackgroundTask()
                     }
                 default:
                     break
@@ -171,6 +176,42 @@ class ConversationsManager {
         self.accountsService.setAccountsActive(active: false)
     }
 
+    /*
+     A VoIP push activates the account while the app is in the background. If iOS
+     suspends the app before the pending call is resolved, the account would be
+     carried over as active into the suspended state: the next foreground
+     setAccountsActive(true) would then be a no-op in the daemon (no
+     re-registration, stale connectivity), and the notification extension could
+     not own the account. Keep the app alive briefly so the account can be
+     released before suspension.
+     */
+    private func beginPendingCallBackgroundTask() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            if self.pendingCallBackgroundTask != .invalid {
+                UIApplication.shared.endBackgroundTask(self.pendingCallBackgroundTask)
+                self.pendingCallBackgroundTask = .invalid
+            }
+            self.pendingCallBackgroundTask = UIApplication.shared.beginBackgroundTask(withName: "pending-call-account") { [weak self] in
+                guard let self = self else { return }
+                self.callsProvider.stopAllUnhandeledCalls()
+                self.accountsService.setAccountsActive(active: false)
+                if self.pendingCallBackgroundTask != .invalid {
+                    UIApplication.shared.endBackgroundTask(self.pendingCallBackgroundTask)
+                    self.pendingCallBackgroundTask = .invalid
+                }
+            }
+        }
+    }
+
+    private func endPendingCallBackgroundTask() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self, self.pendingCallBackgroundTask != .invalid else { return }
+            UIApplication.shared.endBackgroundTask(self.pendingCallBackgroundTask)
+            self.pendingCallBackgroundTask = .invalid
+        }
+    }
+
     func cleanConversationData() {
         guard let userDefaults = UserDefaults(suiteName: Constants.appGroupIdentifier) else {
             return
@@ -186,6 +227,7 @@ class ConversationsManager {
     }
 
     func updateForegroundState() {
+        self.endPendingCallBackgroundTask()
         guard let updatedConversations = self.getConversationData() else {
             self.accountsService.setAccountsActive(active: true)
             return
