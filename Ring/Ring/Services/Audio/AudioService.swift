@@ -20,9 +20,17 @@ import Foundation
 import AVFoundation
 import Combine
 
+struct AudioRouteState: Sendable, Equatable {
+    let speakerActive: Bool
+    let bluetoothConnected: Bool
+    let headphonesConnected: Bool
+}
+
 final class AudioService {
 
     private let audio: LibJamiAudioAPI
+    private let currentRoute: () -> AudioRouteState
+    private let notificationCenter: NotificationCenter
     private let lock = NSLock()
     private var prefersSpeaker = true
     private let speakerActiveSubject = CurrentValueSubject<Bool, Never>(false)
@@ -38,10 +46,20 @@ final class AudioService {
         self.init(audio: LibJamiAudioClient(adapter: audioAdapter))
     }
 
-    init(audio: LibJamiAudioAPI) {
+    convenience init(audio: LibJamiAudioAPI) {
+        self.init(audio: audio,
+                  currentRoute: { AudioService.systemRouteState() },
+                  notificationCenter: .default)
+    }
+
+    init(audio: LibJamiAudioAPI,
+         currentRoute: @escaping () -> AudioRouteState,
+         notificationCenter: NotificationCenter) {
         self.audio = audio
+        self.currentRoute = currentRoute
+        self.notificationCenter = notificationCenter
         refreshRouteState()
-        observer = NotificationCenter.default.addObserver(
+        observer = notificationCenter.addObserver(
             forName: AVAudioSession.routeChangeNotification,
             object: nil,
             queue: nil
@@ -54,46 +72,49 @@ final class AudioService {
                     || reason == .categoryChange else {
                 return
             }
-            self?.routeQueue.async { self?.applyRoute() }
+            self?.routeQueue.async { self?.applyAutomaticRoute() }
         }
     }
 
     deinit {
         if let observer = observer {
-            NotificationCenter.default.removeObserver(observer)
+            notificationCenter.removeObserver(observer)
         }
     }
 
     func callKitActivated(callHasVideo: Bool, direction: CallDirection) {
         setPrefersSpeaker(AudioRoutePolicy.defaultSpeakerPreference(callHasVideo: callHasVideo))
         if AudioRoutePolicy.shouldOverrideOnActivation(direction: direction) {
-            applyRoute()
+            applyAutomaticRoute()
         } else {
             refreshRouteState()
         }
     }
 
     func toggleSpeaker() {
-        lock.lock()
-        prefersSpeaker.toggle()
-        lock.unlock()
-        applyRoute()
+        // A button tap is an explicit override: match the old client behavior
+        // and invert the real route even when a headset is connected.
+        let route: AudioRoute = speakerActiveSubject.value
+            ? .receiver : .builtinSpeaker
+        setPrefersSpeaker(route == .builtinSpeaker)
+        select(route)
     }
 
-    private func applyRoute() {
-        let bluetooth = bluetoothConnected()
-        let headphones = headphonesConnected()
-        let route = AudioRoutePolicy.route(bluetoothConnected: bluetooth,
-                                           headphonesConnected: headphones,
+    private func applyAutomaticRoute() {
+        let current = currentRoute()
+        let route = AudioRoutePolicy.route(bluetoothConnected: current.bluetoothConnected,
+                                           headphonesConnected: current.headphonesConnected,
                                            prefersSpeaker: currentPrefersSpeaker())
+        select(route)
+    }
+
+    private func select(_ route: AudioRoute) {
         audio.setAudioOutputDevice(route.rawValue)
         speakerActiveSubject.send(route == .builtinSpeaker)
     }
 
     private func refreshRouteState() {
-        speakerActiveSubject.send(
-            AVAudioSession.sharedInstance().currentRoute.outputs.first?
-                .portType == .builtInSpeaker)
+        speakerActiveSubject.send(currentRoute().speakerActive)
     }
 
     private func setPrefersSpeaker(_ value: Bool) {
@@ -108,16 +129,15 @@ final class AudioService {
         return prefersSpeaker
     }
 
-    private func bluetoothConnected() -> Bool {
-        return AVAudioSession.sharedInstance().currentRoute.outputs.contains {
-            $0.portType == .bluetoothA2DP || $0.portType == .bluetoothHFP
-                || $0.portType == .bluetoothLE
-        }
-    }
-
-    private func headphonesConnected() -> Bool {
-        return AVAudioSession.sharedInstance().currentRoute.outputs.contains {
-            $0.portType == .headphones
-        }
+    private static func systemRouteState() -> AudioRouteState {
+        let outputs = AVAudioSession.sharedInstance().currentRoute.outputs
+        return AudioRouteState(
+            speakerActive: outputs.contains { $0.portType == .builtInSpeaker },
+            bluetoothConnected: outputs.contains {
+                $0.portType == .bluetoothA2DP || $0.portType == .bluetoothHFP
+                    || $0.portType == .bluetoothLE
+            },
+            headphonesConnected: outputs.contains { $0.portType == .headphones }
+        )
     }
 }
