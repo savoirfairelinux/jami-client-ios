@@ -159,10 +159,17 @@ static id <CallsAdapterDelegate> _delegate;
     }));
 
     callHandlers.insert(exportable_callback<CallSignal::ConferenceChanged>([&](const std::string& accountId, const std::string& confId, const std::string& state) {
-        if (CallsAdapter.delegate) {
+        id<CallsAdapterDelegate> delegate = CallsAdapter.delegate;
+        if (delegate) {
             NSString* confIdString = [NSString stringWithUTF8String:confId.c_str()];
             NSString* stateString = [NSString stringWithUTF8String:state.c_str()];
-            [CallsAdapter.delegate conferenceChangedWithConference: confIdString accountId: [NSString stringWithUTF8String:accountId.c_str()] state: stateString];
+            NSString* accountIdString = [NSString stringWithUTF8String:accountId.c_str()];
+            auto members = getParticipantList(accountId, confId);
+            NSArray<NSString*>* memberCallIds = [Utils vectorToArray:members];
+            [delegate conferenceChangedWithConference:confIdString
+                                             accountId:accountIdString
+                                                 state:stateString
+                                         memberCallIds:memberCallIds];
         }
     }));
 

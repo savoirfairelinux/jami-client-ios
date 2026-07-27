@@ -188,7 +188,8 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
 
     private var chromeCanAutoHide: Bool {
         guard let call = call else { return false }
-        return CallChromePolicy.canAutoHide(status: call.status, hasVideo: call.hasVideo)
+        let hasVideo = call.effectiveMedia(in: conference).hasVideo
+        return CallChromePolicy.canAutoHide(status: call.status, hasVideo: hasVideo)
     }
 
     private func hideChrome() {
@@ -264,16 +265,19 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
             self.conference = conference
             rebuildCanvas(mode: daemonCanvasMode())
             rebuildRows()
+            rebuildControlsAndCapabilities()
+            updateChromeForState()
             updatePiPSource()
         case let .conferenceEnded(confId, remainingCallId):
             guard conference?.id == confId else { return }
             conference = nil
+            rebuildCanvas(mode: .grid)
+            rebuildRows()
             if let remaining = remainingCallId, remaining != callId {
-                rebuildCanvas(mode: .grid)
                 retarget(to: remaining)
             } else {
-                rebuildCanvas(mode: .grid)
-                rebuildRows()
+                rebuildControlsAndCapabilities()
+                updateChromeForState()
                 updatePiPSource()
             }
         default:
@@ -291,11 +295,10 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
 
     private func apply(call: CallState) {
         self.call = call
-        controls = CallControlsModel(call: call, isSipAccount: isSipAccount)
         peerIsRecording = call.peerIsRecording
         statusText = statusDescription(for: call.status)
-        canAddParticipant = call.status.isOngoing && !isSipAccount
         rebuildRows()
+        rebuildControlsAndCapabilities()
         configureIdentity(for: call)
         updateChromeForState()
         updatePiPSource()
@@ -409,20 +412,25 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
     }
 
     func toggleMuteAudio() {
+        let callId = self.callId
         Task {
-            await callService.toggleMute(callId, label: .defaultAudio)
+            await callService.toggleMute(callId, label: .defaultAudio,
+                                         localJamiId: localJamiId)
         }
     }
 
     func toggleMuteVideo() {
+        let callId = self.callId
         Task {
-            await callService.toggleMute(callId, label: .defaultVideo)
+            await callService.toggleMute(callId, label: .defaultVideo,
+                                         localJamiId: localJamiId)
         }
     }
 
     func toggleHold() {
-        guard let controls = controls else { return }
+        guard let controls = controls, controls.canHold || controls.canResume else { return }
         let hold = controls.canHold
+        let callId = self.callId
         Task { await callService.hold(callId, hold) }
     }
 
@@ -503,6 +511,18 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
         participantRows.count + pendingRows.count
     }
 
+    private func rebuildControlsAndCapabilities() {
+        guard let call = call else {
+            controls = nil
+            canAddParticipant = false
+            return
+        }
+        controls = CallControlsModel(call: call, conference: conference,
+                                     isSipAccount: isSipAccount)
+        canAddParticipant = call.status.isOngoing && !isSipAccount
+            && (conference == nil || canModerateConference)
+    }
+
     func setLayout(_ layout: ConferenceLayoutMode) {
         guard let confId = conference?.id else { return }
         Task { await callService.setLayout(layout, in: confId) }
@@ -561,6 +581,7 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
     }
 
     func addParticipantTapped() {
+        guard canAddParticipant else { return }
         onAddParticipant?()
     }
 

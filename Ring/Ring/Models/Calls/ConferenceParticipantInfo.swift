@@ -36,6 +36,11 @@ struct ConferenceParticipantInfo: Hashable, Identifiable, Sendable {
 
     static func id(uri: String, device: String) -> String { uri + "|" + device }
 
+    func isLocalParticipant(localJamiId: String) -> Bool {
+        if uri.isEmpty { return true }
+        return !localJamiId.isEmpty && uri.filterOutHost() == localJamiId
+    }
+
     init?(_ dict: [String: String]) {
         guard let uri = dict[ConfInfoKey.uri.rawValue] else { return nil }
         func value(_ key: ConfInfoKey) -> String? { dict[key.rawValue] }

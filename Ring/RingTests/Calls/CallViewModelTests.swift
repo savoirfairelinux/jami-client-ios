@@ -328,7 +328,9 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
         harness.callAPI.conferenceCallsReturn["conf-1"] = [harness.callId.raw]
         harness.send(.conferenceCreated(conferenceId: "conf-1", conversationId: "",
                                         accountId: Harness.accountId,
-                                        memberCallIds: [harness.callId.raw]))
+                                        state: "ACTIVE_ATTACHED",
+                                        memberCallIds: [harness.callId.raw],
+                                        participants: [], media: []))
         func sendInfos(activeId: String?, othersSide: Int) {
             func entry(_ uri: String, _ device: String, _ sink: String)
             -> ConferenceParticipantInfo {
@@ -450,7 +452,8 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
         let model = harness.makeModel(localJamiId: jamiId1)
         harness.callAPI.placeCallReturn = "sub-call"
 
-        harness.callService.addParticipant(uri: "carol", toCall: harness.callId)
+        harness.callService.addParticipant(uri: "carol", toCall: harness.callId,
+                                           requestedBy: jamiId1)
         await Harness.wait { model.pendingRows.count == 1 }
         XCTAssertEqual(model.participantRows.count, 2)
         XCTAssertEqual(model.participantCount, 3)

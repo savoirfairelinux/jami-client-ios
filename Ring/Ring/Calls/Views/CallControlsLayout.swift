@@ -41,14 +41,22 @@ struct CallControlsModel: Equatable {
     let canResume: Bool
     let showsDialpad: Bool
 
-    init(call: CallState, isSipAccount: Bool) {
-        self.isAudioMuted = call.isAudioMuted
-        self.isVideoMuted = call.isVideoMuted
+    init(call: CallState, conference: ConferenceState? = nil, isSipAccount: Bool) {
+        let hostedConference = call.mediaOwningHostedConference(in: conference)
+        let media = hostedConference?.media ?? call.media
+        let pendingMediaRequest = hostedConference == nil
+            ? call.pendingMediaRequest
+            : hostedConference?.pendingMediaRequest
+        self.isAudioMuted = hostedConference?.isAudioMuted ?? media.isAudioMuted
+        self.isVideoMuted = media.isVideoMuted
         self.canToggleMedia = call.status.allows(.changeMedia)
-            && call.pendingMediaRequest == nil
-        self.canSwitchCamera = call.hasVideo
-        self.canHold = call.status.allows(.hold)
-        self.canResume = call.status.allows(.resume)
+            && pendingMediaRequest == nil
+            && !(conference?.isHost == true && conference?.id == call.conferenceId
+                 && conference?.hasAttachedHost == false)
+        self.canSwitchCamera = media.hasVideo
+        let canHoldSession = isSipAccount && call.conferenceId == nil
+        self.canHold = canHoldSession && call.status.allows(.hold)
+        self.canResume = canHoldSession && call.status.allows(.resume)
         self.showsDialpad = isSipAccount
     }
 

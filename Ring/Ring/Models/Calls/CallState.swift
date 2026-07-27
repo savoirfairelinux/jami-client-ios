@@ -38,6 +38,17 @@ struct ConfId: Hashable, Sendable, CustomStringConvertible {
     var description: String { raw }
 }
 
+enum ConferenceLifecycle: String, Sendable {
+    case activeAttached = "ACTIVE_ATTACHED"
+    case activeDetached = "ACTIVE_DETACHED"
+    case hold = "HOLD"
+    case unknown
+
+    init(libJamiState: String) {
+        self = ConferenceLifecycle(rawValue: libJamiState) ?? .unknown
+    }
+}
+
 enum CallDirection: Sendable, Equatable {
     case incoming
     case outgoing
@@ -87,22 +98,37 @@ struct CallState: Sendable, Identifiable, Equatable {
     }
 
     var isAudioMuted: Bool {
-        media.first(where: { $0.label == .defaultAudio })?.muted ?? false
+        media.isAudioMuted
     }
 
     var isVideoMuted: Bool {
-        guard let video = media.first(where: { $0.label == .defaultVideo }) else {
-            return true
-        }
-        return video.muted || !video.enabled
+        media.isVideoMuted
     }
 
     var hasVideo: Bool {
-        media.contains { $0.type == .video && $0.enabled && !$0.muted }
+        media.hasVideo
     }
 
     var hasNegotiatedVideo: Bool {
-        media.contains { $0.type == .video && $0.enabled }
+        media.hasNegotiatedVideo
+    }
+
+    /// The attached locally hosted conference that owns this call's media.
+    func mediaOwningHostedConference(in conference: ConferenceState?) -> ConferenceState? {
+        guard let conference = conference,
+              conference.id == conferenceId,
+              conference.isHost,
+              conference.hasAttachedHost else { return nil }
+        return conference
+    }
+
+    /// Media owned by this call, or by its locally hosted conference.
+    func effectiveMedia(in conference: ConferenceState?) -> [MediaItem] {
+        return mediaOwningHostedConference(in: conference)?.media ?? media
+    }
+
+    func effectiveAudioMuted(in conference: ConferenceState?) -> Bool {
+        return mediaOwningHostedConference(in: conference)?.isAudioMuted ?? isAudioMuted
     }
 }
 
@@ -125,11 +151,35 @@ struct PendingConferenceInvite: Sendable, Equatable {
 struct ConferenceState: Sendable, Identifiable, Equatable {
     let id: ConfId
     let accountId: String
+    /// libjami-confirmed media owned by the local conference host.
+    var media: [MediaItem] = []
+    /// Host media re-invite awaiting MediaNegotiationStatus.
+    var pendingMediaRequest: [MediaItem]?
     var participants: [ConferenceParticipantInfo] = []
     var memberCallIds: Set<CallId> = []
     var layout: ConferenceLayoutMode = .grid
     var isHost: Bool = false
+    var lifecycle: ConferenceLifecycle = .unknown
     var conversationId: String?
+
+    var hasAttachedHost: Bool {
+        return lifecycle == .activeAttached
+    }
+
+    var isAudioMuted: Bool {
+        if let localHost = participants.first(where: { $0.uri.isEmpty }) {
+            return localHost.isAudioLocallyMuted || localHost.isAudioModeratorMuted
+        }
+        return media.isAudioMuted
+    }
+
+    var isVideoMuted: Bool {
+        media.isVideoMuted
+    }
+
+    var hasVideo: Bool {
+        media.hasVideo
+    }
 }
 
 struct CallSystemState: Sendable {

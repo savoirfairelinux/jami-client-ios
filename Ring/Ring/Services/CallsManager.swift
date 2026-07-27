@@ -186,9 +186,14 @@ final class CallsManager: CallCameraCoordinating {
         case let .setMuted(callId, muted):
             Task { [weak self] in
                 guard let self = self else { return }
-                guard let call = await self.callService.snapshot().call(callId),
-                      call.isAudioMuted != muted else { return }
-                await self.callService.toggleMute(callId, label: .defaultAudio)
+                let snapshot = await self.callService.snapshot()
+                guard let call = snapshot.call(callId) else { return }
+                let conference = call.conferenceId.flatMap { snapshot.conferences[$0] }
+                guard call.effectiveAudioMuted(in: conference) != muted else { return }
+                let localJamiId = self.accountsService
+                    .getAccount(fromAccountId: call.accountId)?.jamiId ?? ""
+                await self.callService.toggleMute(callId, label: .defaultAudio,
+                                                  localJamiId: localJamiId)
             }
         case .audioSessionActivated:
             Task { [weak self] in

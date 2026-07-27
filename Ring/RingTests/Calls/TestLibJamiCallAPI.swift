@@ -177,7 +177,9 @@ final class TestLibJamiCallAPI: LibJamiCallAPI, @unchecked Sendable {
 
     func muteStream(_ participantId: String, conferenceId: String, accountId: String,
                     deviceId: String, streamId: String, muted: Bool) {
-        moderationCommands.append("muteStream:\(participantId):\(streamId):\(muted)")
+        moderationCommands.append(
+            "muteStream:\(participantId):\(conferenceId):\(deviceId):\(streamId):\(muted)"
+        )
     }
 
     func raiseHand(_ participantId: String, conferenceId: String, accountId: String,

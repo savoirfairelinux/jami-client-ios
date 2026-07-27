@@ -194,12 +194,17 @@ final class CallService {
     }
 
     /// Calls a new participant and joins them once their call connects.
-    func addParticipant(uri: String, toCall callId: CallId) {
+    func addParticipant(uri: String, toCall callId: CallId,
+                        requestedBy localJamiId: String) {
         Task { [weak self] in
             guard let self = self else { return }
-            try? await self.store.addParticipant(peerUri: uri,
-                                                 toCall: callId,
-                                                 videoSource: self.camera?.currentCameraSource() ?? "")
+            do {
+                try await self.store.addParticipant(
+                    peerUri: uri, toCall: callId, requestedBy: localJamiId,
+                    videoSource: self.camera?.currentCameraSource() ?? "")
+            } catch {
+                NSLog("Failed to add call participant: %@", String(describing: error))
+            }
         }
     }
 
@@ -280,8 +285,8 @@ final class CallService {
         await store.hold(id, hold)
     }
 
-    func toggleMute(_ id: CallId, label: MediaLabel) async {
-        await store.toggleMute(id, label: label,
+    func toggleMute(_ id: CallId, label: MediaLabel, localJamiId: String) async {
+        await store.toggleMute(id, label: label, localJamiId: localJamiId,
                                cameraSource: camera?.currentCameraSource() ?? "")
     }
 

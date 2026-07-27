@@ -631,6 +631,102 @@ final class CallStoreTests: XCTestCase {
         XCTAssertNil(call?.pendingMediaRequest)
     }
 
+    func testHostedConferenceMuteTargetsConferenceAndTracksItsMedia() async throws {
+        let memberId = try await placeOngoingAudioCall(negotiated: [.audio(), .video()])
+        let conferenceId = memberId.raw
+        callAPI.conferenceCallsReturn[conferenceId] = [memberId.raw]
+        callAPI.currentMediaReturn[conferenceId] = [.audio(), .video()]
+        callAPI.conferenceDetailsReturn[conferenceId] = ["STATE": "ACTIVE_ATTACHED"]
+        callAPI.conferenceInfosReturn[conferenceId] = [ConferenceParticipantInfo(
+            ["uri": "", "device": "local-device", "sinkId": "host_video_0",
+             "audioLocalMuted": "false", "audioModeratorMuted": "false"]
+        )!]
+        sendEvent(.conferenceCreated(conferenceId: conferenceId, conversationId: "",
+                                     accountId: "acc1"))
+        await expectEvent { event in
+            guard case let .conferenceUpdated(conference) = event else { return false }
+            return conference.id == ConfId(raw: conferenceId)
+                && conference.media.count == 2
+                && !conference.participants.isEmpty
+        }
+
+        await store.toggleMute(memberId, label: .defaultAudio,
+                               localJamiId: "local-jami-id",
+                               cameraSource: "camera://front")
+        flushCommands()
+
+        XCTAssertEqual(callAPI.moderationCommands.last,
+                       "muteStream:local-jami-id:\(conferenceId):local-device:host_video_0:true")
+        XCTAssertTrue(callAPI.requestedMediaChanges.isEmpty,
+                      "host microphone uses the conference-typed API")
+        let memberCall = await store.snapshot().call(memberId)
+        XCTAssertFalse(memberCall?.isAudioMuted == true,
+                       "host mute state belongs to the conference, not one member leg")
+
+        await store.toggleMute(memberId, label: .defaultVideo,
+                               localJamiId: "local-jami-id",
+                               cameraSource: "camera://front")
+        flushCommands()
+        XCTAssertEqual(callAPI.requestedMediaChanges.last?.callId, conferenceId)
+        let requestedVideo = callAPI.requestedMediaChanges.last?.media.first {
+            $0.label == .defaultVideo
+        }
+        XCTAssertTrue(requestedVideo?.muted == true,
+                      "camera changes must also target the hosted conference")
+    }
+
+    func testDetachedHostedConferenceDoesNotMuteMemberCall() async throws {
+        let memberId = try await placeOngoingAudioCall(negotiated: [.audio(), .video()])
+        callAPI.conferenceCallsReturn["conf-1"] = [memberId.raw]
+        callAPI.conferenceDetailsReturn["conf-1"] = ["STATE": "ACTIVE_DETACHED"]
+        sendEvent(.conferenceCreated(conferenceId: "conf-1", conversationId: "",
+                                     accountId: "acc1"))
+        await expectEvent { if case .conferenceUpdated = $0 { return true }; return false }
+
+        await store.toggleMute(memberId, label: .defaultAudio,
+                               localJamiId: "local-jami-id",
+                               cameraSource: "camera://front")
+        flushCommands()
+
+        XCTAssertTrue(callAPI.requestedMediaChanges.isEmpty)
+        XCTAssertTrue(callAPI.moderationCommands.isEmpty,
+                      "a detached relay has no local microphone to mute")
+    }
+
+    func testHostedConferenceWithUnknownMediaDoesNotSendVideoOnlyRequest() async throws {
+        let memberId = try await placeOngoingAudioCall(negotiated: [.audio()])
+        callAPI.conferenceCallsReturn["conf-1"] = [memberId.raw]
+        callAPI.conferenceDetailsReturn["conf-1"] = ["STATE": "ACTIVE_ATTACHED"]
+        sendEvent(.conferenceCreated(conferenceId: "conf-1", conversationId: "",
+                                     accountId: "acc1"))
+        await expectEvent { if case .conferenceUpdated = $0 { return true }; return false }
+
+        await store.toggleMute(memberId, label: .defaultVideo,
+                               localJamiId: "local-jami-id",
+                               cameraSource: "camera://front")
+        flushCommands()
+
+        XCTAssertTrue(callAPI.requestedMediaChanges.isEmpty,
+                      "unknown conference media must not become a video-only re-invite")
+    }
+
+    func testHostedConferenceMuteSignalUpdatesConferenceState() async throws {
+        let memberId = try await placeOngoingAudioCall()
+        callAPI.conferenceCallsReturn["conf-1"] = [memberId.raw]
+        callAPI.currentMediaReturn["conf-1"] = [.audio(), .video()]
+        sendEvent(.conferenceCreated(conferenceId: "conf-1", conversationId: "",
+                                     accountId: "acc1"))
+        await expectEvent { if case .conferenceUpdated = $0 { return true }; return false }
+
+        sendEvent(.videoMuted(callId: "conf-1", muted: true))
+        let event = await expectEvent { event in
+            guard case let .conferenceUpdated(conference) = event else { return false }
+            return conference.isVideoMuted
+        }
+
+        XCTAssertNotNil(event)
+    }
+
     func testMutingOurCameraKeepsTheCallVideoCapable() async throws {
         let id = try await placeOngoingAudioCall(negotiated: [.audio(), .video()])
 
@@ -770,7 +866,7 @@ final class CallStoreTests: XCTestCase {
 
         callAPI.placeCallReturn = "sub-call"
         try await store.addParticipant(peerUri: "peerB", toCall: id,
-                                       videoSource: "camera://front")
+                                       requestedBy: "", videoSource: "camera://front")
         var media = callAPI.placedCalls[1].media
         XCTAssertEqual(media.map(\.label), [.audio(0), .video(0)])
         XCTAssertEqual(media[1].muted, false, "our camera is live, so the leg sends it")
@@ -782,7 +878,7 @@ final class CallStoreTests: XCTestCase {
         }
         callAPI.placeCallReturn = "sub-call-2"
         try await store.addParticipant(peerUri: "peerC", toCall: id,
-                                       videoSource: "camera://front")
+                                       requestedBy: "", videoSource: "camera://front")
         media = callAPI.placedCalls[2].media
         XCTAssertEqual(media.map(\.label), [.audio(0), .video(0)],
                        "the leg keeps a video stream so the new peer's video can reach us")
@@ -790,12 +886,30 @@ final class CallStoreTests: XCTestCase {
                        "our camera is muted — the leg must not switch it back on")
     }
 
+    func testHostedConferenceInviteUsesConferenceMedia() async throws {
+        let memberId = try await placeOngoingAudioCall(negotiated: [.audio(), .video()])
+        callAPI.conferenceCallsReturn["conf-1"] = [memberId.raw]
+        callAPI.currentMediaReturn["conf-1"] = [.audio(), .video(muted: true)]
+        callAPI.conferenceDetailsReturn["conf-1"] = ["STATE": "ACTIVE_ATTACHED"]
+        sendEvent(.conferenceCreated(conferenceId: "conf-1", conversationId: "",
+                                     accountId: "acc1"))
+        await expectEvent { if case .conferenceUpdated = $0 { return true }; return false }
+
+        callAPI.placeCallReturn = "sub-call"
+        try await store.addParticipant(peerUri: "peerB", toCall: memberId,
+                                       requestedBy: "me", videoSource: "camera://front")
+
+        let media = callAPI.placedCalls.last?.media
+        XCTAssertEqual(media?.first { $0.label == .defaultVideo }?.muted, true,
+                       "an invite must not reactivate the host camera")
+    }
+
     func testAddParticipantMarksSubCallToJoinExistingCall() async throws {
         let id = try await placeOngoingAudioCall()
 
         callAPI.placeCallReturn = "sub-call"
         try await store.addParticipant(peerUri: "peerB", toCall: id,
-                                       videoSource: "camera://front")
+                                       requestedBy: "", videoSource: "camera://front")
 
         let added = await expectEvent { event in
             if case let .callAdded(call) = event { return call.id.raw == "sub-call" }
@@ -823,7 +937,7 @@ final class CallStoreTests: XCTestCase {
 
         callAPI.placeCallReturn = "sub-call"
         try await store.addParticipant(peerUri: "peerB", toCall: id,
-                                       videoSource: "camera://front")
+                                       requestedBy: "", videoSource: "camera://front")
         XCTAssertEqual(callAPI.placedCalls[1].media.map(\.label), [.audio(0)])
     }
 
@@ -837,7 +951,7 @@ final class CallStoreTests: XCTestCase {
 
         callAPI.placeCallReturn = "sub-call"
         try await store.addParticipant(peerUri: "peerB", toCall: CallId(raw: "host-call"),
-                                       videoSource: "")
+                                       requestedBy: "", videoSource: "")
         flushCommands()
         XCTAssertEqual(callAPI.placedCalls.count, 2)
         XCTAssertTrue(callAPI.joinedCalls.isEmpty, "join must wait for sub-call CURRENT")
@@ -854,11 +968,77 @@ final class CallStoreTests: XCTestCase {
         XCTAssertEqual(callAPI.joinedCalls[0].second, "sub-call")
     }
 
+    func testRegularPeerHostedParticipantCannotStartAnInvite() async throws {
+        let id = await receiveIncomingCall(callId: "member-1")
+        sendEvent(.callStateChanged(callId: id.raw, state: "CURRENT",
+                                    accountId: "acc1", code: 0))
+        await expectEvent { if case .callUpdated = $0 { return true }; return false }
+        let participants = [
+            ["uri": "me", "device": "local", "sinkId": "member-1_video_0",
+             "isModerator": "false"],
+            ["uri": "peer1", "device": "remote", "sinkId": "member-1_video_1"]
+        ]
+        sendEvent(.conferenceInfosUpdated(conferenceId: id.raw, info: participants))
+        await expectEvent { if case .conferenceUpdated = $0 { return true }; return false }
+
+        do {
+            try await store.addParticipant(peerUri: "peerB", toCall: id,
+                                           requestedBy: "me", videoSource: "")
+            XCTFail("a regular participant must not place an invitation call")
+        } catch {
+            XCTAssertEqual(error as? CallStoreError, .notAuthorized)
+        }
+        XCTAssertTrue(callAPI.placedCalls.isEmpty)
+    }
+
+    func testPeerHostedModeratorCombinesCallLegsInsteadOfJoiningLocalConference() async throws {
+        let id = await receiveIncomingCall(callId: "member-1")
+        sendEvent(.callStateChanged(callId: id.raw, state: "CURRENT",
+                                    accountId: "acc1", code: 0))
+        await expectEvent { if case .callUpdated = $0 { return true }; return false }
+        let participants = [
+            ["uri": "me", "device": "local", "sinkId": "member-1_video_0",
+             "isModerator": "true"],
+            ["uri": "peer1", "device": "remote", "sinkId": "member-1_video_1"]
+        ]
+        sendEvent(.conferenceInfosUpdated(conferenceId: id.raw, info: participants))
+        await expectEvent { if case .conferenceUpdated = $0 { return true }; return false }
+
+        callAPI.placeCallReturn = "sub-call"
+        try await store.addParticipant(peerUri: "peerB", toCall: id,
+                                       requestedBy: "me", videoSource: "")
+        sendEvent(.callStateChanged(callId: "sub-call", state: "CURRENT",
+                                    accountId: "acc1", code: 0))
+        await expectEvent { event in
+            guard case let .callUpdated(call) = event else { return false }
+            return call.id == CallId(raw: "sub-call") && call.status == .current
+        }
+        flushCommands()
+
+        XCTAssertEqual(callAPI.joinedCalls.first?.first, id.raw)
+        XCTAssertEqual(callAPI.joinedCalls.first?.second, "sub-call")
+        XCTAssertTrue(callAPI.joinedConferences.isEmpty)
+    }
+
+    func testHoldIsRejectedForConferenceMemberCall() async throws {
+        let memberId = try await placeOngoingAudioCall()
+        callAPI.conferenceCallsReturn["conf-1"] = [memberId.raw]
+        sendEvent(.conferenceCreated(conferenceId: "conf-1", conversationId: "",
+                                     accountId: "acc1"))
+        await expectEvent { if case .conferenceUpdated = $0 { return true }; return false }
+
+        await store.hold(memberId, true)
+        flushCommands()
+
+        XCTAssertTrue(callAPI.held.isEmpty)
+    }
+
     func testAddParticipantListsTheInviteOnTheHostCall() async throws {
         let id = try await placeOngoingAudioCall()
 
         callAPI.placeCallReturn = "sub-call"
-        try await store.addParticipant(peerUri: "peerB", toCall: id, videoSource: "")
+        try await store.addParticipant(peerUri: "peerB", toCall: id,
+                                       requestedBy: "", videoSource: "")
 
         let event = await expectEvent { event in
             if case let .callUpdated(call) = event {
@@ -877,7 +1057,8 @@ final class CallStoreTests: XCTestCase {
     func testInviteReportsTheLegsProgress() async throws {
         let id = try await placeOngoingAudioCall()
         callAPI.placeCallReturn = "sub-call"
-        try await store.addParticipant(peerUri: "peerB", toCall: id, videoSource: "")
+        try await store.addParticipant(peerUri: "peerB", toCall: id,
+                                       requestedBy: "", videoSource: "")
         await expectEvent { event in
             if case let .callUpdated(call) = event { return !call.pendingInvites.isEmpty }
             return false
@@ -900,7 +1081,8 @@ final class CallStoreTests: XCTestCase {
     func testAJoinedPeerIsNeverReportedAsStillInvited() async throws {
         let id = try await placeOngoingAudioCall()
         callAPI.placeCallReturn = "sub-call"
-        try await store.addParticipant(peerUri: "peerB", toCall: id, videoSource: "")
+        try await store.addParticipant(peerUri: "peerB", toCall: id,
+                                       requestedBy: "", videoSource: "")
         await expectEvent { event in
             if case let .callUpdated(call) = event { return !call.pendingInvites.isEmpty }
             return false
@@ -921,7 +1103,8 @@ final class CallStoreTests: XCTestCase {
     func testInviteLeavesThePendingListWhenTheInviteeJoins() async throws {
         let id = try await placeOngoingAudioCall()
         callAPI.placeCallReturn = "sub-call"
-        try await store.addParticipant(peerUri: "peerB", toCall: id, videoSource: "")
+        try await store.addParticipant(peerUri: "peerB", toCall: id,
+                                       requestedBy: "", videoSource: "")
         await expectEvent { event in
             if case let .callUpdated(call) = event { return !call.pendingInvites.isEmpty }
             return false
@@ -944,7 +1127,8 @@ final class CallStoreTests: XCTestCase {
     func testCancellingAnInviteRemovesItFromTheHostCall() async throws {
         let id = try await placeOngoingAudioCall()
         callAPI.placeCallReturn = "sub-call"
-        try await store.addParticipant(peerUri: "peerB", toCall: id, videoSource: "")
+        try await store.addParticipant(peerUri: "peerB", toCall: id,
+                                       requestedBy: "", videoSource: "")
         await expectEvent { event in
             if case let .callUpdated(call) = event { return !call.pendingInvites.isEmpty }
             return false
@@ -961,7 +1145,8 @@ final class CallStoreTests: XCTestCase {
     func testEndingTheHostCallHangsUpItsRingingInvite() async throws {
         let id = try await placeOngoingAudioCall()
         callAPI.placeCallReturn = "sub-call"
-        try await store.addParticipant(peerUri: "peerB", toCall: id, videoSource: "")
+        try await store.addParticipant(peerUri: "peerB", toCall: id,
+                                       requestedBy: "", videoSource: "")
         await expectEvent { event in
             if case let .callUpdated(call) = event { return !call.pendingInvites.isEmpty }
             return false
@@ -994,7 +1179,7 @@ final class CallStoreTests: XCTestCase {
 
         callAPI.placeCallReturn = "sub-call"
         try await store.addParticipant(peerUri: "peerC", toCall: CallId(raw: "member-1"),
-                                       videoSource: "")
+                                       requestedBy: "", videoSource: "")
         await expectEvent { event in
             if case let .callUpdated(call) = event { return !call.pendingInvites.isEmpty }
             return false
@@ -1384,7 +1569,8 @@ final class CallStoreTests: XCTestCase {
         await expectEvent { if case .conferenceUpdated = $0 { return true }; return false }
 
         callAPI.conferenceCallsReturn["conf-1"] = ["member-2"]
-        sendEvent(.conferenceChanged(conferenceId: "conf-1", accountId: accountId1, state: ""))
+        sendEvent(.conferenceChanged(conferenceId: "conf-1", accountId: accountId1, state: "",
+                                     memberCallIds: ["member-2"]))
         await expectEvent { if case .conferenceUpdated = $0 { return true }; return false }
 
         let state = await store.snapshot()
