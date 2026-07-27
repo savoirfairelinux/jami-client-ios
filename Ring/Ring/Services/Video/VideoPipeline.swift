@@ -20,6 +20,58 @@ import Foundation
 import AVFoundation
 import UIKit
 
+/// Codec/sink state used to validate asynchronous quality evaluations.
+struct VideoDowngradeState {
+    private(set) var currentDeviceId: String
+    private var codecByCallId: [String: String] = [:]
+    private var decodingSinks: Set<SinkId> = []
+
+    init(currentDeviceId: String = "") {
+        self.currentDeviceId = currentDeviceId
+    }
+
+    @discardableResult
+    mutating func setCodec(_ codec: String?, forCallId callId: String) -> [SinkId] {
+        guard let codec = codec, !codec.isEmpty else {
+            codecByCallId[callId] = nil
+            return []
+        }
+        codecByCallId[callId] = codec
+        guard Self.isSoftwareEncoded(codec) else { return [] }
+        return decodingSinks.filter { $0.baseId == callId }
+    }
+
+    mutating func decodingStarted(_ sink: SinkId) -> [SinkId] {
+        decodingSinks.insert(sink)
+        guard let codec = codecByCallId[sink.baseId],
+              Self.isSoftwareEncoded(codec) else { return [] }
+        return [sink]
+    }
+
+    mutating func decodingStopped(_ sink: SinkId) {
+        decodingSinks.remove(sink)
+    }
+
+    mutating func setCurrentDevice(_ identifier: String) {
+        currentDeviceId = identifier
+    }
+
+    mutating func reserveDowngrade(_ sink: SinkId,
+                                   cameraQuality: AVCaptureSession.Preset) -> Bool {
+        guard cameraQuality == .high,
+              currentDeviceId != CameraDevice.medium,
+              decodingSinks.contains(sink),
+              let codec = codecByCallId[sink.baseId],
+              Self.isSoftwareEncoded(codec) else { return false }
+        currentDeviceId = CameraDevice.medium
+        return true
+    }
+
+    private static func isSoftwareEncoded(_ codec: String) -> Bool {
+        return codec != "H264" && codec != "H265"
+    }
+}
+
 /// Coordinates the video path: camera capture toward libjami, decoded
 /// sinks toward renderers, hardware-acceleration setup
 final class VideoPipeline: NSObject {
@@ -43,9 +95,7 @@ final class VideoPipeline: NSObject {
     private let stateLock = NSLock()
     private var orientationState = CameraOrientationState.make(orientation: .portrait,
                                                                cameraPosition: .front)
-    private var currentDeviceId = ""
-    private var codecByCallId: [String: String] = [:]
-    private var decodingSinks: Set<SinkId> = []
+    private var downgradeState = VideoDowngradeState()
 
     private func locked<T>(_ body: () -> T) -> T {
         stateLock.lock()
@@ -126,34 +176,31 @@ final class VideoPipeline: NSObject {
 
     /// Current video source URI for media lists ("camera://<device>").
     func videoSource() -> String {
-        return locked { Self.cameraSourceURI(from: currentDeviceId) }
+        return locked { Self.cameraSourceURI(from: downgradeState.currentDeviceId) }
     }
 
     private func setCurrentDeviceId(_ identifier: String) {
-        locked { currentDeviceId = identifier }
+        locked { downgradeState.setCurrentDevice(identifier) }
     }
 
     func setVideoCodec(_ codec: String?, forCallId callId: String) {
-        let sinks: [SinkId] = locked {
-            guard let codec = codec, !codec.isEmpty else {
-                codecByCallId[callId] = nil
-                return []
-            }
-            codecByCallId[callId] = codec
-            return decodingSinks.filter { $0.baseId == callId }
-        }
-        sinks.forEach(downgradeCaptureIfSoftwareEncoded)
+        let candidates = locked { downgradeState.setCodec(codec, forCallId: callId) }
+        candidates.forEach(evaluateCaptureDowngrade)
     }
 
-    private func downgradeCaptureIfSoftwareEncoded(_ sink: SinkId) {
-        let codec = locked { codecByCallId[sink.baseId] }
-        guard let codec = codec, !codec.isEmpty,
-              codec != "H264", codec != "H265" else { return }
+    private func evaluateCaptureDowngrade(_ sink: SinkId) {
         Task {
-            guard await capturer.currentQuality() == .high else { return }
+            let quality = await capturer.currentQuality()
+            guard locked({ downgradeState.reserveDowngrade(sink,
+                                                            cameraQuality: quality) }) else {
+                return
+            }
             video.setDefaultDevice(CameraDevice.medium)
-            setCurrentDeviceId(video.defaultDevice())
-            onSourceDowngraded?(sink, Self.cameraSourceURI(from: CameraDevice.medium))
+            let actualDevice = video.defaultDevice()
+            setCurrentDeviceId(actualDevice)
+            guard actualDevice == CameraDevice.medium else { return }
+            onSourceDowngraded?(sink,
+                                Self.cameraSourceURI(from: CameraDevice.medium))
         }
     }
 
@@ -163,11 +210,14 @@ final class VideoPipeline: NSObject {
 
     func startPreviewCapture() {
         localFrames.clearCachedFrame()
-        capturer.start()
+        let quality: AVCaptureSession.Preset = locked {
+            downgradeState.currentDeviceId == CameraDevice.medium ? .medium : .high
+        }
+        capturer.setPreviewCapture(active: true, quality: quality)
     }
 
     func stopPreviewCapture() {
-        capturer.stop()
+        capturer.setPreviewCapture(active: false)
         localFrames.clearCachedFrame()
     }
 
@@ -203,7 +253,8 @@ final class VideoPipeline: NSObject {
         localFrames.distribute(VideoFrame(sampleBuffer: sampleBuffer, rotation: 0))
         if let imageBuffer = imageBuffer {
             let (angle, source) = locked {
-                (orientationState.outgoingAngle, Self.cameraSourceURI(from: currentDeviceId))
+                (orientationState.outgoingAngle,
+                 Self.cameraSourceURI(from: downgradeState.currentDeviceId))
             }
             video.writeOutgoingFrame(imageBuffer, angle: angle, videoInputId: source)
         }
@@ -258,21 +309,15 @@ final class VideoPipeline: NSObject {
 extension VideoPipeline: VideoAdapterDelegate {
 
     func startCapture(withDevice device: String) {
-        Task {
-            // The libjami names the device it wants; adjust preset quality.
-            let quality = await capturer.currentQuality()
-            if device == CameraDevice.high && quality == .medium {
-                capturer.setQuality(.high)
-            } else if device == CameraDevice.medium && quality == .high {
-                capturer.setQuality(.medium)
-            }
-            capturer.start()
-        }
+        // Quality and start are one session-queue intent, so a later stop
+        // cannot be overtaken by a suspended quality lookup.
+        let quality: AVCaptureSession.Preset = device == CameraDevice.medium ? .medium : .high
+        capturer.setDaemonCapture(device: device, active: true, quality: quality)
     }
 
     func stopCapture(withDevice device: String) {
         guard !device.isEmpty && device != MediaNegotiator.mutedCameraSource else { return }
-        capturer.stop()
+        capturer.setDaemonCapture(device: device, active: false)
     }
 
     func setDecodingAccelerated(withState state: Bool) {
@@ -296,8 +341,8 @@ extension VideoPipeline: DecodingAdapterDelegate {
     func decodingStarted(withSinkId sinkId: String, withWidth width: Int, withHeight height: Int) {
         let sink = SinkId(raw: sinkId)
         sinkRegistry.handleDecodingStarted(sinkId: sink)
-        locked { _ = decodingSinks.insert(sink) }
-        downgradeCaptureIfSoftwareEncoded(sink)
+        let candidates = locked { downgradeState.decodingStarted(sink) }
+        candidates.forEach(evaluateCaptureDowngrade)
 
         video.registerSink(sink, width: width, height: height,
                            hasListeners: sinkRegistry.hasListeners(sink))
@@ -306,7 +351,7 @@ extension VideoPipeline: DecodingAdapterDelegate {
     func decodingStopped(withSinkId sinkId: String) {
         let sink = SinkId(raw: sinkId)
         sinkRegistry.handleDecodingStopped(sinkId: sink)
-        locked { decodingSinks.remove(sink) }
+        locked { downgradeState.decodingStopped(sink) }
         video.removeSink(sink)
     }
 }

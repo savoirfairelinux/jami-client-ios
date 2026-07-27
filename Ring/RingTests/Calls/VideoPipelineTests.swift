@@ -18,9 +18,67 @@
 
 import XCTest
 import CoreMedia
+import AVFoundation
 @testable import Ring
 
 final class VideoPipelineTests: XCTestCase {
+
+    func testCaptureOwnershipAndLatestIntentDetermineRunningState() {
+        var state = CameraCaptureState()
+        state.setPreview(active: true, quality: .high)
+        state.setDaemon(device: CameraDevice.medium, active: true, quality: .medium)
+
+        state.setPreview(active: false, quality: nil)
+        XCTAssertTrue(state.shouldRun)
+        XCTAssertEqual(state.quality, .medium)
+
+        state.setPreview(active: true, quality: .high)
+        state.setDaemon(device: CameraDevice.medium, active: false, quality: nil)
+        XCTAssertTrue(state.shouldRun)
+        XCTAssertEqual(state.quality, .high)
+
+        state.setPreview(active: false, quality: nil)
+        state.setDaemon(device: CameraDevice.medium, active: true, quality: .medium)
+        state.setDaemon(device: CameraDevice.medium, active: false, quality: nil)
+        XCTAssertFalse(state.shouldRun)
+    }
+
+    func testStoppingOneDaemonDeviceKeepsTheOtherActive() {
+        var state = CameraCaptureState()
+        state.setDaemon(device: CameraDevice.high, active: true, quality: .high)
+        state.setDaemon(device: CameraDevice.medium, active: true, quality: .medium)
+
+        state.setDaemon(device: CameraDevice.high, active: false, quality: nil)
+
+        XCTAssertTrue(state.shouldRun)
+        XCTAssertEqual(state.quality, .medium)
+
+        state.setDaemon(device: CameraDevice.medium, active: false, quality: nil)
+        XCTAssertFalse(state.shouldRun)
+    }
+
+    func testStaleVideoStateCannotReserveCaptureDowngrade() throws {
+        var state = VideoDowngradeState(currentDeviceId: CameraDevice.high)
+        state.setCodec("VP8", forCallId: "call-1")
+        let stoppedSink = try XCTUnwrap(state.decodingStarted(SinkId(raw: "call-1")).first)
+
+        state.decodingStopped(stoppedSink)
+        XCTAssertFalse(state.reserveDowngrade(stoppedSink, cameraQuality: .high))
+
+        state = VideoDowngradeState(currentDeviceId: CameraDevice.high)
+        state.setCodec("VP8", forCallId: "call-1")
+        let changedCodec = try XCTUnwrap(state.decodingStarted(SinkId(raw: "call-1")).first)
+
+        state.setCodec("H264", forCallId: "call-1")
+        XCTAssertFalse(state.reserveDowngrade(changedCodec, cameraQuality: .high))
+
+        state = VideoDowngradeState(currentDeviceId: CameraDevice.high)
+        state.setCodec("VP8", forCallId: "call-1")
+        let duplicate = try XCTUnwrap(state.decodingStarted(SinkId(raw: "call-1")).first)
+
+        XCTAssertTrue(state.reserveDowngrade(duplicate, cameraQuality: .high))
+        XCTAssertFalse(state.reserveDowngrade(duplicate, cameraQuality: .high))
+    }
 
     func testCapturedFrameIsMarkedForImmediateDisplay() throws {
         let pipeline = VideoPipeline(video: TestLibJamiVideoAPI())
