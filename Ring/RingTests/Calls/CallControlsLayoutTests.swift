@@ -101,8 +101,61 @@ final class CallControlsLayoutTests: XCTestCase {
                        "audio output is independent of the media re-invite gate")
     }
 
-    func testSpeakerActiveShowsActiveStyle() {
+    func testSpeakerActiveShowsWaveIconAndActiveStyle() {
         let out = action(.toggleAudioOutput, in: plan(speaker: true))
+        XCTAssertEqual(out?.systemImage, "speaker.wave.3.fill")
         XCTAssertEqual(out?.style, .active)
+        XCTAssertEqual(out?.accessibilityLabel,
+                       L10n.Accessibility.Calls.Alter.toggleSpeaker)
+    }
+
+    func testSpeakerInactiveOffersToTurnSpeakerOn() {
+        let out = action(.toggleAudioOutput, in: plan(speaker: false))
+        XCTAssertEqual(out?.systemImage, "speaker.wave.2.fill")
+        XCTAssertEqual(out?.accessibilityLabel,
+                       L10n.Accessibility.Calls.Default.toggleSpeaker)
+    }
+
+    func testHoldAndResumeSwapGlyph() {
+        XCTAssertEqual(action(.toggleHold, in: plan(model(canHold: true)))?.systemImage,
+                       "pause.fill")
+        XCTAssertEqual(action(.toggleHold, in: plan(model(canResume: true)))?.systemImage,
+                       "play.fill")
+    }
+
+    func testBarNeverOutgrowsTheWidthItIsGiven() {
+        for slots in 1...9 {
+            for width in stride(from: 280.0, through: 1366.0, by: 1.0) {
+                let metrics = BarMetrics(availableWidth: CGFloat(width),
+                                         slots: CGFloat(slots))
+                XCTAssertLessThanOrEqual(metrics.totalWidth, CGFloat(width) + 0.001,
+                                         "\(slots) slots in \(width) pt render "
+                                            + "\(metrics.totalWidth) pt wide and widen "
+                                            + "the whole call screen")
+            }
+        }
+    }
+
+    func testRegularWidthBarIsSizedForEveryActionItShows() {
+        let everyAction = model(canHold: true, showsDialpad: true)
+        let primary = plan(everyAction, regular: true).primary
+
+        XCTAssertGreaterThan(primary.count, Int(BarMetrics.compactSlotCount),
+                             "a regular-width bar inlines the secondary actions")
+        let width: CGFloat = 600
+        let metrics = BarMetrics(availableWidth: width, slots: CGFloat(primary.count))
+        XCTAssertLessThanOrEqual(metrics.totalWidth, width + 0.001,
+                                 "\(primary.count) inline actions render "
+                                    + "\(metrics.totalWidth) pt wide in \(width) pt")
+    }
+
+    func testUnmeasuredBarStillRendersButFitsTheNarrowestPhone() {
+        let metrics = BarMetrics(availableWidth: 0)
+
+        XCTAssertEqual(metrics.button, BarMetrics.minimumButton,
+                       "the bar must still be laid out before it is measured")
+        XCTAssertLessThanOrEqual(metrics.totalWidth, 320,
+                                 "an unmeasured bar must fit the narrowest phone, "
+                                    + "or it widens the whole call screen")
     }
 }

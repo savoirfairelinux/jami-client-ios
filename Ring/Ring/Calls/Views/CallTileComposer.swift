@@ -34,12 +34,12 @@ struct CallTileComposer {
         let terminated = call?.status.isTerminal == true
         let plans: [CallTilePlan]
         if !terminated, let conference = conference, !conference.participants.isEmpty {
+            let localCameraOn = call?.effectiveMedia(in: conference).hasVideo == true
             plans = CallTilePlanner.conferenceTiles(conference.participants,
                                                     localJamiId: localJamiId,
                                                     peerUri: call?.peerUri ?? "",
                                                     isHostedLocally: conference.isHost,
-                                                    localCameraOn: call?.effectiveMedia(
-                                                        in: conference).hasVideo == true,
+                                                    localCameraOn: localCameraOn,
                                                     frozenForRecomposition: frozenForRecomposition)
         } else if terminated, conference != nil {
             plans = []
