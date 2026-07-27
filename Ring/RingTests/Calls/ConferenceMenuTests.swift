@@ -25,9 +25,11 @@ final class ConferenceMenuTests: XCTestCase {
 
     func testLowerHandOnlyAppearsWhenHandIsRaised() {
         let raised = builder.menuForLocalTile(layout: .grid, isActive: false,
-                                              isHandRaised: true)
+                                              isHandRaised: true,
+                                              isModeratorMuted: false)
         let lowered = builder.menuForLocalTile(layout: .grid, isActive: false,
-                                               isHandRaised: false)
+                                               isHandRaised: false,
+                                               isModeratorMuted: false)
 
         XCTAssertTrue(raised.contains(.lowerHand))
         XCTAssertFalse(lowered.contains(.lowerHand))

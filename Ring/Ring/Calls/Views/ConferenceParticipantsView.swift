@@ -169,6 +169,9 @@ private struct ParticipantRowView: View, Equatable {
         if item == .setModerator && row.isModerator {
             return L10n.Calls.removeModerator
         }
+        if item == .muteAudio && row.isAudioModeratorMuted {
+            return L10n.Calls.unmuteAudio
+        }
         return item.title
     }
 
@@ -178,7 +181,7 @@ private struct ParticipantRowView: View, Equatable {
         case .minimize: return "arrow.down.right.and.arrow.up.left"
         case .maximize: return "arrow.up.left.and.arrow.down.right"
         case .setModerator: return row.isModerator ? "shield.slash" : "checkmark.shield"
-        case .muteAudio: return "mic.slash.fill"
+        case .muteAudio: return row.isAudioModeratorMuted ? "mic.fill" : "mic.slash.fill"
         case .lowerHand: return "hand.raised.slash"
         }
     }

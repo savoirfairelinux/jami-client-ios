@@ -28,6 +28,8 @@ final class TestLibJamiCallAPI: LibJamiCallAPI, @unchecked Sendable {
     var refuseReturn = true
     var hangUpReturn = true
     var hangUpConferenceReturn = true
+    var holdConferenceReturn = true
+    var resumeConferenceReturn = true
     var holdReturn = true
     var resumeReturn = true
     var requestMediaChangeReturn = true
@@ -56,6 +58,8 @@ final class TestLibJamiCallAPI: LibJamiCallAPI, @unchecked Sendable {
     var joinedCalls: [(first: String, second: String)] = []
     var joinedConferences: [(conferenceId: String, callId: String)] = []
     var hungUpConferences: [String] = []
+    var heldConferences: [String] = []
+    var resumedConferences: [String] = []
     var sentMessages: [(callId: String, message: [String: String])] = []
     var moderationCommands: [String] = []
 
@@ -157,6 +161,16 @@ final class TestLibJamiCallAPI: LibJamiCallAPI, @unchecked Sendable {
         return hangUpConferenceReturn
     }
 
+    func holdConference(conferenceId: String, accountId: String) -> Bool {
+        heldConferences.append(conferenceId)
+        return holdConferenceReturn
+    }
+
+    func resumeConference(conferenceId: String, accountId: String) -> Bool {
+        resumedConferences.append(conferenceId)
+        return resumeConferenceReturn
+    }
+
     func setActiveParticipant(_ participantId: String, conferenceId: String, accountId: String) {
         moderationCommands.append("setActive:\(participantId):\(conferenceId)")
     }
@@ -177,7 +191,9 @@ final class TestLibJamiCallAPI: LibJamiCallAPI, @unchecked Sendable {
 
     func muteStream(_ participantId: String, conferenceId: String, accountId: String,
                     deviceId: String, streamId: String, muted: Bool) {
-        moderationCommands.append("muteStream:\(participantId):\(streamId):\(muted)")
+        moderationCommands.append(
+            "muteStream:\(participantId):\(conferenceId):\(deviceId):\(streamId):\(muted)"
+        )
     }
 
     func raiseHand(_ participantId: String, conferenceId: String, accountId: String,

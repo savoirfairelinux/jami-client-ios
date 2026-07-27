@@ -25,6 +25,7 @@ struct ConferenceParticipantRow: Identifiable, Equatable {
     let isModerator: Bool
     let isActive: Bool
     let isAudioMuted: Bool
+    let isAudioModeratorMuted: Bool
     let isVideoMuted: Bool
     let isHandRaised: Bool
     let isRecording: Bool
@@ -64,23 +65,27 @@ enum ConferenceParticipants {
         let local = ConferenceParticipantRow(
             id: ConferenceParticipantInfo.id(uri: localJamiId, device: ""),
             uri: localJamiId, isLocal: true, isModerator: false, isActive: false,
-            isAudioMuted: call.isAudioMuted, isVideoMuted: call.isVideoMuted,
+            isAudioMuted: call.isAudioMuted, isAudioModeratorMuted: false,
+            isVideoMuted: call.isVideoMuted,
             isHandRaised: false, isRecording: false, isSpeaking: false, actions: [])
         guard !call.peerUri.isEmpty else { return [local] }
         let peer = ConferenceParticipantRow(
             id: ConferenceParticipantInfo.id(uri: call.peerUri, device: ""),
             uri: call.peerUri, isLocal: false, isModerator: false, isActive: false,
-            isAudioMuted: false, isVideoMuted: false, isHandRaised: false,
+            isAudioMuted: false, isAudioModeratorMuted: false,
+            isVideoMuted: false, isHandRaised: false,
             isRecording: call.peerIsRecording, isSpeaking: false, actions: [])
         return [local, peer]
     }
 
     static func rows(from conference: ConferenceState,
                      localJamiId: String,
+                     peerUri: String,
                      builder: ConferenceMenuBuilder = ConferenceMenuBuilder())
     -> [ConferenceParticipantRow] {
         let localInfo = conference.participants.first {
-            self.isLocalParticipant($0, localJamiId: localJamiId)
+            $0.isLocalParticipant(localJamiId: localJamiId,
+                                  isHostedLocally: conference.isHost)
         }
 
         let joined = conference.participants.map { info -> ConferenceParticipantRow in
@@ -89,11 +94,14 @@ enum ConferenceParticipants {
                                        conference: conference, localInfo: localInfo, builder: builder)
             return ConferenceParticipantRow(
                 id: info.id,
-                uri: isLocal && info.uri.isEmpty ? localJamiId : info.uri,
+                uri: info.resolvedUri(localJamiId: localJamiId,
+                                      peerUri: peerUri,
+                                      isHostedLocally: conference.isHost),
                 isLocal: isLocal,
                 isModerator: info.isModerator,
                 isActive: info.isActive,
                 isAudioMuted: info.isAudioLocallyMuted || info.isAudioModeratorMuted,
+                isAudioModeratorMuted: info.isAudioModeratorMuted,
                 isVideoMuted: info.isVideoMuted,
                 isHandRaised: info.isHandRaised,
                 isRecording: info.isRecording,
@@ -104,12 +112,6 @@ enum ConferenceParticipants {
         return joined.filter { $0.isLocal } + joined.filter { !$0.isLocal }
     }
 
-    static func isLocalParticipant(_ info: ConferenceParticipantInfo,
-                                   localJamiId: String) -> Bool {
-        if info.uri.isEmpty { return true }
-        return !localJamiId.isEmpty && info.uri.filterOutHost() == localJamiId
-    }
-
     private static func actions(for info: ConferenceParticipantInfo, isLocal: Bool,
                                 conference: ConferenceState,
                                 localInfo: ConferenceParticipantInfo?,
@@ -118,7 +120,8 @@ enum ConferenceParticipants {
         if isLocal {
             base = builder.menuForLocalTile(layout: conference.layout,
                                             isActive: info.isActive,
-                                            isHandRaised: info.isHandRaised)
+                                            isHandRaised: info.isHandRaised,
+                                            isModeratorMuted: info.isAudioModeratorMuted)
         } else {
             let role: ConferenceRole = conference.isHost ? .host
                 : (localInfo?.isModerator == true ? .moderator : .regular)

@@ -30,7 +30,8 @@ enum RawCallSignal: Sendable {
     case videoMuted(callId: String, muted: Bool)
     case remoteRecordingChanged(callId: String, recording: Bool)
     case conferenceCreated(conferenceId: String, conversationId: String, accountId: String)
-    case conferenceChanged(conferenceId: String, accountId: String, state: String)
+    case conferenceChanged(conferenceId: String, accountId: String, state: String,
+                           memberCallIds: [String])
     case conferenceRemoved(conferenceId: String)
     case conferenceInfosUpdated(conferenceId: String, info: [[String: String]])
 }
@@ -54,7 +55,8 @@ enum LibJamiCallEvent: Sendable {
     case videoMuted(callId: String, muted: Bool)
     case remoteRecordingChanged(callId: String, recording: Bool)
     case conferenceCreated(conferenceId: String, conversationId: String, accountId: String,
-                           memberCallIds: [String])
+                           state: String, memberCallIds: [String],
+                           participants: [ConferenceParticipantInfo], media: [MediaItem])
     case conferenceChanged(conferenceId: String, accountId: String, state: String,
                            memberCallIds: [String])
     case conferenceRemoved(conferenceId: String)
@@ -127,9 +129,11 @@ extension CallEventSource: CallsAdapterDelegate {
                                     accountId: accountId))
     }
 
-    func conferenceChanged(conference conferenceID: String, accountId: String, state: String) {
+    func conferenceChanged(conference conferenceID: String, accountId: String, state: String,
+                           memberCallIds: [String]) {
         onSignal(.conferenceChanged(conferenceId: conferenceID,
-                                    accountId: accountId, state: state))
+                                    accountId: accountId, state: state,
+                                    memberCallIds: memberCallIds))
     }
 
     func conferenceRemoved(conference conferenceID: String) {

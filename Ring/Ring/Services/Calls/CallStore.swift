@@ -32,6 +32,7 @@ enum CallSystemEvent: Sendable {
 enum CallStoreError: Error, Equatable {
     case placeCallFailed
     case callNotFound
+    case notAuthorized
     case swarmCallTimedOut
 }
 
@@ -359,6 +360,7 @@ actor CallStore { // swiftlint:disable:this type_body_length
 
     func hold(_ id: CallId, _ hold: Bool) {
         guard let call = state.calls[id],
+              call.conferenceId == nil,
               call.status.allows(hold ? .hold : .resume) else { return }
         let accountId = call.accountId
         let raw = id.raw
@@ -368,10 +370,27 @@ actor CallStore { // swiftlint:disable:this type_body_length
         }
     }
 
+    func holdConference(_ id: ConfId, _ hold: Bool) {
+        guard let conference = state.conferences[id], conference.isHost else { return }
+        let allowed = hold
+            ? conference.lifecycle == .activeAttached
+            : conference.lifecycle == .activeDetached || conference.lifecycle == .hold
+        guard allowed else { return }
+        let accountId = conference.accountId
+        let raw = id.raw
+        send { api in
+            _ = hold ? api.holdConference(conferenceId: raw, accountId: accountId)
+                : api.resumeConference(conferenceId: raw, accountId: accountId)
+        }
+    }
+
     /// Sends the re-invite that toggles `label`'s mute state. UI state
     /// flips only when libjami confirms via MediaNegotiationStatus.
     func toggleMute(_ id: CallId, label: MediaLabel, cameraSource: String) {
         guard var call = state.calls[id], call.status.allows(.changeMedia) else { return }
+        if requestHostedConferenceMediaChange(for: call, transform: {
+            MediaNegotiator.togglingMute(in: $0, label: label, cameraSource: cameraSource)
+        }) { return }
         let newList = MediaNegotiator.togglingMute(in: call.media, label: label,
                                                    cameraSource: cameraSource)
         guard newList != call.media else { return }
@@ -388,6 +407,13 @@ actor CallStore { // swiftlint:disable:this type_body_length
     /// media change on every unmuted video stream.
     func updateVideoSource(_ id: CallId, source: String) {
         guard var call = state.calls[id], call.status.allows(.changeMedia) else { return }
+        if requestHostedConferenceMediaChange(for: call, transform: { media in
+            var media = media
+            for index in media.indices where media[index].type == .video && !media[index].muted {
+                media[index].source = source
+            }
+            return media
+        }) { return }
         var newList = call.media
         for index in newList.indices where newList[index].type == .video && !newList[index].muted {
             newList[index].source = source
@@ -421,19 +447,56 @@ actor CallStore { // swiftlint:disable:this type_body_length
 
     /// Calls a new participant; the actual join runs when their call
     /// becomes current.
-    func addParticipant(peerUri: String, toCall hostId: CallId, videoSource: String) throws {
+    func addParticipant(peerUri: String, toCall hostId: CallId,
+                        requestedBy localJamiId: String,
+                        videoSource: String) throws {
         guard let host = state.calls[hostId], host.status.isOngoing else {
             throw CallStoreError.callNotFound
         }
-        let media = host.hasNegotiatedVideo
-            ? MediaNegotiator.completeMediaList(videoMuted: host.isVideoMuted,
+        if let conferenceId = host.conferenceId,
+           let conference = state.conferences[conferenceId],
+           !conference.isHost {
+            let isLocalModerator = conference.participants.contains {
+                $0.isModerator && $0.isLocalParticipant(
+                    localJamiId: localJamiId, isHostedLocally: conference.isHost)
+            }
+            guard isLocalModerator else { throw CallStoreError.notAuthorized }
+        }
+        let conference = host.conferenceId.flatMap { state.conferences[$0] }
+        let effectiveMedia = host.effectiveMedia(in: conference)
+        let media = effectiveMedia.hasNegotiatedVideo
+            ? MediaNegotiator.completeMediaList(videoMuted: effectiveMedia.isVideoMuted,
                                                 videoSource: videoSource)
             : MediaNegotiator.defaultMediaList(audioOnly: true, videoSource: videoSource)
         let sub = try placeCall(accountId: host.accountId, to: peerUri, media: media,
-                                isAudioOnly: !host.hasNegotiatedVideo,
+                                isAudioOnly: !effectiveMedia.hasNegotiatedVideo,
                                 joinsExistingCall: true)
         pendingJoins[sub.id] = hostId
         refreshPendingInvites(of: hostId)
+    }
+
+    /// Handles media owned by the local conference host.
+    private func requestHostedConferenceMediaChange(
+        for call: CallState,
+        transform: ([MediaItem]) -> [MediaItem]
+    ) -> Bool {
+        guard let confId = call.conferenceId,
+              var conference = state.conferences[confId],
+              conference.id == call.conferenceId,
+              conference.isHost else { return false }
+        guard conference.hasAttachedHost else { return true }
+
+        guard !conference.media.isEmpty else { return true }
+        guard conference.pendingMediaRequest == nil else { return true }
+        let requested = transform(conference.media)
+        guard requested != conference.media else { return true }
+        let accountId = conference.accountId
+        send(reporting: { $0.requestMediaChange(callId: confId.raw, accountId: accountId,
+                                                media: requested) })
+        conference.pendingMediaRequest = requested
+        state.conferences[confId] = conference
+        broadcaster.send(.conferenceUpdated(conference))
+        return true
     }
 
     private func refreshPendingInvites(of hostId: CallId) {
@@ -559,13 +622,15 @@ actor CallStore { // swiftlint:disable:this type_body_length
             broadcaster.send(.incomingMessage(callId: CallId(raw: callId),
                                               fromUri: fromUri,
                                               message: message))
-        case let .conferenceCreated(conferenceId, conversationId, accountId, memberCallIds):
+        case let .conferenceCreated(conferenceId, conversationId, accountId, lifecycle,
+                                    memberCallIds, participants, media):
             applyConferenceCreated(confId: ConfId(raw: conferenceId),
                                    conversationId: conversationId, accountId: accountId,
-                                   memberCallIds: memberCallIds)
-        case let .conferenceChanged(conferenceId, accountId, _, memberCallIds):
+                                   lifecycle: lifecycle, memberCallIds: memberCallIds,
+                                   participants: participants, media: media)
+        case let .conferenceChanged(conferenceId, accountId, lifecycle, memberCallIds):
             applyConferenceChanged(confId: ConfId(raw: conferenceId), accountId: accountId,
-                                   memberCallIds: memberCallIds)
+                                   lifecycle: lifecycle, memberCallIds: memberCallIds)
         case let .conferenceRemoved(conferenceId):
             applyConferenceRemoved(confId: ConfId(raw: conferenceId))
         case let .conferenceInfosUpdated(conferenceId, participants):
@@ -716,7 +781,8 @@ actor CallStore { // swiftlint:disable:this type_body_length
               let sub = state.calls[subCallId] else { return }
         let hostAccountId = host.accountId
         let subAccountId = sub.accountId
-        if let confId = host.conferenceId {
+        if let confId = host.conferenceId,
+           state.conferences[confId]?.isHost == true {
             send { _ = $0.joinConference(confId.raw, callId: subCallId.raw,
                                          accountId: hostAccountId,
                                          account2Id: subAccountId)
@@ -740,11 +806,20 @@ actor CallStore { // swiftlint:disable:this type_body_length
     }
 
     private func applyMediaNegotiation(callId: CallId, media: [MediaItem]) {
-        updateCall(callId) { call in
-            if !media.isEmpty {
-                call.media = media
+        if state.calls[callId] != nil {
+            updateCall(callId) { call in
+                if !media.isEmpty {
+                    call.media = media
+                }
+                call.pendingMediaRequest = nil
             }
-            call.pendingMediaRequest = nil
+            return
+        }
+        updateConference(ConfId(raw: callId.raw)) { conference in
+            if !media.isEmpty {
+                conference.media = media
+            }
+            conference.pendingMediaRequest = nil
         }
     }
 
@@ -767,20 +842,38 @@ actor CallStore { // swiftlint:disable:this type_body_length
     }
 
     private func applyMuteSignal(callId: CallId, type: MediaType, muted: Bool) {
-        updateCall(callId) { call in
-            for index in call.media.indices where call.media[index].type == type {
-                call.media[index].muted = muted
+        if state.calls[callId] != nil {
+            updateCall(callId) { call in
+                for index in call.media.indices where call.media[index].type == type {
+                    call.media[index].muted = muted
+                }
+            }
+            return
+        }
+        updateConference(ConfId(raw: callId.raw)) { conference in
+            for index in conference.media.indices where conference.media[index].type == type {
+                conference.media[index].muted = muted
             }
         }
     }
 
     private func applyConferenceCreated(confId: ConfId, conversationId: String,
-                                        accountId: String, memberCallIds: [String]) {
+                                        accountId: String, lifecycle: String,
+                                        memberCallIds: [String],
+                                        participants: [ConferenceParticipantInfo],
+                                        media: [MediaItem]) {
         let memberIds = Set(memberCallIds.map { CallId(raw: $0) })
 
         var conference = state.conferences[confId]
             ?? ConferenceState(id: confId, accountId: accountId)
         conference.memberCallIds = memberIds
+        conference.lifecycle = ConferenceLifecycle(libJamiState: lifecycle)
+        if !media.isEmpty {
+            conference.media = media
+        }
+        if !participants.isEmpty {
+            conference.participants = participants
+        }
         if let participants = pendingConferenceParticipants.removeValue(forKey: confId) {
             conference.participants = participants
         }
@@ -801,12 +894,14 @@ actor CallStore { // swiftlint:disable:this type_body_length
         broadcaster.send(.conferenceUpdated(conference))
     }
     private func applyConferenceChanged(confId: ConfId, accountId: String,
+                                        lifecycle: String,
                                         memberCallIds: [String]) {
         var conference = state.conferences[confId]
             ?? ConferenceState(id: confId, accountId: accountId)
         let previousMembers = conference.memberCallIds
         let memberIds = Set(memberCallIds.map { CallId(raw: $0) })
         conference.memberCallIds = memberIds
+        conference.lifecycle = ConferenceLifecycle(libJamiState: lifecycle)
         if let participants = pendingConferenceParticipants.removeValue(forKey: confId) {
             conference.participants = participants
         }
