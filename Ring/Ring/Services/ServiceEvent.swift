@@ -42,12 +42,7 @@ enum ServiceEventType {
     case deviceRevocationEnded
     case newIncomingMessage
     case nameRegistrationEnded
-    case callProviderAcceptCall
-    case callProviderDeclineCall
     case callProviderPreviewPendingCall
-    case callProviderAcceptUnhandeledCall
-    case callProviderSetMuted
-    case audioActivated
     case newOutgoingMessage
     case migrationEnded
     case lastDisplayedMessageUpdated
@@ -64,8 +59,6 @@ enum ServiceEventType {
     case addDeviceStateChanged
     case deviceAuthStateChanged
     case callStarted
-    case incomingCall
-    case pendingCallUpdated
 }
 
 /**

@@ -73,6 +73,8 @@ class MediaRecordViewModel: ObservableObject, Stateable, ViewModel {
     @Published private(set) var fileDisplayName: String = ""
     private(set) var player: PlayerViewModel?
 
+    @MainActor private lazy var orientationMonitor = DeviceOrientationMonitor()
+    private var cameraStarted = false
     private var cameraDisposeBag = DisposeBag()
     private var playerDisposeBag = DisposeBag()
     private var recordingTimer: Timer?
@@ -93,15 +95,23 @@ class MediaRecordViewModel: ObservableObject, Stateable, ViewModel {
 
     /// Must be called after setting `conversation` and `audioOnly`.
     func setup() {
-        if !audioOnly {
-            videoService.setCameraOrientation(orientation: UIDevice.current.orientation)
-            videoService.startMediumCamera()
-        }
         subscribeCameraFrames()
     }
 
-    func setCameraOrientation(orientation: UIDeviceOrientation) {
-        videoService.setCameraOrientation(orientation: orientation)
+    @MainActor
+    func previewAppeared() {
+        guard !audioOnly else { return }
+        orientationMonitor.start { [weak self] input in
+            self?.videoService.setCameraOrientation(input)
+        }
+        guard !cameraStarted else { return }
+        cameraStarted = true
+        videoService.startMediumCamera()
+    }
+
+    @MainActor
+    func previewDisappeared() {
+        orientationMonitor.stop()
     }
 
     // MARK: - Recording
@@ -164,7 +174,7 @@ class MediaRecordViewModel: ObservableObject, Stateable, ViewModel {
     // MARK: - Camera
 
     func switchCamera() {
-        videoService.switchCamera()
+        Task { await videoService.switchCamera() }
     }
 
     // MARK: - Playback controls

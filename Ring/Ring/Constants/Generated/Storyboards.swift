@@ -50,12 +50,6 @@ internal extension UIViewController {
 
 // swiftlint:disable explicit_type_interface identifier_name line_length type_body_length type_name
 internal enum StoryboardScene {
-  internal enum CallViewController: StoryboardType {
-    internal static let storyboardName = "CallViewController"
-
-    internal static let initialScene = InitialSceneType<Ring.CallViewController>(storyboard: CallViewController.self)
-  }
-
     internal enum SwarmCreationViewController: StoryboardType {
       internal static let storyboardName = "SwarmCreationViewController"
 

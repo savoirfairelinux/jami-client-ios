@@ -45,14 +45,11 @@ final class LinkToAccountVMTests: XCTestCase {
         let daemonService = DaemonService(dRingAdaptor: DRingAdapter())
         let nameService = NameService(withNameRegistrationAdapter: NameRegistrationAdapter())
         let presenceService = PresenceService(withPresenceAdapter: PresenceAdapter())
-        let videoService = VideoService(withVideoAdapter: VideoAdapter())
-        let audioService = AudioService(withAudioAdapter: AudioAdapter())
+        let videoService = VideoService()
+        let audioService = AudioService()
+        let callService = CallService()
         let systemService = SystemService(withSystemAdapter: SystemAdapter())
         let networkService = NetworkService()
-        let callsProvider = CallsProviderService(
-            provider: CXProvider(configuration: CallsHelpers.providerConfiguration()),
-            controller: CXCallController())
-        let callService = CallsService(withCallsAdapter: CallsAdapter())
         accountService = MockAccountsService(withAccountAdapter: AccountAdapter(), dbManager: dBManager)
         let contactsService = ContactsService(withContactsAdapter: ContactsAdapter(), dbManager: dBManager)
         let profileService = ProfilesService(withProfilesAdapter: ProfilesAdapter(), dbManager: dBManager)
@@ -75,7 +72,6 @@ final class LinkToAccountVMTests: XCTestCase {
                                     withAudioService: audioService,
                                     withDataTransferService: dataTransferService,
                                     withProfileService: profileService,
-                                    withCallsProvider: callsProvider,
                                     withLocationSharingService: locationSharingService,
                                     withRequestsService: requestsService,
                                     withSystemService: systemService,

@@ -25,7 +25,7 @@ class CallBannerViewModel: ObservableObject {
     @Published var isVisible = false
     @Published var activeCalls: [ActiveCall] = []
 
-    private let callService: CallsService
+    private let callService: CallService
     private let conversation: ConversationModel
     private let disposeBag = DisposeBag()
     private let state: PublishSubject<State>

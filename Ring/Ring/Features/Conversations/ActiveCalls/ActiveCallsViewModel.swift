@@ -21,7 +21,7 @@ import RxSwift
 class ActiveCallsViewModel: ObservableObject, Stateable {
     @Published var callsByAccount: [String: [ActiveCallRowViewModel]] = [:]
 
-    private let callService: CallsService
+    private let callService: CallService
     private let profileService: ProfilesService
     private let accountsService: AccountsService
     private let conversationsSource: ConversationDataSource
@@ -94,12 +94,12 @@ class ActiveCallRowViewModel: ObservableObject, Equatable {
     @Published var avatarData: Data?
     let call: ActiveCall
     private let stateSubject: PublishSubject<State>
-    private let callService: CallsService
+    private let callService: CallService
     let profileService: ProfilesService
     private let disposeBag = DisposeBag()
     let avatarProvider: AvatarProvider
 
-    init(call: ActiveCall, stateSubject: PublishSubject<State>, callService: CallsService, swarmInfo: SwarmInfoProtocol, profileService: ProfilesService) {
+    init(call: ActiveCall, stateSubject: PublishSubject<State>, callService: CallService, swarmInfo: SwarmInfoProtocol, profileService: ProfilesService) {
         self.call = call
         self.profileService = profileService
         self.callService = callService
