@@ -397,6 +397,7 @@
 		26A88C7626700ABC00888EED /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399A961D1C2F6100E99CD9 /* libz.tbd */; };
 		26A88C7826700B7500888EED /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6452144124B4AC9F007203D5 /* libc++.tbd */; };
 		26A88C7926700BC500888EED /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399A931D1C2F5800E99CD9 /* libiconv.tbd */; };
+		26AAB2C7300E7EEF00EE8FED /* EventBroadcaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AAB2BA300E7EEF00EE8FED /* EventBroadcaster.swift */; };
 		26AVATAR0129BA000000000001 /* AvatarProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AVATAR0029BA000000000001 /* AvatarProviderTests.swift */; };
 		26B37339263C439B00E2EE28 /* CustomSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B37337263C439B00E2EE28 /* CustomSearchController.swift */; };
 		26B37342263C4B3700E2EE28 /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B37341263C4B3700E2EE28 /* CustomSearchBar.swift */; };
@@ -1084,6 +1085,7 @@
 		26A88C74267009EC00888EED /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		26A88C7A26700C0500888EED /* libz.1.2.11.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.11.tbd; path = usr/lib/libz.1.2.11.tbd; sourceTree = SDKROOT; };
 		26A88C7C26700C8C00888EED /* Xcode.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = Xcode.app; path = ../../../../../../../Applications/Xcode.app; sourceTree = "<group>"; };
+		26AAB2BA300E7EEF00EE8FED /* EventBroadcaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventBroadcaster.swift; sourceTree = "<group>"; };
 		26AVATAR0029BA000000000001 /* AvatarProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarProviderTests.swift; sourceTree = "<group>"; };
 		26B37337263C439B00E2EE28 /* CustomSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchController.swift; sourceTree = "<group>"; };
 		26B37341263C4B3700E2EE28 /* CustomSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
@@ -1870,7 +1872,10 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		0701DF66E84019629D7EFF42 /* Calls */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Calls; sourceTree = "<group>"; };
 		26EC6EF32DE0E7B9000BA551 /* ActiveCalls */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ActiveCalls; sourceTree = "<group>"; };
+		299E4A3A9C2F5C282BB43B14 /* Calls */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Calls; sourceTree = "<group>"; };
+		2F774C97D1E10CF5AAF9E869 /* Calls */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Calls; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2807,6 +2812,7 @@
 			isa = PBXGroup;
 			children = (
 				263C16642D94E1A6008E102C /* Calls */,
+				2F774C97D1E10CF5AAF9E869 /* Calls */,
 				56BBC9A01ED714DF00CDAF8B /* MessagesAdapterDelegate.swift */,
 				56BBC9A11ED714DF00CDAF8B /* ConversationsService.swift */,
 				26F1D8E02FC73C39002AA754 /* PeerServicesAdapterDelegate.swift */,
@@ -3015,6 +3021,7 @@
 				AA0003010000000000000003 /* MediaPreviewModelSaveTests.swift */,
 				26F1D8EF2FC76A78002AA754 /* PeerSharingServiceTests.swift */,
 				26F1D9A02FC76A78002AA754 /* PeerSharingViewModelTests.swift */,
+				299E4A3A9C2F5C282BB43B14 /* Calls */,
 			);
 			path = RingTests;
 			sourceTree = "<group>";
@@ -3115,6 +3122,7 @@
 				2658071F2B0FBE2900CDE196 /* PreferencesManager.swift */,
 				26454F7B2B7E770900CFF06C /* TestEnvironment.swift */,
 				A7MD00102F20000100000005 /* MessageMarkdown */,
+				26AAB2BA300E7EEF00EE8FED /* EventBroadcaster.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -3260,6 +3268,7 @@
 				0E983E6D1FC77C3E0082103E /* ConversationModel.swift */,
 				0E49096F1FEAC1C6005CAA50 /* CallModel.swift */,
 				267AD77D252B979F00047593 /* ConferenceParticipant.swift */,
+				0701DF66E84019629D7EFF42 /* Calls */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -3911,7 +3920,9 @@
 				3D0E69802DDCD9C80046FA3D /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
+				0701DF66E84019629D7EFF42 /* Calls */,
 				26EC6EF32DE0E7B9000BA551 /* ActiveCalls */,
+				2F774C97D1E10CF5AAF9E869 /* Calls */,
 			);
 			name = Ring;
 			packageProductDependencies = (
@@ -3933,6 +3944,9 @@
 			);
 			dependencies = (
 				04399A0E1D1C2D9D00E99CD9 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				299E4A3A9C2F5C282BB43B14 /* Calls */,
 			);
 			name = RingTests;
 			productName = RingTests;
@@ -4236,6 +4250,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26AAB2C7300E7EEF00EE8FED /* EventBroadcaster.swift in Sources */,
 				26D08ABB2696293100E37574 /* RequestsAdapterDelegate.swift in Sources */,
 				268C87FF2C1E6CF000593D7C /* GeneralSettings.swift in Sources */,
 				265B759F2DCBAB1A00CB1622 /* AccountMigrationView.swift in Sources */,

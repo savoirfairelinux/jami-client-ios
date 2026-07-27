@@ -59,6 +59,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, nullable) NSArray<NSDictionary<NSString*, NSString*>*> *currentMediaListReturnValue;
 
 // Answer media change request
+@property (nonatomic, assign) NSInteger requestMediaChangeCallCount;
+@property (nonatomic, copy, nullable) NSString *requestMediaChangeCallId;
+@property (nonatomic, copy, nullable) NSString *requestMediaChangeAccountId;
+@property (nonatomic, copy, nullable) NSArray<NSDictionary<NSString*, NSString*>*> *requestMediaChangeMediaList;
+@property (nonatomic, assign) BOOL requestMediaChangeReturnValue;
+
 @property (nonatomic, assign) NSInteger answerMediaChangeResquestCallCount;
 @property (nonatomic, copy, nullable) NSString *answerMediaChangeResquestCallId;
 @property (nonatomic, copy, nullable) NSString *answerMediaChangeResquestAccountId;

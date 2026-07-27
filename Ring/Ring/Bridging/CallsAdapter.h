@@ -31,6 +31,7 @@
 - (BOOL)resumeCallWithId:(NSString*)callId accountId:(NSString*)accountId;
 - (void)playDTMF:(NSString*)code;
 
+- (BOOL)requestMediaChange:(NSString*)callId accountId:(NSString*)accountId withMedia:(NSArray*)mediaList;
 - (void)answerMediaChangeResquest:(NSString*)callId accountId:(NSString*)accountId withMedia: (NSArray*)mediaList;
 
 - (NSString*)placeCallWithAccountId:(NSString*)accountId toParticipantId:(NSString*)participantId withMedia: (NSArray*)mediaList;

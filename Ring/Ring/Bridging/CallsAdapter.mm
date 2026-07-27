@@ -210,6 +210,10 @@ static id <CallsAdapterDelegate> _delegate;
     playDTMF(std::string([code UTF8String]));
 }
 
+- (BOOL)requestMediaChange:(NSString*)callId accountId:(NSString*)accountId withMedia:(NSArray*)mediaList {
+    return requestMediaChange(std::string([accountId UTF8String]), std::string([callId UTF8String]), [Utils arrayOfDictionariesToVectorOfMap: mediaList]);
+}
+
 - (void)answerMediaChangeResquest:(NSString*)callId accountId:(NSString*)accountId withMedia: (NSArray*)mediaList {
     answerMediaChangeRequest(std::string([accountId UTF8String]), std::string([callId UTF8String]), [Utils arrayOfDictionariesToVectorOfMap: mediaList]);
 }
