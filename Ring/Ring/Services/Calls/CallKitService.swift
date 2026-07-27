@@ -47,14 +47,16 @@ final class CallKitService: NSObject {
     /// Set by the facade; receives every CallKit-initiated action.
     var onAction: ((CallKitAction) -> Void)?
 
+    /// CallKit callbacks and directory access are confined to the main queue.
+    /// Injected providers/controllers must preserve the same callback contract.
     init(provider: CXProvider = CXProvider(configuration: CallsHelpers.providerConfiguration()),
-         callController: CXCallController = CXCallController(),
+         callController: CXCallController = CXCallController(queue: .main),
          placeholderTimeout: TimeInterval = 15) {
         self.provider = provider
         self.callController = callController
         self.placeholderTimeout = placeholderTimeout
         super.init()
-        self.provider.setDelegate(self, queue: nil)
+        self.provider.setDelegate(self, queue: .main)
     }
 
     // MARK: - Push placeholder path
@@ -63,6 +65,7 @@ final class CallKitService: NSObject {
     /// about it. An existing placeholder for the peer is replaced.
     func previewPendingCall(peerId: String, accountId: String, displayName: String,
                             hasVideo: Bool, completion: ((Error?) -> Void)?) {
+        assertMainQueue()
         let uuid = UUID()
         if let replaced = directory.addPlaceholder(uuid: uuid, peerId: peerId,
                                                    accountId: accountId,
@@ -74,7 +77,11 @@ final class CallKitService: NSObject {
         let update = CXCallUpdate()
         update.remoteHandle = CXHandle(type: .phoneNumber, value: peerId)
         configure(update, callerName: displayName, hasVideo: hasVideo)
-        provider.reportNewIncomingCall(with: uuid, update: update) { error in
+        provider.reportNewIncomingCall(with: uuid, update: update) { [weak self] error in
+            self?.assertMainQueue()
+            if error != nil {
+                self?.directory.remove(uuid: uuid)
+            }
             completion?(error)
         }
 
@@ -84,6 +91,7 @@ final class CallKitService: NSObject {
     private func scheduleExpiry(uuid: UUID) {
         let timeout = placeholderTimeout
         DispatchQueue.main.asyncAfter(deadline: .now() + timeout) { [weak self] in
+            self?.assertMainQueue()
             guard let self = self, self.directory.expirePlaceholder(uuid: uuid) else { return }
             self.provider.reportCall(with: uuid, endedAt: Date(), reason: .failed)
         }
@@ -96,6 +104,7 @@ final class CallKitService: NSObject {
     /// otherwise report a fresh incoming call.
     func reportIncomingCall(_ call: CallState, handle: CallKitHandle,
                             completion: ((Error?) -> Void)? = nil) {
+        assertMainQueue()
         if let (_, decision) = directory.match(peerId: call.peerHash,
                                                accountId: call.accountId,
                                                callId: call.id) {
@@ -118,6 +127,7 @@ final class CallKitService: NSObject {
                                        value: handle.value)
         configure(update, callerName: handle.displayName, hasVideo: !call.isAudioOnly)
         provider.reportNewIncomingCall(with: uuid, update: update) { [weak self] error in
+            self?.assertMainQueue()
             if error != nil {
                 self?.directory.remove(uuid: uuid)
             }
@@ -127,6 +137,7 @@ final class CallKitService: NSObject {
 
     /// Registers an outgoing call with CallKit.
     func reportOutgoingCallStarted(_ call: CallState, handle: CallKitHandle) {
+        assertMainQueue()
         let uuid = UUID()
         directory.attach(uuid: uuid, to: call.id)
         let cxHandle = CXHandle(type: handle.isPhoneNumber ? .phoneNumber : .generic,
@@ -135,33 +146,39 @@ final class CallKitService: NSObject {
         action.isVideo = !call.isAudioOnly
         action.contactIdentifier = handle.displayName
         callController.request(CXTransaction(action: action)) { [weak self] error in
+            self?.assertMainQueue()
             if let error = error {
                 NSLog("CallKit start-call transaction failed: %@", error.localizedDescription)
                 self?.directory.remove(uuid: uuid)
             } else {
-                self?.provider.reportOutgoingCall(with: uuid, startedConnectingAt: Date())
+                guard let self = self, self.directory.isTracked(uuid) else { return }
+                self.provider.reportOutgoingCall(with: uuid, startedConnectingAt: Date())
             }
         }
     }
 
     func reportOutgoingCallConnecting(_ callId: CallId) {
+        assertMainQueue()
         guard let uuid = directory.uuid(for: callId) else { return }
         provider.reportOutgoingCall(with: uuid, startedConnectingAt: Date())
     }
 
     func reportOutgoingCallConnected(_ callId: CallId) {
+        assertMainQueue()
         guard let uuid = directory.uuid(for: callId) else { return }
         provider.reportOutgoingCall(with: uuid, connectedAt: Date())
     }
 
     /// The call ended (locally or remotely) — tear down its CallKit call.
     func reportCallEnded(_ callId: CallId, isRemoteEnd: Bool) {
+        assertMainQueue()
         guard let uuid = directory.uuid(for: callId) else { return }
         directory.remove(uuid: uuid)
         endCallKitCall(uuid: uuid, isRemoteEnd: isRemoteEnd)
     }
 
     func updateDisplayName(_ callId: CallId, handle: CallKitHandle, hasVideo: Bool) {
+        assertMainQueue()
         guard let uuid = directory.uuid(for: callId) else { return }
         let update = CXCallUpdate()
         update.remoteHandle = CXHandle(type: handle.isPhoneNumber ? .phoneNumber : .generic,
@@ -173,12 +190,14 @@ final class CallKitService: NSObject {
     // MARK: - Queries
 
     func hasActiveCalls() -> Bool {
+        assertMainQueue()
         return callController.callObserver.calls.contains {
             !$0.hasEnded && directory.isTracked($0.uuid)
         }
     }
 
     func stopAllPendingCalls() {
+        assertMainQueue()
         for uuid in directory.allPlaceholderUUIDs() {
             directory.remove(uuid: uuid)
             endCallKitCall(uuid: uuid, isRemoteEnd: false)
@@ -200,6 +219,12 @@ final class CallKitService: NSObject {
 
     // MARK: - Private
 
+    private func assertMainQueue() {
+#if DEBUG
+        dispatchPrecondition(condition: .onQueue(.main))
+#endif
+    }
+
     private func configure(_ update: CXCallUpdate, callerName: String, hasVideo: Bool) {
         update.localizedCallerName = callerName
         update.hasVideo = hasVideo
@@ -209,12 +234,14 @@ final class CallKitService: NSObject {
     }
 
     private func endCallKitCall(uuid: UUID, isRemoteEnd: Bool) {
+        assertMainQueue()
         let isOutgoing = callController.callObserver.calls
             .first { $0.uuid == uuid }?.isOutgoing ?? false
         if isRemoteEnd && !isOutgoing {
             provider.reportCall(with: uuid, endedAt: Date(), reason: .remoteEnded)
         } else {
-            callController.request(CXTransaction(action: CXEndCallAction(call: uuid))) { error in
+            callController.request(CXTransaction(action: CXEndCallAction(call: uuid))) { [weak self] error in
+                self?.assertMainQueue()
                 if let error = error {
                     NSLog("CallKit end-call transaction failed: %@", error.localizedDescription)
                 }
@@ -227,9 +254,12 @@ final class CallKitService: NSObject {
 
 extension CallKitService: CXProviderDelegate {
 
-    func providerDidReset(_ provider: CXProvider) {}
+    func providerDidReset(_ provider: CXProvider) {
+        assertMainQueue()
+    }
 
     func provider(_ provider: CXProvider, perform action: CXAnswerCallAction) {
+        assertMainQueue()
         defer { action.fulfill() }
         switch directory.recordCallAction(uuid: action.callUUID, .accepted(withVideo: true)) {
         case .applyToCall(let callId):
@@ -246,6 +276,7 @@ extension CallKitService: CXProviderDelegate {
     }
 
     func provider(_ provider: CXProvider, perform action: CXEndCallAction) {
+        assertMainQueue()
         defer { action.fulfill() }
         switch directory.recordCallAction(uuid: action.callUUID, .declined) {
         case .applyToCall(let callId):
@@ -262,6 +293,7 @@ extension CallKitService: CXProviderDelegate {
     }
 
     func provider(_ provider: CXProvider, perform action: CXStartCallAction) {
+        assertMainQueue()
         defer { action.fulfill() }
         // Report the display name so call history shows it correctly.
         let update = CXCallUpdate()
@@ -272,16 +304,19 @@ extension CallKitService: CXProviderDelegate {
     }
 
     func provider(_ provider: CXProvider, perform action: CXSetMutedCallAction) {
+        assertMainQueue()
         defer { action.fulfill() }
         guard let callId = directory.callId(for: action.callUUID) else { return }
         onAction?(.setMuted(callId: callId, muted: action.isMuted))
     }
 
     func provider(_ provider: CXProvider, didActivate audioSession: AVAudioSession) {
+        assertMainQueue()
         onAction?(.audioSessionActivated(audioSession))
     }
 
     func provider(_ provider: CXProvider, didDeactivate audioSession: AVAudioSession) {
+        assertMainQueue()
         onAction?(.audioSessionDeactivated(audioSession))
         try? audioSession.setActive(false, options: .notifyOthersOnDeactivation)
     }

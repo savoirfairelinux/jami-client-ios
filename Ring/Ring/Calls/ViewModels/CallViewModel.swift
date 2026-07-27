@@ -85,6 +85,7 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
     private let orientationMonitor = DeviceOrientationMonitor()
     private let tileComposer: CallTileComposer
     private var callId: CallId
+    private var lastKnownConference: ConferenceState?
     private var eventTask: Task<Void, Never>?
     private var durationTimer: AnyCancellable?
     private var audioCancellable: AnyCancellable?
@@ -243,13 +244,13 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
             for await event in events {
                 if Task.isCancelled { return }
                 guard let self = self else { return }
-                self.consume(event: event)
+                await self.consume(event: event)
             }
         }
         previousTask?.cancel()
     }
 
-    private func consume(event: CallSystemEvent) {
+    private func consume(event: CallSystemEvent) async {
         switch event {
         case let .callAdded(call), let .callUpdated(call):
             guard call.id == callId else { return }
@@ -258,21 +259,35 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
         case let .callEnded(call, _):
             guard call.id == callId else { return }
             if call.status != .terminated(.endedLocally),
-               let conference = conference,
-               let survivor = conference.memberCallIds.first(where: { $0 != callId }) {
-                retarget(to: survivor)
-                return
+               let session = conference ?? lastKnownConference {
+                let snapshot = await callService.snapshot()
+                guard !Task.isCancelled, call.id == callId else { return }
+                if let remainingCallId = remainingCallId(
+                    in: session, availableCalls: snapshot.calls
+                ) {
+                    retarget(to: remainingCallId)
+                    return
+                }
             }
             apply(call: call)
             rebuildTiles()
             stopDurationTimer()
+            lastKnownConference = nil
             shouldDismiss = true
         case let .callMatched(replaced, matched):
             guard replaced == callId else { return }
             retarget(to: matched.id)
         case let .conferenceUpdated(conference):
-            guard call?.conferenceId == conference.id
-                    || conference.memberCallIds.contains(callId) else { return }
+            let isMember = call?.conferenceId == conference.id
+                || conference.memberCallIds.contains(callId)
+            let isTracked = self.conference?.id == conference.id
+                || lastKnownConference?.id == conference.id
+            guard isMember || isTracked else { return }
+            lastKnownConference = conference
+            guard isMember else {
+                clearConferenceState()
+                return
+            }
             updateRecompositionFreeze(previous: self.conference, incoming: conference)
             self.conference = conference
             rebuildCanvas(mode: daemonCanvasMode())
@@ -281,26 +296,45 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
             updateChromeForState()
             updatePiPSource()
         case let .conferenceEnded(confId, remainingCallId):
-            guard conference?.id == confId else { return }
-            conference = nil
-            rebuildCanvas(mode: .grid)
-            rebuildRows()
-            if let remaining = remainingCallId, remaining != callId {
+            let wasMember = conference?.id == confId
+            guard wasMember || lastKnownConference?.id == confId else { return }
+            clearConferenceState()
+            lastKnownConference = nil
+            if wasMember, let remaining = remainingCallId, remaining != callId {
                 retarget(to: remaining)
-            } else {
-                rebuildControlsAndCapabilities()
-                updateChromeForState()
-                updatePiPSource()
             }
         default:
             break
         }
     }
 
+    /// Ordered like the store's choice in `conferenceEnded` so both agree on
+    /// which remaining call keeps the session alive.
+    private func remainingCallId(in session: ConferenceState,
+                                 availableCalls: [CallId: CallState]) -> CallId? {
+        return session.memberCallIds
+            .sorted { $0.raw < $1.raw }
+            .first {
+                $0 != callId && availableCalls[$0]?.status.isTerminal == false
+            }
+    }
+
+    private func clearConferenceState() {
+        guard conference != nil else { return }
+        conference = nil
+        frozenForRecomposition = false
+        rebuildCanvas(mode: .grid)
+        rebuildRows()
+        rebuildControlsAndCapabilities()
+        updateChromeForState()
+        updatePiPSource()
+    }
+
     var currentCallId: CallId { callId }
 
     private func retarget(to newCallId: CallId) {
         guard newCallId != callId else { return }
+        lastKnownConference = nil
         callId = newCallId
         startObserving(callId: newCallId)
     }
