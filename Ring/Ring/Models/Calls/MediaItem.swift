@@ -74,6 +74,23 @@ extension Array where Element == MediaItem {
     func toDictionaries() -> [[String: String]] {
         return map { $0.toDictionary() }
     }
+
+    var isAudioMuted: Bool {
+        first(where: { $0.label == .defaultAudio })?.muted ?? false
+    }
+
+    var isVideoMuted: Bool {
+        guard let video = first(where: { $0.label == .defaultVideo }) else { return true }
+        return video.muted || !video.enabled
+    }
+
+    var hasVideo: Bool {
+        contains { $0.type == .video && $0.enabled && !$0.muted }
+    }
+
+    var hasNegotiatedVideo: Bool {
+        contains { $0.type == .video && $0.enabled }
+    }
 }
 
 /// A media stream label as used in libjami media lists ("audio_0",

@@ -143,17 +143,30 @@ final class CallEventResolverTests: XCTestCase {
 
     func testConferenceSignalsCarryMemberCalls() async throws {
         callAPI.conferenceCallsReturn[conferenceId] = [callId, secondaryCallId]
+        callAPI.currentMediaReturn[conferenceId] = [.audio(muted: true), .video()]
+        callAPI.conferenceDetailsReturn[conferenceId] = [
+            "STATE": ConferenceLifecycle.activeAttached.rawValue
+        ]
+        callAPI.conferenceInfosReturn[conferenceId] = [
+            CallTestFixtures.participant(uri: String(), device: deviceId1,
+                                         sinkId: CallTestFixtures.remoteSinkId)
+        ]
         source.conferenceCreated(conferenceId: conferenceId, conversationId: conversationId1,
                                  accountId: accountId1)
-        source.conferenceChanged(conference: conferenceId, accountId: accountId1, state: String())
+        source.conferenceChanged(conference: conferenceId, accountId: accountId1, state: "",
+                                 memberCallIds: [callId, secondaryCallId])
 
         let events = try await collect(count: 2)
-        guard case let .conferenceCreated(_, conversationId, _, created) = events[0],
+        guard case let .conferenceCreated(_, conversationId, _, state, created,
+                                          participants, media) = events[0],
               case let .conferenceChanged(_, _, _, changed) = events[1] else {
             return XCTFail("wrong events")
         }
         XCTAssertEqual(conversationId, conversationId1)
+        XCTAssertEqual(state, ConferenceLifecycle.activeAttached.rawValue)
         XCTAssertEqual(created, [callId, secondaryCallId])
+        XCTAssertEqual(participants.map(\.device), [deviceId1])
+        XCTAssertTrue(media.first(where: { $0.type == .audio })?.muted == true)
         XCTAssertEqual(changed, [callId, secondaryCallId])
     }
 

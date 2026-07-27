@@ -182,6 +182,7 @@ final class LibJamiCallParsingTests: XCTestCase {
         XCTAssertTrue(info.isHandRaised)
         XCTAssertFalse(info.hasVoiceActivity)
         XCTAssertTrue(info.isRecording)
+        XCTAssertEqual(info.id, "conf1_video_0")
     }
 
     func testConferenceParticipantInfoDefaults() {
@@ -194,10 +195,42 @@ final class LibJamiCallParsingTests: XCTestCase {
         XCTAssertEqual(info.device, "")
     }
 
-    func testParticipantIdentityIncludesDevice() {
+    func testParticipantIdentityFallsBackToDeviceWithoutSink() {
         let participantOnFirstDevice = ConferenceParticipantInfo(["uri": "u1", "device": deviceId1])!
         let participantOnSecondDevice = ConferenceParticipantInfo(["uri": "u1", "device": deviceId2])!
         XCTAssertNotEqual(participantOnFirstDevice.id, participantOnSecondDevice.id)
+    }
+
+    func testParticipantIdentityUsesVideoSink() {
+        let placeholder = ConferenceParticipantInfo([
+            "uri": "", "device": deviceId1, "sinkId": "host_video_0"
+        ])!
+        let camera = ConferenceParticipantInfo([
+            "uri": "", "device": "", "sinkId": "host_video_0"
+        ])!
+        XCTAssertEqual(placeholder.id, camera.id)
+    }
+
+    func testLatestPerStreamReplacesThePlaceholderInPlace() {
+        let hostSinkId = "host_video_0"
+        let collapsed = ConferenceParticipantInfo.latestPerStream([
+            CallTestFixtures.participant(uri: String(), device: deviceId1,
+                                         sinkId: hostSinkId, videoMuted: true,
+                                         frameSize: CGSize(width: 10, height: 10)),
+            CallTestFixtures.participant(uri: String(), device: String(),
+                                         sinkId: hostSinkId,
+                                         frameSize: CGSize(width: 320, height: 240)),
+            CallTestFixtures.participant(uri: CallTestFixtures.peerUri,
+                                         device: CallTestFixtures.remoteDeviceId,
+                                         sinkId: CallTestFixtures.remoteSinkId)
+        ])
+
+        XCTAssertEqual(collapsed.map(\.sinkId),
+                       [SinkId(raw: hostSinkId), SinkId(raw: CallTestFixtures.remoteSinkId)],
+                       "the collapsed stream keeps its original position")
+        XCTAssertEqual(collapsed.first?.frame.size, CGSize(width: 320, height: 240))
+        XCTAssertEqual(collapsed.first?.isVideoMuted, false,
+                       "the restored camera entry must replace its audio-only placeholder")
     }
 
     func testLibJamiBoolAcceptsLibJamiVariants() {

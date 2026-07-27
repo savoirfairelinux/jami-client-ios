@@ -28,7 +28,8 @@ final class CallTilePlannerTests: XCTestCase {
         let tiles = CallTilePlanner.conferenceTiles(
             [CallTestFixtures.participant(uri: localId),
              CallTestFixtures.participant(uri: remoteId)],
-            localJamiId: localId, localCameraOn: true)
+            localJamiId: localId, peerUri: remoteId,
+            isHostedLocally: false, localCameraOn: true)
         XCTAssertFalse(tiles.contains { $0.isLocalPreview },
                        "a conference shows the local user as a grid tile, not a floating preview")
     }
@@ -37,7 +38,8 @@ final class CallTilePlannerTests: XCTestCase {
         let tiles = CallTilePlanner.conferenceTiles(
             [CallTestFixtures.participant(uri: localId),
              CallTestFixtures.participant(uri: remoteId)],
-            localJamiId: localId, localCameraOn: true)
+            localJamiId: localId, peerUri: remoteId,
+            isHostedLocally: false, localCameraOn: true)
         let mine = tiles.first { $0.avatarUri == localId }
         XCTAssertEqual(mine?.source, .localCamera)
         XCTAssertEqual(mine?.showsVideo, true, "our tile follows our own camera state")
@@ -47,11 +49,28 @@ final class CallTilePlannerTests: XCTestCase {
         let tiles = CallTilePlanner.conferenceTiles(
             [CallTestFixtures.participant(uri: String()),
              CallTestFixtures.participant(uri: remoteId)],
-            localJamiId: localId, localCameraOn: false)
+            localJamiId: localId, peerUri: remoteId,
+            isHostedLocally: true, localCameraOn: false)
         let mine = tiles.first { $0.source == .localCamera }
         XCTAssertNotNil(mine, "the empty-uri host cell is our own local-camera tile")
         XCTAssertEqual(mine?.avatarUri, localId, "it resolves against the local jami id")
         XCTAssertEqual(mine?.showsVideo, false, "camera off falls back to the avatar")
+    }
+
+    func testEmptyUriPeerHostRendersItsRemoteSink() {
+        let tiles = CallTilePlanner.conferenceTiles(
+            [CallTestFixtures.participant(uri: String(),
+                                          sinkId: CallTestFixtures.remoteSinkId),
+             CallTestFixtures.participant(uri: localId)],
+            localJamiId: localId, peerUri: remoteId,
+            isHostedLocally: false, localCameraOn: true)
+
+        let peerHostId = CallTestFixtures.remoteSinkId
+        let peerHost = tiles.first { $0.id == peerHostId }
+        XCTAssertEqual(peerHost?.source,
+                       .remoteStream(SinkId(raw: CallTestFixtures.remoteSinkId)))
+        XCTAssertEqual(peerHost?.avatarUri, remoteId)
+        XCTAssertFalse(peerHost?.isLocalPreview == true)
     }
 
     func testRemoteParticipantRendersItsSink() {
@@ -60,7 +79,8 @@ final class CallTilePlannerTests: XCTestCase {
              CallTestFixtures.participant(uri: remoteId,
                                           sinkId: CallTestFixtures.remoteSinkId,
                                           videoMuted: true)],
-            localJamiId: localId, localCameraOn: true)
+            localJamiId: localId, peerUri: remoteId,
+            isHostedLocally: false, localCameraOn: true)
         let remote = tiles.first { $0.avatarUri == remoteId }
         XCTAssertEqual(remote?.source, .remoteStream(SinkId(raw: CallTestFixtures.remoteSinkId)))
         XCTAssertEqual(remote?.showsVideo, false, "a muted remote camera shows the avatar")
@@ -113,7 +133,8 @@ final class CallTilePlannerTests: XCTestCase {
         let tiles = CallTilePlanner.conferenceTiles(
             [CallTestFixtures.participant(uri: localId),
              CallTestFixtures.participant(uri: remoteId)],
-            localJamiId: localId, localCameraOn: true)
+            localJamiId: localId, peerUri: remoteId,
+            isHostedLocally: false, localCameraOn: true)
         XCTAssertTrue(tiles.allSatisfy { $0.showsName },
                       "every conference tile names itself, our own cell included")
     }

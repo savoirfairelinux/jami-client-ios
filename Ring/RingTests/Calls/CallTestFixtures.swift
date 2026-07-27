@@ -25,7 +25,7 @@ enum CallTestFixtures {
     static let secondaryCallId = CallId(raw: conversationId2)
     static let inviteCallId = CallId(raw: deviceId1)
     static let hostCallId = CallId(raw: deviceId2)
-    static let conferenceId = ConfId(raw: conversationId2)
+    static let conferenceId = ConfId(raw: "conferenceId")
     static let peerUri = jamiId2
     static let secondaryPeerUri = jamiId3
     static let tertiaryPeerUri = jamiId4
@@ -53,16 +53,23 @@ enum CallTestFixtures {
                   conversationId: conversationId)
     }
 
-    static func conference(conversationId: String? = conversationId2,
+    static func conference(id: ConfId = conferenceId,
+                           conversationId: String? = conversationId2,
                            accountId: String = accountId1,
+                           media: [MediaItem] = [],
+                           pendingMediaRequest: [MediaItem]? = nil,
                            participants: [ConferenceParticipantInfo] = [],
                            layout: ConferenceLayoutMode = .grid,
-                           isHost: Bool = false) -> ConferenceState {
-        var conference = ConferenceState(id: conferenceId,
+                           isHost: Bool = false,
+                           lifecycle: ConferenceLifecycle = .unknown) -> ConferenceState {
+        var conference = ConferenceState(id: id,
                                          accountId: accountId,
+                                         media: media,
+                                         pendingMediaRequest: pendingMediaRequest,
                                          participants: participants,
                                          layout: layout,
-                                         isHost: isHost)
+                                         isHost: isHost,
+                                         lifecycle: lifecycle)
         conference.conversationId = conversationId
         return conference
     }
@@ -93,6 +100,30 @@ enum CallTestFixtures {
         voiceActivity: Bool = false,
         frameSize: CGSize? = nil
     ) -> ConferenceParticipantInfo {
+        let dictionary = participantDictionary(
+            uri: uri, device: device, sinkId: sinkId,
+            isModerator: isModerator, isActive: isActive,
+            handRaised: handRaised, audioLocalMuted: audioLocalMuted,
+            audioModeratorMuted: audioModeratorMuted, videoMuted: videoMuted,
+            recording: recording, voiceActivity: voiceActivity,
+            frameSize: frameSize)
+        return ConferenceParticipantInfo(dictionary)!
+    }
+
+    static func participantDictionary(
+        uri: String,
+        device: String = deviceId1,
+        sinkId: String? = nil,
+        isModerator: Bool = false,
+        isActive: Bool = false,
+        handRaised: Bool = false,
+        audioLocalMuted: Bool = false,
+        audioModeratorMuted: Bool = false,
+        videoMuted: Bool = false,
+        recording: Bool = false,
+        voiceActivity: Bool = false,
+        frameSize: CGSize? = nil
+    ) -> [String: String] {
         var dictionary: [String: String] = [
             ConfInfoKey.uri.rawValue: uri,
             ConfInfoKey.device.rawValue: device,
@@ -110,6 +141,6 @@ enum CallTestFixtures {
             dictionary[ConfInfoKey.frameWidth.rawValue] = String(describing: frameSize.width)
             dictionary[ConfInfoKey.frameHeight.rawValue] = String(describing: frameSize.height)
         }
-        return ConferenceParticipantInfo(dictionary)!
+        return dictionary
     }
 }

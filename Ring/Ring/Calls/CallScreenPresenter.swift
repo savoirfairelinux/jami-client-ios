@@ -63,6 +63,7 @@ final class CallScreenPresenter {
         }
 
         let account = injectionBag.accountService.getAccount(fromAccountId: call.accountId)
+        let localJamiId = account?.jamiId ?? ""
         let model = CallViewModel(call: call,
                                   callService: callService,
                                   videoService: injectionBag.videoService,
@@ -70,10 +71,11 @@ final class CallScreenPresenter {
                                   profileService: injectionBag.profileService,
                                   nameService: injectionBag.nameService,
                                   isSipAccount: account?.type == .sip,
-                                  localJamiId: account?.jamiId ?? "")
+                                  localJamiId: localJamiId)
         model.onAddParticipant = { [weak self, weak model] in
             Task { @MainActor in
-                self?.presentContactPicker(for: model?.currentCallId ?? call.id)
+                self?.presentContactPicker(for: model?.currentCallId ?? call.id,
+                                           requestedBy: localJamiId)
             }
         }
         model.onMinimize = { [weak self] route in
@@ -174,7 +176,7 @@ final class CallScreenPresenter {
     // MARK: - Add participant
 
     @MainActor
-    private func presentContactPicker(for callId: CallId) {
+    private func presentContactPicker(for callId: CallId, requestedBy localJamiId: String) {
         guard let host = callController, !isMinimized else { return }
         let viewModel = ContactPickerViewModel(with: injectionBag)
         viewModel.type = .forCall
@@ -182,7 +184,8 @@ final class CallScreenPresenter {
         viewModel.contactSelectedCB = { [weak self, weak host] items in
             guard let self = self,
                   let contact = items.first?.contacts.first else { return }
-            self.callService.addParticipant(uri: contact.uri, toCall: callId)
+            self.callService.addParticipant(uri: contact.uri, toCall: callId,
+                                            requestedBy: localJamiId)
             Task { @MainActor in
                 host?.presentedViewController?.dismiss(animated: true)
             }

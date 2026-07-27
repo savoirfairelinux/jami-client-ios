@@ -70,17 +70,23 @@ final class CallEventResolver: @unchecked Sendable {
                                                           accountId: accountId))
 
         case let .conferenceCreated(conferenceId, conversationId, accountId):
+            let details = api.conferenceDetails(conferenceId: conferenceId,
+                                                accountId: accountId)
             return .conferenceCreated(conferenceId: conferenceId,
                                       conversationId: conversationId,
                                       accountId: accountId,
+                                      state: details["STATE"] ?? "",
                                       memberCallIds: api.conferenceCalls(
-                                        conferenceId: conferenceId, accountId: accountId))
+                                        conferenceId: conferenceId, accountId: accountId),
+                                      participants: api.conferenceInfos(
+                                        conferenceId: conferenceId, accountId: accountId),
+                                      media: api.currentMedia(callId: conferenceId,
+                                                              accountId: accountId))
 
-        case let .conferenceChanged(conferenceId, accountId, state):
+        case let .conferenceChanged(conferenceId, accountId, state, memberCallIds):
             return .conferenceChanged(conferenceId: conferenceId, accountId: accountId,
                                       state: state,
-                                      memberCallIds: api.conferenceCalls(
-                                        conferenceId: conferenceId, accountId: accountId))
+                                      memberCallIds: memberCallIds)
 
         case let .mediaChangeRequested(accountId, callId, media):
             return .mediaChangeRequested(accountId: accountId, callId: callId,

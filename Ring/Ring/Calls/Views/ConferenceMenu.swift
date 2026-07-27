@@ -47,7 +47,8 @@ enum ConferenceRole {
 struct ConferenceMenuBuilder {
 
     func menuForLocalTile(layout: ConferenceLayoutMode, isActive: Bool?,
-                          isHandRaised: Bool) -> [ConferenceMenuItem] {
+                          isHandRaised: Bool,
+                          isModeratorMuted: Bool) -> [ConferenceMenuItem] {
         var menu = [ConferenceMenuItem]()
         guard let isActive = isActive else { return menu }
         if isHandRaised {
@@ -64,7 +65,9 @@ struct ConferenceMenuBuilder {
         case .one:
             menu.append(isActive ? .minimize : .maximize)
         }
-        menu.append(.muteAudio)
+        if isModeratorMuted {
+            menu.append(.muteAudio)
+        }
         return menu
     }
 

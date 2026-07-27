@@ -32,9 +32,40 @@ struct ConferenceParticipantInfo: Hashable, Identifiable, Sendable {
     let hasVoiceActivity: Bool
     let isRecording: Bool
 
-    var id: String { Self.id(uri: uri, device: device) }
+    var id: String {
+        return sinkId.raw.isEmpty ? Self.id(uri: uri, device: device) : sinkId.raw
+    }
 
     static func id(uri: String, device: String) -> String { uri + "|" + device }
+
+    /// Libjami may report an audio-only placeholder and its replacement camera
+    /// entry in the same update. Both describe one rendered stream when their
+    /// sink ids match, so the later entry replaces the earlier state while the
+    /// stream keeps its original position.
+    static func latestPerStream(_ participants: [Self]) -> [Self] {
+        var result: [Self] = []
+        var indexById: [String: Int] = [:]
+        for participant in participants {
+            if let index = indexById[participant.id] {
+                result[index] = participant
+            } else {
+                indexById[participant.id] = result.count
+                result.append(participant)
+            }
+        }
+        return result
+    }
+
+    func isLocalParticipant(localJamiId: String, isHostedLocally: Bool) -> Bool {
+        if uri.isEmpty { return isHostedLocally }
+        return !localJamiId.isEmpty && uri.filterOutHost() == localJamiId
+    }
+
+    func resolvedUri(localJamiId: String, peerUri: String,
+                     isHostedLocally: Bool) -> String {
+        guard uri.isEmpty else { return uri }
+        return isHostedLocally ? localJamiId : peerUri
+    }
 
     init?(_ dict: [String: String]) {
         guard let uri = dict[ConfInfoKey.uri.rawValue] else { return nil }

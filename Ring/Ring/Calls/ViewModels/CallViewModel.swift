@@ -188,7 +188,8 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
 
     private var chromeCanAutoHide: Bool {
         guard let call = call else { return false }
-        return CallChromePolicy.canAutoHide(status: call.status, hasVideo: call.hasVideo)
+        let hasVideo = call.effectiveMedia(in: conference).hasVideo
+        return CallChromePolicy.canAutoHide(status: call.status, hasVideo: hasVideo)
     }
 
     private func hideChrome() {
@@ -264,16 +265,19 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
             self.conference = conference
             rebuildCanvas(mode: daemonCanvasMode())
             rebuildRows()
+            rebuildControlsAndCapabilities()
+            updateChromeForState()
             updatePiPSource()
         case let .conferenceEnded(confId, remainingCallId):
             guard conference?.id == confId else { return }
             conference = nil
+            rebuildCanvas(mode: .grid)
+            rebuildRows()
             if let remaining = remainingCallId, remaining != callId {
-                rebuildCanvas(mode: .grid)
                 retarget(to: remaining)
             } else {
-                rebuildCanvas(mode: .grid)
-                rebuildRows()
+                rebuildControlsAndCapabilities()
+                updateChromeForState()
                 updatePiPSource()
             }
         default:
@@ -291,11 +295,10 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
 
     private func apply(call: CallState) {
         self.call = call
-        controls = CallControlsModel(call: call, isSipAccount: isSipAccount)
         peerIsRecording = call.peerIsRecording
         statusText = statusDescription(for: call.status)
-        canAddParticipant = call.status.isOngoing && !isSipAccount
         rebuildRows()
+        rebuildControlsAndCapabilities()
         configureIdentity(for: call)
         updateChromeForState()
         updatePiPSource()
@@ -409,20 +412,28 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
     }
 
     func toggleMuteAudio() {
+        let callId = self.callId
         Task {
             await callService.toggleMute(callId, label: .defaultAudio)
         }
     }
 
     func toggleMuteVideo() {
+        let callId = self.callId
         Task {
             await callService.toggleMute(callId, label: .defaultVideo)
         }
     }
 
     func toggleHold() {
-        guard let controls = controls else { return }
+        guard let controls = controls, controls.canHold || controls.canResume else { return }
         let hold = controls.canHold
+        if let conference = conference, conference.isHost {
+            let conferenceId = conference.id
+            Task { await callService.holdConference(conferenceId, hold) }
+            return
+        }
+        let callId = self.callId
         Task { await callService.hold(callId, hold) }
     }
 
@@ -503,6 +514,18 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
         participantRows.count + pendingRows.count
     }
 
+    private func rebuildControlsAndCapabilities() {
+        guard let call = call else {
+            controls = nil
+            canAddParticipant = false
+            return
+        }
+        controls = CallControlsModel(call: call, conference: conference,
+                                     isSipAccount: isSipAccount)
+        canAddParticipant = call.status.isOngoing && !isSipAccount
+            && (conference == nil || canModerateConference)
+    }
+
     func setLayout(_ layout: ConferenceLayoutMode) {
         guard let confId = conference?.id else { return }
         Task { await callService.setLayout(layout, in: confId) }
@@ -511,7 +534,8 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
     private func rebuildRows() {
         if let conference = conference {
             participantRows = ConferenceParticipants.rows(from: conference,
-                                                          localJamiId: localJamiId)
+                                                          localJamiId: localJamiId,
+                                                          peerUri: call?.peerUri ?? "")
         } else if let call = call, call.status.isOngoing {
             participantRows = ConferenceParticipants.rows(from: call,
                                                           localJamiId: localJamiId)
@@ -530,7 +554,9 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
               let info = conference.participants.first(where: { $0.id == participantId })
         else { return }
         let confId = conference.id
-        let targetUri = info.uri.isEmpty ? localJamiId : info.uri
+        let targetUri = info.resolvedUri(localJamiId: localJamiId,
+                                         peerUri: call?.peerUri ?? "",
+                                         isHostedLocally: conference.isHost)
         Task {
             switch item {
             case .maximize:
@@ -546,7 +572,7 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
                 await callService.muteStream(targetUri, in: confId,
                                              deviceId: info.device,
                                              streamId: info.sinkId.raw,
-                                             muted: !info.isAudioLocallyMuted)
+                                             muted: !info.isAudioModeratorMuted)
             case .setModerator:
                 await callService.setModerator(targetUri, in: confId,
                                                active: !info.isModerator)
@@ -561,6 +587,7 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
     }
 
     func addParticipantTapped() {
+        guard canAddParticipant else { return }
         onAddParticipant?()
     }
 
