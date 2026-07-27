@@ -53,6 +53,7 @@ final class ParticipantCanvas: UIView {
     private var models: [String: CanvasTileModel] = [:]
     private var lastAppliedModels: [CanvasTileModel] = []
     private var mode = CanvasLayoutMode.grid
+    private var style = CanvasTileStyle.fullBleed
     private var previewCorner = PreviewCorner.topTrailing
     private var lastLayoutSize = CGSize.zero
     private var layoutAnimator: UIViewPropertyAnimator?
@@ -109,16 +110,22 @@ final class ParticipantCanvas: UIView {
 
     private func stripPanShouldBegin(_ recognizer: UIGestureRecognizer) -> Bool {
         guard case .spotlight = mode else { return false }
-        return CanvasLayout.stripBand(canvasSize: bounds.size)
+        return CanvasLayout.stripBand(currentInput())
             .contains(recognizer.location(in: self))
     }
 
     // MARK: - Updates
 
+    func apply(_ state: CanvasState, animated: Bool = true) {
+        apply(models: state.tiles, mode: state.mode, style: state.style, animated: animated)
+    }
+
     func apply(models newModels: [CanvasTileModel], mode newMode: CanvasLayoutMode,
-               animated: Bool = true) {
-        guard newMode != mode || newModels != lastAppliedModels else { return }
+               style newStyle: CanvasTileStyle = .fullBleed, animated: Bool = true) {
+        guard newMode != mode || newStyle != style
+                || newModels != lastAppliedModels else { return }
         lastAppliedModels = newModels
+        style = newStyle
 
         let newIds = Set(newModels.map(\.participant.id))
 
@@ -192,6 +199,11 @@ final class ParticipantCanvas: UIView {
         super.layoutSubviews()
         guard bounds.size != lastLayoutSize else { return }
         lastLayoutSize = bounds.size
+        relayout(animated: false)
+    }
+
+    override func safeAreaInsetsDidChange() {
+        super.safeAreaInsetsDidChange()
         relayout(animated: false)
     }
 
@@ -289,7 +301,7 @@ final class ParticipantCanvas: UIView {
         let hasStrip = layout.stripContentWidth > 0
         stripDriver.panGestureRecognizer.isEnabled = hasStrip
         guard hasStrip else { return }
-        let band = CanvasLayout.stripBand(canvasSize: bounds.size)
+        let band = CanvasLayout.stripBand(currentInput())
         stripDriver.frame = band
         stripDriver.contentSize = CGSize(width: layout.stripContentWidth,
                                          height: band.height)
@@ -316,10 +328,12 @@ final class ParticipantCanvas: UIView {
     }
 
     private func cornerRadius(for id: String) -> CGFloat {
-        guard models[id]?.participant.isLocalPreview == true, models.count > 1 else {
-            return 0
+        if models[id]?.participant.isLocalPreview == true {
+            return models.count > 1 ? CanvasLayout.tileCornerRadius : 0
         }
-        return CanvasLayout.previewCornerRadius
+        guard style == .cards else { return 0 }
+        if case .fullscreen(let focusId) = mode, focusId == id { return 0 }
+        return CanvasLayout.tileCornerRadius
     }
 
     private func currentInput() -> CanvasLayout.Input {
@@ -329,7 +343,8 @@ final class ParticipantCanvas: UIView {
             canvasSize: bounds.size,
             safeAreaInsets: safeAreaInsets,
             previewCorner: previewCorner,
-            stripOffset: stripDriver.contentOffset.x)
+            stripOffset: stripDriver.contentOffset.x,
+            style: style)
     }
 
     private func updateVideoAttachments(frames: [String: CGRect],

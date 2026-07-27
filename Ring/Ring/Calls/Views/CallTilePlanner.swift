@@ -41,7 +41,7 @@ enum CallTilePlanner {
                                 localCameraOn: Bool,
                                 frozenForRecomposition: Bool = false) -> [CallTilePlan] {
         participants.map { info in
-            if ConferenceParticipants.isLocalParticipant(info, localJamiId: localJamiId) {
+            if info.isLocalParticipant(localJamiId: localJamiId) {
                 return CallTilePlan(id: info.id,
                                     isLocalPreview: false,
                                     source: .localCamera,

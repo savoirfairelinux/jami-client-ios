@@ -85,6 +85,15 @@ final class ConferenceParticipantsTests: XCTestCase {
         XCTAssertTrue(alice.contains(.endCall), "a host may moderate others")
     }
 
+    func testModelRecognizesTheLocalParticipant() {
+        XCTAssertTrue(CallTestFixtures.participant(uri: "")
+            .isLocalParticipant(localJamiId: localId))
+        XCTAssertTrue(CallTestFixtures.participant(uri: localId + "@ring.dht")
+            .isLocalParticipant(localJamiId: localId))
+        XCTAssertFalse(CallTestFixtures.participant(uri: "alice")
+            .isLocalParticipant(localJamiId: localId))
+    }
+
     func testSelfCanMuteButNotSpotlightWhenNotModerator() {
         let list = rows(conference([CallTestFixtures.participant(uri: localId),
                                     CallTestFixtures.participant(uri: "alice")], isHost: false))

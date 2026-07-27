@@ -32,9 +32,9 @@ struct CallTileComposer {
                avatars: CallParticipantAvatars?,
                frozenForRecomposition: Bool = false) -> [CanvasTileModel] {
         let terminated = call?.status.isTerminal == true
+        let localCameraOn = call?.effectiveMedia(in: conference).hasVideo == true
         let plans: [CallTilePlan]
         if !terminated, let conference = conference, !conference.participants.isEmpty {
-            let localCameraOn = call?.effectiveMedia(in: conference).hasVideo == true
             plans = CallTilePlanner.conferenceTiles(conference.participants,
                                                     localJamiId: localJamiId,
                                                     localCameraOn: localCameraOn,

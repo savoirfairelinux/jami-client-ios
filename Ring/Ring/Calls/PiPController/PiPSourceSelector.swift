@@ -40,7 +40,7 @@ enum PiPSourceSelector {
                                            localJamiId: String,
                                            current: Selection?) -> Selection? {
         let remotesWithVideo = conference.participants.filter {
-            !ConferenceParticipants.isLocalParticipant($0, localJamiId: localJamiId) &&
+            !$0.isLocalParticipant(localJamiId: localJamiId) &&
                 !$0.isVideoMuted && !$0.sinkId.raw.isEmpty
         }
         guard !remotesWithVideo.isEmpty else { return nil }

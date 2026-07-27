@@ -29,6 +29,7 @@ enum CallChromePolicy {
 struct CanvasState: Equatable {
     var tiles: [CanvasTileModel] = []
     var mode: CanvasLayoutMode = .grid
+    var style: CanvasTileStyle = .fullBleed
 }
 
 @MainActor
@@ -372,11 +373,13 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
     }
 
     private func rebuildCanvas(mode: CanvasLayoutMode) {
+        let inConference = conference?.participants.isEmpty == false
         let state = CanvasState(
             tiles: tileComposer.tiles(call: call, conference: conference,
                                       avatars: avatars,
                                       frozenForRecomposition: frozenForRecomposition),
-            mode: mode)
+            mode: mode,
+            style: inConference ? .cards : .fullBleed)
         if state != canvas {
             canvas = state
         }

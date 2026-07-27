@@ -68,7 +68,7 @@ enum ConferenceParticipants {
                      builder: ConferenceMenuBuilder = ConferenceMenuBuilder())
     -> [ConferenceParticipantRow] {
         let localInfo = conference.participants.first {
-            self.isLocalParticipant($0, localJamiId: localJamiId)
+            $0.isLocalParticipant(localJamiId: localJamiId)
         }
 
         let joined = conference.participants.map { info -> ConferenceParticipantRow in
@@ -90,12 +90,6 @@ enum ConferenceParticipants {
         }
 
         return joined.filter { $0.isLocal } + joined.filter { !$0.isLocal }
-    }
-
-    static func isLocalParticipant(_ info: ConferenceParticipantInfo,
-                                   localJamiId: String) -> Bool {
-        if info.uri.isEmpty { return true }
-        return !localJamiId.isEmpty && info.uri.filterOutHost() == localJamiId
     }
 
     private static func actions(for info: ConferenceParticipantInfo, isLocal: Bool,
