@@ -261,6 +261,12 @@ struct AvatarSwiftUIView: View {
 
     private var effectiveSize: CGFloat { sizeOverride ?? source.size.points }
 
+    /// An avatar drawn at the size it was decoded for needs no resampling; drawn at any
+    /// other size, nearest-neighbour is visibly ragged.
+    private var interpolation: Image.Interpolation {
+        effectiveSize == source.size.points ? .none : .medium
+    }
+
     var body: some View {
         if source.isGroup && !source.hasCustomAvatar, let snapshot = source.groupAvatarSnapshot {
             Image(uiImage: snapshot)
@@ -283,7 +289,7 @@ struct AvatarSwiftUIView: View {
             if let image = source.avatar {
                 Image(uiImage: image)
                     .resizable()
-                    .interpolation(.none)
+                    .interpolation(interpolation)
                     .aspectRatio(contentMode: .fill)
             } else {
                 monogramView

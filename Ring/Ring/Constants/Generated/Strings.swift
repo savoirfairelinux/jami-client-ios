@@ -655,6 +655,8 @@ internal enum L10n {
     internal static let currentCallWith = L10n.tr("Localizable", "calls.currentCallWith", fallback: "Call with ")
     /// Grid view
     internal static let gridLayout = L10n.tr("Localizable", "calls.gridLayout", fallback: "Grid view")
+    /// Inviting…
+    internal static let inviting = L10n.tr("Localizable", "calls.inviting", fallback: "Inviting…")
     /// Lower hand
     internal static let lowerHand = L10n.tr("Localizable", "calls.lowerHand", fallback: "Lower hand")
     /// Maximize
@@ -667,6 +669,12 @@ internal enum L10n {
     internal static let muteAudio = L10n.tr("Localizable", "calls.muteAudio", fallback: "Mute microphone")
     /// Participants
     internal static let participants = L10n.tr("Localizable", "calls.participants", fallback: "Participants")
+    /// %@ in call
+    internal static func participantsInCall(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "calls.participantsInCall", String(describing: p1), fallback: "%@ in call")
+    }
+    /// Recording
+    internal static let peerRecording = L10n.tr("Localizable", "calls.peerRecording", fallback: "Recording")
     /// Unset moderator
     internal static let removeModerator = L10n.tr("Localizable", "calls.removeModerator", fallback: "Unset moderator")
     /// Ringing…

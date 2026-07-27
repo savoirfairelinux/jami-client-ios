@@ -18,22 +18,37 @@
 
 import SwiftUI
 
-private struct BarMetrics {
+struct BarMetrics {
     let button: CGFloat
     let icon: CGFloat
     let gap: CGFloat
+    let slots: CGFloat
     var pad: CGFloat { gap }
 
-    static let slotCount: CGFloat = 5
+    static let compactSlotCount: CGFloat = 5
+    static let minimumButton: CGFloat = 46
+    static let minimumGap: CGFloat = 7
 
-    init(availableWidth: CGFloat) {
-        let width = availableWidth > 0 ? availableWidth : 375
-        let gap = max(7, min(14, width * 0.033))
-        let usable = width - (Self.slotCount - 1) * gap - 2 * gap
-        let button = max(46, min(60, usable / Self.slotCount))
+    init(availableWidth: CGFloat, slots: CGFloat = BarMetrics.compactSlotCount) {
+        let slots = max(1, slots)
+        self.slots = slots
+        guard availableWidth > 0 else {
+            self.button = Self.minimumButton
+            self.gap = Self.minimumGap
+            self.icon = (Self.minimumButton * 0.42).rounded()
+            return
+        }
+        let spacing = max(Self.minimumGap, min(14, availableWidth * 0.033))
+        let usable = availableWidth - (slots + 1) * spacing
+        let preferred = max(Self.minimumButton, min(60, usable / slots))
+        let button = min(preferred, availableWidth / slots)
         self.button = button
-        self.gap = gap
+        self.gap = min(spacing, max(0, (availableWidth - slots * button) / (slots + 1)))
         self.icon = (button * 0.42).rounded()
+    }
+
+    var totalWidth: CGFloat {
+        slots * button + (slots + 1) * gap
     }
 }
 
@@ -112,7 +127,10 @@ struct CallControlsView: View {
     }
 
     var body: some View {
-        let metrics = BarMetrics(availableWidth: availableWidth)
+        let plan = self.plan
+        let metrics = BarMetrics(availableWidth: availableWidth,
+                                 slots: CGFloat(plan?.primary.count
+                                                    ?? Int(BarMetrics.compactSlotCount)))
         Group {
             if let plan = plan {
                 HStack(spacing: 0) {
