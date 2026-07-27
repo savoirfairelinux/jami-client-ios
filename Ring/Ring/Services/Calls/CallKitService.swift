@@ -48,13 +48,13 @@ final class CallKitService: NSObject {
     var onAction: ((CallKitAction) -> Void)?
 
     init(provider: CXProvider = CXProvider(configuration: CallsHelpers.providerConfiguration()),
-         callController: CXCallController = CXCallController(),
+         callController: CXCallController = CXCallController(queue: .main),
          placeholderTimeout: TimeInterval = 15) {
         self.provider = provider
         self.callController = callController
         self.placeholderTimeout = placeholderTimeout
         super.init()
-        self.provider.setDelegate(self, queue: nil)
+        self.provider.setDelegate(self, queue: .main)
     }
 
     // MARK: - Push placeholder path
@@ -74,7 +74,10 @@ final class CallKitService: NSObject {
         let update = CXCallUpdate()
         update.remoteHandle = CXHandle(type: .phoneNumber, value: peerId)
         configure(update, callerName: displayName, hasVideo: hasVideo)
-        provider.reportNewIncomingCall(with: uuid, update: update) { error in
+        provider.reportNewIncomingCall(with: uuid, update: update) { [weak self] error in
+            if error != nil {
+                self?.directory.remove(uuid: uuid)
+            }
             completion?(error)
         }
 
@@ -135,11 +138,14 @@ final class CallKitService: NSObject {
         action.isVideo = !call.isAudioOnly
         action.contactIdentifier = handle.displayName
         callController.request(CXTransaction(action: action)) { [weak self] error in
+            guard let self = self else { return }
             if let error = error {
                 NSLog("CallKit start-call transaction failed: %@", error.localizedDescription)
-                self?.directory.remove(uuid: uuid)
+                self.directory.remove(uuid: uuid)
+            } else if self.directory.isTracked(uuid) {
+                self.provider.reportOutgoingCall(with: uuid, startedConnectingAt: Date())
             } else {
-                self?.provider.reportOutgoingCall(with: uuid, startedConnectingAt: Date())
+                self.provider.reportCall(with: uuid, endedAt: Date(), reason: .failed)
             }
         }
     }

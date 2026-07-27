@@ -360,6 +360,46 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
         await Harness.wait { model.canvasMode == .grid }
     }
 
+    func testSelectedParticipantStaysFocusedWhenOtherConferenceLegLeaves() async {
+        let harness = await Harness(callHasVideo: true)
+        let model = harness.makeModel(localJamiId: jamiId1)
+        let conferenceId = CallTestFixtures.conferenceId.raw
+        let survivorId = CallTestFixtures.hostCallId
+        let selectedParticipantId = CallTestFixtures.secondaryRemoteSinkId
+        let other = CallTestFixtures.participant(
+            uri: CallTestFixtures.peerUri,
+            device: deviceId1,
+            sinkId: CallTestFixtures.remoteSinkId,
+            frameSize: CGSize(width: 120, height: 120))
+        let selected = CallTestFixtures.participant(
+            uri: CallTestFixtures.secondaryPeerUri,
+            device: deviceId2,
+            sinkId: selectedParticipantId,
+            isActive: true,
+            frameSize: CGSize(width: 600, height: 600))
+        harness.send(.conferenceCreated(
+            conferenceId: conferenceId,
+            conversationId: "",
+            accountId: Harness.accountId,
+            state: ConferenceLifecycle.activeAttached.rawValue,
+            memberCallIds: [harness.callId.raw, survivorId.raw],
+            participants: [other, selected],
+            media: [.audio(), .video()]))
+        await Harness.wait { model.canvasMode == .spotlight(selectedParticipantId) }
+
+        harness.send(.conferenceChanged(
+            conferenceId: conferenceId,
+            accountId: Harness.accountId,
+            state: ConferenceLifecycle.activeAttached.rawValue,
+            memberCallIds: [survivorId.raw]))
+        harness.send(.remoteRecordingChanged(callId: harness.callId.raw, recording: true))
+        await Harness.wait { model.call?.peerIsRecording == true }
+
+        XCTAssertEqual(model.canvasMode.focusId, selectedParticipantId,
+                       "another call leg leaving must not reset the selected participant")
+        XCTAssertEqual(model.conference?.memberCallIds, [survivorId])
+    }
+
     func testOnlyAConferenceRendersTilesAsCards() async {
         let harness = await Harness(callHasVideo: true)
         let model = harness.makeModel(localJamiId: jamiId1)
