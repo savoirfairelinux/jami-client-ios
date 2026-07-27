@@ -446,6 +446,58 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
                       "muting the effective host video makes the chrome persistent")
     }
 
+    func testDepartedConferenceMemberReturnsToDirectCall() async {
+        let harness = await Harness(callHasVideo: true)
+        let model = harness.makeModel(localJamiId: jamiId1)
+        harness.send(.conferenceCreated(
+            conferenceId: "conf-1", conversationId: "", accountId: Harness.accountId,
+            state: "ACTIVE_ATTACHED",
+            memberCallIds: [harness.callId.raw, "member-2"],
+            participants: [], media: [.audio(), .video()]))
+        await Harness.wait {
+            model.call?.conferenceId == ConfId(raw: "conf-1") && model.conference != nil
+        }
+
+        harness.send(.conferenceChanged(
+            conferenceId: "conf-1", accountId: Harness.accountId,
+            state: "ACTIVE_ATTACHED", memberCallIds: ["member-2"]))
+
+        await Harness.wait { model.call?.conferenceId == nil && model.conference == nil }
+        XCTAssertNil(model.conference,
+                     "a detached call must stop displaying its former conference")
+    }
+
+    func testConferenceCollapseKeepsSurvivingDirectCallOnScreen() async {
+        let harness = await Harness(callHasVideo: false)
+        let model = harness.makeModel(localJamiId: jamiId1)
+        let survivorId = CallId(raw: "call-b")
+        harness.send(.incomingCall(accountId: Harness.accountId, callId: survivorId.raw,
+                                   peerUri: "carol", media: [.audio()], details: nil))
+        harness.send(.callStateChanged(callId: survivorId.raw, state: .current,
+                                       rawState: "CURRENT", accountId: Harness.accountId,
+                                       code: 0, negotiatedMedia: [.audio()], videoCodec: nil))
+        harness.send(.conferenceCreated(
+            conferenceId: "conf-1", conversationId: "", accountId: Harness.accountId,
+            state: "ACTIVE_ATTACHED",
+            memberCallIds: [harness.callId.raw, survivorId.raw],
+            participants: [], media: [.audio()]))
+        await Harness.wait { model.conference?.memberCallIds.count == 2 }
+
+        harness.send(.conferenceChanged(
+            conferenceId: "conf-1", accountId: Harness.accountId,
+            state: "ACTIVE_ATTACHED", memberCallIds: [survivorId.raw]))
+        harness.send(.conferenceRemoved(conferenceId: "conf-1"))
+
+        await Harness.wait { model.call?.id == survivorId && model.conference == nil }
+
+        model.hangUp()
+        await Harness.wait { model.shouldDismiss }
+
+        XCTAssertEqual(model.call?.status, .terminated(.endedLocally))
+        XCTAssertTrue(harness.callAPI.hungUpConferences.isEmpty,
+                      "the survivor must not hang up through the removed conference")
+    }
+
     func testOnlyLocalModeratorCanAddToPeerHostedConference() async {
         let harness = await Harness(callHasVideo: true)
         let model = harness.makeModel(localJamiId: jamiId1)

@@ -47,6 +47,7 @@ final class CallScreenPresenter {
     private func subscribeToPresentation() {
         guard let manager = injectionBag.callsManager else { return }
         manager.callToPresent
+            .compactMap { $0 }
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] call in
                 Task { @MainActor in self?.presentCallScreen(for: call) }
@@ -58,9 +59,10 @@ final class CallScreenPresenter {
 
     @MainActor
     private func presentCallScreen(for call: CallState) {
-        if model?.currentCallId == call.id, callController != nil, !isMinimized {
-            return
-        }
+        // Presentation intentionally owns one call. A matching libjami call can
+        // replace a CallKit placeholder in the durable state while the existing
+        // view model retargets itself through `.callMatched`.
+        guard callController == nil else { return }
 
         let account = injectionBag.accountService.getAccount(fromAccountId: call.accountId)
         let localJamiId = account?.jamiId ?? ""
@@ -111,14 +113,8 @@ final class CallScreenPresenter {
             self.setInCallDeviceState(active: true)
         }
 
-        if let existing = callController, !isMinimized {
-            existing.dismiss(animated: false, completion: present)
-            callController = nil
-        } else {
-            callController = nil
-            isMinimized = false
-            present()
-        }
+        isMinimized = false
+        present()
     }
 
     // MARK: - Picture in picture

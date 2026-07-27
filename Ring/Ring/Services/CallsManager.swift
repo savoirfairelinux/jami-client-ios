@@ -18,6 +18,27 @@
 
 import Foundation
 import RxSwift
+import RxRelay
+
+/// Durable single-call presentation state. Unlike a `PublishSubject`, the
+/// relay replays the current call to a presenter created after CallKit answers.
+final class CallPresentationState {
+    let call = BehaviorRelay<CallState?>(value: nil)
+
+    func present(_ call: CallState) {
+        self.call.accept(call)
+    }
+
+    func replace(_ replaced: CallId, with call: CallState) {
+        guard self.call.value?.id == replaced else { return }
+        self.call.accept(call)
+    }
+
+    func clear(_ callId: CallId) {
+        guard call.value?.id == callId else { return }
+        call.accept(nil)
+    }
+}
 
 /// Wires the call domain to the domains it needs but must not own: CallKit
 /// reporting, camera capture, the audio session, and account/contact
@@ -25,7 +46,10 @@ import RxSwift
 /// stays independently constructible and testable.
 final class CallsManager: CallCameraCoordinating {
 
-    let callToPresent = PublishSubject<CallState>()
+    private let presentationState = CallPresentationState()
+    var callToPresent: Observable<CallState?> {
+        return presentationState.call.asObservable()
+    }
 
     private let callService: CallService
     private let videoService: VideoService
@@ -83,18 +107,19 @@ final class CallsManager: CallCameraCoordinating {
 
     private func handle(_ event: CallSystemEvent) {
         switch event {
-        case .callMatched(_, let call):
+        case .callMatched(let replaced, let call):
+            presentationState.replace(replaced, with: call)
             reportIncoming(call)
         case let .callAdded(call):
             if call.id.isLocal {
                 // Answered on the CallKit screen: CallKit already knows this
                 // call, so only the screen is missing.
-                callToPresent.onNext(call)
+                presentationState.present(call)
             } else if call.direction == .incoming {
                 reportIncoming(call)
             } else if !call.joinsExistingCall {
                 callKit.reportOutgoingCallStarted(call, handle: handle(for: call))
-                callToPresent.onNext(call)
+                presentationState.present(call)
             }
         case let .callUpdated(call):
             videoService.setVideoCodec(call.videoCodec, forCallId: call.id.raw)
@@ -108,6 +133,7 @@ final class CallsManager: CallCameraCoordinating {
                 break
             }
         case let .callEnded(call, _):
+            presentationState.clear(call.id)
             if !callService.stateMirror.calls.contains(where: { !$0.value.status.isTerminal }) {
                 // No call left to take the capture over — stop a warm-up
                 // libjami never claimed (normal ends go through
@@ -169,7 +195,9 @@ final class CallsManager: CallCameraCoordinating {
                 guard let self = self else { return }
                 await self.callService.accept(callId, withVideo: withVideo)
                 if let call = await self.callService.snapshot().call(callId) {
-                    self.callToPresent.onNext(call)
+                    await MainActor.run {
+                        self.presentationState.present(call)
+                    }
                 }
             }
         case let .answerPending(peerId, accountId, hasVideo):

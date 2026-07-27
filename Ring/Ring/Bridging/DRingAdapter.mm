@@ -45,12 +45,6 @@ using namespace libjami;
 
 - (BOOL) initDaemonInternal {
 #if DEBUG
-    // TEMPORARY (push-latency measurement, revert before commit): Manager reads
-    // these at init to enable the opendht and dhtnet loggers, which are off by
-    // default. Needed for "[proxy:client] ... sending subscribe" and dhtnet's
-    // "Received request" (PeerConnectionRequest arrival).
-    setenv("JAMI_LOG_DHT", "1", 1);
-    setenv("JAMI_LOG_DHTNET", "1", 1);
     int flag = LIBJAMI_FLAG_DEBUG | LIBJAMI_FLAG_CONSOLE_LOG | LIBJAMI_FLAG_SYSLOG;
 #else
     int flag = 0;
