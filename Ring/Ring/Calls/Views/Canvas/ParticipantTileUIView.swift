@@ -27,6 +27,36 @@ struct ParticipantTileState: Equatable {
     var isSpeaking = false
 }
 
+private final class CornerShapeView: UIView {
+
+    override class var layerClass: AnyClass { CAShapeLayer.self }
+
+    var shape: CAShapeLayer {
+        guard let shape = layer as? CAShapeLayer else {
+            fatalError("layerClass mismatch")
+        }
+        return shape
+    }
+}
+
+enum TileCornerStyle: Equatable {
+    case square
+    case clipped(CGFloat)
+    case backdrop(CGFloat)
+
+    var clipRadius: CGFloat {
+        if case .clipped(let radius) = self { return radius }
+        return 0
+    }
+
+    var paintedRadius: CGFloat {
+        if case .backdrop(let radius) = self { return radius }
+        return 0
+    }
+
+    var radius: CGFloat { max(clipRadius, paintedRadius) }
+}
+
 final class ParticipantTileUIView: UIView {
 
     let participantId: String
@@ -51,9 +81,46 @@ final class ParticipantTileUIView: UIView {
 
     private let avatarView = CallAvatarView()
     private let nameLabel = UILabel()
+    private let namePlate = UIView()
+
+    private static let paintedCorners: [(unit: CGPoint, startAngle: CGFloat)] = [
+        (CGPoint(x: 0, y: 0), .pi),
+        (CGPoint(x: 1, y: 0), 1.5 * .pi),
+        (CGPoint(x: 0, y: 1), 0.5 * .pi),
+        (CGPoint(x: 1, y: 1), 0)
+    ]
+    private static let speakingBorderWidth: CGFloat = 2
+
+    private let cornerViews = ParticipantTileUIView.paintedCorners.map { _ in CornerShapeView() }
+    private let speakingBorder = UIView()
+    private var pathRadius: CGFloat = -1
 
     private var avatarWidth: NSLayoutConstraint!
     private var avatarHeight: NSLayoutConstraint!
+    private var nameLeading: NSLayoutConstraint!
+    private var nameBottom: NSLayoutConstraint!
+    private var nameTrailing: NSLayoutConstraint!
+
+    var backdropColor: UIColor = .black {
+        didSet {
+            guard backdropColor != oldValue else { return }
+            for corner in cornerViews { corner.shape.fillColor = backdropColor.cgColor }
+        }
+    }
+
+    var cornerStyle: TileCornerStyle = .square {
+        didSet {
+            guard cornerStyle != oldValue else { return }
+            applyCornerStyle()
+        }
+    }
+
+    var contentInsets: UIEdgeInsets = .zero {
+        didSet {
+            guard contentInsets != oldValue else { return }
+            applyContentInsets()
+        }
+    }
     private var nameCancellable: AnyCancellable?
     private weak var boundProvider: AvatarProvider?
 
@@ -94,23 +161,106 @@ final class ParticipantTileUIView: UIView {
 
         nameLabel.textColor = .white
         nameLabel.font = .systemFont(ofSize: 13, weight: .medium)
+        nameLabel.lineBreakMode = .byTruncatingMiddle
         nameLabel.layer.shadowColor = UIColor.black.cgColor
         nameLabel.layer.shadowOpacity = 0.8
         nameLabel.layer.shadowRadius = 2
         nameLabel.layer.shadowOffset = .zero
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(nameLabel)
+
+        namePlate.backgroundColor = .jamiOnVideoScrim
+        namePlate.clipsToBounds = true
+        namePlate.translatesAutoresizingMaskIntoConstraints = false
+        namePlate.addSubview(nameLabel)
+        addSubview(namePlate)
 
         avatarWidth = avatarView.widthAnchor.constraint(equalToConstant: 72)
         avatarHeight = avatarView.heightAnchor.constraint(equalToConstant: 72)
+        nameLeading = namePlate.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8)
+        nameBottom = namePlate.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -6)
+        nameTrailing = namePlate.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor,
+                                                           constant: -8)
         NSLayoutConstraint.activate([
             avatarView.centerXAnchor.constraint(equalTo: centerXAnchor),
             avatarView.centerYAnchor.constraint(equalTo: centerYAnchor),
             avatarWidth, avatarHeight,
-            nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
-            nameLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -6),
-            nameLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -8)
+            nameLeading, nameBottom, nameTrailing,
+            nameLabel.leadingAnchor.constraint(equalTo: namePlate.leadingAnchor, constant: 8),
+            nameLabel.trailingAnchor.constraint(equalTo: namePlate.trailingAnchor,
+                                                constant: -8),
+            nameLabel.topAnchor.constraint(equalTo: namePlate.topAnchor, constant: 3),
+            nameLabel.bottomAnchor.constraint(equalTo: namePlate.bottomAnchor, constant: -3)
         ])
+
+        configureOverlayViews()
+    }
+
+    private func configureOverlayViews() {
+        for (corner, definition) in zip(cornerViews, Self.paintedCorners) {
+            corner.shape.fillColor = backdropColor.cgColor
+            corner.isUserInteractionEnabled = false
+            corner.isHidden = true
+            corner.autoresizingMask = [
+                definition.unit.x == 0 ? .flexibleRightMargin : .flexibleLeftMargin,
+                definition.unit.y == 0 ? .flexibleBottomMargin : .flexibleTopMargin
+            ]
+            addSubview(corner)
+        }
+
+        speakingBorder.isUserInteractionEnabled = false
+        speakingBorder.isHidden = true
+        speakingBorder.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        speakingBorder.layer.borderWidth = Self.speakingBorderWidth
+        speakingBorder.layer.borderColor = UIColor.systemGreen.cgColor
+        addSubview(speakingBorder)
+    }
+
+    private func applyCornerStyle() {
+        layer.cornerRadius = cornerStyle.clipRadius
+        speakingBorder.layer.cornerRadius = cornerStyle.radius
+        let paints = cornerStyle.paintedRadius > 0
+        for corner in cornerViews { corner.isHidden = !paints }
+        setNeedsLayout()
+    }
+
+    private func layoutOverlayViews() {
+        speakingBorder.frame = bounds
+
+        let radius = cornerStyle.paintedRadius
+        guard radius > 0 else { return }
+        if radius != pathRadius {
+            pathRadius = radius
+            for (corner, definition) in zip(cornerViews, Self.paintedCorners) {
+                corner.shape.path = Self.cornerPath(radius: radius, unit: definition.unit,
+                                                    startAngle: definition.startAngle)
+            }
+        }
+        for (corner, definition) in zip(cornerViews, Self.paintedCorners) {
+            corner.frame = CGRect(x: definition.unit.x * (bounds.width - radius),
+                                  y: definition.unit.y * (bounds.height - radius),
+                                  width: radius, height: radius)
+        }
+    }
+
+    private static func cornerPath(radius: CGFloat, unit: CGPoint,
+                                   startAngle: CGFloat) -> CGPath {
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: unit.x * radius, y: unit.y * radius))
+        path.addArc(withCenter: CGPoint(x: (1 - unit.x) * radius,
+                                        y: (1 - unit.y) * radius),
+                    radius: radius, startAngle: startAngle,
+                    endAngle: startAngle + .pi / 2, clockwise: true)
+        path.close()
+        return path.cgPath
+    }
+
+    private func applyContentInsets() {
+        let rightToLeft = effectiveUserInterfaceLayoutDirection == .rightToLeft
+        let leadingInset = rightToLeft ? contentInsets.right : contentInsets.left
+        let trailingInset = rightToLeft ? contentInsets.left : contentInsets.right
+        nameLeading.constant = leadingInset + 8
+        nameBottom.constant = -(contentInsets.bottom + 6)
+        nameTrailing.constant = -(trailingInset + 8)
     }
 
     override func layoutSubviews() {
@@ -120,17 +270,18 @@ final class ParticipantTileUIView: UIView {
             avatarWidth.constant = side
             avatarHeight.constant = side
         }
-        layer.borderWidth = tileState.isSpeaking ? 2 : 0
+        namePlate.layer.cornerRadius = namePlate.bounds.height / 2
+        layoutOverlayViews()
     }
 
     func apply(_ state: ParticipantTileState) {
         let losesVideo = tileState.showsVideo && !state.showsVideo && !videoView.isHidden
         tileState = state
         nameLabel.isHidden = !state.showsName
+        namePlate.isHidden = !state.showsName
         if state.showsVideo { videoView.isHidden = false }
         syncAvatarVisibility(animated: losesVideo)
-        layer.borderColor = UIColor.systemGreen.cgColor
-        layer.borderWidth = state.isSpeaking ? 2 : 0
+        speakingBorder.isHidden = !state.isSpeaking
     }
 
     func bindAvatar(_ provider: AvatarProvider?) {
@@ -146,6 +297,7 @@ final class ParticipantTileUIView: UIView {
             .sink { [weak self] name in
                 self?.nameLabel.text = name
                 self?.accessibilityLabel = name
+                self?.setNeedsLayout()
             }
     }
 
@@ -154,6 +306,12 @@ final class ParticipantTileUIView: UIView {
     }
 
     var displayedName: String? { nameLabel.isHidden ? nil : nameLabel.text }
+
+    var nameChipFrame: CGRect? { namePlate.isHidden ? nil : namePlate.frame }
+
+    var nameTextFrame: CGRect? {
+        namePlate.isHidden ? nil : namePlate.convert(nameLabel.frame, to: self)
+    }
 
     private func syncAvatarVisibility(animated: Bool) {
         let showsContent = tileState.showsVideo && videoView.hasVideoContent

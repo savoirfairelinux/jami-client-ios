@@ -29,6 +29,7 @@ enum CallChromePolicy {
 struct CanvasState: Equatable {
     var tiles: [CanvasTileModel] = []
     var mode: CanvasLayoutMode = .grid
+    var style: CanvasTileStyle = .plain
 }
 
 @MainActor
@@ -372,11 +373,14 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
     }
 
     private func rebuildCanvas(mode: CanvasLayoutMode) {
+        let inConference = CallTileComposer.showsConferenceTiles(call: call,
+                                                                 conference: conference)
         let state = CanvasState(
             tiles: tileComposer.tiles(call: call, conference: conference,
                                       avatars: avatars,
                                       frozenForRecomposition: frozenForRecomposition),
-            mode: mode)
+            mode: mode,
+            style: inConference ? .cards : .plain)
         if state != canvas {
             canvas = state
         }
@@ -538,8 +542,8 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
         // participants yet is still the two people already talking — not nobody.
         if let conference = conference, !conference.participants.isEmpty {
             rows = ConferenceParticipants.rows(from: conference,
-                                                localJamiId: localJamiId,
-                                                peerUri: call?.peerUri ?? "")
+                                               localJamiId: localJamiId,
+                                               peerUri: call?.peerUri ?? "")
         } else if let call = call, call.status.isOngoing {
             rows = ConferenceParticipants.rows(from: call, localJamiId: localJamiId)
         } else {
