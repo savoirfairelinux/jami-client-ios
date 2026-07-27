@@ -21,7 +21,7 @@ import XCTest
 
 final class AudioRoutePolicyTests: XCTestCase {
 
-    func testHeadsetAlwaysWins() {
+    func testConnectedHeadsetsTakePriorityOverSpeakerPreference() {
         XCTAssertEqual(AudioRoutePolicy.route(bluetoothConnected: true,
                                               headphonesConnected: false,
                                               prefersSpeaker: true), .bluetooth)
@@ -43,7 +43,7 @@ final class AudioRoutePolicyTests: XCTestCase {
                                               prefersSpeaker: false), .receiver)
     }
 
-    func testDefaultPreferenceFollowsVideo() {
+    func testDefaultSpeakerPreferenceMatchesVideoCapability() {
         XCTAssertTrue(AudioRoutePolicy.defaultSpeakerPreference(callHasVideo: true))
         XCTAssertFalse(AudioRoutePolicy.defaultSpeakerPreference(callHasVideo: false))
     }
@@ -58,5 +58,85 @@ final class AudioRoutePolicyTests: XCTestCase {
         XCTAssertEqual(AudioRoute.bluetooth.rawValue, 1)
         XCTAssertEqual(AudioRoute.headphones.rawValue, 2)
         XCTAssertEqual(AudioRoute.receiver.rawValue, 3)
+    }
+}
+
+final class AudioServiceTests: XCTestCase {
+
+    private final class FakeAudioAPI: LibJamiAudioAPI {
+        var outputDevices: [Int] = []
+
+        func setAudioOutputDevice(_ index: Int) {
+            outputDevices.append(index)
+        }
+
+        func setAudioInputDevice(_ index: Int) {}
+    }
+
+    func testToggleSpeakerUsesActualReceiverWhenPreferenceIsStale() {
+        let api = FakeAudioAPI()
+        let service = AudioService(
+            audio: api,
+            currentRoute: {
+                AudioRouteState(speakerActive: false,
+                                bluetoothConnected: false,
+                                headphonesConnected: false)
+            },
+            notificationCenter: NotificationCenter())
+
+        service.toggleSpeaker()
+
+        XCTAssertEqual(api.outputDevices, [AudioRoute.builtinSpeaker.rawValue])
+    }
+
+    func testToggleSpeakerOverridesConnectedHeadset() {
+        let api = FakeAudioAPI()
+        let service = AudioService(
+            audio: api,
+            currentRoute: {
+                AudioRouteState(speakerActive: false,
+                                bluetoothConnected: true,
+                                headphonesConnected: false)
+            },
+            notificationCenter: NotificationCenter())
+
+        service.toggleSpeaker()
+
+        XCTAssertEqual(api.outputDevices, [AudioRoute.builtinSpeaker.rawValue],
+                       "an explicit user action must override automatic headset routing")
+    }
+
+    func testToggleSpeakerUsesActualSpeakerWhenPreferenceIsStale() {
+        let api = FakeAudioAPI()
+        let service = AudioService(
+            audio: api,
+            currentRoute: {
+                AudioRouteState(speakerActive: true,
+                                bluetoothConnected: false,
+                                headphonesConnected: false)
+            },
+            notificationCenter: NotificationCenter())
+        service.callKitActivated(callHasVideo: false, direction: .outgoing)
+
+        service.toggleSpeaker()
+
+        XCTAssertEqual(api.outputDevices, [AudioRoute.receiver.rawValue])
+    }
+
+    func testIncomingActivationStillPrefersConnectedHeadset() {
+        let api = FakeAudioAPI()
+        let service = AudioService(
+            audio: api,
+            currentRoute: {
+                AudioRouteState(speakerActive: false,
+                                bluetoothConnected: true,
+                                headphonesConnected: false)
+            },
+            notificationCenter: NotificationCenter())
+
+        service.callKitActivated(callHasVideo: true, direction: .incoming)
+
+        XCTAssertEqual(api.outputDevices, [AudioRoute.bluetooth.rawValue],
+                       "automatic routing still follows a newly connected headset")
     }
 }
