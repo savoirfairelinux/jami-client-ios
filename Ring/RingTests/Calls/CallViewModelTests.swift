@@ -521,6 +521,69 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
                       "muting the effective host video makes the chrome persistent")
     }
 
+    func testDepartedConferenceMemberReturnsToDirectCall() async {
+        let harness = await Harness(callHasVideo: true)
+        let model = harness.makeModel(localJamiId: jamiId1)
+        harness.createConference(with: [harness.callId, CallTestFixtures.hostCallId],
+                                 media: [.audio(), .video()])
+        await Harness.wait {
+            model.call?.conferenceId == CallTestFixtures.conferenceId && model.conference != nil
+        }
+
+        harness.changeConferenceMembers(to: [CallTestFixtures.hostCallId])
+
+        await Harness.wait { model.call?.conferenceId == nil && model.conference == nil }
+        XCTAssertNil(model.conference,
+                     "a detached call must stop displaying its former conference")
+    }
+
+    func testCallDetachedBeforeItsEndStillFollowsTheConferenceItLeft() async {
+        let harness = await Harness(callHasVideo: false)
+        let model = harness.makeModel(localJamiId: jamiId1)
+        let survivorId = CallTestFixtures.hostCallId
+        await harness.addOngoingCall(survivorId, peerUri: CallTestFixtures.tertiaryPeerUri)
+        harness.createConference(with: [harness.callId, survivorId])
+        await Harness.wait { model.conference?.memberCallIds.count == 2 }
+
+        harness.changeConferenceMembers(to: [survivorId])
+        await Harness.wait { model.conference == nil }
+        harness.send(.callStateChanged(callId: harness.callId.raw, state: .over,
+                                       rawState: LibJamiCallState.over.rawValue,
+                                       accountId: Harness.accountId,
+                                       code: 0, negotiatedMedia: [], videoCodec: nil))
+
+        await Harness.wait { model.currentCallId == survivorId }
+        XCTAssertFalse(model.shouldDismiss,
+                       "the session lives on in the member that stayed in the conference")
+    }
+
+    func testCollapsedConferenceLeavesADetachedCallOnItsOwn() async {
+        let harness = await Harness(callHasVideo: false)
+        let model = harness.makeModel(localJamiId: jamiId1)
+        let otherId = CallTestFixtures.hostCallId
+        await harness.addOngoingCall(otherId, peerUri: CallTestFixtures.tertiaryPeerUri)
+        harness.createConference(with: [harness.callId, otherId])
+        await Harness.wait { model.conference?.memberCallIds.count == 2 }
+
+        harness.changeConferenceMembers(to: [otherId])
+        harness.send(.conferenceRemoved(conferenceId: CallTestFixtures.conferenceId.raw))
+        harness.send(.remoteRecordingChanged(callId: harness.callId.raw, recording: true))
+
+        await Harness.wait { model.call?.peerIsRecording == true }
+        XCTAssertEqual(model.currentCallId, harness.callId,
+                       "a call that left the conference keeps the screen, "
+                        + "the collapse belongs to the members that stayed")
+        XCTAssertNil(model.conference)
+
+        model.hangUp()
+        await Harness.wait { model.shouldDismiss }
+        await Harness.wait { harness.callAPI.hungUp == [harness.callId.raw] }
+
+        XCTAssertEqual(model.call?.status, .terminated(.endedLocally))
+        XCTAssertTrue(harness.callAPI.hungUpConferences.isEmpty,
+                      "the detached call must not hang up through the removed conference")
+    }
+
     func testOnlyLocalModeratorCanAddToPeerHostedConference() async {
         let harness = await Harness(callHasVideo: true)
         let model = harness.makeModel(localJamiId: jamiId1)
@@ -741,6 +804,35 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
                                    rawState: LibJamiCallState.current.rawValue, accountId: Self.accountId,
                                    code: 0, negotiatedMedia: media, videoCodec: nil))
             self.call = await Self.waitForCall(callService, callId) { $0.status == .current }
+        }
+
+        @MainActor
+        func addOngoingCall(_ id: CallId, peerUri: String) async {
+            send(.incomingCall(accountId: Self.accountId, callId: id.raw,
+                               peerUri: peerUri, media: [.audio()], details: nil))
+            send(.callStateChanged(callId: id.raw, state: .current,
+                                   rawState: LibJamiCallState.current.rawValue,
+                                   accountId: Self.accountId, code: 0,
+                                   negotiatedMedia: [.audio()], videoCodec: nil))
+            _ = await Self.waitForCall(callService, id) { $0.status == .current }
+        }
+
+        @MainActor
+        func createConference(with members: [CallId], media: [MediaItem] = [.audio()]) {
+            send(.conferenceCreated(
+                conferenceId: CallTestFixtures.conferenceId.raw, conversationId: "",
+                accountId: Self.accountId,
+                state: ConferenceLifecycle.activeAttached.rawValue,
+                memberCallIds: members.map(\.raw),
+                participants: [], media: media))
+        }
+
+        @MainActor
+        func changeConferenceMembers(to members: [CallId]) {
+            send(.conferenceChanged(
+                conferenceId: CallTestFixtures.conferenceId.raw, accountId: Self.accountId,
+                state: ConferenceLifecycle.activeAttached.rawValue,
+                memberCallIds: members.map(\.raw)))
         }
 
         @MainActor

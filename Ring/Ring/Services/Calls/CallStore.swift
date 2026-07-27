@@ -348,7 +348,7 @@ actor CallStore { // swiftlint:disable:this type_body_length
         // lives on, and the screen would retarget onto a call about to end too.
         state.conferences[id] = nil
         for memberId in conference.memberCallIds {
-            updateCall(memberId, emit: false) { $0.conferenceId = nil }
+            setConferenceId(nil, for: memberId)
         }
         broadcaster.send(.conferenceEnded(id, remainingCallId: nil))
         for memberId in conference.memberCallIds {
@@ -882,16 +882,15 @@ actor CallStore { // swiftlint:disable:this type_body_length
             conference.conversationId = conversationId
         }
 
-        for memberId in memberIds {
-            updateCall(memberId, emit: false) { $0.conferenceId = confId }
-        }
-
         conference.isHost = true
+        state.conferences[confId] = conference
+        for memberId in memberIds {
+            setConferenceId(confId, for: memberId)
+        }
         if let continuation = pendingSwarmCalls.removeValue(forKey: conversationId) {
             continuation.resume(returning: confId)
         }
 
-        state.conferences[confId] = conference
         broadcaster.send(.conferenceUpdated(conference))
     }
     private func applyConferenceChanged(confId: ConfId, accountId: String,
@@ -906,15 +905,15 @@ actor CallStore { // swiftlint:disable:this type_body_length
         if let participants = pendingConferenceParticipants.removeValue(forKey: confId) {
             conference.participants = participants
         }
+        state.conferences[confId] = conference
         for memberId in memberIds {
-            updateCall(memberId, emit: false) { $0.conferenceId = confId }
+            setConferenceId(confId, for: memberId)
         }
         // Detach calls that left the conference so they don't carry a stale
         // parent id after they continue (or end) on their own.
         for departed in previousMembers.subtracting(memberIds) {
-            updateCall(departed, emit: false) { $0.conferenceId = nil }
+            setConferenceId(nil, for: departed)
         }
-        state.conferences[confId] = conference
         broadcaster.send(.conferenceUpdated(conference))
     }
     private func applyConferenceRemoved(confId: ConfId) {
@@ -926,7 +925,7 @@ actor CallStore { // swiftlint:disable:this type_body_length
             .sorted { $0.raw < $1.raw }
             .first { state.calls[$0] != nil }
         for memberId in conference.memberCallIds {
-            updateCall(memberId, emit: false) { $0.conferenceId = nil }
+            setConferenceId(nil, for: memberId)
         }
         broadcaster.send(.conferenceEnded(confId, remainingCallId: remainingCallId))
     }
@@ -961,13 +960,13 @@ actor CallStore { // swiftlint:disable:this type_body_length
         conference.participants = participants
         conference.memberCallIds = [callId]
         state.conferences[confId] = conference
-        updateCall(callId, emit: false) { $0.conferenceId = confId }
+        setConferenceId(confId, for: callId)
         broadcaster.send(.conferenceUpdated(conference))
     }
 
     private func collapsePeerHostedConference(_ confId: ConfId, into callId: CallId) {
         state.conferences[confId] = nil
-        updateCall(callId, emit: false) { $0.conferenceId = nil }
+        setConferenceId(nil, for: callId)
         let remaining = state.calls[callId] != nil ? callId : nil
         broadcaster.send(.conferenceEnded(confId, remainingCallId: remaining))
     }
@@ -981,6 +980,11 @@ actor CallStore { // swiftlint:disable:this type_body_length
     }
 
     // MARK: - State helpers
+
+    private func setConferenceId(_ conferenceId: ConfId?, for callId: CallId) {
+        guard state.calls[callId]?.conferenceId != conferenceId else { return }
+        updateCall(callId) { $0.conferenceId = conferenceId }
+    }
 
     private func updateCall(_ id: CallId, emit: Bool = true,
                             _ mutate: (inout CallState) -> Void) {
