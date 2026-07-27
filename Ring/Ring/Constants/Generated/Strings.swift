@@ -192,8 +192,12 @@ internal enum L10n {
       }
     }
     internal enum Conference {
+      /// Crop video
+      internal static let cropVideo = L10n.tr("Localizable", "accessibility.conference.cropVideo", fallback: "Crop video")
       /// End call
       internal static let endCall = L10n.tr("Localizable", "accessibility.conference.endCall", fallback: "End call")
+      /// Your video
+      internal static let localPreview = L10n.tr("Localizable", "accessibility.conference.localPreview", fallback: "Your video")
       /// Lower hand
       internal static let lowerHand = L10n.tr("Localizable", "accessibility.conference.lowerHand", fallback: "Lower hand")
       /// Maximize
@@ -204,6 +208,10 @@ internal enum L10n {
       internal static let muteAudio = L10n.tr("Localizable", "accessibility.conference.muteAudio", fallback: "Mute audio")
       /// Set moderator
       internal static let setModerator = L10n.tr("Localizable", "accessibility.conference.setModerator", fallback: "Set moderator")
+      /// Show full video
+      internal static let showFullVideo = L10n.tr("Localizable", "accessibility.conference.showFullVideo", fallback: "Show full video")
+      /// Show participants
+      internal static let showParticipants = L10n.tr("Localizable", "accessibility.conference.showParticipants", fallback: "Show participants")
       /// Unmute audio
       internal static let unmuteAudio = L10n.tr("Localizable", "accessibility.conference.unmuteAudio", fallback: "Unmute audio")
       /// Unset moderator
@@ -637,24 +645,42 @@ internal enum L10n {
     internal static let activeCallLabel = L10n.tr("Localizable", "calls.activeCallLabel", fallback: "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.")
     /// Call finished
     internal static let callFinished = L10n.tr("Localizable", "calls.callFinished", fallback: "Call finished")
+    /// Calling…
+    internal static let calling = L10n.tr("Localizable", "calls.calling", fallback: "Calling…")
+    /// Calling
+    internal static let callingParticipants = L10n.tr("Localizable", "calls.callingParticipants", fallback: "Calling")
     /// Connecting…
     internal static let connecting = L10n.tr("Localizable", "calls.connecting", fallback: "Connecting…")
     /// Call with 
     internal static let currentCallWith = L10n.tr("Localizable", "calls.currentCallWith", fallback: "Call with ")
+    /// Grid view
+    internal static let gridLayout = L10n.tr("Localizable", "calls.gridLayout", fallback: "Grid view")
     /// Lower hand
     internal static let lowerHand = L10n.tr("Localizable", "calls.lowerHand", fallback: "Lower hand")
     /// Maximize
     internal static let maximize = L10n.tr("Localizable", "calls.maximize", fallback: "Maximize")
     /// Minimize
     internal static let minimize = L10n.tr("Localizable", "calls.minimize", fallback: "Minimize")
+    /// More actions
+    internal static let moreActions = L10n.tr("Localizable", "calls.moreActions", fallback: "More actions")
     /// Mute microphone
     internal static let muteAudio = L10n.tr("Localizable", "calls.muteAudio", fallback: "Mute microphone")
+    /// Participants
+    internal static let participants = L10n.tr("Localizable", "calls.participants", fallback: "Participants")
     /// Unset moderator
     internal static let removeModerator = L10n.tr("Localizable", "calls.removeModerator", fallback: "Unset moderator")
     /// Ringing…
     internal static let ringing = L10n.tr("Localizable", "calls.ringing", fallback: "Ringing…")
     /// Set moderator
     internal static let setModerator = L10n.tr("Localizable", "calls.setModerator", fallback: "Set moderator")
+    /// Spotlight view
+    internal static let spotlightLayout = L10n.tr("Localizable", "calls.spotlightLayout", fallback: "Spotlight view")
+    /// Start Picture in Picture
+    internal static let startPictureInPicture = L10n.tr("Localizable", "calls.startPictureInPicture", fallback: "Start Picture in Picture")
+    /// Stop calling %@
+    internal static func stopCalling(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "calls.stopCalling", String(describing: p1), fallback: "Stop calling %@")
+    }
     /// Unmute microphone
     internal static let unmuteAudio = L10n.tr("Localizable", "calls.unmuteAudio", fallback: "Unmute microphone")
   }
