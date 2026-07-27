@@ -101,8 +101,39 @@ final class CallControlsLayoutTests: XCTestCase {
                        "audio output is independent of the media re-invite gate")
     }
 
-    func testSpeakerActiveShowsActiveStyle() {
-        let out = action(.toggleAudioOutput, in: plan(speaker: true))
-        XCTAssertEqual(out?.style, .active)
+    func testSpeakerAnnouncesTheActionItWillPerform() {
+        let active = action(.toggleAudioOutput, in: plan(speaker: true))
+        XCTAssertEqual(active?.style, .active)
+        XCTAssertEqual(active?.accessibilityLabel,
+                       L10n.Accessibility.Calls.Alter.toggleSpeaker,
+                       "a speaker that is on offers to turn itself off")
+
+        let inactive = action(.toggleAudioOutput, in: plan(speaker: false))
+        XCTAssertEqual(inactive?.accessibilityLabel,
+                       L10n.Accessibility.Calls.Default.toggleSpeaker)
+    }
+
+    func testBarNeverOutgrowsTheWidthItIsGiven() {
+        for slots in 1...9 {
+            for width in stride(from: 280.0, through: 1366.0, by: 1.0) {
+                let metrics = BarMetrics(availableWidth: CGFloat(width),
+                                         slots: CGFloat(slots))
+                XCTAssertLessThanOrEqual(metrics.totalWidth, CGFloat(width) + 0.001,
+                                         "\(slots) slots in \(width) pt render "
+                                            + "\(metrics.totalWidth) pt wide and widen "
+                                            + "the whole call screen")
+            }
+        }
+    }
+
+    func testUnmeasuredBarStillRendersButFitsTheNarrowestPhone() {
+        let metrics = BarMetrics(availableWidth: 0)
+
+        XCTAssertGreaterThanOrEqual(metrics.button, 44,
+                                    "the bar must be laid out — and tappable — "
+                                        + "before it has been measured")
+        XCTAssertLessThanOrEqual(metrics.totalWidth, 320,
+                                 "an unmeasured bar must fit the narrowest phone, "
+                                    + "or it widens the whole call screen")
     }
 }
