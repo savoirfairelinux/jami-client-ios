@@ -29,8 +29,8 @@ struct ConferenceParticipantsView: View {
             ScrollView {
                 LazyVStack(spacing: 0) {
                     if !model.pendingRows.isEmpty {
-                        sectionHeader(L10n.Calls.callingParticipants,
-                                      count: model.pendingRows.count)
+                        sectionHeader(
+                            L10n.Calls.callingParticipants("\(model.pendingRows.count)"))
                         ForEach(model.pendingRows) { row in
                             PendingParticipantRowView(
                                 row: row,
@@ -55,14 +55,11 @@ struct ConferenceParticipantsView: View {
     }
 
     private func sectionHeader<Accessory: View>(
-        _ title: String, count: Int,
+        _ title: String,
         @ViewBuilder accessory: () -> Accessory = { EmptyView() }) -> some View {
         HStack(spacing: 8) {
             Text(title)
                 .font(.headline)
-            Text("\(count)")
-                .font(.headline)
-                .foregroundColor(.secondary)
             Spacer()
             accessory()
         }
@@ -71,7 +68,7 @@ struct ConferenceParticipantsView: View {
     }
 
     private var participantsHeader: some View {
-        sectionHeader(L10n.Calls.participants, count: model.participantRows.count) {
+        sectionHeader(L10n.Calls.inThisCall("\(model.participantRows.count)")) {
             if model.canModerateConference {
                 layoutMenu
             }

@@ -31,35 +31,12 @@ struct CallScreenView: View {
             PiPSourceView(model: model)
                 .ignoresSafeArea()
 
-            Group {
-                ConferenceCanvasView(model: model)
-                    .ignoresSafeArea()
-
-                if model.moreExpanded {
-                    Color.black.opacity(0.28)
-                        .ignoresSafeArea()
-                        .transition(.opacity)
-                        .onTapGesture {
-                            withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
-                                model.setMoreExpanded(false)
-                            }
-                        }
-                }
-
-                VStack {
-                    CallHeaderView(model: model)
-                    Spacer()
-                    CallControlsView(model: model)
-                        .padding(.bottom, 12)
-                }
-                .padding()
-                .opacity(model.chromeVisible ? 1 : 0)
-                .allowsHitTesting(model.chromeVisible)
-                .animation(chromeAnimation, value: model.chromeVisible)
-            }
-            .opacity(model.contentHidden ? 0 : 1)
-            .allowsHitTesting(!model.contentHidden)
+            ConferenceCanvasView(model: model)
+                .ignoresSafeArea()
+                .opacity(model.contentHidden ? 0 : 1)
+                .allowsHitTesting(!model.contentHidden)
         }
+        .overlay(chrome)
         .statusBar(hidden: true)
         .sheet(isPresented: $model.showsDialpad) {
             InCallDialpadView(model: model)
@@ -72,46 +49,33 @@ struct CallScreenView: View {
         .onDisappear { model.screenDisappeared() }
     }
 
-}
-
-struct CallHeaderView: View {
-
-    @ObservedObject var model: CallViewModel
-
-    var body: some View {
-        VStack(spacing: 4) {
-            HStack(spacing: 6) {
-                Text(model.title)
-                    .font(.headline)
-                    .foregroundColor(.white)
-                if model.peerIsRecording {
-                    Image(systemName: "record.circle")
-                        .foregroundColor(.red)
-                }
-                if model.hasParticipantList {
-                    Image(systemName: "person.2.fill")
-                        .font(.footnote)
-                        .foregroundColor(.white.opacity(0.8))
-                    Text("\(model.participantCount)")
-                        .font(.footnote)
-                        .foregroundColor(.white.opacity(0.8))
-                }
+    @ViewBuilder
+    private var chrome: some View {
+        ZStack {
+            if model.moreExpanded {
+                Color.black.opacity(0.28)
+                    .ignoresSafeArea()
+                    .transition(.opacity)
+                    .onTapGesture {
+                        withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+                            model.setMoreExpanded(false)
+                        }
+                    }
             }
-            Text(model.statusText.isEmpty ? model.durationText : model.statusText)
-                .font(.subheadline.monospacedDigit())
-                .foregroundColor(.white.opacity(0.8))
+
+            VStack {
+                CallHeaderView(model: model)
+                Spacer()
+                CallControlsView(model: model)
+                    .padding(.bottom, 12)
+            }
+            .padding()
+            .opacity(model.chromeVisible ? 1 : 0)
+            .allowsHitTesting(model.chromeVisible)
+            .animation(chromeAnimation, value: model.chromeVisible)
         }
-        .padding(.horizontal, 20)
-        .padding(.vertical, 10)
-        .background(Color.black.opacity(0.35))
-        .clipShape(Capsule())
-        .contentShape(Capsule())
-        .onTapGesture {
-            if model.hasParticipantList { model.showsParticipants = true }
-        }
-        .accessibilityElement(children: .combine)
-        .accessibilityAddTraits(model.hasParticipantList ? .isButton : [])
-        .accessibilityHint(model.hasParticipantList ? L10n.Accessibility.Conference.showParticipants : "")
+        .opacity(model.contentHidden ? 0 : 1)
+        .allowsHitTesting(!model.contentHidden)
     }
 }
 
