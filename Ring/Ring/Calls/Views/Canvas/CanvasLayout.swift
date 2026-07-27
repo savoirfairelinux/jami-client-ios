@@ -38,6 +38,11 @@ enum CanvasLayoutMode: Equatable {
     }
 }
 
+enum CanvasTileStyle: Equatable {
+    case plain
+    case cards
+}
+
 enum PreviewCorner: CaseIterable {
     case topLeading, topTrailing, bottomLeading, bottomTrailing
 
@@ -64,15 +69,31 @@ enum CanvasLayout {
         var safeAreaInsets: UIEdgeInsets = .zero
         var previewCorner: PreviewCorner = .topTrailing
         var stripOffset: CGFloat = 0
+        var style: CanvasTileStyle = .plain
+
+        var contentInsets: UIEdgeInsets {
+            guard style == .cards else { return .zero }
+            return UIEdgeInsets(top: safeAreaInsets.top + tileMargin,
+                                left: safeAreaInsets.left + tileMargin,
+                                bottom: safeAreaInsets.bottom + tileMargin,
+                                right: safeAreaInsets.right + tileMargin)
+        }
+
+        var gap: CGFloat { style == .cards ? CanvasLayout.tileSpacing : 0 }
     }
 
     static let basePreviewSize = CGSize(width: 120, height: 170)
     static let previewPadding: CGFloat = 16
     static let previewBottomClearance: CGFloat = 96
-    static let previewCornerRadius: CGFloat = 14
+    static let tileCornerRadius: CGFloat = 14
+    static let tileMargin: CGFloat = 8
+    static let tileSpacing: CGFloat = 8
     static let spotlightFocusFraction: CGFloat = 2.0 / 3.0
     static let stripPadding: CGFloat = 12
     static let stripSpacing: CGFloat = 8
+    static let stripVisibleTiles: CGFloat = 2
+    static let stripPeek: CGFloat = 24
+    static let minimumScrollableOverflow: CGFloat = 0.5
 
     static func plan(_ input: Input) -> Plan {
         let remote = input.participants.filter { !$0.isLocalPreview }
@@ -103,8 +124,9 @@ enum CanvasLayout {
 
     private static func gridLayout(remote: [CanvasParticipant], input: Input) -> Plan {
         var layout = Plan()
-        let size = input.canvasSize
-        layout.contentSize = size
+        let content = contentRect(input)
+        let gap = input.gap
+        layout.contentSize = input.canvasSize
         layout.zOrder = remote.map(\.id)
         layout.scrollEnabled = false
 
@@ -112,45 +134,56 @@ enum CanvasLayout {
         case 0:
             break
         case 1:
-            layout.frames[remote[0].id] = CGRect(origin: .zero, size: size)
+            layout.frames[remote[0].id] = content
             layout.primaryTileId = remote[0].id
         case 2:
-            let half = CGSize(width: size.width, height: size.height / 2)
-            layout.frames[remote[0].id] = CGRect(origin: .zero, size: half)
-            layout.frames[remote[1].id] = CGRect(x: 0, y: half.height,
-                                                 width: half.width, height: half.height)
+            let rowHeight = (content.height - gap) / 2
+            layout.frames[remote[0].id] = CGRect(x: content.minX, y: content.minY,
+                                                 width: content.width, height: rowHeight)
+            layout.frames[remote[1].id] = CGRect(x: content.minX,
+                                                 y: content.minY + rowHeight + gap,
+                                                 width: content.width, height: rowHeight)
         case 3:
-            let rowHeight = size.height / 2
-            layout.frames[remote[0].id] = CGRect(x: 0, y: 0,
-                                                 width: size.width, height: rowHeight)
-            layout.frames[remote[1].id] = CGRect(x: 0, y: rowHeight,
-                                                 width: size.width / 2, height: rowHeight)
-            layout.frames[remote[2].id] = CGRect(x: size.width / 2, y: rowHeight,
-                                                 width: size.width / 2, height: rowHeight)
+            let rowHeight = (content.height - gap) / 2
+            let halfWidth = (content.width - gap) / 2
+            let secondRow = content.minY + rowHeight + gap
+            layout.frames[remote[0].id] = CGRect(x: content.minX, y: content.minY,
+                                                 width: content.width, height: rowHeight)
+            layout.frames[remote[1].id] = CGRect(x: content.minX, y: secondRow,
+                                                 width: halfWidth, height: rowHeight)
+            layout.frames[remote[2].id] = CGRect(x: content.minX + halfWidth + gap,
+                                                 y: secondRow,
+                                                 width: halfWidth, height: rowHeight)
         case 4:
-            let tile = CGSize(width: size.width / 2, height: size.height / 2)
+            let tile = CGSize(width: (content.width - gap) / 2,
+                              height: (content.height - gap) / 2)
             for (index, participant) in remote.enumerated() {
                 layout.frames[participant.id] = CGRect(
-                    x: CGFloat(index % 2) * tile.width,
-                    y: CGFloat(index / 2) * tile.height,
+                    x: content.minX + CGFloat(index % 2) * (tile.width + gap),
+                    y: content.minY + CGFloat(index / 2) * (tile.height + gap),
                     width: tile.width, height: tile.height)
             }
         default:
-            let rowHeight = size.height / 3
-            let halfWidth = size.width / 2
+            let rowHeight = (content.height - 2 * gap) / 3
+            let halfWidth = (content.width - gap) / 2
             for (index, participant) in remote.enumerated() {
                 let row = CGFloat(index / 2)
                 let isLastAndOdd = index == remote.count - 1 && remote.count % 2 == 1
                 layout.frames[participant.id] = CGRect(
-                    x: isLastAndOdd ? 0 : CGFloat(index % 2) * halfWidth,
-                    y: row * rowHeight,
-                    width: isLastAndOdd ? size.width : halfWidth,
+                    x: isLastAndOdd ? content.minX
+                        : content.minX + CGFloat(index % 2) * (halfWidth + gap),
+                    y: content.minY + row * (rowHeight + gap),
+                    width: isLastAndOdd ? content.width : halfWidth,
                     height: rowHeight)
             }
             let rows = CGFloat((remote.count + 1) / 2)
-            layout.contentSize = CGSize(width: size.width,
-                                        height: max(rows * rowHeight, size.height))
-            layout.scrollEnabled = rows * rowHeight > size.height
+            let stackedHeight = rows * rowHeight + (rows - 1) * gap
+                + input.contentInsets.top + input.contentInsets.bottom
+            let overflows = stackedHeight - input.canvasSize.height > minimumScrollableOverflow
+            layout.contentSize = CGSize(width: input.canvasSize.width,
+                                        height: overflows ? stackedHeight
+                                            : input.canvasSize.height)
+            layout.scrollEnabled = overflows
         }
         return layout
     }
@@ -160,9 +193,8 @@ enum CanvasLayout {
     private static func spotlightLayout(remote: [CanvasParticipant], focusId: String,
                                         input: Input) -> Plan {
         focusedLayout(remote: remote, focusId: focusId, input: input,
-                      focusRect: focusFrame(canvasSize: input.canvasSize),
-                      stripY: input.canvasSize.height * spotlightFocusFraction
-                        + stripPadding,
+                      focusRect: focusFrame(input),
+                      stripY: stripBand(input).minY + stripPadding,
                       parksStrip: false)
     }
 
@@ -187,10 +219,11 @@ enum CanvasLayout {
         layout.primaryTileId = focusId
 
         let others = remote.filter { $0.id != focusId }
-        let side = stripTileSide(canvasSize: input.canvasSize)
+        let side = stripTileSide(input)
+        let stripX = contentRect(input).minX + stripPadding
         for (index, participant) in others.enumerated() {
             layout.frames[participant.id] = CGRect(
-                x: stripTileX(index: index, side: side) - input.stripOffset,
+                x: stripX + CGFloat(index) * (side + stripSpacing) - input.stripOffset,
                 y: stripY,
                 width: side, height: side)
         }
@@ -198,7 +231,7 @@ enum CanvasLayout {
             layout.offstage = Set(others.map(\.id))
         } else {
             layout.stripContentWidth = stripContentWidth(tileCount: others.count,
-                                                         canvasSize: input.canvasSize)
+                                                         input: input)
         }
         layout.zOrder = others.map(\.id) + [focusId]
         return layout
@@ -206,30 +239,37 @@ enum CanvasLayout {
 
     // MARK: - Strip geometry
 
-    static func focusFrame(canvasSize: CGSize) -> CGRect {
-        CGRect(x: 0, y: 0, width: canvasSize.width,
-               height: canvasSize.height * spotlightFocusFraction)
+    static func contentRect(_ input: Input) -> CGRect {
+        CGRect(origin: .zero, size: input.canvasSize).inset(by: input.contentInsets)
     }
 
-    static func stripBand(canvasSize: CGSize) -> CGRect {
-        let top = canvasSize.height * spotlightFocusFraction
-        return CGRect(x: 0, y: top,
-                      width: canvasSize.width, height: canvasSize.height - top)
+    static func focusFrame(_ input: Input) -> CGRect {
+        let content = contentRect(input)
+        return CGRect(x: content.minX, y: content.minY,
+                      width: content.width,
+                      height: content.height - stripBand(input).height)
     }
 
-    static func stripTileSide(canvasSize: CGSize) -> CGFloat {
-        max(stripBand(canvasSize: canvasSize).height - 2 * stripPadding, 0)
+    static func stripBand(_ input: Input) -> CGRect {
+        let content = contentRect(input)
+        let height = min(stripTileSide(input) + 2 * stripPadding, content.height)
+        return CGRect(x: content.minX, y: content.maxY - height,
+                      width: content.width, height: height)
     }
 
-    static func stripContentWidth(tileCount: Int, canvasSize: CGSize) -> CGFloat {
+    static func stripTileSide(_ input: Input) -> CGFloat {
+        let content = contentRect(input)
+        let tallest = content.height * (1 - spotlightFocusFraction) - 2 * stripPadding
+        let widest = (content.width - 2 * stripPadding
+                        - (stripVisibleTiles - 1) * stripSpacing - stripPeek)
+            / stripVisibleTiles
+        return max(min(tallest, widest), 0)
+    }
+
+    static func stripContentWidth(tileCount: Int, input: Input) -> CGFloat {
         guard tileCount > 0 else { return 0 }
-        let side = stripTileSide(canvasSize: canvasSize)
-        return 2 * stripPadding + CGFloat(tileCount) * side
+        return 2 * stripPadding + CGFloat(tileCount) * stripTileSide(input)
             + CGFloat(tileCount - 1) * stripSpacing
-    }
-
-    private static func stripTileX(index: Int, side: CGFloat) -> CGFloat {
-        stripPadding + CGFloat(index) * (side + stripSpacing)
     }
 
     // MARK: - Local preview
@@ -237,7 +277,7 @@ enum CanvasLayout {
     private static func place(preview: CanvasParticipant, into layout: inout Plan,
                               input: Input, remoteCount: Int) {
         if remoteCount == 0 {
-            layout.frames[preview.id] = CGRect(origin: .zero, size: input.canvasSize)
+            layout.frames[preview.id] = contentRect(input)
             layout.contentSize = input.canvasSize
             layout.zOrder.append(preview.id)
             layout.scrollEnabled = false

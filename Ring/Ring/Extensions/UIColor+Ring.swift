@@ -89,6 +89,7 @@ extension UIColor {
     static let jamiRaiseHand = UIColor(red: 0, green: 184, blue: 255, alpha: 1.0)
     static let jamiCallPulse = UIColor(hex: 0x039FDF, alpha: 1.0)
     static let jamiDefaultAvatar = UIColor(hex: 0x039FDF, alpha: 1.0)
+    static let jamiOnVideoScrim = UIColor(white: 0, alpha: 0.6)
 
     // MARK: - Status
     static let jamiSuccess = UIColor(hex: 0x00b20b, alpha: 1.0)

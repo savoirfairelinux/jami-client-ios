@@ -51,9 +51,22 @@ final class ParticipantTileUIView: UIView {
 
     private let avatarView = CallAvatarView()
     private let nameLabel = UILabel()
+    private let namePlate = UIView()
 
     private var avatarWidth: NSLayoutConstraint!
     private var avatarHeight: NSLayoutConstraint!
+    private var nameLeading: NSLayoutConstraint!
+    private var nameBottom: NSLayoutConstraint!
+    private var nameTrailing: NSLayoutConstraint!
+
+    var contentInsets: UIEdgeInsets = .zero {
+        didSet {
+            guard contentInsets != oldValue else { return }
+            nameLeading.constant = contentInsets.left + 8
+            nameBottom.constant = -(contentInsets.bottom + 6)
+            nameTrailing.constant = -(contentInsets.right + 8)
+        }
+    }
     private var nameCancellable: AnyCancellable?
     private weak var boundProvider: AvatarProvider?
 
@@ -94,22 +107,35 @@ final class ParticipantTileUIView: UIView {
 
         nameLabel.textColor = .white
         nameLabel.font = .systemFont(ofSize: 13, weight: .medium)
+        nameLabel.lineBreakMode = .byTruncatingMiddle
         nameLabel.layer.shadowColor = UIColor.black.cgColor
         nameLabel.layer.shadowOpacity = 0.8
         nameLabel.layer.shadowRadius = 2
         nameLabel.layer.shadowOffset = .zero
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(nameLabel)
+
+        namePlate.backgroundColor = .jamiOnVideoScrim
+        namePlate.clipsToBounds = true
+        namePlate.translatesAutoresizingMaskIntoConstraints = false
+        namePlate.addSubview(nameLabel)
+        addSubview(namePlate)
 
         avatarWidth = avatarView.widthAnchor.constraint(equalToConstant: 72)
         avatarHeight = avatarView.heightAnchor.constraint(equalToConstant: 72)
+        nameLeading = namePlate.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8)
+        nameBottom = namePlate.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -6)
+        nameTrailing = namePlate.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor,
+                                                           constant: -8)
         NSLayoutConstraint.activate([
             avatarView.centerXAnchor.constraint(equalTo: centerXAnchor),
             avatarView.centerYAnchor.constraint(equalTo: centerYAnchor),
             avatarWidth, avatarHeight,
-            nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
-            nameLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -6),
-            nameLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -8)
+            nameLeading, nameBottom, nameTrailing,
+            nameLabel.leadingAnchor.constraint(equalTo: namePlate.leadingAnchor, constant: 8),
+            nameLabel.trailingAnchor.constraint(equalTo: namePlate.trailingAnchor,
+                                                constant: -8),
+            nameLabel.topAnchor.constraint(equalTo: namePlate.topAnchor, constant: 3),
+            nameLabel.bottomAnchor.constraint(equalTo: namePlate.bottomAnchor, constant: -3)
         ])
     }
 
@@ -120,6 +146,7 @@ final class ParticipantTileUIView: UIView {
             avatarWidth.constant = side
             avatarHeight.constant = side
         }
+        namePlate.layer.cornerRadius = namePlate.bounds.height / 2
         layer.borderWidth = tileState.isSpeaking ? 2 : 0
     }
 
@@ -127,6 +154,7 @@ final class ParticipantTileUIView: UIView {
         let losesVideo = tileState.showsVideo && !state.showsVideo && !videoView.isHidden
         tileState = state
         nameLabel.isHidden = !state.showsName
+        namePlate.isHidden = !state.showsName
         if state.showsVideo { videoView.isHidden = false }
         syncAvatarVisibility(animated: losesVideo)
         layer.borderColor = UIColor.systemGreen.cgColor
@@ -146,6 +174,7 @@ final class ParticipantTileUIView: UIView {
             .sink { [weak self] name in
                 self?.nameLabel.text = name
                 self?.accessibilityLabel = name
+                self?.setNeedsLayout()
             }
     }
 
@@ -154,6 +183,10 @@ final class ParticipantTileUIView: UIView {
     }
 
     var displayedName: String? { nameLabel.isHidden ? nil : nameLabel.text }
+
+    var nameChipFrame: CGRect? { namePlate.isHidden ? nil : namePlate.frame }
+
+    var nameTextFrame: CGRect? { namePlate.isHidden ? nil : nameLabel.frame }
 
     private func syncAvatarVisibility(animated: Bool) {
         let showsContent = tileState.showsVideo && videoView.hasVideoContent

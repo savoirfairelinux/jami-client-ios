@@ -53,6 +53,7 @@ final class ParticipantCanvas: UIView {
     private var models: [String: CanvasTileModel] = [:]
     private var lastAppliedModels: [CanvasTileModel] = []
     private var mode = CanvasLayoutMode.grid
+    private var style = CanvasTileStyle.plain
     private var previewCorner = PreviewCorner.topTrailing
     private var lastLayoutSize = CGSize.zero
     private var layoutAnimator: UIViewPropertyAnimator?
@@ -109,16 +110,22 @@ final class ParticipantCanvas: UIView {
 
     private func stripPanShouldBegin(_ recognizer: UIGestureRecognizer) -> Bool {
         guard case .spotlight = mode else { return false }
-        return CanvasLayout.stripBand(canvasSize: bounds.size)
+        return CanvasLayout.stripBand(currentInput())
             .contains(recognizer.location(in: self))
     }
 
     // MARK: - Updates
 
+    func apply(_ state: CanvasState, animated: Bool = true) {
+        apply(models: state.tiles, mode: state.mode, style: state.style, animated: animated)
+    }
+
     func apply(models newModels: [CanvasTileModel], mode newMode: CanvasLayoutMode,
-               animated: Bool = true) {
-        guard newMode != mode || newModels != lastAppliedModels else { return }
+               style newStyle: CanvasTileStyle = .plain, animated: Bool = true) {
+        guard newMode != mode || newStyle != style
+                || newModels != lastAppliedModels else { return }
         lastAppliedModels = newModels
+        style = newStyle
 
         let newIds = Set(newModels.map(\.participant.id))
 
@@ -195,6 +202,11 @@ final class ParticipantCanvas: UIView {
         relayout(animated: false)
     }
 
+    override func safeAreaInsetsDidChange() {
+        super.safeAreaInsetsDidChange()
+        relayout(animated: false)
+    }
+
     private func relayout(animated: Bool, newcomers: Set<String> = [],
                           duration: TimeInterval = ParticipantCanvas.modeSwitchDuration) {
         guard bounds.width > 0, bounds.height > 0 else { return }
@@ -213,6 +225,7 @@ final class ParticipantCanvas: UIView {
             guard let tile = tiles[id], let frame = layout.frames[id] else { continue }
             tile.frame = frame
             tile.layer.cornerRadius = cornerRadius(for: id)
+            tile.contentInsets = contentInsets(for: id)
             tile.layoutIfNeeded()
             if animated { tile.alpha = 0 }
         }
@@ -221,6 +234,7 @@ final class ParticipantCanvas: UIView {
             for (id, frame) in layout.frames where !newcomers.contains(id) && id != held {
                 tiles[id]?.frame = frame
                 tiles[id]?.layer.cornerRadius = cornerRadius(for: id)
+                tiles[id]?.contentInsets = contentInsets(for: id)
             }
         }
         if animated {
@@ -240,6 +254,7 @@ final class ParticipantCanvas: UIView {
                 for id in newcomers { tiles[id]?.alpha = 1 }
             }
         } else {
+            stopLayoutAnimator()
             applyFrames()
             scrollView.contentSize = layout.contentSize
             clampContentOffset()
@@ -248,12 +263,15 @@ final class ParticipantCanvas: UIView {
         applyVideoScalingPolicies(primaryTileId: layout.primaryTileId)
     }
 
+    private func stopLayoutAnimator() {
+        guard let running = layoutAnimator, running.state == .active else { return }
+        running.stopAnimation(false)
+        running.finishAnimation(at: .current)
+    }
+
     private func retargetLayoutAnimator(duration: TimeInterval,
                                         animations: @escaping () -> Void) {
-        if let running = layoutAnimator, running.state == .active {
-            running.stopAnimation(false)
-            running.finishAnimation(at: .current)
-        }
+        stopLayoutAnimator()
         let animator = UIViewPropertyAnimator(
             duration: duration,
             timingParameters: UISpringTimingParameters(dampingRatio: 1))
@@ -289,7 +307,7 @@ final class ParticipantCanvas: UIView {
         let hasStrip = layout.stripContentWidth > 0
         stripDriver.panGestureRecognizer.isEnabled = hasStrip
         guard hasStrip else { return }
-        let band = CanvasLayout.stripBand(canvasSize: bounds.size)
+        let band = CanvasLayout.stripBand(currentInput())
         stripDriver.frame = band
         stripDriver.contentSize = CGSize(width: layout.stripContentWidth,
                                          height: band.height)
@@ -315,11 +333,18 @@ final class ParticipantCanvas: UIView {
         updateVideoAttachments(frames: layout.frames, offstage: layout.offstage)
     }
 
+    private func contentInsets(for id: String) -> UIEdgeInsets {
+        guard case .fullscreen(let focusId) = mode, focusId == id else { return .zero }
+        return safeAreaInsets
+    }
+
     private func cornerRadius(for id: String) -> CGFloat {
-        guard models[id]?.participant.isLocalPreview == true, models.count > 1 else {
-            return 0
+        if models[id]?.participant.isLocalPreview == true {
+            return models.count > 1 ? CanvasLayout.tileCornerRadius : 0
         }
-        return CanvasLayout.previewCornerRadius
+        guard style == .cards else { return 0 }
+        if case .fullscreen(let focusId) = mode, focusId == id { return 0 }
+        return CanvasLayout.tileCornerRadius
     }
 
     private func currentInput() -> CanvasLayout.Input {
@@ -329,7 +354,8 @@ final class ParticipantCanvas: UIView {
             canvasSize: bounds.size,
             safeAreaInsets: safeAreaInsets,
             previewCorner: previewCorner,
-            stripOffset: stripDriver.contentOffset.x)
+            stripOffset: stripDriver.contentOffset.x,
+            style: style)
     }
 
     private func updateVideoAttachments(frames: [String: CGRect],
@@ -454,6 +480,11 @@ final class ParticipantCanvas: UIView {
         animator.startAnimation()
     }
 
+}
+
+// MARK: - Preview fling geometry
+
+extension ParticipantCanvas {
     static func nearestCorner(toCenter center: CGPoint, in bounds: CGRect) -> PreviewCorner {
         let top = center.y < bounds.midY
         let leading = center.x < bounds.midX
