@@ -32,7 +32,9 @@ final class CallScreenPresenter {
 
     private var callController: UIViewController?
     private var model: CallViewModel?
+    private var pendingCall: CallState?
     private var dismissCancellable: AnyCancellable?
+    private var isDismissing = false
     private var isMinimized = false
     private var inCallDeviceStateActive = false
 
@@ -49,7 +51,10 @@ final class CallScreenPresenter {
         manager.callToPresent
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] call in
-                Task { @MainActor in self?.presentCallScreen(for: call) }
+                Task { @MainActor in
+                    self?.pendingCall = call
+                    self?.presentPendingCall()
+                }
             })
             .disposed(by: disposeBag)
     }
@@ -57,11 +62,15 @@ final class CallScreenPresenter {
     // MARK: - Presentation
 
     @MainActor
-    private func presentCallScreen(for call: CallState) {
-        if model?.currentCallId == call.id, callController != nil, !isMinimized {
-            return
-        }
+    private func presentPendingCall() {
+        guard callController == nil, !isDismissing,
+              let call = pendingCall, let top = topController() else { return }
+        pendingCall = nil
+        presentCallScreen(for: call, on: top)
+    }
 
+    @MainActor
+    private func presentCallScreen(for call: CallState, on top: UIViewController) {
         let account = injectionBag.accountService.getAccount(fromAccountId: call.accountId)
         let localJamiId = account?.jamiId ?? ""
         let model = CallViewModel(call: call,
@@ -97,28 +106,15 @@ final class CallScreenPresenter {
         controller.modalPresentationStyle = .overFullScreen
         controller.modalTransitionStyle = .crossDissolve
 
-        let present = { [weak self] in
-            guard let self = self, let top = self.topController() else { return }
-            top.present(controller, animated: true)
-            self.callController = controller
-            self.isMinimized = false
-            self.model = model
-            self.dismissCancellable = model.$shouldDismiss
-                .filter { $0 }
-                .sink { [weak self, weak controller] _ in
-                    Task { @MainActor in self?.dismissCallScreen(controller) }
-                }
-            self.setInCallDeviceState(active: true)
-        }
-
-        if let existing = callController, !isMinimized {
-            existing.dismiss(animated: false, completion: present)
-            callController = nil
-        } else {
-            callController = nil
-            isMinimized = false
-            present()
-        }
+        top.present(controller, animated: true)
+        callController = controller
+        self.model = model
+        dismissCancellable = model.$shouldDismiss
+            .filter { $0 }
+            .sink { [weak self, weak controller] _ in
+                Task { @MainActor in self?.dismissCallScreen(controller) }
+            }
+        setInCallDeviceState(active: true)
     }
 
     // MARK: - Picture in picture
@@ -168,9 +164,16 @@ final class CallScreenPresenter {
         dismissCancellable = nil
         guard !isMinimized else {
             isMinimized = false
+            presentPendingCall()
             return
         }
-        controller.dismiss(animated: true)
+        isDismissing = true
+        controller.dismiss(animated: true) { [weak self] in
+            Task { @MainActor in
+                self?.isDismissing = false
+                self?.presentPendingCall()
+            }
+        }
     }
 
     // MARK: - Add participant
