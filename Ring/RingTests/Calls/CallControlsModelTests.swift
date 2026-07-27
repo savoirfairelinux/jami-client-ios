@@ -24,11 +24,14 @@ final class CallControlsModelTests: XCTestCase {
     private func call(status: CallStatus = .current,
                       media: [MediaItem] = [.audio(), .video()],
                       pending: [MediaItem]? = nil,
-                      isSip: Bool = false) -> CallControlsModel {
+                      isSip: Bool = false,
+                      conference: ConferenceState? = nil) -> CallControlsModel {
         var state = CallTestFixtures.call(status: status,
                                           media: media)
         state.pendingMediaRequest = pending
-        return CallControlsModel(call: state, isSipAccount: isSip)
+        state.conferenceId = conference?.id
+        return CallControlsModel(call: state, conference: conference,
+                                 isSipAccount: isSip)
     }
 
     func testMuteStatesReflectLibJamiConfirmedMedia() {
@@ -61,9 +64,103 @@ final class CallControlsModelTests: XCTestCase {
     }
 
     func testHoldAvailability() {
-        XCTAssertTrue(call(status: .current).canHold)
-        XCTAssertFalse(call(status: .held(side: .local)).canHold)
-        XCTAssertTrue(call(status: .held(side: .local)).canResume)
-        XCTAssertFalse(call(status: .held(side: .peer)).canResume)
+        XCTAssertFalse(call(status: .current).canHold,
+                       "Jami calls do not expose SIP hold")
+        XCTAssertTrue(call(status: .current, isSip: true).canHold)
+        XCTAssertFalse(call(status: .held(side: .local), isSip: true).canHold)
+        XCTAssertTrue(call(status: .held(side: .local), isSip: true).canResume)
+        XCTAssertFalse(call(status: .held(side: .peer), isSip: true).canResume)
+    }
+
+    func testSipConferenceUsesHostMediaAndConferenceHold() {
+        let conference = CallTestFixtures.conference(
+            media: [.audio(muted: true), .video(muted: false)],
+            isHost: true, lifecycle: .activeAttached)
+
+        let model = call(media: [.audio(), .video(muted: true)],
+                         isSip: true, conference: conference)
+
+        XCTAssertTrue(model.isAudioMuted)
+        XCTAssertFalse(model.isVideoMuted)
+        XCTAssertTrue(model.canHold)
+        XCTAssertFalse(model.canResume)
+    }
+
+    func testDetachedSipConferenceCanResume() {
+        let conference = CallTestFixtures.conference(
+            media: [.audio(), .video()], isHost: true,
+            lifecycle: .activeDetached)
+
+        let model = call(isSip: true, conference: conference)
+
+        XCTAssertFalse(model.canHold)
+        XCTAssertTrue(model.canResume)
+    }
+
+    func testJamiConferenceDoesNotExposeSipHold() {
+        let conference = CallTestFixtures.conference(
+            media: [.audio(), .video()], isHost: true,
+            lifecycle: .activeAttached)
+
+        let model = call(isSip: false, conference: conference)
+
+        XCTAssertFalse(model.canHold)
+        XCTAssertFalse(model.canResume)
+    }
+
+    func testConferencePendingMediaDisablesToggles() {
+        let conference = CallTestFixtures.conference(
+            media: [.audio(), .video()],
+            pendingMediaRequest: [.audio(muted: true), .video()],
+            isHost: true, lifecycle: .activeAttached)
+
+        XCTAssertFalse(call(conference: conference).canToggleMedia)
+    }
+
+    func testDetachedHostedConferenceDisablesMediaControls() {
+        var state = CallTestFixtures.call(media: [.audio(muted: true), .video()])
+        state.conferenceId = CallTestFixtures.conferenceId
+        let conference = CallTestFixtures.conference(
+            isHost: true, lifecycle: .activeDetached)
+
+        let model = CallControlsModel(call: state, conference: conference,
+                                      isSipAccount: false)
+
+        XCTAssertFalse(model.canToggleMedia,
+                       "a detached relay has no local microphone or camera")
+    }
+
+    func testMismatchedHostedConferenceDoesNotSupplyPendingMediaState() {
+        var state = CallTestFixtures.call(media: [.audio(), .video()])
+        state.conferenceId = CallTestFixtures.conferenceId
+        let unrelated = CallTestFixtures.conference(
+            id: ConfId(raw: CallTestFixtures.secondaryCallId.raw),
+            media: [.audio(muted: true), .video(muted: true)],
+            pendingMediaRequest: [.audio(muted: true)], isHost: true)
+
+        let model = CallControlsModel(call: state, conference: unrelated,
+                                      isSipAccount: false)
+
+        XCTAssertFalse(model.isAudioMuted)
+        XCTAssertFalse(model.isVideoMuted)
+        XCTAssertTrue(model.canToggleMedia)
+    }
+
+    func testEffectiveMediaUsesOnlyTheLocallyHostedConference() {
+        var state = CallTestFixtures.call(media: [.audio(), .video()])
+        state.conferenceId = CallTestFixtures.conferenceId
+        let hosted = CallTestFixtures.conference(
+            media: [.audio(muted: true), .video(muted: true)],
+            isHost: true, lifecycle: .activeAttached)
+        let peerHosted = CallTestFixtures.conference(
+            media: [.audio(muted: true), .video(muted: true)])
+
+        XCTAssertTrue(state.effectiveMedia(in: hosted).isAudioMuted)
+        XCTAssertTrue(state.effectiveMedia(in: hosted).isVideoMuted)
+        XCTAssertFalse(state.effectiveMedia(in: peerHosted).isAudioMuted,
+                       "a peer-hosted conference still uses the local member leg")
+        XCTAssertEqual(state.effectiveMedia(in: CallTestFixtures.conference(
+                                                isHost: true, lifecycle: .activeAttached)), [],
+                       "an attached host owns its media even before the list arrives")
     }
 }

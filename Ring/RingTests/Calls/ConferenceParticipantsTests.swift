@@ -33,8 +33,11 @@ final class ConferenceParticipantsTests: XCTestCase {
                                     isHost: isHost)
     }
 
-    private func rows(_ conference: ConferenceState) -> [ConferenceParticipantRow] {
-        ConferenceParticipants.rows(from: conference, localJamiId: localId)
+    private func rows(_ conference: ConferenceState,
+                      peerUri: String = CallTestFixtures.peerUri)
+    -> [ConferenceParticipantRow] {
+        ConferenceParticipants.rows(from: conference, localJamiId: localId,
+                                    peerUri: peerUri)
     }
 
     private func row(_ uri: String, in rows: [ConferenceParticipantRow]) -> ConferenceParticipantRow? {
@@ -77,9 +80,9 @@ final class ConferenceParticipantsTests: XCTestCase {
                         + "can't recompose it, nor moderate others")
     }
 
-    func testEmptyUriHostIsRecognizedAsLocalModerator() {
+    func testEmptyUriHostIsRecognizedAsLocalModeratorWhenHostedLocally() {
         let list = rows(conference([CallTestFixtures.participant(uri: String(), isModerator: true),
-                                    CallTestFixtures.participant(uri: remoteId)], isHost: false))
+                                    CallTestFixtures.participant(uri: remoteId)], isHost: true))
         let host = list.first
         XCTAssertEqual(host?.isLocal, true, "the empty-uri cell is our own host cell")
         XCTAssertEqual(host?.uri, localId, "it resolves to the local jami id")
@@ -88,13 +91,54 @@ final class ConferenceParticipantsTests: XCTestCase {
         XCTAssertTrue(remote.contains(.endCall), "a host may moderate others")
     }
 
-    func testSelfCanMuteButNotSpotlightWhenNotModerator() {
+    func testEmptyUriPeerHostIsNotOurLocalModerator() {
+        let list = rows(conference([
+            CallTestFixtures.participant(uri: String(), isModerator: true),
+            CallTestFixtures.participant(uri: localId),
+            CallTestFixtures.participant(uri: remoteId)
+        ], isHost: false))
+
+        XCTAssertEqual(list.first?.uri, localId, "our explicit participant comes first")
+        XCTAssertEqual(list.first?.isLocal, true)
+        let peerHost = list.first { !$0.isLocal && $0.isModerator }
+        XCTAssertEqual(peerHost?.isLocal, false, "the empty-uri cell belongs to the remote host")
+        XCTAssertEqual(peerHost?.uri, CallTestFixtures.peerUri,
+                       "the empty-uri peer host resolves to the dialog peer")
+        XCTAssertEqual(row(remoteId, in: list)?.actions, [],
+                       "the remote host's moderator role must not authorize us")
+    }
+
+    func testSelfHasNoModerationWhenNotModerator() {
         let list = rows(conference([CallTestFixtures.participant(uri: localId),
                                     CallTestFixtures.participant(uri: remoteId)], isHost: false))
         let localActions = row(localId, in: list)?.actions ?? []
-        XCTAssertTrue(localActions.contains(.muteAudio), "you can always mute yourself")
+        XCTAssertFalse(localActions.contains(.muteAudio),
+                       "the microphone button owns muting ourselves")
         XCTAssertFalse(localActions.contains(.maximize),
                        "spotlight recomposes the room — moderator-only")
+    }
+
+    func testSelfCanLiftAModeratorMuteWithoutBeingModerator() {
+        let list = rows(conference([
+            CallTestFixtures.participant(uri: localId, audioModeratorMuted: true),
+            CallTestFixtures.participant(uri: remoteId)
+        ], isHost: false))
+
+        XCTAssertEqual(row(localId, in: list)?.actions, [.muteAudio],
+                       "a moderator mute is ours to lift")
+    }
+
+    func testModeratorMuteIsReportedApartFromTheirOwnMute() {
+        let list = rows(conference([
+            CallTestFixtures.participant(uri: localId),
+            CallTestFixtures.participant(uri: remoteId, audioLocalMuted: true)
+        ], isHost: true))
+        let remote = row(remoteId, in: list)
+
+        XCTAssertEqual(remote?.isAudioMuted, true, "they are silent either way")
+        XCTAssertEqual(remote?.isAudioModeratorMuted, false,
+                       "their own mute is not a moderator mute — the action "
+                        + "must still read as mute")
     }
 
     func testStatusFieldsMapFromParticipant() {

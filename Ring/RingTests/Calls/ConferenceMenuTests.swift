@@ -25,12 +25,31 @@ final class ConferenceMenuTests: XCTestCase {
 
     func testLowerHandOnlyAppearsWhenHandIsRaised() {
         let raised = builder.menuForLocalTile(layout: .grid, isActive: false,
-                                              isHandRaised: true)
+                                              isHandRaised: true,
+                                              isModeratorMuted: false)
         let lowered = builder.menuForLocalTile(layout: .grid, isActive: false,
-                                               isHandRaised: false)
+                                               isHandRaised: false,
+                                               isModeratorMuted: false)
 
         XCTAssertTrue(raised.contains(.lowerHand))
         XCTAssertFalse(lowered.contains(.lowerHand))
+    }
+
+    func testLocalTileOffersNoModeratorMuteOfOurselves() {
+        let menu = builder.menuForLocalTile(layout: .grid, isActive: false,
+                                            isHandRaised: false,
+                                            isModeratorMuted: false)
+
+        XCTAssertFalse(menu.contains(.muteAudio),
+                       "the microphone button owns muting ourselves")
+    }
+
+    func testLocalTileCanLiftAModeratorMute() {
+        let menu = builder.menuForLocalTile(layout: .grid, isActive: false,
+                                            isHandRaised: false,
+                                            isModeratorMuted: true)
+
+        XCTAssertTrue(menu.contains(.muteAudio))
     }
 
     func testRegularParticipantHasNoModerationActions() {

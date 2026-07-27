@@ -27,7 +27,8 @@ protocol CallsAdapterDelegate {
     func videoMuted(call callId: String, mute: Bool)
     func remoteRecordingChanged(call callId: String, record: Bool)
     func conferenceCreated(conferenceId: String, conversationId: String, accountId: String)
-    func conferenceChanged(conference conferenceID: String, accountId: String, state: String)
+    func conferenceChanged(conference conferenceID: String, accountId: String, state: String,
+                           memberCallIds: [String])
     func conferenceRemoved(conference conferenceID: String)
     func conferenceInfoUpdated(conference conferenceID: String, info: [[String: String]])
     func didChangeMediaNegotiationStatus(withCallId callId: String, event: String, withMedia: [[String: String]])

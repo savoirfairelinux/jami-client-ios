@@ -38,10 +38,13 @@ enum CallTilePlanner {
 
     static func conferenceTiles(_ participants: [ConferenceParticipantInfo],
                                 localJamiId: String,
+                                peerUri: String,
+                                isHostedLocally: Bool,
                                 localCameraOn: Bool,
                                 frozenForRecomposition: Bool = false) -> [CallTilePlan] {
         participants.map { info in
-            if ConferenceParticipants.isLocalParticipant(info, localJamiId: localJamiId) {
+            if info.isLocalParticipant(localJamiId: localJamiId,
+                                       isHostedLocally: isHostedLocally) {
                 return CallTilePlan(id: info.id,
                                     isLocalPreview: false,
                                     source: .localCamera,
@@ -59,7 +62,9 @@ enum CallTilePlanner {
                                 source: .remoteStream(info.sinkId),
                                 showsVideo: !info.isVideoMuted,
                                 isSpeaking: info.hasVoiceActivity,
-                                avatarUri: info.uri,
+                                avatarUri: info.resolvedUri(localJamiId: localJamiId,
+                                                            peerUri: peerUri,
+                                                            isHostedLocally: isHostedLocally),
                                 showsName: true,
                                 expectedVideoSize: expected)
         }

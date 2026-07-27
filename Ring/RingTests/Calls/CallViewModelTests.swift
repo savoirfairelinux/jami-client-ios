@@ -293,7 +293,9 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
         harness.callAPI.conferenceCallsReturn[conferenceId] = [harness.callId.raw]
         harness.send(.conferenceCreated(conferenceId: conferenceId, conversationId: String(),
                                         accountId: Harness.accountId,
-                                        memberCallIds: [harness.callId.raw]))
+                                        state: "ACTIVE_ATTACHED",
+                                        memberCallIds: [harness.callId.raw],
+                                        participants: [], media: []))
         func sendInfos(activeId: String?, othersSide: Int) {
             func entry(_ uri: String, _ device: String, _ sink: String)
             -> ConferenceParticipantInfo {
@@ -388,6 +390,78 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
                        "the original call sink contains the peer's mixed conference frame")
     }
 
+    func testModeratorMuteTogglesTheModeratorFlagNotTheirOwnMicrophone() async {
+        let harness = await Harness(callHasVideo: true)
+        let model = harness.makeModel(localJamiId: jamiId1)
+        let conferenceId = CallTestFixtures.conferenceId.raw
+        let remoteId = "\(CallTestFixtures.peerUri)|\(CallTestFixtures.remoteDeviceId)"
+        harness.callAPI.conferenceCallsReturn[conferenceId] = [harness.callId.raw]
+        harness.send(.conferenceCreated(conferenceId: conferenceId, conversationId: String(),
+                                        accountId: Harness.accountId,
+                                        state: "ACTIVE_ATTACHED",
+                                        memberCallIds: [harness.callId.raw],
+                                        participants: [], media: []))
+        func sendInfos(moderatorMuted: Bool) {
+            harness.send(.conferenceInfosUpdated(
+                            conferenceId: conferenceId,
+                            participants: [
+                                CallTestFixtures.participant(uri: String()),
+                                CallTestFixtures.participant(
+                                    uri: CallTestFixtures.peerUri,
+                                    device: CallTestFixtures.remoteDeviceId,
+                                    sinkId: CallTestFixtures.remoteSinkId,
+                                    audioLocalMuted: true,
+                                    audioModeratorMuted: moderatorMuted)
+                            ]))
+        }
+
+        func muteCommands() -> [String] {
+            harness.callAPI.moderationCommands.filter { $0.hasPrefix("muteStream:") }
+        }
+
+        sendInfos(moderatorMuted: false)
+        await Harness.wait { model.participantRows.count == 2 }
+        XCTAssertEqual(model.participantRows.last?.isAudioModeratorMuted, false,
+                       "their own microphone mute is not a moderator mute")
+
+        model.perform(.muteAudio, on: remoteId)
+        await Harness.wait { muteCommands().count == 1 }
+        XCTAssertEqual(muteCommands().last?.hasSuffix(":true"), true)
+
+        sendInfos(moderatorMuted: true)
+        await Harness.wait {
+            model.participantRows.last?.isAudioModeratorMuted == true
+        }
+
+        model.perform(.muteAudio, on: remoteId)
+        await Harness.wait { muteCommands().count == 2 }
+        XCTAssertEqual(muteCommands().last?.hasSuffix(":false"), true,
+                       "the same action must lift the mute it applied")
+    }
+
+    func testHostedConferenceCameraTileUsesConferenceMediaState() async {
+        let harness = await Harness(callHasVideo: true)
+        let model = harness.makeModel(localJamiId: jamiId1)
+        let conferenceId = CallTestFixtures.conferenceId.raw
+        let local = CallTestFixtures.participant(uri: String())
+        let remote = CallTestFixtures.participant(
+            uri: CallTestFixtures.peerUri, device: CallTestFixtures.remoteDeviceId,
+            sinkId: CallTestFixtures.remoteSinkId)
+
+        harness.send(.conferenceCreated(
+                        conferenceId: conferenceId, conversationId: String(),
+                        accountId: Harness.accountId,
+                        state: ConferenceLifecycle.activeAttached.rawValue,
+                        memberCallIds: [harness.callId.raw], participants: [local, remote],
+                        media: [.audio(), .video(muted: true)]))
+        await Harness.wait { model.conference?.id == CallTestFixtures.conferenceId }
+
+        let localTile = model.tiles.first { $0.participant.id == local.id }
+        XCTAssertTrue(localTile?.distributor === harness.videoService.localFrames)
+        XCTAssertEqual(localTile?.tileState.showsVideo, false,
+                       "the hosted conference camera is muted even if its member leg is not")
+    }
+
     func testOngoingOneToOneCallListsBothPeople() async {
         let harness = await Harness(callHasVideo: false)
         let model = harness.makeModel(localJamiId: jamiId1)
@@ -416,7 +490,9 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
         let model = harness.makeModel(localJamiId: jamiId1)
         harness.callAPI.placeCallReturn = CallTestFixtures.secondaryCallId.raw
 
-        harness.callService.addParticipant(uri: CallTestFixtures.secondaryPeerUri, toCall: harness.callId)
+        harness.callService.addParticipant(uri: CallTestFixtures.secondaryPeerUri,
+                                           toCall: harness.callId,
+                                           requestedBy: jamiId1)
         await Harness.wait { model.pendingRows.count == 1 }
         XCTAssertEqual(model.participantRows.count, 2)
         XCTAssertEqual(model.participantCount, 3)

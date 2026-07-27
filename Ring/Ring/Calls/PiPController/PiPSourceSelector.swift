@@ -30,6 +30,7 @@ enum PiPSourceSelector {
         guard let call = call, !call.status.isTerminal else { return nil }
         if let conference = conference, !conference.participants.isEmpty {
             return selectInConference(conference, localJamiId: localJamiId,
+                                      peerUri: call.peerUri,
                                       current: current)
         }
         guard call.status.isOngoing, call.hasNegotiatedVideo else { return nil }
@@ -38,20 +39,35 @@ enum PiPSourceSelector {
 
     private static func selectInConference(_ conference: ConferenceState,
                                            localJamiId: String,
+                                           peerUri: String,
                                            current: Selection?) -> Selection? {
         let remotesWithVideo = conference.participants.filter {
-            !ConferenceParticipants.isLocalParticipant($0, localJamiId: localJamiId) &&
+            !$0.isLocalParticipant(localJamiId: localJamiId,
+                                   isHostedLocally: conference.isHost) &&
                 !$0.isVideoMuted && !$0.sinkId.raw.isEmpty
         }
         guard !remotesWithVideo.isEmpty else { return nil }
         if let speaker = remotesWithVideo.first(where: \.hasVoiceActivity) {
-            return Selection(uri: speaker.uri, sinkId: speaker.sinkId)
+            return selection(for: speaker, in: conference,
+                             localJamiId: localJamiId, peerUri: peerUri)
         }
         if let current = current,
            let retained = remotesWithVideo.first(where: { $0.sinkId == current.sinkId }) {
-            return Selection(uri: retained.uri, sinkId: retained.sinkId)
+            return selection(for: retained, in: conference,
+                             localJamiId: localJamiId, peerUri: peerUri)
         }
         let first = remotesWithVideo[0]
-        return Selection(uri: first.uri, sinkId: first.sinkId)
+        return selection(for: first, in: conference,
+                         localJamiId: localJamiId, peerUri: peerUri)
+    }
+
+    private static func selection(for participant: ConferenceParticipantInfo,
+                                  in conference: ConferenceState,
+                                  localJamiId: String,
+                                  peerUri: String) -> Selection {
+        Selection(uri: participant.resolvedUri(localJamiId: localJamiId,
+                                               peerUri: peerUri,
+                                               isHostedLocally: conference.isHost),
+                  sinkId: participant.sinkId)
     }
 }

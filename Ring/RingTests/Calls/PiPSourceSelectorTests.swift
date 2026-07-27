@@ -45,9 +45,11 @@ final class PiPSourceSelectorTests: XCTestCase {
         MediaItem.audio()
     }
 
-    private func conference(_ participants: [ConferenceParticipantInfo])
+    private func conference(_ participants: [ConferenceParticipantInfo],
+                            isHost: Bool = false)
     -> ConferenceState {
-        CallTestFixtures.conference(conversationId: nil, participants: participants)
+        CallTestFixtures.conference(conversationId: nil, participants: participants,
+                                    isHost: isHost)
     }
 
     private func participant(_ uri: String,
@@ -122,9 +124,24 @@ final class PiPSourceSelectorTests: XCTestCase {
         XCTAssertEqual(select(call: call(media: [audio(), video()]),
                               conference: conference([participant(String()),
                                                       participant(remoteId,
-                                                                  sinkId: CallTestFixtures.remoteSinkId)])),
+                                                                  sinkId: CallTestFixtures.remoteSinkId)],
+                                                     isHost: true)),
                        PiPSourceSelector.Selection(uri: remoteId,
                                                    sinkId: SinkId(raw: CallTestFixtures.remoteSinkId)))
+    }
+
+    func testEmptyUriPeerHostCanFeedPictureInPicture() {
+        let selection = select(call: call(media: [audio(), video()]),
+                               conference: conference([
+                                participant(String(),
+                                            sinkId: CallTestFixtures.remoteSinkId),
+                                participant(localId)
+                               ]))
+
+        XCTAssertEqual(selection,
+                       PiPSourceSelector.Selection(
+                        uri: remoteId,
+                        sinkId: SinkId(raw: CallTestFixtures.remoteSinkId)))
     }
 
     func testConferenceFollowsTheSpeaker() {

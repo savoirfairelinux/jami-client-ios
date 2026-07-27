@@ -59,6 +59,8 @@ protocol LibJamiCallAPI: AnyObject, Sendable {
     func conferenceDetails(conferenceId: String, accountId: String) -> [String: String]
     func conferenceCalls(conferenceId: String, accountId: String) -> [String]
     func hangUpConference(conferenceId: String, accountId: String) -> Bool
+    func holdConference(conferenceId: String, accountId: String) -> Bool
+    func resumeConference(conferenceId: String, accountId: String) -> Bool
     func setActiveParticipant(_ participantId: String, conferenceId: String, accountId: String)
     func setConferenceLayout(_ layout: Int, conferenceId: String, accountId: String)
     func setModerator(_ participantId: String, conferenceId: String,
@@ -208,6 +210,14 @@ final class LibJamiCallClient: LibJamiCallAPI, @unchecked Sendable {
 
     func hangUpConference(conferenceId: String, accountId: String) -> Bool {
         return adapter.disconnectConference(conferenceId, accountId: accountId)
+    }
+
+    func holdConference(conferenceId: String, accountId: String) -> Bool {
+        return adapter.holdConference(conferenceId, accountId: accountId)
+    }
+
+    func resumeConference(conferenceId: String, accountId: String) -> Bool {
+        return adapter.resumeConference(conferenceId, accountId: accountId)
     }
 
     func setActiveParticipant(_ participantId: String, conferenceId: String, accountId: String) {
