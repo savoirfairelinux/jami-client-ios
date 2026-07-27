@@ -43,7 +43,6 @@
                         videoInputId:(NSString*)videoInputId;
 - (void)setDecodingAccelerated:(BOOL)state;
 - (BOOL)getDecodingAccelerated;
-- (BOOL)requestMediaChange:(NSString*)callId accountId:(NSString*)accountId withMedia:(NSArray*)mediaList;
 - (void)setEncodingAccelerated:(BOOL)state;
 - (BOOL)getEncodingAccelerated;
 - (void)stopAudioDevice;

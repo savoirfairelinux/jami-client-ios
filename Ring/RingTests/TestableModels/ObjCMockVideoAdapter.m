@@ -20,12 +20,4 @@
 
 @implementation ObjCMockVideoAdapter
 
-- (BOOL)requestMediaChange:(NSString*)callId accountId:(NSString*)accountId withMedia:(NSArray*)mediaList {
-    self.requestMediaChangeCallCount++;
-    self.requestMediaChangeCallId = callId;
-    self.requestMediaChangeAccountId = accountId;
-    self.requestMediaChangeMediaList = mediaList;
-    return self.requestMediaChangeReturnValue;
-}
-
 @end

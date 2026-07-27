@@ -17,6 +17,8 @@
  */
 
 import Foundation
+import CoreVideo
+import CoreGraphics
 @testable import Ring
 
 final class TestLibJamiCallAPI: LibJamiCallAPI, @unchecked Sendable {
@@ -182,4 +184,29 @@ final class TestLibJamiCallAPI: LibJamiCallAPI, @unchecked Sendable {
                    deviceId: String, raised: Bool) {
         moderationCommands.append("raiseHand:\(participantId):\(raised)")
     }
+}
+
+final class TestLibJamiVideoAPI: LibJamiVideoAPI {
+    func registerSink(_ sinkId: SinkId, width: Int, height: Int, hasListeners: Bool) {}
+    func removeSink(_ sinkId: SinkId) {}
+    func setHasListeners(_ hasListeners: Bool, sinkId: SinkId) {}
+    func renderSize(_ sinkId: SinkId) -> CGSize { .zero }
+    func writeOutgoingFrame(_ buffer: CVImageBuffer, angle: Int, videoInputId: String) {}
+    func addVideoDevice(name: String, info: [String: Any]) {}
+    func setDefaultDevice(_ name: String) {}
+    func defaultDevice() -> String { "front" }
+    func openVideoInput(_ path: String) {}
+    func closeVideoInput(_ path: String) {}
+    func setDecodingAccelerated(_ state: Bool) {}
+    func setEncodingAccelerated(_ state: Bool) {}
+    func decodingAccelerated() -> Bool { true }
+    func encodingAccelerated() -> Bool { true }
+    func startLocalRecording(videoInputId: String, path: String) -> String? { nil }
+    func stopLocalRecording(path: String) {}
+    func createMediaPlayer(path: String) -> String? { nil }
+    func pausePlayer(playerId: String, pause: Bool) {}
+    func closePlayer(playerId: String) {}
+    func mutePlayerAudio(playerId: String, mute: Bool) {}
+    func playerSeek(to time: Int, playerId: String) {}
+    func playerPosition(playerId: String) -> Int64 { -1 }
 }

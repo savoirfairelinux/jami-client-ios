@@ -30,7 +30,43 @@ struct LocalFrameInfo {
     let imageOrientation: UIImage.Orientation
 }
 
+extension UIInterfaceOrientation {
+    /// The physical device orientation matching this interface orientation.
+    /// Landscape is inverted between the two (interface-left is device-right),
+    /// so mapping through here lets the always-valid interface orientation
+    /// drive the device-orientation-based camera transform math.
+    var asDeviceOrientation: UIDeviceOrientation {
+        switch self {
+        case .portrait: return .portrait
+        case .portraitUpsideDown: return .portraitUpsideDown
+        case .landscapeLeft: return .landscapeRight
+        case .landscapeRight: return .landscapeLeft
+        case .unknown: return .portrait
+        @unknown default: return .portrait
+        }
+    }
+}
+
 extension AVCaptureVideoOrientation {
+
+    static func resolve(_ input: DeviceOrientationInput) -> AVCaptureVideoOrientation? {
+        if input.device.isValidInterfaceOrientation {
+            return AVCaptureVideoOrientation(deviceOrientation: input.device)
+        }
+        guard input.interface != .unknown else { return nil }
+        return AVCaptureVideoOrientation(deviceOrientation: input.interface.asDeviceOrientation)
+    }
+
+    private init?(deviceOrientation: UIDeviceOrientation) {
+        switch deviceOrientation {
+        case .portrait: self = .portrait
+        case .portraitUpsideDown: self = .portraitUpsideDown
+        case .landscapeLeft: self = .landscapeLeft
+        case .landscapeRight: self = .landscapeRight
+        default: return nil
+        }
+    }
+
     init(_ orientation: UIInterfaceOrientation) {
         switch orientation {
         case .portrait:
@@ -97,6 +133,28 @@ extension CGAffineTransform {
     static func rotation(degrees: Int) -> CGAffineTransform {
         let radians = CGFloat(degrees) * .pi / 180.0
         return CGAffineTransform(rotationAngle: radians)
+    }
+
+    var isQuarterTurn: Bool { abs(b) > 0.5 }
+}
+
+extension CMSampleBuffer {
+    var presentationVideoSize: CGSize? {
+        guard let format = CMSampleBufferGetFormatDescription(self) else { return nil }
+        let dimensions = CMVideoFormatDescriptionGetPresentationDimensions(
+            format, usePixelAspectRatio: true, useCleanAperture: true)
+        guard dimensions.width > 0, dimensions.height > 0 else { return nil }
+        return CGSize(width: dimensions.width, height: dimensions.height)
+    }
+
+    func markForImmediateDisplay() {
+        guard let attachments = CMSampleBufferGetSampleAttachmentsArray(
+                self, createIfNecessary: true) else { return }
+        let dictionary = unsafeBitCast(CFArrayGetValueAtIndex(attachments, 0),
+                                       to: CFMutableDictionary.self)
+        let key = Unmanaged.passUnretained(kCMSampleAttachmentKey_DisplayImmediately).toOpaque()
+        let value = Unmanaged.passUnretained(kCFBooleanTrue).toOpaque()
+        CFDictionarySetValue(dictionary, key, value)
     }
 }
 

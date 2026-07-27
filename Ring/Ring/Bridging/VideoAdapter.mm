@@ -232,11 +232,6 @@ static id <DecodingAdapterDelegate> _decodingDelegate;
     return getEncodingAccelerated();
 }
 
-- (BOOL)requestMediaChange:(NSString*)callId accountId:(NSString*)accountId withMedia:(NSArray*)mediaList {
-    requestMediaChange(std::string([accountId UTF8String]), std::string([callId UTF8String]), [Utils arrayOfDictionariesToVectorOfMap: mediaList]);
-    return false;
-}
-
 - (void)stopAudioDevice {
     stopAudioDevice();
 }

@@ -1,7 +1,5 @@
 /*
- *  Copyright (C) 2018-2019 Savoir-faire Linux Inc.
- *
- *  Author: Andreas Traczyk <andreas.traczyk@savoirfairelinux.com>
+ *  Copyright (C) 2018-2026 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,10 +16,10 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-@objc protocol VideoAdapterDelegate {
-    func startCapture(withDevice device: String)
-    func stopCapture(withDevice device: String)
-    func setDecodingAccelerated(withState state: Bool)
-    func fileOpened(for playerId: String, fileInfo: [String: String])
-    func writeFrame(withBuffer buffer: CVPixelBuffer?, sinkId: String, rotation: Int)
+@objc
+protocol DecodingAdapterDelegate {
+    func decodingStarted(withSinkId sinkId: String,
+                         withWidth width: Int,
+                         withHeight height: Int)
+    func decodingStopped(withSinkId sinkId: String)
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026-2026 Savoir-faire Linux Inc.
+ * Copyright (C) 2017-2026 Savoir-faire Linux Inc.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,13 +16,28 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-#import <Foundation/Foundation.h>
-#import "VideoAdapter.h"
+import Foundation
 
-NS_ASSUME_NONNULL_BEGIN
+/// Typed audio-device commands toward libjami.
+protocol LibJamiAudioAPI: AnyObject {
+    func setAudioOutputDevice(_ index: Int)
+    func setAudioInputDevice(_ index: Int)
+}
 
-@interface ObjCMockVideoAdapter : VideoAdapter
+/// Production implementation over the kept ObjC++ `AudioAdapter`.
+final class LibJamiAudioClient: LibJamiAudioAPI {
 
-@end
+    private let adapter: AudioAdapter
 
-NS_ASSUME_NONNULL_END
+    init(adapter: AudioAdapter) {
+        self.adapter = adapter
+    }
+
+    func setAudioOutputDevice(_ index: Int) {
+        adapter.setAudioOutputDevice(index)
+    }
+
+    func setAudioInputDevice(_ index: Int) {
+        adapter.setAudioInputDevice(index)
+    }
+}
