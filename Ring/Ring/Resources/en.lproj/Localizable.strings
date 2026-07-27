@@ -320,11 +320,19 @@
 "calls.currentCallWith" = "Call with ";
 "calls.maximize" = "Maximize";
 "calls.minimize" = "Minimize";
+"calls.moreActions" = "More";
+"calls.pictureInPicture" = "Picture in picture";
 "calls.setModerator" = "Set moderator";
 "calls.removeModerator" = "Unset moderator";
 "calls.muteAudio" = "Mute microphone";
 "calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "Lower hand";
+"calls.participants" = "Participants";
+"calls.gridLayout" = "Grid";
+"calls.spotlightLayout" = "Spotlight";
+"calls.inviting" = "Inviting…";
+"calls.invitedParticipants" = "Invited";
+"calls.cancelInvite" = "Cancel invitation";
 "calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
 "calls.activeCallInConversation" = "A call is in progress. Do you want to join the call?";
 "calls.acceptWithAudio" = "Accept with audio";
@@ -669,6 +677,10 @@
 "accessibility.conference.unmuteAudio" = "Unmute audio";
 "accessibility.conference.endCall" = "End call";
 "accessibility.conference.lowerHand" = "Lower hand";
+"accessibility.conference.showParticipants" = "Show participants";
+"accessibility.conference.showEntireVideo" = "Show entire video";
+"accessibility.conference.cropVideoToFill" = "Crop video to fill tile";
+"accessibility.conference.localPreview" = "Your video";
 "accessibility.account.tokenQRcode" = "Token QR code";
 
 // Swarm Colors

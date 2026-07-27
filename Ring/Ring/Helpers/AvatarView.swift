@@ -81,6 +81,7 @@ class AvatarView: UIView {
 
 class AvatarProvider: ObservableObject {
     @Published var avatar: UIImage?
+    @Published private(set) var isAvatarResolved = true
     @Published var profileName: String = ""
     @Published var registeredName: String = ""
     @Published private(set) var isGroup: Bool = false
@@ -100,10 +101,13 @@ class AvatarProvider: ObservableObject {
          size: Constants.AvatarSize,
          avatar avatarStream: Observable<Data?>,
          displayName nameStream: Observable<String>,
-         isGroup: Bool) {
+         isGroup: Bool,
+         waitForFirstAvatar: Bool = false) {
         self.size = size
         self.profileService = profileService
-        self.subscribeAvatar(observable: avatarStream)
+        self.isAvatarResolved = !waitForFirstAvatar
+        self.subscribeAvatar(observable: avatarStream,
+                             resolvesOnFirstEmission: waitForFirstAvatar)
         self.subscribeProfileName(observable: nameStream.map { Optional($0) })
         self.isGroup = isGroup
     }
@@ -114,19 +118,24 @@ class AvatarProvider: ObservableObject {
         self.profileService = profileService
     }
 
-    private func subscribeAvatar(observable: Observable<Data?>) {
+    private func subscribeAvatar(observable: Observable<Data?>,
+                                 resolvesOnFirstEmission: Bool = false) {
         observable
-            .compactMap { $0 }
+            .filter { resolvesOnFirstEmission || $0 != nil }
             .distinctUntilChanged()
             .observe(on: ConcurrentDispatchQueueScheduler(qos: .userInitiated))
             .map { [weak self] data -> UIImage? in
-                guard let self = self else { return nil }
+                guard let self = self, let data = data else { return nil }
                 let decodeSize = max(self.size.points * 2, Constants.defaultAvatarSize * 2)
                 return self.profileService.getAvatarFor(data, size: decodeSize)
             }
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] image in
-                self?.avatar = image
+                guard let self = self else { return }
+                self.avatar = image
+                if resolvesOnFirstEmission, !self.isAvatarResolved {
+                    self.isAvatarResolved = true
+                }
             })
             .disposed(by: disposeBag)
     }

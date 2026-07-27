@@ -26,14 +26,16 @@ enum IndicatorOrientation {
 }
 
 struct Indicator: View {
+    static let indicatorHeight: CGFloat = 5
+
     let orientation: IndicatorOrientation
 
     var body: some View {
-        RoundedRectangle(cornerRadius: ActionsConstants.indicatorHeight / 2)
+        RoundedRectangle(cornerRadius: Self.indicatorHeight / 2)
             .fill(Color.white.opacity(0.6))
             .frame(
-                width: orientation == .horizontal ? 60 : ActionsConstants.indicatorHeight,
-                height: orientation == .horizontal ? ActionsConstants.indicatorHeight : 60
+                width: orientation == .horizontal ? 60 : Self.indicatorHeight,
+                height: orientation == .horizontal ? Self.indicatorHeight : 60
             )
     }
 }
