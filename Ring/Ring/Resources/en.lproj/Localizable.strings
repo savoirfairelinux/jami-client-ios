@@ -328,6 +328,8 @@
 "calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "Lower hand";
 "calls.participants" = "Participants";
+"calls.participantsInCall" = "%@ in call";
+"calls.peerRecording" = "Recording";
 "calls.gridLayout" = "Grid";
 "calls.spotlightLayout" = "Spotlight";
 "calls.inviting" = "Inviting…";

@@ -669,6 +669,12 @@ internal enum L10n {
     internal static let muteAudio = L10n.tr("Localizable", "calls.muteAudio", fallback: "Mute microphone")
     /// Participants
     internal static let participants = L10n.tr("Localizable", "calls.participants", fallback: "Participants")
+    /// %@ in call
+    internal static func participantsInCall(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "calls.participantsInCall", String(describing: p1), fallback: "%@ in call")
+    }
+    /// Recording
+    internal static let peerRecording = L10n.tr("Localizable", "calls.peerRecording", fallback: "Recording")
     /// Picture in picture
     internal static let pictureInPicture = L10n.tr("Localizable", "calls.pictureInPicture", fallback: "Picture in picture")
     /// Unset moderator

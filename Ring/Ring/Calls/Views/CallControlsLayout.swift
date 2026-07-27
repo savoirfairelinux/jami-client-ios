@@ -123,8 +123,10 @@ enum CallControlsLayout {
 
         let audioOutput = ControlAction(
             intent: .toggleAudioOutput,
-            systemImage: context.speakerActive ? "speaker.wave.2.fill" : "speaker.fill",
-            accessibilityLabel: L10n.Accessibility.Calls.Default.toggleSpeaker,
+            systemImage: context.speakerActive ? "speaker.wave.3.fill" : "speaker.wave.2.fill",
+            accessibilityLabel: context.speakerActive
+                ? L10n.Accessibility.Calls.Alter.toggleSpeaker
+                : L10n.Accessibility.Calls.Default.toggleSpeaker,
             style: context.speakerActive ? .active : .normal)
 
         let hangUp = ControlAction(

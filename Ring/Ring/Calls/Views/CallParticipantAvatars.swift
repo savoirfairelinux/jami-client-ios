@@ -26,6 +26,9 @@ final class CallParticipantAvatars {
     private let profileService: ProfilesService
     private let nameService: NameService
     private var providers: [String: AvatarProvider] = [:]
+    /// Spelling-keyed shortcut: callers ask from view bodies, and canonicalizing a uri
+    /// costs a regex and several allocations that the profile key would only discard.
+    private var providersByURI: [String: AvatarProvider] = [:]
     private let disposeBag = DisposeBag()
 
     init(accountId: String, profileService: ProfilesService, nameService: NameService) {
@@ -35,10 +38,11 @@ final class CallParticipantAvatars {
     }
 
     func provider(forUri uri: String) -> AvatarProvider {
+        if let existing = providersByURI[uri] { return existing }
         let key = Self.participantKey(for: uri)
-        if let existing = providers[key.profileUri] { return existing }
-        let provider = makeProvider(key: key)
+        let provider = providers[key.profileUri] ?? makeProvider(key: key)
         providers[key.profileUri] = provider
+        providersByURI[uri] = provider
         return provider
     }
 

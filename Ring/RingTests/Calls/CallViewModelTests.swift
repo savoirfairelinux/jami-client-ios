@@ -58,8 +58,8 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
 
         XCTAssertEqual(model.call, call)
         XCTAssertNotNil(model.controls, "hang-up controls must exist on the first render")
-        XCTAssertEqual(model.title, "bob")
-        XCTAssertFalse(model.statusText.isEmpty)
+        XCTAssertEqual(model.header.title, "bob")
+        XCTAssertFalse(model.statusLine.isEmpty)
         XCTAssertTrue(model.chromeVisible)
         XCTAssertEqual(model.tiles.count, 1)
         let preview = model.tiles.first
@@ -105,7 +105,7 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
         await harness.waitForEnded(model)
 
         XCTAssertTrue(model.chromeVisible, "the ending must bring the chrome back")
-        XCTAssertEqual(model.statusText, L10n.Calls.callFinished)
+        XCTAssertEqual(model.statusLine, L10n.Calls.callFinished)
         XCTAssertNil(model.tiles.first { $0.participant.isLocalPreview },
                      "the self-preview must not outlive the call")
         XCTAssertEqual(model.tiles.count, 1, "the peer stays, as an avatar")
@@ -121,7 +121,8 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
         await harness.callService.hangUp(harness.callId)
         await harness.waitForEnded(model)
 
-        XCTAssertEqual(model.statusText, "")
+        XCTAssertNotEqual(model.statusLine, L10n.Calls.callFinished,
+                          "hanging up yourself needs no announcement")
         XCTAssertNil(model.tiles.first { $0.participant.isLocalPreview })
         XCTAssertEqual(model.tiles.first?.tileState.showsVideo, false)
         XCTAssertTrue(model.shouldDismiss, "a local end leaves on the tap")
@@ -330,7 +331,8 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
                                         accountId: Harness.accountId,
                                         state: "ACTIVE_ATTACHED",
                                         memberCallIds: [harness.callId.raw],
-                                        participants: [], media: []))
+                                        participants: [],
+                                        media: [.audio(), .video()]))
         func sendInfos(activeId: String?, othersSide: Int) {
             func entry(_ uri: String, _ device: String, _ sink: String)
             -> ConferenceParticipantInfo {
@@ -420,14 +422,63 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
                        "the original call sink contains the peer's mixed conference frame")
     }
 
+    func testHostedConferenceVideoMuteHidesLocalCameraAndRevealsChrome() async {
+        let harness = await Harness(callHasVideo: true)
+        let model = harness.makeModel(localJamiId: jamiId1)
+        model.screenTapped()
+        XCTAssertFalse(model.chromeVisible, "precondition: video call chrome can hide")
+
+        harness.send(.conferenceCreated(
+            conferenceId: "conf-1", conversationId: "", accountId: Harness.accountId,
+            state: "ACTIVE_ATTACHED",
+            memberCallIds: [harness.callId.raw],
+            participants: [],
+            media: [.audio(), .video(muted: true)]))
+        harness.send(.conferenceInfosUpdated(
+            conferenceId: "conf-1",
+            participants: [ConferenceParticipantInfo(
+                ["uri": jamiId1, "device": "local", "sinkId": "conf-1_video_0"])!]))
+
+        await Harness.wait { model.conference?.participants.count == 1 }
+        let localTile = model.tiles.first { $0.distributor === harness.videoService.localFrames }
+        XCTAssertEqual(localTile?.tileState.showsVideo, false)
+        XCTAssertTrue(model.chromeVisible,
+                      "muting the effective host video makes the chrome persistent")
+    }
+
+    func testOnlyLocalModeratorCanAddToPeerHostedConference() async {
+        let harness = await Harness(callHasVideo: true)
+        let model = harness.makeModel(localJamiId: jamiId1)
+        func participant(_ uri: String, moderator: Bool) -> ConferenceParticipantInfo {
+            ConferenceParticipantInfo(
+                ["uri": uri, "device": uri, "sinkId": "\(uri)_video_0",
+                 "isModerator": moderator ? "true" : "false"])!
+        }
+
+        harness.send(.conferenceInfosUpdated(
+            conferenceId: harness.callId.raw,
+            participants: [participant(jamiId1, moderator: false),
+                           participant("bob", moderator: true)]))
+        await Harness.wait { model.conference?.participants.count == 2 }
+        XCTAssertFalse(model.canAddParticipant)
+
+        harness.send(.conferenceInfosUpdated(
+            conferenceId: harness.callId.raw,
+            participants: [participant(jamiId1, moderator: true),
+                           participant("bob", moderator: true)]))
+        await Harness.wait { model.canAddParticipant }
+        XCTAssertTrue(model.canAddParticipant)
+    }
+
     func testOngoingOneToOneCallListsBothPeople() async {
         let harness = await Harness(callHasVideo: false)
         let model = harness.makeModel(localJamiId: jamiId1)
 
-        XCTAssertEqual(model.participantRows.map(\.uri), [jamiId1, "bob"])
+        XCTAssertEqual(model.participantRows.map(\.uri), [jamiId1, "bob"],
+                       "the roster is who is on the call, conference or not")
         XCTAssertTrue(model.pendingRows.isEmpty)
-        XCTAssertTrue(model.hasParticipantList,
-                      "the roster is who is on the call, conference or not")
+        XCTAssertFalse(model.header.showsRoster,
+                       "but a two-person list has nothing in it to act on")
     }
 
     func testRingingCallHasNoRosterYet() {
@@ -444,7 +495,7 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
 
         XCTAssertTrue(model.participantRows.isEmpty,
                       "nobody is on a call that has not connected")
-        XCTAssertFalse(model.hasParticipantList)
+        XCTAssertFalse(model.header.showsRoster)
     }
 
     func testCancellingTheOnlyInviteLeavesTheCallRosterStanding() async {
@@ -456,15 +507,143 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
                                            requestedBy: jamiId1)
         await Harness.wait { model.pendingRows.count == 1 }
         XCTAssertEqual(model.participantRows.count, 2)
-        XCTAssertEqual(model.participantCount, 3)
+        XCTAssertTrue(model.header.showsRoster,
+                      "a pending invite is something the roster can act on")
 
         model.cancelInvite(CallId(raw: "sub-call"))
         await Harness.wait { model.pendingRows.isEmpty }
 
         XCTAssertEqual(model.participantRows.map(\.uri), [jamiId1, "bob"],
                        "cancelling one invite must remove one row, not the whole list")
-        XCTAssertTrue(model.hasParticipantList,
-                      "the list stays reachable — the call is still running")
+        XCTAssertFalse(model.header.showsRoster,
+                       "with the invite gone this is a plain two-person call again")
+    }
+
+    func testConferenceStopsBeingTitledByTheAnsweringPeer() async {
+        let harness = await Harness(callHasVideo: false)
+        let model = harness.makeModel(localJamiId: jamiId1)
+        XCTAssertEqual(model.header.title, "bob", "precondition: a one-to-one call")
+        XCTAssertFalse(model.header.showsRoster, "two people are not worth a sheet")
+
+        harness.callAPI.conferenceCallsReturn["conf-1"] = [harness.callId.raw]
+        harness.send(.conferenceCreated(conferenceId: "conf-1", conversationId: "",
+                                        accountId: Harness.accountId,
+                                        state: "ACTIVE_ATTACHED",
+                                        memberCallIds: [harness.callId.raw],
+                                        participants: [],
+                                        media: [.audio()]))
+        harness.send(.conferenceInfosUpdated(
+                        conferenceId: "conf-1",
+                        participants: [ConferenceParticipantInfo(["uri": "bob",
+                                                                  "device": deviceId1])!,
+                                       ConferenceParticipantInfo(["uri": "carol",
+                                                                  "device": deviceId2])!]))
+        await Harness.wait { model.conference?.participants.count == 2 }
+
+        XCTAssertEqual(model.header.title, L10n.Calls.participantsInCall("2"),
+                       "conference events must reach the header — it stops showing "
+                        + "whoever answered first")
+        XCTAssertTrue(model.header.showsRoster)
+    }
+
+    func testConferenceWithNoInfosYetStillCountsThePeopleTalking() async {
+        let harness = await Harness(callHasVideo: false)
+        let model = harness.makeModel(localJamiId: jamiId1)
+        harness.callAPI.conferenceCallsReturn["conf-1"] = [harness.callId.raw]
+
+        harness.send(.conferenceCreated(conferenceId: "conf-1", conversationId: "",
+                                        accountId: Harness.accountId,
+                                        state: "ACTIVE_ATTACHED",
+                                        memberCallIds: [harness.callId.raw],
+                                        participants: [],
+                                        media: [.audio()]))
+        await Harness.wait { model.conference != nil }
+
+        XCTAssertEqual(model.header.title, L10n.Calls.participantsInCall("2"),
+                       "the conference exists before its first infos arrive — "
+                        + "the two people already talking are not nobody")
+    }
+
+    func testConferenceRetargetDropsThePreviousPeersResolvedName() async {
+        let harness = await Harness(callHasVideo: false)
+        let nameService = NameService(
+            withNameRegistrationAdapter: NameRegistrationAdapter())
+        let model = harness.makeModel(localJamiId: jamiId1, nameService: nameService)
+
+        let response = LookupNameResponse()
+        response.state = .found
+        response.address = "bob"
+        response.name = "Resolved Bob"
+        response.requestedName = ""
+        nameService.usernameLookupStatus.onNext(response)
+        await Harness.wait { model.header.title == "Resolved Bob" }
+
+        let survivorId = "call-carol"
+        harness.send(.incomingCall(accountId: Harness.accountId, callId: survivorId,
+                                   peerUri: "carol", media: [.audio()], details: nil))
+        harness.send(.callStateChanged(callId: survivorId, state: .current,
+                                       rawState: "CURRENT", accountId: Harness.accountId,
+                                       code: 0, negotiatedMedia: [.audio()], videoCodec: nil))
+        harness.send(.conferenceCreated(conferenceId: "conf-1", conversationId: "",
+                                        accountId: Harness.accountId,
+                                        state: "ACTIVE_ATTACHED",
+                                        memberCallIds: [harness.callId.raw, survivorId],
+                                        participants: [], media: [.audio()]))
+        await Harness.wait { model.conference?.memberCallIds.count == 2 }
+
+        harness.send(.callStateChanged(callId: harness.callId.raw, state: .over,
+                                       rawState: "OVER", accountId: Harness.accountId,
+                                       code: 0, negotiatedMedia: [], videoCodec: nil))
+        await Harness.wait {
+            model.currentCallId == CallId(raw: survivorId) && model.call?.peerUri == "carol"
+        }
+        harness.send(.conferenceRemoved(conferenceId: "conf-1"))
+        await Harness.wait { model.conference == nil }
+
+        XCTAssertEqual(model.header.title, "carol",
+                       "the survivor must not inherit the previous peer's resolved name")
+    }
+
+    func testGeometryOnlyConferenceUpdatesLeaveTheHeaderAlone() async {
+        let harness = await Harness(callHasVideo: true)
+        let model = harness.makeModel(localJamiId: jamiId1)
+        harness.callAPI.conferenceCallsReturn["conf-1"] = [harness.callId.raw]
+        harness.send(.conferenceCreated(conferenceId: "conf-1", conversationId: "",
+                                        accountId: Harness.accountId,
+                                        state: "ACTIVE_ATTACHED",
+                                        memberCallIds: [harness.callId.raw],
+                                        participants: [],
+                                        media: [.audio(), .video()]))
+        func sendInfos(side: Int) {
+            harness.send(.conferenceInfosUpdated(
+                            conferenceId: "conf-1",
+                            participants: ["bob", "carol"].map {
+                                ConferenceParticipantInfo(["uri": $0,
+                                                           "device": deviceId1,
+                                                           "w": "\(side)",
+                                                           "h": "\(side)"])!
+                            }))
+        }
+        sendInfos(side: 300)
+        await Harness.wait { model.conference?.participants.count == 2 }
+
+        var emissions = 0
+        let cancellable = model.$header.dropFirst().sink { _ in emissions += 1 }
+        sendInfos(side: 120)
+        await Harness.wait { model.conference?.participants.first?.frame.width == 120 }
+
+        XCTAssertEqual(emissions, 0,
+                       "the daemon reports geometry constantly — the header shows none of it")
+        cancellable.cancel()
+    }
+
+    func testStatusLineCarriesTheDurationOnceTheCallIsUp() async {
+        let harness = await Harness(callHasVideo: false)
+        let model = harness.makeModel(localJamiId: jamiId1)
+
+        XCTAssertNotNil(model.statusLine.range(of: "^[0-9]{2}:[0-9]{2}$",
+                                               options: .regularExpression),
+                        "a connected call shows its duration, not a status word")
     }
 
     func testTileTapOnAOneToOneCallStillTogglesTheCanvas() async {
@@ -515,7 +694,10 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
 
         @MainActor
         func makeModel(localJamiId: String = "",
-                       pipController: PiPControlling = PiPController()) -> CallViewModel {
+                       pipController: PiPControlling = PiPController(),
+                       nameService: NameService = NameService(
+                        withNameRegistrationAdapter: NameRegistrationAdapter()))
+        -> CallViewModel {
             let database = DBManager(profileHepler: ProfileDataHelper(),
                                      conversationHelper: ConversationDataHelper(),
                                      interactionHepler: InteractionDataHelper(),
@@ -527,7 +709,7 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
                 audio: AudioService(audio: LibJamiAudioClient(adapter: AudioAdapter())),
                 profileService: ProfilesService(withProfilesAdapter: ProfilesAdapter(),
                                                 dbManager: database),
-                nameService: NameService(withNameRegistrationAdapter: NameRegistrationAdapter()),
+                nameService: nameService,
                 localJamiId: localJamiId,
                 pipController: pipController)
         }

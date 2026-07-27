@@ -43,9 +43,7 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
 
     var tiles: [CanvasTileModel] { canvas.tiles }
     var canvasMode: CanvasLayoutMode { canvas.mode }
-    @Published private(set) var durationText = ""
-    @Published private(set) var statusText = ""
-    @Published private(set) var peerIsRecording = false
+    @Published private(set) var statusLine = ""
     @Published private(set) var shouldDismiss = false
     @Published var showsDialpad = false
     @Published private(set) var canStartPictureInPicture = false
@@ -58,7 +56,7 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
     @Published private(set) var moreExpanded = false
     @Published private(set) var contentHidden = false
 
-    @Published private(set) var title: String = ""
+    @Published private(set) var header = CallHeaderModel.empty
 
     // MARK: - Dependencies
 
@@ -85,7 +83,10 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
     private var wasAutoHideable = false
     private static let autoHideDelay: TimeInterval = 4
     private var avatars: CallParticipantAvatars?
-    private var titleCancellable: AnyCancellable?
+    private var peerName = ""
+    private var observedPeerURI: String?
+    private var peerNameCancellable: AnyCancellable?
+    private var chromeCancellable: AnyCancellable?
     private var pipSource: PiPSourceSelector.Selection?
 
     private enum PiPState {
@@ -147,7 +148,9 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
         apply(call: call)
         rebuildTiles()
         startObserving(callId: call.id, fallback: call)
-        startDurationTimer()
+        chromeCancellable = $chromeVisible
+            .removeDuplicates()
+            .sink { [weak self] visible in self?.setDurationTicking(visible) }
     }
 
     deinit {
@@ -295,11 +298,10 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
 
     private func apply(call: CallState) {
         self.call = call
-        peerIsRecording = call.peerIsRecording
-        statusText = statusDescription(for: call.status)
+        configureIdentity(for: call)
         rebuildRows()
         rebuildControlsAndCapabilities()
-        configureIdentity(for: call)
+        refreshStatusLine()
         updateChromeForState()
         updatePiPSource()
     }
@@ -310,15 +312,28 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
                                              profileService: profileService,
                                              nameService: nameService)
         }
-        if title.isEmpty { title = call.bestName }
-        guard conference == nil, titleCancellable == nil,
-              !call.peerUri.isEmpty, let avatars = avatars else { return }
-        titleCancellable = avatars.provider(forUri: call.peerUri).$profileName
+        let peerURI = call.peerUri
+        guard peerURI != observedPeerURI else { return }
+        peerNameCancellable?.cancel()
+        peerNameCancellable = nil
+        observedPeerURI = peerURI
+        peerName = ""
+        guard !peerURI.isEmpty, let avatars = avatars else { return }
+        peerNameCancellable = avatars.provider(forUri: peerURI).$profileName
             .receive(on: DispatchQueue.main)
             .sink { [weak self] name in
-                guard let self = self, self.conference == nil, !name.isEmpty else { return }
-                self.title = name
+                guard let self = self, self.observedPeerURI == peerURI,
+                      !name.isEmpty else { return }
+                self.peerName = name
+                self.rebuildHeader()
             }
+    }
+
+    private func rebuildHeader() {
+        let next = CallHeaderModel(call: call, isConference: conference != nil,
+                                   rows: participantRows, pending: pendingRows,
+                                   peerName: peerName)
+        if next != header { header = next }
     }
 
     private func daemonCanvasMode() -> CanvasLayoutMode {
@@ -350,18 +365,6 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
         }
     }
 
-    private func statusDescription(for status: CallStatus) -> String {
-        switch status {
-        case .incoming: return L10n.Global.incomingCall
-        case .connecting: return L10n.Calls.connecting
-        case .ringing: return L10n.Calls.ringing
-        case .current: return ""
-        case .held: return L10n.Accessibility.Calls.Default.pauseCall
-        case .terminated(.endedLocally): return ""
-        case .terminated: return L10n.Calls.callFinished
-        }
-    }
-
     // MARK: - Tiles
 
     private func rebuildTiles() {
@@ -381,14 +384,19 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
 
     // MARK: - Duration
 
-    private func startDurationTimer() {
+    private func refreshStatusLine() {
+        let next = CallHeaderModel.statusLine(for: call)
+        if next != statusLine { statusLine = next }
+    }
+
+    /// The duration only exists to be read, so it ticks only while the chrome shows it.
+    private func setDurationTicking(_ ticking: Bool) {
+        guard ticking else { return stopDurationTimer() }
+        refreshStatusLine()
+        guard durationTimer == nil else { return }
         durationTimer = Timer.publish(every: 1, on: .main, in: .common)
             .autoconnect()
-            .sink { [weak self] _ in
-                guard let self = self, let startedAt = self.call?.startedAt else { return }
-                let elapsed = Int(Date().timeIntervalSince(startedAt))
-                self.durationText = String(format: "%02d:%02d", elapsed / 60, elapsed % 60)
-            }
+            .sink { [weak self] _ in self?.refreshStatusLine() }
     }
 
     private func stopDurationTimer() {
@@ -503,14 +511,6 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
         conference?.isHost == true || participantRows.contains { $0.isLocal && $0.isModerator }
     }
 
-    var hasParticipantList: Bool {
-        !participantRows.isEmpty || !pendingRows.isEmpty
-    }
-
-    var participantCount: Int {
-        participantRows.count + pendingRows.count
-    }
-
     private func rebuildControlsAndCapabilities() {
         guard let call = call else {
             controls = nil
@@ -528,17 +528,22 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
         Task { await callService.setLayout(layout, in: confId) }
     }
 
+    /// The daemon reports conference infos continuously — publish only real changes.
     private func rebuildRows() {
-        if let conference = conference {
-            participantRows = ConferenceParticipants.rows(from: conference,
-                                                          localJamiId: localJamiId)
+        let rows: [ConferenceParticipantRow]
+        // `conferenceCreated` lands before the first infos, so a conference with no
+        // participants yet is still the two people already talking — not nobody.
+        if let conference = conference, !conference.participants.isEmpty {
+            rows = ConferenceParticipants.rows(from: conference, localJamiId: localJamiId)
         } else if let call = call, call.status.isOngoing {
-            participantRows = ConferenceParticipants.rows(from: call,
-                                                          localJamiId: localJamiId)
+            rows = ConferenceParticipants.rows(from: call, localJamiId: localJamiId)
         } else {
-            participantRows = []
+            rows = []
         }
-        pendingRows = ConferenceParticipants.pendingRows(from: call?.pendingInvites ?? [])
+        let pending = ConferenceParticipants.pendingRows(from: call?.pendingInvites ?? [])
+        if rows != participantRows { participantRows = rows }
+        if pending != pendingRows { pendingRows = pending }
+        rebuildHeader()
     }
 
     func cancelInvite(_ invitedCallId: CallId) {
