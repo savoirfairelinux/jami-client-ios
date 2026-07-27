@@ -30,6 +30,35 @@ enum CameraDevice {
     static let high = "1280_720Camera"
 }
 
+/// Desired camera ownership and quality. `CameraCapturer` mutates this only
+/// on its session queue, then reconciles the `AVCaptureSession` once per intent.
+struct CameraCaptureState {
+    private var previewActive = false
+    private var daemonActive = false
+    private var previewQuality = AVCaptureSession.Preset.high
+    private var daemonQuality: AVCaptureSession.Preset?
+
+    var shouldRun: Bool {
+        return previewActive || daemonActive
+    }
+
+    var quality: AVCaptureSession.Preset {
+        return daemonQuality ?? previewQuality
+    }
+
+    mutating func setPreview(active: Bool, quality: AVCaptureSession.Preset?) {
+        previewActive = active
+        if let quality = quality {
+            previewQuality = quality
+        }
+    }
+
+    mutating func setDaemon(active: Bool, quality: AVCaptureSession.Preset?) {
+        daemonActive = active
+        daemonQuality = active ? quality : nil
+    }
+}
+
 /// Owns the AVCaptureSession. All session work runs asynchronously on one
 /// serial queue.
 final class CameraCapturer: NSObject, @unchecked Sendable {
@@ -42,7 +71,7 @@ final class CameraCapturer: NSObject, @unchecked Sendable {
     private let captureSession = AVCaptureSession()
     private var systemPressureObservation: NSKeyValueObservation?
 
-    private var quality = AVCaptureSession.Preset.high
+    private var captureState = CameraCaptureState()
     private var position = AVCaptureDevice.Position.front
     private let connectionOrientation = AVCaptureVideoOrientation.landscapeLeft
 
@@ -106,38 +135,27 @@ final class CameraCapturer: NSObject, @unchecked Sendable {
 
     // MARK: - Start / stop / switch
 
-    func setQuality(_ quality: AVCaptureSession.Preset) {
+    func setPreviewCapture(active: Bool, quality: AVCaptureSession.Preset? = nil) {
         sessionQueue.async { [weak self] in
-            self?.quality = quality
+            guard let self = self else { return }
+            self.captureState.setPreview(active: active, quality: quality)
+            self.reconcileCaptureState()
+        }
+    }
+
+    func setDaemonCapture(active: Bool, quality: AVCaptureSession.Preset? = nil) {
+        sessionQueue.async { [weak self] in
+            guard let self = self else { return }
+            self.captureState.setDaemon(active: active, quality: quality)
+            self.reconcileCaptureState()
         }
     }
 
     func currentQuality() async -> AVCaptureSession.Preset {
         await withCheckedContinuation { continuation in
             sessionQueue.async { [weak self] in
-                continuation.resume(returning: self?.quality ?? .high)
+                continuation.resume(returning: self?.captureState.quality ?? .high)
             }
-        }
-    }
-
-    func start() {
-        sessionQueue.async { [weak self] in
-            guard let self = self else { return }
-            if self.captureSession.canSetSessionPreset(self.quality) {
-                self.captureSession.beginConfiguration()
-                self.captureSession.sessionPreset = self.quality
-                self.captureSession.commitConfiguration()
-            }
-            if !self.captureSession.isRunning {
-                self.captureSession.startRunning()
-            }
-        }
-    }
-
-    func stop() {
-        sessionQueue.async { [weak self] in
-            guard let self = self, self.captureSession.isRunning else { return }
-            self.captureSession.stopRunning()
         }
     }
 
@@ -184,7 +202,7 @@ final class CameraCapturer: NSObject, @unchecked Sendable {
 
         captureSession.inputs.forEach(captureSession.removeInput)
         captureSession.outputs.forEach(captureSession.removeOutput)
-        captureSession.sessionPreset = quality
+        captureSession.sessionPreset = captureState.quality
 
         guard let device = selectDevice(position: position) else {
             throw CameraError.deviceUnavailable
@@ -226,6 +244,24 @@ final class CameraCapturer: NSObject, @unchecked Sendable {
             currentInput.device.position == .back ? .front : .back
         try performSelectCamera(position: newPosition)
         return newPosition
+    }
+
+    private func reconcileCaptureState() {
+        let quality = captureState.quality
+        if captureSession.sessionPreset != quality,
+           captureSession.canSetSessionPreset(quality) {
+            captureSession.beginConfiguration()
+            captureSession.sessionPreset = quality
+            captureSession.commitConfiguration()
+        }
+
+        if captureState.shouldRun {
+            if !captureSession.isRunning {
+                captureSession.startRunning()
+            }
+        } else if captureSession.isRunning {
+            captureSession.stopRunning()
+        }
     }
 
     private func performSelectCamera(position newPosition: AVCaptureDevice.Position) throws {
