@@ -25,6 +25,7 @@ import RxRelay
 final class AvatarProviderTests: XCTestCase {
 
     var injectionBag: InjectionBag!
+    private var cancellables = Set<AnyCancellable>()
 
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -35,12 +36,11 @@ final class AvatarProviderTests: XCTestCase {
         let daemonService = DaemonService(dRingAdaptor: DRingAdapter())
         let nameService = NameService(withNameRegistrationAdapter: NameRegistrationAdapter())
         let presenceService = PresenceService(withPresenceAdapter: PresenceAdapter())
-        let videoService = VideoService(withVideoAdapter: VideoAdapter())
-        let audioService = AudioService(withAudioAdapter: AudioAdapter())
+        let videoService = VideoService()
+        let audioService = AudioService()
+        let callService = CallService()
         let systemService = SystemService(withSystemAdapter: SystemAdapter())
         let networkService = NetworkService()
-        let callsProvider: CallsProviderService = CallsProviderService(provider: CXProvider(configuration: CallsHelpers.providerConfiguration()), controller: CXCallController())
-        let callService: CallsService = CallsService(withCallsAdapter: CallsAdapter())
         let accountService: AccountsService = AccountsService(withAccountAdapter: AccountAdapter(), dbManager: dBManager)
         let contactsService: ContactsService = ContactsService(withContactsAdapter: ContactsAdapter(), dbManager: dBManager)
         let profileService: ProfilesService =
@@ -67,7 +67,6 @@ final class AvatarProviderTests: XCTestCase {
                                     withAudioService: audioService,
                                     withDataTransferService: dataTransferService,
                                     withProfileService: profileService,
-                                    withCallsProvider: callsProvider,
                                     withLocationSharingService: locationSharingService,
                                     withRequestsService: requestsService,
                                     withSystemService: systemService,
@@ -76,6 +75,7 @@ final class AvatarProviderTests: XCTestCase {
 
     override func tearDownWithError() throws {
         try super.tearDownWithError()
+        cancellables.removeAll()
         injectionBag = nil
     }
 
@@ -98,18 +98,61 @@ final class AvatarProviderTests: XCTestCase {
         swarmInfo.participantsAvatars.accept(participants.compactMap { $0.avatarData.value })
     }
 
-    func waitForMainScheduler() {
-        let expectation = expectation(description: "wait for main queue delivery")
-        DispatchQueue.main.async { expectation.fulfill() }
-        wait(for: [expectation], timeout: 1)
-    }
-
     func createTestImageData() -> Data {
         let renderer = UIGraphicsImageRenderer(size: CGSize(width: 10, height: 10))
         return renderer.pngData { ctx in
             UIColor.red.setFill()
             ctx.fill(CGRect(x: 0, y: 0, width: 10, height: 10))
         }
+    }
+
+    func testDeferredAvatarRemainsUnresolvedUntilFirstResult() {
+        let avatarData = PublishSubject<Data?>()
+        let provider = AvatarProvider(
+            profileService: injectionBag.profileService,
+            size: .call160,
+            avatar: avatarData.asObservable(),
+            displayName: Observable.just("Alice"),
+            isGroup: false,
+            waitForFirstAvatar: true)
+
+        XCTAssertFalse(provider.isAvatarResolved)
+
+        let resolved = expectation(description: "empty avatar result resolves")
+        provider.$isAvatarResolved
+            .filter { $0 }
+            .sink { _ in resolved.fulfill() }
+            .store(in: &cancellables)
+
+        avatarData.onNext(nil)
+
+        wait(for: [resolved], timeout: 1)
+        XCTAssertNil(provider.avatar)
+    }
+
+    func testDeferredAvatarPublishesImageBeforeResolution() {
+        let avatarData = PublishSubject<Data?>()
+        let provider = AvatarProvider(
+            profileService: injectionBag.profileService,
+            size: .call160,
+            avatar: avatarData.asObservable(),
+            displayName: Observable.just("Alice"),
+            isGroup: false,
+            waitForFirstAvatar: true)
+
+        let resolved = expectation(description: "decoded avatar resolves")
+        provider.$isAvatarResolved
+            .filter { $0 }
+            .sink { _ in
+                XCTAssertNotNil(provider.avatar,
+                                "the image must be available before resolution is published")
+                resolved.fulfill()
+            }
+            .store(in: &cancellables)
+
+        avatarData.onNext(createTestImageData())
+
+        wait(for: [resolved], timeout: 1)
     }
 
     // MARK: - Display Participant Selection

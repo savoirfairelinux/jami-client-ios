@@ -28,7 +28,7 @@ class DialpadViewModel: ObservableObject, ViewModel, Stateable {
     private let stateSubject = PublishSubject<State>()
     var state: Observable<State> { stateSubject.asObservable() }
 
-    private let callService: CallsService
+    private let callService: CallService
 
     /// The number being composed, shown in the display label.
     @Published var phoneNumber: String = ""

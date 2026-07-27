@@ -32,9 +32,9 @@ class ConversationsManager {
     private let accountsService: AccountsService
     private let nameService: NameService
     private let dataTransferService: DataTransferService
-    private let callService: CallsService
+    private let callService: CallService
+    private let callsManager: CallsManager
     private let locationSharingService: LocationSharingService
-    private let callsProvider: CallsProviderService
     private let requestService: RequestsService
     private let profileService: ProfilesService
     private let presenceService: PresenceService
@@ -53,10 +53,10 @@ class ConversationsManager {
          accountsService: AccountsService,
          nameService: NameService,
          dataTransferService: DataTransferService,
-         callService: CallsService,
+         callService: CallService,
+         callsManager: CallsManager,
          locationSharingService: LocationSharingService,
          contactsService: ContactsService,
-         callsProvider: CallsProviderService,
          requestsService: RequestsService,
          profileService: ProfilesService,
          presenceService: PresenceService) {
@@ -65,9 +65,9 @@ class ConversationsManager {
         self.nameService = nameService
         self.dataTransferService = dataTransferService
         self.callService = callService
+        self.callsManager = callsManager
         self.locationSharingService = locationSharingService
         self.contactsService = contactsService
-        self.callsProvider = callsProvider
         self.requestService = requestsService
         self.profileService = profileService
         self.presenceService = presenceService
@@ -85,10 +85,8 @@ class ConversationsManager {
         self.cleanConversationData()
         self.subscribeFileTransferEvents()
         self.subscribeCallsEvents()
-        self.subscribeOutgoingCallLifecycle()
         self.subscribeContactsEvents()
         self.subscribeLocationSharingEvent()
-        self.subscribeCallsProviderEvents()
         self.subscribeRequestEvents()
         self.controlAccountsState()
     }
@@ -99,10 +97,9 @@ class ConversationsManager {
         NotificationCenter.default.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(appMovedForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
         // calls events
-        let callProviderEvents = callsProvider.sharedResponseStream
+        let callProviderEvents = callService.sharedResponseStream
             .filter({ (event) in
-                return event.eventType == .callProviderDeclineCall ||
-                    event.eventType == .callProviderPreviewPendingCall
+                return event.eventType == .callProviderPreviewPendingCall
             })
         let callEndedEvents = self.callService.sharedResponseStream
             .filter({ (event) in
@@ -148,7 +145,7 @@ class ConversationsManager {
                         let accountIds = extractAccountIds(from: updatedConversations)
                         self.reloadConversationsAndRequests(accountIds: accountIds)
                     }
-                case .callEnded, .callProviderDeclineCall:
+                case .callEnded:
                     DispatchQueue.main.async {
                         // Deactivate whenever the app is not actively in the foreground, so a
                         // pending push call that ends while the app is inactive or in the
@@ -171,7 +168,7 @@ class ConversationsManager {
      the notification extension should handle incoming notifications unless there is a pending call.
      */
     func updateBackgroundState() {
-        if self.callsProvider.hasActiveCalls() { return }
+        if self.callsManager.hasActiveCalls() { return }
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             appDelegate.updateCallScreenState(presenting: false)
         }
@@ -196,7 +193,6 @@ class ConversationsManager {
             }
             self.pendingCallBackgroundTask = UIApplication.shared.beginBackgroundTask(withName: "pending-call-account") { [weak self] in
                 guard let self = self else { return }
-                self.callsProvider.stopAllUnhandeledCalls()
                 self.accountsService.setAccountsActive(active: false)
                 if self.pendingCallBackgroundTask != .invalid {
                     UIApplication.shared.endBackgroundTask(self.pendingCallBackgroundTask)
@@ -324,45 +320,6 @@ class ConversationsManager {
             .disposed(by: self.disposeBag)
     }
 
-    private func subscribeCallsProviderEvents() {
-        callsProvider.sharedResponseStream
-            .filter({serviceEvent in
-                guard serviceEvent.eventType == .callProviderAcceptCall ||
-                        serviceEvent.eventType == .callProviderDeclineCall else {
-                    return false
-                }
-                return true
-            })
-            .subscribe(onNext: { [weak self] serviceEvent in
-                os_log("event from call provider")
-                guard let self = self,
-                      let callUUID: String = serviceEvent
-                        .getEventInput(ServiceEventInput.callUUID),
-                      let call = self.callService.callByUUID(UUID: callUUID) else {
-                    return
-                }
-                if serviceEvent.eventType == ServiceEventType.callProviderAcceptCall {
-                    os_log("call provider accept call %@", call.callId)
-                    if !self.callService.acceptCall(call: call) {
-                        self.callsProvider.stopCall(callUUID: call.callUUID, participant: call.paricipantHash())
-                    }
-                } else {
-                    if call.callType == .incoming {
-                        self.callService
-                            .decline(callId: call.callId)
-                            .subscribe()
-                            .disposed(by: self.disposeBag)
-                    } else {
-                        self.callService
-                            .endCall(callId: call.callId)
-                            .subscribe()
-                            .disposed(by: self.disposeBag)
-                    }
-                }
-            })
-            .disposed(by: self.disposeBag)
-    }
-
     private func subscribeLocationSharingEvent() {
         self.locationSharingService
             .locationServiceEventShared
@@ -393,17 +350,8 @@ class ConversationsManager {
     }
 
     private func subscribeCallsEvents() {
-        self.callService.sharedResponseStream
-            .filter({ (event) in
-                return  event.eventType == .callEnded
-            })
-            .subscribe(onNext: { [weak self] event in
-                guard let self = self else { return }
-                guard let peerId: String = event.getEventInput(ServiceEventInput.peerUri),
-                      let uuidString: String = event.getEventInput(ServiceEventInput.callUUID) else { return }
-                self.callsProvider.stopCall(callUUID: UUID(uuidString: uuidString)!, participant: peerId.filterOutHost(), isRemoteEnd: true)
-            })
-            .disposed(by: disposeBag)
+        // CallKit teardown on call end is owned by CallKitService;
+        // only in-call messages are handled here.
         self.callService.newMessage
             .filter({ (event) in
                 return  event.eventType == ServiceEventType.newIncomingMessage
@@ -450,23 +398,6 @@ class ConversationsManager {
                                                      shouldRefreshConversations: true)
                     .subscribe()
                     .disposed(by: self.disposeBag)
-            })
-            .disposed(by: disposeBag)
-    }
-
-    private func subscribeOutgoingCallLifecycle() {
-        self.callService.callUpdates
-            .filter { $0.callType == .outgoing }
-            .subscribe(onNext: { [weak self] call in
-                guard let self = self else { return }
-                switch call.state {
-                case .ringing:
-                    self.callsProvider.reportOutgoingCallConnecting(callUUID: call.callUUID)
-                case .current:
-                    self.callsProvider.reportOutgoingCallConnected(callUUID: call.callUUID)
-                default:
-                    break
-                }
             })
             .disposed(by: disposeBag)
     }

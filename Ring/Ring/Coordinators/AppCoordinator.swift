@@ -54,6 +54,8 @@ final class AppCoordinator: Coordinator, StateableResponsive {
     var parentCoordinator: Coordinator?
 
     var childCoordinators = [Coordinator]()
+    /// Owns in-call screen presentation for the whole app lifetime.
+    private var callScreenPresenter: CallScreenPresenter?
 
     // MARK: StateableResponsive
     var disposeBag = DisposeBag()
@@ -95,6 +97,16 @@ final class AppCoordinator: Coordinator, StateableResponsive {
     }
 
     func start () {
+        if callScreenPresenter == nil {
+            let presenter = CallScreenPresenter(callService: injectionBag.callService,
+                                                navigationController: navigationController,
+                                                injectionBag: injectionBag)
+            presenter.onOpenConversation = { [weak self] route in
+                self?.conversationsCoordinator?
+                    .openConversationFromCall(route: route)
+            }
+            callScreenPresenter = presenter
+        }
         self.stateSubject.onNext(AppState.initialLoading)
 
         switch self.initialState {

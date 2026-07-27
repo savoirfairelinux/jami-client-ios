@@ -26,7 +26,6 @@ import SwiftUI
 /// This Coordinator drives the conversation navigation (Smartlist / Conversation detail)
 class ConversationsCoordinator: RootCoordinator, StateableResponsive, ConversationNavigation {
     var presentingVC = [String: Bool]()
-    var pendingCallUUIDs = Set<String>()
 
     var rootViewController: UIViewController {
         return self.navigationController
@@ -41,10 +40,9 @@ class ConversationsCoordinator: RootCoordinator, StateableResponsive, Conversati
     var disposeBag = DisposeBag()
 
     let stateSubject = PublishSubject<State>()
-    let callService: CallsService
+    let callService: CallService
     let accountService: AccountsService
     let conversationService: ConversationsService
-    let callsProvider: CallsProviderService
     let nameService: NameService
     let requestsService: RequestsService
     let conversationsSource: ConversationDataSource
@@ -58,7 +56,6 @@ class ConversationsCoordinator: RootCoordinator, StateableResponsive, Conversati
         self.accountService = injectionBag.accountService
         self.nameService = injectionBag.nameService
         self.conversationService = injectionBag.conversationsService
-        self.callsProvider = injectionBag.callsProvider
         self.requestsService = injectionBag.requestsService
         self.conversationsSource = ConversationDataSource(with: injectionBag)
         self.addLockFlags()
@@ -74,8 +71,6 @@ class ConversationsCoordinator: RootCoordinator, StateableResponsive, Conversati
                     self.showDialpad(inCall: inCall)
                 case .openAboutJami:
                     self.openAboutJami()
-                case .navigateToCall(let call):
-                    self.navigateToCall(call: call)
                 case .showContactPicker(let callID, let contactCallBack, let conversationCallBack):
                     self.showContactPicker(callId: callID, contactSelectedCB: contactCallBack, conversationSelectedCB: conversationCallBack)
                 case .conversationRemoved:
@@ -108,54 +103,10 @@ class ConversationsCoordinator: RootCoordinator, StateableResponsive, Conversati
             })
             .disposed(by: self.disposeBag)
 
-        self.callService.sharedResponseStream
-            .asObservable()
-            .filter({ event in
-                return event.eventType == .incomingCall
-            })
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { (event) in
-                guard  let callId: String = event.getEventInput(.callId),
-                       let call = self.callService.call(callID: callId) else { return }
-                self.showIncomingCall(call: call)
-            })
-            .disposed(by: self.disposeBag)
-
-        self.callsProvider.sharedResponseStream
-            .filter({ serviceEvent in
-                return serviceEvent.eventType == .callProviderAcceptUnhandeledCall
-            })
-            .subscribe(onNext: { [weak self] serviceEvent in
-                guard let self = self,
-                      let callUUID: String = serviceEvent.getEventInput(.callUUID),
-                      let peerId: String = serviceEvent.getEventInput(.peerUri),
-                      let accountId: String = serviceEvent.getEventInput(.accountId) else { return }
-
-                self.presentPendingCall(callUUID: callUUID, peerId: peerId, accountId: accountId)
-            })
-            .disposed(by: self.disposeBag)
+        // Incoming-call presentation is owned by CallScreenPresenter.
         self.callbackPlaceCall()
         self.subscribeToActiveCalls()
         self.navigationController.navigationBar.tintColor = UIColor.jami
-    }
-
-    func presentPendingCall(callUUID: String, peerId: String, accountId: String) {
-        pendingCallUUIDs.insert(callUUID)
-        let controller = CallViewController.instantiate(with: self.injectionBag)
-        controller.viewModel.subscribePendingCall(callId: callUUID)
-        if let call = self.callService.createPlaceholderCallModel(
-            callUUID: UUID(uuidString: callUUID)!,
-            peerId: peerId,
-            accountId: accountId
-        ) {
-            controller.viewModel.call = call
-            self.present(viewController: controller,
-                         withStyle: .fadeInOverFullScreen,
-                         withAnimation: false,
-                         withStateable: controller.viewModel)
-        } else {
-            print("Do not need placeholder call, a call already exists")
-        }
     }
 
     func start() {
@@ -281,9 +232,7 @@ extension ConversationsCoordinator {
                          withStateable: viewModel)
             return
         }
-        if let controller = self.navigationController.visibleViewController as? CallViewController {
-            controller.present(dialpadViewController, animated: true, completion: nil)
-        }
+        // The in-call dialpad is a sheet owned by the call screen itself.
     }
 
     func showContactPicker(callId: String, contactSelectedCB: ((_ contact: [ConferencableItem]) -> Void)? = nil, conversationSelectedCB: ((_ conversationIds: [String]) -> Void)? = nil) {
@@ -371,17 +320,55 @@ extension ConversationsCoordinator {
         }
     }
 
-    func openConversationFromCall(conversationModel: ConversationModel) {
-        guard let navigationController = self.rootViewController as? UINavigationController else { return }
+    func openConversationFromCall(route: CallConversationRoute) {
+        guard let model = conversationViewModel(for: route) else {
+            self.popToSmartList()
+            return
+        }
+        if popToExistingConversation(model.conversation) { return }
+        self.popToSmartList()
+        self.showConversation(withConversationViewModel: model, withAnimation: true)
+    }
+
+    private func conversationViewModel(for route: CallConversationRoute) -> ConversationViewModel? {
+        let models = conversationsSource.conversationViewModels
+            .filter { $0.conversation.accountId == route.accountId }
+        if let conversationId = route.conversationId, !conversationId.isEmpty {
+            return models.first { $0.conversation.id == conversationId }
+        }
+        let peerHash = self.peerHash(route.peerUri)
+        return models.first { model in
+            guard model.conversation.isCoredialog(),
+                  let participant = model.conversation.getParticipants().first else {
+                return false
+            }
+            return self.peerHash(participant.jamiId) == peerHash
+        }
+    }
+
+    private func peerHash(_ uri: String) -> String {
+        return JamiURI(from: uri).hash ?? uri.filterOutHost()
+    }
+
+    private func popToExistingConversation(_ conversationModel: ConversationModel) -> Bool {
+        guard let navigationController = self.rootViewController as? UINavigationController else {
+            return false
+        }
         let controllers = navigationController.children
         for controller in controllers
         where controller.isKind(of: (ConversationViewController).self) {
             if let conversationController = controller as? ConversationViewController, conversationController.viewModel.conversation == conversationModel {
                 navigationController.popToViewController(conversationController, animated: true)
                 conversationController.becomeFirstResponder()
-                return
+                return true
             }
         }
+        return false
+    }
+
+    func openConversationFromCall(conversationModel: ConversationModel) {
+        guard self.rootViewController is UINavigationController else { return }
+        if popToExistingConversation(conversationModel) { return }
         self.openConversation(conversationId: conversationModel.id, accountId: conversationModel.accountId, shouldOpenSmarList: true, withAnimation: true)
     }
 
@@ -400,82 +387,8 @@ extension ConversationsCoordinator {
 
 // MARK: - Call
 extension ConversationsCoordinator {
-    func showIncomingCall(call: CallModel) {
-        guard let account = self.accountService
-                .getAccount(fromAccountId: call.accountId),
-              !call.callId.isEmpty else {
-            return
-        }
-        callsProvider.sharedResponseStream
-            .filter({ [weak call] serviceEvent in
-                guard serviceEvent.eventType == .callProviderAcceptCall ||
-                        serviceEvent.eventType == .callProviderDeclineCall else {
-                    return false
-                }
-                guard let callUUID: String = serviceEvent
-                        .getEventInput(ServiceEventInput.callUUID) else {
-                    return false
-                }
-                return callUUID == call?.callUUID.uuidString
-            })
-            .take(1)
-            .subscribe(onNext: { [weak self, weak call] serviceEvent in
-                guard let self = self,
-                      let call = call else { return }
-                let uuidString = call.callUUID.uuidString
-                let hasPendingVC = self.pendingCallUUIDs.remove(uuidString) != nil
-                if serviceEvent.eventType == ServiceEventType.callProviderAcceptCall {
-                    // A pending call VC already handles this call
-                    if hasPendingVC { return }
-                    // check if we have presented call screen for uuid
-                    if let topController = self.getTopController() as? CallViewController,
-                       topController.viewModel.call?.callUUID == call.callUUID {
-                        return
-                    }
-                    self.presentCallScreen(call: call)
-                }
-            })
-            .disposed(by: self.disposeBag)
-        callsProvider.handleIncomingCall(account: account, call: call)
-        guard call.getDisplayName() == call.paricipantHash() else { return }
-        self.nameService.usernameLookupStatus
-            .filter({ [weak call] lookupNameResponse in
-                return lookupNameResponse.requestedName != nil &&
-                    lookupNameResponse.requestedName == call?.paricipantHash()
-            })
-            .asObservable()
-            .take(1)
-            .subscribe(onNext: { [weak call] lookupNameResponse in
-                // if we have a registered name then we should update the value for it
-                if let name = lookupNameResponse.name, !name.isEmpty, let call = call {
-                    call.registeredName = name
-                    self.callsProvider.updateRegisteredName(account: account, call: call)
-                }
-            })
-            .disposed(by: self.disposeBag)
-        self.nameService.lookupAddress(withAccount: account.id, nameserver: "", address: call.callUri.filterOutHost())
-    }
-
-    func presentCallScreen(call: CallModel) {
-        if let topController = self.getTopController(),
-           !topController.isKind(of: (CallViewController).self) {
-            topController.dismiss(animated: false, completion: nil)
-        }
-        self.popToSmartList()
-        if self.accountService.currentAccount?.id != call.accountId {
-            self.accountService.currentAccount = self.accountService.getAccount(fromAccountId: call.accountId)
-        }
-        if let model = self.getConversationViewModelForParticipant(jamiId: call.paricipantHash()) {
-            self.showConversation(withConversationViewModel: model)
-        }
-        let controller = CallViewController.instantiate(with: self.injectionBag)
-        controller.viewModel.call = call
-        self.present(viewController: controller,
-                     withStyle: .fadeInOverFullScreen,
-                     withAnimation: false,
-                     withStateable: controller.viewModel)
-    }
-
+    // Call presentation lives in CallScreenPresenter; this coordinator only
+    // navigates conversations and forwards outgoing-call intents.
     func startOutgoingCall(contactRingId: String, userName: String, isAudioOnly: Bool = false) {
         guard let account = self.injectionBag.accountService.currentAccount else {
             return
@@ -495,7 +408,9 @@ extension ConversationsCoordinator {
 
             self.popToSmartList()
             self.navigateToConversationIfNeeded(for: contactRingId, account: account)
-            self.presentCallViewController(contactRingId: contactRingId, userName: userName, account: account, isAudioOnly: isAudioOnly)
+            self.callService.startOutgoingCall(uri: contactRingId,
+                                               account: account,
+                                               isAudioOnly: isAudioOnly)
         }
     }
 
@@ -521,17 +436,5 @@ extension ConversationsCoordinator {
         }
 
         return nil
-    }
-
-    private func presentCallViewController(contactRingId: String, userName: String, account: AccountModel, isAudioOnly: Bool) {
-        let callViewController = CallViewController.instantiate(with: injectionBag)
-        present(viewController: callViewController,
-                withStyle: .fadeInOverFullScreen,
-                withAnimation: false,
-                withStateable: callViewController.viewModel)
-        callViewController.viewModel.placeCall(with: contactRingId,
-                                               userName: userName,
-                                               account: account,
-                                               isAudioOnly: isAudioOnly)
     }
 }

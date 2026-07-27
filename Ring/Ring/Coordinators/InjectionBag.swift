@@ -31,12 +31,13 @@ class InjectionBag {
     let contactsService: ContactsService
     let presenceService: PresenceService
     let networkService: NetworkService
-    let callService: CallsService
+    let callService: CallService
+    /// Assigned by AppDelegate once the call domains are wired.
+    weak var callsManager: CallsManager?
     let videoService: VideoService
     let audioService: AudioService
     let dataTransferService: DataTransferService
     let profileService: ProfilesService
-    let callsProvider: CallsProviderService
     let locationSharingService: LocationSharingService
     let requestsService: RequestsService
     let systemService: SystemService
@@ -49,12 +50,11 @@ class InjectionBag {
           withContactsService contactsService: ContactsService,
           withPresenceService presenceService: PresenceService,
           withNetworkService networkService: NetworkService,
-          withCallService callService: CallsService,
+          withCallService callService: CallService,
           withVideoService videoService: VideoService,
           withAudioService audioService: AudioService,
           withDataTransferService dataTransferService: DataTransferService,
           withProfileService profileService: ProfilesService,
-          withCallsProvider callsProvider: CallsProviderService,
           withLocationSharingService locationSharingService: LocationSharingService,
           withRequestsService requestsService: RequestsService,
           withSystemService systemService: SystemService,
@@ -71,7 +71,6 @@ class InjectionBag {
         self.audioService = audioService
         self.dataTransferService = dataTransferService
         self.profileService = profileService
-        self.callsProvider = callsProvider
         self.locationSharingService = locationSharingService
         self.requestsService = requestsService
         self.systemService = systemService

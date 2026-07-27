@@ -30,10 +30,10 @@ class GeneratedInteractionsManager {
     let accountService: AccountsService
     let requestsService: RequestsService
     let conversationService: ConversationsService
-    let callService: CallsService
+    let callService: CallService
     let disposeBag = DisposeBag()
 
-    init(accountService: AccountsService, requestsService: RequestsService, conversationService: ConversationsService, callService: CallsService) {
+    init(accountService: AccountsService, requestsService: RequestsService, conversationService: ConversationsService, callService: CallService) {
         self.accountService = accountService
         self.requestsService = requestsService
         self.conversationService = conversationService
