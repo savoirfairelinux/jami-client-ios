@@ -331,7 +331,6 @@
 "calls.participantsInCall" = "%@ in call";
 "calls.peerRecording" = "Recording";
 "calls.gridLayout" = "Grid view";
-"calls.spotlightLayout" = "Spotlight view";
 "calls.calling" = "Calling…";
 "calls.callingParticipants" = "Calling (%@)";
 "calls.stopCalling" = "Stop calling %@";

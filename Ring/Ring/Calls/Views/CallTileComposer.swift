@@ -20,6 +20,11 @@ import UIKit
 
 struct CallTileComposer {
 
+    struct Composition {
+        let tiles: [CanvasTileModel]
+        let style: CanvasTileStyle
+    }
+
     private let videoService: VideoService
     private let localJamiId: String
 
@@ -28,32 +33,42 @@ struct CallTileComposer {
         self.localJamiId = localJamiId
     }
 
-    func tiles(call: CallState?, conference: ConferenceState?,
-               avatars: CallParticipantAvatars?,
-               frozenForRecomposition: Bool = false) -> [CanvasTileModel] {
+    func compose(call: CallState?, conference: ConferenceState?,
+                 avatars: CallParticipantAvatars?,
+                 frozenForRecomposition: Bool = false) -> Composition {
         let terminated = call?.status.isTerminal == true
-        let plans: [CallTilePlan]
         if !terminated, let conference = conference, !conference.participants.isEmpty {
             let localCameraOn = call?.effectiveMedia(in: conference).hasVideo == true
-            plans = CallTilePlanner.conferenceTiles(conference.participants,
-                                                    localJamiId: localJamiId,
-                                                    peerUri: call?.peerUri ?? "",
-                                                    isHostedLocally: conference.isHost,
-                                                    localCameraOn: localCameraOn,
-                                                    frozenForRecomposition: frozenForRecomposition)
-        } else if terminated, conference != nil {
+            let plans = CallTilePlanner.conferenceTiles(
+                conference.participants,
+                localJamiId: localJamiId,
+                peerUri: call?.peerUri ?? "",
+                isHostedLocally: conference.isHost,
+                localCameraOn: localCameraOn,
+                frozenForRecomposition: frozenForRecomposition)
+            return makeComposition(plans: plans, style: .cards, avatars: avatars)
+        }
+
+        let plans: [CallTilePlan]
+        if terminated, conference != nil {
             plans = []
         } else if let call = call {
-            plans = CallTilePlanner.directCallTiles(CallTilePlanner.DirectCall(
-                                                        id: call.id.raw,
-                                                        peerUri: call.peerUri,
-                                                        isOngoing: call.status.isOngoing,
-                                                        hasVideo: !terminated && call.hasVideo,
-                                                        hasNegotiatedVideo: call.hasNegotiatedVideo))
+            plans = CallTilePlanner.directCallTiles(
+                CallTilePlanner.DirectCall(id: call.id.raw,
+                                           peerUri: call.peerUri,
+                                           isOngoing: call.status.isOngoing,
+                                           hasVideo: !terminated && call.hasVideo,
+                                           hasNegotiatedVideo: call.hasNegotiatedVideo))
         } else {
             plans = []
         }
-        return plans.map { model(from: $0, avatars: avatars) }
+        return makeComposition(plans: plans, style: .plain, avatars: avatars)
+    }
+
+    private func makeComposition(plans: [CallTilePlan], style: CanvasTileStyle,
+                                 avatars: CallParticipantAvatars?) -> Composition {
+        Composition(tiles: plans.map { model(from: $0, avatars: avatars) },
+                    style: style)
     }
 
     private func model(from plan: CallTilePlan,

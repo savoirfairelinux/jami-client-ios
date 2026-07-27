@@ -17,11 +17,18 @@
  */
 
 import XCTest
+import UIKit
 @testable import Ring
 
 final class CanvasLayoutTests: XCTestCase {
 
     private let canvas = CGSize(width: 400, height: 800)
+    private let cardSafeArea = UIEdgeInsets(top: 0, left: 0, bottom: 26, right: 0)
+
+    private func safeAreaBounds(contentSize: CGSize? = nil) -> CGRect {
+        UIEdgeInsetsInsetRect(CGRect(origin: .zero, size: contentSize ?? canvas),
+                              cardSafeArea)
+    }
 
     private func participants(_ count: Int) -> [CanvasParticipant] {
         return (0..<count).map { CanvasParticipant(id: "p\($0)") }
@@ -29,12 +36,32 @@ final class CanvasLayoutTests: XCTestCase {
 
     private func makeInput(_ participants: [CanvasParticipant],
                            mode: CanvasLayoutMode = .grid,
+                           safeAreaInsets: UIEdgeInsets = .zero,
+                           previewCorner: PreviewCorner = .topTrailing,
                            stripOffset: CGFloat = 0) -> CanvasLayout.Input {
         return CanvasLayout.Input(
             participants: participants,
             mode: mode,
             canvasSize: canvas,
+            safeAreaInsets: safeAreaInsets,
+            previewCorner: previewCorner,
             stripOffset: stripOffset)
+    }
+
+    private func makeCardInput(_ participants: [CanvasParticipant],
+                               mode: CanvasLayoutMode = .grid,
+                               stripOffset: CGFloat = 0) -> CanvasLayout.Input {
+        return CanvasLayout.Input(
+            participants: participants,
+            mode: mode,
+            canvasSize: canvas,
+            safeAreaInsets: cardSafeArea,
+            stripOffset: stripOffset,
+            style: .cards)
+    }
+
+    private func geometry(_ canvasSize: CGSize) -> CanvasLayout.Input {
+        CanvasLayout.Input(participants: [], canvasSize: canvasSize)
     }
 
     func testSingleParticipantFillsCanvas() {
@@ -86,8 +113,8 @@ final class CanvasLayoutTests: XCTestCase {
     func testLocalPreviewFloatsTopTrailingAboveGrid() {
         var all = participants(2)
         all.append(CanvasParticipant(id: CanvasParticipant.localId, isLocalPreview: true))
-        var input = makeInput(all)
-        input.safeAreaInsets = UIEdgeInsets(top: 50, left: 0, bottom: 30, right: 10)
+        let safeAreaInsets = UIEdgeInsets(top: 50, left: 0, bottom: 30, right: 10)
+        let input = makeInput(all, safeAreaInsets: safeAreaInsets)
 
         let layout = CanvasLayout.plan(input)
 
@@ -109,8 +136,7 @@ final class CanvasLayoutTests: XCTestCase {
     func testLocalPreviewCornerIsRespected() {
         var all = participants(1)
         all.append(CanvasParticipant(id: CanvasParticipant.localId, isLocalPreview: true))
-        var input = makeInput(all)
-        input.previewCorner = .bottomLeading
+        let input = makeInput(all, previewCorner: .bottomLeading)
 
         let layout = CanvasLayout.plan(input)
 
@@ -184,13 +210,14 @@ final class CanvasLayoutTests: XCTestCase {
         let people = participants(4)
         let layout = CanvasLayout.plan(makeInput(people, mode: .spotlight("p1")))
 
-        let focusHeight = canvas.height * CanvasLayout.spotlightFocusFraction
+        let focusHeight = CanvasLayout.focusFrame(geometry(canvas)).height
         XCTAssertEqual(layout.frames["p1"],
                        CGRect(x: 0, y: 0, width: canvas.width, height: focusHeight),
                        "focus takes the top of the content, no viewport math")
 
-        let side = CanvasLayout.stripTileSide(canvasSize: canvas)
-        let stripY = focusHeight + CanvasLayout.stripPadding
+        let side = CanvasLayout.stripTileSide(geometry(canvas))
+        let stripY = CanvasLayout.stripBand(geometry(canvas)).minY
+            + CanvasLayout.stripPadding
         XCTAssertEqual(layout.frames["p0"],
                        CGRect(x: CanvasLayout.stripPadding, y: stripY,
                               width: side, height: side))
@@ -212,7 +239,7 @@ final class CanvasLayoutTests: XCTestCase {
         XCTAssertEqual(scrolled.frames["p0"], base.frames["p0"],
                        "the focus tile ignores the strip offset")
         XCTAssertEqual(base.stripContentWidth,
-                       CanvasLayout.stripContentWidth(tileCount: 7, canvasSize: canvas))
+                       CanvasLayout.stripContentWidth(tileCount: 7, input: geometry(canvas)))
         XCTAssertGreaterThan(base.stripContentWidth, canvas.width,
                              "seven tiles overflow -> the strip must scroll")
     }
@@ -229,9 +256,57 @@ final class CanvasLayoutTests: XCTestCase {
             let frame = layout.frames[id]!
             XCTAssertGreaterThanOrEqual(frame.minY, canvas.height,
                                         "\(id) must wait just below the canvas edge")
-            XCTAssertEqual(frame.width, CanvasLayout.stripTileSide(canvasSize: canvas),
+            XCTAssertEqual(frame.width, CanvasLayout.stripTileSide(geometry(canvas)),
                            "parked tiles keep their strip size for the return trip")
         }
+    }
+
+    func testCardGridStaysInsideSafeAreaWithoutOverlap() {
+        for count in [1, 4, 7] {
+            let layout = CanvasLayout.plan(makeCardInput(participants(count)))
+            let frames = Array(layout.frames.values)
+            let safeBounds = safeAreaBounds(contentSize: layout.contentSize)
+
+            for frame in frames {
+                XCTAssertTrue(safeBounds.contains(frame),
+                              "\(count) tiles: \(frame) crosses the safe area")
+            }
+            for first in frames.indices {
+                for second in frames.indices where second > first {
+                    XCTAssertFalse(frames[first].intersects(frames[second]),
+                                   "\(count) tiles overlap")
+                }
+            }
+        }
+    }
+
+    func testCardSpotlightKeepsVisibleTilesInsideSafeArea() {
+        let input = makeCardInput(participants(5), mode: .spotlight("p0"))
+        let layout = CanvasLayout.plan(input)
+        let safeBounds = safeAreaBounds()
+        let content = CanvasLayout.contentRect(input)
+
+        for id in ["p0", "p1", "p2"] {
+            XCTAssertTrue(safeBounds.contains(layout.frames[id]!),
+                          "\(id) crosses the safe area")
+        }
+        XCTAssertTrue(CGRect(origin: .zero, size: canvas).intersects(layout.frames["p3"]!),
+                      "the next participant must remain discoverable")
+        XCTAssertFalse(safeBounds.contains(layout.frames["p3"]!),
+                       "the next participant should only peek into the strip")
+        XCTAssertEqual(layout.frames["p3"]!.intersection(content).width,
+                       CanvasLayout.stripMinimumNextTileVisibleWidth,
+                       accuracy: 0.001,
+                       "the width-limited strip must preserve the promised minimum peek")
+    }
+
+    func testCardGridScrollsOnlyOnceARowIsActuallyOffCanvas() {
+        let fitting = CanvasLayout.plan(makeCardInput(participants(6)))
+        let overflowing = CanvasLayout.plan(makeCardInput(participants(7)))
+
+        XCTAssertFalse(fitting.scrollEnabled, "three rows fit without scrolling")
+        XCTAssertTrue(overflowing.scrollEnabled, "a fourth row has to be reachable")
+        XCTAssertGreaterThan(overflowing.contentSize.height, canvas.height)
     }
 
     func testEveryModeStaysWithinOneCoordinateSpace() {

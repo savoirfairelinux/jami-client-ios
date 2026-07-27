@@ -685,8 +685,6 @@ internal enum L10n {
     internal static let ringing = L10n.tr("Localizable", "calls.ringing", fallback: "Ringing…")
     /// Set moderator
     internal static let setModerator = L10n.tr("Localizable", "calls.setModerator", fallback: "Set moderator")
-    /// Spotlight view
-    internal static let spotlightLayout = L10n.tr("Localizable", "calls.spotlightLayout", fallback: "Spotlight view")
     /// Start Picture in Picture
     internal static let startPictureInPicture = L10n.tr("Localizable", "calls.startPictureInPicture", fallback: "Start Picture in Picture")
     /// Stop calling %@

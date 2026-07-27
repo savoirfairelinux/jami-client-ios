@@ -360,6 +360,36 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
         await Harness.wait { model.canvasMode == .grid }
     }
 
+    func testOnlyAConferenceRendersTilesAsCards() async {
+        let harness = await Harness(callHasVideo: true)
+        let model = harness.makeModel(localJamiId: jamiId1)
+
+        XCTAssertEqual(model.canvas.style, .plain,
+                       "a one-to-one call fills the screen")
+
+        harness.send(.conferenceInfosUpdated(
+                        conferenceId: harness.callId.raw,
+                        participants: [CallTestFixtures.participant(
+                                        uri: jamiId1, device: deviceId1,
+                                        sinkId: CallTestFixtures.remoteSinkId),
+                                       CallTestFixtures.participant(
+                                        uri: CallTestFixtures.peerUri,
+                                        device: CallTestFixtures.remoteDeviceId,
+                                        sinkId: CallTestFixtures.secondaryRemoteSinkId)]))
+        await Harness.wait { model.conference?.participants.count == 2 }
+
+        XCTAssertEqual(model.canvas.style, .cards)
+
+        harness.send(.callStateChanged(callId: harness.callId.raw, state: .over,
+                                       rawState: LibJamiCallState.over.rawValue,
+                                       accountId: Harness.accountId,
+                                       code: 0, negotiatedMedia: [], videoCodec: nil))
+        await harness.waitForEnded(model)
+
+        XCTAssertEqual(model.canvas.style, .plain,
+                       "the ending drops the conference tiles, so it must drop the cards too")
+    }
+
     func testPeerHostedConferenceUsesParticipantSinksInsteadOfMixedCallSink() async {
         let harness = await Harness(callHasVideo: true)
         let model = harness.makeModel(localJamiId: jamiId1)

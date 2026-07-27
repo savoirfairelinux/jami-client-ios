@@ -27,8 +27,17 @@ enum CallChromePolicy {
 }
 
 struct CanvasState: Equatable {
-    var tiles: [CanvasTileModel] = []
-    var mode: CanvasLayoutMode = .grid
+    let tiles: [CanvasTileModel]
+    let mode: CanvasLayoutMode
+    let style: CanvasTileStyle
+
+    init(tiles: [CanvasTileModel] = [],
+         mode: CanvasLayoutMode = .grid,
+         style: CanvasTileStyle = .plain) {
+        self.tiles = tiles
+        self.mode = mode
+        self.style = style
+    }
 }
 
 @MainActor
@@ -372,11 +381,13 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
     }
 
     private func rebuildCanvas(mode: CanvasLayoutMode) {
+        let composition = tileComposer.compose(
+            call: call, conference: conference, avatars: avatars,
+            frozenForRecomposition: frozenForRecomposition)
         let state = CanvasState(
-            tiles: tileComposer.tiles(call: call, conference: conference,
-                                      avatars: avatars,
-                                      frozenForRecomposition: frozenForRecomposition),
-            mode: mode)
+            tiles: composition.tiles,
+            mode: mode,
+            style: composition.style)
         if state != canvas {
             canvas = state
         }
@@ -486,13 +497,15 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
             showsParticipants = true
             return
         }
+        let nextMode: CanvasLayoutMode
         switch canvas.mode {
         case .fullscreen:
-            canvas.mode = .grid
-        default:
+            nextMode = .grid
+        case .grid, .spotlight:
             guard participantId != CanvasParticipant.localId, tiles.count > 1 else { return }
-            canvas.mode = .fullscreen(participantId)
+            nextMode = .fullscreen(participantId)
         }
+        rebuildCanvas(mode: nextMode)
     }
 
     // MARK: - Conference
@@ -526,9 +539,9 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
             && (conference == nil || canModerateConference)
     }
 
-    func setLayout(_ layout: ConferenceLayoutMode) {
+    func showGridLayout() {
         guard let confId = conference?.id else { return }
-        Task { await callService.setLayout(layout, in: confId) }
+        Task { await callService.setLayout(.grid, in: confId) }
     }
 
     /// The daemon reports conference infos continuously — publish only real changes.
@@ -538,8 +551,8 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
         // participants yet is still the two people already talking — not nobody.
         if let conference = conference, !conference.participants.isEmpty {
             rows = ConferenceParticipants.rows(from: conference,
-                                                localJamiId: localJamiId,
-                                                peerUri: call?.peerUri ?? "")
+                                               localJamiId: localJamiId,
+                                               peerUri: call?.peerUri ?? "")
         } else if let call = call, call.status.isOngoing {
             rows = ConferenceParticipants.rows(from: call, localJamiId: localJamiId)
         } else {

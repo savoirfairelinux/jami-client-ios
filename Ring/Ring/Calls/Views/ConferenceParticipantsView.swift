@@ -70,22 +70,14 @@ struct ConferenceParticipantsView: View {
     private var participantsHeader: some View {
         sectionHeader(L10n.Calls.inThisCall("\(model.participantRows.count)")) {
             if model.canModerateConference {
-                layoutMenu
+                Button(action: model.showGridLayout) {
+                    Label(L10n.Calls.gridLayout, systemImage: "square.grid.2x2")
+                        .labelStyle(IconOnlyLabelStyle())
+                        .imageScale(.large)
+                        .frame(width: 44, height: 44)
+                        .contentShape(Rectangle())
+                }
             }
-        }
-    }
-
-    private var layoutMenu: some View {
-        Menu {
-            Button { model.setLayout(.grid) } label: {
-                Label(L10n.Calls.gridLayout, systemImage: "square.grid.2x2")
-            }
-            Button { model.setLayout(.oneWithSmall) } label: {
-                Label(L10n.Calls.spotlightLayout, systemImage: "person.crop.rectangle")
-            }
-        } label: {
-            Image(systemName: "square.grid.2x2")
-                .imageScale(.large)
         }
     }
 }
