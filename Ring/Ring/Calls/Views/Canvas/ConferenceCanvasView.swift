@@ -34,6 +34,6 @@ struct ConferenceCanvasView: UIViewRepresentable {
     }
 
     func updateUIView(_ canvas: ParticipantCanvas, context: Context) {
-        canvas.apply(models: model.canvas.tiles, mode: model.canvas.mode)
+        canvas.apply(model.canvas)
     }
 }

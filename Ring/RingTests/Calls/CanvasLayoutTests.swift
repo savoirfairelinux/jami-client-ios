@@ -17,11 +17,25 @@
  */
 
 import XCTest
+import UIKit
 @testable import Ring
 
 final class CanvasLayoutTests: XCTestCase {
 
     private let canvas = CGSize(width: 400, height: 800)
+    private let cardSafeArea = UIEdgeInsets(top: 0, left: 0, bottom: 26, right: 0)
+
+    private var cardInsets: UIEdgeInsets {
+        let margin = CanvasLayout.tileMargin
+        return UIEdgeInsets(top: cardSafeArea.top + margin, left: cardSafeArea.left + margin,
+                            bottom: cardSafeArea.bottom + margin, right: cardSafeArea.right + margin)
+    }
+
+    private var cardContent: CGRect {
+        CGRect(x: cardInsets.left, y: cardInsets.top,
+               width: canvas.width - cardInsets.left - cardInsets.right,
+               height: canvas.height - cardInsets.top - cardInsets.bottom)
+    }
 
     private func participants(_ count: Int) -> [CanvasParticipant] {
         return (0..<count).map { CanvasParticipant(id: "p\($0)") }
@@ -35,6 +49,22 @@ final class CanvasLayoutTests: XCTestCase {
             mode: mode,
             canvasSize: canvas,
             stripOffset: stripOffset)
+    }
+
+    private func makeCardInput(_ participants: [CanvasParticipant],
+                               mode: CanvasLayoutMode = .grid,
+                               stripOffset: CGFloat = 0) -> CanvasLayout.Input {
+        return CanvasLayout.Input(
+            participants: participants,
+            mode: mode,
+            canvasSize: canvas,
+            safeAreaInsets: cardSafeArea,
+            stripOffset: stripOffset,
+            style: .cards)
+    }
+
+    private func geometry(_ canvasSize: CGSize) -> CanvasLayout.Input {
+        CanvasLayout.Input(participants: [], canvasSize: canvasSize)
     }
 
     func testSingleParticipantFillsCanvas() {
@@ -184,13 +214,14 @@ final class CanvasLayoutTests: XCTestCase {
         let people = participants(4)
         let layout = CanvasLayout.plan(makeInput(people, mode: .spotlight("p1")))
 
-        let focusHeight = canvas.height * CanvasLayout.spotlightFocusFraction
+        let focusHeight = CanvasLayout.focusFrame(geometry(canvas)).height
         XCTAssertEqual(layout.frames["p1"],
                        CGRect(x: 0, y: 0, width: canvas.width, height: focusHeight),
                        "focus takes the top of the content, no viewport math")
 
-        let side = CanvasLayout.stripTileSide(canvasSize: canvas)
-        let stripY = focusHeight + CanvasLayout.stripPadding
+        let side = CanvasLayout.stripTileSide(geometry(canvas))
+        let stripY = CanvasLayout.stripBand(geometry(canvas)).minY
+            + CanvasLayout.stripPadding
         XCTAssertEqual(layout.frames["p0"],
                        CGRect(x: CanvasLayout.stripPadding, y: stripY,
                               width: side, height: side))
@@ -212,9 +243,20 @@ final class CanvasLayoutTests: XCTestCase {
         XCTAssertEqual(scrolled.frames["p0"], base.frames["p0"],
                        "the focus tile ignores the strip offset")
         XCTAssertEqual(base.stripContentWidth,
-                       CanvasLayout.stripContentWidth(tileCount: 7, canvasSize: canvas))
+                       CanvasLayout.stripContentWidth(tileCount: 7, input: geometry(canvas)))
         XCTAssertGreaterThan(base.stripContentWidth, canvas.width,
                              "seven tiles overflow -> the strip must scroll")
+    }
+
+    func testStripFitsTwoWholeTilesAndPeeksTheThird() {
+        let layout = CanvasLayout.plan(makeInput(participants(5), mode: .spotlight("p0")))
+        let visible = ["p1", "p2"].map { layout.frames[$0]! }
+
+        XCTAssertLessThanOrEqual(visible[1].maxX, canvas.width,
+                                 "two participants must fit whole: \(visible)")
+        let third = layout.frames["p3"]!
+        XCTAssertLessThan(third.minX, canvas.width, "the third must peek in")
+        XCTAssertGreaterThan(third.maxX, canvas.width, "the third must stay cut")
     }
 
     func testFullscreenParksTheStripBelowTheCanvas() {
@@ -229,9 +271,79 @@ final class CanvasLayoutTests: XCTestCase {
             let frame = layout.frames[id]!
             XCTAssertGreaterThanOrEqual(frame.minY, canvas.height,
                                         "\(id) must wait just below the canvas edge")
-            XCTAssertEqual(frame.width, CanvasLayout.stripTileSide(canvasSize: canvas),
+            XCTAssertEqual(frame.width, CanvasLayout.stripTileSide(geometry(canvas)),
                            "parked tiles keep their strip size for the return trip")
         }
+    }
+
+    func testCardGridKeepsEveryTileInsideTheInsets() {
+        let content = cardContent
+        for count in 1...8 {
+            let layout = CanvasLayout.plan(makeCardInput(participants(count)))
+            for (id, frame) in layout.frames {
+                XCTAssertGreaterThanOrEqual(frame.minX, content.minX,
+                                            "\(count) tiles: \(id) crosses the leading edge")
+                XCTAssertLessThanOrEqual(frame.maxX, content.maxX,
+                                         "\(count) tiles: \(id) crosses the trailing edge")
+                XCTAssertGreaterThanOrEqual(frame.minY, content.minY,
+                                            "\(count) tiles: \(id) crosses the top edge")
+            }
+            XCTAssertEqual(layout.frames.values.map(\.maxY).max()!,
+                           layout.contentSize.height - cardInsets.bottom,
+                           accuracy: 0.001,
+                           "\(count) tiles: the last row must end on the bottom inset")
+        }
+    }
+
+    func testCardGridSeparatesNeighboursBySpacing() {
+        let content = cardContent
+        let spacing = CanvasLayout.tileSpacing
+        let layout = CanvasLayout.plan(makeCardInput(participants(4)))
+
+        let topLeading = layout.frames["p0"]!
+        XCTAssertEqual(topLeading.origin, content.origin)
+        XCTAssertEqual(layout.frames["p1"]!.minX - topLeading.maxX, spacing,
+                       "columns are one gap apart")
+        XCTAssertEqual(layout.frames["p2"]!.minY - topLeading.maxY, spacing,
+                       "rows are one gap apart")
+        XCTAssertEqual(layout.frames["p1"]!.maxX, content.maxX,
+                       "the pair still spans the content width")
+        XCTAssertEqual(layout.frames["p3"]!.maxY, content.maxY)
+    }
+
+    func testCardSpotlightKeepsTheTwoUpStripInsideTheInsets() {
+        let content = cardContent
+        let layout = CanvasLayout.plan(makeCardInput(participants(5), mode: .spotlight("p0")))
+
+        XCTAssertEqual(layout.frames["p0"],
+                       CanvasLayout.focusFrame(makeCardInput(participants(5),
+                                                             mode: .spotlight("p0"))))
+        XCTAssertGreaterThanOrEqual(layout.frames["p1"]!.minX, content.minX)
+        XCTAssertLessThanOrEqual(layout.frames["p2"]!.maxX, content.maxX,
+                                 "two participants still fit whole inside the margins")
+        XCTAssertGreaterThan(layout.frames["p3"]!.maxX, content.maxX,
+                             "the third still peeks")
+        XCTAssertLessThanOrEqual(layout.frames["p1"]!.maxY, content.maxY,
+                                 "the strip stays clear of the bottom inset")
+    }
+
+    func testCardGridScrollsOnlyOnceARowIsActuallyOffCanvas() {
+        for count in 1...6 {
+            let layout = CanvasLayout.plan(makeCardInput(participants(count)))
+            XCTAssertFalse(layout.scrollEnabled,
+                           "\(count) tiles tile the canvas exactly — rounding must not scroll it")
+            XCTAssertEqual(layout.contentSize.height, canvas.height,
+                           "\(count) tiles: the content must not overhang by a rounding crumb")
+        }
+        let overflowing = CanvasLayout.plan(makeCardInput(participants(7)))
+        XCTAssertTrue(overflowing.scrollEnabled, "a fourth row has to be reachable")
+        XCTAssertGreaterThan(overflowing.contentSize.height, canvas.height)
+    }
+
+    func testCardFullscreenStaysEdgeToEdge() {
+        let layout = CanvasLayout.plan(makeCardInput(participants(3), mode: .fullscreen("p1")))
+        XCTAssertEqual(layout.frames["p1"], CGRect(origin: .zero, size: canvas),
+                       "fullscreen ignores the card insets by design")
     }
 
     func testEveryModeStaysWithinOneCoordinateSpace() {

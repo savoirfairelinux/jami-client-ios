@@ -54,14 +54,16 @@ final class ParticipantTileUIViewTests: XCTestCase {
     }
 
     func testUncaptionedTileStaysSilentWhenProviderResolvesName() {
-        let tile = ParticipantTileUIView(participantId: "peer")
+        let tile = ParticipantTileUIView(participantId: CallTestFixtures.peerUri)
         tile.apply(ParticipantTileState(showsVideo: false, showsName: false))
 
-        tile.bindAvatar(makeProvider(name: "Alice"))
+        tile.bindAvatar(makeProvider(name: profileName1))
         waitForMainScheduler()
 
         XCTAssertNil(tile.displayedName,
                      "a direct-call tile must not repeat the header's name")
+        XCTAssertNil(tile.nameChipFrame,
+                     "an uncaptioned tile must not leave an empty name plate")
     }
 
     func testLocalPreviewHasAnAccessibilityLabel() {
@@ -101,20 +103,45 @@ final class ParticipantTileUIViewTests: XCTestCase {
         XCTAssertEqual(tile.displayedName, "Alice")
     }
 
-    func testCaptionSurvivesReapplyAndFollowsLateProfile() {
-        let tile = ParticipantTileUIView(participantId: "peer")
+    func testCaptionPlateResizesForLateProfileName() throws {
+        let tile = ParticipantTileUIView(participantId: CallTestFixtures.peerUri)
+        tile.frame = CGRect(x: 0, y: 0, width: 184, height: 240)
         tile.apply(ParticipantTileState(showsVideo: false, showsName: true))
-        let provider = makeProvider(name: "bob-hash")
+        let provider = makeProvider(name: profileName1)
         tile.bindAvatar(provider)
         waitForMainScheduler()
 
         tile.apply(ParticipantTileState(showsVideo: true, showsName: true))
-        XCTAssertEqual(tile.displayedName, "bob-hash", "a re-apply must not blank the name")
+        tile.layoutIfNeeded()
+        let initial = try XCTUnwrap(tile.nameChipFrame)
 
-        provider.profileName = "Bob"
+        provider.profileName = jamiId1
         waitForMainScheduler()
+        tile.layoutIfNeeded()
 
-        XCTAssertEqual(tile.displayedName, "Bob")
+        let resolved = try XCTUnwrap(tile.nameChipFrame)
+        let text = try XCTUnwrap(tile.nameTextFrame)
+        XCTAssertEqual(tile.displayedName, jamiId1)
+        XCTAssertGreaterThan(resolved.width, initial.width)
+        XCTAssertTrue(resolved.contains(text), "the resolved name escaped its plate")
+    }
+
+    func testCaptionPlateRespectsPhysicalInsetsInRightToLeftLayout() throws {
+        let tile = ParticipantTileUIView(participantId: CallTestFixtures.peerUri)
+        tile.semanticContentAttribute = .forceRightToLeft
+        tile.frame = CGRect(x: 0, y: 0, width: 400, height: 240)
+        tile.contentInsets = UIEdgeInsets(top: 0, left: 44, bottom: 21, right: 0)
+        tile.apply(ParticipantTileState(showsVideo: false, showsName: true))
+        tile.bindAvatar(makeProvider(name: profileName1))
+        waitForMainScheduler()
+        tile.layoutIfNeeded()
+
+        let chip = try XCTUnwrap(tile.nameChipFrame)
+        XCTAssertGreaterThanOrEqual(chip.minX, tile.contentInsets.left + 8)
+        XCTAssertEqual(chip.maxX, tile.bounds.width - 8, accuracy: 0.5)
+        XCTAssertEqual(chip.maxY,
+                       tile.bounds.height - tile.contentInsets.bottom - 6,
+                       accuracy: 0.5)
     }
 
     func testAvatarStaysUntilFirstVideoFrame() {

@@ -28,12 +28,19 @@ struct CallTileComposer {
         self.localJamiId = localJamiId
     }
 
+    static func showsConferenceTiles(call: CallState?,
+                                     conference: ConferenceState?) -> Bool {
+        return call?.status.isTerminal != true
+            && conference?.participants.isEmpty == false
+    }
+
     func tiles(call: CallState?, conference: ConferenceState?,
                avatars: CallParticipantAvatars?,
                frozenForRecomposition: Bool = false) -> [CanvasTileModel] {
         let terminated = call?.status.isTerminal == true
         let plans: [CallTilePlan]
-        if !terminated, let conference = conference, !conference.participants.isEmpty {
+        if let conference = conference,
+           Self.showsConferenceTiles(call: call, conference: conference) {
             let localCameraOn = call?.effectiveMedia(in: conference).hasVideo == true
             plans = CallTilePlanner.conferenceTiles(conference.participants,
                                                     localJamiId: localJamiId,
