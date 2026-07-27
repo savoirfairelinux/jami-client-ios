@@ -21,6 +21,64 @@ import CoreGraphics
 
 enum CallTestFixtures {
 
+    static let callId = CallId(raw: conversationId1)
+    static let secondaryCallId = CallId(raw: conversationId2)
+    static let inviteCallId = CallId(raw: deviceId1)
+    static let hostCallId = CallId(raw: deviceId2)
+    static let conferenceId = ConfId(raw: conversationId2)
+    static let peerUri = jamiId2
+    static let secondaryPeerUri = jamiId3
+    static let tertiaryPeerUri = jamiId4
+    static let remoteDeviceId = deviceId2
+    static let secondaryRemoteDeviceId = deviceId1
+    static let remoteSinkId = "remoteSinkId"
+    static let secondaryRemoteSinkId = "secondaryRemoteSinkId"
+    static let tertiaryRemoteSinkId = "tertiaryRemoteSinkId"
+
+    static func call(id: CallId = callId,
+                     conversationId: String? = conversationId1,
+                     accountId: String = accountId1,
+                     direction: CallDirection = .outgoing,
+                     peerUri: String = peerUri,
+                     status: CallStatus = .current,
+                     media: [MediaItem] = [],
+                     isAudioOnly: Bool = false) -> CallState {
+        CallState(id: id,
+                  accountId: accountId,
+                  direction: direction,
+                  peerUri: peerUri,
+                  status: status,
+                  media: media,
+                  isAudioOnly: isAudioOnly,
+                  conversationId: conversationId)
+    }
+
+    static func conference(conversationId: String? = conversationId2,
+                           accountId: String = accountId1,
+                           participants: [ConferenceParticipantInfo] = [],
+                           layout: ConferenceLayoutMode = .grid,
+                           isHost: Bool = false) -> ConferenceState {
+        var conference = ConferenceState(id: conferenceId,
+                                         accountId: accountId,
+                                         participants: participants,
+                                         layout: layout,
+                                         isHost: isHost)
+        conference.conversationId = conversationId
+        return conference
+    }
+
+    static func directCall(id: String = callId.raw,
+                           peerUri: String = peerUri,
+                           isOngoing: Bool,
+                           hasVideo: Bool,
+                           hasNegotiatedVideo: Bool) -> CallTilePlanner.DirectCall {
+        CallTilePlanner.DirectCall(id: id,
+                                   peerUri: peerUri,
+                                   isOngoing: isOngoing,
+                                   hasVideo: hasVideo,
+                                   hasNegotiatedVideo: hasNegotiatedVideo)
+    }
+
     static func participant(
         uri: String,
         device: String = deviceId1,

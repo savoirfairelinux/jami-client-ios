@@ -21,6 +21,13 @@ import XCTest
 
 final class FrameDistributorTests: XCTestCase {
 
+    func testSourceDistinguishesLocalCameraFromRemoteSink() {
+        let sinkId = SinkId(raw: "remote")
+
+        XCTAssertEqual(FrameDistributor(source: .localCamera).source, .localCamera)
+        XCTAssertEqual(FrameDistributor(sinkId: sinkId).source, .remote(sinkId))
+    }
+
     func testFanOutToAllSubscribers() {
         let distributor = FrameDistributor(sinkId: SinkId(raw: "s1"))
         var first = 0

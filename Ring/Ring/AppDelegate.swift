@@ -34,18 +34,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     private let daemonService = DaemonService(dRingAdaptor: DRingAdapter())
     private let nameService = NameService(withNameRegistrationAdapter: NameRegistrationAdapter())
     private let presenceService = PresenceService(withPresenceAdapter: PresenceAdapter())
-    private let videoService = VideoService(withVideoAdapter: VideoAdapter())
-    private let audioService = AudioService(withAudioAdapter: AudioAdapter())
+    private let videoService = VideoService(videoAdapter: VideoAdapter())
+    private let audioService = AudioService(audioAdapter: AudioAdapter())
+    private let callService = CallService(callsAdapter: CallsAdapter())
+    private var callsManager: CallsManager?
     private let systemService = SystemService(withSystemAdapter: SystemAdapter())
     private let networkService = NetworkService()
     private let peerSharingService = PeerSharingService(withPeerServicesAdapter: PeerServicesAdapter())
-    private let callsProvider: CallsProviderService = CallsProviderService(provider: CXProvider(configuration: CallsHelpers.providerConfiguration()), controller: CXCallController())
     private var conversationManager: ConversationsManager?
     private var interactionsManager: GeneratedInteractionsManager?
-    private var videoManager: VideoManager?
-    private lazy var callService: CallsService = {
-        CallsService(withCallsAdapter: CallsAdapter())
-    }()
     internal lazy var accountService: AccountsService = {
         AccountsService(withAccountAdapter: AccountAdapter(), dbManager: self.dBManager)
     }()
@@ -89,7 +86,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                             withAudioService: self.audioService,
                             withDataTransferService: self.dataTransferService,
                             withProfileService: self.profileService,
-                            withCallsProvider: self.callsProvider,
                             withLocationSharingService: self.locationSharingService,
                             withRequestsService: self.requestsService,
                             withSystemService: self.systemService,
@@ -151,6 +147,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
         self.addListenerForNotification()
 
+        let callsManager = CallsManager(callService: self.callService,
+                                        videoService: self.videoService,
+                                        audioService: self.audioService,
+                                        accountsService: self.accountService,
+                                        contactsService: self.contactsService,
+                                        nameService: self.nameService)
+        self.callsManager = callsManager
+        self.injectionBag.callsManager = callsManager
+
         // starts the daemon
         self.startDaemon()
 
@@ -161,8 +166,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // requests permission to use the camera
         // will enumerate and add devices once permission has been granted
         self.videoService.setupInputs()
-
-        self.audioService.connectAudioSignal()
 
         // Observe connectivity changes and reconnect DHT
         self.networkService.connectionStateObservable
@@ -187,10 +190,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                                                         nameService: self.nameService,
                                                         dataTransferService: self.dataTransferService,
                                                         callService: self.callService,
+                                                        callsManager: callsManager,
                                                         locationSharingService: self.locationSharingService, contactsService: self.contactsService,
-                                                        callsProvider: self.callsProvider, requestsService: self.requestsService, profileService: self.profileService,
+                                                        requestsService: self.requestsService, profileService: self.profileService,
                                                         presenceService: self.presenceService)
-        self.videoManager = VideoManager(with: self.callService, videoService: self.videoService)
 
         prepareAccounts()
         self.voipRegistry.delegate = self
@@ -365,7 +368,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
-        self.callsProvider.stopAllUnhandeledCalls()
+        self.callsManager?.stopAllUnhandeledCalls()
         #if DEBUG
         self.cleanTestDataIfNeed()
         #endif
@@ -423,7 +426,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
             // If the app is running in the background and there are no waiting calls, the extension should handle the notification.
-            if UIApplication.shared.applicationState == .background && !self.presentingCallScreen && !self.callsProvider.hasActiveCalls() {
+            if UIApplication.shared.applicationState == .background && !self.presentingCallScreen && !(self.callsManager?.hasActiveCalls() ?? false) {
                 return
             }
             // emit signal that app is active for notification extension
@@ -550,7 +553,7 @@ extension AppDelegate {
     }
 
     func findContactAndStartCall(hash: String, isVideo: Bool) {
-        if callsProvider.hasActiveCalls() {
+        if callsManager?.hasActiveCalls() == true {
             return
         }
         // if saved Jami hash
@@ -670,7 +673,7 @@ extension AppDelegate: PKPushRegistryDelegate {
             }
         }
 
-        callsProvider.previewPendingCall(peerId: peerId,
+        callsManager?.previewPendingCall(peerId: peerId,
                                          withVideo: hasVideo.boolValue,
                                          displayName: displayName,
                                          accountId: accountId,

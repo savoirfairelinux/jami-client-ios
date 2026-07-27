@@ -85,30 +85,30 @@ final class CanvasLayoutTests: XCTestCase {
 
     func testLocalPreviewFloatsTopTrailingAboveGrid() {
         var all = participants(2)
-        all.append(CanvasParticipant(id: "local", isLocalPreview: true))
+        all.append(CanvasParticipant(id: CanvasParticipant.localId, isLocalPreview: true))
         var input = makeInput(all)
         input.safeAreaInsets = UIEdgeInsets(top: 50, left: 0, bottom: 30, right: 10)
 
         let layout = CanvasLayout.plan(input)
 
         XCTAssertEqual(layout.frames["p0"]?.height, 400)
-        let preview = layout.frames["local"]!
+        let preview = layout.frames[CanvasParticipant.localId]!
         XCTAssertLessThan(preview.width, 200)
         XCTAssertEqual(preview.minY, 50 + CanvasLayout.previewPadding)
         XCTAssertEqual(preview.maxX, canvas.width - 10 - CanvasLayout.previewPadding)
-        XCTAssertEqual(layout.zOrder.last, "local")
+        XCTAssertEqual(layout.zOrder.last, CanvasParticipant.localId)
         XCTAssertFalse(layout.scrollEnabled, "no scrolling needed for two tiles")
     }
 
     func testLonelyLocalPreviewFillsCanvas() {
         let layout = CanvasLayout.plan(
-            makeInput([CanvasParticipant(id: "local", isLocalPreview: true)]))
-        XCTAssertEqual(layout.frames["local"], CGRect(origin: .zero, size: canvas))
+            makeInput([CanvasParticipant(id: CanvasParticipant.localId, isLocalPreview: true)]))
+        XCTAssertEqual(layout.frames[CanvasParticipant.localId], CGRect(origin: .zero, size: canvas))
     }
 
     func testLocalPreviewCornerIsRespected() {
         var all = participants(1)
-        all.append(CanvasParticipant(id: "local", isLocalPreview: true))
+        all.append(CanvasParticipant(id: CanvasParticipant.localId, isLocalPreview: true))
         var input = makeInput(all)
         input.previewCorner = .bottomLeading
 
@@ -118,7 +118,7 @@ final class CanvasLayoutTests: XCTestCase {
             for: .bottomLeading,
             in: CGRect(origin: .zero, size: canvas),
             safeAreaInsets: .zero)
-        XCTAssertEqual(layout.frames["local"]?.origin, expected)
+        XCTAssertEqual(layout.frames[CanvasParticipant.localId]?.origin, expected)
     }
 
     func testPreviewOriginForEachCornerStaysOnScreen() {

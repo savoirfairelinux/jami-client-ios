@@ -21,6 +21,12 @@ import XCTest
 import RxSwift
 @testable import Ring
 
+enum TestPeerSharingFactory {
+    static func createService() -> PeerSharingService {
+        PeerSharingService(withPeerServicesAdapter: ObjCMockPeerServicesAdapter())
+    }
+}
+
 class PeerSharingServiceTests: XCTestCase {
 
     private enum TestConstants {

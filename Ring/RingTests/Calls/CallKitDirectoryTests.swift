@@ -22,10 +22,15 @@ import XCTest
 final class CallKitDirectoryTests: XCTestCase {
 
     private var directory = CallKitDirectory()
+    private let peerId = CallTestFixtures.peerUri
+    private let otherPeerId = CallTestFixtures.secondaryPeerUri
+    private let unknownPeerId = CallTestFixtures.tertiaryPeerUri
+    private let callId = CallTestFixtures.callId
+    private let otherCallId = CallTestFixtures.secondaryCallId
 
-    private func addPlaceholder(uuid: UUID = UUID(), peerId: String = "peer1",
+    private func addPlaceholder(uuid: UUID = UUID(), peerId: String? = nil,
                                 accountId: String = accountId1) -> UUID {
-        _ = directory.addPlaceholder(uuid: uuid, peerId: peerId, accountId: accountId,
+        _ = directory.addPlaceholder(uuid: uuid, peerId: peerId ?? self.peerId, accountId: accountId,
                                      displayName: "Alice", hasVideo: false)
         return uuid
     }
@@ -33,7 +38,7 @@ final class CallKitDirectoryTests: XCTestCase {
     func testPlaceholderIsTracked() {
         let uuid = addPlaceholder()
         XCTAssertTrue(directory.isTracked(uuid))
-        XCTAssertEqual(directory.placeholderUUID(peerId: "peer1", accountId: accountId1), uuid)
+        XCTAssertEqual(directory.placeholderUUID(peerId: peerId, accountId: accountId1), uuid)
         XCTAssertNil(directory.callId(for: uuid))
     }
 
@@ -41,38 +46,38 @@ final class CallKitDirectoryTests: XCTestCase {
         let first = addPlaceholder()
         let second = UUID()
 
-        let replaced = directory.addPlaceholder(uuid: second, peerId: "peer1",
+        let replaced = directory.addPlaceholder(uuid: second, peerId: peerId,
                                                 accountId: accountId1, displayName: "Alice",
                                                 hasVideo: false)
 
         XCTAssertEqual(replaced, first, "old placeholder returned for CallKit teardown")
         XCTAssertFalse(directory.isTracked(first))
-        XCTAssertEqual(directory.placeholderUUID(peerId: "peer1", accountId: accountId1), second)
+        XCTAssertEqual(directory.placeholderUUID(peerId: peerId, accountId: accountId1), second)
     }
 
     func testPlaceholdersForSamePeerOnDifferentAccountsCoexist() {
-        let onAcc1 = addPlaceholder(peerId: "peer1", accountId: accountId1)
+        let onAcc1 = addPlaceholder(peerId: peerId, accountId: accountId1)
         let onAcc2 = UUID()
 
-        let replaced = directory.addPlaceholder(uuid: onAcc2, peerId: "peer1",
+        let replaced = directory.addPlaceholder(uuid: onAcc2, peerId: peerId,
                                                 accountId: accountId2, displayName: "Alice",
                                                 hasVideo: false)
 
         XCTAssertNil(replaced, "a different account is a different call")
         XCTAssertTrue(directory.isTracked(onAcc1))
-        XCTAssertEqual(directory.placeholderUUID(peerId: "peer1", accountId: accountId1), onAcc1)
-        XCTAssertEqual(directory.placeholderUUID(peerId: "peer1", accountId: accountId2), onAcc2)
+        XCTAssertEqual(directory.placeholderUUID(peerId: peerId, accountId: accountId1), onAcc1)
+        XCTAssertEqual(directory.placeholderUUID(peerId: peerId, accountId: accountId2), onAcc2)
     }
 
     func testPlaceholderLookupIsScopedToAccount() {
-        let uuid = addPlaceholder(peerId: "peer1", accountId: accountId1)
-        XCTAssertEqual(directory.placeholderUUID(peerId: "peer1", accountId: accountId1), uuid)
-        XCTAssertNil(directory.placeholderUUID(peerId: "peer1", accountId: accountId2))
+        let uuid = addPlaceholder(peerId: peerId, accountId: accountId1)
+        XCTAssertEqual(directory.placeholderUUID(peerId: peerId, accountId: accountId1), uuid)
+        XCTAssertNil(directory.placeholderUUID(peerId: peerId, accountId: accountId2))
     }
 
     func testPlaceholdersForDifferentPeersCoexist() {
-        let first = addPlaceholder(peerId: "peer1")
-        let replaced = directory.addPlaceholder(uuid: UUID(), peerId: "peer2",
+        let first = addPlaceholder(peerId: peerId)
+        let replaced = directory.addPlaceholder(uuid: UUID(), peerId: otherPeerId,
                                                 accountId: accountId1, displayName: "Bob",
                                                 hasVideo: true)
         XCTAssertNil(replaced)
@@ -82,47 +87,47 @@ final class CallKitDirectoryTests: XCTestCase {
     func testMatchReusesPlaceholderUUID() {
         let uuid = addPlaceholder()
 
-        let result = directory.match(peerId: "peer1", accountId: accountId1, callId: CallId(raw: "call-1"))
+        let result = directory.match(peerId: peerId, accountId: accountId1, callId: callId)
 
         XCTAssertEqual(result?.uuid, uuid)
         XCTAssertNil(result?.pendingDecision, "no user action yet")
-        XCTAssertEqual(directory.callId(for: uuid), CallId(raw: "call-1"))
-        XCTAssertEqual(directory.uuid(for: CallId(raw: "call-1")), uuid)
-        XCTAssertNil(directory.placeholderUUID(peerId: "peer1", accountId: accountId1), "no longer a placeholder")
+        XCTAssertEqual(directory.callId(for: uuid), callId)
+        XCTAssertEqual(directory.uuid(for: callId), uuid)
+        XCTAssertNil(directory.placeholderUUID(peerId: peerId, accountId: accountId1), "no longer a placeholder")
     }
 
     func testMatchUsesTheCallingAccount() {
-        let onAcc1 = addPlaceholder(peerId: "peer1", accountId: accountId1)
-        let onAcc2 = addPlaceholder(uuid: UUID(), peerId: "peer1", accountId: accountId2)
+        let onAcc1 = addPlaceholder(peerId: peerId, accountId: accountId1)
+        let onAcc2 = addPlaceholder(uuid: UUID(), peerId: peerId, accountId: accountId2)
 
-        let result = directory.match(peerId: "peer1", accountId: accountId2,
-                                     callId: CallId(raw: "call-on-acc2"))
+        let result = directory.match(peerId: peerId, accountId: accountId2,
+                                     callId: otherCallId)
 
         XCTAssertEqual(result?.uuid, onAcc2)
-        XCTAssertEqual(directory.placeholderUUID(peerId: "peer1", accountId: accountId1), onAcc1,
+        XCTAssertEqual(directory.placeholderUUID(peerId: peerId, accountId: accountId1), onAcc1,
                        "the other account's placeholder is untouched")
-        XCTAssertEqual(directory.uuid(for: CallId(raw: "call-on-acc2")), onAcc2)
+        XCTAssertEqual(directory.uuid(for: otherCallId), onAcc2)
     }
 
     func testDecisionDoesNotReplayOntoAnotherAccountsCall() {
-        let onAcc1 = addPlaceholder(peerId: "peer1", accountId: accountId1)
-        _ = addPlaceholder(uuid: UUID(), peerId: "peer1", accountId: accountId2)
+        let onAcc1 = addPlaceholder(peerId: peerId, accountId: accountId1)
+        _ = addPlaceholder(uuid: UUID(), peerId: peerId, accountId: accountId2)
         _ = directory.recordCallAction(uuid: onAcc1, .declined)
 
-        let result = directory.match(peerId: "peer1", accountId: accountId2,
-                                     callId: CallId(raw: "call-on-acc2"))
+        let result = directory.match(peerId: peerId, accountId: accountId2,
+                                     callId: otherCallId)
 
         XCTAssertNil(result?.pendingDecision, "acc1's decline belongs to acc1's call")
     }
 
     func testMatchWithUnknownAccountReturnsNil() {
-        _ = addPlaceholder(peerId: "peer1", accountId: accountId1)
-        XCTAssertNil(directory.match(peerId: "peer1", accountId: "acc9",
-                                     callId: CallId(raw: "c")))
+        _ = addPlaceholder(peerId: peerId, accountId: accountId1)
+        XCTAssertNil(directory.match(peerId: peerId, accountId: accountId2,
+                                     callId: callId))
     }
 
     func testMatchWithoutPlaceholderReturnsNil() {
-        XCTAssertNil(directory.match(peerId: "stranger", accountId: accountId1, callId: CallId(raw: "c")))
+        XCTAssertNil(directory.match(peerId: unknownPeerId, accountId: accountId1, callId: callId))
     }
 
     func testDecisionBeforeLibJamiCallIsReplayedOnMatch() {
@@ -131,7 +136,7 @@ final class CallKitDirectoryTests: XCTestCase {
         let outcome = directory.recordCallAction(uuid: uuid, .accepted(withVideo: true))
         XCTAssertEqual(outcome, .storedOnPlaceholder)
 
-        let result = directory.match(peerId: "peer1", accountId: accountId1, callId: CallId(raw: "call-1"))
+        let result = directory.match(peerId: peerId, accountId: accountId1, callId: callId)
         XCTAssertEqual(result?.pendingDecision, .accepted(withVideo: true))
     }
 
@@ -139,17 +144,17 @@ final class CallKitDirectoryTests: XCTestCase {
         let uuid = addPlaceholder()
         _ = directory.recordCallAction(uuid: uuid, .declined)
 
-        let result = directory.match(peerId: "peer1", accountId: accountId1, callId: CallId(raw: "call-1"))
+        let result = directory.match(peerId: peerId, accountId: accountId1, callId: callId)
         XCTAssertEqual(result?.pendingDecision, .declined)
     }
 
     func testDecisionOnLiveCallIsForwarded() {
         let uuid = UUID()
-        directory.attach(uuid: uuid, to: CallId(raw: "call-1"))
+        directory.attach(uuid: uuid, to: callId)
 
         let outcome = directory.recordCallAction(uuid: uuid, .accepted(withVideo: false))
 
-        XCTAssertEqual(outcome, .applyToCall(CallId(raw: "call-1")))
+        XCTAssertEqual(outcome, .applyToCall(callId))
     }
 
     func testDecisionOnUnknownUUID() {
@@ -158,19 +163,19 @@ final class CallKitDirectoryTests: XCTestCase {
 
     func testAttachAndLookup() {
         let uuid = UUID()
-        directory.attach(uuid: uuid, to: CallId(raw: "out-1"))
+        directory.attach(uuid: uuid, to: callId)
         XCTAssertTrue(directory.isTracked(uuid))
-        XCTAssertEqual(directory.uuid(for: CallId(raw: "out-1")), uuid)
+        XCTAssertEqual(directory.uuid(for: callId), uuid)
     }
 
     func testRemoveAssociation() {
         let uuid = UUID()
-        directory.attach(uuid: uuid, to: CallId(raw: "out-1"))
+        directory.attach(uuid: uuid, to: callId)
 
         directory.remove(uuid: uuid)
 
         XCTAssertFalse(directory.isTracked(uuid))
-        XCTAssertNil(directory.uuid(for: CallId(raw: "out-1")))
+        XCTAssertNil(directory.uuid(for: callId))
     }
 
     func testExpireRemovesOnlyPlaceholders() {
@@ -181,16 +186,16 @@ final class CallKitDirectoryTests: XCTestCase {
 
     func testExpireIsNoOpForLiveCalls() {
         let uuid = addPlaceholder()
-        _ = directory.match(peerId: "peer1", accountId: accountId1, callId: CallId(raw: "call-1"))
+        _ = directory.match(peerId: peerId, accountId: accountId1, callId: callId)
 
         XCTAssertFalse(directory.expirePlaceholder(uuid: uuid))
         XCTAssertTrue(directory.isTracked(uuid))
     }
 
     func testAllPlaceholderUUIDsForTeardown() {
-        let first = addPlaceholder(peerId: "peer1")
-        let second = addPlaceholder(uuid: UUID(), peerId: "peer2")
-        directory.attach(uuid: UUID(), to: CallId(raw: "live"))
+        let first = addPlaceholder(peerId: peerId)
+        let second = addPlaceholder(uuid: UUID(), peerId: otherPeerId)
+        directory.attach(uuid: UUID(), to: callId)
 
         XCTAssertEqual(Set(directory.allPlaceholderUUIDs()), Set([first, second]))
     }

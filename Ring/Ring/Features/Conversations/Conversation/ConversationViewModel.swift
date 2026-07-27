@@ -69,7 +69,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
     private let contactsService: ContactsService
     private let presenceService: PresenceService
     private let profileService: ProfilesService
-    private let callService: CallsService
+    private let callService: CallService
     private let locationSharingService: LocationSharingService
     private let peerSharingService: PeerSharingService
     let dataTransferService: DataTransferService
@@ -516,7 +516,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
                   let account = self.accountService.currentAccount else { return }
             // if in call send sip msg
             if let call = self.callService.call(participantId: participantJamiId, accountId: conversation.accountId) {
-                self.callService.sendInCallMessage(callID: call.callId, message: content, accountId: account)
+                self.callService.sendInCallMessage(callId: call, message: content, accountId: account)
                 return
             }
             self.conversationsService
@@ -603,54 +603,17 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
     }
 
     lazy var showCallButton: Observable<Bool> = {
-        return self.callService
-            .callUpdates
-            .share()
-            .asObservable()
-            .filter({ [weak self] (call) -> Bool in
+        return self.callService.callsUpdated
+            .observe(on: MainScheduler.instance)
+            .map { [weak self] _ in
                 guard let self = self else { return false }
-                if !self.conversation.isDialog() {
-                    return false
-                }
-                guard let jamiId = self.conversation.getParticipants().first?.jamiId else { return false }
-                return call.paricipantHash() == jamiId
-                    && call.accountId == self.conversation.accountId
-            })
-            .map({ [weak self]  call in
-                guard let self = self else { return false }
-                let show = self.shouldShowCallButton(call: call)
-                self.currentCallId.accept(show ? call.callId : "")
-                return show
-            })
+                return self.haveCurrentCall()
+            }
+            .startWith(false)
+            .distinctUntilChanged()
     }()
 
     let currentCallId = BehaviorRelay<String>(value: "")
-
-    func callIsValid(call: CallModel) -> Bool {
-        return call.stateValue == CallState.hold.rawValue ||
-            call.stateValue == CallState.current.rawValue ||
-            call.stateValue == CallState.ringing.rawValue ||
-            call.stateValue == CallState.connecting.rawValue
-    }
-
-    func shouldShowCallButton(call: CallModel) -> Bool {
-        // From iOS 15 picture in picture is supported and it will take care of presenting the video call.
-        if #available(iOS 15.0, *) {
-            if call.isAudioOnly {
-                return callIsValid(call: call)
-            }
-            return call.stateValue == CallState.ringing.rawValue || call.stateValue == CallState.connecting.rawValue
-        }
-        return callIsValid(call: call)
-    }
-
-    func openCall() {
-        guard let call = self.callService
-                .call(participantId: self.conversation.getParticipants().first?.jamiId ?? "",
-                      accountId: self.conversation.accountId) else { return }
-
-        self.stateSubject.onNext(ConversationState.navigateToCall(call: call))
-    }
 
     deinit {
         self.closeAllPlayers()

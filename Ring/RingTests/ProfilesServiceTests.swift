@@ -61,7 +61,7 @@ final class ProfilesServiceTests: XCTestCase {
         try super.tearDownWithError()
     }
 
-    func testSameUriAcrossTwoAccountsDoesNotCrossContaminate() throws {
+    func testSameUriAcrossTwoAccountsDoesNotCrossContaminate() async throws {
         let uri = try XCTUnwrap(JamiURI(schema: .ring, infoHash: jamiId1).uriString)
         database.seed[.init(uri: uri, accountId: accountId1)] =
             Profile(uri: uri, alias: profileName1, photo: nil, type: ProfileType.ring.rawValue)
@@ -93,7 +93,7 @@ final class ProfilesServiceTests: XCTestCase {
             })
             .disposed(by: bag)
 
-        wait(for: [exp1, exp2], timeout: 2.0)
+        await fulfillment(of: [exp1, exp2], timeout: 2.0)
 
         XCTAssertEqual(alias1, profileName1,
                        "account 1 should resolve to its own seeded profile")

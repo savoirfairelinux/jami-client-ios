@@ -28,11 +28,12 @@ final class CallServiceStateMirrorTests: XCTestCase {
     }
 
     private func makeCall(_ index: Int) -> CallState {
-        return CallState(id: CallId(raw: "call\(index)"),
-                         accountId: accountId1,
-                         direction: .incoming,
-                         peerUri: "peer\(index)",
-                         status: .current)
+        let id = index == 1 ? CallTestFixtures.callId : CallTestFixtures.secondaryCallId
+        let peerUri = index == 1 ? CallTestFixtures.peerUri : CallTestFixtures.secondaryPeerUri
+        return CallTestFixtures.call(id: id,
+                                     conversationId: nil,
+                                     direction: .incoming,
+                                     peerUri: peerUri)
     }
 
     func testMirrorTracksCallLifecycle() {

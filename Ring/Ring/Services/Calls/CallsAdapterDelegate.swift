@@ -16,7 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-@objc protocol CallsAdapterDelegate {
+@objc
+protocol CallsAdapterDelegate {
     func didChangeCallState(withCallId callId: String, state: String, accountId: String, stateCode: NSInteger)
     func didReceiveMediaChangeRequest(withAccountId accountId: String, callId: String, withMedia: [[String: String]])
     func didReceiveMessage(withCallId callId: String, fromURI uri: String, message: [String: String])

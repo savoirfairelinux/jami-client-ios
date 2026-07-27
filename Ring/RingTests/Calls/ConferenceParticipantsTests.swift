@@ -22,12 +22,15 @@ import XCTest
 final class ConferenceParticipantsTests: XCTestCase {
 
     private let localId = jamiId1
+    private let remoteId = CallTestFixtures.peerUri
 
     private func conference(_ participants: [ConferenceParticipantInfo],
                             isHost: Bool = false,
                             layout: ConferenceLayoutMode = .grid) -> ConferenceState {
-        ConferenceState(id: ConfId(raw: "conf1"), accountId: accountId1,
-                        participants: participants, layout: layout, isHost: isHost)
+        CallTestFixtures.conference(conversationId: nil,
+                                    participants: participants,
+                                    layout: layout,
+                                    isHost: isHost)
     }
 
     private func rows(_ conference: ConferenceState) -> [ConferenceParticipantRow] {
@@ -39,7 +42,7 @@ final class ConferenceParticipantsTests: XCTestCase {
     }
 
     func testLocalParticipantComesFirst() {
-        let list = rows(conference([CallTestFixtures.participant(uri: "alice"),
+        let list = rows(conference([CallTestFixtures.participant(uri: remoteId),
                                     CallTestFixtures.participant(uri: localId)]))
         XCTAssertEqual(list.first?.uri, localId)
         XCTAssertTrue(list.first?.isLocal == true)
@@ -47,47 +50,47 @@ final class ConferenceParticipantsTests: XCTestCase {
 
     func testHostSeesModerationOnOthers() {
         let list = rows(conference([CallTestFixtures.participant(uri: localId),
-                                    CallTestFixtures.participant(uri: "alice")], isHost: true))
-        let alice = row("alice", in: list)?.actions ?? []
-        XCTAssertTrue(alice.contains(.muteAudio))
-        XCTAssertTrue(alice.contains(.setModerator))
-        XCTAssertTrue(alice.contains(.endCall))
-        XCTAssertTrue(alice.contains(.maximize), "a moderator may spotlight")
+                                    CallTestFixtures.participant(uri: remoteId)], isHost: true))
+        let remote = row(remoteId, in: list)?.actions ?? []
+        XCTAssertTrue(remote.contains(.muteAudio))
+        XCTAssertTrue(remote.contains(.setModerator))
+        XCTAssertTrue(remote.contains(.endCall))
+        XCTAssertTrue(remote.contains(.maximize), "a moderator may spotlight")
     }
 
     func testModeratorSeesMuteAndKickButNotSetModerator() {
         let local = CallTestFixtures.participant(uri: localId, isModerator: true)
         let list = rows(conference([local,
-                                    CallTestFixtures.participant(uri: "alice")], isHost: false))
-        let alice = row("alice", in: list)?.actions ?? []
-        XCTAssertTrue(alice.contains(.muteAudio))
-        XCTAssertTrue(alice.contains(.endCall))
-        XCTAssertTrue(alice.contains(.maximize))
-        XCTAssertFalse(alice.contains(.setModerator), "only the host promotes moderators")
+                                    CallTestFixtures.participant(uri: remoteId)], isHost: false))
+        let remote = row(remoteId, in: list)?.actions ?? []
+        XCTAssertTrue(remote.contains(.muteAudio))
+        XCTAssertTrue(remote.contains(.endCall))
+        XCTAssertTrue(remote.contains(.maximize))
+        XCTAssertFalse(remote.contains(.setModerator), "only the host promotes moderators")
     }
 
     func testRegularParticipantHasNoActionsOnOthers() {
         let list = rows(conference([CallTestFixtures.participant(uri: localId),
-                                    CallTestFixtures.participant(uri: "alice")], isHost: false))
-        XCTAssertEqual(row("alice", in: list)?.actions, [],
+                                    CallTestFixtures.participant(uri: remoteId)], isHost: false))
+        XCTAssertEqual(row(remoteId, in: list)?.actions, [],
                        "layout is shared conference state — a non-moderator "
                         + "can't recompose it, nor moderate others")
     }
 
     func testEmptyUriHostIsRecognizedAsLocalModerator() {
-        let list = rows(conference([CallTestFixtures.participant(uri: "", isModerator: true),
-                                    CallTestFixtures.participant(uri: "alice")], isHost: false))
+        let list = rows(conference([CallTestFixtures.participant(uri: String(), isModerator: true),
+                                    CallTestFixtures.participant(uri: remoteId)], isHost: false))
         let host = list.first
         XCTAssertEqual(host?.isLocal, true, "the empty-uri cell is our own host cell")
         XCTAssertEqual(host?.uri, localId, "it resolves to the local jami id")
-        let alice = row("alice", in: list)?.actions ?? []
-        XCTAssertTrue(alice.contains(.muteAudio))
-        XCTAssertTrue(alice.contains(.endCall), "a host may moderate others")
+        let remote = row(remoteId, in: list)?.actions ?? []
+        XCTAssertTrue(remote.contains(.muteAudio))
+        XCTAssertTrue(remote.contains(.endCall), "a host may moderate others")
     }
 
     func testSelfCanMuteButNotSpotlightWhenNotModerator() {
         let list = rows(conference([CallTestFixtures.participant(uri: localId),
-                                    CallTestFixtures.participant(uri: "alice")], isHost: false))
+                                    CallTestFixtures.participant(uri: remoteId)], isHost: false))
         let localActions = row(localId, in: list)?.actions ?? []
         XCTAssertTrue(localActions.contains(.muteAudio), "you can always mute yourself")
         XCTAssertFalse(localActions.contains(.maximize),
@@ -96,35 +99,39 @@ final class ConferenceParticipantsTests: XCTestCase {
 
     func testStatusFieldsMapFromParticipant() {
         let list = rows(conference([CallTestFixtures.participant(uri: localId),
-                                    CallTestFixtures.participant(uri: "alice",
+                                    CallTestFixtures.participant(uri: remoteId,
                                                                  handRaised: true,
                                                                  audioLocalMuted: true,
                                                                  recording: true,
                                                                  voiceActivity: true)]))
-        let alice = row("alice", in: list)
-        XCTAssertEqual(alice?.isHandRaised, true)
-        XCTAssertEqual(alice?.isAudioMuted, true)
-        XCTAssertEqual(alice?.isRecording, true)
-        XCTAssertEqual(alice?.isSpeaking, true)
+        let remote = row(remoteId, in: list)
+        XCTAssertEqual(remote?.isHandRaised, true)
+        XCTAssertEqual(remote?.isAudioMuted, true)
+        XCTAssertEqual(remote?.isRecording, true)
+        XCTAssertEqual(remote?.isSpeaking, true)
     }
 
     func testPendingRowsCarryTheLegToHangUpAndItsProgress() {
-        let invites = [PendingConferenceInvite(callId: CallId(raw: "c1"), peerUri: "bob",
+        let invites = [PendingConferenceInvite(callId: CallTestFixtures.callId,
+                                               peerUri: remoteId,
                                                status: .ringing)]
         let pending = ConferenceParticipants.pendingRows(from: invites)
-        XCTAssertEqual(pending.map(\.uri), ["bob"])
-        XCTAssertEqual(pending.first?.callId, CallId(raw: "c1"),
+        XCTAssertEqual(pending.map(\.uri), [remoteId])
+        XCTAssertEqual(pending.first?.callId, CallTestFixtures.callId,
                        "cancelling the invite hangs up its own leg")
         XCTAssertEqual(pending.first?.status, .ringing)
     }
 
     func testPendingRowUsesCallOrientedPresentation() {
-        let connecting = PendingParticipantRow(id: "c1", callId: CallId(raw: "c1"),
-                                               uri: "bob", status: .connecting)
-        let ringing = PendingParticipantRow(id: "c1", callId: CallId(raw: "c1"),
-                                            uri: "bob", status: .ringing)
-        let fallback = PendingParticipantRow(id: "c1", callId: CallId(raw: "c1"),
-                                             uri: "bob", status: .incoming)
+        let connecting = PendingParticipantRow(id: CallTestFixtures.callId.raw,
+                                               callId: CallTestFixtures.callId,
+                                               uri: remoteId, status: .connecting)
+        let ringing = PendingParticipantRow(id: CallTestFixtures.callId.raw,
+                                            callId: CallTestFixtures.callId,
+                                            uri: remoteId, status: .ringing)
+        let fallback = PendingParticipantRow(id: CallTestFixtures.callId.raw,
+                                             callId: CallTestFixtures.callId,
+                                             uri: remoteId, status: .incoming)
 
         XCTAssertEqual(connecting.progressText, L10n.Calls.connecting)
         XCTAssertEqual(ringing.progressText, L10n.Calls.ringing)
@@ -140,13 +147,14 @@ final class ConferenceParticipantsTests: XCTestCase {
     }
 
     func testOneToOneCallIsListedWithoutModeration() {
-        var call = CallState(id: CallId(raw: "call1"), accountId: accountId1,
-                             direction: .outgoing, peerUri: "alice", status: .current)
+        var call = CallTestFixtures.call(conversationId: nil,
+                                         peerUri: remoteId,
+                                         status: .current)
         call.media = [.audio(muted: true)]
 
         let list = ConferenceParticipants.rows(from: call, localJamiId: localId)
 
-        XCTAssertEqual(list.map(\.uri), [localId, "alice"], "we come first")
+        XCTAssertEqual(list.map(\.uri), [localId, remoteId], "we come first")
         XCTAssertEqual(list.first?.isAudioMuted, true)
         XCTAssertEqual(list.map(\.actions), [[], []],
                        "there is no conference to moderate")

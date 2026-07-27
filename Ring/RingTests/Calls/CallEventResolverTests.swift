@@ -20,6 +20,12 @@ import XCTest
 @testable import Ring
 final class CallEventResolverTests: XCTestCase {
 
+    private let callId = CallTestFixtures.callId.raw
+    private let secondaryCallId = CallTestFixtures.secondaryCallId.raw
+    private let conferenceId = CallTestFixtures.conferenceId.raw
+    private let peerUri = CallTestFixtures.peerUri
+    private let unknownState = "SOME_NEW_STATE"
+
     private enum CollectionError: Error {
         case timedOut
     }
@@ -60,43 +66,43 @@ final class CallEventResolverTests: XCTestCase {
     }
 
     func testIncomingCallSignalBecomesTypedEvent() async throws {
-        source.receivingCall(withAccountId: accountId1, callId: "call1", fromURI: "uri1",
-                             withMedia: [["MEDIA_TYPE": "MEDIA_TYPE_AUDIO",
-                                          "LABEL": "audio_0",
-                                          "ENABLED": "true",
-                                          "MUTED": "false"]])
+        source.receivingCall(withAccountId: accountId1, callId: callId, fromURI: peerUri,
+                             withMedia: [[MediaKey.mediaType.rawValue: MediaType.audio.rawValue,
+                                          MediaKey.label.rawValue: MediaLabel.defaultAudio.libJamiString,
+                                          MediaKey.enabled.rawValue: true.libJamiString,
+                                          MediaKey.muted.rawValue: false.libJamiString]])
 
         let events = try await collect(count: 1)
         guard case let .incomingCall(accountId, callId, peerUri, media, _) = events[0] else {
             return XCTFail("wrong event: \(events[0])")
         }
         XCTAssertEqual(accountId, accountId1)
-        XCTAssertEqual(callId, "call1")
-        XCTAssertEqual(peerUri, "uri1")
+        XCTAssertEqual(callId, self.callId)
+        XCTAssertEqual(peerUri, self.peerUri)
         XCTAssertEqual(media, [MediaItem.audio()])
     }
 
     func testIncomingCallCarriesCallDetails() async throws {
-        callAPI.callDetailsReturn["call1"] = CallDetails(["PEER_NUMBER": "uri1",
-                                                          "REGISTERED_NAME": "alice",
-                                                          "DISPLAY_NAME": "Alice",
-                                                          "ACCOUNTID": accountId1,
-                                                          "AUDIO_ONLY": "true"])
-        source.receivingCall(withAccountId: accountId1, callId: "call1", fromURI: "uri1",
+        callAPI.callDetailsReturn[callId] = CallDetails([CallDetailKey.peerNumber.rawValue: peerUri,
+                                                         CallDetailKey.registeredName.rawValue: registeredName1,
+                                                         CallDetailKey.displayName.rawValue: profileName1,
+                                                         CallDetailKey.accountId.rawValue: accountId1,
+                                                         CallDetailKey.audioOnly.rawValue: true.libJamiString])
+        source.receivingCall(withAccountId: accountId1, callId: callId, fromURI: peerUri,
                              withMedia: [])
 
         let events = try await collect(count: 1)
         guard case let .incomingCall(_, _, _, _, details) = events[0] else {
             return XCTFail("wrong event")
         }
-        XCTAssertEqual(details?.displayName, "Alice")
-        XCTAssertEqual(details?.registeredName, "alice")
+        XCTAssertEqual(details?.displayName, profileName1)
+        XCTAssertEqual(details?.registeredName, registeredName1)
     }
 
     func testStateChangeSignalKeepsRawStateForUnknownValues() async throws {
-        source.didChangeCallState(withCallId: "c1", state: "CURRENT",
+        source.didChangeCallState(withCallId: callId, state: LibJamiCallState.current.rawValue,
                                   accountId: accountId1, stateCode: 0)
-        source.didChangeCallState(withCallId: "c2", state: "SOME_NEW_STATE",
+        source.didChangeCallState(withCallId: secondaryCallId, state: unknownState,
                                   accountId: accountId1, stateCode: 7)
 
         let events = try await collect(count: 2)
@@ -105,15 +111,15 @@ final class CallEventResolverTests: XCTestCase {
             return XCTFail("wrong events")
         }
         XCTAssertEqual(state1, .current)
-        XCTAssertEqual(raw1, "CURRENT")
+        XCTAssertEqual(raw1, LibJamiCallState.current.rawValue)
         XCTAssertNil(state2)
-        XCTAssertEqual(raw2, "SOME_NEW_STATE")
+        XCTAssertEqual(raw2, unknownState)
         XCTAssertEqual(code2, 7)
     }
 
     func testNegotiatedMediaIsResolvedOnlyWhenCallBecomesCurrent() async throws {
-        callAPI.currentMediaReturn["c1"] = [.audio(), .video()]
-        source.didChangeCallState(withCallId: "c1", state: "CURRENT",
+        callAPI.currentMediaReturn[callId] = [.audio(), .video()]
+        source.didChangeCallState(withCallId: callId, state: LibJamiCallState.current.rawValue,
                                   accountId: accountId1, stateCode: 0)
 
         let events = try await collect(count: 1)
@@ -124,8 +130,8 @@ final class CallEventResolverTests: XCTestCase {
     }
 
     func testNegotiatedMediaIsEmptyForNonCurrentStates() async throws {
-        callAPI.currentMediaReturn["c1"] = [.audio(), .video()]
-        source.didChangeCallState(withCallId: "c1", state: "RINGING",
+        callAPI.currentMediaReturn[callId] = [.audio(), .video()]
+        source.didChangeCallState(withCallId: callId, state: LibJamiCallState.ringing.rawValue,
                                   accountId: accountId1, stateCode: 0)
 
         let events = try await collect(count: 1)
@@ -136,10 +142,10 @@ final class CallEventResolverTests: XCTestCase {
     }
 
     func testConferenceSignalsCarryMemberCalls() async throws {
-        callAPI.conferenceCallsReturn["conf1"] = ["m1", "m2"]
-        source.conferenceCreated(conferenceId: "conf1", conversationId: conversationId1,
+        callAPI.conferenceCallsReturn[conferenceId] = [callId, secondaryCallId]
+        source.conferenceCreated(conferenceId: conferenceId, conversationId: conversationId1,
                                  accountId: accountId1)
-        source.conferenceChanged(conference: "conf1", accountId: accountId1, state: "")
+        source.conferenceChanged(conference: conferenceId, accountId: accountId1, state: String())
 
         let events = try await collect(count: 2)
         guard case let .conferenceCreated(_, conversationId, _, created) = events[0],
@@ -147,46 +153,48 @@ final class CallEventResolverTests: XCTestCase {
             return XCTFail("wrong events")
         }
         XCTAssertEqual(conversationId, conversationId1)
-        XCTAssertEqual(created, ["m1", "m2"])
-        XCTAssertEqual(changed, ["m1", "m2"])
+        XCTAssertEqual(created, [callId, secondaryCallId])
+        XCTAssertEqual(changed, [callId, secondaryCallId])
     }
 
     func testMediaNegotiationStatusParsesEventAndMedia() async throws {
-        source.didChangeMediaNegotiationStatus(withCallId: "c",
-                                               event: "NEGOTIATION_SUCCESS",
-                                               withMedia: [["MEDIA_TYPE": "MEDIA_TYPE_VIDEO",
-                                                            "LABEL": "video_0",
-                                                            "ENABLED": "true",
-                                                            "MUTED": "true"]])
+        source.didChangeMediaNegotiationStatus(withCallId: callId,
+                                               event: MediaNegotiationEvent.success.rawValue,
+                                               withMedia: [[MediaKey.mediaType.rawValue: MediaType.video.rawValue,
+                                                            MediaKey.label.rawValue: MediaLabel.defaultVideo.libJamiString,
+                                                            MediaKey.enabled.rawValue: true.libJamiString,
+                                                            MediaKey.muted.rawValue: true.libJamiString]])
 
         let events = try await collect(count: 1)
         guard case let .mediaNegotiationStatus(callId, event, media) = events[0] else {
             return XCTFail("wrong event")
         }
-        XCTAssertEqual(callId, "c")
+        XCTAssertEqual(callId, self.callId)
         XCTAssertEqual(event, .success)
         XCTAssertEqual(media.first?.label, .video(0))
         XCTAssertEqual(media.first?.muted, true)
     }
 
     func testConferenceInfosSignalParsesParticipants() async throws {
-        source.conferenceInfoUpdated(conference: "conf1",
-                                     info: [["uri": "u1", "device": deviceId1,
-                                             "sinkId": "s1", "active": "false"]])
+        source.conferenceInfoUpdated(conference: conferenceId,
+                                     info: [[ConfInfoKey.uri.rawValue: peerUri,
+                                             ConfInfoKey.device.rawValue: deviceId1,
+                                             ConfInfoKey.sinkId.rawValue: CallTestFixtures.remoteSinkId,
+                                             ConfInfoKey.active.rawValue: false.libJamiString]])
 
         let events = try await collect(count: 1)
         guard case let .conferenceInfosUpdated(conferenceId, participants) = events[0] else {
             return XCTFail("wrong event")
         }
-        XCTAssertEqual(conferenceId, "conf1")
+        XCTAssertEqual(conferenceId, self.conferenceId)
         XCTAssertEqual(participants.count, 1)
-        XCTAssertEqual(participants[0].uri, "u1")
+        XCTAssertEqual(participants[0].uri, peerUri)
     }
 
     func testEventsAreBufferedUntilConsumed() async throws {
-        source.callPlacedOnHold(withCallId: "c1", hold: true)
-        source.audioMuted(call: "c1", mute: true)
-        source.videoMuted(call: "c1", mute: false)
+        source.callPlacedOnHold(withCallId: callId, hold: true)
+        source.audioMuted(call: callId, mute: true)
+        source.videoMuted(call: callId, mute: false)
 
         let events = try await collect(count: 3)
         XCTAssertEqual(events.count, 3)

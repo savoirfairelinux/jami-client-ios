@@ -73,8 +73,8 @@ final class CallStoreTests: XCTestCase {
         }
     }
 
-    private func receiveIncomingCall(callId: String = "call-in",
-                                     peer: String = "peer1") async -> CallId {
+    private func receiveIncomingCall(callId: String = CallTestFixtures.callId.raw,
+                                     peer: String = CallTestFixtures.peerUri) async -> CallId {
         sendEvent(.incomingCall(accountId: accountId1, callId: callId, peerUri: peer,
                                 media: [MediaItem.audio(), .video()].toDictionaries()))
         let event = await expectEvent { if case .callAdded = $0 { return true }; return false }
@@ -83,7 +83,7 @@ final class CallStoreTests: XCTestCase {
     }
 
     func testAcceptingPendingCallAddsAConnectingCallWithNoLibJamiId() async {
-        let call = await store.acceptPendingCall(peerId: "peer1", accountId: accountId1,
+        let call = await store.acceptPendingCall(peerId: CallTestFixtures.peerUri, accountId: accountId1,
                                                  withVideo: true)
         flushCommands()
 
@@ -97,11 +97,11 @@ final class CallStoreTests: XCTestCase {
     }
 
     func testLibJamiIncomingCallReplacesTheAcceptedPlaceholder() async {
-        let placeholder = await store.acceptPendingCall(peerId: "peer1", accountId: accountId1,
+        let placeholder = await store.acceptPendingCall(peerId: CallTestFixtures.peerUri, accountId: accountId1,
                                                         withVideo: true)
         await expectEvent { if case .callAdded = $0 { return true }; return false }
 
-        sendEvent(.incomingCall(accountId: accountId1, callId: "call-in", peerUri: "peer1",
+        sendEvent(.incomingCall(accountId: accountId1, callId: CallTestFixtures.callId.raw, peerUri: CallTestFixtures.peerUri,
                                 media: [MediaItem.audio(), .video()].toDictionaries()))
 
         let event = await expectEvent { if case .callMatched = $0 { return true }; return false }
@@ -109,7 +109,7 @@ final class CallStoreTests: XCTestCase {
             return XCTFail("the libjami call must replace the placeholder")
         }
         XCTAssertEqual(replaced, placeholder.id)
-        XCTAssertEqual(matched.id, CallId(raw: "call-in"))
+        XCTAssertEqual(matched.id, CallTestFixtures.callId)
 
         let state = await store.snapshot()
         XCTAssertEqual(state.calls.count, 1, "the placeholder is replaced, not duplicated")
@@ -117,7 +117,7 @@ final class CallStoreTests: XCTestCase {
     }
 
     func testAcceptedPlaceholderEndsWhenLibJamiNeverReportsTheCall() async {
-        _ = await store.acceptPendingCall(peerId: "peer1", accountId: accountId1,
+        _ = await store.acceptPendingCall(peerId: CallTestFixtures.peerUri, accountId: accountId1,
                                           withVideo: true, timeout: 0.1)
         await expectEvent { if case .callAdded = $0 { return true }; return false }
 
@@ -128,7 +128,7 @@ final class CallStoreTests: XCTestCase {
     }
 
     func testCancellingAnAcceptedPlaceholderSendsNoLibJamiCommand() async {
-        let placeholder = await store.acceptPendingCall(peerId: "peer1", accountId: accountId1,
+        let placeholder = await store.acceptPendingCall(peerId: CallTestFixtures.peerUri, accountId: accountId1,
                                                         withVideo: true)
         await expectEvent { if case .callAdded = $0 { return true }; return false }
 
@@ -145,7 +145,7 @@ final class CallStoreTests: XCTestCase {
         let call = await store.snapshot().call(id)
         XCTAssertEqual(call?.status, .incoming)
         XCTAssertEqual(call?.direction, .incoming)
-        XCTAssertEqual(call?.peerUri, "peer1")
+        XCTAssertEqual(call?.peerUri, CallTestFixtures.peerUri)
         XCTAssertEqual(call?.media.count, 2)
     }
 
@@ -156,7 +156,7 @@ final class CallStoreTests: XCTestCase {
         flushCommands()
 
         XCTAssertEqual(callAPI.accepted.count, 1)
-        XCTAssertEqual(callAPI.accepted[0].callId, "call-in")
+        XCTAssertEqual(callAPI.accepted[0].callId, CallTestFixtures.callId.raw)
         XCTAssertEqual(callAPI.accepted[0].media.map(\.label), [.audio(0), .video(0)])
     }
 
@@ -171,7 +171,7 @@ final class CallStoreTests: XCTestCase {
 
     func testAcceptIsRejectedWhenNotIncoming() async {
         let id = await receiveIncomingCall()
-        sendEvent(.callStateChanged(callId: id.raw, state: "CURRENT",
+        sendEvent(.callStateChanged(callId: id.raw, state: LibJamiCallState.current.rawValue,
                                     accountId: accountId1, code: 0))
         await expectEvent { if case .callUpdated = $0 { return true }; return false }
 
@@ -185,25 +185,25 @@ final class CallStoreTests: XCTestCase {
         let id = await receiveIncomingCall()
         await store.refuse(id)
         flushCommands()
-        XCTAssertEqual(callAPI.refused, ["call-in"])
+        XCTAssertEqual(callAPI.refused, [CallTestFixtures.callId.raw])
     }
 
     func testPlaceCallCreatesConnectingCall() async throws {
-        callAPI.placeCallReturn = "call-out"
+        callAPI.placeCallReturn = CallTestFixtures.secondaryCallId.raw
 
-        let call = try await store.placeCall(accountId: accountId1, to: "peer2",
+        let call = try await store.placeCall(accountId: accountId1, to: CallTestFixtures.secondaryPeerUri,
                                              audioOnly: false, videoSource: "camera://front")
 
         XCTAssertEqual(call.status, .connecting)
         XCTAssertEqual(call.direction, .outgoing)
         XCTAssertEqual(callAPI.placedCalls.count, 1)
         XCTAssertEqual(callAPI.placedCalls[0].media.map(\.label), [.audio(0), .video(0)])
-        let stored = await store.snapshot().call(CallId(raw: "call-out"))
+        let stored = await store.snapshot().call(CallTestFixtures.secondaryCallId)
         XCTAssertNotNil(stored)
     }
 
     func testPlaceCallAudioOnly() async throws {
-        _ = try await store.placeCall(accountId: accountId1, to: "peer2",
+        _ = try await store.placeCall(accountId: accountId1, to: CallTestFixtures.secondaryPeerUri,
                                       audioOnly: true, videoSource: "camera://front")
         XCTAssertEqual(callAPI.placedCalls[0].media.map(\.label), [.audio(0)])
     }
@@ -211,7 +211,7 @@ final class CallStoreTests: XCTestCase {
     func testPlaceCallFailureThrows() async {
         callAPI.placeCallReturn = nil
         do {
-            _ = try await store.placeCall(accountId: accountId1, to: "peer2",
+            _ = try await store.placeCall(accountId: accountId1, to: CallTestFixtures.secondaryPeerUri,
                                           audioOnly: true, videoSource: "")
             XCTFail("should throw")
         } catch let error as CallStoreError {
@@ -231,11 +231,11 @@ final class CallStoreTests: XCTestCase {
     }
 
     func testRingingStateEmitsCallUpdated() async throws {
-        callAPI.placeCallReturn = "call-out"
+        callAPI.placeCallReturn = CallTestFixtures.secondaryCallId.raw
         _ = try await store.placeCall(accountId: accountId1, to: "p",
                                       audioOnly: true, videoSource: "")
 
-        sendEvent(.callStateChanged(callId: "call-out", state: "RINGING",
+        sendEvent(.callStateChanged(callId: CallTestFixtures.secondaryCallId.raw, state: LibJamiCallState.ringing.rawValue,
                                     accountId: accountId1, code: 0))
 
         let event = await expectEvent { event in
@@ -246,16 +246,16 @@ final class CallStoreTests: XCTestCase {
     }
 
     func testCurrentStateSetsStartDateAndFetchesMedia() async throws {
-        callAPI.placeCallReturn = "call-out"
-        callAPI.currentMediaReturn["call-out"] = [.audio(muted: true)]
+        callAPI.placeCallReturn = CallTestFixtures.secondaryCallId.raw
+        callAPI.currentMediaReturn[CallTestFixtures.secondaryCallId.raw] = [.audio(muted: true)]
         _ = try await store.placeCall(accountId: accountId1, to: "p",
                                       audioOnly: true, videoSource: "")
 
-        sendEvent(.callStateChanged(callId: "call-out", state: "CURRENT",
+        sendEvent(.callStateChanged(callId: CallTestFixtures.secondaryCallId.raw, state: LibJamiCallState.current.rawValue,
                                     accountId: accountId1, code: 0))
         await expectEvent { if case .callUpdated = $0 { return true }; return false }
 
-        let call = await store.snapshot().call(CallId(raw: "call-out"))
+        let call = await store.snapshot().call(CallTestFixtures.secondaryCallId)
         XCTAssertEqual(call?.status, .current)
         XCTAssertNotNil(call?.startedAt)
         XCTAssertEqual(call?.media, [.audio(muted: true)], "media confirmed by libjami")
@@ -264,7 +264,7 @@ final class CallStoreTests: XCTestCase {
     func testTerminalStateEmitsCallEndedAndRemovesCall() async {
         let id = await receiveIncomingCall()
 
-        sendEvent(.callStateChanged(callId: id.raw, state: "OVER",
+        sendEvent(.callStateChanged(callId: id.raw, state: LibJamiCallState.over.rawValue,
                                     accountId: accountId1, code: 0))
 
         let event = await expectEvent { if case .callEnded = $0 { return true }; return false }
@@ -278,8 +278,8 @@ final class CallStoreTests: XCTestCase {
     }
 
     func testCallEventsReplayTerminalStateWhenObservationStartsAfterEnd() async throws {
-        callAPI.placeCallReturn = "call-out"
-        let placed = try await store.placeCall(accountId: accountId1, to: "peer2",
+        callAPI.placeCallReturn = CallTestFixtures.secondaryCallId.raw
+        let placed = try await store.placeCall(accountId: accountId1, to: CallTestFixtures.secondaryPeerUri,
                                                audioOnly: true, videoSource: "")
 
         sendEvent(.callStateChanged(callId: placed.id.raw,
@@ -302,7 +302,7 @@ final class CallStoreTests: XCTestCase {
 
     func testCallEventsReplayCurrentStateAndExcludeOtherCalls() async throws {
         callAPI.placeCallReturn = "target"
-        let target = try await store.placeCall(accountId: accountId1, to: "peer2",
+        let target = try await store.placeCall(accountId: accountId1, to: CallTestFixtures.secondaryPeerUri,
                                                audioOnly: true, videoSource: "")
         let screenEvents = await store.events(for: target.id, fallback: target)
 
@@ -317,10 +317,10 @@ final class CallStoreTests: XCTestCase {
         XCTAssertEqual(call.status, .connecting)
 
         callAPI.placeCallReturn = "other"
-        _ = try await store.placeCall(accountId: accountId1, to: "peer3",
+        _ = try await store.placeCall(accountId: accountId1, to: CallTestFixtures.tertiaryPeerUri,
                                       audioOnly: true, videoSource: "")
         sendEvent(.callStateChanged(callId: target.id.raw,
-                                    state: "RINGING", accountId: accountId1, code: 0))
+                                    state: LibJamiCallState.ringing.rawValue, accountId: accountId1, code: 0))
 
         let updated = await expectEvent(in: screenEvents) { event in
             switch event {
@@ -336,8 +336,8 @@ final class CallStoreTests: XCTestCase {
     }
 
     func testCallEventsReplayEndedCallWithoutAnyFallback() async throws {
-        callAPI.placeCallReturn = "call-out"
-        let placed = try await store.placeCall(accountId: accountId1, to: "peer2",
+        callAPI.placeCallReturn = CallTestFixtures.secondaryCallId.raw
+        let placed = try await store.placeCall(accountId: accountId1, to: CallTestFixtures.secondaryPeerUri,
                                                audioOnly: true, videoSource: "")
 
         sendEvent(.callStateChanged(callId: placed.id.raw,
@@ -358,8 +358,8 @@ final class CallStoreTests: XCTestCase {
     }
 
     func testCallEventsReportEndForStaleFallbackAfterTheEndedLogEvicted() async throws {
-        callAPI.placeCallReturn = "call-out"
-        let placed = try await store.placeCall(accountId: accountId1, to: "peer2",
+        callAPI.placeCallReturn = CallTestFixtures.secondaryCallId.raw
+        let placed = try await store.placeCall(accountId: accountId1, to: CallTestFixtures.secondaryPeerUri,
                                                audioOnly: true, videoSource: "")
         sendEvent(.callStateChanged(callId: placed.id.raw,
                                     state: "FAILURE", accountId: accountId1, code: 0))
@@ -368,9 +368,9 @@ final class CallStoreTests: XCTestCase {
         for index in 0...EndedCallLog.limit {
             let id = "filler-\(index)"
             callAPI.placeCallReturn = id
-            _ = try await store.placeCall(accountId: accountId1, to: "peer3",
+            _ = try await store.placeCall(accountId: accountId1, to: CallTestFixtures.tertiaryPeerUri,
                                           audioOnly: true, videoSource: "")
-            sendEvent(.callStateChanged(callId: id, state: "OVER",
+            sendEvent(.callStateChanged(callId: id, state: LibJamiCallState.over.rawValue,
                                         accountId: accountId1, code: 0))
             await expectEvent { event in
                 if case let .callEnded(call, _) = event { return call.id.raw == id }
@@ -394,7 +394,7 @@ final class CallStoreTests: XCTestCase {
     }
 
     func testStateChangeForUnknownCallIsIgnored() async {
-        sendEvent(.callStateChanged(callId: "ghost", state: "CURRENT",
+        sendEvent(.callStateChanged(callId: "ghost", state: LibJamiCallState.current.rawValue,
                                     accountId: accountId1, code: 0))
         sendEvent(.incomingCall(accountId: accountId1, callId: "real", peerUri: "p", media: []))
         await expectEvent { if case .callAdded = $0 { return true }; return false }
@@ -429,7 +429,7 @@ final class CallStoreTests: XCTestCase {
         await store.hangUp(id)
         await expectEvent { if case .callEnded = $0 { return true }; return false }
 
-        sendEvent(.callStateChanged(callId: id.raw, state: "OVER",
+        sendEvent(.callStateChanged(callId: id.raw, state: LibJamiCallState.over.rawValue,
                                     accountId: accountId1, code: 0))
 
         let second = await expectEvent { if case .callEnded = $0 { return true }; return false }
@@ -470,7 +470,7 @@ final class CallStoreTests: XCTestCase {
         flushCommands()
         XCTAssertTrue(callAPI.held.isEmpty, "cannot hold before current")
 
-        sendEvent(.callStateChanged(callId: id.raw, state: "CURRENT",
+        sendEvent(.callStateChanged(callId: id.raw, state: LibJamiCallState.current.rawValue,
                                     accountId: accountId1, code: 0))
         await expectEvent { if case .callUpdated = $0 { return true }; return false }
 
@@ -488,7 +488,7 @@ final class CallStoreTests: XCTestCase {
 
     func testPeerHoldMergesIntoHoldSide() async {
         let id = await receiveIncomingCall()
-        sendEvent(.callStateChanged(callId: id.raw, state: "CURRENT",
+        sendEvent(.callStateChanged(callId: id.raw, state: LibJamiCallState.current.rawValue,
                                     accountId: accountId1, code: 0))
         await expectEvent { if case .callUpdated = $0 { return true }; return false }
 
@@ -508,7 +508,7 @@ final class CallStoreTests: XCTestCase {
 
     func testIncomingMediaChangeRequestIsAnsweredPreservingState() async {
         let id = await receiveIncomingCall()
-        sendEvent(.callStateChanged(callId: id.raw, state: "CURRENT",
+        sendEvent(.callStateChanged(callId: id.raw, state: LibJamiCallState.current.rawValue,
                                     accountId: accountId1, code: 0))
         await expectEvent { if case .callUpdated = $0 { return true }; return false }
 
@@ -540,17 +540,17 @@ final class CallStoreTests: XCTestCase {
 
     private func placeOngoingAudioCall(negotiated: [MediaItem] = [.audio()])
     async throws -> CallId {
-        callAPI.placeCallReturn = "call-out"
-        callAPI.currentMediaReturn["call-out"] = negotiated
-        _ = try await store.placeCall(accountId: accountId1, to: "peer2",
+        callAPI.placeCallReturn = CallTestFixtures.secondaryCallId.raw
+        callAPI.currentMediaReturn[CallTestFixtures.secondaryCallId.raw] = negotiated
+        _ = try await store.placeCall(accountId: accountId1, to: CallTestFixtures.secondaryPeerUri,
                                       audioOnly: true, videoSource: "camera://front")
-        sendEvent(.callStateChanged(callId: "call-out", state: "CURRENT",
+        sendEvent(.callStateChanged(callId: CallTestFixtures.secondaryCallId.raw, state: LibJamiCallState.current.rawValue,
                                     accountId: accountId1, code: 0))
         await expectEvent { event in
             if case let .callUpdated(call) = event { return call.status == .current }
             return false
         }
-        return CallId(raw: "call-out")
+        return CallTestFixtures.secondaryCallId
     }
 
     func testPeerAddingVideoToAnAudioCallMakesTheCallVideoCapable() async throws {
@@ -648,7 +648,7 @@ final class CallStoreTests: XCTestCase {
 
     func testUpdateVideoSourceReInvitesUnmutedVideoWithTheNewSource() async {
         let id = await receiveIncomingCall()
-        sendEvent(.callStateChanged(callId: id.raw, state: "CURRENT",
+        sendEvent(.callStateChanged(callId: id.raw, state: LibJamiCallState.current.rawValue,
                                     accountId: accountId1, code: 0))
         await expectEvent { if case .callUpdated = $0 { return true }; return false }
 
@@ -664,7 +664,7 @@ final class CallStoreTests: XCTestCase {
 
     func testUpdateVideoSourceIgnoresMutedVideo() async {
         let id = await receiveIncomingCall()
-        sendEvent(.callStateChanged(callId: id.raw, state: "CURRENT",
+        sendEvent(.callStateChanged(callId: id.raw, state: LibJamiCallState.current.rawValue,
                                     accountId: accountId1, code: 0))
         await expectEvent { if case .callUpdated = $0 { return true }; return false }
         sendEvent(.mediaNegotiationStatus(
@@ -685,7 +685,7 @@ final class CallStoreTests: XCTestCase {
 
     func testToggleMuteSendsReInviteAndConfirmsOnNegotiation() async {
         let id = await receiveIncomingCall()
-        sendEvent(.callStateChanged(callId: id.raw, state: "CURRENT",
+        sendEvent(.callStateChanged(callId: id.raw, state: LibJamiCallState.current.rawValue,
                                     accountId: accountId1, code: 0))
         await expectEvent { if case .callUpdated = $0 { return true }; return false }
 
@@ -714,7 +714,7 @@ final class CallStoreTests: XCTestCase {
 
     func testToggleMuteKeepsConfirmedStateWhenLibJamiRefuses() async {
         let id = await receiveIncomingCall()
-        sendEvent(.callStateChanged(callId: id.raw, state: "CURRENT",
+        sendEvent(.callStateChanged(callId: id.raw, state: LibJamiCallState.current.rawValue,
                                     accountId: accountId1, code: 0))
         await expectEvent { if case .callUpdated = $0 { return true }; return false }
         callAPI.requestMediaChangeReturn = false
@@ -729,7 +729,7 @@ final class CallStoreTests: XCTestCase {
 
     func testFailedNegotiationClearsThePendingRequest() async {
         let id = await receiveIncomingCall()
-        sendEvent(.callStateChanged(callId: id.raw, state: "CURRENT",
+        sendEvent(.callStateChanged(callId: id.raw, state: LibJamiCallState.current.rawValue,
                                     accountId: accountId1, code: 0))
         await expectEvent { if case .callUpdated = $0 { return true }; return false }
 
@@ -768,8 +768,8 @@ final class CallStoreTests: XCTestCase {
     func testAddParticipantLegCarriesVideoWheneverTheCallHasIt() async throws {
         let id = try await placeOngoingAudioCall(negotiated: [.audio(), .video()])
 
-        callAPI.placeCallReturn = "sub-call"
-        try await store.addParticipant(peerUri: "peerB", toCall: id,
+        callAPI.placeCallReturn = CallTestFixtures.inviteCallId.raw
+        try await store.addParticipant(peerUri: CallTestFixtures.secondaryPeerUri, toCall: id,
                                        videoSource: "camera://front")
         var media = callAPI.placedCalls[1].media
         XCTAssertEqual(media.map(\.label), [.audio(0), .video(0)])
@@ -781,7 +781,7 @@ final class CallStoreTests: XCTestCase {
             return false
         }
         callAPI.placeCallReturn = "sub-call-2"
-        try await store.addParticipant(peerUri: "peerC", toCall: id,
+        try await store.addParticipant(peerUri: CallTestFixtures.tertiaryPeerUri, toCall: id,
                                        videoSource: "camera://front")
         media = callAPI.placedCalls[2].media
         XCTAssertEqual(media.map(\.label), [.audio(0), .video(0)],
@@ -793,12 +793,12 @@ final class CallStoreTests: XCTestCase {
     func testAddParticipantMarksSubCallToJoinExistingCall() async throws {
         let id = try await placeOngoingAudioCall()
 
-        callAPI.placeCallReturn = "sub-call"
-        try await store.addParticipant(peerUri: "peerB", toCall: id,
+        callAPI.placeCallReturn = CallTestFixtures.inviteCallId.raw
+        try await store.addParticipant(peerUri: CallTestFixtures.secondaryPeerUri, toCall: id,
                                        videoSource: "camera://front")
 
         let added = await expectEvent { event in
-            if case let .callAdded(call) = event { return call.id.raw == "sub-call" }
+            if case let .callAdded(call) = event { return call.id.raw == CallTestFixtures.inviteCallId.raw }
             return false
         }
         guard case let .callAdded(subCall)? = added else {
@@ -809,9 +809,9 @@ final class CallStoreTests: XCTestCase {
     }
 
     func testPlacedCallIsNotMarkedAsJoiningExistingCall() async throws {
-        callAPI.placeCallReturn = "call-out"
+        callAPI.placeCallReturn = CallTestFixtures.secondaryCallId.raw
 
-        let call = try await store.placeCall(accountId: accountId1, to: "peer2",
+        let call = try await store.placeCall(accountId: accountId1, to: CallTestFixtures.secondaryPeerUri,
                                              audioOnly: false, videoSource: "camera://front")
 
         XCTAssertFalse(call.joinsExistingCall,
@@ -821,44 +821,44 @@ final class CallStoreTests: XCTestCase {
     func testAddParticipantToAnAudioOnlyCallPlacesAnAudioLeg() async throws {
         let id = try await placeOngoingAudioCall()
 
-        callAPI.placeCallReturn = "sub-call"
-        try await store.addParticipant(peerUri: "peerB", toCall: id,
+        callAPI.placeCallReturn = CallTestFixtures.inviteCallId.raw
+        try await store.addParticipant(peerUri: CallTestFixtures.secondaryPeerUri, toCall: id,
                                        videoSource: "camera://front")
         XCTAssertEqual(callAPI.placedCalls[1].media.map(\.label), [.audio(0)])
     }
 
     func testAddParticipantDefersJoinUntilSubCallIsCurrent() async throws {
-        callAPI.placeCallReturn = "host-call"
+        callAPI.placeCallReturn = CallTestFixtures.hostCallId.raw
         _ = try await store.placeCall(accountId: accountId1, to: "peerA",
                                       audioOnly: true, videoSource: "")
-        sendEvent(.callStateChanged(callId: "host-call", state: "CURRENT",
+        sendEvent(.callStateChanged(callId: CallTestFixtures.hostCallId.raw, state: LibJamiCallState.current.rawValue,
                                     accountId: accountId1, code: 0))
         await expectEvent { if case .callUpdated = $0 { return true }; return false }
 
-        callAPI.placeCallReturn = "sub-call"
-        try await store.addParticipant(peerUri: "peerB", toCall: CallId(raw: "host-call"),
+        callAPI.placeCallReturn = CallTestFixtures.inviteCallId.raw
+        try await store.addParticipant(peerUri: CallTestFixtures.secondaryPeerUri, toCall: CallTestFixtures.hostCallId,
                                        videoSource: "")
         flushCommands()
         XCTAssertEqual(callAPI.placedCalls.count, 2)
         XCTAssertTrue(callAPI.joinedCalls.isEmpty, "join must wait for sub-call CURRENT")
 
-        sendEvent(.callStateChanged(callId: "sub-call", state: "CURRENT",
+        sendEvent(.callStateChanged(callId: CallTestFixtures.inviteCallId.raw, state: LibJamiCallState.current.rawValue,
                                     accountId: accountId1, code: 0))
         await expectEvent { event in
             guard case let .callUpdated(call) = event else { return false }
-            return call.id == CallId(raw: "sub-call") && call.status == .current
+            return call.id == CallTestFixtures.inviteCallId && call.status == .current
         }
         flushCommands()
         XCTAssertEqual(callAPI.joinedCalls.count, 1)
-        XCTAssertEqual(callAPI.joinedCalls[0].first, "host-call")
-        XCTAssertEqual(callAPI.joinedCalls[0].second, "sub-call")
+        XCTAssertEqual(callAPI.joinedCalls[0].first, CallTestFixtures.hostCallId.raw)
+        XCTAssertEqual(callAPI.joinedCalls[0].second, CallTestFixtures.inviteCallId.raw)
     }
 
     func testAddParticipantListsTheInviteOnTheHostCall() async throws {
         let id = try await placeOngoingAudioCall()
 
-        callAPI.placeCallReturn = "sub-call"
-        try await store.addParticipant(peerUri: "peerB", toCall: id, videoSource: "")
+        callAPI.placeCallReturn = CallTestFixtures.inviteCallId.raw
+        try await store.addParticipant(peerUri: CallTestFixtures.secondaryPeerUri, toCall: id, videoSource: "")
 
         let event = await expectEvent { event in
             if case let .callUpdated(call) = event {
@@ -869,21 +869,21 @@ final class CallStoreTests: XCTestCase {
         XCTAssertNotNil(event, "the screen learns about the invite through the host call")
         let host = await store.snapshot().call(id)
         XCTAssertEqual(host?.pendingInvites,
-                       [PendingConferenceInvite(callId: CallId(raw: "sub-call"),
-                                                peerUri: "peerB",
+                       [PendingConferenceInvite(callId: CallTestFixtures.inviteCallId,
+                                                peerUri: CallTestFixtures.secondaryPeerUri,
                                                 status: .connecting)])
     }
 
     func testInviteReportsTheLegsProgress() async throws {
         let id = try await placeOngoingAudioCall()
-        callAPI.placeCallReturn = "sub-call"
-        try await store.addParticipant(peerUri: "peerB", toCall: id, videoSource: "")
+        callAPI.placeCallReturn = CallTestFixtures.inviteCallId.raw
+        try await store.addParticipant(peerUri: CallTestFixtures.secondaryPeerUri, toCall: id, videoSource: "")
         await expectEvent { event in
             if case let .callUpdated(call) = event { return !call.pendingInvites.isEmpty }
             return false
         }
 
-        sendEvent(.callStateChanged(callId: "sub-call", state: "RINGING",
+        sendEvent(.callStateChanged(callId: CallTestFixtures.inviteCallId.raw, state: LibJamiCallState.ringing.rawValue,
                                     accountId: accountId1, code: 0))
         await expectEvent { event in
             if case let .callUpdated(call) = event {
@@ -899,14 +899,14 @@ final class CallStoreTests: XCTestCase {
 
     func testAJoinedPeerIsNeverReportedAsStillInvited() async throws {
         let id = try await placeOngoingAudioCall()
-        callAPI.placeCallReturn = "sub-call"
-        try await store.addParticipant(peerUri: "peerB", toCall: id, videoSource: "")
+        callAPI.placeCallReturn = CallTestFixtures.inviteCallId.raw
+        try await store.addParticipant(peerUri: CallTestFixtures.secondaryPeerUri, toCall: id, videoSource: "")
         await expectEvent { event in
             if case let .callUpdated(call) = event { return !call.pendingInvites.isEmpty }
             return false
         }
 
-        sendEvent(.callStateChanged(callId: "sub-call", state: "CURRENT",
+        sendEvent(.callStateChanged(callId: CallTestFixtures.inviteCallId.raw, state: LibJamiCallState.current.rawValue,
                                     accountId: accountId1, code: 0))
         let event = await expectEvent { event in
             guard case let .callUpdated(call) = event, call.id == id else { return false }
@@ -920,14 +920,14 @@ final class CallStoreTests: XCTestCase {
 
     func testInviteLeavesThePendingListWhenTheInviteeJoins() async throws {
         let id = try await placeOngoingAudioCall()
-        callAPI.placeCallReturn = "sub-call"
-        try await store.addParticipant(peerUri: "peerB", toCall: id, videoSource: "")
+        callAPI.placeCallReturn = CallTestFixtures.inviteCallId.raw
+        try await store.addParticipant(peerUri: CallTestFixtures.secondaryPeerUri, toCall: id, videoSource: "")
         await expectEvent { event in
             if case let .callUpdated(call) = event { return !call.pendingInvites.isEmpty }
             return false
         }
 
-        sendEvent(.callStateChanged(callId: "sub-call", state: "CURRENT",
+        sendEvent(.callStateChanged(callId: CallTestFixtures.inviteCallId.raw, state: LibJamiCallState.current.rawValue,
                                     accountId: accountId1, code: 0))
         await expectEvent { event in
             if case let .callUpdated(call) = event {
@@ -943,25 +943,25 @@ final class CallStoreTests: XCTestCase {
 
     func testCancellingAnInviteRemovesItFromTheHostCall() async throws {
         let id = try await placeOngoingAudioCall()
-        callAPI.placeCallReturn = "sub-call"
-        try await store.addParticipant(peerUri: "peerB", toCall: id, videoSource: "")
+        callAPI.placeCallReturn = CallTestFixtures.inviteCallId.raw
+        try await store.addParticipant(peerUri: CallTestFixtures.secondaryPeerUri, toCall: id, videoSource: "")
         await expectEvent { event in
             if case let .callUpdated(call) = event { return !call.pendingInvites.isEmpty }
             return false
         }
 
-        await store.hangUp(CallId(raw: "sub-call"))
+        await store.hangUp(CallTestFixtures.inviteCallId)
         flushCommands()
 
-        XCTAssertEqual(callAPI.hungUp, ["sub-call"])
+        XCTAssertEqual(callAPI.hungUp, [CallTestFixtures.inviteCallId.raw])
         let host = await store.snapshot().call(id)
         XCTAssertEqual(host?.pendingInvites, [], "the cancelled leg leaves the list")
     }
 
     func testEndingTheHostCallHangsUpItsRingingInvite() async throws {
         let id = try await placeOngoingAudioCall()
-        callAPI.placeCallReturn = "sub-call"
-        try await store.addParticipant(peerUri: "peerB", toCall: id, videoSource: "")
+        callAPI.placeCallReturn = CallTestFixtures.inviteCallId.raw
+        try await store.addParticipant(peerUri: CallTestFixtures.secondaryPeerUri, toCall: id, videoSource: "")
         await expectEvent { event in
             if case let .callUpdated(call) = event { return !call.pendingInvites.isEmpty }
             return false
@@ -970,7 +970,7 @@ final class CallStoreTests: XCTestCase {
         await store.hangUp(id)
         flushCommands()
 
-        XCTAssertTrue(callAPI.hungUp.contains("sub-call"),
+        XCTAssertTrue(callAPI.hungUp.contains(CallTestFixtures.inviteCallId.raw),
                       "the leg has no session left to fold into")
         let state = await store.snapshot()
         XCTAssertTrue(state.calls.isEmpty)
@@ -983,7 +983,7 @@ final class CallStoreTests: XCTestCase {
         sendEvent(.conferenceCreated(conferenceId: "conf-1", conversationId: "",
                                      accountId: accountId1))
         await expectEvent { if case .conferenceUpdated = $0 { return true }; return false }
-        sendEvent(.callStateChanged(callId: "member-1", state: "CURRENT",
+        sendEvent(.callStateChanged(callId: "member-1", state: LibJamiCallState.current.rawValue,
                                     accountId: accountId1, code: 0))
         await expectEvent { event in
             if case let .callUpdated(call) = event {
@@ -992,15 +992,15 @@ final class CallStoreTests: XCTestCase {
             return false
         }
 
-        callAPI.placeCallReturn = "sub-call"
-        try await store.addParticipant(peerUri: "peerC", toCall: CallId(raw: "member-1"),
+        callAPI.placeCallReturn = CallTestFixtures.inviteCallId.raw
+        try await store.addParticipant(peerUri: CallTestFixtures.tertiaryPeerUri, toCall: CallId(raw: "member-1"),
                                        videoSource: "")
         await expectEvent { event in
             if case let .callUpdated(call) = event { return !call.pendingInvites.isEmpty }
             return false
         }
 
-        sendEvent(.callStateChanged(callId: "member-1", state: "OVER",
+        sendEvent(.callStateChanged(callId: "member-1", state: LibJamiCallState.over.rawValue,
                                     accountId: accountId1, code: 0))
         await expectEvent { event in
             if case let .callEnded(call, _) = event { return call.id == CallId(raw: "member-1") }
@@ -1008,10 +1008,10 @@ final class CallStoreTests: XCTestCase {
         }
         flushCommands()
 
-        XCTAssertFalse(callAPI.hungUp.contains("sub-call"),
+        XCTAssertFalse(callAPI.hungUp.contains(CallTestFixtures.inviteCallId.raw),
                        "the conference lives on, so the invite is still wanted")
         let survivor = await store.snapshot().call(CallId(raw: "member-2"))
-        XCTAssertEqual(survivor?.pendingInvites.map(\.callId), [CallId(raw: "sub-call")],
+        XCTAssertEqual(survivor?.pendingInvites.map(\.callId), [CallTestFixtures.inviteCallId],
                        "the invite moves to a member that can still host the join")
     }
 
@@ -1065,11 +1065,11 @@ final class CallStoreTests: XCTestCase {
     }
 
     func testPeerHostedConferenceInfosPromoteDirectCall() async {
-        let id = await receiveIncomingCall(callId: "member-1", peer: "peer1")
+        let id = await receiveIncomingCall(callId: "member-1", peer: CallTestFixtures.peerUri)
         let infos = [
             ["uri": jamiId1, "device": "local", "sinkId": "member-1_video_0",
              "w": "320", "h": "240"],
-            ["uri": "peer1", "device": "remote", "sinkId": "member-1_video_1",
+            ["uri": CallTestFixtures.peerUri, "device": "remote", "sinkId": "member-1_video_1",
              "w": "320", "h": "240"]
         ]
 
@@ -1093,11 +1093,11 @@ final class CallStoreTests: XCTestCase {
     }
 
     func testPeerHostedConferenceEndsWhenItsCallEnds() async {
-        let id = await receiveIncomingCall(callId: "member-1", peer: "peer1")
+        let id = await receiveIncomingCall(callId: "member-1", peer: CallTestFixtures.peerUri)
         let infos = [
             ["uri": jamiId1, "device": "local", "sinkId": "member-1_video_0",
              "w": "320", "h": "240"],
-            ["uri": "peer1", "device": "remote", "sinkId": "member-1_video_1",
+            ["uri": CallTestFixtures.peerUri, "device": "remote", "sinkId": "member-1_video_1",
              "w": "320", "h": "240"]
         ]
         sendEvent(.conferenceInfosUpdated(conferenceId: id.raw, info: infos))
@@ -1108,7 +1108,7 @@ final class CallStoreTests: XCTestCase {
             return false
         }
 
-        sendEvent(.callStateChanged(callId: id.raw, state: "OVER",
+        sendEvent(.callStateChanged(callId: id.raw, state: LibJamiCallState.over.rawValue,
                                     accountId: accountId1, code: 0))
 
         let ended = await expectEvent { event in
@@ -1125,11 +1125,11 @@ final class CallStoreTests: XCTestCase {
     }
 
     func testPeerHostedConferenceCollapsesBackToOneToOneOnEmptyInfos() async {
-        let id = await receiveIncomingCall(callId: "member-1", peer: "peer1")
+        let id = await receiveIncomingCall(callId: "member-1", peer: CallTestFixtures.peerUri)
         let infos = [
             ["uri": jamiId1, "device": "local", "sinkId": "member-1_video_0",
              "w": "320", "h": "240"],
-            ["uri": "peer1", "device": "remote", "sinkId": "member-1_video_1",
+            ["uri": CallTestFixtures.peerUri, "device": "remote", "sinkId": "member-1_video_1",
              "w": "320", "h": "240"]
         ]
         sendEvent(.conferenceInfosUpdated(conferenceId: id.raw, info: infos))
@@ -1157,11 +1157,11 @@ final class CallStoreTests: XCTestCase {
     }
 
     func testConferenceInfosWaitForTheirCall() async {
-        let infos = [["uri": "peer1", "device": "remote",
+        let infos = [["uri": CallTestFixtures.peerUri, "device": "remote",
                       "sinkId": "member-1_video_1", "w": "320", "h": "240"]]
         sendEvent(.conferenceInfosUpdated(conferenceId: "member-1", info: infos))
 
-        let id = await receiveIncomingCall(callId: "member-1", peer: "peer1")
+        let id = await receiveIncomingCall(callId: "member-1", peer: CallTestFixtures.peerUri)
 
         let event = await expectEvent { event in
             if case let .conferenceUpdated(conference) = event {
@@ -1177,7 +1177,7 @@ final class CallStoreTests: XCTestCase {
     }
 
     func testConferenceInfosWaitForTheirLifecycleOwner() async {
-        let infos = [["uri": "peer1", "device": "remote",
+        let infos = [["uri": CallTestFixtures.peerUri, "device": "remote",
                       "sinkId": "conf-1_video_1", "w": "320", "h": "240"]]
         sendEvent(.conferenceInfosUpdated(conferenceId: "conf-1", info: infos))
         callAPI.conferenceCallsReturn["conf-1"] = []
@@ -1197,8 +1197,8 @@ final class CallStoreTests: XCTestCase {
     }
 
     func testConferenceCreationPreservesEarlierParticipantInfos() async {
-        let id = await receiveIncomingCall(callId: "member-1", peer: "peer1")
-        let infos = [["uri": "peer1", "device": "remote",
+        let id = await receiveIncomingCall(callId: "member-1", peer: CallTestFixtures.peerUri)
+        let infos = [["uri": CallTestFixtures.peerUri, "device": "remote",
                       "sinkId": "member-1_video_1", "w": "320", "h": "240"]]
         sendEvent(.conferenceInfosUpdated(conferenceId: id.raw, info: infos))
         await expectEvent { event in
@@ -1269,7 +1269,7 @@ final class CallStoreTests: XCTestCase {
                                      accountId: accountId1))
         await expectEvent { if case .conferenceUpdated = $0 { return true }; return false }
 
-        sendEvent(.callStateChanged(callId: "member-1", state: "OVER",
+        sendEvent(.callStateChanged(callId: "member-1", state: LibJamiCallState.over.rawValue,
                                     accountId: accountId1, code: 0))
 
         let shrink = await expectEvent { event in
@@ -1291,7 +1291,7 @@ final class CallStoreTests: XCTestCase {
                                      accountId: accountId1))
         await expectEvent { if case .conferenceUpdated = $0 { return true }; return false }
 
-        sendEvent(.callStateChanged(callId: "member-1", state: "OVER",
+        sendEvent(.callStateChanged(callId: "member-1", state: LibJamiCallState.over.rawValue,
                                     accountId: accountId1, code: 0))
         await expectEvent { event in
             if case let .conferenceUpdated(conf) = event {
@@ -1447,7 +1447,7 @@ final class CallStoreTests: XCTestCase {
         }
         XCTAssertNotNil(accepted, "joined rdv call is accepted on all trackers")
 
-        sendEvent(.callStateChanged(callId: "rdv-call", state: "OVER",
+        sendEvent(.callStateChanged(callId: "rdv-call", state: LibJamiCallState.over.rawValue,
                                     accountId: accountId1, code: 0))
         let reopened = await expectEvent { event in
             if case let .activeCallsChanged(trackers) = event {
@@ -1487,7 +1487,7 @@ final class CallStoreTests: XCTestCase {
 
     func testIncomingMessageIsForwarded() async {
         let id = await receiveIncomingCall()
-        sendEvent(.incomingMessage(callId: id.raw, fromUri: "peer1",
+        sendEvent(.incomingMessage(callId: id.raw, fromUri: CallTestFixtures.peerUri,
                                    message: ["text/plain": "yo"]))
         let event = await expectEvent { if case .incomingMessage = $0 { return true }; return false }
         XCTAssertNotNil(event)

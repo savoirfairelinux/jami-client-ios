@@ -25,6 +25,13 @@ struct VideoFrame {
     let rotation: Int
 }
 
+/// Identifies where a distributor's frames originate without assigning the
+/// synthetic local-camera feed a libjami sink identifier.
+enum FrameSource: Hashable, Sendable {
+    case localCamera
+    case remote(SinkId)
+}
+
 final class FrameSubscription {
     private let cancelHandler: () -> Void
 
@@ -37,7 +44,7 @@ final class FrameSubscription {
     }
 }
 
-/// Fans one sink's frames out to its renderers (call tile, PiP, preview).
+/// Fans one frame source out to its renderers (call tile, PiP, preview).
 /// Frames are delivered synchronously on the decoding thread —
 /// `AVSampleBufferDisplayLayer.enqueue` is thread-safe, so renderers
 /// enqueue directly. The last frame is kept and
@@ -45,7 +52,7 @@ final class FrameSubscription {
 /// content immediately).
 final class FrameDistributor: @unchecked Sendable {
 
-    let sinkId: SinkId
+    let source: FrameSource
 
     private let onSubscriberCountChanged: ((Int) -> Void)?
 
@@ -53,9 +60,15 @@ final class FrameDistributor: @unchecked Sendable {
     private var handlers: [UUID: (VideoFrame) -> Void] = [:]
     private var lastFrame: VideoFrame?
 
-    init(sinkId: SinkId, onSubscriberCountChanged: ((Int) -> Void)? = nil) {
-        self.sinkId = sinkId
+    init(source: FrameSource, onSubscriberCountChanged: ((Int) -> Void)? = nil) {
+        self.source = source
         self.onSubscriberCountChanged = onSubscriberCountChanged
+    }
+
+    convenience init(sinkId: SinkId,
+                     onSubscriberCountChanged: ((Int) -> Void)? = nil) {
+        self.init(source: .remote(sinkId),
+                  onSubscriberCountChanged: onSubscriberCountChanged)
     }
 
     func subscribe(_ handler: @escaping (VideoFrame) -> Void) -> FrameSubscription {

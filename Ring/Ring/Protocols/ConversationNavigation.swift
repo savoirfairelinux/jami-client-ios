@@ -32,7 +32,6 @@ enum ConversationState: State {
     case createNewAccount
     case showDialpad(inCall: Bool)
     case recordFile(conversation: ConversationModel, audioOnly: Bool)
-    case navigateToCall(call: CallModel)
     case showContactPicker(callID: String, contactSelectedCB: ((_ contact: [ConferencableItem]) -> Void)?, conversationSelectedCB: ((_ conversaionIds: [String]?) -> Void)?)
     case openConversationFromCall(conversation: ConversationModel)
     case needAccountMigration(accountId: String)
@@ -47,7 +46,6 @@ enum ConversationState: State {
                                            accountId: String,
                                            shouldOpenSmarList: Bool,
                                            withAnimation: Bool)
-    case reopenCall(viewController: CallViewController)
     case openAboutJami
     case showAccountSettings(account: AccountModel)
 }
@@ -77,12 +75,8 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                     self.createSwarm(onCreated: onCreated)
                 case .recordFile(let conversation, let audioOnly):
                     self.openRecordFile(conversation: conversation, audioOnly: audioOnly)
-                case .navigateToCall(let call):
-                    self.navigateToCall(call: call)
                 case .needAccountMigration(let accountId):
                     self.migrateAccount(accountId: accountId)
-                case .reopenCall(let viewController):
-                    self.reopenCall(viewController: viewController)
                 case .showAccountSettings(let account):
                     self.showAccountSettings(account: account)
                 default:
@@ -174,60 +168,7 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
             .disposed(by: self.disposeBag)
     }
 
-    func reopenCall(viewController: CallViewController) {
-        guard let call = viewController.viewModel.call else { return }
-        if self.tryPresentCallFromStack(call: call) {
-            return
-        }
-        dismissTopCallViewControllerIfNeeded { [weak self] shouldPresent in
-            guard let self = self, shouldPresent else { return }
-            self.present(viewController: viewController,
-                         withStyle: .fadeInOverFullScreen,
-                         withAnimation: false,
-                         withStateable: viewController.viewModel)
-        }
-    }
-
-    func tryPresentCallFromStack(call: CallModel) -> Bool {
-        guard let navController = self.rootViewController as? UINavigationController else { return false
-        }
-        let controllers = navController.children
-        for controller in controllers
-        where controller.isKind(of: (CallViewController).self) {
-            if let callController = controller as? CallViewController, callController.viewModel.call?.callId == call.callId {
-                navController.popToViewController(callController, animated: true)
-                return true
-            }
-        }
-        return false
-    }
-
-    func dismissTopCallViewControllerIfNeeded(completion: ((Bool) -> Void)? = nil) {
-        guard let topController = getTopController(),
-              !topController.isKind(of: CallViewController.self) else {
-            completion?(false)
-            return
-        }
-        topController.dismiss(animated: false) {
-            completion?(true)
-        }
-    }
-
-    func navigateToCall(call: CallModel) {
-        if self.tryPresentCallFromStack(call: call) {
-            return
-        }
-        dismissTopCallViewControllerIfNeeded { [weak self] shouldPresent in
-            guard let self = self, shouldPresent else { return }
-            let callViewController = CallViewController
-                .instantiate(with: self.injectionBag)
-            callViewController.viewModel.call = call
-            self.present(viewController: callViewController,
-                         withStyle: .fadeInOverFullScreen,
-                         withAnimation: false,
-                         withStateable: callViewController.viewModel)
-        }
-    }
+    // In-call presentation is owned by CallScreenPresenter.
 
     func dismissAllModals(completion: @escaping () -> Void) {
         guard var currentController = UIApplication.shared.windows.first?.rootViewController else {

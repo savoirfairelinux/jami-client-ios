@@ -25,9 +25,9 @@ final class CallControlsModelTests: XCTestCase {
                       media: [MediaItem] = [.audio(), .video()],
                       pending: [MediaItem]? = nil,
                       isSip: Bool = false) -> CallControlsModel {
-        let state = CallState(id: CallId(raw: "c"), accountId: accountId1,
-                              direction: .outgoing, status: status,
-                              media: media, pendingMediaRequest: pending)
+        var state = CallTestFixtures.call(status: status,
+                                          media: media)
+        state.pendingMediaRequest = pending
         return CallControlsModel(call: state, isSipAccount: isSip)
     }
 

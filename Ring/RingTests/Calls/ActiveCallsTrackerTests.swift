@@ -26,9 +26,17 @@ final class ActiveCallsTrackerTests: XCTestCase {
     private let account2 = ActiveCallsTracker.AccountRef(id: accountId2, jamiId: jamiId2,
                                                          currentDeviceId: deviceId2)
 
-    private func wireCall(id: String = "c1", uri: String = "remoteUri",
-                          device: String = "remoteDev") -> [String: String] {
+    private func wireCall(id: String = CallTestFixtures.callId.raw,
+                          uri: String = CallTestFixtures.peerUri,
+                          device: String = CallTestFixtures.remoteDeviceId) -> [String: String] {
         return ["id": id, "uri": uri, "device": device]
+    }
+
+    private func rendezvousURI(conversationId: String = conversationId1,
+                               uri: String = CallTestFixtures.peerUri,
+                               device: String = CallTestFixtures.remoteDeviceId,
+                               callId: String = CallTestFixtures.callId.raw) -> String {
+        return "rdv:\(conversationId)/\(uri)/\(device)/\(callId)"
     }
 
     func testUpdateParsesValidCalls() {
@@ -39,7 +47,7 @@ final class ActiveCallsTrackerTests: XCTestCase {
 
         let calls = tracker.trackers[accountId1]?.calls(for: conversationId1)
         XCTAssertEqual(calls?.count, 1)
-        XCTAssertEqual(calls?.first?.id, "c1")
+        XCTAssertEqual(calls?.first?.id, CallTestFixtures.callId.raw)
         XCTAssertEqual(calls?.first?.accountId, accountId1)
         XCTAssertFalse(calls!.first!.isFromLocalDevice)
     }
@@ -59,7 +67,7 @@ final class ActiveCallsTrackerTests: XCTestCase {
         var tracker = ActiveCallsTracker()
 
         tracker.updateActiveCalls(conversationId: conversationId1,
-                                  calls: [["id": "x"], wireCall()], account: account1)
+                                  calls: [["id": CallTestFixtures.secondaryCallId.raw], wireCall()], account: account1)
 
         XCTAssertEqual(tracker.trackers[accountId1]?.calls(for: conversationId1).count, 1)
     }
@@ -98,7 +106,7 @@ final class ActiveCallsTrackerTests: XCTestCase {
         tracker.updateActiveCalls(conversationId: conversationId1, calls: [wireCall()],
                                   account: account2)
 
-        let rdvUri = "rdv:\(conversationId1)/remoteUri/remoteDev/c1"
+        let rdvUri = rendezvousURI()
         tracker.acceptCall(uri: rdvUri)
 
         XCTAssertTrue(tracker.trackers[accountId1]!.notAcceptedCalls(for: conversationId1).isEmpty)
@@ -110,7 +118,7 @@ final class ActiveCallsTrackerTests: XCTestCase {
         var tracker = ActiveCallsTracker()
         tracker.updateActiveCalls(conversationId: conversationId1, calls: [wireCall()],
                                   account: account1)
-        let rdvUri = "rdv:\(conversationId1)/remoteUri/remoteDev/c1"
+        let rdvUri = rendezvousURI()
         tracker.acceptCall(uri: rdvUri)
         XCTAssertTrue(tracker.trackers[accountId1]!.notAcceptedCalls(for: conversationId1).isEmpty)
 
@@ -121,7 +129,7 @@ final class ActiveCallsTrackerTests: XCTestCase {
 
     func testIgnoreDoesNotPropagateToDifferentRemoteCall() {
         var tracker = ActiveCallsTracker()
-        let calls = [wireCall(), wireCall(id: "c2", device: "otherDev")]
+        let calls = [wireCall(), wireCall(id: CallTestFixtures.secondaryCallId.raw, device: CallTestFixtures.secondaryRemoteDeviceId)]
         tracker.updateActiveCalls(conversationId: conversationId1, calls: calls, account: account1)
         tracker.updateActiveCalls(conversationId: conversationId1, calls: calls, account: account2)
 
@@ -129,14 +137,14 @@ final class ActiveCallsTrackerTests: XCTestCase {
         tracker.ignoreCall(call)
 
         let remaining = tracker.trackers[accountId2]!.notIgnoredCalls(for: conversationId1)
-        XCTAssertEqual(remaining.map(\.id), ["c2"])
+        XCTAssertEqual(remaining.map(\.id), [CallTestFixtures.secondaryCallId.raw])
     }
 
     func testMultipleAccountsTrackedIndependently() {
         var tracker = ActiveCallsTracker()
         tracker.updateActiveCalls(conversationId: conversationId1, calls: [wireCall()],
                                   account: account1)
-        tracker.updateActiveCalls(conversationId: conversationId2, calls: [wireCall(id: "c2")],
+        tracker.updateActiveCalls(conversationId: conversationId2, calls: [wireCall(id: CallTestFixtures.secondaryCallId.raw)],
                                   account: account2)
 
         XCTAssertEqual(tracker.trackers[accountId1]?.calls(for: conversationId1).count, 1)
@@ -149,6 +157,6 @@ final class ActiveCallsTrackerTests: XCTestCase {
         tracker.updateActiveCalls(conversationId: conversationId1, calls: [wireCall()],
                                   account: account1)
         XCTAssertNotNil(tracker.activeCall(conversationId: conversationId1, accountId: accountId1))
-        XCTAssertNil(tracker.activeCall(conversationId: "convX", accountId: accountId1))
+        XCTAssertNil(tracker.activeCall(conversationId: conversationId2, accountId: accountId1))
     }
 }

@@ -42,14 +42,19 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
             pipController: pipController)
     }
 
+    private func makeCall(status: CallStatus = .current,
+                          media: [MediaItem] = [.audio(), .video()],
+                          conversationId: String? = conversationId1,
+                          isAudioOnly: Bool = false) -> CallState {
+        CallTestFixtures.call(conversationId: conversationId,
+                              peerUri: CallTestFixtures.peerUri,
+                              status: status,
+                              media: media,
+                              isAudioOnly: isAudioOnly)
+    }
+
     func testConnectingCallPopulatesFirstRenderedState() {
-        let call = CallState(id: CallId(raw: "call-out"),
-                             accountId: accountId1,
-                             direction: .outgoing,
-                             peerUri: "bob",
-                             status: .connecting,
-                             media: [.audio(), .video()],
-                             isAudioOnly: false)
+        let call = makeCall(status: .connecting)
         let callService = CallService(callClient: TestLibJamiCallAPI(),
                                       callEvents: AsyncStream { _ in })
         let videoService = VideoService(video: TestLibJamiVideoAPI())
@@ -58,7 +63,7 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
 
         XCTAssertEqual(model.call, call)
         XCTAssertNotNil(model.controls, "hang-up controls must exist on the first render")
-        XCTAssertEqual(model.title, "bob")
+        XCTAssertEqual(model.title, CallTestFixtures.peerUri)
         XCTAssertFalse(model.statusText.isEmpty)
         XCTAssertTrue(model.chromeVisible)
         XCTAssertEqual(model.tiles.count, 1)
@@ -73,9 +78,9 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
 
     func testCallThatEndedBeforeObservationStillTransitionsScreenToEnded() async throws {
         let callAPI = TestLibJamiCallAPI()
-        callAPI.placeCallReturn = "call-out"
+        callAPI.placeCallReturn = CallTestFixtures.callId.raw
         let callService = CallService(callClient: callAPI, callEvents: AsyncStream { _ in })
-        let call = try await callService.placeCall(accountId: accountId1, to: "bob",
+        let call = try await callService.placeCall(accountId: accountId1, to: CallTestFixtures.peerUri,
                                                    audioOnly: true)
         await callService.hangUp(call.id)
 
@@ -100,7 +105,7 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
         XCTAssertFalse(model.chromeVisible, "precondition: chrome hidden mid-call")
 
         harness.send(.callStateChanged(callId: harness.callId.raw, state: .over,
-                                       rawState: "OVER", accountId: Harness.accountId,
+                                       rawState: LibJamiCallState.over.rawValue, accountId: Harness.accountId,
                                        code: 0, negotiatedMedia: [], videoCodec: nil))
         await harness.waitForEnded(model)
 
@@ -121,21 +126,14 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
         await harness.callService.hangUp(harness.callId)
         await harness.waitForEnded(model)
 
-        XCTAssertEqual(model.statusText, "")
+        XCTAssertEqual(model.statusText, String())
         XCTAssertNil(model.tiles.first { $0.participant.isLocalPreview })
         XCTAssertEqual(model.tiles.first?.tileState.showsVideo, false)
         XCTAssertTrue(model.shouldDismiss, "a local end leaves on the tap")
     }
 
     func testPictureInPictureMinimizesWhileTheShrinkAnimationRuns() {
-        let call = CallState(id: CallId(raw: "call-out"),
-                             accountId: accountId1,
-                             direction: .outgoing,
-                             peerUri: "bob",
-                             status: .current,
-                             media: [.audio(), .video()],
-                             isAudioOnly: false,
-                             conversationId: "conversation")
+        let call = makeCall()
         let callService = CallService(callClient: TestLibJamiCallAPI(),
                                       callEvents: AsyncStream { _ in })
         let pipController = TestPiPController()
@@ -148,21 +146,14 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
 
         XCTAssertEqual(pipController.startCallCount, 1)
         XCTAssertEqual(openedRoute,
-                       CallConversationRoute(conversationId: "conversation",
-                                             peerUri: "bob",
+                       CallConversationRoute(conversationId: conversationId1,
+                                             peerUri: CallTestFixtures.peerUri,
                                              accountId: accountId1),
                        "the call screen must leave while AVKit shrinks it into the PiP window")
     }
 
     func testFailedPictureInPictureStartBringsTheCallScreenBack() {
-        let call = CallState(id: CallId(raw: "call-out"),
-                             accountId: accountId1,
-                             direction: .outgoing,
-                             peerUri: "bob",
-                             status: .current,
-                             media: [.audio(), .video()],
-                             isAudioOnly: false,
-                             conversationId: "conversation")
+        let call = makeCall()
         let callService = CallService(callClient: TestLibJamiCallAPI(),
                                       callEvents: AsyncStream { _ in })
         let pipController = TestPiPController()
@@ -183,14 +174,7 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
     }
 
     func testRestoringFromAMinimizedCallHidesTheScreenUntilTheWindowFinishesGrowing() {
-        let call = CallState(id: CallId(raw: "call-out"),
-                             accountId: accountId1,
-                             direction: .outgoing,
-                             peerUri: "bob",
-                             status: .current,
-                             media: [.audio(), .video()],
-                             isAudioOnly: false,
-                             conversationId: "conversation")
+        let call = makeCall()
         let callService = CallService(callClient: TestLibJamiCallAPI(),
                                       callEvents: AsyncStream { _ in })
         let pipController = TestPiPController()
@@ -211,14 +195,7 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
     }
 
     func testRestoringAnAutomaticPictureInPictureKeepsTheScreenVisible() {
-        let call = CallState(id: CallId(raw: "call-out"),
-                             accountId: accountId1,
-                             direction: .outgoing,
-                             peerUri: "bob",
-                             status: .current,
-                             media: [.audio(), .video()],
-                             isAudioOnly: false,
-                             conversationId: "conversation")
+        let call = makeCall()
         let callService = CallService(callClient: TestLibJamiCallAPI(),
                                       callEvents: AsyncStream { _ in })
         let pipController = TestPiPController()
@@ -233,14 +210,7 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
     }
 
     func testRestoreThatNeverPresentsRevealsTheCallScreen() {
-        let call = CallState(id: CallId(raw: "call-out"),
-                             accountId: accountId1,
-                             direction: .outgoing,
-                             peerUri: "bob",
-                             status: .current,
-                             media: [.audio(), .video()],
-                             isAudioOnly: false,
-                             conversationId: "conversation")
+        let call = makeCall()
         let callService = CallService(callClient: TestLibJamiCallAPI(),
                                       callEvents: AsyncStream { _ in })
         let pipController = TestPiPController()
@@ -256,13 +226,7 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
     }
 
     func testPictureInPictureRestoreWaitsForCallScreenPresentation() {
-        let call = CallState(id: CallId(raw: "call-out"),
-                             accountId: accountId1,
-                             direction: .outgoing,
-                             peerUri: "bob",
-                             status: .current,
-                             media: [.audio(), .video()],
-                             isAudioOnly: false)
+        let call = makeCall(conversationId: nil)
         let callService = CallService(callClient: TestLibJamiCallAPI(),
                                       callEvents: AsyncStream { _ in })
         let pipController = TestPiPController()
@@ -324,9 +288,10 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
     func testMaximizeAndMinimizeWalkTheSharedLayoutLadder() async {
         let harness = await Harness(callHasVideo: true)
         let model = harness.makeModel()
-        let focusedParticipantId = "u1|\(deviceId1)"
-        harness.callAPI.conferenceCallsReturn["conf-1"] = [harness.callId.raw]
-        harness.send(.conferenceCreated(conferenceId: "conf-1", conversationId: "",
+        let focusedParticipantId = "\(CallTestFixtures.peerUri)|\(deviceId1)"
+        let conferenceId = CallTestFixtures.conferenceId.raw
+        harness.callAPI.conferenceCallsReturn[conferenceId] = [harness.callId.raw]
+        harness.send(.conferenceCreated(conferenceId: conferenceId, conversationId: String(),
                                         accountId: Harness.accountId,
                                         memberCallIds: [harness.callId.raw]))
         func sendInfos(activeId: String?, othersSide: Int) {
@@ -342,9 +307,13 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
                     frameSize: CGSize(width: CGFloat(side), height: CGFloat(side)))
             }
             harness.send(.conferenceInfosUpdated(
-                            conferenceId: "conf-1",
-                            participants: [entry("u1", deviceId1, "conf-1_video_0"),
-                                           entry("u2", deviceId2, "conf-1_video_1")]))
+                            conferenceId: conferenceId,
+                            participants: [entry(CallTestFixtures.peerUri,
+                                                 deviceId1,
+                                                 CallTestFixtures.remoteSinkId),
+                                           entry(CallTestFixtures.secondaryPeerUri,
+                                                 deviceId2,
+                                                 CallTestFixtures.secondaryRemoteSinkId)]))
         }
         sendInfos(activeId: nil, othersSide: 300)
         await Harness.wait { model.conference?.participants.count == 2 }
@@ -394,27 +363,28 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
                         conferenceId: harness.callId.raw,
                         participants: [CallTestFixtures.participant(
                                         uri: jamiId1,
-                                        device: "local",
-                                        sinkId: "member-1_video_0",
+                                        device: deviceId1,
+                                        sinkId: CallTestFixtures.remoteSinkId,
                                         frameSize: CGSize(width: 320, height: 240)),
                                        CallTestFixtures.participant(
-                                        uri: "bob",
-                                        device: "remote-1",
-                                        sinkId: "member-1_video_1",
+                                        uri: CallTestFixtures.peerUri,
+                                        device: CallTestFixtures.remoteDeviceId,
+                                        sinkId: CallTestFixtures.secondaryRemoteSinkId,
                                         frameSize: CGSize(width: 320, height: 240)),
                                        CallTestFixtures.participant(
-                                        uri: "carol",
-                                        device: "remote-2",
-                                        sinkId: "member-1_video_2",
+                                        uri: CallTestFixtures.secondaryPeerUri,
+                                        device: CallTestFixtures.secondaryRemoteDeviceId,
+                                        sinkId: CallTestFixtures.tertiaryRemoteSinkId,
                                         frameSize: CGSize(width: 320, height: 240))]))
 
         await Harness.wait { model.conference?.participants.count == 3 }
 
-        let renderedSinks = Set(model.tiles.compactMap { $0.distributor?.sinkId })
-        XCTAssertEqual(renderedSinks,
-                       [SinkId(raw: "local"), SinkId(raw: "member-1_video_1"),
-                        SinkId(raw: "member-1_video_2")])
-        XCTAssertFalse(renderedSinks.contains(SinkId(raw: harness.callId.raw)),
+        let renderedSources = Set(model.tiles.compactMap { $0.distributor?.source })
+        XCTAssertEqual(renderedSources,
+                       [.localCamera,
+                        .remote(SinkId(raw: CallTestFixtures.secondaryRemoteSinkId)),
+                        .remote(SinkId(raw: CallTestFixtures.tertiaryRemoteSinkId))])
+        XCTAssertFalse(renderedSources.contains(.remote(SinkId(raw: harness.callId.raw))),
                        "the original call sink contains the peer's mixed conference frame")
     }
 
@@ -422,20 +392,16 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
         let harness = await Harness(callHasVideo: false)
         let model = harness.makeModel(localJamiId: jamiId1)
 
-        XCTAssertEqual(model.participantRows.map(\.uri), [jamiId1, "bob"])
+        XCTAssertEqual(model.participantRows.map(\.uri), [jamiId1, CallTestFixtures.peerUri])
         XCTAssertTrue(model.pendingRows.isEmpty)
         XCTAssertTrue(model.hasParticipantList,
                       "the roster is who is on the call, conference or not")
     }
 
     func testRingingCallHasNoRosterYet() {
-        let call = CallState(id: CallId(raw: "call-out"),
-                             accountId: accountId1,
-                             direction: .outgoing,
-                             peerUri: "bob",
-                             status: .ringing,
-                             media: [.audio()],
-                             isAudioOnly: true)
+        let call = makeCall(status: .ringing,
+                            media: [.audio()],
+                            isAudioOnly: true)
         let callService = CallService(callClient: TestLibJamiCallAPI(),
                                       callEvents: AsyncStream { _ in })
         let model = makeModel(call: call, callService: callService)
@@ -448,17 +414,17 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
     func testCancellingTheOnlyInviteLeavesTheCallRosterStanding() async {
         let harness = await Harness(callHasVideo: false)
         let model = harness.makeModel(localJamiId: jamiId1)
-        harness.callAPI.placeCallReturn = "sub-call"
+        harness.callAPI.placeCallReturn = CallTestFixtures.secondaryCallId.raw
 
-        harness.callService.addParticipant(uri: "carol", toCall: harness.callId)
+        harness.callService.addParticipant(uri: CallTestFixtures.secondaryPeerUri, toCall: harness.callId)
         await Harness.wait { model.pendingRows.count == 1 }
         XCTAssertEqual(model.participantRows.count, 2)
         XCTAssertEqual(model.participantCount, 3)
 
-        model.cancelInvite(CallId(raw: "sub-call"))
+        model.cancelInvite(CallTestFixtures.secondaryCallId)
         await Harness.wait { model.pendingRows.isEmpty }
 
-        XCTAssertEqual(model.participantRows.map(\.uri), [jamiId1, "bob"],
+        XCTAssertEqual(model.participantRows.map(\.uri), [jamiId1, CallTestFixtures.peerUri],
                        "cancelling one invite must remove one row, not the whole list")
         XCTAssertTrue(model.hasParticipantList,
                       "the list stays reachable — the call is still running")
@@ -485,7 +451,7 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
         let videoService: VideoService
         let callAPI = TestLibJamiCallAPI()
         let send: (LibJamiCallEvent) -> Void
-        let callId = CallId(raw: "call-in")
+        let callId = CallTestFixtures.callId
         let call: CallState
 
         init(callHasVideo: Bool) async {
@@ -503,9 +469,9 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
 
             let media: [MediaItem] = callHasVideo ? [.audio(), .video()] : [.audio()]
             send(.incomingCall(accountId: Self.accountId, callId: callId.raw,
-                               peerUri: "bob", media: media, details: nil))
+                               peerUri: CallTestFixtures.peerUri, media: media, details: nil))
             send(.callStateChanged(callId: callId.raw, state: .current,
-                                   rawState: "CURRENT", accountId: Self.accountId,
+                                   rawState: LibJamiCallState.current.rawValue, accountId: Self.accountId,
                                    code: 0, negotiatedMedia: media, videoCodec: nil))
             self.call = await Self.waitForCall(callService, callId) { $0.status == .current }
         }
@@ -555,8 +521,11 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
                 try? await Task.sleep(nanoseconds: 10_000_000)
             }
             XCTFail("the call service never reached the expected call state")
-            return CallState(id: id, accountId: Harness.accountId, direction: .incoming,
-                             peerUri: "bob", status: .current)
+            return CallTestFixtures.call(id: id,
+                                         conversationId: nil,
+                                         accountId: Harness.accountId,
+                                         direction: .incoming,
+                                         peerUri: CallTestFixtures.peerUri)
         }
     }
 }

@@ -75,6 +75,8 @@ struct MediaRecordView: View {
                 .ignoresSafeArea()
             contentLayer
         }
+        .onAppear { viewModel.previewAppeared() }
+        .onDisappear { viewModel.previewDisappeared() }
     }
 
     // MARK: - Content

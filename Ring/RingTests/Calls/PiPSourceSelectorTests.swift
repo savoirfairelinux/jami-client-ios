@@ -22,15 +22,19 @@ import XCTest
 final class PiPSourceSelectorTests: XCTestCase {
 
     private let localId = jamiId1
+    private let remoteId = CallTestFixtures.peerUri
+    private let secondaryRemoteId = CallTestFixtures.secondaryPeerUri
+    private let tertiaryRemoteId = CallTestFixtures.tertiaryPeerUri
 
-    private func call(id: String = "c1", peerUri: String = "bob",
+    private func call(id: String = CallTestFixtures.callId.raw,
+                      peerUri: String = CallTestFixtures.peerUri,
                       status: CallStatus = .current,
                       media: [MediaItem] = []) -> CallState {
-        var state = CallState(id: CallId(raw: id), accountId: accountId1,
-                              direction: .outgoing, status: status)
-        state.peerUri = peerUri
-        state.media = media
-        return state
+        return CallTestFixtures.call(id: CallId(raw: id),
+                                     conversationId: nil,
+                                     peerUri: peerUri,
+                                     status: status,
+                                     media: media)
     }
 
     private func video(muted: Bool = false) -> MediaItem {
@@ -43,8 +47,17 @@ final class PiPSourceSelectorTests: XCTestCase {
 
     private func conference(_ participants: [ConferenceParticipantInfo])
     -> ConferenceState {
-        ConferenceState(id: ConfId(raw: "conf1"), accountId: accountId1,
-                        participants: participants)
+        CallTestFixtures.conference(conversationId: nil, participants: participants)
+    }
+
+    private func participant(_ uri: String,
+                             sinkId: String? = nil,
+                             videoMuted: Bool = false,
+                             voiceActivity: Bool = false) -> ConferenceParticipantInfo {
+        CallTestFixtures.participant(uri: uri,
+                                     sinkId: sinkId,
+                                     videoMuted: videoMuted,
+                                     voiceActivity: voiceActivity)
     }
 
     private func select(call: CallState?, conference: ConferenceState? = nil,
@@ -68,14 +81,14 @@ final class PiPSourceSelectorTests: XCTestCase {
 
     func testOngoingVideoCallShowsThePeer() {
         XCTAssertEqual(select(call: call(media: [audio(), video()])),
-                       PiPSourceSelector.Selection(uri: "bob",
-                                                   sinkId: SinkId(raw: "c1")))
+                       PiPSourceSelector.Selection(uri: remoteId,
+                                                   sinkId: SinkId(raw: CallTestFixtures.callId.raw)))
     }
 
     func testPeerVideoStillCountsWhileOurCameraIsMuted() {
         XCTAssertEqual(select(call: call(media: [audio(), video(muted: true)])),
-                       PiPSourceSelector.Selection(uri: "bob",
-                                                   sinkId: SinkId(raw: "c1")),
+                       PiPSourceSelector.Selection(uri: remoteId,
+                                                   sinkId: SinkId(raw: CallTestFixtures.callId.raw)),
                        "muting our own camera does not stop the peer's stream")
     }
 
@@ -92,123 +105,131 @@ final class PiPSourceSelectorTests: XCTestCase {
 
     func testConferenceOfOneIsEmpty() {
         XCTAssertNil(select(call: call(media: [audio(), video()]),
-                            conference: conference([CallTestFixtures.participant(uri: localId)])),
+                            conference: conference([participant(localId)])),
                      "a conference where we are alone has nobody to show")
     }
 
     func testConferenceOfTwoShowsTheOtherParticipant() {
         XCTAssertEqual(select(call: call(media: [audio(), video()]),
-                              conference: conference([CallTestFixtures.participant(uri: localId),
-                                                      CallTestFixtures.participant(uri: "alice")])),
-                       PiPSourceSelector.Selection(uri: "alice",
-                                                   sinkId: SinkId(raw: "sink_alice")))
+                              conference: conference([participant(localId),
+                                                      participant(remoteId,
+                                                                  sinkId: CallTestFixtures.remoteSinkId)])),
+                       PiPSourceSelector.Selection(uri: remoteId,
+                                                   sinkId: SinkId(raw: CallTestFixtures.remoteSinkId)))
     }
 
     func testEmptyUriHostCountsAsOurself() {
         XCTAssertEqual(select(call: call(media: [audio(), video()]),
-                              conference: conference([CallTestFixtures.participant(uri: ""),
-                                                      CallTestFixtures.participant(uri: "alice")])),
-                       PiPSourceSelector.Selection(uri: "alice",
-                                                   sinkId: SinkId(raw: "sink_alice")))
+                              conference: conference([participant(String()),
+                                                      participant(remoteId,
+                                                                  sinkId: CallTestFixtures.remoteSinkId)])),
+                       PiPSourceSelector.Selection(uri: remoteId,
+                                                   sinkId: SinkId(raw: CallTestFixtures.remoteSinkId)))
     }
 
     func testConferenceFollowsTheSpeaker() {
-        let conf = conference([CallTestFixtures.participant(uri: localId),
-                               CallTestFixtures.participant(uri: "alice"),
-                               CallTestFixtures.participant(uri: "bob", voiceActivity: true),
-                               CallTestFixtures.participant(uri: "carol")])
+        let conf = conference([participant(localId),
+                               participant(remoteId),
+                               participant(secondaryRemoteId,
+                                           sinkId: CallTestFixtures.secondaryRemoteSinkId,
+                                           voiceActivity: true),
+                               participant(tertiaryRemoteId)])
         XCTAssertEqual(select(call: call(media: [audio(), video()]), conference: conf),
-                       PiPSourceSelector.Selection(uri: "bob",
-                                                   sinkId: SinkId(raw: "sink_bob")))
+                       PiPSourceSelector.Selection(uri: secondaryRemoteId,
+                                                   sinkId: SinkId(raw: CallTestFixtures.secondaryRemoteSinkId)))
     }
 
     func testMutedSpeakerIsSkippedForParticipantWithVideo() {
-        let conf = conference([CallTestFixtures.participant(uri: localId),
-                               CallTestFixtures.participant(uri: "alice", videoMuted: true,
-                                                            voiceActivity: true),
-                               CallTestFixtures.participant(uri: "bob")])
+        let conf = conference([participant(localId),
+                               participant(remoteId,
+                                           videoMuted: true,
+                                           voiceActivity: true),
+                               participant(secondaryRemoteId,
+                                           sinkId: CallTestFixtures.secondaryRemoteSinkId)])
         XCTAssertEqual(select(call: call(media: [audio(), video()]), conference: conf),
-                       PiPSourceSelector.Selection(uri: "bob",
-                                                   sinkId: SinkId(raw: "sink_bob")))
+                       PiPSourceSelector.Selection(uri: secondaryRemoteId,
+                                                   sinkId: SinkId(raw: CallTestFixtures.secondaryRemoteSinkId)))
     }
 
     func testAllRemoteVideoMutedHasNothingToShow() {
-        let conf = conference([CallTestFixtures.participant(uri: localId),
-                               CallTestFixtures.participant(uri: "alice", videoMuted: true),
-                               CallTestFixtures.participant(uri: "bob", videoMuted: true)])
+        let conf = conference([participant(localId),
+                               participant(remoteId, videoMuted: true),
+                               participant(secondaryRemoteId, videoMuted: true)])
         XCTAssertNil(select(call: call(media: [audio(), video()]), conference: conf))
     }
 
     func testParticipantWithoutSinkIsIgnored() {
-        let conf = conference([CallTestFixtures.participant(uri: localId),
-                               CallTestFixtures.participant(uri: "alice", sinkId: ""),
-                               CallTestFixtures.participant(uri: "bob")])
+        let conf = conference([participant(localId),
+                               participant(remoteId, sinkId: String()),
+                               participant(secondaryRemoteId,
+                                           sinkId: CallTestFixtures.secondaryRemoteSinkId)])
         XCTAssertEqual(select(call: call(media: [audio(), video()]), conference: conf),
-                       PiPSourceSelector.Selection(uri: "bob",
-                                                   sinkId: SinkId(raw: "sink_bob")))
+                       PiPSourceSelector.Selection(uri: secondaryRemoteId,
+                                                   sinkId: SinkId(raw: CallTestFixtures.secondaryRemoteSinkId)))
     }
 
     func testOurOwnVoiceDoesNotTakeOverPictureInPicture() {
-        let conf = conference([CallTestFixtures.participant(uri: localId,
-                                                            voiceActivity: true),
-                               CallTestFixtures.participant(uri: "alice"),
-                               CallTestFixtures.participant(uri: "bob")])
+        let conf = conference([participant(localId, voiceActivity: true),
+                               participant(remoteId, sinkId: CallTestFixtures.remoteSinkId),
+                               participant(secondaryRemoteId)])
         XCTAssertEqual(select(call: call(media: [audio(), video()]), conference: conf),
-                       PiPSourceSelector.Selection(uri: "alice",
-                                                   sinkId: SinkId(raw: "sink_alice")),
+                       PiPSourceSelector.Selection(uri: remoteId,
+                                                   sinkId: SinkId(raw: CallTestFixtures.remoteSinkId)),
                        "we never watch ourselves in picture in picture")
     }
 
     func testTheLastSpeakerStaysWhenEveryoneGoesQuiet() {
-        let conf = conference([CallTestFixtures.participant(uri: localId),
-                               CallTestFixtures.participant(uri: "alice"),
-                               CallTestFixtures.participant(uri: "bob"),
-                               CallTestFixtures.participant(uri: "carol")])
-        let current = PiPSourceSelector.Selection(uri: "carol",
-                                                  sinkId: SinkId(raw: "sink_carol"))
+        let conf = conference([participant(localId),
+                               participant(remoteId),
+                               participant(secondaryRemoteId),
+                               participant(tertiaryRemoteId,
+                                           sinkId: CallTestFixtures.secondaryRemoteSinkId)])
+        let current = PiPSourceSelector.Selection(uri: tertiaryRemoteId,
+                                                  sinkId: SinkId(raw: CallTestFixtures.secondaryRemoteSinkId))
         XCTAssertEqual(select(call: call(media: [audio(), video()]),
                               conference: conf, current: current),
                        current, "silence must not shuffle the picture-in-picture subject")
     }
 
     func testRetainedSpeakerRequiresTheSameSink() {
-        let conf = conference([CallTestFixtures.participant(uri: localId),
-                               CallTestFixtures.participant(uri: "alice",
-                                                            sinkId: "sink_alice_new"),
-                               CallTestFixtures.participant(uri: "bob")])
-        let current = PiPSourceSelector.Selection(uri: "alice",
-                                                  sinkId: SinkId(raw: "sink_alice_old"))
+        let conf = conference([participant(localId),
+                               participant(remoteId,
+                                           sinkId: CallTestFixtures.secondaryRemoteSinkId),
+                               participant(secondaryRemoteId)])
+        let current = PiPSourceSelector.Selection(uri: remoteId,
+                                                  sinkId: SinkId(raw: CallTestFixtures.remoteSinkId))
         XCTAssertEqual(select(call: call(media: [audio(), video()]),
                               conference: conf, current: current),
-                       PiPSourceSelector.Selection(uri: "alice",
-                                                   sinkId: SinkId(raw: "sink_alice_new")),
+                       PiPSourceSelector.Selection(uri: remoteId,
+                                                   sinkId: SinkId(raw: CallTestFixtures.secondaryRemoteSinkId)),
                        "a rejoined participant must not retain their stale decoder sink")
     }
 
     func testDepartedSpeakerFallsBackToTheFirstRemoteParticipant() {
-        let conf = conference([CallTestFixtures.participant(uri: localId),
-                               CallTestFixtures.participant(uri: "alice"),
-                               CallTestFixtures.participant(uri: "bob")])
-        let current = PiPSourceSelector.Selection(uri: "carol",
-                                                  sinkId: SinkId(raw: "sink_carol"))
+        let conf = conference([participant(localId),
+                               participant(remoteId,
+                                           sinkId: CallTestFixtures.remoteSinkId),
+                               participant(secondaryRemoteId)])
+        let current = PiPSourceSelector.Selection(uri: tertiaryRemoteId,
+                                                  sinkId: SinkId(raw: CallTestFixtures.secondaryRemoteSinkId))
         XCTAssertEqual(select(call: call(media: [audio(), video()]),
                               conference: conf, current: current),
-                       PiPSourceSelector.Selection(uri: "alice",
-                                                   sinkId: SinkId(raw: "sink_alice")))
+                       PiPSourceSelector.Selection(uri: remoteId,
+                                                   sinkId: SinkId(raw: CallTestFixtures.remoteSinkId)))
     }
 
     func testConferenceIgnoresTheCallMediaGate() {
-        let conf = conference([CallTestFixtures.participant(uri: localId),
-                               CallTestFixtures.participant(uri: "alice")])
+        let conf = conference([participant(localId),
+                               participant(remoteId, sinkId: CallTestFixtures.remoteSinkId)])
         XCTAssertEqual(select(call: call(media: [audio()]), conference: conf),
-                       PiPSourceSelector.Selection(uri: "alice",
-                                                   sinkId: SinkId(raw: "sink_alice")),
+                       PiPSourceSelector.Selection(uri: remoteId,
+                                                   sinkId: SinkId(raw: CallTestFixtures.remoteSinkId)),
                        "conference participants publish their own streams")
     }
 
     func testTerminatedConferenceHasNothingToShow() {
-        let conf = conference([CallTestFixtures.participant(uri: localId),
-                               CallTestFixtures.participant(uri: "alice")])
+        let conf = conference([participant(localId),
+                               participant(remoteId)])
         XCTAssertNil(select(call: call(status: .terminated(.endedLocally),
                                        media: [audio(), video()]),
                             conference: conf))

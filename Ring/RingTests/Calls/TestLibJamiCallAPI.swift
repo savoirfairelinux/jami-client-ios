@@ -23,7 +23,7 @@ import CoreGraphics
 
 final class TestLibJamiCallAPI: LibJamiCallAPI, @unchecked Sendable {
 
-    var placeCallReturn: String? = "call-1"
+    var placeCallReturn: String? = CallTestFixtures.callId.raw
     var acceptReturn = true
     var refuseReturn = true
     var hangUpReturn = true

@@ -28,7 +28,7 @@ final class VideoPipeline: NSObject {
     let sinkRegistry = VideoSinkRegistry()
     private let video: LibJamiVideoAPI
 
-    let localFrames = FrameDistributor(sinkId: SinkId(raw: "local"))
+    let localFrames = FrameDistributor(source: .localCamera)
     /// Transform preview layers must apply to local frames (orientation
     /// + front-camera mirroring), updated on rotation/camera switch.
     var localLayerTransform: CGAffineTransform { locked { orientationState.layerTransform } }
