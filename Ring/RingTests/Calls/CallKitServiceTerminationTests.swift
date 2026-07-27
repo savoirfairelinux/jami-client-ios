@@ -23,6 +23,9 @@ import XCTest
 private final class MockCXProvider: CXProvider {
 
     private(set) var invalidateCount = 0
+    private(set) var outgoingCallUUIDs: [UUID] = []
+    private(set) var endedCalls: [(uuid: UUID, reason: CXCallEndedReason)] = []
+    var incomingCallError: Error?
 
     init() {
         super.init(configuration: CXProviderConfiguration())
@@ -34,11 +37,31 @@ private final class MockCXProvider: CXProvider {
 
     override func reportNewIncomingCall(with uuid: UUID, update: CXCallUpdate,
                                         completion: @escaping (Error?) -> Void) {
-        completion(nil)
+        completion(incomingCallError)
     }
 
     override func reportCall(with uuid: UUID, endedAt dateEnded: Date?,
-                             reason endedReason: CXCallEndedReason) {}
+                             reason endedReason: CXCallEndedReason) {
+        endedCalls.append((uuid, endedReason))
+    }
+
+    override func reportOutgoingCall(with uuid: UUID, startedConnectingAt dateStartedConnecting: Date?) {
+        outgoingCallUUIDs.append(uuid)
+    }
+}
+
+private final class MockCXCallController: CXCallController {
+
+    private var completions: [(Error?) -> Void] = []
+
+    override func request(_ transaction: CXTransaction,
+                          completion: @escaping (Error?) -> Void) {
+        completions.append(completion)
+    }
+
+    func completeRequest(at index: Int, error: Error? = nil) {
+        completions[index](error)
+    }
 }
 
 final class CallKitServiceTerminationTests: XCTestCase {
@@ -54,7 +77,7 @@ final class CallKitServiceTerminationTests: XCTestCase {
 
     func testEndAllCallsOnTerminationStopsPendingCallsAndInvalidatesProvider() {
         service.previewPendingCall(peerId: CallTestFixtures.peerUri, accountId: accountId1,
-                                   displayName: "Alice", hasVideo: false, completion: nil)
+                                   displayName: profileName1, hasVideo: false, completion: nil)
         XCTAssertFalse(service.directory.allPlaceholderUUIDs().isEmpty)
 
         service.endAllCallsOnTermination()
@@ -63,5 +86,31 @@ final class CallKitServiceTerminationTests: XCTestCase {
                       "placeholders dropped before the process leaves")
         XCTAssertEqual(provider.invalidateCount, 1,
                        "provider invalidated so CallKit ends its calls synchronously")
+    }
+
+    func testFailedPendingCallReportRemovesPlaceholder() {
+        provider.incomingCallError = NSError(domain: "CallKit", code: 1)
+
+        service.previewPendingCall(peerId: CallTestFixtures.peerUri, accountId: accountId1,
+                                   displayName: profileName1, hasVideo: false, completion: nil)
+
+        XCTAssertTrue(service.directory.allPlaceholderUUIDs().isEmpty,
+                      "a rejected report must not leave a phantom call to match later")
+    }
+
+    func testCompletedStartTransactionDoesNotReviveEndedOutgoingCall() {
+        let callController = MockCXCallController()
+        service = CallKitService(provider: provider, callController: callController)
+        let call = CallTestFixtures.call(direction: .outgoing, status: .connecting)
+        let handle = CallKitHandle(value: call.peerUri, displayName: profileName1,
+                                   isPhoneNumber: false)
+
+        service.reportOutgoingCallStarted(call, handle: handle)
+        service.reportCallEnded(call.id, isRemoteEnd: false)
+        callController.completeRequest(at: 0)
+
+        XCTAssertTrue(provider.outgoingCallUUIDs.isEmpty,
+                      "a completed start transaction must not revive an ended call")
+        XCTAssertEqual(provider.endedCalls.map(\.reason), [.failed])
     }
 }
