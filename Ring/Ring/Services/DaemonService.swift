@@ -100,6 +100,14 @@ class DaemonService {
     /**
      Stops the Ring daemon.
 
+     Blocks until libjami has released every resource it owns, which involves
+     network operations that can take tens of seconds when connectivity is
+     gone. Never call this from `applicationWillTerminate(_:)`: the system
+     kills the app once that callback has been running for a few seconds.
+
+     Must be called from the thread that started the daemon, since libjami
+     registers it with pjsip and rejects calls made from any other one.
+
      - Throws: StopDaemonError
      */
     func stopDaemon() throws {

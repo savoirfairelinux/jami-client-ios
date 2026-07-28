@@ -185,6 +185,19 @@ final class CallKitService: NSObject {
         }
     }
 
+    /*
+     Ends every call reported to CallKit before the process goes away.
+
+     stopAllPendingCalls() requests CXTransactions, which CallKit processes
+     asynchronously. On the termination path the process is gone before they
+     are delivered and the system call UI stays on screen, so invalidate the
+     provider: it ends all of its calls right away.
+     */
+    func endAllCallsOnTermination() {
+        stopAllPendingCalls()
+        provider.invalidate()
+    }
+
     // MARK: - Private
 
     private func configure(_ update: CXCallUpdate, callerName: String, hasVideo: Bool) {

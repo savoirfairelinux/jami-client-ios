@@ -254,6 +254,11 @@ final class CallsManager: CallCameraCoordinating {
         callKit.stopAllPendingCalls()
     }
 
+    /// Ends every call reported to CallKit before the process goes away.
+    func endAllCallsOnTermination() {
+        callKit.endAllCallsOnTermination()
+    }
+
     func hasActiveCalls() -> Bool {
         return callKit.hasActiveCalls() || callService.hasOngoingCalls
     }
