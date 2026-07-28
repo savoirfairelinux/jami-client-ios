@@ -685,17 +685,22 @@ class AccountsService: AccountAdapterDelegate {
                 let mutableDict = NSMutableDictionary(dictionary: pushConfig)
                 self.accountAdapter.setPushNotificationConfig(mutableDict)
             }
-            // Set account details to force the DHT update to use the token.
-            for account in accounts {
-                // Use details from the daemon, as the token may be set immediately after account creation,
-                // meaning the client might not have the updated details.
-                guard let accountDetailsDict = accountAdapter.getAccountDetails(account.id) as? [String: String] else { continue }
-                let accountDetails = AccountConfigModel(withDetails: accountDetailsDict)
-                let model = ConfigKeyModel(withKey: .proxyEnabled)
-                if accountDetails.get(withConfigKeyModel: model) == "true" {
-                    self.setAccountDetails(forAccountId: account.id, withDetails: accountDetails)
-                }
-            }
+            /*
+             Do not push the account details back to the daemon here.
+
+             setPushNotificationConfig() already persists the token and applies
+             it to the running DHT session, so writing the details is redundant.
+             It is also harmful: AccountConfigModel silently drops every key the
+             client does not know, so the map sent back never matches the one
+             the daemon holds. The daemon therefore takes the "details changed"
+             path and does a full doUnregister() + reload + doRegister().
+
+             That happens on every launch, about a second after the daemon
+             started, and it destroys all in-flight DHT operations: answers to
+             the peer connection requests arriving at that moment fail to be
+             published, so those peers never receive our ICE candidates and
+             their connection attempt is lost.
+             */
         }
     }
 
