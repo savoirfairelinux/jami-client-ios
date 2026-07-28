@@ -368,11 +368,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
-        self.callsManager?.stopAllUnhandeledCalls()
+        self.callsManager?.endAllCallsOnTermination()
         #if DEBUG
         self.cleanTestDataIfNeed()
         #endif
-        self.stopDaemon()
+        /*
+         Leave the process instead of stopping the daemon.
+
+         The system only gives the app a few seconds to return from
+         applicationWillTerminate(_:). Stopping the daemon runs
+         Manager::finish(), which shuts UPnP down, unregisters the accounts,
+         tears the SIP and ICE stacks down and joins the DHT thread pools.
+         Every one of those steps waits on the network, so once connectivity
+         has been lost — typically while the device was asleep — they only
+         return when their own timeouts expire, long past the deadline: the
+         main thread stays blocked and the watchdog kills the app
+         (0x8BADF00D). Manager::finish() also rewrites dring.yml in place, so
+         being killed while it runs can truncate the account configuration.
+
+         Moving the shutdown to another thread is not an option: the daemon
+         registers the thread that initialized it and pjsip rejects calls
+         coming from any other one.
+
+         Skipping it loses nothing. Account settings are written as they
+         change, conversations live in git and SQLite storage that tolerates
+         an abrupt exit, and the system reclaims sockets, memory and file
+         descriptors when the process dies. _exit is used rather than
+         returning so that the C++ static destructors do not run while the
+         daemon threads are still alive.
+         */
+        _exit(EXIT_SUCCESS)
     }
 
     // MARK: - Ring Daemon
@@ -387,16 +412,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             log.error("Daemon already running.")
         } catch {
             log.error("Unknown error in Daemon start.")
-        }
-    }
-
-    private func stopDaemon() {
-        do {
-            try self.daemonService.stopDaemon()
-        } catch StopDaemonError.daemonNotRunning {
-            log.error("Daemon failed to stop because it was not already running.")
-        } catch {
-            log.error("Unknown error in Daemon stop.")
         }
     }
 
