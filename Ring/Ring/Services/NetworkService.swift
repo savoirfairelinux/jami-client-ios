@@ -39,8 +39,25 @@ class NetworkService {
         return self.connectionState.asObservable()
     }()
 
+    /*
+     Emits only real connectivity transitions, never the first path evaluation.
+
+     NWPathMonitor delivers the current path as soon as it starts. That first
+     callback describes the state the daemon already registered with, so
+     reporting it as a change makes the daemon unregister and re-register the
+     account for nothing. A re-registration tears the DHT down, and every
+     in-flight operation dies with it: answers to peer connection requests fail
+     to be published, so peers trying to reach us right after launch never get
+     our ICE candidates and their connection attempt is lost.
+     */
+    private let connectivityChanges = PublishRelay<ConnectionType>()
+
+    lazy var connectivityChangedObservable: Observable<ConnectionType> = {
+        return self.connectivityChanges.asObservable()
+    }()
+
     private var monitor: NWPathMonitor?
-    private var lastStatus: NWPath.Status = .requiresConnection
+    private var lastStatus: NWPath.Status?
 
     init() {
         monitor = NWPathMonitor()
@@ -48,23 +65,32 @@ class NetworkService {
 
     func monitorNetworkType() {
         monitor?.pathUpdateHandler = { [weak self] path in
-            guard let self = self else { return }
-
-            if self.lastStatus == path.status { return }
-            self.lastStatus = path.status
-
-            switch path.status {
-            case .satisfied:
-                print("Connected to a network")
-                self.connectionState.accept(.connected)
-            case .unsatisfied, .requiresConnection:
-                print("Disconnected from a network")
-                self.connectionState.accept(.none)
-            default:
-                break
-            }
+            self?.handle(status: path.status)
         }
         let queue = DispatchQueue(label: "NetworkMonitor")
         monitor?.start(queue: queue)
+    }
+
+    func handle(status: NWPath.Status) {
+        let isInitialPath = lastStatus == nil
+        if lastStatus == status { return }
+        lastStatus = status
+
+        let state: ConnectionType
+        switch status {
+        case .satisfied:
+            print("Connected to a network")
+            state = .connected
+        case .unsatisfied, .requiresConnection:
+            print("Disconnected from a network")
+            state = .none
+        default:
+            return
+        }
+
+        connectionState.accept(state)
+        if !isInitialPath {
+            connectivityChanges.accept(state)
+        }
     }
 }

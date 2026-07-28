@@ -167,9 +167,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // will enumerate and add devices once permission has been granted
         self.videoService.setupInputs()
 
-        // Observe connectivity changes and reconnect DHT
-        self.networkService.connectionStateObservable
-            .skip(1)
+        // Observe connectivity changes and reconnect DHT. The first path
+        // evaluation is not a change: the daemon has just registered with that
+        // very network, so reporting it would re-register the account and drop
+        // every DHT operation in flight.
+        self.networkService.connectivityChangedObservable
             .subscribe(onNext: { _ in
                 self.daemonService.connectivityChanged()
             })
