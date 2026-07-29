@@ -34,6 +34,7 @@ final class VideoSinkRegistry: @unchecked Sendable {
     }
 
     private let lock = NSLock()
+    private let publishLock = NSLock()
     private var distributors: [SinkId: FrameDistributor] = [:]
 
     private var stoppedDistributors: [SinkId: WeakDistributor] = [:]
@@ -51,8 +52,8 @@ final class VideoSinkRegistry: @unchecked Sendable {
             lock.unlock()
             return stopped
         }
-        let distributor = FrameDistributor(sinkId: sinkId) { [weak self] subscriberCount in
-            self?.onListenersChanged?(sinkId, subscriberCount >= 1)
+        let distributor = FrameDistributor(sinkId: sinkId) { [weak self] in
+            self?.publishListenerState(for: sinkId)
         }
         distributors[sinkId] = distributor
         lock.unlock()
@@ -64,6 +65,12 @@ final class VideoSinkRegistry: @unchecked Sendable {
         defer { lock.unlock() }
         let distributor = distributors[sinkId] ?? stoppedDistributors[sinkId]?.value
         return (distributor?.subscriberCount ?? 0) > 0
+    }
+
+    func publishListenerState(for sinkId: SinkId) {
+        publishLock.lock()
+        defer { publishLock.unlock() }
+        onListenersChanged?(sinkId, hasListeners(sinkId))
     }
 
     /// Promotes a distributor retained by a persistent tile back to the active

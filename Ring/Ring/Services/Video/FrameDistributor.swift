@@ -54,32 +54,31 @@ final class FrameDistributor: @unchecked Sendable {
 
     let source: FrameSource
 
-    private let onSubscriberCountChanged: ((Int) -> Void)?
+    private let onSubscribersChanged: (() -> Void)?
 
     private let lock = NSLock()
     private var handlers: [UUID: (VideoFrame) -> Void] = [:]
     private var lastFrame: VideoFrame?
 
-    init(source: FrameSource, onSubscriberCountChanged: ((Int) -> Void)? = nil) {
+    init(source: FrameSource, onSubscribersChanged: (() -> Void)? = nil) {
         self.source = source
-        self.onSubscriberCountChanged = onSubscriberCountChanged
+        self.onSubscribersChanged = onSubscribersChanged
     }
 
     convenience init(sinkId: SinkId,
-                     onSubscriberCountChanged: ((Int) -> Void)? = nil) {
+                     onSubscribersChanged: (() -> Void)? = nil) {
         self.init(source: .remote(sinkId),
-                  onSubscriberCountChanged: onSubscriberCountChanged)
+                  onSubscribersChanged: onSubscribersChanged)
     }
 
     func subscribe(_ handler: @escaping (VideoFrame) -> Void) -> FrameSubscription {
         let id = UUID()
         lock.lock()
         handlers[id] = handler
-        let count = handlers.count
         let replay = lastFrame
         lock.unlock()
 
-        onSubscriberCountChanged?(count)
+        onSubscribersChanged?()
         if let replay = replay {
             handler(replay)
         }
@@ -113,8 +112,7 @@ final class FrameDistributor: @unchecked Sendable {
     private func remove(_ id: UUID) {
         lock.lock()
         handlers[id] = nil
-        let count = handlers.count
         lock.unlock()
-        onSubscriberCountChanged?(count)
+        onSubscribersChanged?()
     }
 }

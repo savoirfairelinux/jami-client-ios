@@ -22,14 +22,14 @@ import XCTest
 final class FrameDistributorTests: XCTestCase {
 
     func testSourceDistinguishesLocalCameraFromRemoteSink() {
-        let sinkId = SinkId(raw: "remote")
+        let sinkId = SinkId(raw: CallTestFixtures.remoteSinkId)
 
         XCTAssertEqual(FrameDistributor(source: .localCamera).source, .localCamera)
         XCTAssertEqual(FrameDistributor(sinkId: sinkId).source, .remote(sinkId))
     }
 
     func testFanOutToAllSubscribers() {
-        let distributor = FrameDistributor(sinkId: SinkId(raw: "s1"))
+        let distributor = FrameDistributor(sinkId: SinkId(raw: CallTestFixtures.remoteSinkId))
         var first = 0
         var second = 0
         let tokenA = distributor.subscribe { _ in first += 1 }
@@ -42,21 +42,23 @@ final class FrameDistributorTests: XCTestCase {
         _ = (tokenA, tokenB)
     }
 
-    func testSubscriberCountCallback() {
-        var counts: [Int] = []
-        let distributor = FrameDistributor(sinkId: SinkId(raw: "s1")) { counts.append($0) }
+    func testSubscriberChangesAreReported() {
+        var notificationCount = 0
+        let distributor = FrameDistributor(sinkId: SinkId(raw: CallTestFixtures.remoteSinkId)) {
+            notificationCount += 1
+        }
 
         var token: FrameSubscription? = distributor.subscribe { _ in }
         let second = distributor.subscribe { _ in }
         token = nil
         _ = second
 
-        XCTAssertEqual(counts, [1, 2, 1])
+        XCTAssertEqual(notificationCount, 3)
         _ = token
     }
 
     func testCancelledSubscriptionReceivesNothing() {
-        let distributor = FrameDistributor(sinkId: SinkId(raw: "s1"))
+        let distributor = FrameDistributor(sinkId: SinkId(raw: CallTestFixtures.remoteSinkId))
         var received = 0
         var token: FrameSubscription? = distributor.subscribe { _ in received += 1 }
         token = nil
@@ -68,7 +70,7 @@ final class FrameDistributorTests: XCTestCase {
     }
 
     func testLastFrameReplayedToLateSubscriber() {
-        let distributor = FrameDistributor(sinkId: SinkId(raw: "s1"))
+        let distributor = FrameDistributor(sinkId: SinkId(raw: CallTestFixtures.remoteSinkId))
         distributor.distribute(VideoFrame(sampleBuffer: nil, rotation: 42))
 
         var rotations: [Int] = []
@@ -79,7 +81,7 @@ final class FrameDistributorTests: XCTestCase {
     }
 
     func testClearedFrameIsNotReplayedToLateSubscriber() {
-        let distributor = FrameDistributor(sinkId: SinkId(raw: "s1"))
+        let distributor = FrameDistributor(sinkId: SinkId(raw: CallTestFixtures.remoteSinkId))
         distributor.distribute(VideoFrame(sampleBuffer: nil, rotation: 42))
 
         distributor.clearCachedFrame()
@@ -92,7 +94,7 @@ final class FrameDistributorTests: XCTestCase {
     }
 
     func testClearingFrameKeepsSubscribersAttached() {
-        let distributor = FrameDistributor(sinkId: SinkId(raw: "s1"))
+        let distributor = FrameDistributor(sinkId: SinkId(raw: CallTestFixtures.remoteSinkId))
         var rotations: [Int] = []
         let token = distributor.subscribe { rotations.append($0.rotation) }
         distributor.distribute(VideoFrame(sampleBuffer: nil, rotation: 1))
@@ -107,9 +109,28 @@ final class FrameDistributorTests: XCTestCase {
 
 final class VideoSinkRegistryTests: XCTestCase {
 
+    func testListenerChangesPublishCurrentState() {
+        let registry = VideoSinkRegistry()
+        let sinkId = SinkId(raw: CallTestFixtures.remoteSinkId)
+        var states: [Bool] = []
+        registry.onListenersChanged = { changedSink, hasListeners in
+            XCTAssertEqual(changedSink, sinkId)
+            states.append(hasListeners)
+        }
+
+        let distributor = registry.distributor(for: sinkId)
+        var first: FrameSubscription? = distributor.subscribe { _ in }
+        var second: FrameSubscription? = distributor.subscribe { _ in }
+        first = nil
+        second = nil
+
+        XCTAssertEqual(states, [true, true, true, false])
+        _ = (first, second)
+    }
+
     func testObservedDistributorSurvivesDecoderRestart() {
         let registry = VideoSinkRegistry()
-        let sinkId = SinkId(raw: "call-video")
+        let sinkId = SinkId(raw: CallTestFixtures.remoteSinkId)
         let distributor = registry.distributor(for: sinkId)
         let token = distributor.subscribe { _ in }
 
@@ -123,7 +144,7 @@ final class VideoSinkRegistryTests: XCTestCase {
 
     func testStoppedDistributorIsReleasedAfterLastSubscriberLeaves() {
         let registry = VideoSinkRegistry()
-        let sinkId = SinkId(raw: "call-video")
+        let sinkId = SinkId(raw: CallTestFixtures.remoteSinkId)
         weak var releasedDistributor: FrameDistributor?
         var token: FrameSubscription?
 
