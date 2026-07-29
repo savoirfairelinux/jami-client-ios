@@ -21,21 +21,11 @@ import SwiftUI
 struct ConversationContainerView: View {
     @ObservedObject var viewModel: ConversationViewModel
     @StateObject private var mediaPreviewPresenter = MediaPreviewPresenter()
-    @SwiftUI.State private var containerWidth: CGFloat = UIScreen.main.bounds.width
     @SwiftUI.State private var showPeerServices = false
     @SwiftUI.State private var peerSharingVM: PeerSharingViewModel?
 
     var body: some View {
         MessagesListView(model: viewModel.swiftUIModel)
-            .background(
-                GeometryReader { geometry in
-                    Color.clear
-                        .onAppear { containerWidth = geometry.size.width }
-                        .onChange(of: geometry.size.width) { newWidth in
-                            containerWidth = newWidth
-                        }
-                }
-            )
             .onPreferenceChange(MessagePanelTopPreferenceKey.self) { value in
                 if let top = value {
                     mediaPreviewPresenter.messagePanelTopY = top
@@ -49,14 +39,7 @@ struct ConversationContainerView: View {
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    conversationTitleView
-                }
-                ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    trailingButtons
-                }
-            }
+            .navigationBarItems(leading: conversationTitleView, trailing: trailingButtons)
             .sheet(isPresented: $showPeerServices, onDismiss: {
                 peerSharingVM?.closePeerSession()
                 peerSharingVM = nil
@@ -78,7 +61,7 @@ struct ConversationContainerView: View {
     private var titleViewContent: some View {
         HStack(spacing: 8) {
             AvatarSwiftUIView(source: viewModel.navBarAvatarProvider)
-                .frame(width: 30, height: 30)
+                //.frame(width: 30, height: 30)
 
             VStack(alignment: .leading, spacing: 0) {
                 if !viewModel.name.isEmpty {
@@ -98,67 +81,51 @@ struct ConversationContainerView: View {
                         .truncationMode(.tail)
                 }
             }
-            .frame(maxWidth: titleMaxWidth, alignment: .leading)
+            .frame(maxWidth: 120, alignment: .leading)
         }
     }
 
     // MARK: - Trailing Buttons
 
     @ViewBuilder private var trailingButtons: some View {
-        if !viewModel.isBlocked {
-            if viewModel.hasPeerSharing {
-                peerServicesButton
-            }
-            audioCallButton
-            if !viewModel.isAccountSip {
-                videoCallButton
+        HStack {
+            if !viewModel.isBlocked {
+                if viewModel.hasPeerSharing {
+                    peerServicesButton
+                }
+                audioCallButton
+                if !viewModel.isAccountSip {
+                    videoCallButton
+                }
             }
         }
     }
 
     private var peerServicesButton: some View {
-        Button {
+        Button(action: {
             guard let peerVM = viewModel.makePeerSharingViewModel() else { return }
             peerSharingVM = peerVM
             showPeerServices = true
-        } label: {
+        }, label: {
             Image(systemName: "network")
-        }
-        .foregroundColor(.jami)
+                .navBarIconStyle()
+        })
         .accessibilityLabel(L10n.PeerServices.title)
     }
 
     private var audioCallButton: some View {
-        Button(action: viewModel.startAudioCall) {
+        Button(action: viewModel.startAudioCall, label: {
             Image(systemName: "phone")
-        }
-        .foregroundColor(.jami)
+                .navBarIconStyle()
+        })
         .accessibilityLabel(L10n.Accessibility.conversationStartVoiceCall(viewModel.name))
     }
 
     private var videoCallButton: some View {
-        Button(action: viewModel.startCall) {
+        Button(action: viewModel.startCall, label: {
             Image(systemName: "video")
-        }
-        .foregroundColor(.jami)
+                .navBarIconStyle()
+        })
         .accessibilityLabel(L10n.Accessibility.conversationStartVideoCall(viewModel.name))
-    }
-
-    // MARK: - Helpers
-
-    private var titleMaxWidth: CGFloat {
-        let backButtonReserve: CGFloat = 60
-        let sidePaddingReserve: CGFloat = 30
-        let trailingButtonReserve: CGFloat = 60
-        let avatarWidthReserve: CGFloat = 30 + 8
-        var trailingCount = viewModel.isBlocked ? 0 : (viewModel.isAccountSip ? 1 : 2)
-        if viewModel.hasPeerSharing && !viewModel.isBlocked {
-            trailingCount += 1
-        }
-
-        let totalReserved = backButtonReserve + (sidePaddingReserve * 2) +
-            (trailingButtonReserve * CGFloat(trailingCount)) + avatarWidthReserve
-
-        return max(0, containerWidth - totalReserved)
     }
 }

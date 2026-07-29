@@ -153,7 +153,7 @@ struct SmartListView: View, StateEmittingView {
         }, label: {
             if let uiImage = UIImage(asset: Asset.phoneBook) {
                 Image(uiImage: uiImage)
-                    .foregroundColor(Color.jami)
+                    .navBarIconStyle()
             }
         })
         .accessibility(identifier: SmartListAccessibilityIdentifiers.bookButton)
@@ -183,7 +183,7 @@ struct SmartListView: View, StateEmittingView {
             supportButton
         } label: {
             Image(systemName: "ellipsis.circle")
-                .foregroundColor(Color.jami)
+                .navBarIconStyle()
                 .accessibility(identifier: SmartListAccessibilityIdentifiers.openMenuInSmartList)
         }
     }
@@ -193,7 +193,7 @@ struct SmartListView: View, StateEmittingView {
             activateSearch = true
         }, label: {
             Image(systemName: "square.and.pencil")
-                .foregroundColor(Color.jami)
+                .navBarIconStyle()
         })
         .accessibility(identifier: SmartListAccessibilityIdentifiers.composeButton)
     }
