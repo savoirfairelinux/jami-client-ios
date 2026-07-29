@@ -187,9 +187,24 @@ final class TestLibJamiCallAPI: LibJamiCallAPI, @unchecked Sendable {
 }
 
 final class TestLibJamiVideoAPI: LibJamiVideoAPI {
-    func registerSink(_ sinkId: SinkId, width: Int, height: Int, hasListeners: Bool) {}
-    func removeSink(_ sinkId: SinkId) {}
-    func setHasListeners(_ hasListeners: Bool, sinkId: SinkId) {}
+    var onSinkRegistrationStarted: ((SinkId) -> Void)?
+    private(set) var listenerStates: [SinkId: Bool] = [:]
+    private var knownSinks: Set<SinkId> = []
+
+    func registerSink(_ sinkId: SinkId, width: Int, height: Int, hasListeners: Bool) {
+        onSinkRegistrationStarted?(sinkId)
+        knownSinks.insert(sinkId)
+        listenerStates[sinkId] = hasListeners
+    }
+
+    func removeSink(_ sinkId: SinkId) {
+        knownSinks.remove(sinkId)
+    }
+
+    func setHasListeners(_ hasListeners: Bool, sinkId: SinkId) {
+        guard knownSinks.contains(sinkId) else { return }
+        listenerStates[sinkId] = hasListeners
+    }
     func renderSize(_ sinkId: SinkId) -> CGSize { .zero }
     func writeOutgoingFrame(_ buffer: CVImageBuffer, angle: Int, videoInputId: String) {}
     func addVideoDevice(name: String, info: [String: Any]) {}

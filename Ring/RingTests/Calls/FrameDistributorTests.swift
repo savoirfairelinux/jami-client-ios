@@ -42,16 +42,18 @@ final class FrameDistributorTests: XCTestCase {
         _ = (tokenA, tokenB)
     }
 
-    func testSubscriberCountCallback() {
-        var counts: [Int] = []
-        let distributor = FrameDistributor(sinkId: SinkId(raw: "s1")) { counts.append($0) }
+    func testSubscriberChangesAreReported() {
+        var notificationCount = 0
+        let distributor = FrameDistributor(sinkId: SinkId(raw: "s1")) {
+            notificationCount += 1
+        }
 
         var token: FrameSubscription? = distributor.subscribe { _ in }
         let second = distributor.subscribe { _ in }
         token = nil
         _ = second
 
-        XCTAssertEqual(counts, [1, 2, 1])
+        XCTAssertEqual(notificationCount, 3)
         _ = token
     }
 
@@ -106,6 +108,25 @@ final class FrameDistributorTests: XCTestCase {
 }
 
 final class VideoSinkRegistryTests: XCTestCase {
+
+    func testListenerChangesPublishCurrentState() {
+        let registry = VideoSinkRegistry()
+        let sinkId = SinkId(raw: "call-video")
+        var states: [Bool] = []
+        registry.onListenersChanged = { changedSink, hasListeners in
+            XCTAssertEqual(changedSink, sinkId)
+            states.append(hasListeners)
+        }
+
+        let distributor = registry.distributor(for: sinkId)
+        var first: FrameSubscription? = distributor.subscribe { _ in }
+        var second: FrameSubscription? = distributor.subscribe { _ in }
+        first = nil
+        second = nil
+
+        XCTAssertEqual(states, [true, true, true, false])
+        _ = (first, second)
+    }
 
     func testObservedDistributorSurvivesDecoderRestart() {
         let registry = VideoSinkRegistry()
