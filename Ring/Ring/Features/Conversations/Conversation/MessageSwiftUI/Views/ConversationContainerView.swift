@@ -21,21 +21,11 @@ import SwiftUI
 struct ConversationContainerView: View {
     @ObservedObject var viewModel: ConversationViewModel
     @StateObject private var mediaPreviewPresenter = MediaPreviewPresenter()
-    @SwiftUI.State private var containerWidth: CGFloat = UIScreen.main.bounds.width
     @SwiftUI.State private var showPeerServices = false
     @SwiftUI.State private var peerSharingVM: PeerSharingViewModel?
 
     var body: some View {
         MessagesListView(model: viewModel.swiftUIModel)
-            .background(
-                GeometryReader { geometry in
-                    Color.clear
-                        .onAppear { containerWidth = geometry.size.width }
-                        .onChange(of: geometry.size.width) { newWidth in
-                            containerWidth = newWidth
-                        }
-                }
-            )
             .onPreferenceChange(MessagePanelTopPreferenceKey.self) { value in
                 if let top = value {
                     mediaPreviewPresenter.messagePanelTopY = top
@@ -98,7 +88,7 @@ struct ConversationContainerView: View {
                         .truncationMode(.tail)
                 }
             }
-            .frame(maxWidth: titleMaxWidth, alignment: .leading)
+            .frame(maxWidth: 150, alignment: .leading)
         }
     }
 
@@ -142,23 +132,5 @@ struct ConversationContainerView: View {
         }
         .foregroundColor(.jami)
         .accessibilityLabel(L10n.Accessibility.conversationStartVideoCall(viewModel.name))
-    }
-
-    // MARK: - Helpers
-
-    private var titleMaxWidth: CGFloat {
-        let backButtonReserve: CGFloat = 60
-        let sidePaddingReserve: CGFloat = 30
-        let trailingButtonReserve: CGFloat = 60
-        let avatarWidthReserve: CGFloat = 30 + 8
-        var trailingCount = viewModel.isBlocked ? 0 : (viewModel.isAccountSip ? 1 : 2)
-        if viewModel.hasPeerSharing && !viewModel.isBlocked {
-            trailingCount += 1
-        }
-
-        let totalReserved = backButtonReserve + (sidePaddingReserve * 2) +
-            (trailingButtonReserve * CGFloat(trailingCount)) + avatarWidthReserve
-
-        return max(0, containerWidth - totalReserved)
     }
 }
