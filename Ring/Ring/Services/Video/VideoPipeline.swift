@@ -301,6 +301,11 @@ extension VideoPipeline: DecodingAdapterDelegate {
 
         video.registerSink(sink, width: width, height: height,
                            hasListeners: sinkRegistry.hasListeners(sink))
+        publishListenerState(for: sink)
+    }
+
+    private func publishListenerState(for sink: SinkId) {
+        video.setHasListeners(sinkRegistry.hasListeners(sink), sinkId: sink)
     }
 
     func decodingStopped(withSinkId sinkId: String) {

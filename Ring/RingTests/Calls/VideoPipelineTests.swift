@@ -22,6 +22,22 @@ import CoreMedia
 
 final class VideoPipelineTests: XCTestCase {
 
+    func testListenerArrivingDuringSinkRegistrationReachesTheSink() {
+        let video = TestLibJamiVideoAPI()
+        let pipeline = VideoPipeline(video: video)
+        let sink = SinkId(baseId: CallTestFixtures.callId.raw, label: .video(0))
+        var subscription: FrameSubscription?
+        video.onSinkRegistrationStarted = { [weak pipeline] sinkId in
+            subscription = pipeline?.sinkRegistry.distributor(for: sinkId).subscribe { _ in }
+        }
+
+        pipeline.decodingStarted(withSinkId: sink.raw, withWidth: 640, withHeight: 480)
+
+        XCTAssertEqual(video.listenerStates[sink], true,
+                       "a listener that appeared before the renderer existed must be republished")
+        _ = subscription
+    }
+
     func testCapturedFrameIsMarkedForImmediateDisplay() throws {
         let pipeline = VideoPipeline(video: TestLibJamiVideoAPI())
         let captured = try makeCaptureSampleBuffer()

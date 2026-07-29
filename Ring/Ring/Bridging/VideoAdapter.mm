@@ -24,10 +24,11 @@
 
 #include <AVFoundation/AVFoundation.h>
 
-#include <pthread.h>
-#include <functional>
-#include <mutex>
 #include <atomic>
+#include <map>
+#include <memory>
+#include <mutex>
+#include <utility>
 
 #import "jami/videomanager_interface.h"
 #import "jami/callmanager_interface.h"
@@ -36,43 +37,77 @@ using namespace libjami;
 
 struct Renderer
 {
-    std::condition_variable frameCv;
-    std::atomic<bool> isRendering = {false};
-    std::mutex renderMutex;
-    SinkTarget target;
-    int width;
-    int height;
-    bool hasListeners = false;
-    NSString* sinkId;
+    Renderer(NSString* sinkId, int width, int height, bool hasListeners)
+        : sinkId([sinkId copy])
+        , width_(width)
+        , height_(height)
+        , hasListeners_(hasListeners)
+    {}
 
-    void bindAVSinkFunctions() {
-        target.push = [this](FrameBuffer frame) {
-            if(!VideoAdapter.videoDelegate || !hasListeners) {
+    void updateSize(int width, int height)
+    {
+        std::lock_guard<std::mutex> lock(sizeMutex_);
+        width_ = width;
+        height_ = height;
+    }
+
+    std::pair<int, int> size() const
+    {
+        std::lock_guard<std::mutex> lock(sizeMutex_);
+        return {width_, height_};
+    }
+
+    void setHasListeners(bool hasListeners)
+    {
+        hasListeners_.store(hasListeners, std::memory_order_relaxed);
+    }
+
+    void pushFrame(FrameBuffer frame)
+    {
+        if (!hasListeners_.load(std::memory_order_relaxed)) {
+            return;
+        }
+        @autoreleasepool {
+            id<VideoAdapterDelegate> delegate = VideoAdapter.videoDelegate;
+            if (!delegate) {
                 return;
             }
-            @autoreleasepool {
-                PixelBufferInfo info = [MediaUtils getCVPixelBufferFromAVFrame:std::move(frame.get())];
-                if (info.pixelBuffer == NULL) {
-                    return;
-                }
-                isRendering.store(true);
-                [VideoAdapter.videoDelegate writeFrameWithBuffer: info.pixelBuffer sinkId: sinkId rotation: info.rotation];
-                if (info.ownsMemory) {
-                    CFRelease(info.pixelBuffer);
-                }
-                isRendering.store(false);
+            PixelBufferInfo info = [MediaUtils getCVPixelBufferFromAVFrame:std::move(frame.get())];
+            if (info.pixelBuffer == NULL) {
+                return;
             }
-        };
+            [delegate writeFrameWithBuffer:info.pixelBuffer sinkId:sinkId rotation:info.rotation];
+            if (info.ownsMemory) {
+                CFRelease(info.pixelBuffer);
+            }
+        }
     }
+
+    __strong NSString* const sinkId;
+
+private:
+    mutable std::mutex sizeMutex_;
+    int width_;
+    int height_;
+    std::atomic_bool hasListeners_;
 };
+
+@interface VideoAdapter ()
+
+- (std::shared_ptr<Renderer>)findRenderer:(const std::string&)rendererId;
+
+@end
 
 @implementation VideoAdapter {
     std::map<std::string, std::shared_ptr<Renderer>> renderers;
+    /// Never held across a libjami call, so listener updates never wait on a frame.
+    std::mutex renderersMutex;
+    std::mutex rendererLifecycleMutex;
 }
 
 // Static delegates that will receive the propagated daemon events
-static id <VideoAdapterDelegate> _videoDelegate;
-static id <DecodingAdapterDelegate> _decodingDelegate;
+static __weak id<VideoAdapterDelegate> _videoDelegate;
+static __weak id<DecodingAdapterDelegate> _decodingDelegate;
 
 #pragma mark Init
 
@@ -90,45 +125,50 @@ static id <DecodingAdapterDelegate> _decodingDelegate;
 - (void)registerVideoHandlers {
     std::map<std::string, std::shared_ptr<CallbackWrapperBase>> videoHandlers;
 
-    videoHandlers.insert(exportable_callback<VideoSignal::DecodingStarted>([&](const std::string& renderer_id,
+    videoHandlers.insert(exportable_callback<VideoSignal::DecodingStarted>([](const std::string& renderer_id,
                                                                                const std::string& shm_path,
                                                                                int w,
                                                                                int h,
                                                                                bool is_mixer) {
-        if(VideoAdapter.decodingDelegate) {
+        id<DecodingAdapterDelegate> delegate = VideoAdapter.decodingDelegate;
+        if (delegate) {
             NSString* sinkId = [NSString stringWithUTF8String:renderer_id.c_str()];
-            [VideoAdapter.decodingDelegate decodingStartedWithSinkId:sinkId withWidth:(NSInteger)w withHeight:(NSInteger)h];
+            [delegate decodingStartedWithSinkId:sinkId withWidth:(NSInteger)w withHeight:(NSInteger)h];
         }
     }));
 
-    videoHandlers.insert(exportable_callback<VideoSignal::DecodingStopped>([&](const std::string& renderer_id,
+    videoHandlers.insert(exportable_callback<VideoSignal::DecodingStopped>([](const std::string& renderer_id,
                                                                                const std::string& shm_path,
                                                                                bool is_mixer) {
-        if(VideoAdapter.decodingDelegate) {
+        id<DecodingAdapterDelegate> delegate = VideoAdapter.decodingDelegate;
+        if (delegate) {
             NSString* sinkId = [NSString stringWithUTF8String:renderer_id.c_str()];
-            [VideoAdapter.decodingDelegate decodingStoppedWithSinkId:sinkId];
+            [delegate decodingStoppedWithSinkId:sinkId];
         }
     }));
 
-    videoHandlers.insert(exportable_callback<VideoSignal::StartCapture>([&](const std::string& device) {
-        if(VideoAdapter.videoDelegate) {
+    videoHandlers.insert(exportable_callback<VideoSignal::StartCapture>([](const std::string& device) {
+        id<VideoAdapterDelegate> delegate = VideoAdapter.videoDelegate;
+        if (delegate) {
             NSString* deviceString = [NSString stringWithUTF8String:device.c_str()];
-            [VideoAdapter.videoDelegate startCaptureWithDevice:deviceString];
+            [delegate startCaptureWithDevice:deviceString];
         }
     }));
 
-    videoHandlers.insert(exportable_callback<VideoSignal::StopCapture>([&](const std::string& deviceId) {
-        if(VideoAdapter.videoDelegate) {
+    videoHandlers.insert(exportable_callback<VideoSignal::StopCapture>([](const std::string& deviceId) {
+        id<VideoAdapterDelegate> delegate = VideoAdapter.videoDelegate;
+        if (delegate) {
             NSString* deviceString = @(deviceId.c_str());
-            [VideoAdapter.videoDelegate stopCaptureWithDevice: deviceString];
+            [delegate stopCaptureWithDevice:deviceString];
         }
     }));
 
-    videoHandlers.insert(exportable_callback<MediaPlayerSignal::FileOpened>([&](const std::string& playerId, std::map<std::string, std::string> playerInfo) {
-        if(VideoAdapter.videoDelegate) {
+    videoHandlers.insert(exportable_callback<MediaPlayerSignal::FileOpened>([](const std::string& playerId, std::map<std::string, std::string> playerInfo) {
+        id<VideoAdapterDelegate> delegate = VideoAdapter.videoDelegate;
+        if (delegate) {
             NSString* player = @(playerId.c_str());
             NSMutableDictionary* info = [Utils mapToDictionary:playerInfo];
-            [VideoAdapter.videoDelegate fileOpenedFor:player fileInfo:info];
+            [delegate fileOpenedFor:player fileInfo:info];
         }
     }));
 
@@ -137,52 +177,66 @@ static id <DecodingAdapterDelegate> _decodingDelegate;
 
 #pragma mark -
 
+- (std::shared_ptr<Renderer>)findRenderer:(const std::string&)rendererId {
+    std::lock_guard<std::mutex> lock(renderersMutex);
+    auto value = renderers.find(rendererId);
+    return value == renderers.end() ? nullptr : value->second;
+}
+
 -(CGSize)getRenderSize:(NSString* )sinkId {
-    auto renderer = renderers.find(std::string([sinkId UTF8String]));
-    if (renderer != renderers.end()) {
-        std::unique_lock<std::mutex> lk(renderer->second->renderMutex);
-        return CGSizeMake(renderer->second->width, renderer->second->height);
+    auto renderer = [self findRenderer:std::string([sinkId UTF8String])];
+    if (!renderer) {
+        return CGSizeZero;
     }
-    return CGSizeZero;
+    auto size = renderer->size();
+    return CGSizeMake(size.first, size.second);
 }
 
 - (void)registerSinkTargetWithSinkId:sinkId
                            withWidth:(NSInteger)w
                           withHeight:(NSInteger)h
                          hasListeners:(BOOL)hasListeners {
-    auto _sinkId = std::string([sinkId UTF8String]);
-    auto renderer = renderers.find(_sinkId);
-    if (renderer != renderers.end()) {
-        renderer->second->width = static_cast<int>(w);
-        renderer->second->height = static_cast<int>(h);
-        renderer->second->hasListeners = hasListeners;
+    auto rendererId = std::string([sinkId UTF8String]);
+    std::lock_guard<std::mutex> lifecycleLock(rendererLifecycleMutex);
+    if (auto renderer = [self findRenderer:rendererId]) {
+        renderer->updateSize(static_cast<int>(w), static_cast<int>(h));
+        renderer->setHasListeners(hasListeners);
         return;
     }
-    auto newRenderer = std::make_shared<Renderer>();
-    newRenderer->width = static_cast<int>(w);
-    newRenderer->height = static_cast<int>(h);
-    newRenderer->sinkId = sinkId;
-    newRenderer->hasListeners = hasListeners;
-    newRenderer->bindAVSinkFunctions();
-    registerSinkTarget(_sinkId, newRenderer->target);
-    renderers.insert(std::make_pair(_sinkId, newRenderer));
+    auto renderer = std::make_shared<Renderer>(sinkId,
+                                               static_cast<int>(w),
+                                               static_cast<int>(h),
+                                               hasListeners);
+    {
+        std::lock_guard<std::mutex> lock(renderersMutex);
+        renderers.emplace(rendererId, renderer);
+    }
+    SinkTarget target;
+    target.push = [renderer](FrameBuffer frame) {
+        renderer->pushFrame(std::move(frame));
+    };
+    if (!registerSinkTarget(rendererId, std::move(target))) {
+        std::lock_guard<std::mutex> lock(renderersMutex);
+        renderers.erase(rendererId);
+    }
 }
 
 - (void)removeSinkTargetWithSinkId:(NSString*)sinkId {
-    auto renderer = renderers.find(std::string([sinkId UTF8String]));
-    if (renderer != renderers.end()) {
-        std::unique_lock<std::mutex> lk(renderer->second->renderMutex);
-        renderer->second->frameCv.wait(lk, [=] {
-            return !renderer->second->isRendering.load();
-        });
-        renderers.erase(renderer);
+    auto rendererId = std::string([sinkId UTF8String]);
+    std::lock_guard<std::mutex> lifecycleLock(rendererLifecycleMutex);
+    if (![self findRenderer:rendererId]) {
+        return;
     }
+    // The barrier: the sink takes its own mutex both here and around every
+    // push, so once this returns no frame is in flight and none can start.
+    registerSinkTarget(rendererId, SinkTarget {});
+    std::lock_guard<std::mutex> lock(renderersMutex);
+    renderers.erase(rendererId);
 }
 
 - (void)setHasListeners:(BOOL)hasListeners forSinkId:(NSString*)sinkId {
-    auto renderer = renderers.find(std::string([sinkId UTF8String]));
-    if (renderer != renderers.end()) {
-        renderer->second->hasListeners = hasListeners;
+    if (auto renderer = [self findRenderer:std::string([sinkId UTF8String])]) {
+        renderer->setHasListeners(hasListeners);
     }
 }
 
