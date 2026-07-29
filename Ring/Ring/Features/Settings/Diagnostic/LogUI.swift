@@ -117,10 +117,11 @@ struct LogUI: View {
     }
 
     private var trailingBarItems: some View {
-        HStack {
+        HStack(spacing: 0) {
             shareButton
             saveButton
         }
+        .fixedSize(horizontal: true, vertical: false)
     }
 
     private var shareButton: some View {
@@ -128,8 +129,7 @@ struct LogUI: View {
             model.openShareWindow()
         }, label: {
             Image(systemName: "square.and.arrow.up")
-                .padding(5)
-                .foregroundColor(Color.jami)
+                .navBarIconStyle()
         })
     }
 
@@ -138,8 +138,7 @@ struct LogUI: View {
             model.openDocumentBrowser()
         }, label: {
             Image(systemName: "arrow.down.circle")
-                .padding(5)
-                .foregroundColor(Color.jami)
+                .navBarIconStyle()
         })
     }
 
