@@ -136,7 +136,7 @@ struct SmartListView: View, StateEmittingView {
     }
 
     private var trailingBarItems: some View {
-        HStack {
+        HStack(spacing: 0) {
             if model.isSipAccount() {
                 menuButton
                 bookButton
@@ -145,6 +145,7 @@ struct SmartListView: View, StateEmittingView {
                 composeButton
             }
         }
+        .fixedSize(horizontal: true, vertical: false)
     }
 
     private var bookButton: some View {
@@ -153,7 +154,7 @@ struct SmartListView: View, StateEmittingView {
         }, label: {
             if let uiImage = UIImage(asset: Asset.phoneBook) {
                 Image(uiImage: uiImage)
-                    .foregroundColor(Color.jami)
+                    .navBarIconStyle()
             }
         })
         .accessibility(identifier: SmartListAccessibilityIdentifiers.bookButton)
@@ -183,7 +184,7 @@ struct SmartListView: View, StateEmittingView {
             supportButton
         } label: {
             Image(systemName: "ellipsis.circle")
-                .foregroundColor(Color.jami)
+                .navBarIconStyle()
                 .accessibility(identifier: SmartListAccessibilityIdentifiers.openMenuInSmartList)
         }
     }
@@ -193,7 +194,7 @@ struct SmartListView: View, StateEmittingView {
             activateSearch = true
         }, label: {
             Image(systemName: "square.and.pencil")
-                .foregroundColor(Color.jami)
+                .navBarIconStyle()
         })
         .accessibility(identifier: SmartListAccessibilityIdentifiers.composeButton)
     }

@@ -41,6 +41,16 @@ extension View {
             .foregroundColor(Color.jamiButtonSecondary)
     }
 
+    // Shared style for icon-only navigation bar trailing buttons (smart list,
+    // conversation, settings) so they stay visually and behaviorally consistent.
+    // The frame provides the minimum tappable area for each button.
+    func navBarIconStyle() -> some View {
+        self
+            .foregroundColor(.jami)
+            .frame(width: 44, height: 44)
+            .contentShape(Rectangle())
+    }
+
     func measureSize() -> some View {
         self.modifier(MeasureSizeModifier())
     }
