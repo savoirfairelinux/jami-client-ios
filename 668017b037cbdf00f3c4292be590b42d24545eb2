@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3b869ae_a7191596",
+        "filename": "Ring/Ring/Features/Collab/CollabDocMessageVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-07-30T21:44:29Z",
+      "side": 1,
+      "message": "[warning] Line 44: 🟡 `follow(accountId:conversationId:service:)` is not idempotent: if the same container/view model is rebound, this adds another daemon name request and another `documentsRenamed` subscription without disposing the previous ones. Guard repeated calls for the same account/conversation/document or reset the previous subscription before subscribing.",
+      "revId": "668017b037cbdf00f3c4292be590b42d24545eb2",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
