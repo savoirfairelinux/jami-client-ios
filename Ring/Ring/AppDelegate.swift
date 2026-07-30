@@ -41,6 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     private let systemService = SystemService(withSystemAdapter: SystemAdapter())
     private let networkService = NetworkService()
     private let peerSharingService = PeerSharingService(withPeerServicesAdapter: PeerServicesAdapter())
+    private let collaborationService = CollaborationService(withCollaborationAdapter: CollaborationAdapter())
     private var conversationManager: ConversationsManager?
     private var interactionsManager: GeneratedInteractionsManager?
     internal lazy var accountService: AccountsService = {
@@ -89,7 +90,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                             withLocationSharingService: self.locationSharingService,
                             withRequestsService: self.requestsService,
                             withSystemService: self.systemService,
-                            withPeerSharingService: self.peerSharingService)
+                            withPeerSharingService: self.peerSharingService,
+                            withCollaborationService: self.collaborationService)
     }()
     private lazy var appCoordinator: AppCoordinator = {
         return AppCoordinator(injectionBag: self.injectionBag)

@@ -73,7 +73,8 @@ final class JamiSearchViewModelTests: XCTestCase {
                                     withLocationSharingService: locationSharingService,
                                     withRequestsService: requestsService,
                                     withSystemService: systemService,
-                                    withPeerSharingService: TestPeerSharingFactory.createService())
+                                    withPeerSharingService: TestPeerSharingFactory.createService(),
+                                    withCollaborationService: CollaborationService(withCollaborationAdapter: CollaborationAdapter()))
         conversationVM = ConversationViewModel(with: injectionBag)
         conversationVM.conversation = ConversationModel(type: .oneToOne)
         dataSource = TestableFilteredDataSource(conversations: [conversationVM], injectionBag: injectionBag)

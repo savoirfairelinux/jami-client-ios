@@ -42,6 +42,7 @@ class InjectionBag {
     let requestsService: RequestsService
     let systemService: SystemService
     let peerSharingService: PeerSharingService
+    let collaborationService: CollaborationService
 
     init (withDaemonService daemonService: DaemonService,
           withAccountService accountService: AccountsService,
@@ -58,7 +59,8 @@ class InjectionBag {
           withLocationSharingService locationSharingService: LocationSharingService,
           withRequestsService requestsService: RequestsService,
           withSystemService systemService: SystemService,
-          withPeerSharingService peerSharingService: PeerSharingService) {
+          withPeerSharingService peerSharingService: PeerSharingService,
+          withCollaborationService collaborationService: CollaborationService) {
         self.daemonService = daemonService
         self.accountService = accountService
         self.nameService = nameService
@@ -75,5 +77,6 @@ class InjectionBag {
         self.requestsService = requestsService
         self.systemService = systemService
         self.peerSharingService = peerSharingService
+        self.collaborationService = collaborationService
     }
 }
