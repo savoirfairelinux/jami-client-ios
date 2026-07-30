@@ -21,6 +21,10 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		C30000000000000000000003 /* CollabEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30000000000000000000002 /* CollabEditorViewModel.swift */; };
+		C30000000000000000000005 /* CollabEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30000000000000000000004 /* CollabEditorViewController.swift */; };
+		C30000000000000000000007 /* CollabSchemeHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30000000000000000000006 /* CollabSchemeHandler.swift */; };
+		C30000000000000000000011 /* CollabHistoryPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30000000000000000000010 /* CollabHistoryPanel.swift */; };
 		C10000000000000000000064 /* libyrs.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C10000000000000000000001 /* libyrs.xcframework */; };
 		C10000000000000000000071 /* libyrs.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C10000000000000000000001 /* libyrs.xcframework */; };
 		C1000000000000000000007E /* libyrs.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C10000000000000000000001 /* libyrs.xcframework */; };
@@ -657,6 +661,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C30000000000000000000002 /* CollabEditorViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollabEditorViewModel.swift; sourceTree = "<group>"; };
+		C30000000000000000000004 /* CollabEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollabEditorViewController.swift; sourceTree = "<group>"; };
+		C30000000000000000000006 /* CollabSchemeHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollabSchemeHandler.swift; sourceTree = "<group>"; };
+		C30000000000000000000010 /* CollabHistoryPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollabHistoryPanel.swift; sourceTree = "<group>"; };
 		C10000000000000000000001 /* libyrs.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libyrs.xcframework; path = ../xcframework/libyrs.xcframework; sourceTree = "<group>"; };
 		C00000000000000000000001 /* CollaborationAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CollaborationAdapter.h; sourceTree = "<group>"; };
 		C00000000000000000000008 /* CollaborationAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CollaborationAdapter.mm; sourceTree = "<group>"; };
@@ -2027,6 +2035,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C30000000000000000000001 /* Collab */ = {
+			isa = PBXGroup;
+			children = (
+				C30000000000000000000002 /* CollabEditorViewModel.swift */,
+				C30000000000000000000004 /* CollabEditorViewController.swift */,
+				C30000000000000000000006 /* CollabSchemeHandler.swift */,
+				C30000000000000000000010 /* CollabHistoryPanel.swift */,
+			);
+			name = Collab;
+			path = Features/Collab;
+			sourceTree = "<group>";
+		};
 		028568231DF60E5C003A8D8D /* Fixtures */ = {
 			isa = PBXGroup;
 			children = (
@@ -3076,6 +3096,7 @@
 		1A0C4EBC1F1D48AA00550433 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				C30000000000000000000001 /* Collab */,
 				71EDE7188785BAE3C6142B71 /* Calls */,
 				26454FB52B7FDCA100CFF06C /* About */,
 				BB1E8C6B29159DDE005AE1D6 /* SwarmInfo */,
@@ -4133,6 +4154,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C30000000000000000000003 /* CollabEditorViewModel.swift in Sources */,
+				C30000000000000000000005 /* CollabEditorViewController.swift in Sources */,
+				C30000000000000000000007 /* CollabSchemeHandler.swift in Sources */,
+				C30000000000000000000011 /* CollabHistoryPanel.swift in Sources */,
 				C0000000000000000000000F /* CollaborationAdapter.mm in Sources */,
 				C0000000000000000000001D /* CollaborationAdapterDelegate.swift in Sources */,
 				C0000000000000000000002B /* CollaborationService.swift in Sources */,

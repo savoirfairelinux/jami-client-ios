@@ -48,6 +48,10 @@ enum ConversationState: State {
                                            withAnimation: Bool)
     case openAboutJami
     case showAccountSettings(account: AccountModel)
+    case openCollabDocument(accountId: String,
+                            conversationId: String,
+                            documentId: String,
+                            name: String?)
 }
 
 protocol ConversationNavigation: AnyObject {
@@ -79,6 +83,11 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                     self.migrateAccount(accountId: accountId)
                 case .showAccountSettings(let account):
                     self.showAccountSettings(account: account)
+                case .openCollabDocument(let accountId, let conversationId, let documentId, let name):
+                    self.openCollabDocument(accountId: accountId,
+                                            conversationId: conversationId,
+                                            documentId: documentId,
+                                            name: name)
                 default:
                     break
                 }
@@ -147,6 +156,29 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                      withAnimation: withAnimation,
                      withStateable: conversationViewModel,
                      lockWhilePresenting: VCType.conversation.rawValue)
+    }
+
+    /**
+     A document is opened over the conversation it belongs to, not pushed onto
+     it: the editor takes the whole screen and the keyboard, and coming back
+     has to land on the conversation exactly as it was left.
+     */
+    func openCollabDocument(accountId: String,
+                            conversationId: String,
+                            documentId: String,
+                            name: String?) {
+        let viewModel = CollabEditorViewModel(with: self.injectionBag,
+                                              accountId: accountId,
+                                              conversationId: conversationId,
+                                              documentId: documentId,
+                                              name: name)
+        let editor = CollabEditorViewController(viewModel: viewModel)
+        let navigation = UINavigationController(rootViewController: editor)
+        navigation.modalPresentationStyle = .fullScreen
+        self.present(viewController: navigation,
+                     withStyle: .present,
+                     withAnimation: true,
+                     disposeBag: self.disposeBag)
     }
 
     func showAccountSettings(account: AccountModel) {
