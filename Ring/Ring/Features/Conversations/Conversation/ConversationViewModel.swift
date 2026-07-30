@@ -54,6 +54,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
     @Published var lastMessage: String = ""
     @Published var lastMessageDate: String = ""
     @Published var unreadMessages: Int = 0
+    @Published var collaborativeDocuments = [CollaborativeDocument]()
     @Published var presence: PresenceStatus = .offline
     @Published var navUserName: String = ""
     @Published var isBlocked: Bool = false
@@ -73,6 +74,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
     private let callService: CallService
     private let locationSharingService: LocationSharingService
     private let peerSharingService: PeerSharingService
+    private let collaborationService: CollaborationService
     let dataTransferService: DataTransferService
 
     let injectionBag: InjectionBag
@@ -80,6 +82,8 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
     internal let disposeBag = DisposeBag()
 
     private var conversationBindingsDisposeBag = DisposeBag()
+    private var messageUnreadCount = 0
+    private var unreadCollaborativeDocumentIds = Set<String>()
 
     func closeAllPlayers() {
         self.swiftUIModel.transferHelper.closeAllPlayers()
@@ -166,6 +170,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
         self.callService = injectionBag.callService
         self.locationSharingService = injectionBag.locationSharingService
         self.peerSharingService = injectionBag.peerSharingService
+        self.collaborationService = injectionBag.collaborationService
         let transferHelper = TransferHelper(injectionBag: injectionBag)
 
         swiftUIModel = MessagesListVM(injectionBag: self.injectionBag,
@@ -257,8 +262,12 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
         didSet {
             conversationBindingsDisposeBag = DisposeBag()
             swarmInfo = nil
+            messageUnreadCount = 0
+            unreadCollaborativeDocumentIds.removeAll()
+            collaborativeDocuments = []
 
             self.subscribeUnreadMessages()
+            self.subscribeCollaborativeDocumentChanges()
             self.swiftUIModel.conversation = conversation
 
             guard let account = self.accountService.getAccount(fromAccountId: self.conversation.accountId) else { return }
@@ -710,14 +719,51 @@ extension ConversationViewModel {
     }
 
     private func subscribeUnreadMessages() {
+        messageUnreadCount = conversation.numberOfUnreadMessages.value
+        updateUnreadCount()
         self.conversation.numberOfUnreadMessages
             .observe(on: MainScheduler.instance)
             .subscribe { [weak self] unreadMessages in
                 guard let self = self else { return }
-                self.unreadMessages = unreadMessages
+                self.messageUnreadCount = unreadMessages
+                self.updateUnreadCount()
             } onError: { _ in
             }
             .disposed(by: conversationBindingsDisposeBag)
+    }
+
+    private func subscribeCollaborativeDocumentChanges() {
+        collaborationService
+            .changes(forAccount: conversation.accountId, conversationId: conversation.id)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] event in
+                guard let self = self else { return }
+                switch event.change {
+                case .notification:
+                    self.unreadCollaborativeDocumentIds.insert(event.documentId)
+                    self.refreshCollaborativeDocuments()
+                case .update:
+                    // Non-empty updates are delivered only while an editor is
+                    // open, so this document is no longer waiting to be read.
+                    self.unreadCollaborativeDocumentIds.remove(event.documentId)
+                }
+                self.updateUnreadCount()
+            })
+            .disposed(by: conversationBindingsDisposeBag)
+    }
+
+    private func refreshCollaborativeDocuments() {
+        collaborationService.documents(accountId: conversation.accountId,
+                                       conversationId: conversation.id)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onSuccess: { [weak self] documents in
+                self?.collaborativeDocuments = documents
+            })
+            .disposed(by: conversationBindingsDisposeBag)
+    }
+
+    private func updateUnreadCount() {
+        unreadMessages = messageUnreadCount + unreadCollaborativeDocumentIds.count
     }
 
     private func subscribeUserServiceLookupStatus() {

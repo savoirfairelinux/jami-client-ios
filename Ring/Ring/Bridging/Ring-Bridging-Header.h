@@ -32,6 +32,7 @@
 #import "RegistrationResponse.h"
 #import "NameRegistrationResponse.h"
 #import "ConversationsAdapter.h"
+#import "CollaborationAdapter.h"
 #import "ContactsAdapter.h"
 #import "ProfilesAdapter.h"
 #import "PresenceAdapter.h"

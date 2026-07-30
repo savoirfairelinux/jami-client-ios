@@ -21,6 +21,13 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		C10000000000000000000064 /* libyrs.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C10000000000000000000001 /* libyrs.xcframework */; };
+		C10000000000000000000071 /* libyrs.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C10000000000000000000001 /* libyrs.xcframework */; };
+		C1000000000000000000007E /* libyrs.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C10000000000000000000001 /* libyrs.xcframework */; };
+		C0000000000000000000000F /* CollaborationAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000008 /* CollaborationAdapter.mm */; };
+		C0000000000000000000001D /* CollaborationAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000016 /* CollaborationAdapterDelegate.swift */; };
+		C0000000000000000000002B /* CollaborationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000024 /* CollaborationService.swift */; };
+		C00000000000000000000039 /* CollaborativeDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000032 /* CollaborativeDocument.swift */; };
 		024B612C1DF7654F00C4F9DE /* DaemonServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024B612B1DF7654F00C4F9DE /* DaemonServiceTests.swift */; };
 		024B61311DF7656A00C4F9DE /* FixtureFailInitDRingAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 024B612E1DF7656A00C4F9DE /* FixtureFailInitDRingAdapter.mm */; };
 		024B61321DF7656A00C4F9DE /* FixtureFailStartDRingAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 024B61301DF7656A00C4F9DE /* FixtureFailStartDRingAdapter.mm */; };
@@ -416,6 +423,8 @@
 		26F1D8E62FC73C6E002AA754 /* PeerServicesAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26F1D8E52FC73C6E002AA754 /* PeerServicesAdapter.mm */; };
 		26F1D8F02FC76A78002AA754 /* PeerSharingServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F1D8EF2FC76A78002AA754 /* PeerSharingServiceTests.swift */; };
 		26F1D8F32FC76A8B002AA754 /* ObjCMockPeerServicesAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F1D8F22FC76A8B002AA754 /* ObjCMockPeerServicesAdapter.m */; };
+		C30000000000000000000014 /* ObjCMockCollaborationAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = C30000000000000000000013 /* ObjCMockCollaborationAdapter.m */; };
+		C40000000000000000000002 /* CollaborationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40000000000000000000001 /* CollaborationServiceTests.swift */; };
 		26F1D9A12FC76A78002AA754 /* PeerSharingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F1D9A02FC76A78002AA754 /* PeerSharingViewModelTests.swift */; };
 		26F5442D2C5815770069A7A4 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F5442C2C5815770069A7A4 /* WelcomeView.swift */; };
 		26F544A32C5AABD20069A7A4 /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F544A22C5AABD20069A7A4 /* CreateAccountView.swift */; };
@@ -654,6 +663,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C10000000000000000000001 /* libyrs.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libyrs.xcframework; path = ../xcframework/libyrs.xcframework; sourceTree = "<group>"; };
+		C00000000000000000000001 /* CollaborationAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CollaborationAdapter.h; sourceTree = "<group>"; };
+		C00000000000000000000008 /* CollaborationAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CollaborationAdapter.mm; sourceTree = "<group>"; };
+		C00000000000000000000016 /* CollaborationAdapterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollaborationAdapterDelegate.swift; sourceTree = "<group>"; };
+		C00000000000000000000024 /* CollaborationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollaborationService.swift; sourceTree = "<group>"; };
+		C00000000000000000000032 /* CollaborativeDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollaborativeDocument.swift; sourceTree = "<group>"; };
 		024B612B1DF7654F00C4F9DE /* DaemonServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DaemonServiceTests.swift; sourceTree = "<group>"; };
 		024B612D1DF7656A00C4F9DE /* FixtureFailInitDRingAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FixtureFailInitDRingAdapter.h; path = Fixtures/DRingAdaptor/FixtureFailInitDRingAdapter.h; sourceTree = "<group>"; };
 		024B612E1DF7656A00C4F9DE /* FixtureFailInitDRingAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = FixtureFailInitDRingAdapter.mm; path = Fixtures/DRingAdaptor/FixtureFailInitDRingAdapter.mm; sourceTree = "<group>"; };
@@ -1058,6 +1073,9 @@
 		26F1D8EF2FC76A78002AA754 /* PeerSharingServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerSharingServiceTests.swift; sourceTree = "<group>"; };
 		26F1D8F12FC76A8B002AA754 /* ObjCMockPeerServicesAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjCMockPeerServicesAdapter.h; sourceTree = "<group>"; };
 		26F1D8F22FC76A8B002AA754 /* ObjCMockPeerServicesAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjCMockPeerServicesAdapter.m; sourceTree = "<group>"; };
+		C30000000000000000000012 /* ObjCMockCollaborationAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjCMockCollaborationAdapter.h; sourceTree = "<group>"; };
+		C30000000000000000000013 /* ObjCMockCollaborationAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjCMockCollaborationAdapter.m; sourceTree = "<group>"; };
+		C40000000000000000000001 /* CollaborationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollaborationServiceTests.swift; sourceTree = "<group>"; };
 		26F1D9A02FC76A78002AA754 /* PeerSharingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerSharingViewModelTests.swift; sourceTree = "<group>"; };
 		26F5442C2C5815770069A7A4 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		26F544A22C5AABD20069A7A4 /* CreateAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
@@ -2730,6 +2748,8 @@
 		02E1A0261DDE4C2E00D75B59 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				C00000000000000000000016 /* CollaborationAdapterDelegate.swift */,
+				C00000000000000000000024 /* CollaborationService.swift */,
 				56BBC9A01ED714DF00CDAF8B /* MessagesAdapterDelegate.swift */,
 				56BBC9A11ED714DF00CDAF8B /* ConversationsService.swift */,
 				26F1D8E02FC73C39002AA754 /* PeerServicesAdapterDelegate.swift */,
@@ -2775,6 +2795,8 @@
 		02EFCACF1E0C3DD600FD8ED1 /* Bridging */ = {
 			isa = PBXGroup;
 			children = (
+				C00000000000000000000001 /* CollaborationAdapter.h */,
+				C00000000000000000000008 /* CollaborationAdapter.mm */,
 				56C715FD1F0D36C600770048 /* ContactsAdapter.h */,
 				56C715FE1F0D36C600770048 /* ContactsAdapter.mm */,
 				56BBC99D1ED714CB00CDAF8B /* ConversationsAdapter.h */,
@@ -2935,6 +2957,7 @@
 				260AE64129C266B300D66D5E /* CallsTests */,
 				AA0003010000000000000003 /* MediaPreviewModelSaveTests.swift */,
 				26F1D8EF2FC76A78002AA754 /* PeerSharingServiceTests.swift */,
+				C40000000000000000000001 /* CollaborationServiceTests.swift */,
 				26F1D9A02FC76A78002AA754 /* PeerSharingViewModelTests.swift */,
 				299E4A3A9C2F5C282BB43B14 /* Calls */,
 			);
@@ -3162,6 +3185,7 @@
 		1A2D18B81F2916BA00B2C785 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C00000000000000000000032 /* CollaborativeDocument.swift */,
 				1A5DC0271F3564AA0075E8EF /* MessageModel.swift */,
 				1A5DC0231F3564360075E8EF /* RequestModel.swift */,
 				1A2D18B91F29180700B2C785 /* AccountConfigModel.swift */,
@@ -3242,6 +3266,8 @@
 			children = (
 				26F1D8F12FC76A8B002AA754 /* ObjCMockPeerServicesAdapter.h */,
 				26F1D8F22FC76A8B002AA754 /* ObjCMockPeerServicesAdapter.m */,
+				C30000000000000000000012 /* ObjCMockCollaborationAdapter.h */,
+				C30000000000000000000013 /* ObjCMockCollaborationAdapter.m */,
 				2681AC6F2F893D8E00550A4F /* ObjCMockVideoAdapter.h */,
 				2681AC702F893D8E00550A4F /* ObjCMockVideoAdapter.m */,
 				260AE62829B8ECA400D66D5E /* TestableFilteredDataSource.swift */,
@@ -4080,6 +4106,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0000000000000000000000F /* CollaborationAdapter.mm in Sources */,
+				C0000000000000000000001D /* CollaborationAdapterDelegate.swift in Sources */,
+				C0000000000000000000002B /* CollaborationService.swift in Sources */,
+				C00000000000000000000039 /* CollaborativeDocument.swift in Sources */,
 				26D08ABB2696293100E37574 /* RequestsAdapterDelegate.swift in Sources */,
 				268C87FF2C1E6CF000593D7C /* GeneralSettings.swift in Sources */,
 				265B759F2DCBAB1A00CB1622 /* AccountMigrationView.swift in Sources */,
@@ -4385,6 +4415,8 @@
 				260AE63529BE00F100D66D5E /* Constants.swift in Sources */,
 				2681AC712F893D8E00550A4F /* ObjCMockVideoAdapter.m in Sources */,
 				26F1D8F32FC76A8B002AA754 /* ObjCMockPeerServicesAdapter.m in Sources */,
+				C30000000000000000000014 /* ObjCMockCollaborationAdapter.m in Sources */,
+				C40000000000000000000002 /* CollaborationServiceTests.swift in Sources */,
 				029CE9D71E1D8C860000C8E1 /* ServiceEventTests.swift in Sources */,
 				260AE62929B8ECA400D66D5E /* TestableFilteredDataSource.swift in Sources */,
 				260AE62729B8E89300D66D5E /* JamiSearchViewModelTests.swift in Sources */,

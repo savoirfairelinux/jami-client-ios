@@ -19,6 +19,7 @@
  */
 
 import XCTest
+import Combine
 import RxRelay
 import RxSwift
 @testable import Ring
@@ -29,6 +30,9 @@ final class JamiSearchViewModelTests: XCTestCase {
     var injectionBag: InjectionBag!
     var dataSource: TestableFilteredDataSource!
     var searchViewModel: JamiSearchViewModel!
+    var collaborationAdapter: ObjCMockCollaborationAdapter!
+    var collaborationService: CollaborationService!
+    private var cancellables = Set<AnyCancellable>()
 
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -58,6 +62,8 @@ final class JamiSearchViewModelTests: XCTestCase {
         let requestsService: RequestsService =
             RequestsService(withRequestsAdapter: RequestsAdapter(), dbManager: dBManager)
 
+        collaborationAdapter = ObjCMockCollaborationAdapter()
+        collaborationService = CollaborationService(withCollaborationAdapter: collaborationAdapter)
         injectionBag = InjectionBag(withDaemonService: daemonService,
                                     withAccountService: accountService,
                                     withNameService: nameService,
@@ -73,7 +79,8 @@ final class JamiSearchViewModelTests: XCTestCase {
                                     withLocationSharingService: locationSharingService,
                                     withRequestsService: requestsService,
                                     withSystemService: systemService,
-                                    withPeerSharingService: TestPeerSharingFactory.createService())
+                                    withPeerSharingService: TestPeerSharingFactory.createService(),
+                                    withCollaborationService: collaborationService)
         conversationVM = ConversationViewModel(with: injectionBag)
         conversationVM.conversation = ConversationModel(type: .oneToOne)
         dataSource = TestableFilteredDataSource(conversations: [conversationVM], injectionBag: injectionBag)
@@ -83,6 +90,9 @@ final class JamiSearchViewModelTests: XCTestCase {
     override func tearDownWithError() throws {
         try super.tearDownWithError()
         conversationVM = nil
+        collaborationService = nil
+        collaborationAdapter = nil
+        cancellables.removeAll()
         injectionBag = nil
         dataSource = nil
         searchViewModel = nil
@@ -110,6 +120,41 @@ final class JamiSearchViewModelTests: XCTestCase {
             ConfigKey.accountHostname.rawValue: "sip.example.org"
         ])
         return account
+    }
+
+    func testDocumentNotificationUpdatesConversationUnreadAndRefetchesDocuments() {
+        let accountId = "account"
+        let conversationId = "conversation"
+        let documentId = "document"
+        collaborationAdapter.documentsReturnValue = [[
+            "id": documentId,
+            "displayName": "Notes",
+            "mimeType": "text/plain"
+        ]]
+        conversationVM.conversation = ConversationModel(withId: conversationId,
+                                                        accountId: accountId,
+                                                        type: .oneToOne)
+
+        let unreadUpdated = expectation(description: "Document notification updates the conversation badge")
+        conversationVM.$unreadMessages
+            .filter { $0 == 1 }
+            .first()
+            .sink { _ in unreadUpdated.fulfill() }
+            .store(in: &cancellables)
+
+        let documentsRefetched = expectation(description: "Document notification refetches document metadata")
+        conversationVM.$collaborativeDocuments
+            .filter { $0.map(\.id) == [documentId] }
+            .first()
+            .sink { _ in documentsRefetched.fulfill() }
+            .store(in: &cancellables)
+
+        collaborationService.documentUpdate(withAccountId: accountId,
+                                            conversationId: conversationId,
+                                            documentId: documentId,
+                                            update: Data())
+
+        wait(for: [unreadUpdated, documentsRefetched], timeout: 1)
     }
 
     func testConversationExists_ForOneToOneConversation_QueryIsHash_Exists() {
