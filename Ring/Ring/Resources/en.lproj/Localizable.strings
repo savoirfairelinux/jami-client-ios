@@ -733,11 +733,16 @@
 "peerServices.open" = "Open";
 
 // Collaborative documents
+"collab.documents" = "Documents";
 "collab.menu" = "Document actions";
+"collab.newDocument" = "New document";
 "collab.untitled" = "Untitled document";
 "collab.documentNameHint" = "Document name";
+"collab.create" = "Create";
 "collab.rename" = "Rename";
 "collab.openError" = "This document could not be opened.";
+"collab.noDocuments" = "No document has been written in this conversation yet.";
+"collab.createdBy" = "Created by %@";
 "collab.editingAlone" = "Only you are editing";
 "collab.editingOthers" = "%d other people are editing";
 "collab.editingOneOther" = "1 other person is editing";
@@ -760,6 +765,7 @@
 "collab.imageError" = "This image could not be added.";
 "collab.imageTooLarge" = "This image is too large to be added to a document.";
 "collab.sendError" = "Your changes could not be sent.";
+"collab.createError" = "This document could not be created.";
 "collab.bold" = "Bold";
 "collab.italic" = "Italic";
 "collab.underline" = "Underline";
