@@ -8,6 +8,8 @@ This repository contains the iOS client implementation of Jami.
 - Xcode 13 or higher
 - [Homebrew](https://brew.sh)
 - Carthage (`brew install carthage`)
+- Node.js (`brew install node`) — the collaborative editor is bundled from
+  its sources during the build
 
 ## Build instructions
 
@@ -32,7 +34,7 @@ git submodule update --init
 2. Install dependencies
 
 ```bash
-brew install carthage
+brew install carthage node
 ```
 
 3. Build daemon and contributions (choose one option):
