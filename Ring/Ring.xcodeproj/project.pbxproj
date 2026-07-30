@@ -3753,6 +3753,7 @@
 				043999F11D1C2D9D00E99CD9 /* Resources */,
 				645BDD6424B5FEFF009129B1 /* Embed Frameworks */,
 				26A88C0C266FFFC800888EED /* Embed App Extensions */,
+				C20000000000000000000001 /* ⚙️ Collaborative Editor */,
 			);
 			buildRules = (
 			);
@@ -3783,6 +3784,7 @@
 				04399A081D1C2D9D00E99CD9 /* Sources */,
 				04399A091D1C2D9D00E99CD9 /* Frameworks */,
 				04399A0A1D1C2D9D00E99CD9 /* Resources */,
+				C20000000000000000000002 /* ⚙️ Collaborative Editor Tests */,
 			);
 			buildRules = (
 			);
@@ -4045,6 +4047,44 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		C20000000000000000000002 /* ⚙️ Collaborative Editor Tests */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "⚙️ Collaborative Editor Tests";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin:/usr/local/bin\"\n\"${PROJECT_DIR}/CollabEditor/build.sh\" --test\n";
+		};
+		C20000000000000000000001 /* ⚙️ Collaborative Editor */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(PROJECT_DIR)/CollabEditor/build.sh",
+				"$(PROJECT_DIR)/CollabEditor/esbuild.mjs",
+				"$(PROJECT_DIR)/CollabEditor/package-lock.json",
+				"$(PROJECT_DIR)/CollabEditor/editor.html",
+				"$(PROJECT_DIR)/CollabEditor/src/index.js",
+				"$(PROJECT_DIR)/CollabEditor/src/jamiformat.js",
+				"$(PROJECT_DIR)/CollabEditor/src/styles.css",
+			);
+			name = "⚙️ Collaborative Editor";
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/collab/editor.js",
+				"$(BUILT_PRODUCTS_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/collab/editor.css",
+				"$(BUILT_PRODUCTS_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/collab/editor.html",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin:/usr/local/bin\"\n\"${PROJECT_DIR}/CollabEditor/build.sh\" \"${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}\"\n";
+		};
 		1ABE07C31F0C28E000D36361 /* ⚠️ Swiftlint Analysis */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

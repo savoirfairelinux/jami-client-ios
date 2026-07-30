@@ -27,3 +27,6 @@ Ring/Carthage/
 
 # VSCode
 .vscode/
+# Collaborative editor: fetched dependencies and build products
+Ring/CollabEditor/node_modules/
+Ring/CollabEditor/build/
