@@ -48,6 +48,7 @@ enum MessageType: Equatable {
     case merge
     case initial
     case profile
+    case collabDocument
 
     var rawValue: String {
         switch self {
@@ -58,6 +59,7 @@ enum MessageType: Equatable {
         case .merge: return "merge"
         case .initial: return "initial"
         case .profile: return "application/update-profile"
+        case .collabDocument: return "application/collab-doc+json"
         }
     }
 
@@ -70,6 +72,7 @@ enum MessageType: Equatable {
         case "merge": self = .merge
         case "initial": self = .initial
         case "application/update-profile": self = .profile
+        case "application/collab-doc+json": self = .collabDocument
         default: return nil
         }
     }
@@ -82,7 +85,8 @@ enum MessageType: Equatable {
              (.merge, .merge),
              (.initial, .initial),
              (.contact, .contact),
-             (.profile, .profile):
+             (.profile, .profile),
+             (.collabDocument, .collabDocument):
             return true
         default:
             return false
@@ -178,6 +182,10 @@ public class MessageModel {
     var statusForParticipant = [String: MessageStatus]()
     var accessibilityLabelValue: String = ""
     var tid: String = ""
+    /// Set for `.collabDocument` only: the document this commit announces.
+    var collabDocumentId: String = ""
+    /// The name the document was created with; it can be renamed afterwards.
+    var collabDocumentName: String = ""
     private let statusAccessLock = NSLock()
 
     init(withId id: String, receivedDate: Date, content: String, authorURI: String, incoming: Bool) {
@@ -231,12 +239,18 @@ public class MessageModel {
         if let author = info[MessageAttributes.author.rawValue] {
             self.authorId = author
         }
-        if let uri = info[MessageAttributes.uri.rawValue] {
-            self.uri = uri
-        }
         if let type = info[MessageAttributes.type.rawValue],
            let messageType = MessageType(rawValue: type) {
             self.type = messageType
+        }
+        if self.type == .collabDocument {
+            // A document announcement puts the document's id in "uri", not the
+            // author's; taking it for one would make every document look as if
+            // it came from a stranger.
+            self.collabDocumentId = info[MessageAttributes.uri.rawValue] ?? ""
+            self.collabDocumentName = info[MessageAttributes.displayName.rawValue] ?? ""
+        } else if let uri = info[MessageAttributes.uri.rawValue] {
+            self.uri = uri
         }
         if let content = info[MessageAttributes.body.rawValue], self.type == MessageType.text {
             self.content = content
