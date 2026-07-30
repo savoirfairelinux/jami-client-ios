@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eda252f8_d65890bb",
+        "filename": "Ring/Ring.xcodeproj/project.pbxproj",
+        "patchSetId": 1
+      },
+      "lineNbr": 650,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-07-30T21:44:27Z",
+      "side": 1,
+      "message": "[error] Line 650: 🔴 The project now links ../xcframework/libyrs.xcframework, but this patchset does not add that xcframework or update the dependency-fetch/build scripts that provide it. A clean checkout will fail to resolve the file unless it already exists outside the review. Please add the artifact through the repo’s existing xcframework dependency mechanism or update the setup/build scripts so this path is populated deterministically.",
+      "revId": "75708275f9a7fc5d1473fc81504972e8ac576624",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
