@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8bf5d44_2b562775",
+        "filename": "Ring/CollabEditor/package.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-07-30T22:08:35Z",
+      "side": 1,
+      "message": "[warning] Line 18: 🟡 `jsdom` is declared with a caret range while the rest of this package pins exact versions. Keep it pinned to `25.0.1` so lockfile refreshes do not silently pull a newer DOM implementation and change test/build behavior unexpectedly.",
+      "revId": "77657834f81388f287a246133a6eb2edc8b4c2ec",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
