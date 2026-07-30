@@ -765,6 +765,7 @@
 "collab.imageError" = "This image could not be added.";
 "collab.imageTooLarge" = "This image is too large to be added to a document.";
 "collab.sendError" = "Your changes could not be sent.";
+"collab.editableDocument" = "Editable document";
 "collab.createError" = "This document could not be created.";
 "collab.bold" = "Bold";
 "collab.italic" = "Italic";

@@ -81,7 +81,10 @@ struct MessageRowView: View {
             }
             Spacer()
                 .frame(height: model.topSpace)
-            if model.centeredMessage {
+            if let collabDoc = messageModel.collabDocViewModel {
+                CollabDocMessageView(model: collabDoc)
+                    .frame(maxWidth: .infinity, alignment: .center)
+            } else if model.centeredMessage {
                 ContactMessageView(model: messageModel.contactViewModel)
                     .frame(maxWidth: .infinity, alignment: .center)
             } else if model.incoming {

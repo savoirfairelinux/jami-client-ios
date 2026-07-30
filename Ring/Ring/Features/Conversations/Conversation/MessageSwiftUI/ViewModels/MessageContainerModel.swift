@@ -31,6 +31,8 @@ class MessageContainerModel: Identifiable, Equatable {
     let messageRow: MessageRowVM
     let stackViewModel: MessageStackVM
     let contactViewModel: ContactMessageVM
+    /// Only for `.collabDocument`; every other message leaves it nil.
+    let collabDocViewModel: CollabDocMessageVM?
     let message: MessageModel
     let disposeBag = DisposeBag()
     let replyTarget: MessageReplyTargetVM
@@ -93,6 +95,8 @@ class MessageContainerModel: Identifiable, Equatable {
         self.messageContent = MessageContentVM(message: message, contextMenuState: contextMenuState, transferState: self.transferSubject, isHistory: isHistory, preferencesColor: preferencesColor)
         self.messageRow = MessageRowVM(message: message)
         self.contactViewModel = ContactMessageVM(message: message)
+        self.collabDocViewModel = message.type == .collabDocument
+            ? CollabDocMessageVM(message: message, contextMenuState: contextMenuState) : nil
         self.replyTarget = MessageReplyTargetVM(contextMenuState: contextMenuState, localJamiId: localJamiId, replyAuthorJamiId: message.authorId, isIncoming: message.incoming)
         self.reactionsModel = ReactionsContainerModel(message: message)
     }
