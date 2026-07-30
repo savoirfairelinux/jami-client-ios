@@ -73,6 +73,7 @@ enum ContextMenu: State {
     case delete(message: MessageContentVM)
     case edit(message: MessageContentVM)
     case scrollToReplyTarget(messageId: String)
+    case openCollabDocument(documentId: String, name: String)
 }
 
 // swiftlint:disable type_body_length
@@ -216,6 +217,8 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
                     self.saveFile(url: url)
                 case .openDocument(let url):
                     self.openDocument(url: url)
+                case .openCollabDocument(let documentId, let name):
+                    self.viewModel.openCollabDocument(documentId: documentId, name: name)
                 default:
                     break
                 }

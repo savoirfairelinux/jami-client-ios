@@ -1,0 +1,84 @@
+/*
+ * Copyright (C) 2026 Savoir-faire Linux Inc.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ */
+
+import Foundation
+import RxSwift
+import SwiftUI
+
+/**
+ The announcement of a document, in the conversation it was written in.
+
+ The name shown is the one the daemon holds, not the one in the commit: a
+ document can be renamed, and an announcement that keeps for ever the name its
+ document was born with names something that no longer exists.
+ */
+class CollabDocMessageVM: ObservableObject {
+
+    let message: MessageModel
+    private let contextMenuState: PublishSubject<State>
+    private let disposeBag = DisposeBag()
+
+    @Published var name: String
+
+    var documentId: String {
+        return self.message.collabDocumentId
+    }
+
+    init(message: MessageModel, contextMenuState: PublishSubject<State>) {
+        self.message = message
+        self.contextMenuState = contextMenuState
+        self.name = message.collabDocumentName.isEmpty ? L10n.Collab.untitled
+            : message.collabDocumentName
+    }
+
+    /**
+     Asks the daemon for the document's current name, and follows renames.
+
+     Called once the conversation is known, which the message alone does not
+     say: a message carries its author and its document, not the conversation
+     it was committed to.
+     */
+    func follow(accountId: String, conversationId: String, service: CollaborationService) {
+        let documentId = self.documentId
+        guard !documentId.isEmpty else { return }
+        service.name(accountId: accountId, conversationId: conversationId, documentId: documentId)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onSuccess: { [weak self] name in
+                guard let self = self, !name.isEmpty else { return }
+                self.name = name
+            })
+            .disposed(by: self.disposeBag)
+        service.documentsRenamed
+            .filter {
+                $0.accountId == accountId && $0.conversationId == conversationId
+                    && $0.documentId == documentId
+            }
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] renamed in
+                guard let self = self, !renamed.value.isEmpty else { return }
+                self.name = renamed.value
+            })
+            .disposed(by: self.disposeBag)
+    }
+
+    func open() {
+        guard !self.documentId.isEmpty else { return }
+        self.contextMenuState.onNext(
+            ContextMenu.openCollabDocument(documentId: self.documentId, name: self.name))
+    }
+}
