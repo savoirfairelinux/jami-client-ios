@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "162aa1d6_9a33037f",
+        "filename": "Ring/Ring/Bridging/CollaborationAdapter.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-07-30T21:44:26Z",
+      "side": 1,
+      "message": "[error] Line 129: 🔴 The header declares `delegate` as weak, but the custom static backing storage is strong by default under ARC. This makes `CollaborationService` retained globally after initialization and can leak services/tests; it also contradicts the API contract. Declare the backing variable as `static __weak id\u003cCollaborationAdapterDelegate\u003e _delegate;` or use another explicitly weak storage pattern.",
+      "revId": "c7643c3058e88423235a5b1d13ed522df51580d0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "005bc3e5_f9961e2b",
+        "filename": "Ring/RingTests/AvatarProviderTests.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-07-30T21:44:26Z",
+      "side": 1,
+      "message": "[warning] Line 71: 🟡 These unrelated tests now instantiate the real `CollaborationAdapter`, whose initializer registers daemon signal handlers. That adds global side effects to tests that do not exercise collaboration and can cause duplicate callbacks or daemon dependency failures across the suite. Inject a lightweight test/fake collaboration service or make `InjectionBag` accept an abstraction so tests do not register real daemon handlers.",
+      "revId": "c7643c3058e88423235a5b1d13ed522df51580d0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
