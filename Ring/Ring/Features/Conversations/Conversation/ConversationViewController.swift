@@ -188,6 +188,8 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
                     self.recordVideo()
                 case .sendFile:
                     self.importDocument()
+                case .newCollabDocument:
+                    self.promptNewCollabDocument()
                 case .registerTypingIndicator(let typingStatus):
                     self.viewModel.setIsComposingMsg(isComposing: typingStatus)
                 case .joinActiveCall(call: let call, withVideo: let withVideo):
@@ -248,9 +250,32 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
         self.present(documentPicker, animated: true, completion: nil)
     }
 
+    // MARK: - Collaborative documents
+
+    private func promptNewCollabDocument() {
+        let alert = UIAlertController(title: L10n.Collab.newDocument,
+                                      message: nil,
+                                      preferredStyle: .alert)
+        alert.addTextField { field in
+            field.placeholder = L10n.Collab.documentNameHint
+        }
+        alert.addAction(UIAlertAction(title: L10n.Global.cancel, style: .cancel))
+        alert.addAction(UIAlertAction(title: L10n.Collab.create, style: .default) { [weak self, weak alert] _ in
+            guard let self = self else { return }
+            self.viewModel.createCollabDocument(named: alert?.textFields?.first?.text ?? "") { [weak self] in
+                self?.showMessageAlert(title: L10n.Collab.createError)
+            }
+        })
+        self.present(alert, animated: true, completion: nil)
+    }
+
     // MARK: - Alerts
 
     private func showNoPermissionsAlert(title: String) {
+        self.showMessageAlert(title: title)
+    }
+
+    private func showMessageAlert(title: String) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
