@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d659793_dd7cd6c1",
+        "filename": "Ring/Ring/Features/Collab/CollabDocumentsVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-07-30T21:44:30Z",
+      "side": 1,
+      "message": "[warning] Line 47: 🟡 `reload()` does not handle failures, so if the daemon call fails the UI silently shows the empty-state message, which is indistinguishable from a conversation with no documents. Add an `onFailure` path and expose a separate load error or retry state so users are not misled.",
+      "revId": "3b6dce6a9daaa460108d2f303e5feea1b2b94acd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34202a85_9705fe61",
+        "filename": "Ring/Ring/Features/Collab/CollabDocumentsVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-07-30T21:44:30Z",
+      "side": 1,
+      "message": "[warning] Line 58: 🟡 The document name is only trimmed, with no maximum length or character validation before being sent to the daemon. Apply the same validation/limits used by the editor rename flow, or add a shared helper, to avoid creating unusable or excessively large titles.",
+      "revId": "3b6dce6a9daaa460108d2f303e5feea1b2b94acd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
