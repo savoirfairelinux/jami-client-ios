@@ -21,6 +21,9 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		C10000000000000000000064 /* libyrs.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C10000000000000000000001 /* libyrs.xcframework */; };
+		C10000000000000000000071 /* libyrs.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C10000000000000000000001 /* libyrs.xcframework */; };
+		C1000000000000000000007E /* libyrs.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C10000000000000000000001 /* libyrs.xcframework */; };
 		024B612C1DF7654F00C4F9DE /* DaemonServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024B612B1DF7654F00C4F9DE /* DaemonServiceTests.swift */; };
 		024B61311DF7656A00C4F9DE /* FixtureFailInitDRingAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 024B612E1DF7656A00C4F9DE /* FixtureFailInitDRingAdapter.mm */; };
 		024B61321DF7656A00C4F9DE /* FixtureFailStartDRingAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 024B61301DF7656A00C4F9DE /* FixtureFailStartDRingAdapter.mm */; };
@@ -649,6 +652,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C10000000000000000000001 /* libyrs.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libyrs.xcframework; path = ../xcframework/libyrs.xcframework; sourceTree = "<group>"; };
 		024B612B1DF7654F00C4F9DE /* DaemonServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DaemonServiceTests.swift; sourceTree = "<group>"; };
 		024B612D1DF7656A00C4F9DE /* FixtureFailInitDRingAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FixtureFailInitDRingAdapter.h; path = Fixtures/DRingAdaptor/FixtureFailInitDRingAdapter.h; sourceTree = "<group>"; };
 		024B612E1DF7656A00C4F9DE /* FixtureFailInitDRingAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = FixtureFailInitDRingAdapter.mm; path = Fixtures/DRingAdaptor/FixtureFailInitDRingAdapter.mm; sourceTree = "<group>"; };
@@ -1790,6 +1794,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C10000000000000000000064 /* libyrs.xcframework in Frameworks */,
 				26B4C49B2EDD225400273727 /* libsimdutf.xcframework in Frameworks */,
 				04399A981D1C2F6100E99CD9 /* libz.tbd in Frameworks */,
 				26001C122D78E1A1009A8E23 /* libnettle.xcframework in Frameworks */,
@@ -1880,6 +1885,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C10000000000000000000071 /* libyrs.xcframework in Frameworks */,
 				26B4C49D2EDD228F00273727 /* libsimdutf.xcframework in Frameworks */,
 				26001CB62D78E3E7009A8E23 /* libswscale.xcframework in Frameworks */,
 				26BB43852670150E00019CF6 /* libbz2.tbd in Frameworks */,
@@ -1949,6 +1955,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1000000000000000000007E /* libyrs.xcframework in Frameworks */,
 				26B4C49C2EDD227000273727 /* libsimdutf.xcframework in Frameworks */,
 				3D4181892DDE312F001BAD76 /* libgmp.xcframework in Frameworks */,
 				3D4181B32DDE3163001BAD76 /* libpjsip.xcframework in Frameworks */,
@@ -2030,6 +2037,7 @@
 		02AED8171DD4C4B000F740BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C10000000000000000000001 /* libyrs.xcframework */,
 				261A90832F1FF75B00438171 /* libjami-core.xcframework */,
 				26B4C49A2EDD225400273727 /* libsimdutf.xcframework */,
 				3D417D992DDE2846001BAD76 /* ~libswiftPencilKit.tbd */,
