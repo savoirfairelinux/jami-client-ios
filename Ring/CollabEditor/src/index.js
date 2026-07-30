@@ -594,6 +594,30 @@ class Editor {
         if (!this.preview) this.quill.enable(this.editable)
     }
 
+    /*
+     * The bytes of an attachment have reached this device. A picture a peer
+     * referred to was drawn before they did, so the page asked for it and was
+     * told there was nothing: it is broken, and will stay broken, because
+     * nothing makes a page ask for the same address twice.
+     *
+     * The address is therefore made a different one. Where an image is read
+     * from is not something the document says, so this changes nothing anyone
+     * else can see -- but Quill watches the whole editor for changes, and
+     * would otherwise take this one for an edit.
+     */
+    attachmentArrived(attachmentId) {
+        if (!attachmentId) return
+        const source = ATTACHMENT_BASE + encodeURIComponent(attachmentId)
+            + '?arrived=' + Date.now()
+        let found = false
+        this.quill.root.querySelectorAll('img[data-jami-id]').forEach((node) => {
+            if (node.getAttribute('data-jami-id') !== attachmentId) return
+            node.setAttribute('src', source)
+            found = true
+        })
+        if (found) this.quill.update('silent')
+    }
+
     /* ---------------------------------------------------------------- reading */
 
     getHtml() {
@@ -704,6 +728,7 @@ window.JamiEditor = {
     insertImage: guard(Editor.prototype.insertImage),
     setImageWidth: guard(Editor.prototype.setImageWidth),
     setEditable: guard(Editor.prototype.setEditable),
+    attachmentArrived: guard(Editor.prototype.attachmentArrived),
     getHtml: guard(Editor.prototype.getHtml),
     getText: guard(Editor.prototype.getText),
     showVersion: guard(Editor.prototype.showVersion),
