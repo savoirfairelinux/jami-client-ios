@@ -714,6 +714,102 @@ internal enum L10n {
     /// Unmute microphone
     internal static let unmuteAudio = L10n.tr("Localizable", "calls.unmuteAudio", fallback: "Unmute microphone")
   }
+  internal enum Collab {
+    /// Center
+    internal static let alignCenter = L10n.tr("Localizable", "collab.alignCenter", fallback: "Center")
+    /// Justify
+    internal static let alignJustify = L10n.tr("Localizable", "collab.alignJustify", fallback: "Justify")
+    /// Align left
+    internal static let alignLeft = L10n.tr("Localizable", "collab.alignLeft", fallback: "Align left")
+    /// Align right
+    internal static let alignRight = L10n.tr("Localizable", "collab.alignRight", fallback: "Align right")
+    /// Bold
+    internal static let bold = L10n.tr("Localizable", "collab.bold", fallback: "Bold")
+    /// Bulleted list
+    internal static let bulletList = L10n.tr("Localizable", "collab.bulletList", fallback: "Bulleted list")
+    /// Clear formatting
+    internal static let clearFormat = L10n.tr("Localizable", "collab.clearFormat", fallback: "Clear formatting")
+    /// Document name
+    internal static let documentNameHint = L10n.tr("Localizable", "collab.documentNameHint", fallback: "Document name")
+    /// Only you are editing
+    internal static let editingAlone = L10n.tr("Localizable", "collab.editingAlone", fallback: "Only you are editing")
+    /// 1 other person is editing
+    internal static let editingOneOther = L10n.tr("Localizable", "collab.editingOneOther", fallback: "1 other person is editing")
+    /// %d other people are editing
+    internal static func editingOthers(_ p1: Int) -> String {
+      return L10n.tr("Localizable", "collab.editingOthers", p1, fallback: "%d other people are editing")
+    }
+    /// This document could not be exported.
+    internal static let exportError = L10n.tr("Localizable", "collab.exportError", fallback: "This document could not be exported.")
+    /// Export to PDF
+    internal static let exportPdf = L10n.tr("Localizable", "collab.exportPdf", fallback: "Export to PDF")
+    /// Heading %d
+    internal static func heading(_ p1: Int) -> String {
+      return L10n.tr("Localizable", "collab.heading", p1, fallback: "Heading %d")
+    }
+    /// Version history
+    internal static let history = L10n.tr("Localizable", "collab.history", fallback: "Version history")
+    /// This image could not be added.
+    internal static let imageError = L10n.tr("Localizable", "collab.imageError", fallback: "This image could not be added.")
+    /// This image is too large to be added to a document.
+    internal static let imageTooLarge = L10n.tr("Localizable", "collab.imageTooLarge", fallback: "This image is too large to be added to a document.")
+    /// Insert image
+    internal static let insertImage = L10n.tr("Localizable", "collab.insertImage", fallback: "Insert image")
+    /// Italic
+    internal static let italic = L10n.tr("Localizable", "collab.italic", fallback: "Italic")
+    /// Add
+    internal static let linkAdd = L10n.tr("Localizable", "collab.linkAdd", fallback: "Add")
+    /// Address
+    internal static let linkHint = L10n.tr("Localizable", "collab.linkHint", fallback: "Address")
+    /// Remove
+    internal static let linkRemove = L10n.tr("Localizable", "collab.linkRemove", fallback: "Remove")
+    /// Link
+    internal static let linkTitle = L10n.tr("Localizable", "collab.linkTitle", fallback: "Link")
+    /// Document actions
+    internal static let menu = L10n.tr("Localizable", "collab.menu", fallback: "Document actions")
+    /// This document has no saved version yet.
+    internal static let noHistory = L10n.tr("Localizable", "collab.noHistory", fallback: "This document has no saved version yet.")
+    /// This document could not be opened.
+    internal static let openError = L10n.tr("Localizable", "collab.openError", fallback: "This document could not be opened.")
+    /// Numbered list
+    internal static let orderedList = L10n.tr("Localizable", "collab.orderedList", fallback: "Numbered list")
+    /// Redo
+    internal static let redo = L10n.tr("Localizable", "collab.redo", fallback: "Redo")
+    /// Rename
+    internal static let rename = L10n.tr("Localizable", "collab.rename", fallback: "Rename")
+    /// Your changes could not be sent.
+    internal static let sendError = L10n.tr("Localizable", "collab.sendError", fallback: "Your changes could not be sent.")
+    /// Strikethrough
+    internal static let strikethrough = L10n.tr("Localizable", "collab.strikethrough", fallback: "Strikethrough")
+    /// Underline
+    internal static let underline = L10n.tr("Localizable", "collab.underline", fallback: "Underline")
+    /// Undo
+    internal static let undo = L10n.tr("Localizable", "collab.undo", fallback: "Undo")
+    /// Untitled document
+    internal static let untitled = L10n.tr("Localizable", "collab.untitled", fallback: "Untitled document")
+    /// %1$@ — %2$@
+    internal static func versionBy(_ p1: Any, _ p2: Any) -> String {
+      return L10n.tr("Localizable", "collab.versionBy", String(describing: p1), String(describing: p2), fallback: "%1$@ — %2$@")
+    }
+    /// %1$@ — %2$@, %3$d change(s)
+    internal static func versionDeltas(_ p1: Any, _ p2: Any, _ p3: Int) -> String {
+      return L10n.tr("Localizable", "collab.versionDeltas", String(describing: p1), String(describing: p2), p3, fallback: "%1$@ — %2$@, %3$d change(s)")
+    }
+    /// Back to the current version
+    internal static let versionLeave = L10n.tr("Localizable", "collab.versionLeave", fallback: "Back to the current version")
+    /// Restore
+    internal static let versionRestore = L10n.tr("Localizable", "collab.versionRestore", fallback: "Restore")
+    /// The document was restored to this version.
+    internal static let versionRestored = L10n.tr("Localizable", "collab.versionRestored", fallback: "The document was restored to this version.")
+    /// This version could not be restored.
+    internal static let versionRestoreError = L10n.tr("Localizable", "collab.versionRestoreError", fallback: "This version could not be restored.")
+    /// Version of %@
+    internal static func versionShown(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "collab.versionShown", String(describing: p1), fallback: "Version of %@")
+    }
+    /// This version is the document you already have.
+    internal static let versionUnchanged = L10n.tr("Localizable", "collab.versionUnchanged", fallback: "This version is the document you already have.")
+  }
   internal enum ContactPage {
     /// Leave conversation
     internal static let leaveConversation = L10n.tr("Localizable", "contactPage.leaveConversation", fallback: "Leave conversation")
