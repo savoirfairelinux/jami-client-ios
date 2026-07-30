@@ -32,10 +32,17 @@ def connect_api_key
   )
 end
 
+# JS, not XCTests. From a build phase a failure cancelled the Swift suite.
+def collab_editor_tests
+  sh(File.expand_path("../CollabEditor/build.sh", __dir__), "--test")
+end
+
 platform :ios do
   desc "Runs all the tests"
   lane :test do
     require "json"
+
+    collab_editor_tests
 
     # Create a fresh, factory-clean simulator per job.
     # Treat an empty env var the same as unset.
@@ -91,6 +98,8 @@ platform :ios do
 
   desc "Runs unit tests only"
   lane :unit do
+    collab_editor_tests
+
     run_tests(
       scheme: "Ring",
       only_testing: ["RingTests"],
