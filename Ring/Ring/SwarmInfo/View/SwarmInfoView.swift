@@ -24,6 +24,7 @@ import SwiftUI
 enum SwarmSettingView: String, CaseIterable {
     case about
     case memberList
+    case documents
 
     var title: String {
         switch self {
@@ -31,6 +32,8 @@ enum SwarmSettingView: String, CaseIterable {
             return L10n.Swarm.settings
         case .memberList:
             return L10n.Swarm.members
+        case .documents:
+            return L10n.Collab.documents
         }
     }
 }
@@ -65,10 +68,13 @@ public struct SwarmInfoView: View, StateEmittingView {
 
     // MARK: - Computed Properties
     private var swarmViews: [SwarmSettingView] {
-        guard let conversation = viewModel.conversation, !conversation.isCoredialog() else {
-            return [.about]
+        guard let conversation = viewModel.conversation else { return [.about] }
+        // A document lives in the conversation's repository, so it exists for
+        // every swarm — including a one-to-one one — and for nothing else.
+        if conversation.isCoredialog() {
+            return conversation.isSwarm() ? [.about, .documents] : [.about]
         }
-        return [.about, .memberList]
+        return [.about, .memberList, .documents]
     }
 
     private var lightOrDarkColor: Color {
@@ -295,11 +301,16 @@ public struct SwarmInfoView: View, StateEmittingView {
             SettingsView(viewmodel: viewModel, stateEmitter: stateEmitter)
         case .memberList:
             MemberList(viewModel: viewModel)
+        case .documents:
+            if let documents = viewModel.collabDocuments {
+                CollabDocumentsView(viewModel: documents, stateEmitter: stateEmitter)
+            }
         }
     }
 
     @ViewBuilder private var addParticipantsButton: some View {
-        if !(viewModel.conversation?.isCoredialog() ?? true) {
+        // The documents tab has a button of its own in that corner.
+        if selectedView != .documents, !(viewModel.conversation?.isCoredialog() ?? true) {
             AddMoreParticipantsInSwarm(viewmodel: viewModel)
         }
     }

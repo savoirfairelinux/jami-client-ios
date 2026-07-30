@@ -711,8 +711,18 @@ internal enum L10n {
     internal static let bulletList = L10n.tr("Localizable", "collab.bulletList", fallback: "Bulleted list")
     /// Clear formatting
     internal static let clearFormat = L10n.tr("Localizable", "collab.clearFormat", fallback: "Clear formatting")
+    /// Create
+    internal static let create = L10n.tr("Localizable", "collab.create", fallback: "Create")
+    /// Created by %@
+    internal static func createdBy(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "collab.createdBy", String(describing: p1), fallback: "Created by %@")
+    }
+    /// This document could not be created.
+    internal static let createError = L10n.tr("Localizable", "collab.createError", fallback: "This document could not be created.")
     /// Document name
     internal static let documentNameHint = L10n.tr("Localizable", "collab.documentNameHint", fallback: "Document name")
+    /// Documents
+    internal static let documents = L10n.tr("Localizable", "collab.documents", fallback: "Documents")
     /// Only you are editing
     internal static let editingAlone = L10n.tr("Localizable", "collab.editingAlone", fallback: "Only you are editing")
     /// 1 other person is editing
@@ -749,6 +759,10 @@ internal enum L10n {
     internal static let linkTitle = L10n.tr("Localizable", "collab.linkTitle", fallback: "Link")
     /// Document actions
     internal static let menu = L10n.tr("Localizable", "collab.menu", fallback: "Document actions")
+    /// New document
+    internal static let newDocument = L10n.tr("Localizable", "collab.newDocument", fallback: "New document")
+    /// No document has been written in this conversation yet.
+    internal static let noDocuments = L10n.tr("Localizable", "collab.noDocuments", fallback: "No document has been written in this conversation yet.")
     /// This document has no saved version yet.
     internal static let noHistory = L10n.tr("Localizable", "collab.noHistory", fallback: "This document has no saved version yet.")
     /// This document could not be opened.
