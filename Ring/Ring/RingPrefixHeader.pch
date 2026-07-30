@@ -23,6 +23,12 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
+/*
+ *  Objective-C++ compiles without modules, so the @import block of Ring-Swift.h
+ *  is skipped there and the frameworks a Swift class is exposed with have to be
+ *  imported here instead.
+ */
+#import <WebKit/WebKit.h>
 
 /*
  *  Because Realm does not support mix ObjC/Swift projects. This workaround fixes compilation failure
