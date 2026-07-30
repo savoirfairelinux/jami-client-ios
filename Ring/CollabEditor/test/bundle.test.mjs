@@ -56,7 +56,11 @@ function launch() {
     // The page the application loads, not a stand-in for it: an editor that
     // builds itself into an element the shipped HTML does not have is exactly
     // the kind of blank screen this is here to catch.
+    //
+    // It is loaded from the scheme the application serves it from, because the
+    // editor asks the page where it is to know where its images are.
     const dom = new JSDOM(readFileSync(page, 'utf8'), {
+        url: 'jami-collab://editor/editor.html',
         pretendToBeVisual: true,
         runScripts: 'outside-only',
     })
@@ -479,6 +483,52 @@ test('a pinch away from any image is left alone', options, async () => {
 
     // Pinching the page is not pinching the picture.
     assert.equal(image.getAttribute('width'), null)
+    assert.deepEqual(host.updates, [])
+    assert.deepEqual(host.logs, [])
+})
+
+test('an image is asked for again once its bytes arrive', options, async () => {
+    const { dom, host, editor } = await launch()
+
+    // A peer's picture: the reference reaches this replica with the text,
+    // the bytes follow, so the first fetch of it fails.
+    const peer = new Y.Doc()
+    peer.getText('content').applyDelta([
+        { insert: { image: { id: 'att-1', width: 800, height: 600 } } },
+    ])
+    editor.applyUpdate(Buffer.from(Y.encodeStateAsUpdate(peer)).toString('base64'))
+    host.updates.length = 0
+
+    const image = dom.window.document.querySelector('img')
+    const before = image.getAttribute('src')
+    assert.match(before, /att-1/)
+
+    editor.attachmentArrived('att-1')
+
+    // A source the page has not fetched yet, or the broken picture stays
+    // broken until the document is closed and opened again.
+    assert.notEqual(image.getAttribute('src'), before)
+    assert.match(image.getAttribute('src'), /att-1/)
+    // The document says nothing about where an image is read from: asking
+    // for it again is not an edit, and must not be sent to anyone.
+    assert.deepEqual(host.updates, [])
+    assert.deepEqual(peer.getText('content').toDelta(), [
+        { insert: { image: { id: 'att-1', width: 800, height: 600 } } },
+    ])
+    assert.deepEqual(host.logs, [])
+})
+
+test('the bytes of another image leave a picture alone', options, async () => {
+    const { dom, host, editor } = await launch()
+    editor.insertImage('att-1', 800, 600)
+    host.updates.length = 0
+
+    const image = dom.window.document.querySelector('img')
+    const before = image.getAttribute('src')
+
+    editor.attachmentArrived('att-2')
+
+    assert.equal(image.getAttribute('src'), before)
     assert.deepEqual(host.updates, [])
     assert.deepEqual(host.logs, [])
 })
