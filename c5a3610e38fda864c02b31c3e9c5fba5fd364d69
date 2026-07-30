@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "819e381b_e64218bc",
+        "filename": "Ring/Ring/Bridging/CollaborationAdapter.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-07-30T22:08:37Z",
+      "side": 1,
+      "message": "[error] Line 136: 🔴 The Objective-C bridge constructs `std::string([arg UTF8String])` for every string argument without guarding against `nil`. Swift imports these APIs as implicitly unwrapped optionals, so any Objective-C/test caller or accidental nil crossing the bridge will pass a null pointer to `std::string` and crash. Add explicit nil validation in the adapter methods, returning the documented empty value/empty data or no-op consistently with existing adapter error handling.",
+      "revId": "c5a3610e38fda864c02b31c3e9c5fba5fd364d69",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebf20358_8a14d2ee",
+        "filename": "Ring/Ring/Services/CollaborationService.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-07-30T22:08:37Z",
+      "side": 1,
+      "message": "[warning] Line 317: 🟡 `Single.just(block())` executes the daemon call while building the deferred Single, before `subscribe(on:)` has a chance to move work to `daemonScheduler`. The same pattern in `onDaemon` executes `block()` synchronously inside the deferred factory. Use `Single.create`/`Completable.create` with `.subscribe(on:)`, or apply scheduling inside the deferred observable, so open/apply/attachment calls actually run off the caller thread as documented.",
+      "revId": "c5a3610e38fda864c02b31c3e9c5fba5fd364d69",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
