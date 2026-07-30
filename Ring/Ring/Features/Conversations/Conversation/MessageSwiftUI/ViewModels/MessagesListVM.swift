@@ -599,6 +599,9 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
                 preferencesColor: self.conversation.preferences.getColor()
             )
             container.messageContent.actionHandler = self.actionHandler
+            container.collabDocViewModel?.follow(accountId: self.conversation.accountId,
+                                                 conversationId: self.conversation.id,
+                                                 service: self.injectionBag.collaborationService)
 
             self.subscribeMessage(container: container)
             self.updateLastRead(message: container)

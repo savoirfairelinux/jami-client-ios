@@ -902,6 +902,15 @@ extension ConversationViewModel {
             self.shareMessage(message: message, with: selectedItems)
         }))
     }
+
+    func openCollabDocument(documentId: String, name: String) {
+        guard let conversation = self.conversation else { return }
+        self.stateSubject.onNext(
+            ConversationState.openCollabDocument(accountId: conversation.accountId,
+                                                 conversationId: conversation.id,
+                                                 documentId: documentId,
+                                                 name: name))
+    }
 }
 
 // MARK: file transfer
