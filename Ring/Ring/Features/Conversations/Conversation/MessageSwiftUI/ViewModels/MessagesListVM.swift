@@ -38,6 +38,7 @@ enum MessagePanelState: State {
     case recordAudio
     case recordVido
     case sendFile
+    case newCollabDocument
     case joinActiveCall(call: ActiveCall, withVideo: Bool)
 
     func toString() -> String {
@@ -58,6 +59,8 @@ enum MessagePanelState: State {
             return L10n.Alerts.uploadFile
         case .sendPhoto:
             return L10n.Alerts.sendPhoto
+        case .newCollabDocument:
+            return L10n.Collab.newDocument
         default:
             return ""
         }
@@ -77,6 +80,8 @@ enum MessagePanelState: State {
             return "doc"
         case .sendPhoto:
             return "camera"
+        case .newCollabDocument:
+            return "square.and.pencil"
         default:
             return ""
         }
@@ -220,6 +225,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
             self.updateColorPreference()
             self.updateLastDisplayed()
             self.callBannerViewModel = CallBannerViewModel(injectionBag: self.injectionBag, conversation: self.conversation, state: self.messagePanelStateSubject)
+            self.messagePanel.canWriteDocuments = self.conversation.isSwarm()
         }
     }
 
