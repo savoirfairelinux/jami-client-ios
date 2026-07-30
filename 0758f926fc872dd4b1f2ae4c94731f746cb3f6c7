@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c47f508_ed391e1a",
+        "filename": "Ring/Ring/Services/AccountsService.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 687,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-07-30T13:23:20Z",
+      "side": 1,
+      "message": "Removing the details write-back also removes the only thing that got a changed push token onto already-established proxy subscriptions: DhtProxyClient::setPushNotificationToken just assigns deviceKey_, and restartListeners only runs on a Disconnected→Connected transition, so live listens keep the old token. That matters in the case the token set right after account creation, when dht_ came up with an empty deviceKey.",
+      "revId": "0758f926fc872dd4b1f2ae4c94731f746cb3f6c7",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
