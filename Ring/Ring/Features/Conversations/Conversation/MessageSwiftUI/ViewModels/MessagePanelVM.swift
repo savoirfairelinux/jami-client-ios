@@ -29,6 +29,9 @@ class MessagePanelVM: ObservableObject, MessageAppearanceProtocol {
     @Published var isEdit: Bool = false
     @Published var avatarImage: UIImage?
     @Published var inReplyTo = ""
+    /// A collaborative document is a commit in the conversation's repository,
+    /// so it can only be started where there is one.
+    @Published var canWriteDocuments = false
     var styling: MessageStyling = MessageStyling()
 
     private let messagePanelState: PublishSubject<State>
@@ -102,6 +105,10 @@ class MessagePanelVM: ObservableObject, MessageAppearanceProtocol {
 
     func sendPhoto() {
         messagePanelState.onNext(MessagePanelState.sendPhoto)
+    }
+
+    func newCollabDocument() {
+        messagePanelState.onNext(MessagePanelState.newCollabDocument)
     }
 
     func configureReplyTo(message: MessageContentVM) {

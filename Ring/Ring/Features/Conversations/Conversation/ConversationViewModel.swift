@@ -950,6 +950,39 @@ extension ConversationViewModel {
         }))
     }
 
+    /**
+     Starts a collaborative document and opens it.
+
+     - parameter failed: called when the daemon refuses, which it does by
+       answering with no identifier; an editor opened on one would show a
+       document that does not exist.
+     */
+    func createCollabDocument(named name: String, failed: @escaping () -> Void) {
+        guard let conversation = self.conversation else { return }
+        let title = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        let named = title.isEmpty ? L10n.Collab.untitled : title
+        self.injectionBag.collaborationService
+            .createDocument(accountId: conversation.accountId,
+                            conversationId: conversation.id,
+                            name: named)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onSuccess: { [weak self] documentId in
+                guard let self = self else { return }
+                guard !documentId.isEmpty else {
+                    failed()
+                    return
+                }
+                self.stateSubject.onNext(
+                    ConversationState.openCollabDocument(accountId: conversation.accountId,
+                                                         conversationId: conversation.id,
+                                                         documentId: documentId,
+                                                         name: named))
+            }, onFailure: { _ in
+                failed()
+            })
+            .disposed(by: self.disposeBag)
+    }
+
     func openCollabDocument(documentId: String, name: String) {
         guard let conversation = self.conversation else { return }
         self.stateSubject.onNext(

@@ -308,6 +308,14 @@ struct MessagePanelView: View {
             })
             .accessibilityHint(L10n.Accessibility.conversationCameraHint)
 
+            if model.canWriteDocuments {
+                Button(action: {
+                    model.newCollabDocument()
+                }, label: {
+                    Label(MessagePanelState.newCollabDocument.toString(),
+                          systemImage: MessagePanelState.newCollabDocument.imageName())
+                })
+            }
         }
     }
 
