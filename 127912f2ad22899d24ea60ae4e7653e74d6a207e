@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b25dda0_f3452bbb",
+        "filename": "Ring/Ring/Features/Collab/CollabEditorViewController.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-07-30T21:44:28Z",
+      "side": 1,
+      "message": "[error] Line 299: 🔴 `open()` completion updates UIKit/WebKit state without forcing the main thread. If the view model emits from a daemon/background queue, this calls `evaluateJavaScript`, mutates views, and starts subscriptions off-main, which can crash or behave intermittently. Add `.observe(on: MainScheduler.instance)` before the `subscribe` for UI-affecting chains here and the other async chains that present alerts/update views.",
+      "revId": "127912f2ad22899d24ea60ae4e7653e74d6a207e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1738bfe_325c0222",
+        "filename": "Ring/Ring/Features/Collab/CollabEditorViewController.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-07-30T21:44:28Z",
+      "side": 1,
+      "message": "[warning] Line 605: 🟡 Link input is passed directly into the document with no URL validation. Users can create `javascript:`, `data:`, or app-specific schemes that may be rendered by other clients with different navigation protections. Normalize and allow-list safe schemes such as `https`, `http`, and `mailto` before calling `setLink`, or reject/strip unsafe links.",
+      "revId": "127912f2ad22899d24ea60ae4e7653e74d6a207e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
