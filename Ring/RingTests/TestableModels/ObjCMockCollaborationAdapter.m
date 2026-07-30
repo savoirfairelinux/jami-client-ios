@@ -1,7 +1,5 @@
 /*
- *  Copyright (C) 2016-2019 Savoir-faire Linux Inc.
- *
- *  Author: Edric Ladent-Milaret <edric.ladent-milaret@savoirfairelinux.com>
+ *  Copyright (C) 2026-2026 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -15,19 +13,16 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301
- * USA.
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-//
-//  Use this file to import your target's public headers that you would like to
-//  expose to Swift.
-//
-
-#import "Ring-Bridging-Header.h"
-#import "FixtureFailInitDRingAdapter.h"
-#import "FixtureFailStartDRingAdapter.h"
-#import "ObjCMockCallsAdapter.h"
-#import "ObjCMockVideoAdapter.h"
-#import "ObjCMockPeerServicesAdapter.h"
 #import "ObjCMockCollaborationAdapter.h"
+
+@implementation ObjCMockCollaborationAdapter
+
+/// The initializer sends this to itself, so overriding it is enough to keep the
+/// daemon out of a test.
+- (void)registerConfigurationHandler {
+}
+
+@end
