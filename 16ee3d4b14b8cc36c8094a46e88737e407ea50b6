@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e72b64b_ea40265e",
+        "filename": "Ring/CollabEditor/build.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-07-30T21:44:27Z",
+      "side": 1,
+      "message": "[error] Line 39: 🔴 `npm ci` is run from the Xcode build phase, so clean release/CI builds depend on live npm registry access and execute package install scripts during the app build. For a reproducible and safer iOS build, vendor or prebuild the editor bundle, or make dependency installation an explicit preparatory step outside the Xcode build phase with documented verification.",
+      "revId": "16ee3d4b14b8cc36c8094a46e88737e407ea50b6",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6bdb926_2b0e2e17",
+        "filename": "Ring/CollabEditor/esbuild.mjs",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-07-30T21:44:27Z",
+      "side": 1,
+      "message": "[warning] Line 13: 🟡 `process.argv[flag + 1]` is used without validating that `--outdir` actually has a value. A malformed Xcode phase invocation would resolve an unintended output path or fail unclearly. Check for a missing value and exit with a clear error before writing build products.",
+      "revId": "16ee3d4b14b8cc36c8094a46e88737e407ea50b6",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
