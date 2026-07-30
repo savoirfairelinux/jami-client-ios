@@ -24,6 +24,8 @@
 		C30000000000000000000003 /* CollabEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30000000000000000000002 /* CollabEditorViewModel.swift */; };
 		C30000000000000000000005 /* CollabEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30000000000000000000004 /* CollabEditorViewController.swift */; };
 		C30000000000000000000007 /* CollabSchemeHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30000000000000000000006 /* CollabSchemeHandler.swift */; };
+		C30000000000000000000009 /* CollabDocumentsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30000000000000000000008 /* CollabDocumentsVM.swift */; };
+		C3000000000000000000000B /* CollabDocumentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3000000000000000000000A /* CollabDocumentsView.swift */; };
 		C30000000000000000000011 /* CollabHistoryPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30000000000000000000010 /* CollabHistoryPanel.swift */; };
 		C10000000000000000000064 /* libyrs.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C10000000000000000000001 /* libyrs.xcframework */; };
 		C10000000000000000000071 /* libyrs.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C10000000000000000000001 /* libyrs.xcframework */; };
@@ -670,6 +672,8 @@
 		C30000000000000000000002 /* CollabEditorViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollabEditorViewModel.swift; sourceTree = "<group>"; };
 		C30000000000000000000004 /* CollabEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollabEditorViewController.swift; sourceTree = "<group>"; };
 		C30000000000000000000006 /* CollabSchemeHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollabSchemeHandler.swift; sourceTree = "<group>"; };
+		C30000000000000000000008 /* CollabDocumentsVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollabDocumentsVM.swift; sourceTree = "<group>"; };
+		C3000000000000000000000A /* CollabDocumentsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollabDocumentsView.swift; sourceTree = "<group>"; };
 		C30000000000000000000010 /* CollabHistoryPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollabHistoryPanel.swift; sourceTree = "<group>"; };
 		C10000000000000000000001 /* libyrs.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libyrs.xcframework; path = ../xcframework/libyrs.xcframework; sourceTree = "<group>"; };
 		C00000000000000000000001 /* CollaborationAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CollaborationAdapter.h; sourceTree = "<group>"; };
@@ -2051,6 +2055,8 @@
 				C30000000000000000000002 /* CollabEditorViewModel.swift */,
 				C30000000000000000000004 /* CollabEditorViewController.swift */,
 				C30000000000000000000006 /* CollabSchemeHandler.swift */,
+				C30000000000000000000008 /* CollabDocumentsVM.swift */,
+				C3000000000000000000000A /* CollabDocumentsView.swift */,
 				C30000000000000000000010 /* CollabHistoryPanel.swift */,
 			);
 			name = Collab;
@@ -4158,6 +4164,8 @@
 				C30000000000000000000003 /* CollabEditorViewModel.swift in Sources */,
 				C30000000000000000000005 /* CollabEditorViewController.swift in Sources */,
 				C30000000000000000000007 /* CollabSchemeHandler.swift in Sources */,
+				C30000000000000000000009 /* CollabDocumentsVM.swift in Sources */,
+				C3000000000000000000000B /* CollabDocumentsView.swift in Sources */,
 				C30000000000000000000011 /* CollabHistoryPanel.swift in Sources */,
 				C0000000000000000000000F /* CollaborationAdapter.mm in Sources */,
 				C0000000000000000000001D /* CollaborationAdapterDelegate.swift in Sources */,

@@ -38,6 +38,15 @@ class SwarmInfoVM: ObservableObject {
     var swarmInfo: SwarmInfoProtocol
     var conversation: ConversationModel?
 
+    /// Built when the documents tab is first shown, so a conversation that is
+    /// never asked for its documents never asks the daemon for them.
+    lazy var collabDocuments: CollabDocumentsVM? = {
+        guard let conversation = self.conversation else { return nil }
+        return CollabDocumentsVM(with: self.injectionBag,
+                                 accountId: conversation.accountId,
+                                 conversationId: conversation.id)
+    }()
+
     // MARK: - Private Properties
     private let disposeBag = DisposeBag()
     private var contactsSubscriptionsDisposeBag = DisposeBag()

@@ -24,6 +24,7 @@ import SwiftUI
 enum SwarmSettingView: String, CaseIterable {
     case about
     case memberList
+    case documents
 
     var title: String {
         switch self {
@@ -31,6 +32,8 @@ enum SwarmSettingView: String, CaseIterable {
             return L10n.Swarm.settings
         case .memberList:
             return L10n.Swarm.members
+        case .documents:
+            return L10n.Collab.documents
         }
     }
 }
@@ -65,10 +68,17 @@ public struct SwarmInfoView: View, StateEmittingView {
 
     // MARK: - Computed Properties
     private var swarmViews: [SwarmSettingView] {
-        guard let conversation = viewModel.conversation, !conversation.isCoredialog() else {
-            return [.about]
+        guard let conversation = viewModel.conversation else { return [.about] }
+        var views: [SwarmSettingView] = [.about]
+        if !conversation.isCoredialog() {
+            views.append(.memberList)
         }
-        return [.about, .memberList]
+        // A document lives in the conversation's repository, so it exists for
+        // every swarm — including a one-to-one one — and for nothing else.
+        if conversation.isSwarm() {
+            views.append(.documents)
+        }
+        return views
     }
 
     private var lightOrDarkColor: Color {
@@ -82,6 +92,7 @@ public struct SwarmInfoView: View, StateEmittingView {
             Color(UIColor.systemGroupedBackground)
             mainContent
             addParticipantsButton
+            documentNamePrompt
             if viewModel.isShowingTitleAlert {
                 editTitleAlert()
             }
@@ -295,11 +306,25 @@ public struct SwarmInfoView: View, StateEmittingView {
             SettingsView(viewmodel: viewModel, stateEmitter: stateEmitter)
         case .memberList:
             MemberList(viewModel: viewModel)
+        case .documents:
+            if let documents = viewModel.collabDocuments {
+                CollabDocumentsView(viewModel: documents, stateEmitter: stateEmitter)
+            }
+        }
+    }
+
+    /// The prompt for a new document's name belongs over the whole screen, not
+    /// over the tab it was asked from, so it is raised here beside the alerts
+    /// this screen already shows.
+    @ViewBuilder private var documentNamePrompt: some View {
+        if selectedView == .documents, let documents = viewModel.collabDocuments {
+            CollabNewDocumentPrompt(viewModel: documents, stateEmitter: stateEmitter)
         }
     }
 
     @ViewBuilder private var addParticipantsButton: some View {
-        if !(viewModel.conversation?.isCoredialog() ?? true) {
+        // The documents tab has a button of its own in that corner.
+        if selectedView != .documents, !(viewModel.conversation?.isCoredialog() ?? true) {
             AddMoreParticipantsInSwarm(viewmodel: viewModel)
         }
     }
