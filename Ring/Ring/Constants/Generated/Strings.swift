@@ -723,6 +723,8 @@ internal enum L10n {
     internal static let documentNameHint = L10n.tr("Localizable", "collab.documentNameHint", fallback: "Document name")
     /// Documents
     internal static let documents = L10n.tr("Localizable", "collab.documents", fallback: "Documents")
+    /// Editable document
+    internal static let editableDocument = L10n.tr("Localizable", "collab.editableDocument", fallback: "Editable document")
     /// Only you are editing
     internal static let editingAlone = L10n.tr("Localizable", "collab.editingAlone", fallback: "Only you are editing")
     /// 1 other person is editing
