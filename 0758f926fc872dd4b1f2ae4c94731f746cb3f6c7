@@ -16,6 +16,24 @@
       "message": "Removing the details write-back also removes the only thing that got a changed push token onto already-established proxy subscriptions: DhtProxyClient::setPushNotificationToken just assigns deviceKey_, and restartListeners only runs on a Disconnected→Connected transition, so live listens keep the old token. That matters in the case the token set right after account creation, when dht_ came up with an empty deviceKey.",
       "revId": "0758f926fc872dd4b1f2ae4c94731f746cb3f6c7",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6be24c63_efe26b5c",
+        "filename": "Ring/Ring/Services/AccountsService.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 687,
+      "author": {
+        "id": 617
+      },
+      "writtenOn": "2026-07-30T14:05:21Z",
+      "side": 1,
+      "message": "Thanks for looking at this closely. I checked that path against the opendht we actually ship, and the resubscription you are worried about is already there.\n\ndaemon/contrib/src/opendht/rules.mak pins OPENDHT_VERSION :\u003d 4.2.0. In v4.2.0, src/dht_proxy_client.cpp:1422:\n\n    deviceKey_ \u003d token;\n    if (!(statusIpv4_ \u003d\u003d NodeStatus::Connected || statusIpv6_ \u003d\u003d NodeStatus::Connected))\n        return;\n    ...\n    logger_-\u003edebug(\"[proxy:client] [push] token changed, resubscribing\");\n    for (auto\u0026 search : searches_)\n        for (auto\u0026 listener : search.second.listeners)\n            resubscribe(search.first, listener.first, listener.second);\n\nSo it does not only assign deviceKey_: when the node is connected it resubscribes every listener of every search, without waiting for a Disconnected -\u003e Connected transition. The code is identical on master.\n\nThe full chain still runs after this change:\n\n  - AccountsService.swift:686 calls setPushNotificationConfig()\n  - src/client/configurationmanager.cpp:1335 -\u003e JamiAccount::setPushNotificationConfig()\n  - src/jamidht/jamiaccount.cpp:3946 persists through Account::setPushNotificationConfig() (which calls saveConfig()) and then calls dht_-\u003esetPushNotificationToken(config_-\u003edeviceKey)\n  - opendht src/dhtrunner.cpp:1191 stores config_.push_token and forwards to the proxy client\n  - src/dht_proxy_client.cpp:1422, quoted above\n\nThe case you raise, a token set right after account creation while dht_ came up with an empty deviceKey, is covered by the same code. If the node is already connected, the resubscription above runs immediately. If it is not, the token is stored and every listen built afterwards goes to the subscribe endpoint rather than listen, because deviceKey_ is read when the request is built (dht_proxy_client.cpp:855), and restartListeners() picks up the rest on connect.\n\nWhat the removed block did was call setAccountDetails(), which is not a targeted refresh: AccountConfigModel drops every key the client does not know, so the map never matched the daemon\u0027s one, the daemon took the \"details changed\" path and did a full doUnregister() + reload + doRegister(). That is what tore the DHT down about a second after launch and lost the answers to peer connection requests in flight, 6 of them per launch on device.\n\nIf you would still rather have a belt-and-braces refresh for the post-creation case, I would rather we fix it in DhtProxyClient than reinstate a full re-register from the client. Happy to look at it if you can reproduce a token change that does not reach live subscriptions.\n\nThe Verified-1 is unrelated to this change: the build node reports \"iOS 26.5 is not installed\".",
+      "parentUuid": "0c47f508_ed391e1a",
+      "revId": "0758f926fc872dd4b1f2ae4c94731f746cb3f6c7",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
