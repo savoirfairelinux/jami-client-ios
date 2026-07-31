@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9b44cca_a604d745",
+        "filename": "Ring/Ring/Features/Collab/CollabDocumentsView.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-07-31T01:27:24Z",
+      "side": 1,
+      "message": "[error] Line 128: 🔴 Tapping a removal button can also trigger the row-level `.onTapGesture`, opening the document while showing the removal confirmation. Move the open gesture to a non-overlapping row area or implement the row as a button/context action so action taps do not propagate to open.",
+      "revId": "6392da95927e9ecf9f064ec1be3a424320aaea88",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
