@@ -334,6 +334,7 @@ final class CallService {
     private func emitCallEnded(call: CallState, duration: Int) {
         var event = ServiceEvent(withEventType: .callEnded)
         event.addEventInput(.peerUri, value: call.peerUri)
+        event.addEventInput(.peerHash, value: call.peerHash)
         event.addEventInput(.callUUID, value: call.callKitUUID?.uuidString ?? "")
         event.addEventInput(.accountId, value: call.accountId)
         event.addEventInput(.callId, value: call.id.raw)

@@ -87,6 +87,7 @@ enum ServiceEventInput {
     case deviceId
     case content
     case peerUri
+    case peerHash
     case accountUri
     case name
     case callUUID
