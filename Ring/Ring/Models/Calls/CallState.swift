@@ -197,3 +197,13 @@ struct CallSystemState: Sendable {
         }
     }
 }
+
+struct PendingPostCallSync {
+    let accountId: String
+    let peerHash: String
+
+    func isConfirmed(by message: MessageModel, from accountId: String) -> Bool {
+        guard case .call = message.type else { return false }
+        return accountId == self.accountId && message.authorId == peerHash
+    }
+}
