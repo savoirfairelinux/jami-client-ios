@@ -790,3 +790,18 @@
 "collab.clearFormat" = "Clear formatting";
 "collab.undo" = "Undo";
 "collab.redo" = "Redo";
+"collab.remove" = "Remove";
+// Short labels shown inside document-list swipe actions.
+"collab.removeLocallyAction" = "Remove local";
+"collab.removeEverywhereAction" = "Remove for all";
+"collab.removeTitle" = "Remove document";
+"collab.removeMessage" = "\"%@\" will be removed for every member of this conversation. This cannot be undone.";
+"collab.removeError" = "This document could not be removed.";
+"collab.removeLocallyTitle" = "Remove from this device";
+"collab.removeLocallyMessage" = "\"%@\" will be removed from this device only. The other members keep it, and opening it again downloads it back.";
+"collab.removeLocallyError" = "This document could not be removed from this device.";
+"collab.notOnThisDevice" = "not on this device";
+"collab.documentRemoved" = "Document removed";
+"collab.documentRemovedMessage" = "\"%@\" was removed by its author.";
+"collab.documentRemovedLocally" = "Document removed from this device";
+"collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";

@@ -202,12 +202,27 @@ class CollabEditorViewModel {
     }
 
     /**
+     When the document being edited stops existing here.
+
+     `true` when it was retired for every member, `false` when only this device
+     let go of it. The editor is over either way: what it holds is no longer
+     backed by anything, and every further keystroke would be dropped in
+     silence.
+     */
+    var removals: Observable<Bool> {
+        return self.collaborationService
+            .removals(forAccount: self.accountId,
+                      conversationId: self.conversationId,
+                      documentId: self.documentId)
+            .observe(on: MainScheduler.instance)
+    }
+
+    /**
      A picture a peer put in the document reaches this device after the text
      that refers to it, so the page draws it before its bytes are here and is
      told there is nothing to draw. This says when to ask again.
      */
-    var attachments: Observable<String> {
-        return self.collaborationService
+    var attachments: Observable<String> {        return self.collaborationService
             .attachments(forAccount: self.accountId,
                          conversationId: self.conversationId,
                          documentId: self.documentId)

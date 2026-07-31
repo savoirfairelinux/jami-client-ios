@@ -37,7 +37,7 @@ struct CollabDocumentsView: View {
         .background(Color(UIColor.systemGroupedBackground).ignoresSafeArea(edges: .bottom))
         .onAppear(perform: viewModel.reload)
         .alert(isPresented: $viewModel.failed) {
-            Alert(title: Text(L10n.Collab.createError))
+            Alert(title: Text(viewModel.failureMessage))
         }
     }
 
@@ -62,7 +62,10 @@ struct CollabDocumentsView: View {
                         } label: {
                             row(for: document)
                         }
+                        .buttonStyle(.plain)
                         .accessibilityElement(children: .combine)
+                        .modifier(DocumentRemovalActions(document: document,
+                                                         viewModel: viewModel))
                     }
                 }
             }
@@ -74,6 +77,7 @@ struct CollabDocumentsView: View {
         }
     }
 
+    /// The document's label inside the button that opens it.
     private func row(for document: CollaborativeDocument) -> some View {
         HStack(spacing: Layout.margin) {
             Image(systemName: "doc.richtext")
@@ -88,6 +92,7 @@ struct CollabDocumentsView: View {
             Spacer()
         }
         .frame(minHeight: Layout.rowHeight)
+        .contentShape(Rectangle())
     }
 
     private var newDocumentButton: some View {
@@ -116,6 +121,68 @@ struct CollabDocumentsView: View {
         static let rowHeight: CGFloat = 44
         static let buttonSize: CGFloat = 56
         static let shadow: CGFloat = 4
+    }
+}
+
+private struct DocumentRemovalActions: ViewModifier {
+
+    let document: CollaborativeDocument
+    let viewModel: CollabDocumentsVM
+
+    @SwiftUI.State private var confirming: Removal?
+
+    /**
+     A removal waiting to be confirmed.
+
+     The two are asked apart because they are not the same question: one takes a
+     document away from everybody for good, the other only reclaims what this
+     device chose to keep.
+     */
+    private struct Removal: Identifiable {
+        let everywhere: Bool
+
+        var id: String { everywhere ? "all" : "here" }
+    }
+
+    func body(content: Content) -> some View {
+        content
+            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                if document.storedLocally {
+                    Button {
+                        confirming = Removal(everywhere: false)
+                    } label: {
+                        Label(L10n.Collab.removeLocallyAction,
+                              systemImage: "minus.circle")
+                    }
+                    .tint(.jamiWarning)
+                }
+                if viewModel.canRemoveEverywhere(document) {
+                    Button {
+                        confirming = Removal(everywhere: true)
+                    } label: {
+                        Label(L10n.Collab.removeEverywhereAction,
+                              systemImage: "trash")
+                    }
+                    .tint(.jamiFailure)
+                }
+            }
+            .alert(item: $confirming, content: removalAlert)
+    }
+
+    private func removalAlert(for removal: Removal) -> Alert {
+        Alert(title: Text(removal.everywhere ? L10n.Collab.removeTitle
+                            : L10n.Collab.removeLocallyTitle),
+              message: Text(removal.everywhere
+                            ? L10n.Collab.removeMessage(viewModel.title(of: document))
+                            : L10n.Collab.removeLocallyMessage(viewModel.title(of: document))),
+              primaryButton: .destructive(Text(L10n.Collab.remove)) {
+                if removal.everywhere {
+                    viewModel.removeEverywhere(document)
+                } else {
+                    viewModel.removeLocally(document)
+                }
+              },
+              secondaryButton: .cancel(Text(L10n.Global.cancel)))
     }
 }
 

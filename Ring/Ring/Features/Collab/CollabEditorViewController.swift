@@ -384,6 +384,12 @@ class CollabEditorViewController: UIViewController {
                 self.callEditor("attachmentArrived", self.quote(attachmentId))
             })
             .disposed(by: self.disposeBag)
+
+        self.viewModel.removals
+            .subscribe(onNext: { [weak self] everywhere in
+                self?.documentRemoved(everywhere: everywhere)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     private func send(update base64: String) {
@@ -479,12 +485,6 @@ class CollabEditorViewController: UIViewController {
         self.navigationItem.prompt = self.viewModel.participantsDescription
     }
 
-    private func showMessage(_ message: String) {
-        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: L10n.Global.ok, style: .default))
-        self.present(alert, animated: true)
-    }
-
     // MARK: - Constants
 
     fileprivate static let bridgeName = "jami"
@@ -530,6 +530,39 @@ class CollabEditorViewController: UIViewController {
         FormatItem(.undo, symbol: "arrow.uturn.backward", label: L10n.Collab.undo),
         FormatItem(.redo, symbol: "arrow.uturn.forward", label: L10n.Collab.redo)
     ]
+}
+
+// MARK: - Telling the user what became of the document
+
+extension CollabEditorViewController {
+
+    private func showMessage(_ message: String) {
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: L10n.Global.ok, style: .default))
+        self.present(alert, animated: true)
+    }
+
+    /**
+     Says what happened, then closes.
+
+     Closing on its own would make the screen vanish mid-sentence; staying would
+     leave the user typing into something no longer backed by anything, where
+     each keystroke is dropped without a word.
+     */
+    private func documentRemoved(everywhere: Bool) {
+        let name = self.viewModel.documentName.value
+        let named = name.isEmpty ? L10n.Collab.untitled : name
+        let alert = UIAlertController(
+            title: everywhere ? L10n.Collab.documentRemoved
+                : L10n.Collab.documentRemovedLocally,
+            message: everywhere ? L10n.Collab.documentRemovedMessage(named)
+                : L10n.Collab.documentRemovedLocallyMessage(named),
+            preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: L10n.Global.ok, style: .default) { [weak self] _ in
+            self?.closeEditor()
+        })
+        self.present(alert, animated: true)
+    }
 }
 
 // MARK: - What the user asks of the document

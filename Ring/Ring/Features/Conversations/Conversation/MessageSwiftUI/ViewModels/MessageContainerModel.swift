@@ -149,6 +149,7 @@ class MessageContainerModel: Identifiable, Equatable {
     func messageUpdated() {
         self.messageContent.updateMessageEditions()
         self.messageRow.updateMessageStatus()
+        self.collabDocViewModel?.messageUpdated()
     }
 
     func displayLastSent(state: Bool) {
