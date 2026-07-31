@@ -557,6 +557,8 @@
 		AA01CAFE000000000000FF02 /* IncomingCallFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA01CAFE000000000000FF01 /* IncomingCallFilter.swift */; };
 		AA01CAFE000000000000FF03 /* IncomingCallFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA01CAFE000000000000FF01 /* IncomingCallFilter.swift */; };
 		AA01CAFE000000000000FF05 /* IncomingCallFilterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA01CAFE000000000000FF04 /* IncomingCallFilterTests.swift */; };
+		AA01CAFE000000000000FF11 /* PendingPostCallSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA01CAFE000000000000FF10 /* PendingPostCallSync.swift */; };
+		AA01CAFE000000000000FF13 /* PendingPostCallSyncTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA01CAFE000000000000FF12 /* PendingPostCallSyncTests.swift */; };
 		AA01CAFE000000000000FF42 /* ContactsFileReader.mm in Sources */ = {isa = PBXBuildFile; fileRef = AA01CAFE000000000000FF41 /* ContactsFileReader.mm */; };
 		AA01CAFE000000000000FF44 /* ContactsFileFormatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA01CAFE000000000000FF43 /* ContactsFileFormatTests.swift */; };
 		AA01CAFE000000000000FF45 /* ContactsFileReader.mm in Sources */ = {isa = PBXBuildFile; fileRef = AA01CAFE000000000000FF41 /* ContactsFileReader.mm */; };
@@ -1750,6 +1752,8 @@
 		AA0003010000000000000003 /* MediaPreviewModelSaveTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPreviewModelSaveTests.swift; sourceTree = "<group>"; };
 		AA01CAFE000000000000FF01 /* IncomingCallFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingCallFilter.swift; sourceTree = "<group>"; };
 		AA01CAFE000000000000FF04 /* IncomingCallFilterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingCallFilterTests.swift; sourceTree = "<group>"; };
+		AA01CAFE000000000000FF10 /* PendingPostCallSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingPostCallSync.swift; sourceTree = "<group>"; };
+		AA01CAFE000000000000FF12 /* PendingPostCallSyncTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingPostCallSyncTests.swift; sourceTree = "<group>"; };
 		AA01CAFE000000000000FF40 /* ContactsFileReader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactsFileReader.h; sourceTree = "<group>"; };
 		AA01CAFE000000000000FF41 /* ContactsFileReader.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ContactsFileReader.mm; sourceTree = "<group>"; };
 		AA01CAFE000000000000FF43 /* ContactsFileFormatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsFileFormatTests.swift; sourceTree = "<group>"; };
@@ -2734,6 +2738,7 @@
 				62A88D3A1F6C3ACC00F8AB18 /* PresenceService.swift */,
 				62DFAB2D1F9FF0D0002D6F9C /* NetworkService.swift */,
 				0EF78DE21FD0AE3000FC6966 /* ConversationsManager.swift */,
+				AA01CAFE000000000000FF10 /* PendingPostCallSync.swift */,
 				A1D0C0DE0000000000000B01 /* CallsManager.swift */,
 				0E48F9D21FDF150700D6CC08 /* GeneratedInteractionsManager.swift */,
 				0EBB72A82034F44200D88F46 /* ProfilesService.swift */,
@@ -2911,6 +2916,7 @@
 				260AE63029BA5B6700D66D5E /* ConversationsTests */,
 				024B612B1DF7654F00C4F9DE /* DaemonServiceTests.swift */,
 				029CE9D61E1D8C860000C8E1 /* ServiceEventTests.swift */,
+				AA01CAFE000000000000FF12 /* PendingPostCallSyncTests.swift */,
 				028568301DF610A9003A8D8D /* RingTests-Bridging-Header.h */,
 				028568231DF60E5C003A8D8D /* Fixtures */,
 				04399A101D1C2D9D00E99CD9 /* RingTests.swift */,
@@ -4287,6 +4293,7 @@
 				56BBC9BC1ED7161200CDAF8B /* Date+Helpers.swift in Sources */,
 				564C44621E943DE6000F92B1 /* NameService.swift in Sources */,
 				0EF78DE31FD0AE3000FC6966 /* ConversationsManager.swift in Sources */,
+				AA01CAFE000000000000FF11 /* PendingPostCallSync.swift in Sources */,
 				A1D0C0DE0000000000000B02 /* CallsManager.swift in Sources */,
 				64DBCD2224DB3CF600CB5CA2 /* UserSearchResponse.m in Sources */,
 				66266FC021557D2F002757A6 /* ScanViewModel.swift in Sources */,
@@ -4350,6 +4357,7 @@
 				2617A1212C493BC5002CFD4A /* AccountsServiceTest.swift in Sources */,
 				AA01CAFE000000000000FF03 /* IncomingCallFilter.swift in Sources */,
 				AA01CAFE000000000000FF05 /* IncomingCallFilterTests.swift in Sources */,
+				AA01CAFE000000000000FF13 /* PendingPostCallSyncTests.swift in Sources */,
 				AA01CAFE000000000000FF44 /* ContactsFileFormatTests.swift in Sources */,
 				2E95DB7F67AC7C0D12E4014B /* LinkDeviceVMTests.swift in Sources */,
 				2E95DB7F67AC7C0D12E4014C /* LinkToAccountVMTests.swift in Sources */,

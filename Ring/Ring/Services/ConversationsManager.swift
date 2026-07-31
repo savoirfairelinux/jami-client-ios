@@ -47,6 +47,9 @@ class ConversationsManager {
     }
     private let appState: BehaviorRelay<ServiceEventType>
     private var pendingCallBackgroundTask: UIBackgroundTaskIdentifier = .invalid
+    private let postCallSyncTimeout: TimeInterval = 3
+    private var pendingPostCallSync: PendingPostCallSync?
+    private var postCallSyncTimeoutWork: DispatchWorkItem?
 
     // swiftlint:disable cyclomatic_complexity
     init(with conversationService: ConversationsService,
@@ -114,6 +117,8 @@ class ConversationsManager {
                 case .appEnterBackground:
                     self.updateBackgroundState()
                 case .appEnterForeground:
+                    // Cancel before the hop so the timeout cannot deactivate the foreground account.
+                    self.cancelPostCallSync()
                     DispatchQueue.global(qos: .userInitiated).async { [weak self] in
                         guard let self = self else { return }
                         self.updateForegroundState()
@@ -131,6 +136,8 @@ class ConversationsManager {
                 guard let self = self else { return }
                 switch serviceEvent.eventType {
                 case .callProviderPreviewPendingCall:
+                    // Prevent the previous timeout from deactivating the new call.
+                    self.cancelPostCallSync()
                     self.accountsService.setAccountsActive(active: true)
                     self.beginPendingCallBackgroundTask()
                     if let payload: [String: String] = serviceEvent.getEventInput(.content),
@@ -147,13 +154,13 @@ class ConversationsManager {
                     }
                 case .callEnded:
                     DispatchQueue.main.async {
-                        // Deactivate whenever the app is not actively in the foreground, so a
-                        // pending push call that ends while the app is inactive or in the
-                        // background does not leave the account active for the next run.
-                        if UIApplication.shared.applicationState != .active {
-                            self.updateBackgroundState()
+                        guard UIApplication.shared.applicationState != .active else {
+                            self.endPendingCallBackgroundTask()
+                            return
                         }
-                        self.endPendingCallBackgroundTask()
+                        let peerUri: String = serviceEvent.getEventInput(.peerUri) ?? ""
+                        self.awaitPostCallSync(accountId: serviceEvent.getEventInput(.accountId) ?? "",
+                                               peerHash: ProfilePathHelper.jamiHash(from: peerUri))
                     }
                 default:
                     break
@@ -169,6 +176,13 @@ class ConversationsManager {
      */
     func updateBackgroundState() {
         if self.callsManager.hasActiveCalls() { return }
+        if self.pendingPostCallSync != nil { return }
+        self.releaseAccount()
+    }
+
+    // The call screen state has to be reset with the account, otherwise the
+    // extension keeps deferring to an app that no longer owns the account.
+    private func releaseAccount() {
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             appDelegate.updateCallScreenState(presenting: false)
         }
@@ -192,12 +206,23 @@ class ConversationsManager {
                 self.pendingCallBackgroundTask = .invalid
             }
             self.pendingCallBackgroundTask = UIApplication.shared.beginBackgroundTask(withName: "pending-call-account") { [weak self] in
-                guard let self = self else { return }
-                self.accountsService.setAccountsActive(active: false)
-                if self.pendingCallBackgroundTask != .invalid {
-                    UIApplication.shared.endBackgroundTask(self.pendingCallBackgroundTask)
-                    self.pendingCallBackgroundTask = .invalid
-                }
+                self?.handlePendingCallTaskExpiration()
+            }
+        }
+    }
+
+    // A CallKit-only placeholder must not block the handoff, but an ongoing call
+    // confirmed by the daemon still needs the account.
+    private func handlePendingCallTaskExpiration() {
+        onMain { [weak self] in
+            guard let self = self else { return }
+            self.cancelPostCallSync()
+            if !self.callService.hasOngoingCalls {
+                self.releaseAccount()
+            }
+            if self.pendingCallBackgroundTask != .invalid {
+                UIApplication.shared.endBackgroundTask(self.pendingCallBackgroundTask)
+                self.pendingCallBackgroundTask = .invalid
             }
         }
     }
@@ -207,6 +232,64 @@ class ConversationsManager {
             guard let self = self, self.pendingCallBackgroundTask != .invalid else { return }
             UIApplication.shared.endBackgroundTask(self.pendingCallBackgroundTask)
             self.pendingCallBackgroundTask = .invalid
+        }
+    }
+
+    // The peer sends the final call-history commit over the call connection,
+    // so keep it alive until the commit arrives or the wait expires.
+    private func awaitPostCallSync(accountId: String, peerHash: String) {
+        onMain { [weak self] in
+            guard let self = self else { return }
+            self.beginPendingCallBackgroundTask()
+            self.postCallSyncTimeoutWork?.cancel()
+            self.pendingPostCallSync = PendingPostCallSync(accountId: accountId,
+                                                           peerHash: peerHash)
+            let timeoutWork = DispatchWorkItem { [weak self] in
+                self?.finishPostCallSync()
+            }
+            self.postCallSyncTimeoutWork = timeoutWork
+            DispatchQueue.main.asyncAfter(deadline: .now() + self.postCallSyncTimeout,
+                                          execute: timeoutWork)
+        }
+    }
+
+    private func finishPostCallSync() {
+        onMain { [weak self] in
+            guard let self = self else { return }
+            self.postCallSyncTimeoutWork?.cancel()
+            self.postCallSyncTimeoutWork = nil
+            self.pendingPostCallSync = nil
+            if UIApplication.shared.applicationState != .active {
+                self.updateBackgroundState()
+            }
+            self.endPendingCallBackgroundTask()
+        }
+    }
+
+    private func cancelPostCallSync() {
+        onMain { [weak self] in
+            guard let self = self else { return }
+            self.postCallSyncTimeoutWork?.cancel()
+            self.postCallSyncTimeoutWork = nil
+            self.pendingPostCallSync = nil
+        }
+    }
+
+    private func confirmPostCallSyncIfNeeded(accountId: String, message: MessageModel) {
+        onMain { [weak self] in
+            guard let self = self,
+                  let pending = self.pendingPostCallSync,
+                  pending.isConfirmed(by: message, from: accountId) else { return }
+            self.finishPostCallSync()
+        }
+    }
+
+    // Preserve ordering between cancellation and an already-due timeout.
+    private func onMain(_ block: @escaping () -> Void) {
+        if Thread.isMainThread {
+            block()
+        } else {
+            DispatchQueue.main.async(execute: block)
         }
     }
 
@@ -627,6 +710,7 @@ extension  ConversationsManager: MessagesAdapterDelegate {
     func newInteraction(conversationId: String, accountId: String, message: SwarmMessageWrap) {
         guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
         let newMessage = MessageModel(with: message, localJamiId: account.jamiId)
+        self.confirmPostCallSyncIfNeeded(accountId: accountId, message: newMessage)
         if newMessage.type == .fileTransfer {
             newMessage.transferStatus = newMessage.incoming ? .awaiting : .success
         }

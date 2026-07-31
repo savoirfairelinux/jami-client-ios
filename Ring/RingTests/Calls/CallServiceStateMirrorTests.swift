@@ -40,8 +40,11 @@ final class CallServiceStateMirrorTests: XCTestCase {
         let service = makeService()
         let first = makeCall(1)
         let second = makeCall(2)
+
+        XCTAssertFalse(service.hasOngoingCalls)
         service.handle(.callAdded(first))
         service.handle(.callAdded(second))
+        XCTAssertTrue(service.hasOngoingCalls)
         let addedSnapshot = service.stateMirror
 
         var held = first
@@ -56,5 +59,9 @@ final class CallServiceStateMirrorTests: XCTestCase {
 
         XCTAssertNil(service.stateMirror.call(first.id))
         XCTAssertEqual(service.stateMirror.call(second.id)?.status, .current)
+        XCTAssertTrue(service.hasOngoingCalls)
+
+        service.handle(.callEnded(second, durationSeconds: 0))
+        XCTAssertFalse(service.hasOngoingCalls)
     }
 }
