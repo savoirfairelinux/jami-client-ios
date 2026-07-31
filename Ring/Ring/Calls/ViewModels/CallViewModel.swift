@@ -538,8 +538,8 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
         // participants yet is still the two people already talking — not nobody.
         if let conference = conference, !conference.participants.isEmpty {
             rows = ConferenceParticipants.rows(from: conference,
-                                                localJamiId: localJamiId,
-                                                peerUri: call?.peerUri ?? "")
+                                               localJamiId: localJamiId,
+                                               peerUri: call?.peerUri ?? "")
         } else if let call = call, call.status.isOngoing {
             rows = ConferenceParticipants.rows(from: call, localJamiId: localJamiId)
         } else {

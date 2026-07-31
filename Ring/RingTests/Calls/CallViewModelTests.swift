@@ -474,15 +474,15 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
         let conferenceId = CallTestFixtures.conferenceId.raw
 
         harness.send(.conferenceCreated(
-            conferenceId: conferenceId, conversationId: "", accountId: Harness.accountId,
-            state: ConferenceLifecycle.activeAttached.rawValue,
-            memberCallIds: [harness.callId.raw],
-            participants: [],
-            media: [.audio(), .video(muted: true)]))
+                        conferenceId: conferenceId, conversationId: "", accountId: Harness.accountId,
+                        state: ConferenceLifecycle.activeAttached.rawValue,
+                        memberCallIds: [harness.callId.raw],
+                        participants: [],
+                        media: [.audio(), .video(muted: true)]))
         harness.send(.conferenceInfosUpdated(
-            conferenceId: conferenceId,
-            participants: [CallTestFixtures.participant(
-                uri: jamiId1, sinkId: "\(conferenceId)_video_0")]))
+                        conferenceId: conferenceId,
+                        participants: [CallTestFixtures.participant(
+                                        uri: jamiId1, sinkId: "\(conferenceId)_video_0")]))
 
         await Harness.wait { model.conference?.participants.count == 1 }
         let localTile = model.tiles.first { $0.distributor === harness.videoService.localFrames }
@@ -500,18 +500,18 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
         }
 
         harness.send(.conferenceInfosUpdated(
-            conferenceId: harness.callId.raw,
-            participants: [participant(jamiId1, moderator: false),
-                           participant(CallTestFixtures.secondaryPeerUri,
-                                       moderator: true)]))
+                        conferenceId: harness.callId.raw,
+                        participants: [participant(jamiId1, moderator: false),
+                                       participant(CallTestFixtures.secondaryPeerUri,
+                                                   moderator: true)]))
         await Harness.wait { model.conference?.participants.count == 2 }
         XCTAssertFalse(model.canAddParticipant)
 
         harness.send(.conferenceInfosUpdated(
-            conferenceId: harness.callId.raw,
-            participants: [participant(jamiId1, moderator: true),
-                           participant(CallTestFixtures.secondaryPeerUri,
-                                       moderator: true)]))
+                        conferenceId: harness.callId.raw,
+                        participants: [participant(jamiId1, moderator: true),
+                                       participant(CallTestFixtures.secondaryPeerUri,
+                                                   moderator: true)]))
         await Harness.wait { model.canAddParticipant }
         XCTAssertTrue(model.canAddParticipant)
     }
@@ -581,11 +581,11 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
         harness.send(.conferenceInfosUpdated(
                         conferenceId: conferenceId,
                         participants: [CallTestFixtures.participant(
-                                            uri: CallTestFixtures.secondaryPeerUri,
-                                            device: deviceId1),
+                                        uri: CallTestFixtures.secondaryPeerUri,
+                                        device: deviceId1),
                                        CallTestFixtures.participant(
-                                            uri: CallTestFixtures.tertiaryPeerUri,
-                                            device: deviceId2)]))
+                                        uri: CallTestFixtures.tertiaryPeerUri,
+                                        device: deviceId2)]))
         await Harness.wait { model.conference?.participants.count == 2 }
 
         XCTAssertEqual(model.header.title, L10n.Calls.participantsInCall("2"),
