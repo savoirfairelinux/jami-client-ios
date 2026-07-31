@@ -28,6 +28,21 @@ struct CollabDocumentsView: View {
 
     @SwiftUI.State private var isNaming = false
     @SwiftUI.State private var name = ""
+    @SwiftUI.State private var confirming: Removal?
+
+    /**
+     A removal waiting to be confirmed.
+
+     The two are asked apart because they are not the same question: one takes a
+     document away from everybody for good, the other only reclaims what this
+     device chose to keep.
+     */
+    private struct Removal: Identifiable {
+        let document: CollaborativeDocument
+        let everywhere: Bool
+
+        var id: String { (everywhere ? "all:" : "here:") + document.id }
+    }
 
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
@@ -43,7 +58,7 @@ struct CollabDocumentsView: View {
         }
         .onAppear(perform: viewModel.reload)
         .alert(isPresented: $viewModel.failed) {
-            Alert(title: Text(L10n.Collab.createError))
+            Alert(title: Text(viewModel.failureMessage))
         }
     }
 
@@ -63,18 +78,34 @@ struct CollabDocumentsView: View {
             List {
                 Section(header: Text(L10n.Collab.documents)) {
                     ForEach(viewModel.documents, id: \.id) { document in
-                        Button {
-                            open(document.id, viewModel.title(of: document))
-                        } label: {
-                            row(for: document)
-                        }
-                        .accessibilityElement(children: .combine)
+                        row(for: document)
                     }
                 }
+            }
+            .alert(item: $confirming) { removal in
+                Alert(title: Text(removal.everywhere ? L10n.Collab.removeTitle
+                                    : L10n.Collab.removeLocallyTitle),
+                      message: Text(removal.everywhere
+                                    ? L10n.Collab.removeMessage(viewModel.title(of: removal.document))
+                                    : L10n.Collab.removeLocallyMessage(viewModel.title(of: removal.document))),
+                      primaryButton: .destructive(Text(L10n.Collab.remove)) {
+                        if removal.everywhere {
+                            viewModel.removeEverywhere(removal.document)
+                        } else {
+                            viewModel.removeLocally(removal.document)
+                        }
+                      },
+                      secondaryButton: .cancel(Text(L10n.Global.cancel)))
             }
         }
     }
 
+    /**
+     The row opens the document, and carries the removals it can offer.
+
+     Buttons inside a list row need a borderless style, or the row answers for
+     all three at once and every tap opens the document.
+     */
     private func row(for document: CollaborativeDocument) -> some View {
         HStack(spacing: Layout.margin) {
             Image(systemName: "doc.richtext")
@@ -87,8 +118,34 @@ struct CollabDocumentsView: View {
                     .foregroundColor(.secondary)
             }
             Spacer()
+            if document.storedLocally {
+                removalButton(icon: "trash",
+                              label: L10n.Collab.removeLocallyTitle,
+                              removal: Removal(document: document, everywhere: false))
+            }
+            if viewModel.canRemoveEverywhere(document) {
+                removalButton(icon: "trash.slash",
+                              label: L10n.Collab.removeTitle,
+                              removal: Removal(document: document, everywhere: true))
+            }
         }
         .frame(minHeight: Layout.rowHeight)
+        .contentShape(Rectangle())
+        .onTapGesture {
+            open(document.id, viewModel.title(of: document))
+        }
+    }
+
+    private func removalButton(icon: String, label: String, removal: Removal) -> some View {
+        Button {
+            confirming = removal
+        } label: {
+            Image(systemName: icon)
+                .foregroundColor(.secondary)
+                .frame(width: Layout.actionSize, height: Layout.actionSize)
+        }
+        .buttonStyle(BorderlessButtonStyle())
+        .accessibilityLabel(label)
     }
 
     private var newDocumentButton: some View {
@@ -125,6 +182,7 @@ struct CollabDocumentsView: View {
         static let margin: CGFloat = 16
         static let textSpacing: CGFloat = 2
         static let rowHeight: CGFloat = 44
+        static let actionSize: CGFloat = 44
         static let buttonSize: CGFloat = 56
         static let shadow: CGFloat = 4
     }

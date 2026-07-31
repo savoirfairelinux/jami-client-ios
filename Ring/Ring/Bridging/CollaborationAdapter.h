@@ -47,6 +47,31 @@
                      documentId:(NSString*)documentId;
 
 /**
+ * Retire a document from the conversation, for every member and every device.
+ *
+ * Only its author can: the removal is an edition of the announcement, and the
+ * swarm takes an edition only from the author of what it edits.
+ *
+ * @return NO when no announcement for that document is known here. YES means the
+ *         removal was committed, not that the members applied it; the delegate's
+ *         documentRemoved... reports that.
+ */
+- (BOOL)removeDocumentForAccount:(NSString*)accountId
+                  conversationId:(NSString*)conversationId
+                      documentId:(NSString*)documentId;
+
+/**
+ * Drop a document from this device alone, leaving the other members with it.
+ *
+ * Any member may, on any document: nothing is said to the conversation. The
+ * document stays listed, with @c storedLocally false, and opening it fetches it
+ * back.
+ */
+- (BOOL)removeDocumentLocallyForAccount:(NSString*)accountId
+                         conversationId:(NSString*)conversationId
+                             documentId:(NSString*)documentId;
+
+/**
  * Hand over an update produced by this device's own replica. It is not
  * signalled back, and the call cannot fail: it is no acknowledgement.
  */

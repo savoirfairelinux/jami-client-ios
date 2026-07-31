@@ -721,6 +721,18 @@ internal enum L10n {
     internal static let createError = L10n.tr("Localizable", "collab.createError", fallback: "This document could not be created.")
     /// Document name
     internal static let documentNameHint = L10n.tr("Localizable", "collab.documentNameHint", fallback: "Document name")
+    /// Document removed
+    internal static let documentRemoved = L10n.tr("Localizable", "collab.documentRemoved", fallback: "Document removed")
+    /// Document removed from this device
+    internal static let documentRemovedLocally = L10n.tr("Localizable", "collab.documentRemovedLocally", fallback: "Document removed from this device")
+    /// "%@" is no longer on this device. Opening it again downloads it back.
+    internal static func documentRemovedLocallyMessage(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "collab.documentRemovedLocallyMessage", String(describing: p1), fallback: "\"%@\" is no longer on this device. Opening it again downloads it back.")
+    }
+    /// "%@" was removed by its author.
+    internal static func documentRemovedMessage(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "collab.documentRemovedMessage", String(describing: p1), fallback: "\"%@\" was removed by its author.")
+    }
     /// Documents
     internal static let documents = L10n.tr("Localizable", "collab.documents", fallback: "Documents")
     /// Editable document
@@ -767,12 +779,32 @@ internal enum L10n {
     internal static let noDocuments = L10n.tr("Localizable", "collab.noDocuments", fallback: "No document has been written in this conversation yet.")
     /// This document has no saved version yet.
     internal static let noHistory = L10n.tr("Localizable", "collab.noHistory", fallback: "This document has no saved version yet.")
+    /// not on this device
+    internal static let notOnThisDevice = L10n.tr("Localizable", "collab.notOnThisDevice", fallback: "not on this device")
     /// This document could not be opened.
     internal static let openError = L10n.tr("Localizable", "collab.openError", fallback: "This document could not be opened.")
     /// Numbered list
     internal static let orderedList = L10n.tr("Localizable", "collab.orderedList", fallback: "Numbered list")
     /// Redo
     internal static let redo = L10n.tr("Localizable", "collab.redo", fallback: "Redo")
+    /// Remove
+    internal static let remove = L10n.tr("Localizable", "collab.remove", fallback: "Remove")
+    /// This document could not be removed.
+    internal static let removeError = L10n.tr("Localizable", "collab.removeError", fallback: "This document could not be removed.")
+    /// This document could not be removed from this device.
+    internal static let removeLocallyError = L10n.tr("Localizable", "collab.removeLocallyError", fallback: "This document could not be removed from this device.")
+    /// "%@" will be removed from this device only. The other members keep it, and opening it again downloads it back.
+    internal static func removeLocallyMessage(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "collab.removeLocallyMessage", String(describing: p1), fallback: "\"%@\" will be removed from this device only. The other members keep it, and opening it again downloads it back.")
+    }
+    /// Remove from this device
+    internal static let removeLocallyTitle = L10n.tr("Localizable", "collab.removeLocallyTitle", fallback: "Remove from this device")
+    /// "%@" will be removed for every member of this conversation. This cannot be undone.
+    internal static func removeMessage(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "collab.removeMessage", String(describing: p1), fallback: "\"%@\" will be removed for every member of this conversation. This cannot be undone.")
+    }
+    /// Remove document
+    internal static let removeTitle = L10n.tr("Localizable", "collab.removeTitle", fallback: "Remove document")
     /// Rename
     internal static let rename = L10n.tr("Localizable", "collab.rename", fallback: "Rename")
     /// Your changes could not be sent.

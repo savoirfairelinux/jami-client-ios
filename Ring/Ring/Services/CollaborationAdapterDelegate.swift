@@ -56,4 +56,17 @@ import Foundation
                          conversationId: String,
                          documentId: String,
                          attachmentId: String)
+
+    /**
+     A document is no longer held here.
+
+     Unlike the others this one fires whether or not the document is open, since
+     it is what tells a conversation its document went. `everywhere` true means
+     the author retired it for every member; false means this device alone
+     dropped it, and opening it again fetches it back.
+     */
+    func documentRemoved(withAccountId accountId: String,
+                         conversationId: String,
+                         documentId: String,
+                         everywhere: Bool)
 }

@@ -29,14 +29,11 @@ struct CollabDocMessageView: View {
             HStack(spacing: Layout.spacing) {
                 Image(systemName: "doc.richtext")
                     .font(.title3)
-                    .foregroundColor(Color.jami)
+                    .foregroundColor(model.removed ? .secondary : Color.jami)
                 VStack(alignment: .leading, spacing: Layout.textSpacing) {
-                    Text(model.name)
-                        .font(.callout)
-                        .foregroundColor(Color(UIColor.label))
-                        .lineLimit(1)
-                        .truncationMode(.middle)
-                    Text(L10n.Collab.editableDocument)
+                    title
+                    Text(model.removed ? L10n.Collab.documentRemoved
+                            : L10n.Collab.editableDocument)
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
@@ -49,9 +46,25 @@ struct CollabDocMessageView: View {
                     .fill(Color(UIColor.secondarySystemBackground))
             )
         }
+        // A retired announcement opens nothing, so it stops answering taps
+        // rather than answer them with silence.
+        .disabled(model.removed)
         .accessibilityElement(children: .combine)
-        .accessibilityHint(L10n.Collab.editableDocument)
+        .accessibilityHint(model.removed ? L10n.Collab.documentRemoved
+                            : L10n.Collab.editableDocument)
         .padding(.vertical, Layout.textSpacing)
+    }
+
+    @ViewBuilder private var title: some View {
+        // Struck through on the Text itself: the same modifier on a view needs
+        // iOS 16, and this ships to 14.5.
+        let text = model.removed
+            ? Text(model.name).strikethrough().foregroundColor(.secondary)
+            : Text(model.name).foregroundColor(Color(UIColor.label))
+        text
+            .font(.callout)
+            .lineLimit(1)
+            .truncationMode(.middle)
     }
 
     private enum Layout {

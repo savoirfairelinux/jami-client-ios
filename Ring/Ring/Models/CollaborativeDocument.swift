@@ -35,6 +35,13 @@ struct CollaborativeDocument: Equatable {
     let mimeType: String
     let author: String?
     let timestamp: Int64
+    /**
+     Whether this device is holding the document.
+
+     False for one this device removed from itself: it stays announced in the
+     conversation, and opening it fetches it back.
+     */
+    let storedLocally: Bool
 
     var isRichText: Bool {
         return mimeType == CollaborativeDocument.mimeRichText
@@ -60,6 +67,10 @@ struct CollaborativeDocument: Equatable {
             self.author = nil
         }
         self.timestamp = Int64(map["timestamp"] ?? "") ?? 0
+        // Absent from a daemon that predates local removal, and from every
+        // document the daemon does hold: only a removal writes it, and it writes
+        // "false".
+        self.storedLocally = map["storedLocally"] != "false"
     }
 }
 

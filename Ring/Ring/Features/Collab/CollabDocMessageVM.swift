@@ -34,6 +34,15 @@ class CollabDocMessageVM: ObservableObject {
     private let disposeBag = DisposeBag()
 
     @Published var name: String
+    /**
+     Whether the document this announces is gone for every member.
+
+     Read from the message itself: the announcement of a document can only ever
+     be edited to retire it, so an edited announcement means the document is
+     gone. Asking the daemon instead would walk the conversation log once per
+     row that scrolls by.
+     */
+    @Published var removed: Bool
 
     var documentId: String {
         return self.message.collabDocumentId
@@ -44,6 +53,13 @@ class CollabDocMessageVM: ObservableObject {
         self.contextMenuState = contextMenuState
         self.name = message.collabDocumentName.isEmpty ? L10n.Collab.untitled
             : message.collabDocumentName
+        self.removed = message.isMessageDeleted()
+    }
+
+    /// The edit that retires an announcement arrives like any other.
+    func messageUpdated() {
+        guard self.message.isMessageDeleted() else { return }
+        self.removed = true
     }
 
     /**
@@ -74,10 +90,22 @@ class CollabDocMessageVM: ObservableObject {
                 self.name = renamed.value
             })
             .disposed(by: self.disposeBag)
+        service.removals(forAccount: accountId,
+                         conversationId: conversationId,
+                         documentId: documentId)
+            // Only a removal for every member retires the announcement. One that
+            // took the document off this device alone leaves it announced and
+            // leaves this message live: opening it is what fetches it back.
+            .filter { $0 }
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] _ in
+                self?.removed = true
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func open() {
-        guard !self.documentId.isEmpty else { return }
+        guard !self.documentId.isEmpty, !self.removed else { return }
         self.contextMenuState.onNext(
             ContextMenu.openCollabDocument(documentId: self.documentId, name: self.name))
     }

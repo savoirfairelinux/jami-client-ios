@@ -128,6 +128,21 @@ static __weak id <CollaborationAdapterDelegate> _delegate;
                                       attachmentId:@(attachmentId.c_str())];
         }));
 
+    confHandlers.insert(exportable_callback<ConfigurationSignal::CollaborativeDocumentRemoved>(
+        [&](const std::string& accountId,
+            const std::string& conversationId,
+            const std::string& documentId,
+            bool everywhere) {
+            id <CollaborationAdapterDelegate> delegate = CollaborationAdapter.delegate;
+            if (!delegate) {
+                return;
+            }
+            [delegate documentRemovedWithAccountId:@(accountId.c_str())
+                                    conversationId:@(conversationId.c_str())
+                                        documentId:@(documentId.c_str())
+                                        everywhere:everywhere];
+        }));
+
     registerSignalHandlers(confHandlers);
 }
 
@@ -169,6 +184,22 @@ static __weak id <CollaborationAdapterDelegate> _delegate;
     closeCollaborativeDocument(std::string([accountId UTF8String]),
                                std::string([conversationId UTF8String]),
                                std::string([documentId UTF8String]));
+}
+
+- (BOOL)removeDocumentForAccount:(NSString*)accountId
+                  conversationId:(NSString*)conversationId
+                      documentId:(NSString*)documentId {
+    return removeCollaborativeDocument(std::string([accountId UTF8String]),
+                                       std::string([conversationId UTF8String]),
+                                       std::string([documentId UTF8String]));
+}
+
+- (BOOL)removeDocumentLocallyForAccount:(NSString*)accountId
+                         conversationId:(NSString*)conversationId
+                             documentId:(NSString*)documentId {
+    return removeCollaborativeDocumentLocally(std::string([accountId UTF8String]),
+                                              std::string([conversationId UTF8String]),
+                                              std::string([documentId UTF8String]));
 }
 
 - (void)applyUpdateForAccount:(NSString*)accountId

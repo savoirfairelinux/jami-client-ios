@@ -55,6 +55,19 @@ struct ParticipantLeft {
     let clientId: UInt64
 }
 
+/// A document is no longer held here.
+struct DocumentRemoved {
+    let accountId: String
+    let conversationId: String
+    let documentId: String
+    /**
+     True when its author retired it for every member, and nothing brings it
+     back. False when this device alone dropped it: the other members keep it,
+     and opening it again fetches it back.
+     */
+    let everywhere: Bool
+}
+
 /**
  Collaborative documents: their lifecycle, their content as Y-CRDT updates, and
  the ephemeral state their editors share.
@@ -95,12 +108,14 @@ class CollaborationService {
     private let participantLeftSubject = PublishSubject<ParticipantLeft>()
     private let renamedSubject = PublishSubject<DocumentEvent>()
     private let attachmentSubject = PublishSubject<DocumentEvent>()
+    private let removedSubject = PublishSubject<DocumentRemoved>()
 
     lazy var documentUpdates = documentUpdateSubject.observe(on: deliveryScheduler)
     lazy var awarenessUpdates = awarenessSubject.observe(on: deliveryScheduler)
     lazy var participantsLeft = participantLeftSubject.observe(on: deliveryScheduler)
     lazy var documentsRenamed = renamedSubject.observe(on: deliveryScheduler)
     lazy var attachmentsAdded = attachmentSubject.observe(on: deliveryScheduler)
+    lazy var documentsRemoved = removedSubject.observe(on: deliveryScheduler)
 
     init(withCollaborationAdapter adapter: CollaborationAdapter) {
         self.adapter = adapter
@@ -152,6 +167,19 @@ class CollaborationService {
             .map { $0.value }
     }
 
+    /// Removals of one document, for a screen showing that document alone.
+    /// The value tells the two removals apart.
+    func removals(forAccount accountId: String,
+                  conversationId: String,
+                  documentId: String) -> Observable<Bool> {
+        return documentsRemoved
+            .filter {
+                $0.accountId == accountId && $0.conversationId == conversationId
+                    && $0.documentId == documentId
+            }
+            .map { $0.everywhere }
+    }
+
     // MARK: - Documents
 
     /**
@@ -191,6 +219,39 @@ class CollaborationService {
             adapter.closeDocument(forAccount: accountId,
                                   conversationId: conversationId,
                                   documentId: documentId)
+        }
+    }
+
+    /**
+     Retire a document from the conversation, for every member and every device.
+
+     Only its author can, and nothing brings it back. The answer says the removal
+     was committed, not that the members applied it: `documentsRemoved` reports
+     that, here as everywhere else.
+     */
+    func removeDocument(accountId: String,
+                        conversationId: String,
+                        documentId: String) -> Single<Bool> {
+        return fromDaemon { [adapter] in
+            adapter.removeDocument(forAccount: accountId,
+                                   conversationId: conversationId,
+                                   documentId: documentId)
+        }
+    }
+
+    /**
+     Drop a document from this device alone. Any member may, on any document.
+
+     The document stays in the conversation and stays listed; opening it again
+     fetches it back.
+     */
+    func removeDocumentLocally(accountId: String,
+                               conversationId: String,
+                               documentId: String) -> Single<Bool> {
+        return fromDaemon { [adapter] in
+            adapter.removeDocumentLocally(forAccount: accountId,
+                                          conversationId: conversationId,
+                                          documentId: documentId)
         }
     }
 
@@ -402,5 +463,15 @@ extension CollaborationService: CollaborationAdapterDelegate {
                                                conversationId: conversationId,
                                                documentId: documentId,
                                                value: attachmentId))
+    }
+
+    func documentRemoved(withAccountId accountId: String,
+                         conversationId: String,
+                         documentId: String,
+                         everywhere: Bool) {
+        removedSubject.onNext(DocumentRemoved(accountId: accountId,
+                                              conversationId: conversationId,
+                                              documentId: documentId,
+                                              everywhere: everywhere))
     }
 }
