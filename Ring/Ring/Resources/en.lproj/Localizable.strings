@@ -761,6 +761,12 @@
 "collab.linkAdd" = "Add";
 "collab.linkRemove" = "Remove";
 "collab.exportPdf" = "Export to PDF";
+"collab.export" = "Export a local copy";
+"collab.exportHtml" = "Export to HTML";
+"collab.exportMarkdown" = "Export to Markdown";
+"collab.exportText" = "Export to plain text";
+"collab.exportMissingImages" = "%d picture(s) in this document have not arrived yet, and will be left out of the exported file.";
+"collab.exportAnyway" = "Export anyway";
 "collab.exportError" = "This document could not be exported.";
 "collab.imageError" = "This image could not be added.";
 "collab.imageTooLarge" = "This image is too large to be added to a document.";
