@@ -17,6 +17,23 @@
       "parentUuid": "9fb8f930_325c0630",
       "revId": "d4ace58a0a390a286384efd536fbfb39bc7684f5",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "819db397_98a18e9e",
+        "filename": "Ring/Ring/Features/Collab/CollabEditorViewController.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 874,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-08-01T02:59:12Z",
+      "side": 1,
+      "message": "[warning] Line 874: 🟡 If a later retry finds additional missing images, this recursive call drops the previously excluded IDs, so earlier missing images can reappear in the next export attempt. Pass the union of `missing` and `absent` when retrying.",
+      "revId": "d4ace58a0a390a286384efd536fbfb39bc7684f5",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
