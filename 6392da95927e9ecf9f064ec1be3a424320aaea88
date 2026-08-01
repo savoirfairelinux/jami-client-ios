@@ -16,6 +16,24 @@
       "message": "[error] Line 128: 🔴 Tapping a removal button can also trigger the row-level `.onTapGesture`, opening the document while showing the removal confirmation. Move the open gesture to a non-overlapping row area or implement the row as a button/context action so action taps do not propagate to open.",
       "revId": "6392da95927e9ecf9f064ec1be3a424320aaea88",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "561a7f73_c38556c7",
+        "filename": "Ring/Ring/Features/Collab/CollabDocumentsView.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 617
+      },
+      "writtenOn": "2026-08-01T02:28:45Z",
+      "side": 1,
+      "message": "The buttons already carry it: `.buttonStyle(BorderlessButtonStyle())` in\n`removalButton`, line 147 of this same file. The doc comment on `row(for:)`\njust above says why -- without it a list row answers for all three at once and\nevery tap opens the document.\n\nTried on an iPad against the desktop client: tapping either icon brings up the\nconfirmation and nothing else.",
+      "parentUuid": "c9b44cca_a604d745",
+      "revId": "6392da95927e9ecf9f064ec1be3a424320aaea88",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
