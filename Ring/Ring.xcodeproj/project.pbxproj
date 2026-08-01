@@ -4096,17 +4096,11 @@
 		};
 		C20000000000000000000001 /* ⚙️ Collaborative Editor */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"$(PROJECT_DIR)/CollabEditor/build.sh",
-				"$(PROJECT_DIR)/CollabEditor/esbuild.mjs",
-				"$(PROJECT_DIR)/CollabEditor/package-lock.json",
-				"$(PROJECT_DIR)/CollabEditor/editor.html",
-				"$(PROJECT_DIR)/CollabEditor/src/index.js",
-				"$(PROJECT_DIR)/CollabEditor/src/jamiformat.js",
-				"$(PROJECT_DIR)/CollabEditor/src/styles.css",
 			);
 			name = "⚙️ Collaborative Editor";
 			outputPaths = (

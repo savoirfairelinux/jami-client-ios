@@ -350,6 +350,22 @@ class CollabEditorViewModel {
                         attachmentId: attachmentId)
     }
 
+    /**
+     The bytes of several attachments at once.
+
+     One this device does not hold answers with nothing rather than failing: a
+     single picture that never arrived must not take the whole export with it.
+     */
+    func attachments(_ attachmentIds: [String]) -> Single<[String: Data]> {
+        guard !attachmentIds.isEmpty else { return Single.just([:]) }
+        return Single.zip(attachmentIds.map { attachmentId in
+            self.attachment(attachmentId)
+                .catchAndReturn(Data())
+                .map { (attachmentId, $0) }
+        })
+        .map { Dictionary($0, uniquingKeysWith: { first, _ in first }) }
+    }
+
     // MARK: - Peers
 
     /**
@@ -400,4 +416,75 @@ class CollabEditorViewModel {
     private static let cursorColors = [
         "#E53935", "#1E88E5", "#43A047", "#FB8C00", "#8E24AA", "#00ACC1", "#F4511E"
     ]
+}
+
+// MARK: - Taking a copy of the document away
+
+/**
+ A document lives inside Jami, and the pictures in it live further in still:
+ they are attachments of the conversation, which nothing outside Jami can ask
+ for. What the page writes therefore names each picture rather than carrying
+ it, and the bytes are put in here, so that the file stands on its own wherever
+ it is opened.
+ */
+extension CollabEditorViewModel {
+
+    /**
+     The bytes of each picture, in place of the address the page named it by.
+
+     A picture whose bytes are not here is left as it was: the page is asked to
+     write the document again without it rather than leave an address that
+     leads nowhere.
+
+     @param scheme what the page named its pictures under this time. It draws it
+            afresh for every export, so that a peer writing out what looks like
+            a picture's name cannot have these bytes put into their sentence.
+     */
+    func embed(_ bytes: [String: Data], in text: String, under scheme: String) -> String {
+        var written = text
+        for (attachmentId, data) in bytes where !data.isEmpty {
+            let dataURL = "data:\(CollabSchemeHandler.mimeType(of: data))"
+                + ";base64,\(data.base64EncodedString())"
+            written = written.replacingOccurrences(
+                of: CollabEditorViewModel.reference(to: attachmentId, under: scheme),
+                with: dataURL)
+        }
+        return written
+    }
+
+    /// The exported document as a file to hand over, named after the document
+    /// so the user recognises it in whichever application receives it.
+    func exportFile(_ text: String, fileExtension: String) -> URL? {
+        let manager = FileManager.default
+        let directory = manager.temporaryDirectory
+            .appendingPathComponent("collab-export", isDirectory: true)
+        guard (try? manager.createDirectory(at: directory,
+                                            withIntermediateDirectories: true)) != nil else {
+            return nil
+        }
+        let file = directory.appendingPathComponent(self.exportFileName(fileExtension))
+        guard (try? text.write(to: file, atomically: true, encoding: .utf8)) != nil else {
+            return nil
+        }
+        return file
+    }
+
+    private static func reference(to attachmentId: String, under scheme: String) -> String {
+        // The unreserved set of encodeURIComponent, which is what the page used.
+        let unreserved = CharacterSet(charactersIn:
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_.!~*'()")
+        let escaped = attachmentId.addingPercentEncoding(withAllowedCharacters: unreserved)
+        return scheme + (escaped ?? attachmentId)
+    }
+
+    /// The document's name, made into something a file system will take.
+    private func exportFileName(_ fileExtension: String) -> String {
+        let forbidden = CharacterSet(charactersIn: "/\\:*?\"<>|").union(.controlCharacters)
+        var name = self.documentName.value
+            .components(separatedBy: forbidden)
+            .joined(separator: " ")
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+        if name.isEmpty { name = L10n.Collab.untitled }
+        return "\(name.prefix(80).trimmingCharacters(in: .whitespaces)).\(fileExtension)"
+    }
 }
