@@ -1,0 +1,22 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a8d92b1_c070f774",
+        "filename": "Ring/Ring/Features/Collab/CollabEditorViewController.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 874,
+      "author": {
+        "id": 617
+      },
+      "writtenOn": "2026-08-01T03:03:05Z",
+      "side": 1,
+      "message": "Right, and fixed in patch set 5 -- the retry is asked for `missing + absent`,\nso what was dropped once stays dropped.\n\nToday it takes a second round of missing pictures to show, and the fetch is the\nsame one twice, so it does not happen in practice. That is exactly the kind of\nreasoning that stops being true later, and the function should not need it.",
+      "parentUuid": "819db397_98a18e9e",
+      "revId": "58f4357b8da46cbddc86cb993298d13a863524c3",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
