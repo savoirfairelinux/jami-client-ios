@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fb8f930_325c0630",
+        "filename": "Ring/Ring.xcodeproj/project.pbxproj",
+        "patchSetId": 2
+      },
+      "lineNbr": 4097,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-08-01T02:26:13Z",
+      "side": 1,
+      "message": "[warning] Line 4097: 🟡 Setting the collaborative editor build phase to always out-of-date makes every app build rerun the JS bundle step, even when none of its inputs changed. Add the new export.js file to the input paths instead of removing dependency tracking, so incremental Xcode builds stay fast while still rebuilding when the exporter changes.",
+      "revId": "c246311391a5d9e45526b299a23c6debde5e8de6",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
