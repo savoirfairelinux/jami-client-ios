@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88b2e263_71f8c0bd",
+        "filename": "Ring/CollabEditor/src/export.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-08-01T00:30:25Z",
+      "side": 1,
+      "message": "[error] Line 126: 🔴 Exported HTML preserves peer-controlled links without validating the scheme. A document can export `\u003ca href\u003d\"javascript:...\"\u003e`, which becomes executable when opened and clicked in a browser. Filter links to safe schemes such as `http`, `https`, `mailto`, or strip unsafe hrefs before writing HTML/Markdown.",
+      "revId": "3f48a120bcf9e0186da858b786fc8ba7c73b8e41",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a14aeff_77e0f019",
+        "filename": "Ring/Ring/Features/Collab/CollabEditorViewModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-08-01T00:30:25Z",
+      "side": 1,
+      "message": "[warning] Line 443: 🟡 `replacingOccurrences` runs across the whole exported document, so any literal `jami-attachment:\u003cid\u003e` typed in normal text or a link will be replaced with the image data URL. That corrupts user content and can expose embedded image bytes outside image references. Replace only the specific `src`/Markdown image placeholders emitted by the exporter, or have JS return structured ranges/placeholders that cannot collide with document text.",
+      "revId": "3f48a120bcf9e0186da858b786fc8ba7c73b8e41",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
