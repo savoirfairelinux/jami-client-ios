@@ -1,0 +1,40 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27179e6e_5d785753",
+        "filename": "Ring/CollabEditor/src/export.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 617
+      },
+      "writtenOn": "2026-08-01T02:28:45Z",
+      "side": 1,
+      "message": "This one does not reach the export. Quill sanitises a link when it builds\nthe line, and `getContents()` reads the attributes back from the DOM, so the\nexporter is given what was displayed, never what was sent.\n\nProbed on the shipped bundle, with the hostile attribute written straight into\nthe CRDT the way a replica that does not run our code would (going through our\nown writer would only test what we send):\n\n    sent : javascript:alert(1)\n    DOM  : about:blank\n    html : \u003ca href\u003d\"about:blank\"\u003eclick\u003c/a\u003e\n    md   : [click](about:blank)\n\nSame for `JaVaScRiPt:`, `data:text/html,...` and `vbscript:`. Quill\u0027s\n`PROTOCOL_WHITELIST` is `[\"http\", \"https\", \"mailto\", \"tel\", \"sms\"]`; everything\nelse becomes `about:blank`.\n\nYou are right that it should not rest on knowing this: patch set 3 adds a test\nthat writes each of those four schemes into the document as a peer and asserts\nthat neither the DOM nor either export carries them.",
+      "parentUuid": "88b2e263_71f8c0bd",
+      "revId": "30f6603ef42097cf10ff8cb194d89da88d39ffcd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf960028_8e1d377f",
+        "filename": "Ring/Ring/Features/Collab/CollabEditorViewModel.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 617
+      },
+      "writtenOn": "2026-08-01T02:28:45Z",
+      "side": 1,
+      "message": "Right, and the text is the peers\u0027 to write, so nothing in the document can be\nruled out. Fixed in patch set 2: the name is no longer a fixed string but is\ndrawn afresh at every export -- `jami-attachment-\u003c32 hex\u003e:` -- and returned to\nthe client under `scheme`, which now substitutes on that instead of on a\nconstant. A peer cannot type out what it cannot guess.",
+      "parentUuid": "0a14aeff_77e0f019",
+      "revId": "30f6603ef42097cf10ff8cb194d89da88d39ffcd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
