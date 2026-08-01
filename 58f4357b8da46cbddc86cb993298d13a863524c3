@@ -17,6 +17,23 @@
       "parentUuid": "819db397_98a18e9e",
       "revId": "58f4357b8da46cbddc86cb993298d13a863524c3",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12acbdeb_5be5d763",
+        "filename": "Ring/Ring/Features/Collab/CollabEditorViewModel.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-08-01T03:03:19Z",
+      "side": 1,
+      "message": "[warning] Line 489: 🟡 `exportFile` always writes to the same temporary path for a given document name and extension. If the user starts another export before the previous share sheet finishes, the second export can overwrite the file backing the first share item, so the receiving app may get the wrong content. Create a unique temporary directory or filename per export, then remove that specific file when sharing completes.",
+      "revId": "58f4357b8da46cbddc86cb993298d13a863524c3",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
