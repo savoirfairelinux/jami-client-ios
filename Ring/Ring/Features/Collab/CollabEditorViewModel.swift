@@ -350,6 +350,25 @@ class CollabEditorViewModel {
                         attachmentId: attachmentId)
     }
 
+    /**
+     The bytes of several attachments at once.
+
+     One this device does not hold answers with nothing rather than failing: a
+     single picture that never arrived must not take the whole export with it.
+     That answer is the daemon's own, so nothing is caught here — a failure is
+     something else having gone wrong, and calling it a picture that never
+     arrived would tell the reader the file is short of a picture when it is
+     the export that broke.
+     */
+    func attachments(_ attachmentIds: [String]) -> Single<[String: Data]> {
+        guard !attachmentIds.isEmpty else { return Single.just([:]) }
+        return Single.zip(attachmentIds.map { attachmentId in
+            self.attachment(attachmentId)
+                .map { (attachmentId, $0) }
+        })
+        .map { Dictionary($0, uniquingKeysWith: { first, _ in first }) }
+    }
+
     // MARK: - Peers
 
     /**
@@ -400,4 +419,101 @@ class CollabEditorViewModel {
     private static let cursorColors = [
         "#E53935", "#1E88E5", "#43A047", "#FB8C00", "#8E24AA", "#00ACC1", "#F4511E"
     ]
+}
+
+// MARK: - Taking a copy of the document away
+
+/**
+ A document lives inside Jami, and the pictures in it live further in still:
+ they are attachments of the conversation, which nothing outside Jami can ask
+ for. What the page writes therefore names each picture rather than carrying
+ it, and the bytes are put in here, so that the file stands on its own wherever
+ it is opened.
+ */
+extension CollabEditorViewModel {
+
+    /**
+     The bytes of each picture, in place of the address the page named it by.
+
+     A picture whose bytes are not here is left as it was: the page is asked to
+     write the document again without it rather than leave an address that
+     leads nowhere.
+
+     @param scheme what the page named its pictures under this time. It draws it
+            afresh for every export, so that a peer writing out what looks like
+            a picture's name cannot have these bytes put into their sentence.
+     */
+    func embed(_ bytes: [String: Data], in text: String, under scheme: String) -> String {
+        // In one pass, the base64 of a picture running to several times its
+        // size: substituting one picture at a time would copy the whole
+        // document, every picture already put in with it, once per picture.
+        var pictures: [String: String] = [:]
+        var names: [String] = []
+        for (attachmentId, data) in bytes {
+            let name = CollabEditorViewModel.encoded(attachmentId)
+            names.append(name)
+            guard !data.isEmpty else { continue }
+            pictures[name] = "data:\(CollabSchemeHandler.mimeType(of: data))"
+                + ";base64,\(data.base64EncodedString())"
+        }
+        let parts = text.components(separatedBy: scheme)
+        guard parts.count > 1, !names.isEmpty else { return text }
+        // What follows a name is not something a name cannot hold: an id is
+        // written with encodeURIComponent, which leaves brackets alone, and
+        // markdown closes a picture with one. So the names say where they end,
+        // longest first, one id being able to open another.
+        names.sort { $0.count > $1.count }
+        var written = parts[0]
+        for part in parts.dropFirst() {
+            guard let name = names.first(where: { part.hasPrefix($0) }),
+                  let picture = pictures[name] else {
+                // A picture whose bytes never came keeps its name: the document
+                // is asked for again without it rather than left pointing
+                // nowhere.
+                written += scheme + part
+                continue
+            }
+            written += picture
+            written += part[part.index(part.startIndex, offsetBy: name.count)...]
+        }
+        return written
+    }
+
+    /// The exported document as a file to hand over, named after the document
+    /// so the user recognises it in whichever application receives it.
+    func exportFile(_ text: String, fileExtension: String) -> URL? {
+        let manager = FileManager.default
+        let directory = manager.temporaryDirectory
+            .appendingPathComponent("collab-export", isDirectory: true)
+        guard (try? manager.createDirectory(at: directory,
+                                            withIntermediateDirectories: true)) != nil else {
+            return nil
+        }
+        let file = directory.appendingPathComponent(self.exportFileName(fileExtension))
+        guard (try? text.write(to: file, atomically: true, encoding: .utf8)) != nil else {
+            return nil
+        }
+        return file
+    }
+
+    /// A picture's name as the page wrote it, being `encodeURIComponent` of
+    /// its attachment id.
+    private static func encoded(_ attachmentId: String) -> String {
+        // The unreserved set of encodeURIComponent, which is what the page used.
+        let unreserved = CharacterSet(charactersIn:
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_.!~*'()")
+        return attachmentId.addingPercentEncoding(withAllowedCharacters: unreserved)
+            ?? attachmentId
+    }
+
+    /// The document's name, made into something a file system will take.
+    private func exportFileName(_ fileExtension: String) -> String {
+        let forbidden = CharacterSet(charactersIn: "/\\:*?\"<>|").union(.controlCharacters)
+        var name = self.documentName.value
+            .components(separatedBy: forbidden)
+            .joined(separator: " ")
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+        if name.isEmpty { name = L10n.Collab.untitled }
+        return "\(name.prefix(80).trimmingCharacters(in: .whitespaces)).\(fileExtension)"
+    }
 }
