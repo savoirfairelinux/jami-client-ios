@@ -763,10 +763,24 @@ internal enum L10n {
     internal static func editingOthers(_ p1: Int) -> String {
       return L10n.tr("Localizable", "collab.editingOthers", p1, fallback: "%d other people are editing")
     }
+    /// Export a local copy
+    internal static let export = L10n.tr("Localizable", "collab.export", fallback: "Export a local copy")
+    /// Export anyway
+    internal static let exportAnyway = L10n.tr("Localizable", "collab.exportAnyway", fallback: "Export anyway")
     /// This document could not be exported.
     internal static let exportError = L10n.tr("Localizable", "collab.exportError", fallback: "This document could not be exported.")
+    /// Export to HTML
+    internal static let exportHtml = L10n.tr("Localizable", "collab.exportHtml", fallback: "Export to HTML")
+    /// Export to Markdown
+    internal static let exportMarkdown = L10n.tr("Localizable", "collab.exportMarkdown", fallback: "Export to Markdown")
+    /// %d picture(s) in this document have not arrived yet, and will be left out of the exported file.
+    internal static func exportMissingImages(_ p1: Int) -> String {
+      return L10n.tr("Localizable", "collab.exportMissingImages", p1, fallback: "%d picture(s) in this document have not arrived yet, and will be left out of the exported file.")
+    }
     /// Export to PDF
     internal static let exportPdf = L10n.tr("Localizable", "collab.exportPdf", fallback: "Export to PDF")
+    /// Export to plain text
+    internal static let exportText = L10n.tr("Localizable", "collab.exportText", fallback: "Export to plain text")
     /// Heading %d
     internal static func heading(_ p1: Int) -> String {
       return L10n.tr("Localizable", "collab.heading", p1, fallback: "Heading %d")

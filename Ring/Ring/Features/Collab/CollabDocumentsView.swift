@@ -173,8 +173,8 @@ private struct DocumentRemovalActions: ViewModifier {
         Alert(title: Text(removal.everywhere ? L10n.Collab.removeTitle
                             : L10n.Collab.removeLocallyTitle),
               message: Text(removal.everywhere
-                            ? L10n.Collab.removeMessage(viewModel.title(of: document))
-                            : L10n.Collab.removeLocallyMessage(viewModel.title(of: document))),
+                                ? L10n.Collab.removeMessage(viewModel.title(of: document))
+                                : L10n.Collab.removeLocallyMessage(viewModel.title(of: document))),
               primaryButton: .destructive(Text(L10n.Collab.remove)) {
                 if removal.everywhere {
                     viewModel.removeEverywhere(document)

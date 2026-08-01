@@ -114,11 +114,15 @@ class CollabSchemeHandler: NSObject, WKURLSchemeHandler {
         task.didFailWithError(URLError(.resourceUnavailable))
     }
 
-    private static func mimeType(of data: Data) -> String {
+    /// What the bytes are, read from the first of them: an attachment is stored
+    /// as it arrived, and nothing alongside it says what it is.
+    static func mimeType(of data: Data) -> String {
         let bytes = [UInt8](data.prefix(12))
         if bytes.count > 3, bytes[0] == 0xFF, bytes[1] == 0xD8 { return "image/jpeg" }
         if bytes.count > 8, bytes[0] == 0x89, bytes[1] == 0x50 { return "image/png" }
-        if bytes.count > 12, bytes[0] == 0x52, bytes[8] == 0x57 { return "image/webp" }
+        // Only twelve bytes were taken, so asking for more than twelve never
+        // matched: every WebP went out as bytes of no stated kind.
+        if bytes.count >= 12, bytes[0] == 0x52, bytes[8] == 0x57 { return "image/webp" }
         if bytes.count > 6, bytes[0] == 0x47, bytes[1] == 0x49 { return "image/gif" }
         return "application/octet-stream"
     }
