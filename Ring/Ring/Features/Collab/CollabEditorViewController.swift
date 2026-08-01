@@ -578,9 +578,14 @@ extension CollabEditorViewController {
         sheet.addAction(UIAlertAction(title: L10n.Collab.history, style: .default) { [weak self] _ in
             self?.showHistory()
         })
-        sheet.addAction(UIAlertAction(title: L10n.Collab.exportPdf, style: .default) { [weak self] _ in
-            self?.exportToPdf()
-        })
+        // A past version is read over the document itself, which is what would
+        // be written: offering the action here would export something other
+        // than what is on screen.
+        if self.versionBar.isHidden {
+            sheet.addAction(UIAlertAction(title: L10n.Collab.export, style: .default) { [weak self] _ in
+                self?.showExportMenu()
+            })
+        }
         sheet.addAction(UIAlertAction(title: L10n.Global.cancel, style: .cancel))
         sheet.popoverPresentationController?.barButtonItem = self.navigationItem.rightBarButtonItem
         self.present(sheet, animated: true)
@@ -810,6 +815,149 @@ extension CollabEditorViewController {
     }
 }
 
+// MARK: - Taking a copy of the document away
+
+/**
+ A document lives inside Jami, and the pictures in it live further in still:
+ they are attachments of the conversation, named by an id that means nothing to
+ any other reader. Exporting is therefore two things -- the page writes the
+ document out in a format someone else's software reads, and the bytes of every
+ picture are put in where it named one.
+
+ PDF is not written this way: the system renders the page itself, pictures and
+ all, through the print dialog.
+ */
+extension CollabEditorViewController {
+
+    /// A format the page can write, and the file it is written to.
+    private struct ExportFormat {
+        let name: String
+        let fileExtension: String
+        let label: String
+        /// What the file is, for a share sheet that would otherwise guess from
+        /// the extension. Markdown is plain text as far as the system knows,
+        /// and saying so is what keeps it shareable at all.
+        let type: String
+    }
+
+    private static let exportFormats = [
+        ExportFormat(name: "html", fileExtension: "html",
+                     label: L10n.Collab.exportHtml, type: "public.html"),
+        ExportFormat(name: "md", fileExtension: "md",
+                     label: L10n.Collab.exportMarkdown, type: "public.plain-text"),
+        ExportFormat(name: "txt", fileExtension: "txt",
+                     label: L10n.Collab.exportText, type: "public.plain-text")
+    ]
+
+    private func showExportMenu() {
+        let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        sheet.addAction(UIAlertAction(title: L10n.Collab.exportPdf, style: .default) { [weak self] _ in
+            self?.exportToPdf()
+        })
+        for format in CollabEditorViewController.exportFormats {
+            sheet.addAction(UIAlertAction(title: format.label, style: .default) { [weak self] _ in
+                self?.export(format)
+            })
+        }
+        sheet.addAction(UIAlertAction(title: L10n.Global.cancel, style: .cancel))
+        sheet.popoverPresentationController?.barButtonItem = self.navigationItem.rightBarButtonItem
+        self.present(sheet, animated: true)
+    }
+
+    /// The document as the page wrote it, and what it left for the application.
+    private struct WrittenDocument {
+        let text: String
+        let attachments: [String]
+        /// What the pictures are named under, this time: drawn afresh for every
+        /// export so that no text in the document can be taken for one.
+        let scheme: String
+    }
+
+    private func export(_ format: ExportFormat, without missing: [String] = []) {
+        self.writeDocument(format, without: missing) { [weak self] written in
+            guard let self = self else { return }
+            guard !written.attachments.isEmpty else {
+                self.share(written.text, as: format)
+                return
+            }
+            self.viewModel.attachments(written.attachments)
+                .observe(on: MainScheduler.instance)
+                .subscribe(onSuccess: { [weak self] bytes in
+                    guard let self = self else { return }
+                    let absent = written.attachments.filter { bytes[$0]?.isEmpty ?? true }
+                    guard absent.isEmpty else {
+                        // Written again without them: a picture left as an
+                        // address no reader can follow is a hole in a file that
+                        // is supposed to stand on its own.
+                        self.confirmMissingPictures(absent.count) { [weak self] in
+                            // Together with the ones already left out: a
+                            // picture dropped once stays dropped, or a second
+                            // pass would write back what the first removed.
+                            self?.export(format, without: missing + absent)
+                        }
+                        return
+                    }
+                    let filled = self.viewModel.embed(bytes,
+                                                      in: written.text,
+                                                      under: written.scheme)
+                    self.share(filled, as: format)
+                }, onFailure: { [weak self] _ in
+                    self?.showMessage(L10n.Collab.exportError)
+                })
+                .disposed(by: self.disposeBag)
+        }
+    }
+
+    /// Ask the page for the document, and for the pictures it left to be put in.
+    private func writeDocument(_ format: ExportFormat,
+                               without missing: [String],
+                               then use: @escaping (WrittenDocument) -> Void) {
+        let dropped = (try? JSONSerialization.data(withJSONObject: missing, options: []))
+            .flatMap { String(data: $0, encoding: .utf8) } ?? "[]"
+        let call = "window.JamiEditor.exportAs("
+            + "\(self.quote(format.name)),\(self.quote(self.viewModel.title)),\(dropped))"
+        self.webView.evaluateJavaScript(call) { [weak self] result, _ in
+            guard let self = self else { return }
+            guard let answer = result as? [String: Any],
+                  let text = answer["text"] as? String,
+                  let scheme = answer["scheme"] as? String else {
+                self.showMessage(L10n.Collab.exportError)
+                return
+            }
+            use(WrittenDocument(text: text,
+                                attachments: answer["attachments"] as? [String] ?? [],
+                                scheme: scheme))
+        }
+    }
+
+    private func confirmMissingPictures(_ count: Int, then export: @escaping () -> Void) {
+        let alert = UIAlertController(title: L10n.Collab.export,
+                                      message: L10n.Collab.exportMissingImages(count),
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: L10n.Collab.exportAnyway,
+                                      style: .default) { _ in export() })
+        alert.addAction(UIAlertAction(title: L10n.Global.cancel, style: .cancel))
+        self.present(alert, animated: true)
+    }
+
+    /// Handed over rather than saved: where a copy of a document belongs is the
+    /// user's business, and the share sheet is where every answer to that is.
+    private func share(_ text: String, as format: ExportFormat) {
+        guard let file = self.viewModel.exportFile(text, fileExtension: format.fileExtension) else {
+            self.showMessage(L10n.Collab.exportError)
+            return
+        }
+        let item = CollabExportItem(file: file, type: format.type,
+                                    name: self.viewModel.title)
+        let sheet = UIActivityViewController(activityItems: [item], applicationActivities: nil)
+        sheet.popoverPresentationController?.barButtonItem = self.navigationItem.rightBarButtonItem
+        sheet.completionWithItemsHandler = { _, _, _, _ in
+            // The directory, not the file: it was made for this export alone.
+            try? FileManager.default.removeItem(at: file.deletingLastPathComponent())
+        }
+        self.present(sheet, animated: true)
+    }
+}
 
 // MARK: - What the page is allowed to ask of the application
 
@@ -897,6 +1045,47 @@ extension CollabEditorViewController: PHPickerViewControllerDelegate {
                 self.attach(image: data, width: width, height: height)
             }
         }
+    }
+}
+
+/**
+ A file handed over, saying what it is.
+
+ A share sheet types a file by its extension, and iOS knows nothing of `.md`:
+ the file is then offered as content of no type at all, which the other side
+ refuses. Naming the type leaves it nothing to guess at.
+ */
+private class CollabExportItem: NSObject, UIActivityItemSource {
+
+    private let file: URL
+    private let type: String
+    private let name: String
+
+    init(file: URL, type: String, name: String) {
+        self.file = file
+        self.type = type
+        self.name = name
+    }
+
+    func activityViewControllerPlaceholderItem(_ controller: UIActivityViewController) -> Any {
+        return self.file
+    }
+
+    func activityViewController(_ controller: UIActivityViewController,
+                                itemForActivityType activity: UIActivity.ActivityType?) -> Any? {
+        return self.file
+    }
+
+    func activityViewController(_ controller: UIActivityViewController,
+                                dataTypeIdentifierForActivityType
+                                    activity: UIActivity.ActivityType?) -> String {
+        return self.type
+    }
+
+    func activityViewController(_ controller: UIActivityViewController,
+                                subjectForActivityType activity: UIActivity.ActivityType?)
+    -> String {
+        return self.name
     }
 }
 
