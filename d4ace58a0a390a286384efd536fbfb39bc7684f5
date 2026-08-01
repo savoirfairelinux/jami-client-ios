@@ -1,0 +1,22 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7bec315_60be8817",
+        "filename": "Ring/Ring.xcodeproj/project.pbxproj",
+        "patchSetId": 4
+      },
+      "lineNbr": 4097,
+      "author": {
+        "id": 617
+      },
+      "writtenOn": "2026-08-01T02:59:00Z",
+      "side": 1,
+      "message": "Adding the file is what I did first, and then I asked what the list costs\nwhen it is wrong: this change exists because the list did not have export.js\nin it, so Xcode thought the phase was up to date and the application went on\nshipping the bundle from before. That is not a build that fails, it is a build\nthat succeeds and installs an editor from another day.\n\nThe next file added would do it again. A list that has to be right, in a file\nnobody reads, and whose being wrong is silent, is what I would rather not\nleave behind.\n\nMeasured, with nothing changed:\n\n    real 0.09\n    real 0.09\n    real 0.09\n\nThe script decides for itself: it reinstalls only when the lock file has moved,\nand esbuild does the rest. Ninety milliseconds is not what an incremental build\nis spent on.",
+      "parentUuid": "9fb8f930_325c0630",
+      "revId": "d4ace58a0a390a286384efd536fbfb39bc7684f5",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
