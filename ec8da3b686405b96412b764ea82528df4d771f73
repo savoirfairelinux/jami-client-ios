@@ -1,0 +1,22 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1c39168_c2b1c1c4",
+        "filename": "Ring/Ring/Features/Collab/CollabEditorViewModel.swift",
+        "patchSetId": 7
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 617
+      },
+      "writtenOn": "2026-08-01T03:09:13Z",
+      "side": 1,
+      "message": "Right. Fixed in patch set 7: each export goes into a directory of its own, the\nfile inside keeping the document\u0027s name, and the share sheet\u0027s completion\nhandler removes that directory rather than the file.\n\nThe same bug was on Android, in a louder form: it swept the export directory\nclean before writing, so a second export deleted the first one\u0027s file outright\nwhile the receiving app was still reading it. Fixed there too, except that\nnothing on that side is told when the reading ends -- the old directories are\nswept by age at the next export instead.",
+      "parentUuid": "12acbdeb_5be5d763",
+      "revId": "ec8da3b686405b96412b764ea82528df4d771f73",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
