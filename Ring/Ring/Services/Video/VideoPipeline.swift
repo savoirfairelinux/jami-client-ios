@@ -157,8 +157,14 @@ final class VideoPipeline: NSObject {
         }
     }
 
+    private static let cameraScheme = "camera://"
+
     static func cameraSourceURI(from source: String) -> String {
-        return source.hasPrefix("camera://") ? source : "camera://" + source
+        return source.hasPrefix(cameraScheme) ? source : cameraScheme + source
+    }
+
+    private static func isCaptureSink(_ sinkId: String) -> Bool {
+        return sinkId.hasPrefix(cameraScheme)
     }
 
     func startPreviewCapture() {
@@ -294,6 +300,7 @@ extension VideoPipeline: VideoAdapterDelegate {
 extension VideoPipeline: DecodingAdapterDelegate {
 
     func decodingStarted(withSinkId sinkId: String, withWidth width: Int, withHeight height: Int) {
+        guard !Self.isCaptureSink(sinkId) else { return }
         let sink = SinkId(raw: sinkId)
         sinkRegistry.handleDecodingStarted(sinkId: sink)
         locked { _ = decodingSinks.insert(sink) }
@@ -305,6 +312,7 @@ extension VideoPipeline: DecodingAdapterDelegate {
     }
 
     func decodingStopped(withSinkId sinkId: String) {
+        guard !Self.isCaptureSink(sinkId) else { return }
         let sink = SinkId(raw: sinkId)
         sinkRegistry.handleDecodingStopped(sinkId: sink)
         locked { decodingSinks.remove(sink) }
