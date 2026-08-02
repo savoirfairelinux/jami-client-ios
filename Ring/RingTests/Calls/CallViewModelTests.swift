@@ -293,12 +293,7 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
         let focusedParticipantId = CallTestFixtures.remoteSinkId
         let conferenceId = CallTestFixtures.conferenceId.raw
         harness.callAPI.conferenceCallsReturn[conferenceId] = [harness.callId.raw]
-        harness.send(.conferenceCreated(conferenceId: conferenceId, conversationId: String(),
-                                        accountId: Harness.accountId,
-                                        state: ConferenceLifecycle.activeAttached.rawValue,
-                                        memberCallIds: [harness.callId.raw],
-                                        participants: [],
-                                        media: [.audio(), .video()]))
+        harness.createConference(with: [harness.callId], media: [.audio(), .video()])
         func sendInfos(activeId: String?, othersSide: Int) {
             func entry(_ uri: String, _ device: String, _ sink: String)
             -> ConferenceParticipantInfo {
@@ -429,11 +424,7 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
         let conferenceId = CallTestFixtures.conferenceId.raw
         let remoteId = CallTestFixtures.remoteSinkId
         harness.callAPI.conferenceCallsReturn[conferenceId] = [harness.callId.raw]
-        harness.send(.conferenceCreated(conferenceId: conferenceId, conversationId: String(),
-                                        accountId: Harness.accountId,
-                                        state: ConferenceLifecycle.activeAttached.rawValue,
-                                        memberCallIds: [harness.callId.raw],
-                                        participants: [], media: []))
+        harness.createConference(with: [harness.callId], media: [])
         func sendInfos(moderatorMuted: Bool) {
             harness.send(.conferenceInfosUpdated(
                             conferenceId: conferenceId,
@@ -503,12 +494,8 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
         XCTAssertFalse(model.chromeVisible, "precondition: video call chrome can hide")
         let conferenceId = CallTestFixtures.conferenceId.raw
 
-        harness.send(.conferenceCreated(
-            conferenceId: conferenceId, conversationId: "", accountId: Harness.accountId,
-            state: ConferenceLifecycle.activeAttached.rawValue,
-            memberCallIds: [harness.callId.raw],
-            participants: [],
-            media: [.audio(), .video(muted: true)]))
+        harness.createConference(with: [harness.callId],
+                                media: [.audio(), .video(muted: true)])
         harness.send(.conferenceInfosUpdated(
             conferenceId: conferenceId,
             participants: [CallTestFixtures.participant(
@@ -665,12 +652,7 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
 
         let conferenceId = CallTestFixtures.conferenceId.raw
         harness.callAPI.conferenceCallsReturn[conferenceId] = [harness.callId.raw]
-        harness.send(.conferenceCreated(conferenceId: conferenceId, conversationId: "",
-                                        accountId: Harness.accountId,
-                                        state: ConferenceLifecycle.activeAttached.rawValue,
-                                        memberCallIds: [harness.callId.raw],
-                                        participants: [],
-                                        media: [.audio()]))
+        harness.createConference(with: [harness.callId])
         harness.send(.conferenceInfosUpdated(
                         conferenceId: conferenceId,
                         participants: [CallTestFixtures.participant(
@@ -693,12 +675,7 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
         let conferenceId = CallTestFixtures.conferenceId.raw
         harness.callAPI.conferenceCallsReturn[conferenceId] = [harness.callId.raw]
 
-        harness.send(.conferenceCreated(conferenceId: conferenceId, conversationId: "",
-                                        accountId: Harness.accountId,
-                                        state: ConferenceLifecycle.activeAttached.rawValue,
-                                        memberCallIds: [harness.callId.raw],
-                                        participants: [],
-                                        media: [.audio()]))
+        harness.createConference(with: [harness.callId])
         await Harness.wait { model.conference != nil }
 
         XCTAssertEqual(model.header.title, L10n.Calls.participantsInCall("2"),
@@ -721,19 +698,9 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
         await Harness.wait { model.header.title == profileName1 }
 
         let conferenceId = CallTestFixtures.conferenceId.raw
-        let survivorId = CallTestFixtures.hostCallId.raw
-        harness.send(.incomingCall(accountId: Harness.accountId, callId: survivorId,
-                                   peerUri: CallTestFixtures.tertiaryPeerUri,
-                                   media: [.audio()], details: nil))
-        harness.send(.callStateChanged(callId: survivorId, state: .current,
-                                       rawState: LibJamiCallState.current.rawValue,
-                                       accountId: Harness.accountId,
-                                       code: 0, negotiatedMedia: [.audio()], videoCodec: nil))
-        harness.send(.conferenceCreated(conferenceId: conferenceId, conversationId: "",
-                                        accountId: Harness.accountId,
-                                        state: ConferenceLifecycle.activeAttached.rawValue,
-                                        memberCallIds: [harness.callId.raw, survivorId],
-                                        participants: [], media: [.audio()]))
+        let survivorId = CallTestFixtures.hostCallId
+        await harness.addOngoingCall(survivorId, peerUri: CallTestFixtures.tertiaryPeerUri)
+        harness.createConference(with: [harness.callId, survivorId])
         await Harness.wait { model.conference?.memberCallIds.count == 2 }
 
         harness.send(.callStateChanged(callId: harness.callId.raw, state: .over,
@@ -741,7 +708,7 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
                                        accountId: Harness.accountId,
                                        code: 0, negotiatedMedia: [], videoCodec: nil))
         await Harness.wait {
-            model.currentCallId == CallId(raw: survivorId)
+            model.currentCallId == survivorId
                 && model.call?.peerUri == CallTestFixtures.tertiaryPeerUri
         }
         harness.send(.conferenceRemoved(conferenceId: conferenceId))

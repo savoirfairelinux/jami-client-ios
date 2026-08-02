@@ -52,14 +52,6 @@ struct BarMetrics {
     }
 }
 
-private struct ControlsWidthKey: PreferenceKey {
-    static var defaultValue: CGFloat = 0
-
-    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
-        value = max(value, nextValue())
-    }
-}
-
 private struct ControlIcon: View {
     let systemName: String
     var style: ControlAction.Style = .normal
@@ -113,8 +105,8 @@ private struct ControlButton: View {
 struct CallControlsView: View {
 
     @ObservedObject var model: CallViewModel
+    let availableWidth: CGFloat
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
-    @SwiftUI.State private var availableWidth: CGFloat = 0
 
     private var plan: CallControlsLayout.Plan? {
         guard let controls = model.controls else { return nil }
@@ -148,10 +140,6 @@ struct CallControlsView: View {
             }
         }
         .frame(maxWidth: .infinity)
-        .background(GeometryReader { geo in
-            Color.clear.preference(key: ControlsWidthKey.self, value: geo.size.width)
-        })
-        .onPreferenceChange(ControlsWidthKey.self) { availableWidth = $0 }
         .onChange(of: horizontalSizeClass) { newValue in
             if newValue == .regular { model.setMoreExpanded(false) }
         }
@@ -174,8 +162,7 @@ struct CallControlsView: View {
             }
         }
         .padding(metrics.pad)
-        .background(Color.black.opacity(0.4))
-        .clipShape(Capsule())
+        .onVideoCapsule()
     }
 
     private func overflowColumn(_ actions: [ControlAction], metrics: BarMetrics) -> some View {
@@ -190,8 +177,7 @@ struct CallControlsView: View {
             }
         }
         .padding(metrics.pad)
-        .background(Color.black.opacity(0.4))
-        .clipShape(Capsule())
+        .onVideoCapsule()
     }
 
     private func dispatch(_ intent: CallControlIntent) {

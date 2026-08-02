@@ -24,7 +24,7 @@ final class CallPresentationStateTests: XCTestCase {
 
     func testLateObserverReceivesCallWaitingForPresentation() {
         let state = CallPresentationState()
-        let call = makeCall(id: CallTestFixtures.callId)
+        let call = CallTestFixtures.call()
         state.present(call)
 
         var received: CallState?
@@ -39,8 +39,8 @@ final class CallPresentationStateTests: XCTestCase {
 
     func testMatchedCallReplacesPlaceholderUntilRealCallEnds() {
         let state = CallPresentationState()
-        let placeholder = makeCall(id: CallId.local())
-        let matched = makeCall(id: CallTestFixtures.callId)
+        let placeholder = CallTestFixtures.call(id: CallId.local())
+        let matched = CallTestFixtures.call()
         state.present(placeholder)
 
         state.replace(placeholder.id, with: matched)
@@ -55,8 +55,8 @@ final class CallPresentationStateTests: XCTestCase {
 
     func testCallWaitingForTheScreenOutlivesTheCallItSuperseded() {
         let state = CallPresentationState()
-        let onScreen = makeCall(id: CallTestFixtures.callId)
-        let waiting = makeCall(id: CallTestFixtures.secondaryCallId)
+        let onScreen = CallTestFixtures.call()
+        let waiting = CallTestFixtures.call(id: CallTestFixtures.secondaryCallId)
         state.present(onScreen)
         state.present(waiting)
 
@@ -64,10 +64,5 @@ final class CallPresentationStateTests: XCTestCase {
 
         XCTAssertEqual(state.call.value, waiting,
                        "the call still waiting must survive the end of the one it replaced")
-    }
-
-    private func makeCall(id: CallId) -> CallState {
-        return CallTestFixtures.call(id: id, direction: .incoming,
-                                     media: [.audio()], isAudioOnly: true)
     }
 }

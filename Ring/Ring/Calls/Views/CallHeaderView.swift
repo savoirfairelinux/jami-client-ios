@@ -71,8 +71,7 @@ struct CallHeaderView: View {
         .padding(.horizontal, Metrics.horizontalPadding)
         .padding(.vertical, Metrics.verticalPadding)
         .frame(minHeight: Metrics.minimumHeight)
-        .background(Color.black.opacity(0.35))
-        .clipShape(Capsule())
+        .onVideoCapsule()
         .contentShape(Capsule())
         .onTapGesture {
             if header.showsRoster { model.showsParticipants = true }

@@ -28,19 +28,6 @@ enum ContextMenuPresentingState {
     case dismissed
 }
 
-struct VisualEffect: UIViewRepresentable {
-    let style: UIBlurEffect.Style
-    let withVibrancy: Bool
-
-    func makeUIView(context: Context) -> UIVisualEffectView {
-        let blurEffect = UIBlurEffect(style: style)
-        let effect = withVibrancy ? UIVibrancyEffect(blurEffect: blurEffect) : blurEffect
-        return UIVisualEffectView(effect: effect)
-    }
-    func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
-    }
-}
-
 struct ContextMenuView: View {
     @SwiftUI.StateObject var model: ContextMenuVM
     @Binding var presentingState: ContextMenuPresentingState
