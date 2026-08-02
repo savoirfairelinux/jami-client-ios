@@ -49,33 +49,34 @@ struct CallScreenView: View {
         .onDisappear { model.screenDisappeared() }
     }
 
-    @ViewBuilder
     private var chrome: some View {
         ZStack {
-            if model.moreExpanded {
-                Color.black.opacity(0.28)
-                    .ignoresSafeArea()
-                    .transition(.opacity)
-                    .onTapGesture {
-                        withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
-                            model.setMoreExpanded(false)
+            if model.showsChrome {
+                if model.moreExpanded {
+                    Color.black.opacity(0.28)
+                        .ignoresSafeArea()
+                        .transition(.opacity)
+                        .onTapGesture {
+                            withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+                                model.setMoreExpanded(false)
+                            }
                         }
-                    }
-            }
+                }
 
-            VStack {
-                CallHeaderView(model: model)
-                Spacer()
-                CallControlsView(model: model)
-                    .padding(.bottom, 12)
+                GeometryReader { geometry in
+                    VStack {
+                        CallHeaderView(model: model)
+                        Spacer()
+                        CallControlsView(model: model, availableWidth: geometry.size.width)
+                            .padding(.bottom, 12)
+                    }
+                }
+                .padding()
+                .transition(.opacity)
             }
-            .padding()
-            .opacity(model.chromeVisible ? 1 : 0)
-            .allowsHitTesting(model.chromeVisible)
-            .animation(chromeAnimation, value: model.chromeVisible)
         }
-        .opacity(model.contentHidden ? 0 : 1)
-        .allowsHitTesting(!model.contentHidden)
+        .allowsHitTesting(model.showsChrome)
+        .animation(chromeAnimation, value: model.showsChrome)
     }
 }
 

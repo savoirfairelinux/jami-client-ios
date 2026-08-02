@@ -90,6 +90,7 @@ extension UIColor {
     static let jamiCallPulse = UIColor(hex: 0x039FDF, alpha: 1.0)
     static let jamiDefaultAvatar = UIColor(hex: 0x039FDF, alpha: 1.0)
     static let jamiOnVideoScrim = UIColor(named: "jamiOnVideoScrim")!
+    static let jamiOnVideoGlass = UIColor(named: "jamiOnVideoGlass")!
 
     // MARK: - Status
     static let jamiSuccess = UIColor(hex: 0x00b20b, alpha: 1.0)

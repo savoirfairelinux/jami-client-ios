@@ -65,6 +65,8 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
     @Published private(set) var moreExpanded = false
     @Published private(set) var contentHidden = false
 
+    var showsChrome: Bool { chromeVisible && !contentHidden }
+
     @Published private(set) var header = CallHeaderModel.empty
 
     // MARK: - Dependencies

@@ -261,6 +261,19 @@ extension View {
     }
 }
 
+struct VisualEffect: UIViewRepresentable {
+    let style: UIBlurEffect.Style
+    var withVibrancy = false
+
+    func makeUIView(context: Context) -> UIVisualEffectView {
+        let blurEffect = UIBlurEffect(style: style)
+        let effect = withVibrancy ? UIVibrancyEffect(blurEffect: blurEffect) : blurEffect
+        return UIVisualEffectView(effect: effect)
+    }
+    func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
+    }
+}
+
 struct CloseButton: View {
     let action: () -> Void
     let accessibilityIdentifier: String
