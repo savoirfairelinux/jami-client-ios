@@ -53,8 +53,24 @@ actor CallStore { // swiftlint:disable:this type_body_length
 
     /// Sub-call → host call: joins deferred until the sub-call is current.
     private var pendingJoins: [CallId: CallId] = [:]
-    /// Swarm placements waiting for their ConferenceCreated.
-    private var pendingSwarmCalls: [String: CheckedContinuation<ConfId, Error>] = [:]
+    /// Swarm placements waiting for their ConferenceCreated. Hosting a new
+    /// swarm intentionally returns no call id, so the request metadata has to
+    /// survive for a bounded interval while the conference signal may still
+    /// supply the session id.
+    private struct PendingSwarmCallKey: Hashable, Sendable {
+        let accountId: String
+        let conversationId: String
+    }
+    private struct PendingSwarmCall {
+        let requestId: UUID
+        var continuation: CheckedContinuation<ConfId, Error>?
+        let accountId: String
+        let media: [MediaItem]
+        let isAudioOnly: Bool
+        let lateConferenceRetention: TimeInterval
+        var callId: CallId?
+    }
+    private var pendingSwarmCalls: [PendingSwarmCallKey: PendingSwarmCall] = [:]
     /// Locally-created calls waiting for the libjami call that replaces them,
     /// keyed by account + peer hash.
     private var awaitingMatch: [PendingCallKey: CallId] = [:]
@@ -189,6 +205,14 @@ actor CallStore { // swiftlint:disable:this type_body_length
         guard let rawId = callAPI.placeCall(accountId: accountId, to: peerUri, media: media) else {
             throw CallStoreError.placeCallFailed
         }
+        return registerPlacedCall(rawId: rawId, accountId: accountId, peerUri: peerUri,
+                                  media: media, isAudioOnly: isAudioOnly,
+                                  joinsExistingCall: joinsExistingCall)
+    }
+
+    private func registerPlacedCall(rawId: String, accountId: String, peerUri: String,
+                                    media: [MediaItem], isAudioOnly: Bool,
+                                    joinsExistingCall: Bool = false) -> CallState {
         var call = CallState(id: CallId(raw: rawId),
                              accountId: accountId,
                              direction: .outgoing,
@@ -216,28 +240,84 @@ actor CallStore { // swiftlint:disable:this type_body_length
     /// libjami's ConferenceCreated.
     func placeSwarmCall(accountId: String, conversationId: String,
                         audioOnly: Bool, videoSource: String,
-                        timeout: TimeInterval = 30) async throws -> ConfId {
-        _ = try placeCall(accountId: accountId, to: "swarm:" + conversationId,
-                          audioOnly: audioOnly, videoSource: videoSource)
-
+                        timeout: TimeInterval = 30,
+                        lateConferenceRetention: TimeInterval = 30) async throws -> ConfId {
+        let key = PendingSwarmCallKey(accountId: accountId, conversationId: conversationId)
+        guard pendingSwarmCalls[key] == nil else {
+            throw CallStoreError.placeCallFailed
+        }
+        let uri = "swarm:" + conversationId
+        let media = MediaNegotiator.completeMediaList(videoMuted: audioOnly,
+                                                       videoSource: videoSource)
         return try await withCheckedThrowingContinuation { continuation in
-            pendingSwarmCalls[conversationId] = continuation
-            scheduleSwarmCallExpiration(conversationId: conversationId, timeout: timeout)
+            pendingSwarmCalls[key] = PendingSwarmCall(
+                requestId: UUID(),
+                continuation: continuation,
+                accountId: accountId,
+                media: media,
+                isAudioOnly: audioOnly,
+                lateConferenceRetention: lateConferenceRetention,
+                callId: nil)
+            scheduleSwarmCallExpiration(for: key, timeout: timeout)
+
+            // A nil id is the normal libjami result when this device hosts a
+            // new swarm. ConferenceCreated completes that path. If libjami
+            // returns a sub-call id, retain the ordinary outgoing-call flow.
+            guard let rawId = callAPI.placeCall(accountId: accountId, to: uri, media: media) else {
+                return
+            }
+            let call = registerPlacedCall(rawId: rawId, accountId: accountId,
+                                          peerUri: uri, media: media,
+                                          isAudioOnly: audioOnly)
+            pendingSwarmCalls[key]?.callId = call.id
         }
     }
 
-    private func scheduleSwarmCallExpiration(conversationId: String, timeout: TimeInterval) {
+    private func scheduleSwarmCallExpiration(for key: PendingSwarmCallKey,
+                                             timeout: TimeInterval) {
         Task { [weak self] in
             guard await Self.waitForTimeout(timeout) else { return }
-            await self?.expireSwarmCall(conversationId: conversationId)
+            await self?.expireSwarmCall(for: key)
         }
     }
 
-    private func expireSwarmCall(conversationId: String) {
-        guard let continuation = pendingSwarmCalls.removeValue(forKey: conversationId) else {
+    private func expireSwarmCall(for key: PendingSwarmCallKey) {
+        guard var pending = pendingSwarmCalls[key],
+              let continuation = pending.continuation else {
             return
         }
+        pending.continuation = nil
+        if pending.callId == nil {
+            // Retain host placement metadata after resuming the caller. A
+            // delayed ConferenceCreated still represents a live daemon
+            // session and must produce a controllable call screen.
+            pendingSwarmCalls[key] = pending
+            scheduleLateConferenceMetadataCleanup(
+                for: key,
+                requestId: pending.requestId,
+                retention: pending.lateConferenceRetention)
+        } else {
+            pendingSwarmCalls[key] = nil
+        }
         continuation.resume(throwing: CallStoreError.swarmCallTimedOut)
+    }
+
+    private func scheduleLateConferenceMetadataCleanup(
+        for key: PendingSwarmCallKey,
+        requestId: UUID,
+        retention: TimeInterval
+    ) {
+        Task { [weak self] in
+            guard await Self.waitForTimeout(retention) else { return }
+            await self?.removeExpiredSwarmPlacement(for: key, requestId: requestId)
+        }
+    }
+
+    private func removeExpiredSwarmPlacement(for key: PendingSwarmCallKey, requestId: UUID) {
+        guard let pending = pendingSwarmCalls[key],
+              pending.requestId == requestId,
+              pending.continuation == nil else { return }
+        pendingSwarmCalls[key] = nil
     }
 
     struct PendingCallKey: Hashable, Sendable {
@@ -327,6 +407,12 @@ actor CallStore { // swiftlint:disable:this type_body_length
 
     func hangUp(_ id: CallId) {
         guard var call = state.calls[id], call.status.allows(.hangUp) else { return }
+        if let confId = call.conferenceId,
+           confId.raw == id.raw,
+           state.conferences[confId]?.isHost == true {
+            hangUpConference(confId)
+            return
+        }
         let accountId = call.accountId
         let raw = id.raw
         if !id.isLocal {
@@ -356,6 +442,7 @@ actor CallStore { // swiftlint:disable:this type_body_length
             call.status = .terminated(.endedLocally)
             finishCall(call)
         }
+        finishHostedConferenceCall(id, status: .terminated(.endedLocally))
     }
 
     func hold(_ id: CallId, _ hold: Bool) {
@@ -806,6 +893,16 @@ actor CallStore { // swiftlint:disable:this type_body_length
     }
 
     private func applyMediaNegotiation(callId: CallId, media: [MediaItem]) {
+        let confId = ConfId(raw: callId.raw)
+        if isHostedConferenceAlias(callId, confId: confId) {
+            updateConference(confId) { conference in
+                if !media.isEmpty {
+                    conference.media = media
+                }
+                conference.pendingMediaRequest = nil
+            }
+            return
+        }
         if state.calls[callId] != nil {
             updateCall(callId) { call in
                 if !media.isEmpty {
@@ -815,7 +912,7 @@ actor CallStore { // swiftlint:disable:this type_body_length
             }
             return
         }
-        updateConference(ConfId(raw: callId.raw)) { conference in
+        updateConference(confId) { conference in
             if !media.isEmpty {
                 conference.media = media
             }
@@ -842,6 +939,15 @@ actor CallStore { // swiftlint:disable:this type_body_length
     }
 
     private func applyMuteSignal(callId: CallId, type: MediaType, muted: Bool) {
+        let confId = ConfId(raw: callId.raw)
+        if isHostedConferenceAlias(callId, confId: confId) {
+            updateConference(confId) { conference in
+                for index in conference.media.indices where conference.media[index].type == type {
+                    conference.media[index].muted = muted
+                }
+            }
+            return
+        }
         if state.calls[callId] != nil {
             updateCall(callId) { call in
                 for index in call.media.indices where call.media[index].type == type {
@@ -850,11 +956,16 @@ actor CallStore { // swiftlint:disable:this type_body_length
             }
             return
         }
-        updateConference(ConfId(raw: callId.raw)) { conference in
+        updateConference(confId) { conference in
             for index in conference.media.indices where conference.media[index].type == type {
                 conference.media[index].muted = muted
             }
         }
+    }
+
+    private func isHostedConferenceAlias(_ callId: CallId, confId: ConfId) -> Bool {
+        return state.calls[callId]?.conferenceId == confId
+            && state.conferences[confId]?.isHost == true
     }
 
     private func applyConferenceCreated(confId: ConfId, conversationId: String,
@@ -887,12 +998,47 @@ actor CallStore { // swiftlint:disable:this type_body_length
         }
 
         conference.isHost = true
-        if let continuation = pendingSwarmCalls.removeValue(forKey: conversationId) {
-            continuation.resume(returning: confId)
+        state.conferences[confId] = conference
+
+        let pendingKey = PendingSwarmCallKey(accountId: accountId,
+                                             conversationId: conversationId)
+        if let pending = pendingSwarmCalls.removeValue(forKey: pendingKey) {
+            if let callId = pending.callId {
+                updateCall(callId, emit: false) { $0.conferenceId = confId }
+            } else {
+                addHostedConferenceCall(confId: confId,
+                                        conversationId: conversationId,
+                                        pending: pending,
+                                        conferenceMedia: conference.media)
+            }
+            pending.continuation?.resume(returning: confId)
         }
 
-        state.conferences[confId] = conference
         broadcaster.send(.conferenceUpdated(conference))
+    }
+
+    private func addHostedConferenceCall(confId: ConfId, conversationId: String,
+                                         pending: PendingSwarmCall,
+                                         conferenceMedia: [MediaItem]) {
+        let callId = CallId(raw: confId.raw)
+        let media = conferenceMedia.isEmpty ? pending.media : conferenceMedia
+        var call = CallState(id: callId,
+                             accountId: pending.accountId,
+                             direction: .outgoing,
+                             peerUri: "swarm:" + conversationId,
+                             status: .connecting,
+                             media: media,
+                             isAudioOnly: pending.isAudioOnly)
+        call.conversationId = conversationId
+        call.conferenceId = confId
+        endedCalls.forget(callId)
+        state.calls[callId] = call
+        broadcaster.send(.callAdded(call))
+
+        call.status = .current
+        call.startedAt = Date()
+        state.calls[callId] = call
+        broadcaster.send(.callUpdated(call))
     }
     private func applyConferenceChanged(confId: ConfId, accountId: String,
                                         lifecycle: String,
@@ -929,6 +1075,17 @@ actor CallStore { // swiftlint:disable:this type_body_length
             updateCall(memberId, emit: false) { $0.conferenceId = nil }
         }
         broadcaster.send(.conferenceEnded(confId, remainingCallId: remainingCallId))
+        if conference.isHost {
+            finishHostedConferenceCall(confId, status: .terminated(.over))
+        }
+    }
+
+    private func finishHostedConferenceCall(_ confId: ConfId, status: CallStatus) {
+        let callId = CallId(raw: confId.raw)
+        guard var call = state.calls[callId], call.conferenceId == confId else { return }
+        call.conferenceId = nil
+        call.status = status
+        finishCall(call)
     }
 
     private func applyConferenceInfos(confId: ConfId,
