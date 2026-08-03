@@ -320,11 +320,21 @@
 "calls.currentCallWith" = "Զանգահարեք ";
 "calls.maximize" = "Մաքսիմալացնել";
 "calls.minimize" = "Մինիմինացնել";
+"calls.moreActions" = "More actions";
+"calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Կազմել մոդերատոր";
 "calls.removeModerator" = "Կարգավորիչը անսահմանված";
 "calls.muteAudio" = "Միկրոֆոն անջատ";
 "calls.unmuteAudio" = "Միացնել խոսափողի ձայնը";
 "calls.lowerHand" = "Նվազագույն ձեռքը";
+"calls.inThisCall" = "In this call (%@)";
+"calls.participantsInCall" = "%@ in call";
+"calls.peerRecording" = "Recording";
+"calls.gridLayout" = "Grid view";
+"calls.calling" = "Calling…";
+"calls.callingParticipants" = "Calling (%@)";
+"calls.stopCalling" = "Stop calling %@";
+"calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
 "calls.activeCallInConversation" = "Հեռախոսազանգ է ընթանում։ Ցանկանում եք միանալ զանգին։";
 "calls.acceptWithAudio" = "Ընդունել ձայնով";
@@ -669,6 +679,10 @@
 "accessibility.conference.unmuteAudio" = "Անխափան ձայնային ձայն";
 "accessibility.conference.endCall" = "Վերջնական զանգը";
 "accessibility.conference.lowerHand" = "Նվազագույն ձեռքը";
+"accessibility.conference.showParticipants" = "Show participants";
+"accessibility.conference.showFullVideo" = "Show full video";
+"accessibility.conference.cropVideo" = "Crop video";
+"accessibility.conference.localPreview" = "Your video";
 "accessibility.account.tokenQRcode" = "Token QR code";
 
 // Swarm Colors

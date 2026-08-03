@@ -320,11 +320,21 @@
 "calls.currentCallWith" = "Llamar con";
 "calls.maximize" = "Maximizar";
 "calls.minimize" = "Minimizar";
+"calls.moreActions" = "More actions";
+"calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Asignar moderador";
 "calls.removeModerator" = "Desasignar moderador";
 "calls.muteAudio" = "Silenciar micrófono";
 "calls.unmuteAudio" = "Activar micrófono";
 "calls.lowerHand" = "Bajar la mano";
+"calls.inThisCall" = "In this call (%@)";
+"calls.participantsInCall" = "%@ in call";
+"calls.peerRecording" = "Grabaciones";
+"calls.gridLayout" = "Grid view";
+"calls.calling" = "Calling…";
+"calls.callingParticipants" = "Calling (%@)";
+"calls.stopCalling" = "Stop calling %@";
+"calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "Una llamada está en curso. ¿Quieres unirte a la convocatoria? También puede unirse a la llamada más tarde desde la conversación.";
 "calls.activeCallInConversation" = "Hay una llamada en curso. ¿Quieres unirte a la misma?";
 "calls.acceptWithAudio" = "Aceptar con audio";
@@ -669,6 +679,10 @@
 "accessibility.conference.unmuteAudio" = "Reactivar audio";
 "accessibility.conference.endCall" = "Finalizar llamada";
 "accessibility.conference.lowerHand" = "Bajar la mano";
+"accessibility.conference.showParticipants" = "Show participants";
+"accessibility.conference.showFullVideo" = "Show full video";
+"accessibility.conference.cropVideo" = "Crop video";
+"accessibility.conference.localPreview" = "Your video";
 "accessibility.account.tokenQRcode" = "Código QR de token";
 
 // Swarm Colors

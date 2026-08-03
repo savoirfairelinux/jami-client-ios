@@ -320,11 +320,21 @@
 "calls.currentCallWith" = "Telepon dengan";
 "calls.maximize" = "Maksimalkan";
 "calls.minimize" = "Minimalkan";
+"calls.moreActions" = "More actions";
+"calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Atur moderator";
 "calls.removeModerator" = "Batal atur moderator";
 "calls.muteAudio" = "Senyapkan mikrofon";
 "calls.unmuteAudio" = "Suarakan mikrofon";
 "calls.lowerHand" = "Turunkan tangan";
+"calls.inThisCall" = "In this call (%@)";
+"calls.participantsInCall" = "%@ in call";
+"calls.peerRecording" = "Merekam";
+"calls.gridLayout" = "Grid view";
+"calls.calling" = "Calling…";
+"calls.callingParticipants" = "Calling (%@)";
+"calls.stopCalling" = "Stop calling %@";
+"calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
 "calls.activeCallInConversation" = "Sebuah panggilan sedang berlangsung.";
 "calls.acceptWithAudio" = "Terima dengan audio";
@@ -669,6 +679,10 @@
 "accessibility.conference.unmuteAudio" = "Bunyikan audio";
 "accessibility.conference.endCall" = "Akhiri panggilan";
 "accessibility.conference.lowerHand" = "Turunkan tangan";
+"accessibility.conference.showParticipants" = "Show participants";
+"accessibility.conference.showFullVideo" = "Show full video";
+"accessibility.conference.cropVideo" = "Crop video";
+"accessibility.conference.localPreview" = "Your video";
 "accessibility.account.tokenQRcode" = "Token QR code";
 
 // Swarm Colors

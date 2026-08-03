@@ -320,11 +320,21 @@
 "calls.currentCallWith" = "Gọi với ";
 "calls.maximize" = "Tăng tối đa";
 "calls.minimize" = "Giảm thiểu";
+"calls.moreActions" = "More actions";
+"calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Set moderator";
 "calls.removeModerator" = "Moderator không cài đặt";
 "calls.muteAudio" = "Tắt tiếng micrô";
 "calls.unmuteAudio" = "Bật tiếng micrô";
 "calls.lowerHand" = "Tay dưới";
+"calls.inThisCall" = "In this call (%@)";
+"calls.participantsInCall" = "%@ in call";
+"calls.peerRecording" = "Recording";
+"calls.gridLayout" = "Grid view";
+"calls.calling" = "Calling…";
+"calls.callingParticipants" = "Calling (%@)";
+"calls.stopCalling" = "Stop calling %@";
+"calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "Một cuộc gọi đang diễn ra. Bạn có muốn tham gia cuộc gọi không? Bạn cũng có thể tham gia cuộc gọi sau từ cuộc trò chuyện.";
 "calls.activeCallInConversation" = "Có cuộc gọi đang diễn ra, anh có muốn tham gia cuộc gọi không?";
 "calls.acceptWithAudio" = "Chấp nhận bằng âm thanh";
@@ -669,6 +679,10 @@
 "accessibility.conference.unmuteAudio" = "Đáp âm thanh không động";
 "accessibility.conference.endCall" = "Kết thúc cuộc gọi";
 "accessibility.conference.lowerHand" = "Tay dưới";
+"accessibility.conference.showParticipants" = "Show participants";
+"accessibility.conference.showFullVideo" = "Show full video";
+"accessibility.conference.cropVideo" = "Crop video";
+"accessibility.conference.localPreview" = "Your video";
 "accessibility.account.tokenQRcode" = "Mã QR mã thông báo";
 
 // Swarm Colors

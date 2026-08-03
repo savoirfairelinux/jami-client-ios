@@ -320,11 +320,21 @@
 "calls.currentCallWith" = "Apel cu ";
 "calls.maximize" = "Maximizează";
 "calls.minimize" = "Minimizează";
+"calls.moreActions" = "More actions";
+"calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Pune un moderator";
 "calls.removeModerator" = "Elimină moderatorul";
 "calls.muteAudio" = "Oprește microfonul";
 "calls.unmuteAudio" = "Pornește microfonul";
 "calls.lowerHand" = "Coboară mâna";
+"calls.inThisCall" = "In this call (%@)";
+"calls.participantsInCall" = "%@ in call";
+"calls.peerRecording" = "Se înregistrează";
+"calls.gridLayout" = "Grid view";
+"calls.calling" = "Calling…";
+"calls.callingParticipants" = "Calling (%@)";
+"calls.stopCalling" = "Stop calling %@";
+"calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "Un apel este în curs. Vrei să participi? Poți participa și mai târziu din conversație.";
 "calls.activeCallInConversation" = "Un apel este în curs. Vrei să participi?";
 "calls.acceptWithAudio" = "Răspunde vocal";
@@ -669,6 +679,10 @@
 "accessibility.conference.unmuteAudio" = "Pornește microfonul";
 "accessibility.conference.endCall" = "Închide apelul";
 "accessibility.conference.lowerHand" = "Coboară mâna";
+"accessibility.conference.showParticipants" = "Show participants";
+"accessibility.conference.showFullVideo" = "Show full video";
+"accessibility.conference.cropVideo" = "Crop video";
+"accessibility.conference.localPreview" = "Your video";
 "accessibility.account.tokenQRcode" = "Codul QR";
 
 // Swarm Colors

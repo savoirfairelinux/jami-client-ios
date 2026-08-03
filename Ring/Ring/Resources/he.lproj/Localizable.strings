@@ -320,11 +320,21 @@
 "calls.currentCallWith" = "תתקשר עם ";
 "calls.maximize" = "שימו את האפס";
 "calls.minimize" = "מינימום";
+"calls.moreActions" = "More actions";
+"calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "הגדרת המודרטור";
 "calls.removeModerator" = "מתקן לא מתאים";
 "calls.muteAudio" = "מיקרופון שקט";
 "calls.unmuteAudio" = "בטל השתקת מיקרופון";
 "calls.lowerHand" = "יד התחתונה";
+"calls.inThisCall" = "In this call (%@)";
+"calls.participantsInCall" = "%@ in call";
+"calls.peerRecording" = "Recording";
+"calls.gridLayout" = "Grid view";
+"calls.calling" = "Calling…";
+"calls.callingParticipants" = "Calling (%@)";
+"calls.stopCalling" = "Stop calling %@";
+"calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
 "calls.activeCallInConversation" = "שיחת טלפון מתמשכת, אתה רוצה להצטרף?";
 "calls.acceptWithAudio" = "קבל עם שמע";
@@ -669,6 +679,10 @@
 "accessibility.conference.unmuteAudio" = "אוודיו לא שקט";
 "accessibility.conference.endCall" = "סיום השיחה";
 "accessibility.conference.lowerHand" = "יד התחתונה";
+"accessibility.conference.showParticipants" = "Show participants";
+"accessibility.conference.showFullVideo" = "Show full video";
+"accessibility.conference.cropVideo" = "Crop video";
+"accessibility.conference.localPreview" = "Your video";
 "accessibility.account.tokenQRcode" = "Token QR code";
 
 // Swarm Colors

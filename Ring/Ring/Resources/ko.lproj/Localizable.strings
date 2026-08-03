@@ -320,11 +320,21 @@
 "calls.currentCallWith" = "전화";
 "calls.maximize" = "최대한 활용";
 "calls.minimize" = "최소화";
+"calls.moreActions" = "More actions";
+"calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "조정기를 설정";
 "calls.removeModerator" = "설정하지 않는 모더레이터";
 "calls.muteAudio" = "무음 마이크";
 "calls.unmuteAudio" = "마이크 음소거 해제";
 "calls.lowerHand" = "하위 손";
+"calls.inThisCall" = "In this call (%@)";
+"calls.participantsInCall" = "%@ in call";
+"calls.peerRecording" = "Recording";
+"calls.gridLayout" = "Grid view";
+"calls.calling" = "Calling…";
+"calls.callingParticipants" = "Calling (%@)";
+"calls.stopCalling" = "Stop calling %@";
+"calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "통화가 진행 중입니다. 통화에 참여하시겠습니까? 나중에 대화에서 통화에 참여할 수도 있습니다.";
 "calls.activeCallInConversation" = "전화가 진행 중이야, 전화에 참여하고 싶니?";
 "calls.acceptWithAudio" = "음성과 함께 수락";
@@ -669,6 +679,10 @@
 "accessibility.conference.unmuteAudio" = "무음 음향";
 "accessibility.conference.endCall" = "통화 종료";
 "accessibility.conference.lowerHand" = "하위 손";
+"accessibility.conference.showParticipants" = "Show participants";
+"accessibility.conference.showFullVideo" = "Show full video";
+"accessibility.conference.cropVideo" = "Crop video";
+"accessibility.conference.localPreview" = "Your video";
 "accessibility.account.tokenQRcode" = "토큰 QR 코드";
 
 // Swarm Colors

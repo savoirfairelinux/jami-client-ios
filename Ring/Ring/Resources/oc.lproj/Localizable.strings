@@ -320,11 +320,21 @@
 "calls.currentCallWith" = "Apelèt amb ";
 "calls.maximize" = "Maximizar";
 "calls.minimize" = "Reduire";
+"calls.moreActions" = "More actions";
+"calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Configuracion de moderator";
 "calls.removeModerator" = "Moderator desactivat";
 "calls.muteAudio" = "Micròfon silenciós";
 "calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "Man inferiora";
+"calls.inThisCall" = "In this call (%@)";
+"calls.participantsInCall" = "%@ in call";
+"calls.peerRecording" = "Recording";
+"calls.gridLayout" = "Grid view";
+"calls.calling" = "Calling…";
+"calls.callingParticipants" = "Calling (%@)";
+"calls.stopCalling" = "Stop calling %@";
+"calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
 "calls.activeCallInConversation" = "Una telefoneta es en cors. Volètz participar a l'acompanhament?";
 "calls.acceptWithAudio" = "Accept with audio";
@@ -669,6 +679,10 @@
 "accessibility.conference.unmuteAudio" = "Audio imut";
 "accessibility.conference.endCall" = "Terminar";
 "accessibility.conference.lowerHand" = "Man inferiora";
+"accessibility.conference.showParticipants" = "Show participants";
+"accessibility.conference.showFullVideo" = "Show full video";
+"accessibility.conference.cropVideo" = "Crop video";
+"accessibility.conference.localPreview" = "Your video";
 "accessibility.account.tokenQRcode" = "Token QR code";
 
 // Swarm Colors

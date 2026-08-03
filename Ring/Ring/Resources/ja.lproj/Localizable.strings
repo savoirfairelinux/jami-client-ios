@@ -320,11 +320,21 @@
 "calls.currentCallWith" = "連絡する";
 "calls.maximize" = "最大化";
 "calls.minimize" = "最小化";
+"calls.moreActions" = "More actions";
+"calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "調停者を設定";
 "calls.removeModerator" = "調停者を取り消し";
 "calls.muteAudio" = "マイクをミュート";
 "calls.unmuteAudio" = "マイクのミュートを解除";
 "calls.lowerHand" = "手を下げる";
+"calls.inThisCall" = "In this call (%@)";
+"calls.participantsInCall" = "%@ in call";
+"calls.peerRecording" = "記録中";
+"calls.gridLayout" = "Grid view";
+"calls.calling" = "Calling…";
+"calls.callingParticipants" = "Calling (%@)";
+"calls.stopCalling" = "Stop calling %@";
+"calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "通話が進行中です。通話に参加しますか？後で会話から通話に参加することもできます。";
 "calls.activeCallInConversation" = "連絡が進んでいる. 連絡に参加したいですか?";
 "calls.acceptWithAudio" = "音声で承諾";
@@ -669,6 +679,10 @@
 "accessibility.conference.unmuteAudio" = "音声無音";
 "accessibility.conference.endCall" = "通話を終了";
 "accessibility.conference.lowerHand" = "手を下げる";
+"accessibility.conference.showParticipants" = "Show participants";
+"accessibility.conference.showFullVideo" = "Show full video";
+"accessibility.conference.cropVideo" = "Crop video";
+"accessibility.conference.localPreview" = "Your video";
 "accessibility.account.tokenQRcode" = "トークンQRコード";
 
 // Swarm Colors

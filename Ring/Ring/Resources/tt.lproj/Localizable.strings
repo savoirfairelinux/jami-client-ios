@@ -320,11 +320,21 @@
 "calls.currentCallWith" = "";
 "calls.maximize" = "Максимумлырак";
 "calls.minimize" = "Бу эшне киметмәгез";
+"calls.moreActions" = "More actions";
+"calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Модераторны билгелә";
 "calls.removeModerator" = "Модераторны урнаштырмау";
 "calls.muteAudio" = "Тыныч микрофон";
 "calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "Түбән кул";
+"calls.inThisCall" = "In this call (%@)";
+"calls.participantsInCall" = "%@ in call";
+"calls.peerRecording" = "Recording";
+"calls.gridLayout" = "Grid view";
+"calls.calling" = "Calling…";
+"calls.callingParticipants" = "Calling (%@)";
+"calls.stopCalling" = "Stop calling %@";
+"calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
 "calls.activeCallInConversation" = "Телефон буенча сөйләшү бара.";
 "calls.acceptWithAudio" = "Accept with audio";
@@ -669,6 +679,10 @@
 "accessibility.conference.unmuteAudio" = "Тыныч тавыш";
 "accessibility.conference.endCall" = "Шалтыратуны тәмамлау";
 "accessibility.conference.lowerHand" = "Түбән кул";
+"accessibility.conference.showParticipants" = "Show participants";
+"accessibility.conference.showFullVideo" = "Show full video";
+"accessibility.conference.cropVideo" = "Crop video";
+"accessibility.conference.localPreview" = "Your video";
 "accessibility.account.tokenQRcode" = "Token QR code";
 
 // Swarm Colors

@@ -320,11 +320,21 @@
 "calls.currentCallWith" = " తో కాల్";
 "calls.maximize" = "గరిష్టంగా";
 "calls.minimize" = "తక్కువ స్థాయిలో";
+"calls.moreActions" = "More actions";
+"calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "మోడరేటర్ సెట్";
 "calls.removeModerator" = "సెట్టింగ్ను తొలగించు";
 "calls.muteAudio" = "మ్యూట్ మైక్రోఫోన్";
 "calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "దిగువ చేతి";
+"calls.inThisCall" = "In this call (%@)";
+"calls.participantsInCall" = "%@ in call";
+"calls.peerRecording" = "Recording";
+"calls.gridLayout" = "Grid view";
+"calls.calling" = "Calling…";
+"calls.callingParticipants" = "Calling (%@)";
+"calls.stopCalling" = "Stop calling %@";
+"calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
 "calls.activeCallInConversation" = "ఒక కాల్ కొనసాగుతోంది. మీరు కాల్ చేరాలనుకుంటున్నారా?";
 "calls.acceptWithAudio" = "Accept with audio";
@@ -669,6 +679,10 @@
 "accessibility.conference.unmuteAudio" = "నిశ్శబ్ద ఆడియో";
 "accessibility.conference.endCall" = "కాల్‌ను ముగించు";
 "accessibility.conference.lowerHand" = "దిగువ చేతి";
+"accessibility.conference.showParticipants" = "Show participants";
+"accessibility.conference.showFullVideo" = "Show full video";
+"accessibility.conference.cropVideo" = "Crop video";
+"accessibility.conference.localPreview" = "Your video";
 "accessibility.account.tokenQRcode" = "Token QR code";
 
 // Swarm Colors

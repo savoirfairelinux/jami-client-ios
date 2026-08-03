@@ -277,7 +277,7 @@
 "alerts.accountDefaultErrorMessage" = "Beim Erstellen des Kontos ist ein Fehler aufgetreten.";
 "alerts.profileTakePhoto" = "Foto aufnehmen";
 "alerts.profileUploadPhoto" = "Foto hochladen";
-"alerts.accountLinkedTitle" = "Verknüpfe Konto";
+"alerts.accountLinkedTitle" = "Konto wird verknüpft";
 "alerts.dbFailedTitle" = "Beim Starten von Jami ist ein Fehler aufgetreten";
 "alerts.dbFailedMessage" = "Bitte schließen Sie die Anwendung und versuchen Sie, sie erneut zu öffnen";
 "alerts.confirmBlockContact" = "Möchten Sie diesen Kontakt blockieren? Der Unterhaltungsverlauf mit diesem Kontakt wird ebenfalls dauerhaft gelöscht.";
@@ -299,7 +299,7 @@
 "alerts.locationServiceIsDisabled" = "Aktivieren Sie die ‚Standortdienste‘, damit ‚Jami‘ den Gerätestandort bestimmen kann.";
 "alerts.locationSharing" = "Meinen Standort freigeben";
 "alerts.alreadylocationSharing" = "Standort wird bereits mit diesem Nutzer geteilt";
-"alerts.locationSharingDurationTitle" = "Wie lange sollte die Standortübermittlung dauern?";
+"alerts.locationSharingDurationTitle" = "Wie lange soll die Standortfreigabe dauern?";
 "alerts.locationSharingDuration10min" = "10 Minuten";
 "alerts.locationSharingDuration1hour" = "1 Stunde";
 "alerts.mapInformation" = "Karteninformationen";
@@ -320,11 +320,21 @@
 "calls.currentCallWith" = "Anrufen mit";
 "calls.maximize" = "Maximieren";
 "calls.minimize" = "Minimieren";
+"calls.moreActions" = "More actions";
+"calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Moderator festlegen";
 "calls.removeModerator" = "Moderator entfernen";
 "calls.muteAudio" = "Mikrofon stummschalten";
 "calls.unmuteAudio" = "Mikrofon-Stummschaltung aufheben";
 "calls.lowerHand" = "Hand senken";
+"calls.inThisCall" = "In this call (%@)";
+"calls.participantsInCall" = "%@ in call";
+"calls.peerRecording" = "Aufzeichnung";
+"calls.gridLayout" = "Grid view";
+"calls.calling" = "Calling…";
+"calls.callingParticipants" = "Calling (%@)";
+"calls.stopCalling" = "Stop calling %@";
+"calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "Ein Anruf läuft. Möchten Sie dem Anruf beitreten? Sie können dem Anruf auch später über die Unterhaltung beitreten.";
 "calls.activeCallInConversation" = "Ein Anruf läuft. Möchten Sie dem Anruf beitreten?";
 "calls.acceptWithAudio" = "Mit Audio annehmen";
@@ -379,7 +389,7 @@
 "accountPage.changePasswordError" = "Falsches Passwort";
 "accountPage.enableBoothMode" = "Booth-Modus aktivieren";
 "accountPage.disableBoothMode" = "Booth-Modus deaktivieren";
-"accountPage.disableBoothModeExplanation" = "Bitte geben Sie das Konto-Passwort an.";
+"accountPage.disableBoothModeExplanation" = "Bitte geben Sie das Passwort des Kontos ein.";
 "accountPage.boothModeExplanation" = "Im Booth-Modus wird der Unterhaltungsverlauf nicht gespeichert und die Jami-Funktionalität beim Tätigen von ausgehenden Anrufen eingeschränkt. Wenn Sie den Booth-Modus aktivieren, werden alle Ihre Unterhaltungen gelöscht.";
 "accountPage.noBoothMode" = "Um den Booth-Modus zu aktivieren, schützen Sie das Konto zunächst mit einem Passwort.";
 "accountPage.boothModeAlertMessage" = "Nach dem Aktivieren des Booth-Modus werden alle Unterhaltungen entfernt.";
@@ -429,12 +439,12 @@
 "accountPage.accountSettingsExplanation" = "Diese Einstellungen gelten nur für dieses Konto.";
 "accountPage.appSettings" = "App-Einstellungen";
 "accountPage.appSettingsExplanation" = "Diese Einstellungen gelten für die gesamte Anwendung";
-"accountPage.connectivityAndConfiguration" = "Verbindungen und Konfigurationen";
+"accountPage.connectivityAndConfiguration" = "Verbindung und Konfiguration";
 "accountPage.sipExpirationTime" = "Ablaufzeit der Registrierung (Sekunden)";
 "accountPage.tlsVerifyServerCertificates" = "TLS-Zertifikate des Servers verifizieren";
 "accountPage.tlsVerifyClientCertificates" = "TLS-Zertifikate des Clients verifizieren";
 "accountPage.tlsRequireTlsCertificate" = "Ein Zertifikat für eingehende TLS-Verbindungen voraussetzen";
-"accountPage.tlsDisableSecureDlgCheck" = "Überprüfung des sicheren Dialogs für eingehende TLS-Daten deaktivieren";
+"accountPage.tlsDisableSecureDlgCheck" = "Prüfung des Sicherheitsdialogs für eingehende TLS-Daten deaktivieren";
 "accountPage.editSipExpirationTime" = "Ablaufzeit";
 "accountPage.selectSipExpirationTime" = "Ablaufzeit der Registrierung (in Sekunden) festlegen";
 "accountPage.invalidSipExpirationTime" = "Einen Wert zwischen 60 und 604800 Sekunden eingeben";
@@ -456,7 +466,7 @@
 "backupAccount.creating" = "Sicherung wird erstellt";
 "backupAccount.archiveName" = "Wählen Sie einen Namen für das Archiv.";
 "backupAccount.archiveNamePlaceholder" = "Archivname";
-"backupAccount.passwordRequest" = "Geben Sie das Kontopasswort ein.";
+"backupAccount.passwordRequest" = "Geben Sie das Passwort des Kontos ein.";
 "backupAccount.backupButton" = "Sicherung";
 "backupAccount.documentPickerButton" = "Sicherungsort öffnen";
 "backupAccount.exportSuccess" = "Sicherung erstellt";
@@ -575,7 +585,7 @@
 "migrateAccount.title" = "Kontomigration";
 "migrateAccount.migrateButton" = "Konto migrieren";
 "migrateAccount.explanation" = "Kontomigration erforderlich.";
-"migrateAccount.passwordExplanation" = "Um mit der Kontomigration fortzufahren, geben Sie das Kontopasswort ein.";
+"migrateAccount.passwordExplanation" = "Um mit der Kontomigration fortzufahren, geben Sie das Passwort des Kontos ein.";
 "migrateAccount.error" = "Beim Migrieren des Kontos ist ein Fehler aufgetreten. Versuchen Sie es erneut oder löschen Sie das Konto.";
 "migrateAccount.migrating" = "Wird migriert…";
 "migrateAccount.migrateAnother" = "Anderes Konto migrieren";
@@ -669,6 +679,10 @@
 "accessibility.conference.unmuteAudio" = "Stummschaltung aufheben";
 "accessibility.conference.endCall" = "Anruf beenden";
 "accessibility.conference.lowerHand" = "Hand senken";
+"accessibility.conference.showParticipants" = "Show participants";
+"accessibility.conference.showFullVideo" = "Show full video";
+"accessibility.conference.cropVideo" = "Crop video";
+"accessibility.conference.localPreview" = "Your video";
 "accessibility.account.tokenQRcode" = "Token-QR-Code";
 
 // Swarm Colors

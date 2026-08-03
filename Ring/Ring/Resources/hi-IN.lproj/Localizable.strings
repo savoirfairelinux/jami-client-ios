@@ -320,11 +320,21 @@
 "calls.currentCallWith" = "";
 "calls.maximize" = "बड़ा करें";
 "calls.minimize" = "न्यूनतम करें";
+"calls.moreActions" = "More actions";
+"calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "मॉडरेटर सेट करें";
 "calls.removeModerator" = "मॉडरेटर अनसेट करें";
 "calls.muteAudio" = "मूक माइक्रोफोन";
 "calls.unmuteAudio" = "माइक्रोफ़ोन अनम्यूट करें";
 "calls.lowerHand" = "निचला हाथ";
+"calls.inThisCall" = "In this call (%@)";
+"calls.participantsInCall" = "%@ in call";
+"calls.peerRecording" = "Recording";
+"calls.gridLayout" = "Grid view";
+"calls.calling" = "Calling…";
+"calls.callingParticipants" = "Calling (%@)";
+"calls.stopCalling" = "Stop calling %@";
+"calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "एक कॉल प्रगति पर है। क्या आप कॉल में शामिल होना चाहते हैं? आप बाद में बातचीत से भी कॉल में शामिल हो सकते हैं।";
 "calls.activeCallInConversation" = "एक कॉल चल रही है. क्या आप कॉल में शामिल होना चाहते हैं?";
 "calls.acceptWithAudio" = "ऑडियो के साथ स्वीकार करें";
@@ -669,6 +679,10 @@
 "accessibility.conference.unmuteAudio" = "अमूत ऑडियो";
 "accessibility.conference.endCall" = "कॉल समाप्त करें";
 "accessibility.conference.lowerHand" = "निचला हाथ";
+"accessibility.conference.showParticipants" = "Show participants";
+"accessibility.conference.showFullVideo" = "Show full video";
+"accessibility.conference.cropVideo" = "Crop video";
+"accessibility.conference.localPreview" = "Your video";
 "accessibility.account.tokenQRcode" = "टोकन QR कोड";
 
 // Swarm Colors

@@ -320,11 +320,21 @@
 "calls.currentCallWith" = "Piga simu na ";
 "calls.maximize" = "Kufanya yote uwezayo";
 "calls.minimize" = "Punguza";
+"calls.moreActions" = "More actions";
+"calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Weka moderator";
 "calls.removeModerator" = "Moderator kutoweka";
 "calls.muteAudio" = "Kipaza sauti";
 "calls.unmuteAudio" = "Ondoa unyamazishaji wa maikrofoni";
 "calls.lowerHand" = "Mkono wa chini";
+"calls.inThisCall" = "In this call (%@)";
+"calls.participantsInCall" = "%@ in call";
+"calls.peerRecording" = "Recording";
+"calls.gridLayout" = "Grid view";
+"calls.calling" = "Calling…";
+"calls.callingParticipants" = "Calling (%@)";
+"calls.stopCalling" = "Stop calling %@";
+"calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
 "calls.activeCallInConversation" = "Simu inachukua hatua. Je, unataka kujiunga na simu?";
 "calls.acceptWithAudio" = "Kubali kwa sauti";
@@ -669,6 +679,10 @@
 "accessibility.conference.unmuteAudio" = "Sauti isiyo na sauti";
 "accessibility.conference.endCall" = "Maliza simu hii";
 "accessibility.conference.lowerHand" = "Mkono wa chini";
+"accessibility.conference.showParticipants" = "Show participants";
+"accessibility.conference.showFullVideo" = "Show full video";
+"accessibility.conference.cropVideo" = "Crop video";
+"accessibility.conference.localPreview" = "Your video";
 "accessibility.account.tokenQRcode" = "Token QR code";
 
 // Swarm Colors

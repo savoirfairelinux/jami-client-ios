@@ -320,11 +320,21 @@
 "calls.currentCallWith" = "通話對象：";
 "calls.maximize" = "最大化";
 "calls.minimize" = "最小化";
+"calls.moreActions" = "More actions";
+"calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "設定主持人";
 "calls.removeModerator" = "取消設定主持人";
 "calls.muteAudio" = "关闭麦克风";
 "calls.unmuteAudio" = "麦克风静音";
 "calls.lowerHand" = "放下手";
+"calls.inThisCall" = "In this call (%@)";
+"calls.participantsInCall" = "%@ in call";
+"calls.peerRecording" = "記錄";
+"calls.gridLayout" = "Grid view";
+"calls.calling" = "Calling…";
+"calls.callingParticipants" = "Calling (%@)";
+"calls.stopCalling" = "Stop calling %@";
+"calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "有個通話進行中。你是否要加入該通話？你也可以稍後加入該對話。";
 "calls.activeCallInConversation" = "电话正在进行,你想加入电话吗?";
 "calls.acceptWithAudio" = "接受音频";
@@ -669,6 +679,10 @@
 "accessibility.conference.unmuteAudio" = "取消静音";
 "accessibility.conference.endCall" = "結束電話";
 "accessibility.conference.lowerHand" = "放下手";
+"accessibility.conference.showParticipants" = "Show participants";
+"accessibility.conference.showFullVideo" = "Show full video";
+"accessibility.conference.cropVideo" = "Crop video";
+"accessibility.conference.localPreview" = "Your video";
 "accessibility.account.tokenQRcode" = "二維碼令牌";
 
 // Swarm Colors

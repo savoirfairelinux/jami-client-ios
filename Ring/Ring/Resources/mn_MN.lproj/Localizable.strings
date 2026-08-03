@@ -320,11 +320,21 @@
 "calls.currentCallWith" = "Тэнд нь дуудлаа";
 "calls.maximize" = "Хамгийн их хэмжээний";
 "calls.minimize" = "Хөгжлийн багасгах";
+"calls.moreActions" = "More actions";
+"calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Модератор байгуулж";
 "calls.removeModerator" = "Улаанбаатар";
 "calls.muteAudio" = "Улаан чимээгүй микрофон";
 "calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "Доод гар";
+"calls.inThisCall" = "In this call (%@)";
+"calls.participantsInCall" = "%@ in call";
+"calls.peerRecording" = "Recording";
+"calls.gridLayout" = "Grid view";
+"calls.calling" = "Calling…";
+"calls.callingParticipants" = "Calling (%@)";
+"calls.stopCalling" = "Stop calling %@";
+"calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
 "calls.activeCallInConversation" = "Зудлага явагдаж байна. Зудлагатай нэгдэх үү?";
 "calls.acceptWithAudio" = "Accept with audio";
@@ -669,6 +679,10 @@
 "accessibility.conference.unmuteAudio" = "Утасны үнэгүй";
 "accessibility.conference.endCall" = "Дуудлагыг дуусгах";
 "accessibility.conference.lowerHand" = "Доод гар";
+"accessibility.conference.showParticipants" = "Show participants";
+"accessibility.conference.showFullVideo" = "Show full video";
+"accessibility.conference.cropVideo" = "Crop video";
+"accessibility.conference.localPreview" = "Your video";
 "accessibility.account.tokenQRcode" = "Token QR code";
 
 // Swarm Colors

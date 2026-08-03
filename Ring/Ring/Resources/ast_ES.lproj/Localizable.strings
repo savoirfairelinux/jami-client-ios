@@ -320,11 +320,21 @@
 "calls.currentCallWith" = "Llamó con ";
 "calls.maximize" = "La mayor parte de los casos";
 "calls.minimize" = "La so capacidá de control ye de 5 a 10 años.";
+"calls.moreActions" = "More actions";
+"calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Establecimientu inscritu nel Rexistru d'Actividaes Turístiques del Principáu d'Asturies col códigu DGT CA0831.";
 "calls.removeModerator" = "Moderador desactiváu";
 "calls.muteAudio" = "Micrófonos silenciosos";
 "calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "La mano inferior";
+"calls.inThisCall" = "In this call (%@)";
+"calls.participantsInCall" = "%@ in call";
+"calls.peerRecording" = "Recording";
+"calls.gridLayout" = "Grid view";
+"calls.calling" = "Calling…";
+"calls.callingParticipants" = "Calling (%@)";
+"calls.stopCalling" = "Stop calling %@";
+"calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
 "calls.activeCallInConversation" = "Una llamada va en cursu. ¿Quieres xunise a la llamada?";
 "calls.acceptWithAudio" = "Accept with audio";
@@ -669,6 +679,10 @@
 "accessibility.conference.unmuteAudio" = "El soníu nun silenciáu";
 "accessibility.conference.endCall" = "La llamada final";
 "accessibility.conference.lowerHand" = "La mano inferior";
+"accessibility.conference.showParticipants" = "Show participants";
+"accessibility.conference.showFullVideo" = "Show full video";
+"accessibility.conference.cropVideo" = "Crop video";
+"accessibility.conference.localPreview" = "Your video";
 "accessibility.account.tokenQRcode" = "Token QR code";
 
 // Swarm Colors

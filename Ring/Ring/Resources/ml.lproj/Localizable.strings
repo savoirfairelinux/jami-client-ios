@@ -320,11 +320,21 @@
 "calls.currentCallWith" = " വിളിക്കുക";
 "calls.maximize" = "പരമാവധി";
 "calls.minimize" = "പരിമിതപ്പെടുത്തുക";
+"calls.moreActions" = "More actions";
+"calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "മോഡറേറ്റർ സജ്ജമാക്കുക";
 "calls.removeModerator" = "മോഡറേറ്റർ അൺസെറ്റ് ചെയ്യുക";
 "calls.muteAudio" = "മിണ്ടാത്ത മൈക്രോഫോൺ";
 "calls.unmuteAudio" = "മൈക്ക് അൺമ്യൂട്ട് ചെയ്യുക";
 "calls.lowerHand" = "താഴത്തെ കൈ";
+"calls.inThisCall" = "In this call (%@)";
+"calls.participantsInCall" = "%@ in call";
+"calls.peerRecording" = "Recording";
+"calls.gridLayout" = "Grid view";
+"calls.calling" = "Calling…";
+"calls.callingParticipants" = "Calling (%@)";
+"calls.stopCalling" = "Stop calling %@";
+"calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
 "calls.activeCallInConversation" = "ഒരു കോൾ നടക്കുന്നുണ്ട്.";
 "calls.acceptWithAudio" = "ഓഡിയൊ വഴി സ്വീകരിക്കുക";
@@ -669,6 +679,10 @@
 "accessibility.conference.unmuteAudio" = "നിശബ്ദമായ ഓഡിയോ";
 "accessibility.conference.endCall" = "കോൾ അവസാനിപ്പിക്കുക";
 "accessibility.conference.lowerHand" = "താഴത്തെ കൈ";
+"accessibility.conference.showParticipants" = "Show participants";
+"accessibility.conference.showFullVideo" = "Show full video";
+"accessibility.conference.cropVideo" = "Crop video";
+"accessibility.conference.localPreview" = "Your video";
 "accessibility.account.tokenQRcode" = "Token QR code";
 
 // Swarm Colors

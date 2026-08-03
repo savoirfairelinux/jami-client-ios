@@ -320,11 +320,21 @@
 "calls.currentCallWith" = "Звони з ";
 "calls.maximize" = "Збільшити";
 "calls.minimize" = "Зменьшити";
+"calls.moreActions" = "More actions";
+"calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Наведіть модератор";
 "calls.removeModerator" = "Не встановлюється модератор";
 "calls.muteAudio" = "Відключити мікрофон";
 "calls.unmuteAudio" = "Увімкнути звук мікрофона";
 "calls.lowerHand" = "Нижня рука";
+"calls.inThisCall" = "In this call (%@)";
+"calls.participantsInCall" = "%@ in call";
+"calls.peerRecording" = "Записування";
+"calls.gridLayout" = "Grid view";
+"calls.calling" = "Calling…";
+"calls.callingParticipants" = "Calling (%@)";
+"calls.stopCalling" = "Stop calling %@";
+"calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "Триває виклик. Бажаєте приєднатися до виклику? Ви також можете приєднатися до виклику пізніше з розмови.";
 "calls.activeCallInConversation" = "Зовсім не так.";
 "calls.acceptWithAudio" = "Прийняти зі звуком";
@@ -669,6 +679,10 @@
 "accessibility.conference.unmuteAudio" = "Незаглушенний аудіо";
 "accessibility.conference.endCall" = "Закінчити дзвінок";
 "accessibility.conference.lowerHand" = "Нижня рука";
+"accessibility.conference.showParticipants" = "Show participants";
+"accessibility.conference.showFullVideo" = "Show full video";
+"accessibility.conference.cropVideo" = "Crop video";
+"accessibility.conference.localPreview" = "Your video";
 "accessibility.account.tokenQRcode" = "QR-код токена";
 
 // Swarm Colors

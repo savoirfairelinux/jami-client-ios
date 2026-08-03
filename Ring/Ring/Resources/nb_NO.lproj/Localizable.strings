@@ -320,11 +320,21 @@
 "calls.currentCallWith" = "Call with ";
 "calls.maximize" = "Maksimer";
 "calls.minimize" = "Minimize";
+"calls.moreActions" = "More actions";
+"calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Angi ordstyrer";
 "calls.removeModerator" = "Avløs ordstyrer";
 "calls.muteAudio" = "Koble ut mikrofon";
 "calls.unmuteAudio" = "Opphev demping av mikrofon";
 "calls.lowerHand" = "Ta ned hånden";
+"calls.inThisCall" = "In this call (%@)";
+"calls.participantsInCall" = "%@ in call";
+"calls.peerRecording" = "Tar opp";
+"calls.gridLayout" = "Grid view";
+"calls.calling" = "Calling…";
+"calls.callingParticipants" = "Calling (%@)";
+"calls.stopCalling" = "Stop calling %@";
+"calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "En samtale pågår. Vil du bli med i samtalen? Du kan også bli med i samtalen senere fra samtalen.";
 "calls.activeCallInConversation" = "- Vil du delta i samtalen?";
 "calls.acceptWithAudio" = "Godta med lyd";
@@ -669,6 +679,10 @@
 "accessibility.conference.unmuteAudio" = "Unmute audio";
 "accessibility.conference.endCall" = "Avslutt samtale";
 "accessibility.conference.lowerHand" = "Ta ned hånden";
+"accessibility.conference.showParticipants" = "Show participants";
+"accessibility.conference.showFullVideo" = "Show full video";
+"accessibility.conference.cropVideo" = "Crop video";
+"accessibility.conference.localPreview" = "Your video";
 "accessibility.account.tokenQRcode" = "QR-kode for token";
 
 // Swarm Colors

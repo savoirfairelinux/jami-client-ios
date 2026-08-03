@@ -320,11 +320,21 @@
 "calls.currentCallWith" = "اتصل بـ";
 "calls.maximize" = "تكبير";
 "calls.minimize" = "خفض";
+"calls.moreActions" = "More actions";
+"calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "حدد المدير";
 "calls.removeModerator" = "إزالة المدير";
 "calls.muteAudio" = "كتم ميكروفون";
 "calls.unmuteAudio" = "إلغاء كتم الميكروفون";
 "calls.lowerHand" = "اليد السفلى";
+"calls.inThisCall" = "In this call (%@)";
+"calls.participantsInCall" = "%@ in call";
+"calls.peerRecording" = "Recording";
+"calls.gridLayout" = "Grid view";
+"calls.calling" = "Calling…";
+"calls.callingParticipants" = "Calling (%@)";
+"calls.stopCalling" = "Stop calling %@";
+"calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "هناك مكالمة جارية. هل تريد الانضمام إلى المكالمة؟ يمكنك أيضًا الانضمام إلى المكالمة لاحقًا من المحادثة.";
 "calls.activeCallInConversation" = "مكالمة جارية هل تريد الانضمام إلى المكالمة؟";
 "calls.acceptWithAudio" = "القبول بالصوت";
@@ -669,6 +679,10 @@
 "accessibility.conference.unmuteAudio" = "صوت غير محكم";
 "accessibility.conference.endCall" = "إنهاء المكالمة";
 "accessibility.conference.lowerHand" = "اليد السفلى";
+"accessibility.conference.showParticipants" = "Show participants";
+"accessibility.conference.showFullVideo" = "Show full video";
+"accessibility.conference.cropVideo" = "Crop video";
+"accessibility.conference.localPreview" = "Your video";
 "accessibility.account.tokenQRcode" = "رمز QR للرمز المميّز";
 
 // Swarm Colors

@@ -320,11 +320,21 @@
 "calls.currentCallWith" = "Τηλεφώνησε με";
 "calls.maximize" = "Μεγιστοποίηση";
 "calls.minimize" = "Ελαχιστοποίηση";
+"calls.moreActions" = "More actions";
+"calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Ρυθμίστε τον διαχειριστή";
 "calls.removeModerator" = "Ανακατάσταση διαχειριστή";
 "calls.muteAudio" = "Σίγαση μικροφώνου";
 "calls.unmuteAudio" = "Κατάργηση σίγασης μικροφώνου";
 "calls.lowerHand" = "Κάτω χέρι";
+"calls.inThisCall" = "In this call (%@)";
+"calls.participantsInCall" = "%@ in call";
+"calls.peerRecording" = "Recording";
+"calls.gridLayout" = "Grid view";
+"calls.calling" = "Calling…";
+"calls.callingParticipants" = "Calling (%@)";
+"calls.stopCalling" = "Stop calling %@";
+"calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "Μια κλήση βρίσκεται σε εξέλιξη. Θέλετε να συμμετάσχετε στην κλήση; Μπορείτε επίσης να συμμετάσχετε στην κλήση αργότερα από τη συνομιλία.";
 "calls.activeCallInConversation" = "Υπάρχει μια κλήση σε εξέλιξη. Θα θέλατε να συμμετάσχετε σε αυτήν;";
 "calls.acceptWithAudio" = "Αποδοχή με ήχο";
@@ -669,6 +679,10 @@
 "accessibility.conference.unmuteAudio" = "Ανεκλειστικό ήχο";
 "accessibility.conference.endCall" = "Τερματισμός κλήσης";
 "accessibility.conference.lowerHand" = "Κάτω χέρι";
+"accessibility.conference.showParticipants" = "Show participants";
+"accessibility.conference.showFullVideo" = "Show full video";
+"accessibility.conference.cropVideo" = "Crop video";
+"accessibility.conference.localPreview" = "Your video";
 "accessibility.account.tokenQRcode" = "Κωδικός QR διακριτικού";
 
 // Swarm Colors

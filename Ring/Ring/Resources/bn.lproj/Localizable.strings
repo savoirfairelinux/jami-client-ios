@@ -320,11 +320,21 @@
 "calls.currentCallWith" = "কল করুন ";
 "calls.maximize" = "সর্বাধিক";
 "calls.minimize" = "কমিয়ে আনুন";
+"calls.moreActions" = "More actions";
+"calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "সেট মডারেটর";
 "calls.removeModerator" = "অপসারণকারী";
 "calls.muteAudio" = "নিঃশব্দ মাইক্রোফোন";
 "calls.unmuteAudio" = "মাইক্রোফোনের শব্দ চালু করুন";
 "calls.lowerHand" = "নীচের হাত";
+"calls.inThisCall" = "In this call (%@)";
+"calls.participantsInCall" = "%@ in call";
+"calls.peerRecording" = "Recording";
+"calls.gridLayout" = "Grid view";
+"calls.calling" = "Calling…";
+"calls.callingParticipants" = "Calling (%@)";
+"calls.stopCalling" = "Stop calling %@";
+"calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
 "calls.activeCallInConversation" = "একটা কল চলছে, তুমি কি যোগ দিতে চাও?";
 "calls.acceptWithAudio" = "অডিও দিয়ে গ্রহণ করুন";
@@ -669,6 +679,10 @@
 "accessibility.conference.unmuteAudio" = "অডিও মুছে ফেলা";
 "accessibility.conference.endCall" = "কল শেষ";
 "accessibility.conference.lowerHand" = "নীচের হাত";
+"accessibility.conference.showParticipants" = "Show participants";
+"accessibility.conference.showFullVideo" = "Show full video";
+"accessibility.conference.cropVideo" = "Crop video";
+"accessibility.conference.localPreview" = "Your video";
 "accessibility.account.tokenQRcode" = "Token QR code";
 
 // Swarm Colors

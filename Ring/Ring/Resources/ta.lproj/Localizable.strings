@@ -320,11 +320,21 @@
 "calls.currentCallWith" = " உடன் அழைப்பு";
 "calls.maximize" = "அதிகபட்சமாக";
 "calls.minimize" = "குறைக்கவும்";
+"calls.moreActions" = "More actions";
+"calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "அமை அமை அமைப்பான்";
 "calls.removeModerator" = "அமைக்கப்படாத மாடரேட்டர்";
 "calls.muteAudio" = "மைக்ரோஃபோன் முடக்கப்பட்டது";
 "calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "கீழ் கை";
+"calls.inThisCall" = "In this call (%@)";
+"calls.participantsInCall" = "%@ in call";
+"calls.peerRecording" = "Recording";
+"calls.gridLayout" = "Grid view";
+"calls.calling" = "Calling…";
+"calls.callingParticipants" = "Calling (%@)";
+"calls.stopCalling" = "Stop calling %@";
+"calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
 "calls.activeCallInConversation" = "ஒரு அழைப்பு நடந்து வருகிறது. நீங்கள் அழைப்பு சேர விரும்புகிறீர்களா?";
 "calls.acceptWithAudio" = "ஆடியோவுடன் ஏற்றுக்கொள்ளுங்கள்";
@@ -669,6 +679,10 @@
 "accessibility.conference.unmuteAudio" = "ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி";
 "accessibility.conference.endCall" = "அழைப்பை முடித்திடுக";
 "accessibility.conference.lowerHand" = "கீழ் கை";
+"accessibility.conference.showParticipants" = "Show participants";
+"accessibility.conference.showFullVideo" = "Show full video";
+"accessibility.conference.cropVideo" = "Crop video";
+"accessibility.conference.localPreview" = "Your video";
 "accessibility.account.tokenQRcode" = "Token QR code";
 
 // Swarm Colors

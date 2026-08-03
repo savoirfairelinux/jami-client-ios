@@ -320,11 +320,21 @@
 "calls.currentCallWith" = "İle çağrı yap";
 "calls.maximize" = "En büyük";
 "calls.minimize" = "En küçük";
+"calls.moreActions" = "More actions";
+"calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Oturum başkanı ayarla";
 "calls.removeModerator" = "Oturum başkanı ayarını kaldır";
 "calls.muteAudio" = "Mikrofon sessiz";
 "calls.unmuteAudio" = "Mikrofonun sesini aç";
 "calls.lowerHand" = "Elini indir";
+"calls.inThisCall" = "In this call (%@)";
+"calls.participantsInCall" = "%@ in call";
+"calls.peerRecording" = "Kayıt";
+"calls.gridLayout" = "Grid view";
+"calls.calling" = "Calling…";
+"calls.callingParticipants" = "Calling (%@)";
+"calls.stopCalling" = "Stop calling %@";
+"calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "Bir çağrı sürüyor. Çağrıya katılmak istiyor musunuz? Çağrıya daha sonra görüşmeden de katılabilirsiniz.";
 "calls.activeCallInConversation" = "Bir çağrı sürüyor. Görüşmeye katılmak istiyor musun?";
 "calls.acceptWithAudio" = "Sesli kabul et";
@@ -669,6 +679,10 @@
 "accessibility.conference.unmuteAudio" = "Sesi aç";
 "accessibility.conference.endCall" = "Çağrıyı sonlandır";
 "accessibility.conference.lowerHand" = "Elini indir";
+"accessibility.conference.showParticipants" = "Show participants";
+"accessibility.conference.showFullVideo" = "Show full video";
+"accessibility.conference.cropVideo" = "Crop video";
+"accessibility.conference.localPreview" = "Your video";
 "accessibility.account.tokenQRcode" = "Jeton QR kodu";
 
 // Swarm Colors

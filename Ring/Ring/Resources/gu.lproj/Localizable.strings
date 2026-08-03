@@ -320,11 +320,21 @@
 "calls.currentCallWith" = " સાથે કૉલ કરો";
 "calls.maximize" = "મહત્તમ કરો";
 "calls.minimize" = "ન્યૂનતમ";
+"calls.moreActions" = "More actions";
+"calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "મધ્યસ્થ સેટ કરો";
 "calls.removeModerator" = "અનસેટ કરેલ મધ્યસ્થ";
 "calls.muteAudio" = "મ્યૂટ માઇક્રોફોન";
 "calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "નીચે હાથ";
+"calls.inThisCall" = "In this call (%@)";
+"calls.participantsInCall" = "%@ in call";
+"calls.peerRecording" = "Recording";
+"calls.gridLayout" = "Grid view";
+"calls.calling" = "Calling…";
+"calls.callingParticipants" = "Calling (%@)";
+"calls.stopCalling" = "Stop calling %@";
+"calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
 "calls.activeCallInConversation" = "કૉલ ચાલી રહ્યો છે. શું તમે કૉલ સાથે જોડાવા માંગો છો?";
 "calls.acceptWithAudio" = "Accept with audio";
@@ -669,6 +679,10 @@
 "accessibility.conference.unmuteAudio" = "અનમ્યૂટ ઑડિઓ";
 "accessibility.conference.endCall" = "કૉલ સમાપ્ત કરો";
 "accessibility.conference.lowerHand" = "નીચે હાથ";
+"accessibility.conference.showParticipants" = "Show participants";
+"accessibility.conference.showFullVideo" = "Show full video";
+"accessibility.conference.cropVideo" = "Crop video";
+"accessibility.conference.localPreview" = "Your video";
 "accessibility.account.tokenQRcode" = "Token QR code";
 
 // Swarm Colors

@@ -320,11 +320,21 @@
 "calls.currentCallWith" = "Bellen met";
 "calls.maximize" = "Maximaliseren";
 "calls.minimize" = "Minimaliseren";
+"calls.moreActions" = "More actions";
+"calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Stel moderator in";
 "calls.removeModerator" = "De moderator is niet ingesteld.";
 "calls.muteAudio" = "Microfoon dempen";
 "calls.unmuteAudio" = "Demping microfoon opheffen";
 "calls.lowerHand" = "Onderaan hand";
+"calls.inThisCall" = "In this call (%@)";
+"calls.participantsInCall" = "%@ in call";
+"calls.peerRecording" = "Opname";
+"calls.gridLayout" = "Grid view";
+"calls.calling" = "Calling…";
+"calls.callingParticipants" = "Calling (%@)";
+"calls.stopCalling" = "Stop calling %@";
+"calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "Er is een oproep bezig. Wil je deelnemen aan de oproep? Je kunt later ook deelnemen vanuit het gesprek.";
 "calls.activeCallInConversation" = "Een gesprek is aan het gang.";
 "calls.acceptWithAudio" = "Accepteren met audio";
@@ -669,6 +679,10 @@
 "accessibility.conference.unmuteAudio" = "Niet-gemakkelijk geluid";
 "accessibility.conference.endCall" = "Oproep beëindigen";
 "accessibility.conference.lowerHand" = "Onderaan hand";
+"accessibility.conference.showParticipants" = "Show participants";
+"accessibility.conference.showFullVideo" = "Show full video";
+"accessibility.conference.cropVideo" = "Crop video";
+"accessibility.conference.localPreview" = "Your video";
 "accessibility.account.tokenQRcode" = "Token-QR-code";
 
 // Swarm Colors

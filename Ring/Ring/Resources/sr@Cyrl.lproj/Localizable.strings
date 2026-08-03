@@ -320,11 +320,21 @@
 "calls.currentCallWith" = "Позови са ";
 "calls.maximize" = "Увећај";
 "calls.minimize" = "Минимализирајте";
+"calls.moreActions" = "More actions";
+"calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Уредимо модератор";
 "calls.removeModerator" = "Упременимо модератор";
 "calls.muteAudio" = "Искључи микрофон";
 "calls.unmuteAudio" = "Укључи микрофон";
 "calls.lowerHand" = "Ниже руке";
+"calls.inThisCall" = "In this call (%@)";
+"calls.participantsInCall" = "%@ in call";
+"calls.peerRecording" = "Recording";
+"calls.gridLayout" = "Grid view";
+"calls.calling" = "Calling…";
+"calls.callingParticipants" = "Calling (%@)";
+"calls.stopCalling" = "Stop calling %@";
+"calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "Позив је у току. Желите ли да се придружите позиву? Позиву се можете придружити и касније из разговора.";
 "calls.activeCallInConversation" = "Позив је у току.";
 "calls.acceptWithAudio" = "Прихватите са звуком";
@@ -669,6 +679,10 @@
 "accessibility.conference.unmuteAudio" = "Неуглашен аудио";
 "accessibility.conference.endCall" = "Заврши позив";
 "accessibility.conference.lowerHand" = "Ниже руке";
+"accessibility.conference.showParticipants" = "Show participants";
+"accessibility.conference.showFullVideo" = "Show full video";
+"accessibility.conference.cropVideo" = "Crop video";
+"accessibility.conference.localPreview" = "Your video";
 "accessibility.account.tokenQRcode" = "QR код токена";
 
 // Swarm Colors

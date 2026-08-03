@@ -320,11 +320,21 @@
 "calls.currentCallWith" = "Déan teagmháil le ";
 "calls.maximize" = "A mhéadú";
 "calls.minimize" = "Cinntíbhí";
+"calls.moreActions" = "More actions";
+"calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Modhálaí a shuiteáil";
 "calls.removeModerator" = "Modhálaí neamhghnách";
 "calls.muteAudio" = "Micrófón muinte";
 "calls.unmuteAudio" = "Díbhalbhaigh micreafón";
 "calls.lowerHand" = "lámh íochtarach";
+"calls.inThisCall" = "In this call (%@)";
+"calls.participantsInCall" = "%@ in call";
+"calls.peerRecording" = "Recording";
+"calls.gridLayout" = "Grid view";
+"calls.calling" = "Calling…";
+"calls.callingParticipants" = "Calling (%@)";
+"calls.stopCalling" = "Stop calling %@";
+"calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
 "calls.activeCallInConversation" = "Tá glao ag dul i gcrích.";
 "calls.acceptWithAudio" = "Glac le fuaim";
@@ -669,6 +679,10 @@
 "accessibility.conference.unmuteAudio" = "Audio neamhbhuailte";
 "accessibility.conference.endCall" = "Críochnaigh an glao";
 "accessibility.conference.lowerHand" = "lámh íochtarach";
+"accessibility.conference.showParticipants" = "Show participants";
+"accessibility.conference.showFullVideo" = "Show full video";
+"accessibility.conference.cropVideo" = "Crop video";
+"accessibility.conference.localPreview" = "Your video";
 "accessibility.account.tokenQRcode" = "Token QR code";
 
 // Swarm Colors

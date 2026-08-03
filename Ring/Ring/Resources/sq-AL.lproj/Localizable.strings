@@ -320,11 +320,21 @@
 "calls.currentCallWith" = "Thirre me";
 "calls.maximize" = "Maksimizoje";
 "calls.minimize" = "Minimizoje";
+"calls.moreActions" = "More actions";
+"calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Caktoni moderator";
 "calls.removeModerator" = "Hiqe nga moderator";
 "calls.muteAudio" = "Heshtoje mikrofonin";
 "calls.unmuteAudio" = "Hiqi heshtimin mikrofonit";
 "calls.lowerHand" = "Uleni dorën";
+"calls.inThisCall" = "In this call (%@)";
+"calls.participantsInCall" = "%@ in call";
+"calls.peerRecording" = "Incizim";
+"calls.gridLayout" = "Grid view";
+"calls.calling" = "Calling…";
+"calls.callingParticipants" = "Calling (%@)";
+"calls.stopCalling" = "Stop calling %@";
+"calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "Ka në kryerje e sipër një thirrje. Doni të merrni pjesë te thirrja? Te thirrja mund të merrni pjesë më vonë, që nga biseda.";
 "calls.activeCallInConversation" = "Ka një thirrje në zhvillim e sipër. Doni të merrni pjesë në thirrje?";
 "calls.acceptWithAudio" = "Pranoje me audio";
@@ -669,6 +679,10 @@
 "accessibility.conference.unmuteAudio" = "Riktheji zërin";
 "accessibility.conference.endCall" = "Përfundoje thirrjen";
 "accessibility.conference.lowerHand" = "Uleni dorën";
+"accessibility.conference.showParticipants" = "Show participants";
+"accessibility.conference.showFullVideo" = "Show full video";
+"accessibility.conference.cropVideo" = "Crop video";
+"accessibility.conference.localPreview" = "Your video";
 "accessibility.account.tokenQRcode" = "Kod QR token-i";
 
 // Swarm Colors

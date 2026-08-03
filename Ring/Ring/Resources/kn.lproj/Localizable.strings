@@ -320,11 +320,21 @@
 "calls.currentCallWith" = "";
 "calls.maximize" = "ಗರಿಷ್ಠ ಮಟ್ಟದಲ್ಲಿ";
 "calls.minimize" = "ಕಡಿಮೆ ಮಾಡಿ";
+"calls.moreActions" = "More actions";
+"calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "ಮಾಡರೇಟರ್ ಅನ್ನು ಹೊಂದಿಸಿ";
 "calls.removeModerator" = "ಡಿಸ್ಇನ್ಸೆಟ್ ಮಾಡರೇಟರ್";
 "calls.muteAudio" = "ಮೂಕ ಮೈಕ್ರೊಫೋನ್";
 "calls.unmuteAudio" = "ಮೈಕ್ರೊಫೋನ್ ಅನ್‌ಮ್ಯೂಟ್ ಮಾಡಿ";
 "calls.lowerHand" = "ಕೆಳ ಕೈ";
+"calls.inThisCall" = "In this call (%@)";
+"calls.participantsInCall" = "%@ in call";
+"calls.peerRecording" = "Recording";
+"calls.gridLayout" = "Grid view";
+"calls.calling" = "Calling…";
+"calls.callingParticipants" = "Calling (%@)";
+"calls.stopCalling" = "Stop calling %@";
+"calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
 "calls.activeCallInConversation" = "ಕರೆ ನಡೆಯುತ್ತಿದೆ. ನೀವು ಕರೆ ಸೇರಲು ಬಯಸುವಿರಾ?";
 "calls.acceptWithAudio" = "ಆಡಿಯೊದೊಂದಿಗೆ ಸ್ವೀಕರಿಸಿ";
@@ -669,6 +679,10 @@
 "accessibility.conference.unmuteAudio" = "ಅನಿರ್ದಿಷ್ಟ ಆಡಿಯೋ";
 "accessibility.conference.endCall" = "ಕರೆ ಅಂತ್ಯಗೊಳಿಸು";
 "accessibility.conference.lowerHand" = "ಕೆಳ ಕೈ";
+"accessibility.conference.showParticipants" = "Show participants";
+"accessibility.conference.showFullVideo" = "Show full video";
+"accessibility.conference.cropVideo" = "Crop video";
+"accessibility.conference.localPreview" = "Your video";
 "accessibility.account.tokenQRcode" = "Token QR code";
 
 // Swarm Colors

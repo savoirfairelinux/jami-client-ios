@@ -320,11 +320,21 @@
 "calls.currentCallWith" = "Volat s ";
 "calls.maximize" = "Maximalizovat";
 "calls.minimize" = "Zmenšit";
+"calls.moreActions" = "More actions";
+"calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Nastavit moderátora";
 "calls.removeModerator" = "Nenastavený moderátor";
 "calls.muteAudio" = "Ztlumit mikrofon";
 "calls.unmuteAudio" = "Zrušit ztlumení mikrofonu";
 "calls.lowerHand" = "Dát ruku dolů";
+"calls.inThisCall" = "In this call (%@)";
+"calls.participantsInCall" = "%@ in call";
+"calls.peerRecording" = "Nahrávka";
+"calls.gridLayout" = "Grid view";
+"calls.calling" = "Calling…";
+"calls.callingParticipants" = "Calling (%@)";
+"calls.stopCalling" = "Stop calling %@";
+"calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "Probíhá hovor. Chcete se k hovoru připojit? K hovoru se můžete připojit také později z konverzace.";
 "calls.activeCallInConversation" = "Probíhá hovor. Chcete se k hovoru připojit?";
 "calls.acceptWithAudio" = "Přijmout se zvukem";
@@ -669,6 +679,10 @@
 "accessibility.conference.unmuteAudio" = "Zrušení ztlumení zvuku";
 "accessibility.conference.endCall" = "Ukončit hovor";
 "accessibility.conference.lowerHand" = "Dát ruku dolů";
+"accessibility.conference.showParticipants" = "Show participants";
+"accessibility.conference.showFullVideo" = "Show full video";
+"accessibility.conference.cropVideo" = "Crop video";
+"accessibility.conference.localPreview" = "Your video";
 "accessibility.account.tokenQRcode" = "QR kód tokenu";
 
 // Swarm Colors

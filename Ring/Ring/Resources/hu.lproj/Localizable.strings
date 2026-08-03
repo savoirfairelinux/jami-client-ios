@@ -320,11 +320,21 @@
 "calls.currentCallWith" = "Hívás:";
 "calls.maximize" = "Teljes méret";
 "calls.minimize" = "Kis méret";
+"calls.moreActions" = "More actions";
+"calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Moderátor beállítása";
 "calls.removeModerator" = "Moderátor megszüntetése";
 "calls.muteAudio" = "Mikrofon elnémítása";
 "calls.unmuteAudio" = "Mikrofon némításának feloldása";
 "calls.lowerHand" = "Kéz leengedése";
+"calls.inThisCall" = "In this call (%@)";
+"calls.participantsInCall" = "%@ in call";
+"calls.peerRecording" = "Felvétel";
+"calls.gridLayout" = "Grid view";
+"calls.calling" = "Calling…";
+"calls.callingParticipants" = "Calling (%@)";
+"calls.stopCalling" = "Stop calling %@";
+"calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "Hívás folyamatban van. Szeretne csatlakozni a híváshoz? Később is csatlakozhatsz a híváshoz a beszélgetésből.";
 "calls.activeCallInConversation" = "Hívás folyamatban van. Szeretne csatlakozni a híváshoz?";
 "calls.acceptWithAudio" = "Elfogadás hanggal";
@@ -669,6 +679,10 @@
 "accessibility.conference.unmuteAudio" = "Mikrofon némításának feloldása";
 "accessibility.conference.endCall" = "Hívás befejezése";
 "accessibility.conference.lowerHand" = "Kéz leengedése";
+"accessibility.conference.showParticipants" = "Show participants";
+"accessibility.conference.showFullVideo" = "Show full video";
+"accessibility.conference.cropVideo" = "Crop video";
+"accessibility.conference.localPreview" = "Your video";
 "accessibility.account.tokenQRcode" = "Jogkivonat QR-kód";
 
 // Swarm Colors

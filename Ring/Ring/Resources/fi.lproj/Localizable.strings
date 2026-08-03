@@ -320,11 +320,21 @@
 "calls.currentCallWith" = "Soita";
 "calls.maximize" = "Suurenna";
 "calls.minimize" = "Pienennä";
+"calls.moreActions" = "More actions";
+"calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Aseta valvoja";
 "calls.removeModerator" = "Poista valvoja";
 "calls.muteAudio" = "Mykistä mikrofoni";
 "calls.unmuteAudio" = "Poista mikrofonin mykistys";
 "calls.lowerHand" = "Käsi alas";
+"calls.inThisCall" = "In this call (%@)";
+"calls.participantsInCall" = "%@ in call";
+"calls.peerRecording" = "Tallenne";
+"calls.gridLayout" = "Grid view";
+"calls.calling" = "Calling…";
+"calls.callingParticipants" = "Calling (%@)";
+"calls.stopCalling" = "Stop calling %@";
+"calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "Puhelu on käynnissä. Haluatko liittyä puheluun? Voit liittyä puheluun myös myöhemmin keskustelusta.";
 "calls.activeCallInConversation" = "Puhelu on meneillään. Haluatko liittyä?";
 "calls.acceptWithAudio" = "Hyväksy äänellä";
@@ -669,6 +679,10 @@
 "accessibility.conference.unmuteAudio" = "Poista mykistys";
 "accessibility.conference.endCall" = "Lopeta puhelu";
 "accessibility.conference.lowerHand" = "Käsi alas";
+"accessibility.conference.showParticipants" = "Show participants";
+"accessibility.conference.showFullVideo" = "Show full video";
+"accessibility.conference.cropVideo" = "Crop video";
+"accessibility.conference.localPreview" = "Your video";
 "accessibility.account.tokenQRcode" = "Token QR-koodi";
 
 // Swarm Colors

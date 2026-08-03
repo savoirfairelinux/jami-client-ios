@@ -320,11 +320,21 @@
 "calls.currentCallWith" = "كاو دڠن ";
 "calls.maximize" = "ممبنتو ڤڠاجرن";
 "calls.minimize" = "مڠهادڤي";
+"calls.moreActions" = "More actions";
+"calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "مودراتور دتڠڬوڠ";
 "calls.removeModerator" = "مودراتور دڤرچايا?? ي";
 "calls.muteAudio" = "ميكروفون خاموش";
 "calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "يڠ دالم لالو";
+"calls.inThisCall" = "In this call (%@)";
+"calls.participantsInCall" = "%@ in call";
+"calls.peerRecording" = "Recording";
+"calls.gridLayout" = "Grid view";
+"calls.calling" = "Calling…";
+"calls.callingParticipants" = "Calling (%@)";
+"calls.stopCalling" = "Stop calling %@";
+"calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
 "calls.activeCallInConversation" = "يه تماس داره پيش مياد، ميخواي به تماس بليک بشي؟";
 "calls.acceptWithAudio" = "Accept with audio";
@@ -669,6 +679,10 @@
 "accessibility.conference.unmuteAudio" = "صوت غير محكم";
 "accessibility.conference.endCall" = "ڤڠاجرن اخير";
 "accessibility.conference.lowerHand" = "يڠ دالم لالو";
+"accessibility.conference.showParticipants" = "Show participants";
+"accessibility.conference.showFullVideo" = "Show full video";
+"accessibility.conference.cropVideo" = "Crop video";
+"accessibility.conference.localPreview" = "Your video";
 "accessibility.account.tokenQRcode" = "Token QR code";
 
 // Swarm Colors
