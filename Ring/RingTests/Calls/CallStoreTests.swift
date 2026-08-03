@@ -572,6 +572,19 @@ final class CallStoreTests: XCTestCase {
         }
     }
 
+    private func configureHostedSwarmCall(media: [MediaItem] = []) {
+        let conferenceId = CallTestFixtures.conferenceId
+        callAPI.placeCallReturn = nil
+        if !media.isEmpty {
+            callAPI.currentMediaReturn[conferenceId.raw] = media
+        }
+        callAPI.onPlaceCall = { [sendEvent] in
+            sendEvent?(.conferenceCreated(conferenceId: conferenceId.raw,
+                                          conversationId: conversationId1,
+                                          accountId: accountId1))
+        }
+    }
+
     func testPeerAddingVideoToAnAudioCallMakesTheCallVideoCapable() async throws {
         let id = try await placeOngoingAudioCall()
         var call = await store.snapshot().call(id)
@@ -1666,31 +1679,152 @@ final class CallStoreTests: XCTestCase {
     }
 
     func testPlaceSwarmCallResolvesOnConferenceCreated() async throws {
-        callAPI.placeCallReturn = "swarm-call"
-        callAPI.conferenceCallsReturn["conf-s"] = ["swarm-call"]
+        callAPI.placeCallReturn = CallTestFixtures.callId.raw
+        let conferenceId = CallTestFixtures.conferenceId
+        callAPI.conferenceCallsReturn[conferenceId.raw] = [CallTestFixtures.callId.raw]
         let placeCallStarted = expectation(description: "swarm call placed")
         callAPI.onPlaceCall = { placeCallStarted.fulfill() }
 
         async let placed = store.placeSwarmCall(accountId: accountId1,
-                                                conversationId: "conv-1",
+                                                conversationId: conversationId1,
                                                 audioOnly: false,
                                                 videoSource: "camera://front",
                                                 timeout: 2)
         await fulfillment(of: [placeCallStarted], timeout: 1)
-        sendEvent(.conferenceCreated(conferenceId: "conf-s", conversationId: "conv-1",
+        sendEvent(.conferenceCreated(conferenceId: conferenceId.raw,
+                                     conversationId: conversationId1,
                                      accountId: accountId1))
 
         let confId = try await placed
-        XCTAssertEqual(confId, ConfId(raw: "conf-s"))
-        XCTAssertEqual(callAPI.placedCalls[0].participantId, "swarm:conv-1")
+        XCTAssertEqual(confId, conferenceId)
+        XCTAssertEqual(callAPI.placedCalls[0].participantId, "swarm:" + conversationId1)
         XCTAssertEqual(callAPI.placedCalls[0].media.map(\.label), [.audio(0), .video(0)])
     }
 
+    func testHostedSwarmWithoutCallIdAddsCurrentCall() async throws {
+        let conferenceId = CallTestFixtures.conferenceId
+        configureHostedSwarmCall(media: [.audio(), .video()])
+
+        let confId = try await store.placeSwarmCall(accountId: accountId1,
+                                                    conversationId: conversationId1,
+                                                    audioOnly: false,
+                                                    videoSource: "camera://front",
+                                                    timeout: 2)
+
+        XCTAssertEqual(confId, conferenceId)
+        let event = await expectEvent("conference-backed call added") { event in
+            guard case let .callAdded(call) = event else { return false }
+            return call.id.raw == conferenceId.raw
+        }
+        XCTAssertNotNil(event)
+
+        let state = await store.snapshot()
+        let call = state.call(CallId(raw: conferenceId.raw))
+        XCTAssertEqual(call?.accountId, accountId1)
+        XCTAssertEqual(call?.peerUri, "swarm:" + conversationId1)
+        XCTAssertEqual(call?.conversationId, conversationId1)
+        XCTAssertEqual(call?.conferenceId, conferenceId)
+        XCTAssertEqual(call?.status, .current)
+    }
+
+    func testHostedSwarmRoutesMediaSignalsToConference() async throws {
+        let conferenceId = CallTestFixtures.conferenceId
+        configureHostedSwarmCall(media: [.audio(), .video()])
+        callAPI.conferenceDetailsReturn[conferenceId.raw] = [
+            "STATE": ConferenceLifecycle.activeAttached.rawValue
+        ]
+
+        _ = try await store.placeSwarmCall(accountId: accountId1,
+                                           conversationId: conversationId1,
+                                           audioOnly: false,
+                                           videoSource: "camera://front",
+                                           timeout: 2)
+        await expectEvent { if case .callAdded = $0 { return true }; return false }
+
+        let callId = CallId(raw: conferenceId.raw)
+        await store.toggleMute(callId, label: .defaultAudio, cameraSource: String())
+        flushCommands()
+
+        var state = await store.snapshot()
+        XCTAssertNotNil(state.conferences[conferenceId]?.pendingMediaRequest)
+        XCTAssertNil(state.call(callId)?.pendingMediaRequest)
+
+        sendEvent(.mediaNegotiationStatus(
+                    callId: conferenceId.raw, event: MediaNegotiationEvent.success.rawValue,
+                    media: [MediaItem.audio(muted: true), .video()].toDictionaries()))
+        await expectEvent { event in
+            guard case let .conferenceUpdated(conference) = event else { return false }
+            return conference.id == conferenceId
+                && conference.isAudioMuted
+                && conference.pendingMediaRequest == nil
+        }
+
+        sendEvent(.audioMuted(callId: conferenceId.raw, muted: false))
+        sendEvent(.videoMuted(callId: conferenceId.raw, muted: true))
+        await expectEvent { event in
+            guard case let .conferenceUpdated(conference) = event else { return false }
+            return conference.id == conferenceId && conference.isVideoMuted
+        }
+
+        state = await store.snapshot()
+        XCTAssertEqual(state.conferences[conferenceId]?.isAudioMuted, false)
+        XCTAssertEqual(state.conferences[conferenceId]?.isVideoMuted, true)
+        XCTAssertEqual(state.call(callId)?.isVideoMuted, false,
+                       "conference media signals must not mutate the synthetic call")
+    }
+
+    func testRemovingHostedSwarmConferenceEndsCall() async throws {
+        let conferenceId = CallTestFixtures.conferenceId
+        let callId = CallId(raw: conferenceId.raw)
+        configureHostedSwarmCall()
+
+        _ = try await store.placeSwarmCall(accountId: accountId1,
+                                           conversationId: conversationId1,
+                                           audioOnly: true,
+                                           videoSource: String(),
+                                           timeout: 2)
+        await expectEvent { if case .callAdded = $0 { return true }; return false }
+
+        sendEvent(.conferenceRemoved(conferenceId: conferenceId.raw))
+
+        let event = await expectEvent("conference-backed call ended") { event in
+            guard case let .callEnded(call, _) = event else { return false }
+            return call.id == callId
+        }
+        XCTAssertNotNil(event)
+        let state = await store.snapshot()
+        XCTAssertNil(state.call(callId))
+        XCTAssertNil(state.conferences[conferenceId])
+    }
+
+    func testHangingUpHostedSwarmUsesConferenceAPI() async throws {
+        let conferenceId = CallTestFixtures.conferenceId
+        let callId = CallId(raw: conferenceId.raw)
+        configureHostedSwarmCall()
+
+        _ = try await store.placeSwarmCall(accountId: accountId1,
+                                           conversationId: conversationId1,
+                                           audioOnly: true,
+                                           videoSource: String(),
+                                           timeout: 2)
+        await expectEvent { if case .callAdded = $0 { return true }; return false }
+
+        await store.hangUp(callId)
+        flushCommands()
+
+        XCTAssertEqual(callAPI.hungUpConferences, [conferenceId.raw])
+        XCTAssertTrue(callAPI.hungUp.isEmpty)
+        let state = await store.snapshot()
+        XCTAssertNil(state.call(callId))
+        XCTAssertNil(state.conferences[conferenceId])
+    }
+
     func testPlaceSwarmCallTimesOut() async {
-        callAPI.placeCallReturn = "swarm-call"
+        callAPI.placeCallReturn = CallTestFixtures.callId.raw
         do {
-            _ = try await store.placeSwarmCall(accountId: accountId1, conversationId: "conv-1",
-                                               audioOnly: true, videoSource: "",
+            _ = try await store.placeSwarmCall(accountId: accountId1,
+                                               conversationId: conversationId1,
+                                               audioOnly: true, videoSource: String(),
                                                timeout: 0.1)
             XCTFail("should time out")
         } catch let error as CallStoreError {
@@ -1698,6 +1832,36 @@ final class CallStoreTests: XCTestCase {
         } catch {
             XCTFail("unexpected error: \(error)")
         }
+    }
+
+    func testHostedSwarmCreatedAfterTimeoutStillAddsCall() async {
+        let conferenceId = CallTestFixtures.conferenceId
+        callAPI.placeCallReturn = nil
+
+        do {
+            _ = try await store.placeSwarmCall(accountId: accountId1,
+                                               conversationId: conversationId1,
+                                               audioOnly: true,
+                                               videoSource: String(),
+                                               timeout: 0.01)
+            XCTFail("should time out")
+        } catch let error as CallStoreError {
+            XCTAssertEqual(error, .swarmCallTimedOut)
+        } catch {
+            XCTFail("unexpected error: \(error)")
+        }
+
+        sendEvent(.conferenceCreated(conferenceId: conferenceId.raw,
+                                     conversationId: conversationId1,
+                                     accountId: accountId1))
+
+        let event = await expectEvent("late conference-backed call added") { event in
+            guard case let .callAdded(call) = event else { return false }
+            return call.id.raw == conferenceId.raw
+        }
+        XCTAssertNotNil(event)
+        let state = await store.snapshot()
+        XCTAssertEqual(state.call(CallId(raw: conferenceId.raw))?.conferenceId, conferenceId)
     }
 
     func testJoiningRendezvousCallMarksItAccepted() async throws {

@@ -150,10 +150,20 @@ final class CallService {
         Task { [weak self] in
             guard let self = self else { return }
             do {
-                _ = try await self.store.placeCall(accountId: account.id,
-                                                   to: uri,
-                                                   audioOnly: isAudioOnly,
-                                                   videoSource: self.camera?.currentCameraSource() ?? "")
+                let videoSource = self.camera?.currentCameraSource() ?? ""
+                if uri.hasPrefix("swarm:") {
+                    let conversationId = String(uri.dropFirst("swarm:".count))
+                    _ = try await self.store.placeSwarmCall(
+                        accountId: account.id,
+                        conversationId: conversationId,
+                        audioOnly: isAudioOnly,
+                        videoSource: videoSource)
+                } else {
+                    _ = try await self.store.placeCall(accountId: account.id,
+                                                       to: uri,
+                                                       audioOnly: isAudioOnly,
+                                                       videoSource: videoSource)
+                }
             } catch {
                 NSLog("CallService: placing call failed: %@", error.localizedDescription)
             }
