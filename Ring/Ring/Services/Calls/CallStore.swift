@@ -248,7 +248,7 @@ actor CallStore { // swiftlint:disable:this type_body_length
         }
         let uri = "swarm:" + conversationId
         let media = MediaNegotiator.completeMediaList(videoMuted: audioOnly,
-                                                       videoSource: videoSource)
+                                                      videoSource: videoSource)
         return try await withCheckedThrowingContinuation { continuation in
             pendingSwarmCalls[key] = PendingSwarmCall(
                 requestId: UUID(),

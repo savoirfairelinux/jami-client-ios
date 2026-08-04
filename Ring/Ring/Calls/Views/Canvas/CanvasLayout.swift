@@ -76,6 +76,7 @@ enum CanvasLayout {
         let previewCorner: PreviewCorner
         let stripOffset: CGFloat
         let style: CanvasTileStyle
+        let previewControlInsets: UIEdgeInsets
 
         init(participants: [CanvasParticipant],
              mode: CanvasLayoutMode = .grid,
@@ -83,7 +84,8 @@ enum CanvasLayout {
              safeAreaInsets: UIEdgeInsets = .zero,
              previewCorner: PreviewCorner = .topTrailing,
              stripOffset: CGFloat = 0,
-             style: CanvasTileStyle = .plain) {
+             style: CanvasTileStyle = .plain,
+             previewControlInsets: UIEdgeInsets = .zero) {
             self.participants = participants
             self.mode = mode
             self.canvasSize = canvasSize
@@ -91,6 +93,7 @@ enum CanvasLayout {
             self.previewCorner = previewCorner
             self.stripOffset = stripOffset
             self.style = style
+            self.previewControlInsets = previewControlInsets
         }
 
         var contentInsets: UIEdgeInsets {
@@ -105,8 +108,8 @@ enum CanvasLayout {
     }
 
     static let basePreviewSize = CGSize(width: 120, height: 170)
+    static let previewCompactScale: CGFloat = 0.89
     static let previewPadding: CGFloat = 16
-    static let previewBottomClearance: CGFloat = 96
     static let tileCornerRadius: CGFloat = 14
     static let tileMargin: CGFloat = 8
     static let tileSpacing: CGFloat = 8
@@ -313,29 +316,39 @@ enum CanvasLayout {
         }
         let origin = previewOrigin(for: input.previewCorner,
                                    in: CGRect(origin: .zero, size: input.canvasSize),
-                                   safeAreaInsets: input.safeAreaInsets)
+                                   safeAreaInsets: input.safeAreaInsets,
+                                   controlInsets: input.previewControlInsets)
         layout.frames[preview.id] = CGRect(origin: origin,
                                            size: previewSize(for: input.canvasSize))
         layout.zOrder.append(preview.id)
     }
 
     static func previewSize(for canvasSize: CGSize) -> CGSize {
-        canvasSize.width > canvasSize.height
+        return canvasSize.width > canvasSize.height
             ? CGSize(width: basePreviewSize.height, height: basePreviewSize.width)
             : basePreviewSize
     }
 
+    static func previewOriginBounds(in bounds: CGRect,
+                                    safeAreaInsets: UIEdgeInsets,
+                                    controlInsets: UIEdgeInsets = .zero) -> CGRect {
+        let size = previewSize(for: bounds.size)
+        let minX = bounds.minX + safeAreaInsets.left + previewPadding
+        let maxX = bounds.maxX - size.width - previewPadding - safeAreaInsets.right
+        let minY = bounds.minY + safeAreaInsets.top + previewPadding + controlInsets.top
+        let maxY = bounds.maxY - size.height - previewPadding
+            - safeAreaInsets.bottom - controlInsets.bottom
+        return CGRect(x: minX, y: minY,
+                      width: max(0, maxX - minX), height: max(0, maxY - minY))
+    }
+
     static func previewOrigin(for corner: PreviewCorner,
                               in bounds: CGRect,
-                              safeAreaInsets: UIEdgeInsets) -> CGPoint {
-        let size = previewSize(for: bounds.size)
-        let originX = corner.isLeading
-            ? bounds.minX + safeAreaInsets.left + previewPadding
-            : bounds.maxX - size.width - previewPadding - safeAreaInsets.right
-        let originY = corner.isTop
-            ? bounds.minY + safeAreaInsets.top + previewPadding
-            : bounds.maxY - size.height - previewPadding
-            - safeAreaInsets.bottom - previewBottomClearance
-        return CGPoint(x: originX, y: originY)
+                              safeAreaInsets: UIEdgeInsets,
+                              controlInsets: UIEdgeInsets = .zero) -> CGPoint {
+        let travel = previewOriginBounds(in: bounds, safeAreaInsets: safeAreaInsets,
+                                         controlInsets: controlInsets)
+        return CGPoint(x: corner.isLeading ? travel.minX : travel.maxX,
+                       y: corner.isTop ? travel.minY : travel.maxY)
     }
 }

@@ -24,6 +24,11 @@ final class CanvasLayoutTests: XCTestCase {
 
     private let canvas = CGSize(width: 400, height: 800)
     private let cardSafeArea = UIEdgeInsets(top: 0, left: 0, bottom: 26, right: 0)
+    private let previewControlInsets = UIEdgeInsets(
+        top: CanvasLayout.previewPadding,
+        left: 0,
+        bottom: CanvasLayout.previewPadding,
+        right: 0)
 
     private func safeAreaBounds(contentSize: CGSize? = nil) -> CGRect {
         UIEdgeInsetsInsetRect(CGRect(origin: .zero, size: contentSize ?? canvas),
@@ -38,14 +43,16 @@ final class CanvasLayoutTests: XCTestCase {
                            mode: CanvasLayoutMode = .grid,
                            safeAreaInsets: UIEdgeInsets = .zero,
                            previewCorner: PreviewCorner = .topTrailing,
-                           stripOffset: CGFloat = 0) -> CanvasLayout.Input {
+                           stripOffset: CGFloat = 0,
+                           previewControlInsets: UIEdgeInsets = .zero) -> CanvasLayout.Input {
         return CanvasLayout.Input(
             participants: participants,
             mode: mode,
             canvasSize: canvas,
             safeAreaInsets: safeAreaInsets,
             previewCorner: previewCorner,
-            stripOffset: stripOffset)
+            stripOffset: stripOffset,
+            previewControlInsets: previewControlInsets)
     }
 
     private func makeCardInput(_ participants: [CanvasParticipant],
@@ -162,15 +169,62 @@ final class CanvasLayoutTests: XCTestCase {
 
         let topTrailing = CanvasLayout.previewOrigin(
             for: .topTrailing, in: visible, safeAreaInsets: insets)
-        XCTAssertEqual(topTrailing.y, 50 + pad)
-        XCTAssertEqual(topTrailing.x, canvas.width - size.width - pad - 10)
+        XCTAssertEqual(topTrailing.y, insets.top + pad)
+        XCTAssertEqual(topTrailing.x,
+                       canvas.width - size.width - pad - insets.right)
 
         let bottomLeading = CanvasLayout.previewOrigin(
             for: .bottomLeading, in: visible, safeAreaInsets: insets)
-        XCTAssertEqual(bottomLeading.x, 10 + pad)
+        XCTAssertEqual(bottomLeading.x, insets.left + pad)
         XCTAssertEqual(bottomLeading.y,
-                       canvas.height - size.height - pad - 30
-                        - CanvasLayout.previewBottomClearance)
+                       canvas.height - size.height - pad - insets.bottom)
+    }
+
+    func testChromeClearanceKeepsPreviewOutsideControls() throws {
+        var all = participants(1)
+        all.append(CanvasParticipant(id: CanvasParticipant.localId,
+                                     isLocalPreview: true))
+        let cases: [(PreviewCorner, CGRect)] = [
+            (.topTrailing,
+             CGRect(origin: .zero,
+                    size: CGSize(width: canvas.width,
+                                 height: previewControlInsets.top))),
+            (.bottomTrailing,
+             CGRect(x: 0,
+                    y: canvas.height - previewControlInsets.bottom,
+                    width: canvas.width,
+                    height: previewControlInsets.bottom))
+        ]
+
+        for (corner, controlsFrame) in cases {
+            let layout = CanvasLayout.plan(
+                makeInput(all,
+                          previewCorner: corner,
+                          previewControlInsets: previewControlInsets))
+            let previewFrame = try XCTUnwrap(layout.frames[CanvasParticipant.localId])
+
+            XCTAssertFalse(previewFrame.intersects(controlsFrame))
+        }
+    }
+
+    func testControlClearanceMovesPreviewAtItsOwnEdgeAndKeepsCornerAnchored() {
+        let visible = CGRect(origin: .zero, size: canvas)
+
+        let topWithoutControls = CanvasLayout.previewOrigin(
+            for: .topTrailing, in: visible, safeAreaInsets: .zero)
+        let topWithControls = CanvasLayout.previewOrigin(
+            for: .topTrailing, in: visible, safeAreaInsets: .zero,
+            controlInsets: previewControlInsets)
+        let bottomWithoutControls = CanvasLayout.previewOrigin(
+            for: .bottomTrailing, in: visible, safeAreaInsets: .zero)
+        let bottomWithControls = CanvasLayout.previewOrigin(
+            for: .bottomTrailing, in: visible, safeAreaInsets: .zero,
+            controlInsets: previewControlInsets)
+
+        XCTAssertGreaterThan(topWithControls.y, topWithoutControls.y)
+        XCTAssertLessThan(bottomWithControls.y, bottomWithoutControls.y)
+        XCTAssertEqual(topWithControls.x, topWithoutControls.x)
+        XCTAssertEqual(bottomWithControls.x, bottomWithoutControls.x)
     }
 
     func testPreviewSizeSwapsAxesInLandscape() {

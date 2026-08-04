@@ -669,8 +669,6 @@ internal enum L10n {
     internal static let maximize = L10n.tr("Localizable", "calls.maximize", fallback: "Maximize")
     /// Minimize
     internal static let minimize = L10n.tr("Localizable", "calls.minimize", fallback: "Minimize")
-    /// More actions
-    internal static let moreActions = L10n.tr("Localizable", "calls.moreActions", fallback: "More actions")
     /// Mute microphone
     internal static let muteAudio = L10n.tr("Localizable", "calls.muteAudio", fallback: "Mute microphone")
     /// %@ in call

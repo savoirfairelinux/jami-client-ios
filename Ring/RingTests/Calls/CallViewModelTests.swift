@@ -77,6 +77,23 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
                       "the first rendered tile must display captured local frames")
     }
 
+    func testAddParticipantWaitsForRosterDismissalBeforeRequestingPicker() async {
+        let harness = await Harness(callHasVideo: false)
+        let model = harness.makeModel()
+        model.showsParticipants = true
+        var didRequestPicker = false
+        model.onAddParticipant = { didRequestPicker = true }
+
+        model.addParticipantTapped()
+
+        XCTAssertFalse(model.showsParticipants)
+        XCTAssertFalse(didRequestPicker)
+
+        model.participantsDismissed()
+
+        XCTAssertTrue(didRequestPicker)
+    }
+
     func testCallThatEndedBeforeObservationStillTransitionsScreenToEnded() async throws {
         let callAPI = TestLibJamiCallAPI()
         callAPI.placeCallReturn = CallTestFixtures.callId.raw

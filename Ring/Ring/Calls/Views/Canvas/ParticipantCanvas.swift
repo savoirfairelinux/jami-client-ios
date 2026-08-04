@@ -52,6 +52,7 @@ extension CanvasTileModel: Equatable {
     }
 }
 
+// swiftlint:disable:next type_body_length
 final class ParticipantCanvas: UIView {
 
     var onCanvasTapped: (() -> Void)?
@@ -74,15 +75,35 @@ final class ParticipantCanvas: UIView {
     private var orderedParticipants: [CanvasParticipant] = []
     private var suppressesStripCallback = false
     private var isDraggingPreview = false
-    private var previewFlingAnimator: UIViewPropertyAnimator?
+    private var previewBody: PreviewMotion.Body?
+    private var previewSpring = PreviewMotion.settle
+    private var previewWalls = PreviewMotion.WallTravel.settled(.zero)
+    private var previewMotionLink: CADisplayLink?
+    private var previewMotionTimestamp: CFTimeInterval = 0
     private var videoScalingPolicyOverrides: [String: VideoScalingPolicy] = [:]
-    private var previewInteracting: Bool {
-        isDraggingPreview || previewFlingAnimator?.isRunning == true
-    }
     private var previewId: String? {
         models.first { $0.value.participant.isLocalPreview }?.key
     }
+    private var previewFloats: Bool { previewId != nil && tiles.count > 1 }
     private var attachMargin: CGFloat { bounds.height / 3 }
+    var previewControlInsets: UIEdgeInsets = .zero {
+        didSet {
+            guard previewControlInsets != oldValue else { return }
+            let arriving = previewControlInsets.top + previewControlInsets.bottom
+                > oldValue.top + oldValue.bottom
+            previewSpring = arriving ? PreviewMotion.push : PreviewMotion.settle
+            guard previewBody != nil, !UIAccessibility.isReduceMotionEnabled else {
+                previewWalls = .settled(previewControlInsets)
+                snapPreviewToRest()
+                return
+            }
+            previewWalls = PreviewMotion.WallTravel(
+                from: previewWalls.current,
+                destination: previewControlInsets,
+                duration: CallScreenView.Motion.chromeFadeDuration)
+            startPreviewMotion()
+        }
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -221,6 +242,11 @@ final class ParticipantCanvas: UIView {
         relayout(animated: false)
     }
 
+    override func willMove(toWindow newWindow: UIWindow?) {
+        super.willMove(toWindow: newWindow)
+        if newWindow == nil { stopPreviewMotion() }
+    }
+
     private func relayout(animated: Bool, newcomers: Set<String> = [],
                           duration: TimeInterval = ParticipantCanvas.modeSwitchDuration) {
         guard bounds.width > 0, bounds.height > 0 else { return }
@@ -243,12 +269,17 @@ final class ParticipantCanvas: UIView {
             tile.layoutIfNeeded()
             if animated { tile.alpha = 0 }
         }
-        let held = previewInteracting ? previewId : nil
+        let held = isDraggingPreview || previewBody != nil ? previewId : nil
         let applyFrames = { [self] in
-            for (id, frame) in layout.frames where !newcomers.contains(id) && id != held {
-                tiles[id]?.frame = frame
-                tiles[id]?.layer.cornerRadius = cornerRadius(for: id, in: layout)
-                tiles[id]?.contentInsets = contentInsets(for: id, in: layout)
+            for (id, frame) in layout.frames where !newcomers.contains(id) {
+                guard let tile = tiles[id] else { continue }
+                if id == held {
+                    tile.bounds.size = frame.size
+                } else {
+                    tile.frame = frame
+                }
+                tile.layer.cornerRadius = cornerRadius(for: id, in: layout)
+                tile.contentInsets = contentInsets(for: id, in: layout)
             }
         }
         if animated {
@@ -275,6 +306,7 @@ final class ParticipantCanvas: UIView {
         }
         updateVideoAttachments(frames: layout.frames, offstage: layout.offstage)
         applyVideoScalingPolicies(primaryTileId: layout.primaryTileId)
+        syncPreviewMotion(animated: animated)
     }
 
     private func stopLayoutAnimator() {
@@ -367,7 +399,8 @@ final class ParticipantCanvas: UIView {
             safeAreaInsets: safeAreaInsets,
             previewCorner: previewCorner,
             stripOffset: stripDriver.contentOffset.x,
-            style: style)
+            style: style,
+            previewControlInsets: previewWalls.current)
     }
 
     private func updateVideoAttachments(frames: [String: CGRect],
@@ -444,59 +477,155 @@ final class ParticipantCanvas: UIView {
 
     @objc
     private func previewPanned(_ recognizer: UIPanGestureRecognizer) {
-        guard tiles.count > 1, let tile = recognizer.view else { return }
+        guard previewFloats, let tile = recognizer.view else { return }
 
         switch recognizer.state {
         case .began:
             isDraggingPreview = true
-            previewFlingAnimator?.stopAnimation(true)
-            previewFlingAnimator = nil
+            stopLayoutAnimator()
+            seedPreviewBody()
         case .changed:
             isDraggingPreview = true
             let translation = recognizer.translation(in: scrollView)
             recognizer.setTranslation(.zero, in: scrollView)
-            var origin = tile.frame.origin
-            origin.x = min(max(0, origin.x + translation.x),
-                           bounds.width - tile.frame.width)
-            origin.y = min(max(0, origin.y + translation.y),
-                           bounds.height - tile.frame.height)
-            tile.frame.origin = origin
+            let current = previewOrigin(of: tile)
+            let dragged = CGPoint(x: current.x + translation.x,
+                                  y: current.y + translation.y)
+            let origin = PreviewMotion.clamp(dragged, within: previewTravelBounds())
+            previewBody = PreviewMotion.Body(position: origin)
+            movePreview(tile, to: origin)
         case .ended, .cancelled, .failed:
             isDraggingPreview = false
-            flingPreview(tile, velocity: recognizer.velocity(in: scrollView))
+            releasePreview(tile, velocity: recognizer.velocity(in: scrollView))
         default:
             break
         }
     }
 
-    private func flingPreview(_ tile: UIView, velocity: CGPoint) {
-        let corner = Self.nearestCorner(toCenter: tile.center, in: bounds)
-        previewCorner = corner
-        let origin = CanvasLayout.previewOrigin(
-            for: corner, in: CGRect(origin: .zero, size: bounds.size),
-            safeAreaInsets: safeAreaInsets)
-        let target = CGRect(origin: origin,
-                            size: CanvasLayout.previewSize(for: bounds.size))
+    private func releasePreview(_ tile: UIView, velocity: CGPoint) {
+        previewCorner = Self.nearestCorner(toCenter: tile.center, in: bounds)
+        previewSpring = PreviewMotion.fling
+        previewBody = PreviewMotion.Body(
+            position: tile.frame.origin,
+            velocity: CGVector(dx: velocity.x, dy: velocity.y))
+        startPreviewMotion()
+    }
 
-        let initialVelocity = Self.springVelocity(from: velocity,
-                                                  current: tile.frame.origin,
-                                                  target: origin)
-        let timing = UISpringTimingParameters(dampingRatio: 0.7,
-                                              initialVelocity: initialVelocity)
-        let animator = UIViewPropertyAnimator(duration: 0.5, timingParameters: timing)
-        animator.addAnimations { tile.frame = target }
-        animator.addCompletion { [weak self] _ in
-            self?.previewFlingAnimator = nil
+    // MARK: - Preview motion
+
+    private func syncPreviewMotion(animated: Bool) {
+        guard previewFloats else {
+            previewBody = nil
+            stopPreviewMotion()
+            return
         }
-        previewFlingAnimator = animator
-        animator.startAnimation()
+        guard previewBody == nil else {
+            startPreviewMotion()
+            return
+        }
+        if animated, let animator = layoutAnimator {
+            animator.addCompletion { [weak self] position in
+                guard position == .end else { return }
+                self?.seedPreviewBody()
+            }
+        } else {
+            seedPreviewBody()
+        }
+    }
+
+    private func seedPreviewBody() {
+        guard previewFloats, let id = previewId, let tile = tiles[id] else { return }
+        previewBody = PreviewMotion.Body(position: tile.frame.origin)
+    }
+
+    private func snapPreviewToRest() {
+        guard previewFloats, let id = previewId, let tile = tiles[id] else { return }
+        stopPreviewMotion()
+        let body = PreviewMotion.settled(at: previewRestOrigin(),
+                                         within: previewTravelBounds())
+        previewBody = body
+        movePreview(tile, to: body.position)
+    }
+
+    private func previewRestOrigin() -> CGPoint {
+        return CanvasLayout.previewOrigin(
+            for: previewCorner,
+            in: CGRect(origin: .zero, size: bounds.size),
+            safeAreaInsets: safeAreaInsets,
+            controlInsets: previewWalls.current)
+    }
+
+    private func previewTravelBounds() -> CGRect {
+        return CanvasLayout.previewOriginBounds(
+            in: CGRect(origin: .zero, size: bounds.size),
+            safeAreaInsets: safeAreaInsets,
+            controlInsets: previewWalls.current)
+    }
+
+    private func movePreview(_ tile: UIView, to origin: CGPoint) {
+        tile.center = CGPoint(x: origin.x + tile.bounds.width / 2,
+                              y: origin.y + tile.bounds.height / 2)
+        let scale = 1 - (1 - CanvasLayout.previewCompactScale)
+            * previewWalls.chromePresence
+        tile.layer.transform = CATransform3DMakeScale(scale, scale, 1)
+    }
+
+    private func previewOrigin(of tile: UIView) -> CGPoint {
+        return CGPoint(x: tile.center.x - tile.bounds.width / 2,
+                       y: tile.center.y - tile.bounds.height / 2)
+    }
+
+    private func startPreviewMotion() {
+        guard previewMotionLink == nil else { return }
+        let link = CADisplayLink(target: self,
+                                 selector: #selector(advancePreviewMotion(_:)))
+        link.add(to: .main, forMode: .common)
+        previewMotionTimestamp = CACurrentMediaTime()
+        previewMotionLink = link
+    }
+
+    private func stopPreviewMotion() {
+        previewMotionLink?.invalidate()
+        previewMotionLink = nil
+    }
+
+    @objc
+    private func advancePreviewMotion(_ link: CADisplayLink) {
+        let interval = min(max(0, link.timestamp - previewMotionTimestamp),
+                           Self.maximumPreviewMotionInterval)
+        previewMotionTimestamp = link.timestamp
+        previewWalls.advance(by: interval)
+
+        guard let id = previewId, let tile = tiles[id], var body = previewBody else {
+            stopPreviewMotion()
+            return
+        }
+        let walls = previewTravelBounds()
+        if isDraggingPreview {
+            body.position = PreviewMotion.clamp(body.position, within: walls)
+            previewBody = body
+            movePreview(tile, to: body.position)
+            if previewWalls.isFinished { stopPreviewMotion() }
+            return
+        }
+        let attractor = previewRestOrigin()
+        body = PreviewMotion.step(body, toward: attractor, within: walls,
+                                  spring: previewSpring, interval: CGFloat(interval))
+        if previewWalls.isFinished, PreviewMotion.isAtRest(body, at: attractor) {
+            body = PreviewMotion.settled(at: attractor, within: walls)
+            stopPreviewMotion()
+        }
+        previewBody = body
+        movePreview(tile, to: body.position)
     }
 
 }
 
-// MARK: - Preview fling geometry
+// MARK: - Preview corner geometry
 
 extension ParticipantCanvas {
+    static let maximumPreviewMotionInterval: CFTimeInterval = 1.0 / 20.0
+
     static func nearestCorner(toCenter center: CGPoint, in bounds: CGRect) -> PreviewCorner {
         let top = center.y < bounds.midY
         let leading = center.x < bounds.midX
@@ -506,16 +635,6 @@ extension ParticipantCanvas {
         case (false, true): return .bottomLeading
         case (false, false): return .bottomTrailing
         }
-    }
-
-    static func springVelocity(from velocity: CGPoint,
-                               current: CGPoint, target: CGPoint) -> CGVector {
-        let horizontalDistance = target.x - current.x
-        let verticalDistance = target.y - current.y
-        return CGVector(dx: abs(horizontalDistance) > 0.001
-                            ? velocity.x / horizontalDistance : 0,
-                        dy: abs(verticalDistance) > 0.001
-                            ? velocity.y / verticalDistance : 0)
     }
 }
 

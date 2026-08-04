@@ -22,81 +22,72 @@ struct CallHeaderView: View {
 
     private enum Metrics {
         static let minimumHeight: CGFloat = 46
-        static let maximumWidth: CGFloat = 420
-        static let outerInset: CGFloat = 26
-        static let horizontalPadding: CGFloat = 20
-        static let verticalPadding: CGFloat = 10
+        static let verticalPadding: CGFloat = 8
         static let lineSpacing: CGFloat = 4
         static let spacing: CGFloat = 8
         static let avatar: CGFloat = 22
         static let avatarOverlap: CGFloat = -7
         static let avatarBorder: CGFloat = 1
-        static let recordingDot: CGFloat = 8
     }
 
     @ObservedObject var model: CallViewModel
+    let horizontalInset: CGFloat
 
     private var header: CallHeaderModel { model.header }
 
-    /// The cap bounds the width *proposed* to the capsule, which then shrink-wraps
-    /// within it — so a long name truncates instead of stretching the pill.
+    private var isTappable: Bool { header.showsRoster || model.canAddParticipant }
+
     var body: some View {
-        capsule
-            .frame(maxWidth: Metrics.maximumWidth)
-            .padding(.horizontal, Metrics.outerInset)
+        Group {
+            if isTappable {
+                Button(action: showParticipants) {
+                    content
+                }
+                .buttonStyle(PlainButtonStyle())
+                .accessibilityHint(L10n.Accessibility.Conference.showParticipants)
+            } else {
+                content
+            }
+        }
     }
 
-    /// Sized by the layout rather than by its content, so neither a resolving name
-    /// nor a peer starting to record can change its geometry.
-    private var capsule: some View {
+    private var content: some View {
         VStack(spacing: Metrics.lineSpacing) {
             HStack(spacing: Metrics.spacing) {
-                if header.avatars.isEmpty {
-                    accessories.hidden()
-                } else {
+                if !header.avatars.isEmpty {
                     avatars
                 }
+                if header.isRecording {
+                    RecordingIndicator()
+                }
                 Text(header.title)
-                    .font(.headline)
+                    .font(.body.weight(.medium))
                     .foregroundColor(.white)
                     .lineLimit(1)
                     .truncationMode(header.titleIsIdentifier ? .middle : .tail)
-                accessories
+                    .layoutPriority(1)
+                if isTappable {
+                    Image(systemName: "chevron.down")
+                        .font(.caption2.weight(.semibold))
+                        .foregroundColor(.white.opacity(0.7))
+                        .accessibilityHidden(true)
+                }
             }
             Text(model.statusLine)
-                .font(.subheadline.monospacedDigit())
+                .font(.footnote.monospacedDigit())
                 .foregroundColor(.white.opacity(0.8))
                 .lineLimit(1)
         }
-        .padding(.horizontal, Metrics.horizontalPadding)
+        .padding(.horizontal, horizontalInset)
         .padding(.vertical, Metrics.verticalPadding)
         .frame(minHeight: Metrics.minimumHeight)
-        .onVideoCapsule()
-        .contentShape(Capsule())
-        .onTapGesture {
-            if header.showsRoster { model.showsParticipants = true }
-        }
+        .contentShape(Rectangle())
         .accessibilityElement(children: .combine)
-        .accessibilityAddTraits(header.showsRoster ? .isButton : [])
         .accessibilityValue(header.isInviting ? L10n.Calls.inviting : "")
-        .accessibilityHint(header.showsRoster
-                            ? L10n.Accessibility.Conference.showParticipants : "")
     }
 
-    /// The recording dot keeps its slot whether or not it shows, so a peer starting to
-    /// record cannot widen the capsule. Avatars balance it when there are any; when
-    /// there are none, a hidden copy does — mirroring the real thing rather than a
-    /// hand-copied width, so adding an accessory can't silently un-centre the title.
-    private var accessories: some View {
-        HStack(spacing: Metrics.spacing) {
-            recordingIndicator
-            if header.showsRoster {
-                Image(systemName: "chevron.down")
-                    .font(.caption2.weight(.semibold))
-                    .foregroundColor(.white.opacity(0.7))
-                    .accessibilityHidden(true)
-            }
-        }
+    private func showParticipants() {
+        model.showsParticipants = true
     }
 
     private var avatars: some View {
@@ -122,14 +113,38 @@ struct CallHeaderView: View {
         Circle().strokeBorder(color, lineWidth: Metrics.avatarBorder)
     }
 
-    /// Always occupies its slot so that starting a recording cannot widen the capsule.
-    private var recordingIndicator: some View {
+}
+
+private struct RecordingIndicator: View {
+
+    private enum Metrics {
+        static let size: CGFloat = 8
+        static let dimmedOpacity: Double = 0.35
+        static let period: TimeInterval = 0.8
+    }
+
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @SwiftUI.State private var isDimmed = false
+
+    var body: some View {
         Circle()
             .fill(Color.red)
-            .frame(width: Metrics.recordingDot, height: Metrics.recordingDot)
-            .opacity(header.isRecording ? 1 : 0)
-            .accessibilityHidden(!header.isRecording)
+            .frame(width: Metrics.size, height: Metrics.size)
+            .opacity(reduceMotion ? 1 : (isDimmed ? Metrics.dimmedOpacity : 1))
             .accessibilityLabel(L10n.Calls.peerRecording)
+            .onAppear { updateAnimation(reduceMotion: reduceMotion) }
+            .onChange(of: reduceMotion) { updateAnimation(reduceMotion: $0) }
+    }
+
+    private func updateAnimation(reduceMotion: Bool) {
+        guard !reduceMotion else {
+            isDimmed = false
+            return
+        }
+        withAnimation(.easeInOut(duration: Metrics.period)
+                        .repeatForever(autoreverses: true)) {
+            isDimmed = true
+        }
     }
 }
 

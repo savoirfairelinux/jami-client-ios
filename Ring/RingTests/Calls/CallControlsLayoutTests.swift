@@ -30,19 +30,18 @@ final class CallControlsLayoutTests: XCTestCase {
                           canHold: canHold, canResume: canResume, showsDialpad: showsDialpad)
     }
 
-    private func plan(_ model: CallControlsModel? = nil, regular: Bool = false,
-                      speaker: Bool = false, canAdd: Bool = true,
+    private func plan(_ model: CallControlsModel? = nil,
+                      speaker: Bool = false,
                       canPiP: Bool = true) -> CallControlsLayout.Plan {
         CallControlsLayout.plan(.init(model: model ?? self.model(),
                                       speakerActive: speaker,
-                                      canAddParticipant: canAdd,
-                                      canStartPictureInPicture: canPiP,
-                                      isRegularWidth: regular))
+                                      canStartPictureInPicture: canPiP))
     }
 
     private func action(_ intent: CallControlIntent,
                         in plan: CallControlsLayout.Plan) -> ControlAction? {
-        (plan.primary + plan.overflow).first { $0.intent == intent }
+        (plan.primary + plan.supplemental + [plan.pictureInPicture].compactMap { $0 })
+            .first { $0.intent == intent }
     }
 
     func testDialpadOnlyForSip() {
@@ -57,35 +56,48 @@ final class CallControlsLayoutTests: XCTestCase {
                        L10n.Calls.startPictureInPicture)
     }
 
-    func testMoreIsDisabledWhenNothingWouldOverflow() {
-        let stripped = model(canToggleMedia: false, canSwitchCamera: false)
-        let empty = plan(stripped, canAdd: false, canPiP: false)
-        XCTAssertTrue(empty.overflow.isEmpty)
-        XCTAssertEqual(action(.more, in: empty)?.isEnabled, false)
-        XCTAssertEqual(action(.more, in: plan())?.isEnabled, true)
-        XCTAssertEqual(action(.more, in: plan())?.accessibilityLabel,
-                       L10n.Calls.moreActions)
+    func testFlipCameraRemainsVisibleWhenUnavailable() {
+        let unavailable = action(
+            .flipCamera,
+            in: plan(model(videoMute: true, canSwitchCamera: false)))
+        XCTAssertNotNil(unavailable)
+        XCTAssertEqual(unavailable?.isEnabled, false)
+
+        let mediaChangeUnavailable = action(
+            .flipCamera,
+            in: plan(model(canToggleMedia: false, canSwitchCamera: true)))
+        XCTAssertEqual(mediaChangeUnavailable?.isEnabled, false)
+
+        let available = action(.flipCamera, in: plan(model(canSwitchCamera: true)))
+        XCTAssertEqual(available?.isEnabled, true)
+        XCTAssertEqual(available?.accessibilityLabel,
+                       L10n.Accessibility.Calls.Default.switchCamera)
     }
 
-    func testFlipCameraGatedByCanSwitchCamera() {
-        XCTAssertNil(action(.flipCamera, in: plan(model(canSwitchCamera: false))))
-        XCTAssertNotNil(action(.flipCamera, in: plan(model(canSwitchCamera: true))))
+    func testPrimaryControlsRemainStableWhenCapabilitiesChange() {
+        let available = plan(model(canSwitchCamera: true)).primary.map(\.intent)
+        let unavailable = plan(model(canSwitchCamera: false)).primary.map(\.intent)
+        XCTAssertEqual(unavailable, available)
+
+        let sipAvailable = plan(model(canHold: true, showsDialpad: true))
+            .supplemental.map(\.intent)
+        let sipUnavailable = plan(model(showsDialpad: true)).supplemental.map(\.intent)
+        XCTAssertEqual(sipUnavailable, sipAvailable)
     }
 
-    func testAddParticipantGatedByCapability() {
-        XCTAssertNil(action(.addParticipant, in: plan(canAdd: false)))
-        XCTAssertNotNil(action(.addParticipant, in: plan(canAdd: true)))
+    func testSipAddsControlsWithoutReplacingVideoControls() {
+        let sip = plan(model(canSwitchCamera: false, canHold: true, showsDialpad: true))
+        let regular = plan(model(canSwitchCamera: false))
+
+        XCTAssertEqual(sip.primary.map(\.intent), regular.primary.map(\.intent))
+        XCTAssertEqual(sip.supplemental.map(\.intent), [.toggleHold, .showDialpad])
     }
 
-    func testRegularWidthDropsMoreAndFlattensInline() {
-        let layoutPlan = plan(model(canHold: true), regular: true)
-        XCTAssertTrue(layoutPlan.overflow.isEmpty, "no overflow column in regular width")
-        XCTAssertFalse(layoutPlan.primary.contains { $0.intent == .more }, "no More button")
-        for intent: CallControlIntent in [.flipCamera, .toggleHold, .addParticipant,
-                                          .startPictureInPicture] {
-            XCTAssertTrue(layoutPlan.primary.contains { $0.intent == intent },
-                          "\(intent) should be inline in regular width")
-        }
+    func testSipHoldRemainsVisibleWhenUnavailable() {
+        let hold = action(.toggleHold, in: plan(model(showsDialpad: true)))
+
+        XCTAssertNotNil(hold)
+        XCTAssertEqual(hold?.isEnabled, false)
     }
 
     func testMuteShowsActiveStyle() {

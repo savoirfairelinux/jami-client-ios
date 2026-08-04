@@ -21,6 +21,7 @@ import SwiftUI
 struct ConferenceCanvasView: UIViewRepresentable {
 
     @ObservedObject var model: CallViewModel
+    let previewControlInsets: UIEdgeInsets
 
     func makeUIView(context: Context) -> ParticipantCanvas {
         let canvas = ParticipantCanvas()
@@ -34,6 +35,7 @@ struct ConferenceCanvasView: UIViewRepresentable {
     }
 
     func updateUIView(_ canvas: ParticipantCanvas, context: Context) {
+        canvas.previewControlInsets = previewControlInsets
         canvas.apply(model.canvas)
     }
 }
