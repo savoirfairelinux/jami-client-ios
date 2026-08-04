@@ -62,10 +62,18 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
     @Published private(set) var canAddParticipant = false
     @Published private(set) var speakerActive = false
     @Published private(set) var chromeVisible = true
-    @Published private(set) var moreExpanded = false
     @Published private(set) var contentHidden = false
 
     var showsChrome: Bool { chromeVisible && !contentHidden }
+
+    var controlsPlan: CallControlsLayout.Plan? {
+        controls.map { controls in
+            CallControlsLayout.plan(
+                .init(model: controls,
+                      speakerActive: speakerActive,
+                      canStartPictureInPicture: canStartPictureInPicture))
+        }
+    }
 
     @Published private(set) var header = CallHeaderModel.empty
 
@@ -95,6 +103,7 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
     private static let autoHideDelay: TimeInterval = 4
     private var avatars: CallParticipantAvatars?
     private var peerName = ""
+    private var addParticipantAfterRosterDismissal = false
     private var observedPeerURI: String?
     private var peerNameCancellable: AnyCancellable?
     private var chromeCancellable: AnyCancellable?
@@ -174,7 +183,6 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
 
     func screenTapped() {
         guard chromeCanAutoHide else { return }
-        if moreExpanded { setMoreExpanded(false); return }
         chromeVisible ? hideChrome() : revealChrome()
     }
 
@@ -186,18 +194,6 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
     func registerChromeInteraction() {
         guard chromeCanAutoHide else { return }
         revealChrome()
-    }
-
-    func toggleMoreExpanded() { setMoreExpanded(!moreExpanded) }
-
-    func setMoreExpanded(_ open: Bool) {
-        moreExpanded = open
-        if open {
-            cancelAutoHide()
-            chromeVisible = true
-        } else {
-            scheduleAutoHide()
-        }
     }
 
     private var chromeCanAutoHide: Bool {
@@ -224,7 +220,7 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
 
     private func scheduleAutoHide() {
         cancelAutoHide()
-        guard chromeCanAutoHide, !moreExpanded else { return }
+        guard chromeCanAutoHide else { return }
         let work = DispatchWorkItem { [weak self] in self?.chromeVisible = false }
         autoHideWork = work
         DispatchQueue.main.asyncAfter(deadline: .now() + Self.autoHideDelay, execute: work)
@@ -419,6 +415,20 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
 
     // MARK: - Intents
 
+    func perform(_ intent: CallControlIntent) {
+        registerChromeInteraction()
+        switch intent {
+        case .toggleMic: toggleMuteAudio()
+        case .toggleCamera: toggleMuteVideo()
+        case .toggleAudioOutput: toggleSpeaker()
+        case .hangUp: hangUp()
+        case .flipCamera: switchCamera()
+        case .toggleHold: toggleHold()
+        case .startPictureInPicture: minimizeToPictureInPicture()
+        case .showDialpad: showsDialpad = true
+        }
+    }
+
     func accept(withVideo: Bool) {
         Task { await callService.accept(callId, withVideo: withVideo) }
     }
@@ -609,6 +619,16 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
 
     func addParticipantTapped() {
         guard canAddParticipant else { return }
+        addParticipantAfterRosterDismissal = showsParticipants
+        showsParticipants = false
+        if !addParticipantAfterRosterDismissal {
+            onAddParticipant?()
+        }
+    }
+
+    func participantsDismissed() {
+        guard addParticipantAfterRosterDismissal else { return }
+        addParticipantAfterRosterDismissal = false
         onAddParticipant?()
     }
 

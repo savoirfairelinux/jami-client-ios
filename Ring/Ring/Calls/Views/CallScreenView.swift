@@ -18,11 +18,60 @@
 
 import SwiftUI
 
+private protocol MeasuredHeightKey: PreferenceKey where Value == CGFloat {}
+
+extension MeasuredHeightKey {
+    static var defaultValue: CGFloat { 0 }
+
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = max(value, nextValue())
+    }
+}
+
+private struct TopActionsHeightKey: MeasuredHeightKey {}
+private struct BottomControlsHeightKey: MeasuredHeightKey {}
+
+private extension View {
+    func measuringHeight<Key: MeasuredHeightKey>(_ key: Key.Type,
+                                                 into height: Binding<CGFloat>) -> some View {
+        background(GeometryReader { geometry in
+            Color.clear.preference(key: key, value: geometry.size.height)
+        })
+        .onPreferenceChange(key) { measured in
+            if height.wrappedValue != measured { height.wrappedValue = measured }
+        }
+    }
+}
+
 struct CallScreenView: View {
 
-    @ObservedObject var model: CallViewModel
+    enum Motion {
+        static let chromeFadeDuration: TimeInterval = 0.3
+    }
 
-    private var chromeAnimation: Animation { .easeInOut(duration: 0.3) }
+    private enum Metrics {
+        static let previewChromeGap: CGFloat = 8
+    }
+
+    @ObservedObject var model: CallViewModel
+    @SwiftUI.State private var topActionsHeight: CGFloat = 0
+    @SwiftUI.State private var bottomControlsHeight: CGFloat = 0
+
+    private var chromeAnimation: Animation {
+        .easeInOut(duration: Motion.chromeFadeDuration)
+    }
+    private var previewControlInsets: UIEdgeInsets {
+        guard model.showsChrome else { return .zero }
+        return UIEdgeInsets(
+            top: clearance(for: topActionsHeight),
+            left: 0,
+            bottom: clearance(for: bottomControlsHeight),
+            right: 0)
+    }
+
+    private func clearance(for measuredHeight: CGFloat) -> CGFloat {
+        measuredHeight > 0 ? measuredHeight + Metrics.previewChromeGap : 0
+    }
 
     var body: some View {
         ZStack {
@@ -31,7 +80,8 @@ struct CallScreenView: View {
             PiPSourceView(model: model)
                 .ignoresSafeArea()
 
-            ConferenceCanvasView(model: model)
+            ConferenceCanvasView(model: model,
+                                 previewControlInsets: previewControlInsets)
                 .ignoresSafeArea()
                 .opacity(model.contentHidden ? 0 : 1)
                 .allowsHitTesting(!model.contentHidden)
@@ -41,7 +91,8 @@ struct CallScreenView: View {
         .sheet(isPresented: $model.showsDialpad) {
             InCallDialpadView(model: model)
         }
-        .sheet(isPresented: $model.showsParticipants) {
+        .sheet(isPresented: $model.showsParticipants,
+               onDismiss: model.participantsDismissed) {
             ConferenceParticipantsView(model: model)
                 .optionalMediumPresentationDetents()
         }
@@ -50,31 +101,24 @@ struct CallScreenView: View {
     }
 
     private var chrome: some View {
-        ZStack {
-            if model.showsChrome {
-                if model.moreExpanded {
-                    Color.black.opacity(0.28)
-                        .ignoresSafeArea()
-                        .transition(.opacity)
-                        .onTapGesture {
-                            withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
-                                model.setMoreExpanded(false)
-                            }
-                        }
+        GeometryReader { geometry in
+            VStack {
+                if model.showsChrome {
+                    CallTopActionsView(model: model, availableWidth: geometry.size.width)
+                        .measuringHeight(TopActionsHeightKey.self,
+                                         into: $topActionsHeight)
+                        .transition(.move(edge: .top).combined(with: .opacity))
                 }
-
-                GeometryReader { geometry in
-                    VStack {
-                        CallHeaderView(model: model)
-                        Spacer()
-                        CallControlsView(model: model, availableWidth: geometry.size.width)
-                            .padding(.bottom, 12)
-                    }
+                Spacer(minLength: 0)
+                if model.showsChrome {
+                    CallControlsView(model: model, availableWidth: geometry.size.width)
+                        .measuringHeight(BottomControlsHeightKey.self,
+                                         into: $bottomControlsHeight)
+                        .transition(.move(edge: .bottom).combined(with: .opacity))
                 }
-                .padding()
-                .transition(.opacity)
             }
         }
+        .padding()
         .allowsHitTesting(model.showsChrome)
         .animation(chromeAnimation, value: model.showsChrome)
     }

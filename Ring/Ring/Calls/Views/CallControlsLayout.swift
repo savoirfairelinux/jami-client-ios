@@ -23,10 +23,8 @@ enum CallControlIntent: Hashable {
     case toggleCamera
     case toggleAudioOutput
     case hangUp
-    case more
     case flipCamera
     case toggleHold
-    case addParticipant
     case startPictureInPicture
     case showDialpad
 }
@@ -89,8 +87,20 @@ struct ControlAction: Identifiable, Equatable {
     let intent: CallControlIntent
     let systemImage: String
     let accessibilityLabel: String
-    var style: Style = .normal
-    var isEnabled: Bool = true
+    let style: Style
+    let isEnabled: Bool
+
+    init(intent: CallControlIntent,
+         systemImage: String,
+         accessibilityLabel: String,
+         style: Style = .normal,
+         isEnabled: Bool = true) {
+        self.intent = intent
+        self.systemImage = systemImage
+        self.accessibilityLabel = accessibilityLabel
+        self.style = style
+        self.isEnabled = isEnabled
+    }
 
     var id: CallControlIntent { intent }
 }
@@ -100,14 +110,13 @@ enum CallControlsLayout {
     struct Context {
         let model: CallControlsModel
         let speakerActive: Bool
-        let canAddParticipant: Bool
         let canStartPictureInPicture: Bool
-        let isRegularWidth: Bool
     }
 
     struct Plan: Equatable {
-        var primary: [ControlAction]
-        var overflow: [ControlAction]
+        let primary: [ControlAction]
+        let supplemental: [ControlAction]
+        let pictureInPicture: ControlAction?
     }
 
     static func plan(_ context: Context) -> Plan {
@@ -124,7 +133,9 @@ enum CallControlsLayout {
         let camera = ControlAction(
             intent: .toggleCamera,
             systemImage: model.isVideoMuted ? "video.slash.fill" : "video.fill",
-            accessibilityLabel: L10n.Accessibility.Calls.Default.toggleVideo,
+            accessibilityLabel: model.isVideoMuted
+                ? L10n.Accessibility.Calls.Default.toggleVideo
+                : L10n.Accessibility.Calls.Alter.toggleVideo,
             style: model.isVideoMuted ? .active : .normal,
             isEnabled: model.canToggleMedia)
 
@@ -142,59 +153,44 @@ enum CallControlsLayout {
             accessibilityLabel: L10n.Accessibility.Calls.Default.endCall,
             style: .destructive)
 
-        let secondary = secondaryActions(context)
+        let pictureInPicture: ControlAction? = context.canStartPictureInPicture
+            ? ControlAction(intent: .startPictureInPicture,
+                            systemImage: "pip.enter",
+                            accessibilityLabel: L10n.Calls.startPictureInPicture)
+            : nil
 
-        if context.isRegularWidth {
-            var inline = [mic, camera, audioOutput] + secondary
-            inline.insert(hangUp, at: inline.count / 2)
-            return Plan(primary: inline, overflow: [])
+        let supplemental: [ControlAction]
+        if model.showsDialpad {
+            let dialpad = ControlAction(
+                intent: .showDialpad,
+                systemImage: "circle.grid.3x3.fill",
+                accessibilityLabel: L10n.Accessibility.Calls.Default.showDialpad)
+            supplemental = [holdAction(model), dialpad]
+        } else {
+            supplemental = []
         }
 
-        let more = ControlAction(
-            intent: .more,
-            systemImage: "ellipsis",
-            accessibilityLabel: L10n.Calls.moreActions,
-            isEnabled: !secondary.isEmpty)
-        return Plan(primary: [mic, camera, hangUp, audioOutput, more],
-                    overflow: secondary)
+        let primary = [audioOutput, mic, camera,
+                       flipCameraAction(isEnabled: model.canToggleMedia
+                                        && model.canSwitchCamera), hangUp]
+        return Plan(primary: primary, supplemental: supplemental,
+                    pictureInPicture: pictureInPicture)
     }
 
-    private static func secondaryActions(_ context: Context) -> [ControlAction] {
-        let model = context.model
-        var actions: [ControlAction] = []
+    private static func flipCameraAction(isEnabled: Bool) -> ControlAction {
+        ControlAction(intent: .flipCamera,
+                      systemImage: "arrow.triangle.2.circlepath.camera",
+                      accessibilityLabel: L10n.Accessibility.Calls.Default.switchCamera,
+                      isEnabled: isEnabled)
+    }
 
-        if model.canSwitchCamera {
-            actions.append(ControlAction(
-                            intent: .flipCamera,
-                            systemImage: "arrow.triangle.2.circlepath.camera",
-                            accessibilityLabel: L10n.Accessibility.Calls.Default.switchCamera))
-        }
-        if model.canHold || model.canResume {
-            actions.append(ControlAction(
-                            intent: .toggleHold,
-                            systemImage: model.canResume ? "play.fill" : "pause.fill",
-                            accessibilityLabel: model.canResume
-                                ? L10n.Accessibility.Calls.Alter.pauseCall
-                                : L10n.Accessibility.Calls.Default.pauseCall))
-        }
-        if context.canAddParticipant {
-            actions.append(ControlAction(
-                            intent: .addParticipant,
-                            systemImage: "person.badge.plus",
-                            accessibilityLabel: L10n.Accessibility.Calls.Default.addParticipant))
-        }
-        if context.canStartPictureInPicture {
-            actions.append(ControlAction(
-                            intent: .startPictureInPicture,
-                            systemImage: "pip.enter",
-                            accessibilityLabel: L10n.Calls.startPictureInPicture))
-        }
-        if model.showsDialpad {
-            actions.append(ControlAction(
-                            intent: .showDialpad,
-                            systemImage: "circle.grid.3x3.fill",
-                            accessibilityLabel: L10n.Accessibility.Calls.Default.showDialpad))
-        }
-        return actions
+    private static func holdAction(_ model: CallControlsModel) -> ControlAction {
+        ControlAction(
+            intent: .toggleHold,
+            systemImage: model.canResume ? "play.fill" : "pause.fill",
+            accessibilityLabel: model.canResume
+                ? L10n.Accessibility.Calls.Alter.pauseCall
+                : L10n.Accessibility.Calls.Default.pauseCall,
+            isEnabled: model.canHold || model.canResume)
     }
 }

@@ -42,6 +42,7 @@ struct ParticipantTileState: Equatable {
 final class ParticipantTileUIView: UIView {
 
     private enum Metrics {
+        static let audioOnlyAvatarLiftRatio: CGFloat = 1.0 / 6.0
         static let nameHorizontalPadding: CGFloat = 8
         static let nameVerticalPadding: CGFloat = 3
         static let nameEdgeMargin: CGFloat = 8
@@ -74,6 +75,7 @@ final class ParticipantTileUIView: UIView {
 
     private var avatarWidth: NSLayoutConstraint!
     private var avatarHeight: NSLayoutConstraint!
+    private var avatarCenterY: NSLayoutConstraint!
     private var nameLeading: NSLayoutConstraint!
     private var nameBottom: NSLayoutConstraint!
     private var nameTrailing: NSLayoutConstraint!
@@ -139,6 +141,9 @@ final class ParticipantTileUIView: UIView {
 
         avatarWidth = avatarView.widthAnchor.constraint(equalToConstant: 72)
         avatarHeight = avatarView.heightAnchor.constraint(equalToConstant: 72)
+        avatarCenterY = avatarView.centerYAnchor.constraint(
+            equalTo: centerYAnchor,
+            constant: 0)
         nameLeading = namePlate.leadingAnchor.constraint(
             equalTo: leadingAnchor, constant: Metrics.nameEdgeMargin)
         nameBottom = namePlate.bottomAnchor.constraint(
@@ -147,7 +152,7 @@ final class ParticipantTileUIView: UIView {
                                                            constant: -Metrics.nameEdgeMargin)
         NSLayoutConstraint.activate([
             avatarView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            avatarView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            avatarCenterY,
             avatarWidth, avatarHeight,
             nameLeading, nameBottom, nameTrailing,
             nameLabel.leadingAnchor.constraint(equalTo: namePlate.leadingAnchor,
@@ -171,19 +176,26 @@ final class ParticipantTileUIView: UIView {
     }
 
     override func layoutSubviews() {
-        super.layoutSubviews()
         let side = CallParticipantAvatars.avatarSize(forTileSide: min(bounds.width, bounds.height))
         if avatarWidth.constant != side {
             avatarWidth.constant = side
             avatarHeight.constant = side
         }
+        let avatarLift = tileState.showsVideo
+            ? 0 : side * Metrics.audioOnlyAvatarLiftRatio
+        if avatarCenterY.constant != -avatarLift {
+            avatarCenterY.constant = -avatarLift
+        }
+        super.layoutSubviews()
         namePlate.layer.cornerRadius = namePlate.bounds.height / 2
         layer.borderWidth = tileState.isSpeaking ? 2 : 0
     }
 
     func apply(_ state: ParticipantTileState) {
         let losesVideo = tileState.showsVideo && !state.showsVideo && !videoView.isHidden
+        let videoAvailabilityChanged = tileState.showsVideo != state.showsVideo
         tileState = state
+        if videoAvailabilityChanged { setNeedsLayout() }
         nameLabel.isHidden = !state.showsName
         namePlate.isHidden = !state.showsName
         if state.showsVideo { videoView.isHidden = false }

@@ -69,15 +69,31 @@ struct ConferenceParticipantsView: View {
 
     private var participantsHeader: some View {
         sectionHeader(L10n.Calls.inThisCall("\(model.participantRows.count)")) {
-            if model.canModerateConference {
-                Button(action: model.showGridLayout) {
-                    Label(L10n.Calls.gridLayout, systemImage: "square.grid.2x2")
-                        .labelStyle(IconOnlyLabelStyle())
-                        .imageScale(.large)
-                        .frame(width: 44, height: 44)
-                        .contentShape(Rectangle())
+            HStack(spacing: 4) {
+                if model.canModerateConference {
+                    headerButton(L10n.Calls.gridLayout,
+                                 systemImage: "square.grid.2x2",
+                                 action: model.showGridLayout)
+                }
+                if model.canAddParticipant {
+                    headerButton(L10n.Accessibility.Calls.Default.addParticipant,
+                                 systemImage: "person.badge.plus",
+                                 action: model.addParticipantTapped)
                 }
             }
+        }
+    }
+
+    private func headerButton(_ title: String,
+                              systemImage: String,
+                              action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Label(title, systemImage: systemImage)
+                .labelStyle(IconOnlyLabelStyle())
+                .imageScale(.large)
+                .foregroundColor(Color.jamiButtonPrimary)
+                .frame(width: 44, height: 44)
+                .contentShape(Rectangle())
         }
     }
 }
