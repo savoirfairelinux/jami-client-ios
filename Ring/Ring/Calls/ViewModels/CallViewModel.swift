@@ -317,7 +317,8 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
         if avatars == nil {
             avatars = CallParticipantAvatars(accountId: call.accountId,
                                              profileService: profileService,
-                                             nameService: nameService)
+                                             nameService: nameService,
+                                             localJamiId: localJamiId)
         }
         let peerURI = call.peerUri
         guard peerURI != observedPeerURI else { return }
@@ -530,7 +531,9 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
     private func makeAvatars() -> CallParticipantAvatars {
         let resolver = CallParticipantAvatars(
             accountId: call?.accountId ?? conference?.accountId ?? "",
-            profileService: profileService, nameService: nameService)
+            profileService: profileService,
+            nameService: nameService,
+            localJamiId: localJamiId)
         avatars = resolver
         return resolver
     }

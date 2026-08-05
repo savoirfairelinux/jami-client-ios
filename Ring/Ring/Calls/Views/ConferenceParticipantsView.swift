@@ -113,16 +113,10 @@ private struct ParticipantRowView: View, Equatable {
             AvatarSwiftUIView(source: avatar, sizeOverride: 44)
                 .frame(width: 44, height: 44)
 
-            HStack(spacing: 6) {
-                Text(displayName)
-                    .font(.subheadline)
-                    .fontWeight(.medium)
-                    .lineLimit(1)
-                if row.isLocal {
-                    Text(L10n.Account.me)
-                        .font(.caption).foregroundColor(.secondary)
-                }
-            }
+            Text(displayName)
+                .font(.subheadline)
+                .fontWeight(.medium)
+                .lineLimit(1)
 
             Spacer(minLength: 8)
             statusIcons
@@ -134,7 +128,8 @@ private struct ParticipantRowView: View, Equatable {
     }
 
     private var displayName: String {
-        avatar.profileName.isEmpty ? row.uri.filterOutHost() : avatar.profileName
+        let name = avatar.profileName.isEmpty ? row.uri.filterOutHost() : avatar.profileName
+        return row.isLocal ? name.withYourselfSuffix() : name
     }
 
     @ViewBuilder private var statusIcons: some View {

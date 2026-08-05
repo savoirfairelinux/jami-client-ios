@@ -25,16 +25,21 @@ final class CallParticipantAvatars {
     let accountId: String
     private let profileService: ProfilesService
     private let nameService: NameService
+    private let localParticipantHash: String
     private var providers: [String: AvatarProvider] = [:]
     /// Spelling-keyed shortcut: callers ask from view bodies, and canonicalizing a uri
     /// costs a regex and several allocations that the profile key would only discard.
     private var providersByURI: [String: AvatarProvider] = [:]
     private let disposeBag = DisposeBag()
 
-    init(accountId: String, profileService: ProfilesService, nameService: NameService) {
+    init(accountId: String,
+         profileService: ProfilesService,
+         nameService: NameService,
+         localJamiId: String) {
         self.accountId = accountId
         self.profileService = profileService
         self.nameService = nameService
+        self.localParticipantHash = Self.participantKey(for: localJamiId).hash
     }
 
     func provider(forUri uri: String) -> AvatarProvider {
@@ -48,12 +53,16 @@ final class CallParticipantAvatars {
 
     private func makeProvider(key: (profileUri: String, hash: String)) -> AvatarProvider {
         let hash = key.hash
+        let isLocal = !localParticipantHash.isEmpty && hash == localParticipantHash
         let profileNameRelay = BehaviorRelay(value: "")
         let registeredNameRelay = BehaviorRelay(value: "")
 
-        let profile = profileService
-            .getProfile(uri: key.profileUri, createIfNotexists: false, accountId: accountId)
-            .share(replay: 1)
+        let source = isLocal
+            ? profileService.getAccountProfile(accountId: accountId)
+            : profileService.getProfile(uri: key.profileUri,
+                                        createIfNotexists: false,
+                                        accountId: accountId)
+        let profile = source.share(replay: 1)
 
         let photo: Observable<Data?> = profile.map { $0.photo?.toImageData() }
         profile
@@ -79,7 +88,8 @@ final class CallParticipantAvatars {
                               avatar: photo,
                               displayName: name,
                               isGroup: false,
-                              waitForFirstAvatar: true)
+                              waitForFirstAvatar: true,
+                              isLocalParticipant: isLocal)
     }
 
     private func resolveRegisteredName(forHash hash: String,

@@ -212,12 +212,15 @@ final class ParticipantTileUIView: UIView {
             nameCancellable = nil
             return
         }
+        let isLocalParticipant = provider.isLocalParticipant
         nameCancellable = provider.$profileName
             .receive(on: DispatchQueue.main)
             .sink { [weak self] name in
-                self?.nameLabel.text = name
-                self?.accessibilityLabel = name
-                self?.setNeedsLayout()
+                guard let self = self else { return }
+                let displayName = isLocalParticipant ? name.withYourselfSuffix() : name
+                self.nameLabel.text = displayName
+                self.accessibilityLabel = displayName
+                self.setNeedsLayout()
             }
     }
 
