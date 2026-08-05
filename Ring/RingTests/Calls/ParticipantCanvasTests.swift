@@ -50,6 +50,19 @@ final class ParticipantCanvasTests: XCTestCase {
         }
     }
 
+    private func floatingPreviewModels(distributor: FrameDistributor) -> [CanvasTileModel] {
+        return [
+            CanvasTileModel(
+                participant: CanvasParticipant(id: CallTestFixtures.remoteSinkId),
+                tileState: ParticipantTileState(showsVideo: true)),
+            CanvasTileModel(
+                participant: CanvasParticipant(id: CanvasParticipant.localId,
+                                               isLocalPreview: true),
+                tileState: ParticipantTileState(showsVideo: true),
+                distributor: distributor)
+        ]
+    }
+
     private func tile(_ id: String, in canvas: ParticipantCanvas) -> ParticipantTileUIView? {
         Self.firstDescendant(in: canvas) { $0.participantId == id }
     }
@@ -133,5 +146,37 @@ final class ParticipantCanvasTests: XCTestCase {
         XCTAssertEqual(focused.frame, CGRect(origin: .zero, size: canvas.bounds.size))
         XCTAssertEqual(focused.contentInsets, canvas.safeAreaInsets)
         XCTAssertEqual(parked.contentInsets, .zero)
+    }
+
+    func testDockedPreviewSuspendsRenderingAndIgnoresCallControls() throws {
+        let canvas = makeCanvas()
+        let distributor = FrameDistributor(source: .localCamera)
+        canvas.apply(CanvasState(tiles: floatingPreviewModels(distributor: distributor)),
+                     animated: false)
+
+        XCTAssertEqual(distributor.subscriberCount, 1)
+
+        canvas.dockPreview(to: .left, animated: false)
+        XCTAssertEqual(distributor.subscriberCount, 0)
+
+        let handle: PreviewDockHandleView = try XCTUnwrap(
+            Self.firstDescendant(in: canvas))
+        let preview = try XCTUnwrap(tile(CanvasParticipant.localId, in: canvas))
+        let handleCenterY = handle.center.y
+        let previewCenterY = preview.center.y
+
+        canvas.previewControlInsets = UIEdgeInsets(top: 72, left: 0,
+                                                   bottom: 144, right: 0)
+        canvas.settleDockedPreview(to: .left, animated: false)
+
+        XCTAssertEqual(handle.center.y, handleCenterY)
+        XCTAssertEqual(preview.center.y, previewCenterY)
+
+        canvas.restorePreview(animated: false)
+        XCTAssertEqual(distributor.subscriberCount, 1)
+
+        canvas.dockPreview(to: .right)
+        canvas.willMove(toWindow: nil)
+        XCTAssertEqual(distributor.subscriberCount, 0)
     }
 }
