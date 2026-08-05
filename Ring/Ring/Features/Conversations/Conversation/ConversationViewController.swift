@@ -87,6 +87,7 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        view.endEditing(true)
         viewModel.setMessagesAsRead()
     }
 
