@@ -29,7 +29,8 @@ struct CallTopActionsView: View {
     var body: some View {
         let plan = model.controlsPlan
         let metrics = BarMetrics(availableWidth: availableWidth, plan: plan)
-        let sideLane = plan?.pictureInPicture == nil ? 0 : metrics.button + metrics.gap
+        let hasSideAction = plan?.pictureInPicture != nil || model.canAddParticipant
+        let sideLane = hasSideAction ? metrics.button + metrics.gap : 0
         let identityWidth = max(0, availableWidth - 2 * sideLane)
 
         ZStack {
@@ -45,6 +46,9 @@ struct CallTopActionsView: View {
                     topButton(action, metrics: metrics)
                 }
                 Spacer(minLength: 0)
+                if model.canAddParticipant {
+                    addParticipantButton(metrics: metrics)
+                }
             }
         }
         .frame(maxWidth: .infinity)
@@ -60,5 +64,17 @@ struct CallTopActionsView: View {
         }
         .disabled(!action.isEnabled)
         .accessibilityLabel(action.accessibilityLabel)
+    }
+
+    private func addParticipantButton(metrics: BarMetrics) -> some View {
+        Button(action: model.addParticipantTapped) {
+            Label(L10n.Accessibility.Calls.Default.addParticipant,
+                  systemImage: "person.badge.plus")
+                .labelStyle(IconOnlyLabelStyle())
+                .font(.system(size: metrics.icon, weight: .medium))
+                .foregroundColor(.white)
+                .frame(width: metrics.button, height: metrics.button)
+                .onVideoGlass(Circle(), tint: Color.jamiOnVideoGlass)
+        }
     }
 }
