@@ -54,6 +54,9 @@ final class ParticipantTileUIView: UIView {
 
     var foreignGestureGate: ((UIGestureRecognizer) -> Bool)?
     var onVideoScalingToggleRequested: (() -> Void)?
+    var onPreviewHideRequested: (() -> Void)? {
+        didSet { syncAccessibilityActions() }
+    }
 
     var canToggleVideoScaling = false {
         didSet {
@@ -259,18 +262,23 @@ final class ParticipantTileUIView: UIView {
     }
 
     private func syncAccessibilityActions() {
-        guard canToggleVideoScaling else {
-            accessibilityCustomActions = nil
-            return
-        }
-        let name = videoView.showsWholeFrame
-            ? L10n.Accessibility.Conference.cropVideo
-            : L10n.Accessibility.Conference.showFullVideo
-        accessibilityCustomActions = [
-            UIAccessibilityCustomAction(name: name) { [weak self] _ in
+        var actions: [UIAccessibilityCustomAction] = []
+        if canToggleVideoScaling {
+            let name = videoView.showsWholeFrame
+                ? L10n.Accessibility.Conference.cropVideo
+                : L10n.Accessibility.Conference.showFullVideo
+            actions.append(UIAccessibilityCustomAction(name: name) { [weak self] _ in
                 self?.onVideoScalingToggleRequested?()
                 return true
-            }
-        ]
+            })
+        }
+        if onPreviewHideRequested != nil {
+            actions.append(UIAccessibilityCustomAction(
+                name: L10n.Accessibility.Conference.hideLocalPreview) { [weak self] _ in
+                self?.onPreviewHideRequested?()
+                return true
+            })
+        }
+        accessibilityCustomActions = actions.isEmpty ? nil : actions
     }
 }

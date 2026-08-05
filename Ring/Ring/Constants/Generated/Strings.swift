@@ -196,6 +196,8 @@ internal enum L10n {
       internal static let cropVideo = L10n.tr("Localizable", "accessibility.conference.cropVideo", fallback: "Crop video")
       /// End call
       internal static let endCall = L10n.tr("Localizable", "accessibility.conference.endCall", fallback: "End call")
+      /// Hide your video
+      internal static let hideLocalPreview = L10n.tr("Localizable", "accessibility.conference.hideLocalPreview", fallback: "Hide your video")
       /// Your video
       internal static let localPreview = L10n.tr("Localizable", "accessibility.conference.localPreview", fallback: "Your video")
       /// Lower hand
@@ -210,6 +212,8 @@ internal enum L10n {
       internal static let setModerator = L10n.tr("Localizable", "accessibility.conference.setModerator", fallback: "Set moderator")
       /// Show full video
       internal static let showFullVideo = L10n.tr("Localizable", "accessibility.conference.showFullVideo", fallback: "Show full video")
+      /// Show your video
+      internal static let showLocalPreview = L10n.tr("Localizable", "accessibility.conference.showLocalPreview", fallback: "Show your video")
       /// Show participants
       internal static let showParticipants = L10n.tr("Localizable", "accessibility.conference.showParticipants", fallback: "Show participants")
       /// Unmute audio
