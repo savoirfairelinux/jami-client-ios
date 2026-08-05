@@ -51,6 +51,15 @@ enum CanvasTileStyle: Equatable {
 enum PreviewCorner: CaseIterable {
     case topLeading, topTrailing, bottomLeading, bottomTrailing
 
+    init(isTop: Bool, isLeading: Bool) {
+        switch (isTop, isLeading) {
+        case (true, true): self = .topLeading
+        case (true, false): self = .topTrailing
+        case (false, true): self = .bottomLeading
+        case (false, false): self = .bottomTrailing
+        }
+    }
+
     var isTop: Bool { self == .topLeading || self == .topTrailing }
     var isLeading: Bool { self == .topLeading || self == .bottomLeading }
 }
