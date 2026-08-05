@@ -54,7 +54,8 @@ final class CallParticipantAvatarsTests: XCTestCase {
         let nameService = NameService(withNameRegistrationAdapter: NameRegistrationAdapter())
         let avatars = CallParticipantAvatars(accountId: accountId1,
                                              profileService: profileService,
-                                             nameService: nameService)
+                                             nameService: nameService,
+                                             localJamiId: jamiId2)
 
         let provider = avatars.provider(forUri: peerHash)
 

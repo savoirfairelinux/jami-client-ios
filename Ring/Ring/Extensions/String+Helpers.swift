@@ -194,7 +194,7 @@ extension String {
     }
 
     func withYourselfSuffix() -> String {
-        guard !self.hasSuffix(Self.yourselfSuffix) else { return self }
+        guard !self.isEmpty, !self.hasSuffix(Self.yourselfSuffix) else { return self }
         return self + Self.yourselfSuffix
     }
 

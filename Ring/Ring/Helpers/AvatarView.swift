@@ -91,6 +91,7 @@ class AvatarProvider: ObservableObject {
     @Published var hasCustomAvatar: Bool = false
     @Published var groupAvatarSnapshot: UIImage?
     let size: Constants.AvatarSize
+    let isLocalParticipant: Bool
 
     private let profileService: ProfilesService
     private let disposeBag = DisposeBag()
@@ -102,9 +103,11 @@ class AvatarProvider: ObservableObject {
          avatar avatarStream: Observable<Data?>,
          displayName nameStream: Observable<String>,
          isGroup: Bool,
-         waitForFirstAvatar: Bool = false) {
+         waitForFirstAvatar: Bool = false,
+         isLocalParticipant: Bool = false) {
         self.size = size
         self.profileService = profileService
+        self.isLocalParticipant = isLocalParticipant
         self.isAvatarResolved = !waitForFirstAvatar
         self.subscribeAvatar(observable: avatarStream,
                              resolvesOnFirstEmission: waitForFirstAvatar)
@@ -116,6 +119,7 @@ class AvatarProvider: ObservableObject {
          size: Constants.AvatarSize) {
         self.size = size
         self.profileService = profileService
+        self.isLocalParticipant = false
     }
 
     private func subscribeAvatar(observable: Observable<Data?>,
