@@ -64,6 +64,7 @@ final class ParticipantCanvas: UIView {
 
     private let scrollView = UIScrollView()
     private let stripDriver = UIScrollView()
+    private let previewDockHandle = PreviewDockHandleView()
     private var tiles: [String: ParticipantTileUIView] = [:]
     private var models: [String: CanvasTileModel] = [:]
     private var lastAppliedModels: [CanvasTileModel] = []
@@ -75,12 +76,17 @@ final class ParticipantCanvas: UIView {
     private var orderedParticipants: [CanvasParticipant] = []
     private var suppressesStripCallback = false
     private var isDraggingPreview = false
+    private var previewPresentation = PreviewPresentationState.visible
+    private var previewDragRawOrigin: CGPoint?
+    private var isDockTransitioning = false
+    private var dockAnimator: UIViewPropertyAnimator?
     private var previewBody: PreviewMotion.Body?
     private var previewSpring = PreviewMotion.settle
     private var previewWalls = PreviewMotion.WallTravel.settled(.zero)
     private var previewMotionLink: CADisplayLink?
     private var previewMotionTimestamp: CFTimeInterval = 0
     private var videoScalingPolicyOverrides: [String: VideoScalingPolicy] = [:]
+    var isReduceMotionEnabled: () -> Bool = { UIAccessibility.isReduceMotionEnabled }
     private var previewId: String? {
         models.first { $0.value.participant.isLocalPreview }?.key
     }
@@ -92,7 +98,12 @@ final class ParticipantCanvas: UIView {
             let arriving = previewControlInsets.top + previewControlInsets.bottom
                 > oldValue.top + oldValue.bottom
             previewSpring = arriving ? PreviewMotion.push : PreviewMotion.settle
-            guard previewBody != nil, !UIAccessibility.isReduceMotionEnabled else {
+            if case .docked = previewPresentation, previewFloats {
+                previewWalls = .settled(previewControlInsets)
+                layoutDockedPreview()
+                return
+            }
+            guard previewBody != nil, !isReduceMotionEnabled() else {
                 previewWalls = .settled(previewControlInsets)
                 snapPreviewToRest()
                 return
@@ -118,6 +129,7 @@ final class ParticipantCanvas: UIView {
         addGestureRecognizer(
             UIPinchGestureRecognizer(target: self, action: #selector(canvasPinched(_:))))
         configureStripDriver()
+        configurePreviewDockHandle()
     }
 
     @available(*, unavailable)
@@ -134,6 +146,16 @@ final class ParticipantCanvas: UIView {
         stripDriver.panGestureRecognizer.isEnabled = false
         addSubview(stripDriver)
         addGestureRecognizer(stripDriver.panGestureRecognizer)
+    }
+
+    private func configurePreviewDockHandle() {
+        previewDockHandle.frame.size = PreviewDockHandleView.Metrics.hitSize
+        previewDockHandle.isHidden = true
+        previewDockHandle.addTarget(self, action: #selector(previewDockHandleTapped),
+                                    for: .touchUpInside)
+        previewDockHandle.addGestureRecognizer(UIPanGestureRecognizer(
+            target: self, action: #selector(previewDockHandlePanned(_:))))
+        addSubview(previewDockHandle)
     }
 
     override func gestureRecognizerShouldBegin(_ recognizer: UIGestureRecognizer) -> Bool {
@@ -203,10 +225,14 @@ final class ParticipantCanvas: UIView {
                     self?.toggleVideoScalingPolicy(forTileId: id)
                 }
                 if model.participant.isLocalPreview {
+                    tile.addGestureRecognizer(UITapGestureRecognizer(
+                                                target: self, action: #selector(canvasTapped)))
                     tile.addGestureRecognizer(UIPanGestureRecognizer(
                                                 target: self, action: #selector(previewPanned(_:))))
+                    addSubview(tile)
+                } else {
+                    scrollView.addSubview(tile)
                 }
-                scrollView.addSubview(tile)
                 tiles[id] = tile
                 newcomers.insert(id)
             }
@@ -215,6 +241,12 @@ final class ParticipantCanvas: UIView {
             tile.videoView.expectedFrameSize = model.expectedVideoSize
             tile.bindAvatar(model.avatarProvider)
             models[id] = model
+        }
+
+        if let id = previewId, let previewTile = tiles[id] {
+            previewTile.onPreviewHideRequested = tiles.count > 1 ? { [weak self] in
+                self?.dockPreviewBesideCurrentCorner()
+            } : nil
         }
 
         orderedParticipants = models.values.map(\.participant)
@@ -244,7 +276,10 @@ final class ParticipantCanvas: UIView {
 
     override func willMove(toWindow newWindow: UIWindow?) {
         super.willMove(toWindow: newWindow)
-        if newWindow == nil { stopPreviewMotion() }
+        if newWindow == nil {
+            stopPreviewMotion()
+            stopDockAnimator()
+        }
     }
 
     private func relayout(animated: Bool, newcomers: Set<String> = [],
@@ -257,7 +292,7 @@ final class ParticipantCanvas: UIView {
 
         for id in layout.zOrder {
             if let tile = tiles[id] {
-                scrollView.bringSubviewToFront(tile)
+                tile.superview?.bringSubviewToFront(tile)
             }
         }
 
@@ -269,7 +304,9 @@ final class ParticipantCanvas: UIView {
             tile.layoutIfNeeded()
             if animated { tile.alpha = 0 }
         }
-        let held = isDraggingPreview || previewBody != nil ? previewId : nil
+        let previewIsHeld = isDraggingPreview || previewBody != nil
+            || (previewFloats && previewPresentation.isDocked)
+        let held = previewIsHeld ? previewId : nil
         let applyFrames = { [self] in
             for (id, frame) in layout.frames where !newcomers.contains(id) {
                 guard let tile = tiles[id] else { continue }
@@ -405,15 +442,22 @@ final class ParticipantCanvas: UIView {
 
     private func updateVideoAttachments(frames: [String: CGRect],
                                         offstage: Set<String>) {
-        let visible = CGRect(origin: scrollView.contentOffset, size: bounds.size)
+        let scrollVisible = CGRect(origin: scrollView.contentOffset, size: bounds.size)
         for (id, tile) in tiles {
             guard let model = models[id], let frame = frames[id] else { continue }
+            let isPreview = model.participant.isLocalPreview
+            let visible = isPreview ? bounds : scrollVisible
             let shouldRender = model.tileState.showsVideo
                 && !offstage.contains(id)
                 && CanvasLayout.shouldRenderVideo(frame: frame, visibleRect: visible,
                                                   margin: attachMargin)
+                && !(isPreview && previewIsDockedAndSettled)
             tile.videoView.attach(to: shouldRender ? model.distributor : nil)
         }
+    }
+
+    private var previewIsDockedAndSettled: Bool {
+        return previewFloats && previewPresentation.isDocked && !isDockTransitioning
     }
 
     // MARK: - Video scaling
@@ -445,7 +489,7 @@ final class ParticipantCanvas: UIView {
     @objc
     private func canvasPinched(_ recognizer: UIPinchGestureRecognizer) {
         guard recognizer.state == .ended,
-              let id = tileId(at: recognizer.location(in: scrollView)),
+              let id = tileId(at: recognizer.location(in: self)),
               models[id]?.tileState.showsVideo == true else { return }
         if recognizer.scale > 1.15 {
             videoScalingPolicyOverrides[id] = .aspectFill
@@ -461,9 +505,9 @@ final class ParticipantCanvas: UIView {
     private func tileId(at point: CGPoint) -> String? {
         let layout = CanvasLayout.plan(currentInput())
         for id in layout.zOrder.reversed()
-        where layout.frames[id]?.contains(point) == true
-            && !layout.offstage.contains(id) {
-            return id
+        where !layout.offstage.contains(id) {
+            guard let tile = tiles[id] else { continue }
+            if tile.convert(tile.bounds, to: self).contains(point) { return id }
         }
         return nil
     }
@@ -477,38 +521,388 @@ final class ParticipantCanvas: UIView {
 
     @objc
     private func previewPanned(_ recognizer: UIPanGestureRecognizer) {
-        guard previewFloats, let tile = recognizer.view else { return }
+        guard previewFloats, previewPresentation == .visible,
+              let tile = recognizer.view else { return }
 
         switch recognizer.state {
         case .began:
             isDraggingPreview = true
             stopLayoutAnimator()
+            stopDockAnimator()
+            previewDragRawOrigin = previewOrigin(of: tile)
+            previewDockHandle.isHidden = true
             seedPreviewBody()
         case .changed:
             isDraggingPreview = true
-            let translation = recognizer.translation(in: scrollView)
-            recognizer.setTranslation(.zero, in: scrollView)
-            let current = previewOrigin(of: tile)
+            let translation = recognizer.translation(in: self)
+            recognizer.setTranslation(.zero, in: self)
+            let current = previewDragRawOrigin ?? previewOrigin(of: tile)
             let dragged = CGPoint(x: current.x + translation.x,
                                   y: current.y + translation.y)
-            let origin = PreviewMotion.clamp(dragged, within: previewTravelBounds())
+            previewDragRawOrigin = dragged
+            let origin = dockAwarePreviewOrigin(for: dragged)
             previewBody = PreviewMotion.Body(position: origin)
             movePreview(tile, to: origin)
-        case .ended, .cancelled, .failed:
+        case .ended:
             isDraggingPreview = false
-            releasePreview(tile, velocity: recognizer.velocity(in: scrollView))
+            let velocity = recognizer.velocity(in: self)
+            if let dragged = previewDragRawOrigin,
+               let overshoot = previewOvershoot(for: dragged),
+               PreviewDocking.shouldDock(
+                outwardDistance: overshoot.distance,
+                outwardVelocity: overshoot.side.outwardComponent(of: velocity.x),
+                previewWidth: tile.bounds.width) {
+                dockPreview(to: overshoot.side, animated: true, velocity: velocity)
+            } else {
+                previewDockHandle.isHidden = true
+                releasePreview(tile, velocity: velocity)
+            }
+            previewDragRawOrigin = nil
+        case .cancelled, .failed:
+            isDraggingPreview = false
+            previewDragRawOrigin = nil
+            previewDockHandle.isHidden = true
+            releasePreview(tile, velocity: .zero)
         default:
             break
         }
     }
 
+    private struct PreviewOvershoot {
+        let side: PreviewDockSide
+        let distance: CGFloat
+    }
+
+    private func previewOvershoot(for dragged: CGPoint) -> PreviewOvershoot? {
+        let travel = previewTravelBounds()
+        if dragged.x < travel.minX {
+            return PreviewOvershoot(side: .left, distance: travel.minX - dragged.x)
+        }
+        if dragged.x > travel.maxX {
+            return PreviewOvershoot(side: .right, distance: dragged.x - travel.maxX)
+        }
+        return nil
+    }
+
+    private func dockAwarePreviewOrigin(for dragged: CGPoint) -> CGPoint {
+        let travel = previewTravelBounds()
+        let clampedY = PreviewMotion.clamp(dragged, within: travel).y
+        guard let overshoot = previewOvershoot(for: dragged) else {
+            return CGPoint(x: dragged.x, y: clampedY)
+        }
+        let edgeX = overshoot.side == .left ? travel.minX : travel.maxX
+        let rubberBanded = PreviewDocking.rubberBanded(overshoot.distance,
+                                                       dimension: bounds.width)
+        return CGPoint(x: edgeX + overshoot.side.outwardComponent(of: rubberBanded),
+                       y: clampedY)
+    }
+
     private func releasePreview(_ tile: UIView, velocity: CGPoint) {
-        previewCorner = Self.nearestCorner(toCenter: tile.center, in: bounds)
+        previewCorner = PreviewCorner(isTop: tile.center.y < bounds.midY,
+                                      isLeading: tile.center.x < bounds.midX)
         previewSpring = PreviewMotion.fling
         previewBody = PreviewMotion.Body(
             position: tile.frame.origin,
             velocity: CGVector(dx: velocity.x, dy: velocity.y))
         startPreviewMotion()
+    }
+
+    // MARK: - Preview docking
+
+    func dockPreview(to side: PreviewDockSide, animated: Bool = true,
+                     velocity: CGPoint = .zero) {
+        guard previewFloats, let id = previewId, let tile = tiles[id] else { return }
+        stopPreviewMotion()
+        stopDockAnimator()
+        previewCorner = PreviewCorner(isTop: tile.center.y < bounds.midY,
+                                      isLeading: side == .left)
+        settleDockedPreview(to: side, animated: animated, velocity: velocity)
+    }
+
+    func settleDockedPreview(to side: PreviewDockSide, animated: Bool = true,
+                             velocity: CGPoint = .zero) {
+        guard previewFloats, let id = previewId, let tile = tiles[id] else { return }
+        stopPreviewMotion()
+        stopDockAnimator()
+        isDraggingPreview = false
+        previewCorner = PreviewCorner(isTop: previewCorner.isTop, isLeading: side == .left)
+        previewPresentation = .docked(side)
+        isDockTransitioning = true
+        tile.isAccessibilityElement = false
+
+        previewDockHandle.configure(side: side)
+        previewDockHandle.isHidden = false
+
+        let target = dockedPreviewOrigin(for: side, tile: tile)
+        guard animated else {
+            previewBody = nil
+            movePreview(tile, to: target)
+            positionDockHandle(side: side, previewOrigin: target, tile: tile)
+            finishDocking(tile: tile)
+            return
+        }
+        guard isReduceMotionEnabled() else {
+            springPreview(tile, side: side, velocity: velocity)
+            return
+        }
+        previewBody = nil
+        tile.alpha = 0
+        movePreview(tile, to: target)
+        positionDockHandle(side: side, previewOrigin: target, tile: tile)
+        previewDockHandle.alpha = 0
+        fadePreviewTransition(
+            tile: tile,
+            animations: { [weak self] in self?.previewDockHandle.alpha = 1 },
+            completion: { [weak self] tile in self?.finishDocking(tile: tile) })
+    }
+
+    func restorePreview(animated: Bool = true, velocity: CGPoint = .zero) {
+        guard case .docked(let side) = previewPresentation,
+              previewFloats, let id = previewId, let tile = tiles[id],
+              let model = models[id] else { return }
+        stopDockAnimator()
+        stopPreviewMotion()
+        isDockTransitioning = true
+        previewCorner = PreviewCorner(isTop: previewCorner.isTop, isLeading: side == .left)
+        previewPresentation = .visible
+        tile.isAccessibilityElement = true
+        tile.videoView.attach(to: model.tileState.showsVideo ? model.distributor : nil)
+        let target = previewRestOrigin()
+
+        guard animated else {
+            movePreview(tile, to: target)
+            finishRestoring(tile: tile, target: target)
+            return
+        }
+        guard isReduceMotionEnabled() else {
+            tile.alpha = 1
+            springPreview(tile, side: side, velocity: velocity)
+            return
+        }
+        previewBody = nil
+        positionDockHandle(side: side, previewOrigin: previewOrigin(of: tile), tile: tile)
+        movePreview(tile, to: target)
+        tile.alpha = 0
+        fadePreviewTransition(
+            tile: tile,
+            animations: { [weak self, weak tile] in
+                tile?.alpha = 1
+                self?.previewDockHandle.alpha = 0
+            },
+            completion: { [weak self] tile in
+                self?.finishRestoring(tile: tile, target: target)
+            })
+    }
+
+    private func springPreview(_ tile: UIView, side: PreviewDockSide, velocity: CGPoint) {
+        previewSpring = PreviewMotion.fling
+        let origin = previewOrigin(of: tile)
+        previewBody = PreviewMotion.Body(
+            position: origin,
+            velocity: CGVector(dx: velocity.x, dy: velocity.y))
+        positionDockHandle(side: side, previewOrigin: origin, tile: tile)
+        startPreviewMotion()
+    }
+
+    private func fadePreviewTransition(
+        tile: ParticipantTileUIView,
+        animations: @escaping () -> Void,
+        completion: @escaping (ParticipantTileUIView) -> Void) {
+        let expected = previewPresentation
+        let animator = UIViewPropertyAnimator(duration: Self.dockFadeDuration,
+                                              curve: .easeInOut,
+                                              animations: animations)
+        animator.addCompletion { [weak self, weak tile] position in
+            guard position == .end, let self = self, let tile = tile,
+                  self.previewFloats, self.previewPresentation == expected else { return }
+            completion(tile)
+        }
+        dockAnimator = animator
+        animator.startAnimation()
+    }
+
+    private func dockPreviewBesideCurrentCorner() {
+        dockPreview(to: previewCorner.isLeading ? .left : .right)
+    }
+
+    private func finishDocking(tile: ParticipantTileUIView) {
+        isDockTransitioning = false
+        if case .docked(let side) = previewPresentation {
+            positionDockHandle(side: side,
+                               previewOrigin: dockedPreviewOrigin(for: side, tile: tile),
+                               tile: tile)
+        }
+        previewDockHandle.alpha = 1
+        tile.isAccessibilityElement = false
+        tile.videoView.attach(to: nil)
+        previewBody = nil
+        dockAnimator = nil
+    }
+
+    private func finishRestoring(tile: ParticipantTileUIView, target: CGPoint) {
+        tile.alpha = 1
+        previewDockHandle.alpha = 1
+        previewDockHandle.isHidden = true
+        isDockTransitioning = false
+        previewBody = PreviewMotion.Body(position: target)
+        dockAnimator = nil
+        updateCurrentVideoAttachments()
+    }
+
+    private func stopDockAnimator() {
+        guard let animator = dockAnimator else { return }
+        animator.stopAnimation(false)
+        animator.finishAnimation(at: .current)
+        dockAnimator = nil
+        reconcilePreviewPresentation()
+    }
+
+    private func reconcilePreviewPresentation() {
+        isDockTransitioning = false
+        isDraggingPreview = false
+        previewBody = nil
+
+        switch previewPresentation {
+        case .docked:
+            layoutDockedPreview()
+        case .visible:
+            previewDockHandle.alpha = 1
+            previewDockHandle.isHidden = true
+            guard previewFloats, let id = previewId, let tile = tiles[id] else {
+                updateCurrentVideoAttachments()
+                return
+            }
+            let target = previewRestOrigin()
+            tile.alpha = 1
+            tile.isAccessibilityElement = true
+            movePreview(tile, to: target)
+            previewBody = PreviewMotion.Body(position: target)
+            updateCurrentVideoAttachments()
+        }
+    }
+
+    private func dockedPreviewOrigin(for side: PreviewDockSide, tile: UIView) -> CGPoint {
+        let compactedInset = tile.bounds.width * (1 - previewScale) / 2
+        let horizontalOrigin: CGFloat = side == .left
+            ? bounds.minX - tile.bounds.width + compactedInset - 1
+            : bounds.maxX - compactedInset + 1
+        return CGPoint(x: horizontalOrigin,
+                       y: dockedPreviewVerticalOrigin(height: tile.bounds.height))
+    }
+
+    private func dockedPreviewVerticalOrigin(height: CGFloat) -> CGFloat {
+        let preferred = previewCorner.isTop
+            ? safeAreaInsets.top + CanvasLayout.previewPadding
+            : bounds.height - safeAreaInsets.bottom - CanvasLayout.previewPadding - height
+        return clampedDockY(preferred, height: height)
+    }
+
+    private func clampedDockY(_ preferred: CGFloat, height: CGFloat) -> CGFloat {
+        let minimum = safeAreaInsets.top + CanvasLayout.previewPadding
+        let maximum = bounds.height - safeAreaInsets.bottom
+            - CanvasLayout.previewPadding - height
+        return min(max(minimum, preferred), max(minimum, maximum))
+    }
+
+    private func layoutDockedPreview() {
+        guard case .docked(let side) = previewPresentation,
+              previewFloats, let id = previewId, let tile = tiles[id] else {
+            previewDockHandle.isHidden = true
+            return
+        }
+        let origin = dockedPreviewOrigin(for: side, tile: tile)
+        previewDockHandle.configure(side: side)
+        previewDockHandle.isHidden = false
+        movePreview(tile, to: origin)
+        positionDockHandle(side: side, previewOrigin: origin, tile: tile)
+        previewDockHandle.alpha = 1
+        tile.isAccessibilityElement = false
+        if !isDockTransitioning { tile.videoView.attach(to: nil) }
+    }
+
+    private func previewVisualRect(origin: CGPoint, tile: UIView) -> CGRect {
+        let inset = (1 - previewScale) / 2
+        return CGRect(origin: origin, size: tile.bounds.size)
+            .insetBy(dx: tile.bounds.width * inset, dy: tile.bounds.height * inset)
+    }
+
+    private func positionDockHandle(side: PreviewDockSide,
+                                    previewOrigin: CGPoint,
+                                    tile: UIView) {
+        let size = PreviewDockHandleView.Metrics.hitSize
+        let visual = previewVisualRect(origin: previewOrigin, tile: tile)
+        var origin = PreviewDocking.handleOrigin(for: side,
+                                                 previewVisualRect: visual,
+                                                 hitSize: size)
+        origin.y = clampedDockY(origin.y, height: size.height)
+        previewDockHandle.frame = CGRect(origin: origin, size: size)
+        bringSubviewToFront(previewDockHandle)
+        previewDockHandle.alpha = isDockTransitioning
+            ? dockHandleFade(side: side, previewOrigin: previewOrigin, tile: tile)
+            : 1
+    }
+
+    private func dockHandleFade(side: PreviewDockSide,
+                                previewOrigin: CGPoint,
+                                tile: UIView) -> CGFloat {
+        let docked = dockedPreviewOrigin(for: side, tile: tile)
+        let travel = previewTravelBounds()
+        let edgeX = side == .left ? travel.minX : travel.maxX
+        let span = max(abs(edgeX - docked.x), 1)
+        let distanceFromDock = abs(previewOrigin.x - docked.x)
+        return max(0, 1 - min(distanceFromDock / span, 1))
+    }
+
+    @objc
+    private func previewDockHandleTapped() {
+        restorePreview()
+    }
+
+    @objc
+    private func previewDockHandlePanned(_ recognizer: UIPanGestureRecognizer) {
+        guard case .docked(let side) = previewPresentation,
+              previewFloats, let id = previewId, let tile = tiles[id],
+              let model = models[id] else { return }
+
+        switch recognizer.state {
+        case .began:
+            stopDockAnimator()
+            stopPreviewMotion()
+            previewBody = nil
+            isDockTransitioning = true
+            tile.alpha = 1
+            tile.videoView.attach(to: model.tileState.showsVideo ? model.distributor : nil)
+        case .changed:
+            let base = dockedPreviewOrigin(for: side, tile: tile)
+            let travel = min(restoreDistance(of: recognizer, side: side),
+                             tile.bounds.width + CanvasLayout.previewPadding)
+            let origin = CGPoint(x: base.x + side.inwardComponent(of: travel), y: base.y)
+            movePreview(tile, to: origin)
+            positionDockHandle(side: side, previewOrigin: origin, tile: tile)
+        case .ended:
+            let velocity = recognizer.velocity(in: self)
+            if PreviewDocking.shouldRestore(
+                inwardDistance: restoreDistance(of: recognizer, side: side),
+                inwardVelocity: side.inwardComponent(of: velocity.x)) {
+                restorePreview(velocity: velocity)
+            } else {
+                settleDockedPreview(to: side, velocity: velocity)
+            }
+        case .cancelled, .failed:
+            settleDockedPreview(to: side)
+        default:
+            break
+        }
+    }
+
+    private func restoreDistance(of recognizer: UIPanGestureRecognizer,
+                                 side: PreviewDockSide) -> CGFloat {
+        return max(0, side.inwardComponent(of: recognizer.translation(in: self).x))
+    }
+
+    private func updateCurrentVideoAttachments() {
+        let layout = CanvasLayout.plan(currentInput())
+        updateVideoAttachments(frames: layout.frames, offstage: layout.offstage)
     }
 
     // MARK: - Preview motion
@@ -517,8 +911,32 @@ final class ParticipantCanvas: UIView {
         guard previewFloats else {
             previewBody = nil
             stopPreviewMotion()
+            stopDockAnimator()
+            isDockTransitioning = false
+            previewDockHandle.isHidden = true
+            if let id = previewId, let tile = tiles[id] {
+                if let frame = CanvasLayout.plan(currentInput()).frames[id] {
+                    tile.frame = frame
+                }
+                tile.alpha = 1
+                tile.isAccessibilityElement = true
+                tile.layer.transform = CATransform3DIdentity
+            }
             return
         }
+        if case .docked = previewPresentation {
+            if isDockTransitioning, previewBody != nil {
+                startPreviewMotion()
+                return
+            }
+            if !isDockTransitioning {
+                previewBody = nil
+                stopPreviewMotion()
+                layoutDockedPreview()
+            }
+            return
+        }
+        previewDockHandle.isHidden = true
         guard previewBody == nil else {
             startPreviewMotion()
             return
@@ -565,9 +983,12 @@ final class ParticipantCanvas: UIView {
     private func movePreview(_ tile: UIView, to origin: CGPoint) {
         tile.center = CGPoint(x: origin.x + tile.bounds.width / 2,
                               y: origin.y + tile.bounds.height / 2)
-        let scale = 1 - (1 - CanvasLayout.previewCompactScale)
+        tile.layer.transform = CATransform3DMakeScale(previewScale, previewScale, 1)
+    }
+
+    private var previewScale: CGFloat {
+        return 1 - (1 - CanvasLayout.previewCompactScale)
             * previewWalls.chromePresence
-        tile.layer.transform = CATransform3DMakeScale(scale, scale, 1)
     }
 
     private func previewOrigin(of tile: UIView) -> CGPoint {
@@ -600,23 +1021,68 @@ final class ParticipantCanvas: UIView {
             stopPreviewMotion()
             return
         }
-        let walls = previewTravelBounds()
         if isDraggingPreview {
-            body.position = PreviewMotion.clamp(body.position, within: walls)
+            body.position = dockAwarePreviewOrigin(
+                for: previewDragRawOrigin ?? body.position)
             previewBody = body
             movePreview(tile, to: body.position)
             if previewWalls.isFinished { stopPreviewMotion() }
             return
         }
-        let attractor = previewRestOrigin()
+
+        let attractor: CGPoint
+        if case .docked(let side) = previewPresentation, isDockTransitioning {
+            attractor = dockedPreviewOrigin(for: side, tile: tile)
+        } else {
+            attractor = previewRestOrigin()
+        }
+        let walls = isDockTransitioning
+            ? previewMotionWalls(spanning: attractor, body.position)
+            : previewTravelBounds()
+
         body = PreviewMotion.step(body, toward: attractor, within: walls,
                                   spring: previewSpring, interval: CGFloat(interval))
+        if isDockTransitioning, let side = dockSideForMotion {
+            positionDockHandle(side: side, previewOrigin: body.position, tile: tile)
+        }
+
         if previewWalls.isFinished, PreviewMotion.isAtRest(body, at: attractor) {
             body = PreviewMotion.settled(at: attractor, within: walls)
             stopPreviewMotion()
+            previewBody = body
+            movePreview(tile, to: body.position)
+            if isDockTransitioning {
+                switch previewPresentation {
+                case .docked:
+                    finishDocking(tile: tile)
+                case .visible:
+                    finishRestoring(tile: tile, target: attractor)
+                }
+            }
+            return
         }
         previewBody = body
         movePreview(tile, to: body.position)
+    }
+
+    private var dockSideForMotion: PreviewDockSide? {
+        switch previewPresentation {
+        case .docked(let side):
+            return side
+        case .visible where isDockTransitioning:
+            return previewCorner.isLeading ? .left : .right
+        default:
+            return nil
+        }
+    }
+
+    private func previewMotionWalls(spanning first: CGPoint, _ second: CGPoint) -> CGRect {
+        let travel = previewTravelBounds()
+        let minX = min(travel.minX, first.x, second.x)
+        let maxX = max(travel.maxX, first.x, second.x)
+        let minY = min(travel.minY, first.y, second.y)
+        let maxY = max(travel.maxY, first.y, second.y)
+        return CGRect(x: minX, y: minY, width: maxX - minX, height: maxY - minY)
     }
 
 }
@@ -625,17 +1091,7 @@ final class ParticipantCanvas: UIView {
 
 extension ParticipantCanvas {
     static let maximumPreviewMotionInterval: CFTimeInterval = 1.0 / 20.0
-
-    static func nearestCorner(toCenter center: CGPoint, in bounds: CGRect) -> PreviewCorner {
-        let top = center.y < bounds.midY
-        let leading = center.x < bounds.midX
-        switch (top, leading) {
-        case (true, true): return .topLeading
-        case (true, false): return .topTrailing
-        case (false, true): return .bottomLeading
-        case (false, false): return .bottomTrailing
-        }
-    }
+    static let dockFadeDuration: TimeInterval = 0.18
 }
 
 // MARK: - UIScrollViewDelegate
@@ -646,8 +1102,7 @@ extension ParticipantCanvas: UIScrollViewDelegate {
             guard !suppressesStripCallback else { return }
             applyStripOffset()
         } else {
-            let layout = CanvasLayout.plan(currentInput())
-            updateVideoAttachments(frames: layout.frames, offstage: layout.offstage)
+            updateCurrentVideoAttachments()
         }
     }
 }
