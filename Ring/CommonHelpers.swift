@@ -33,12 +33,18 @@ enum CommonHelpers {
         var isDirectory = ObjCBool(false)
         let directoryExists = FileManager.default.fileExists(atPath: directoryURL.path, isDirectory: &isDirectory)
         if directoryExists && isDirectory.boolValue {
-            var finalFileName = fileNameOnly + "." + fileExtensionOnly
+            var finalFileName = fileNameOnly
+            if !fileExtensionOnly.isEmpty {
+                finalFileName += "." + fileExtensionOnly
+            }
             var filePathCheck = directoryURL.appendingPathComponent(finalFileName)
             var fileExists = FileManager.default.fileExists(atPath: filePathCheck.path, isDirectory: &isDirectory)
             var duplicates = 2
             while fileExists {
-                finalFileName = fileNameOnly + "_" + String(duplicates) + "." + fileExtensionOnly
+                finalFileName = fileNameOnly + "_" + String(duplicates)
+                if !fileExtensionOnly.isEmpty {
+                    finalFileName += "." + fileExtensionOnly
+                }
                 filePathCheck = directoryURL.appendingPathComponent(finalFileName)
                 fileExists = FileManager.default.fileExists(atPath: filePathCheck.path, isDirectory: &isDirectory)
                 duplicates += 1
