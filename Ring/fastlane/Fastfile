@@ -116,6 +116,16 @@ platform :ios do
     )
   end
 
+  desc "Regenerate the App Store certificate and provisioning profiles"
+  lane :renew_signing do
+    unlock_keychain
+    match(
+      api_key: connect_api_key,
+      app_identifier: APP_IDENTIFIERS,
+      type: "appstore"
+    )
+  end
+
   desc "Submit a new Beta Build to Apple TestFlight"
   lane :beta do
     unlock_keychain
