@@ -435,6 +435,7 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
     }
 
     func hangUp() {
+        shouldDismiss = true
         if let conference = conference, conference.isHost {
             let confId = conference.id
             Task { await callService.hangUpConference(confId) }
