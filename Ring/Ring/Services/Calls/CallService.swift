@@ -30,6 +30,7 @@ protocol CallCameraCoordinating: AnyObject {
     func currentCameraSource() -> String
     func prepareCameraForOutgoingCall(audioOnly: Bool)
     func prepareCameraForAnswerWithVideo()
+    func cancelCameraPreparation()
 }
 
 final class CallService {
@@ -166,6 +167,7 @@ final class CallService {
                 }
             } catch {
                 NSLog("CallService: placing call failed: %@", error.localizedDescription)
+                self.camera?.cancelCameraPreparation()
             }
         }
     }

@@ -222,6 +222,13 @@ final class CallsManager: CallCameraCoordinating {
         videoService.startPreviewCapture()
     }
 
+    func cancelCameraPreparation() {
+        let hasLiveCall = callService.stateMirror.calls.contains { !$0.value.status.isTerminal }
+        guard !hasLiveCall else { return }
+        videoService.stopPreviewCapture()
+        Task { await videoService.resetCameraPosition() }
+    }
+
     // MARK: - Capture quality
 
     /// Hardware acceleration only covers H264/H265; the pipeline drops to
