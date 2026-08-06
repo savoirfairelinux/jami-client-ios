@@ -17,6 +17,21 @@ default_platform :ios
 
 ENV["FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT"] = "120"
 
+APP_IDENTIFIERS = [
+  "com.savoirfairelinux.ring",
+  "com.savoirfairelinux.ring.jamiNotificationExtension",
+  "com.savoirfairelinux.ring.jamiShareExtension"
+].freeze
+
+def connect_api_key
+  app_store_connect_api_key(
+    key_id: "#{ENV["KEY_ID"]}",
+    issuer_id: "#{ENV["ISSUER_ID"]}",
+    key_filepath: "#{ENV["KEY_FILEPATH"]}",
+    in_house: false,
+  )
+end
+
 platform :ios do
   desc "Runs all the tests"
   lane :test do
@@ -87,6 +102,7 @@ platform :ios do
   lane :build do
     unlock_keychain
     match(
+      api_key: connect_api_key,
       force: true,
       type: "development"
     )
@@ -103,16 +119,10 @@ platform :ios do
   desc "Submit a new Beta Build to Apple TestFlight"
   lane :beta do
     unlock_keychain
-    api_key = app_store_connect_api_key(
-      key_id: "#{ENV["KEY_ID"]}",
-      issuer_id: "#{ENV["ISSUER_ID"]}",
-      key_filepath: "#{ENV["KEY_FILEPATH"]}",
-      in_house: false,
-    )
+    api_key = connect_api_key
     match(
       api_key: api_key,
-      app_identifier: ["com.savoirfairelinux.ring", "com.savoirfairelinux.ring.jamiNotificationExtension",
-"com.savoirfairelinux.ring.jamiShareExtension"],
+      app_identifier: APP_IDENTIFIERS,
       type: "appstore",
       readonly: true
     )
