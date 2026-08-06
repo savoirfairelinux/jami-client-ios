@@ -116,6 +116,27 @@ platform :ios do
     )
   end
 
+  desc "Install App Store signing assets, creating only the missing or expired ones"
+  lane :sync_signing do
+    unlock_keychain
+    match(
+      api_key: connect_api_key,
+      app_identifier: APP_IDENTIFIERS,
+      type: "appstore"
+    )
+  end
+
+  desc "Recreate the App Store provisioning profiles, replacing the stored ones"
+  lane :renew_signing do
+    unlock_keychain
+    match(
+      api_key: connect_api_key,
+      app_identifier: APP_IDENTIFIERS,
+      type: "appstore",
+      force: true
+    )
+  end
+
   desc "Submit a new Beta Build to Apple TestFlight"
   lane :beta do
     unlock_keychain
