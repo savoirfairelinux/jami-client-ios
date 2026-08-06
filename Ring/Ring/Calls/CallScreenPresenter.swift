@@ -34,6 +34,7 @@ final class CallScreenPresenter {
     private var model: CallViewModel?
     private var dismissCancellable: AnyCancellable?
     private var isMinimized = false
+    private var pendingDismissal = false
     private var inCallDeviceStateActive = false
 
     init(callService: CallService, navigationController: UINavigationController,
@@ -95,12 +96,15 @@ final class CallScreenPresenter {
         let view = CallScreenView(model: model)
         let controller = UIHostingController(rootView: view)
         controller.modalPresentationStyle = .overFullScreen
-        controller.modalTransitionStyle = .crossDissolve
 
         let present = { [weak self] in
             guard let self = self, let top = self.topController() else { return }
-            top.present(controller, animated: true)
+            top.present(controller, animated: false) { [weak self, weak controller] in
+                guard let self = self, let controller = controller else { return }
+                self.drainPendingDismissal(controller)
+            }
             self.callController = controller
+            self.pendingDismissal = false
             self.isMinimized = false
             self.model = model
             self.dismissCancellable = model.$shouldDismiss
@@ -156,21 +160,61 @@ final class CallScreenPresenter {
             }
             self.isMinimized = false
             completion(true)
+            self.drainPendingDismissal(controller)
         }
+    }
+
+    @MainActor
+    private func deferUntilChildTransitionEnds(_ controller: UIViewController) -> Bool {
+        guard let child = controller.presentedViewController,
+              child.isBeingPresented || child.isBeingDismissed,
+              let coordinator = child.transitionCoordinator else { return false }
+        pendingDismissal = true
+        let queued = coordinator.animate(alongsideTransition: nil) { [weak self, weak controller] _ in
+            guard let controller = controller else { return }
+            self?.drainPendingDismissal(controller)
+        }
+        guard queued else {
+            pendingDismissal = false
+            return false
+        }
+        return true
+    }
+
+    @MainActor
+    private func drainPendingDismissal(_ controller: UIViewController) {
+        guard pendingDismissal else { return }
+        pendingDismissal = false
+        dismissCallScreen(controller)
     }
 
     @MainActor
     private func dismissCallScreen(_ controller: UIViewController?) {
         guard let controller = controller, controller === callController else { return }
+        guard !controller.isBeingPresented else {
+            pendingDismissal = true
+            return
+        }
+        guard !deferUntilChildTransitionEnds(controller) else { return }
+        guard !isMinimized else {
+            clearCallScreenState(controller)
+            return
+        }
+        (controller.presentingViewController ?? controller)
+            .dismiss(animated: false) { [weak self, weak controller] in
+                guard let controller = controller else { return }
+                self?.clearCallScreenState(controller)
+            }
+    }
+
+    @MainActor
+    private func clearCallScreenState(_ controller: UIViewController) {
+        guard controller === callController else { return }
         setInCallDeviceState(active: false)
         callController = nil
         model = nil
         dismissCancellable = nil
-        guard !isMinimized else {
-            isMinimized = false
-            return
-        }
-        controller.dismiss(animated: true)
+        isMinimized = false
     }
 
     // MARK: - Add participant
