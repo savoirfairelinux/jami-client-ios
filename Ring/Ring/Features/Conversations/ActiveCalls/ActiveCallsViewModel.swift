@@ -21,6 +21,8 @@ import RxSwift
 class ActiveCallsViewModel: ObservableObject, Stateable {
     @Published var callsByAccount: [String: [ActiveCallRowViewModel]] = [:]
 
+    var onNoRenderableCalls: (() -> Void)?
+
     private let callService: CallService
     private let profileService: ProfilesService
     private let accountsService: AccountsService
@@ -37,6 +39,7 @@ class ActiveCallsViewModel: ObservableObject, Stateable {
         self.profileService = injectionBag.profileService
         self.accountsService = injectionBag.accountService
         self.conversationsSource = conversationsSource
+        self.updateCallViewModels(from: callService.activeCalls.value)
         self.observeActiveCalls()
     }
 
@@ -82,6 +85,9 @@ class ActiveCallsViewModel: ObservableObject, Stateable {
             }
         }
         callsByAccount = grouped
+        if grouped.isEmpty {
+            onNoRenderableCalls?()
+        }
     }
 
     private func findConversation(for call: ActiveCall) -> ConversationViewModel? {

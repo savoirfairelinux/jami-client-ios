@@ -21,8 +21,6 @@ import RxSwift
 
 struct ActiveCallsView: View {
     @ObservedObject var viewModel: ActiveCallsViewModel
-    @Environment(\.presentationMode)
-    var presentationMode
     @SwiftUI.State private var isContentVisible = false
 
     var body: some View {
@@ -64,11 +62,6 @@ struct ActiveCallsView: View {
         .ignoresSafeArea()
         .onAppear {
             isContentVisible = true
-        }
-        .onChange(of: viewModel.callsByAccount) { accounts in
-            if accounts.isEmpty || accounts.allSatisfy({ $0.value.isEmpty }) {
-                presentationMode.wrappedValue.dismiss()
-            }
         }
     }
 }
