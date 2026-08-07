@@ -46,6 +46,7 @@ class ConversationsCoordinator: RootCoordinator, StateableResponsive, Conversati
     let nameService: NameService
     let requestsService: RequestsService
     let conversationsSource: ConversationDataSource
+    private weak var activeCallsController: UIViewController?
 
     required init(navigationController: UINavigationController, injectionBag: InjectionBag) {
         // we get navigationController from app coordinator, as it main view for the application
@@ -125,11 +126,12 @@ class ConversationsCoordinator: RootCoordinator, StateableResponsive, Conversati
                     !accountCalls.incomingNotAcceptedNotIgnoredCalls().isEmpty
                 }
 
-                guard hasActiveCalls else { return }
-
-                if self.presentingVC[VCType.activeCalls.rawValue] == true {
+                guard hasActiveCalls else {
+                    self.dismissActiveCalls()
                     return
                 }
+
+                guard self.activeCallsController == nil else { return }
 
                 guard let account = self.accountService.currentAccount, accountCalls.keys.contains(account.id) else {
                     // TODO: show alert for call for another account
@@ -151,17 +153,28 @@ class ConversationsCoordinator: RootCoordinator, StateableResponsive, Conversati
                 let activeCallsViewModel = ActiveCallsViewModel(
                     injectionBag: self.injectionBag, conversationsSource: self.conversationsSource
                 )
+                guard !activeCallsViewModel.callsByAccount.isEmpty else { return }
+
+                activeCallsViewModel.onNoRenderableCalls = { [weak self] in
+                    self?.dismissActiveCalls()
+                }
                 let activeCallsView = ActiveCallsView(viewModel: activeCallsViewModel)
                 let viewController = self.createHostingVC(activeCallsView)
                 viewController.view.backgroundColor = .clear
+                self.activeCallsController = viewController
 
                 self.presentFromTopController(viewController: viewController,
                                               style: .overFullScreen,
-                                              animation: true,
-                                              stateable: activeCallsViewModel,
-                                              lockKey: VCType.activeCalls.rawValue)
+                                              animation: false,
+                                              stateable: activeCallsViewModel)
             })
             .disposed(by: self.disposeBag)
+    }
+
+    private func dismissActiveCalls() {
+        guard let controller = activeCallsController else { return }
+        activeCallsController = nil
+        controller.dismiss(animated: false)
     }
 
     func addLockFlags() {
