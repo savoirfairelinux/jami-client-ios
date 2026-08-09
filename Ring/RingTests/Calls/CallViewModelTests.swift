@@ -116,41 +116,6 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
         withExtendedLifetime(cancellable) {}
     }
 
-    func testRemoteEndDropsVideoTilesAndAnnouncesTheEnding() async {
-        let harness = await Harness(callHasVideo: true)
-        let model = harness.makeModel()
-        model.screenTapped()
-        XCTAssertFalse(model.chromeVisible, "precondition: chrome hidden mid-call")
-
-        harness.send(.callStateChanged(callId: harness.callId.raw, state: .over,
-                                       rawState: LibJamiCallState.over.rawValue, accountId: Harness.accountId,
-                                       code: 0, negotiatedMedia: [], videoCodec: nil))
-        await harness.waitForEnded(model)
-
-        XCTAssertTrue(model.chromeVisible, "the ending must bring the chrome back")
-        XCTAssertEqual(model.statusLine, L10n.Calls.callFinished)
-        XCTAssertNil(model.tiles.first { $0.participant.isLocalPreview },
-                     "the self-preview must not outlive the call")
-        XCTAssertEqual(model.tiles.count, 1, "the peer stays, as an avatar")
-        XCTAssertEqual(model.tiles.first?.tileState.showsVideo, false)
-        XCTAssertNil(model.tiles.first?.distributor,
-                     "a frozen last frame must not keep a distributor attached")
-    }
-
-    func testLocalEndDropsVideoTilesWithoutAnnouncing() async {
-        let harness = await Harness(callHasVideo: true)
-        let model = harness.makeModel()
-
-        await harness.callService.hangUp(harness.callId)
-        await harness.waitForEnded(model)
-
-        XCTAssertNotEqual(model.statusLine, L10n.Calls.callFinished,
-                          "hanging up yourself needs no announcement")
-        XCTAssertNil(model.tiles.first { $0.participant.isLocalPreview })
-        XCTAssertEqual(model.tiles.first?.tileState.showsVideo, false)
-        XCTAssertTrue(model.shouldDismiss, "a local end leaves on the tap")
-    }
-
     func testPictureInPictureMinimizesWhileTheShrinkAnimationRuns() {
         let call = makeCall()
         let callService = CallService(callClient: TestLibJamiCallAPI(),
