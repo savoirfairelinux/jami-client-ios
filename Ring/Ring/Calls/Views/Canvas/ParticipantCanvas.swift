@@ -118,7 +118,7 @@ final class ParticipantCanvas: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .black
+        backgroundColor = .jamiCallCanvas
         scrollView.frame = bounds
         scrollView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         scrollView.contentInsetAdjustmentBehavior = .never

@@ -76,7 +76,7 @@ final class PreviewDockHandleView: UIControl {
     }
 
     private let effectView = UIVisualEffectView(
-        effect: UIBlurEffect(style: .systemThinMaterialDark))
+        effect: UIBlurEffect(style: .systemMaterialDark))
     private let tintView = UIView()
     private let arrowView = UIImageView()
     private var side: PreviewDockSide?

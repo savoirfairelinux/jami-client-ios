@@ -541,6 +541,7 @@
 		66ACB430214AE28C00A94162 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66ACB42F214AE28C00A94162 /* ScanViewController.swift */; };
 		66F295DE2166A5930044ED6F /* Devices+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F295DD2166A5930044ED6F /* Devices+Helpers.swift */; };
 		7C583E15A5920A5D661FE768 /* GroupAvatarRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE00A4B452D77EC0CA26ED4 /* GroupAvatarRenderer.swift */; };
+		803EA760EE82660B036D3FD8 /* IdentityBackdrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = C760772C22CC601BCEA3449C /* IdentityBackdrop.swift */; };
 		9F5F2102C5C96402A066ADA0 /* GroupAvatarRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE00A4B452D77EC0CA26ED4 /* GroupAvatarRenderer.swift */; };
 		A1D0C0DE0000000000000B02 /* CallsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D0C0DE0000000000000B01 /* CallsManager.swift */; };
 		A7MD00102F20000200000001 /* MessageMarkdownSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7MD00102F20000100000001 /* MessageMarkdownSupport.swift */; };
@@ -1773,6 +1774,7 @@
 		BB91FAA9292EA26900BB41C1 /* EventData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventData.swift; sourceTree = "<group>"; };
 		BBB76E402966062C00A42DF5 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		BBD3D750297B4CA00098DB02 /* SwarmInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwarmInfoView.swift; sourceTree = "<group>"; };
+		C760772C22CC601BCEA3449C /* IdentityBackdrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityBackdrop.swift; sourceTree = "<group>"; };
 		DDE8CA20E60048678054756B /* PeerSharingSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerSharingSheet.swift; sourceTree = "<group>"; };
 		EECD5DF711D545048AA5E270 /* PeerSharingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerSharingViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -3014,6 +3016,7 @@
 				627F11F020348FBF006560B5 /* AvatarView.swift */,
 				0EDA00010000000000001001 /* ConversationDestructiveAction.swift */,
 				AFD989EC28085426384411E8 /* AvatarHelpers.swift */,
+				C760772C22CC601BCEA3449C /* IdentityBackdrop.swift */,
 				5FE00A4B452D77EC0CA26ED4 /* GroupAvatarRenderer.swift */,
 				BB6690032A99043200875848 /* SharedActionsPresenter.swift */,
 				0EE1B54F1F75AD4700BA98EE /* VCardUtils.swift */,
@@ -4280,6 +4283,7 @@
 				62AF6862201A66CF003AA9E8 /* AudioAdapter.mm in Sources */,
 				627F11F120348FBF006560B5 /* AvatarView.swift in Sources */,
 				E8ACE0B8E94AB3DEABA30A1A /* AvatarHelpers.swift in Sources */,
+				803EA760EE82660B036D3FD8 /* IdentityBackdrop.swift in Sources */,
 				9F5F2102C5C96402A066ADA0 /* GroupAvatarRenderer.swift in Sources */,
 				26F544A32C5AABD20069A7A4 /* CreateAccountView.swift in Sources */,
 				1A20417A1F1E547F00C08435 /* Stateable.swift in Sources */,

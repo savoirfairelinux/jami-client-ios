@@ -75,7 +75,7 @@ struct CallScreenView: View {
 
     var body: some View {
         ZStack {
-            Color.black.ignoresSafeArea()
+            Color.jamiCallBackdrop.ignoresSafeArea()
 
             PiPSourceView(model: model)
                 .ignoresSafeArea()

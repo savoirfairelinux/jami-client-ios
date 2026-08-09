@@ -58,9 +58,7 @@ struct CallTopActionsView: View {
         Button {
             model.perform(action.intent)
         } label: {
-            CallControlIcon(action: action,
-                            metrics: metrics,
-                            showsBorder: false)
+            CallControlIcon(action: action, metrics: metrics)
         }
         .disabled(!action.isEnabled)
         .accessibilityLabel(action.accessibilityLabel)
@@ -74,7 +72,7 @@ struct CallTopActionsView: View {
                 .font(.system(size: metrics.icon, weight: .medium))
                 .foregroundColor(.white)
                 .frame(width: metrics.button, height: metrics.button)
-                .onVideoGlass(Circle(), tint: Color.jamiOnVideoGlass)
+                .onVideoGlass(Circle())
         }
     }
 }
