@@ -18,58 +18,114 @@
 
 import SwiftUI
 
+private enum RosterMetrics {
+    static let margin: CGFloat = 20
+    static let avatar: CGFloat = 44
+    static let avatarSpacing: CGFloat = 12
+    static let elementSpacing: CGFloat = 8
+    static let textSpacing: CGFloat = 2
+    static let verticalPadding: CGFloat = 8
+    static let glyph: CGFloat = 24
+    static let tapTarget: CGFloat = 44
+    static let pendingAvatarOpacity: Double = 0.5
+
+    static let textLeading = margin + avatar + avatarSpacing
+    static let controlInset = margin - (tapTarget - glyph) / 2
+}
+
+private enum RosterTypography {
+    static let sectionTitle = Font.headline
+    static let headerAction = Font.title3
+    static let rowControl = Font.body
+    static let name = Font.subheadline.weight(.medium)
+    static let detail = Font.caption
+    static let status = Font.footnote
+}
+
+private extension View {
+    func rosterRowInsets() -> some View {
+        padding(.leading, RosterMetrics.margin)
+            .padding(.trailing, RosterMetrics.controlInset)
+            .padding(.vertical, RosterMetrics.verticalPadding)
+    }
+}
+
+private struct RosterAvatar: View {
+    let provider: AvatarProvider
+
+    var body: some View {
+        AvatarSwiftUIView(source: provider, sizeOverride: RosterMetrics.avatar)
+    }
+}
+
+private struct RosterControlIcon: View {
+    let systemImage: String
+    let color: Color
+    var font: Font = RosterTypography.rowControl
+
+    var body: some View {
+        Image(systemName: systemImage)
+            .font(font)
+            .foregroundColor(color)
+            .frame(width: RosterMetrics.glyph, height: RosterMetrics.glyph)
+            .frame(width: RosterMetrics.tapTarget, height: RosterMetrics.tapTarget)
+            .contentShape(Rectangle())
+    }
+}
+
 struct ConferenceParticipantsView: View {
 
     @ObservedObject var model: CallViewModel
 
     var body: some View {
-        VStack(spacing: 0) {
-            Indicator(orientation: .horizontal)
-                .padding(.top, 10)
-            ScrollView {
-                LazyVStack(spacing: 0) {
-                    if !model.pendingRows.isEmpty {
-                        sectionHeader(
-                            L10n.Calls.callingParticipants("\(model.pendingRows.count)"))
-                        ForEach(model.pendingRows) { row in
-                            PendingParticipantRowView(
-                                row: row,
-                                avatar: model.avatarProvider(forUri: row.uri),
-                                cancel: { model.cancelInvite(row.callId) })
-                                .equatable()
-                            Divider().padding(.leading, 68)
-                        }
-                    }
-                    participantsHeader
-                    ForEach(model.participantRows) { row in
-                        ParticipantRowView(
+        ScrollView {
+            LazyVStack(spacing: 0) {
+                if !model.pendingRows.isEmpty {
+                    sectionHeader(
+                        L10n.Calls.callingParticipants("\(model.pendingRows.count)"))
+                    ForEach(model.pendingRows) { row in
+                        PendingParticipantRowView(
                             row: row,
                             avatar: model.avatarProvider(forUri: row.uri),
-                            perform: { model.perform($0, on: row.id) })
+                            cancel: { model.cancelInvite(row.callId) })
                             .equatable()
-                        Divider().padding(.leading, 68)
+                        rowSeparator
                     }
+                }
+                participantsHeader
+                ForEach(model.participantRows) { row in
+                    ParticipantRowView(
+                        row: row,
+                        avatar: model.avatarProvider(forUri: row.uri),
+                        perform: { model.perform($0, on: row.id) })
+                        .equatable()
+                    rowSeparator
                 }
             }
         }
+        .background(Color.jamiCallBackdrop.opacity(0.3).ignoresSafeArea())
+    }
+
+    private var rowSeparator: some View {
+        Divider()
+            .padding(.leading, RosterMetrics.textLeading)
     }
 
     private func sectionHeader<Accessory: View>(
         _ title: String,
         @ViewBuilder accessory: () -> Accessory = { EmptyView() }) -> some View {
-        HStack(spacing: 8) {
+        HStack(spacing: RosterMetrics.elementSpacing) {
             Text(title)
-                .font(.headline)
+                .font(RosterTypography.sectionTitle)
             Spacer()
             accessory()
         }
-        .padding(.horizontal, 20)
-        .padding(.vertical, 12)
+        .rosterRowInsets()
     }
 
     private var participantsHeader: some View {
         sectionHeader(L10n.Calls.inThisCall("\(model.participantRows.count)")) {
-            HStack(spacing: 4) {
+            HStack(spacing: 0) {
                 if model.canModerateConference {
                     headerButton(L10n.Calls.gridLayout,
                                  systemImage: "square.grid.2x2",
@@ -88,13 +144,12 @@ struct ConferenceParticipantsView: View {
                               systemImage: String,
                               action: @escaping () -> Void) -> some View {
         Button(action: action) {
-            Label(title, systemImage: systemImage)
-                .labelStyle(IconOnlyLabelStyle())
-                .imageScale(.large)
-                .foregroundColor(Color.jamiButtonPrimary)
-                .frame(width: 44, height: 44)
-                .contentShape(Rectangle())
+            RosterControlIcon(systemImage: systemImage,
+                              color: .white,
+                              font: RosterTypography.headerAction)
         }
+        .buttonStyle(PlainButtonStyle())
+        .accessibilityLabel(title)
     }
 }
 
@@ -109,21 +164,23 @@ private struct ParticipantRowView: View, Equatable {
     }
 
     var body: some View {
-        HStack(spacing: 12) {
-            AvatarSwiftUIView(source: avatar, sizeOverride: 44)
-                .frame(width: 44, height: 44)
+        HStack(spacing: RosterMetrics.avatarSpacing) {
+            RosterAvatar(provider: avatar)
 
             Text(displayName)
-                .font(.subheadline)
-                .fontWeight(.medium)
+                .font(RosterTypography.name)
                 .lineLimit(1)
 
-            Spacer(minLength: 8)
+            Spacer(minLength: RosterMetrics.elementSpacing)
             statusIcons
-            if !row.actions.isEmpty { actionsMenu }
+            if row.actions.isEmpty {
+                Color.clear
+                    .frame(width: RosterMetrics.tapTarget)
+            } else {
+                actionsMenu
+            }
         }
-        .padding(.horizontal, 20)
-        .padding(.vertical, 8)
+        .rosterRowInsets()
         .contentShape(Rectangle())
     }
 
@@ -133,7 +190,7 @@ private struct ParticipantRowView: View, Equatable {
     }
 
     @ViewBuilder private var statusIcons: some View {
-        HStack(spacing: 8) {
+        HStack(spacing: RosterMetrics.elementSpacing) {
             if row.isSpeaking { icon("waveform", .green) }
             if row.isHandRaised { icon("hand.raised.fill", .yellow) }
             if row.isModerator { icon("checkmark.shield.fill", .secondary) }
@@ -145,7 +202,7 @@ private struct ParticipantRowView: View, Equatable {
 
     private func icon(_ name: String, _ color: Color) -> some View {
         Image(systemName: name)
-            .font(.footnote)
+            .font(RosterTypography.status)
             .foregroundColor(color)
     }
 
@@ -159,10 +216,9 @@ private struct ParticipantRowView: View, Equatable {
                 }
             }
         } label: {
-            Image(systemName: "ellipsis.circle")
-                .imageScale(.large)
-                .foregroundColor(.secondary)
+            RosterControlIcon(systemImage: "ellipsis.circle", color: .secondary)
         }
+        .accessibilityLabel(L10n.Calls.participantOptions(displayName))
     }
 
     private func title(for item: ConferenceMenuItem) -> String {
@@ -198,34 +254,27 @@ private struct PendingParticipantRowView: View, Equatable {
     }
 
     var body: some View {
-        HStack(spacing: 12) {
-            AvatarSwiftUIView(source: avatar, sizeOverride: 44)
-                .frame(width: 44, height: 44)
-                .opacity(0.5)
+        HStack(spacing: RosterMetrics.avatarSpacing) {
+            RosterAvatar(provider: avatar)
+                .opacity(RosterMetrics.pendingAvatarOpacity)
 
-            VStack(alignment: .leading, spacing: 2) {
+            VStack(alignment: .leading, spacing: RosterMetrics.textSpacing) {
                 Text(displayName)
-                    .font(.subheadline.weight(.medium))
+                    .font(RosterTypography.name)
                     .lineLimit(1)
                 Text(row.progressText)
-                    .font(.caption).foregroundColor(.secondary)
+                    .font(RosterTypography.detail).foregroundColor(.secondary)
             }
 
-            Spacer(minLength: 8)
+            Spacer(minLength: RosterMetrics.elementSpacing)
 
             Button(action: cancel) {
-                Image(systemName: "phone.down.fill")
-                    .imageScale(.medium)
-                    .foregroundColor(.red)
-                    .frame(width: 44, height: 44)
-                    .contentShape(Rectangle())
+                RosterControlIcon(systemImage: "phone.down.fill", color: .red)
             }
             .buttonStyle(PlainButtonStyle())
             .accessibilityLabel(row.stopCallingLabel(displayName: displayName))
         }
-        .padding(.leading, 20)
-        .padding(.trailing, 8)
-        .padding(.vertical, 8)
+        .rosterRowInsets()
     }
 
     private var displayName: String {
