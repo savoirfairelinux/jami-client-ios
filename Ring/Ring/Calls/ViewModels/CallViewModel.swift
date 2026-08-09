@@ -261,8 +261,8 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
                 retarget(to: survivor)
                 return
             }
-            apply(call: call)
-            rebuildTiles()
+            self.call = call
+            updatePiPSource()
             stopDurationTimer()
             shouldDismiss = true
         case let .callMatched(replaced, matched):
