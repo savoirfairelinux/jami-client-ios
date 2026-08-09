@@ -90,11 +90,13 @@ struct CallScreenView: View {
         .statusBar(hidden: true)
         .sheet(isPresented: $model.showsDialpad) {
             InCallDialpadView(model: model)
+                .preferredColorScheme(.dark)
         }
         .sheet(isPresented: $model.showsParticipants,
                onDismiss: model.participantsDismissed) {
             ConferenceParticipantsView(model: model)
                 .optionalMediumPresentationDetents()
+                .preferredColorScheme(.dark)
         }
         .onAppear { model.screenAppeared() }
         .onDisappear { model.screenDisappeared() }
