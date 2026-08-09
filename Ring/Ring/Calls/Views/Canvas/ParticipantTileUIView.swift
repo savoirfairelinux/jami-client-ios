@@ -73,6 +73,7 @@ final class ParticipantTileUIView: UIView {
     }
 
     private let avatarView = CallAvatarView()
+    private let backdropLayer = CAGradientLayer()
     private let nameLabel = UILabel()
     private let namePlate = UIView()
 
@@ -90,6 +91,8 @@ final class ParticipantTileUIView: UIView {
         }
     }
     private var nameCancellable: AnyCancellable?
+    private var backdropCancellable: AnyCancellable?
+    private var backdropSource: (name: String, avatar: UIImage?)?
     private weak var boundProvider: AvatarProvider?
 
     private(set) var tileState = ParticipantTileState()
@@ -107,12 +110,17 @@ final class ParticipantTileUIView: UIView {
 
     private func configureSubviews() {
         clipsToBounds = true
-        backgroundColor = UIColor(white: 0.12, alpha: 1)
+        backgroundColor = .jamiCallBackdrop
         isAccessibilityElement = true
         accessibilityTraits = .image
         if participantId == CanvasParticipant.localId {
             accessibilityLabel = L10n.Accessibility.Conference.localPreview
         }
+
+        backdropLayer.type = .radial
+        backdropLayer.locations = IdentityBackdrop.Geometry.locations
+        backdropLayer.isHidden = true
+        layer.insertSublayer(backdropLayer, at: 0)
 
         videoView.frame = bounds
         videoView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -190,6 +198,7 @@ final class ParticipantTileUIView: UIView {
             avatarCenterY.constant = -avatarLift
         }
         super.layoutSubviews()
+        syncBackdropGeometry()
         namePlate.layer.cornerRadius = namePlate.bounds.height / 2
         layer.borderWidth = tileState.isSpeaking ? 2 : 0
     }
@@ -213,8 +222,17 @@ final class ParticipantTileUIView: UIView {
         boundProvider = provider
         guard let provider = provider else {
             nameCancellable = nil
+            backdropCancellable = nil
+            clearBackdrop()
             return
         }
+        backdropSource = nil
+        backdropCancellable = provider.$profileName
+            .combineLatest(provider.$isAvatarResolved, provider.$avatar)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] name, isResolved, avatar in
+                self?.applyBackdrop(name: name, avatar: avatar, isResolved: isResolved)
+            }
         let isLocalParticipant = provider.isLocalParticipant
         nameCancellable = provider.$profileName
             .receive(on: DispatchQueue.main)
@@ -239,6 +257,76 @@ final class ParticipantTileUIView: UIView {
         namePlate.isHidden ? nil : namePlate.convert(nameLabel.frame, to: self)
     }
 
+    private func applyBackdrop(name: String, avatar: UIImage?, isResolved: Bool) {
+        guard isResolved else {
+            clearBackdrop()
+            return
+        }
+        if isBackdropCurrent(name: name, avatar: avatar) { return }
+        backdropSource = (name, avatar)
+
+        guard let avatar = avatar else {
+            setBackdrop(IdentityBackdrop.monogramTint(forName: name))
+            return
+        }
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            let tint = IdentityBackdrop.photoTint(for: avatar)
+                ?? IdentityBackdrop.monogramTint(forName: name)
+            DispatchQueue.main.async {
+                guard let self = self, self.backdropSource?.avatar === avatar else { return }
+                self.setBackdrop(tint)
+            }
+        }
+    }
+
+    private func isBackdropCurrent(name: String, avatar: UIImage?) -> Bool {
+        guard let source = backdropSource, source.avatar === avatar else { return false }
+        return avatar != nil || source.name == name
+    }
+
+    private func clearBackdrop() {
+        backdropSource = nil
+        setBackdrop(nil)
+    }
+
+    private func syncBackdropGeometry() {
+        let mirrored = effectiveUserInterfaceLayoutDirection == .rightToLeft
+        let (start, end) = IdentityBackdrop.Geometry.points(mirrored: mirrored)
+
+        guard backdropLayer.frame != bounds
+                || backdropLayer.startPoint != start
+                || backdropLayer.endPoint != end else { return }
+
+        withoutImplicitAnimation {
+            backdropLayer.frame = bounds
+            backdropLayer.startPoint = start
+            backdropLayer.endPoint = end
+        }
+    }
+
+    private func setBackdrop(_ tint: UIColor?) {
+        withoutImplicitAnimation {
+            backdropLayer.colors = tint.map(IdentityBackdrop.gradientColors)
+        }
+        syncBackdropVisibility()
+    }
+
+    private func syncBackdropVisibility() {
+        setBackdropHidden(backdropLayer.colors == nil || backdropLayer.opacity == 0)
+    }
+
+    private func setBackdropHidden(_ hidden: Bool) {
+        guard backdropLayer.isHidden != hidden else { return }
+        withoutImplicitAnimation { backdropLayer.isHidden = hidden }
+    }
+
+    private func withoutImplicitAnimation(_ changes: () -> Void) {
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        changes()
+        CATransaction.commit()
+    }
+
     private func syncAvatarVisibility(animated: Bool) {
         let showsContent = tileState.showsVideo && videoView.hasVideoContent
         let targetAlpha: CGFloat = showsContent ? 0 : 1
@@ -246,14 +334,23 @@ final class ParticipantTileUIView: UIView {
             hideVideoSurfaceIfUnused()
             return
         }
-        let apply = { self.avatarView.alpha = targetAlpha }
+        if targetAlpha > 0, backdropLayer.colors != nil {
+            setBackdropHidden(false)
+        }
+        let apply = {
+            self.avatarView.alpha = targetAlpha
+            self.backdropLayer.opacity = Float(targetAlpha)
+        }
         if animated {
-            UIView.animate(withDuration: 0.15, animations: apply) { [weak self] _ in
+            UIView.animate(withDuration: 0.15, animations: apply) { [weak self] finished in
                 self?.hideVideoSurfaceIfUnused()
+                guard finished else { return }
+                self?.syncBackdropVisibility()
             }
         } else {
-            apply()
+            withoutImplicitAnimation(apply)
             hideVideoSurfaceIfUnused()
+            syncBackdropVisibility()
         }
     }
 

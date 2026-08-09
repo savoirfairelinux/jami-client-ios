@@ -80,7 +80,6 @@ struct BarMetrics {
 struct CallControlIcon: View {
     let action: ControlAction
     let metrics: BarMetrics
-    var showsBorder = true
 
     var body: some View {
         Image(systemName: action.systemImage)
@@ -88,8 +87,6 @@ struct CallControlIcon: View {
             .foregroundColor(foreground)
             .frame(width: metrics.button, height: metrics.button)
             .onVideoGlass(Circle(), tint: background)
-            .overlay(Circle().strokeBorder(border,
-                                           lineWidth: showsBorder ? 1 : 0))
     }
 
     private var foreground: Color {
@@ -106,14 +103,6 @@ struct CallControlIcon: View {
         case .destructive: return .red
         case .active: return .white.opacity(0.92)
         case .normal: return Color.jamiOnVideoGlass
-        }
-    }
-
-    private var border: Color {
-        guard action.isEnabled else { return .white.opacity(0.13) }
-        switch action.style {
-        case .active: return .white.opacity(0.76)
-        case .destructive, .normal: return .white.opacity(0.2)
         }
     }
 }
