@@ -320,7 +320,6 @@
 "calls.currentCallWith" = "Позови са ";
 "calls.maximize" = "Увећај";
 "calls.minimize" = "Минимализирајте";
-"calls.moreActions" = "More actions";
 "calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Уредимо модератор";
 "calls.removeModerator" = "Упременимо модератор";
@@ -683,6 +682,8 @@
 "accessibility.conference.showFullVideo" = "Show full video";
 "accessibility.conference.cropVideo" = "Crop video";
 "accessibility.conference.localPreview" = "Your video";
+"accessibility.conference.hideLocalPreview" = "Hide your video";
+"accessibility.conference.showLocalPreview" = "Show your video";
 "accessibility.account.tokenQRcode" = "QR код токена";
 
 // Swarm Colors

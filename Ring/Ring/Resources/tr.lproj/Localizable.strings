@@ -320,7 +320,6 @@
 "calls.currentCallWith" = "İle çağrı yap";
 "calls.maximize" = "En büyük";
 "calls.minimize" = "En küçük";
-"calls.moreActions" = "More actions";
 "calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Oturum başkanı ayarla";
 "calls.removeModerator" = "Oturum başkanı ayarını kaldır";
@@ -683,6 +682,8 @@
 "accessibility.conference.showFullVideo" = "Show full video";
 "accessibility.conference.cropVideo" = "Crop video";
 "accessibility.conference.localPreview" = "Your video";
+"accessibility.conference.hideLocalPreview" = "Hide your video";
+"accessibility.conference.showLocalPreview" = "Show your video";
 "accessibility.account.tokenQRcode" = "Jeton QR kodu";
 
 // Swarm Colors

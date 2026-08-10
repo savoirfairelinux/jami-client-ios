@@ -320,7 +320,6 @@
 "calls.currentCallWith" = "전화";
 "calls.maximize" = "최대한 활용";
 "calls.minimize" = "최소화";
-"calls.moreActions" = "More actions";
 "calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "조정기를 설정";
 "calls.removeModerator" = "설정하지 않는 모더레이터";
@@ -683,6 +682,8 @@
 "accessibility.conference.showFullVideo" = "Show full video";
 "accessibility.conference.cropVideo" = "Crop video";
 "accessibility.conference.localPreview" = "Your video";
+"accessibility.conference.hideLocalPreview" = "Hide your video";
+"accessibility.conference.showLocalPreview" = "Show your video";
 "accessibility.account.tokenQRcode" = "토큰 QR 코드";
 
 // Swarm Colors

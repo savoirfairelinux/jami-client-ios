@@ -320,7 +320,6 @@
 "calls.currentCallWith" = "";
 "calls.maximize" = "बड़ा करें";
 "calls.minimize" = "न्यूनतम करें";
-"calls.moreActions" = "More actions";
 "calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "मॉडरेटर सेट करें";
 "calls.removeModerator" = "मॉडरेटर अनसेट करें";
@@ -683,6 +682,8 @@
 "accessibility.conference.showFullVideo" = "Show full video";
 "accessibility.conference.cropVideo" = "Crop video";
 "accessibility.conference.localPreview" = "Your video";
+"accessibility.conference.hideLocalPreview" = "Hide your video";
+"accessibility.conference.showLocalPreview" = "Show your video";
 "accessibility.account.tokenQRcode" = "टोकन QR कोड";
 
 // Swarm Colors

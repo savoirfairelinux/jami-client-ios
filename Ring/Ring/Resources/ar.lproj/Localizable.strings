@@ -320,7 +320,6 @@
 "calls.currentCallWith" = "اتصل بـ";
 "calls.maximize" = "تكبير";
 "calls.minimize" = "خفض";
-"calls.moreActions" = "More actions";
 "calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "حدد المدير";
 "calls.removeModerator" = "إزالة المدير";
@@ -329,7 +328,7 @@
 "calls.lowerHand" = "اليد السفلى";
 "calls.inThisCall" = "In this call (%@)";
 "calls.participantsInCall" = "%@ in call";
-"calls.peerRecording" = "Recording";
+"calls.peerRecording" = "تسجيل";
 "calls.gridLayout" = "Grid view";
 "calls.calling" = "Calling…";
 "calls.callingParticipants" = "Calling (%@)";
@@ -683,6 +682,8 @@
 "accessibility.conference.showFullVideo" = "Show full video";
 "accessibility.conference.cropVideo" = "Crop video";
 "accessibility.conference.localPreview" = "Your video";
+"accessibility.conference.hideLocalPreview" = "Hide your video";
+"accessibility.conference.showLocalPreview" = "Show your video";
 "accessibility.account.tokenQRcode" = "رمز QR للرمز المميّز";
 
 // Swarm Colors

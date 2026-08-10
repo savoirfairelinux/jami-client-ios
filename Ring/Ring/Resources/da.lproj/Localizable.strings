@@ -320,7 +320,6 @@
 "calls.currentCallWith" = "Opkald med";
 "calls.maximize" = "Maksimer";
 "calls.minimize" = "Minimer";
-"calls.moreActions" = "More actions";
 "calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Indstilling af moderator";
 "calls.removeModerator" = "Moderator";
@@ -683,6 +682,8 @@
 "accessibility.conference.showFullVideo" = "Show full video";
 "accessibility.conference.cropVideo" = "Crop video";
 "accessibility.conference.localPreview" = "Your video";
+"accessibility.conference.hideLocalPreview" = "Hide your video";
+"accessibility.conference.showLocalPreview" = "Show your video";
 "accessibility.account.tokenQRcode" = "QR-kode til token";
 
 // Swarm Colors

@@ -86,7 +86,7 @@
 "swarm.descriptionPlaceholder" = "Enter title";
 "swarm.contactHeader" = "Contact";
 "swarm.showContactQRCode" = "Show contact QR code";
-"swarm.shareContactInfo" = "Share contact information";
+"swarm.shareContactInfo" = "Compartir información de contautu";
 "swarm.accessibilityContactQRCode" = "Show contact QR code";
 "swarm.accessibilityContactQRCodeHint" = "Opens a screen with contact's QR code";
 "swarm.accessibilityContactShareHint" = "Opens sharing options for contact information";
@@ -111,7 +111,7 @@
 "swarm.inviteMembersNotSelected" = "Not selected";
 "swarm.confirmLeaveConversation" = "Do you want to leave this conversation?";
 "swarm.Leave" = "La so primer apaición foi nel estrenu de la cuarta temporada.";
-"swarm.newGroup" = "Create new group";
+"swarm.newGroup" = "Crear nuevo grupu";
 "swarm.namePlaceholder" = "Group name";
 "swarm.explanationText" = "Members can be invited at any time after the group has been created.";
 "swarm.customizeProfile" = "Customize group profile";
@@ -136,7 +136,7 @@
 "smartlist.newContact" = "New contact";
 "smartlist.newGroup" = "New group";
 "smartlist.accounts" = "Cuentas";
-"smartlist.invitationReceived" = "Invitations received";
+"smartlist.invitationReceived" = "Invitaciones recibíes";
 "smartlist.noResults" = "Nun hai resultáu";
 "smartlist.noConversation" = "Nun hai conversaciones.";
 "smartlist.searchBarPlaceholder" = "Enter name…";
@@ -193,7 +193,7 @@
 "invitations.accepted" = "Acceptáu";
 "invitations.declined" = "Declined";
 "invitations.blocked" = "Blocked";
-"invitations.list" = "Invitations received";
+"invitations.list" = "Invitaciones recibíes";
 
 // Walkthrough
 
@@ -320,7 +320,6 @@
 "calls.currentCallWith" = "Llamó con ";
 "calls.maximize" = "La mayor parte de los casos";
 "calls.minimize" = "La so capacidá de control ye de 5 a 10 años.";
-"calls.moreActions" = "More actions";
 "calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Establecimientu inscritu nel Rexistru d'Actividaes Turístiques del Principáu d'Asturies col códigu DGT CA0831.";
 "calls.removeModerator" = "Moderador desactiváu";
@@ -337,8 +336,8 @@
 "calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
 "calls.activeCallInConversation" = "Una llamada va en cursu. ¿Quieres xunise a la llamada?";
-"calls.acceptWithAudio" = "Accept with audio";
-"calls.acceptWithVideo" = "Accept with video";
+"calls.acceptWithAudio" = "Aceutar con audio";
+"calls.acceptWithVideo" = "Aceutar con video";
 
 // Account Page
 "accountPage.devicesListHeader" = "Dispositivos";
@@ -417,7 +416,7 @@
 "accountPage.profileHeader" = "Perfil";
 "accountPage.profileNameNotSelected" = "Name not selected";
 "accountPage.accountHeader" = "Cuenta";
-"accountPage.profileName" = "Profile name";
+"accountPage.profileName" = "Nome de perfil";
 "accountPage.profileNamePlaceholder" = "Enter profile name";
 "accountPage.editProfile" = "Edit Profile";
 "accountPage.manageAccount" = "Gestionar cuenta";
@@ -597,12 +596,12 @@
 "aboutJami.noWarranty2" = "version 3 or later for details.";
 "aboutJami.contribute" = "Contribuyir";
 "aboutJami.feedback" = "La respuesta";
-"aboutJami.developers" = "Developers";
+"aboutJami.developers" = "Desarrollaores";
 "aboutJami.media" = "Medios de comunicación";
-"aboutJami.communityManagement" = "Community Management";
-"aboutJami.specialThanks" = "Special thanks to";
+"aboutJami.communityManagement" = "Xestión de la comunidá";
+"aboutJami.specialThanks" = "Agradecimientu especial a";
 "aboutJami.info" = "This is a list of people who have made a significant investment of time, with useful results, into Jami. Any such contributors who want to be added to the list should contact us.";
-"aboutJami.header" = "We would like to thank our contributors, whose efforts over many years have made this software what it is.";
+"aboutJami.header" = "Gustaríanos agradecer a los nuesos collaboradores, yá que los sos esfuercios a lo llargo de munchos años fixeron d'esti software lo que ye güei.";
 
 // Accessibility
 "accessibility.close" = "La so primer apaición foi nel estrenu de la cuarta temporada.";
@@ -636,8 +635,8 @@
 "accessibility.pendingRequestsRowSingular" = "Invitation received: %@ pending invitation";
 "accessibility.pendingRequestsRowHint" = "Double-tap to review and reply to invitations you received";
 "accessibility.pendingRequestsListBlockUser" = "Block invitation sender";
-"accessibility.pendingRequestsListRejectInvitation" = "Decline invitation";
-"accessibility.pendingRequestsListAcceptInvitation" = "Accept invitation";
+"accessibility.pendingRequestsListRejectInvitation" = "Refugar invitación";
+"accessibility.pendingRequestsListAcceptInvitation" = "Aceutar invitación";
 "accessibility.messageBubbleDeleted" = "Message deleted";
 "accessibility.messageBubbleEdited" = "Ediciones";
 "accessibility.messageBubbleRead" = "Read";
@@ -649,14 +648,14 @@
 "accessibility.text.sentOn" = "%1@, message sent on %2@";
 "accessibility.fileTransfer.receivedOn" = "File: %1@ , received on %2@";
 "accessibility.fileTransfer.sentOn" = "File: %1@, sent on %2@";
-"accessibility.call.lasted" = "Lasted %@";
+"accessibility.call.lasted" = "Duró %@";
 "accessibility.calls.default.toggleAudio" = "Micrófonos silenciosos";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "Pausa llamada";
 "accessibility.calls.default.endCall" = "La llamada final";
 "accessibility.calls.default.addParticipant" = "Aúna de les partes";
-"accessibility.calls.default.switchCamera" = "Switch camera";
-"accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
+"accessibility.calls.default.switchCamera" = "Camudar cámara";
+"accessibility.calls.default.toggleSpeaker" = "Encender altavoces";
 "accessibility.calls.default.openConversation" = "La conversación abierta";
 "accessibility.calls.default.showDialpad" = "Show dialpad";
 "accessibility.calls.default.raiseHand" = "Ellí ye la mano.";
@@ -666,7 +665,7 @@
 "accessibility.calls.alter.pauseCall" = "Reanudar la llamada";
 "accessibility.calls.alter.endCall" = "La llamada final";
 "accessibility.calls.alter.addParticipant" = "Aúna de les partes";
-"accessibility.calls.alter.switchCamera" = "Switch camera";
+"accessibility.calls.alter.switchCamera" = "Camudar cámara";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
 "accessibility.calls.alter.openConversation" = "La conversación abierta";
 "accessibility.calls.alter.showDialpad" = "Show dialpad";
@@ -683,6 +682,8 @@
 "accessibility.conference.showFullVideo" = "Show full video";
 "accessibility.conference.cropVideo" = "Crop video";
 "accessibility.conference.localPreview" = "Your video";
+"accessibility.conference.hideLocalPreview" = "Hide your video";
+"accessibility.conference.showLocalPreview" = "Show your video";
 "accessibility.account.tokenQRcode" = "Token QR code";
 
 // Swarm Colors

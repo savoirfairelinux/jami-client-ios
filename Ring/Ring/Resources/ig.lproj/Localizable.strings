@@ -320,7 +320,6 @@
 "calls.currentCallWith" = "Kpọọ m";
 "calls.maximize" = "Mee Ka Ihe Dịkwuo Mma";
 "calls.minimize" = "Mee ka ihe dịkwuo ala";
-"calls.moreActions" = "More actions";
 "calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Set moderator";
 "calls.removeModerator" = "Ịkwụsị ịhazi ihe";
@@ -683,6 +682,8 @@
 "accessibility.conference.showFullVideo" = "Show full video";
 "accessibility.conference.cropVideo" = "Crop video";
 "accessibility.conference.localPreview" = "Your video";
+"accessibility.conference.hideLocalPreview" = "Hide your video";
+"accessibility.conference.showLocalPreview" = "Show your video";
 "accessibility.account.tokenQRcode" = "Token QR code";
 
 // Swarm Colors

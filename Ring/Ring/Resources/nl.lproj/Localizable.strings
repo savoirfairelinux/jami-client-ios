@@ -320,7 +320,6 @@
 "calls.currentCallWith" = "Bellen met";
 "calls.maximize" = "Maximaliseren";
 "calls.minimize" = "Minimaliseren";
-"calls.moreActions" = "More actions";
 "calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Stel moderator in";
 "calls.removeModerator" = "De moderator is niet ingesteld.";
@@ -683,6 +682,8 @@
 "accessibility.conference.showFullVideo" = "Show full video";
 "accessibility.conference.cropVideo" = "Crop video";
 "accessibility.conference.localPreview" = "Your video";
+"accessibility.conference.hideLocalPreview" = "Hide your video";
+"accessibility.conference.showLocalPreview" = "Show your video";
 "accessibility.account.tokenQRcode" = "Token-QR-code";
 
 // Swarm Colors

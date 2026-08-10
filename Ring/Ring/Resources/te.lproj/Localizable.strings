@@ -320,7 +320,6 @@
 "calls.currentCallWith" = " తో కాల్";
 "calls.maximize" = "గరిష్టంగా";
 "calls.minimize" = "తక్కువ స్థాయిలో";
-"calls.moreActions" = "More actions";
 "calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "మోడరేటర్ సెట్";
 "calls.removeModerator" = "సెట్టింగ్ను తొలగించు";
@@ -683,6 +682,8 @@
 "accessibility.conference.showFullVideo" = "Show full video";
 "accessibility.conference.cropVideo" = "Crop video";
 "accessibility.conference.localPreview" = "Your video";
+"accessibility.conference.hideLocalPreview" = "Hide your video";
+"accessibility.conference.showLocalPreview" = "Show your video";
 "accessibility.account.tokenQRcode" = "Token QR code";
 
 // Swarm Colors

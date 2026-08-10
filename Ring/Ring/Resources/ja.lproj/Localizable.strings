@@ -320,7 +320,6 @@
 "calls.currentCallWith" = "連絡する";
 "calls.maximize" = "最大化";
 "calls.minimize" = "最小化";
-"calls.moreActions" = "More actions";
 "calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "調停者を設定";
 "calls.removeModerator" = "調停者を取り消し";
@@ -683,6 +682,8 @@
 "accessibility.conference.showFullVideo" = "Show full video";
 "accessibility.conference.cropVideo" = "Crop video";
 "accessibility.conference.localPreview" = "Your video";
+"accessibility.conference.hideLocalPreview" = "Hide your video";
+"accessibility.conference.showLocalPreview" = "Show your video";
 "accessibility.account.tokenQRcode" = "トークンQRコード";
 
 // Swarm Colors

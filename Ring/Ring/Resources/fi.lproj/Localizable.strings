@@ -320,21 +320,20 @@
 "calls.currentCallWith" = "Soita";
 "calls.maximize" = "Suurenna";
 "calls.minimize" = "Pienennä";
-"calls.moreActions" = "More actions";
-"calls.startPictureInPicture" = "Start Picture in Picture";
+"calls.startPictureInPicture" = "Aloita kuva kuvassa";
 "calls.setModerator" = "Aseta valvoja";
 "calls.removeModerator" = "Poista valvoja";
 "calls.muteAudio" = "Mykistä mikrofoni";
 "calls.unmuteAudio" = "Poista mikrofonin mykistys";
 "calls.lowerHand" = "Käsi alas";
-"calls.inThisCall" = "In this call (%@)";
-"calls.participantsInCall" = "%@ in call";
+"calls.inThisCall" = "Tässä puhelussa (%@)";
+"calls.participantsInCall" = "%@ puhelussa";
 "calls.peerRecording" = "Tallenne";
-"calls.gridLayout" = "Grid view";
-"calls.calling" = "Calling…";
-"calls.callingParticipants" = "Calling (%@)";
-"calls.stopCalling" = "Stop calling %@";
-"calls.inviting" = "Inviting…";
+"calls.gridLayout" = "Ruutunäkymä";
+"calls.calling" = "Soitetaan…";
+"calls.callingParticipants" = " Soitetaan (%@)";
+"calls.stopCalling" = "Lopeta puhelu %@";
+"calls.inviting" = "Kutsutaan…";
 "calls.activeCallLabel" = "Puhelu on käynnissä. Haluatko liittyä puheluun? Voit liittyä puheluun myös myöhemmin keskustelusta.";
 "calls.activeCallInConversation" = "Puhelu on meneillään. Haluatko liittyä?";
 "calls.acceptWithAudio" = "Hyväksy äänellä";
@@ -679,10 +678,12 @@
 "accessibility.conference.unmuteAudio" = "Poista mykistys";
 "accessibility.conference.endCall" = "Lopeta puhelu";
 "accessibility.conference.lowerHand" = "Käsi alas";
-"accessibility.conference.showParticipants" = "Show participants";
-"accessibility.conference.showFullVideo" = "Show full video";
-"accessibility.conference.cropVideo" = "Crop video";
-"accessibility.conference.localPreview" = "Your video";
+"accessibility.conference.showParticipants" = "Näytä osallistujat";
+"accessibility.conference.showFullVideo" = "Näytä koko video";
+"accessibility.conference.cropVideo" = "Rajaa video";
+"accessibility.conference.localPreview" = "Sinun video";
+"accessibility.conference.hideLocalPreview" = "Hide your video";
+"accessibility.conference.showLocalPreview" = "Show your video";
 "accessibility.account.tokenQRcode" = "Token QR-koodi";
 
 // Swarm Colors

@@ -320,21 +320,20 @@
 "calls.currentCallWith" = "Helista kasutajale";
 "calls.maximize" = "Maksimeeri";
 "calls.minimize" = "Minimeeri";
-"calls.moreActions" = "More actions";
-"calls.startPictureInPicture" = "Start Picture in Picture";
+"calls.startPictureInPicture" = "Käivita pilt-pildis režiim";
 "calls.setModerator" = "Määra moderaator";
 "calls.removeModerator" = "Eemalda moderaator";
 "calls.muteAudio" = "Summuta mikrofon";
 "calls.unmuteAudio" = "Lõpeta mikrofoni summutamine";
 "calls.lowerHand" = "Lase käsi alla";
-"calls.inThisCall" = "In this call (%@)";
-"calls.participantsInCall" = "%@ in call";
-"calls.peerRecording" = "Recording";
-"calls.gridLayout" = "Grid view";
-"calls.calling" = "Calling…";
-"calls.callingParticipants" = "Calling (%@)";
-"calls.stopCalling" = "Stop calling %@";
-"calls.inviting" = "Inviting…";
+"calls.inThisCall" = "Selles kõnes (%@)";
+"calls.participantsInCall" = "%@ on helistamas";
+"calls.peerRecording" = "Salvestan";
+"calls.gridLayout" = "Ruudustikuvaade";
+"calls.calling" = "Helistan…";
+"calls.callingParticipants" = "Helistan (%@)";
+"calls.stopCalling" = "Lõpeta helistamine:%@";
+"calls.inviting" = "Saadan kutset…";
 "calls.activeCallLabel" = "Kõne on pooleli. Kas sa soovid sellega liituda? Sa saad temaga ka hiljem liituda vestlusest.";
 "calls.activeCallInConversation" = "Kõne on pooleli. Kas sa soovid sellega liituda?";
 "calls.acceptWithAudio" = "Vasta häälkõnena";
@@ -679,10 +678,12 @@
 "accessibility.conference.unmuteAudio" = "Lõpeta heli summutamine";
 "accessibility.conference.endCall" = "Lõpeta kõne";
 "accessibility.conference.lowerHand" = "Lase käsi alla";
-"accessibility.conference.showParticipants" = "Show participants";
-"accessibility.conference.showFullVideo" = "Show full video";
-"accessibility.conference.cropVideo" = "Crop video";
-"accessibility.conference.localPreview" = "Your video";
+"accessibility.conference.showParticipants" = "Näita osalejaid";
+"accessibility.conference.showFullVideo" = "Näita täiskaadris videot";
+"accessibility.conference.cropVideo" = "Kadreeri videot";
+"accessibility.conference.localPreview" = "Sinu video";
+"accessibility.conference.hideLocalPreview" = "Hide your video";
+"accessibility.conference.showLocalPreview" = "Show your video";
 "accessibility.account.tokenQRcode" = "Tunnusloa QR-kood";
 
 // Swarm Colors

@@ -320,7 +320,6 @@
 "calls.currentCallWith" = "Gọi với ";
 "calls.maximize" = "Tăng tối đa";
 "calls.minimize" = "Giảm thiểu";
-"calls.moreActions" = "More actions";
 "calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Set moderator";
 "calls.removeModerator" = "Moderator không cài đặt";
@@ -683,6 +682,8 @@
 "accessibility.conference.showFullVideo" = "Show full video";
 "accessibility.conference.cropVideo" = "Crop video";
 "accessibility.conference.localPreview" = "Your video";
+"accessibility.conference.hideLocalPreview" = "Hide your video";
+"accessibility.conference.showLocalPreview" = "Show your video";
 "accessibility.account.tokenQRcode" = "Mã QR mã thông báo";
 
 // Swarm Colors

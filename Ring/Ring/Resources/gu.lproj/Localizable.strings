@@ -320,7 +320,6 @@
 "calls.currentCallWith" = " સાથે કૉલ કરો";
 "calls.maximize" = "મહત્તમ કરો";
 "calls.minimize" = "ન્યૂનતમ";
-"calls.moreActions" = "More actions";
 "calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "મધ્યસ્થ સેટ કરો";
 "calls.removeModerator" = "અનસેટ કરેલ મધ્યસ્થ";
@@ -683,6 +682,8 @@
 "accessibility.conference.showFullVideo" = "Show full video";
 "accessibility.conference.cropVideo" = "Crop video";
 "accessibility.conference.localPreview" = "Your video";
+"accessibility.conference.hideLocalPreview" = "Hide your video";
+"accessibility.conference.showLocalPreview" = "Show your video";
 "accessibility.account.tokenQRcode" = "Token QR code";
 
 // Swarm Colors

@@ -320,21 +320,20 @@
 "calls.currentCallWith" = "Anrufen mit";
 "calls.maximize" = "Maximieren";
 "calls.minimize" = "Minimieren";
-"calls.moreActions" = "More actions";
-"calls.startPictureInPicture" = "Start Picture in Picture";
+"calls.startPictureInPicture" = "Bild-in-Bild starten";
 "calls.setModerator" = "Moderator festlegen";
 "calls.removeModerator" = "Moderator entfernen";
 "calls.muteAudio" = "Mikrofon stummschalten";
 "calls.unmuteAudio" = "Mikrofon-Stummschaltung aufheben";
 "calls.lowerHand" = "Hand senken";
-"calls.inThisCall" = "In this call (%@)";
-"calls.participantsInCall" = "%@ in call";
+"calls.inThisCall" = "In diesem Anruf (%@)";
+"calls.participantsInCall" = "%@ im Anruf";
 "calls.peerRecording" = "Aufzeichnung";
-"calls.gridLayout" = "Grid view";
-"calls.calling" = "Calling…";
-"calls.callingParticipants" = "Calling (%@)";
-"calls.stopCalling" = "Stop calling %@";
-"calls.inviting" = "Inviting…";
+"calls.gridLayout" = "Rasteransicht";
+"calls.calling" = "Wird angerufen…";
+"calls.callingParticipants" = "%@ wird angerufen";
+"calls.stopCalling" = "Anruf bei %@ abbrechen";
+"calls.inviting" = "Wird eingeladen...";
 "calls.activeCallLabel" = "Ein Anruf läuft. Möchten Sie dem Anruf beitreten? Sie können dem Anruf auch später über die Unterhaltung beitreten.";
 "calls.activeCallInConversation" = "Ein Anruf läuft. Möchten Sie dem Anruf beitreten?";
 "calls.acceptWithAudio" = "Mit Audio annehmen";
@@ -679,10 +678,12 @@
 "accessibility.conference.unmuteAudio" = "Stummschaltung aufheben";
 "accessibility.conference.endCall" = "Anruf beenden";
 "accessibility.conference.lowerHand" = "Hand senken";
-"accessibility.conference.showParticipants" = "Show participants";
-"accessibility.conference.showFullVideo" = "Show full video";
-"accessibility.conference.cropVideo" = "Crop video";
-"accessibility.conference.localPreview" = "Your video";
+"accessibility.conference.showParticipants" = "Teilnehmer anzeigen";
+"accessibility.conference.showFullVideo" = "Vollständiges Video anzeigen";
+"accessibility.conference.cropVideo" = "Video zuschneiden";
+"accessibility.conference.localPreview" = "Ihr Video";
+"accessibility.conference.hideLocalPreview" = "Hide your video";
+"accessibility.conference.showLocalPreview" = "Show your video";
 "accessibility.account.tokenQRcode" = "Token-QR-Code";
 
 // Swarm Colors
