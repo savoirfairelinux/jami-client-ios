@@ -113,6 +113,7 @@ class ConversationsCoordinator: RootCoordinator, StateableResponsive, Conversati
     func start() {
         let view = SmartListView(injectionBag: self.injectionBag, source: self.conversationsSource)
         let viewController = createHostingVC(view)
+        viewController.navigationItem.backButtonDisplayMode = .minimal
         self.smartListViewController = viewController
         self.present(viewController: viewController, withStyle: .replaceNavigationStack, withAnimation: true, withStateable: view.stateEmitter)
     }

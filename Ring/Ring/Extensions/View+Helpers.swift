@@ -19,6 +19,11 @@
 import SwiftUI
 import Combine
 
+enum NavBarIcon {
+    static let glyphSize: CGFloat = 20
+    static let tapTarget: CGFloat = 44
+}
+
 extension View {
     func placeholder<Content: View>(
         when shouldShow: Bool,
@@ -46,8 +51,9 @@ extension View {
     // The frame provides the minimum tappable area for each button.
     func navBarIconStyle() -> some View {
         self
+            .font(.system(size: NavBarIcon.glyphSize))
             .foregroundColor(.jami)
-            .frame(width: 44, height: 44)
+            .frame(width: NavBarIcon.tapTarget, height: NavBarIcon.tapTarget)
             .contentShape(Rectangle())
     }
 

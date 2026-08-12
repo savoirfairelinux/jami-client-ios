@@ -24,6 +24,29 @@ struct ConversationContainerView: View {
     @SwiftUI.State private var showPeerServices = false
     @SwiftUI.State private var peerSharingVM: PeerSharingViewModel?
 
+    private enum TrailingButton: Hashable {
+        case peerSharing
+        case audioCall
+        case videoCall
+    }
+
+    private var visibleTrailingButtons: [TrailingButton] {
+        guard !viewModel.isBlocked else { return [] }
+        var buttons: [TrailingButton] = []
+        if viewModel.hasPeerSharing { buttons.append(.peerSharing) }
+        buttons.append(.audioCall)
+        if !viewModel.isAccountSip { buttons.append(.videoCall) }
+        return buttons
+    }
+
+    private var titleMaxWidth: CGFloat {
+        ConversationNavBarLayout.titleMaxWidth(
+            barContentWidth: viewModel.navBarContentWidth,
+            trailingButtonCount: visibleTrailingButtons.count,
+            isPad: UIDevice.current.userInterfaceIdiom == .pad
+        )
+    }
+
     var body: some View {
         MessagesListView(model: viewModel.swiftUIModel)
             .onPreferenceChange(MessagePanelTopPreferenceKey.self) { value in
@@ -59,9 +82,10 @@ struct ConversationContainerView: View {
     }
 
     private var titleViewContent: some View {
-        HStack(spacing: 8) {
+        HStack(spacing: ConversationNavBarLayout.avatarSpacing) {
             AvatarSwiftUIView(source: viewModel.navBarAvatarProvider)
-                .frame(width: 30, height: 30)
+                .frame(width: ConversationNavBarLayout.avatarSize,
+                       height: ConversationNavBarLayout.avatarSize)
 
             VStack(alignment: .leading, spacing: 0) {
                 if !viewModel.name.isEmpty {
@@ -81,22 +105,23 @@ struct ConversationContainerView: View {
                         .truncationMode(.tail)
                 }
             }
-            .frame(maxWidth: 120, alignment: .leading)
+            .frame(maxWidth: titleMaxWidth, alignment: .leading)
         }
     }
 
     // MARK: - Trailing Buttons
 
     @ViewBuilder private var trailingButtons: some View {
+        let buttons = visibleTrailingButtons
         HStack(spacing: 0) {
-            if !viewModel.isBlocked {
-                if viewModel.hasPeerSharing {
-                    peerServicesButton
-                }
+            if buttons.contains(.peerSharing) {
+                peerServicesButton
+            }
+            if buttons.contains(.audioCall) {
                 audioCallButton
-                if !viewModel.isAccountSip {
-                    videoCallButton
-                }
+            }
+            if buttons.contains(.videoCall) {
+                videoCallButton
             }
         }
         .fixedSize(horizontal: true, vertical: false)

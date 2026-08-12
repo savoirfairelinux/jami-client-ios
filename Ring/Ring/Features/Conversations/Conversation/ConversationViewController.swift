@@ -26,6 +26,37 @@ import SwiftUI
 import RxRelay
 import CoreLocation
 import UniformTypeIdentifiers
+import CoreGraphics
+
+enum ConversationNavBarLayout {
+    static let avatarSize: CGFloat = 30
+    static let avatarSpacing: CGFloat = 8
+
+    private static let trailingSpacing: CGFloat = 8
+    private static let backButtonSpacing: CGFloat = 20
+    private static let titleToTrailingSpacing: CGFloat = 40
+    private static let windowControlsInset: CGFloat = 120
+
+    static func trailingButtonsWidth(buttonCount: Int) -> CGFloat {
+        guard buttonCount > 0 else { return 0 }
+        return CGFloat(buttonCount) * NavBarIcon.tapTarget
+            + trailingSpacing * CGFloat(buttonCount - 1)
+    }
+
+    static func titleMaxWidth(barContentWidth: CGFloat,
+                              trailingButtonCount: Int,
+                              isPad: Bool) -> CGFloat {
+        let itemSpacings = backButtonSpacing + titleToTrailingSpacing
+        let avatarBlock = avatarSize + avatarSpacing * 2
+        let available = barContentWidth
+            - (isPad ? windowControlsInset : 0)
+            - NavBarIcon.tapTarget
+            - itemSpacings
+            - avatarBlock
+            - trailingButtonsWidth(buttonCount: trailingButtonCount)
+        return max(0, available)
+    }
+}
 
 enum DocumentPickerMode {
     case picking
@@ -83,6 +114,16 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
         subscribeContextMenuState()
         subscribeLastMessage()
         view.backgroundColor = UIColor.systemBackground
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        guard let navigationBar = navigationController?.navigationBar else { return }
+        let margins = navigationBar.layoutMargins
+        let width = navigationBar.bounds.width - margins.left - margins.right
+        if viewModel.navBarContentWidth != width {
+            viewModel.navBarContentWidth = width
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {

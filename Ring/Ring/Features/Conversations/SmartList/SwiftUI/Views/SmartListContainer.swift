@@ -154,6 +154,8 @@ struct SmartListView: View, StateEmittingView {
         }, label: {
             if let uiImage = UIImage(asset: Asset.phoneBook) {
                 Image(uiImage: uiImage)
+                    .resizable()
+                    .frame(width: NavBarIcon.glyphSize, height: NavBarIcon.glyphSize)
                     .navBarIconStyle()
             }
         })

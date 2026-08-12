@@ -58,6 +58,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
     @Published var navUserName: String = ""
     @Published var isBlocked: Bool = false
     @Published var hasPeerSharing: Bool = false
+    @Published var navBarContentWidth: CGFloat = 0
 
     /// Logger
     private let log = SwiftyBeaver.self
