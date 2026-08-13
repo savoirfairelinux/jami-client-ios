@@ -333,6 +333,7 @@
 "calls.calling" = "Calling…";
 "calls.callingParticipants" = "Calling (%@)";
 "calls.stopCalling" = "Stop calling %@";
+"calls.participantOptions" = "Options for %@";
 "calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "Hi ha una trucada en curs. Voleu unir-vos a la trucada? També us podeu unir a la trucada més tard des de la conversa.";
 "calls.activeCallInConversation" = "Una trucada està en curs.";

@@ -333,6 +333,7 @@
 "calls.calling" = "Soitetaan…";
 "calls.callingParticipants" = " Soitetaan (%@)";
 "calls.stopCalling" = "Lopeta puhelu %@";
+"calls.participantOptions" = "Options for %@";
 "calls.inviting" = "Kutsutaan…";
 "calls.activeCallLabel" = "Puhelu on käynnissä. Haluatko liittyä puheluun? Voit liittyä puheluun myös myöhemmin keskustelusta.";
 "calls.activeCallInConversation" = "Puhelu on meneillään. Haluatko liittyä?";

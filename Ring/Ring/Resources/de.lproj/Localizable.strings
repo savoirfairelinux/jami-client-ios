@@ -333,6 +333,7 @@
 "calls.calling" = "Wird angerufen…";
 "calls.callingParticipants" = "%@ wird angerufen";
 "calls.stopCalling" = "Anruf bei %@ abbrechen";
+"calls.participantOptions" = "Options for %@";
 "calls.inviting" = "Wird eingeladen...";
 "calls.activeCallLabel" = "Ein Anruf läuft. Möchten Sie dem Anruf beitreten? Sie können dem Anruf auch später über die Unterhaltung beitreten.";
 "calls.activeCallInConversation" = "Ein Anruf läuft. Möchten Sie dem Anruf beitreten?";
@@ -682,8 +683,8 @@
 "accessibility.conference.showFullVideo" = "Vollständiges Video anzeigen";
 "accessibility.conference.cropVideo" = "Video zuschneiden";
 "accessibility.conference.localPreview" = "Ihr Video";
-"accessibility.conference.hideLocalPreview" = "Hide your video";
-"accessibility.conference.showLocalPreview" = "Show your video";
+"accessibility.conference.hideLocalPreview" = "Eigenes Video ausblenden";
+"accessibility.conference.showLocalPreview" = "Eigenes Video anzeigen";
 "accessibility.account.tokenQRcode" = "Token-QR-Code";
 
 // Swarm Colors

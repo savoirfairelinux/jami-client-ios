@@ -333,6 +333,7 @@
 "calls.calling" = "Calling…";
 "calls.callingParticipants" = "Calling (%@)";
 "calls.stopCalling" = "Stop calling %@";
+"calls.participantOptions" = "Options for %@";
 "calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "Probíhá hovor. Chcete se k hovoru připojit? K hovoru se můžete připojit také později z konverzace.";
 "calls.activeCallInConversation" = "Probíhá hovor. Chcete se k hovoru připojit?";

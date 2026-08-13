@@ -333,6 +333,7 @@
 "calls.calling" = "Calling…";
 "calls.callingParticipants" = "Calling (%@)";
 "calls.stopCalling" = "Stop calling %@";
+"calls.participantOptions" = "Options for %@";
 "calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "Позив је у току. Желите ли да се придружите позиву? Позиву се можете придружити и касније из разговора.";
 "calls.activeCallInConversation" = "Позив је у току.";

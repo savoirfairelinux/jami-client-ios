@@ -333,6 +333,7 @@
 "calls.calling" = "Helistan…";
 "calls.callingParticipants" = "Helistan (%@)";
 "calls.stopCalling" = "Lõpeta helistamine:%@";
+"calls.participantOptions" = "Options for %@";
 "calls.inviting" = "Saadan kutset…";
 "calls.activeCallLabel" = "Kõne on pooleli. Kas sa soovid sellega liituda? Sa saad temaga ka hiljem liituda vestlusest.";
 "calls.activeCallInConversation" = "Kõne on pooleli. Kas sa soovid sellega liituda?";
@@ -682,8 +683,8 @@
 "accessibility.conference.showFullVideo" = "Näita täiskaadris videot";
 "accessibility.conference.cropVideo" = "Kadreeri videot";
 "accessibility.conference.localPreview" = "Sinu video";
-"accessibility.conference.hideLocalPreview" = "Hide your video";
-"accessibility.conference.showLocalPreview" = "Show your video";
+"accessibility.conference.hideLocalPreview" = "Peida oma videovoog";
+"accessibility.conference.showLocalPreview" = "Näita oma videovoogu";
 "accessibility.account.tokenQRcode" = "Tunnusloa QR-kood";
 
 // Swarm Colors

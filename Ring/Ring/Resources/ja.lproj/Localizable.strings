@@ -333,6 +333,7 @@
 "calls.calling" = "Calling…";
 "calls.callingParticipants" = "Calling (%@)";
 "calls.stopCalling" = "Stop calling %@";
+"calls.participantOptions" = "Options for %@";
 "calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "通話が進行中です。通話に参加しますか？後で会話から通話に参加することもできます。";
 "calls.activeCallInConversation" = "連絡が進んでいる. 連絡に参加したいですか?";

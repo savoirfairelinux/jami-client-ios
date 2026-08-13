@@ -333,6 +333,7 @@
 "calls.calling" = "呼叫中…";
 "calls.callingParticipants" = "正在呼叫（%@）";
 "calls.stopCalling" = "停止呼叫%@";
+"calls.participantOptions" = "Options for %@";
 "calls.inviting" = "邀请中…";
 "calls.activeCallLabel" = "有個通話進行中。你是否要加入該通話？你也可以稍後加入該對話。";
 "calls.activeCallInConversation" = "電話正在進行,你想加入電話嗎?";
@@ -682,8 +683,8 @@
 "accessibility.conference.showFullVideo" = "全屏显示视频";
 "accessibility.conference.cropVideo" = "裁剪视频";
 "accessibility.conference.localPreview" = "您的视频";
-"accessibility.conference.hideLocalPreview" = "Hide your video";
-"accessibility.conference.showLocalPreview" = "Show your video";
+"accessibility.conference.hideLocalPreview" = "隐藏你的视频";
+"accessibility.conference.showLocalPreview" = "显示你的视频";
 "accessibility.account.tokenQRcode" = "二維碼令牌";
 
 // Swarm Colors

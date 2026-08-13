@@ -333,6 +333,7 @@
 "calls.calling" = "Calling…";
 "calls.callingParticipants" = "Calling (%@)";
 "calls.stopCalling" = "Stop calling %@";
+"calls.participantOptions" = "Options for %@";
 "calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "È in corso una chiamata. Vuoi partecipare alla chiamata? Puoi anche partecipare in un secondo momento dalla conversazione.";
 "calls.activeCallInConversation" = "È in corso una chiamata. Vuoi partecipare alla chiamata?";

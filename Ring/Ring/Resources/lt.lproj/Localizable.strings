@@ -333,6 +333,7 @@
 "calls.calling" = "Calling…";
 "calls.callingParticipants" = "Calling (%@)";
 "calls.stopCalling" = "Stop calling %@";
+"calls.participantOptions" = "Options for %@";
 "calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "Vyksta skambutis. Ar norite prisijungti prie skambučio? Prie skambučio taip pat galite prisijungti vėliau iš pokalbio.";
 "calls.activeCallInConversation" = "Vyksta skambutis. Ar norite prisijungti prie skambučio?";

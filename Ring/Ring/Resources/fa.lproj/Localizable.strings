@@ -218,9 +218,9 @@
 // Create Account form
 "createAccount.createAccountFormTitle" = "با جمی هم همراهی کن";
 "createAccount.lookingForUsernameAvailability" = "Checking username availability…";
-"createAccount.invalidUsername" = "Invalid username. Please enter the correct username.";
+"createAccount.invalidUsername" = "نام کاربری نامعتبر است. لطفاً نام کاربری صحیح را وارد کنید.";
 "createAccount.usernameAlreadyTaken" = "نام کاربری قبلا گرفته شده است";
-"createAccount.usernameValid" = "The username is available.";
+"createAccount.usernameValid" = "نام کاربری در دسترس است.";
 "createAccount.UsernameNotRegisteredTitle" = "خطای شبکه";
 "createAccount.UsernameNotRegisteredMessage" = "حساب ایجاد شده، اما نام‌کاربری ثبت نشده است";
 "createAccount.timeoutTitle" = "حساب کاربری ایجاد شد";
@@ -236,7 +236,7 @@
 "createAccount.encryptExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
 
 // Link To Account form
-"linkToAccount.importAccount" = "Import account";
+"linkToAccount.importAccount" = "درون‌برد حساب";
 "linkToAccount.showQrCode" = "کد QR";
 "linkToAccount.showPinCode" = "Authentication code";
 "linkToAccount.actionRequired" = "Action required.\nPlease confirm account on the source device.";
@@ -244,7 +244,7 @@
 "linkToAccount.goToAccounts" = "Go to imported account";
 "linkToAccount.exportInstructions" = "On the source device, initiate the exportation.";
 "linkToAccount.exportInstructionsPath" = "Select Account → Account Settings → Link new device.";
-"linkToAccount.scanQrCode" = "When ready, scan the QR code.";
+"linkToAccount.scanQrCode" = "وقتی آماده شدید، کد QR را اسکن کنید.";
 "linkToAccount.enterProvidedCode" = "When ready, enter the authentication code.";
 "linkToAccount.accountLockedWithPassword" = "The account is password protected. To continue, enter the account password.";
 "linkToAccount.exit" = "خروج";
@@ -291,7 +291,7 @@
 "alerts.noLibraryPermissionsTitle" = "دسترسی به کتابخانه تصاویر داده نشده است";
 "alerts.noLocationPermissionsTitle" = "دسترسی به مکان داده نشده است";
 "alerts.errorWrongCredentials" = "An error occurred while connecting to the management server. Please try again. If the problem persists, contact your system administrator.";
-"alerts.recordVideoMessage" = "Record video message";
+"alerts.recordVideoMessage" = "ضبط پیام ویدیویی";
 "alerts.recordAudioMessage" = "ضبط پیام صوتی";
 "alerts.uploadFile" = "ارسال فایل";
 "alerts.uploadPhoto" = "گالری را باز کن";
@@ -333,6 +333,7 @@
 "calls.calling" = "Calling…";
 "calls.callingParticipants" = "Calling (%@)";
 "calls.stopCalling" = "Stop calling %@";
+"calls.participantOptions" = "Options for %@";
 "calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
 "calls.activeCallInConversation" = "يه تماس داره ادامه مده ميخواي به تماس برسي؟";
@@ -412,7 +413,7 @@
 "accountPage.security" = "امنیت";
 "accountPage.enableSRTP" = "امکان تبادل کلید SDES را فراهم کنید";
 "accountPage.encryptNegotiation" = "رمزگذاری مذاکره (TLS)";
-"accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
+"accountPage.registerNameExplanation" = "یک نام کاربری ثبت کنید تا دیگران راحت‌تر شما را در جمی پیدا کنند و با شما در ارتباط باشند.";
 "accountPage.profileHeader" = "نمایه";
 "accountPage.profileNameNotSelected" = "Name not selected";
 "accountPage.accountHeader" = "حساب";
@@ -422,7 +423,7 @@
 "accountPage.manageAccount" = "مدیرت حساب";
 "accountPage.encryptAccount" = "گذرواژه";
 "accountPage.passwordExplanation" = "حساب Jami شما تنها روی این دستگاه به‌صورت آرشیوی حاوی کلیدهای حساب شما ثبت شده است. دسترسی به این آرشیو می‌تواند با گذرواژه محافظت شود.";
-"accountPage.passwordsDoNotMatch" = "Passwords do not match.";
+"accountPage.passwordsDoNotMatch" = "گذرواژه‌ها یکسان نیستند.";
 "accountPage.passwordCreated" = "Password set";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "دستگاه‌های پیوند‌‌داده‌شده";
@@ -504,9 +505,9 @@
 "linkDevice.errorTimeout" = "زمان عملیات به پایان رسید. لطفاً دوباره تلاش کنید.";
 "linkDevice.errorCode" = "An error occurred while generating the code. Please try again.";
 "linkDevice.errorWrongData" = "هنگام صدور حساب خطایی رخ داد. لطفاً دوباره تلاش کنید.";
-"linkDevice.initialInfo" = "On the new device, initiate a new account.";
+"linkDevice.initialInfo" = "روی دستگاه جدید، یک حساب جدید راه‌اندازی کنید.";
 "linkDevice.infoAddAccount" = "Select Add Account → Connect from another device.";
-"linkDevice.infoQRCode" = "When ready, scan the QR code.";
+"linkDevice.infoQRCode" = "وقتی آماده شدید، کد QR را اسکن کنید.";
 "linkDevice.infoCode" = "When ready, enter the code and tap Connect.";
 "linkDevice.connecting" = "Connecting to your new device…";
 "linkDevice.authenticationInfo" = "New device found at the following IP address. Is that you? To continue the export account operation, tap Confirm.";
@@ -640,7 +641,7 @@
 "accessibility.messageBubbleDeleted" = "Message deleted";
 "accessibility.messageBubbleEdited" = "ویرایش شده";
 "accessibility.messageBubbleRead" = "Read";
-"accessibility.messageBubbleUnread" = "Unread";
+"accessibility.messageBubbleUnread" = "خوانده‌نشده";
 "accessibility.textNotAvailable" = "Empty text message received on %@. This might not have been sent correctly.";
 "accessibility.fileTransferNoName" = "File received on %@, name not available";
 "accessibility.inReply" = "In reply to message";

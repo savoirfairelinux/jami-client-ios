@@ -333,6 +333,7 @@
 "calls.calling" = "Calling…";
 "calls.callingParticipants" = "Calling (%@)";
 "calls.stopCalling" = "Stop calling %@";
+"calls.participantOptions" = "Options for %@";
 "calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "통화가 진행 중입니다. 통화에 참여하시겠습니까? 나중에 대화에서 통화에 참여할 수도 있습니다.";
 "calls.activeCallInConversation" = "통화가 진행 중입니다. 통화에 참가하시겠습니까?";

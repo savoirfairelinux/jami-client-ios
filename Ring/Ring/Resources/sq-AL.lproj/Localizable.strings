@@ -333,6 +333,7 @@
 "calls.calling" = "Calling…";
 "calls.callingParticipants" = "Calling (%@)";
 "calls.stopCalling" = "Stop calling %@";
+"calls.participantOptions" = "Options for %@";
 "calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "Ka në kryerje e sipër një thirrje. Doni të merrni pjesë te thirrja? Te thirrja mund të merrni pjesë më vonë, që nga biseda.";
 "calls.activeCallInConversation" = "Ka një thirrje në zhvillim e sipër. Doni të merrni pjesë në thirrje?";

@@ -333,6 +333,7 @@
 "calls.calling" = "Calling…";
 "calls.callingParticipants" = "Calling (%@)";
 "calls.stopCalling" = "Stop calling %@";
+"calls.participantOptions" = "Options for %@";
 "calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "Триває виклик. Бажаєте приєднатися до виклику? Ви також можете приєднатися до виклику пізніше з розмови.";
 "calls.activeCallInConversation" = "Зовсім не так.";

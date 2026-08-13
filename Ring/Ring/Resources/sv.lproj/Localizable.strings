@@ -333,6 +333,7 @@
 "calls.calling" = "Calling…";
 "calls.callingParticipants" = "Calling (%@)";
 "calls.stopCalling" = "Stop calling %@";
+"calls.participantOptions" = "Options for %@";
 "calls.inviting" = "Inviting…";
 "calls.activeCallLabel" = "Ett samtal pågår. Vill du gå med i samtalet? Du kan också gå med i samtalet senare från konversationen.";
 "calls.activeCallInConversation" = "Samtal pågår - Vill du gå med?";
