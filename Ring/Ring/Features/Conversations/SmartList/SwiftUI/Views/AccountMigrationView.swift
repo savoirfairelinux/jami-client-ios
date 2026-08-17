@@ -105,7 +105,7 @@ struct AccountMigrationView: View {
                         .font(.footnote)
                         .multilineTextAlignment(.leading)
                         .truncationMode(.middle)
-                        .conditionalTextSelection()
+                        .textSelection(.enabled)
                 }
             }
         }

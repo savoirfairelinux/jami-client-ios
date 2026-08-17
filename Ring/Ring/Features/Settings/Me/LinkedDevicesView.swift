@@ -85,7 +85,7 @@ struct LinkedDevicesView: View {
                 if let name = device.deviceName {
                     if editingDevice != device.deviceId {
                         Text(name)
-                            .conditionalTextSelection()
+                            .textSelection(.enabled)
                     } else {
                         FocusableTextField(text: $deviceName, isFirstResponder: $isFocused)
                             .accessibilityAutoFocusOnAppear()
@@ -96,7 +96,7 @@ struct LinkedDevicesView: View {
                     .foregroundColor(Color(UIColor.secondaryLabel))
                     .lineLimit(1)
                     .accessibilityHidden(true)
-                    .conditionalTextSelection()
+                    .textSelection(.enabled)
             }
             Spacer()
             if !device.isCurrent {
@@ -134,7 +134,7 @@ struct LinkedDevicesView: View {
                 .cornerRadius(10)
         })
         .listRowBackground(Color.clear)
-        .optionalRowSeparator(hidden: true)
+        .listRowSeparator(.hidden)
         .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
         .listRowBackground(Color.clear)
     }

@@ -12,7 +12,7 @@ This repository contains the iOS client implementation of Jami.
 ## Build instructions
 
 Supported archs are: arm64 for iPhoneOS and arm64, x86_64 for iPhoneSimulator
-Minimum supported version is: 14.5
+Minimum supported version is: 15.0
 
 ### Standalone (recommended)
 

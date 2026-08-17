@@ -1072,38 +1072,21 @@ extension NotificationService {
     }
 
     private func configureCallActions(notification: LocalNotification, calls: [ActiveCall], info: inout [AnyHashable: Any]) {
-        let acceptVideoAction: UNNotificationAction
-        let acceptAudioAction: UNNotificationAction
+        let acceptVideoAction = UNNotificationAction(
+            identifier: Constants.NotificationAction.acceptVideo.rawValue,
+            title: Constants.NotificationActionTitle.acceptWithVideo.toString(),
+            options: [.foreground, .authenticationRequired],
+            icon: UNNotificationActionIcon(systemImageName: Constants.NotificationActionIcon.video.rawValue)
+        )
 
-        if #available(iOS 15.0, *) {
-            acceptVideoAction = UNNotificationAction(
-                identifier: Constants.NotificationAction.acceptVideo.rawValue,
-                title: Constants.NotificationActionTitle.acceptWithVideo.toString(),
-                options: [.foreground, .authenticationRequired],
-                icon: UNNotificationActionIcon(systemImageName: Constants.NotificationActionIcon.video.rawValue)
-            )
+        let acceptAudioAction = UNNotificationAction(
+            identifier: Constants.NotificationAction.acceptAudio.rawValue,
+            title: Constants.NotificationActionTitle.acceptWithAudio.toString(),
+            options: [.foreground, .authenticationRequired],
+            icon: UNNotificationActionIcon(systemImageName: Constants.NotificationActionIcon.audio.rawValue)
+        )
 
-            acceptAudioAction = UNNotificationAction(
-                identifier: Constants.NotificationAction.acceptAudio.rawValue,
-                title: Constants.NotificationActionTitle.acceptWithAudio.toString(),
-                options: [.foreground, .authenticationRequired],
-                icon: UNNotificationActionIcon(systemImageName: Constants.NotificationActionIcon.audio.rawValue)
-            )
-
-            notification.content.interruptionLevel = .timeSensitive
-        } else {
-            acceptVideoAction = UNNotificationAction(
-                identifier: Constants.NotificationAction.acceptVideo.rawValue,
-                title: Constants.NotificationActionTitle.acceptWithVideo.toString(),
-                options: [.foreground, .authenticationRequired]
-            )
-
-            acceptAudioAction = UNNotificationAction(
-                identifier: Constants.NotificationAction.acceptAudio.rawValue,
-                title: Constants.NotificationActionTitle.acceptWithAudio.toString(),
-                options: [.foreground, .authenticationRequired]
-            )
-        }
+        notification.content.interruptionLevel = .timeSensitive
 
         let callCategory = UNNotificationCategory(
             identifier: Constants.NotificationCategory.call.rawValue,

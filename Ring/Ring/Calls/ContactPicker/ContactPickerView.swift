@@ -37,12 +37,7 @@ struct ContactPickerView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                VStack(spacing: 0) {
-                    if #unavailable(iOS 15) {
-                        legacySearchBar
-                    }
-                    contentList
-                }
+                contentList
 
                 if viewModel.isLoading {
                     loadingOverlay
@@ -50,7 +45,11 @@ struct ContactPickerView: View {
             }
             .background(Color(.systemBackground))
             .navigationBarTitleDisplayMode(.inline)
-            .applySearchable(text: $viewModel.searchText)
+            .searchable(
+                text: $viewModel.searchText,
+                prompt: L10n.Smartlist.searchBarPlaceholder
+            )
+            .autocorrectionDisabled()
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button(L10n.Global.cancel) {
@@ -73,25 +72,6 @@ struct ContactPickerView: View {
         .navigationViewStyle(.stack)
         .accentColor(.jami)
         .onDisappear { onDismissed?() }
-    }
-
-    // MARK: - Legacy Search Bar (iOS 14)
-
-    private var legacySearchBar: some View {
-        HStack {
-            Image(systemName: "magnifyingglass")
-                .foregroundColor(Color(.tertiaryLabel))
-            TextField(L10n.Smartlist.searchBarPlaceholder, text: $viewModel.searchText)
-                .autocapitalization(.none)
-                .disableAutocorrection(true)
-        }
-        .padding(.horizontal)
-        .padding(.vertical, 8)
-        .background(Capsule().fill(Color(.secondarySystemBackground)))
-        .overlay(
-            Capsule().stroke(Color(.quaternaryLabel), lineWidth: 1)
-        )
-        .padding()
     }
 
     private var loadingOverlay: some View {
@@ -325,18 +305,5 @@ private extension View {
             .buttonStyle(.plain)
             .listRowInsets(EdgeInsets(top: 4, leading: 16, bottom: 4, trailing: 16))
             .hideRowSeparator()
-    }
-
-    @ViewBuilder
-    func applySearchable(text: Binding<String>) -> some View {
-        if #available(iOS 15.0, *) {
-            self.searchable(
-                text: text,
-                prompt: L10n.Smartlist.searchBarPlaceholder
-            )
-            .autocorrectionDisabled()
-        } else {
-            self
-        }
     }
 }

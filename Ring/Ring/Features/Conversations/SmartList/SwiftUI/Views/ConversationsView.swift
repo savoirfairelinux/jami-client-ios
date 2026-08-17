@@ -28,35 +28,19 @@ struct SwipeActionsModifier: ViewModifier {
     func body(content: Content) -> some View {
         let actions = ConversationDestructiveAction.availableActions(for: conversation.conversation)
 
-        return Group {
-            if #available(iOS 15.0, *) {
-                content
-                    .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                        ForEach(actions) { action in
-                            Button {
-                                activeAction = action
-                            } label: {
-                                Label(action.swipeActionTitle(for: conversation.conversation),
-                                      systemImage: action.icon(for: conversation.conversation))
-                            }
-                            .tint(tint(for: action))
-                        }
+        return content
+            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                ForEach(actions) { action in
+                    Button {
+                        activeAction = action
+                    } label: {
+                        Label(action.swipeActionTitle(for: conversation.conversation),
+                              systemImage: action.icon(for: conversation.conversation))
                     }
-            } else {
-                content
-                    .contextMenu {
-                        ForEach(actions) { action in
-                            Button {
-                                activeAction = action
-                            } label: {
-                                Label(action.title(for: conversation.conversation),
-                                      systemImage: action.icon(for: conversation.conversation))
-                            }
-                        }
-                    }
+                    .tint(tint(for: action))
+                }
             }
-        }
-        .alert(item: $activeAction, content: alertForAction)
+            .alert(item: $activeAction, content: alertForAction)
     }
 
     private func tint(for action: ConversationDestructiveAction) -> Color {

@@ -36,29 +36,28 @@ enum MessageMarkdown {
         let strippedFallback = MessageMarkdownPlainText.display(from: content, isRenderable: isRenderable)
         let hasBlockSyntax = MessageMarkdownSupport.requiresFullSyntax(in: content)
         // Supported bubble markdown is intentionally small:
-        // - inline markdown renders rich on iOS 15+
+        // - inline markdown renders rich
         // - block markdown is stripped to plain text
         // - plain non-markdown URLs are linked separately
         // SwiftUI Text(AttributedString) does not preserve block layout well enough here, and
         // linking URLs after block stripping requires fragile source-to-display range mapping.
-        if #available(iOS 15.0, *), !hasBlockSyntax {
+        if !hasBlockSyntax {
             if let markdown = attributedString(
                 from: content,
                 linkColor: linkColor,
                 baseFont: baseFont,
                 isRenderable: isRenderable
             ) {
-                return .rich(markdown, fallbackPlain: strippedFallback)
+                return .rich(markdown)
             }
             if hasInlineLinks,
                let linked = attributedStringWithInlineLinks(from: content, linkColor: linkColor) {
-                return .rich(linked, fallbackPlain: content)
+                return .rich(linked)
             }
         }
         return .plain(strippedFallback)
     }
 
-    @available(iOS 15.0, *)
     static func attributedStringWithInlineLinks(
         from content: String,
         linkColor: Color
@@ -82,7 +81,6 @@ enum MessageMarkdown {
         return appliedLink ? attributedString : nil
     }
 
-    @available(iOS 15.0, *)
     static func attributedString(
         from markdown: String,
         linkColor: Color,
@@ -96,7 +94,6 @@ enum MessageMarkdown {
         )
     }
 
-    @available(iOS 15.0, *)
     static func attributedString(
         from markdown: String,
         linkColor: Color,
@@ -122,7 +119,6 @@ enum MessageMarkdown {
         return result
     }
 
-    @available(iOS 15.0, *)
     private static func applyBareURLRuns(to attributed: inout AttributedString, linkColor: Color) {
         let text = String(attributed.characters)
         for match in MessageMarkdownSupport.allowedLinkMatches(in: text) {
@@ -140,7 +136,6 @@ enum MessageMarkdown {
         }
     }
 
-    @available(iOS 15.0, *)
     private static func isInsideInlineCode(
         in attributed: AttributedString,
         range: Range<AttributedString.Index>
@@ -153,7 +148,6 @@ enum MessageMarkdown {
         return false
     }
 
-    @available(iOS 15.0, *)
     private static func rangesOverlap(
         _ lhs: Range<AttributedString.Index>,
         _ rhs: Range<AttributedString.Index>
@@ -161,14 +155,12 @@ enum MessageMarkdown {
         lhs.lowerBound < rhs.upperBound && rhs.lowerBound < lhs.upperBound
     }
 
-    @available(iOS 15.0, *)
     private static func applyBaseFont(to attributed: inout AttributedString, baseFont: Font) {
         for run in attributed.runs where run.font == nil {
             attributed[run.range].font = baseFont
         }
     }
 
-    @available(iOS 15.0, *)
     private static func filterDisallowedLinks(in attributed: inout AttributedString) {
         for run in attributed.runs where run.link != nil {
             guard let url = run.link,
@@ -182,7 +174,6 @@ enum MessageMarkdown {
         }
     }
 
-    @available(iOS 15.0, *)
     private static func applyLinkStyle(to attributed: inout AttributedString, linkColor: Color) {
         for run in attributed.runs where run.link != nil {
             attributed[run.range].foregroundColor = linkColor
