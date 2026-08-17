@@ -409,4 +409,13 @@ extension View {
         )
         .clipShape(shape)
     }
+
+    /// White chrome drawn straight onto video with no container to sit in. Two layers, because
+    /// one is not enough: the tight shadow keeps the glyph edges crisp, the wide one darkens the
+    /// ground the glyphs sit on. The wide layer is what carries text over a blown-out highlight,
+    /// and it costs nothing over a dark scene where there is nothing left to darken.
+    func onVideoLegible() -> some View {
+        shadow(color: .black.opacity(0.9), radius: 1.5, y: 0.5)
+            .shadow(color: .black.opacity(0.6), radius: 9)
+    }
 }

@@ -19,10 +19,6 @@ import SwiftUI
 
 struct CallTopActionsView: View {
 
-    private enum Metrics {
-        static let additionalHeaderHorizontalPadding: CGFloat = 6
-    }
-
     @ObservedObject var model: CallViewModel
     let availableWidth: CGFloat
 
@@ -34,11 +30,8 @@ struct CallTopActionsView: View {
         let identityWidth = max(0, availableWidth - 2 * sideLane)
 
         ZStack {
-            CallHeaderView(
-                model: model,
-                horizontalInset: metrics.contentInset
-                    + Metrics.additionalHeaderHorizontalPadding)
-                .onVideoGlass(Capsule())
+            CallHeaderView(model: model, horizontalInset: metrics.contentInset)
+                .onVideoLegible()
                 .frame(maxWidth: identityWidth)
 
             HStack(spacing: 0) {
