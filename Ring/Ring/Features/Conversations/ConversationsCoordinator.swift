@@ -115,7 +115,7 @@ class ConversationsCoordinator: RootCoordinator, StateableResponsive, Conversati
         let viewController = createHostingVC(view)
         viewController.navigationItem.backButtonDisplayMode = .minimal
         self.smartListViewController = viewController
-        self.present(viewController: viewController, withStyle: .replaceNavigationStack, withAnimation: true, withStateable: view.stateEmitter)
+        self.present(viewController: viewController, withStyle: .replaceNavigationStack, withAnimation: false, withStateable: view.stateEmitter)
     }
 
     func subscribeToActiveCalls() {
