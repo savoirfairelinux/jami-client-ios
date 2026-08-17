@@ -18,21 +18,7 @@
 
 import SwiftUI
 
-struct MessageBubbleTextBody {
-    enum Kind {
-        case plain(String)
-        case rich(Any)
-    }
-
-    let kind: Kind
-    let fallbackPlain: String
-
-    static func plain(_ text: String) -> MessageBubbleTextBody {
-        MessageBubbleTextBody(kind: .plain(text), fallbackPlain: text)
-    }
-
-    @available(iOS 15.0, *)
-    static func rich(_ attributed: AttributedString, fallbackPlain: String) -> MessageBubbleTextBody {
-        MessageBubbleTextBody(kind: .rich(attributed), fallbackPlain: fallbackPlain)
-    }
+enum MessageBubbleTextBody {
+    case plain(String)
+    case rich(AttributedString)
 }

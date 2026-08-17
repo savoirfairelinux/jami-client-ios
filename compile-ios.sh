@@ -1,7 +1,7 @@
 #! /bin/sh
 
 export BUILDFORIOS=1
-export MIN_IOS_VERSION=14.5
+export MIN_IOS_VERSION=15.0
 IOS_TARGET_PLATFORM=iPhoneSimulator
 RELEASE=0
 

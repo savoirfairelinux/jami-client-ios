@@ -96,7 +96,7 @@ struct ShareView: View {
                     }
                 }
             }
-            .modifier(SearchableModifier(searchText: $searchText))
+            .searchable(text: $searchText, prompt: L10n.ShareExtension.searchConversations)
             .alert(isPresented: $showUnsupportedAlert) {
                 Alert(
                     title: Text(L10n.ShareExtension.UnsupportedType.title),
@@ -817,36 +817,6 @@ struct ConversationAvatarView: View {
                 size: size
             )
             .transition(.identity)
-        }
-    }
-}
-
-// MARK: - Searchable Modifier
-struct SearchableModifier: ViewModifier {
-    @Binding var searchText: String
-
-    func body(content: Content) -> some View {
-        if #available(iOS 15.0, *) {
-            content
-                .searchable(text: $searchText, prompt: L10n.ShareExtension.searchConversations)
-        } else {
-            VStack(spacing: 0) {
-                HStack {
-                    Image(systemName: "magnifyingglass")
-                        .foregroundColor(Color(.tertiaryLabel))
-                    TextField(L10n.ShareExtension.searchConversations, text: $searchText)
-                }
-                .padding(.horizontal)
-                .padding(.vertical, 8)
-                .background(Capsule().fill(Color(.secondarySystemBackground)))
-                .overlay(
-                    Capsule().stroke(Color(.quaternaryLabel), lineWidth: 1)
-                )
-                .padding()
-
-                content
-                Spacer()
-            }
         }
     }
 }

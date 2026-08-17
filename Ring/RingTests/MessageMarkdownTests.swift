@@ -320,26 +320,22 @@ final class MessageMarkdownTests: XCTestCase {
 
     // MARK: - MessageMarkdown rendering
 
-    @available(iOS 15.0, *)
     func test_attributedString_bold_parses() {
         let result = MessageMarkdown.attributedString(from: Sample.boldInPhraseSentence, linkColor: .blue)
         XCTAssertNotNil(result)
         XCTAssertTrue(String(result!.characters).contains(Sample.text))
     }
 
-    @available(iOS 15.0, *)
     func test_attributedString_plainText_returnsNil() {
         XCTAssertNil(MessageMarkdown.attributedString(from: Sample.phrase, linkColor: .blue))
     }
 
-    @available(iOS 15.0, *)
     func test_attributedString_invalidBold_returnsNil() {
         for input in [Sample.invalidBoldEmpty, Sample.invalidBoldOpen, Sample.invalidBoldDoubled] {
             XCTAssertNil(MessageMarkdown.attributedString(from: input, linkColor: .blue))
         }
     }
 
-    @available(iOS 15.0, *)
     func test_resolveBubbleBody_plainText() {
         let body = MessageMarkdown.resolveBubbleBody(
             content: Sample.text,
@@ -347,13 +343,12 @@ final class MessageMarkdownTests: XCTestCase {
             baseFont: .callout,
             hasInlineLinks: false
         )
-        guard case .plain(let text) = body.kind else {
+        guard case .plain(let text) = body else {
             return XCTFail("Expected plain body")
         }
         XCTAssertEqual(text, Sample.text)
     }
 
-    @available(iOS 15.0, *)
     func test_resolveBubbleBody_markdown_returnsRich() {
         let body = MessageMarkdown.resolveBubbleBody(
             content: Sample.bold,
@@ -361,12 +356,10 @@ final class MessageMarkdownTests: XCTestCase {
             baseFont: .callout,
             hasInlineLinks: false
         )
-        guard case .rich(let storage) = body.kind,
-              let attributed = storage as? AttributedString else {
+        guard case .rich(let attributed) = body else {
             return XCTFail("Expected rich body")
         }
         XCTAssertTrue(String(attributed.characters).contains(Sample.text))
-        XCTAssertEqual(body.fallbackPlain, Sample.text)
     }
 
     func test_normalizedFullMessageURL_www() {
@@ -380,7 +373,6 @@ final class MessageMarkdownTests: XCTestCase {
         XCTAssertNil(MessageMarkdownSupport.normalizedFullMessageURL(from: "javascript:alert(1)"))
     }
 
-    @available(iOS 15.0, *)
     func test_resolveBubbleBody_fencedCodeWithURL_returnsPlainLiteral() {
         let body = MessageMarkdown.resolveBubbleBody(
             content: Sample.fencedCodeWithURL,
@@ -388,14 +380,12 @@ final class MessageMarkdownTests: XCTestCase {
             baseFont: .callout,
             hasInlineLinks: true
         )
-        guard case .plain(let text) = body.kind else {
+        guard case .plain(let text) = body else {
             return XCTFail("Expected plain body for URL inside fenced code")
         }
         XCTAssertEqual(text, Sample.linkURL)
-        XCTAssertEqual(body.fallbackPlain, Sample.linkURL)
     }
 
-    @available(iOS 15.0, *)
     func test_resolveBubbleBody_fencedCodeWithMarkdown_preservesLiterals() {
         let expected = "**\(Sample.text)** [\(Sample.text)](\(Sample.linkURL))"
         let body = MessageMarkdown.resolveBubbleBody(
@@ -404,14 +394,12 @@ final class MessageMarkdownTests: XCTestCase {
             baseFont: .callout,
             hasInlineLinks: false
         )
-        guard case .plain(let text) = body.kind else {
+        guard case .plain(let text) = body else {
             return XCTFail("Expected plain body for fenced code")
         }
         XCTAssertEqual(text, expected)
-        XCTAssertEqual(body.fallbackPlain, expected)
     }
 
-    @available(iOS 15.0, *)
     func test_resolveBubbleBody_blockSyntax_returnsPlainWithNewlines() {
         let cases: [(content: String, expected: String)] = [
             (Sample.orderedListMultiline, "\(Sample.text)\n\(Sample.text)"),
@@ -428,15 +416,13 @@ final class MessageMarkdownTests: XCTestCase {
                 baseFont: .callout,
                 hasInlineLinks: false
             )
-            guard case .plain(let text) = body.kind else {
+            guard case .plain(let text) = body else {
                 return XCTFail("Expected plain body for block syntax: \(testCase.content)")
             }
             XCTAssertEqual(text, testCase.expected, "Content: \(testCase.content)")
-            XCTAssertEqual(body.fallbackPlain, testCase.expected)
         }
     }
 
-    @available(iOS 15.0, *)
     func test_resolveBubbleBody_blockSyntaxWithInlineLink_returnsPlain() {
         let cases: [(content: String, expectedDisplay: String)] = [
             (Sample.blockquoteWithURL, "see \(Sample.linkURL)"),
@@ -450,15 +436,13 @@ final class MessageMarkdownTests: XCTestCase {
                 baseFont: .callout,
                 hasInlineLinks: true
             )
-            guard case .plain(let text) = body.kind else {
+            guard case .plain(let text) = body else {
                 return XCTFail("Expected plain body for block syntax with inline link: \(testCase.content)")
             }
             XCTAssertEqual(text, testCase.expectedDisplay, testCase.content)
-            XCTAssertEqual(body.fallbackPlain, testCase.expectedDisplay, testCase.content)
         }
     }
 
-    @available(iOS 15.0, *)
     func test_resolveBubbleBody_invalidBold_isPlainLiteral() {
         for input in [Sample.invalidBoldEmpty, Sample.invalidBoldOpen, Sample.invalidBoldDoubled] {
             let body = MessageMarkdown.resolveBubbleBody(
@@ -467,15 +451,13 @@ final class MessageMarkdownTests: XCTestCase {
                 baseFont: .callout,
                 hasInlineLinks: false
             )
-            guard case .plain(let text) = body.kind else {
+            guard case .plain(let text) = body else {
                 return XCTFail("Expected plain body for \(input)")
             }
             XCTAssertEqual(text, input)
-            XCTAssertEqual(body.fallbackPlain, input)
         }
     }
 
-    @available(iOS 15.0, *)
     func test_resolveBubbleBody_disallowedMarkdownLink_isPlainLiteral() {
         let body = MessageMarkdown.resolveBubbleBody(
             content: Sample.javascriptLink,
@@ -483,14 +465,12 @@ final class MessageMarkdownTests: XCTestCase {
             baseFont: .callout,
             hasInlineLinks: false
         )
-        guard case .plain(let text) = body.kind else {
+        guard case .plain(let text) = body else {
             return XCTFail("Expected plain body for disallowed markdown link")
         }
         XCTAssertEqual(text, Sample.javascriptLink)
-        XCTAssertEqual(body.fallbackPlain, Sample.javascriptLink)
     }
 
-    @available(iOS 15.0, *)
     func test_attributedString_inlineCodeWithURL_doesNotAutolink() {
         guard let attributed = MessageMarkdown.attributedString(
             from: Sample.inlineCodeWithURL,
@@ -502,7 +482,6 @@ final class MessageMarkdownTests: XCTestCase {
         XCTAssertTrue(attributed.runs.contains { $0.inlinePresentationIntent?.contains(.code) == true })
     }
 
-    @available(iOS 15.0, *)
     func test_attributedString_bareURLOutsideCode_stillAutolinks() {
         guard let attributed = MessageMarkdown.attributedString(
             from: Sample.boldWithBareURL,
@@ -513,7 +492,6 @@ final class MessageMarkdownTests: XCTestCase {
         XCTAssertTrue(attributed.runs.contains { $0.link?.absoluteString == Sample.linkURL })
     }
 
-    @available(iOS 15.0, *)
     func test_resolveBubbleBody_markdownWithBareURL_appliesLink() {
         let body = MessageMarkdown.resolveBubbleBody(
             content: Sample.boldWithBareURL,
@@ -521,8 +499,7 @@ final class MessageMarkdownTests: XCTestCase {
             baseFont: .callout,
             hasInlineLinks: false
         )
-        guard case .rich(let storage) = body.kind,
-              let attributed = storage as? AttributedString else {
+        guard case .rich(let attributed) = body else {
             return XCTFail("Expected rich body")
         }
         XCTAssertTrue(attributed.runs.contains { $0.link?.absoluteString == Sample.linkURL })
@@ -535,7 +512,6 @@ final class MessageMarkdownTests: XCTestCase {
         )
     }
 
-    @available(iOS 15.0, *)
     func test_attributedString_markdownLink_wwwSchemeNormalized() {
         guard let attributed = MessageMarkdown.attributedString(from: Sample.wwwMarkdownLink, linkColor: .blue) else {
             return XCTFail("Expected attributed string for www markdown link")
@@ -550,14 +526,12 @@ final class MessageMarkdownTests: XCTestCase {
         XCTAssertFalse(MessageMarkdownSupport.isAllowedBubbleLinkURL(URL(string: "tel:123")!))
     }
 
-    @available(iOS 15.0, *)
     func test_attributedString_markdownLink_disallowedSchemeReturnsNil() {
         for input in [Sample.javascriptLink, Sample.telLink] {
             XCTAssertNil(MessageMarkdown.attributedString(from: input, linkColor: .blue), input)
         }
     }
 
-    @available(iOS 15.0, *)
     func test_attributedString_markdownLink_httpsSchemeLinked() {
         guard let attributed = MessageMarkdown.attributedString(from: Sample.link, linkColor: .blue) else {
             return XCTFail("Expected attributed string for https markdown link")
@@ -565,7 +539,6 @@ final class MessageMarkdownTests: XCTestCase {
         XCTAssertTrue(attributed.runs.contains { $0.link?.scheme == "https" })
     }
 
-    @available(iOS 15.0, *)
     func test_resolveBubbleBody_prefersInlineLinkWhenNoMarkdown() {
         let context = "\(Sample.phrase) \(Sample.linkURL)"
         let body = MessageMarkdown.resolveBubbleBody(
@@ -574,11 +547,9 @@ final class MessageMarkdownTests: XCTestCase {
             baseFont: .callout,
             hasInlineLinks: true
         )
-        guard case .rich(let storage) = body.kind,
-              let attributed = storage as? AttributedString else {
+        guard case .rich(let attributed) = body else {
             return XCTFail("Expected rich body")
         }
         XCTAssertTrue(attributed.runs.contains { $0.link != nil })
-        XCTAssertEqual(body.fallbackPlain, context)
     }
 }

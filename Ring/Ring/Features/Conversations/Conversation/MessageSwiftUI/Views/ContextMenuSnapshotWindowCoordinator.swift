@@ -87,14 +87,9 @@ struct ContextMenuSnapshotWindowCoordinator: UIViewRepresentable {
     }
 
     private static var currentWindowScene: UIWindowScene? {
-        if #available(iOS 15.0, *) {
-            return UIApplication.shared.connectedScenes
-                .compactMap { $0 as? UIWindowScene }
-                .first { $0.keyWindow != nil }
-        }
-        return UIApplication.shared.connectedScenes
+        UIApplication.shared.connectedScenes
             .compactMap { $0 as? UIWindowScene }
-            .first { $0.activationState == .foregroundActive }
+            .first { $0.keyWindow != nil }
     }
 
     func makeCoordinator() -> Coordinator {
@@ -113,16 +108,10 @@ struct ContextMenuSnapshotWindowCoordinator: UIViewRepresentable {
 }
 
 func captureKeyWindowSnapshot(erasingRect: CGRect? = nil) -> UIImage? {
-    let keyWindow: UIWindow?
-    if #available(iOS 15.0, *) {
-        let scene = UIApplication.shared.connectedScenes
-            .compactMap { $0 as? UIWindowScene }
-            .first { $0.activationState == .foregroundActive }
-        keyWindow = scene?.keyWindow
-    } else {
-        keyWindow = UIApplication.shared.windows.first { $0.isKeyWindow }
-    }
-    guard let window = keyWindow else { return nil }
+    let scene = UIApplication.shared.connectedScenes
+        .compactMap { $0 as? UIWindowScene }
+        .first { $0.activationState == .foregroundActive }
+    guard let window = scene?.keyWindow else { return nil }
     let format = UIGraphicsImageRendererFormat()
     format.scale = 1
     let renderer = UIGraphicsImageRenderer(bounds: window.bounds, format: format)

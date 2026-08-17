@@ -56,16 +56,10 @@ struct LogUI: View {
                 }
                 List {
                     ForEach(model.logEntries) { log in
-                        if #available(iOS 15.0, *) {
-                            Text(log.content)
-                                .font(model.font)
-                                .listRowSeparator(.hidden)
-                                .padding(.vertical, -5)
-                        } else {
-                            Text(log.content)
-                                .font(.footnote)
-                                .padding(.vertical, -5)
-                        }
+                        Text(log.content)
+                            .font(model.font)
+                            .listRowSeparator(.hidden)
+                            .padding(.vertical, -5)
                     }
                     .flipped()
                 }

@@ -50,20 +50,20 @@ struct BlockedContactRowView: View {
                 if !model.profileName.isEmpty {
                     Text(model.profileName)
                         .lineLimit(1)
-                        .conditionalTextSelection()
+                        .textSelection(.enabled)
                         .truncationMode(.middle)
                 }
                 if !model.registeredName.isEmpty {
                     Text(model.registeredName)
                         .font(model.profileName.isEmpty ? .footnote : .body)
                         .lineLimit(1)
-                        .conditionalTextSelection()
+                        .textSelection(.enabled)
                         .truncationMode(.middle)
                 } else {
                     Text(model.id)
                         .font(.footnote)
                         .lineLimit(1)
-                        .conditionalTextSelection()
+                        .textSelection(.enabled)
                         .truncationMode(.middle)
                 }
             }

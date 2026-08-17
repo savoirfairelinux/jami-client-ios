@@ -52,12 +52,11 @@ final class PiPController: NSObject, PiPControlling {
     private var stopCause: StopCause?
 
     var isSupported: Bool {
-        guard #available(iOS 15.0, *) else { return false }
-        return AVPictureInPictureController.isPictureInPictureSupported()
+        AVPictureInPictureController.isPictureInPictureSupported()
     }
 
     func start() {
-        guard #available(iOS 15.0, *), let controller = pipController,
+        guard let controller = pipController,
               !controller.isPictureInPictureActive else { return }
         controller.startPictureInPicture()
     }
@@ -77,7 +76,7 @@ final class PiPController: NSObject, PiPControlling {
     }
 
     func stop() {
-        guard #available(iOS 15.0, *), let controller = pipController else { return }
+        guard let controller = pipController else { return }
         guard controller.isPictureInPictureActive else {
             pipController = nil
             return
@@ -93,7 +92,7 @@ final class PiPController: NSObject, PiPControlling {
     }
 
     private func bindController() {
-        guard #available(iOS 15.0, *), isSupported, pipController == nil else { return }
+        guard isSupported, pipController == nil else { return }
         let contentSource = AVPictureInPictureController.ContentSource(
             sampleBufferDisplayLayer: sourceView.displayLayer, playbackDelegate: self)
         let controller = AVPictureInPictureController(contentSource: contentSource)

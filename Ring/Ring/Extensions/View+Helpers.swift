@@ -159,21 +159,11 @@ extension View {
     }
 }
 
-struct RowSeparatorHiddenModifier: ViewModifier {
-    func body(content: Content) -> some View {
-        if #available(iOS 15.0, *) {
-            content
-                .listRowSeparator(.hidden)
-                .listRowSeparatorTint(.clear)
-        } else {
-            content
-        }
-    }
-}
-
 extension View {
     func hideRowSeparator() -> some View {
-        self.modifier(RowSeparatorHiddenModifier())
+        self
+            .listRowSeparator(.hidden)
+            .listRowSeparatorTint(.clear)
     }
 }
 
@@ -196,22 +186,6 @@ extension Notification {
     }
 }
 
-struct TextSelectionModifier: ViewModifier {
-    func body(content: Content) -> some View {
-        if #available(iOS 15.0, *) {
-            content.textSelection(.enabled)
-        } else {
-            content
-        }
-    }
-}
-
-extension View {
-    func conditionalTextSelection() -> some View {
-        self.modifier(TextSelectionModifier())
-    }
-}
-
 struct OptionalMediumPresentationDetents: ViewModifier {
     @ViewBuilder
     func body(content: Content) -> some View {
@@ -226,25 +200,6 @@ struct OptionalMediumPresentationDetents: ViewModifier {
 extension View {
     func optionalMediumPresentationDetents() -> some View {
         self.modifier(OptionalMediumPresentationDetents())
-    }
-}
-
-struct OptionalRowSeparator: ViewModifier {
-    let hidden: Bool
-
-    func body(content: Content) -> some View {
-        if #available(iOS 15.0, *) {
-            content
-                .listRowSeparator(hidden ? .hidden : .visible)
-        } else {
-            content
-        }
-    }
-}
-
-extension View {
-    func optionalRowSeparator(hidden: Bool) -> some View {
-        self.modifier(OptionalRowSeparator(hidden: hidden))
     }
 }
 
@@ -302,26 +257,12 @@ struct CloseButton: View {
 
 // MARK: - Accessibility
 extension View {
-    // Conditionally applies an accessibility focus modifier on iOS 15+,
-    func accessibilityFocusCompat(_ isFocused: Binding<Bool>) -> some View {
-        if #available(iOS 15, *) {
-            return AnyView(self.modifier(AccessibilityFocusModifier(isFocused: isFocused)))
-        } else {
-            return AnyView(self)
-        }
-    }
-
-    // Automatically apply accessibility focus to view when it appears on iOS 15+.
+    // Automatically apply accessibility focus to view when it appears.
     func accessibilityAutoFocusOnAppear(_ shouldFocus: Bool = true) -> some View {
-        if #available(iOS 15, *) {
-            return AnyView(self.modifier(AccessibilityAutoFocusModifier(shouldFocus: shouldFocus)))
-        } else {
-            return AnyView(self)
-        }
+        self.modifier(AccessibilityAutoFocusModifier(shouldFocus: shouldFocus))
     }
 }
 
-@available(iOS 15, *)
 struct AccessibilityAutoFocusModifier: ViewModifier {
     let shouldFocus: Bool
     @AccessibilityFocusState private var isFocused: Bool
@@ -332,30 +273,6 @@ struct AccessibilityAutoFocusModifier: ViewModifier {
             .onAppear {
                 if shouldFocus {
                     isFocused = true
-                }
-            }
-    }
-}
-
-@available(iOS 15, *)
-private struct AccessibilityFocusModifier: ViewModifier {
-    @Binding var isFocused: Bool
-    @AccessibilityFocusState private var internalFocus: Bool
-
-    func body(content: Content) -> some View {
-        content
-            .accessibilityFocused($internalFocus)
-            .onAppear {
-                internalFocus = isFocused
-            }
-            .onChange(of: internalFocus) { newValue in
-                if isFocused != newValue {
-                    isFocused = newValue
-                }
-            }
-            .onChange(of: isFocused) { newValue in
-                if internalFocus != newValue {
-                    internalFocus = newValue
                 }
             }
     }
