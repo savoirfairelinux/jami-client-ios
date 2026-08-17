@@ -69,13 +69,13 @@ struct CallHeaderView: View {
                 if isTappable {
                     Image(systemName: "chevron.down")
                         .font(.caption2.weight(.semibold))
-                        .foregroundColor(.white.opacity(0.7))
+                        .foregroundColor(.white.opacity(0.8))
                         .accessibilityHidden(true)
                 }
             }
             Text(model.statusLine)
                 .font(.footnote.monospacedDigit())
-                .foregroundColor(.white.opacity(0.8))
+                .foregroundColor(.white.opacity(0.9))
                 .lineLimit(1)
         }
         .padding(.horizontal, horizontalInset)
