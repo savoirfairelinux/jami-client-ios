@@ -186,6 +186,7 @@ struct ConversationRowView: View {
                 VStack(alignment: .leading) {
                     Text(model.nameWithSuffix)
                         .fontWeight(model.unreadMessages > 0 ? .bold : .regular)
+                        .foregroundColor(.primary)
                         .lineLimit(1)
                     if model.swiftUIModel.isBlocked {
                         Spacer()
@@ -193,6 +194,7 @@ struct ConversationRowView: View {
                         Text(L10n.Swarm.blocked)
                             .italic()
                             .font(.footnote)
+                            .foregroundColor(.secondary)
                             .lineLimit(1)
                     } else if !model.lastMessage.isEmpty {
                         Spacer()
@@ -201,9 +203,11 @@ struct ConversationRowView: View {
                             Text(model.lastMessageDate + " -")
                                 .fontWeight(.regular)
                                 .font(.footnote)
+                                .foregroundColor(.primary)
                                 .lineLimit(1)
                             Text( model.lastMessage)
                                 .font(.footnote)
+                                .foregroundColor(.secondary)
                                 .lineLimit(1)
                         }
                     } else if model.swiftUIModel.isSyncing {
@@ -212,6 +216,7 @@ struct ConversationRowView: View {
                         Text(L10n.Smartlist.inSynchronization)
                             .italic()
                             .font(.footnote)
+                            .foregroundColor(.secondary)
                             .lineLimit(1)
                     }
                 }
