@@ -38,31 +38,32 @@ struct WelcomeView: View, StateEmittingView {
     var verticalSizeClass
 
     var body: some View {
-        ZStack(alignment: .top) {
-            ZStack {
-                Group {
-                    if verticalSizeClass == .compact {
-                        HorizontalView(showImportOptions: $showImportOptions,
-                                       showAdvancedOptions: $showAdvancedOptions,
-                                       model: viewModel,
-                                       stateEmitter: stateEmitter)
-                    } else {
-                        PortraitView(showImportOptions: $showImportOptions,
-                                     showAdvancedOptions: $showAdvancedOptions,
-                                     model: viewModel,
-                                     stateEmitter: stateEmitter)
-                    }
+        ZStack {
+            Group {
+                if verticalSizeClass == .compact {
+                    HorizontalView(showImportOptions: $showImportOptions,
+                                   showAdvancedOptions: $showAdvancedOptions,
+                                   model: viewModel,
+                                   stateEmitter: stateEmitter)
+                } else {
+                    PortraitView(showImportOptions: $showImportOptions,
+                                 showAdvancedOptions: $showAdvancedOptions,
+                                 model: viewModel,
+                                 stateEmitter: stateEmitter)
                 }
-                .padding()
-                alertView()
-                    .ignoresSafeArea()
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            HStack {
-                cancelButton()
-                Spacer()
+            .padding()
+            alertView()
+                .ignoresSafeArea()
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .cancellationAction) {
+                if !notCancelable {
+                    cancelButton()
+                }
             }
-            .padding(.horizontal)
         }
         .applyJamiBackground()
     }
@@ -130,20 +131,15 @@ struct WelcomeView: View, StateEmittingView {
         CustomAlert(content: { AlertFactory.createLoadingView() })
     }
 
-    @ViewBuilder
     func cancelButton() -> some View {
-        if notCancelable {
-            EmptyView()
-        } else {
-            Button(action: { [weak viewModel, weak stateEmitter] in
-                guard let viewModel = viewModel,
-                      let stateEmitter = stateEmitter else { return }
-                viewModel.finish(stateHandler: stateEmitter)
-            }, label: {
-                Text(L10n.Global.cancel)
-                    .foregroundColor(Color.jami)
-            })
-        }
+        Button(action: { [weak viewModel, weak stateEmitter] in
+            guard let viewModel = viewModel,
+                  let stateEmitter = stateEmitter else { return }
+            viewModel.finish(stateHandler: stateEmitter)
+        }, label: {
+            Text(L10n.Global.cancel)
+                .foregroundColor(Color.jami)
+        })
     }
 }
 struct HorizontalView: View {
