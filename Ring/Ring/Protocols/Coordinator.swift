@@ -140,8 +140,6 @@ extension Coordinator {
                 contoller.pushViewController(viewController, animated: animation)
             }
         case .replaceNavigationStack:
-            viewController.modalPresentationStyle = .overFullScreen
-            viewController.modalTransitionStyle = .coverVertical
             if let contoller: UINavigationController = self.rootViewController as? UINavigationController {
                 contoller.setViewControllers([viewController], animated: animation)
             }

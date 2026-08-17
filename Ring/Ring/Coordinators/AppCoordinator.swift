@@ -124,7 +124,7 @@ final class AppCoordinator: Coordinator, StateableResponsive {
                                         profileService: injectionBag.profileService,
                                         onCompletion: nil)
         let viewController = createHostingVC(view)
-        self.present(viewController: viewController, withStyle: .replaceNavigationStack, withAnimation: true, withStateable: view.stateEmitter)
+        self.present(viewController: viewController, withStyle: .replaceNavigationStack, withAnimation: false, withStateable: view.stateEmitter)
     }
 
     func initialLoadingCompleted() {
@@ -164,7 +164,7 @@ final class AppCoordinator: Coordinator, StateableResponsive {
     /// Presents the initial loading interface as the root of the navigation
     func showInitialLoading () {
         let initialLoading = InitialLoadingViewController.instantiate()
-        self.navigationController.setViewControllers([initialLoading], animated: true)
+        self.navigationController.setViewControllers([initialLoading], animated: false)
     }
 
     func showDatabaseError() {
