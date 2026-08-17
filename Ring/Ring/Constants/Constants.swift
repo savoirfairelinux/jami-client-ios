@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2022-2025 Savoir-faire Linux Inc.
+ *  Copyright (C) 2022-2026 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -41,6 +41,7 @@ Capucine Berthet
 Charles-Francis Damedey
 Christophe Villemer
 Cyrille Béraud
+Dorina Mosku
 Eden Abitbol
 Édric Milaret
 Éloi Bail
@@ -111,11 +112,12 @@ Vitalii Nikitchyn
 Vsevolod Ivanov
 Xavier Jouslin de Noray
 Yang Wang
+Zélie Leydert
 Ziwei Wang
 """
 
 let contributorsMedia: String = """
-Charlotte Hoffman
+Charlotte Hoffmann
 Marianne Forget
 """
 

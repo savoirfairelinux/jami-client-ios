@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024-2025 Savoir-faire Linux Inc.
+ * Copyright (C) 2024-2026 Savoir-faire Linux Inc.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@ import RxSwift
 class AboutSwiftUIVM {
     let declarationText = L10n.AboutJami.declaration1 + " [jami.net](https://jami.net) " + L10n.AboutJami.declaration2
     let noWarrantyText = L10n.AboutJami.noWarranty1 + " [GNU General Public License](https://www.gnu.org/licenses/gpl-3.0.html), " + L10n.AboutJami.noWarranty2
-    let mainUrlText = "Copyright © 2015–2025 [Savoir-faire Linux Inc.](https://savoirfairelinux.com)"
+    let mainUrlText = "Copyright © 2015–2026 [Savoir-faire Linux Inc.](https://savoirfairelinux.com)"
     let fullVersion: String = Constants.fullVersion ?? ""
     let contributeLabel: String = L10n.AboutJami.contribute
     let feedbackLabel: String = L10n.AboutJami.feedback
