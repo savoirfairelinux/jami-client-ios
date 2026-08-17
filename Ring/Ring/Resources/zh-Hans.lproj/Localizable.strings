@@ -333,7 +333,7 @@
 "calls.calling" = "呼叫中…";
 "calls.callingParticipants" = "正在呼叫（%@）";
 "calls.stopCalling" = "停止呼叫%@";
-"calls.participantOptions" = "Options for %@";
+"calls.participantOptions" = "%@的选项";
 "calls.inviting" = "邀请中…";
 "calls.activeCallLabel" = "有個通話進行中。你是否要加入該通話？你也可以稍後加入該對話。";
 "calls.activeCallInConversation" = "電話正在進行,你想加入電話嗎?";

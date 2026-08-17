@@ -333,7 +333,7 @@
 "calls.calling" = "Helistan…";
 "calls.callingParticipants" = "Helistan (%@)";
 "calls.stopCalling" = "Lõpeta helistamine:%@";
-"calls.participantOptions" = "Options for %@";
+"calls.participantOptions" = "Valikud: %@";
 "calls.inviting" = "Saadan kutset…";
 "calls.activeCallLabel" = "Kõne on pooleli. Kas sa soovid sellega liituda? Sa saad temaga ka hiljem liituda vestlusest.";
 "calls.activeCallInConversation" = "Kõne on pooleli. Kas sa soovid sellega liituda?";

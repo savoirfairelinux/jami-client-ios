@@ -333,7 +333,7 @@
 "calls.calling" = "Llamando…";
 "calls.callingParticipants" = "Llamando… (%@)";
 "calls.stopCalling" = "Detener llamanda %@";
-"calls.participantOptions" = "Options for %@";
+"calls.participantOptions" = "Opciones para %@";
 "calls.inviting" = "Invitando…";
 "calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
 "calls.activeCallInConversation" = "A call is in progress. Do you want to join the call?";
