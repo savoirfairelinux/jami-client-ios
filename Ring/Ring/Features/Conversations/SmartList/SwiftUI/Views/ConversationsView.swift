@@ -108,7 +108,7 @@ struct ConversationsView: View {
                 })
                 .buttonStyle(.plain)
                 .conditionalSmartListSwipeActions(conversation: conversation, model: model)
-                .listRowInsets(EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15))
+                .listRowInsets(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15))
                 .listRowBackground(Color.clear)
                 .conversationRowSeparator(isFirstRow: conversation.id == model.filteredConversations.first?.id)
             }
@@ -175,7 +175,7 @@ struct ConversationRowView: View {
     @ObservedObject var model: ConversationViewModel
     var withSeparator: Bool = true
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 0) {
             HStack {
                 ZStack(alignment: .bottomTrailing) {
                     AvatarSwiftUIView(source: model.avatarProvider)
@@ -235,6 +235,7 @@ struct ConversationRowView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
                 }
             }
+            .padding(.vertical, 8)
             if withSeparator {
                 Divider()
                     .padding(.leading, Constants.defaultAvatarSize)
