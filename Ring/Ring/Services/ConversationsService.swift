@@ -114,18 +114,15 @@ class ConversationsService {
                         }
                         currentConversations.append(contentsOf: conversationsFromDB)
                         self.sortAndUpdate(conversations: &currentConversations)
-                        // load one message for each swarm conversation
-                        for swarmId in conversationToLoad {
-                            self.loadConversationMessages(conversationId: swarmId, accountId: accountId, from: "", size: 1)
-                        }
+                        self.loadLatestMessages(swarmIds: conversationToLoad, accountId: accountId)
+                        self.scheduleUnreadCounts(for: currentConversations, accountId: accountId)
                     }
                 }, onError: { [weak self] _ in
                     self?.serialOperationQueue.async {
                         guard let self = self else { return }
                         self.conversations.accept(currentConversations)
-                        for swarmId in conversationToLoad {
-                            self.loadConversationMessages(conversationId: swarmId, accountId: accountId, from: "", size: 1)
-                        }
+                        self.loadLatestMessages(swarmIds: conversationToLoad, accountId: accountId)
+                        self.scheduleUnreadCounts(for: currentConversations, accountId: accountId)
                     }
                 })
                 .disposed(by: self.disposeBag)
@@ -203,11 +200,14 @@ class ConversationsService {
         }
         conversation.addParticipantsFromArray(participantsInfo: participantsInfo, accountURI: accountURI)
         conversation.updateLastDisplayedMessage(participantsInfo: participantsInfo)
-        self.updateUnreadMessages(conversation: conversation, accountId: accountId)
     }
 
     private func publishNewConversation(conversationId: String, accountId: String, conversations: inout [ConversationModel]) {
         self.sortAndUpdate(conversations: &conversations)
+
+        if let conversation = conversations.first(where: { $0.id == conversationId }) {
+            self.scheduleUnreadCount(for: conversation, accountId: accountId)
+        }
 
         DispatchQueue.main.async {
             var data = [String: Any]()
@@ -233,6 +233,24 @@ class ConversationsService {
             return lastMessage1.receivedDate > lastMessage2.receivedDate
         })
         self.conversations.accept(sorted)
+    }
+
+    private func loadLatestMessages(swarmIds: [String], accountId: String) {
+        for swarmId in swarmIds {
+            self.loadConversationMessages(conversationId: swarmId, accountId: accountId, from: "", size: 1)
+        }
+    }
+
+    private func scheduleUnreadCounts(for conversations: [ConversationModel], accountId: String) {
+        for conversation in conversations where conversation.isSwarm() {
+            self.scheduleUnreadCount(for: conversation, accountId: accountId)
+        }
+    }
+
+    private func scheduleUnreadCount(for conversation: ConversationModel, accountId: String) {
+        serialOperationQueue.async { [weak self] in
+            self?.updateUnreadMessages(conversation: conversation, accountId: accountId)
+        }
     }
 
     private func updateUnreadMessages(conversation: ConversationModel, accountId: String) {
@@ -441,7 +459,9 @@ class ConversationsService {
                     conversation?.updatePreferences(preferences: prefsInfo)
                 }
                 conversation?.addParticipantsFromArray(participantsInfo: participantsInfo, accountURI: accountURI)
-                self.updateUnreadMessages(conversation: conversation!, accountId: accountId)
+                if let conversation = conversation {
+                    self.scheduleUnreadCount(for: conversation, accountId: accountId)
+                }
                 self.loadConversationMessages(conversationId: conversationId, accountId: accountId, from: "", size: 2)
                 self.sortIfNeeded()
             }
