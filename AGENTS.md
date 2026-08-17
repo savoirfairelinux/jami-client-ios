@@ -1,6 +1,6 @@
 # AGENTS.md
 
-Jami is a secure, distributed (peer-to-peer) messaging and audio/video calling client for iOS. The protocol is handled by a C++ daemon (the `jami-daemon` submodule) that this Swift/UIKit/SwiftUI app drives through an ObjC++ bridge (`DRingAdapter` and the per-domain adapters in `Ring/Ring/Bridging/`). Minimum deployment target: **iOS 14.5**.
+Jami is a secure, distributed (peer-to-peer) messaging and audio/video calling client for iOS. The protocol is handled by a C++ daemon (the `jami-daemon` submodule) that this Swift/UIKit/SwiftUI app drives through an ObjC++ bridge (`DRingAdapter` and the per-domain adapters in `Ring/Ring/Bridging/`). Minimum deployment target: **iOS 15.0**.
 
 ## General rules
 

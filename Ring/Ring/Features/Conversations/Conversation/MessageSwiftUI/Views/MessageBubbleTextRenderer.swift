@@ -18,24 +18,18 @@
 
 import SwiftUI
 
-/// Encapsulates iOS 15 rich-text availability.
 struct MessageBubbleTextRenderer: View {
     let textBody: MessageBubbleTextBody
     let font: Font
 
     var body: some View {
-        switch textBody.kind {
+        switch textBody {
         case .plain(let text):
             Text(text)
                 .font(font)
-        case .rich(let storage):
-            if #available(iOS 15.0, *), let attributed = storage as? AttributedString {
-                Text(attributed)
-                    .font(font)
-            } else {
-                Text(textBody.fallbackPlain)
-                    .font(font)
-            }
+        case .rich(let attributed):
+            Text(attributed)
+                .font(font)
         }
     }
 }

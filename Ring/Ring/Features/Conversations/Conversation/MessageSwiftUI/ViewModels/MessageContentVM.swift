@@ -232,7 +232,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
         return isIncoming ? UIColor.jamiMessageCellReceived : preferencesColor
     }
 
-    /// Plain-text preview for list, reply strip, and iOS 14.5 bubble fallback.
+    /// Plain-text preview for list and reply strip.
     var displayContent: String {
         if let cached = cachedDisplayContent { return cached }
         let value = MessageMarkdown.displayText(from: content)
@@ -243,10 +243,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     /// Rich or stripped bubble body; URL branching stays in the view (full URL / preview card).
     var bubbleTextBody: MessageBubbleTextBody {
         if let cached = cachedBubbleTextBody { return cached }
-        let hasInlineLinks: Bool = {
-            guard #available(iOS 15.0, *), !isFullURL else { return false }
-            return urlInfo.hasInlineLinks
-        }()
+        let hasInlineLinks = !isFullURL && urlInfo.hasInlineLinks
         let body = MessageMarkdown.resolveBubbleBody(
             content: content,
             linkColor: Color(linkColor),

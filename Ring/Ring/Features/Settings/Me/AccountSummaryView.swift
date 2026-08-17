@@ -117,7 +117,7 @@ struct AccountSummaryView: View {
                 .listRowBackground(Color(UIColor.secondarySystemGroupedBackground))
             HStack {
                 Text(model.jamiId)
-                    .conditionalTextSelection()
+                    .textSelection(.enabled)
                     .truncationMode(.middle)
                     .lineLimit(1)
                     .accessibilityHidden(true)
@@ -202,13 +202,13 @@ struct AccountSummaryView: View {
         if model.account.isJams {
             return AnyView(
                 Text(model.registeredName)
-                    .conditionalTextSelection()
+                    .textSelection(.enabled)
             )
         }
         if !model.registeredName.isEmpty && model.registeredName != model.jamiId {
             return AnyView(
                 Text(model.registeredName)
-                    .conditionalTextSelection()
+                    .textSelection(.enabled)
             )
         } else {
             return AnyView(

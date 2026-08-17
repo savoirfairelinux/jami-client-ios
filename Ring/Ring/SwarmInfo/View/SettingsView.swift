@@ -247,24 +247,14 @@ struct SettingsView: View {
         }
     }
 
-    @ViewBuilder
     private func selectableText(_ text: String) -> some View {
-        if #available(iOS 15.0, *) {
-            Text(text)
-                .font(.footnote)
-                .multilineTextAlignment(.trailing)
-                .truncationMode(.middle)
-                .lineLimit(1)
-                .foregroundColor(Color(UIColor.secondaryLabel))
-                .textSelection(.enabled)
-        } else {
-            Text(text)
-                .font(.footnote)
-                .multilineTextAlignment(.trailing)
-                .truncationMode(.middle)
-                .lineLimit(1)
-                .foregroundColor(Color(UIColor.secondaryLabel))
-        }
+        Text(text)
+            .font(.footnote)
+            .multilineTextAlignment(.trailing)
+            .truncationMode(.middle)
+            .lineLimit(1)
+            .foregroundColor(Color(UIColor.secondaryLabel))
+            .textSelection(.enabled)
     }
 }
 

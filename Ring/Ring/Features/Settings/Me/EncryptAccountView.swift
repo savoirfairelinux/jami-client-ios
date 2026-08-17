@@ -88,7 +88,7 @@ struct EncryptAccount: View {
                     .disabled(!model.buttonEnabled)
                     .opacity(model.buttonEnabled ? 1 : 0.5)
                     .listRowBackground(Color.clear)
-                    .optionalRowSeparator(hidden: true)
+                    .listRowSeparator(.hidden)
                     .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                 }
             }
