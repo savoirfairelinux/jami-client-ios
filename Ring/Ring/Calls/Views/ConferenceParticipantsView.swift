@@ -56,6 +56,7 @@ private struct RosterAvatar: View {
 
     var body: some View {
         AvatarSwiftUIView(source: provider, sizeOverride: RosterMetrics.avatar)
+            .accessibilityHidden(true)
     }
 }
 
@@ -119,6 +120,7 @@ struct ConferenceParticipantsView: View {
         HStack(spacing: RosterMetrics.elementSpacing) {
             Text(title)
                 .font(RosterTypography.sectionTitle)
+                .accessibilityAddTraits(.isHeader)
             Spacer()
             accessory()
         }
@@ -158,6 +160,7 @@ struct ConferenceParticipantsView: View {
 
 private struct ParticipantRowView: View, Equatable {
 
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     let row: ConferenceParticipantRow
     @ObservedObject var avatar: AvatarProvider
     let perform: (ConferenceMenuItem) -> Void
@@ -170,12 +173,17 @@ private struct ParticipantRowView: View, Equatable {
         HStack(spacing: RosterMetrics.avatarSpacing) {
             RosterAvatar(provider: avatar)
 
-            Text(displayName)
-                .font(RosterTypography.name)
-                .lineLimit(1)
+            VStack(alignment: .leading, spacing: RosterMetrics.textSpacing) {
+                participantName
+                if dynamicTypeSize.isAccessibilitySize {
+                    statusIcons
+                }
+            }
 
             Spacer(minLength: RosterMetrics.elementSpacing)
-            statusIcons
+            if !dynamicTypeSize.isAccessibilitySize {
+                statusIcons
+            }
             if row.actions.isEmpty {
                 Color.clear
                     .frame(width: RosterMetrics.tapTarget)
@@ -192,6 +200,14 @@ private struct ParticipantRowView: View, Equatable {
         return row.isLocal ? name.withYourselfSuffix() : name
     }
 
+    private var participantName: some View {
+        Text(displayName)
+            .font(RosterTypography.name)
+            .lineLimit(dynamicTypeSize.isAccessibilitySize ? 2 : 1)
+            .accessibilityLabel(displayName)
+            .accessibilityValue(row.accessibilityStatus)
+    }
+
     @ViewBuilder private var statusIcons: some View {
         HStack(spacing: RosterMetrics.elementSpacing) {
             if row.isSpeaking { icon("waveform", .green) }
@@ -201,6 +217,7 @@ private struct ParticipantRowView: View, Equatable {
             if row.isAudioMuted { icon("mic.slash.fill", .red) }
             if row.isVideoMuted { icon("video.slash.fill", .secondary) }
         }
+        .accessibilityHidden(true)
     }
 
     private func icon(_ name: String, _ color: Color) -> some View {
@@ -249,6 +266,7 @@ private struct ParticipantRowView: View, Equatable {
 
 private struct PendingParticipantRowView: View, Equatable {
 
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     let row: PendingParticipantRow
     @ObservedObject var avatar: AvatarProvider
     let cancel: () -> Void
@@ -265,10 +283,13 @@ private struct PendingParticipantRowView: View, Equatable {
             VStack(alignment: .leading, spacing: RosterMetrics.textSpacing) {
                 Text(displayName)
                     .font(RosterTypography.name)
-                    .lineLimit(1)
+                    .lineLimit(dynamicTypeSize.isAccessibilitySize ? 2 : 1)
                 Text(row.progressText)
                     .font(RosterTypography.detail).foregroundColor(.secondary)
             }
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(displayName)
+            .accessibilityValue(row.progressText)
 
             Spacer(minLength: RosterMetrics.elementSpacing)
 

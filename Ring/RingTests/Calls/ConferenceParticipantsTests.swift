@@ -131,6 +131,7 @@ final class ConferenceParticipantsTests: XCTestCase {
     func testStatusFieldsMapFromParticipant() {
         let list = rows(conference([CallTestFixtures.participant(uri: localId),
                                     CallTestFixtures.participant(uri: remoteId,
+                                                                 isModerator: true,
                                                                  handRaised: true,
                                                                  audioLocalMuted: true,
                                                                  videoMuted: true,
@@ -145,6 +146,8 @@ final class ConferenceParticipantsTests: XCTestCase {
                         + "must still read as mute")
         XCTAssertEqual(remote?.isRecording, true)
         XCTAssertEqual(remote?.isSpeaking, true)
+        XCTAssertEqual(remote?.accessibilityStatus,
+                       "Speaking, Hand raised, Moderator, Recording, Microphone muted, Camera off")
     }
 
     func testPendingRowsCarryTheLegToHangUpAndItsProgress() {
@@ -195,6 +198,7 @@ final class ConferenceParticipantsTests: XCTestCase {
         XCTAssertTrue(list.allSatisfy {
             !$0.isAudioMuted && !$0.isVideoMuted && !$0.isRecording
         }, "direct calls do not expose symmetric per-participant status")
+        XCTAssertTrue(list.allSatisfy { $0.accessibilityStatus.isEmpty })
         XCTAssertEqual(list.map(\.actions), [[], []],
                        "there is no conference to moderate")
     }
