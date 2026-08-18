@@ -61,12 +61,12 @@ struct CallHeaderView: View {
                     RecordingIndicator()
                 }
                 Text(header.title)
-                    .font(.body.weight(.medium))
+                    .font(.headline)
                     .foregroundColor(.white)
                     .lineLimit(1)
                     .truncationMode(header.titleIsIdentifier ? .middle : .tail)
                     .layoutPriority(1)
-                if isTappable {
+                if header.showsRoster {
                     Image(systemName: "chevron.down")
                         .font(.caption2.weight(.semibold))
                         .foregroundColor(.white.opacity(0.8))
