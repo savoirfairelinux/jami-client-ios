@@ -24,6 +24,7 @@ private enum RosterMetrics {
     static let avatarSpacing: CGFloat = 12
     static let elementSpacing: CGFloat = 8
     static let textSpacing: CGFloat = 2
+    static let topPadding: CGFloat = 8
     static let verticalPadding: CGFloat = 8
     static let glyph: CGFloat = 24
     static let tapTarget: CGFloat = 44
@@ -102,6 +103,7 @@ struct ConferenceParticipantsView: View {
                     rowSeparator
                 }
             }
+            .padding(.top, RosterMetrics.topPadding)
         }
         .background(Color.jamiCallBackdrop.opacity(0.3).ignoresSafeArea())
     }
@@ -120,6 +122,7 @@ struct ConferenceParticipantsView: View {
             Spacer()
             accessory()
         }
+        .frame(minHeight: RosterMetrics.tapTarget)
         .rosterRowInsets()
     }
 
