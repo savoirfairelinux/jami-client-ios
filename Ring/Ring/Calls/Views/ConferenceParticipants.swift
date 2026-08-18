@@ -31,6 +31,18 @@ struct ConferenceParticipantRow: Identifiable, Equatable {
     let isRecording: Bool
     let isSpeaking: Bool
     let actions: [ConferenceMenuItem]
+
+    var accessibilityStatus: String {
+        var statuses = [String]()
+        if isSpeaking { statuses.append(L10n.Accessibility.Conference.speaking) }
+        if isHandRaised { statuses.append(L10n.Accessibility.Conference.handRaised) }
+        if isModerator { statuses.append(L10n.Accessibility.Conference.moderator) }
+        if isRecording { statuses.append(L10n.Accessibility.Conference.recording) }
+        if isAudioMuted { statuses.append(L10n.Accessibility.Conference.microphoneMuted) }
+        if isVideoMuted { statuses.append(L10n.Accessibility.Conference.cameraOff) }
+        guard !statuses.isEmpty else { return "" }
+        return ListFormatter.localizedString(byJoining: statuses)
+    }
 }
 
 struct PendingParticipantRow: Identifiable, Equatable {
