@@ -192,10 +192,14 @@ internal enum L10n {
       }
     }
     internal enum Conference {
+      /// Camera off
+      internal static let cameraOff = L10n.tr("Localizable", "accessibility.conference.cameraOff", fallback: "Camera off")
       /// Crop video
       internal static let cropVideo = L10n.tr("Localizable", "accessibility.conference.cropVideo", fallback: "Crop video")
       /// End call
       internal static let endCall = L10n.tr("Localizable", "accessibility.conference.endCall", fallback: "End call")
+      /// Hand raised
+      internal static let handRaised = L10n.tr("Localizable", "accessibility.conference.handRaised", fallback: "Hand raised")
       /// Hide your video
       internal static let hideLocalPreview = L10n.tr("Localizable", "accessibility.conference.hideLocalPreview", fallback: "Hide your video")
       /// Your video
@@ -204,10 +208,16 @@ internal enum L10n {
       internal static let lowerHand = L10n.tr("Localizable", "accessibility.conference.lowerHand", fallback: "Lower hand")
       /// Maximize
       internal static let maximize = L10n.tr("Localizable", "accessibility.conference.maximize", fallback: "Maximize")
+      /// Microphone muted
+      internal static let microphoneMuted = L10n.tr("Localizable", "accessibility.conference.microphoneMuted", fallback: "Microphone muted")
       /// Minimize
       internal static let minimize = L10n.tr("Localizable", "accessibility.conference.minimize", fallback: "Minimize")
+      /// Moderator
+      internal static let moderator = L10n.tr("Localizable", "accessibility.conference.moderator", fallback: "Moderator")
       /// Mute audio
       internal static let muteAudio = L10n.tr("Localizable", "accessibility.conference.muteAudio", fallback: "Mute audio")
+      /// Recording
+      internal static let recording = L10n.tr("Localizable", "accessibility.conference.recording", fallback: "Recording")
       /// Set moderator
       internal static let setModerator = L10n.tr("Localizable", "accessibility.conference.setModerator", fallback: "Set moderator")
       /// Show full video
@@ -216,6 +226,8 @@ internal enum L10n {
       internal static let showLocalPreview = L10n.tr("Localizable", "accessibility.conference.showLocalPreview", fallback: "Show your video")
       /// Show participants
       internal static let showParticipants = L10n.tr("Localizable", "accessibility.conference.showParticipants", fallback: "Show participants")
+      /// Speaking
+      internal static let speaking = L10n.tr("Localizable", "accessibility.conference.speaking", fallback: "Speaking")
       /// Unmute audio
       internal static let unmuteAudio = L10n.tr("Localizable", "accessibility.conference.unmuteAudio", fallback: "Unmute audio")
       /// Unset moderator

@@ -16,6 +16,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
+import Foundation
 import XCTest
 @testable import Ring
 
@@ -131,6 +132,7 @@ final class ConferenceParticipantsTests: XCTestCase {
     func testStatusFieldsMapFromParticipant() {
         let list = rows(conference([CallTestFixtures.participant(uri: localId),
                                     CallTestFixtures.participant(uri: remoteId,
+                                                                 isModerator: true,
                                                                  handRaised: true,
                                                                  audioLocalMuted: true,
                                                                  videoMuted: true,
@@ -145,6 +147,16 @@ final class ConferenceParticipantsTests: XCTestCase {
                         + "must still read as mute")
         XCTAssertEqual(remote?.isRecording, true)
         XCTAssertEqual(remote?.isSpeaking, true)
+        let expectedStatuses = [
+            L10n.Accessibility.Conference.speaking,
+            L10n.Accessibility.Conference.handRaised,
+            L10n.Accessibility.Conference.moderator,
+            L10n.Accessibility.Conference.recording,
+            L10n.Accessibility.Conference.microphoneMuted,
+            L10n.Accessibility.Conference.cameraOff
+        ]
+        XCTAssertEqual(remote?.accessibilityStatus,
+                       ListFormatter.localizedString(byJoining: expectedStatuses))
     }
 
     func testPendingRowsCarryTheLegToHangUpAndItsProgress() {
@@ -195,6 +207,7 @@ final class ConferenceParticipantsTests: XCTestCase {
         XCTAssertTrue(list.allSatisfy {
             !$0.isAudioMuted && !$0.isVideoMuted && !$0.isRecording
         }, "direct calls do not expose symmetric per-participant status")
+        XCTAssertTrue(list.allSatisfy { $0.accessibilityStatus.isEmpty })
         XCTAssertEqual(list.map(\.actions), [[], []],
                        "there is no conference to moderate")
     }
