@@ -685,6 +685,8 @@ internal enum L10n {
     }
     /// Recording
     internal static let peerRecording = L10n.tr("Localizable", "calls.peerRecording", fallback: "Recording")
+    /// Raise hand
+    internal static let raiseHand = L10n.tr("Localizable", "calls.raiseHand", fallback: "Raise hand")
     /// Unset moderator
     internal static let removeModerator = L10n.tr("Localizable", "calls.removeModerator", fallback: "Unset moderator")
     /// Ringing…

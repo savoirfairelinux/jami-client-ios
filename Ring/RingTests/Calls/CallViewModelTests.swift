@@ -528,6 +528,36 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
         XCTAssertTrue(model.canAddParticipant)
     }
 
+    func testRaisingOurOwnHandLetsLibJamiResolveTheLocalDevice() async {
+        let harness = await Harness(callHasVideo: true)
+        let model = harness.makeModel(localJamiId: jamiId1)
+        func roster(handRaised: Bool) -> LibJamiCallEvent {
+            let participants = [
+                CallTestFixtures.participant(uri: jamiId1, device: jamiId1,
+                                             handRaised: handRaised),
+                CallTestFixtures.participant(uri: CallTestFixtures.secondaryPeerUri,
+                                             device: CallTestFixtures.secondaryPeerUri)
+            ]
+            return .conferenceInfosUpdated(conferenceId: harness.callId.raw,
+                                           participants: participants)
+        }
+
+        harness.send(roster(handRaised: false))
+        await Harness.wait { model.controlsPlan?.raiseHand != nil }
+
+        model.perform(.toggleRaiseHand)
+        await Harness.wait { !harness.callAPI.moderationCommands.isEmpty }
+        XCTAssertEqual(harness.callAPI.moderationCommands, ["raiseHand:::true"],
+                       "an empty uri and device raise the hand of this device")
+
+        harness.send(roster(handRaised: true))
+        await Harness.wait { model.localHandRaised }
+
+        model.perform(.toggleRaiseHand)
+        await Harness.wait { harness.callAPI.moderationCommands.count == 2 }
+        XCTAssertEqual(harness.callAPI.moderationCommands.last, "raiseHand:::false")
+    }
+
     func testOngoingOneToOneCallListsBothPeople() async {
         let harness = await Harness(callHasVideo: false)
         let model = harness.makeModel(localJamiId: jamiId1)

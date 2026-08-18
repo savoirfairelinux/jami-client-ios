@@ -325,6 +325,7 @@
 "calls.removeModerator" = "Unset moderator";
 "calls.muteAudio" = "Mute microphone";
 "calls.unmuteAudio" = "Unmute microphone";
+"calls.raiseHand" = "Raise hand";
 "calls.lowerHand" = "Lower hand";
 "calls.inThisCall" = "In this call (%@)";
 "calls.participantsInCall" = "%@ in call";

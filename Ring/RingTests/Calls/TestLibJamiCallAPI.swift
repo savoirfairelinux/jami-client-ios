@@ -198,7 +198,7 @@ final class TestLibJamiCallAPI: LibJamiCallAPI, @unchecked Sendable {
 
     func raiseHand(_ participantId: String, conferenceId: String, accountId: String,
                    deviceId: String, raised: Bool) {
-        moderationCommands.append("raiseHand:\(participantId):\(raised)")
+        moderationCommands.append("raiseHand:\(participantId):\(deviceId):\(raised)")
     }
 }
 
