@@ -26,22 +26,29 @@ struct CallTopActionsView: View {
         let plan = model.controlsPlan
         let metrics = BarMetrics(availableWidth: availableWidth, plan: plan)
         let hasSideAction = plan?.pictureInPicture != nil || model.canAddParticipant
+            || plan?.raiseHand != nil
         let sideLane = hasSideAction ? metrics.button + metrics.gap : 0
         let identityWidth = max(0, availableWidth - 2 * sideLane)
 
-        ZStack {
+        ZStack(alignment: .top) {
             CallHeaderView(model: model, horizontalInset: metrics.contentInset)
                 .shadow(color: .black.opacity(0.85), radius: 1.5, y: 0.5)
                 .shadow(color: .black.opacity(0.45), radius: 7)
                 .frame(maxWidth: identityWidth)
+                .frame(height: metrics.button)
 
-            HStack(spacing: 0) {
+            HStack(alignment: .top, spacing: 0) {
                 if let action = plan?.pictureInPicture {
                     topButton(action, metrics: metrics)
                 }
                 Spacer(minLength: 0)
-                if model.canAddParticipant {
-                    addParticipantButton(metrics: metrics)
+                VStack(spacing: metrics.gap) {
+                    if model.canAddParticipant {
+                        addParticipantButton(metrics: metrics)
+                    }
+                    if let action = plan?.raiseHand {
+                        topButton(action, metrics: metrics)
+                    }
                 }
             }
         }

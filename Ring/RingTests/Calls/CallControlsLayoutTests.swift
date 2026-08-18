@@ -24,18 +24,22 @@ final class CallControlsLayoutTests: XCTestCase {
     private func model(mute: Bool = false, videoMute: Bool = false,
                        canToggleMedia: Bool = true, canSwitchCamera: Bool = true,
                        canHold: Bool = false, canResume: Bool = false,
-                       showsDialpad: Bool = false) -> CallControlsModel {
+                       showsDialpad: Bool = false,
+                       showsRaiseHand: Bool = false) -> CallControlsModel {
         CallControlsModel(isAudioMuted: mute, isVideoMuted: videoMute,
                           canToggleMedia: canToggleMedia, canSwitchCamera: canSwitchCamera,
-                          canHold: canHold, canResume: canResume, showsDialpad: showsDialpad)
+                          canHold: canHold, canResume: canResume, showsDialpad: showsDialpad,
+                          showsRaiseHand: showsRaiseHand)
     }
 
     private func plan(_ model: CallControlsModel? = nil,
                       speaker: Bool = false,
-                      canPiP: Bool = true) -> CallControlsLayout.Plan {
+                      canPiP: Bool = true,
+                      handRaised: Bool = false) -> CallControlsLayout.Plan {
         CallControlsLayout.plan(.init(model: model ?? self.model(),
                                       speakerActive: speaker,
-                                      canStartPictureInPicture: canPiP))
+                                      canStartPictureInPicture: canPiP,
+                                      isHandRaised: handRaised))
     }
 
     private func action(_ intent: CallControlIntent,
@@ -47,6 +51,20 @@ final class CallControlsLayoutTests: XCTestCase {
     func testDialpadOnlyForSip() {
         XCTAssertNil(action(.showDialpad, in: plan(model(showsDialpad: false))))
         XCTAssertNotNil(action(.showDialpad, in: plan(model(showsDialpad: true))))
+    }
+
+    func testRaiseHandTracksTheCurrentState() {
+        XCTAssertNil(plan(model(showsRaiseHand: false)).raiseHand)
+
+        let lowered = plan(model(showsRaiseHand: true), handRaised: false).raiseHand
+        XCTAssertEqual(lowered?.accessibilityLabel,
+                       L10n.Accessibility.Calls.Default.raiseHand)
+        XCTAssertEqual(lowered?.style, .normal)
+
+        let raised = plan(model(showsRaiseHand: true), handRaised: true).raiseHand
+        XCTAssertEqual(raised?.accessibilityLabel,
+                       L10n.Accessibility.Calls.Alter.raiseHand)
+        XCTAssertEqual(raised?.style, .active)
     }
 
     func testPictureInPictureGatedByAvailability() {

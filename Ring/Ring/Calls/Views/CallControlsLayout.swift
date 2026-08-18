@@ -27,6 +27,7 @@ enum CallControlIntent: Hashable {
     case toggleHold
     case startPictureInPicture
     case showDialpad
+    case toggleRaiseHand
 }
 
 struct CallControlsModel: Equatable {
@@ -38,6 +39,7 @@ struct CallControlsModel: Equatable {
     let canHold: Bool
     let canResume: Bool
     let showsDialpad: Bool
+    let showsRaiseHand: Bool
 
     init(call: CallState, conference: ConferenceState? = nil, isSipAccount: Bool) {
         let hostedConference = call.mediaOwningHostedConference(in: conference)
@@ -63,10 +65,12 @@ struct CallControlsModel: Equatable {
             self.canResume = canHoldCall && call.status.allows(.resume)
         }
         self.showsDialpad = isSipAccount
+        self.showsRaiseHand = !isSipAccount && conference != nil
     }
 
     init(isAudioMuted: Bool, isVideoMuted: Bool, canToggleMedia: Bool,
-         canSwitchCamera: Bool, canHold: Bool, canResume: Bool, showsDialpad: Bool) {
+         canSwitchCamera: Bool, canHold: Bool, canResume: Bool, showsDialpad: Bool,
+         showsRaiseHand: Bool) {
         self.isAudioMuted = isAudioMuted
         self.isVideoMuted = isVideoMuted
         self.canToggleMedia = canToggleMedia
@@ -74,6 +78,7 @@ struct CallControlsModel: Equatable {
         self.canHold = canHold
         self.canResume = canResume
         self.showsDialpad = showsDialpad
+        self.showsRaiseHand = showsRaiseHand
     }
 }
 
@@ -111,12 +116,14 @@ enum CallControlsLayout {
         let model: CallControlsModel
         let speakerActive: Bool
         let canStartPictureInPicture: Bool
+        let isHandRaised: Bool
     }
 
     struct Plan: Equatable {
         let primary: [ControlAction]
         let supplemental: [ControlAction]
         let pictureInPicture: ControlAction?
+        let raiseHand: ControlAction?
     }
 
     static func plan(_ context: Context) -> Plan {
@@ -159,6 +166,10 @@ enum CallControlsLayout {
                             accessibilityLabel: L10n.Calls.startPictureInPicture)
             : nil
 
+        let raiseHand: ControlAction? = model.showsRaiseHand
+            ? raiseHandAction(isRaised: context.isHandRaised)
+            : nil
+
         let supplemental: [ControlAction]
         if model.showsDialpad {
             let dialpad = ControlAction(
@@ -174,7 +185,17 @@ enum CallControlsLayout {
                        flipCameraAction(isEnabled: model.canToggleMedia
                                             && model.canSwitchCamera), hangUp]
         return Plan(primary: primary, supplemental: supplemental,
-                    pictureInPicture: pictureInPicture)
+                    pictureInPicture: pictureInPicture, raiseHand: raiseHand)
+    }
+
+    private static func raiseHandAction(isRaised: Bool) -> ControlAction {
+        ControlAction(
+            intent: .toggleRaiseHand,
+            systemImage: isRaised ? "hand.raised.fill" : "hand.raised",
+            accessibilityLabel: isRaised
+                ? L10n.Accessibility.Calls.Alter.raiseHand
+                : L10n.Accessibility.Calls.Default.raiseHand,
+            style: isRaised ? .active : .normal)
     }
 
     private static func flipCameraAction(isEnabled: Bool) -> ControlAction {
