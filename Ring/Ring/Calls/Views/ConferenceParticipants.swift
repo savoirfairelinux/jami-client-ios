@@ -65,8 +65,8 @@ enum ConferenceParticipants {
         let local = ConferenceParticipantRow(
             id: ConferenceParticipantInfo.id(uri: localJamiId, device: ""),
             uri: localJamiId, isLocal: true, isModerator: false, isActive: false,
-            isAudioMuted: call.isAudioMuted, isAudioModeratorMuted: false,
-            isVideoMuted: call.isVideoMuted,
+            isAudioMuted: false, isAudioModeratorMuted: false,
+            isVideoMuted: false,
             isHandRaised: false, isRecording: false, isSpeaking: false, actions: [])
         guard !call.peerUri.isEmpty else { return [local] }
         let peer = ConferenceParticipantRow(
@@ -74,7 +74,7 @@ enum ConferenceParticipants {
             uri: call.peerUri, isLocal: false, isModerator: false, isActive: false,
             isAudioMuted: false, isAudioModeratorMuted: false,
             isVideoMuted: false, isHandRaised: false,
-            isRecording: call.peerIsRecording, isSpeaking: false, actions: [])
+            isRecording: false, isSpeaking: false, actions: [])
         return [local, peer]
     }
 

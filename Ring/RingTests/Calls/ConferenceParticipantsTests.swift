@@ -133,11 +133,13 @@ final class ConferenceParticipantsTests: XCTestCase {
                                     CallTestFixtures.participant(uri: remoteId,
                                                                  handRaised: true,
                                                                  audioLocalMuted: true,
+                                                                 videoMuted: true,
                                                                  recording: true,
                                                                  voiceActivity: true)]))
         let remote = row(remoteId, in: list)
         XCTAssertEqual(remote?.isHandRaised, true)
         XCTAssertEqual(remote?.isAudioMuted, true)
+        XCTAssertEqual(remote?.isVideoMuted, true)
         XCTAssertEqual(remote?.isAudioModeratorMuted, false,
                        "their own mute is not a moderator mute — the action "
                         + "must still read as mute")
@@ -180,16 +182,19 @@ final class ConferenceParticipantsTests: XCTestCase {
                        "an invitee has not joined the conference yet")
     }
 
-    func testOneToOneCallIsListedWithoutModeration() {
+    func testOneToOneCallHidesParticipantStatusesWithoutModeration() {
         var call = CallTestFixtures.call(conversationId: nil,
                                          peerUri: remoteId,
                                          status: .current)
-        call.media = [.audio(muted: true)]
+        call.media = [.audio(muted: true), .video(muted: true)]
+        call.peerIsRecording = true
 
         let list = ConferenceParticipants.rows(from: call, localJamiId: localId)
 
         XCTAssertEqual(list.map(\.uri), [localId, remoteId], "we come first")
-        XCTAssertEqual(list.first?.isAudioMuted, true)
+        XCTAssertTrue(list.allSatisfy {
+            !$0.isAudioMuted && !$0.isVideoMuted && !$0.isRecording
+        }, "direct calls do not expose symmetric per-participant status")
         XCTAssertEqual(list.map(\.actions), [[], []],
                        "there is no conference to moderate")
     }
