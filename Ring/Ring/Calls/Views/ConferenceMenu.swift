@@ -24,6 +24,7 @@ enum ConferenceMenuItem: Hashable {
     case maximize
     case setModerator
     case muteAudio
+    case raiseHand
     case lowerHand
 
     var title: String {
@@ -33,6 +34,7 @@ enum ConferenceMenuItem: Hashable {
         case .maximize: return L10n.Calls.maximize
         case .setModerator: return L10n.Calls.setModerator
         case .muteAudio: return L10n.Calls.muteAudio
+        case .raiseHand: return L10n.Calls.raiseHand
         case .lowerHand: return L10n.Calls.lowerHand
         }
     }
@@ -51,9 +53,7 @@ struct ConferenceMenuBuilder {
                           isModeratorMuted: Bool) -> [ConferenceMenuItem] {
         var menu = [ConferenceMenuItem]()
         guard let isActive = isActive else { return menu }
-        if isHandRaised {
-            menu.append(.lowerHand)
-        }
+        menu.append(isHandRaised ? .lowerHand : .raiseHand)
         switch layout {
         case .grid:
             menu.append(.maximize)

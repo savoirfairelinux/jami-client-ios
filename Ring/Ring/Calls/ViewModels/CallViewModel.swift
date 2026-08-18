@@ -71,7 +71,8 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
             CallControlsLayout.plan(
                 .init(model: controls,
                       speakerActive: speakerActive,
-                      canStartPictureInPicture: canStartPictureInPicture))
+                      canStartPictureInPicture: canStartPictureInPicture,
+                      isHandRaised: localHandRaised))
         }
     }
 
@@ -427,6 +428,7 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
         case .toggleHold: toggleHold()
         case .startPictureInPicture: minimizeToPictureInPicture()
         case .showDialpad: showsDialpad = true
+        case .toggleRaiseHand: toggleRaiseHand()
         }
     }
 
@@ -555,6 +557,16 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
             && (conference == nil || canModerateConference)
     }
 
+    var localHandRaised: Bool {
+        participantRows.first { $0.isLocal }?.isHandRaised ?? false
+    }
+
+    private func toggleRaiseHand() {
+        guard let confId = conference?.id else { return }
+        let raised = !localHandRaised
+        Task { await callService.raiseHand("", in: confId, deviceId: "", raised: raised) }
+    }
+
     func showGridLayout() {
         guard let confId = conference?.id else { return }
         Task { await callService.setLayout(.grid, in: confId) }
@@ -614,9 +626,12 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
             case .endCall:
                 await callService.hangUpParticipant(targetUri, in: confId,
                                                     deviceId: info.device)
-            case .lowerHand:
-                await callService.raiseHand(targetUri, in: confId,
-                                            deviceId: info.device, raised: false)
+            case .raiseHand, .lowerHand:
+                let isLocal = info.isLocalParticipant(localJamiId: localJamiId,
+                                                      isHostedLocally: conference.isHost)
+                await callService.raiseHand(isLocal ? "" : targetUri, in: confId,
+                                            deviceId: isLocal ? "" : info.device,
+                                            raised: item == .raiseHand)
             }
         }
     }

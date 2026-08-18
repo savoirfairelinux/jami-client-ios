@@ -40,6 +40,13 @@ final class CallControlsModelTests: XCTestCase {
         CallTestFixtures.conference(media: media, isHost: true, lifecycle: lifecycle)
     }
 
+    func testRaiseHandIsOfferedOnlyForJamiConferences() {
+        let conference = CallTestFixtures.conference(lifecycle: .activeAttached)
+        XCTAssertTrue(call(conference: conference).showsRaiseHand)
+        XCTAssertFalse(call(conference: nil).showsRaiseHand)
+        XCTAssertFalse(call(isSip: true, conference: conference).showsRaiseHand)
+    }
+
     func testMuteStatesReflectLibJamiConfirmedMedia() {
         let model = call(media: [.audio(muted: true), .video(muted: false)])
         XCTAssertTrue(model.isAudioMuted)

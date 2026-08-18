@@ -192,7 +192,7 @@ private struct ParticipantRowView: View, Equatable {
     @ViewBuilder private var statusIcons: some View {
         HStack(spacing: RosterMetrics.elementSpacing) {
             if row.isSpeaking { icon("waveform", .green) }
-            if row.isHandRaised { icon("hand.raised.fill", .yellow) }
+            if row.isHandRaised { icon("hand.raised.fill", .jamiRaiseHand) }
             if row.isModerator { icon("checkmark.shield.fill", .secondary) }
             if row.isRecording { icon("record.circle", .red) }
             if row.isAudioMuted { icon("mic.slash.fill", .red) }
@@ -238,6 +238,7 @@ private struct ParticipantRowView: View, Equatable {
         case .maximize: return "arrow.up.left.and.arrow.down.right"
         case .setModerator: return row.isModerator ? "shield.slash" : "checkmark.shield"
         case .muteAudio: return row.isAudioModeratorMuted ? "mic.fill" : "mic.slash.fill"
+        case .raiseHand: return "hand.raised"
         case .lowerHand: return "hand.raised.slash"
         }
     }

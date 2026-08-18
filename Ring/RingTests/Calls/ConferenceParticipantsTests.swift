@@ -124,8 +124,8 @@ final class ConferenceParticipantsTests: XCTestCase {
             CallTestFixtures.participant(uri: remoteId)
         ], isHost: false))
 
-        XCTAssertEqual(row(localId, in: list)?.actions, [.muteAudio],
-                       "a moderator mute is ours to lift")
+        XCTAssertEqual(row(localId, in: list)?.actions, [.raiseHand, .muteAudio],
+                       "a moderator mute is ours to lift, and our hand is ours to raise")
     }
 
     func testStatusFieldsMapFromParticipant() {
