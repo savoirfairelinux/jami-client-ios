@@ -239,6 +239,9 @@
 		260AE64529C8FD2500D66D5E /* VCardUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260AE64429C8FD2500D66D5E /* VCardUtilsTests.swift */; };
 		260C73F129196B66005C513F /* MessageReplyTargetVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260C73F029196B66005C513F /* MessageReplyTargetVM.swift */; };
 		260C73F329196C6C005C513F /* MessageStackVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260C73F229196C6C005C513F /* MessageStackVM.swift */; };
+		26159D093035EA7100553450 /* libyrs.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26159D083035EA7100553450 /* libyrs.xcframework */; };
+		26159D0C3035EA9700553450 /* libyrs.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26159D083035EA7100553450 /* libyrs.xcframework */; };
+		26159D0F3035EB2A00553450 /* libyrs.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26159D083035EA7100553450 /* libyrs.xcframework */; };
 		2617A1212C493BC5002CFD4A /* AccountsServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2617A1202C493BC5002CFD4A /* AccountsServiceTest.swift */; };
 		2617A1232C493FB7002CFD4A /* MockAccountsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2617A1222C493FB7002CFD4A /* MockAccountsService.swift */; };
 		261A90842F1FF75C00438171 /* libjami-core.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 261A90832F1FF75B00438171 /* libjami-core.xcframework */; };
@@ -841,6 +844,7 @@
 		260AE64429C8FD2500D66D5E /* VCardUtilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCardUtilsTests.swift; sourceTree = "<group>"; };
 		260C73F029196B66005C513F /* MessageReplyTargetVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageReplyTargetVM.swift; sourceTree = "<group>"; };
 		260C73F229196C6C005C513F /* MessageStackVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageStackVM.swift; sourceTree = "<group>"; };
+		26159D083035EA7100553450 /* libyrs.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libyrs.xcframework; path = ../xcframework/libyrs.xcframework; sourceTree = "<group>"; };
 		2617A1202C493BC5002CFD4A /* AccountsServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsServiceTest.swift; sourceTree = "<group>"; };
 		2617A1222C493FB7002CFD4A /* MockAccountsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAccountsService.swift; sourceTree = "<group>"; };
 		261A90832F1FF75B00438171 /* libjami-core.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "libjami-core.xcframework"; path = "../xcframework/libjami-core.xcframework"; sourceTree = "<group>"; };
@@ -1820,6 +1824,7 @@
 				26001CD52D792494009A8E23 /* Reusable.xcframework in Frameworks */,
 				26001C422D78E1A3009A8E23 /* libpj.xcframework in Frameworks */,
 				26001C2E2D78E1A2009A8E23 /* libtls.xcframework in Frameworks */,
+				26159D0F3035EB2A00553450 /* libyrs.xcframework in Frameworks */,
 				26001C462D78E1A3009A8E23 /* libopus.xcframework in Frameworks */,
 				26001CC92D792489009A8E23 /* SQLite.xcframework in Frameworks */,
 				26001C342D78E1A2009A8E23 /* libx264.xcframework in Frameworks */,
@@ -1896,6 +1901,7 @@
 				26001CAC2D78E3E7009A8E23 /* libspeex.xcframework in Frameworks */,
 				26001C7C2D78E3E5009A8E23 /* libgmp.xcframework in Frameworks */,
 				26001C902D78E3E6009A8E23 /* libopus.xcframework in Frameworks */,
+				26159D093035EA7100553450 /* libyrs.xcframework in Frameworks */,
 				26001C9C2D78E3E6009A8E23 /* libpjmedia.xcframework in Frameworks */,
 				26001CA22D78E3E7009A8E23 /* libpjsip-ua.xcframework in Frameworks */,
 				26001CBA2D78E3E8009A8E23 /* libupnp.xcframework in Frameworks */,
@@ -1983,6 +1989,7 @@
 				3D4181872DDE312C001BAD76 /* libgit2.xcframework in Frameworks */,
 				3D4181992DDE3142001BAD76 /* libnatpmp.xcframework in Frameworks */,
 				3D4181772DDE3119001BAD76 /* libavcodec.xcframework in Frameworks */,
+				26159D0C3035EA9700553450 /* libyrs.xcframework in Frameworks */,
 				3D4181D72DDE33E3001BAD76 /* libbz2.tbd in Frameworks */,
 				3D4181CD2DDE3183001BAD76 /* libx264.xcframework in Frameworks */,
 				3D4181D92DDE3448001BAD76 /* libiconv.2.tbd in Frameworks */,
@@ -2034,6 +2041,7 @@
 		02AED8171DD4C4B000F740BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				26159D083035EA7100553450 /* libyrs.xcframework */,
 				261A90832F1FF75B00438171 /* libjami-core.xcframework */,
 				26B4C49A2EDD225400273727 /* libsimdutf.xcframework */,
 				3D417D992DDE2846001BAD76 /* ~libswiftPencilKit.tbd */,
