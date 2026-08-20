@@ -124,7 +124,12 @@ class SwarmInfoVM: ObservableObject {
 
         self.swarmInfo = swarmInfo
         self.conversation = swarmInfo.conversation
-        self.provider = AvatarProvider.from(swarmInfo: swarmInfo, profileService: self.profileService, size: Constants.AvatarSize.conversationInfo80)
+        self.provider = AvatarProvider.from(
+            swarmInfo: swarmInfo,
+            profileService: profileService,
+            size: .conversationInfo106,
+            supportsExpansion: true
+        )
 
         setupBindings()
     }
@@ -140,13 +145,12 @@ class SwarmInfoVM: ObservableObject {
 
     private func setupBindings() {
         Observable.combineLatest(
-            swarmInfo.finalAvatarData,
             swarmInfo.finalTitle.startWith(swarmInfo.finalTitle.value),
             swarmInfo.description.startWith(swarmInfo.description.value),
             swarmInfo.color
         )
         .observe(on: MainScheduler.instance)
-        .subscribe(onNext: { [weak self] (_, newTitle, newDescription, newColor) in
+        .subscribe(onNext: { [weak self] (newTitle, newDescription, newColor) in
             guard let self = self else { return }
 
             if self.title != newTitle {
