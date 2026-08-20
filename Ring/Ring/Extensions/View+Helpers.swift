@@ -220,6 +220,33 @@ extension View {
     func optionalListSectionSpacing(_ spacing: CGFloat) -> some View {
         self.modifier(OptionalListSectionSpacing(spacing: spacing))
     }
+
+    @ViewBuilder
+    func adaptiveInsetGroupedListStyle() -> some View {
+        if #available(iOS 26.0, *) {
+            self.listStyle(.insetGrouped)
+        } else {
+            self.listStyle(.grouped)
+        }
+    }
+
+    @ViewBuilder
+    func optionalFullWidthListSection() -> some View {
+        if #available(iOS 26.0, *) {
+            self.listSectionMargins(.horizontal, 0)
+        } else {
+            self
+        }
+    }
+
+    @ViewBuilder
+    func hidingTopScrollEdgeEffect() -> some View {
+        if #available(iOS 26.0, *) {
+            self.scrollEdgeEffectHidden(true, for: .top)
+        } else {
+            self
+        }
+    }
 }
 
 struct VisualEffect: UIViewRepresentable {
