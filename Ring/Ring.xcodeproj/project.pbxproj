@@ -579,6 +579,7 @@
 		BB91FAAD292EA36200BB41C1 /* EventData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB91FAA9292EA26900BB41C1 /* EventData.swift */; };
 		BBB76E412966062C00A42DF5 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB76E402966062C00A42DF5 /* MapView.swift */; };
 		BBD3D751297B4CA00098DB02 /* SwarmInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD3D750297B4CA00098DB02 /* SwarmInfoView.swift */; };
+		C39ADB74167B420FBFEF18B2 /* ExpandableAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFEB4CB31604F75894DCEE5 /* ExpandableAvatar.swift */; };
 		E8ACE0B8E94AB3DEABA30A1A /* AvatarHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD989EC28085426384411E8 /* AvatarHelpers.swift */; };
 		FB726FE5280249DA8219EDE9 /* PeerSharingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECD5DF711D545048AA5E270 /* PeerSharingViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -1774,6 +1775,7 @@
 		BB91FAA9292EA26900BB41C1 /* EventData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventData.swift; sourceTree = "<group>"; };
 		BBB76E402966062C00A42DF5 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		BBD3D750297B4CA00098DB02 /* SwarmInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwarmInfoView.swift; sourceTree = "<group>"; };
+		FDFEB4CB31604F75894DCEE5 /* ExpandableAvatar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableAvatar.swift; sourceTree = "<group>"; };
 		C760772C22CC601BCEA3449C /* IdentityBackdrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityBackdrop.swift; sourceTree = "<group>"; };
 		DDE8CA20E60048678054756B /* PeerSharingSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerSharingSheet.swift; sourceTree = "<group>"; };
 		EECD5DF711D545048AA5E270 /* PeerSharingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerSharingViewModel.swift; sourceTree = "<group>"; };
@@ -3712,6 +3714,7 @@
 				BB1E8C6E29159DF6005AE1D6 /* MembersList.swift */,
 				BB1E8C7029159DFC005AE1D6 /* SettingsView.swift */,
 				BBD3D750297B4CA00098DB02 /* SwarmInfoView.swift */,
+				FDFEB4CB31604F75894DCEE5 /* ExpandableAvatar.swift */,
 				BB3AB06929316FA0006906BA /* ViewDidLoadModifier.swift */,
 				1DF75AC5296E0C2A0055EA87 /* AddMoreParticipantsInSwarm.swift */,
 			);
@@ -4187,6 +4190,7 @@
 				1DE93595291B119900E426CF /* SwarmCreationViewController.swift in Sources */,
 				26CCEE392F644C8E007856A2 /* MediaViewHelpers.swift in Sources */,
 				BBD3D751297B4CA00098DB02 /* SwarmInfoView.swift in Sources */,
+				C39ADB74167B420FBFEF18B2 /* ExpandableAvatar.swift in Sources */,
 				260AE64329C8F58800D66D5E /* Data+Helpers.swift in Sources */,
 				1A2D189A1F2642C000B2C785 /* NotificationCenter+Ring.swift in Sources */,
 				1DF75AC4296E0A940055EA87 /* View+Helpers.swift in Sources */,

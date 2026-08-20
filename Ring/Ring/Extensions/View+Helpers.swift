@@ -220,6 +220,15 @@ extension View {
     func optionalListSectionSpacing(_ spacing: CGFloat) -> some View {
         self.modifier(OptionalListSectionSpacing(spacing: spacing))
     }
+
+    @ViewBuilder
+    func hidingTopScrollEdgeEffect() -> some View {
+        if #available(iOS 26.0, *) {
+            self.scrollEdgeEffectHidden(true, for: .top)
+        } else {
+            self
+        }
+    }
 }
 
 struct VisualEffect: UIViewRepresentable {
