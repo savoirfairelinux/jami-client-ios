@@ -90,12 +90,17 @@ class AvatarProvider: ObservableObject {
     @Published var overflowCount: Int = 0
     @Published var hasCustomAvatar: Bool = false
     @Published var groupAvatarSnapshot: UIImage?
+    @Published private(set) var expandedAvatar: UIImage?
     let size: Constants.AvatarSize
     let isLocalParticipant: Bool
 
+    private let retainsSourceData: Bool
     private let profileService: ProfilesService
     private let disposeBag = DisposeBag()
     private var snapshotBag = DisposeBag()
+    private var expandedBag = DisposeBag()
+    private var rawAvatarData: Data?
+    private var expandedAvatarPixels: CGFloat = 0
     private var hasReceivedParticipants = false
 
     init(profileService: ProfilesService,
@@ -104,10 +109,12 @@ class AvatarProvider: ObservableObject {
          displayName nameStream: Observable<String>,
          isGroup: Bool,
          waitForFirstAvatar: Bool = false,
-         isLocalParticipant: Bool = false) {
+         isLocalParticipant: Bool = false,
+         retainsSourceData: Bool = false) {
         self.size = size
         self.profileService = profileService
         self.isLocalParticipant = isLocalParticipant
+        self.retainsSourceData = retainsSourceData
         self.isAvatarResolved = !waitForFirstAvatar
         self.subscribeAvatar(observable: avatarStream,
                              resolvesOnFirstEmission: waitForFirstAvatar)
@@ -120,6 +127,7 @@ class AvatarProvider: ObservableObject {
         self.size = size
         self.profileService = profileService
         self.isLocalParticipant = false
+        self.retainsSourceData = false
     }
 
     private func subscribeAvatar(observable: Observable<Data?>,
@@ -128,15 +136,17 @@ class AvatarProvider: ObservableObject {
             .filter { resolvesOnFirstEmission || $0 != nil }
             .distinctUntilChanged()
             .observe(on: ConcurrentDispatchQueueScheduler(qos: .userInitiated))
-            .map { [weak self] data -> UIImage? in
-                guard let self = self, let data = data else { return nil }
+            .map { [weak self] data -> (data: Data?, image: UIImage?) in
+                guard let self = self, let data = data else { return (nil, nil) }
                 let decodeSize = max(self.size.points * 2, Constants.defaultAvatarSize * 2)
-                return self.profileService.getAvatarFor(data, size: decodeSize)
+                return (data, self.profileService.getAvatarFor(data, size: decodeSize))
             }
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] image in
+            .subscribe(onNext: { [weak self] decoded in
                 guard let self = self else { return }
-                self.avatar = image
+                self.rawAvatarData = self.retainsSourceData ? decoded.data : nil
+                self.releaseExpandedAvatar()
+                self.avatar = decoded.image
                 if resolvesOnFirstEmission, !self.isAvatarResolved {
                     self.isAvatarResolved = true
                 }
@@ -153,6 +163,33 @@ class AvatarProvider: ObservableObject {
                 self?.profileName = name
             })
             .disposed(by: disposeBag)
+    }
+
+    var canExpand: Bool { avatar != nil && rawAvatarData != nil }
+
+    func loadExpandedAvatar(maxPixels: CGFloat) {
+        let requested = min(maxPixels, Constants.expandedAvatarMaxPixels)
+        guard requested > expandedAvatarPixels, let data = rawAvatarData else { return }
+        expandedBag = DisposeBag()
+        Observable.just(data)
+            .observe(on: ConcurrentDispatchQueueScheduler(qos: .userInitiated))
+            .map { data -> UIImage? in
+                guard let source = CGImageSourceCreateWithData(data as CFData, nil) else { return nil }
+                return UIImage.createResizedImage(imageSource: source, size: requested)
+            }
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] image in
+                guard let self = self, let image = image else { return }
+                self.expandedAvatarPixels = requested
+                self.expandedAvatar = image
+            })
+            .disposed(by: expandedBag)
+    }
+
+    func releaseExpandedAvatar() {
+        expandedBag = DisposeBag()
+        expandedAvatarPixels = 0
+        expandedAvatar = nil
     }
 
     private func subscribeGroupParticipants(swarmInfo: SwarmInfoProtocol) {
@@ -242,14 +279,18 @@ extension AvatarProvider {
         )
     }
 
-    static func from(swarmInfo: SwarmInfoProtocol, profileService: ProfilesService, size: Constants.AvatarSize) -> AvatarProvider {
+    static func from(swarmInfo: SwarmInfoProtocol,
+                     profileService: ProfilesService,
+                     size: Constants.AvatarSize,
+                     retainsSourceData: Bool = false) -> AvatarProvider {
         let isGroup = !(swarmInfo.conversation?.isCoredialog() ?? false)
         let provider = AvatarProvider(
             profileService: profileService,
             size: size,
             avatar: swarmInfo.finalAvatarData,
             displayName: swarmInfo.finalTitle.asObservable(),
-            isGroup: isGroup
+            isGroup: isGroup,
+            retainsSourceData: retainsSourceData
         )
         if isGroup {
             provider.subscribeGroupParticipants(swarmInfo: swarmInfo)

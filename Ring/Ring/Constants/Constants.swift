@@ -241,6 +241,8 @@ public class Constants: NSObject {
 
     public static let maxProfileImageSize: CGFloat = 512
 
+    public static let expandedAvatarMaxPixels: CGFloat = 2048
+
     enum AvatarSize: CGFloat {
         case conversation20 = 20
         case conversation30 = 30
@@ -249,6 +251,7 @@ public class Constants: NSObject {
         case medium50 = 50
         case default55 = 55
         case conversationInfo80 = 80
+        case conversationInfo96 = 96
         case call160 = 160
         case account100 = 100
         case account60 = 60

@@ -49,13 +49,8 @@ struct SettingsView: View {
 
     // MARK: - Body
     var body: some View {
-        Form {
-            contactSection
-            conversationSection
-        }
-        .alert(item: $presentingAlert) { alert in
-            createAlert(for: alert)
-        }
+        contactSection
+        conversationSection
     }
 
     // MARK: - Contact Section
@@ -136,6 +131,9 @@ struct SettingsView: View {
             swarmTypeView
             colorPickerView
             removeConversationButton
+                .alert(item: $presentingAlert) { alert in
+                    createAlert(for: alert)
+                }
         }
     }
 
