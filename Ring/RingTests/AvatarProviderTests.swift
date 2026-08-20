@@ -99,11 +99,13 @@ final class AvatarProviderTests: XCTestCase {
         swarmInfo.participantsAvatars.accept(participants.compactMap { $0.avatarData.value })
     }
 
-    func createTestImageData() -> Data {
-        let renderer = UIGraphicsImageRenderer(size: CGSize(width: 10, height: 10))
+    func createTestImageData(side: CGFloat = 10) -> Data {
+        let format = UIGraphicsImageRendererFormat.default()
+        format.scale = 1
+        let renderer = UIGraphicsImageRenderer(size: CGSize(width: side, height: side), format: format)
         return renderer.pngData { ctx in
             UIColor.red.setFill()
-            ctx.fill(CGRect(x: 0, y: 0, width: 10, height: 10))
+            ctx.fill(CGRect(x: 0, y: 0, width: side, height: side))
         }
     }
 
@@ -446,5 +448,126 @@ final class AvatarProviderTests: XCTestCase {
         XCTAssertTrue(provider.displayParticipants.isEmpty)
         XCTAssertEqual(provider.overflowCount, 0)
         XCTAssertNotNil(provider.groupAvatarSnapshot)
+    }
+}
+
+extension AvatarProviderTests {
+    // MARK: - Expanded Avatar Lifecycle
+
+    private var sharpSourceSide: CGFloat { 800 }
+
+    private func createExpandableProvider(avatar: Observable<Data?>, retainsSourceData: Bool) -> AvatarProvider {
+        return AvatarProvider(
+            profileService: injectionBag.profileService,
+            size: .conversationInfo106,
+            avatar: avatar,
+            displayName: Observable.just(profileName1),
+            isGroup: false,
+            retainsSourceData: retainsSourceData)
+    }
+
+    private func waitForAvatar(on provider: AvatarProvider) {
+        let decoded = expectation(description: "avatar decoded")
+        provider.$avatar
+            .compactMap { $0 }
+            .first()
+            .sink { _ in decoded.fulfill() }
+            .store(in: &cancellables)
+        wait(for: [decoded], timeout: 2)
+    }
+
+    private func waitForExpandedAvatar(on provider: AvatarProvider) {
+        let decoded = expectation(description: "expanded avatar decoded")
+        provider.$expandedAvatar
+            .compactMap { $0 }
+            .first()
+            .sink { _ in decoded.fulfill() }
+            .store(in: &cancellables)
+        wait(for: [decoded], timeout: 2)
+    }
+
+    private func waitForDecodeAttempt() {
+        let settled = expectation(description: "decode attempt settled")
+        DispatchQueue.global(qos: .userInitiated).async {
+            DispatchQueue.main.async { settled.fulfill() }
+        }
+        wait(for: [settled], timeout: 2)
+    }
+
+    func testExpandedAvatarNotLoadedWhenSourceDataNotRetained() {
+        // Arrange
+        let avatarData = PublishSubject<Data?>()
+        let provider = createExpandableProvider(avatar: avatarData.asObservable(), retainsSourceData: false)
+        avatarData.onNext(createTestImageData(side: sharpSourceSide))
+        waitForAvatar(on: provider)
+        // Assert
+        XCTAssertFalse(provider.canExpand)
+        // Act
+        provider.loadExpandedAvatar(maxPixels: sharpSourceSide)
+        waitForDecodeAttempt()
+        // Assert
+        XCTAssertNil(provider.expandedAvatar)
+    }
+
+    func testExpandedAvatarSkippedWhenSourceIsNotSharperThanDecodedAvatar() {
+        // Arrange — source smaller than the collapsed decode, so it is already fully resolved
+        let avatarData = PublishSubject<Data?>()
+        let provider = createExpandableProvider(avatar: avatarData.asObservable(), retainsSourceData: true)
+        avatarData.onNext(createTestImageData(side: 64))
+        waitForAvatar(on: provider)
+        XCTAssertTrue(provider.canExpand)
+        // Act
+        provider.loadExpandedAvatar(maxPixels: sharpSourceSide)
+        waitForDecodeAttempt()
+        // Assert — the already decoded avatar is used as is
+        XCTAssertNil(provider.expandedAvatar)
+    }
+
+    func testReleaseExpandedAvatarAllowsReload() {
+        // Arrange
+        let avatarData = PublishSubject<Data?>()
+        let provider = createExpandableProvider(avatar: avatarData.asObservable(), retainsSourceData: true)
+        avatarData.onNext(createTestImageData(side: sharpSourceSide))
+        waitForAvatar(on: provider)
+        XCTAssertTrue(provider.canExpand)
+        // Act
+        provider.loadExpandedAvatar(maxPixels: sharpSourceSide)
+        waitForExpandedAvatar(on: provider)
+        // Assert
+        XCTAssertNotNil(provider.expandedAvatar)
+        // Act — screen removed
+        provider.releaseExpandedAvatar()
+        // Assert
+        XCTAssertNil(provider.expandedAvatar)
+        XCTAssertTrue(provider.canExpand)
+        // Act — screen presented again and expanded at the same size
+        provider.loadExpandedAvatar(maxPixels: sharpSourceSide)
+        waitForExpandedAvatar(on: provider)
+        // Assert
+        XCTAssertNotNil(provider.expandedAvatar)
+    }
+
+    func testExpandedAvatarClearedWhenAvatarDataChanges() {
+        // Arrange
+        let avatarData = PublishSubject<Data?>()
+        let provider = createExpandableProvider(avatar: avatarData.asObservable(), retainsSourceData: true)
+        avatarData.onNext(createTestImageData(side: sharpSourceSide))
+        waitForAvatar(on: provider)
+        provider.loadExpandedAvatar(maxPixels: sharpSourceSide)
+        waitForExpandedAvatar(on: provider)
+        let firstAvatar = provider.avatar
+        // Act
+        avatarData.onNext(createTestImageData(side: sharpSourceSide - 100))
+        let replaced = expectation(description: "avatar replaced")
+        provider.$avatar
+            .compactMap { $0 }
+            .filter { $0 !== firstAvatar }
+            .first()
+            .sink { _ in replaced.fulfill() }
+            .store(in: &cancellables)
+        wait(for: [replaced], timeout: 2)
+        // Assert
+        XCTAssertNil(provider.expandedAvatar)
+        XCTAssertTrue(provider.canExpand)
     }
 }

@@ -27,18 +27,16 @@ struct MemberList: View {
 
     // MARK: - Body
     var body: some View {
-        List {
-            Section(header: Text(L10n.Swarm.members)) {
-                ForEach(viewModel.swarmInfo.participants.value, id: \.self) { participant in
-                    MemberItem(
-                        participant: participant,
-                        isInvited: participant.role == .invited,
-                        isLocalParticipant: participant.jamiId == localJamiId
-                    )
-                    .deleteDisabled(participant.role == .admin)
-                }
-                .onDelete(perform: viewModel.isAdmin ? delete : nil)
+        Section(header: Text(L10n.Swarm.members)) {
+            ForEach(viewModel.swarmInfo.participants.value, id: \.self) { participant in
+                MemberItem(
+                    participant: participant,
+                    isInvited: participant.role == .invited,
+                    isLocalParticipant: participant.jamiId == localJamiId
+                )
+                .deleteDisabled(participant.role == .admin)
             }
+            .onDelete(perform: viewModel.isAdmin ? delete : nil)
         }
         .environment(\.editMode, $editMode)
         .onChange(of: viewModel.swarmInfo.participants.value) { _ in

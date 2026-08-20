@@ -48,23 +48,33 @@ public struct SwarmInfoView: View, StateEmittingView {
     enum Layout {
         static let verticalMargin: CGFloat = 10
         static let generalMargin: CGFloat = 20
-        static let avatarSize: CGFloat = 80
-        static let minimizedTopHeight: CGFloat = 50
-        static let topSpacerHeight: CGFloat = 30
         static let callButtonSize: CGFloat = 45
         static let callButtonsMargin: CGFloat = 5
+        static let editPictureButtonSize: CGFloat = 32
+        static let avatarTopGap: CGFloat = 14
+        static let avatarBottomGap: CGFloat = 12
+        static let sectionSpacing: CGFloat = 8
+        static let expandAnimation: Animation = .spring(response: 0.38, dampingFraction: 0.9)
+        static let floatingButtonClearance: CGFloat = 88
     }
 
     // MARK: - Properties
     @ObservedObject var viewModel: SwarmInfoVM
+    @ObservedObject private var screen = ScreenDimensionsManager.shared
     let stateEmitter = ConversationStatePublisher()
+    var onAvatarExpansionChanged: ((Bool) -> Void)?
 
     // MARK: - State
     @SwiftUI.State private var selectedView: SwarmSettingView = .about
     @SwiftUI.State private var showingOptions = false
     @SwiftUI.State private var showingType: PhotoSheetType?
     @SwiftUI.State private var image: UIImage?
-    @SwiftUI.State private var minimizedTopView: Bool = false
+    @SwiftUI.State private var isAvatarExpanded: Bool
+
+    init(viewModel: SwarmInfoVM) {
+        self.viewModel = viewModel
+        self._isAvatarExpanded = SwiftUI.State(initialValue: viewModel.hasPicture)
+    }
 
     // MARK: - Computed Properties
     private var swarmViews: [SwarmSettingView] {
@@ -81,9 +91,36 @@ public struct SwarmInfoView: View, StateEmittingView {
         return views
     }
 
-    private var lightOrDarkColor: Color {
-        let isLight = Color(hex: viewModel.finalColor)?.isLight(threshold: 0.8) ?? true
-        return isLight ? Color.jami : Color.white
+    private var collapsedTopInset: CGFloat {
+        screen.safeAreaInsets.top + Layout.avatarTopGap
+    }
+
+    private var segmentedControlHorizontalPadding: CGFloat {
+        if #available(iOS 26.0, *) {
+            return 0
+        }
+        return Layout.generalMargin
+    }
+
+    private var headerForeground: Color {
+        isAvatarExpanded ? .white : Color(UIColor.label)
+    }
+
+    private var buttonTint: Color {
+        isAvatarExpanded ? .white : Color.jami
+    }
+
+    private var callButtonBackground: Color {
+        isAvatarExpanded ? Color.white.opacity(0.2) : Color(UIColor.secondarySystemGroupedBackground)
+    }
+
+    private var shouldReserveFloatingButtonSpace: Bool {
+        switch selectedView {
+        case .documents:
+            return viewModel.collabDocuments != nil
+        case .about, .memberList:
+            return !(viewModel.conversation?.isCoredialog() ?? true)
+        }
     }
 
     // MARK: - Body
@@ -91,7 +128,7 @@ public struct SwarmInfoView: View, StateEmittingView {
         ZStack(alignment: .bottomTrailing) {
             Color(UIColor.systemGroupedBackground)
             mainContent
-            addParticipantsButton
+            floatingActionButton
             documentNamePrompt
             if viewModel.isShowingTitleAlert {
                 editTitleAlert()
@@ -100,106 +137,77 @@ public struct SwarmInfoView: View, StateEmittingView {
                 editDescriptionAlert()
             }
         }
-        .onReceive(orientationPublisher) { _ in
-            minimizedTopView = shouldMinimizeTop()
+        .onChange(of: isAvatarExpanded) { expanded in
+            onAvatarExpansionChanged?(expanded)
         }
         .onAppear {
-            minimizedTopView = shouldMinimizeTop()
+            setAvatarExpanded(viewModel.hasPicture, providesFeedback: false)
+            onAvatarExpansionChanged?(viewModel.hasPicture)
+        }
+        .onChange(of: viewModel.hasPicture) { hasPicture in
+            setAvatarExpanded(hasPicture, providesFeedback: false)
+        }
+        .onDisappear {
+            setAvatarExpanded(false)
+            viewModel.provider.releaseExpandedAvatar()
         }
         .ignoresSafeArea(edges: [.top, .leading, .trailing])
     }
 
     // MARK: - Main Content Components
 
-    @ViewBuilder private var mainContent: some View {
-        VStack(spacing: 0) {
+    private var mainContent: some View {
+        List {
             topArea
-            segmentedControl
+            segmentedControlSection
             contentArea
         }
-    }
-
-    @ViewBuilder private var topArea: some View {
-        if minimizedTopView {
-            minimizedTopBar
-        } else {
-            fullTopArea
+        .adaptiveInsetGroupedListStyle()
+        .optionalListSectionSpacing(Layout.sectionSpacing)
+        .hidingTopScrollEdgeEffect()
+        .ignoresSafeArea(edges: [.top, .leading, .trailing])
+        .safeAreaInset(edge: .bottom) {
+            floatingButtonClearance
         }
     }
 
-    private var minimizedTopBar: some View {
-        Color(hex: viewModel.finalColor)
-            .frame(height: Layout.minimizedTopHeight)
-            .ignoresSafeArea(edges: [.top, .leading, .trailing])
+    private var topArea: some View {
+        Section {
+            fullTopArea
+                .listRowInsets(EdgeInsets())
+                .listRowBackground(Color.clear)
+                .listRowSeparator(.hidden)
+        }
+        .optionalFullWidthListSection()
+    }
+
+    private func setAvatarExpanded(_ expanded: Bool, providesFeedback: Bool = true) {
+        if expanded {
+            viewModel.provider.loadExpandedAvatar(maxPixels: ExpandedAvatarMetrics.decodePixels)
+        }
+        guard expanded != isAvatarExpanded else { return }
+        if expanded {
+            if providesFeedback {
+                UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
+            }
+        }
+        withAnimation(Layout.expandAnimation) {
+            isAvatarExpanded = expanded
+        }
     }
 
     private var fullTopArea: some View {
-        HStack {
-            Spacer()
-            VStack(spacing: Layout.generalMargin) {
-                Spacer().frame(height: Layout.topSpacerHeight)
-                avatarView
-                titleView
-                descriptionView
-                if viewModel.getContactJamiId() != nil {
-                    callButtons
-                }
+        VStack(spacing: Layout.avatarBottomGap) {
+            avatarView
+            if !isAvatarExpanded {
+                infoStack
+                    .padding(.horizontal, Layout.generalMargin)
+                    .transition(.opacity)
             }
-            Spacer()
         }
-        .padding(Layout.generalMargin)
-        .ignoresSafeArea(edges: [.top, .leading, .trailing])
-        .background(Color(hex: viewModel.finalColor))
-    }
-
-    private var callButtons: some View {
-        HStack(spacing: Layout.generalMargin) {
-            Spacer()
-
-            callButton(
-                systemName: "phone",
-                action: placeAudioCall,
-                accessibilityLabel: L10n.Accessibility.conversationStartVoiceCall(viewModel.getContactDisplayName())
-            )
-
-            callButton(
-                systemName: "video",
-                action: placeVideoCall,
-                accessibilityLabel: L10n.Accessibility.conversationStartVideoCall(viewModel.getContactDisplayName())
-            )
-
-            Spacer()
-        }
-        .padding(.vertical, Layout.callButtonsMargin)
-    }
-
-    private func callButton(systemName: String, action: @escaping () -> Void, accessibilityLabel: String) -> some View {
-        Button(action: action) {
-            Image(systemName: systemName)
-                .font(.system(size: 20, weight: .semibold))
-                .foregroundColor(lightOrDarkColor)
-                .frame(width: Layout.callButtonSize, height: Layout.callButtonSize)
-                .background(RoundedRectangle(cornerRadius: Layout.verticalMargin).fill(lightOrDarkColor.opacity(0.2)))
-        }
-        .accessibilityLabel(accessibilityLabel)
-    }
-
-    @ViewBuilder private var avatarView: some View {
-        if viewModel.isAdmin {
-            editableAvatar
-        } else {
-            avatarImage
-        }
-    }
-
-    private var editableAvatar: some View {
-        Button {
-            showingOptions = true
-        } label: {
-            avatarImage
-        }
-        .accessibilityLabel(L10n.Accessibility.swarmPicturePicker)
-        .accessibilityHint(L10n.Accessibility.profilePicturePickerHint)
+        .padding(.top, isAvatarExpanded ? 0 : collapsedTopInset)
+        .padding(.bottom, isAvatarExpanded ? 0 : Layout.verticalMargin)
+        .frame(maxWidth: .infinity)
         .actionSheet(isPresented: $showingOptions) {
             ActionSheet(
                 title: Text(""),
@@ -226,6 +234,131 @@ public struct SwarmInfoView: View, StateEmittingView {
         }
     }
 
+    private var infoStack: some View {
+        VStack(spacing: Layout.generalMargin) {
+            titleView
+            descriptionView
+            if viewModel.getContactJamiId() != nil {
+                callButtons
+            }
+        }
+    }
+
+    private var scrimmedInfo: some View {
+        infoStack
+            .padding(Layout.generalMargin)
+            .frame(maxWidth: .infinity)
+            .background(infoBackdrop)
+    }
+
+    private var infoBackdrop: some View {
+        LinearGradient(
+            gradient: Gradient(stops: [
+                .init(color: .clear, location: 0),
+                .init(color: scrim.opacity(0.18), location: 0.3),
+                .init(color: scrim.opacity(0.55), location: 0.62),
+                .init(color: scrim, location: 1)
+            ]),
+            startPoint: .top,
+            endPoint: .bottom
+        )
+        .allowsHitTesting(false)
+    }
+
+    private var scrim: Color {
+        Color.jamiOnVideoScrim.opacity(ExpandedAvatarMetrics.infoBackdropStrength)
+    }
+
+    private var callButtons: some View {
+        HStack(spacing: Layout.generalMargin) {
+            callButton(
+                systemName: "phone.fill",
+                action: placeAudioCall,
+                accessibilityLabel: L10n.Accessibility.conversationStartVoiceCall(viewModel.getContactDisplayName())
+            )
+
+            callButton(
+                systemName: "video.fill",
+                action: placeVideoCall,
+                accessibilityLabel: L10n.Accessibility.conversationStartVideoCall(viewModel.getContactDisplayName())
+            )
+        }
+        .padding(.top, Layout.callButtonsMargin)
+    }
+
+    private func callButton(systemName: String,
+                            action: @escaping () -> Void,
+                            accessibilityLabel: String) -> some View {
+        Button(action: action) {
+            Image(systemName: systemName)
+                .font(.system(size: 20, weight: .semibold))
+                .foregroundColor(buttonTint)
+                .frame(width: Layout.callButtonSize, height: Layout.callButtonSize)
+                .background(RoundedRectangle(cornerRadius: Layout.verticalMargin).fill(callButtonBackground))
+        }
+        .buttonStyle(PlainButtonStyle())
+        .accessibilityLabel(accessibilityLabel)
+    }
+
+    @ViewBuilder private var avatarView: some View {
+        if viewModel.hasPicture {
+            expandableAvatar
+        } else if viewModel.isAdmin {
+            editableAvatar
+        } else {
+            avatarImage
+        }
+    }
+
+    private var expandableAvatar: some View {
+        ExpandableAvatar(
+            provider: viewModel.provider,
+            isExpanded: isAvatarExpanded,
+            isGroup: !(viewModel.conversation?.isCoredialog() ?? true),
+            onToggle: { setAvatarExpanded(!isAvatarExpanded) }
+        ) {
+            scrimmedInfo
+        }
+        .overlay(alignment: .topTrailing) {
+            if viewModel.isAdmin && isAvatarExpanded {
+                editPictureButton.transition(.opacity)
+            }
+        }
+        .overlay(alignment: .bottomTrailing) {
+            if viewModel.isAdmin && !isAvatarExpanded {
+                editPictureButton.transition(.opacity)
+            }
+        }
+    }
+
+    private var editPictureButton: some View {
+        Button {
+            showingOptions = true
+        } label: {
+            Image(systemName: "camera.fill")
+                .font(.system(size: 15, weight: .semibold))
+                .foregroundColor(Color.white)
+                .frame(width: Layout.editPictureButtonSize, height: Layout.editPictureButtonSize)
+                .background(Circle().fill(Color.jami))
+        }
+        .buttonStyle(PlainButtonStyle())
+        .padding(.top, isAvatarExpanded ? screen.safeAreaInsets.top + Layout.generalMargin : 0)
+        .padding(.trailing, isAvatarExpanded ? Layout.generalMargin : 0)
+        .accessibilityLabel(L10n.Accessibility.swarmPicturePicker)
+        .accessibilityHint(L10n.Accessibility.profilePicturePickerHint)
+    }
+
+    private var editableAvatar: some View {
+        Button {
+            showingOptions = true
+        } label: {
+            avatarImage
+        }
+        .buttonStyle(PlainButtonStyle())
+        .accessibilityLabel(L10n.Accessibility.swarmPicturePicker)
+        .accessibilityHint(L10n.Accessibility.profilePicturePickerHint)
+    }
+
     private var avatarImage: some View {
         AvatarSwiftUIView(source: viewModel.provider)
             .accessibilityHidden(true)
@@ -249,8 +382,8 @@ public struct SwarmInfoView: View, StateEmittingView {
             .multilineTextAlignment(.center)
             .truncationMode(.middle)
             .lineLimit(2)
-            .foregroundColor(lightOrDarkColor)
-            .accentColor(lightOrDarkColor)
+            .foregroundColor(headerForeground)
+            .accentColor(headerForeground)
             .accessibilityLabel(viewModel.title)
     }
 
@@ -271,8 +404,8 @@ public struct SwarmInfoView: View, StateEmittingView {
             }
             .lineLimit(2)
             .multilineTextAlignment(.center)
-            .foregroundColor(lightOrDarkColor)
-            .accentColor(lightOrDarkColor)
+            .foregroundColor(headerForeground)
+            .accentColor(headerForeground)
             .accessibilityLabel(viewModel.description.isEmpty ? L10n.Swarm.addDescription : viewModel.description)
             .accessibilityHint(L10n.Swarm.editTextHint)
     }
@@ -281,22 +414,27 @@ public struct SwarmInfoView: View, StateEmittingView {
         Text(viewModel.description)
             .lineLimit(2)
             .multilineTextAlignment(.center)
-            .foregroundColor(lightOrDarkColor)
-            .accentColor(lightOrDarkColor)
+            .foregroundColor(headerForeground)
+            .accentColor(headerForeground)
             .accessibilityLabel(viewModel.description)
     }
 
-    @ViewBuilder private var segmentedControl: some View {
+    @ViewBuilder private var segmentedControlSection: some View {
         if swarmViews.count > 1 {
-            Picker("", selection: $selectedView) {
-                ForEach(swarmViews, id: \.self) { view in
-                    Text(view == .memberList ?
-                            "\(viewModel.swarmInfo.participants.value.count) \(view.title)" :
-                            view.title)
+            Section {
+                Picker("", selection: $selectedView) {
+                    ForEach(swarmViews, id: \.self) { view in
+                        Text(view == .memberList ?
+                                "\(viewModel.swarmInfo.participants.value.count) \(view.title)" :
+                                view.title)
+                    }
                 }
+                .pickerStyle(.segmented)
+                .padding(.horizontal, segmentedControlHorizontalPadding)
+                .listRowInsets(EdgeInsets())
+                .listRowBackground(Color.clear)
+                .listRowSeparator(.hidden)
             }
-            .pickerStyle(.segmented)
-            .padding([.horizontal, .top], Layout.generalMargin)
         }
     }
 
@@ -322,15 +460,31 @@ public struct SwarmInfoView: View, StateEmittingView {
         }
     }
 
-    @ViewBuilder private var addParticipantsButton: some View {
-        // The documents tab has a button of its own in that corner.
-        if selectedView != .documents, !(viewModel.conversation?.isCoredialog() ?? true) {
-            AddMoreParticipantsInSwarm(viewmodel: viewModel)
+    @ViewBuilder private var floatingActionButton: some View {
+        switch selectedView {
+        case .documents:
+            if let documents = viewModel.collabDocuments {
+                CollabNewDocumentButton(viewModel: documents)
+            }
+        case .about, .memberList:
+            if !(viewModel.conversation?.isCoredialog() ?? true) {
+                AddMoreParticipantsInSwarm(viewmodel: viewModel)
+            }
         }
     }
 
-    // MARK: - Alert Components
+    @ViewBuilder private var floatingButtonClearance: some View {
+        if shouldReserveFloatingButtonSpace {
+            Color.clear
+                .frame(height: Layout.floatingButtonClearance)
+                .accessibilityHidden(true)
+        }
+    }
+}
 
+// MARK: - Alert Components
+
+extension SwarmInfoView {
     @ViewBuilder
     func editTitleAlert() -> some View {
         textInputAlert(
@@ -401,16 +555,5 @@ public struct SwarmInfoView: View, StateEmittingView {
         guard let jamiId = viewModel.getContactJamiId() else { return }
         let name = viewModel.getContactDisplayName()
         stateEmitter.emitState(.startCall(contactRingId: jamiId, userName: name))
-    }
-
-    // MARK: - Helpers
-
-    private func shouldMinimizeTop() -> Bool {
-        return ScreenDimensionsManager.shared.isLandscape &&
-            UIDevice.current.userInterfaceIdiom == .phone
-    }
-
-    private var orientationPublisher: NotificationCenter.Publisher {
-        NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)
     }
 }

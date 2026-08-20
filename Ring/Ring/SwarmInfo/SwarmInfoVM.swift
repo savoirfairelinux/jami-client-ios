@@ -34,6 +34,7 @@ class SwarmInfoVM: ObservableObject {
     @Published var editableDescription: String = ""
     @Published var isShowingTitleAlert = false
     @Published var isShowingDescriptionAlert = false
+    @Published var hasPicture = false
 
     var swarmInfo: SwarmInfoProtocol
     var conversation: ConversationModel?
@@ -124,7 +125,8 @@ class SwarmInfoVM: ObservableObject {
 
         self.swarmInfo = swarmInfo
         self.conversation = swarmInfo.conversation
-        self.provider = AvatarProvider.from(swarmInfo: swarmInfo, profileService: self.profileService, size: Constants.AvatarSize.conversationInfo80)
+        self.provider = AvatarProvider.from(swarmInfo: swarmInfo, profileService: self.profileService, size: Constants.AvatarSize.conversationInfo106,
+                                           retainsSourceData: true)
 
         setupBindings()
     }
@@ -146,8 +148,13 @@ class SwarmInfoVM: ObservableObject {
             swarmInfo.color
         )
         .observe(on: MainScheduler.instance)
-        .subscribe(onNext: { [weak self] (_, newTitle, newDescription, newColor) in
+        .subscribe(onNext: { [weak self] (newAvatar, newTitle, newDescription, newColor) in
             guard let self = self else { return }
+
+            let hasPicture = !(newAvatar?.isEmpty ?? true)
+            if self.hasPicture != hasPicture {
+                self.hasPicture = hasPicture
+            }
 
             if self.title != newTitle {
                 self.title = newTitle
