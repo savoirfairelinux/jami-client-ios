@@ -27,64 +27,35 @@ struct CollabDocumentsView: View {
     let stateEmitter: ConversationStatePublisher
 
     var body: some View {
-        ZStack(alignment: .bottomTrailing) {
-            documentList
-            newDocumentButton
-        }
-        // The tabs beside this one are a Form and a List, which carry the
-        // grouped background through the bottom safe area. The empty state has
-        // no scroll view to do that, so it says the same thing here.
-        .background(Color(UIColor.systemGroupedBackground).ignoresSafeArea(edges: .bottom))
+        documentSection
         .onAppear(perform: viewModel.reload)
         .alert(isPresented: $viewModel.failed) {
             Alert(title: Text(viewModel.failureMessage))
         }
     }
 
-    @ViewBuilder private var documentList: some View {
+    @ViewBuilder private var documentSection: some View {
         if viewModel.documents.isEmpty {
-            VStack {
-                Spacer()
+            Section {
                 Text(L10n.Collab.noDocuments)
                     .font(.callout)
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, DocumentsLayout.margin)
-                Spacer()
+                    .padding(.vertical, DocumentsLayout.margin * 2)
+                    .frame(maxWidth: .infinity)
+                    .listRowBackground(Color.clear)
+                    .listRowSeparator(.hidden)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
         } else {
-            List {
-                Section(header: Text(L10n.Collab.documents)) {
-                    ForEach(viewModel.documents, id: \.id) { document in
-                        DocumentRow(document: document,
-                                    viewModel: viewModel,
-                                    open: { open(document.id, viewModel.title(of: document)) })
-                    }
+            Section(header: Text(L10n.Collab.documents)) {
+                ForEach(viewModel.documents, id: \.id) { document in
+                    DocumentRow(document: document,
+                                viewModel: viewModel,
+                                open: { open(document.id, viewModel.title(of: document)) })
                 }
             }
-            // The new-document button stands in this corner; without the inset
-            // it covers the last row, which then cannot be tapped.
-            .safeAreaInset(edge: .bottom) {
-                Color.clear.frame(height: DocumentsLayout.buttonSize + DocumentsLayout.margin * 2)
-            }
         }
-    }
-
-    private var newDocumentButton: some View {
-        Button {
-            viewModel.startNaming()
-        } label: {
-            Image(systemName: "square.and.pencil")
-                .font(.title2)
-                .foregroundColor(.white)
-                .frame(width: DocumentsLayout.buttonSize, height: DocumentsLayout.buttonSize)
-                .background(Color.jami)
-                .clipShape(Circle())
-                .shadow(radius: DocumentsLayout.shadow)
-        }
-        .padding(DocumentsLayout.margin)
-        .accessibilityLabel(L10n.Collab.newDocument)
     }
 
     private func open(_ documentId: String, _ name: String) {
@@ -96,8 +67,31 @@ private enum DocumentsLayout {
     static let margin: CGFloat = 16
     static let textSpacing: CGFloat = 2
     static let rowHeight: CGFloat = 44
-    static let buttonSize: CGFloat = 56
-    static let shadow: CGFloat = 4
+}
+
+struct CollabNewDocumentButton: View {
+    @ObservedObject var viewModel: CollabDocumentsVM
+
+    private enum Layout {
+        static let margin: CGFloat = 16
+        static let size: CGFloat = 56
+        static let shadowRadius: CGFloat = 4
+    }
+
+    var body: some View {
+        Button(action: viewModel.startNaming) {
+            Label(L10n.Collab.newDocument, systemImage: "square.and.pencil")
+                .labelStyle(.iconOnly)
+                .font(.title2)
+                .foregroundColor(.white)
+                .frame(width: Layout.size, height: Layout.size)
+                .background(Color.jami)
+                .clipShape(Circle())
+                .shadow(radius: Layout.shadowRadius)
+        }
+        .padding(Layout.margin)
+        .accessibilityLabel(L10n.Collab.newDocument)
+    }
 }
 
 /**
