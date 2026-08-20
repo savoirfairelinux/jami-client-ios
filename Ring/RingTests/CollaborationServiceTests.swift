@@ -123,21 +123,21 @@ final class CollaborationServiceTests: XCTestCase {
      */
     func testAnUnknownIdentityIsNeverTheAuthor() throws {
         XCTAssertEqual(try CollabDocumentRemoval
-            .available(for: document(author: localJamiId, storedLocally: true), localJamiId: ""),
+                        .available(for: document(author: localJamiId, storedLocally: true), localJamiId: ""),
                        [.fromThisDevice])
         XCTAssertEqual(try CollabDocumentRemoval
-            .available(for: document(author: nil, storedLocally: true), localJamiId: localJamiId),
+                        .available(for: document(author: nil, storedLocally: true), localJamiId: localJamiId),
                        [.fromThisDevice])
     }
 
     func testADocumentThisDeviceDoesNotHoldCannotBeDroppedAgain() throws {
         XCTAssertEqual(try CollabDocumentRemoval
-            .available(for: document(author: localJamiId, storedLocally: false),
-                       localJamiId: localJamiId),
+                        .available(for: document(author: localJamiId, storedLocally: false),
+                                   localJamiId: localJamiId),
                        [.forEveryone])
         XCTAssertTrue(try CollabDocumentRemoval
-            .available(for: document(author: "someone-else", storedLocally: false),
-                       localJamiId: localJamiId).isEmpty)
+                        .available(for: document(author: "someone-else", storedLocally: false),
+                                   localJamiId: localJamiId).isEmpty)
     }
 
     func testEveryRemovalIsNamedOnBothSurfaces() {

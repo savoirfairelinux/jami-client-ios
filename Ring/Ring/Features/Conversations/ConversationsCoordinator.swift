@@ -191,18 +191,15 @@ extension ConversationsCoordinator {
 
     func presentSwarmInfo(swarmInfo: SwarmInfoProtocol) {
         let swiftUIVM = SwarmInfoVM(with: self.injectionBag, swarmInfo: swarmInfo)
-        let view = SwarmInfoView(viewModel: swiftUIVM)
+        let view = SwarmInfoView(viewModel: swiftUIVM) { [weak self] expanded in
+            self?.navigationController.navigationBar.tintColor = expanded ? .white : .jami
+        }
         let viewController = createHostingVC(view)
-        viewController.rx.viewWillAppear
-            .subscribe(onNext: { [weak self] _ in
-                self?.navigationController.navigationBar.tintColor = UIColor.white
-            })
-            .disposed(by: disposeBag)
-        viewController.rx.viewWillDisappear
-            .subscribe(onNext: { [weak self] _ in
-                self?.navigationController.navigationBar.tintColor = UIColor.jami
-            })
-            .disposed(by: disposeBag)
+        let transparentBar = UINavigationBarAppearance()
+        transparentBar.configureWithTransparentBackground()
+        viewController.navigationItem.standardAppearance = transparentBar
+        viewController.navigationItem.compactAppearance = transparentBar
+        viewController.navigationItem.scrollEdgeAppearance = transparentBar
         self.present(viewController: viewController, withStyle: .show, withAnimation: true, withStateable: view.stateEmitter)
     }
 

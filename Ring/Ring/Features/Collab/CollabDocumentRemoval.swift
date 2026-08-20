@@ -42,8 +42,8 @@ enum CollabDocumentRemoval: CaseIterable, Identifiable {
      cannot happen.
 
      - parameter localJamiId: who this device is, empty when the account could
-       not be read. An unknown identity matches nobody, least of all a document
-       whose author is unknown too.
+     not be read. An unknown identity matches nobody, least of all a document
+     whose author is unknown too.
      */
     static func available(for document: CollaborativeDocument,
                           localJamiId: String) -> [CollabDocumentRemoval] {
