@@ -281,6 +281,14 @@ extension UIImage {
         return createResizedImage(imageSource: imageSource, size: scaledSize) ?? UIImage(data: imageData)
     }
 
+    static func pixelSize(imageSource: CGImageSource) -> CGFloat {
+        let options = [kCGImageSourceShouldCache: false] as CFDictionary
+        guard let properties = CGImageSourceCopyPropertiesAtIndex(imageSource, 0, options) as? [CFString: Any],
+              let width = properties[kCGImagePropertyPixelWidth] as? CGFloat,
+              let height = properties[kCGImagePropertyPixelHeight] as? CGFloat else { return 0 }
+        return max(width, height)
+    }
+
     static func createResizedImage(imageSource: CGImageSource, size: CGFloat) -> UIImage? {
         var dict: [CFString: Any] = [
             kCGImageSourceCreateThumbnailWithTransform: true,

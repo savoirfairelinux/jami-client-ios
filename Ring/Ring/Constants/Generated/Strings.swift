@@ -51,6 +51,10 @@ internal enum L10n {
     internal static let audioPlayerPause = L10n.tr("Localizable", "accessibility.audioPlayerPause", fallback: "Pause")
     /// Play
     internal static let audioPlayerPlay = L10n.tr("Localizable", "accessibility.audioPlayerPlay", fallback: "Play")
+    /// Double-tap to shrink the picture
+    internal static let avatarCollapseHint = L10n.tr("Localizable", "accessibility.avatarCollapseHint", fallback: "Double-tap to shrink the picture")
+    /// Double-tap to enlarge the picture
+    internal static let avatarExpandHint = L10n.tr("Localizable", "accessibility.avatarExpandHint", fallback: "Double-tap to enlarge the picture")
     /// Close
     internal static let close = L10n.tr("Localizable", "accessibility.close", fallback: "Close")
     /// Double-tap to open camera
