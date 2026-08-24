@@ -81,12 +81,18 @@ struct MessageRowView: View {
             }
             Spacer()
                 .frame(height: model.topSpace)
-            if let collabDoc = messageModel.collabDocViewModel {
-                CollabDocMessageView(model: collabDoc)
-                    .frame(maxWidth: .infinity, alignment: .center)
-            } else if model.centeredMessage {
-                ContactMessageView(model: messageModel.contactViewModel)
-                    .frame(maxWidth: .infinity, alignment: .center)
+            if model.centeredMessage {
+                // The rows drawn across the conversation rather than as a
+                // bubble. Which one it is follows from the message; that it is
+                // one of them at all is the flag's to say.
+                Group {
+                    if let collabDoc = messageModel.collabDocViewModel {
+                        CollabDocMessageView(model: collabDoc)
+                    } else {
+                        ContactMessageView(model: messageModel.contactViewModel)
+                    }
+                }
+                .frame(maxWidth: .infinity, alignment: .center)
             } else if model.incoming {
                 HStack(alignment: .bottom) {
                     if model.shouldDisplayAavatar,

@@ -44,6 +44,17 @@ class CollabDocMessageVM: ObservableObject {
      */
     @Published var removed: Bool
 
+    /**
+     Whether a rename has been applied, after which a fetched name is stale.
+
+     The name is asked for once, and renames arrive on their own; the answer
+     comes off the daemon's queue and a rename off the delivery queue, with
+     nothing ordering the two. An answer given before a rename can be delivered
+     after one, and would put back a name the document no longer has. Both
+     writes are made on the main queue, so reading this there needs no lock.
+     */
+    private var renameApplied = false
+
     var documentId: String {
         return self.message.collabDocumentId
     }
@@ -75,7 +86,7 @@ class CollabDocMessageVM: ObservableObject {
         service.name(accountId: accountId, conversationId: conversationId, documentId: documentId)
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { [weak self] name in
-                guard let self = self, !name.isEmpty else { return }
+                guard let self = self, !name.isEmpty, !self.renameApplied else { return }
                 self.name = name
             })
             .disposed(by: self.disposeBag)
@@ -87,6 +98,7 @@ class CollabDocMessageVM: ObservableObject {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] renamed in
                 guard let self = self, !renamed.value.isEmpty else { return }
+                self.renameApplied = true
                 self.name = renamed.value
             })
             .disposed(by: self.disposeBag)
