@@ -325,6 +325,7 @@
 "calls.removeModerator" = "Hiqe nga moderator";
 "calls.muteAudio" = "Heshtoje mikrofonin";
 "calls.unmuteAudio" = "Hiqi heshtimin mikrofonit";
+"calls.raiseHand" = "Ngrini dorën";
 "calls.lowerHand" = "Uleni dorën";
 "calls.inThisCall" = "In this call (%@)";
 "calls.participantsInCall" = "%@ in call";
@@ -685,6 +686,12 @@
 "accessibility.conference.localPreview" = "Your video";
 "accessibility.conference.hideLocalPreview" = "Hide your video";
 "accessibility.conference.showLocalPreview" = "Show your video";
+"accessibility.conference.speaking" = "Speaking";
+"accessibility.conference.handRaised" = "Dorë e ngritur";
+"accessibility.conference.moderator" = "Moderator";
+"accessibility.conference.recording" = "Incizim";
+"accessibility.conference.microphoneMuted" = "Microphone muted";
+"accessibility.conference.cameraOff" = "Camera off";
 "accessibility.account.tokenQRcode" = "Kod QR token-i";
 
 // Swarm Colors

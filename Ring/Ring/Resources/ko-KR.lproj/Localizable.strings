@@ -325,6 +325,7 @@
 "calls.removeModerator" = "설정하지 않는 모더레이터";
 "calls.muteAudio" = "무음 마이크";
 "calls.unmuteAudio" = "마이크 음소거 해제";
+"calls.raiseHand" = "손 들기";
 "calls.lowerHand" = "하위 손";
 "calls.inThisCall" = "In this call (%@)";
 "calls.participantsInCall" = "%@ in call";
@@ -685,6 +686,12 @@
 "accessibility.conference.localPreview" = "Your video";
 "accessibility.conference.hideLocalPreview" = "Hide your video";
 "accessibility.conference.showLocalPreview" = "Show your video";
+"accessibility.conference.speaking" = "Speaking";
+"accessibility.conference.handRaised" = "손을 들어";
+"accessibility.conference.moderator" = "조정자";
+"accessibility.conference.recording" = "Recording";
+"accessibility.conference.microphoneMuted" = "Microphone muted";
+"accessibility.conference.cameraOff" = "Camera off";
 "accessibility.account.tokenQRcode" = "토큰 QR 코드";
 
 // Swarm Colors

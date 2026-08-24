@@ -325,6 +325,7 @@
 "calls.removeModerator" = "Ukloni moderatora";
 "calls.muteAudio" = "Isključi mikrofon";
 "calls.unmuteAudio" = "Uključi mikrofon";
+"calls.raiseHand" = "Podigni ruku";
 "calls.lowerHand" = "Spusti ruku";
 "calls.inThisCall" = "In this call (%@)";
 "calls.participantsInCall" = "%@ in call";
@@ -685,6 +686,12 @@
 "accessibility.conference.localPreview" = "Your video";
 "accessibility.conference.hideLocalPreview" = "Hide your video";
 "accessibility.conference.showLocalPreview" = "Show your video";
+"accessibility.conference.speaking" = "Speaking";
+"accessibility.conference.handRaised" = "Podignuta ruka";
+"accessibility.conference.moderator" = "Модератор";
+"accessibility.conference.recording" = "Recording";
+"accessibility.conference.microphoneMuted" = "Microphone muted";
+"accessibility.conference.cameraOff" = "Camera off";
 "accessibility.account.tokenQRcode" = "QR kôd tokena";
 
 // Swarm Colors

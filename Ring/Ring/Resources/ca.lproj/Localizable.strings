@@ -325,6 +325,7 @@
 "calls.removeModerator" = "Moderador desactivat";
 "calls.muteAudio" = "Silencia el micròfon";
 "calls.unmuteAudio" = "Activa el so del micròfon";
+"calls.raiseHand" = "Aixeca la mà";
 "calls.lowerHand" = "Man baixa";
 "calls.inThisCall" = "In this call (%@)";
 "calls.participantsInCall" = "%@ in call";
@@ -685,6 +686,12 @@
 "accessibility.conference.localPreview" = "Your video";
 "accessibility.conference.hideLocalPreview" = "Hide your video";
 "accessibility.conference.showLocalPreview" = "Show your video";
+"accessibility.conference.speaking" = "Speaking";
+"accessibility.conference.handRaised" = "Mà aixecada";
+"accessibility.conference.moderator" = "Moderador";
+"accessibility.conference.recording" = "Recording";
+"accessibility.conference.microphoneMuted" = "Microphone muted";
+"accessibility.conference.cameraOff" = "Camera off";
 "accessibility.account.tokenQRcode" = "Codi QR del testimoni";
 
 // Swarm Colors

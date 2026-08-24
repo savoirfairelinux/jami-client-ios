@@ -325,6 +325,7 @@
 "calls.removeModerator" = "Eemalda moderaator";
 "calls.muteAudio" = "Summuta mikrofon";
 "calls.unmuteAudio" = "Lõpeta mikrofoni summutamine";
+"calls.raiseHand" = "Anna käega märku";
 "calls.lowerHand" = "Lase käsi alla";
 "calls.inThisCall" = "Selles kõnes (%@)";
 "calls.participantsInCall" = "%@ on helistamas";
@@ -685,6 +686,12 @@
 "accessibility.conference.localPreview" = "Sinu video";
 "accessibility.conference.hideLocalPreview" = "Peida oma videovoog";
 "accessibility.conference.showLocalPreview" = "Näita oma videovoogu";
+"accessibility.conference.speaking" = "Speaking";
+"accessibility.conference.handRaised" = "Märguanne käega";
+"accessibility.conference.moderator" = "Moderaator";
+"accessibility.conference.recording" = "Salvestan";
+"accessibility.conference.microphoneMuted" = "Microphone muted";
+"accessibility.conference.cameraOff" = "Camera off";
 "accessibility.account.tokenQRcode" = "Tunnusloa QR-kood";
 
 // Swarm Colors

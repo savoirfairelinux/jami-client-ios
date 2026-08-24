@@ -325,6 +325,7 @@
 "calls.removeModerator" = "Ανακατάσταση διαχειριστή";
 "calls.muteAudio" = "Σίγαση μικροφώνου";
 "calls.unmuteAudio" = "Κατάργηση σίγασης μικροφώνου";
+"calls.raiseHand" = "Σηκώστε το χέρι σας";
 "calls.lowerHand" = "Κάτω χέρι";
 "calls.inThisCall" = "In this call (%@)";
 "calls.participantsInCall" = "%@ in call";
@@ -685,6 +686,12 @@
 "accessibility.conference.localPreview" = "Your video";
 "accessibility.conference.hideLocalPreview" = "Hide your video";
 "accessibility.conference.showLocalPreview" = "Show your video";
+"accessibility.conference.speaking" = "Speaking";
+"accessibility.conference.handRaised" = "Σήκωσε το χέρι";
+"accessibility.conference.moderator" = "Διαχειριστής";
+"accessibility.conference.recording" = "Recording";
+"accessibility.conference.microphoneMuted" = "Microphone muted";
+"accessibility.conference.cameraOff" = "Camera off";
 "accessibility.account.tokenQRcode" = "Κωδικός QR διακριτικού";
 
 // Swarm Colors

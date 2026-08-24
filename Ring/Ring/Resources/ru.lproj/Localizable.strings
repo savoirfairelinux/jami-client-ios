@@ -325,6 +325,7 @@
 "calls.removeModerator" = "Отменить установку модератора";
 "calls.muteAudio" = "Выключить микрофон";
 "calls.unmuteAudio" = "Включить микрофон";
+"calls.raiseHand" = "Поднять руку";
 "calls.lowerHand" = "Опущенная рука";
 "calls.inThisCall" = "In this call (%@)";
 "calls.participantsInCall" = "%@ in call";
@@ -685,6 +686,12 @@
 "accessibility.conference.localPreview" = "Your video";
 "accessibility.conference.hideLocalPreview" = "Hide your video";
 "accessibility.conference.showLocalPreview" = "Show your video";
+"accessibility.conference.speaking" = "Speaking";
+"accessibility.conference.handRaised" = "Поднятая рука";
+"accessibility.conference.moderator" = "Модератор";
+"accessibility.conference.recording" = "Запись";
+"accessibility.conference.microphoneMuted" = "Microphone muted";
+"accessibility.conference.cameraOff" = "Camera off";
 "accessibility.account.tokenQRcode" = "QR-код токена";
 
 // Swarm Colors

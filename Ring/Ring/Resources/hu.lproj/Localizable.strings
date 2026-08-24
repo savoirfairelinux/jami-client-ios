@@ -325,6 +325,7 @@
 "calls.removeModerator" = "Moderátor megszüntetése";
 "calls.muteAudio" = "Mikrofon elnémítása";
 "calls.unmuteAudio" = "Mikrofon némításának feloldása";
+"calls.raiseHand" = "Kéz felemelése";
 "calls.lowerHand" = "Kéz leengedése";
 "calls.inThisCall" = "In this call (%@)";
 "calls.participantsInCall" = "%@ in call";
@@ -685,6 +686,12 @@
 "accessibility.conference.localPreview" = "Your video";
 "accessibility.conference.hideLocalPreview" = "Hide your video";
 "accessibility.conference.showLocalPreview" = "Show your video";
+"accessibility.conference.speaking" = "Speaking";
+"accessibility.conference.handRaised" = "Kéz felemelt";
+"accessibility.conference.moderator" = "Moderátor";
+"accessibility.conference.recording" = "Felvétel";
+"accessibility.conference.microphoneMuted" = "Microphone muted";
+"accessibility.conference.cameraOff" = "Camera off";
 "accessibility.account.tokenQRcode" = "Jogkivonat QR-kód";
 
 // Swarm Colors

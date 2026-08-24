@@ -325,6 +325,7 @@
 "calls.removeModerator" = "മോഡറേറ്റർ അൺസെറ്റ് ചെയ്യുക";
 "calls.muteAudio" = "മിണ്ടാത്ത മൈക്രോഫോൺ";
 "calls.unmuteAudio" = "Unmute microphone";
+"calls.raiseHand" = "കൈ ഉയര് ത്തുക";
 "calls.lowerHand" = "താഴത്തെ കൈ";
 "calls.inThisCall" = "In this call (%@)";
 "calls.participantsInCall" = "%@ in call";
@@ -685,6 +686,12 @@
 "accessibility.conference.localPreview" = "Your video";
 "accessibility.conference.hideLocalPreview" = "Hide your video";
 "accessibility.conference.showLocalPreview" = "Show your video";
+"accessibility.conference.speaking" = "Speaking";
+"accessibility.conference.handRaised" = "കൈ ഉയര് ത്തുക";
+"accessibility.conference.moderator" = "മോഡറേറ്റർ";
+"accessibility.conference.recording" = "Recording";
+"accessibility.conference.microphoneMuted" = "Microphone muted";
+"accessibility.conference.cameraOff" = "Camera off";
 "accessibility.account.tokenQRcode" = "Token QR code";
 
 // Swarm Colors

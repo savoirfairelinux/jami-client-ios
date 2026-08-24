@@ -325,6 +325,7 @@
 "calls.removeModerator" = "Կարգավորիչը անսահմանված";
 "calls.muteAudio" = "Միկրոֆոն անջատ";
 "calls.unmuteAudio" = "Միացնել խոսափողի ձայնը";
+"calls.raiseHand" = "Բարձրացրեք ձեռքը";
 "calls.lowerHand" = "Նվազագույն ձեռքը";
 "calls.inThisCall" = "In this call (%@)";
 "calls.participantsInCall" = "%@ in call";
@@ -685,6 +686,12 @@
 "accessibility.conference.localPreview" = "Your video";
 "accessibility.conference.hideLocalPreview" = "Hide your video";
 "accessibility.conference.showLocalPreview" = "Show your video";
+"accessibility.conference.speaking" = "Speaking";
+"accessibility.conference.handRaised" = "Ձեռք բարձրացրեք";
+"accessibility.conference.moderator" = "Մոդերատոր";
+"accessibility.conference.recording" = "Recording";
+"accessibility.conference.microphoneMuted" = "Microphone muted";
+"accessibility.conference.cameraOff" = "Camera off";
 "accessibility.account.tokenQRcode" = "Token QR code";
 
 // Swarm Colors

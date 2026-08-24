@@ -325,6 +325,7 @@
 "calls.removeModerator" = "מתקן לא מתאים";
 "calls.muteAudio" = "מיקרופון שקט";
 "calls.unmuteAudio" = "בטל השתקת מיקרופון";
+"calls.raiseHand" = "תרים את היד.";
 "calls.lowerHand" = "יד התחתונה";
 "calls.inThisCall" = "In this call (%@)";
 "calls.participantsInCall" = "%@ in call";
@@ -685,6 +686,12 @@
 "accessibility.conference.localPreview" = "Your video";
 "accessibility.conference.hideLocalPreview" = "Hide your video";
 "accessibility.conference.showLocalPreview" = "Show your video";
+"accessibility.conference.speaking" = "Speaking";
+"accessibility.conference.handRaised" = "יד מעלה";
+"accessibility.conference.moderator" = "מתווך";
+"accessibility.conference.recording" = "Recording";
+"accessibility.conference.microphoneMuted" = "Microphone muted";
+"accessibility.conference.cameraOff" = "Camera off";
 "accessibility.account.tokenQRcode" = "Token QR code";
 
 // Swarm Colors

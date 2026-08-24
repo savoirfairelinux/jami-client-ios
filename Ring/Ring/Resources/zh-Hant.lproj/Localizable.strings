@@ -325,6 +325,7 @@
 "calls.removeModerator" = "取消設定主持人";
 "calls.muteAudio" = "关闭麦克风";
 "calls.unmuteAudio" = "麦克风静音";
+"calls.raiseHand" = "舉手";
 "calls.lowerHand" = "放下手";
 "calls.inThisCall" = "本次通话中（%@）";
 "calls.participantsInCall" = "%@正在通话";
@@ -685,6 +686,12 @@
 "accessibility.conference.localPreview" = "您的视频";
 "accessibility.conference.hideLocalPreview" = "隐藏你的视频";
 "accessibility.conference.showLocalPreview" = "显示你的视频";
+"accessibility.conference.speaking" = "Speaking";
+"accessibility.conference.handRaised" = "舉手";
+"accessibility.conference.moderator" = "主持人";
+"accessibility.conference.recording" = "記錄";
+"accessibility.conference.microphoneMuted" = "Microphone muted";
+"accessibility.conference.cameraOff" = "Camera off";
 "accessibility.account.tokenQRcode" = "二維碼令牌";
 
 // Swarm Colors

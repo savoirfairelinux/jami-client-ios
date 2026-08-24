@@ -325,6 +325,7 @@
 "calls.removeModerator" = "मॉडरेटर अनसेट करें";
 "calls.muteAudio" = "मूक माइक्रोफोन";
 "calls.unmuteAudio" = "माइक्रोफ़ोन अनम्यूट करें";
+"calls.raiseHand" = "हाथ उठाओ";
 "calls.lowerHand" = "निचला हाथ";
 "calls.inThisCall" = "In this call (%@)";
 "calls.participantsInCall" = "%@ in call";
@@ -685,6 +686,12 @@
 "accessibility.conference.localPreview" = "Your video";
 "accessibility.conference.hideLocalPreview" = "Hide your video";
 "accessibility.conference.showLocalPreview" = "Show your video";
+"accessibility.conference.speaking" = "Speaking";
+"accessibility.conference.handRaised" = "हाथ उठाया";
+"accessibility.conference.moderator" = "संयोजक";
+"accessibility.conference.recording" = "Recording";
+"accessibility.conference.microphoneMuted" = "Microphone muted";
+"accessibility.conference.cameraOff" = "Camera off";
 "accessibility.account.tokenQRcode" = "टोकन QR कोड";
 
 // Swarm Colors

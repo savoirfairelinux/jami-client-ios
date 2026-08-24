@@ -325,6 +325,7 @@
 "calls.removeModerator" = "Oturum başkanı ayarını kaldır";
 "calls.muteAudio" = "Mikrofon sessiz";
 "calls.unmuteAudio" = "Mikrofonun sesini aç";
+"calls.raiseHand" = "El kaldır";
 "calls.lowerHand" = "Elini indir";
 "calls.inThisCall" = "In this call (%@)";
 "calls.participantsInCall" = "%@ in call";
@@ -685,6 +686,12 @@
 "accessibility.conference.localPreview" = "Your video";
 "accessibility.conference.hideLocalPreview" = "Hide your video";
 "accessibility.conference.showLocalPreview" = "Show your video";
+"accessibility.conference.speaking" = "Speaking";
+"accessibility.conference.handRaised" = "El kaldırıldı";
+"accessibility.conference.moderator" = "Moderatör";
+"accessibility.conference.recording" = "Kayıt";
+"accessibility.conference.microphoneMuted" = "Microphone muted";
+"accessibility.conference.cameraOff" = "Camera off";
 "accessibility.account.tokenQRcode" = "Jeton QR kodu";
 
 // Swarm Colors

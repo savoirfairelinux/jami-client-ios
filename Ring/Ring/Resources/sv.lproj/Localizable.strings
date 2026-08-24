@@ -325,6 +325,7 @@
 "calls.removeModerator" = "Moderator inte åsatt. ";
 "calls.muteAudio" = "Stäng av mikrofon";
 "calls.unmuteAudio" = "Sluta tysta mikrofon";
+"calls.raiseHand" = "Räck upp handen";
 "calls.lowerHand" = "Ta ned handen ";
 "calls.inThisCall" = "In this call (%@)";
 "calls.participantsInCall" = "%@ in call";
@@ -685,6 +686,12 @@
 "accessibility.conference.localPreview" = "Your video";
 "accessibility.conference.hideLocalPreview" = "Hide your video";
 "accessibility.conference.showLocalPreview" = "Show your video";
+"accessibility.conference.speaking" = "Speaking";
+"accessibility.conference.handRaised" = "Hand upp";
+"accessibility.conference.moderator" = "Moderator";
+"accessibility.conference.recording" = "Inspelning";
+"accessibility.conference.microphoneMuted" = "Microphone muted";
+"accessibility.conference.cameraOff" = "Camera off";
 "accessibility.account.tokenQRcode" = "QR-kod för token";
 
 // Swarm Colors

@@ -325,6 +325,7 @@
 "calls.removeModerator" = "Moderator entfernen";
 "calls.muteAudio" = "Mikrofon stummschalten";
 "calls.unmuteAudio" = "Mikrofon-Stummschaltung aufheben";
+"calls.raiseHand" = "Hand heben";
 "calls.lowerHand" = "Hand senken";
 "calls.inThisCall" = "In diesem Anruf (%@)";
 "calls.participantsInCall" = "%@ im Anruf";
@@ -333,7 +334,7 @@
 "calls.calling" = "Wird angerufen…";
 "calls.callingParticipants" = "%@ wird angerufen";
 "calls.stopCalling" = "Anruf bei %@ abbrechen";
-"calls.participantOptions" = "Options for %@";
+"calls.participantOptions" = "Optionen für %@";
 "calls.inviting" = "Wird eingeladen...";
 "calls.activeCallLabel" = "Ein Anruf läuft. Möchten Sie dem Anruf beitreten? Sie können dem Anruf auch später über die Unterhaltung beitreten.";
 "calls.activeCallInConversation" = "Ein Anruf läuft. Möchten Sie dem Anruf beitreten?";
@@ -685,6 +686,12 @@
 "accessibility.conference.localPreview" = "Ihr Video";
 "accessibility.conference.hideLocalPreview" = "Eigenes Video ausblenden";
 "accessibility.conference.showLocalPreview" = "Eigenes Video anzeigen";
+"accessibility.conference.speaking" = "Speaking";
+"accessibility.conference.handRaised" = "Hand gehoben";
+"accessibility.conference.moderator" = "Moderator";
+"accessibility.conference.recording" = "Aufzeichnung";
+"accessibility.conference.microphoneMuted" = "Microphone muted";
+"accessibility.conference.cameraOff" = "Camera off";
 "accessibility.account.tokenQRcode" = "Token-QR-Code";
 
 // Swarm Colors

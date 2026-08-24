@@ -325,6 +325,7 @@
 "calls.removeModerator" = "Moderator không cài đặt";
 "calls.muteAudio" = "Tắt tiếng micrô";
 "calls.unmuteAudio" = "Bật tiếng micrô";
+"calls.raiseHand" = "Giơ tay";
 "calls.lowerHand" = "Tay dưới";
 "calls.inThisCall" = "In this call (%@)";
 "calls.participantsInCall" = "%@ in call";
@@ -685,6 +686,12 @@
 "accessibility.conference.localPreview" = "Your video";
 "accessibility.conference.hideLocalPreview" = "Hide your video";
 "accessibility.conference.showLocalPreview" = "Show your video";
+"accessibility.conference.speaking" = "Speaking";
+"accessibility.conference.handRaised" = "Tay lên";
+"accessibility.conference.moderator" = "Người điều hành";
+"accessibility.conference.recording" = "Recording";
+"accessibility.conference.microphoneMuted" = "Microphone muted";
+"accessibility.conference.cameraOff" = "Camera off";
 "accessibility.account.tokenQRcode" = "Mã QR mã thông báo";
 
 // Swarm Colors

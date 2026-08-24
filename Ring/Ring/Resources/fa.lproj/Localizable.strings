@@ -325,6 +325,7 @@
 "calls.removeModerator" = "لغو میدیریت";
 "calls.muteAudio" = "قطع میکروفون";
 "calls.unmuteAudio" = "باصدا کردن میکروفون";
+"calls.raiseHand" = "بالا بردن دست ";
 "calls.lowerHand" = "دست پایین";
 "calls.inThisCall" = "In this call (%@)";
 "calls.participantsInCall" = "%@ in call";
@@ -685,6 +686,12 @@
 "accessibility.conference.localPreview" = "Your video";
 "accessibility.conference.hideLocalPreview" = "Hide your video";
 "accessibility.conference.showLocalPreview" = "Show your video";
+"accessibility.conference.speaking" = "Speaking";
+"accessibility.conference.handRaised" = "دست بالاست";
+"accessibility.conference.moderator" = "مدیر";
+"accessibility.conference.recording" = "در حال ضبط";
+"accessibility.conference.microphoneMuted" = "Microphone muted";
+"accessibility.conference.cameraOff" = "Camera off";
 "accessibility.account.tokenQRcode" = "Token QR code";
 
 // Swarm Colors

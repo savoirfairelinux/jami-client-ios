@@ -325,6 +325,7 @@
 "calls.removeModerator" = "Odstaviť moderátor";
 "calls.muteAudio" = "Stlmiť mikrofón";
 "calls.unmuteAudio" = "Zrušiť stlmenie mikrofónu";
+"calls.raiseHand" = "Zdvihnite ruku";
 "calls.lowerHand" = "Dolná ruka";
 "calls.inThisCall" = "In this call (%@)";
 "calls.participantsInCall" = "%@ in call";
@@ -685,6 +686,12 @@
 "accessibility.conference.localPreview" = "Your video";
 "accessibility.conference.hideLocalPreview" = "Hide your video";
 "accessibility.conference.showLocalPreview" = "Show your video";
+"accessibility.conference.speaking" = "Speaking";
+"accessibility.conference.handRaised" = "Roko zvednuté";
+"accessibility.conference.moderator" = "Moderátor";
+"accessibility.conference.recording" = "Hlasové nahrávky";
+"accessibility.conference.microphoneMuted" = "Microphone muted";
+"accessibility.conference.cameraOff" = "Camera off";
 "accessibility.account.tokenQRcode" = "QR kód tokenu";
 
 // Swarm Colors
