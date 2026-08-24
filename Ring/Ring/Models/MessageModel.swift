@@ -316,6 +316,11 @@ public class MessageModel {
         case .initial:
             self.type = .initial
             self.content = L10n.GeneratedMessage.swarmCreated
+        case .collabDocument:
+            // The name the document was announced with, so that a conversation
+            // whose latest event is a document still has a preview line to show.
+            self.content = self.collabDocumentName.isEmpty ? L10n.Collab.untitled
+                : self.collabDocumentName
         default:
             break
         }
@@ -368,6 +373,12 @@ public class MessageModel {
     func isMessageDeleted() -> Bool {
         if self.type == .fileTransfer {
             return self.tid.isEmpty && !self.editions.isEmpty
+        }
+        if self.type == .collabDocument {
+            // The content holds the document's name, so its emptiness says
+            // nothing. An announcement is only ever edited to retire what it
+            // announces, which makes an edited one a removed document.
+            return !self.editions.isEmpty
         }
         return self.content.isEmpty && !self.editions.isEmpty
     }
