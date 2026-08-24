@@ -98,6 +98,12 @@ enum MessageType: Equatable {
         return false
     }
 
+    /// Shown across the conversation rather than as a bubble: it belongs to no
+    /// sequence, and breaks the one it lands in.
+    var isCentered: Bool {
+        return self.isContact || self == .initial || self == .collabDocument
+    }
+
     func getInteractionString(name: String, isIncoming: Bool) -> String? {
         if case .contact(let action) = self {
             return action.getInteractionString(name: name, isIncomig: isIncoming)

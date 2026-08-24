@@ -1049,7 +1049,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
 
     private func isBreakingSequence(message: MessageModel, secondMessage: MessageModel) -> Bool {
         let differentUri = message.uri != secondMessage.uri
-        let messageTypeCheck = message.type.isContact || message.type == .initial
+        let messageTypeCheck = message.type.isCentered || secondMessage.type.isCentered
         let differentAuthor = message.authorId != secondMessage.authorId
         let isReplyCheck = message.isReply() || secondMessage.isReply()
         let hasReactions = !message.reactions.isEmpty || !secondMessage.reactions.isEmpty
