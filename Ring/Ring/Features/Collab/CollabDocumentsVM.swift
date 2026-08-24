@@ -113,29 +113,17 @@ class CollabDocumentsVM: ObservableObject {
             .disposed(by: self.disposeBag)
     }
 
-    /**
-     Starts a document and hands its identifier back so it can be opened.
-
-     An empty identifier is how the daemon refuses; an editor opened on it
-     would show a document that does not exist.
-     */
+    /// Starts a document and hands it back, by id and name, so it can be opened.
     func create(named name: String, then open: @escaping (String, String) -> Void) {
-        let title = name.trimmingCharacters(in: .whitespacesAndNewlines)
-        let named = title.isEmpty ? L10n.Collab.untitled : title
         self.collaborationService
             .createDocument(accountId: self.accountId,
                             conversationId: self.conversationId,
-                            name: named,
-                            mimeType: CollaborativeDocument.mimeRichText)
+                            name: name)
             .observe(on: MainScheduler.instance)
-            .subscribe(onSuccess: { [weak self] documentId in
+            .subscribe(onSuccess: { [weak self] document in
                 guard let self = self else { return }
-                guard !documentId.isEmpty else {
-                    self.fail(with: L10n.Collab.createError)
-                    return
-                }
                 self.reload()
-                open(documentId, named)
+                open(document.id, document.name)
             }, onFailure: { [weak self] _ in
                 self?.fail(with: L10n.Collab.createError)
             })

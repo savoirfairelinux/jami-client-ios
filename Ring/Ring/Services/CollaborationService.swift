@@ -85,6 +85,16 @@ struct DocumentRemoved {
     let everywhere: Bool
 }
 
+/// What the daemon can refuse to do with a document.
+enum CollaborationError: Error {
+    /**
+     The daemon declined to create the document, which it says by answering with
+     no identifier: an editor opened on an empty one would show a document that
+     does not exist.
+     */
+    case refused
+}
+
 /**
  Collaborative documents: their lifecycle, their content as Y-CRDT updates, and
  the ephemeral state their editors share.
@@ -229,18 +239,28 @@ class CollaborationService {
     // MARK: - Documents
 
     /**
-     Announce a new document in a conversation.
-     - returns: its id, empty when the daemon refused to create it.
+     Announce a new document in a conversation, under the name it will go by:
+     the one asked for, trimmed, or the default for one asked for without.
+
+     - returns: its id, and the name it was created under.
+     - throws: `CollaborationError.refused`, the daemon having declined.
      */
     func createDocument(accountId: String,
                         conversationId: String,
                         name: String,
-                        mimeType: String = CollaborativeDocument.mimeRichText) -> Single<String> {
+                        mimeType: String = CollaborativeDocument.mimeRichText)
+    -> Single<(id: String, name: String)> {
+        let title = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        let named = title.isEmpty ? L10n.Collab.untitled : title
         return fromDaemon { [adapter] in
             adapter.createDocument(forAccount: accountId,
                                    conversationId: conversationId,
-                                   name: name,
+                                   name: named,
                                    mimeType: mimeType)
+        }
+        .map { documentId in
+            guard !documentId.isEmpty else { throw CollaborationError.refused }
+            return (id: documentId, name: named)
         }
     }
 

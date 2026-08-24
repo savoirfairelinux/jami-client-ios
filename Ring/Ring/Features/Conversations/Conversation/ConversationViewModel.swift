@@ -54,7 +54,6 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
     @Published var lastMessage: String = ""
     @Published var lastMessageDate: String = ""
     @Published var unreadMessages: Int = 0
-    @Published var collaborativeDocuments = [CollaborativeDocument]()
     @Published var presence: PresenceStatus = .offline
     @Published var navUserName: String = ""
     @Published var isBlocked: Bool = false
@@ -264,7 +263,6 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
             swarmInfo = nil
             messageUnreadCount = 0
             unreadCollaborativeDocumentIds.removeAll()
-            collaborativeDocuments = []
 
             self.subscribeUnreadMessages()
             self.subscribeCollaborativeDocumentChanges()
@@ -741,23 +739,12 @@ extension ConversationViewModel {
                 switch event.change {
                 case .notification:
                     self.unreadCollaborativeDocumentIds.insert(event.documentId)
-                    self.refreshCollaborativeDocuments()
                 case .update:
                     // Non-empty updates are delivered only while an editor is
                     // open, so this document is no longer waiting to be read.
                     self.unreadCollaborativeDocumentIds.remove(event.documentId)
                 }
                 self.updateUnreadCount()
-            })
-            .disposed(by: conversationBindingsDisposeBag)
-    }
-
-    private func refreshCollaborativeDocuments() {
-        collaborationService.documents(accountId: conversation.accountId,
-                                       conversationId: conversation.id)
-            .observe(on: MainScheduler.instance)
-            .subscribe(onSuccess: { [weak self] documents in
-                self?.collaborativeDocuments = documents
             })
             .disposed(by: conversationBindingsDisposeBag)
     }
@@ -953,30 +940,23 @@ extension ConversationViewModel {
     /**
      Starts a collaborative document and opens it.
 
-     - parameter failed: called when the daemon refuses, which it does by
-       answering with no identifier; an editor opened on one would show a
-       document that does not exist.
+     - parameter failed: called when no document was started, the daemon having
+       refused or the call itself having failed.
      */
     func createCollabDocument(named name: String, failed: @escaping () -> Void) {
         guard let conversation = self.conversation else { return }
-        let title = name.trimmingCharacters(in: .whitespacesAndNewlines)
-        let named = title.isEmpty ? L10n.Collab.untitled : title
         self.injectionBag.collaborationService
             .createDocument(accountId: conversation.accountId,
                             conversationId: conversation.id,
-                            name: named)
+                            name: name)
             .observe(on: MainScheduler.instance)
-            .subscribe(onSuccess: { [weak self] documentId in
+            .subscribe(onSuccess: { [weak self] document in
                 guard let self = self else { return }
-                guard !documentId.isEmpty else {
-                    failed()
-                    return
-                }
                 self.stateSubject.onNext(
                     ConversationState.openCollabDocument(accountId: conversation.accountId,
                                                          conversationId: conversation.id,
-                                                         documentId: documentId,
-                                                         name: named))
+                                                         documentId: document.id,
+                                                         name: document.name))
             }, onFailure: { _ in
                 failed()
             })

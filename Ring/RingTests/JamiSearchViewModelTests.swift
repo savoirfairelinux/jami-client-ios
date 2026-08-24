@@ -122,15 +122,10 @@ final class JamiSearchViewModelTests: XCTestCase {
         return account
     }
 
-    func testDocumentNotificationUpdatesConversationUnreadAndRefetchesDocuments() {
+    func testDocumentNotificationUpdatesConversationUnread() {
         let accountId = "account"
         let conversationId = "conversation"
         let documentId = "document"
-        collaborationAdapter.documentsReturnValue = [[
-            "id": documentId,
-            "displayName": "Notes",
-            "mimeType": "text/plain"
-        ]]
         conversationVM.conversation = ConversationModel(withId: conversationId,
                                                         accountId: accountId,
                                                         type: .oneToOne)
@@ -142,19 +137,12 @@ final class JamiSearchViewModelTests: XCTestCase {
             .sink { _ in unreadUpdated.fulfill() }
             .store(in: &cancellables)
 
-        let documentsRefetched = expectation(description: "Document notification refetches document metadata")
-        conversationVM.$collaborativeDocuments
-            .filter { $0.map(\.id) == [documentId] }
-            .first()
-            .sink { _ in documentsRefetched.fulfill() }
-            .store(in: &cancellables)
-
         collaborationService.documentUpdate(withAccountId: accountId,
                                             conversationId: conversationId,
                                             documentId: documentId,
                                             update: Data())
 
-        wait(for: [unreadUpdated, documentsRefetched], timeout: 1)
+        wait(for: [unreadUpdated], timeout: 1)
     }
 
     func testConversationExists_ForOneToOneConversation_QueryIsHash_Exists() {
