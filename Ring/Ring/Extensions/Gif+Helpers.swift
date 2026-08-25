@@ -32,33 +32,25 @@ extension UIImage {
         return UIImage.animatedImageWithSource(imageSource, maxSize: maxSize)
     }
 
-    class func delayForImageAtIndex(_ index: Int, source: CGImageSource!) -> Double {
-        var delay = 0.1
+    class func delayForImageAtIndex(_ index: Int, source: CGImageSource) -> Double {
+        let defaultDelay = 0.1
 
-        let cfProperties = CGImageSourceCopyPropertiesAtIndex(source, index, nil)
-        let gifProperties: CFDictionary = unsafeBitCast(
-            CFDictionaryGetValue(cfProperties,
-                                 Unmanaged.passUnretained(kCGImagePropertyGIFDictionary).toOpaque()),
-            to: CFDictionary.self)
-
-        var delayObject: AnyObject = unsafeBitCast(
-            CFDictionaryGetValue(gifProperties,
-                                 Unmanaged.passUnretained(kCGImagePropertyGIFUnclampedDelayTime).toOpaque()),
-            to: AnyObject.self)
-        if delayObject.doubleValue == 0 {
-            delayObject = unsafeBitCast(CFDictionaryGetValue(gifProperties,
-                                                             Unmanaged.passUnretained(kCGImagePropertyGIFDelayTime).toOpaque()), to: AnyObject.self)
+        guard let properties = CGImageSourceCopyPropertiesAtIndex(source, index, nil) as NSDictionary?,
+              let gifProperties = properties[kCGImagePropertyGIFDictionary] as? NSDictionary else {
+            return defaultDelay
         }
 
-        guard let delayDouble = delayObject as? Double else { return delay }
-
-        delay = delayDouble
-
-        if delay < 0.1 {
-            delay = 0.1
+        if let delay = (gifProperties[kCGImagePropertyGIFUnclampedDelayTime] as? NSNumber)?.doubleValue,
+           delay > 0, delay.isFinite {
+            return max(delay, defaultDelay)
         }
 
-        return delay
+        guard let delay = (gifProperties[kCGImagePropertyGIFDelayTime] as? NSNumber)?.doubleValue,
+              delay.isFinite else {
+            return defaultDelay
+        }
+
+        return max(delay, defaultDelay)
     }
 
     class func gcdForPair(_ varA: Int?, _ varB: Int?) -> Int {
@@ -117,9 +109,10 @@ extension UIImage {
         var delays = [Int]()
 
         for rang in 0..<count {
-            if let image = CGImageSourceCreateImageAtIndex(source, rang, options) {
-                images.append(image)
+            guard let image = CGImageSourceCreateImageAtIndex(source, rang, options) else {
+                return nil
             }
+            images.append(image)
 
             let delaySeconds = UIImage.delayForImageAtIndex(Int(rang),
                                                             source: source)
