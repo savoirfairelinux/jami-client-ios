@@ -797,9 +797,13 @@
 "collab.undo" = "Undo";
 "collab.redo" = "Redo";
 "collab.remove" = "Remove";
+"collab.open" = "Open";
+// Full labels shown inside the document-list row menu.
+"collab.removeLocallyMenu" = "Remove from this device";
+"collab.removeEverywhereMenu" = "Remove for everyone";
 // Short labels shown inside document-list swipe actions.
-"collab.removeLocallyAction" = "Remove local";
-"collab.removeEverywhereAction" = "Remove for all";
+"collab.removeLocallyAction" = "Offload";
+"collab.removeEverywhereAction" = "Remove";
 "collab.removeTitle" = "Remove document";
 "collab.removeMessage" = "\"%@\" will be removed for every member of this conversation. This cannot be undone.";
 "collab.removeError" = "This document could not be removed.";
