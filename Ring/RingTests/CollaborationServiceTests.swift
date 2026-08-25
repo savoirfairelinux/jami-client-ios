@@ -153,4 +153,69 @@ final class CollaborationServiceTests: XCTestCase {
         let symbols = Set(CollabDocumentRemoval.allCases.map { $0.symbol })
         XCTAssertEqual(symbols.count, CollabDocumentRemoval.allCases.count)
     }
+
+    func testAResolvedAuthorIsNamed() {
+        XCTAssertEqual(CollabDocumentsVM.authorName(for: "author-uri",
+                                                    resolved: ["author-uri": "Alice"],
+                                                    localJamiId: localJamiId),
+                       "Alice")
+    }
+
+    func testAnAuthorlessDocumentIsNotAttributed() {
+        XCTAssertNil(CollabDocumentsVM.authorName(for: nil,
+                                                  resolved: [:],
+                                                  localJamiId: localJamiId))
+        XCTAssertNil(CollabDocumentsVM.authorName(for: "",
+                                                  resolved: [:],
+                                                  localJamiId: localJamiId))
+    }
+
+    func testAnUnresolvedAuthorIsShortened() {
+        XCTAssertEqual(CollabDocumentsVM.authorName(for: "0123456789abcdef",
+                                                    resolved: [:],
+                                                    localJamiId: localJamiId),
+                       "01234567")
+    }
+
+    func testAShortUnresolvedAuthorIsLeftWhole() {
+        XCTAssertEqual(CollabDocumentsVM.authorName(for: "abc",
+                                                    resolved: [:],
+                                                    localJamiId: localJamiId),
+                       "abc")
+    }
+
+    func testALookupThatResolvedNothingFallsBack() {
+        XCTAssertEqual(CollabDocumentsVM.authorName(for: "0123456789abcdef",
+                                                    resolved: ["0123456789abcdef": "0123456789abcdef"],
+                                                    localJamiId: localJamiId),
+                       "01234567")
+        XCTAssertEqual(CollabDocumentsVM.authorName(for: "0123456789abcdef",
+                                                    resolved: ["0123456789abcdef": ""],
+                                                    localJamiId: localJamiId),
+                       "01234567")
+    }
+
+    func testYourOwnDocumentSaysSo() {
+        let name = CollabDocumentsVM.authorName(for: localJamiId,
+                                                resolved: [localJamiId: "Alice"],
+                                                localJamiId: localJamiId)
+
+        XCTAssertEqual(name, "Alice".withYourselfSuffix())
+    }
+
+    func testYourOwnDocumentSaysSoEvenUnresolved() {
+        let name = CollabDocumentsVM.authorName(for: localJamiId,
+                                                resolved: [:],
+                                                localJamiId: localJamiId)
+
+        XCTAssertEqual(name, String(localJamiId.prefix(8)).withYourselfSuffix())
+    }
+
+    func testAnUnreadableAccountClaimsNoDocument() {
+        let name = CollabDocumentsVM.authorName(for: "author-uri",
+                                                resolved: ["author-uri": "Alice"],
+                                                localJamiId: "")
+
+        XCTAssertEqual(name, "Alice")
+    }
 }

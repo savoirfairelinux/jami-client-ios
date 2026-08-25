@@ -735,6 +735,10 @@ internal enum L10n {
     internal static func createdBy(_ p1: Any) -> String {
       return L10n.tr("Localizable", "collab.createdBy", String(describing: p1), fallback: "Created by %@")
     }
+    /// Created by %@, not downloaded
+    internal static func createdByNotDownloaded(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "collab.createdByNotDownloaded", String(describing: p1), fallback: "Created by %@, not downloaded")
+    }
     /// This document could not be created.
     internal static let createError = L10n.tr("Localizable", "collab.createError", fallback: "This document could not be created.")
     /// Document name
@@ -753,6 +757,8 @@ internal enum L10n {
     }
     /// Documents
     internal static let documents = L10n.tr("Localizable", "collab.documents", fallback: "Documents")
+    /// Download and open
+    internal static let downloadAndOpen = L10n.tr("Localizable", "collab.downloadAndOpen", fallback: "Download and open")
     /// Editable document
     internal static let editableDocument = L10n.tr("Localizable", "collab.editableDocument", fallback: "Editable document")
     /// Only you are editing
@@ -811,8 +817,8 @@ internal enum L10n {
     internal static let noDocuments = L10n.tr("Localizable", "collab.noDocuments", fallback: "No document has been written in this conversation yet.")
     /// This document has no saved version yet.
     internal static let noHistory = L10n.tr("Localizable", "collab.noHistory", fallback: "This document has no saved version yet.")
-    /// not on this device
-    internal static let notOnThisDevice = L10n.tr("Localizable", "collab.notOnThisDevice", fallback: "not on this device")
+    /// Not downloaded
+    internal static let notDownloaded = L10n.tr("Localizable", "collab.notDownloaded", fallback: "Not downloaded")
     /// Open
     internal static let `open` = L10n.tr("Localizable", "collab.open", fallback: "Open")
     /// This document could not be opened.
