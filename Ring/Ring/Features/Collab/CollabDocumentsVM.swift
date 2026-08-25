@@ -217,30 +217,19 @@ class CollabDocumentsVM: ObservableObject {
         return document.name.isEmpty ? L10n.Collab.untitled : document.name
     }
 
-    /**
-     Who wrote it and when, and whether this device still holds it.
+    func authorName(of document: CollaborativeDocument) -> String? {
+        return Self.authorName(for: document.author,
+                               resolved: self.authorNames,
+                               localJamiId: self.localJamiId)
+    }
 
-     An entry that is no longer held stays open-able: opening it is what brings
-     it back, so it is told apart rather than dimmed.
-     */
-    func subtitle(of document: CollaborativeDocument) -> String {
-        let date = DateFormatter.localizedString(
-            from: Date(timeIntervalSince1970: TimeInterval(document.timestamp)),
-            dateStyle: .medium,
-            timeStyle: .none)
-        var line = date
-        if let author = document.author, !author.isEmpty {
-            let fallback = author.count > 8 ? String(author.prefix(8)) : author
-            let resolved = self.authorNames[author]
-            var name = resolved.flatMap { $0.isEmpty || $0 == author ? nil : $0 } ?? fallback
-            if author == self.localJamiId {
-                name = name.withYourselfSuffix()
-            }
-            line = L10n.Collab.createdBy(name) + " · " + date
-        }
-        guard document.storedLocally else {
-            return line + " · " + L10n.Collab.notOnThisDevice
-        }
-        return line
+    static func authorName(for author: String?,
+                           resolved: [String: String],
+                           localJamiId: String) -> String? {
+        guard let author = author, !author.isEmpty else { return nil }
+        let known = resolved[author].flatMap { $0.isEmpty || $0 == author ? nil : $0 }
+        let name = known ?? String(author.prefix(8))
+        guard !localJamiId.isEmpty, author == localJamiId else { return name }
+        return name.withYourselfSuffix()
     }
 }

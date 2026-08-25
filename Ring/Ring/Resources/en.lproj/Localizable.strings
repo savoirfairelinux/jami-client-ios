@@ -798,6 +798,7 @@
 "collab.redo" = "Redo";
 "collab.remove" = "Remove";
 "collab.open" = "Open";
+"collab.downloadAndOpen" = "Download and open";
 // Full labels shown inside the document-list row menu.
 "collab.removeLocallyMenu" = "Remove from this device";
 "collab.removeEverywhereMenu" = "Remove for everyone";
@@ -810,7 +811,8 @@
 "collab.removeLocallyTitle" = "Remove from this device";
 "collab.removeLocallyMessage" = "\"%@\" will be removed from this device only. The other members keep it, and opening it again downloads it back.";
 "collab.removeLocallyError" = "This document could not be removed from this device.";
-"collab.notOnThisDevice" = "not on this device";
+"collab.notDownloaded" = "Not downloaded";
+"collab.createdByNotDownloaded" = "Created by %@, not downloaded";
 "collab.documentRemoved" = "Document removed";
 "collab.documentRemovedMessage" = "\"%@\" was removed by its author.";
 "collab.documentRemovedLocally" = "Document removed from this device";

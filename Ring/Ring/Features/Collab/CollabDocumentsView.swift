@@ -111,9 +111,6 @@ private enum DocumentsLayout {
  */
 private struct DocumentRow: View {
 
-    /// The row's icon, which the menu's own Open item repeats.
-    private static let symbol = "doc.richtext"
-
     let document: CollaborativeDocument
     let viewModel: CollabDocumentsVM
     let open: () -> Void
@@ -144,17 +141,23 @@ private struct DocumentRow: View {
         .alert(item: $confirming, content: removalAlert)
     }
 
+    private var symbol: String {
+        return document.storedLocally ? "doc.richtext" : "arrow.down.doc"
+    }
+
+    private var openTitle: String {
+        return document.storedLocally ? L10n.Collab.open : L10n.Collab.downloadAndOpen
+    }
+
     private var label: some View {
         HStack(spacing: DocumentsLayout.margin) {
-            Image(systemName: DocumentRow.symbol)
+            Image(systemName: symbol)
                 .foregroundColor(Color.jami)
                 .accessibilityHidden(true)
             VStack(alignment: .leading, spacing: DocumentsLayout.textSpacing) {
                 Text(viewModel.title(of: document))
                     .foregroundColor(Color(UIColor.label))
-                Text(viewModel.subtitle(of: document))
-                    .font(.caption)
-                    .foregroundColor(.secondary)
+                details
             }
             Spacer()
         }
@@ -162,10 +165,27 @@ private struct DocumentRow: View {
         .contentShape(Rectangle())
     }
 
+    @ViewBuilder private var details: some View {
+        if let line = detailLine {
+            Text(line)
+                .font(.caption)
+                .foregroundColor(.secondary)
+        }
+    }
+
+    private var detailLine: String? {
+        switch (viewModel.authorName(of: document), document.storedLocally) {
+        case let (author?, true): return L10n.Collab.createdBy(author)
+        case let (author?, false): return L10n.Collab.createdByNotDownloaded(author)
+        case (nil, true): return nil
+        case (nil, false): return L10n.Collab.notDownloaded
+        }
+    }
+
     private var actionsMenu: some View {
         Menu {
             Button(action: open) {
-                Label(L10n.Collab.open, systemImage: DocumentRow.symbol)
+                Label(openTitle, systemImage: symbol)
             }
             ForEach(viewModel.removals(for: document)) { removal in
                 Button(role: removal == .forEveryone ? ButtonRole.destructive : nil) {
