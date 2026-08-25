@@ -44,7 +44,8 @@ class SwarmInfoVM: ObservableObject {
         guard let conversation = self.conversation else { return nil }
         return CollabDocumentsVM(with: self.injectionBag,
                                  accountId: conversation.accountId,
-                                 conversationId: conversation.id)
+                                 conversationId: conversation.id,
+                                 participants: self.swarmInfo.participants.asObservable())
     }()
 
     // MARK: - Private Properties

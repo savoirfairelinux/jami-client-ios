@@ -40,6 +40,7 @@ class CollabDocumentsVM: ObservableObject {
 
     @Published var documents = [CollaborativeDocument]()
     @Published var failed = false
+    @Published private var authorNames = [String: String]()
     /// What the alert says: creating and removing share it, and they fail for
     /// unrelated reasons.
     @Published var failureMessage = L10n.Collab.createError
@@ -49,13 +50,35 @@ class CollabDocumentsVM: ObservableObject {
     @Published var isNaming = false
     @Published var pendingName = ""
 
-    init(with injectionBag: InjectionBag, accountId: String, conversationId: String) {
+    init(with injectionBag: InjectionBag,
+         accountId: String,
+         conversationId: String,
+         participants: Observable<[ParticipantInfo]>) {
         self.collaborationService = injectionBag.collaborationService
         self.accountId = accountId
         self.conversationId = conversationId
         self.localJamiId = injectionBag.accountService
             .getAccount(fromAccountId: accountId)?.jamiId ?? ""
         self.subscribeDocumentChanges()
+        self.subscribeAuthorNames(participants)
+    }
+
+    private func subscribeAuthorNames(_ participants: Observable<[ParticipantInfo]>) {
+        participants
+            .flatMapLatest { participants -> Observable<[String: String]> in
+                guard !participants.isEmpty else { return .just([:]) }
+                let names = participants.map { participant in
+                    participant.finalName
+                        .map { (participant.jamiId, $0) }
+                }
+                return Observable.combineLatest(names)
+                    .map { Dictionary($0, uniquingKeysWith: { _, latest in latest }) }
+            }
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] names in
+                self?.authorNames = names
+            })
+            .disposed(by: self.disposeBag)
     }
 
     /**
@@ -207,8 +230,13 @@ class CollabDocumentsVM: ObservableObject {
             timeStyle: .none)
         var line = date
         if let author = document.author, !author.isEmpty {
-            let short = author.count > 8 ? String(author.prefix(8)) : author
-            line = L10n.Collab.createdBy(short) + " · " + date
+            let fallback = author.count > 8 ? String(author.prefix(8)) : author
+            let resolved = self.authorNames[author]
+            var name = resolved.flatMap { $0.isEmpty || $0 == author ? nil : $0 } ?? fallback
+            if author == self.localJamiId {
+                name = name.withYourselfSuffix()
+            }
+            line = L10n.Collab.createdBy(name) + " · " + date
         }
         guard document.storedLocally else {
             return line + " · " + L10n.Collab.notOnThisDevice
