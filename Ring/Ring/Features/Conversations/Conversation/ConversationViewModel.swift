@@ -941,7 +941,7 @@ extension ConversationViewModel {
      Starts a collaborative document and opens it.
 
      - parameter failed: called when no document was started, the daemon having
-       refused or the call itself having failed.
+     refused or the call itself having failed.
      */
     func createCollabDocument(named name: String, failed: @escaping () -> Void) {
         guard let conversation = self.conversation else { return }

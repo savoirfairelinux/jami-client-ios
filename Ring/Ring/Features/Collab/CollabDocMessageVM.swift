@@ -67,10 +67,11 @@ class CollabDocMessageVM: ObservableObject {
         self.removed = message.isMessageDeleted()
     }
 
-    /// The edit that retires an announcement arrives like any other.
     func messageUpdated() {
-        guard self.message.isMessageDeleted() else { return }
-        self.removed = true
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self, self.message.isMessageDeleted() else { return }
+            self.removed = true
+        }
     }
 
     /**
