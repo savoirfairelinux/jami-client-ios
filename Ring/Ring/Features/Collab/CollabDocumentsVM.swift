@@ -135,15 +135,15 @@ class CollabDocumentsVM: ObservableObject {
         self.isNaming = true
     }
 
-    /**
-     Whether this device may retire a document for every member.
+    func removals(for document: CollaborativeDocument) -> [CollabDocumentRemoval] {
+        return CollabDocumentRemoval.available(for: document, localJamiId: localJamiId)
+    }
 
-     Only its author may, and the daemon refuses anyone else: offering it to the
-     others would promise what cannot happen.
-     */
-    func canRemoveEverywhere(_ document: CollaborativeDocument) -> Bool {
-        guard let author = document.author, !author.isEmpty else { return false }
-        return !localJamiId.isEmpty && author == localJamiId
+    func perform(_ removal: CollabDocumentRemoval, on document: CollaborativeDocument) {
+        switch removal {
+        case .fromThisDevice: removeLocally(document)
+        case .forEveryone: removeEverywhere(document)
+        }
     }
 
     /// Retire a document for every member of the conversation.

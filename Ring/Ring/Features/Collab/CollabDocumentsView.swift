@@ -49,7 +49,7 @@ struct CollabDocumentsView: View {
                     .font(.callout)
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
-                    .padding(.horizontal, Layout.margin)
+                    .padding(.horizontal, DocumentsLayout.margin)
                 Spacer()
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -57,42 +57,18 @@ struct CollabDocumentsView: View {
             List {
                 Section(header: Text(L10n.Collab.documents)) {
                     ForEach(viewModel.documents, id: \.id) { document in
-                        Button {
-                            open(document.id, viewModel.title(of: document))
-                        } label: {
-                            row(for: document)
-                        }
-                        .buttonStyle(.plain)
-                        .accessibilityElement(children: .combine)
-                        .modifier(DocumentRemovalActions(document: document,
-                                                         viewModel: viewModel))
+                        DocumentRow(document: document,
+                                    viewModel: viewModel,
+                                    open: { open(document.id, viewModel.title(of: document)) })
                     }
                 }
             }
             // The new-document button stands in this corner; without the inset
             // it covers the last row, which then cannot be tapped.
             .safeAreaInset(edge: .bottom) {
-                Color.clear.frame(height: Layout.buttonSize + Layout.margin * 2)
+                Color.clear.frame(height: DocumentsLayout.buttonSize + DocumentsLayout.margin * 2)
             }
         }
-    }
-
-    /// The document's label inside the button that opens it.
-    private func row(for document: CollaborativeDocument) -> some View {
-        HStack(spacing: Layout.margin) {
-            Image(systemName: "doc.richtext")
-                .foregroundColor(Color.jami)
-            VStack(alignment: .leading, spacing: Layout.textSpacing) {
-                Text(viewModel.title(of: document))
-                    .foregroundColor(Color(UIColor.label))
-                Text(viewModel.subtitle(of: document))
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-            }
-            Spacer()
-        }
-        .frame(minHeight: Layout.rowHeight)
-        .contentShape(Rectangle())
     }
 
     private var newDocumentButton: some View {
@@ -102,87 +78,126 @@ struct CollabDocumentsView: View {
             Image(systemName: "square.and.pencil")
                 .font(.title2)
                 .foregroundColor(.white)
-                .frame(width: Layout.buttonSize, height: Layout.buttonSize)
+                .frame(width: DocumentsLayout.buttonSize, height: DocumentsLayout.buttonSize)
                 .background(Color.jami)
                 .clipShape(Circle())
-                .shadow(radius: Layout.shadow)
+                .shadow(radius: DocumentsLayout.shadow)
         }
-        .padding(Layout.margin)
+        .padding(DocumentsLayout.margin)
         .accessibilityLabel(L10n.Collab.newDocument)
     }
 
     private func open(_ documentId: String, _ name: String) {
         stateEmitter.openDocument(in: viewModel, documentId: documentId, name: name)
     }
-
-    private enum Layout {
-        static let margin: CGFloat = 16
-        static let textSpacing: CGFloat = 2
-        static let rowHeight: CGFloat = 44
-        static let buttonSize: CGFloat = 56
-        static let shadow: CGFloat = 4
-    }
 }
 
-private struct DocumentRemovalActions: ViewModifier {
+private enum DocumentsLayout {
+    static let margin: CGFloat = 16
+    static let textSpacing: CGFloat = 2
+    static let rowHeight: CGFloat = 44
+    static let buttonSize: CGFloat = 56
+    static let shadow: CGFloat = 4
+}
+
+/**
+ One document in the list, with everything that can be done to it.
+
+ The removals are reachable two ways. The menu is on every row, because what a
+ row offers depends on who wrote the document and whether this device is still
+ holding it: a swipe that answers on some rows and not on others teaches the
+ reader that the list does not answer at all. The swipe stays for the reader who
+ already knows it is there, and both routes end at the same confirmation.
+ */
+private struct DocumentRow: View {
+
+    /// The row's icon, which the menu's own Open item repeats.
+    private static let symbol = "doc.richtext"
 
     let document: CollaborativeDocument
     let viewModel: CollabDocumentsVM
+    let open: () -> Void
 
-    @SwiftUI.State private var confirming: Removal?
+    @SwiftUI.State private var confirming: CollabDocumentRemoval?
+    @ScaledMetric private var menuSize: CGFloat = 44
 
-    /**
-     A removal waiting to be confirmed.
-
-     The two are asked apart because they are not the same question: one takes a
-     document away from everybody for good, the other only reclaims what this
-     device chose to keep.
-     */
-    private struct Removal: Identifiable {
-        let everywhere: Bool
-
-        var id: String { everywhere ? "all" : "here" }
+    var body: some View {
+        HStack(spacing: 0) {
+            Button(action: open) {
+                label
+            }
+            .buttonStyle(.plain)
+            .accessibilityElement(children: .combine)
+            actionsMenu
+        }
+        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+            ForEach(viewModel.removals(for: document)) { removal in
+                Button {
+                    confirming = removal
+                } label: {
+                    Label(removal.swipeTitle, systemImage: removal.symbol)
+                }
+                .tint(tint(for: removal))
+                .accessibilityLabel(removal.menuTitle)
+            }
+        }
+        .alert(item: $confirming, content: removalAlert)
     }
 
-    func body(content: Content) -> some View {
-        content
-            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                if document.storedLocally {
-                    Button {
-                        confirming = Removal(everywhere: false)
-                    } label: {
-                        Label(L10n.Collab.removeLocallyAction,
-                              systemImage: "minus.circle")
-                    }
-                    .tint(.jamiWarning)
-                }
-                if viewModel.canRemoveEverywhere(document) {
-                    Button {
-                        confirming = Removal(everywhere: true)
-                    } label: {
-                        Label(L10n.Collab.removeEverywhereAction,
-                              systemImage: "trash")
-                    }
-                    .tint(.jamiFailure)
+    private var label: some View {
+        HStack(spacing: DocumentsLayout.margin) {
+            Image(systemName: DocumentRow.symbol)
+                .foregroundColor(Color.jami)
+                .accessibilityHidden(true)
+            VStack(alignment: .leading, spacing: DocumentsLayout.textSpacing) {
+                Text(viewModel.title(of: document))
+                    .foregroundColor(Color(UIColor.label))
+                Text(viewModel.subtitle(of: document))
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+            Spacer()
+        }
+        .frame(minHeight: DocumentsLayout.rowHeight)
+        .contentShape(Rectangle())
+    }
+
+    private var actionsMenu: some View {
+        Menu {
+            Button(action: open) {
+                Label(L10n.Collab.open, systemImage: DocumentRow.symbol)
+            }
+            ForEach(viewModel.removals(for: document)) { removal in
+                Button(role: removal == .forEveryone ? ButtonRole.destructive : nil) {
+                    confirming = removal
+                } label: {
+                    Label(removal.menuTitle, systemImage: removal.symbol)
                 }
             }
-            .alert(item: $confirming, content: removalAlert)
+        } label: {
+            Image(systemName: "ellipsis.circle")
+                .foregroundColor(.secondary)
+                .frame(width: menuSize, height: menuSize)
+                .contentShape(Rectangle())
+        }
+        .accessibilityLabel(L10n.Collab.menu)
     }
 
-    private func removalAlert(for removal: Removal) -> Alert {
-        Alert(title: Text(removal.everywhere ? L10n.Collab.removeTitle
-                            : L10n.Collab.removeLocallyTitle),
-              message: Text(removal.everywhere
-                                ? L10n.Collab.removeMessage(viewModel.title(of: document))
-                                : L10n.Collab.removeLocallyMessage(viewModel.title(of: document))),
-              primaryButton: .destructive(Text(L10n.Collab.remove)) {
-                if removal.everywhere {
-                    viewModel.removeEverywhere(document)
-                } else {
-                    viewModel.removeLocally(document)
-                }
-              },
-              secondaryButton: .cancel(Text(L10n.Global.cancel)))
+    private func removalAlert(for removal: CollabDocumentRemoval) -> Alert {
+        return Alert(title: Text(removal.alertTitle),
+                     message: Text(removal.alertMessage(for: viewModel.title(of: document))),
+                     primaryButton: .destructive(Text(L10n.Collab.remove)) {
+                        viewModel.perform(removal, on: document)
+                     },
+                     secondaryButton: .cancel(Text(L10n.Global.cancel)))
+    }
+
+    /// Only asked for a swipe button; the menu colours its own destructive item.
+    private func tint(for removal: CollabDocumentRemoval) -> Color {
+        switch removal {
+        case .fromThisDevice: return .jamiWarning
+        case .forEveryone: return .jamiFailure
+        }
     }
 }
 

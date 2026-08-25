@@ -24,6 +24,7 @@ final class CollaborationServiceTests: XCTestCase {
     private let accountId = "account"
     private let conversationId = "conversation"
     private let documentId = "document"
+    private let localJamiId = "0123456789abcdef0123456789abcdef01234567"
 
     private var service: CollaborationService!
     private var disposeBag: DisposeBag!
@@ -78,5 +79,78 @@ final class CollaborationServiceTests: XCTestCase {
                                update: Data())
 
         wait(for: [notificationReceived, updateLeaked], timeout: 1)
+    }
+
+    // MARK: - Which removals a document offers
+
+    private func document(author: String?, storedLocally: Bool) throws -> CollaborativeDocument {
+        var map = ["id": documentId, "displayName": "Notes", "timestamp": "42"]
+        if let author = author {
+            map["author"] = author
+        }
+        // Only a local removal writes this key, and it writes "false".
+        if !storedLocally {
+            map["storedLocally"] = "false"
+        }
+        return try XCTUnwrap(CollaborativeDocument(fromNative: map))
+    }
+
+    func testAuthorMayRetireItsOwnDocumentForEveryone() throws {
+        let removals = try CollabDocumentRemoval
+            .available(for: document(author: localJamiId, storedLocally: true),
+                       localJamiId: localJamiId)
+
+        XCTAssertEqual(removals, [.fromThisDevice, .forEveryone])
+    }
+
+    func testAMemberMayOnlyStopHoldingSomeoneElsesDocument() throws {
+        let removals = try CollabDocumentRemoval
+            .available(for: document(author: "someone-else", storedLocally: true),
+                       localJamiId: localJamiId)
+
+        XCTAssertEqual(removals, [.fromThisDevice])
+    }
+
+    /**
+     An account that could not be read matches nobody, not even a document whose
+     author is unknown too.
+
+     Only the empty `localJamiId` is exercised here. The model already collapses
+     an empty author to nil, and declaring `init?(fromNative:)` in its body
+     suppresses the memberwise initializer, so a document with an empty author is
+     not something a test can build: the guard against one is defence in depth
+     against a state the model cannot hold.
+     */
+    func testAnUnknownIdentityIsNeverTheAuthor() throws {
+        XCTAssertEqual(try CollabDocumentRemoval
+            .available(for: document(author: localJamiId, storedLocally: true), localJamiId: ""),
+                       [.fromThisDevice])
+        XCTAssertEqual(try CollabDocumentRemoval
+            .available(for: document(author: nil, storedLocally: true), localJamiId: localJamiId),
+                       [.fromThisDevice])
+    }
+
+    func testADocumentThisDeviceDoesNotHoldCannotBeDroppedAgain() throws {
+        XCTAssertEqual(try CollabDocumentRemoval
+            .available(for: document(author: localJamiId, storedLocally: false),
+                       localJamiId: localJamiId),
+                       [.forEveryone])
+        XCTAssertTrue(try CollabDocumentRemoval
+            .available(for: document(author: "someone-else", storedLocally: false),
+                       localJamiId: localJamiId).isEmpty)
+    }
+
+    func testEveryRemovalIsNamedOnBothSurfaces() {
+        for removal in CollabDocumentRemoval.allCases {
+            XCTAssertFalse(removal.menuTitle.isEmpty)
+            XCTAssertFalse(removal.swipeTitle.isEmpty)
+            XCTAssertFalse(removal.symbol.isEmpty)
+            XCTAssertFalse(removal.alertTitle.isEmpty)
+            XCTAssertFalse(removal.alertMessage(for: "Notes").isEmpty)
+        }
+        // A translation may legitimately collapse two titles into one; a symbol
+        // is not translated, and telling the two removals apart is its whole job.
+        let symbols = Set(CollabDocumentRemoval.allCases.map { $0.symbol })
+        XCTAssertEqual(symbols.count, CollabDocumentRemoval.allCases.count)
     }
 }

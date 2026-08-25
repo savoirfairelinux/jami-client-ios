@@ -813,6 +813,8 @@ internal enum L10n {
     internal static let noHistory = L10n.tr("Localizable", "collab.noHistory", fallback: "This document has no saved version yet.")
     /// not on this device
     internal static let notOnThisDevice = L10n.tr("Localizable", "collab.notOnThisDevice", fallback: "not on this device")
+    /// Open
+    internal static let `open` = L10n.tr("Localizable", "collab.open", fallback: "Open")
     /// This document could not be opened.
     internal static let openError = L10n.tr("Localizable", "collab.openError", fallback: "This document could not be opened.")
     /// Numbered list
@@ -823,12 +825,16 @@ internal enum L10n {
     internal static let remove = L10n.tr("Localizable", "collab.remove", fallback: "Remove")
     /// This document could not be removed.
     internal static let removeError = L10n.tr("Localizable", "collab.removeError", fallback: "This document could not be removed.")
-    /// Remove for all
-    internal static let removeEverywhereAction = L10n.tr("Localizable", "collab.removeEverywhereAction", fallback: "Remove for all")
-    /// Remove local
-    internal static let removeLocallyAction = L10n.tr("Localizable", "collab.removeLocallyAction", fallback: "Remove local")
+    /// Remove
+    internal static let removeEverywhereAction = L10n.tr("Localizable", "collab.removeEverywhereAction", fallback: "Remove")
+    /// Remove for everyone
+    internal static let removeEverywhereMenu = L10n.tr("Localizable", "collab.removeEverywhereMenu", fallback: "Remove for everyone")
+    /// Offload
+    internal static let removeLocallyAction = L10n.tr("Localizable", "collab.removeLocallyAction", fallback: "Offload")
     /// This document could not be removed from this device.
     internal static let removeLocallyError = L10n.tr("Localizable", "collab.removeLocallyError", fallback: "This document could not be removed from this device.")
+    /// Remove from this device
+    internal static let removeLocallyMenu = L10n.tr("Localizable", "collab.removeLocallyMenu", fallback: "Remove from this device")
     /// "%@" will be removed from this device only. The other members keep it, and opening it again downloads it back.
     internal static func removeLocallyMessage(_ p1: Any) -> String {
       return L10n.tr("Localizable", "collab.removeLocallyMessage", String(describing: p1), fallback: "\"%@\" will be removed from this device only. The other members keep it, and opening it again downloads it back.")
