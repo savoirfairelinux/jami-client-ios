@@ -66,8 +66,8 @@ struct CallTileComposer {
             plans = []
         } else if let call = call, isSwarmCall {
             plans = [CallTilePlanner.swarmStartupTile(
-                localJamiId: localJamiId,
-                localCameraOn: call.effectiveMedia(in: conference).hasVideo)]
+                        localJamiId: localJamiId,
+                        localCameraOn: call.effectiveMedia(in: conference).hasVideo)]
         } else if let call = call {
             plans = CallTilePlanner.directCallTiles(
                 CallTilePlanner.DirectCall(id: call.id.raw,

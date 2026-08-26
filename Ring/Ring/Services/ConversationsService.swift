@@ -1,10 +1,5 @@
 /*
- *  Copyright (C) 2017-2021 Savoir-faire Linux Inc.
- *
- *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
- *  Author: Quentin Muret <quentin.muret@savoirfairelinux.com>
- *  Author: Raphaël Brulé <raphael.brule@savoirfairelinux.com>
- *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Copyright (C) 2017-2026 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -66,6 +61,19 @@ class ConversationsService {
     let dbManager: DBManager
 
     private let serialOperationQueue = DispatchQueue(label: "com.jami.ConversationsService.operationQueue")
+
+    var onEvent: ((ConversationEvent) -> Void)?
+
+    private(set) lazy var eventSource = ConversationEventSource { [weak self] event in
+        guard let self = self else { return }
+        self.serialOperationQueue.async {
+            self.onEvent?(event)
+        }
+    }
+
+    func startEvents() {
+        eventSource.attachToAdapter()
+    }
 
     // MARK: initial loading
 
@@ -130,9 +138,11 @@ class ConversationsService {
     }
 
     func clearConversationsData(accountId: String) {
-        self.conversations.value.forEach { conversation in
-            self.conversationsAdapter
-                .clearCashe(forConversationId: conversation.id, accountId: accountId)
+        serialOperationQueue.async { [weak self] in
+            guard let self = self else { return }
+            self.conversations.value.forEach { conversation in
+                self.conversationsAdapter.clearCashe(forConversationId: conversation.id, accountId: accountId)
+            }
         }
     }
 
@@ -354,63 +364,56 @@ class ConversationsService {
      @return inserted. Returns true if at least one message was inserted.
      */
     func insertMessages(messages: [MessageModel], accountId: String, localJamiId: String, conversationId: String, fromLoaded: Bool) -> Bool {
-        var result = false
+        dispatchPrecondition(condition: .onQueue(serialOperationQueue))
+        guard let conversation = self.conversations.value
+                .filter({ conversation in
+                    return conversation.id == conversationId && conversation.accountId == accountId
+                })
+                .first else { return false }
 
-        serialOperationQueue.sync {
-            guard let conversation = self.conversations.value
-                    .filter({ conversation in
-                        return conversation.id == conversationId && conversation.accountId == accountId
-                    })
-                    .first else { return }
-
-            if self.isTargetReply(messages: messages) {
-                self.processReplyTargetMessage(with: messages.first)
-                result = true
-                return
-            }
-
-            // If all the loaded messages are of type .merge or .profile or have already been added, we need to load the next set of messages.
-            let filtered = messages.filter { newMessage in newMessage.type != .merge && newMessage.type != .profile && !conversation.messages.contains(where: { message in
-                message.id == newMessage.id
-            })
-            }
-
-            if fromLoaded && filtered.isEmpty {
-                if let lastMessage = messages.last?.id {
-                    self.loadConversationMessages(conversationId: conversationId, accountId: accountId, from: lastMessage)
-                }
-                result = false
-                return
-            }
-
-            var newMessages = [MessageModel]()
-            filtered.forEach { newMessage in
-                newMessages.append(newMessage)
-                guard let lastMessage = conversation.lastMessage,
-                      lastMessage.receivedDate > newMessage.receivedDate else {
-                    conversation.lastMessage = newMessage
-                    return
-                }
-            }
-
-            if fromLoaded {
-                conversation.messages.append(contentsOf: newMessages)
-            } else {
-                conversation.messages.insert(contentsOf: newMessages, at: 0)
-            }
-
-            self.sortIfNeeded()
-
-            if !fromLoaded {
-                let incomingMessages = newMessages.filter({ $0.authorId != localJamiId && !$0.authorId.isEmpty })
-                conversation.updateUnreadMessages(count: incomingMessages.count)
-            }
-
-            conversation.newMessages.accept(LoadedMessages(messages: newMessages, fromHistory: fromLoaded))
-            result = true
+        if self.isTargetReply(messages: messages) {
+            self.processReplyTargetMessage(with: messages.first)
+            return true
         }
 
-        return result
+        // If all the loaded messages are of type .merge or .profile or have already been added, we need to load the next set of messages.
+        let filtered = messages.filter { newMessage in newMessage.type != .merge && newMessage.type != .profile && !conversation.messages.contains(where: { message in
+            message.id == newMessage.id
+        })
+        }
+
+        if fromLoaded && filtered.isEmpty {
+            if let lastMessage = messages.last?.id {
+                self.loadConversationMessages(conversationId: conversationId, accountId: accountId, from: lastMessage)
+            }
+            return false
+        }
+
+        var newMessages = [MessageModel]()
+        filtered.forEach { newMessage in
+            newMessages.append(newMessage)
+            guard let lastMessage = conversation.lastMessage,
+                  lastMessage.receivedDate > newMessage.receivedDate else {
+                conversation.lastMessage = newMessage
+                return
+            }
+        }
+
+        if fromLoaded {
+            conversation.messages.append(contentsOf: newMessages)
+        } else {
+            conversation.messages.insert(contentsOf: newMessages, at: 0)
+        }
+
+        self.sortIfNeeded()
+
+        if !fromLoaded {
+            let incomingMessages = newMessages.filter({ $0.authorId != localJamiId && !$0.authorId.isEmpty })
+            conversation.updateUnreadMessages(count: incomingMessages.count)
+        }
+
+        conversation.newMessages.accept(LoadedMessages(messages: newMessages, fromHistory: fromLoaded))
+        return true
     }
 
     private func isTargetReply(messages: [MessageModel]) -> Bool {
@@ -441,33 +444,27 @@ class ConversationsService {
     }
 
     func conversationReady(conversationId: String, accountId: String, accountURI: String) {
-        serialOperationQueue.async { [weak self] in
-            guard let self = self else { return }
-            let conversation = self.getConversationForId(conversationId: conversationId, accountId: accountId)
-
-            if conversation == nil {
-                var currentConversations = self.conversations.value
-                self.addSwarm(conversationId: conversationId, accountId: accountId, accountURI: accountURI, to: &currentConversations)
-                self.publishNewConversation(conversationId: conversationId, accountId: accountId, conversations: &currentConversations)
-                return
-            }
-
-            if let info = self.conversationsAdapter.getConversationInfo(forAccount: accountId, conversationId: conversationId) as? [String: String],
-               let participantsInfo = self.conversationsAdapter.getConversationMembers(accountId, conversationId: conversationId) {
-                conversation?.updateInfo(info: info)
-                if let prefsInfo = self.getConversationPreferences(accountId: accountId, conversationId: conversationId) {
-                    conversation?.updatePreferences(preferences: prefsInfo)
-                }
-                conversation?.addParticipantsFromArray(participantsInfo: participantsInfo, accountURI: accountURI)
-                if let conversation = conversation {
-                    self.scheduleUnreadCount(for: conversation, accountId: accountId)
-                }
-                self.loadConversationMessages(conversationId: conversationId, accountId: accountId, from: "", size: 2)
-                self.sortIfNeeded()
-            }
-
-            self.conversationReady.accept(conversationId)
+        dispatchPrecondition(condition: .onQueue(serialOperationQueue))
+        guard let conversation = self.getConversationForId(conversationId: conversationId, accountId: accountId) else {
+            var currentConversations = self.conversations.value
+            self.addSwarm(conversationId: conversationId, accountId: accountId, accountURI: accountURI, to: &currentConversations)
+            self.publishNewConversation(conversationId: conversationId, accountId: accountId, conversations: &currentConversations)
+            return
         }
+
+        if let info = self.conversationsAdapter.getConversationInfo(forAccount: accountId, conversationId: conversationId) as? [String: String],
+           let participantsInfo = self.conversationsAdapter.getConversationMembers(accountId, conversationId: conversationId) {
+            conversation.updateInfo(info: info)
+            if let prefsInfo = self.getConversationPreferences(accountId: accountId, conversationId: conversationId) {
+                conversation.updatePreferences(preferences: prefsInfo)
+            }
+            conversation.addParticipantsFromArray(participantsInfo: participantsInfo, accountURI: accountURI)
+            self.scheduleUnreadCount(for: conversation, accountId: accountId)
+            self.loadConversationMessages(conversationId: conversationId, accountId: accountId, from: "", size: 2)
+            self.sortIfNeeded()
+        }
+
+        self.conversationReady.accept(conversationId)
     }
 
     func getConversationInfo(conversationId: String, accountId: String) -> [String: String] {
@@ -475,28 +472,26 @@ class ConversationsService {
     }
 
     func conversationRemoved(conversationId: String, accountId: String) {
-        serialOperationQueue.async { [weak self] in
-            guard let self = self else { return }
-            guard let index = self.conversations.value.firstIndex(where: { conversationModel in
-                conversationModel.id == conversationId && conversationModel.accountId == accountId
-            }) else { return }
-            var conversations = self.conversations.value
-            conversations.remove(at: index)
-            self.conversations.accept(conversations)
-            let serviceEventType: ServiceEventType = .conversationRemoved
-            var serviceEvent = ServiceEvent(withEventType: serviceEventType)
-            serviceEvent.addEventInput(.conversationId, value: conversationId)
-            serviceEvent.addEventInput(.accountId, value: accountId)
-            self.responseStream.onNext(serviceEvent)
-        }
+        dispatchPrecondition(condition: .onQueue(serialOperationQueue))
+        guard let index = self.conversations.value.firstIndex(where: { conversationModel in
+            conversationModel.id == conversationId && conversationModel.accountId == accountId
+        }) else { return }
+        var conversations = self.conversations.value
+        conversations.remove(at: index)
+        self.conversations.accept(conversations)
+        let serviceEventType: ServiceEventType = .conversationRemoved
+        var serviceEvent = ServiceEvent(withEventType: serviceEventType)
+        serviceEvent.addEventInput(.conversationId, value: conversationId)
+        serviceEvent.addEventInput(.accountId, value: accountId)
+        self.responseStream.onNext(serviceEvent)
     }
 
-    func conversationMemberEvent(conversationId: String, accountId: String, memberUri: String, event: ConversationMemberEvent, accountURI: String) {
+    func conversationMemberEvent(conversationId: String, accountId: String, accountURI: String) {
+        dispatchPrecondition(condition: .onQueue(serialOperationQueue))
         guard let conversation = self.getConversationForId(conversationId: conversationId, accountId: accountId),
-              let participantsInfo = conversationsAdapter.getConversationMembers(accountId, conversationId: conversationId) else { return }
-        conversation.addParticipantsFromArray(participantsInfo: participantsInfo, accountURI: accountURI)
-        let serviceEventType: ServiceEventType = .conversationMemberEvent
-        var serviceEvent = ServiceEvent(withEventType: serviceEventType)
+              let members = conversationsAdapter.getConversationMembers(accountId, conversationId: conversationId) else { return }
+        conversation.addParticipantsFromArray(participantsInfo: members, accountURI: accountURI)
+        var serviceEvent = ServiceEvent(withEventType: .conversationMemberEvent)
         serviceEvent.addEventInput(.conversationId, value: conversationId)
         serviceEvent.addEventInput(.accountId, value: accountId)
         self.responseStream.onNext(serviceEvent)
@@ -737,8 +732,8 @@ class ConversationsService {
             .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe(onCompleted: finish,
                        onError: { [weak self] error in
-                           self?.log.error(error)
-                           finish()
+                        self?.log.error(error)
+                        finish()
                        })
             .disposed(by: self.disposeBag)
     }

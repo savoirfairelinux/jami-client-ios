@@ -28,6 +28,7 @@
 #import "FixtureFailInitDRingAdapter.h"
 #import "FixtureFailStartDRingAdapter.h"
 #import "ObjCMockCallsAdapter.h"
+#import "ObjCMockConversationsAdapter.h"
 #import "ObjCMockVideoAdapter.h"
 #import "ObjCMockPeerServicesAdapter.h"
 #import "ObjCMockCollaborationAdapter.h"
