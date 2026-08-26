@@ -281,7 +281,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
                 self.isAccountSip = true
                 if let participantId = conversation.getParticipants().first?.jamiId,
                    let uri = ProfilesService.profileUriString(
-                       for: JamiURI(schema: .sip, infoHash: participantId)
+                    for: JamiURI(schema: .sip, infoHash: participantId)
                    ) {
                     self.subscribeNonSwarmProfiles(uri: uri,
                                                    accountId: self.conversation.accountId)
