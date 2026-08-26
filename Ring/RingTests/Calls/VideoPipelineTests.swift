@@ -83,6 +83,6 @@ final class VideoPipelineTests: XCTestCase {
 
         XCTAssertEqual(video.framesRecorded(at: path), 1,
                        "captured frames must reach the recorder; libjami drops any frame "
-                       + "addressed to a video input it has not opened")
+                        + "addressed to a video input it has not opened")
     }
 }
