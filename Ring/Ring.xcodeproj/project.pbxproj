@@ -548,6 +548,8 @@
 		803EA760EE82660B036D3FD8 /* IdentityBackdrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = C760772C22CC601BCEA3449C /* IdentityBackdrop.swift */; };
 		9F5F2102C5C96402A066ADA0 /* GroupAvatarRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE00A4B452D77EC0CA26ED4 /* GroupAvatarRenderer.swift */; };
 		A1D0C0DE0000000000000B02 /* CallsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D0C0DE0000000000000B01 /* CallsManager.swift */; };
+		A1D0C0DE0000000000000C11 /* ConversationEventOrderingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D0C0DE0000000000000C12 /* ConversationEventOrderingTests.swift */; };
+		A1D0C0DE0000000000000C13 /* ObjCMockConversationsAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D0C0DE0000000000000C14 /* ObjCMockConversationsAdapter.m */; };
 		A7F100010000000000000001 /* GifHelpersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F100020000000000000002 /* GifHelpersTests.swift */; };
 		A7MD00102F20000200000001 /* MessageMarkdownSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7MD00102F20000100000001 /* MessageMarkdownSupport.swift */; };
 		A7MD00102F20000200000002 /* MessageMarkdownPlainText.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7MD00102F20000100000002 /* MessageMarkdownPlainText.swift */; };
@@ -1769,6 +1771,9 @@
 		66ACB42F214AE28C00A94162 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
 		66F295DD2166A5930044ED6F /* Devices+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Devices+Helpers.swift"; sourceTree = "<group>"; };
 		A1D0C0DE0000000000000B01 /* CallsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallsManager.swift; sourceTree = "<group>"; };
+		A1D0C0DE0000000000000C12 /* ConversationEventOrderingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationEventOrderingTests.swift; sourceTree = "<group>"; };
+		A1D0C0DE0000000000000C14 /* ObjCMockConversationsAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjCMockConversationsAdapter.m; sourceTree = "<group>"; };
+		A1D0C0DE0000000000000C15 /* ObjCMockConversationsAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjCMockConversationsAdapter.h; sourceTree = "<group>"; };
 		A7F100020000000000000002 /* GifHelpersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifHelpersTests.swift; sourceTree = "<group>"; };
 		A7MD00102F20000100000001 /* MessageMarkdownSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageMarkdownSupport.swift; sourceTree = "<group>"; };
 		A7MD00102F20000100000002 /* MessageMarkdownPlainText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageMarkdownPlainText.swift; sourceTree = "<group>"; };
@@ -1839,6 +1844,7 @@
 		71EDE7188785BAE3C6142B71 /* Calls */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Calls; sourceTree = "<group>"; };
 		8E78832A5F39EFF9893C109D /* Video */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Video; sourceTree = "<group>"; };
 		A1D0C0DE0000000000000A01 /* Audio */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Audio; sourceTree = "<group>"; };
+		A1D0C0DE0000000000000C01 /* Conversations */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Conversations; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2809,6 +2815,7 @@
 				AA0001010000000000000001 /* PhotoLibrarySaving.swift */,
 				A1D0C0DE0000000000000A01 /* Audio */,
 				2F774C97D1E10CF5AAF9E869 /* Calls */,
+				A1D0C0DE0000000000000C01 /* Conversations */,
 				8E78832A5F39EFF9893C109D /* Video */,
 			);
 			path = Services;
@@ -3283,6 +3290,7 @@
 		260AE63029BA5B6700D66D5E /* ConversationsTests */ = {
 			isa = PBXGroup;
 			children = (
+				A1D0C0DE0000000000000C12 /* ConversationEventOrderingTests.swift */,
 				260AE62629B8E89300D66D5E /* JamiSearchViewModelTests.swift */,
 				260AE62E29BA3B6900D66D5E /* ConversationModelTests.swift */,
 				0EDA00050000000000001005 /* ConversationDestructiveActionTests.swift */,
@@ -3298,6 +3306,8 @@
 		260AE63129BA5BB500D66D5E /* TestableModels */ = {
 			isa = PBXGroup;
 			children = (
+				A1D0C0DE0000000000000C14 /* ObjCMockConversationsAdapter.m */,
+				A1D0C0DE0000000000000C15 /* ObjCMockConversationsAdapter.h */,
 				26F1D8F12FC76A8B002AA754 /* ObjCMockPeerServicesAdapter.h */,
 				26F1D8F22FC76A8B002AA754 /* ObjCMockPeerServicesAdapter.m */,
 				C30000000000000000000012 /* ObjCMockCollaborationAdapter.h */,
@@ -3853,6 +3863,7 @@
 				71EDE7188785BAE3C6142B71 /* Calls */,
 				8E78832A5F39EFF9893C109D /* Video */,
 				A1D0C0DE0000000000000A01 /* Audio */,
+				A1D0C0DE0000000000000C01 /* Conversations */,
 			);
 			name = Ring;
 			packageProductDependencies = (
@@ -4503,6 +4514,8 @@
 			files = (
 				A7F100010000000000000001 /* GifHelpersTests.swift in Sources */,
 				260AE63329BA5DF600D66D5E /* SwarmInfoTests.swift in Sources */,
+				A1D0C0DE0000000000000C11 /* ConversationEventOrderingTests.swift in Sources */,
+				A1D0C0DE0000000000000C13 /* ObjCMockConversationsAdapter.m in Sources */,
 				26AVATAR0129BA000000000001 /* AvatarProviderTests.swift in Sources */,
 				26GRPAVT0129BA000000000001 /* GroupAvatarRendererTests.swift in Sources */,
 				26BA01010000000000000001 /* ProfilesServiceTests.swift in Sources */,

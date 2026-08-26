@@ -421,12 +421,12 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
                     frameSize: CGSize(width: 300, height: 300))]
             }
             harness.send(.conferenceCreated(
-                conferenceId: conferenceId, conversationId: conversationId1,
-                accountId: Harness.accountId,
-                state: ConferenceLifecycle.activeAttached.rawValue,
-                memberCallIds: [harness.callId.raw],
-                participants: participants(localIsActive: false),
-                media: [.audio(), .video()]))
+                            conferenceId: conferenceId, conversationId: conversationId1,
+                            accountId: Harness.accountId,
+                            state: ConferenceLifecycle.activeAttached.rawValue,
+                            memberCallIds: [harness.callId.raw],
+                            participants: participants(localIsActive: false),
+                            media: [.audio(), .video()]))
             await Harness.wait { model.conference?.participants.count == 2 }
 
             XCTAssertEqual(Set(model.tiles.map { $0.participant.id }),
@@ -435,13 +435,13 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
             let remoteTile = model.tiles.first { $0.participant.id == CallTestFixtures.remoteSinkId }
             XCTAssertTrue(localTile?.distributor === harness.videoService.localFrames)
             XCTAssertTrue(remoteTile?.distributor === harness.videoService.distributor(
-                for: SinkId(raw: CallTestFixtures.remoteSinkId)))
+                            for: SinkId(raw: CallTestFixtures.remoteSinkId)))
             XCTAssertEqual(model.canvasMode, .spotlight(CallTestFixtures.remoteSinkId))
             XCTAssertEqual(model.participantRows.filter(\.isLocal).map(\.id),
                            ["\(conferenceId)_video_0"])
             XCTAssertEqual(PiPSourceSelector.select(
-                call: model.call, conference: model.conference,
-                localJamiId: jamiId1, localDeviceId: deviceId1, current: nil)?.sinkId,
+                            call: model.call, conference: model.conference,
+                            localJamiId: jamiId1, localDeviceId: deviceId1, current: nil)?.sinkId,
                            SinkId(raw: CallTestFixtures.remoteSinkId))
 
             model.perform(.raiseHand, on: CallTestFixtures.remoteSinkId)
@@ -450,7 +450,7 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
                            "raiseHand:\(jamiId1):\(deviceId2):true")
 
             harness.send(.conferenceInfosUpdated(
-                conferenceId: conferenceId, participants: participants(localIsActive: true)))
+                            conferenceId: conferenceId, participants: participants(localIsActive: true)))
             await Harness.wait { model.canvasMode == .spotlight(CanvasParticipant.localId) }
         }
 
