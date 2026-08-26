@@ -1831,6 +1831,7 @@
 		71EDE7188785BAE3C6142B71 /* Calls */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Calls; sourceTree = "<group>"; };
 		8E78832A5F39EFF9893C109D /* Video */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Video; sourceTree = "<group>"; };
 		A1D0C0DE0000000000000A01 /* Audio */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Audio; sourceTree = "<group>"; };
+		A1D0C0DE0000000000000C01 /* Conversations */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Conversations; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2818,6 +2819,7 @@
 				AA0001010000000000000001 /* PhotoLibrarySaving.swift */,
 				A1D0C0DE0000000000000A01 /* Audio */,
 				2F774C97D1E10CF5AAF9E869 /* Calls */,
+				A1D0C0DE0000000000000C01 /* Conversations */,
 				8E78832A5F39EFF9893C109D /* Video */,
 			);
 			path = Services;
@@ -3823,6 +3825,7 @@
 				71EDE7188785BAE3C6142B71 /* Calls */,
 				8E78832A5F39EFF9893C109D /* Video */,
 				A1D0C0DE0000000000000A01 /* Audio */,
+				A1D0C0DE0000000000000C01 /* Conversations */,
 			);
 			name = Ring;
 			packageProductDependencies = (

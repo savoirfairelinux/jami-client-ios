@@ -1,10 +1,5 @@
 /*
- *  Copyright (C) 2017-2021 Savoir-faire Linux Inc.
- *
- *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
- *  Author: Quentin Muret <quentin.muret@savoirfairelinux.com>
- *  Author: Raphaël Brulé <raphael.brule@savoirfairelinux.com>
- *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Copyright (C) 2017-2026 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -65,6 +60,8 @@ class ConversationsService {
 
     let dbManager: DBManager
 
+    let libJamiAPI: LibJamiConversationAPI
+
     private let serialOperationQueue = DispatchQueue(label: "com.jami.ConversationsService.operationQueue")
 
     // MARK: initial loading
@@ -73,6 +70,7 @@ class ConversationsService {
         self.responseStream.disposed(by: disposeBag)
         self.sharedResponseStream = responseStream.share()
         self.conversationsAdapter = adapter
+        self.libJamiAPI = LibJamiConversationClient(adapter: adapter)
         self.dbManager = dbManager
     }
     /**
@@ -129,10 +127,15 @@ class ConversationsService {
         }
     }
 
+    /// Called from `currentWillChange`, which the account setter emits
+    /// synchronously on the caller's thread -- the account picker, on main. Each
+    /// `clearCache` is a blocking daemon call, so this has to leave main.
     func clearConversationsData(accountId: String) {
-        self.conversations.value.forEach { conversation in
-            self.conversationsAdapter
-                .clearCashe(forConversationId: conversation.id, accountId: accountId)
+        serialOperationQueue.async { [weak self] in
+            guard let self = self else { return }
+            self.conversations.value.forEach { conversation in
+                self.libJamiAPI.clearCache(accountId: accountId, conversationId: conversation.id)
+            }
         }
     }
 
@@ -159,6 +162,18 @@ class ConversationsService {
 
     func reloadConversationsAndRequests(accountId: String) {
         self.conversationsAdapter.reloadConversationsAndRequests(accountId)
+    }
+
+    private func addSwarm(conversationId: String, accountId: String, accountURI: String,
+                          snapshot: ConversationSnapshot,
+                          to conversations: inout [ConversationModel]) {
+        let conversation = ConversationModel(withId: conversationId, accountId: accountId,
+                                             info: snapshot.info)
+        conversation.updatePreferences(preferences: snapshot.preferences)
+        conversation.addParticipantsFromArray(participantsInfo: snapshot.members,
+                                              accountURI: accountURI)
+        conversation.updateLastDisplayedMessage(participantsInfo: snapshot.members)
+        conversations.append(conversation)
     }
 
     private func addSwarm(conversationId: String, accountId: String, accountURI: String, to conversations: inout [ConversationModel]) {
@@ -356,6 +371,8 @@ class ConversationsService {
     func insertMessages(messages: [MessageModel], accountId: String, localJamiId: String, conversationId: String, fromLoaded: Bool) -> Bool {
         var result = false
 
+        // `.sync` because the resolver queue and this queue are separate; do
+        // not call this from the serial queue itself.
         serialOperationQueue.sync {
             guard let conversation = self.conversations.value
                     .filter({ conversation in
@@ -440,31 +457,28 @@ class ConversationsService {
         self.requestedReplyTargets.removeAll { $0 == messageId }
     }
 
-    func conversationReady(conversationId: String, accountId: String, accountURI: String) {
+    func conversationReady(conversationId: String, accountId: String, accountURI: String,
+                           snapshot: ConversationSnapshot) {
         serialOperationQueue.async { [weak self] in
             guard let self = self else { return }
             let conversation = self.getConversationForId(conversationId: conversationId, accountId: accountId)
 
-            if conversation == nil {
+            guard let existing = conversation else {
                 var currentConversations = self.conversations.value
-                self.addSwarm(conversationId: conversationId, accountId: accountId, accountURI: accountURI, to: &currentConversations)
+                self.addSwarm(conversationId: conversationId, accountId: accountId,
+                              accountURI: accountURI, snapshot: snapshot,
+                              to: &currentConversations)
                 self.publishNewConversation(conversationId: conversationId, accountId: accountId, conversations: &currentConversations)
                 return
             }
 
-            if let info = self.conversationsAdapter.getConversationInfo(forAccount: accountId, conversationId: conversationId) as? [String: String],
-               let participantsInfo = self.conversationsAdapter.getConversationMembers(accountId, conversationId: conversationId) {
-                conversation?.updateInfo(info: info)
-                if let prefsInfo = self.getConversationPreferences(accountId: accountId, conversationId: conversationId) {
-                    conversation?.updatePreferences(preferences: prefsInfo)
-                }
-                conversation?.addParticipantsFromArray(participantsInfo: participantsInfo, accountURI: accountURI)
-                if let conversation = conversation {
-                    self.scheduleUnreadCount(for: conversation, accountId: accountId)
-                }
-                self.loadConversationMessages(conversationId: conversationId, accountId: accountId, from: "", size: 2)
-                self.sortIfNeeded()
-            }
+            existing.updateInfo(info: snapshot.info)
+            existing.updatePreferences(preferences: snapshot.preferences)
+            existing.addParticipantsFromArray(participantsInfo: snapshot.members,
+                                              accountURI: accountURI)
+            self.scheduleUnreadCount(for: existing, accountId: accountId)
+            self.loadConversationMessages(conversationId: conversationId, accountId: accountId, from: "", size: 2)
+            self.sortIfNeeded()
 
             self.conversationReady.accept(conversationId)
         }
@@ -491,15 +505,19 @@ class ConversationsService {
         }
     }
 
-    func conversationMemberEvent(conversationId: String, accountId: String, memberUri: String, event: ConversationMemberEvent, accountURI: String) {
-        guard let conversation = self.getConversationForId(conversationId: conversationId, accountId: accountId),
-              let participantsInfo = conversationsAdapter.getConversationMembers(accountId, conversationId: conversationId) else { return }
-        conversation.addParticipantsFromArray(participantsInfo: participantsInfo, accountURI: accountURI)
-        let serviceEventType: ServiceEventType = .conversationMemberEvent
-        var serviceEvent = ServiceEvent(withEventType: serviceEventType)
-        serviceEvent.addEventInput(.conversationId, value: conversationId)
-        serviceEvent.addEventInput(.accountId, value: accountId)
-        self.responseStream.onNext(serviceEvent)
+    func conversationMemberEvent(conversationId: String, accountId: String,
+                                 event: ConversationMemberEvent, accountURI: String,
+                                 members: [[String: String]]) {
+        serialOperationQueue.async { [weak self] in
+            guard let self = self,
+                  let conversation = self.getConversationForId(conversationId: conversationId, accountId: accountId) else { return }
+            conversation.addParticipantsFromArray(participantsInfo: members, accountURI: accountURI)
+            let serviceEventType: ServiceEventType = .conversationMemberEvent
+            var serviceEvent = ServiceEvent(withEventType: serviceEventType)
+            serviceEvent.addEventInput(.conversationId, value: conversationId)
+            serviceEvent.addEventInput(.accountId, value: accountId)
+            self.responseStream.onNext(serviceEvent)
+        }
     }
 
     func reactionAdded(conversationId: String, accountId: String, messageId: String, reaction: [String: String]) {
