@@ -51,6 +51,8 @@ class ConversationsManager {
     private var pendingPostCallSync: PendingPostCallSync?
     private var postCallSyncTimeoutWork: DispatchWorkItem?
 
+    private var eventSource: ConversationEventSource?
+
     // swiftlint:disable cyclomatic_complexity
     init(with conversationService: ConversationsService,
          accountsService: AccountsService,
@@ -76,8 +78,8 @@ class ConversationsManager {
         self.presenceService = presenceService
         ProfilesAdapter.delegate = self
 
-        ConversationsAdapter.messagesDelegate = self
         RequestsAdapter.delegate = self
+        self.startConversationEventPipeline()
         /*
          When the application starts, all conversations will be loaded.
          Conversation data should be cleaned to prevent reloading conversations
@@ -91,6 +93,74 @@ class ConversationsManager {
         self.subscribeRequestEvents()
         self.subscribeProfileEvents()
         self.controlAccountsState()
+    }
+
+    // MARK: libjami conversation signals
+
+    private func startConversationEventPipeline() {
+        let source = conversationService.makeEventSource { [weak self] event in
+            self?.handle(event)
+        }
+        self.eventSource = source
+        // Attach last: from here on, daemon threads can call in.
+        source.attachToAdapter()
+    }
+
+    private func handle(_ event: ConversationEvent) {
+        switch event {
+        case let .incomingAccountMessage(accountId, from, messageId, payloads):
+            didReceiveMessage(payloads, from: from, messageId: messageId, to: accountId)
+
+        case let .messageStatusChanged(accountId, conversationId, peer, messageId, status):
+            messageStatusChanged(status, for: messageId, from: accountId,
+                                 to: peer, in: conversationId)
+
+        case let .activeCallsChanged(accountId, conversationId, calls):
+            activeCallsChanged(conversationId: conversationId, accountId: accountId, calls: calls)
+
+        case let .composingStatusChanged(accountId, conversationId, from, status):
+            composingStatusChanged(accountId: accountId, conversationId: conversationId,
+                                   from: from, status: status)
+
+        case let .swarmLoaded(accountId, conversationId, messages, requestId):
+            conversationLoaded(conversationId: conversationId, accountId: accountId,
+                               messages: messages, requestId: requestId)
+
+        case let .swarmMessageReceived(accountId, conversationId, message):
+            newInteraction(conversationId: conversationId, accountId: accountId, message: message)
+
+        case let .swarmMessageUpdated(accountId, conversationId, message):
+            messageUpdated(conversationId: conversationId, accountId: accountId, message: message)
+
+        case let .reactionAdded(accountId, conversationId, messageId, reaction):
+            reactionAdded(conversationId: conversationId, accountId: accountId,
+                          messageId: messageId, reaction: reaction)
+
+        case let .reactionRemoved(accountId, conversationId, messageId, reactionId):
+            reactionRemoved(conversationId: conversationId, accountId: accountId,
+                            messageId: messageId, reactionId: reactionId)
+
+        case let .conversationReady(accountId, conversationId):
+            conversationReady(conversationId: conversationId, accountId: accountId)
+
+        case let .conversationRemoved(accountId, conversationId):
+            conversationRemoved(conversationId: conversationId, accountId: accountId)
+
+        case let .conversationDeclined(accountId, conversationId):
+            conversationDeclined(conversationId: conversationId, accountId: accountId)
+
+        case let .conversationMemberEvent(accountId, conversationId, memberUri, event):
+            conversationMemberEvent(conversationId: conversationId, accountId: accountId,
+                                    memberUri: memberUri, event: event)
+
+        case let .conversationProfileUpdated(accountId, conversationId, profile):
+            conversationProfileUpdated(conversationId: conversationId, accountId: accountId,
+                                       profile: profile)
+
+        case let .conversationPreferencesUpdated(accountId, conversationId, preferences):
+            conversationPreferencesUpdated(conversationId: conversationId, accountId: accountId,
+                                           preferences: preferences)
+        }
     }
 
     // When the application is inactive, the accounts should also be inactive. Except when when handling incoming call.
@@ -673,8 +743,9 @@ class ConversationsManager {
     }
 }
 
-extension  ConversationsManager: MessagesAdapterDelegate {
-    func conversationMemberEvent(conversationId: String, accountId: String, memberUri: String, event: Int) {
+extension ConversationsManager {
+    func conversationMemberEvent(conversationId: String, accountId: String,
+                                 memberUri: String, event: Int) {
         guard let conversationEvent = ConversationMemberEvent(rawValue: event) else { return }
         guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
         // Check if we leave the conversation on another device. In this case remove conversation.
@@ -682,7 +753,9 @@ extension  ConversationsManager: MessagesAdapterDelegate {
            account.jamiId == memberUri {
             self.conversationService.conversationRemoved(conversationId: conversationId, accountId: accountId)
         } else {
-            self.conversationService.conversationMemberEvent(conversationId: conversationId, accountId: accountId, memberUri: memberUri, event: conversationEvent, accountURI: account.jamiId)
+            self.conversationService.conversationMemberEvent(conversationId: conversationId,
+                                                             accountId: accountId,
+                                                             accountURI: account.jamiId)
         }
     }
 
@@ -710,7 +783,9 @@ extension  ConversationsManager: MessagesAdapterDelegate {
         guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
         guard let currentAccount = self.accountsService.currentAccount else { return }
         if account == currentAccount {
-            self.conversationService.conversationReady(conversationId: conversationId, accountId: accountId, accountURI: account.jamiId)
+            self.conversationService.conversationReady(conversationId: conversationId,
+                                                       accountId: accountId,
+                                                       accountURI: account.jamiId)
         }
     }
 
