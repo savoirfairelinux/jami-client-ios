@@ -127,6 +127,16 @@ final class DBContainer {
                                                     createIfNotExists: createifNotExists)
     }
 
+    func contactProfileOverridePath(accountId: String,
+                                    profileURI: String,
+                                    createIfNotExists: Bool) -> String? {
+        guard let documents = Constants.documentsPath else { return nil }
+        return ProfilePathHelper.contactProfileOverridePath(accountId: accountId,
+                                                            profileURI: profileURI,
+                                                            documents: documents,
+                                                            createIfNotExists: createIfNotExists)
+    }
+
     func accountProfilePath(accountId: String) -> String? {
         guard let documents = Constants.documentsPath else { return nil }
         return ProfilePathHelper.accountProfilePath(accountId: accountId, documents: documents)
@@ -147,6 +157,14 @@ final class DBContainer {
         do {
             try FileManager.default.removeItem(atPath: path)
         } catch _ as NSError {}
+        removeProfileOverride(accountId: accountId, profileURI: profileURI)
+    }
+
+    func removeProfileOverride(accountId: String, profileURI: String) {
+        guard let path = contactProfileOverridePath(accountId: accountId,
+                                                    profileURI: profileURI,
+                                                    createIfNotExists: false) else { return }
+        try? FileManager.default.removeItem(atPath: path)
     }
 
     func isMigrationToDBv2Needed(for accountId: String) -> Bool {

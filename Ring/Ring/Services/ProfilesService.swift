@@ -223,6 +223,29 @@ class ProfilesService {
         }
         return subject.asObservable().share()
     }
+
+    func getProfileWithoutLocalOverride(uri: String, accountId: String) -> Profile? {
+        dbManager.getProfileWithoutLocalOverride(for: uri, accountId: accountId)
+    }
+
+    func getLocalProfileOverride(uri: String, accountId: String) -> Profile? {
+        dbManager.localProfileOverride(for: uri, accountId: accountId)
+    }
+
+    @discardableResult
+    func updateLocalProfileOverride(uri: String,
+                                    accountId: String,
+                                    alias: String?,
+                                    photo: String?) -> Bool {
+        let saved = dbManager.saveLocalProfileOverride(profileUri: uri,
+                                                       alias: alias,
+                                                       photo: photo,
+                                                       accountId: accountId)
+        if saved {
+            triggerProfileSignal(uri: uri, createIfNotexists: false, accountId: accountId)
+        }
+        return saved
+    }
 }
 
 // MARK: account profile

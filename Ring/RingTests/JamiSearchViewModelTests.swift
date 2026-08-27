@@ -381,4 +381,48 @@ final class JamiSearchViewModelTests: XCTestCase {
         // Assert
         XCTAssertFalse(result)
     }
+
+    func testDirectoryResultsDropEntriesThatAreAlreadyContacts() {
+        let known = makeDirectoryUser(jamiId: jamiId1)
+        let unknown = makeDirectoryUser(jamiId: jamiId2)
+
+        let results = JamiSearchViewModel
+            .directoryResultsExcludingContacts(from: [known, unknown],
+                                               isBlocked: { _ in false },
+                                               isContact: { $0 == jamiId1 })
+
+        XCTAssertEqual(results.map(\.jamiId), [jamiId2])
+    }
+
+    func testDirectoryResultsKeepEntriesWithoutAContact() {
+        let first = makeDirectoryUser(jamiId: jamiId1)
+        let second = makeDirectoryUser(jamiId: jamiId2)
+
+        let results = JamiSearchViewModel
+            .directoryResultsExcludingContacts(from: [first, second],
+                                               isBlocked: { _ in false },
+                                               isContact: { _ in false })
+
+        XCTAssertEqual(results.map(\.jamiId), [jamiId1, jamiId2])
+    }
+
+    func testDirectoryResultsKeepBlockedContactsForBlockedFlow() {
+        let blocked = makeDirectoryUser(jamiId: jamiId1)
+
+        let results = JamiSearchViewModel
+            .directoryResultsExcludingContacts(from: [blocked],
+                                               isBlocked: { $0 == jamiId1 },
+                                               isContact: { _ in true })
+
+        XCTAssertEqual(results.map(\.jamiId), [jamiId1])
+    }
+
+    private func makeDirectoryUser(jamiId: String) -> JamiSearchViewModel.JamsUserSearchModel {
+        JamiSearchViewModel.JamsUserSearchModel(username: "username",
+                                                firstName: "First",
+                                                lastName: "Last",
+                                                organization: "org",
+                                                jamiId: jamiId,
+                                                profilePicture: Data([0x01]))
+    }
 }
