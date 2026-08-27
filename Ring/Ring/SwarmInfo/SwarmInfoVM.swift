@@ -20,6 +20,8 @@ import RxRelay
 import RxCocoa
 
 class SwarmInfoVM: ObservableObject {
+    typealias CallTarget = (uri: String, displayName: String)
+
     // MARK: - Public Properties
 
     @Published var participantsRows = [ParticipantRow]()
@@ -74,6 +76,28 @@ class SwarmInfoVM: ObservableObject {
 
         let members = swarmInfo.participants.value
         return members.filter({ $0.role == .admin }).contains(where: { $0.jamiId == jamiId })
+    }
+
+    var callTarget: CallTarget? {
+        guard let conversation = conversation else { return nil }
+
+        if conversation.isCoredialog() {
+            guard let jamiId = getContactJamiId() else { return nil }
+            return (uri: jamiId, displayName: title)
+        }
+
+        guard conversation.isSwarm(),
+              !conversation.id.isEmpty,
+              !conversation.getParticipants().isEmpty else { return nil }
+
+        if let activeCall = injectionBag.callService.getActiveCall(
+            accountId: conversation.accountId,
+            conversationId: conversation.id
+        ) {
+            return (uri: activeCall.constructURI(), displayName: "")
+        }
+
+        return (uri: "swarm:" + conversation.id, displayName: "")
     }
 
     let provider: AvatarProvider
@@ -186,10 +210,6 @@ class SwarmInfoVM: ObservableObject {
     }
 
     func getContactDisplayName() -> String {
-        guard let conversation = self.conversation,
-              conversation.isCoredialog() else {
-            return ""
-        }
         return title
     }
 

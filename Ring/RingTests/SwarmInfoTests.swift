@@ -188,4 +188,76 @@ final class SwarmInfoTests: XCTestCase {
         // Assert
         XCTAssertFalse(result)
     }
+
+    func testCallTargetForOneToOneConversationUsesParticipant() {
+        let conversation = ConversationModel(withId: conversationId1,
+                                             accountId: accountId1,
+                                             type: .oneToOne)
+        conversation.addParticipant(jamiId: jamiId1)
+        let viewModel = makeSwarmInfoViewModel(conversation: conversation, title: profileName1)
+
+        let target = viewModel.callTarget
+
+        XCTAssertEqual(target?.uri, jamiId1)
+        XCTAssertEqual(target?.displayName, profileName1)
+    }
+
+    func testCallTargetForGroupConversationUsesSwarmURI() {
+        let conversation = makeGroupConversation()
+        let viewModel = makeSwarmInfoViewModel(conversation: conversation, title: title1)
+
+        let target = viewModel.callTarget
+
+        XCTAssertEqual(target?.uri, "swarm:\(conversationId1)")
+        XCTAssertEqual(target?.displayName, "")
+    }
+
+    func testCallTargetForGroupConversationUsesActiveCallURI() {
+        let conversation = makeGroupConversation()
+        let activeCall = ActiveCall(id: "call-id",
+                                    uri: jamiId1,
+                                    device: "device-id",
+                                    conversationId: conversationId1,
+                                    accountId: accountId1,
+                                    isFromLocalDevice: false)
+        var tracker = AccountCallTracker()
+        tracker.setCalls(for: conversationId1, to: [activeCall])
+        injectionBag.callService.activeCalls.accept([accountId1: tracker])
+        let viewModel = makeSwarmInfoViewModel(conversation: conversation, title: title1)
+
+        let target = viewModel.callTarget
+
+        XCTAssertEqual(target?.uri, activeCall.constructURI())
+        XCTAssertEqual(target?.displayName, "")
+    }
+
+    func testCallTargetIsNilWithoutConversation() {
+        let testableSwarmInfo = TestableSwarmInfo(participants: [],
+                                                  containsSearchQuery: false,
+                                                  hasParticipantWithRegisteredName: false)
+        let viewModel = SwarmInfoVM(with: injectionBag, swarmInfo: testableSwarmInfo)
+
+        XCTAssertNil(viewModel.callTarget)
+    }
+
+    private func makeGroupConversation() -> ConversationModel {
+        let conversation = ConversationModel(withId: conversationId1,
+                                             accountId: accountId1,
+                                             type: .invitesOnly)
+        conversation.addParticipant(jamiId: jamiId1)
+        conversation.addParticipant(jamiId: jamiId2)
+        conversation.addParticipant(jamiId: jamiId3)
+        return conversation
+    }
+
+    private func makeSwarmInfoViewModel(conversation: ConversationModel,
+                                        title: String) -> SwarmInfoVM {
+        let testableSwarmInfo = TestableSwarmInfo(participants: [],
+                                                  containsSearchQuery: false,
+                                                  hasParticipantWithRegisteredName: false)
+        testableSwarmInfo.conversation = conversation
+        let viewModel = SwarmInfoVM(with: injectionBag, swarmInfo: testableSwarmInfo)
+        viewModel.title = title
+        return viewModel
+    }
 }
