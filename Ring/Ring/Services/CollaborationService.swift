@@ -173,10 +173,11 @@ class CollaborationService {
     /// Every change signal for the collaborative documents in one conversation.
     func changes(forAccount accountId: String,
                  conversationId: String) -> Observable<DocumentChangeEvent> {
-        return documentChanges
+        return documentChangeSubject
             .filter {
                 $0.accountId == accountId && $0.conversationId == conversationId
             }
+            .observe(on: deliveryScheduler)
     }
 
     /**
