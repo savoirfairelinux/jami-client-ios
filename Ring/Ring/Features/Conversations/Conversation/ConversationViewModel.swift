@@ -284,8 +284,10 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
                 let filterParicipants = conversation.getParticipants()
                 if let participantId = filterParicipants.first?.jamiId,
                    let contact = self.contactsService.contact(withHash: participantId) {
-                    self.subscribeNonSwarmProfiles(uri: "ring:" + participantId,
-                                                   accountId: self.conversation.accountId)
+                    if let uri = JamiURI(schema: .ring, infoHash: participantId).uriString {
+                        self.subscribeNonSwarmProfiles(uri: uri,
+                                                       accountId: self.conversation.accountId)
+                    }
                     if let contactUserName = contact.userName {
                         self.userName.accept(contactUserName)
                     } else if self.userName.value.isEmpty {
@@ -375,7 +377,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
             } onError: { _ in
             }
             .disposed(by: conversationBindingsDisposeBag)
-        newSwarmInfo.title.share()
+        newSwarmInfo.finalTitle.share()
             .observe(on: MainScheduler.instance)
             .subscribe { [weak self] name in
                 self?.displayName.accept(name)
@@ -417,12 +419,8 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
             .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe {[weak self] profile in
                 guard let self = self else { return }
-                if let alias = profile.alias, !alias.isEmpty {
-                    self.displayName.accept(alias)
-                }
-                if let data = profile.photo?.toImageData() {
-                    self.profileImageData.accept(data)
-                }
+                self.displayName.accept((profile.alias ?? "").simplified())
+                self.profileImageData.accept(profile.photo?.toImageData())
             } onError: { _ in
             }
             .disposed(by: conversationBindingsDisposeBag)

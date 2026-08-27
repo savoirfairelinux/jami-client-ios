@@ -49,6 +49,18 @@ struct Profile {
     static var empty: Profile {
         Profile(uri: "", alias: nil, photo: nil, type: "")
     }
+
+    var hasNoOverrides: Bool {
+        alias.nonEmptyOverride() == nil && photo.nonEmptyOverride() == nil
+    }
+
+    func merging(localOverride: Profile?) -> Profile {
+        guard let localOverride else { return self }
+        return Profile(uri: uri,
+                       alias: localOverride.alias.nonEmptyOverride() ?? alias,
+                       photo: localOverride.photo.nonEmptyOverride() ?? photo,
+                       type: type)
+    }
 }
 
 enum ProfileType: String {
@@ -97,8 +109,21 @@ class VCardUtils {
         return vCardString.data(using: .utf8)
     }
 
+    class func dataForLocalOverride(_ profile: Profile) -> Data? {
+        var lines = [VCardFields.begin.rawValue]
+        if let alias = profile.alias.nonEmptyOverride() {
+            lines.append(VCardFields.fullName.rawValue + alias)
+        }
+        if let photo = profile.photo.nonEmptyOverride() {
+            lines.append(VCardFields.photoJPEG.rawValue + photo)
+        }
+        lines.append(VCardFields.telephone.rawValue + profile.uri)
+        lines.append(VCardFields.end.rawValue)
+        return lines.joined(separator: "\n").data(using: .utf8)
+    }
+
     class func parseProfile(from string: String) -> Profile? {
-        var alias = "", avatar = "", profileUri = ""
+        var alias: String?, avatar: String?, profileUri = ""
 
         func parseLine(_ line: String) -> (key: String, value: Substring)? {
             guard let colonIndex = line.firstIndex(of: ":") else { return nil }
@@ -136,6 +161,21 @@ class VCardUtils {
         return parseProfile(from: profileStr)
     }
 
+    class func nameFromMergedProfile(basePath: String?, overridePath: String?) -> String? {
+        if let overridePath,
+           let name = getNameFromVCard(filePath: overridePath),
+           !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            return name
+        }
+        return basePath.flatMap { getNameFromVCard(filePath: $0) }
+    }
+
+    class func parseMergedProfile(basePath: String?, overridePath: String?) -> Profile? {
+        let base = basePath.flatMap { parseToProfile(filePath: $0) }
+        let localOverride = overridePath.flatMap { parseToProfile(filePath: $0) }
+        return base?.merging(localOverride: localOverride) ?? localOverride
+    }
+
     class func getNameFromVCard(filePath: String) -> String? {
         guard let fileStream = InputStream(fileAtPath: filePath) else {
             return nil
@@ -171,5 +211,15 @@ class VCardUtils {
         }
 
         return nil
+    }
+}
+
+private extension Optional where Wrapped == String {
+    func nonEmptyOverride() -> String? {
+        guard let trimmed = self?.trimmingCharacters(in: .whitespacesAndNewlines),
+              !trimmed.isEmpty else {
+            return nil
+        }
+        return trimmed
     }
 }

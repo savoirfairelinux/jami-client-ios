@@ -151,16 +151,21 @@ private enum ConversationRemovalPresentation {
 final class ConversationDestructiveActionExecutor {
     private let contactsService: ContactsService
     private let conversationsService: ConversationsService
+    private let profileService: ProfilesService
     private let disposeBag = DisposeBag()
 
-    init(contactsService: ContactsService, conversationsService: ConversationsService) {
+    init(contactsService: ContactsService,
+         conversationsService: ConversationsService,
+         profileService: ProfilesService) {
         self.contactsService = contactsService
         self.conversationsService = conversationsService
+        self.profileService = profileService
     }
 
     convenience init(injectionBag: InjectionBag) {
         self.init(contactsService: injectionBag.contactsService,
-                  conversationsService: injectionBag.conversationsService)
+                  conversationsService: injectionBag.conversationsService,
+                  profileService: injectionBag.profileService)
     }
 
     func perform(_ action: ConversationDestructiveAction,
@@ -228,9 +233,21 @@ final class ConversationDestructiveActionExecutor {
                     self?.conversationsService
                         .removeConversationFromDB(conversation: conversation,
                                                   keepConversation: false)
+                } else {
+                    self?.clearLocalProfileOverride(for: conversation)
                 }
                 completion?()
             })
             .disposed(by: disposeBag)
+    }
+
+    private func clearLocalProfileOverride(for conversation: ConversationModel) {
+        guard let participantId = conversation.getParticipants().first?.jamiId else { return }
+        let schema: URIType = conversation.isSip() ? .sip : .ring
+        guard let uri = JamiURI(schema: schema, infoHash: participantId).uriString else { return }
+        profileService.updateLocalProfileOverride(uri: uri,
+                                                  accountId: conversation.accountId,
+                                                  alias: nil,
+                                                  photo: nil)
     }
 }

@@ -43,6 +43,21 @@ final class ContactUtilsTests: XCTestCase {
         XCTAssertEqual(finalName, profileName1)
     }
 
+    func testGetFinalName_IgnoresWhitespaceOnlyProfileName() {
+        let finalName = ContactsUtils.getFinalNameFrom(registeredName: registeredName1, profileName: "   ", hash: jamiId1)
+        XCTAssertEqual(finalName, registeredName1)
+    }
+
+    func testGetFinalName_SimplifiesSurroundingWhitespace() {
+        let finalName = ContactsUtils.getFinalNameFrom(registeredName: "", profileName: "  \(profileName1) ", hash: jamiId1)
+        XCTAssertEqual(finalName, profileName1)
+    }
+
+    func testGetFinalName_FallsBackToHashWhenEverythingIsWhitespace() {
+        let finalName = ContactsUtils.getFinalNameFrom(registeredName: " ", profileName: "\n", hash: jamiId1)
+        XCTAssertEqual(finalName, jamiId1)
+    }
+
     func testDesirealizeuserDetails() {
         let userName = "username"
         let firstName = "firstName"

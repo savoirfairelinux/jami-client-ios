@@ -1,8 +1,5 @@
 /*
- * Copyright (C) 2022-2025 Savoir-faire Linux Inc. *
- *
- * Author: Alireza Toghiani Khorasgani alireza.toghiani@savoirfairelinux.com
- * Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ * Copyright (C) 2022-2026 Savoir-faire Linux Inc. *
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,6 +17,56 @@
 import SwiftUI
 
 // MARK: - Enums and Types
+
+enum SwarmProfileAction: Hashable {
+    case audioCall
+    case videoCall
+    case editProfile
+
+    static func available(canCall: Bool, canEdit: Bool) -> [SwarmProfileAction] {
+        var actions: [SwarmProfileAction] = canCall ? [.audioCall, .videoCall] : []
+        if canEdit {
+            actions.append(.editProfile)
+        }
+        return actions
+    }
+
+    var title: String {
+        switch self {
+        case .audioCall: return L10n.Global.call
+        case .videoCall: return L10n.Global.video
+        case .editProfile: return L10n.Global.edit
+        }
+    }
+
+    var systemImage: String {
+        switch self {
+        case .audioCall: return "phone.fill"
+        case .videoCall: return "video.fill"
+        case .editProfile: return "square.and.pencil"
+        }
+    }
+
+    func accessibilityLabel(for profileName: String, isGroup: Bool) -> String {
+        switch self {
+        case .audioCall:
+            return L10n.Accessibility.conversationStartVoiceCall(profileName)
+        case .videoCall:
+            return L10n.Accessibility.conversationStartVideoCall(profileName)
+        case .editProfile:
+            return isGroup ? L10n.ProfileEditor.editGroup : L10n.ProfileEditor.editContact
+        }
+    }
+
+    func accessibilityHint(isGroup: Bool) -> String {
+        switch self {
+        case .audioCall, .videoCall:
+            return ""
+        case .editProfile:
+            return isGroup ? L10n.ProfileEditor.editGroupHint : L10n.ProfileEditor.editContactHint
+        }
+    }
+}
 
 enum SwarmSettingView: String, CaseIterable {
     case about
@@ -50,8 +97,6 @@ public struct SwarmInfoView: View, StateEmittingView {
         static let generalMargin: CGFloat = 20
         static let callButtonSize: CGFloat = 45
         static let callButtonsMargin: CGFloat = 5
-        static let editPictureButtonSize: CGFloat = 32
-        static let minimumTapSize: CGFloat = 44
         static let avatarTopGap: CGFloat = 14
         static let avatarBottomGap: CGFloat = 12
         static let sectionSpacing: CGFloat = 8
@@ -71,9 +116,6 @@ public struct SwarmInfoView: View, StateEmittingView {
 
     // MARK: - State
     @SwiftUI.State private var selectedView: SwarmSettingView = .about
-    @SwiftUI.State private var showingOptions = false
-    @SwiftUI.State private var showingType: PhotoSheetType?
-    @SwiftUI.State private var image: UIImage?
     @SwiftUI.State private var isAvatarExpanded = false
 
     init(viewModel: SwarmInfoVM,
@@ -137,12 +179,6 @@ public struct SwarmInfoView: View, StateEmittingView {
             mainContent
             floatingActionButton
             documentNamePrompt
-            if viewModel.isShowingTitleAlert {
-                editTitleAlert()
-            }
-            if viewModel.isShowingDescriptionAlert {
-                editDescriptionAlert()
-            }
         }
         .overlay(alignment: .top) {
             if #unavailable(iOS 26.0), isAvatarExpanded {
@@ -227,73 +263,67 @@ public struct SwarmInfoView: View, StateEmittingView {
 
     private var infoStack: some View {
         VStack(spacing: Layout.generalMargin) {
-            titleView
+            titleLabel
             descriptionView
-            if viewModel.callTarget != nil {
-                callButtons
+            if !profileActions.isEmpty {
+                profileActionButtons
             }
         }
     }
 
-    private var callButtons: some View {
-        HStack(spacing: Layout.generalMargin) {
-            callButton(
-                systemName: "phone.fill",
-                action: placeAudioCall,
-                accessibilityLabel: L10n.Accessibility.conversationStartVoiceCall(viewModel.title)
-            )
+    private var profileActions: [SwarmProfileAction] {
+        SwarmProfileAction.available(canCall: viewModel.callTarget != nil,
+                                     canEdit: viewModel.canEditProfile)
+    }
 
-            callButton(
-                systemName: "video.fill",
-                action: placeVideoCall,
-                accessibilityLabel: L10n.Accessibility.conversationStartVideoCall(viewModel.title)
-            )
+    private var profileActionButtons: some View {
+        HStack(spacing: Layout.generalMargin) {
+            ForEach(profileActions, id: \.self) { action in
+                profileActionButton(action)
+            }
         }
         .padding(.top, Layout.callButtonsMargin)
     }
 
-    private func callButton(systemName: String,
-                            action: @escaping () -> Void,
-                            accessibilityLabel: String) -> some View {
-        Button(action: action) {
-            Label(accessibilityLabel, systemImage: systemName)
-                .labelStyle(.iconOnly)
-                .font(.system(size: 20, weight: .semibold))
-                .foregroundStyle(buttonTint)
-                .frame(width: Layout.callButtonSize, height: Layout.callButtonSize)
-                .background(RoundedRectangle(cornerRadius: Layout.verticalMargin).fill(callButtonBackground))
+    private func profileActionButton(_ action: SwarmProfileAction) -> some View {
+        Button(action: { perform(action) }) {
+            VStack(spacing: Layout.callButtonsMargin) {
+                Image(systemName: action.systemImage)
+                    .font(.system(size: 20, weight: .semibold))
+                    .foregroundStyle(buttonTint)
+                    .frame(width: Layout.callButtonSize, height: Layout.callButtonSize)
+                    .background(RoundedRectangle(cornerRadius: Layout.verticalMargin).fill(callButtonBackground))
+
+                Text(action.title)
+                    .font(.caption)
+                    .foregroundStyle(headerForeground)
+                    .lineLimit(1)
+            }
         }
         .buttonStyle(.plain)
+        .accessibilityLabel(action.accessibilityLabel(for: viewModel.title,
+                                                      isGroup: viewModel.isGroupProfile))
+        .accessibilityHint(action.accessibilityHint(isGroup: viewModel.isGroupProfile))
+    }
+
+    private func perform(_ action: SwarmProfileAction) {
+        switch action {
+        case .audioCall:
+            placeAudioCall()
+        case .videoCall:
+            placeVideoCall()
+        case .editProfile:
+            editProfile()
+        }
     }
 
     private var avatarView: some View {
         Group {
             if provider.canExpand {
                 expandableAvatar
-            } else if viewModel.isAdmin {
-                editableAvatar
             } else {
                 avatarImage
             }
-        }
-        .confirmationDialog("", isPresented: $showingOptions, titleVisibility: .hidden) {
-            Button(L10n.Alerts.profileTakePhoto) {
-                showingType = .picture
-            }
-            Button(L10n.Alerts.profileUploadPhoto) {
-                showingType = .gallery
-            }
-            Button(L10n.Global.cancel, role: .cancel) {}
-        }
-        .sheet(item: $showingType) { type in
-            ImagePicker(
-                sourceType: type == .gallery ? .photoLibrary : .camera,
-                showingType: $showingType,
-                image: $image
-            )
-        }
-        .onChange(of: image) { newValue in
-            viewModel.updateSwarmAvatar(image: newValue)
         }
     }
 
@@ -301,62 +331,16 @@ public struct SwarmInfoView: View, StateEmittingView {
         ExpandableAvatar(
             provider: viewModel.provider,
             isExpanded: isAvatarExpanded,
-            isGroup: !(viewModel.conversation?.isCoredialog() ?? true),
+            isGroup: viewModel.isGroupProfile,
             onToggle: { setAvatarExpanded(!isAvatarExpanded) }
         ) {
             scrimmedInfo
         }
-        .overlay(alignment: isAvatarExpanded ? .topTrailing : .bottomTrailing) {
-            if viewModel.isAdmin {
-                editPictureButton.transition(.opacity)
-            }
-        }
-    }
-
-    private var editPictureButton: some View {
-        Button(action: showAvatarOptions) {
-            Label(L10n.Accessibility.swarmPicturePicker, systemImage: "camera.fill")
-                .labelStyle(.iconOnly)
-                .font(.system(size: 15, weight: .semibold))
-                .foregroundStyle(.white)
-                .frame(width: Layout.editPictureButtonSize, height: Layout.editPictureButtonSize)
-                .background(Circle().fill(Color.jami))
-                .frame(width: Layout.minimumTapSize, height: Layout.minimumTapSize)
-        }
-        .buttonStyle(.plain)
-        .padding(.top, isAvatarExpanded ? screen.safeAreaInsets.top + Layout.generalMargin : 0)
-        .padding(.trailing, isAvatarExpanded ? Layout.generalMargin : 0)
-        .accessibilityHint(L10n.Accessibility.profilePicturePickerHint)
-    }
-
-    private var editableAvatar: some View {
-        Button(action: showAvatarOptions) {
-            avatarImage
-        }
-        .buttonStyle(.plain)
-        .accessibilityLabel(L10n.Accessibility.swarmPicturePicker)
-        .accessibilityHint(L10n.Accessibility.profilePicturePickerHint)
-    }
-
-    private func showAvatarOptions() {
-        showingOptions = true
     }
 
     private var avatarImage: some View {
         AvatarSwiftUIView(source: viewModel.provider)
             .accessibilityHidden(true)
-    }
-
-    @ViewBuilder private var titleView: some View {
-        if viewModel.isAdmin {
-            Button(action: viewModel.presentTitleEditView) {
-                titleLabel
-            }
-            .buttonStyle(.plain)
-            .accessibilityHint(L10n.Swarm.editTextHint)
-        } else {
-            titleLabel
-        }
     }
 
     private var titleLabel: some View {
@@ -369,33 +353,23 @@ public struct SwarmInfoView: View, StateEmittingView {
             .accessibilityLabel(viewModel.title)
     }
 
+    private var displayedDescription: String {
+        viewModel.description.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
     @ViewBuilder private var descriptionView: some View {
-        if viewModel.isAdmin {
-            editableDescriptionText
-                .padding(.bottom, Layout.verticalMargin)
-        } else if !viewModel.description.isEmpty {
+        if !displayedDescription.isEmpty {
             descriptionLabel
                 .padding(.bottom, Layout.verticalMargin)
         }
     }
 
-    private var editableDescriptionText: some View {
-        Button(action: viewModel.presentDescriptionEditView) {
-            Text(viewModel.description.isEmpty ? L10n.Swarm.addDescription : viewModel.description)
-                .lineLimit(2)
-                .multilineTextAlignment(.center)
-                .foregroundStyle(headerForeground)
-        }
-        .buttonStyle(.plain)
-        .accessibilityHint(L10n.Swarm.editTextHint)
-    }
-
     private var descriptionLabel: some View {
-        Text(viewModel.description)
+        Text(displayedDescription)
             .lineLimit(2)
             .multilineTextAlignment(.center)
             .foregroundStyle(headerForeground)
-            .accessibilityLabel(viewModel.description)
+            .accessibilityLabel(displayedDescription)
     }
 
     @ViewBuilder private var segmentedControlSection: some View {
@@ -510,68 +484,12 @@ private extension SwarmInfoView {
     }
 }
 
-// MARK: - Alert Components
+// MARK: - Actions
 
 extension SwarmInfoView {
-    @ViewBuilder
-    func editTitleAlert() -> some View {
-        textInputAlert(
-            headerText: L10n.Swarm.titleAlertHeader,
-            placeholder: L10n.Swarm.titlePlaceholder,
-            text: $viewModel.editableTitle,
-            isShowing: $viewModel.isShowingTitleAlert,
-            onSave: { viewModel.saveTitle() }
-        )
+    private func editProfile() {
+        viewModel.editProfile(stateEmitter: stateEmitter)
     }
-
-    @ViewBuilder
-    func editDescriptionAlert() -> some View {
-        textInputAlert(
-            headerText: L10n.Swarm.descriptionAlertHeader,
-            placeholder: L10n.Swarm.descriptionPlaceholder,
-            text: $viewModel.editableDescription,
-            isShowing: $viewModel.isShowingDescriptionAlert,
-            onSave: { viewModel.saveDescription() }
-        )
-    }
-
-    @ViewBuilder
-    func textInputAlert(
-        headerText: String,
-        placeholder: String,
-        text: Binding<String>,
-        isShowing: Binding<Bool>,
-        onSave: @escaping () -> Void
-    ) -> some View {
-        CustomAlert(content: {
-            VStack(spacing: 20) {
-                Text(headerText)
-                    .font(.headline)
-                TextField(placeholder, text: text)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding(.horizontal)
-                HStack {
-                    Button(action: {
-                        isShowing.wrappedValue = false
-                    }, label: {
-                        Text(L10n.Global.cancel)
-                            .foregroundColor(.jami)
-                    })
-
-                    Spacer()
-
-                    Button(action: {
-                        onSave()
-                    }, label: {
-                        Text(L10n.Global.save)
-                            .foregroundColor(.jami)
-                    })
-                }
-            }
-        })
-    }
-
-    // MARK: - Actions
 
     private func placeAudioCall() {
         guard let target = viewModel.callTarget else { return }

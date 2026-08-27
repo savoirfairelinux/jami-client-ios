@@ -1404,6 +1404,52 @@ internal enum L10n {
     /// Shared Services
     internal static let title = L10n.tr("Localizable", "peerServices.title", fallback: "Shared Services")
   }
+  internal enum ProfileEditor {
+    /// Change picture
+    internal static let changePicture = L10n.tr("Localizable", "profileEditor.changePicture", fallback: "Change picture")
+    /// Choose a new picture from the camera or photo library
+    internal static let changePictureHint = L10n.tr("Localizable", "profileEditor.changePictureHint", fallback: "Choose a new picture from the camera or photo library")
+    /// Enter a name
+    internal static let contactNamePlaceholder = L10n.tr("Localizable", "profileEditor.contactNamePlaceholder", fallback: "Enter a name")
+    /// Description
+    internal static let description = L10n.tr("Localizable", "profileEditor.description", fallback: "Description")
+    /// Enter a description
+    internal static let descriptionPlaceholder = L10n.tr("Localizable", "profileEditor.descriptionPlaceholder", fallback: "Enter a description")
+    /// Discard
+    internal static let discard = L10n.tr("Localizable", "profileEditor.discard", fallback: "Discard")
+    /// Your unsaved changes will be lost.
+    internal static let discardMessage = L10n.tr("Localizable", "profileEditor.discardMessage", fallback: "Your unsaved changes will be lost.")
+    /// Discard changes?
+    internal static let discardTitle = L10n.tr("Localizable", "profileEditor.discardTitle", fallback: "Discard changes?")
+    /// Edit contact
+    internal static let editContact = L10n.tr("Localizable", "profileEditor.editContact", fallback: "Edit contact")
+    /// Opens the contact editor
+    internal static let editContactHint = L10n.tr("Localizable", "profileEditor.editContactHint", fallback: "Opens the contact editor")
+    /// Edit group
+    internal static let editGroup = L10n.tr("Localizable", "profileEditor.editGroup", fallback: "Edit group")
+    /// Opens the group editor
+    internal static let editGroupHint = L10n.tr("Localizable", "profileEditor.editGroupHint", fallback: "Opens the group editor")
+    /// Enter a group name
+    internal static let groupNamePlaceholder = L10n.tr("Localizable", "profileEditor.groupNamePlaceholder", fallback: "Enter a group name")
+    /// This name and picture are visible only on this device.
+    internal static let localChangesFooter = L10n.tr("Localizable", "profileEditor.localChangesFooter", fallback: "This name and picture are visible only on this device.")
+    /// Name
+    internal static let name = L10n.tr("Localizable", "profileEditor.name", fallback: "Name")
+    /// No picture
+    internal static let noPicture = L10n.tr("Localizable", "profileEditor.noPicture", fallback: "No picture")
+    /// Picture selected
+    internal static let pictureSelected = L10n.tr("Localizable", "profileEditor.pictureSelected", fallback: "Picture selected")
+    /// Remove picture
+    internal static let removePicture = L10n.tr("Localizable", "profileEditor.removePicture", fallback: "Remove picture")
+    /// Use original name and picture
+    internal static let resetOriginal = L10n.tr("Localizable", "profileEditor.resetOriginal", fallback: "Use original name and picture")
+    /// Restores the name and picture this contact set for themselves
+    internal static let resetOriginalHint = L10n.tr("Localizable", "profileEditor.resetOriginalHint", fallback: "Restores the name and picture this contact set for themselves")
+    /// Use original picture
+    internal static let resetPicture = L10n.tr("Localizable", "profileEditor.resetPicture", fallback: "Use original picture")
+    /// The changes could not be saved. Please try again.
+    internal static let saveError = L10n.tr("Localizable", "profileEditor.saveError", fallback: "The changes could not be saved. Please try again.")
+  }
   internal enum Scan {
     /// Bad QR code
     internal static let badQrCode = L10n.tr("Localizable", "scan.badQrCode", fallback: "Bad QR code")
@@ -1519,8 +1565,6 @@ internal enum L10n {
     internal static let accessibilityContactQRCodeHint = L10n.tr("Localizable", "swarm.accessibilityContactQRCodeHint", fallback: "Opens a screen with contact's QR code")
     /// Opens sharing options for contact information
     internal static let accessibilityContactShareHint = L10n.tr("Localizable", "swarm.accessibilityContactShareHint", fallback: "Opens sharing options for contact information")
-    /// Add description
-    internal static let addDescription = L10n.tr("Localizable", "swarm.addDescription", fallback: "Add description")
     /// Administrator
     internal static let admin = L10n.tr("Localizable", "swarm.admin", fallback: "Administrator")
     /// Private group (restricted invites)
@@ -1545,12 +1589,6 @@ internal enum L10n {
     internal static let customize = L10n.tr("Localizable", "swarm.customize", fallback: "Customize group")
     /// Customize group profile
     internal static let customizeProfile = L10n.tr("Localizable", "swarm.customizeProfile", fallback: "Customize group profile")
-    /// Edit group description
-    internal static let descriptionAlertHeader = L10n.tr("Localizable", "swarm.descriptionAlertHeader", fallback: "Edit group description")
-    /// Enter title
-    internal static let descriptionPlaceholder = L10n.tr("Localizable", "swarm.descriptionPlaceholder", fallback: "Enter title")
-    /// Double-tap to edit
-    internal static let editTextHint = L10n.tr("Localizable", "swarm.editTextHint", fallback: "Double-tap to edit")
     /// Members can be invited at any time after the group has been created.
     internal static let explanationText = L10n.tr("Localizable", "swarm.explanationText", fallback: "Members can be invited at any time after the group has been created.")
     /// Identifier
@@ -1607,10 +1645,6 @@ internal enum L10n {
     }
     /// Show contact QR code
     internal static let showContactQRCode = L10n.tr("Localizable", "swarm.showContactQRCode", fallback: "Show contact QR code")
-    /// Edit group title
-    internal static let titleAlertHeader = L10n.tr("Localizable", "swarm.titleAlertHeader", fallback: "Edit group title")
-    /// Enter title
-    internal static let titlePlaceholder = L10n.tr("Localizable", "swarm.titlePlaceholder", fallback: "Enter title")
     /// Conversation type
     internal static let typeOfSwarm = L10n.tr("Localizable", "swarm.typeOfSwarm", fallback: "Conversation type")
     /// Unknown

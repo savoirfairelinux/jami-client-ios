@@ -19,12 +19,30 @@
  */
 
 import XCTest
+import RxSwift
 @testable import Ring
 
 final class SwarmInfoTests: XCTestCase {
 
+    private final class MockConversationsService: ConversationsService {
+        var storedInfos = [String: String]()
+        var updatedInfos: [String: String]?
+
+        override func getConversationInfo(conversationId: String,
+                                          accountId: String) -> [String: String] {
+            return storedInfos
+        }
+
+        override func updateConversationInfos(accountId: String,
+                                              conversationId: String,
+                                              infos: [String: String]) {
+            updatedInfos = infos
+        }
+    }
+
     var injectionBag: InjectionBag!
     var swarmInfo: SwarmInfo!
+    private var conversationsService: MockConversationsService!
 
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -47,8 +65,8 @@ final class SwarmInfoTests: XCTestCase {
         let dataTransferService: DataTransferService =
             DataTransferService(withDataTransferAdapter: DataTransferAdapter(),
                                 dbManager: dBManager)
-        let conversationsService: ConversationsService =
-            ConversationsService(withConversationsAdapter: ConversationsAdapter(), dbManager: dBManager)
+        conversationsService = MockConversationsService(withConversationsAdapter: ConversationsAdapter(),
+                                                        dbManager: dBManager)
         let locationSharingService: LocationSharingService =
             LocationSharingService(dbManager: dBManager)
         let requestsService: RequestsService =
@@ -78,6 +96,7 @@ final class SwarmInfoTests: XCTestCase {
         try super.tearDownWithError()
         injectionBag = nil
         swarmInfo = nil
+        conversationsService = nil
     }
 
     func createParticipant(jamiId: String, role: ParticipantRole, registeredName: String,
@@ -200,6 +219,185 @@ final class SwarmInfoTests: XCTestCase {
 
         XCTAssertEqual(target?.uri, "swarm:\(conversationId1)")
         XCTAssertEqual(target?.displayName, "")
+    }
+
+    func testSwarmProfileActionsPlaceEditAfterCallActions() {
+        XCTAssertEqual(SwarmProfileAction.available(canCall: true, canEdit: true),
+                       [.audioCall, .videoCall, .editProfile])
+    }
+
+    func testSwarmProfileActionsHideEditWithoutPermission() {
+        XCTAssertEqual(SwarmProfileAction.available(canCall: true, canEdit: false),
+                       [.audioCall, .videoCall])
+    }
+
+    func testEditProfileActionUsesStandardEditSymbol() {
+        XCTAssertEqual(SwarmProfileAction.editProfile.systemImage, "square.and.pencil")
+    }
+
+    func testProfileEditingIsAvailableForOneToOneContact() {
+        XCTAssertTrue(SwarmInfoVM.profileEditingAllowed(isCoreDialog: true,
+                                                        hasRemoteParticipant: true,
+                                                        isAdmin: false))
+    }
+
+    func testProfileEditingIsUnavailableForConversationWithYourself() {
+        XCTAssertFalse(SwarmInfoVM.profileEditingAllowed(isCoreDialog: true,
+                                                         hasRemoteParticipant: false,
+                                                         isAdmin: false))
+    }
+
+    func testProfileEditingIsAvailableForSwarmAdmin() {
+        XCTAssertTrue(SwarmInfoVM.profileEditingAllowed(isCoreDialog: false,
+                                                        hasRemoteParticipant: true,
+                                                        isAdmin: true))
+    }
+
+    func testProfileEditingIsUnavailableForSwarmMember() {
+        XCTAssertFalse(SwarmInfoVM.profileEditingAllowed(isCoreDialog: false,
+                                                         hasRemoteParticipant: true,
+                                                         isAdmin: false))
+    }
+
+    func testOneToOneProfileEditorEditsTheLocalContactProfile() {
+        let conversation = ConversationModel(withId: conversationId1,
+                                             accountId: accountId1,
+                                             type: .oneToOne)
+        conversation.addParticipant(jamiId: jamiId1)
+        let viewModel = makeSwarmInfoViewModel(conversation: conversation, title: title1)
+
+        guard let editingConversation = viewModel.conversationToEdit else {
+            return XCTFail("Expected profile editing to be available")
+        }
+        XCTAssertTrue(editingConversation === conversation)
+        let model = ConversationProfileEditorVM(conversation: editingConversation,
+                                                injectionBag: injectionBag)
+        XCTAssertFalse(model.isSwarm)
+    }
+
+    func testContactProfileActionsPlaceEditAfterCallActions() {
+        let actions = ContactActions.make(isJamiAccount: true,
+                                          isKnownContact: true,
+                                          canEditProfile: true)
+
+        XCTAssertEqual(actions.map(\.kind),
+                       [.audioCall, .videoCall, .editProfile, .sendMessage,
+                        .leaveConversation, .blockContact])
+    }
+
+    func testContactProfileActionsHideEditWhenEditingIsUnavailable() {
+        let actions = ContactActions.make(isJamiAccount: true,
+                                          isKnownContact: false,
+                                          canEditProfile: false)
+
+        XCTAssertEqual(actions.map(\.kind), [.audioCall, .videoCall, .sendMessage])
+    }
+
+    func testEditActionLabelStandsAloneWithoutTheHint() {
+        XCTAssertEqual(SwarmProfileAction.editProfile.accessibilityLabel(for: title1, isGroup: true),
+                       L10n.ProfileEditor.editGroup)
+        XCTAssertEqual(SwarmProfileAction.editProfile.accessibilityLabel(for: title1, isGroup: false),
+                       L10n.ProfileEditor.editContact)
+    }
+
+    func testEditActionHintDistinguishesGroupFromContact() {
+        XCTAssertEqual(SwarmProfileAction.editProfile.accessibilityHint(isGroup: true),
+                       L10n.ProfileEditor.editGroupHint)
+        XCTAssertEqual(SwarmProfileAction.editProfile.accessibilityHint(isGroup: false),
+                       L10n.ProfileEditor.editContactHint)
+    }
+
+    func testCallActionsHaveNoAccessibilityHint() {
+        XCTAssertTrue(SwarmProfileAction.audioCall.accessibilityHint(isGroup: true).isEmpty)
+        XCTAssertTrue(SwarmProfileAction.videoCall.accessibilityHint(isGroup: false).isEmpty)
+    }
+
+    func testWhitespaceOnlyTitleFallsBackToParticipantNames() {
+        let swarmInfo = SwarmInfo(injectionBag: injectionBag, accountId: accountId1)
+        swarmInfo.participantsNames.accept(["Alice"])
+        swarmInfo.title.accept("")
+        let derivedTitle = swarmInfo.finalTitle.value
+
+        swarmInfo.title.accept("   ")
+
+        XCTAssertEqual(swarmInfo.finalTitle.value, derivedTitle)
+    }
+
+    func testSurroundingWhitespaceIsStrippedFromTitle() {
+        let swarmInfo = SwarmInfo(injectionBag: injectionBag, accountId: accountId1)
+
+        swarmInfo.title.accept("  Team  ")
+
+        XCTAssertEqual(swarmInfo.finalTitle.value, "Team")
+    }
+
+    func testSurroundingWhitespaceIsNotAProfileChange() {
+        conversationsService.storedInfos = [ConversationAttributes.title.rawValue: "Team",
+                                            ConversationAttributes.description.rawValue: "Weekly sync"]
+        let model = ConversationProfileEditorVM(conversation: makeGroupConversation(),
+                                                injectionBag: injectionBag)
+
+        model.name = " Team "
+        model.description = "Weekly sync  "
+
+        XCTAssertFalse(model.hasChanges)
+    }
+
+    func testEmptyConversationAvatarDoesNotMaskParticipantAvatar() {
+        let swarmInfo = SwarmInfo(injectionBag: injectionBag, accountId: accountId1)
+        let bag = DisposeBag()
+        var emissions = [Data?]()
+        swarmInfo.finalAvatarData
+            .subscribe(onNext: { emissions.append($0) })
+            .disposed(by: bag)
+
+        swarmInfo.avatarData.accept(Data())
+
+        XCTAssertNil(emissions.last ?? nil)
+    }
+
+    func testConversationAvatarIsUsedWhenItHasContent() {
+        let swarmInfo = SwarmInfo(injectionBag: injectionBag, accountId: accountId1)
+        let avatar = Data([0x01, 0x02, 0x03])
+        let bag = DisposeBag()
+        var emissions = [Data?]()
+        swarmInfo.finalAvatarData
+            .subscribe(onNext: { emissions.append($0) })
+            .disposed(by: bag)
+
+        swarmInfo.avatarData.accept(avatar)
+
+        XCTAssertEqual(emissions.last ?? nil, avatar)
+    }
+
+    func testSavingTrimsSurroundingWhitespace() {
+        let model = ConversationProfileEditorVM(conversation: makeGroupConversation(),
+                                                injectionBag: injectionBag)
+
+        model.name = "  Team  "
+        model.description = "  Weekly sync  "
+        model.save()
+
+        XCTAssertEqual(conversationsService.updatedInfos?[ConversationAttributes.title.rawValue], "Team")
+        XCTAssertEqual(conversationsService.updatedInfos?[ConversationAttributes.description.rawValue],
+                       "Weekly sync")
+    }
+
+    func testCoreDialogResolvesTitleFromParticipantNotFromInfos() {
+        let conversation = ConversationModel(withId: conversationId1,
+                                             accountId: accountId1,
+                                             type: .oneToOne)
+        conversation.addParticipant(jamiId: jamiId1)
+        let swarmInfo = SwarmInfo(injectionBag: injectionBag, conversation: conversation)
+
+        XCTAssertTrue(swarmInfo.title.value.isEmpty)
+        XCTAssertFalse(swarmInfo.finalTitle.value.isEmpty)
+    }
+
+    private func makeGroupConversation() -> ConversationModel {
+        return ConversationModel(withId: conversationId1,
+                                 accountId: accountId1,
+                                 type: .invitesOnly)
     }
 
     private func makeSwarmInfoViewModel(conversation: ConversationModel,

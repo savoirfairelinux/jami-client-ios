@@ -24,9 +24,53 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
+enum ContactInfoAction: Equatable {
+    case audioCall
+    case videoCall
+    case editProfile
+    case sendMessage
+    case leaveConversation
+    case blockContact
+}
+
 struct ContactActions {
+    let kind: ContactInfoAction
     let title: String
     let image: UIImage
+
+    static func make(isJamiAccount: Bool,
+                     isKnownContact: Bool,
+                     canEditProfile: Bool) -> [ContactActions] {
+        var actions = [ContactActions(kind: .audioCall,
+                                      title: L10n.ContactPage.startAudioCall,
+                                      image: UIImage(systemName: "phone")!)]
+        if isJamiAccount {
+            actions.append(ContactActions(kind: .videoCall,
+                                          title: L10n.ContactPage.startVideoCall,
+                                          image: UIImage(systemName: "video")!))
+        }
+        if canEditProfile {
+            actions.append(ContactActions(kind: .editProfile,
+                                          title: L10n.Global.edit,
+                                          image: UIImage(systemName: "pencil")!))
+        }
+        if isJamiAccount {
+            actions.append(ContactActions(kind: .sendMessage,
+                                          title: L10n.ContactPage.send,
+                                          image: UIImage(systemName: "message")!))
+        }
+        if isKnownContact {
+            actions.append(ContactActions(kind: .leaveConversation,
+                                          title: L10n.ContactPage.leaveConversation,
+                                          image: UIImage(systemName: "rectangle.portrait.and.arrow.right")!))
+            if isJamiAccount {
+                actions.append(ContactActions(kind: .blockContact,
+                                              title: L10n.Global.blockContact,
+                                              image: UIImage(systemName: "nosign")!))
+            }
+        }
+        return actions
+    }
 }
 
 class ContactViewModel: ViewModel, Stateable {
@@ -41,51 +85,27 @@ class ContactViewModel: ViewModel, Stateable {
     private let accountService: AccountsService
     private let nameService: NameService
     private let destructiveActionExecutor: ConversationDestructiveActionExecutor
-    lazy var tableSection: Observable<[SectionModel<String, ContactActions>]> = {
-        let jamiSettings =
-            [SectionModel(model: "ProfileInfoCell",
-                          items:
-                            [ ContactActions(title: L10n.ContactPage.startAudioCall, image: UIImage(systemName: "phone")!),
-                              ContactActions(title: L10n.ContactPage.startVideoCall, image: UIImage(systemName: "video")!),
-                              ContactActions(title: L10n.ContactPage.send, image: UIImage(systemName: "message")!)])]
-        let sipSettings =
-            [SectionModel(model: "ProfileInfoCell",
-                          items:
-                            [ ContactActions(title: L10n.ContactPage.startAudioCall, image: UIImage(systemName: "phone")!)])]
-        guard let account = self.accountService.currentAccount,
-              account.type == AccountType.ring else {
-            return Observable<[SectionModel<String, ContactActions>]>
-                .just(sipSettings)
-        }
-        return Observable<[SectionModel<String, ContactActions>]>
-            .just(jamiSettings)
-    }()
+    private let sections = BehaviorRelay<[SectionModel<String, ContactActions>]>(value: [])
+    var tableSection: Observable<[SectionModel<String, ContactActions>]> {
+        sections.asObservable()
+    }
     var conversation: ConversationModel! {
         didSet {
             guard let account = self.accountService
                     .getAccount(fromAccountId: conversation.accountId),
                   let jamiId = conversation.getParticipants().first?.jamiId else { return }
-            if let contact = self.contactService.contact(withHash: jamiId) {
+
+            let contact = self.contactService.contact(withHash: jamiId)
+            let actions = ContactActions.make(isJamiAccount: account.type == .ring,
+                                              isKnownContact: contact != nil,
+                                              canEditProfile: canEditProfile)
+            sections.accept([SectionModel(model: "ProfileInfoCell", items: actions)])
+
+            if let contact = contact {
                 if let name = contact.userName {
                     self.userName.accept(name)
                 } else {
                     self.userName.accept(jamiId)
-                }
-                if account.type == AccountType.ring {
-                    self.tableSection = Observable<[SectionModel<String, ContactActions>]>
-                        .just([SectionModel(model: "ProfileInfoCell",
-                                            items:
-                                                [ ContactActions(title: L10n.ContactPage.startAudioCall, image: UIImage(systemName: "phone")!),
-                                                  ContactActions(title: L10n.ContactPage.startVideoCall, image: UIImage(systemName: "video")!),
-                                                  ContactActions(title: L10n.ContactPage.send, image: UIImage(systemName: "message")!),
-                                                  ContactActions(title: L10n.ContactPage.leaveConversation, image: UIImage(systemName: "rectangle.portrait.and.arrow.right")!),
-                                                  ContactActions(title: L10n.Global.blockContact, image: UIImage(systemName: "nosign")!)])])
-                } else {
-                    self.tableSection = Observable<[SectionModel<String, ContactActions>]>
-                        .just([SectionModel(model: "ProfileInfoCell",
-                                            items:
-                                                [ ContactActions(title: L10n.ContactPage.startAudioCall, image: UIImage(systemName: "phone")!),
-                                                  ContactActions(title: L10n.ContactPage.leaveConversation, image: UIImage(systemName: "rectangle.portrait.and.arrow.right")!)])])
                 }
             } else {
                 self.userName.accept(jamiId)
@@ -118,12 +138,8 @@ class ContactViewModel: ViewModel, Stateable {
                 .startWith(initialProfile)
                 .subscribe(onNext: { [weak self] profile in
                     guard let self = self else { return }
-                    if let alias = profile.alias, !alias.isEmpty {
-                        self.displayName.accept(alias)
-                    }
-                    if let data = profile.photo?.toImageData() {
-                        self.profileImageData.accept(data)
-                    }
+                    self.displayName.accept((profile.alias ?? "").simplified())
+                    self.profileImageData.accept(profile.photo?.toImageData())
                 })
                 .disposed(by: disposeBag)
         }
@@ -159,6 +175,16 @@ class ContactViewModel: ViewModel, Stateable {
         self.stateSubject.onNext(ConversationState
                                     .startAudioCall(contactRingId: jamiId,
                                                     userName: self.userName.value))
+    }
+
+    var canEditProfile: Bool {
+        guard let conversation else { return false }
+        return conversation.isCoredialog() && !conversation.isOnlyLocalParticipant()
+    }
+
+    func editProfile() {
+        guard canEditProfile else { return }
+        stateSubject.onNext(ConversationState.editConversationProfile(conversation: conversation))
     }
 
     func deleteConversation() {

@@ -23,6 +23,8 @@ class ContactsUtils {
 
     class func getFinalNameFrom(registeredName: String, profileName: String, hash: String) -> String {
         // priority: 1. profileName, 2. registeredName, 3. hash
+        let profileName = profileName.simplified()
+        let registeredName = registeredName.simplified()
         if registeredName.isEmpty && profileName.isEmpty {
             return hash
         }
