@@ -24,6 +24,7 @@
     self = [super init];
     if (self) {
         _documentsReturnValue = @[];
+        _openDocumentReturnValue = [NSData data];
     }
     return self;
 }
@@ -36,6 +37,17 @@
 - (NSArray<NSDictionary<NSString*, NSString*>*>*)documentsForAccount:(NSString*)accountId
                                                       conversationId:(NSString*)conversationId {
     return self.documentsReturnValue;
+}
+
+- (NSData*)openDocumentForAccount:(NSString*)accountId
+                   conversationId:(NSString*)conversationId
+                       documentId:(NSString*)documentId {
+    return self.openDocumentReturnValue;
+}
+
+- (void)closeDocumentForAccount:(NSString*)accountId
+                 conversationId:(NSString*)conversationId
+                     documentId:(NSString*)documentId {
 }
 
 @end

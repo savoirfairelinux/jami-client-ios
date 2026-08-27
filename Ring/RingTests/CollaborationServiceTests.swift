@@ -218,4 +218,94 @@ final class CollaborationServiceTests: XCTestCase {
 
         XCTAssertEqual(name, "Alice")
     }
+
+    // MARK: - Documents waiting to be read
+
+    /// What one conversation has published, latest last. Subscribing emits what
+    /// the count stands at, so there is always a first value.
+    private final class UnreadCounts {
+        var values = [Int]()
+        var latest: Int { return values.last ?? -1 }
+    }
+
+    private func observeUnread(in conversationId: String) -> UnreadCounts {
+        let counts = UnreadCounts()
+        service.unreadDocumentCount(forAccount: accountId, conversationId: conversationId)
+            .subscribe(onNext: { counts.values.append($0) })
+            .disposed(by: disposeBag)
+        return counts
+    }
+
+    private func peerChanged(_ documentId: String, in conversationId: String) {
+        service.documentUpdate(withAccountId: accountId,
+                               conversationId: conversationId,
+                               documentId: documentId,
+                               update: Data())
+    }
+
+    func testAChangedDocumentWaitsToBeRead() {
+        let counts = observeUnread(in: conversationId)
+
+        peerChanged(documentId, in: conversationId)
+
+        XCTAssertEqual(counts.latest, 1)
+    }
+
+    func testAnOpenedDocumentStopsWaiting() {
+        let counts = observeUnread(in: conversationId)
+        peerChanged(documentId, in: conversationId)
+
+        service.markDocumentRead(accountId: accountId,
+                                 conversationId: conversationId,
+                                 documentId: documentId)
+
+        XCTAssertEqual(counts.latest, 0)
+    }
+
+    /**
+     A document nothing here can open again cannot be read either, so its own
+     removal is what ends its wait.
+     */
+    func testARemovedDocumentStopsWaiting() {
+        let counts = observeUnread(in: conversationId)
+        peerChanged(documentId, in: conversationId)
+
+        service.documentRemoved(withAccountId: accountId,
+                                conversationId: conversationId,
+                                documentId: documentId,
+                                everywhere: true)
+
+        XCTAssertEqual(counts.latest, 0)
+    }
+
+    func testReadingTheConversationClearsEveryDocument() {
+        let counts = observeUnread(in: conversationId)
+        peerChanged("first", in: conversationId)
+        peerChanged("second", in: conversationId)
+        XCTAssertEqual(counts.latest, 2)
+
+        service.markConversationDocumentsRead(accountId: accountId,
+                                              conversationId: conversationId)
+
+        XCTAssertEqual(counts.latest, 0)
+    }
+
+    func testTheSameDocumentChangingTwiceWaitsOnce() {
+        let counts = observeUnread(in: conversationId)
+
+        peerChanged(documentId, in: conversationId)
+        peerChanged(documentId, in: conversationId)
+
+        XCTAssertEqual(counts.values, [0, 1])
+    }
+
+    func testAConversationOnlyCountsItsOwnDocuments() {
+        let mine = observeUnread(in: conversationId)
+        let other = observeUnread(in: "other-conversation")
+
+        peerChanged(documentId, in: "other-conversation")
+
+        XCTAssertEqual(mine.latest, 0)
+        XCTAssertEqual(other.latest, 1)
+    }
 }
