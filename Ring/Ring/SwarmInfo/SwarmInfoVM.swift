@@ -31,11 +31,7 @@ class SwarmInfoVM: ObservableObject {
 
     @Published var finalColor: String = UIColor.defaultSwarmColorHex
     @Published var selectedColor: String = String()
-
-    @Published var editableTitle: String = ""
-    @Published var editableDescription: String = ""
-    @Published var isShowingTitleAlert = false
-    @Published var isShowingDescriptionAlert = false
+    @Published private(set) var isAdmin = false
 
     var swarmInfo: SwarmInfoProtocol
     var conversation: ConversationModel?
@@ -64,19 +60,34 @@ class SwarmInfoVM: ObservableObject {
 
     // MARK: - Computed Properties
 
-    var isAdmin: Bool {
-        guard let conversation = self.conversation else { return false }
-        // No admin in one-to-one conversations
-        if conversation.isCoredialog() {
-            return false
+    static func profileEditingAllowed(isCoreDialog: Bool,
+                                      hasRemoteParticipant: Bool,
+                                      isAdmin: Bool) -> Bool {
+        if isCoreDialog {
+            return hasRemoteParticipant
         }
+        return isAdmin
+    }
 
-        guard let jamiId = accountService.getAccount(fromAccountId: conversation.accountId)?.jamiId else {
-            return false
-        }
+    var canEditProfile: Bool {
+        guard let conversation else { return false }
+        return Self.profileEditingAllowed(isCoreDialog: conversation.isCoredialog(),
+                                          hasRemoteParticipant: !conversation.isOnlyLocalParticipant(),
+                                          isAdmin: isAdmin)
+    }
 
-        let members = swarmInfo.participants.value
-        return members.filter({ $0.role == .admin }).contains(where: { $0.jamiId == jamiId })
+    var isGroupProfile: Bool {
+        conversation?.isCoredialog() == false
+    }
+
+    var profileEditingContext: ConversationProfileEditingContext? {
+        guard canEditProfile, let conversation else { return nil }
+        return isGroupProfile ? .swarm(swarmInfo) : .contact(conversation)
+    }
+
+    func editProfile(stateEmitter: ConversationStatePublisher) {
+        guard let context = profileEditingContext else { return }
+        stateEmitter.emitState(.editConversationProfile(context: context))
     }
 
     var callTarget: CallTarget? {
@@ -137,9 +148,10 @@ class SwarmInfoVM: ObservableObject {
         self.provider = AvatarProvider.from(
             swarmInfo: swarmInfo,
             profileService: profileService,
-            size: .conversationInfo106,
+            size: .conversationInfo120,
             supportsExpansion: true
         )
+        self.isAdmin = currentUserIsAdmin(in: swarmInfo.participants.value)
 
         setupBindings()
     }
@@ -154,6 +166,17 @@ class SwarmInfoVM: ObservableObject {
     // MARK: - Setup
 
     private func setupBindings() {
+        swarmInfo.participants
+            .map { [weak self] participants in
+                self?.currentUserIsAdmin(in: participants) ?? false
+            }
+            .distinctUntilChanged()
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] isAdmin in
+                self?.isAdmin = isAdmin
+            })
+            .disposed(by: disposeBag)
+
         Observable.combineLatest(
             swarmInfo.finalTitle.startWith(swarmInfo.finalTitle.value),
             swarmInfo.description.startWith(swarmInfo.description.value),
@@ -180,6 +203,15 @@ class SwarmInfoVM: ObservableObject {
         .disposed(by: disposeBag)
     }
 
+    private func currentUserIsAdmin(in participants: [ParticipantInfo]) -> Bool {
+        guard let conversation,
+              !conversation.isCoredialog(),
+              let jamiId = accountService.getAccount(fromAccountId: conversation.accountId)?.jamiId else {
+            return false
+        }
+        return participants.contains { $0.role == .admin && $0.jamiId == jamiId }
+    }
+
     // MARK: - Contact Information Methods
 
     func getContactJamiId() -> String? {
@@ -197,66 +229,6 @@ class SwarmInfoVM: ObservableObject {
 
     func createShareInfo(for jamiId: String) -> String {
         return L10n.Swarm.shareContactMessage(jamiId)
-    }
-
-    // MARK: - Title and Description Editing
-
-    func presentTitleEditView() {
-        editableTitle = ""
-        DispatchQueue.main.async { [weak self] in
-            self?.isShowingTitleAlert = true
-        }
-    }
-
-    func saveTitle() {
-        DispatchQueue.main.async { [weak self] in
-            self?.isShowingTitleAlert = false
-        }
-        if editableTitle == title { return }
-
-        title = editableTitle
-        updateSwarmInfo()
-    }
-
-    func presentDescriptionEditView() {
-        editableDescription = ""
-        DispatchQueue.main.async { [weak self] in
-            self?.isShowingDescriptionAlert = true
-        }
-    }
-
-    func saveDescription() {
-        DispatchQueue.main.async { [weak self] in
-            self?.isShowingDescriptionAlert = false
-        }
-        if editableDescription == description { return }
-
-        description = editableDescription
-        updateSwarmInfo()
-    }
-
-    // MARK: - Swarm Info Methods
-
-    func updateSwarmInfo() {
-        guard let conversationId = conversation?.id,
-              let accountId = conversation?.accountId else { return }
-
-        var conversationInfo = conversationService.getConversationInfo(conversationId: conversationId, accountId: accountId)
-        conversationInfo[ConversationAttributes.description.rawValue] = description
-        conversationInfo[ConversationAttributes.title.rawValue] = title
-        self.conversationService.updateConversationInfos(accountId: accountId, conversationId: conversationId, infos: conversationInfo)
-    }
-
-    func updateSwarmAvatar(image: UIImage?) {
-        guard let image = image,
-              let data = image.convertToDataForSwarm(),
-              let conversationId = conversation?.id,
-              let accountId = conversation?.accountId else { return }
-
-        var conversationInfo = conversationService.getConversationInfo(conversationId: conversationId, accountId: accountId)
-        conversationInfo[ConversationAttributes.avatar.rawValue] = data.base64EncodedString()
-        self.conversationService.updateConversationInfos(accountId: accountId, conversationId: conversationId, infos: conversationInfo)
-        self.swarmInfo.avatarData.accept(data)
     }
 
     func updateSwarmColor(selectedColor: String) {

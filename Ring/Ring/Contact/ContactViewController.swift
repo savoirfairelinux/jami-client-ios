@@ -158,23 +158,24 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
         self.tableView.rx.itemSelected
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] indexPath in
-                if  self?.tableView.cellForRow(at: indexPath) != nil {
-                    switch indexPath.row {
-                    case 0:
-                        self?.viewModel.startAudioCall()
-                    case 1:
-                        self?.viewModel.startCall()
-                    case 2:
-                        _ = self?.navigationController?.popViewController(animated: false)
-                    case 3:
-                        self?.showDeleteConversationConfirmation()
-                    case 4:
-                        self?.showBlockContactConfirmation()
-                    default:
-                        break
-                    }
-                    self?.tableView.deselectRow(at: indexPath, animated: true)
+                guard let self = self,
+                      self.tableView.cellForRow(at: indexPath) != nil else { return }
+
+                switch dataSource[indexPath].kind {
+                case .audioCall:
+                    self.viewModel.startAudioCall()
+                case .videoCall:
+                    self.viewModel.startCall()
+                case .editProfile:
+                    self.viewModel.editProfile()
+                case .sendMessage:
+                    _ = self.navigationController?.popViewController(animated: false)
+                case .leaveConversation:
+                    self.showDeleteConversationConfirmation()
+                case .blockContact:
+                    self.showBlockContactConfirmation()
                 }
+                self.tableView.deselectRow(at: indexPath, animated: true)
             })
             .disposed(by: self.disposeBag)
     }

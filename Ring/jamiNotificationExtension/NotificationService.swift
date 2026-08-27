@@ -783,11 +783,13 @@ extension NotificationService {
 
     private func contactProfileName(accountId: String, contactId: String) -> String? {
         guard let documents = Constants.documentsPath else { return nil }
-        guard let path = ProfilePathHelper.existingContactProfilePath(accountId: accountId,
-                                                                      contactId: contactId,
-                                                                      documents: documents) else { return nil }
-
-        return VCardUtils.getNameFromVCard(filePath: path)
+        let path = ProfilePathHelper.existingContactProfilePath(accountId: accountId,
+                                                                contactId: contactId,
+                                                                documents: documents)
+        let overridePath = ProfilePathHelper.existingContactProfileOverridePath(accountId: accountId,
+                                                                                contactId: contactId,
+                                                                                documents: documents)
+        return VCardUtils.nameFromMergedProfile(basePath: path, overridePath: overridePath)
     }
 }
 
