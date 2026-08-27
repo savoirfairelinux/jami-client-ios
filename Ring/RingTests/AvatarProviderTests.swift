@@ -460,7 +460,7 @@ extension AvatarProviderTests {
                                           supportsExpansion: Bool = true) -> AvatarProvider {
         AvatarProvider(
             profileService: injectionBag.profileService,
-            size: .conversationInfo106,
+            size: .conversationInfo120,
             avatar: avatar,
             displayName: Observable.just(profileName1),
             isGroup: false,

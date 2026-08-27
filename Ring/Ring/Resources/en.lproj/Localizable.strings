@@ -60,6 +60,30 @@
 "global.confirm" = "Confirm";
 "global.connect" = "Connect";
 "global.leave" = "Leave";
+
+// ProfileEditor
+"profileEditor.editGroup" = "Edit group";
+"profileEditor.editContact" = "Edit contact";
+"profileEditor.name" = "Name";
+"profileEditor.groupNamePlaceholder" = "Enter a group name";
+"profileEditor.contactNamePlaceholder" = "Enter a name";
+"profileEditor.description" = "Description";
+"profileEditor.descriptionPlaceholder" = "Enter a description";
+"profileEditor.localChangesFooter" = "This name and picture are visible only on this device.";
+"profileEditor.resetOriginal" = "Use original name and picture";
+"profileEditor.resetOriginalHint" = "Restores the name and picture this contact set for themselves";
+"profileEditor.changePicture" = "Change picture";
+"profileEditor.changePictureHint" = "Choose a new picture from the camera or photo library";
+"profileEditor.noPicture" = "No picture";
+"profileEditor.pictureSelected" = "Picture selected";
+"profileEditor.removePicture" = "Remove picture";
+"profileEditor.resetPicture" = "Use original picture";
+"profileEditor.discardTitle" = "Discard changes?";
+"profileEditor.discardMessage" = "Your unsaved changes will be lost.";
+"profileEditor.discard" = "Discard";
+"profileEditor.saveError" = "The changes could not be saved. Please try again.";
+"profileEditor.editGroupHint" = "Opens the group editor";
+"profileEditor.editContactHint" = "Opens the contact editor";
 // Scan
 "scan.badQrCode" = "Bad QR code";
 
@@ -79,11 +103,6 @@
 "swarm.conversationId" = "Conversation ID";
 "swarm.settings" = "Settings";
 "swarm.members" = "Members";
-"swarm.addDescription" = "Add description";
-"swarm.titlePlaceholder" = "Enter title";
-"swarm.titleAlertHeader" = "Edit group title";
-"swarm.descriptionAlertHeader" = "Edit group description";
-"swarm.descriptionPlaceholder" = "Enter title";
 "swarm.contactHeader" = "Contact";
 "swarm.showContactQRCode" = "Show contact QR code";
 "swarm.shareContactInfo" = "Share contact information";
@@ -91,7 +110,6 @@
 "swarm.accessibilityContactQRCodeHint" = "Opens a screen with contact's QR code";
 "swarm.accessibilityContactShareHint" = "Opens sharing options for contact information";
 "swarm.accessibilityColorPicker" = "Conversation color picker";
-"swarm.editTextHint" = "Double-tap to edit";
 "swarm.conversationHeader" = "Conversation";
 "swarm.shareContactMessage" = "You can add this contact, %1@, on the Jami distributed communication platform: https://jami.net";
 "swarm.oneToOne" = "Private";

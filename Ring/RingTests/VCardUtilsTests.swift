@@ -108,4 +108,36 @@ final class VCardUtilsTests: XCTestCase {
         XCTAssertEqual(data, expectedData)
     }
 
+    func testLocalOverrideOmitsFieldsThatWereNotCustomized() throws {
+        let profile = Profile(uri: getJamiUri(),
+                              alias: profileName1,
+                              photo: nil,
+                              type: ProfileType.ring.rawValue)
+
+        let data = try XCTUnwrap(VCardUtils.dataForLocalOverride(profile))
+        let parsed = VCardUtils.parseDataToProfile(data: data)
+
+        XCTAssertEqual(parsed?.alias, profileName1)
+        XCTAssertNil(parsed?.photo)
+    }
+
+    func testLocalOverrideCanBeReadWithoutRemoteProfile() throws {
+        let profile = Profile(uri: getJamiUri(),
+                              alias: profileName1,
+                              photo: photo,
+                              type: ProfileType.ring.rawValue)
+        let data = try XCTUnwrap(VCardUtils.dataForLocalOverride(profile))
+        let url = FileManager.default.temporaryDirectory
+            .appendingPathComponent(UUID().uuidString)
+            .appendingPathExtension("vcf")
+        try data.write(to: url)
+        defer { try? FileManager.default.removeItem(at: url) }
+
+        let parsed = VCardUtils.parseMergedProfile(basePath: nil,
+                                                   overridePath: url.path)
+
+        XCTAssertEqual(parsed?.alias, profileName1)
+        XCTAssertEqual(parsed?.photo, photo)
+    }
+
 }

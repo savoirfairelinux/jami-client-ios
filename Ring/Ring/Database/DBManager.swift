@@ -371,7 +371,7 @@ class DBManager {
                                                              createIfNotExists: true) else { return nil }
             guard let documentURL = URL(string: path) else { return nil }
             let directoryContents = try FileManager.default.contentsOfDirectory(at: documentURL, includingPropertiesForKeys: nil, options: [])
-            for url in directoryContents {
+            for url in directoryContents where !url.lastPathComponent.hasSuffix(ProfilePathHelper.overrideFileSuffix) {
                 if let profile = getProfileFromPath(path: url.path) {
                     profiles.append(profile)
                 }
@@ -726,14 +726,50 @@ class DBManager {
                 .contactProfilePath(accountId: accountId,
                                     profileURI: profileUri,
                                     createifNotExists: createIfNotExists) else { return nil }
-        if self.dbConnections
-            .isContactProfileExists(accountId: accountId,
-                                    profileURI: profileUri) || !createIfNotExists {
-            return getProfileFromPath(path: profilePath)
+        let profileExists = self.dbConnections
+            .isContactProfileExists(accountId: accountId, profileURI: profileUri)
+        if !profileExists && createIfNotExists {
+            let profile = Profile(uri: profileUri, alias: alias, photo: photo, type: type.rawValue)
+            try self.saveProfile(profile: profile, path: profilePath)
         }
+        let localOverride = localProfileOverride(for: profileUri, accountId: accountId)
+        return getProfileFromPath(path: profilePath)?.merging(localOverride: localOverride) ?? localOverride
+    }
+
+    func getProfileWithoutLocalOverride(for profileUri: String, accountId: String) -> Profile? {
+        guard let path = dbConnections.contactProfilePath(accountId: accountId,
+                                                          profileURI: profileUri,
+                                                          createifNotExists: false) else { return nil }
+        return getProfileFromPath(path: path)
+    }
+
+    func localProfileOverride(for profileUri: String, accountId: String) -> Profile? {
+        guard let path = dbConnections.contactProfileOverridePath(accountId: accountId,
+                                                                  profileURI: profileUri,
+                                                                  createIfNotExists: false) else { return nil }
+        return getProfileFromPath(path: path)
+    }
+
+    func saveLocalProfileOverride(profileUri: String,
+                                  alias: String?,
+                                  photo: String?,
+                                  accountId: String) -> Bool {
+        let type = profileUri.contains("ring") ? ProfileType.ring : ProfileType.sip
         let profile = Profile(uri: profileUri, alias: alias, photo: photo, type: type.rawValue)
-        try self.saveProfile(profile: profile, path: profilePath)
-        return getProfileFromPath(path: profilePath)
+        if profile.hasNoOverrides {
+            dbConnections.removeProfileOverride(accountId: accountId, profileURI: profileUri)
+            return true
+        }
+        guard let path = dbConnections.contactProfileOverridePath(accountId: accountId,
+                                                                  profileURI: profileUri,
+                                                                  createIfNotExists: true),
+              let data = VCardUtils.dataForLocalOverride(profile) else { return false }
+        do {
+            try data.write(to: URL(fileURLWithPath: path), options: .atomic)
+            return FileManager.default.fileExists(atPath: path)
+        } catch {
+            return false
+        }
     }
 
     private func getProfileFromPath(path: String) -> Profile? {
