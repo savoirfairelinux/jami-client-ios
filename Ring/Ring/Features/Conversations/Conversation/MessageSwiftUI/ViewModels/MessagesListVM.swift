@@ -1115,7 +1115,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
         }
     }
 
-    private func updateAvatar(imageData: Data, jamiId: String) {
+    private func updateAvatar(imageData: Data?, jamiId: String) {
         if let avatarObservable = avatars[jamiId] {
             avatarObservable.accept(imageData)
         }
@@ -1162,14 +1162,11 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
                 .observe(on: MainScheduler.instance)
                 .subscribe(onNext: { [weak self] profile in
                     guard let self = self else { return }
-                    if let profileName = profile.alias, !profileName.isEmpty {
+                    self.updateAvatar(imageData: profile.photo?.toImageData(), jamiId: id)
+                    let profileName = (profile.alias ?? "").simplified()
+                    if !profileName.isEmpty {
                         self.updateName(name: profileName, jamiId: id)
-                    }
-                    if let data = profile.photo?.toImageData() {
-                        self.updateAvatar(imageData: data, jamiId: id)
-                    }
-                    let name = self.names[id]?.value
-                    if name?.isEmpty ?? true {
+                    } else {
                         self.nameLookup(id: id)
                     }
                 })

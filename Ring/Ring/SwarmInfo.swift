@@ -102,6 +102,15 @@ class ParticipantInfo: Equatable, Hashable {
         hasher.combine(jamiId)
     }
 
+    func apply(_ profile: Profile) {
+        let photoData = profile.photo?.toImageData()
+        profileLock.lock()
+        hasProfileAvatar = photoData != nil
+        avatarData.accept(photoData)
+        profileLock.unlock()
+        profileName.accept(profile.alias ?? "")
+    }
+
     func lookupName(nameService: NameService, accountId: String) {
         nameService.usernameLookupStatus.share()
             .filter({ [weak self] lookupNameResponse in
@@ -149,7 +158,7 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
                 guard let self = self else {
                     return nil
                 }
-                if let avatar = avatar { return avatar }
+                if let avatar = avatar, !avatar.isEmpty { return avatar }
                 return self.buildAvatar()
             }
     }()
@@ -191,6 +200,7 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
             .combineLatest(self.title.asObservable(),
                            self.participantsNames.asObservable()) { [weak self] (title: String, names: [String]) -> String in
                 guard let self = self else { return "" }
+                let title = title.simplified()
                 if !title.isEmpty { return title }
                 return self.buildTitleFrom(names: names)
             }
@@ -337,7 +347,6 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
                 guard let self = self else { return }
 
                 let finalNames = data.map(\.finalName).filter { !$0.isEmpty }
-                let profileNames = data.map(\.profileName).filter { !$0.isEmpty }
                 let avatars = data.map(\.avatarData).compactMap { $0 }
 
                 self.participantsAvatars.accept(avatars)
@@ -345,10 +354,6 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
                 if isDialog {
                     self.participantsNames.accept(Array(Set(finalNames)))
                     self.participantsString.accept(self.registeredNameForDialog())
-
-                    if self.title.value.isEmpty, let name = profileNames.first {
-                        self.title.accept(titleForDialog())
-                    }
                 } else {
                     let activeFinalNames = data
                         .filter { $0.role.isActive }
@@ -417,11 +422,16 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
             .disposed(by: self.disposeBag)
     }
 
+    private var hasConversationProfile: Bool {
+        conversation?.isCoredialog() == false
+    }
+
     private func updateInfo() {
-        guard let conversation = self.conversation else { return }
+        guard hasConversationProfile, let conversation = self.conversation else { return }
         let info = self.conversationsService.getConversationInfo(conversationId: conversation.id, accountId: self.accountId)
         if let avatar = info[ConversationAttributes.avatar.rawValue],
-           let imageData = avatar.toImageData() {
+           let imageData = avatar.toImageData(),
+           !imageData.isEmpty {
             self.avatarData.accept(imageData)
         }
         if let title = info[ConversationAttributes.title.rawValue] {
@@ -481,16 +491,7 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
         profileObservable
             .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe { [weak participantInfo] profile in
-                guard let participantInfo = participantInfo else { return }
-                if let data = profile.photo?.toImageData() {
-                    participantInfo.profileLock.lock()
-                    participantInfo.hasProfileAvatar = true
-                    participantInfo.avatarData.accept(data)
-                    participantInfo.profileLock.unlock()
-                }
-                if let profileName = profile.alias, !profileName.isEmpty {
-                    participantInfo.profileName.accept(profileName)
-                }
+                participantInfo?.apply(profile)
             } onError: { _ in
             }
             .disposed(by: participantInfo.disposeBag)
@@ -535,14 +536,6 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
             return participant.avatarData.value
         }
         return localParticipant?.avatarData.value
-    }
-
-    private func titleForDialog() -> String {
-        if let name = nonLocalParticipants.first?.profileName.value,
-           !name.isEmpty {
-            return name
-        }
-        return ""
     }
 
     private func registeredNameForDialog() -> String {

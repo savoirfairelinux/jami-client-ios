@@ -94,6 +94,8 @@ class ConversationsCoordinator: RootCoordinator, StateableResponsive, Conversati
                     self.openConversationFromCall(conversationModel: conversation)
                 case .presentSwarmInfo(let swarmInfo):
                     self.presentSwarmInfo(swarmInfo: swarmInfo)
+                case .editConversationProfile(let context):
+                    self.presentConversationProfileEditor(context: context)
                 case .startCall(let contactRingId, let name):
                     self.startOutgoingCall(contactRingId: contactRingId, userName: name)
                 case .startAudioCall(let contactRingId, let name):
@@ -201,6 +203,16 @@ extension ConversationsCoordinator {
         viewController.navigationItem.compactAppearance = transparentBar
         viewController.navigationItem.scrollEdgeAppearance = transparentBar
         self.present(viewController: viewController, withStyle: .show, withAnimation: true, withStateable: view.stateEmitter)
+    }
+
+    func presentConversationProfileEditor(context: ConversationProfileEditingContext) {
+        let viewModel = ConversationProfileEditorVM(context: context, injectionBag: injectionBag)
+        let view = ConversationProfileEditorView(model: viewModel)
+        let viewController = createDismissableVC(view, dismissible: viewModel.dismissHandler)
+        self.present(viewController: viewController,
+                     withStyle: .present,
+                     withAnimation: true,
+                     disposeBag: disposeBag)
     }
 
     func popToSmartList() {

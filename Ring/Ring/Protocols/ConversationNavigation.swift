@@ -41,6 +41,7 @@ enum ConversationState: State {
     case needToOnboard
     case migrateAccount(accountId: String, completion: ((Bool) -> Void)?)
     case presentSwarmInfo(swarmInfo: SwarmInfoProtocol)
+    case editConversationProfile(context: ConversationProfileEditingContext)
     case openNewConversation(jamiId: String)
     case openConversationForConversationId(conversationId: String,
                                            accountId: String,
