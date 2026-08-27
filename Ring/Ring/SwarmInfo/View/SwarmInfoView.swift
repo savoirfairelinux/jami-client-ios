@@ -229,7 +229,7 @@ public struct SwarmInfoView: View, StateEmittingView {
         VStack(spacing: Layout.generalMargin) {
             titleView
             descriptionView
-            if viewModel.getContactJamiId() != nil {
+            if viewModel.callTarget != nil {
                 callButtons
             }
         }
@@ -240,13 +240,13 @@ public struct SwarmInfoView: View, StateEmittingView {
             callButton(
                 systemName: "phone.fill",
                 action: placeAudioCall,
-                accessibilityLabel: L10n.Accessibility.conversationStartVoiceCall(viewModel.getContactDisplayName())
+                accessibilityLabel: L10n.Accessibility.conversationStartVoiceCall(viewModel.title)
             )
 
             callButton(
                 systemName: "video.fill",
                 action: placeVideoCall,
-                accessibilityLabel: L10n.Accessibility.conversationStartVideoCall(viewModel.getContactDisplayName())
+                accessibilityLabel: L10n.Accessibility.conversationStartVideoCall(viewModel.title)
             )
         }
         .padding(.top, Layout.callButtonsMargin)
@@ -574,14 +574,14 @@ extension SwarmInfoView {
     // MARK: - Actions
 
     private func placeAudioCall() {
-        guard let jamiId = viewModel.getContactJamiId() else { return }
-        let name = viewModel.getContactDisplayName()
-        stateEmitter.emitState(.startAudioCall(contactRingId: jamiId, userName: name))
+        guard let target = viewModel.callTarget else { return }
+        stateEmitter.emitState(.startAudioCall(contactRingId: target.uri,
+                                               userName: target.displayName))
     }
 
     private func placeVideoCall() {
-        guard let jamiId = viewModel.getContactJamiId() else { return }
-        let name = viewModel.getContactDisplayName()
-        stateEmitter.emitState(.startCall(contactRingId: jamiId, userName: name))
+        guard let target = viewModel.callTarget else { return }
+        stateEmitter.emitState(.startCall(contactRingId: target.uri,
+                                          userName: target.displayName))
     }
 }

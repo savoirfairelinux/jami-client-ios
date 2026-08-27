@@ -481,26 +481,15 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
         }
     }
 
-    private func prepareCallURI() -> String? {
-        guard let jamiId = self.conversation.getParticipants().first?.jamiId else { return nil }
-        var uri = self.conversation.isCoredialog() ? jamiId : "swarm:" + self.conversation.id
-
-        if let activeCall = self.callService.getActiveCall(accountId: self.conversation.accountId, conversationId: self.conversation.id), !self.conversation.isCoredialog() {
-            uri = activeCall.constructURI()
-        }
-
-        return uri
-    }
-
     func startCall() {
-        guard let uri = prepareCallURI() else { return }
+        guard let uri = callService.outgoingCallURI(for: conversation) else { return }
         let name = getContactNameForCall()
         self.closeAllPlayers()
         self.stateSubject.onNext(ConversationState.startCall(contactRingId: uri, userName: name))
     }
 
     func startAudioCall() {
-        guard let uri = prepareCallURI() else { return }
+        guard let uri = callService.outgoingCallURI(for: conversation) else { return }
         let name = getContactNameForCall()
         self.closeAllPlayers()
         self.stateSubject.onNext(ConversationState.startAudioCall(contactRingId: uri, userName: name))

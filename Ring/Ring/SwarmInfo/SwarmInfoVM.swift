@@ -20,6 +20,8 @@ import RxRelay
 import RxCocoa
 
 class SwarmInfoVM: ObservableObject {
+    typealias CallTarget = (uri: String, displayName: String)
+
     // MARK: - Public Properties
 
     @Published var participantsRows = [ParticipantRow]()
@@ -56,6 +58,7 @@ class SwarmInfoVM: ObservableObject {
     private let nameService: NameService
     let profileService: ProfilesService
     private let conversationService: ConversationsService
+    private let callService: CallService
     private let destructiveActionExecutor: ConversationDestructiveActionExecutor
     let injectionBag: InjectionBag
 
@@ -74,6 +77,12 @@ class SwarmInfoVM: ObservableObject {
 
         let members = swarmInfo.participants.value
         return members.filter({ $0.role == .admin }).contains(where: { $0.jamiId == jamiId })
+    }
+
+    var callTarget: CallTarget? {
+        guard let conversation,
+              let uri = callService.outgoingCallURI(for: conversation) else { return nil }
+        return (uri: uri, displayName: conversation.isCoredialog() ? title : "")
     }
 
     let provider: AvatarProvider
@@ -120,6 +129,7 @@ class SwarmInfoVM: ObservableObject {
         self.conversationService = injectionBag.conversationsService
         self.nameService = injectionBag.nameService
         self.profileService = injectionBag.profileService
+        self.callService = injectionBag.callService
         self.destructiveActionExecutor = ConversationDestructiveActionExecutor(injectionBag: injectionBag)
 
         self.swarmInfo = swarmInfo
@@ -183,14 +193,6 @@ class SwarmInfoVM: ObservableObject {
         }
         // For self-conversation, return the local participant's jamiId
         return conversation.getLocalParticipants()?.jamiId
-    }
-
-    func getContactDisplayName() -> String {
-        guard let conversation = self.conversation,
-              conversation.isCoredialog() else {
-            return ""
-        }
-        return title
     }
 
     func createShareInfo(for jamiId: String) -> String {

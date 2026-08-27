@@ -188,4 +188,28 @@ final class SwarmInfoTests: XCTestCase {
         // Assert
         XCTAssertFalse(result)
     }
+
+    func testCallTargetForGroupConversationUsesResolvedURIWithoutDisplayName() {
+        let conversation = ConversationModel(withId: conversationId1,
+                                             accountId: accountId1,
+                                             type: .invitesOnly)
+        conversation.addParticipant(jamiId: jamiId1)
+        let viewModel = makeSwarmInfoViewModel(conversation: conversation, title: title1)
+
+        let target = viewModel.callTarget
+
+        XCTAssertEqual(target?.uri, "swarm:\(conversationId1)")
+        XCTAssertEqual(target?.displayName, "")
+    }
+
+    private func makeSwarmInfoViewModel(conversation: ConversationModel,
+                                        title: String) -> SwarmInfoVM {
+        let testableSwarmInfo = TestableSwarmInfo(participants: [],
+                                                  containsSearchQuery: false,
+                                                  hasParticipantWithRegisteredName: false)
+        testableSwarmInfo.conversation = conversation
+        let viewModel = SwarmInfoVM(with: injectionBag, swarmInfo: testableSwarmInfo)
+        viewModel.title = title
+        return viewModel
+    }
 }

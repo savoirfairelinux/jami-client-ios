@@ -64,4 +64,65 @@ final class CallServiceStateMirrorTests: XCTestCase {
         service.handle(.callEnded(second, durationSeconds: 0))
         XCTAssertFalse(service.hasOngoingCalls)
     }
+
+    func testOutgoingCallURIForOneToOneConversationUsesParticipant() {
+        let service = makeService()
+        let conversation = ConversationModel(withId: "conversation-id",
+                                             accountId: "account-id",
+                                             type: .oneToOne)
+        conversation.addParticipant(jamiId: "participant-id")
+
+        XCTAssertEqual(service.outgoingCallURI(for: conversation), "participant-id")
+    }
+
+    func testOutgoingCallURIForSelfConversationUsesLocalParticipant() {
+        let service = makeService()
+        let conversation = ConversationModel(withParticipantUri: JamiURI(schema: .ring,
+                                                                          infoHash: "local-id"),
+                                             accountId: "account-id",
+                                             type: .oneToOne,
+                                             isLocal: true)
+
+        XCTAssertEqual(service.outgoingCallURI(for: conversation), "local-id")
+    }
+
+    func testOutgoingCallURIForGroupConversationUsesSwarmURI() {
+        let service = makeService()
+        let conversation = makeGroupConversation()
+
+        XCTAssertEqual(service.outgoingCallURI(for: conversation), "swarm:conversation-id")
+    }
+
+    func testOutgoingCallURIForGroupConversationUsesActiveCallURI() {
+        let service = makeService()
+        let conversation = makeGroupConversation()
+        let activeCall = ActiveCall(id: "call-id",
+                                    uri: "participant-id",
+                                    device: "device-id",
+                                    conversationId: conversation.id,
+                                    accountId: conversation.accountId,
+                                    isFromLocalDevice: false)
+        var tracker = AccountCallTracker()
+        tracker.setCalls(for: conversation.id, to: [activeCall])
+        service.activeCalls.accept([conversation.accountId: tracker])
+
+        XCTAssertEqual(service.outgoingCallURI(for: conversation), activeCall.constructURI())
+    }
+
+    func testOutgoingCallURIIsNilForGroupWithoutParticipants() {
+        let service = makeService()
+        let conversation = ConversationModel(withId: "conversation-id",
+                                             accountId: "account-id",
+                                             type: .invitesOnly)
+
+        XCTAssertNil(service.outgoingCallURI(for: conversation))
+    }
+
+    private func makeGroupConversation() -> ConversationModel {
+        let conversation = ConversationModel(withId: "conversation-id",
+                                             accountId: "account-id",
+                                             type: .invitesOnly)
+        conversation.addParticipant(jamiId: "participant-id")
+        return conversation
+    }
 }

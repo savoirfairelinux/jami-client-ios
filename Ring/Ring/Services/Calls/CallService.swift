@@ -194,6 +194,24 @@ final class CallService {
         return activeCalls.value[accountId]?.calls(for: conversationId).first
     }
 
+    /// Resolves a conversation's direct, swarm, or active rendezvous call URI.
+    func outgoingCallURI(for conversation: ConversationModel) -> String? {
+        if conversation.isCoredialog() {
+            return conversation.getParticipants().first?.jamiId
+                ?? conversation.getLocalParticipants()?.jamiId
+        }
+
+        guard conversation.isSwarm(),
+              !conversation.id.isEmpty,
+              !conversation.getParticipants().isEmpty else {
+            return nil
+        }
+
+        return getActiveCall(accountId: conversation.accountId,
+                             conversationId: conversation.id)?.constructURI()
+            ?? "swarm:" + conversation.id
+    }
+
     // MARK: - Intents from conversation features
 
     func sendInCallMessage(callId: CallId, message: String, accountId: AccountModel) {
