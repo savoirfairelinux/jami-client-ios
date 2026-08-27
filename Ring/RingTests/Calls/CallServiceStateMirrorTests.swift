@@ -78,7 +78,7 @@ final class CallServiceStateMirrorTests: XCTestCase {
     func testOutgoingCallURIForSelfConversationUsesLocalParticipant() {
         let service = makeService()
         let conversation = ConversationModel(withParticipantUri: JamiURI(schema: .ring,
-                                                                          infoHash: "local-id"),
+                                                                         infoHash: "local-id"),
                                              accountId: "account-id",
                                              type: .oneToOne,
                                              isLocal: true)

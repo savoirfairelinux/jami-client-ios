@@ -21,23 +21,9 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		A7F100010000000000000001 /* GifHelpersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F100020000000000000002 /* GifHelpersTests.swift */; };
-		C30000000000000000000003 /* CollabEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30000000000000000000002 /* CollabEditorViewModel.swift */; };
-		C30000000000000000000005 /* CollabEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30000000000000000000004 /* CollabEditorViewController.swift */; };
-		C30000000000000000000007 /* CollabSchemeHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30000000000000000000006 /* CollabSchemeHandler.swift */; };
-		C30000000000000000000009 /* CollabDocumentsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30000000000000000000008 /* CollabDocumentsVM.swift */; };
-		C3000000000000000000000B /* CollabDocumentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3000000000000000000000A /* CollabDocumentsView.swift */; };
-		C3000000000000000000000D /* CollabDocMessageVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3000000000000000000000C /* CollabDocMessageVM.swift */; };
-		C3000000000000000000000F /* CollabDocMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3000000000000000000000E /* CollabDocMessageView.swift */; };
-		C30000000000000000000011 /* CollabHistoryPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30000000000000000000010 /* CollabHistoryPanel.swift */; };
-		C30000000000000000000016 /* CollabDocumentRemoval.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30000000000000000000015 /* CollabDocumentRemoval.swift */; };
-		C10000000000000000000064 /* libyrs.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C10000000000000000000001 /* libyrs.xcframework */; };
-		C10000000000000000000071 /* libyrs.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C10000000000000000000001 /* libyrs.xcframework */; };
-		C1000000000000000000007E /* libyrs.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C10000000000000000000001 /* libyrs.xcframework */; };
-		C0000000000000000000000F /* CollaborationAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000008 /* CollaborationAdapter.mm */; };
-		C0000000000000000000001D /* CollaborationAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000016 /* CollaborationAdapterDelegate.swift */; };
-		C0000000000000000000002B /* CollaborationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000024 /* CollaborationService.swift */; };
-		C00000000000000000000039 /* CollaborativeDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000032 /* CollaborativeDocument.swift */; };
+		F10000000000000000000003 /* ConversationProfileEditorVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000004 /* ConversationProfileEditorVM.swift */; };
+		F10000000000000000000005 /* ConversationProfileEditorAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000006 /* ConversationProfileEditorAvatar.swift */; };
+		F10000000000000000000007 /* ConversationProfileEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000008 /* ConversationProfileEditorView.swift */; };
 		024B612C1DF7654F00C4F9DE /* DaemonServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024B612B1DF7654F00C4F9DE /* DaemonServiceTests.swift */; };
 		024B61311DF7656A00C4F9DE /* FixtureFailInitDRingAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 024B612E1DF7656A00C4F9DE /* FixtureFailInitDRingAdapter.mm */; };
 		024B61321DF7656A00C4F9DE /* FixtureFailStartDRingAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 024B61301DF7656A00C4F9DE /* FixtureFailStartDRingAdapter.mm */; };
@@ -434,8 +420,6 @@
 		26F1D8E62FC73C6E002AA754 /* PeerServicesAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26F1D8E52FC73C6E002AA754 /* PeerServicesAdapter.mm */; };
 		26F1D8F02FC76A78002AA754 /* PeerSharingServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F1D8EF2FC76A78002AA754 /* PeerSharingServiceTests.swift */; };
 		26F1D8F32FC76A8B002AA754 /* ObjCMockPeerServicesAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F1D8F22FC76A8B002AA754 /* ObjCMockPeerServicesAdapter.m */; };
-		C30000000000000000000014 /* ObjCMockCollaborationAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = C30000000000000000000013 /* ObjCMockCollaborationAdapter.m */; };
-		C40000000000000000000002 /* CollaborationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40000000000000000000001 /* CollaborationServiceTests.swift */; };
 		26F1D9A12FC76A78002AA754 /* PeerSharingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F1D9A02FC76A78002AA754 /* PeerSharingViewModelTests.swift */; };
 		26F5442D2C5815770069A7A4 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F5442C2C5815770069A7A4 /* WelcomeView.swift */; };
 		26F544A32C5AABD20069A7A4 /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F544A22C5AABD20069A7A4 /* CreateAccountView.swift */; };
@@ -567,6 +551,7 @@
 		803EA760EE82660B036D3FD8 /* IdentityBackdrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = C760772C22CC601BCEA3449C /* IdentityBackdrop.swift */; };
 		9F5F2102C5C96402A066ADA0 /* GroupAvatarRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE00A4B452D77EC0CA26ED4 /* GroupAvatarRenderer.swift */; };
 		A1D0C0DE0000000000000B02 /* CallsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D0C0DE0000000000000B01 /* CallsManager.swift */; };
+		A7F100010000000000000001 /* GifHelpersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F100020000000000000002 /* GifHelpersTests.swift */; };
 		A7MD00102F20000200000001 /* MessageMarkdownSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7MD00102F20000100000001 /* MessageMarkdownSupport.swift */; };
 		A7MD00102F20000200000002 /* MessageMarkdownPlainText.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7MD00102F20000100000002 /* MessageMarkdownPlainText.swift */; };
 		A7MD00102F20000200000003 /* MessageMarkdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7MD00102F20000100000003 /* MessageMarkdown.swift */; };
@@ -602,7 +587,22 @@
 		BB91FAAD292EA36200BB41C1 /* EventData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB91FAA9292EA26900BB41C1 /* EventData.swift */; };
 		BBB76E412966062C00A42DF5 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB76E402966062C00A42DF5 /* MapView.swift */; };
 		BBD3D751297B4CA00098DB02 /* SwarmInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD3D750297B4CA00098DB02 /* SwarmInfoView.swift */; };
+		C0000000000000000000000F /* CollaborationAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000008 /* CollaborationAdapter.mm */; };
+		C0000000000000000000001D /* CollaborationAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000016 /* CollaborationAdapterDelegate.swift */; };
+		C0000000000000000000002B /* CollaborationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000024 /* CollaborationService.swift */; };
+		C00000000000000000000039 /* CollaborativeDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000032 /* CollaborativeDocument.swift */; };
+		C30000000000000000000003 /* CollabEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30000000000000000000002 /* CollabEditorViewModel.swift */; };
+		C30000000000000000000005 /* CollabEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30000000000000000000004 /* CollabEditorViewController.swift */; };
+		C30000000000000000000007 /* CollabSchemeHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30000000000000000000006 /* CollabSchemeHandler.swift */; };
+		C30000000000000000000009 /* CollabDocumentsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30000000000000000000008 /* CollabDocumentsVM.swift */; };
+		C3000000000000000000000B /* CollabDocumentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3000000000000000000000A /* CollabDocumentsView.swift */; };
+		C3000000000000000000000D /* CollabDocMessageVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3000000000000000000000C /* CollabDocMessageVM.swift */; };
+		C3000000000000000000000F /* CollabDocMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3000000000000000000000E /* CollabDocMessageView.swift */; };
+		C30000000000000000000011 /* CollabHistoryPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30000000000000000000010 /* CollabHistoryPanel.swift */; };
+		C30000000000000000000014 /* ObjCMockCollaborationAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = C30000000000000000000013 /* ObjCMockCollaborationAdapter.m */; };
+		C30000000000000000000016 /* CollabDocumentRemoval.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30000000000000000000015 /* CollabDocumentRemoval.swift */; };
 		C39ADB74167B420FBFEF18B2 /* ExpandableAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFEB4CB31604F75894DCEE5 /* ExpandableAvatar.swift */; };
+		C40000000000000000000002 /* CollaborationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40000000000000000000001 /* CollaborationServiceTests.swift */; };
 		E8ACE0B8E94AB3DEABA30A1A /* AvatarHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD989EC28085426384411E8 /* AvatarHelpers.swift */; };
 		FB726FE5280249DA8219EDE9 /* PeerSharingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECD5DF711D545048AA5E270 /* PeerSharingViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -675,22 +675,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		A7F100020000000000000002 /* GifHelpersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifHelpersTests.swift; sourceTree = "<group>"; };
-		C30000000000000000000002 /* CollabEditorViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollabEditorViewModel.swift; sourceTree = "<group>"; };
-		C30000000000000000000004 /* CollabEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollabEditorViewController.swift; sourceTree = "<group>"; };
-		C30000000000000000000006 /* CollabSchemeHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollabSchemeHandler.swift; sourceTree = "<group>"; };
-		C30000000000000000000008 /* CollabDocumentsVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollabDocumentsVM.swift; sourceTree = "<group>"; };
-		C3000000000000000000000A /* CollabDocumentsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollabDocumentsView.swift; sourceTree = "<group>"; };
-		C3000000000000000000000C /* CollabDocMessageVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollabDocMessageVM.swift; sourceTree = "<group>"; };
-		C3000000000000000000000E /* CollabDocMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollabDocMessageView.swift; sourceTree = "<group>"; };
-		C30000000000000000000010 /* CollabHistoryPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollabHistoryPanel.swift; sourceTree = "<group>"; };
-		C30000000000000000000015 /* CollabDocumentRemoval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollabDocumentRemoval.swift; sourceTree = "<group>"; };
-		C10000000000000000000001 /* libyrs.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libyrs.xcframework; path = ../xcframework/libyrs.xcframework; sourceTree = "<group>"; };
-		C00000000000000000000001 /* CollaborationAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CollaborationAdapter.h; sourceTree = "<group>"; };
-		C00000000000000000000008 /* CollaborationAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CollaborationAdapter.mm; sourceTree = "<group>"; };
-		C00000000000000000000016 /* CollaborationAdapterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollaborationAdapterDelegate.swift; sourceTree = "<group>"; };
-		C00000000000000000000024 /* CollaborationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollaborationService.swift; sourceTree = "<group>"; };
-		C00000000000000000000032 /* CollaborativeDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollaborativeDocument.swift; sourceTree = "<group>"; };
+		F10000000000000000000004 /* ConversationProfileEditorVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationProfileEditorVM.swift; sourceTree = "<group>"; };
+		F10000000000000000000006 /* ConversationProfileEditorAvatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationProfileEditorAvatar.swift; sourceTree = "<group>"; };
+		F10000000000000000000008 /* ConversationProfileEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationProfileEditorView.swift; sourceTree = "<group>"; };
 		024B612B1DF7654F00C4F9DE /* DaemonServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DaemonServiceTests.swift; sourceTree = "<group>"; };
 		024B612D1DF7656A00C4F9DE /* FixtureFailInitDRingAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FixtureFailInitDRingAdapter.h; path = Fixtures/DRingAdaptor/FixtureFailInitDRingAdapter.h; sourceTree = "<group>"; };
 		024B612E1DF7656A00C4F9DE /* FixtureFailInitDRingAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = FixtureFailInitDRingAdapter.mm; path = Fixtures/DRingAdaptor/FixtureFailInitDRingAdapter.mm; sourceTree = "<group>"; };
@@ -1096,9 +1083,6 @@
 		26F1D8EF2FC76A78002AA754 /* PeerSharingServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerSharingServiceTests.swift; sourceTree = "<group>"; };
 		26F1D8F12FC76A8B002AA754 /* ObjCMockPeerServicesAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjCMockPeerServicesAdapter.h; sourceTree = "<group>"; };
 		26F1D8F22FC76A8B002AA754 /* ObjCMockPeerServicesAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjCMockPeerServicesAdapter.m; sourceTree = "<group>"; };
-		C30000000000000000000012 /* ObjCMockCollaborationAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjCMockCollaborationAdapter.h; sourceTree = "<group>"; };
-		C30000000000000000000013 /* ObjCMockCollaborationAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjCMockCollaborationAdapter.m; sourceTree = "<group>"; };
-		C40000000000000000000001 /* CollaborationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollaborationServiceTests.swift; sourceTree = "<group>"; };
 		26F1D9A02FC76A78002AA754 /* PeerSharingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerSharingViewModelTests.swift; sourceTree = "<group>"; };
 		26F5442C2C5815770069A7A4 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		26F544A22C5AABD20069A7A4 /* CreateAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
@@ -1786,6 +1770,7 @@
 		66ACB42F214AE28C00A94162 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
 		66F295DD2166A5930044ED6F /* Devices+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Devices+Helpers.swift"; sourceTree = "<group>"; };
 		A1D0C0DE0000000000000B01 /* CallsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallsManager.swift; sourceTree = "<group>"; };
+		A7F100020000000000000002 /* GifHelpersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifHelpersTests.swift; sourceTree = "<group>"; };
 		A7MD00102F20000100000001 /* MessageMarkdownSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageMarkdownSupport.swift; sourceTree = "<group>"; };
 		A7MD00102F20000100000002 /* MessageMarkdownPlainText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageMarkdownPlainText.swift; sourceTree = "<group>"; };
 		A7MD00102F20000100000003 /* MessageMarkdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageMarkdown.swift; sourceTree = "<group>"; };
@@ -1819,10 +1804,27 @@
 		BB91FAA9292EA26900BB41C1 /* EventData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventData.swift; sourceTree = "<group>"; };
 		BBB76E402966062C00A42DF5 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		BBD3D750297B4CA00098DB02 /* SwarmInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwarmInfoView.swift; sourceTree = "<group>"; };
-		FDFEB4CB31604F75894DCEE5 /* ExpandableAvatar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableAvatar.swift; sourceTree = "<group>"; };
+		C00000000000000000000001 /* CollaborationAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CollaborationAdapter.h; sourceTree = "<group>"; };
+		C00000000000000000000008 /* CollaborationAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CollaborationAdapter.mm; sourceTree = "<group>"; };
+		C00000000000000000000016 /* CollaborationAdapterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollaborationAdapterDelegate.swift; sourceTree = "<group>"; };
+		C00000000000000000000024 /* CollaborationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollaborationService.swift; sourceTree = "<group>"; };
+		C00000000000000000000032 /* CollaborativeDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollaborativeDocument.swift; sourceTree = "<group>"; };
+		C30000000000000000000002 /* CollabEditorViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollabEditorViewModel.swift; sourceTree = "<group>"; };
+		C30000000000000000000004 /* CollabEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollabEditorViewController.swift; sourceTree = "<group>"; };
+		C30000000000000000000006 /* CollabSchemeHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollabSchemeHandler.swift; sourceTree = "<group>"; };
+		C30000000000000000000008 /* CollabDocumentsVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollabDocumentsVM.swift; sourceTree = "<group>"; };
+		C3000000000000000000000A /* CollabDocumentsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollabDocumentsView.swift; sourceTree = "<group>"; };
+		C3000000000000000000000C /* CollabDocMessageVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollabDocMessageVM.swift; sourceTree = "<group>"; };
+		C3000000000000000000000E /* CollabDocMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollabDocMessageView.swift; sourceTree = "<group>"; };
+		C30000000000000000000010 /* CollabHistoryPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollabHistoryPanel.swift; sourceTree = "<group>"; };
+		C30000000000000000000012 /* ObjCMockCollaborationAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjCMockCollaborationAdapter.h; sourceTree = "<group>"; };
+		C30000000000000000000013 /* ObjCMockCollaborationAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjCMockCollaborationAdapter.m; sourceTree = "<group>"; };
+		C30000000000000000000015 /* CollabDocumentRemoval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollabDocumentRemoval.swift; sourceTree = "<group>"; };
+		C40000000000000000000001 /* CollaborationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollaborationServiceTests.swift; sourceTree = "<group>"; };
 		C760772C22CC601BCEA3449C /* IdentityBackdrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityBackdrop.swift; sourceTree = "<group>"; };
 		DDE8CA20E60048678054756B /* PeerSharingSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerSharingSheet.swift; sourceTree = "<group>"; };
 		EECD5DF711D545048AA5E270 /* PeerSharingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerSharingViewModel.swift; sourceTree = "<group>"; };
+		FDFEB4CB31604F75894DCEE5 /* ExpandableAvatar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableAvatar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -2061,23 +2063,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C30000000000000000000001 /* Collab */ = {
-			isa = PBXGroup;
-			children = (
-				C30000000000000000000002 /* CollabEditorViewModel.swift */,
-				C30000000000000000000004 /* CollabEditorViewController.swift */,
-				C30000000000000000000006 /* CollabSchemeHandler.swift */,
-				C30000000000000000000008 /* CollabDocumentsVM.swift */,
-				C3000000000000000000000A /* CollabDocumentsView.swift */,
-				C3000000000000000000000C /* CollabDocMessageVM.swift */,
-				C3000000000000000000000E /* CollabDocMessageView.swift */,
-				C30000000000000000000010 /* CollabHistoryPanel.swift */,
-				C30000000000000000000015 /* CollabDocumentRemoval.swift */,
-			);
-			name = Collab;
-			path = Features/Collab;
-			sourceTree = "<group>";
-		};
 		028568231DF60E5C003A8D8D /* Fixtures */ = {
 			isa = PBXGroup;
 			children = (
@@ -3197,6 +3182,16 @@
 			path = Features/Conversations;
 			sourceTree = "<group>";
 		};
+		F10000000000000000000009 /* ProfileEditing */ = {
+			isa = PBXGroup;
+			children = (
+				F10000000000000000000004 /* ConversationProfileEditorVM.swift */,
+				F10000000000000000000006 /* ConversationProfileEditorAvatar.swift */,
+				F10000000000000000000008 /* ConversationProfileEditorView.swift */,
+			);
+			path = ProfileEditing;
+			sourceTree = "<group>";
+		};
 		1A2D18A81F290FBF00B2C785 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -3780,6 +3775,7 @@
 			children = (
 				BB1E8C7829159E2B005AE1D6 /* View */,
 				BB1E8C7929159E3E005AE1D6 /* SwarmInfoVM.swift */,
+				F10000000000000000000009 /* ProfileEditing */,
 			);
 			path = SwarmInfo;
 			sourceTree = "<group>";
@@ -3795,6 +3791,23 @@
 				1DF75AC5296E0C2A0055EA87 /* AddMoreParticipantsInSwarm.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		C30000000000000000000001 /* Collab */ = {
+			isa = PBXGroup;
+			children = (
+				C30000000000000000000002 /* CollabEditorViewModel.swift */,
+				C30000000000000000000004 /* CollabEditorViewController.swift */,
+				C30000000000000000000006 /* CollabSchemeHandler.swift */,
+				C30000000000000000000008 /* CollabDocumentsVM.swift */,
+				C3000000000000000000000A /* CollabDocumentsView.swift */,
+				C3000000000000000000000C /* CollabDocMessageVM.swift */,
+				C3000000000000000000000E /* CollabDocMessageView.swift */,
+				C30000000000000000000010 /* CollabHistoryPanel.swift */,
+				C30000000000000000000015 /* CollabDocumentRemoval.swift */,
+			);
+			name = Collab;
+			path = Features/Collab;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -4104,34 +4117,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		C20000000000000000000001 /* ⚙️ Collaborative Editor */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(PROJECT_DIR)/CollabEditor/build.sh",
-				"$(PROJECT_DIR)/CollabEditor/esbuild.mjs",
-				"$(PROJECT_DIR)/CollabEditor/package-lock.json",
-				"$(PROJECT_DIR)/CollabEditor/editor.html",
-				"$(PROJECT_DIR)/CollabEditor/package.json",
-				"$(PROJECT_DIR)/CollabEditor/src/binding.js",
-				"$(PROJECT_DIR)/CollabEditor/src/host.js",
-				"$(PROJECT_DIR)/CollabEditor/src/index.js",
-				"$(PROJECT_DIR)/CollabEditor/src/jamiformat.js",
-				"$(PROJECT_DIR)/CollabEditor/src/styles.css",
-			);
-			name = "⚙️ Collaborative Editor";
-			outputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/collab/editor.js",
-				"$(BUILT_PRODUCTS_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/collab/editor.css",
-				"$(BUILT_PRODUCTS_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/collab/editor.html",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin:/usr/local/bin\"\n\"${PROJECT_DIR}/CollabEditor/build.sh\" \"${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}\"\n";
-		};
 		1ABE07C31F0C28E000D36361 /* ⚠️ Swiftlint Analysis */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -4173,6 +4158,34 @@
 			shellPath = /bin/sh;
 			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin:/usr/local/bin\"\ncd \"${PROJECT_DIR}/..\"\n./compile-ios.sh --platform=iPhoneOS\n";
 		};
+		C20000000000000000000001 /* ⚙️ Collaborative Editor */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(PROJECT_DIR)/CollabEditor/build.sh",
+				"$(PROJECT_DIR)/CollabEditor/esbuild.mjs",
+				"$(PROJECT_DIR)/CollabEditor/package-lock.json",
+				"$(PROJECT_DIR)/CollabEditor/editor.html",
+				"$(PROJECT_DIR)/CollabEditor/package.json",
+				"$(PROJECT_DIR)/CollabEditor/src/binding.js",
+				"$(PROJECT_DIR)/CollabEditor/src/host.js",
+				"$(PROJECT_DIR)/CollabEditor/src/index.js",
+				"$(PROJECT_DIR)/CollabEditor/src/jamiformat.js",
+				"$(PROJECT_DIR)/CollabEditor/src/styles.css",
+			);
+			name = "⚙️ Collaborative Editor";
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/collab/editor.js",
+				"$(BUILT_PRODUCTS_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/collab/editor.css",
+				"$(BUILT_PRODUCTS_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/collab/editor.html",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin:/usr/local/bin\"\n\"${PROJECT_DIR}/CollabEditor/build.sh\" \"${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}\"\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -4180,6 +4193,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F10000000000000000000003 /* ConversationProfileEditorVM.swift in Sources */,
+				F10000000000000000000005 /* ConversationProfileEditorAvatar.swift in Sources */,
+				F10000000000000000000007 /* ConversationProfileEditorView.swift in Sources */,
 				C30000000000000000000003 /* CollabEditorViewModel.swift in Sources */,
 				C30000000000000000000005 /* CollabEditorViewController.swift in Sources */,
 				C30000000000000000000007 /* CollabSchemeHandler.swift in Sources */,

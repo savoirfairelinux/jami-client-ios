@@ -80,6 +80,8 @@ enum CommonHelpers {
 }
 
 enum ProfilePathHelper {
+    static let overrideFileSuffix = "_o.vcf"
+
     static func jamiHash(from uri: String) -> String {
         return uri
             .replacingOccurrences(of: "<", with: "")
@@ -130,12 +132,39 @@ enum ProfilePathHelper {
         return profilesFolder + "\(encoded).vcf"
     }
 
+    static func contactProfileOverridePath(accountId: String,
+                                           profileURI: String,
+                                           documents: URL,
+                                           createIfNotExists: Bool) -> String? {
+        guard let profilesFolder = contactsPath(accountId: accountId,
+                                                documents: documents,
+                                                createIfNotExists: createIfNotExists) else { return nil }
+        let encoded = Data(profileURI.utf8).base64EncodedString()
+        return profilesFolder + encoded + overrideFileSuffix
+    }
+
     static func existingContactProfilePath(accountId: String, contactId: String, documents: URL) -> String? {
         for profileURI in profileURICandidates(for: contactId) {
             guard let path = contactProfilePath(accountId: accountId,
                                                 profileURI: profileURI,
                                                 documents: documents,
                                                 createIfNotExists: false),
+                  FileManager.default.fileExists(atPath: path) else {
+                continue
+            }
+            return path
+        }
+        return nil
+    }
+
+    static func existingContactProfileOverridePath(accountId: String,
+                                                   contactId: String,
+                                                   documents: URL) -> String? {
+        for profileURI in profileURICandidates(for: contactId) {
+            guard let path = contactProfileOverridePath(accountId: accountId,
+                                                        profileURI: profileURI,
+                                                        documents: documents,
+                                                        createIfNotExists: false),
                   FileManager.default.fileExists(atPath: path) else {
                 continue
             }
@@ -321,6 +350,10 @@ struct VisualEffectView: UIViewRepresentable {
 }
 
 extension String {
+    func simplified() -> String {
+        self.split(whereSeparator: { $0.isWhitespace }).joined(separator: " ")
+    }
+
     func normalized() -> String {
         let decomposed = self.decomposedStringWithCanonicalMapping
         let filtered = decomposed.unicodeScalars.filter {
