@@ -100,4 +100,53 @@ final class ProfilesServiceTests: XCTestCase {
         XCTAssertEqual(alias2, profileName2,
                        "account 2 must receive its own profile, not account 1's cached one")
     }
+
+    func testLocalOverrideReplacesOnlyCustomizedName() {
+        let remote = Profile(uri: "jami:peer",
+                             alias: "Remote name",
+                             photo: "remote-photo",
+                             type: ProfileType.ring.rawValue)
+        let local = Profile(uri: "jami:peer",
+                            alias: "My contact name",
+                            photo: nil,
+                            type: ProfileType.ring.rawValue)
+
+        let merged = remote.merging(localOverride: local)
+
+        XCTAssertEqual(merged.alias, "My contact name")
+        XCTAssertEqual(merged.photo, "remote-photo")
+    }
+
+    func testLocalOverrideReplacesOnlyCustomizedPhoto() {
+        let remote = Profile(uri: "jami:peer",
+                             alias: "Remote name",
+                             photo: "remote-photo",
+                             type: ProfileType.ring.rawValue)
+        let local = Profile(uri: "jami:peer",
+                            alias: nil,
+                            photo: "local-photo",
+                            type: ProfileType.ring.rawValue)
+
+        let merged = remote.merging(localOverride: local)
+
+        XCTAssertEqual(merged.alias, "Remote name")
+        XCTAssertEqual(merged.photo, "local-photo")
+    }
+
+    func testEmptyLocalOverrideRestoresRemoteProfile() {
+        let remote = Profile(uri: "jami:peer",
+                             alias: "Updated remote name",
+                             photo: "updated-remote-photo",
+                             type: ProfileType.ring.rawValue)
+        let local = Profile(uri: "jami:peer",
+                            alias: nil,
+                            photo: nil,
+                            type: ProfileType.ring.rawValue)
+
+        let merged = remote.merging(localOverride: local)
+
+        XCTAssertEqual(merged.alias, "Updated remote name")
+        XCTAssertEqual(merged.photo, "updated-remote-photo")
+        XCTAssertTrue(local.hasNoOverrides)
+    }
 }

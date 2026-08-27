@@ -339,27 +339,39 @@ public final class AdapterService: AdapterDelegate {
     }
 
     private func contactProfileName(accountId: String, contactId: String, type: String) -> String? {
-        guard let path = buildVCardPath(accountId: accountId, contactId: contactId, type: type) else {
-            return nil
-        }
-        return VCardUtils.getNameFromVCard(filePath: path)
+        let name = VCardUtils
+            .nameFromMergedProfile(basePath: buildVCardPath(accountId: accountId,
+                                                            contactId: contactId,
+                                                            type: type),
+                                   overridePath: overrideVCardPath(accountId: accountId,
+                                                                   contactId: contactId,
+                                                                   type: type))
+        return nonEmptyName(name)
     }
 
     private func contactProfileAvatar(accountId: String, contactId: String, type: String) -> String? {
-        guard let path = buildVCardPath(accountId: accountId, contactId: contactId, type: type) else {
-            return nil
-        }
-        return VCardUtils.parseToProfile(filePath: path)?.photo
+        contactProfilePhotoAndName(accountId: accountId, contactId: contactId, type: type).photo
     }
 
     private func contactProfilePhotoAndName(accountId: String, contactId: String, type: String) -> (photo: String?, name: String?) {
-        guard let path = buildVCardPath(accountId: accountId, contactId: contactId, type: type),
-              let profile = VCardUtils.parseToProfile(filePath: path) else {
+        let path = buildVCardPath(accountId: accountId, contactId: contactId, type: type)
+        let overridePath = overrideVCardPath(accountId: accountId, contactId: contactId, type: type)
+        guard let profile = VCardUtils.parseMergedProfile(basePath: path, overridePath: overridePath) else {
             return (nil, nil)
         }
-        let trimmed = profile.alias?.trimmingCharacters(in: .whitespacesAndNewlines)
-        let name = (trimmed?.isEmpty == false) ? trimmed : nil
-        return (profile.photo, name)
+        return (profile.photo, nonEmptyName(profile.alias))
+    }
+
+    private func nonEmptyName(_ name: String?) -> String? {
+        let trimmed = name?.trimmingCharacters(in: .whitespacesAndNewlines)
+        return (trimmed?.isEmpty == false) ? trimmed : nil
+    }
+
+    private func overrideVCardPath(accountId: String, contactId: String, type: String) -> String? {
+        guard type == "conversation", let documents = Constants.documentsPath else { return nil }
+        return ProfilePathHelper.existingContactProfileOverridePath(accountId: accountId,
+                                                                    contactId: contactId,
+                                                                    documents: documents)
     }
 
     private func buildVCardPath(accountId: String, contactId: String, type: String) -> String? {

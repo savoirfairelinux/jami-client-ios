@@ -333,13 +333,27 @@ class JamiSearchViewModel: ObservableObject {
         self.jamsTemporaryResults.accept([])
     }
 
+    static func directoryResultsExcludingContacts(from searchModels: [JamsUserSearchModel],
+                                                  isBlocked: (String) -> Bool,
+                                                  isContact: (String) -> Bool) -> [JamsUserSearchModel] {
+        searchModels.filter { isBlocked($0.jamiId) || !isContact($0.jamiId) }
+    }
+
     private func convertToConversations(from searchModels: [JamiSearchViewModel.JamsUserSearchModel], accountId: String) -> [ConversationViewModel] {
-        var jamsSearch: [ConversationViewModel] = []
+        var blockedIds = Set<String>()
         for model in searchModels {
-            searchBlocked(searchQuery: model.jamiId)
-            if blockedConversationExists(for: model.jamiId) {
-                continue
+            self.searchBlocked(searchQuery: model.jamiId)
+            if self.blockedConversationExists(for: model.jamiId) {
+                blockedIds.insert(model.jamiId)
             }
+        }
+
+        let newContacts = Self
+            .directoryResultsExcludingContacts(from: searchModels,
+                                               isBlocked: { blockedIds.contains($0) },
+                                               isContact: { self.injectionBag.contactsService.contact(withHash: $0) != nil })
+        var jamsSearch: [ConversationViewModel] = []
+        for model in newContacts where !blockedIds.contains(model.jamiId) {
             let newConversation = self.createTemporaryJamsConversation(with: model, accountId: accountId)
             jamsSearch.append(newConversation)
         }
