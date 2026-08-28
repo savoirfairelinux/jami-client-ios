@@ -79,6 +79,9 @@ struct MemberItem: View {
         .accessibilityElement(children: .combine)
         .accessibilityLabel("\(displayName), \(roleText)")
         .accessibilityHint(isInvited ? L10n.Swarm.invited : "")
+        .accessibilityAction(named: L10n.Global.copy) {
+            UIPasteboard.general.string = displayName
+        }
     }
 
     // MARK: - View Components
@@ -90,6 +93,7 @@ struct MemberItem: View {
         Text(displayName)
             .lineLimit(1)
             .truncationMode(.middle)
+            .textSelection(.enabled)
     }
 
     private var roleLabel: some View {

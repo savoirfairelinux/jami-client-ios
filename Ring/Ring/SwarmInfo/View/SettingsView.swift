@@ -253,6 +253,9 @@ struct SettingsView: View {
             .lineLimit(1)
             .foregroundColor(Color(UIColor.secondaryLabel))
             .textSelection(.enabled)
+            .accessibilityAction(named: L10n.Global.copy) {
+                UIPasteboard.general.string = text
+            }
     }
 }
 

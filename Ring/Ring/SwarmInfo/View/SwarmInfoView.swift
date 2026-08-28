@@ -105,6 +105,7 @@ public struct SwarmInfoView: View, StateEmittingView {
         static let expandedInfoBackdropStrength: CGFloat = 0.9
         static let topChromeSize: CGFloat = 100
         static let topChromeBlurRadius: CGFloat = 4
+        static let selectionLongPress: Double = 0.4
     }
 
     // MARK: - Properties
@@ -117,6 +118,7 @@ public struct SwarmInfoView: View, StateEmittingView {
     // MARK: - State
     @SwiftUI.State private var selectedView: SwarmSettingView = .about
     @SwiftUI.State private var isAvatarExpanded = false
+    @SwiftUI.State private var isSelectingText = false
 
     init(viewModel: SwarmInfoVM,
          onAvatarExpansionChanged: @escaping (Bool) -> Void = { _ in }) {
@@ -233,6 +235,7 @@ public struct SwarmInfoView: View, StateEmittingView {
             }
             return
         }
+        isSelectingText = false
         if expanded && providesFeedback {
             UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
         }
@@ -269,6 +272,15 @@ public struct SwarmInfoView: View, StateEmittingView {
                 profileActionButtons
             }
         }
+    }
+
+    private var selectionTracker: some Gesture {
+        LongPressGesture(minimumDuration: Layout.selectionLongPress)
+            .onEnded { _ in
+                if isAvatarExpanded {
+                    isSelectingText = true
+                }
+            }
     }
 
     private var profileActions: [SwarmProfileAction] {
@@ -332,10 +344,18 @@ public struct SwarmInfoView: View, StateEmittingView {
             provider: viewModel.provider,
             isExpanded: isAvatarExpanded,
             isGroup: viewModel.isGroupProfile,
-            onToggle: { setAvatarExpanded(!isAvatarExpanded) }
+            onToggle: toggleAvatar
         ) {
             scrimmedInfo
         }
+    }
+
+    private func toggleAvatar() {
+        guard !isSelectingText else {
+            isSelectingText = false
+            return
+        }
+        setAvatarExpanded(!isAvatarExpanded)
     }
 
     private var avatarImage: some View {
@@ -350,7 +370,12 @@ public struct SwarmInfoView: View, StateEmittingView {
             .truncationMode(.middle)
             .lineLimit(2)
             .foregroundStyle(headerForeground)
+            .textSelection(.enabled)
+            .simultaneousGesture(selectionTracker)
             .accessibilityLabel(viewModel.title)
+            .accessibilityAction(named: L10n.Global.copy) {
+                UIPasteboard.general.string = viewModel.title
+            }
     }
 
     private var displayedDescription: String {
@@ -369,7 +394,12 @@ public struct SwarmInfoView: View, StateEmittingView {
             .lineLimit(2)
             .multilineTextAlignment(.center)
             .foregroundStyle(headerForeground)
+            .textSelection(.enabled)
+            .simultaneousGesture(selectionTracker)
             .accessibilityLabel(displayedDescription)
+            .accessibilityAction(named: L10n.Global.copy) {
+                UIPasteboard.general.string = displayedDescription
+            }
     }
 
     @ViewBuilder private var segmentedControlSection: some View {
