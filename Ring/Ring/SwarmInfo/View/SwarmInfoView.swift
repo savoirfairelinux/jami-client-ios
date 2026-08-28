@@ -95,6 +95,12 @@ enum SwarmSettingView: String, CaseIterable {
     }
 }
 
+private struct PendingDocumentRemoval: Identifiable {
+    let id = UUID()
+    let removal: CollabDocumentRemoval
+    let document: CollaborativeDocument
+}
+
 // MARK: - SwarmInfoView
 
 public struct SwarmInfoView: View, StateEmittingView {
@@ -129,6 +135,7 @@ public struct SwarmInfoView: View, StateEmittingView {
     @SwiftUI.State private var selectedView: SwarmSettingView = .about
     @SwiftUI.State private var isAvatarExpanded = false
     @SwiftUI.State private var isInvitingParticipants = false
+    @SwiftUI.State private var pendingDocumentRemoval: PendingDocumentRemoval?
 
     init(viewModel: SwarmInfoVM,
          onAvatarExpansionChanged: @escaping (Bool) -> Void = { _ in }) {
@@ -188,6 +195,7 @@ public struct SwarmInfoView: View, StateEmittingView {
             floatingActionButton
             documentNamePrompt
         }
+        .alert(item: $pendingDocumentRemoval, content: documentRemovalAlert)
         .sheet(isPresented: $isInvitingParticipants,
                onDismiss: viewModel.removeExistingSubscription) {
             InviteParticipantsSheet(viewModel: viewModel)
@@ -418,9 +426,28 @@ public struct SwarmInfoView: View, StateEmittingView {
             MemberList(viewModel: viewModel)
         case .documents:
             if let documents = viewModel.collabDocuments {
-                CollabDocumentsView(viewModel: documents, stateEmitter: stateEmitter)
+                CollabDocumentsView(viewModel: documents,
+                                    stateEmitter: stateEmitter,
+                                    requestRemoval: requestDocumentRemoval)
             }
         }
+    }
+
+    private func requestDocumentRemoval(_ removal: CollabDocumentRemoval,
+                                        document: CollaborativeDocument) {
+        pendingDocumentRemoval = PendingDocumentRemoval(removal: removal,
+                                                        document: document)
+    }
+
+    private func documentRemovalAlert(for pending: PendingDocumentRemoval) -> Alert {
+        let documents = viewModel.collabDocuments
+        let name = documents?.title(of: pending.document) ?? pending.document.name
+        return Alert(title: Text(pending.removal.alertTitle),
+                     message: Text(pending.removal.alertMessage(for: name)),
+                     primaryButton: .destructive(Text(L10n.Collab.remove)) {
+                        documents?.perform(pending.removal, on: pending.document)
+                     },
+                     secondaryButton: .cancel(Text(L10n.Global.cancel)))
     }
 
     /// The prompt for a new document's name belongs over the whole screen, not

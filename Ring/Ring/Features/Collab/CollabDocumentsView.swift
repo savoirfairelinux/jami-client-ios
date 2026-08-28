@@ -25,6 +25,7 @@ struct CollabDocumentsView: View {
 
     @ObservedObject var viewModel: CollabDocumentsVM
     let stateEmitter: ConversationStatePublisher
+    let requestRemoval: (CollabDocumentRemoval, CollaborativeDocument) -> Void
 
     var body: some View {
         documentSection
@@ -52,7 +53,8 @@ struct CollabDocumentsView: View {
                 ForEach(viewModel.documents, id: \.id) { document in
                     DocumentRow(document: document,
                                 viewModel: viewModel,
-                                open: { open(document.id, viewModel.title(of: document)) })
+                                open: { open(document.id, viewModel.title(of: document)) },
+                                requestRemoval: requestRemoval)
                 }
             }
         }
@@ -108,8 +110,8 @@ private struct DocumentRow: View {
     let document: CollaborativeDocument
     let viewModel: CollabDocumentsVM
     let open: () -> Void
+    let requestRemoval: (CollabDocumentRemoval, CollaborativeDocument) -> Void
 
-    @SwiftUI.State private var confirming: CollabDocumentRemoval?
     @ScaledMetric private var menuSize: CGFloat = 44
 
     var body: some View {
@@ -125,7 +127,7 @@ private struct DocumentRow: View {
         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
             ForEach(viewModel.removals(for: document)) { removal in
                 Button {
-                    confirming = removal
+                    requestRemoval(removal, document)
                 } label: {
                     Label(removal.swipeTitle, systemImage: removal.symbol)
                 }
@@ -133,7 +135,6 @@ private struct DocumentRow: View {
                 .accessibilityLabel(removal.menuTitle)
             }
         }
-        .alert(item: $confirming, content: removalAlert)
     }
 
     private var waiting: Bool {
@@ -196,17 +197,8 @@ private struct DocumentRow: View {
     /// A menu's dismissal swallows an alert asked for in the same turn.
     private func confirm(_ removal: CollabDocumentRemoval) {
         DispatchQueue.main.async {
-            confirming = removal
+            requestRemoval(removal, document)
         }
-    }
-
-    private func removalAlert(for removal: CollabDocumentRemoval) -> Alert {
-        return Alert(title: Text(removal.alertTitle),
-                     message: Text(removal.alertMessage(for: viewModel.title(of: document))),
-                     primaryButton: .destructive(Text(L10n.Collab.remove)) {
-                        viewModel.perform(removal, on: document)
-                     },
-                     secondaryButton: .cancel(Text(L10n.Global.cancel)))
     }
 
     /// Only asked for a swipe button; the menu colours its own destructive item.
