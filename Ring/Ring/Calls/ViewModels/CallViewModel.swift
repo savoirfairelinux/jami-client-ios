@@ -347,13 +347,19 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
 
     private func daemonCanvasMode() -> CanvasLayoutMode {
         guard let conference = conference,
+              conference.participants.count > 1,
               let active = conference.participants.first(where: \.isActive) else {
             return .grid
         }
+        let isLocalSwarmParticipant = call?.peerUri.hasPrefix("swarm:") == true
+            && active.isLocalParticipant(
+                localJamiId: localJamiId,
+                isHostedLocally: conference.isHost)
+        let activeId = isLocalSwarmParticipant ? CanvasParticipant.localId : active.id
         let othersVisible = conference.participants.contains {
             $0.id != active.id && $0.frame.width > 0 && $0.frame.height > 0
         }
-        return othersVisible ? .spotlight(active.id) : .fullscreen(active.id)
+        return othersVisible ? .spotlight(activeId) : .fullscreen(activeId)
     }
 
     private func updateRecompositionFreeze(previous: ConferenceState?,

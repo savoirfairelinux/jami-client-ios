@@ -41,17 +41,20 @@ enum CallTilePlanner {
                                 peerUri: String,
                                 isHostedLocally: Bool,
                                 localCameraOn: Bool,
+                                usesStableLocalIdentity: Bool = false,
+                                showsNames: Bool = true,
                                 frozenForRecomposition: Bool = false) -> [CallTilePlan] {
-        participants.map { info in
+        return participants.map { info in
             if info.isLocalParticipant(localJamiId: localJamiId,
                                        isHostedLocally: isHostedLocally) {
-                return CallTilePlan(id: info.id,
+                let id = usesStableLocalIdentity ? CanvasParticipant.localId : info.id
+                return CallTilePlan(id: id,
                                     isLocalPreview: false,
                                     source: .localCamera,
                                     showsVideo: localCameraOn,
                                     isSpeaking: info.hasVoiceActivity,
                                     avatarUri: localJamiId,
-                                    showsName: true)
+                                    showsName: showsNames)
             }
             let cropSize = info.frame.size
             let hasCrop = cropSize.width > 0 && cropSize.height > 0
@@ -65,9 +68,20 @@ enum CallTilePlanner {
                                 avatarUri: info.resolvedUri(localJamiId: localJamiId,
                                                             peerUri: peerUri,
                                                             isHostedLocally: isHostedLocally),
-                                showsName: true,
+                                showsName: showsNames,
                                 expectedVideoSize: expected)
         }
+    }
+
+    static func swarmStartupTile(localJamiId: String,
+                                 localCameraOn: Bool) -> CallTilePlan {
+        CallTilePlan(id: CanvasParticipant.localId,
+                     isLocalPreview: false,
+                     source: .localCamera,
+                     showsVideo: localCameraOn,
+                     isSpeaking: false,
+                     avatarUri: localJamiId,
+                     showsName: false)
     }
 
     struct DirectCall {

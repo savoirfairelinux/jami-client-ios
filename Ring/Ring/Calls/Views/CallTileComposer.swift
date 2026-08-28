@@ -37,21 +37,33 @@ struct CallTileComposer {
                  avatars: CallParticipantAvatars?,
                  frozenForRecomposition: Bool = false) -> Composition {
         let terminated = call?.status.isTerminal == true
+        let isSwarmCall = call?.peerUri.hasPrefix("swarm:") == true
         if !terminated, let conference = conference, !conference.participants.isEmpty {
             let localCameraOn = call?.effectiveMedia(in: conference).hasVideo == true
+            let isLocalOnlySwarm = isSwarmCall && conference.participants.count == 1
+                && conference.participants[0].isLocalParticipant(
+                    localJamiId: localJamiId,
+                    isHostedLocally: conference.isHost)
             let plans = CallTilePlanner.conferenceTiles(
                 conference.participants,
                 localJamiId: localJamiId,
                 peerUri: call?.peerUri ?? "",
                 isHostedLocally: conference.isHost,
                 localCameraOn: localCameraOn,
+                usesStableLocalIdentity: isSwarmCall,
+                showsNames: !isLocalOnlySwarm,
                 frozenForRecomposition: frozenForRecomposition)
-            return makeComposition(plans: plans, style: .cards, avatars: avatars)
+            let style: CanvasTileStyle = isLocalOnlySwarm ? .plain : .cards
+            return makeComposition(plans: plans, style: style, avatars: avatars)
         }
 
         let plans: [CallTilePlan]
         if terminated, conference != nil {
             plans = []
+        } else if let call = call, isSwarmCall {
+            plans = [CallTilePlanner.swarmStartupTile(
+                localJamiId: localJamiId,
+                localCameraOn: call.effectiveMedia(in: conference).hasVideo)]
         } else if let call = call {
             plans = CallTilePlanner.directCallTiles(
                 CallTilePlanner.DirectCall(id: call.id.raw,
