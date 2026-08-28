@@ -22,11 +22,17 @@ enum SwarmProfileAction: Hashable {
     case audioCall
     case videoCall
     case editProfile
+    case addParticipant
 
-    static func available(canCall: Bool, canEdit: Bool) -> [SwarmProfileAction] {
+    static func available(canCall: Bool,
+                          canEdit: Bool,
+                          canAddParticipants: Bool) -> [SwarmProfileAction] {
         var actions: [SwarmProfileAction] = canCall ? [.audioCall, .videoCall] : []
         if canEdit {
             actions.append(.editProfile)
+        }
+        if canAddParticipants {
+            actions.append(.addParticipant)
         }
         return actions
     }
@@ -36,14 +42,16 @@ enum SwarmProfileAction: Hashable {
         case .audioCall: return L10n.Global.call
         case .videoCall: return L10n.Global.video
         case .editProfile: return L10n.Global.edit
+        case .addParticipant: return L10n.Swarm.invite
         }
     }
 
     var systemImage: String {
         switch self {
-        case .audioCall: return "phone.fill"
-        case .videoCall: return "video.fill"
+        case .audioCall: return "phone"
+        case .videoCall: return "video"
         case .editProfile: return "square.and.pencil"
+        case .addParticipant: return "person.badge.plus"
         }
     }
 
@@ -55,12 +63,14 @@ enum SwarmProfileAction: Hashable {
             return L10n.Accessibility.conversationStartVideoCall(profileName)
         case .editProfile:
             return isGroup ? L10n.ProfileEditor.editGroup : L10n.ProfileEditor.editContact
+        case .addParticipant:
+            return L10n.Swarm.inviteMembers
         }
     }
 
     func accessibilityHint(isGroup: Bool) -> String {
         switch self {
-        case .audioCall, .videoCall:
+        case .audioCall, .videoCall, .addParticipant:
             return ""
         case .editProfile:
             return isGroup ? L10n.ProfileEditor.editGroupHint : L10n.ProfileEditor.editContactHint
@@ -99,6 +109,7 @@ public struct SwarmInfoView: View, StateEmittingView {
         static let callButtonsMargin: CGFloat = 5
         static let avatarTopGap: CGFloat = 14
         static let avatarBottomGap: CGFloat = 12
+        static let titleDescriptionSpacing: CGFloat = 14
         static let sectionSpacing: CGFloat = 8
         static let expandAnimation: Animation = .spring(response: 0.38, dampingFraction: 0.9)
         static let floatingButtonClearance: CGFloat = 88
@@ -117,6 +128,7 @@ public struct SwarmInfoView: View, StateEmittingView {
     // MARK: - State
     @SwiftUI.State private var selectedView: SwarmSettingView = .about
     @SwiftUI.State private var isAvatarExpanded = false
+    @SwiftUI.State private var isInvitingParticipants = false
 
     init(viewModel: SwarmInfoVM,
          onAvatarExpansionChanged: @escaping (Bool) -> Void = { _ in }) {
@@ -163,13 +175,9 @@ public struct SwarmInfoView: View, StateEmittingView {
         isAvatarExpanded ? Color.white.opacity(0.2) : Color(UIColor.secondarySystemGroupedBackground)
     }
 
-    private var shouldReserveFloatingButtonSpace: Bool {
-        switch selectedView {
-        case .documents:
-            return viewModel.collabDocuments != nil
-        case .about, .memberList:
-            return !(viewModel.conversation?.isCoredialog() ?? true)
-        }
+    private var documentsInView: CollabDocumentsVM? {
+        guard selectedView == .documents else { return nil }
+        return viewModel.collabDocuments
     }
 
     // MARK: - Body
@@ -179,6 +187,10 @@ public struct SwarmInfoView: View, StateEmittingView {
             mainContent
             floatingActionButton
             documentNamePrompt
+        }
+        .sheet(isPresented: $isInvitingParticipants,
+               onDismiss: viewModel.removeExistingSubscription) {
+            InviteParticipantsSheet(viewModel: viewModel)
         }
         .overlay(alignment: .top) {
             if #unavailable(iOS 26.0), isAvatarExpanded {
@@ -262,18 +274,20 @@ public struct SwarmInfoView: View, StateEmittingView {
     }
 
     private var infoStack: some View {
-        VStack(spacing: Layout.generalMargin) {
+        VStack(spacing: 0) {
             titleLabel
             descriptionView
             if !profileActions.isEmpty {
                 profileActionButtons
+                    .padding(.top, Layout.generalMargin)
             }
         }
     }
 
     private var profileActions: [SwarmProfileAction] {
         SwarmProfileAction.available(canCall: viewModel.callTarget != nil,
-                                     canEdit: viewModel.canEditProfile)
+                                     canEdit: viewModel.canEditProfile,
+                                     canAddParticipants: viewModel.canAddParticipants)
     }
 
     private var profileActionButtons: some View {
@@ -314,6 +328,8 @@ public struct SwarmInfoView: View, StateEmittingView {
             placeVideoCall()
         case .editProfile:
             editProfile()
+        case .addParticipant:
+            inviteParticipants()
         }
     }
 
@@ -361,6 +377,7 @@ public struct SwarmInfoView: View, StateEmittingView {
     @ViewBuilder private var descriptionView: some View {
         if !displayedDescription.isEmpty {
             descriptionLabel
+                .padding(.top, Layout.titleDescriptionSpacing)
                 .padding(.bottom, Layout.verticalMargin)
         }
     }
@@ -410,26 +427,19 @@ public struct SwarmInfoView: View, StateEmittingView {
     /// over the tab it was asked from, so it is raised here beside the alerts
     /// this screen already shows.
     @ViewBuilder private var documentNamePrompt: some View {
-        if selectedView == .documents, let documents = viewModel.collabDocuments {
+        if let documents = documentsInView {
             CollabNewDocumentPrompt(viewModel: documents, stateEmitter: stateEmitter)
         }
     }
 
     @ViewBuilder private var floatingActionButton: some View {
-        switch selectedView {
-        case .documents:
-            if let documents = viewModel.collabDocuments {
-                CollabNewDocumentButton(viewModel: documents)
-            }
-        case .about, .memberList:
-            if !(viewModel.conversation?.isCoredialog() ?? true) {
-                AddMoreParticipantsInSwarm(viewmodel: viewModel)
-            }
+        if let documents = documentsInView {
+            CollabNewDocumentButton(viewModel: documents)
         }
     }
 
     @ViewBuilder private var floatingButtonClearance: some View {
-        if shouldReserveFloatingButtonSpace {
+        if documentsInView != nil {
             Color.clear
                 .frame(height: Layout.floatingButtonClearance)
                 .accessibilityHidden(true)
@@ -492,6 +502,12 @@ private extension SwarmInfoView {
 extension SwarmInfoView {
     private func editProfile() {
         viewModel.editProfile(stateEmitter: stateEmitter)
+    }
+
+    private func inviteParticipants() {
+        viewModel.selections.removeAll()
+        viewModel.updateContactList()
+        isInvitingParticipants = true
     }
 
     private func placeAudioCall() {

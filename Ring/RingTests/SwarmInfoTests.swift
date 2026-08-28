@@ -222,12 +222,14 @@ final class SwarmInfoTests: XCTestCase {
     }
 
     func testSwarmProfileActionsPlaceEditAfterCallActions() {
-        XCTAssertEqual(SwarmProfileAction.available(canCall: true, canEdit: true),
+        XCTAssertEqual(SwarmProfileAction.available(canCall: true, canEdit: true,
+                                                    canAddParticipants: false),
                        [.audioCall, .videoCall, .editProfile])
     }
 
     func testSwarmProfileActionsHideEditWithoutPermission() {
-        XCTAssertEqual(SwarmProfileAction.available(canCall: true, canEdit: false),
+        XCTAssertEqual(SwarmProfileAction.available(canCall: true, canEdit: false,
+                                                    canAddParticipants: false),
                        [.audioCall, .videoCall])
     }
 

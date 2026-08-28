@@ -123,6 +123,7 @@
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "Unknown";
 "swarm.left" = "Left";
+"swarm.invite" = "Invite";
 "swarm.inviteMembers" = "Invite members";
 "swarm.inviteSelectedMembers" = "Invite selected contacts";
 "swarm.inviteMembersSelected" = "Selected";

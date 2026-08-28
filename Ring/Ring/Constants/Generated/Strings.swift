@@ -1593,6 +1593,8 @@ internal enum L10n {
     internal static let explanationText = L10n.tr("Localizable", "swarm.explanationText", fallback: "Members can be invited at any time after the group has been created.")
     /// Identifier
     internal static let identifier = L10n.tr("Localizable", "swarm.identifier", fallback: "Identifier")
+    /// Invite
+    internal static let invite = L10n.tr("Localizable", "swarm.invite", fallback: "Invite")
     /// Invited
     internal static let invited = L10n.tr("Localizable", "swarm.invited", fallback: "Invited")
     /// Invite members

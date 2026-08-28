@@ -76,6 +76,11 @@ class SwarmInfoVM: ObservableObject {
                                           isAdmin: isAdmin)
     }
 
+    var canAddParticipants: Bool {
+        guard let conversation else { return false }
+        return !conversation.isCoredialog()
+    }
+
     var isGroupProfile: Bool {
         conversation?.isCoredialog() == false
     }

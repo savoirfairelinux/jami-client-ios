@@ -20,72 +20,51 @@
 
 import SwiftUI
 
-struct AddMoreParticipantsInSwarm: View {
-    @StateObject var viewmodel: SwarmInfoVM
-    @SwiftUI.State var showAddMember = false
-    @SwiftUI.State private var addMorePeople: UIImage = UIImage(asset: Asset.addPeopleInSwarm)!
+struct InviteParticipantsSheet: View {
+    @ObservedObject var viewModel: SwarmInfoVM
+    @Environment(\.dismiss) private var dismiss
 
     var body: some View {
-        Button(action: {
-            viewmodel.selections.removeAll()
-            showAddMember = true
-            viewmodel.updateContactList()
-        }, label: {
-            Image(uiImage: addMorePeople)
-                .resizable()
-                .renderingMode(.template)
-                .aspectRatio(contentMode: .fill)
-                .foregroundColor(Color(hex: viewmodel.finalColor)?.isLight(threshold: 0.8) ?? true ? Color.jamiButtonPrimary : Color.white)
-                .frame(width: 30, height: 30, alignment: .center)
-        })
-        .frame(width: 50, height: 50, alignment: .center)
-        .background(Color(hex: viewmodel.finalColor))
-        .clipShape(RoundedRectangle(cornerRadius: 10))
-        .padding()
-        .sheet(isPresented: $showAddMember, onDismiss: {
-            viewmodel.removeExistingSubscription()
-        }, content: {
-            NavigationView {
-                VStack {
-                    List {
-                        ForEach(viewmodel.participantsRows) { contact in
-                            ParticipantListCell(participant: contact, isSelected: viewmodel.selections.contains(contact.id)) {
-                                if viewmodel.selections.contains(contact.id) {
-                                    viewmodel.selections.removeAll(where: { $0 == contact.id })
-                                } else {
-                                    viewmodel.selections.append(contact.id)
-                                }
+        NavigationView {
+            VStack {
+                List {
+                    ForEach(viewModel.participantsRows) { contact in
+                        ParticipantListCell(participant: contact, isSelected: viewModel.selections.contains(contact.id)) {
+                            if viewModel.selections.contains(contact.id) {
+                                viewModel.selections.removeAll(where: { $0 == contact.id })
+                            } else {
+                                viewModel.selections.append(contact.id)
                             }
-                            .accessibilityElement()
-                            .accessibilityLabel(Text(contact.name))
-                            .accessibilityValue(viewmodel.selections.contains(contact.id) ? L10n.Swarm.inviteMembersSelected : L10n.Swarm.inviteMembersNotSelected)
                         }
-                    }
-                    .listStyle(PlainListStyle())
-
-                    if !viewmodel.selections.isEmpty {
-                        addMember()
-                            .padding()
+                        .accessibilityElement()
+                        .accessibilityLabel(Text(contact.name))
+                        .accessibilityValue(viewModel.selections.contains(contact.id) ? L10n.Swarm.inviteMembersSelected : L10n.Swarm.inviteMembersNotSelected)
                     }
                 }
-                .navigationTitle(L10n.Swarm.inviteMembers) // 🔹 Title
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .cancellationAction) {
-                        Button(L10n.Global.cancel) {
-                            showAddMember = false
-                        }
+                .listStyle(PlainListStyle())
+
+                if !viewModel.selections.isEmpty {
+                    addMember()
+                        .padding()
+                }
+            }
+            .navigationTitle(L10n.Swarm.inviteMembers)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button(L10n.Global.cancel) {
+                        dismiss()
                     }
                 }
             }
-            .accentColor(.jami)
-        })
+        }
+        .accentColor(.jami)
     }
 
     func addMember() -> some View {
         return Button(action: {
-            showAddMember = false
-            viewmodel.addMember()
+            dismiss()
+            viewModel.addMember()
         }, label: {
             Text(L10n.Swarm.inviteMembers)
                 .swarmButtonTextStyle()
