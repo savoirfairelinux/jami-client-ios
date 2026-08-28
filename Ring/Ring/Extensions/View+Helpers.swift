@@ -288,6 +288,16 @@ extension View {
     func accessibilityAutoFocusOnAppear(_ shouldFocus: Bool = true) -> some View {
         self.modifier(AccessibilityAutoFocusModifier(shouldFocus: shouldFocus))
     }
+
+    func copyAction(_ text: String) -> some View {
+        accessibilityAction(named: L10n.Global.copy) {
+            UIPasteboard.general.string = text
+        }
+    }
+
+    func copyableText(_ text: String) -> some View {
+        textSelection(.enabled).copyAction(text)
+    }
 }
 
 struct AccessibilityAutoFocusModifier: ViewModifier {
