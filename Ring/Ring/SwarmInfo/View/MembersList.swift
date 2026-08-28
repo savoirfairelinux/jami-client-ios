@@ -79,6 +79,7 @@ struct MemberItem: View {
         .accessibilityElement(children: .combine)
         .accessibilityLabel("\(displayName), \(roleText)")
         .accessibilityHint(isInvited ? L10n.Swarm.invited : "")
+        .copyAction(displayName)
     }
 
     // MARK: - View Components
@@ -90,6 +91,7 @@ struct MemberItem: View {
         Text(displayName)
             .lineLimit(1)
             .truncationMode(.middle)
+            .textSelection(.enabled)
     }
 
     private var roleLabel: some View {

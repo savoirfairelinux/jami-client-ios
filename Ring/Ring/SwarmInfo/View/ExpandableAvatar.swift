@@ -132,8 +132,14 @@ struct ExpandableAvatar<BottomOverlay: View>: View {
                     }
                 }
         }
-        .buttonStyle(.plain)
+        .buttonStyle(UnhighlightedButtonStyle())
         .accessibilityLabel(label)
         .accessibilityHint(isExpanded ? L10n.Accessibility.avatarCollapseHint : L10n.Accessibility.avatarExpandHint)
+    }
+}
+
+private struct UnhighlightedButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
     }
 }

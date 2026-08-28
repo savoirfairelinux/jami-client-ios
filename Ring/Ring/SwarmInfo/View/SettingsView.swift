@@ -252,7 +252,7 @@ struct SettingsView: View {
             .truncationMode(.middle)
             .lineLimit(1)
             .foregroundColor(Color(UIColor.secondaryLabel))
-            .textSelection(.enabled)
+            .copyableText(text)
     }
 }
 
