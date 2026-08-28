@@ -73,6 +73,7 @@ final class ParticipantCanvas: UIView {
     private var previewCorner = PreviewCorner.topTrailing
     private var lastLayoutSize = CGSize.zero
     private var layoutAnimator: UIViewPropertyAnimator?
+    var hasActiveLayoutAnimation: Bool { layoutAnimator?.state == .active }
     private var orderedParticipants: [CanvasParticipant] = []
     private var suppressesStripCallback = false
     private var isDraggingPreview = false
@@ -181,6 +182,15 @@ final class ParticipantCanvas: UIView {
                        style newStyle: CanvasTileStyle, animated: Bool) {
         guard newMode != mode || newStyle != style
                 || newModels != lastAppliedModels else { return }
+        let oldParticipants = models.values.map(\.participant)
+            .sorted { $0.id < $1.id }
+            .sorted { !$0.isLocalPreview && $1.isLocalPreview }
+        let newParticipants = newModels.map(\.participant)
+            .sorted { $0.id < $1.id }
+            .sorted { !$0.isLocalPreview && $1.isLocalPreview }
+        let layoutChanged = newMode != mode || newStyle != style
+            || oldParticipants != newParticipants
+        let shouldAnimate = animated && !tiles.isEmpty && layoutChanged
         lastAppliedModels = newModels
         style = newStyle
 
@@ -195,7 +205,7 @@ final class ParticipantCanvas: UIView {
             tiles[id] = nil
             models[id] = nil
             videoScalingPolicyOverrides[id] = nil
-            if animated {
+            if shouldAnimate {
                 UIView.animate(withDuration: Self.tileFadeDuration,
                                animations: { tile.alpha = 0 },
                                completion: { _ in tile.removeFromSuperview() })
@@ -257,7 +267,7 @@ final class ParticipantCanvas: UIView {
             setStripOffsetSilently(.zero)
         }
         mode = newMode
-        relayout(animated: animated, newcomers: newcomers,
+        relayout(animated: shouldAnimate, newcomers: newcomers,
                  duration: answerTransition ? Self.answerTransitionDuration
                     : Self.modeSwitchDuration)
     }

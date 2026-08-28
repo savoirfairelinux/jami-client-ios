@@ -39,10 +39,27 @@ final class CallTilePlannerTests: XCTestCase {
             [CallTestFixtures.participant(uri: localId),
              CallTestFixtures.participant(uri: remoteId)],
             localJamiId: localId, peerUri: remoteId,
-            isHostedLocally: false, localCameraOn: true)
+            isHostedLocally: false, localCameraOn: true,
+            usesStableLocalIdentity: true)
         let mine = tiles.first { $0.avatarUri == localId }
+        XCTAssertEqual(mine?.id, CanvasParticipant.localId,
+                       "the local tile keeps one canvas identity while the swarm starts")
+        XCTAssertEqual(mine?.isLocalPreview, false,
+                       "the local conference tile belongs to the canvas, not the preview overlay")
         XCTAssertEqual(mine?.source, .localCamera)
         XCTAssertEqual(mine?.showsVideo, true, "our tile follows our own camera state")
+    }
+
+    func testSwarmStartupUsesOneNonFloatingLocalCameraTile() {
+        let tile = CallTilePlanner.swarmStartupTile(
+            localJamiId: localId, localCameraOn: true)
+
+        XCTAssertEqual(tile.id, CanvasParticipant.localId)
+        XCTAssertFalse(tile.isLocalPreview)
+        XCTAssertEqual(tile.source, .localCamera)
+        XCTAssertTrue(tile.showsVideo)
+        XCTAssertEqual(tile.avatarUri, localId)
+        XCTAssertFalse(tile.showsName)
     }
 
     func testEmptyUriHostRendersLocalCamera() {
@@ -137,6 +154,18 @@ final class CallTilePlannerTests: XCTestCase {
             isHostedLocally: false, localCameraOn: true)
         XCTAssertTrue(tiles.allSatisfy { $0.showsName },
                       "every conference tile names itself, our own cell included")
+    }
+
+    func testLoneSwarmParticipantHasNoCardCaption() {
+        let tiles = CallTilePlanner.conferenceTiles(
+            [CallTestFixtures.participant(uri: localId)],
+            localJamiId: localId, peerUri: remoteId,
+            isHostedLocally: true, localCameraOn: true,
+            usesStableLocalIdentity: true, showsNames: false)
+
+        XCTAssertEqual(tiles.count, 1)
+        XCTAssertFalse(tiles[0].showsName,
+                       "a lone full-screen local view is not presented as a participant card")
     }
 
     func testDialingAudioCallDoesNotCaptionRemoteTile() {
