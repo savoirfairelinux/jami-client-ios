@@ -179,7 +179,7 @@ private struct DocumentRow: View {
             }
             ForEach(viewModel.removals(for: document)) { removal in
                 Button(role: removal == .forEveryone ? ButtonRole.destructive : nil) {
-                    confirming = removal
+                    confirm(removal)
                 } label: {
                     Label(removal.menuTitle, systemImage: removal.symbol)
                 }
@@ -191,6 +191,13 @@ private struct DocumentRow: View {
                 .contentShape(Rectangle())
         }
         .accessibilityLabel(L10n.Collab.menu)
+    }
+
+    /// A menu's dismissal swallows an alert asked for in the same turn.
+    private func confirm(_ removal: CollabDocumentRemoval) {
+        DispatchQueue.main.async {
+            confirming = removal
+        }
     }
 
     private func removalAlert(for removal: CollabDocumentRemoval) -> Alert {
