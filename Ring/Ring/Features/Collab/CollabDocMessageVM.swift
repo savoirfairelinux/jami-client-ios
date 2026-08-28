@@ -46,6 +46,8 @@ class CollabDocMessageVM: ObservableObject {
 
     @Published var waitingToBeRead = false
 
+    @Published var storedLocally = true
+
     /**
      Whether a rename has been applied, after which a fetched name is stale.
 
@@ -111,6 +113,14 @@ class CollabDocMessageVM: ObservableObject {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] waiting in
                 self?.waitingToBeRead = waiting
+            })
+            .disposed(by: self.disposeBag)
+        service.isStoredLocally(forAccount: accountId,
+                                conversationId: conversationId,
+                                documentId: documentId)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] stored in
+                self?.storedLocally = stored
             })
             .disposed(by: self.disposeBag)
         service.removals(forAccount: accountId,

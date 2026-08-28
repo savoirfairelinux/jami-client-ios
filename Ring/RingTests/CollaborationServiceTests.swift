@@ -352,3 +352,126 @@ final class CollaborationServiceTests: XCTestCase {
         XCTAssertEqual(counts.latest, 1)
     }
 }
+
+final class CollaborationDocumentStorageTests: XCTestCase {
+    private let accountId = "account"
+    private let conversationId = "conversation"
+    private let documentId = "document"
+
+    private var adapter: ObjCMockCollaborationAdapter!
+    private var service: CollaborationService!
+    private var disposeBag: DisposeBag!
+
+    override func setUp() {
+        super.setUp()
+        adapter = ObjCMockCollaborationAdapter()
+        service = CollaborationService(withCollaborationAdapter: adapter)
+        disposeBag = DisposeBag()
+    }
+
+    override func tearDown() {
+        disposeBag = nil
+        service = nil
+        adapter = nil
+        super.tearDown()
+    }
+
+    private func expect(_ documentId: String,
+                        in conversationId: String,
+                        toBeStored expected: Bool,
+                        inverted: Bool = false) -> XCTestExpectation {
+        let reached = expectation(description: expected ? "held here" : "not held here")
+        reached.isInverted = inverted
+        service.isStoredLocally(forAccount: accountId,
+                                conversationId: conversationId,
+                                documentId: documentId)
+            .filter { $0 == expected }
+            .take(1)
+            .subscribe(onNext: { _ in reached.fulfill() })
+            .disposed(by: disposeBag)
+        return reached
+    }
+
+    private func removedLocally(_ documentId: String, in conversationId: String) {
+        service.documentRemoved(withAccountId: accountId,
+                                conversationId: conversationId,
+                                documentId: documentId,
+                                everywhere: false)
+    }
+
+    private func openEditor(on documentId: String, in conversationId: String) {
+        service.openDocument(accountId: accountId,
+                             conversationId: conversationId,
+                             documentId: documentId)
+            .subscribe()
+            .disposed(by: disposeBag)
+    }
+
+    func testADocumentTheListSaysIsMissingIsNotHeldHere() {
+        adapter.documentsReturnValue = [
+            ["id": documentId, "displayName": "Notes", "storedLocally": "false"]
+        ]
+
+        wait(for: [expect(documentId, in: conversationId, toBeStored: false)], timeout: 1)
+    }
+
+    func testALocalRemovalStopsHoldingTheDocument() {
+        let missing = expect(documentId, in: conversationId, toBeStored: false)
+
+        removedLocally(documentId, in: conversationId)
+
+        wait(for: [missing], timeout: 1)
+    }
+
+    func testALocalRemovalOutlivesTheListItRaced() {
+        adapter.documentsReturnValue = [["id": documentId, "displayName": "Notes"]]
+        let missing = expect(documentId, in: conversationId, toBeStored: false)
+
+        removedLocally(documentId, in: conversationId)
+
+        wait(for: [missing], timeout: 1)
+    }
+
+    func testARetiredDocumentIsNotReportedAsMissing() {
+        let missing = expect(documentId, in: conversationId, toBeStored: false, inverted: true)
+
+        service.documentRemoved(withAccountId: accountId,
+                                conversationId: conversationId,
+                                documentId: documentId,
+                                everywhere: true)
+
+        wait(for: [missing], timeout: 0.5)
+    }
+
+    func testOpeningADocumentFetchesItBack() {
+        adapter.openDocumentReturnValue = Data([1, 2, 3])
+        let missing = expect(documentId, in: conversationId, toBeStored: false)
+        removedLocally(documentId, in: conversationId)
+        wait(for: [missing], timeout: 1)
+
+        let held = expect(documentId, in: conversationId, toBeStored: true)
+        openEditor(on: documentId, in: conversationId)
+
+        wait(for: [held], timeout: 1)
+    }
+
+    func testARefusedOpenLeavesTheDocumentMissing() {
+        adapter.openDocumentReturnValue = Data()
+        let missing = expect(documentId, in: conversationId, toBeStored: false)
+        removedLocally(documentId, in: conversationId)
+        wait(for: [missing], timeout: 1)
+
+        let held = expect(documentId, in: conversationId, toBeStored: true, inverted: true)
+        openEditor(on: documentId, in: conversationId)
+
+        wait(for: [held], timeout: 0.5)
+    }
+
+    func testAConversationOnlyFollowsItsOwnDocuments() {
+        let missing = expect(documentId, in: conversationId, toBeStored: false, inverted: true)
+
+        removedLocally(documentId, in: "other-conversation")
+
+        wait(for: [missing], timeout: 0.5)
+    }
+}

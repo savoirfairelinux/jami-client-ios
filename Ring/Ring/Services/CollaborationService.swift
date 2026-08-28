@@ -135,6 +135,10 @@ class CollaborationService {
     private var openDocumentKeys = Set<String>()
     private let unreadSubject = PublishSubject<(conversation: String, waiting: Set<String>)>()
 
+    private let storageLock = NSLock()
+    private var storageStreams = [String: Observable<[String: Bool]>]()
+    private let storageSubject = PublishSubject<DocumentStorage>()
+
     private let documentChangeSubject = PublishSubject<DocumentChangeEvent>()
     private let awarenessSubject = PublishSubject<AwarenessUpdate>()
     private let participantLeftSubject = PublishSubject<ParticipantLeft>()
@@ -388,6 +392,10 @@ class CollaborationService {
                              openForAccount: accountId,
                              conversationId: conversationId,
                              isOpen: true)
+            self.setDocument(documentId,
+                             storedForAccount: accountId,
+                             conversationId: conversationId,
+                             isStored: true)
             self.markDocumentRead(accountId: accountId,
                                   conversationId: conversationId,
                                   documentId: documentId)
@@ -591,6 +599,69 @@ class CollaborationService {
     }
 }
 
+// MARK: - Documents stored locally
+
+private struct DocumentStorage {
+    let conversation: String
+    let documentId: String
+    let stored: Bool
+}
+
+private enum StorageEvent {
+    case listed([CollaborativeDocument])
+    case changed(documentId: String, stored: Bool)
+}
+
+extension CollaborationService {
+
+    func isStoredLocally(forAccount accountId: String,
+                         conversationId: String,
+                         documentId: String) -> Observable<Bool> {
+        return documentsStoredLocally(accountId: accountId, conversationId: conversationId)
+            .map { $0[documentId] ?? true }
+            .distinctUntilChanged()
+    }
+
+    private func documentsStoredLocally(accountId: String,
+                                        conversationId: String) -> Observable<[String: Bool]> {
+        let conversation = CollaborationService.conversationKey(accountId, conversationId)
+        storageLock.lock()
+        defer { storageLock.unlock() }
+        if let shared = storageStreams[conversation] { return shared }
+        let changed = storageSubject
+            .filter { $0.conversation == conversation }
+            .map { StorageEvent.changed(documentId: $0.documentId, stored: $0.stored) }
+        let listed = documents(accountId: accountId, conversationId: conversationId)
+            .asObservable()
+            .map { StorageEvent.listed($0) }
+        let shared = Observable.merge(changed, listed)
+            .observe(on: MainScheduler.instance)
+            .scan(into: [String: Bool]()) { held, event in
+                switch event {
+                case .listed(let documents):
+                    for document in documents where held[document.id] == nil {
+                        held[document.id] = document.storedLocally
+                    }
+                case .changed(let documentId, let stored):
+                    held[documentId] = stored
+                }
+            }
+            .share(replay: 1, scope: .whileConnected)
+        storageStreams[conversation] = shared
+        return shared
+    }
+
+    private func setDocument(_ documentId: String,
+                             storedForAccount accountId: String,
+                             conversationId: String,
+                             isStored: Bool) {
+        let conversation = CollaborationService.conversationKey(accountId, conversationId)
+        storageSubject.onNext(DocumentStorage(conversation: conversation,
+                                              documentId: documentId,
+                                              stored: isStored))
+    }
+}
+
 // MARK: - CollaborationAdapterDelegate
 
 extension CollaborationService: CollaborationAdapterDelegate {
@@ -661,6 +732,12 @@ extension CollaborationService: CollaborationAdapterDelegate {
                     openForAccount: accountId,
                     conversationId: conversationId,
                     isOpen: false)
+        if !everywhere {
+            setDocument(documentId,
+                        storedForAccount: accountId,
+                        conversationId: conversationId,
+                        isStored: false)
+        }
         markDocumentRead(accountId: accountId,
                          conversationId: conversationId,
                          documentId: documentId)

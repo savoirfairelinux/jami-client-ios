@@ -27,7 +27,7 @@ struct CollabDocMessageView: View {
     var body: some View {
         Button(action: model.open) {
             HStack(spacing: Layout.spacing) {
-                Image(systemName: "doc.richtext")
+                Image(systemName: symbol)
                     .font(.title3)
                     .foregroundColor(model.removed ? .secondary : Color.jami)
                 VStack(alignment: .leading, spacing: Layout.textSpacing) {
@@ -64,8 +64,15 @@ struct CollabDocMessageView: View {
         return !model.removed && model.waitingToBeRead
     }
 
+    private var symbol: String {
+        return model.storedLocally || model.removed ? "doc.richtext" : "arrow.down.doc"
+    }
+
     private var detail: String {
-        return model.removed ? L10n.Collab.documentRemoved : L10n.Collab.editableDocument
+        if model.removed {
+            return L10n.Collab.documentRemoved
+        }
+        return model.storedLocally ? L10n.Collab.editableDocument : L10n.Collab.notDownloaded
     }
 
     @ViewBuilder private var title: some View {
