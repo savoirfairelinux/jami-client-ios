@@ -38,6 +38,7 @@ final class ConferenceParticipantsTests: XCTestCase {
                       peerUri: String = CallTestFixtures.peerUri)
     -> [ConferenceParticipantRow] {
         ConferenceParticipants.rows(from: conference, localJamiId: localId,
+                                    localDeviceId: deviceId1,
                                     peerUri: peerUri)
     }
 

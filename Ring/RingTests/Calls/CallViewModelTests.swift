@@ -35,6 +35,7 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
             audio: AudioService(audio: LibJamiAudioClient(adapter: AudioAdapter())),
             profileService: ProfilesService(withProfilesAdapter: ProfilesAdapter()),
             nameService: NameService(withNameRegistrationAdapter: NameRegistrationAdapter()),
+            localDeviceId: deviceId1,
             pipController: pipController)
     }
 
@@ -367,6 +368,117 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
                        "the ending drops the conference tiles, so it must drop the cards too")
     }
 
+    func testLocalOnlySwarmStaysFullScreenThroughConferenceStartup() async {
+        let harness = await Harness(callHasVideo: true,
+                                    peerUri: "swarm:" + conversationId1)
+        let model = harness.makeModel(localJamiId: jamiId1)
+
+        assertLocalOnlySwarmCanvas(model)
+
+        let conferenceId = CallTestFixtures.conferenceId.raw
+        let local = CallTestFixtures.participant(
+            uri: String(), sinkId: "\(conferenceId)_video_0")
+        harness.send(.conferenceCreated(
+                        conferenceId: conferenceId, conversationId: conversationId1,
+                        accountId: Harness.accountId,
+                        state: ConferenceLifecycle.activeAttached.rawValue,
+                        memberCallIds: [harness.callId.raw], participants: [local],
+                        media: [.audio(), .video()]))
+        await Harness.wait { model.conference?.participants.count == 1 }
+
+        assertLocalOnlySwarmCanvas(model)
+
+        let remote = CallTestFixtures.participant(
+            uri: CallTestFixtures.peerUri,
+            device: CallTestFixtures.remoteDeviceId,
+            sinkId: CallTestFixtures.remoteSinkId)
+        harness.send(.conferenceInfosUpdated(
+                        conferenceId: conferenceId,
+                        participants: [local, remote]))
+        await Harness.wait { model.conference?.participants.count == 2 }
+
+        XCTAssertEqual(model.canvas.style, .cards)
+        XCTAssertEqual(model.tiles.count, 2)
+        XCTAssertEqual(model.tiles.filter {
+            $0.participant.id == CanvasParticipant.localId
+        }.count, 1, "the local camera must not be duplicated during the grid transition")
+    }
+
+    func testSwarmDistinguishesAnotherDeviceOnOurAccount() async {
+        for localUri in [String(), jamiId1] {
+            let harness = await Harness(callHasVideo: true,
+                                        peerUri: "swarm:" + conversationId1)
+            let model = harness.makeModel(localJamiId: jamiId1)
+            let conferenceId = CallTestFixtures.conferenceId.raw
+            func participants(localIsActive: Bool) -> [ConferenceParticipantInfo] {
+                [CallTestFixtures.participant(
+                    uri: jamiId1, device: deviceId2,
+                    sinkId: CallTestFixtures.remoteSinkId, isActive: !localIsActive,
+                    frameSize: CGSize(width: 300, height: 300)),
+                 CallTestFixtures.participant(
+                    uri: localUri, device: deviceId1,
+                    sinkId: "\(conferenceId)_video_0", isActive: localIsActive,
+                    frameSize: CGSize(width: 300, height: 300))]
+            }
+            harness.send(.conferenceCreated(
+                conferenceId: conferenceId, conversationId: conversationId1,
+                accountId: Harness.accountId,
+                state: ConferenceLifecycle.activeAttached.rawValue,
+                memberCallIds: [harness.callId.raw],
+                participants: participants(localIsActive: false),
+                media: [.audio(), .video()]))
+            await Harness.wait { model.conference?.participants.count == 2 }
+
+            XCTAssertEqual(Set(model.tiles.map { $0.participant.id }),
+                           [CanvasParticipant.localId, CallTestFixtures.remoteSinkId])
+            let localTile = model.tiles.first { $0.participant.id == CanvasParticipant.localId }
+            let remoteTile = model.tiles.first { $0.participant.id == CallTestFixtures.remoteSinkId }
+            XCTAssertTrue(localTile?.distributor === harness.videoService.localFrames)
+            XCTAssertTrue(remoteTile?.distributor === harness.videoService.distributor(
+                for: SinkId(raw: CallTestFixtures.remoteSinkId)))
+            XCTAssertEqual(model.canvasMode, .spotlight(CallTestFixtures.remoteSinkId))
+            XCTAssertEqual(model.participantRows.filter(\.isLocal).map(\.id),
+                           ["\(conferenceId)_video_0"])
+            XCTAssertEqual(PiPSourceSelector.select(
+                call: model.call, conference: model.conference,
+                localJamiId: jamiId1, localDeviceId: deviceId1, current: nil)?.sinkId,
+                           SinkId(raw: CallTestFixtures.remoteSinkId))
+
+            model.perform(.raiseHand, on: CallTestFixtures.remoteSinkId)
+            await Harness.wait { !harness.callAPI.moderationCommands.isEmpty }
+            XCTAssertEqual(harness.callAPI.moderationCommands.last,
+                           "raiseHand:\(jamiId1):\(deviceId2):true")
+
+            harness.send(.conferenceInfosUpdated(
+                conferenceId: conferenceId, participants: participants(localIsActive: true)))
+            await Harness.wait { model.canvasMode == .spotlight(CanvasParticipant.localId) }
+        }
+
+        for (localDevice, reportedDevice) in [("", deviceId1), (deviceId1, ""), ("", "")] {
+            let tiles = CallTilePlanner.conferenceTiles(
+                [CallTestFixtures.participant(uri: jamiId1, device: reportedDevice)],
+                localJamiId: jamiId1, localDeviceId: localDevice, peerUri: CallTestFixtures.peerUri,
+                isHostedLocally: false, localCameraOn: true, usesStableLocalIdentity: true)
+            XCTAssertEqual(tiles.first?.source, .localCamera,
+                           "missing device metadata must preserve the local camera")
+            XCTAssertEqual(tiles.first?.id, CanvasParticipant.localId)
+        }
+    }
+
+    private func assertLocalOnlySwarmCanvas(_ model: CallViewModel,
+                                            file: StaticString = #filePath,
+                                            line: UInt = #line) {
+        XCTAssertEqual(model.canvas.style, .plain, file: file, line: line)
+        XCTAssertEqual(model.canvasMode, .grid, file: file, line: line)
+        XCTAssertEqual(model.tiles.count, 1, file: file, line: line)
+        let local = model.tiles.first
+        XCTAssertEqual(local?.participant,
+                       CanvasParticipant(id: CanvasParticipant.localId),
+                       file: file, line: line)
+        XCTAssertEqual(local?.tileState.showsVideo, true, file: file, line: line)
+        XCTAssertEqual(local?.tileState.showsName, false, file: file, line: line)
+    }
+
     func testPeerHostedConferenceUsesParticipantSinksInsteadOfMixedCallSink() async {
         let harness = await Harness(callHasVideo: true)
         let model = harness.makeModel(localJamiId: jamiId1)
@@ -502,7 +614,8 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
         let harness = await Harness(callHasVideo: true)
         let model = harness.makeModel(localJamiId: jamiId1)
         func participant(_ uri: String, moderator: Bool) -> ConferenceParticipantInfo {
-            CallTestFixtures.participant(uri: uri, device: uri, sinkId: "\(uri)_video_0",
+            CallTestFixtures.participant(uri: uri, device: uri == jamiId1 ? deviceId1 : uri,
+                                         sinkId: "\(uri)_video_0",
                                          isModerator: moderator)
         }
 
@@ -528,7 +641,7 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
         let model = harness.makeModel(localJamiId: jamiId1)
         func roster(handRaised: Bool) -> LibJamiCallEvent {
             let participants = [
-                CallTestFixtures.participant(uri: jamiId1, device: jamiId1,
+                CallTestFixtures.participant(uri: jamiId1, device: deviceId1,
                                              handRaised: handRaised),
                 CallTestFixtures.participant(uri: CallTestFixtures.secondaryPeerUri,
                                              device: CallTestFixtures.secondaryPeerUri)
@@ -585,7 +698,7 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
 
         harness.callService.addParticipant(uri: CallTestFixtures.secondaryPeerUri,
                                            toCall: harness.callId,
-                                           requestedBy: jamiId1)
+                                           requestedBy: jamiId1, localDeviceId: deviceId1)
         await Harness.wait { model.pendingRows.count == 1 }
         XCTAssertEqual(model.participantRows.count, 2)
         XCTAssertTrue(model.header.showsRoster,
@@ -728,7 +841,7 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
         let callId = CallTestFixtures.callId
         let call: CallState
 
-        init(callHasVideo: Bool) async {
+        init(callHasVideo: Bool, peerUri: String = CallTestFixtures.peerUri) async {
             let video = TestLibJamiVideoAPI()
             var continuation: AsyncStream<LibJamiCallEvent>.Continuation!
             let stream = AsyncStream<LibJamiCallEvent>(bufferingPolicy: .unbounded) {
@@ -743,7 +856,7 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
 
             let media: [MediaItem] = callHasVideo ? [.audio(), .video()] : [.audio()]
             send(.incomingCall(accountId: Self.accountId, callId: callId.raw,
-                               peerUri: CallTestFixtures.peerUri, media: media, details: nil))
+                               peerUri: peerUri, media: media, details: nil))
             send(.callStateChanged(callId: callId.raw, state: .current,
                                    rawState: LibJamiCallState.current.rawValue, accountId: Self.accountId,
                                    code: 0, negotiatedMedia: media, videoCodec: nil))
@@ -764,6 +877,7 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
                 profileService: ProfilesService(withProfilesAdapter: ProfilesAdapter()),
                 nameService: nameService,
                 localJamiId: localJamiId,
+                localDeviceId: deviceId1,
                 pipController: pipController)
         }
 

@@ -66,7 +66,7 @@ final class PiPSourceSelectorTests: XCTestCase {
                         current: PiPSourceSelector.Selection? = nil)
     -> PiPSourceSelector.Selection? {
         PiPSourceSelector.select(call: call, conference: conference,
-                                 localJamiId: localId, current: current)
+                                 localJamiId: localId, localDeviceId: deviceId1, current: current)
     }
 
     // MARK: - Direct calls

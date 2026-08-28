@@ -87,6 +87,7 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
     private let nameService: NameService
     private let isSipAccount: Bool
     private let localJamiId: String
+    private let localDeviceId: String
 
     var onAddParticipant: (() -> Void)?
     var onMinimize: ((CallConversationRoute) -> Void)?
@@ -128,6 +129,7 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
          nameService: NameService,
          isSipAccount: Bool = false,
          localJamiId: String = "",
+         localDeviceId: String,
          pipController: PiPControlling = PiPController()) {
         self.callId = call.id
         self.callService = callService
@@ -137,9 +139,11 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
         self.nameService = nameService
         self.isSipAccount = isSipAccount
         self.localJamiId = localJamiId
+        self.localDeviceId = localDeviceId
         self.pip = pipController
         self.tileComposer = CallTileComposer(videoService: videoService,
-                                             localJamiId: localJamiId)
+                                             localJamiId: localJamiId,
+                                             localDeviceId: localDeviceId)
 
         audioCancellable = audio.speakerActive
             .receive(on: DispatchQueue.main)
@@ -347,13 +351,20 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
 
     private func daemonCanvasMode() -> CanvasLayoutMode {
         guard let conference = conference,
+              conference.participants.count > 1,
               let active = conference.participants.first(where: \.isActive) else {
             return .grid
         }
+        let isLocalSwarmParticipant = call?.peerUri.hasPrefix("swarm:") == true
+            && active.isLocalDevice(
+                localJamiId: localJamiId,
+                localDeviceId: localDeviceId,
+                isHostedLocally: conference.isHost)
+        let activeId = isLocalSwarmParticipant ? CanvasParticipant.localId : active.id
         let othersVisible = conference.participants.contains {
             $0.id != active.id && $0.frame.width > 0 && $0.frame.height > 0
         }
-        return othersVisible ? .spotlight(active.id) : .fullscreen(active.id)
+        return othersVisible ? .spotlight(activeId) : .fullscreen(activeId)
     }
 
     private func updateRecompositionFreeze(previous: ConferenceState?,
@@ -580,6 +591,7 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
         if let conference = conference, !conference.participants.isEmpty {
             rows = ConferenceParticipants.rows(from: conference,
                                                localJamiId: localJamiId,
+                                               localDeviceId: localDeviceId,
                                                peerUri: call?.peerUri ?? "")
         } else if let call = call, call.status.isOngoing {
             rows = ConferenceParticipants.rows(from: call, localJamiId: localJamiId)
@@ -627,8 +639,9 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
                 await callService.hangUpParticipant(targetUri, in: confId,
                                                     deviceId: info.device)
             case .raiseHand, .lowerHand:
-                let isLocal = info.isLocalParticipant(localJamiId: localJamiId,
-                                                      isHostedLocally: conference.isHost)
+                let isLocal = info.isLocalDevice(localJamiId: localJamiId,
+                                                 localDeviceId: localDeviceId,
+                                                 isHostedLocally: conference.isHost)
                 await callService.raiseHand(isLocal ? "" : targetUri, in: confId,
                                             deviceId: isLocal ? "" : info.device,
                                             raised: item == .raiseHand)
@@ -658,6 +671,7 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
     private func updatePiPSource() {
         let selection = PiPSourceSelector.select(call: call, conference: conference,
                                                  localJamiId: localJamiId,
+                                                 localDeviceId: localDeviceId,
                                                  current: pipSource)
         guard selection != pipSource else { return }
         let hadSource = pipSource != nil

@@ -92,6 +92,15 @@ final class ParticipantCanvasTests: XCTestCase {
         XCTAssertEqual(card.frame.origin, .zero)
     }
 
+    func testFirstCanvasPopulationDoesNotStartLayoutAnimation() {
+        let canvas = makeCanvas()
+
+        canvas.apply(CanvasState(tiles: models(1), mode: .grid, style: .plain))
+
+        XCTAssertFalse(canvas.hasActiveLayoutAnimation,
+                       "the first local frame must not fade or resize through an empty canvas")
+    }
+
     func testResizeCancelsInFlightModeTransition() throws {
         let canvas = makeCanvas()
         let models = models(4)

@@ -56,9 +56,11 @@ struct ConferenceParticipantInfo: Hashable, Identifiable, Sendable {
         return result
     }
 
-    func isLocalParticipant(localJamiId: String, isHostedLocally: Bool) -> Bool {
+    func isLocalDevice(localJamiId: String, localDeviceId: String,
+                       isHostedLocally: Bool) -> Bool {
         if uri.isEmpty { return isHostedLocally }
         return !localJamiId.isEmpty && uri.filterOutHost() == localJamiId
+            && (localDeviceId.isEmpty || device.isEmpty || device == localDeviceId)
     }
 
     func resolvedUri(localJamiId: String, peerUri: String,

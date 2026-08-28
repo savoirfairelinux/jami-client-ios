@@ -92,12 +92,14 @@ enum ConferenceParticipants {
 
     static func rows(from conference: ConferenceState,
                      localJamiId: String,
+                     localDeviceId: String,
                      peerUri: String,
                      builder: ConferenceMenuBuilder = ConferenceMenuBuilder())
     -> [ConferenceParticipantRow] {
         let localInfo = conference.participants.first {
-            $0.isLocalParticipant(localJamiId: localJamiId,
-                                  isHostedLocally: conference.isHost)
+            $0.isLocalDevice(localJamiId: localJamiId,
+                             localDeviceId: localDeviceId,
+                             isHostedLocally: conference.isHost)
         }
 
         let joined = conference.participants.map { info -> ConferenceParticipantRow in

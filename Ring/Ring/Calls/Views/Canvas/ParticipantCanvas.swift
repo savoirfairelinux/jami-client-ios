@@ -73,6 +73,7 @@ final class ParticipantCanvas: UIView {
     private var previewCorner = PreviewCorner.topTrailing
     private var lastLayoutSize = CGSize.zero
     private var layoutAnimator: UIViewPropertyAnimator?
+    var hasActiveLayoutAnimation: Bool { layoutAnimator?.state == .active }
     private var orderedParticipants: [CanvasParticipant] = []
     private var suppressesStripCallback = false
     private var isDraggingPreview = false
@@ -181,10 +182,13 @@ final class ParticipantCanvas: UIView {
                        style newStyle: CanvasTileStyle, animated: Bool) {
         guard newMode != mode || newStyle != style
                 || newModels != lastAppliedModels else { return }
+        let newIds = Set(newModels.map(\.participant.id))
+        let layoutChanged = newMode != mode || newStyle != style
+            || newIds.count != models.count
+            || newModels.contains { models[$0.participant.id]?.participant != $0.participant }
+        let shouldAnimate = animated && !tiles.isEmpty && layoutChanged
         lastAppliedModels = newModels
         style = newStyle
-
-        let newIds = Set(newModels.map(\.participant.id))
 
         let wasLonelyPreview = !models.isEmpty
             && models.values.allSatisfy { $0.participant.isLocalPreview }
@@ -195,7 +199,7 @@ final class ParticipantCanvas: UIView {
             tiles[id] = nil
             models[id] = nil
             videoScalingPolicyOverrides[id] = nil
-            if animated {
+            if shouldAnimate {
                 UIView.animate(withDuration: Self.tileFadeDuration,
                                animations: { tile.alpha = 0 },
                                completion: { _ in tile.removeFromSuperview() })
@@ -257,9 +261,15 @@ final class ParticipantCanvas: UIView {
             setStripOffsetSilently(.zero)
         }
         mode = newMode
-        relayout(animated: animated, newcomers: newcomers,
-                 duration: answerTransition ? Self.answerTransitionDuration
-                    : Self.modeSwitchDuration)
+        if layoutChanged {
+            relayout(animated: shouldAnimate, newcomers: newcomers,
+                     duration: answerTransition ? Self.answerTransitionDuration
+                        : Self.modeSwitchDuration)
+        } else if bounds.width > 0, bounds.height > 0 {
+            let layout = CanvasLayout.plan(currentInput())
+            updateVideoAttachments(frames: layout.frames, offstage: layout.offstage)
+            applyVideoScalingPolicies(primaryTileId: layout.primaryTileId)
+        }
     }
 
     override func layoutSubviews() {

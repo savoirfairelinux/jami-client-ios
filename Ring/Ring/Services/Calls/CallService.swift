@@ -225,12 +225,13 @@ final class CallService {
 
     /// Calls a new participant and joins them once their call connects.
     func addParticipant(uri: String, toCall callId: CallId,
-                        requestedBy localJamiId: String) {
+                        requestedBy localJamiId: String, localDeviceId: String) {
         Task { [weak self] in
             guard let self = self else { return }
             do {
                 try await self.store.addParticipant(
                     peerUri: uri, toCall: callId, requestedBy: localJamiId,
+                    localDeviceId: localDeviceId,
                     videoSource: self.camera?.currentCameraSource() ?? "")
             } catch {
                 NSLog("Failed to add call participant: %@", String(describing: error))

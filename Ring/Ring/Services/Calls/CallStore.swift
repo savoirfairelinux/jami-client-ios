@@ -536,6 +536,7 @@ actor CallStore { // swiftlint:disable:this type_body_length
     /// becomes current.
     func addParticipant(peerUri: String, toCall hostId: CallId,
                         requestedBy localJamiId: String,
+                        localDeviceId: String,
                         videoSource: String) throws {
         guard let host = state.calls[hostId], host.status.isOngoing else {
             throw CallStoreError.callNotFound
@@ -544,8 +545,9 @@ actor CallStore { // swiftlint:disable:this type_body_length
            let conference = state.conferences[conferenceId],
            !conference.isHost {
             let isLocalModerator = conference.participants.contains {
-                $0.isModerator && $0.isLocalParticipant(
-                    localJamiId: localJamiId, isHostedLocally: conference.isHost)
+                $0.isModerator && $0.isLocalDevice(
+                    localJamiId: localJamiId, localDeviceId: localDeviceId,
+                    isHostedLocally: conference.isHost)
             }
             guard isLocalModerator else { throw CallStoreError.notAuthorized }
         }

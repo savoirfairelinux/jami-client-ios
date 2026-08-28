@@ -65,6 +65,7 @@ final class CallScreenPresenter {
 
         let account = injectionBag.accountService.getAccount(fromAccountId: call.accountId)
         let localJamiId = account?.jamiId ?? ""
+        let localDeviceId = account.map { AccountModelHelper(withAccount: $0).getCurrentDevice() } ?? ""
         let model = CallViewModel(call: call,
                                   callService: callService,
                                   videoService: injectionBag.videoService,
@@ -72,11 +73,13 @@ final class CallScreenPresenter {
                                   profileService: injectionBag.profileService,
                                   nameService: injectionBag.nameService,
                                   isSipAccount: account?.type == .sip,
-                                  localJamiId: localJamiId)
+                                  localJamiId: localJamiId,
+                                  localDeviceId: localDeviceId)
         model.onAddParticipant = { [weak self, weak model] in
             Task { @MainActor in
                 self?.presentContactPicker(for: model?.currentCallId ?? call.id,
-                                           requestedBy: localJamiId)
+                                           requestedBy: localJamiId,
+                                           localDeviceId: localDeviceId)
             }
         }
         model.onMinimize = { [weak self] route in
@@ -213,7 +216,8 @@ final class CallScreenPresenter {
     // MARK: - Add participant
 
     @MainActor
-    private func presentContactPicker(for callId: CallId, requestedBy localJamiId: String) {
+    private func presentContactPicker(for callId: CallId, requestedBy localJamiId: String,
+                                      localDeviceId: String) {
         guard let host = callController, !isMinimized else { return }
         let viewModel = ContactPickerViewModel(with: injectionBag)
         viewModel.type = .forCall
@@ -222,7 +226,8 @@ final class CallScreenPresenter {
             guard let self = self,
                   let contact = items.first?.contacts.first else { return }
             self.callService.addParticipant(uri: contact.uri, toCall: callId,
-                                            requestedBy: localJamiId)
+                                            requestedBy: localJamiId,
+                                            localDeviceId: localDeviceId)
             Task { @MainActor in
                 host?.presentedViewController?.dismiss(animated: true)
             }

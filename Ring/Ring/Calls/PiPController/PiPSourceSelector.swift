@@ -26,10 +26,12 @@ enum PiPSourceSelector {
     }
 
     static func select(call: CallState?, conference: ConferenceState?,
-                       localJamiId: String, current: Selection?) -> Selection? {
+                       localJamiId: String, localDeviceId: String,
+                       current: Selection?) -> Selection? {
         guard let call = call, !call.status.isTerminal else { return nil }
         if let conference = conference, !conference.participants.isEmpty {
             return selectInConference(conference, localJamiId: localJamiId,
+                                      localDeviceId: localDeviceId,
                                       peerUri: call.peerUri,
                                       current: current)
         }
@@ -39,11 +41,13 @@ enum PiPSourceSelector {
 
     private static func selectInConference(_ conference: ConferenceState,
                                            localJamiId: String,
+                                           localDeviceId: String,
                                            peerUri: String,
                                            current: Selection?) -> Selection? {
         let remotesWithVideo = conference.participants.filter {
-            !$0.isLocalParticipant(localJamiId: localJamiId,
-                                   isHostedLocally: conference.isHost) &&
+            !$0.isLocalDevice(localJamiId: localJamiId,
+                              localDeviceId: localDeviceId,
+                              isHostedLocally: conference.isHost) &&
                 !$0.isVideoMuted && !$0.sinkId.raw.isEmpty
         }
         guard !remotesWithVideo.isEmpty else { return nil }

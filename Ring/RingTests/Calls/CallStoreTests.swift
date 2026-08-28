@@ -910,7 +910,7 @@ final class CallStoreTests: XCTestCase {
 
         callAPI.placeCallReturn = CallTestFixtures.inviteCallId.raw
         try await store.addParticipant(peerUri: CallTestFixtures.secondaryPeerUri, toCall: id,
-                                       requestedBy: jamiId1, videoSource: "camera://front")
+                                       requestedBy: jamiId1, localDeviceId: deviceId1, videoSource: "camera://front")
         var media = callAPI.placedCalls[1].media
         XCTAssertEqual(media.map(\.label), [.audio(0), .video(0)])
         XCTAssertEqual(media[1].muted, false, "our camera is live, so the leg sends it")
@@ -922,7 +922,7 @@ final class CallStoreTests: XCTestCase {
         }
         callAPI.placeCallReturn = "sub-call-2"
         try await store.addParticipant(peerUri: CallTestFixtures.tertiaryPeerUri, toCall: id,
-                                       requestedBy: jamiId1, videoSource: "camera://front")
+                                       requestedBy: jamiId1, localDeviceId: deviceId1, videoSource: "camera://front")
         media = callAPI.placedCalls[2].media
         XCTAssertEqual(media.map(\.label), [.audio(0), .video(0)],
                        "the leg keeps a video stream so the new peer's video can reach us")
@@ -938,6 +938,7 @@ final class CallStoreTests: XCTestCase {
         callAPI.placeCallReturn = CallTestFixtures.inviteCallId.raw
         try await store.addParticipant(peerUri: CallTestFixtures.secondaryPeerUri,
                                        toCall: memberId, requestedBy: jamiId1,
+                                       localDeviceId: deviceId1,
                                        videoSource: String())
 
         let media = callAPI.placedCalls.last?.media
@@ -950,7 +951,7 @@ final class CallStoreTests: XCTestCase {
 
         callAPI.placeCallReturn = CallTestFixtures.inviteCallId.raw
         try await store.addParticipant(peerUri: CallTestFixtures.secondaryPeerUri, toCall: id,
-                                       requestedBy: jamiId1, videoSource: "camera://front")
+                                       requestedBy: jamiId1, localDeviceId: deviceId1, videoSource: "camera://front")
 
         let added = await expectEvent { event in
             if case let .callAdded(call) = event { return call.id.raw == CallTestFixtures.inviteCallId.raw }
@@ -978,7 +979,7 @@ final class CallStoreTests: XCTestCase {
 
         callAPI.placeCallReturn = CallTestFixtures.inviteCallId.raw
         try await store.addParticipant(peerUri: CallTestFixtures.secondaryPeerUri, toCall: id,
-                                       requestedBy: jamiId1, videoSource: "camera://front")
+                                       requestedBy: jamiId1, localDeviceId: deviceId1, videoSource: "camera://front")
         XCTAssertEqual(callAPI.placedCalls[1].media.map(\.label), [.audio(0)])
     }
 
@@ -992,7 +993,7 @@ final class CallStoreTests: XCTestCase {
 
         callAPI.placeCallReturn = CallTestFixtures.inviteCallId.raw
         try await store.addParticipant(peerUri: CallTestFixtures.secondaryPeerUri, toCall: CallTestFixtures.hostCallId,
-                                       requestedBy: jamiId1, videoSource: "")
+                                       requestedBy: jamiId1, localDeviceId: deviceId1, videoSource: "")
         flushCommands()
         XCTAssertEqual(callAPI.placedCalls.count, 2)
         XCTAssertTrue(callAPI.joinedCalls.isEmpty, "join must wait for sub-call CURRENT")
@@ -1029,6 +1030,7 @@ final class CallStoreTests: XCTestCase {
         do {
             try await store.addParticipant(peerUri: CallTestFixtures.secondaryPeerUri,
                                            toCall: id, requestedBy: jamiId1,
+                                           localDeviceId: deviceId1,
                                            videoSource: String())
             XCTFail("the remote host's moderator role must not authorize the local participant")
         } catch {
@@ -1057,7 +1059,7 @@ final class CallStoreTests: XCTestCase {
 
         callAPI.placeCallReturn = subCallId.raw
         try await store.addParticipant(peerUri: CallTestFixtures.secondaryPeerUri, toCall: id,
-                                       requestedBy: jamiId1, videoSource: String())
+                                       requestedBy: jamiId1, localDeviceId: deviceId1, videoSource: String())
         sendEvent(.callStateChanged(callId: subCallId.raw,
                                     state: LibJamiCallState.current.rawValue,
                                     accountId: accountId1, code: 0))
@@ -1113,7 +1115,7 @@ final class CallStoreTests: XCTestCase {
 
         callAPI.placeCallReturn = CallTestFixtures.inviteCallId.raw
         try await store.addParticipant(peerUri: CallTestFixtures.secondaryPeerUri, toCall: id,
-                                       requestedBy: jamiId1, videoSource: "")
+                                       requestedBy: jamiId1, localDeviceId: deviceId1, videoSource: "")
 
         let event = await expectEvent { event in
             if case let .callUpdated(call) = event {
@@ -1133,7 +1135,7 @@ final class CallStoreTests: XCTestCase {
         let id = try await placeOngoingAudioCall()
         callAPI.placeCallReturn = CallTestFixtures.inviteCallId.raw
         try await store.addParticipant(peerUri: CallTestFixtures.secondaryPeerUri, toCall: id,
-                                       requestedBy: jamiId1, videoSource: "")
+                                       requestedBy: jamiId1, localDeviceId: deviceId1, videoSource: "")
         await expectEvent { event in
             if case let .callUpdated(call) = event { return !call.pendingInvites.isEmpty }
             return false
@@ -1157,7 +1159,7 @@ final class CallStoreTests: XCTestCase {
         let id = try await placeOngoingAudioCall()
         callAPI.placeCallReturn = CallTestFixtures.inviteCallId.raw
         try await store.addParticipant(peerUri: CallTestFixtures.secondaryPeerUri, toCall: id,
-                                       requestedBy: jamiId1, videoSource: "")
+                                       requestedBy: jamiId1, localDeviceId: deviceId1, videoSource: "")
         await expectEvent { event in
             if case let .callUpdated(call) = event { return !call.pendingInvites.isEmpty }
             return false
@@ -1179,7 +1181,7 @@ final class CallStoreTests: XCTestCase {
         let id = try await placeOngoingAudioCall()
         callAPI.placeCallReturn = CallTestFixtures.inviteCallId.raw
         try await store.addParticipant(peerUri: CallTestFixtures.secondaryPeerUri, toCall: id,
-                                       requestedBy: jamiId1, videoSource: "")
+                                       requestedBy: jamiId1, localDeviceId: deviceId1, videoSource: "")
         await expectEvent { event in
             if case let .callUpdated(call) = event { return !call.pendingInvites.isEmpty }
             return false
@@ -1203,7 +1205,7 @@ final class CallStoreTests: XCTestCase {
         let id = try await placeOngoingAudioCall()
         callAPI.placeCallReturn = CallTestFixtures.inviteCallId.raw
         try await store.addParticipant(peerUri: CallTestFixtures.secondaryPeerUri, toCall: id,
-                                       requestedBy: jamiId1, videoSource: "")
+                                       requestedBy: jamiId1, localDeviceId: deviceId1, videoSource: "")
         await expectEvent { event in
             if case let .callUpdated(call) = event { return !call.pendingInvites.isEmpty }
             return false
@@ -1221,7 +1223,7 @@ final class CallStoreTests: XCTestCase {
         let id = try await placeOngoingAudioCall()
         callAPI.placeCallReturn = CallTestFixtures.inviteCallId.raw
         try await store.addParticipant(peerUri: CallTestFixtures.secondaryPeerUri, toCall: id,
-                                       requestedBy: jamiId1, videoSource: "")
+                                       requestedBy: jamiId1, localDeviceId: deviceId1, videoSource: "")
         await expectEvent { event in
             if case let .callUpdated(call) = event { return !call.pendingInvites.isEmpty }
             return false
@@ -1254,7 +1256,7 @@ final class CallStoreTests: XCTestCase {
 
         callAPI.placeCallReturn = CallTestFixtures.inviteCallId.raw
         try await store.addParticipant(peerUri: CallTestFixtures.tertiaryPeerUri, toCall: CallId(raw: "member-1"),
-                                       requestedBy: jamiId1, videoSource: "")
+                                       requestedBy: jamiId1, localDeviceId: deviceId1, videoSource: "")
         await expectEvent { event in
             if case let .callUpdated(call) = event { return !call.pendingInvites.isEmpty }
             return false

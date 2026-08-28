@@ -42,6 +42,7 @@ final class CallHeaderModelTests: XCTestCase {
         if let conference = conference {
             rows = ConferenceParticipants.rows(from: conference,
                                                localJamiId: localId,
+                                               localDeviceId: deviceId1,
                                                peerUri: call?.peerUri ?? "")
         } else if let call = call {
             rows = ConferenceParticipants.rows(from: call, localJamiId: localId)
