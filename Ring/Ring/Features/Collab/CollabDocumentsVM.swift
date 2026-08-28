@@ -39,6 +39,7 @@ class CollabDocumentsVM: ObservableObject {
     private let localJamiId: String
 
     @Published var documents = [CollaborativeDocument]()
+    @Published private(set) var waiting = Set<String>()
     @Published var failed = false
     @Published private var authorNames = [String: String]()
     /// What the alert says: creating and removing share it, and they fail for
@@ -61,6 +62,18 @@ class CollabDocumentsVM: ObservableObject {
             .getAccount(fromAccountId: accountId)?.jamiId ?? ""
         self.subscribeDocumentChanges()
         self.subscribeAuthorNames(participants)
+        self.subscribeDocumentsWaitingToBeRead()
+    }
+
+    private func subscribeDocumentsWaitingToBeRead() {
+        self.collaborationService
+            .documentsWaitingToBeRead(forAccount: self.accountId,
+                                      conversationId: self.conversationId)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] waiting in
+                self?.waiting = waiting
+            })
+            .disposed(by: self.disposeBag)
     }
 
     private func subscribeAuthorNames(_ participants: Observable<[ParticipantInfo]>) {
@@ -211,6 +224,10 @@ class CollabDocumentsVM: ObservableObject {
     private func fail(with message: String) {
         self.failureMessage = message
         self.failed = true
+    }
+
+    func isWaitingToBeRead(_ document: CollaborativeDocument) -> Bool {
+        return self.waiting.contains(document.id)
     }
 
     func title(of document: CollaborativeDocument) -> String {

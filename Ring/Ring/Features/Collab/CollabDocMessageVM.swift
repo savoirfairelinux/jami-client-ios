@@ -44,6 +44,8 @@ class CollabDocMessageVM: ObservableObject {
      */
     @Published var removed: Bool
 
+    @Published var waitingToBeRead = false
+
     /**
      Whether a rename has been applied, after which a fetched name is stale.
 
@@ -101,6 +103,14 @@ class CollabDocMessageVM: ObservableObject {
                 guard let self = self, !renamed.value.isEmpty else { return }
                 self.renameApplied = true
                 self.name = renamed.value
+            })
+            .disposed(by: self.disposeBag)
+        service.isWaitingToBeRead(forAccount: accountId,
+                                  conversationId: conversationId,
+                                  documentId: documentId)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] waiting in
+                self?.waitingToBeRead = waiting
             })
             .disposed(by: self.disposeBag)
         service.removals(forAccount: accountId,

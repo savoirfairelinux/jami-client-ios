@@ -31,9 +31,14 @@ struct CollabDocMessageView: View {
                     .font(.title3)
                     .foregroundColor(model.removed ? .secondary : Color.jami)
                 VStack(alignment: .leading, spacing: Layout.textSpacing) {
-                    title
-                    Text(model.removed ? L10n.Collab.documentRemoved
-                            : L10n.Collab.editableDocument)
+                    HStack(spacing: Layout.indicatorSpacing) {
+                        title
+                        if hasUnreadChanges {
+                            CollabUnreadIndicator()
+                                .fixedSize()
+                        }
+                    }
+                    Text(detail)
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
@@ -50,9 +55,17 @@ struct CollabDocMessageView: View {
         // rather than answer them with silence.
         .disabled(model.removed)
         .accessibilityElement(children: .combine)
-        .accessibilityHint(model.removed ? L10n.Collab.documentRemoved
-                            : L10n.Collab.editableDocument)
+        .accessibilityHint(detail)
+        .accessibilityValue(hasUnreadChanges ? L10n.Accessibility.messageBubbleUnread : "")
         .padding(.vertical, Layout.textSpacing)
+    }
+
+    private var hasUnreadChanges: Bool {
+        return !model.removed && model.waitingToBeRead
+    }
+
+    private var detail: String {
+        return model.removed ? L10n.Collab.documentRemoved : L10n.Collab.editableDocument
     }
 
     @ViewBuilder private var title: some View {
@@ -70,9 +83,22 @@ struct CollabDocMessageView: View {
     private enum Layout {
         static let spacing: CGFloat = 10
         static let textSpacing: CGFloat = 2
+        static let indicatorSpacing: CGFloat = 6
         static let padding: CGFloat = 14
         static let verticalPadding: CGFloat = 8
         static let minHeight: CGFloat = 44
         static let corner: CGFloat = 12
+    }
+}
+
+struct CollabUnreadIndicator: View {
+
+    @ScaledMetric(relativeTo: .callout) private var size: CGFloat = 8
+
+    var body: some View {
+        Circle()
+            .fill(Color.unreadMessageText)
+            .frame(width: size, height: size)
+            .accessibilityHidden(true)
     }
 }

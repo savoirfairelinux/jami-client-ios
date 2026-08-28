@@ -21,9 +21,6 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		F10000000000000000000003 /* ConversationProfileEditorVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000004 /* ConversationProfileEditorVM.swift */; };
-		F10000000000000000000005 /* ConversationProfileEditorAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000006 /* ConversationProfileEditorAvatar.swift */; };
-		F10000000000000000000007 /* ConversationProfileEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000008 /* ConversationProfileEditorView.swift */; };
 		024B612C1DF7654F00C4F9DE /* DaemonServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024B612B1DF7654F00C4F9DE /* DaemonServiceTests.swift */; };
 		024B61311DF7656A00C4F9DE /* FixtureFailInitDRingAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 024B612E1DF7656A00C4F9DE /* FixtureFailInitDRingAdapter.mm */; };
 		024B61321DF7656A00C4F9DE /* FixtureFailStartDRingAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 024B61301DF7656A00C4F9DE /* FixtureFailStartDRingAdapter.mm */; };
@@ -604,6 +601,9 @@
 		C39ADB74167B420FBFEF18B2 /* ExpandableAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFEB4CB31604F75894DCEE5 /* ExpandableAvatar.swift */; };
 		C40000000000000000000002 /* CollaborationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40000000000000000000001 /* CollaborationServiceTests.swift */; };
 		E8ACE0B8E94AB3DEABA30A1A /* AvatarHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD989EC28085426384411E8 /* AvatarHelpers.swift */; };
+		F10000000000000000000003 /* ConversationProfileEditorVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000004 /* ConversationProfileEditorVM.swift */; };
+		F10000000000000000000005 /* ConversationProfileEditorAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000006 /* ConversationProfileEditorAvatar.swift */; };
+		F10000000000000000000007 /* ConversationProfileEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000008 /* ConversationProfileEditorView.swift */; };
 		FB726FE5280249DA8219EDE9 /* PeerSharingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECD5DF711D545048AA5E270 /* PeerSharingViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -675,9 +675,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		F10000000000000000000004 /* ConversationProfileEditorVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationProfileEditorVM.swift; sourceTree = "<group>"; };
-		F10000000000000000000006 /* ConversationProfileEditorAvatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationProfileEditorAvatar.swift; sourceTree = "<group>"; };
-		F10000000000000000000008 /* ConversationProfileEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationProfileEditorView.swift; sourceTree = "<group>"; };
 		024B612B1DF7654F00C4F9DE /* DaemonServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DaemonServiceTests.swift; sourceTree = "<group>"; };
 		024B612D1DF7656A00C4F9DE /* FixtureFailInitDRingAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FixtureFailInitDRingAdapter.h; path = Fixtures/DRingAdaptor/FixtureFailInitDRingAdapter.h; sourceTree = "<group>"; };
 		024B612E1DF7656A00C4F9DE /* FixtureFailInitDRingAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = FixtureFailInitDRingAdapter.mm; path = Fixtures/DRingAdaptor/FixtureFailInitDRingAdapter.mm; sourceTree = "<group>"; };
@@ -1824,6 +1821,9 @@
 		C760772C22CC601BCEA3449C /* IdentityBackdrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityBackdrop.swift; sourceTree = "<group>"; };
 		DDE8CA20E60048678054756B /* PeerSharingSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerSharingSheet.swift; sourceTree = "<group>"; };
 		EECD5DF711D545048AA5E270 /* PeerSharingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerSharingViewModel.swift; sourceTree = "<group>"; };
+		F10000000000000000000004 /* ConversationProfileEditorVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationProfileEditorVM.swift; sourceTree = "<group>"; };
+		F10000000000000000000006 /* ConversationProfileEditorAvatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationProfileEditorAvatar.swift; sourceTree = "<group>"; };
+		F10000000000000000000008 /* ConversationProfileEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationProfileEditorView.swift; sourceTree = "<group>"; };
 		FDFEB4CB31604F75894DCEE5 /* ExpandableAvatar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableAvatar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -3182,16 +3182,6 @@
 			path = Features/Conversations;
 			sourceTree = "<group>";
 		};
-		F10000000000000000000009 /* ProfileEditing */ = {
-			isa = PBXGroup;
-			children = (
-				F10000000000000000000004 /* ConversationProfileEditorVM.swift */,
-				F10000000000000000000006 /* ConversationProfileEditorAvatar.swift */,
-				F10000000000000000000008 /* ConversationProfileEditorView.swift */,
-			);
-			path = ProfileEditing;
-			sourceTree = "<group>";
-		};
 		1A2D18A81F290FBF00B2C785 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -3808,6 +3798,16 @@
 			);
 			name = Collab;
 			path = Features/Collab;
+			sourceTree = "<group>";
+		};
+		F10000000000000000000009 /* ProfileEditing */ = {
+			isa = PBXGroup;
+			children = (
+				F10000000000000000000004 /* ConversationProfileEditorVM.swift */,
+				F10000000000000000000006 /* ConversationProfileEditorAvatar.swift */,
+				F10000000000000000000008 /* ConversationProfileEditorView.swift */,
+			);
+			path = ProfileEditing;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

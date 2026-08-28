@@ -87,7 +87,12 @@ struct MessageRowView: View {
                 // one of them at all is the flag's to say.
                 Group {
                     if let collabDoc = messageModel.collabDocViewModel {
-                        CollabDocMessageView(model: collabDoc)
+                        HStack(spacing: 0) {
+                            Spacer(minLength: Layout.centeredMessageMargin)
+                            CollabDocMessageView(model: collabDoc)
+                                .layoutPriority(1)
+                            Spacer(minLength: Layout.centeredMessageMargin)
+                        }
                     } else {
                         ContactMessageView(model: messageModel.contactViewModel)
                     }
@@ -150,5 +155,9 @@ struct MessageRowView: View {
         .padding(.bottom, 1)
         .padding(.leading, 5)
         .padding(.trailing, 5)
+    }
+
+    private enum Layout {
+        static let centeredMessageMargin: CGFloat = 30
     }
 }
