@@ -281,18 +281,6 @@ final class CollaborationServiceTests: XCTestCase {
         XCTAssertEqual(counts.latest, 0)
     }
 
-    func testReadingTheConversationClearsEveryDocument() {
-        let counts = observeUnread(in: conversationId)
-        peerChanged("first", in: conversationId)
-        peerChanged("second", in: conversationId)
-        XCTAssertEqual(counts.latest, 2)
-
-        service.markConversationDocumentsRead(accountId: accountId,
-                                              conversationId: conversationId)
-
-        XCTAssertEqual(counts.latest, 0)
-    }
-
     func testTheSameDocumentChangingTwiceWaitsOnce() {
         let counts = observeUnread(in: conversationId)
 

@@ -534,9 +534,6 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
     func setMessagesAsRead() {
         guard let account = self.accountService.currentAccount,
               let ringId = AccountModelHelper(withAccount: account).ringId else { return }
-        self.collaborationService
-            .markConversationDocumentsRead(accountId: self.conversation.accountId,
-                                           conversationId: self.conversation.id)
         self.conversationsService
             .setMessagesAsRead(forConversation: self.conversation,
                                accountId: account.id,

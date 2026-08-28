@@ -119,6 +119,7 @@ private struct DocumentRow: View {
             }
             .buttonStyle(.plain)
             .accessibilityElement(children: .combine)
+            .accessibilityValue(waiting ? L10n.Accessibility.messageBubbleUnread : "")
             actionsMenu
         }
         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
@@ -133,6 +134,10 @@ private struct DocumentRow: View {
             }
         }
         .alert(item: $confirming, content: removalAlert)
+    }
+
+    private var waiting: Bool {
+        return viewModel.isWaitingToBeRead(document)
     }
 
     private var symbol: String {
@@ -150,6 +155,7 @@ private struct DocumentRow: View {
                 .accessibilityHidden(true)
             VStack(alignment: .leading, spacing: DocumentsLayout.textSpacing) {
                 Text(viewModel.title(of: document))
+                    .fontWeight(waiting ? .bold : .regular)
                     .foregroundColor(Color(UIColor.label))
                 if let detail = viewModel.detail(of: document) {
                     Text(detail)
@@ -158,6 +164,9 @@ private struct DocumentRow: View {
                 }
             }
             Spacer()
+            if waiting {
+                CollabUnreadIndicator()
+            }
         }
         .frame(minHeight: DocumentsLayout.rowHeight)
         .contentShape(Rectangle())

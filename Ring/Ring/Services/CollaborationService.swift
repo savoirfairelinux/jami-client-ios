@@ -133,7 +133,7 @@ class CollaborationService {
     private let unreadLock = NSLock()
     private var unreadDocumentIds = [String: Set<String>]()
     private var openDocumentKeys = Set<String>()
-    private let unreadCountSubject = PublishSubject<(conversation: String, count: Int)>()
+    private let unreadSubject = PublishSubject<(conversation: String, waiting: Set<String>)>()
 
     private let documentChangeSubject = PublishSubject<DocumentChangeEvent>()
     private let awarenessSubject = PublishSubject<AwarenessUpdate>()
@@ -244,36 +244,40 @@ class CollaborationService {
 
     // MARK: - Documents waiting to be read
 
-    /// How many of a conversation's documents changed without being opened
-    /// since, starting with what it stands at now.
-    func unreadDocumentCount(forAccount accountId: String,
-                             conversationId: String) -> Observable<Int> {
+    /// Which of a conversation's documents changed without being opened since,
+    /// starting with what it stands at now.
+    func documentsWaitingToBeRead(forAccount accountId: String,
+                                  conversationId: String) -> Observable<Set<String>> {
         let conversation = CollaborationService.conversationKey(accountId, conversationId)
         return Observable.deferred { [weak self] in
             guard let self = self else { return Observable.empty() }
-            return self.unreadCountSubject
+            return self.unreadSubject
                 .filter { $0.conversation == conversation }
-                .map { $0.count }
-                .startWith(self.unreadCount(in: conversation))
+                .map { $0.waiting }
+                .startWith(self.waiting(in: conversation))
         }
         .distinctUntilChanged()
+    }
+
+    func unreadDocumentCount(forAccount accountId: String,
+                             conversationId: String) -> Observable<Int> {
+        return documentsWaitingToBeRead(forAccount: accountId, conversationId: conversationId)
+            .map { $0.count }
+            .distinctUntilChanged()
+    }
+
+    func isWaitingToBeRead(forAccount accountId: String,
+                           conversationId: String,
+                           documentId: String) -> Observable<Bool> {
+        return documentsWaitingToBeRead(forAccount: accountId, conversationId: conversationId)
+            .map { $0.contains(documentId) }
+            .distinctUntilChanged()
     }
 
     /// The document has been opened, so it is no longer waiting to be read.
     func markDocumentRead(accountId: String, conversationId: String, documentId: String) {
         let conversation = CollaborationService.conversationKey(accountId, conversationId)
         clearUnread(in: conversation, documentId: documentId)
-    }
-
-    /// Everything the conversation was holding has been read.
-    func markConversationDocumentsRead(accountId: String, conversationId: String) {
-        let conversation = CollaborationService.conversationKey(accountId, conversationId)
-        unreadLock.lock()
-        let cleared = unreadDocumentIds.removeValue(forKey: conversation) != nil
-        unreadLock.unlock()
-        if cleared {
-            unreadCountSubject.onNext((conversation: conversation, count: 0))
-        }
     }
 
     private static func conversationKey(_ accountId: String, _ conversationId: String) -> String {
@@ -286,41 +290,41 @@ class CollaborationService {
         return conversationKey(accountId, conversationId) + "|" + documentId
     }
 
-    private func unreadCount(in conversation: String) -> Int {
+    private func waiting(in conversation: String) -> Set<String> {
         unreadLock.lock()
         defer { unreadLock.unlock() }
-        return unreadDocumentIds[conversation]?.count ?? 0
+        return unreadDocumentIds[conversation] ?? []
     }
 
     /// A document that changed is waiting to be read, unless it is open here.
     private func markUnread(accountId: String, conversationId: String, documentId: String) {
         let conversation = CollaborationService.conversationKey(accountId, conversationId)
         let document = CollaborationService.documentKey(accountId, conversationId, documentId)
-        var count: Int?
+        var waiting: Set<String>?
         unreadLock.lock()
         if !openDocumentKeys.contains(document),
            unreadDocumentIds[conversation, default: []].insert(documentId).inserted {
-            count = unreadDocumentIds[conversation]?.count
+            waiting = unreadDocumentIds[conversation]
         }
         unreadLock.unlock()
-        if let count = count {
-            unreadCountSubject.onNext((conversation: conversation, count: count))
+        if let waiting = waiting {
+            unreadSubject.onNext((conversation: conversation, waiting: waiting))
         }
     }
 
     private func clearUnread(in conversation: String, documentId: String) {
-        var count: Int?
+        var waiting: Set<String>?
         unreadLock.lock()
         if unreadDocumentIds[conversation]?.remove(documentId) != nil {
-            let remaining = unreadDocumentIds[conversation]?.count ?? 0
-            if remaining == 0 {
+            let remaining = unreadDocumentIds[conversation] ?? []
+            if remaining.isEmpty {
                 unreadDocumentIds.removeValue(forKey: conversation)
             }
-            count = remaining
+            waiting = remaining
         }
         unreadLock.unlock()
-        if let count = count {
-            unreadCountSubject.onNext((conversation: conversation, count: count))
+        if let waiting = waiting {
+            unreadSubject.onNext((conversation: conversation, waiting: waiting))
         }
     }
 
