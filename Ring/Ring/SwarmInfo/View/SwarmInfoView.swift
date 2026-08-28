@@ -350,6 +350,7 @@ public struct SwarmInfoView: View, StateEmittingView {
             .truncationMode(.middle)
             .lineLimit(2)
             .foregroundStyle(headerForeground)
+            .copyableText(viewModel.title)
             .accessibilityLabel(viewModel.title)
     }
 
@@ -369,6 +370,7 @@ public struct SwarmInfoView: View, StateEmittingView {
             .lineLimit(2)
             .multilineTextAlignment(.center)
             .foregroundStyle(headerForeground)
+            .copyableText(displayedDescription)
             .accessibilityLabel(displayedDescription)
     }
 
@@ -441,8 +443,9 @@ private extension SwarmInfoView {
     var scrimmedInfo: some View {
         infoStack
             .padding(Layout.generalMargin)
-            .padding(.top, 60)
             .frame(maxWidth: .infinity)
+            .contentShape(Rectangle())
+            .padding(.top, 60)
             .background(infoBackdrop)
     }
 
