@@ -60,6 +60,30 @@
 "global.confirm" = "Bestätigen";
 "global.connect" = "Verbinden";
 "global.leave" = "Verlassen";
+
+// ProfileEditor
+"profileEditor.editGroup" = "Edit group";
+"profileEditor.editContact" = "Edit contact";
+"profileEditor.name" = "Name";
+"profileEditor.groupNamePlaceholder" = "Enter a group name";
+"profileEditor.contactNamePlaceholder" = "Enter a name";
+"profileEditor.description" = "Description";
+"profileEditor.descriptionPlaceholder" = "Enter a description";
+"profileEditor.localChangesFooter" = "This name and picture are visible only on this device.";
+"profileEditor.resetOriginal" = "Use original name and picture";
+"profileEditor.resetOriginalHint" = "Restores the name and picture this contact set for themselves";
+"profileEditor.changePicture" = "Change picture";
+"profileEditor.changePictureHint" = "Choose a new picture from the camera or photo library";
+"profileEditor.noPicture" = "No picture";
+"profileEditor.pictureSelected" = "Picture selected";
+"profileEditor.removePicture" = "Bild entfernen";
+"profileEditor.resetPicture" = "Use original picture";
+"profileEditor.discardTitle" = "Discard changes?";
+"profileEditor.discardMessage" = "Your unsaved changes will be lost.";
+"profileEditor.discard" = "Discard";
+"profileEditor.saveError" = "The changes could not be saved. Please try again.";
+"profileEditor.editGroupHint" = "Opens the group editor";
+"profileEditor.editContactHint" = "Opens the contact editor";
 // Scan
 "scan.badQrCode" = "QR-Code ungültig";
 
@@ -79,11 +103,6 @@
 "swarm.conversationId" = "Unterhaltungs-ID";
 "swarm.settings" = "Einstellungen";
 "swarm.members" = "Mitglieder";
-"swarm.addDescription" = "Beschreibung hinzufügen";
-"swarm.titlePlaceholder" = "Titel eingeben";
-"swarm.titleAlertHeader" = "Gruppentitel bearbeiten";
-"swarm.descriptionAlertHeader" = "Gruppenbeschreibung bearbeiten";
-"swarm.descriptionPlaceholder" = "Titel eingeben";
 "swarm.contactHeader" = "Kontakt";
 "swarm.showContactQRCode" = "QR-Code des Kontakts anzeigen";
 "swarm.shareContactInfo" = "Kontaktinformation teilen";
@@ -91,7 +110,6 @@
 "swarm.accessibilityContactQRCodeHint" = "Öffnet einen Bildschirm mit dem QR-Code des Kontakts";
 "swarm.accessibilityContactShareHint" = "Öffnet die Optionen zum Teilen für Kontaktinformationen";
 "swarm.accessibilityColorPicker" = "Farbauswahl für Unterhaltungen";
-"swarm.editTextHint" = "Doppeltippen zum Bearbeiten";
 "swarm.conversationHeader" = "Unterhaltung";
 "swarm.shareContactMessage" = "Sie können diesen Kontakt - %1@ - auf der verteilten Kommunikationsplattform Jami hinzufügen: https://jami.net";
 "swarm.oneToOne" = "Privat";
@@ -105,6 +123,7 @@
 "swarm.blocked" = "Blockiert";
 "swarm.unknown" = "Unbekannt";
 "swarm.left" = "Hat die Unterhaltung verlassen";
+"swarm.invite" = "Invite";
 "swarm.inviteMembers" = "Mitglieder einladen";
 "swarm.inviteSelectedMembers" = "Ausgewählte Kontakte einladen";
 "swarm.inviteMembersSelected" = "Ausgewählt";
@@ -613,6 +632,8 @@
 "accessibility.aboutJamiTitle" = "Über Jami";
 "accessibility.welcomeToJamiTitle" = "Willkommen bei Jami";
 "accessibility.createAccountVerifyUsernamePrompt" = "Geben Sie den Benutzernamen ein, um die Verfügbarkeit zu prüfen.";
+"accessibility.avatarExpandHint" = "Double-tap to enlarge the picture";
+"accessibility.avatarCollapseHint" = "Double-tap to shrink the picture";
 "accessibility.profilePicturePicker" = "Profilbild";
 "accessibility.profilePicturePickerHint" = "Doppeltippen, um ein Foto aufzunehmen oder ein Foto aus der Bibliothek auszuwählen";
 "accessibility.swarmPicturePicker" = "Gruppenbild";
@@ -686,12 +707,12 @@
 "accessibility.conference.localPreview" = "Ihr Video";
 "accessibility.conference.hideLocalPreview" = "Eigenes Video ausblenden";
 "accessibility.conference.showLocalPreview" = "Eigenes Video anzeigen";
-"accessibility.conference.speaking" = "Speaking";
+"accessibility.conference.speaking" = "Sprechend";
 "accessibility.conference.handRaised" = "Hand gehoben";
 "accessibility.conference.moderator" = "Moderator";
 "accessibility.conference.recording" = "Aufzeichnung";
-"accessibility.conference.microphoneMuted" = "Microphone muted";
-"accessibility.conference.cameraOff" = "Camera off";
+"accessibility.conference.microphoneMuted" = "Mikrofon stummgeschaltet";
+"accessibility.conference.cameraOff" = "Kamera aus";
 "accessibility.account.tokenQRcode" = "Token-QR-Code";
 
 // Swarm Colors
@@ -739,3 +760,81 @@
 "peerServices.done" = "Erledigt";
 "peerServices.notSupported" = "Nicht unterstützt";
 "peerServices.open" = "Öffnen";
+
+// Collaborative documents
+"collab.documents" = "Documents";
+"collab.menu" = "Document actions";
+"collab.newDocument" = "New document";
+"collab.untitled" = "Untitled document";
+"collab.documentNameHint" = "Document name";
+"collab.create" = "Create";
+"collab.rename" = "Rename";
+"collab.openError" = "This document could not be opened.";
+"collab.noDocuments" = "No document has been written in this conversation yet.";
+"collab.createdBy" = "Created by %@";
+"collab.editingAlone" = "Only you are editing";
+"collab.editingOthers" = "%d other people are editing";
+"collab.editingOneOther" = "1 other person is editing";
+"collab.history" = "Version history";
+"collab.noHistory" = "This document has no saved version yet.";
+"collab.versionLeave" = "Back to the current version";
+"collab.versionShown" = "Version of %@";
+"collab.versionRestore" = "Restore";
+"collab.versionRestored" = "The document was restored to this version.";
+"collab.versionUnchanged" = "Diese Version ist das Dokument, das Sie bereits haben.";
+"collab.versionRestoreError" = "This version could not be restored.";
+"collab.versionBy" = "%1$@ — %2$@";
+"collab.versionDeltas" = "%1$@ — %2$@, %3$d change(s)";
+"collab.linkTitle" = "Link";
+"collab.linkHint" = "Address";
+"collab.linkAdd" = "Add";
+"collab.linkRemove" = "Remove";
+"collab.exportPdf" = "Export to PDF";
+"collab.export" = "Export a local copy";
+"collab.exportHtml" = "Export to HTML";
+"collab.exportMarkdown" = "Export to Markdown";
+"collab.exportText" = "Export to plain text";
+"collab.exportMissingImages" = "%d picture(s) in this document have not arrived yet, and will be left out of the exported file.";
+"collab.exportAnyway" = "Export anyway";
+"collab.exportError" = "This document could not be exported.";
+"collab.imageError" = "This image could not be added.";
+"collab.imageTooLarge" = "This image is too large to be added to a document.";
+"collab.sendError" = "Your changes could not be sent.";
+"collab.editableDocument" = "Editable document";
+"collab.createError" = "This document could not be created.";
+"collab.bold" = "Bold";
+"collab.italic" = "Italic";
+"collab.underline" = "Underline";
+"collab.strikethrough" = "Strikethrough";
+"collab.heading" = "Heading %d";
+"collab.bulletList" = "Bulleted list";
+"collab.orderedList" = "Numbered list";
+"collab.alignLeft" = "Align left";
+"collab.alignCenter" = "Center";
+"collab.alignRight" = "Align right";
+"collab.alignJustify" = "Justify";
+"collab.insertImage" = "Insert image";
+"collab.clearFormat" = "Clear formatting";
+"collab.undo" = "Undo";
+"collab.redo" = "Redo";
+"collab.remove" = "Remove";
+"collab.open" = "Open";
+"collab.downloadAndOpen" = "Download and open";
+// Full labels shown inside the document-list row menu.
+"collab.removeLocallyMenu" = "Von diesem Gerät entfernen";
+"collab.removeEverywhereMenu" = "Remove for everyone";
+// Short labels shown inside document-list swipe actions.
+"collab.removeLocallyAction" = "Offload";
+"collab.removeEverywhereAction" = "Remove";
+"collab.removeTitle" = "Remove document";
+"collab.removeMessage" = "\"%@\" will be removed for every member of this conversation. This cannot be undone.";
+"collab.removeError" = "This document could not be removed.";
+"collab.removeLocallyTitle" = "Remove from this device";
+"collab.removeLocallyMessage" = "\"%@\" will be removed from this device only. The other members keep it, and opening it again downloads it back.";
+"collab.removeLocallyError" = "This document could not be removed from this device.";
+"collab.notDownloaded" = "Not downloaded";
+"collab.createdByNotDownloaded" = "Created by %@, not downloaded";
+"collab.documentRemoved" = "Document removed";
+"collab.documentRemovedMessage" = "\"%@\" was removed by its author.";
+"collab.documentRemovedLocally" = "Document removed from this device";
+"collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";

@@ -60,6 +60,30 @@
 "global.confirm" = "確認";
 "global.connect" = "连接";
 "global.leave" = "离开";
+
+// ProfileEditor
+"profileEditor.editGroup" = "Edit group";
+"profileEditor.editContact" = "Edit contact";
+"profileEditor.name" = "Name";
+"profileEditor.groupNamePlaceholder" = "Enter a group name";
+"profileEditor.contactNamePlaceholder" = "Enter a name";
+"profileEditor.description" = "Description";
+"profileEditor.descriptionPlaceholder" = "Enter a description";
+"profileEditor.localChangesFooter" = "This name and picture are visible only on this device.";
+"profileEditor.resetOriginal" = "Use original name and picture";
+"profileEditor.resetOriginalHint" = "Restores the name and picture this contact set for themselves";
+"profileEditor.changePicture" = "Change picture";
+"profileEditor.changePictureHint" = "Choose a new picture from the camera or photo library";
+"profileEditor.noPicture" = "No picture";
+"profileEditor.pictureSelected" = "Picture selected";
+"profileEditor.removePicture" = "Remove picture";
+"profileEditor.resetPicture" = "Use original picture";
+"profileEditor.discardTitle" = "Discard changes?";
+"profileEditor.discardMessage" = "Your unsaved changes will be lost.";
+"profileEditor.discard" = "Discard";
+"profileEditor.saveError" = "The changes could not be saved. Please try again.";
+"profileEditor.editGroupHint" = "Opens the group editor";
+"profileEditor.editContactHint" = "Opens the contact editor";
 // Scan
 "scan.badQrCode" = "无效的二维码";
 
@@ -79,11 +103,6 @@
 "swarm.conversationId" = "對話 ID";
 "swarm.settings" = "設定";
 "swarm.members" = "成员";
-"swarm.addDescription" = "添加描述";
-"swarm.titlePlaceholder" = "輸入標題";
-"swarm.titleAlertHeader" = "编辑群名称";
-"swarm.descriptionAlertHeader" = "编辑群简介";
-"swarm.descriptionPlaceholder" = "輸入標題";
 "swarm.contactHeader" = "聯絡人";
 "swarm.showContactQRCode" = "顯示聯絡人二維碼";
 "swarm.shareContactInfo" = "分享联系人";
@@ -91,7 +110,6 @@
 "swarm.accessibilityContactQRCodeHint" = "開啓包括聯絡人二維碼的頁面";
 "swarm.accessibilityContactShareHint" = "開啓聯絡人資訊分享選項";
 "swarm.accessibilityColorPicker" = "對話顏色選擇";
-"swarm.editTextHint" = "雙擊以編輯";
 "swarm.conversationHeader" = "对话";
 "swarm.shareContactMessage" = "你可以在 Jami 分散式通訊平臺 (https://jami.net) 上增加此聯絡人： %1@";
 "swarm.oneToOne" = "私人";
@@ -105,6 +123,7 @@
 "swarm.blocked" = "已封鎖";
 "swarm.unknown" = "未知";
 "swarm.left" = "左邊";
+"swarm.invite" = "Invite";
 "swarm.inviteMembers" = "邀请成员";
 "swarm.inviteSelectedMembers" = "邀請選擇的聯絡人<br>";
 "swarm.inviteMembersSelected" = "已選擇";
@@ -613,6 +632,8 @@
 "accessibility.aboutJamiTitle" = "关于 Jami";
 "accessibility.welcomeToJamiTitle" = "欢迎来到 Jami";
 "accessibility.createAccountVerifyUsernamePrompt" = "請輸入用戶名來檢查是否可用";
+"accessibility.avatarExpandHint" = "Double-tap to enlarge the picture";
+"accessibility.avatarCollapseHint" = "Double-tap to shrink the picture";
 "accessibility.profilePicturePicker" = "个人资料图片";
 "accessibility.profilePicturePickerHint" = "雙點以拍照，或者從相簿中選擇照片<br>";
 "accessibility.swarmPicturePicker" = "群組圖片";
@@ -686,12 +707,12 @@
 "accessibility.conference.localPreview" = "您的视频";
 "accessibility.conference.hideLocalPreview" = "隐藏你的视频";
 "accessibility.conference.showLocalPreview" = "显示你的视频";
-"accessibility.conference.speaking" = "Speaking";
+"accessibility.conference.speaking" = "说话";
 "accessibility.conference.handRaised" = "已举手";
 "accessibility.conference.moderator" = "主持人";
 "accessibility.conference.recording" = "記錄";
-"accessibility.conference.microphoneMuted" = "Microphone muted";
-"accessibility.conference.cameraOff" = "Camera off";
+"accessibility.conference.microphoneMuted" = "麦克风静音";
+"accessibility.conference.cameraOff" = "关闭摄像头";
 "accessibility.account.tokenQRcode" = "二維碼令牌";
 
 // Swarm Colors
@@ -739,3 +760,81 @@
 "peerServices.done" = "完成";
 "peerServices.notSupported" = "不支持";
 "peerServices.open" = "開啟";
+
+// Collaborative documents
+"collab.documents" = "Documents";
+"collab.menu" = "Document actions";
+"collab.newDocument" = "New document";
+"collab.untitled" = "Untitled document";
+"collab.documentNameHint" = "文档名称";
+"collab.create" = "Create";
+"collab.rename" = "Rename";
+"collab.openError" = "This document could not be opened.";
+"collab.noDocuments" = "此对话中尚未编写任何文档。";
+"collab.createdBy" = "Created by %@";
+"collab.editingAlone" = "只有你在编辑";
+"collab.editingOthers" = "%d other people are editing";
+"collab.editingOneOther" = "1 other person is editing";
+"collab.history" = "Version history";
+"collab.noHistory" = "This document has no saved version yet.";
+"collab.versionLeave" = "返回到当前版本";
+"collab.versionShown" = "Version of %@";
+"collab.versionRestore" = "Restore";
+"collab.versionRestored" = "文档已恢复到此版本。";
+"collab.versionUnchanged" = "此版本即为您当前的文档版本。";
+"collab.versionRestoreError" = "This version could not be restored.";
+"collab.versionBy" = "%1$@ — %2$@";
+"collab.versionDeltas" = "%1$@ — %2$@, %3$d change(s)";
+"collab.linkTitle" = "关联";
+"collab.linkHint" = "Address";
+"collab.linkAdd" = "Add";
+"collab.linkRemove" = "Remove";
+"collab.exportPdf" = "导出为 PDF";
+"collab.export" = "导出本地副本";
+"collab.exportHtml" = "导出为 HTML";
+"collab.exportMarkdown" = "导出为 Markdown";
+"collab.exportText" = "Export to plain text";
+"collab.exportMissingImages" = "%d picture(s) in this document have not arrived yet, and will be left out of the exported file.";
+"collab.exportAnyway" = "Export anyway";
+"collab.exportError" = "This document could not be exported.";
+"collab.imageError" = "无法添加此图片。";
+"collab.imageTooLarge" = "This image is too large to be added to a document.";
+"collab.sendError" = "Your changes could not be sent.";
+"collab.editableDocument" = "Editable document";
+"collab.createError" = "无法创建此文档。";
+"collab.bold" = "粗體";
+"collab.italic" = "Italic";
+"collab.underline" = "下划线";
+"collab.strikethrough" = "Strikethrough";
+"collab.heading" = "Heading %d";
+"collab.bulletList" = "Bulleted list";
+"collab.orderedList" = "编号列表";
+"collab.alignLeft" = "Align left";
+"collab.alignCenter" = "中部";
+"collab.alignRight" = "右对齐";
+"collab.alignJustify" = "Justify";
+"collab.insertImage" = "Insert image";
+"collab.clearFormat" = "Clear formatting";
+"collab.undo" = "復原";
+"collab.redo" = "取消復原";
+"collab.remove" = "删除";
+"collab.open" = "Open";
+"collab.downloadAndOpen" = "Download and open";
+// Full labels shown inside the document-list row menu.
+"collab.removeLocallyMenu" = "从此设备移除";
+"collab.removeEverywhereMenu" = "Remove for everyone";
+// Short labels shown inside document-list swipe actions.
+"collab.removeLocallyAction" = "Offload";
+"collab.removeEverywhereAction" = "删除";
+"collab.removeTitle" = "Remove document";
+"collab.removeMessage" = "\"%@\" will be removed for every member of this conversation. This cannot be undone.";
+"collab.removeError" = "This document could not be removed.";
+"collab.removeLocallyTitle" = "Remove from this device";
+"collab.removeLocallyMessage" = "\"%@\" will be removed from this device only. The other members keep it, and opening it again downloads it back.";
+"collab.removeLocallyError" = "This document could not be removed from this device.";
+"collab.notDownloaded" = "Not downloaded";
+"collab.createdByNotDownloaded" = "Created by %@, not downloaded";
+"collab.documentRemoved" = "Document removed";
+"collab.documentRemovedMessage" = "\"%@\" was removed by its author.";
+"collab.documentRemovedLocally" = "Document removed from this device";
+"collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";
