@@ -31,6 +31,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSArray<NSDictionary<NSString*, NSString*>*>* documentsReturnValue;
 
+/// Empty is how the daemon refuses to open a document, and what this answers
+/// with until a test says otherwise.
+@property (nonatomic, copy) NSData* openDocumentReturnValue;
+
 @end
 
 NS_ASSUME_NONNULL_END

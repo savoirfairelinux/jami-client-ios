@@ -82,7 +82,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
 
     private var conversationBindingsDisposeBag = DisposeBag()
     private var messageUnreadCount = 0
-    private var unreadCollaborativeDocumentIds = Set<String>()
+    private var documentUnreadCount = 0
 
     func closeAllPlayers() {
         self.swiftUIModel.transferHelper.closeAllPlayers()
@@ -262,10 +262,10 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
             conversationBindingsDisposeBag = DisposeBag()
             swarmInfo = nil
             messageUnreadCount = 0
-            unreadCollaborativeDocumentIds.removeAll()
+            documentUnreadCount = 0
 
             self.subscribeUnreadMessages()
-            self.subscribeCollaborativeDocumentChanges()
+            self.subscribeUnreadDocuments()
             self.swiftUIModel.conversation = conversation
 
             guard let account = self.accountService.getAccount(fromAccountId: self.conversation.accountId) else { return }
@@ -534,6 +534,9 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
     func setMessagesAsRead() {
         guard let account = self.accountService.currentAccount,
               let ringId = AccountModelHelper(withAccount: account).ringId else { return }
+        self.collaborationService
+            .markConversationDocumentsRead(accountId: self.conversation.accountId,
+                                           conversationId: self.conversation.id)
         self.conversationsService
             .setMessagesAsRead(forConversation: self.conversation,
                                accountId: account.id,
@@ -717,27 +720,21 @@ extension ConversationViewModel {
             .disposed(by: conversationBindingsDisposeBag)
     }
 
-    private func subscribeCollaborativeDocumentChanges() {
+    private func subscribeUnreadDocuments() {
         collaborationService
-            .changes(forAccount: conversation.accountId, conversationId: conversation.id)
+            .unreadDocumentCount(forAccount: conversation.accountId,
+                                 conversationId: conversation.id)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] event in
+            .subscribe(onNext: { [weak self] count in
                 guard let self = self else { return }
-                switch event.change {
-                case .notification:
-                    self.unreadCollaborativeDocumentIds.insert(event.documentId)
-                case .update:
-                    // Non-empty updates are delivered only while an editor is
-                    // open, so this document is no longer waiting to be read.
-                    self.unreadCollaborativeDocumentIds.remove(event.documentId)
-                }
+                self.documentUnreadCount = count
                 self.updateUnreadCount()
             })
             .disposed(by: conversationBindingsDisposeBag)
     }
 
     private func updateUnreadCount() {
-        unreadMessages = messageUnreadCount + unreadCollaborativeDocumentIds.count
+        unreadMessages = messageUnreadCount + documentUnreadCount
     }
 
     private func subscribeUserServiceLookupStatus() {
