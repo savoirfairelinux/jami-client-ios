@@ -26,18 +26,21 @@ final class CollaborationServiceTests: XCTestCase {
     private let documentId = "document"
     private let localJamiId = "0123456789abcdef0123456789abcdef01234567"
 
+    private var adapter: ObjCMockCollaborationAdapter!
     private var service: CollaborationService!
     private var disposeBag: DisposeBag!
 
     override func setUp() {
         super.setUp()
-        service = CollaborationService(withCollaborationAdapter: ObjCMockCollaborationAdapter())
+        adapter = ObjCMockCollaborationAdapter()
+        service = CollaborationService(withCollaborationAdapter: adapter)
         disposeBag = DisposeBag()
     }
 
     override func tearDown() {
         disposeBag = nil
         service = nil
+        adapter = nil
         super.tearDown()
     }
 
@@ -307,5 +310,57 @@ final class CollaborationServiceTests: XCTestCase {
 
         XCTAssertEqual(mine.latest, 0)
         XCTAssertEqual(other.latest, 1)
+    }
+
+    private func openEditor(on documentId: String, in conversationId: String) {
+        let opened = expectation(description: "the daemon answered the open")
+        service.openDocument(accountId: accountId,
+                             conversationId: conversationId,
+                             documentId: documentId)
+            .subscribe(onSuccess: { _ in opened.fulfill() })
+            .disposed(by: disposeBag)
+        wait(for: [opened], timeout: 1)
+    }
+
+    /// The change is arriving in front of the user, so there is nothing to come
+    /// back to and a mark raised here would outlast the reason for it.
+    func testAChangeToAnOpenDocumentDoesNotWait() {
+        adapter.openDocumentReturnValue = Data([1, 2, 3])
+        let counts = observeUnread(in: conversationId)
+        openEditor(on: documentId, in: conversationId)
+
+        peerChanged(documentId, in: conversationId)
+
+        XCTAssertEqual(counts.latest, 0)
+    }
+
+    /**
+     An open the daemon refuses answers with no bytes, and the editor does not
+     close a document it never opened. Were the refusal to leave the document
+     counted as open, nothing it did afterwards could ever be marked again.
+     */
+    func testARefusedOpenLeavesTheDocumentAbleToWait() {
+        adapter.openDocumentReturnValue = Data()
+        let counts = observeUnread(in: conversationId)
+        openEditor(on: documentId, in: conversationId)
+
+        peerChanged(documentId, in: conversationId)
+
+        XCTAssertEqual(counts.latest, 1)
+    }
+
+    func testAClosedDocumentWaitsAgain() {
+        adapter.openDocumentReturnValue = Data([1, 2, 3])
+        let counts = observeUnread(in: conversationId)
+        openEditor(on: documentId, in: conversationId)
+
+        service.closeDocument(accountId: accountId,
+                              conversationId: conversationId,
+                              documentId: documentId)
+            .subscribe()
+            .disposed(by: disposeBag)
+        peerChanged(documentId, in: conversationId)
+
+        XCTAssertEqual(counts.latest, 1)
     }
 }
