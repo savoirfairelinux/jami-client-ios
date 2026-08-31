@@ -28,16 +28,12 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
                            videoService: VideoService = VideoService(
                             video: TestLibJamiVideoAPI()),
                            pipController: PiPControlling = PiPController()) -> CallViewModel {
-        let database = DBManager(conversationHelper: ConversationDataHelper(),
-                                 interactionHepler: InteractionDataHelper(),
-                                 dbConnections: DBContainer())
         return CallViewModel(
             call: call,
             callService: callService,
             videoService: videoService,
             audio: AudioService(audio: LibJamiAudioClient(adapter: AudioAdapter())),
-            profileService: ProfilesService(withProfilesAdapter: ProfilesAdapter(),
-                                            dbManager: database),
+            profileService: ProfilesService(withProfilesAdapter: ProfilesAdapter()),
             nameService: NameService(withNameRegistrationAdapter: NameRegistrationAdapter()),
             pipController: pipController)
     }
@@ -760,16 +756,12 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
                        nameService: NameService = NameService(
                         withNameRegistrationAdapter: NameRegistrationAdapter()))
         -> CallViewModel {
-            let database = DBManager(conversationHelper: ConversationDataHelper(),
-                                     interactionHepler: InteractionDataHelper(),
-                                     dbConnections: DBContainer())
             return CallViewModel(
                 call: call,
                 callService: callService,
                 videoService: videoService,
                 audio: AudioService(audio: LibJamiAudioClient(adapter: AudioAdapter())),
-                profileService: ProfilesService(withProfilesAdapter: ProfilesAdapter(),
-                                                dbManager: database),
+                profileService: ProfilesService(withProfilesAdapter: ProfilesAdapter()),
                 nameService: nameService,
                 localJamiId: localJamiId,
                 pipController: pipController)

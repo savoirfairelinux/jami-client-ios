@@ -727,6 +727,13 @@ class ConversationsService {
                     values.remove(at: index)
                     self.conversations.accept(values)
                 }
+                if !keepConversation {
+                    var serviceEvent = ServiceEvent(withEventType: .conversationRemoved)
+                    serviceEvent.addEventInput(.conversationId, value: conversation.id)
+                    serviceEvent.addEventInput(.accountId, value: conversation.accountId)
+                    serviceEvent.addEventInput(.peerUri, value: uri)
+                    self.responseStream.onNext(serviceEvent)
+                }
             }, onError: { error in
                 self.log.error(error)
             })
