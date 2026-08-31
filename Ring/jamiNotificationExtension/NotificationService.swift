@@ -786,9 +786,10 @@ extension NotificationService {
         let path = ProfilePathHelper.existingContactProfilePath(accountId: accountId,
                                                                 contactId: contactId,
                                                                 documents: documents)
-        let overridePath = ProfilePathHelper.existingContactProfileOverridePath(accountId: accountId,
-                                                                                contactId: contactId,
-                                                                                documents: documents)
+        let overridePath = ProfilePathHelper.customPeerProfilePath(accountId: accountId,
+                                                                   contactId: contactId,
+                                                                   documents: documents,
+                                                                   createIfNotExists: false)
         return VCardUtils.nameFromMergedProfile(basePath: path, overridePath: overridePath)
     }
 }

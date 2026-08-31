@@ -139,6 +139,7 @@ final class VCardUtilsTests: XCTestCase {
         XCTAssertEqual(parsed?.alias, profileName1)
         XCTAssertEqual(parsed?.photo, photo)
     }
+
 }
 
 final class ProfilePathHelperTests: XCTestCase {
@@ -166,6 +167,12 @@ final class ProfilePathHelperTests: XCTestCase {
         documents
             .appendingPathComponent(accountId, isDirectory: true)
             .appendingPathComponent("profiles", isDirectory: true)
+    }
+
+    private var customProfilesFolder: URL {
+        documents
+            .appendingPathComponent(accountId, isDirectory: true)
+            .appendingPathComponent("CustomPeerProfiles", isDirectory: true)
     }
 
     private func vCard(photo: String) -> Data {
@@ -239,6 +246,54 @@ final class ProfilePathHelperTests: XCTestCase {
     }
 
     func testNoProfileResolvesToNil() {
+        XCTAssertNil(ProfilePathHelper.existingContactProfilePath(accountId: accountId,
+                                                                  contactId: jamiId1,
+                                                                  documents: documents))
+    }
+
+    // MARK: - Custom peer profiles
+
+    private var customProfileURL: URL {
+        let encoded = Data(jamiId1.utf8).base64EncodedString()
+        return customProfilesFolder.appendingPathComponent("\(encoded).vcf")
+    }
+
+    private func customProfilePath() -> String? {
+        ProfilePathHelper.customPeerProfilePath(accountId: accountId,
+                                                contactId: jamiId1,
+                                                documents: documents,
+                                                createIfNotExists: false)
+    }
+
+    func testCustomProfileIsReadFromCustomPeerProfiles() throws {
+        // Arrange
+        try FileManager.default.createDirectory(at: customProfilesFolder, withIntermediateDirectories: true)
+        try vCard(photo: profilePhoto).write(to: customProfileURL)
+        // Act
+        let path = try XCTUnwrap(customProfilePath())
+        // Assert
+        XCTAssertEqual(path, customProfileURL.path)
+        XCTAssertEqual(VCardUtils.parseToProfile(filePath: path)?.photo, profilePhoto)
+    }
+
+    func testCustomProfileIsKeyedByHashWhateverTheURIForm() throws {
+        // Arrange
+        try FileManager.default.createDirectory(at: customProfilesFolder, withIntermediateDirectories: true)
+        // Act & Assert
+        for contactId in [jamiId1, "ring:\(jamiId1)", "jami:\(jamiId1)", "<\(jamiId1)@ring.dht>"] {
+            let path = ProfilePathHelper.customPeerProfilePath(accountId: accountId,
+                                                               contactId: contactId,
+                                                               documents: documents,
+                                                               createIfNotExists: false)
+            XCTAssertEqual(path, customProfileURL.path, "failed for \(contactId)")
+        }
+    }
+
+    func testCustomProfileIsNotMistakenForAProfile() throws {
+        // Arrange
+        try FileManager.default.createDirectory(at: customProfilesFolder, withIntermediateDirectories: true)
+        try vCard(photo: profilePhoto).write(to: customProfileURL)
+        // Act & Assert
         XCTAssertNil(ProfilePathHelper.existingContactProfilePath(accountId: accountId,
                                                                   contactId: jamiId1,
                                                                   documents: documents))
