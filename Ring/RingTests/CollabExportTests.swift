@@ -34,8 +34,7 @@ class CollabExportTests: XCTestCase {
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        let dbManager = DBManager(profileHepler: ProfileDataHelper(),
-                                  conversationHelper: ConversationDataHelper(),
+        let dbManager = DBManager(conversationHelper: ConversationDataHelper(),
                                   interactionHepler: InteractionDataHelper(),
                                   dbConnections: DBContainer())
         injectionBag = InjectionBag(

@@ -51,7 +51,7 @@ final class DBContainer {
     private var connections = [String: Connection?]()
     var connectionsSemaphore = DispatchSemaphore(value: 1)
     private let log = SwiftyBeaver.self
-    private let dbVersions = [1, 2]
+    private let dbVersion = 2
 
     func removeDBForAccount(account: String, removeFolder: Bool) {
         self.connectionsSemaphore.wait()
@@ -59,13 +59,6 @@ final class DBContainer {
         self.connectionsSemaphore.signal()
         if !removeFolder { return }
         self.removeAccountFolder(accountId: account)
-    }
-
-    func removeDBForAccount(account: String) {
-        self.connectionsSemaphore.wait()
-        connections[account] = nil
-        self.connectionsSemaphore.signal()
-        self.removeDBNamed(dbName: "\(account).db")
     }
 
     func forAccount(account: String) -> Connection? {
@@ -79,7 +72,7 @@ final class DBContainer {
         guard let dbPath = accountDbPath(accountId: account) else { return nil }
         do {
             connections[account] = try Connection(dbPath)
-            connections[account]??.userVersion = dbVersions.last
+            connections[account]??.userVersion = dbVersion
             return connections[account] ?? nil
         } catch {
             log.error("Unable to open database")
@@ -104,11 +97,6 @@ final class DBContainer {
         return ProfilePathHelper.contactsPath(accountId: accountId,
                                               documents: documents,
                                               createIfNotExists: createIfNotExists)
-    }
-
-    private func isDbExists(accountId: String) -> Bool {
-        guard let path = accountDbPath(accountId: accountId) else { return false }
-        return isFileExists(path: path)
     }
 
     private func isFileExists(path: String) -> Bool {
@@ -167,38 +155,6 @@ final class DBContainer {
         try? FileManager.default.removeItem(atPath: path)
     }
 
-    func isMigrationToDBv2Needed(for accountId: String) -> Bool {
-        if !isDbExists(accountId: accountId) { return true }
-        guard let dbase = self.forAccount(account: accountId) else {
-            return true
-        }
-        let table = Table("profiles")
-        do {
-            try _ = dbase.scalar(table.exists)
-            return true
-        } catch {
-            return false
-        }
-    }
-
-    private func removeDBNamed(dbName: String) {
-        guard let dbPath = Constants.documentsPath else { return }
-        let url = NSURL(fileURLWithPath: dbPath.path)
-        guard let pathComponent = url
-                .appendingPathComponent("/" + dbName) else {
-            return
-        }
-        let filePath = pathComponent.path
-        let filemManager = FileManager.default
-        do {
-            let fileURL = NSURL(fileURLWithPath: filePath)
-            try filemManager.removeItem(at: fileURL as URL)
-            print("old database deleted")
-        } catch {
-            print("Error on delete old database!!!")
-        }
-    }
-
     func createAccountfolder(for accountId: String) {
         guard let accountFolder = accountFolderPath(accountId: accountId) else { return }
         let fileManager = FileManager.default
@@ -209,21 +165,6 @@ final class DBContainer {
                                             attributes: nil)
         } catch {
             return
-        }
-    }
-
-    func copyDbToAccountFolder(for accountId: String) -> Bool {
-        if isDbExists(accountId: accountId) { return true }
-        guard let dbPath = Constants.documentsPath else { return false }
-        let url = NSURL(fileURLWithPath: dbPath.path)
-        guard let oldPath = url.appendingPathComponent("/" + "\(accountId).db") else { return false }
-        guard let newPath = accountDbPath(accountId: accountId) else { return false }
-        let fileManager = FileManager.default
-        do {
-            try fileManager.copyItem(atPath: oldPath.path, toPath: newPath)
-            return fileManager.fileExists(atPath: newPath)
-        } catch _ as NSError {
-            return false
         }
     }
 

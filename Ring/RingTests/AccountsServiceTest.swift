@@ -39,8 +39,7 @@ final class AccountsServiceTest: XCTestCase {
     let deviceName4 = "Device 4"
     let newDeviceName1 = "New Device 1"
 
-    let dBManager = DBManager(profileHepler: ProfileDataHelper(),
-                              conversationHelper: ConversationDataHelper(),
+    let dBManager = DBManager(conversationHelper: ConversationDataHelper(),
                               interactionHepler: InteractionDataHelper(),
                               dbConnections: DBContainer())
 

@@ -27,8 +27,7 @@ import os
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     var window: UIWindow?
-    let dBManager = DBManager(profileHepler: ProfileDataHelper(),
-                              conversationHelper: ConversationDataHelper(),
+    let dBManager = DBManager(conversationHelper: ConversationDataHelper(),
                               interactionHepler: InteractionDataHelper(),
                               dbConnections: DBContainer())
     private let daemonService = DaemonService(dRingAdaptor: DRingAdapter())

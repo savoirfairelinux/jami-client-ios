@@ -28,8 +28,7 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
                            videoService: VideoService = VideoService(
                             video: TestLibJamiVideoAPI()),
                            pipController: PiPControlling = PiPController()) -> CallViewModel {
-        let database = DBManager(profileHepler: ProfileDataHelper(),
-                                 conversationHelper: ConversationDataHelper(),
+        let database = DBManager(conversationHelper: ConversationDataHelper(),
                                  interactionHepler: InteractionDataHelper(),
                                  dbConnections: DBContainer())
         return CallViewModel(
@@ -761,8 +760,7 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
                        nameService: NameService = NameService(
                         withNameRegistrationAdapter: NameRegistrationAdapter()))
         -> CallViewModel {
-            let database = DBManager(profileHepler: ProfileDataHelper(),
-                                     conversationHelper: ConversationDataHelper(),
+            let database = DBManager(conversationHelper: ConversationDataHelper(),
                                      interactionHepler: InteractionDataHelper(),
                                      dbConnections: DBContainer())
             return CallViewModel(

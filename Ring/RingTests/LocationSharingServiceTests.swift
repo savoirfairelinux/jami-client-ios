@@ -32,8 +32,7 @@ class LocationSharingServiceTests: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        dbManager = DBManager(profileHepler: ProfileDataHelper(),
-                              conversationHelper: ConversationDataHelper(),
+        dbManager = DBManager(conversationHelper: ConversationDataHelper(),
                               interactionHepler: InteractionDataHelper(),
                               dbConnections: DBContainer())
         locationSharingService = LocationSharingService(dbManager: dbManager)

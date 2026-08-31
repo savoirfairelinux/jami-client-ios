@@ -31,8 +31,7 @@ final class LinkDeviceVMTests: XCTestCase {
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        let dBManager = DBManager(profileHepler: ProfileDataHelper(),
-                                  conversationHelper: ConversationDataHelper(),
+        let dBManager = DBManager(conversationHelper: ConversationDataHelper(),
                                   interactionHepler: InteractionDataHelper(),
                                   dbConnections: DBContainer())
         accountService = MockAccountsService(withAccountAdapter: AccountAdapter(), dbManager: dBManager)

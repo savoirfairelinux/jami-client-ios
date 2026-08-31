@@ -44,7 +44,6 @@
 		0586C94B1F684DF600613517 /* UIImage+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0586C94A1F684DF600613517 /* UIImage+Helpers.swift */; };
 		0769ACCE032643E496BC13A5 /* PeerSharingSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE8CA20E60048678054756B /* PeerSharingSheet.swift */; };
 		0E0FF1AA1FC3843E003898C2 /* DBContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0FF1A91FC3843E003898C2 /* DBContainer.swift */; };
-		0E0FF1AF1FC38CBC003898C2 /* ProfileDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0FF1AE1FC38CBC003898C2 /* ProfileDataHelper.swift */; };
 		0E0FF1B51FC3947B003898C2 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0FF1B41FC3947B003898C2 /* DBManager.swift */; };
 		0E0FF1B71FC398B3003898C2 /* ConversationDataHepler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0FF1B61FC398B3003898C2 /* ConversationDataHepler.swift */; };
 		0E0FF1B91FC398C5003898C2 /* InteractionDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0FF1B81FC398C5003898C2 /* InteractionDataHelper.swift */; };
@@ -717,7 +716,6 @@
 		0586C94A1F684DF600613517 /* UIImage+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Helpers.swift"; sourceTree = "<group>"; };
 		0E0FF1A61FC38070003898C2 /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = Carthage/Build/iOS/SQLite.framework; sourceTree = "<group>"; };
 		0E0FF1A91FC3843E003898C2 /* DBContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBContainer.swift; sourceTree = "<group>"; };
-		0E0FF1AE1FC38CBC003898C2 /* ProfileDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataHelper.swift; sourceTree = "<group>"; };
 		0E0FF1B41FC3947B003898C2 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 		0E0FF1B61FC398B3003898C2 /* ConversationDataHepler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationDataHepler.swift; sourceTree = "<group>"; };
 		0E0FF1B81FC398C5003898C2 /* InteractionDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionDataHelper.swift; sourceTree = "<group>"; };
@@ -3037,7 +3035,6 @@
 		0E0FF1AB1FC38BD1003898C2 /* DBHelpers */ = {
 			isa = PBXGroup;
 			children = (
-				0E0FF1AE1FC38CBC003898C2 /* ProfileDataHelper.swift */,
 				0E0FF1B61FC398B3003898C2 /* ConversationDataHepler.swift */,
 				0E0FF1B81FC398C5003898C2 /* InteractionDataHelper.swift */,
 			);
@@ -4384,7 +4381,6 @@
 				260C73F129196B66005C513F /* MessageReplyTargetVM.swift in Sources */,
 				268C87F82C1CCB4700593D7C /* LinkedDevicesView.swift in Sources */,
 				2692557E2C5D53A300F85A1E /* Views.swift in Sources */,
-				0E0FF1AF1FC38CBC003898C2 /* ProfileDataHelper.swift in Sources */,
 				563AEC771EA664C0003A5641 /* RegistrationResponse.m in Sources */,
 				265DFB0B292FD41100834B97 /* MessageSwiftUIViews.swift in Sources */,
 				564C445B1E8EA44E000F92B1 /* Durations.swift in Sources */,
