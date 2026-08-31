@@ -133,7 +133,6 @@ class ContactViewModel: ViewModel, Stateable {
                 initialProfile = profile
             }
             self.profileService.getProfile(uri: contactURI,
-                                           createIfNotexists: false,
                                            accountId: conversation.accountId)
                 .startWith(initialProfile)
                 .subscribe(onNext: { [weak self] profile in

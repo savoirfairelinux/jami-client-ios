@@ -354,10 +354,21 @@ class JamiSearchViewModel: ObservableObject {
                                                isContact: { self.injectionBag.contactsService.contact(withHash: $0) != nil })
         var jamsSearch: [ConversationViewModel] = []
         for model in newContacts where !blockedIds.contains(model.jamiId) {
-            let newConversation = self.createTemporaryJamsConversation(with: model, accountId: accountId)
-            jamsSearch.append(newConversation)
+            self.cachePlaceholderProfile(for: model, accountId: accountId)
+            jamsSearch.append(self.createTemporaryJamsConversation(with: model, accountId: accountId))
         }
         return jamsSearch
+    }
+
+    private func cachePlaceholderProfile(for user: JamsUserSearchModel, accountId: String) {
+        guard self.accountsService.getAccount(fromAccountId: accountId)?.jamiId != user.jamiId,
+              let uriString = JamiURI(schema: URIType.ring, infoHash: user.jamiId).uriString else { return }
+        let alias = (user.firstName + " " + user.lastName).simplified()
+        self.injectionBag.profileService
+            .cachePlaceholderProfile(uri: uriString,
+                                     accountId: accountId,
+                                     alias: alias.isEmpty ? nil : alias,
+                                     photo: user.profilePicture?.base64EncodedString())
     }
 
     private func createTemporarySwarmConversation(with hash: String, accountId: String, userName: String? = nil) -> ConversationViewModel {

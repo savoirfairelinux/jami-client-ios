@@ -28,15 +28,31 @@ final class ProfilesServiceTests: XCTestCase {
             let accountId: String
         }
         var seed: [Key: Profile] = [:]
+        var localOverrides: [Key: Profile] = [:]
+        var placeholderProfiles: [Key: Profile] = [:]
 
-        override func profileObservable(for profileUri: String,
-                                        createIfNotExists: Bool,
-                                        accountId: String) -> Observable<Profile> {
-            let key = Key(uri: profileUri, accountId: accountId)
-            if let profile = seed[key] {
-                return .just(profile)
-            }
-            return .error(DBBridgingError.getProfileFailed)
+        override func contactProfile(for profileUri: String,
+                                     accountId: String) -> Profile? {
+            seed[Key(uri: profileUri, accountId: accountId)]
+        }
+
+        override func localProfileOverride(for profileUri: String,
+                                           accountId: String) -> Profile? {
+            localOverrides[Key(uri: profileUri, accountId: accountId)]
+        }
+
+        override func placeholderProfile(for profileUri: String,
+                                         accountId: String) -> Profile? {
+            placeholderProfiles[Key(uri: profileUri, accountId: accountId)]
+        }
+
+        override func savePlaceholderProfile(_ profile: Profile, accountId: String) -> Bool {
+            placeholderProfiles[Key(uri: profile.uri, accountId: accountId)] = profile
+            return true
+        }
+
+        override func removePlaceholderProfile(for profileUri: String, accountId: String) {
+            placeholderProfiles[Key(uri: profileUri, accountId: accountId)] = nil
         }
     }
 
@@ -74,7 +90,7 @@ final class ProfilesServiceTests: XCTestCase {
 
         // Account 1 subscribes first — mirrors the Share Extension activating account 1
         // and its daemon pushing profile vcards before the main app (on account 2) opens.
-        service.getProfile(uri: uri, createIfNotexists: false, accountId: accountId1)
+        service.getProfile(uri: uri, accountId: accountId1)
             .take(1)
             .subscribe(onNext: { profile in
                 alias1 = profile.alias
@@ -84,7 +100,7 @@ final class ProfilesServiceTests: XCTestCase {
 
         // Account 2 subscribes shortly after — if the cache is keyed by URI alone, it
         // will receive the ReplaySubject seeded with account 1's profile.
-        service.getProfile(uri: uri, createIfNotexists: false, accountId: accountId2)
+        service.getProfile(uri: uri, accountId: accountId2)
             .take(1)
             .subscribe(onNext: { profile in
                 alias2 = profile.alias
@@ -100,6 +116,176 @@ final class ProfilesServiceTests: XCTestCase {
                        "account 2 must receive its own profile, not account 1's cached one")
     }
 
+    // MARK: - Placeholder profiles
+
+    private func resolvedProfile(uri: String) async throws -> Profile {
+        let resolved = expectation(description: "profile resolved")
+        var result: Profile?
+        service.getProfile(uri: uri, accountId: accountId1)
+            .take(1)
+            .subscribe(onNext: { profile in
+                result = profile
+                resolved.fulfill()
+            })
+            .disposed(by: bag)
+        await fulfillment(of: [resolved], timeout: 2.0)
+        return try XCTUnwrap(result)
+    }
+
+    func testContactProfileWinsOverPlaceholderProfile() async throws {
+        let uri = try XCTUnwrap(JamiURI(schema: .ring, infoHash: jamiId1).uriString)
+        let contactPhoto = Data("contact-photo".utf8).base64EncodedString()
+        database.seed[.init(uri: uri, accountId: accountId1)] =
+            Profile(uri: uri, alias: profileName1, photo: contactPhoto, type: ProfileType.ring.rawValue)
+
+        service.cachePlaceholderProfile(uri: uri,
+                                        accountId: accountId1,
+                                        alias: profileName2,
+                                        photo: Data("request-photo".utf8).base64EncodedString())
+        let profile = try await resolvedProfile(uri: uri)
+
+        XCTAssertEqual(profile.alias, profileName1)
+        XCTAssertEqual(profile.photo, contactPhoto)
+    }
+
+    func testEmptyPlaceholderProfileIsNotCached() async throws {
+        let uri = try XCTUnwrap(JamiURI(schema: .ring, infoHash: jamiId1).uriString)
+
+        service.cachePlaceholderProfile(uri: uri, accountId: accountId1, alias: nil, photo: nil)
+        let profile = try await resolvedProfile(uri: uri)
+
+        XCTAssertNil(profile.alias)
+        XCTAssertNil(profile.photo)
+    }
+
+    func testPlaceholderProfileIsUsedWhenContactProfileIsMissing() async throws {
+        let uri = try XCTUnwrap(JamiURI(schema: .ring, infoHash: jamiId1).uriString)
+        service.cachePlaceholderProfile(uri: uri,
+                                        accountId: accountId1,
+                                        alias: profileName1,
+                                        photo: Data("request-photo".utf8).base64EncodedString())
+
+        let profile = try await resolvedProfile(uri: uri)
+
+        XCTAssertEqual(profile.alias, profileName1)
+        XCTAssertEqual(profile.photo, Data("request-photo".utf8).base64EncodedString())
+    }
+
+    func testPersistedPlaceholderProfileIsLoadedLazily() async throws {
+        let uri = try XCTUnwrap(JamiURI(schema: .ring, infoHash: jamiId1).uriString)
+        database.placeholderProfiles[.init(uri: uri, accountId: accountId1)] =
+            Profile(uri: uri,
+                    alias: profileName1,
+                    photo: Data("persisted-photo".utf8).base64EncodedString(),
+                    type: ProfileType.ring.rawValue)
+
+        let profile = try await resolvedProfile(uri: uri)
+
+        XCTAssertEqual(profile.alias, profileName1)
+        XCTAssertEqual(profile.photo, Data("persisted-photo".utf8).base64EncodedString())
+    }
+
+    func testContactProfileCompletelyReplacesPlaceholderProfile() async throws {
+        let uri = try XCTUnwrap(JamiURI(schema: .ring, infoHash: jamiId1).uriString)
+        database.seed[.init(uri: uri, accountId: accountId1)] =
+            Profile(uri: uri, alias: profileName2, photo: nil, type: ProfileType.ring.rawValue)
+        service.cachePlaceholderProfile(uri: uri,
+                                        accountId: accountId1,
+                                        alias: profileName1,
+                                        photo: Data("request-photo".utf8).base64EncodedString())
+
+        let profile = try await resolvedProfile(uri: uri)
+
+        XCTAssertEqual(profile.alias, profileName2)
+        XCTAssertNil(profile.photo, "placeholder fields must not fill gaps in an authoritative contact profile")
+    }
+
+    func testPersistPlaceholderProfileWritesCachedProfile() throws {
+        let uri = try XCTUnwrap(JamiURI(schema: .ring, infoHash: jamiId1).uriString)
+        service.cachePlaceholderProfile(uri: uri,
+                                        accountId: accountId1,
+                                        alias: profileName1,
+                                        photo: Data("request-photo".utf8).base64EncodedString())
+
+        XCTAssertTrue(service.persistPlaceholderProfile(uri: uri, accountId: accountId1))
+        XCTAssertEqual(database.placeholderProfiles[.init(uri: uri, accountId: accountId1)]?.alias,
+                       profileName1)
+    }
+
+    func testProfileReceivedRemovesPlaceholderProfile() throws {
+        let uri = try XCTUnwrap(JamiURI(schema: .ring, infoHash: jamiId1).uriString)
+        database.placeholderProfiles[.init(uri: uri, accountId: accountId1)] =
+            Profile(uri: uri, alias: profileName1, photo: nil, type: ProfileType.ring.rawValue)
+        service.cachePlaceholderProfile(uri: uri,
+                                        accountId: accountId1,
+                                        alias: profileName1,
+                                        photo: nil)
+
+        service.profileReceived(contact: jamiId1, withAccountId: accountId1, path: "")
+
+        XCTAssertNil(database.placeholderProfiles[.init(uri: uri, accountId: accountId1)])
+        XCTAssertFalse(service.persistPlaceholderProfile(uri: uri, accountId: accountId1))
+    }
+
+    func testConversationReadyPersistsPlaceholderProfileBeforeRemovingRequest() throws {
+        let conversationId = "accepted-conversation"
+        let avatar = Data("request-photo".utf8)
+        let payload = try XCTUnwrap(VCardUtils.dataWithImageAndUUID(from:
+            Profile(uri: "jami:\(jamiId1)",
+                    alias: profileName1,
+                    photo: avatar.base64EncodedString(),
+                    type: ProfileType.ring.rawValue)))
+        let requestsService = RequestsService(withRequestsAdapter: RequestsAdapter(),
+                                              dbManager: database,
+                                              profilesService: service)
+        let request = RequestModel(with: jamiId1,
+                                   accountId: accountId1,
+                                   withPayload: payload,
+                                   receivedDate: Date(),
+                                   type: .contact,
+                                   conversationId: conversationId)
+        requestsService.requests.accept([request])
+        service.cachePlaceholderProfile(uri: "jami:\(jamiId1)",
+                                        accountId: accountId1,
+                                        alias: request.name,
+                                        photo: request.avatar?.base64EncodedString())
+
+        NotificationCenter.default.post(name: NSNotification.Name(ConversationNotifications.conversationReady.rawValue),
+                                        object: nil,
+                                        userInfo: [ConversationNotificationsKeys.conversationId.rawValue: conversationId,
+                                                   ConversationNotificationsKeys.accountId.rawValue: accountId1])
+
+        let uri = try XCTUnwrap(JamiURI(schema: .ring, infoHash: jamiId1).uriString)
+        XCTAssertTrue(requestsService.requests.value.isEmpty)
+        XCTAssertEqual(database.placeholderProfiles[.init(uri: uri, accountId: accountId1)]?.alias,
+                       profileName1)
+        XCTAssertEqual(database.placeholderProfiles[.init(uri: uri, accountId: accountId1)]?.photo,
+                       avatar.base64EncodedString())
+    }
+
+    func testGroupConversationMetadataIsNotPersistedAsPeerProfile() {
+        let conversationId = "group-conversation"
+        let requestsService = RequestsService(withRequestsAdapter: RequestsAdapter(),
+                                              dbManager: database,
+                                              profilesService: service)
+        requestsService.conversationRequestReceived(
+            conversationId: conversationId,
+            accountId: accountId1,
+            metadata: [ConversationAttributes.conversationId.rawValue: conversationId,
+                       RequestModel.RequestKey.from.rawValue: jamiId1,
+                       ConversationAttributes.mode.rawValue: String(ConversationType.invitesOnly.rawValue),
+                       ConversationAttributes.title.rawValue: "Group title",
+                       ConversationAttributes.avatar.rawValue: Data("group-photo".utf8).base64EncodedString()])
+
+        NotificationCenter.default.post(name: NSNotification.Name(ConversationNotifications.conversationReady.rawValue),
+                                        object: nil,
+                                        userInfo: [ConversationNotificationsKeys.conversationId.rawValue: conversationId,
+                                                   ConversationNotificationsKeys.accountId.rawValue: accountId1])
+
+        let uri = JamiURI(schema: .ring, infoHash: jamiId1).uriString ?? ""
+        XCTAssertNil(database.placeholderProfiles[.init(uri: uri, accountId: accountId1)])
+    }
+
     func testLocalOverrideReplacesOnlyCustomizedName() {
         let remote = Profile(uri: "jami:peer",
                              alias: "Remote name",
@@ -110,7 +296,7 @@ final class ProfilesServiceTests: XCTestCase {
                             photo: nil,
                             type: ProfileType.ring.rawValue)
 
-        let merged = remote.merging(localOverride: local)
+        let merged = remote.merging(preferring: local)
 
         XCTAssertEqual(merged.alias, "My contact name")
         XCTAssertEqual(merged.photo, "remote-photo")
@@ -126,7 +312,7 @@ final class ProfilesServiceTests: XCTestCase {
                             photo: "local-photo",
                             type: ProfileType.ring.rawValue)
 
-        let merged = remote.merging(localOverride: local)
+        let merged = remote.merging(preferring: local)
 
         XCTAssertEqual(merged.alias, "Remote name")
         XCTAssertEqual(merged.photo, "local-photo")
@@ -142,10 +328,10 @@ final class ProfilesServiceTests: XCTestCase {
                             photo: nil,
                             type: ProfileType.ring.rawValue)
 
-        let merged = remote.merging(localOverride: local)
+        let merged = remote.merging(preferring: local)
 
         XCTAssertEqual(merged.alias, "Updated remote name")
         XCTAssertEqual(merged.photo, "updated-remote-photo")
-        XCTAssertTrue(local.hasNoOverrides)
+        XCTAssertTrue(local.isEmpty)
     }
 }
