@@ -57,7 +57,9 @@ final class LinkToAccountVMTests: XCTestCase {
         let conversationsService = ConversationsService(withConversationsAdapter: ConversationsAdapter(),
                                                         dbManager: dBManager)
         let locationSharingService = LocationSharingService(dbManager: dBManager)
-        let requestsService = RequestsService(withRequestsAdapter: RequestsAdapter(), dbManager: dBManager)
+        let requestsService = RequestsService(withRequestsAdapter: RequestsAdapter(),
+                                              dbManager: dBManager,
+                                              profilesService: profileService)
 
         injectionBag = InjectionBag(withDaemonService: daemonService,
                                     withAccountService: accountService,

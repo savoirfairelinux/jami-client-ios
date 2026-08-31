@@ -40,6 +40,7 @@ class RequestsService {
 
     // MARK: private members
     private let requestsAdapter: RequestsAdapter
+    private let profilesService: ProfilesService
     private let log = SwiftyBeaver.self
     private let disposeBag = DisposeBag()
 
@@ -52,9 +53,12 @@ class RequestsService {
 
     // MARK: initial loading
 
-    init(withRequestsAdapter requestsAdapter: RequestsAdapter, dbManager: DBManager) {
+    init(withRequestsAdapter requestsAdapter: RequestsAdapter,
+         dbManager: DBManager,
+         profilesService: ProfilesService) {
         self.dbManager = dbManager
         self.requestsAdapter = requestsAdapter
+        self.profilesService = profilesService
         self.sharedResponseStream = responseStream.share()
         /**
          after accepting the request stays in synchronization until other contact became online and conversation synchronized.
@@ -86,6 +90,7 @@ class RequestsService {
      */
     func loadRequests(withAccount accountId: String, accountURI: String) {
         self.requests.accept([])
+        profilesService.clearCachedProvisionalProfiles(accountId: accountId)
         var currentRequests = self.requests.value
         // Load conversation requests from daemon
         let conversationRequestsDictionaries = self.requestsAdapter.getSwarmRequests(forAccount: accountId)
@@ -99,6 +104,7 @@ class RequestsService {
         if let contactRequests = trustRequestsDictionaries?.map({ dictionary in
             return RequestModel(withDictionary: dictionary, accountId: accountId, type: .contact)
         }) {
+            contactRequests.forEach(cacheProvisionalProfile)
             var contactsId = [String]()
             let contactsDictionaries = self.requestsAdapter.contacts(withAccountId: accountId)
             if let contacts = contactsDictionaries?.map({ contactDict in
@@ -139,7 +145,8 @@ class RequestsService {
             request.accountId == accountId && request.conversationId == conversationId
         }) {
             var values = requests.value
-            _ = values.remove(at: index)
+            let request = values.remove(at: index)
+            persistProvisionalProfile(for: request)
             self.requests.accept(values)
         }
     }
@@ -188,6 +195,30 @@ class RequestsService {
         return !requests.isEmpty
     }
 
+    private func profileURI(for request: RequestModel) -> String? {
+        guard request.isCoredialog(),
+              let jamiId = request.participants.first?.jamiId else { return nil }
+        return JamiURI(schema: .ring, infoHash: jamiId).uriString
+    }
+
+    private func cacheProvisionalProfile(_ request: RequestModel) {
+        guard let uri = profileURI(for: request) else { return }
+        profilesService.cacheProvisionalProfile(uri: uri,
+                                                accountId: request.accountId,
+                                                alias: request.name,
+                                                photo: request.avatar?.base64EncodedString())
+    }
+
+    private func persistProvisionalProfile(for request: RequestModel?) {
+        guard let request, let uri = profileURI(for: request) else { return }
+        profilesService.persistProvisionalProfile(uri: uri, accountId: request.accountId)
+    }
+
+    private func removeProvisionalProfile(for request: RequestModel?) {
+        guard let request, let uri = profileURI(for: request) else { return }
+        profilesService.removeProvisionalProfile(uri: uri, accountId: request.accountId)
+    }
+
     // MARK: Request actions
     /**
      acceptContactRequest called for contact requests.
@@ -196,15 +227,14 @@ class RequestsService {
     func acceptContactRequest(jamiId: String, withAccount accountId: String) -> Observable<Void> {
         return Observable.create { [weak self] observable in
             guard let self = self else { return Disposables.create { } }
+            let request = self.requests.value.first {
+                $0.participants.first?.jamiId == jamiId && $0.accountId == accountId
+            }
             let success = self.requestsAdapter.acceptTrustRequest(fromContact: jamiId,
                                                                   withAccountId: accountId)
             if success {
-                if let request = self.requests.value.filter({ $0.participants.first?.jamiId == jamiId && $0.accountId == accountId
-                }).first {
-                    /// save profile
-                    let photo = (request.avatar != nil) ? request.avatar!.base64EncodedString() : ""
-                    let participantURI = JamiURI.init(schema: .ring, infoHash: jamiId)
-                    _ = self.createProfile(with: participantURI.uriString!, alias: request.name, photo: photo, accountId: request.accountId)
+                if let request {
+                    self.persistProvisionalProfile(for: request)
                     self.removeRequest(withJamiId: jamiId, accountId: accountId)
                     if request.conversationId.isEmpty {
                         /// emit event so message could be generated for db
@@ -236,14 +266,7 @@ class RequestsService {
             guard let self = self else { return Disposables.create { } }
             let request = self.getRequest(withId: conversationId, accountId: accountId)
             let type = request?.conversationType ?? .invitesOnly
-            if let request = request,
-               request.isCoredialog(),
-               let jamiId = request.participants.first?.jamiId {
-                /// save profile
-                let photo = (request.avatar != nil) ? request.avatar!.base64EncodedString() : ""
-                let participantURI = JamiURI.init(schema: .ring, infoHash: jamiId)
-                _ = self.createProfile(with: participantURI.uriString!, alias: request.name, photo: photo, accountId: request.accountId)
-            }
+            self.persistProvisionalProfile(for: request)
             self.requestsAdapter.acceptConversationRequest(accountId, conversationId: conversationId)
             self.removeRequest(with: conversationId, accountId: accountId)
             self.requestAccepted(conversationId: conversationId, withAccount: accountId, conversationType: type)
@@ -258,12 +281,15 @@ class RequestsService {
     func discardContactRequest(jamiId: String, withAccount accountId: String) -> Observable<Void> {
         return Observable.create { [weak self] observable in
             guard let self = self else { return Disposables.create { } }
+            let request = self.requests.value.first {
+                $0.participants.first?.jamiId == jamiId && $0.accountId == accountId
+            }
             let success = self.requestsAdapter.discardTrustRequest(fromContact: jamiId,
                                                                    withAccountId: accountId)
             if success {
+                self.removeProvisionalProfile(for: request)
                 self.removeRequest(withJamiId: jamiId, accountId: accountId)
-                if let request = self.requests.value.filter({ $0.participants.first?.jamiId == jamiId && $0.accountId == accountId
-                }).first, request.conversationId.isEmpty {
+                if let request, request.conversationId.isEmpty {
                     /// emit event so message could be generated for db
                     var event = ServiceEvent(withEventType: .contactRequestDiscarded)
                     event.addEventInput(.accountId, value: accountId)
@@ -281,16 +307,15 @@ class RequestsService {
     func discardConverversationRequest(conversationId: String, withAccount accountId: String) -> Observable<Void> {
         return Observable.create { [weak self] observable in
             guard let self = self else { return Disposables.create { } }
+            let request = self.getRequest(withId: conversationId, accountId: accountId)
             self.requestsAdapter.declineConversationRequest(accountId, conversationId: conversationId)
+            self.removeProvisionalProfile(for: request)
             self.removeRequest(with: conversationId, accountId: accountId)
             observable.on(.completed)
             return Disposables.create { }
         }
     }
-    /**
-     In case of success profile for contact will be saved
-     */
-    func sendContactRequest(to jamiId: String, withAccountId accountId: String, avatar: String? = nil, alias: String) -> Completable {
+    func sendContactRequest(to jamiId: String, withAccountId accountId: String) -> Completable {
         return Completable.create { [weak self] completable in
             guard let self = self else { return Disposables.create { } }
             do {
@@ -302,9 +327,9 @@ class RequestsService {
                     }
                 }
                 self.requestsAdapter.sendTrustRequest(toContact: jamiId, payload: payload, withAccountId: accountId)
-                let participantURI = JamiURI.init(schema: .ring, infoHash: jamiId)
-                let photo = avatar ?? ""
-                _ = self.createProfile(with: participantURI.uriString!, alias: alias, photo: photo, accountId: accountId)
+                if let uri = JamiURI(schema: .ring, infoHash: jamiId).uriString {
+                    self.profilesService.persistProvisionalProfile(uri: uri, accountId: accountId)
+                }
                 completable(.completed)
             } catch {
                 completable(.error(ContactServiceError.vCardSerializationFailed))
@@ -314,17 +339,9 @@ class RequestsService {
     }
 
     // MARK: database actions
-    private func createProfile(with contactUri: String, alias: String, photo: String, accountId: String) -> Profile? {
-        do {
-            return try self.dbManager.getProfile(for: contactUri, createIfNotExists: true, accountId: accountId, alias: alias, photo: photo)
-        } catch {
-            return nil
-        }
-    }
-
     private func getProfile(with contactUri: String, accountId: String) -> Profile? {
         do {
-            return try self.dbManager.getProfile(for: contactUri, createIfNotExists: false, accountId: accountId)
+            return try self.dbManager.getProfile(for: contactUri, accountId: accountId)
         } catch {
             return nil
         }
@@ -335,7 +352,8 @@ class RequestsService {
             request.conversationId == conversationId && request.accountId == accountId
         }) {
             var values = self.requests.value
-            values.remove(at: index)
+            let request = values.remove(at: index)
+            removeProvisionalProfile(for: request)
             self.requests.accept(values)
         }
     }
@@ -361,6 +379,7 @@ extension RequestsService: RequestsAdapterDelegate {
         if contactsId.contains(request.participants.first?.jamiId ?? "") {
             return
         }
+        cacheProvisionalProfile(request)
         /// add a request if it not added yet.
         if conversationId.isEmpty {
             if self.getRequest(withJamiId: jamiId, accountId: accountId) != nil { return }

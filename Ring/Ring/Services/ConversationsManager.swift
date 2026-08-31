@@ -401,6 +401,17 @@ class ConversationsManager {
                 self.conversationService.addSwarmConversationId(conversationId: contact.conversationId, accountId: accountId, jamiId: jamiId)
             })
             .disposed(by: self.disposeBag)
+
+        self.contactsService.sharedResponseStream
+            .filter { $0.eventType == .contactRemoved }
+            .subscribe(onNext: { [weak self] event in
+                guard let self,
+                      let accountId: String = event.getEventInput(.accountId),
+                      let jamiId: String = event.getEventInput(.peerUri),
+                      let uri = JamiURI(schema: .ring, infoHash: jamiId).uriString else { return }
+                self.profileService.removeProvisionalProfile(uri: uri, accountId: accountId)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     private func subscribeLocationSharingEvent() {

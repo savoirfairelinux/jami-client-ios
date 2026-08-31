@@ -36,6 +36,8 @@ class ProfilesService {
 
     private let profilesLock = NSLock()
     private var profiles: ThreadSafeDictionary<ProfileKey, ReplaySubject<Profile>>
+    private var provisionalProfiles: ThreadSafeDictionary<ProfileKey, Profile>
+    private var profileVersions: ThreadSafeDictionary<ProfileKey, Int>
     var accountProfiles: ThreadSafeDictionary<String, ReplaySubject<Profile>>
 
     private let avatarsCache = NSCache<NSString, UIImage>()
@@ -50,6 +52,8 @@ class ProfilesService {
 
     init(withProfilesAdapter adapter: ProfilesAdapter, dbManager: DBManager) {
         self.profiles = ThreadSafeDictionary(lock: profilesLock)
+        self.provisionalProfiles = ThreadSafeDictionary(lock: profilesLock)
+        self.profileVersions = ThreadSafeDictionary(lock: profilesLock)
         self.accountProfiles = ThreadSafeDictionary(lock: profilesLock)
         profilesAdapter = adapter
         self.dbManager = dbManager
@@ -57,54 +61,111 @@ class ProfilesService {
     }
 
     func profileReceived(contact uri: String, withAccountId accountId: String, path: String) {
-        let uri = JamiURI(schema: URIType.ring, infoHash: uri)
-        guard let uriString = uri.uriString,
-              let profile = VCardUtils.parseToProfile(filePath: path) else { return }
-        _ = self.dbManager
-            .createOrUpdateRingProfile(profileUri: uriString,
-                                       alias: profile.alias,
-                                       image: profile.photo,
-                                       accountId: accountId)
-        self.triggerProfileSignal(uri: uriString, createIfNotexists: false, accountId: accountId)
+        guard let uriString = JamiURI(schema: URIType.ring, infoHash: uri).uriString else { return }
+        removeProvisionalProfile(uri: uriString, accountId: accountId, notify: false)
+        self.triggerProfileSignal(uri: uriString, accountId: accountId)
     }
 
-    private func triggerProfileSignal(uri: String, createIfNotexists: Bool, accountId: String) {
-        guard let profileObservable = self.profiles[ProfileKey(accountId: accountId, uri: uri)] else {
+    /// A name and picture learned from somewhere other than the contact's own
+    /// vCard - a trust request payload or a directory lookup. Shown until the
+    /// contact's vCard arrives.
+    func cacheProvisionalProfile(uri: String, accountId: String, alias: String?, photo: String?) {
+        let uri = normalizedURI(uri)
+        let profile = Profile(uri: uri, alias: alias, photo: photo, type: ProfileType.ring.rawValue)
+        guard !profile.isEmpty else { return }
+        provisionalProfiles[ProfileKey(accountId: accountId, uri: uri)] = profile
+        triggerProfileSignal(uri: uri, accountId: accountId)
+    }
+
+    /// Keeps the cached profile once the contact relationship starts, since the
+    /// contact's own vCard can take arbitrarily long to arrive after that.
+    @discardableResult
+    func persistProvisionalProfile(uri: String, accountId: String) -> Bool {
+        let uri = normalizedURI(uri)
+        let key = ProfileKey(accountId: accountId, uri: uri)
+        guard let profile = provisionalProfiles[key] ?? dbManager.provisionalProfile(for: uri, accountId: accountId) else {
+            return false
+        }
+        return dbManager.saveProvisionalProfile(profile, accountId: accountId)
+    }
+
+    func removeProvisionalProfile(uri: String, accountId: String) {
+        removeProvisionalProfile(uri: uri, accountId: accountId, notify: true)
+    }
+
+    func clearCachedProvisionalProfiles(accountId: String) {
+        for key in provisionalProfiles.keys where key.accountId == accountId {
+            provisionalProfiles.removeValue(forKey: key)
+        }
+    }
+
+    private func triggerProfileSignal(uri: String, accountId: String) {
+        let uri = normalizedURI(uri)
+        let key = ProfileKey(accountId: accountId, uri: uri)
+        guard let profileObservable = self.profiles[key] else {
             return
         }
-        self.dbManager
-            .profileObservable(for: uri, createIfNotExists: createIfNotexists, accountId: accountId)
+        let version = profileVersions.mutate { versions -> Int in
+            let next = (versions[key] ?? 0) + 1
+            versions[key] = next
+            return next
+        }
+        Observable.deferred { [weak self] -> Observable<Profile> in
+            guard let self else { return .just(Profile.empty) }
+            return .just(self.resolveProfile(for: key))
+        }
             .subscribe(on: self.resolutionScheduler)
-            .subscribe { profile in
+            .subscribe(onNext: { [weak self] profile in
+                guard self?.profileVersions[key] == version else { return }
                 profileObservable.onNext(profile)
-            } onError: { [weak self] error in
-                // Emit an empty profile instead of erroring so the cached subject stays alive for a later real profile.
-                self?.log.debug("No profile for \(uri): \(error). Emitting empty placeholder.")
-                profileObservable.onNext(Profile.empty)
-            }
+            })
             .disposed(by: self.disposeBag)
     }
 
-    func getProfile(uri: String, createIfNotexists: Bool, accountId: String) -> Observable<Profile> {
+    func getProfile(uri: String, accountId: String) -> Observable<Profile> {
+        let uri = normalizedURI(uri)
         let (subject, inserted) = profiles.getOrInsert(key: ProfileKey(accountId: accountId, uri: uri)) {
             ReplaySubject<Profile>.create(bufferSize: 1)
         }
         if inserted {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-                self?.triggerProfileSignal(uri: uri,
-                                           createIfNotexists: createIfNotexists,
-                                           accountId: accountId)
+                self?.triggerProfileSignal(uri: uri, accountId: accountId)
             }
         }
         return subject.asObservable().share()
     }
 
+    private func resolveProfile(for key: ProfileKey) -> Profile {
+        let localOverride = dbManager.localProfileOverride(for: key.uri, accountId: key.accountId)
+        let contactProfile = dbManager.contactProfile(for: key.uri, accountId: key.accountId)
+            ?? dbManager.legacyContactProfile(for: key.uri, accountId: key.accountId)
+        let remoteProfile = contactProfile ?? provisionalProfile(for: key)
+        return remoteProfile?.merging(preferring: localOverride) ?? localOverride ?? Profile.empty
+    }
+
+    private func provisionalProfile(for key: ProfileKey) -> Profile? {
+        provisionalProfiles[key] ?? dbManager.provisionalProfile(for: key.uri, accountId: key.accountId)
+    }
+
+    private func removeProvisionalProfile(uri: String, accountId: String, notify: Bool) {
+        let uri = normalizedURI(uri)
+        provisionalProfiles.removeValue(forKey: ProfileKey(accountId: accountId, uri: uri))
+        dbManager.removeProvisionalProfile(for: uri, accountId: accountId)
+        if notify {
+            triggerProfileSignal(uri: uri, accountId: accountId)
+        }
+    }
+
+    private func normalizedURI(_ uri: String) -> String {
+        JamiURI(from: uri).uriString ?? uri
+    }
+
     func getProfileWithoutLocalOverride(uri: String, accountId: String) -> Profile? {
-        dbManager.getProfileWithoutLocalOverride(for: uri, accountId: accountId)
+        dbManager.getProfileWithoutLocalOverride(for: normalizedURI(uri), accountId: accountId)
     }
 
     func getLocalProfileOverride(uri: String, accountId: String) -> Profile? {
-        dbManager.localProfileOverride(for: uri, accountId: accountId)
+        dbManager.localProfileOverride(for: normalizedURI(uri), accountId: accountId)
     }
 
     @discardableResult
@@ -112,12 +173,13 @@ class ProfilesService {
                                     accountId: String,
                                     alias: String?,
                                     photo: String?) -> Bool {
+        let uri = normalizedURI(uri)
         let saved = dbManager.saveLocalProfileOverride(profileUri: uri,
                                                        alias: alias,
                                                        photo: photo,
                                                        accountId: accountId)
         if saved {
-            triggerProfileSignal(uri: uri, createIfNotexists: false, accountId: accountId)
+            triggerProfileSignal(uri: uri, accountId: accountId)
         }
         return saved
     }

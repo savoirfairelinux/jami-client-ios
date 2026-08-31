@@ -52,6 +52,7 @@ final class DBContainer {
     var connectionsSemaphore = DispatchSemaphore(value: 1)
     private let log = SwiftyBeaver.self
     private let dbVersion = 2
+    private let provisionalProfilesLock = NSLock()
 
     func removeDBForAccount(account: String, removeFolder: Bool) {
         self.connectionsSemaphore.wait()
@@ -107,12 +108,31 @@ final class DBContainer {
         return fileManager.fileExists(atPath: path)
     }
 
-    func contactProfilePath(accountId: String, profileURI: String, createifNotExists: Bool) -> String? {
+    func existingContactProfilePath(accountId: String, profileURI: String) -> String? {
         guard let documents = Constants.documentsPath else { return nil }
-        return ProfilePathHelper.contactProfilePath(accountId: accountId,
-                                                    profileURI: profileURI,
-                                                    documents: documents,
-                                                    createIfNotExists: createifNotExists)
+        return ProfilePathHelper.existingContactProfilePath(accountId: accountId,
+                                                            contactId: profileURI,
+                                                            documents: documents)
+    }
+
+    func contactProfilePath(accountId: String, profileURI: String) -> String? {
+        guard let documents = Constants.documentsPath,
+              let path = ProfilePathHelper.contactProfilePath(accountId: accountId,
+                                                              contactId: profileURI,
+                                                              documents: documents),
+              FileManager.default.fileExists(atPath: path) else { return nil }
+        return path
+    }
+
+    func legacyContactProfilePath(accountId: String, profileURI: String) -> String? {
+        guard let documents = Constants.documentsPath else { return nil }
+        return ProfilePathHelper.profileURICandidates(for: profileURI)
+            .compactMap {
+                ProfilePathHelper.legacyContactProfilePath(accountId: accountId,
+                                                           profileURI: $0,
+                                                           documents: documents)
+            }
+            .first { FileManager.default.fileExists(atPath: $0) }
     }
 
     func contactProfileOverridePath(accountId: String,
@@ -135,17 +155,69 @@ final class DBContainer {
         return isFileExists(path: path)
     }
 
-    func isContactProfileExists(accountId: String, profileURI: String) -> Bool {
-        guard let path = contactProfilePath(accountId: accountId, profileURI: profileURI, createifNotExists: false) else { return false }
-        return isFileExists(path: path)
+    func removeProfile(accountId: String, profileURI: String) {
+        if let documents = Constants.documentsPath {
+            // The canonical raw-hash vCard is owned by libjami. Remove only
+            // obsolete URI-named copies previously created by the client.
+            let paths = ProfilePathHelper.profileURICandidates(for: profileURI).map {
+                ProfilePathHelper.legacyContactProfilePath(accountId: accountId,
+                                                           profileURI: $0,
+                                                           documents: documents)
+            }
+            for path in paths.compactMap({ $0 }) {
+                try? FileManager.default.removeItem(atPath: path)
+            }
+        }
+        removeProfileOverride(accountId: accountId, profileURI: profileURI)
     }
 
-    func removeProfile(accountId: String, profileURI: String) {
-        guard let path = contactProfilePath(accountId: accountId, profileURI: profileURI, createifNotExists: false) else { return }
+    func provisionalProfile(accountId: String, profileURI: String) -> Profile? {
+        guard let documents = Constants.documentsPath,
+              let path = ProfilePathHelper.provisionalProfilePath(accountId: accountId,
+                                                                  profileURI: profileURI,
+                                                                  documents: documents,
+                                                                  createIfNotExists: false) else { return nil }
+        provisionalProfilesLock.lock()
+        defer { provisionalProfilesLock.unlock() }
+        guard let profile = VCardUtils.parseToProfile(filePath: path), !profile.isEmpty else { return nil }
+        return profile
+    }
+
+    func saveProvisionalProfile(_ profile: Profile, accountId: String) -> Bool {
+        guard !profile.isEmpty,
+              let documents = Constants.documentsPath,
+              let path = ProfilePathHelper.provisionalProfilePath(accountId: accountId,
+                                                                  profileURI: profile.uri,
+                                                                  documents: documents,
+                                                                  createIfNotExists: true),
+              let data = VCardUtils.dataForLocalOverride(profile) else { return false }
+        provisionalProfilesLock.lock()
+        defer { provisionalProfilesLock.unlock() }
         do {
-            try FileManager.default.removeItem(atPath: path)
-        } catch _ as NSError {}
-        removeProfileOverride(accountId: accountId, profileURI: profileURI)
+            try data.write(to: URL(fileURLWithPath: path), options: .atomic)
+            return true
+        } catch {
+            return false
+        }
+    }
+
+    func removeProvisionalProfile(accountId: String, profileURI: String) {
+        guard let documents = Constants.documentsPath,
+              let path = ProfilePathHelper.provisionalProfilePath(accountId: accountId,
+                                                                  profileURI: profileURI,
+                                                                  documents: documents,
+                                                                  createIfNotExists: false) else { return }
+        provisionalProfilesLock.lock()
+        defer { provisionalProfilesLock.unlock() }
+        try? FileManager.default.removeItem(atPath: path)
+    }
+
+    private func removeProvisionalProfiles(accountId: String) {
+        guard let documents = Constants.documentsPath else { return }
+        let path = ProfilePathHelper.provisionalProfilesPath(accountId: accountId, documents: documents)
+        provisionalProfilesLock.lock()
+        defer { provisionalProfilesLock.unlock() }
+        try? FileManager.default.removeItem(atPath: path)
     }
 
     func removeProfileOverride(accountId: String, profileURI: String) {
@@ -169,11 +241,10 @@ final class DBContainer {
     }
 
     func removeContacts(accountId: String) {
-        guard let contacts = self.contactsPath(accountId: accountId, createIfNotExists: false) else { return }
-        let fileManager = FileManager.default
-        do {
-            try fileManager.removeItem(atPath: contacts)
-        } catch _ as NSError {}
+        if let contacts = self.contactsPath(accountId: accountId, createIfNotExists: false) {
+            try? FileManager.default.removeItem(atPath: contacts)
+        }
+        removeProvisionalProfiles(accountId: accountId)
     }
 
     func removeAccountFolder(accountId: String) {

@@ -69,7 +69,9 @@ final class SwarmInfoTests: XCTestCase {
         let locationSharingService: LocationSharingService =
             LocationSharingService(dbManager: dBManager)
         let requestsService: RequestsService =
-            RequestsService(withRequestsAdapter: RequestsAdapter(), dbManager: dBManager)
+            RequestsService(withRequestsAdapter: RequestsAdapter(),
+                            dbManager: dBManager,
+                            profilesService: profileService)
 
         injectionBag = InjectionBag(withDaemonService: daemonService,
                                     withAccountService: accountService,
