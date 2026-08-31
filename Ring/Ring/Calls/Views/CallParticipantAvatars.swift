@@ -60,7 +60,6 @@ final class CallParticipantAvatars {
         let source = isLocal
             ? profileService.getAccountProfile(accountId: accountId)
             : profileService.getProfile(uri: key.profileUri,
-                                        createIfNotexists: false,
                                         accountId: accountId)
         let profile = source.share(replay: 1)
 

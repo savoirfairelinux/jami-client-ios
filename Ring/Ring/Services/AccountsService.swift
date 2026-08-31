@@ -267,10 +267,6 @@ class AccountsService: AccountAdapterDelegate {
         }
     }
 
-    func getAccountProfile(accountId: String) -> Profile? {
-        return self.dbManager.accountProfile(for: accountId)
-    }
-
     /**
      Gets an account from the list of accounts handled by the application.
 

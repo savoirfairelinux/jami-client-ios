@@ -33,6 +33,11 @@ enum ServiceEventType {
     case contactRemoved
     case contactRequestReceived
     case contactRequestDiscarded
+    case contactRequestAdded
+    case contactRequestSent
+    case contactRequestAccepted
+    case contactRequestRemoved
+    case allContactsRemoved
     case notificationEnabled
     case callEnded
     case callsCompleted
@@ -95,6 +100,7 @@ enum ServiceEventInput {
     case oldDisplayedMessage
     case newDisplayedMessage
     case conversationType
+    case profile
 }
 
 /**

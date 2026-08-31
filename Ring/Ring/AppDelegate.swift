@@ -50,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         ContactsService(withContactsAdapter: ContactsAdapter(), dbManager: self.dBManager)
     }()
     private lazy var profileService: ProfilesService = {
-        ProfilesService(withProfilesAdapter: ProfilesAdapter(), dbManager: self.dBManager)
+        ProfilesService(withProfilesAdapter: ProfilesAdapter(), invitations: self.requestsService)
     }()
     private lazy var dataTransferService: DataTransferService = {
         DataTransferService(withDataTransferAdapter: DataTransferAdapter(),
@@ -63,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         LocationSharingService(dbManager: self.dBManager)
     }()
     private lazy var requestsService: RequestsService = {
-        RequestsService(withRequestsAdapter: RequestsAdapter(), dbManager: self.dBManager)
+        RequestsService(withRequestsAdapter: RequestsAdapter())
     }()
 
     private let voipRegistry = PKPushRegistry(queue: DispatchQueue.main)
@@ -616,9 +616,9 @@ extension AppDelegate {
                 uriString = conatactUri.uriString ?? ""
             }
             if hash.isEmpty || uriString.isEmpty { return }
-            self.contactsService
-                .getProfileForUri(uri: uriString,
-                                  accountId: account.id)
+            self.profileService
+                .getProfile(uri: uriString, accountId: account.id)
+                .take(1)
                 .subscribe(onNext: { (profile) in
                     if currentAccount != account {
                         self.accountService.currentAccount = account

@@ -134,6 +134,20 @@ class RequestModel {
         }
     }
 
+    var peerURI: String? {
+        guard isCoredialog(), let jamiId = participants.first?.jamiId else { return nil }
+        return JamiURI(schema: .ring, infoHash: jamiId).uriString
+    }
+
+    var peerProfile: Profile? {
+        guard let uri = peerURI else { return nil }
+        let profile = Profile(uri: uri,
+                              alias: name.isEmpty ? nil : name,
+                              photo: avatar?.base64EncodedString(),
+                              type: ProfileType.ring.rawValue)
+        return profile.isEmpty ? nil : profile
+    }
+
     func isCoredialog() -> Bool {
         return self.conversationType == .nonSwarm || self.conversationType == .oneToOne
     }
