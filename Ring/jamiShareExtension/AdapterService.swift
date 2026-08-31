@@ -369,9 +369,10 @@ public final class AdapterService: AdapterDelegate {
 
     private func overrideVCardPath(accountId: String, contactId: String, type: String) -> String? {
         guard type == "conversation", let documents = Constants.documentsPath else { return nil }
-        return ProfilePathHelper.existingContactProfileOverridePath(accountId: accountId,
-                                                                    contactId: contactId,
-                                                                    documents: documents)
+        return ProfilePathHelper.customPeerProfilePath(accountId: accountId,
+                                                       contactId: contactId,
+                                                       documents: documents,
+                                                       createIfNotExists: false)
     }
 
     private func buildVCardPath(accountId: String, contactId: String, type: String) -> String? {

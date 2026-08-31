@@ -114,14 +114,12 @@ final class DBContainer {
                                                             documents: documents)
     }
 
-    func contactProfileOverridePath(accountId: String,
-                                    profileURI: String,
-                                    createIfNotExists: Bool) -> String? {
+    func customPeerProfilePath(accountId: String, profileURI: String, createIfNotExists: Bool) -> String? {
         guard let documents = Constants.documentsPath else { return nil }
-        return ProfilePathHelper.contactProfileOverridePath(accountId: accountId,
-                                                            profileURI: profileURI,
-                                                            documents: documents,
-                                                            createIfNotExists: createIfNotExists)
+        return ProfilePathHelper.customPeerProfilePath(accountId: accountId,
+                                                       contactId: profileURI,
+                                                       documents: documents,
+                                                       createIfNotExists: createIfNotExists)
     }
 
     func accountProfilePath(accountId: String) -> String? {
@@ -152,9 +150,9 @@ final class DBContainer {
     }
 
     func removeProfileOverride(accountId: String, profileURI: String) {
-        guard let path = contactProfileOverridePath(accountId: accountId,
-                                                    profileURI: profileURI,
-                                                    createIfNotExists: false) else { return }
+        guard let path = customPeerProfilePath(accountId: accountId,
+                                               profileURI: profileURI,
+                                               createIfNotExists: false) else { return }
         try? FileManager.default.removeItem(atPath: path)
     }
 

@@ -80,8 +80,6 @@ enum CommonHelpers {
 }
 
 enum ProfilePathHelper {
-    static let overrideFileSuffix = "_o.vcf"
-
     static func jamiHash(from uri: String) -> String {
         return uri
             .replacingOccurrences(of: "<", with: "")
@@ -103,22 +101,39 @@ enum ProfilePathHelper {
         return documents.appendingPathComponent(accountId, isDirectory: true).path + "/"
     }
 
-    static func contactsPath(accountId: String, documents: URL, createIfNotExists: Bool) -> String? {
-        let profilesFolder = documents
+    private static func folderPath(accountId: String,
+                                   documents: URL,
+                                   named name: String,
+                                   createIfNotExists: Bool) -> String? {
+        let folder = documents
             .appendingPathComponent(accountId, isDirectory: true)
-            .appendingPathComponent("profiles", isDirectory: true)
+            .appendingPathComponent(name, isDirectory: true)
             .path + "/"
         let fileManager = FileManager.default
-        if fileManager.fileExists(atPath: profilesFolder) { return profilesFolder }
+        if fileManager.fileExists(atPath: folder) { return folder }
         if !createIfNotExists { return nil }
         do {
-            try fileManager.createDirectory(atPath: profilesFolder,
+            try fileManager.createDirectory(atPath: folder,
                                             withIntermediateDirectories: true,
                                             attributes: nil)
         } catch {
             return nil
         }
-        return fileManager.fileExists(atPath: profilesFolder) ? profilesFolder : nil
+        return fileManager.fileExists(atPath: folder) ? folder : nil
+    }
+
+    static func contactsPath(accountId: String, documents: URL, createIfNotExists: Bool) -> String? {
+        return folderPath(accountId: accountId,
+                          documents: documents,
+                          named: "profiles",
+                          createIfNotExists: createIfNotExists)
+    }
+
+    static func customProfilesPath(accountId: String, documents: URL, createIfNotExists: Bool) -> String? {
+        return folderPath(accountId: accountId,
+                          documents: documents,
+                          named: "CustomPeerProfiles",
+                          createIfNotExists: createIfNotExists)
     }
 
     static func legacyContactProfilePath(accountId: String,
@@ -129,6 +144,19 @@ enum ProfilePathHelper {
                                                 createIfNotExists: false) else { return nil }
         let encoded = Data(profileURI.utf8).base64EncodedString()
         return profilesFolder + "\(encoded).vcf"
+    }
+
+    static func customPeerProfilePath(accountId: String,
+                                      contactId: String,
+                                      documents: URL,
+                                      createIfNotExists: Bool) -> String? {
+        let hash = jamiHash(from: contactId)
+        guard !hash.isEmpty,
+              let folder = customProfilesPath(accountId: accountId,
+                                              documents: documents,
+                                              createIfNotExists: createIfNotExists) else { return nil }
+        let encoded = Data(hash.utf8).base64EncodedString()
+        return folder + "\(encoded).vcf"
     }
 
     static func contactProfilePath(accountId: String,
@@ -143,17 +171,6 @@ enum ProfilePathHelper {
         return profilesFolder + "\(encoded).vcf"
     }
 
-    static func contactProfileOverridePath(accountId: String,
-                                           profileURI: String,
-                                           documents: URL,
-                                           createIfNotExists: Bool) -> String? {
-        guard let profilesFolder = contactsPath(accountId: accountId,
-                                                documents: documents,
-                                                createIfNotExists: createIfNotExists) else { return nil }
-        let encoded = Data(profileURI.utf8).base64EncodedString()
-        return profilesFolder + encoded + overrideFileSuffix
-    }
-
     static func existingContactProfilePath(accountId: String, contactId: String, documents: URL) -> String? {
         if let path = contactProfilePath(accountId: accountId,
                                          contactId: contactId,
@@ -165,22 +182,6 @@ enum ProfilePathHelper {
             guard let path = legacyContactProfilePath(accountId: accountId,
                                                       profileURI: profileURI,
                                                       documents: documents),
-                  FileManager.default.fileExists(atPath: path) else {
-                continue
-            }
-            return path
-        }
-        return nil
-    }
-
-    static func existingContactProfileOverridePath(accountId: String,
-                                                   contactId: String,
-                                                   documents: URL) -> String? {
-        for profileURI in profileURICandidates(for: contactId) {
-            guard let path = contactProfileOverridePath(accountId: accountId,
-                                                        profileURI: profileURI,
-                                                        documents: documents,
-                                                        createIfNotExists: false),
                   FileManager.default.fileExists(atPath: path) else {
                 continue
             }

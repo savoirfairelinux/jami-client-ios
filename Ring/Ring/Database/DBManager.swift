@@ -301,7 +301,7 @@ class DBManager {
                                                              createIfNotExists: true) else { return nil }
             guard let documentURL = URL(string: path) else { return nil }
             let directoryContents = try FileManager.default.contentsOfDirectory(at: documentURL, includingPropertiesForKeys: nil, options: [])
-            for url in directoryContents where !url.lastPathComponent.hasSuffix(ProfilePathHelper.overrideFileSuffix) {
+            for url in directoryContents {
                 if let profile = getProfileFromPath(path: url.path) {
                     profiles.append(profile)
                 }
@@ -643,9 +643,9 @@ class DBManager {
     }
 
     func localProfileOverride(for profileUri: String, accountId: String) -> Profile? {
-        guard let path = dbConnections.contactProfileOverridePath(accountId: accountId,
-                                                                  profileURI: profileUri,
-                                                                  createIfNotExists: false) else { return nil }
+        guard let path = dbConnections.customPeerProfilePath(accountId: accountId,
+                                                             profileURI: profileUri,
+                                                             createIfNotExists: false) else { return nil }
         return getProfileFromPath(path: path)
     }
 
@@ -659,9 +659,9 @@ class DBManager {
             dbConnections.removeProfileOverride(accountId: accountId, profileURI: profileUri)
             return true
         }
-        guard let path = dbConnections.contactProfileOverridePath(accountId: accountId,
-                                                                  profileURI: profileUri,
-                                                                  createIfNotExists: true),
+        guard let path = dbConnections.customPeerProfilePath(accountId: accountId,
+                                                             profileURI: profileUri,
+                                                             createIfNotExists: true),
               let data = VCardUtils.dataForLocalOverride(profile) else { return false }
         do {
             try data.write(to: URL(fileURLWithPath: path), options: .atomic)
