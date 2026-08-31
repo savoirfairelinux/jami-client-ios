@@ -305,7 +305,7 @@ class CollabEditorViewModel {
                 return Observable.just((author, L10n.Account.me))
             }
             return self.profileService
-                .getProfile(uri: author, createIfNotexists: false, accountId: self.accountId)
+                .getProfile(uri: author, accountId: self.accountId)
                 .map { profile in profile.alias ?? "" }
                 .take(1)
                 .timeout(.seconds(CollabEditorViewModel.profileWait),
@@ -386,7 +386,7 @@ class CollabEditorViewModel {
         let peer = CollabPeer(displayName: CollabEditorViewModel.shortId(peerId), color: color)
         self.peers[peerId] = peer
         self.profileService
-            .getProfile(uri: peerId, createIfNotexists: false, accountId: self.accountId)
+            .getProfile(uri: peerId, accountId: self.accountId)
             .take(1)
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] profile in

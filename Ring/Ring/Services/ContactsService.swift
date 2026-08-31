@@ -65,16 +65,12 @@ class ContactsService {
     }
 
     private func loadSipContacts(withAccount account: AccountModel) {
-        guard let profiles = self.dbManager
-                .getProfilesForAccount(accountId: account.id) else { return }
-        let contacts = profiles.map({ profile in
-            return ContactModel(withUri: JamiURI.init(schema: URIType.sip, infoHash: profile.uri))
-        })
         self.contacts.accept([])
         var values = [ContactModel]()
-        for contact in contacts where self.contacts.value.firstIndex(of: contact) == nil {
+        for participant in self.dbManager.conversationParticipants(accountId: account.id) {
+            let contact = ContactModel(withUri: JamiURI(schema: URIType.sip, infoHash: participant))
+            guard values.firstIndex(of: contact) == nil else { continue }
             values.append(contact)
-            self.log.debug("Contact: \(String(describing: contact.userName))")
         }
         self.contacts.accept(values)
     }
@@ -156,13 +152,13 @@ class ContactsService {
 
     // MARK: get contact profile
     func getProfileForUri(uri: String, accountId: String) -> Observable<Profile> {
-        return self.dbManager.profileObservable(for: uri, createIfNotExists: false, accountId: accountId)
+        return self.dbManager.profileObservable(for: uri, accountId: accountId)
             .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
     }
 
     func getProfile(uri: String, accountId: String) -> Profile? {
         do {
-            return try self.dbManager.getProfile(for: uri, createIfNotExists: false, accountId: accountId)
+            return try self.dbManager.getProfile(for: uri, accountId: accountId)
         } catch {
             return nil
         }
@@ -199,6 +195,9 @@ extension ContactsService: ContactsAdapterDelegate {
     }
 
     func contactRemoved(contact uri: String, withAccountId accountId: String, banned: Bool) {
+        if let profileURI = JamiURI(schema: .ring, infoHash: uri).uriString {
+            dbManager.removePlaceholderProfile(for: profileURI, accountId: accountId)
+        }
         var contactToRemove = self.contacts.value.first(where: { $0.hash == uri })
 
         // If the contact is banned and not found, retrieve details and add it to track banned contacts
