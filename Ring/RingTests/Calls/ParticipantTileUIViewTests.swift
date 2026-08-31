@@ -23,8 +23,7 @@ import RxSwift
 final class ParticipantTileUIViewTests: XCTestCase {
 
     private func makeProvider(name: String) -> AvatarProvider {
-        let dbManager = DBManager(profileHepler: ProfileDataHelper(),
-                                  conversationHelper: ConversationDataHelper(),
+        let dbManager = DBManager(conversationHelper: ConversationDataHelper(),
                                   interactionHepler: InteractionDataHelper(),
                                   dbConnections: DBContainer())
         let provider = AvatarProvider(
@@ -36,8 +35,7 @@ final class ParticipantTileUIViewTests: XCTestCase {
     }
 
     private func makePendingProvider(name: String) -> (AvatarProvider, PublishSubject<Data?>) {
-        let dbManager = DBManager(profileHepler: ProfileDataHelper(),
-                                  conversationHelper: ConversationDataHelper(),
+        let dbManager = DBManager(conversationHelper: ConversationDataHelper(),
                                   interactionHepler: InteractionDataHelper(),
                                   dbConnections: DBContainer())
         let profileService = ProfilesService(withProfilesAdapter: ProfilesAdapter(),

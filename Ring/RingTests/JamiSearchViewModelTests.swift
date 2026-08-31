@@ -36,8 +36,7 @@ final class JamiSearchViewModelTests: XCTestCase {
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        let dBManager = DBManager(profileHepler: ProfileDataHelper(),
-                                  conversationHelper: ConversationDataHelper(),
+        let dBManager = DBManager(conversationHelper: ConversationDataHelper(),
                                   interactionHepler: InteractionDataHelper(),
                                   dbConnections: DBContainer())
         let daemonService = DaemonService(dRingAdaptor: DRingAdapter())

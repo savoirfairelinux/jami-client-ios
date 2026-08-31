@@ -46,8 +46,7 @@ final class ProfilesServiceTests: XCTestCase {
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        database = StubDBManager(profileHepler: ProfileDataHelper(),
-                                 conversationHelper: ConversationDataHelper(),
+        database = StubDBManager(conversationHelper: ConversationDataHelper(),
                                  interactionHepler: InteractionDataHelper(),
                                  dbConnections: DBContainer())
         service = ProfilesService(withProfilesAdapter: ProfilesAdapter(), dbManager: database)

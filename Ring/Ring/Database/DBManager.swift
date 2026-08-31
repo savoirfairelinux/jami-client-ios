@@ -171,7 +171,6 @@ typealias SavedMessageForConversation = (messageID: String, conversationID: Stri
 // swiftlint:disable file_length
 class DBManager {
 
-    let profileHepler: ProfileDataHelper
     let conversationHelper: ConversationDataHelper
     let interactionHepler: InteractionDataHelper
     let dbConnections: DBContainer
@@ -180,46 +179,11 @@ class DBManager {
     // used to create object to save to db. When inserting in table defaultID will be replaced by autoincrementedID
     let defaultID: Int64 = 1
 
-    init(profileHepler: ProfileDataHelper, conversationHelper: ConversationDataHelper,
+    init(conversationHelper: ConversationDataHelper,
          interactionHepler: InteractionDataHelper, dbConnections: DBContainer) {
-        self.profileHepler = profileHepler
         self.conversationHelper = conversationHelper
         self.interactionHepler = interactionHepler
         self.dbConnections = dbConnections
-    }
-
-    func isMigrationToDBv2Needed(accountId: String) -> Bool {
-        return self.dbConnections.isMigrationToDBv2Needed(for: accountId)
-    }
-
-    func migrateToDbVersion2(accountId: String, accountURI: String) -> Bool {
-        if !accountURI.contains("ring:") {
-            self.dbConnections.createAccountfolder(for: accountId)
-        }
-        if !self.dbConnections.copyDbToAccountFolder(for: accountId) {
-            return false
-        }
-        guard let newDB = self.dbConnections.forAccount(account: accountId) else {
-            return false
-        }
-        // move profiles to vcards
-        do {
-            try newDB.transaction { [weak self] in
-                guard let self = self else { throw DataAccessError.databaseError }
-                if try !self.migrateAccountToVCard(for: accountId, accountURI: accountURI, dataBase: newDB) {
-                    throw DataAccessError.databaseError
-                }
-                if try !self.migrateProfilesToVCards(for: accountId, dataBase: newDB) {
-                    throw DataAccessError.databaseError
-                }
-                // remove db from documents folder
-                self.dbConnections.removeDBForAccount(account: accountId)
-                newDB.userVersion = 2
-            }
-        } catch _ as NSError {
-            return false
-        }
-        return true
     }
 
     func createDatabaseForAccount(accountId: String, createFolder: Bool = false) throws -> Bool {
@@ -237,40 +201,6 @@ class DBManager {
         } catch {
             throw DataAccessError.databaseError
         }
-        return true
-    }
-
-    func migrateProfilesToVCards(for accountId: String, dataBase: Connection) throws -> Bool {
-        guard let profiles = try? self.profileHepler.selectAll(dataBase: dataBase) else {
-            return false
-        }
-        for profile in profiles {
-            if self.dbConnections.isContactProfileExists(accountId: accountId, profileURI: profile.uri) {
-                continue
-            }
-            guard let profilePath = self.dbConnections.contactProfilePath(accountId: accountId, profileURI: profile.uri, createifNotExists: true) else { return false }
-            try self.saveProfile(profile: profile, path: profilePath)
-            if !self.dbConnections.isContactProfileExists(accountId: accountId, profileURI: profile.uri) {
-                return false
-            }
-        }
-        self.profileHepler.dropProfileTable(accountDb: dataBase)
-        return true
-    }
-
-    func migrateAccountToVCard(for accountId: String, accountURI: String, dataBase: Connection) throws -> Bool {
-        if self.dbConnections.isAccountProfileExists(accountId: accountId) { return true }
-        guard let accountProfile = self.profileHepler.getAccountProfile(dataBase: dataBase) else {
-            return self.dbConnections.isAccountProfileExists(accountId: accountId)
-        }
-        guard let path = self.dbConnections.accountProfilePath(accountId: accountId) else { return false }
-        let type = accountURI.contains("ring:") ? URIType.ring : URIType.sip
-        let profile = Profile(uri: accountURI, alias: accountProfile.alias, photo: accountProfile.photo, type: type.getString())
-        try self.saveProfile(profile: profile, path: path)
-        if !self.dbConnections.isAccountProfileExists(accountId: accountId) {
-            return false
-        }
-        self.profileHepler.dropAccountTable(accountDb: dataBase)
         return true
     }
 
