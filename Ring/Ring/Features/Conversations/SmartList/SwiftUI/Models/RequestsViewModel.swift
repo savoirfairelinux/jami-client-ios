@@ -227,7 +227,7 @@ class RequestRowViewModel: ObservableObject, Identifiable, Hashable {
     private func subscribeSenderProfile() {
         guard let jamiId = request.participants.first?.jamiId else { return }
         let profileUri = "jami:" + jamiId
-        profilesService.getProfile(uri: profileUri, createIfNotexists: false, accountId: request.accountId)
+        profilesService.getProfile(uri: profileUri, accountId: request.accountId)
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] profile in
                 guard let self = self else { return }

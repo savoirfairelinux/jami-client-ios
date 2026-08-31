@@ -63,7 +63,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         LocationSharingService(dbManager: self.dBManager)
     }()
     private lazy var requestsService: RequestsService = {
-        RequestsService(withRequestsAdapter: RequestsAdapter(), dbManager: self.dBManager)
+        RequestsService(withRequestsAdapter: RequestsAdapter(),
+                        dbManager: self.dBManager,
+                        profilesService: self.profileService)
     }()
 
     private let voipRegistry = PKPushRegistry(queue: DispatchQueue.main)
