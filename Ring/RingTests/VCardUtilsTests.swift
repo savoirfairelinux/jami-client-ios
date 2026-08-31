@@ -114,7 +114,7 @@ final class VCardUtilsTests: XCTestCase {
                               photo: nil,
                               type: ProfileType.ring.rawValue)
 
-        let data = try XCTUnwrap(VCardUtils.dataForLocalOverride(profile))
+        let data = try XCTUnwrap(VCardUtils.vCardData(for: profile))
         let parsed = VCardUtils.parseDataToProfile(data: data)
 
         XCTAssertEqual(parsed?.alias, profileName1)
@@ -126,7 +126,7 @@ final class VCardUtilsTests: XCTestCase {
                               alias: profileName1,
                               photo: photo,
                               type: ProfileType.ring.rawValue)
-        let data = try XCTUnwrap(VCardUtils.dataForLocalOverride(profile))
+        let data = try XCTUnwrap(VCardUtils.vCardData(for: profile))
         let url = FileManager.default.temporaryDirectory
             .appendingPathComponent(UUID().uuidString)
             .appendingPathExtension("vcf")
@@ -139,5 +139,151 @@ final class VCardUtilsTests: XCTestCase {
         XCTAssertEqual(parsed?.alias, profileName1)
         XCTAssertEqual(parsed?.photo, photo)
     }
+}
 
+final class ProfilePathHelperTests: XCTestCase {
+
+    private let accountId = "0123456789abcdef"
+    private var documents: URL!
+
+    private var profilePhoto: String { "profile-photo" }
+    private var legacyPhoto: String { "legacy-photo" }
+    private var jamsPhoto: String { "jams-photo" }
+    private var invitationPhoto: String { "invitation-photo" }
+
+    override func setUpWithError() throws {
+        try super.setUpWithError()
+        documents = FileManager.default.temporaryDirectory
+            .appendingPathComponent(UUID().uuidString, isDirectory: true)
+        try FileManager.default.createDirectory(at: profilesFolder, withIntermediateDirectories: true)
+    }
+
+    override func tearDownWithError() throws {
+        try? FileManager.default.removeItem(at: documents)
+        documents = nil
+        try super.tearDownWithError()
+    }
+
+    private var profilesFolder: URL {
+        documents
+            .appendingPathComponent(accountId, isDirectory: true)
+            .appendingPathComponent("profiles", isDirectory: true)
+    }
+
+    private func vCard(photo: String) -> Data {
+        Data("""
+        BEGIN:VCARD
+        FN:\(profileName1)
+        TEL;other:ring:\(jamiId1)
+        PHOTO;ENCODING=BASE64;TYPE=JPEG:\(photo)
+        END:VCARD
+        """.utf8)
+    }
+
+    @discardableResult
+    private func writeProfile(photo: String) throws -> URL {
+        let encoded = Data(jamiId1.utf8).base64EncodedString()
+        let url = profilesFolder.appendingPathComponent("\(encoded).vcf")
+        try vCard(photo: photo).write(to: url)
+        return url
+    }
+
+    @discardableResult
+    private func writeLegacyProfile(photo: String) throws -> URL {
+        let encoded = Data("jami:\(jamiId1)".utf8).base64EncodedString()
+        let url = profilesFolder.appendingPathComponent("\(encoded).vcf")
+        try vCard(photo: photo).write(to: url)
+        return url
+    }
+
+    @discardableResult
+    private func writeManagedProfile(folder: ManagedProfileFolder, photo: String) throws -> URL {
+        let path = try XCTUnwrap(ProfilePathHelper.profilePath(accountId: accountId,
+                                                               contactId: "jami:\(jamiId1)",
+                                                               folder: folder,
+                                                               documents: documents,
+                                                               createIfNotExists: true))
+        let url = URL(fileURLWithPath: path)
+        try vCard(photo: photo).write(to: url)
+        return url
+    }
+
+    private func resolvedPhoto(for contactId: String) -> String? {
+        guard let path = ProfilePathHelper.existingContactProfilePath(accountId: accountId,
+                                                                      contactId: contactId,
+                                                                      documents: documents) else { return nil }
+        return VCardUtils.parseToProfile(filePath: path)?.photo
+    }
+
+    func testProfileWinsOverLegacyProfile() throws {
+        // Arrange
+        try writeLegacyProfile(photo: legacyPhoto)
+        try writeProfile(photo: profilePhoto)
+        // Act
+        let resolved = resolvedPhoto(for: "jami:\(jamiId1)")
+        // Assert
+        XCTAssertEqual(resolved, profilePhoto)
+    }
+
+    func testLegacyProfileIsUsedWhenProfileIsMissing() throws {
+        // Arrange
+        try writeLegacyProfile(photo: legacyPhoto)
+        // Act
+        let resolved = resolvedPhoto(for: "jami:\(jamiId1)")
+        // Assert
+        XCTAssertEqual(resolved, legacyPhoto)
+    }
+
+    func testProfileIsFoundWithoutLegacyProfile() throws {
+        // Arrange
+        try writeProfile(photo: profilePhoto)
+        // Act
+        let resolved = resolvedPhoto(for: "jami:\(jamiId1)")
+        // Assert
+        XCTAssertEqual(resolved, profilePhoto)
+    }
+
+    func testProfileIsFoundWhateverTheURIForm() throws {
+        // Arrange
+        try writeProfile(photo: profilePhoto)
+        // Act & Assert
+        for contactId in [jamiId1, "ring:\(jamiId1)", "jami:\(jamiId1)", "<\(jamiId1)@ring.dht>"] {
+            XCTAssertEqual(resolvedPhoto(for: contactId), profilePhoto, "failed for \(contactId)")
+        }
+    }
+
+    func testLegacyProfileWinsOverManagedProfiles() throws {
+        try writeLegacyProfile(photo: legacyPhoto)
+        try writeManagedProfile(folder: .jamsSearch, photo: jamsPhoto)
+        try writeManagedProfile(folder: .invitation, photo: invitationPhoto)
+
+        XCTAssertEqual(resolvedPhoto(for: jamiId1), legacyPhoto)
+    }
+
+    func testContactProfileWinsOverManagedProfiles() throws {
+        try writeProfile(photo: profilePhoto)
+        try writeManagedProfile(folder: .jamsSearch, photo: jamsPhoto)
+        try writeManagedProfile(folder: .invitation, photo: invitationPhoto)
+
+        XCTAssertEqual(resolvedPhoto(for: jamiId1), profilePhoto)
+    }
+
+    func testJamsProfileWinsOverInvitationProfile() throws {
+        try writeManagedProfile(folder: .jamsSearch, photo: jamsPhoto)
+        try writeManagedProfile(folder: .invitation, photo: invitationPhoto)
+
+        XCTAssertEqual(resolvedPhoto(for: jamiId1), jamsPhoto)
+    }
+
+    func testInvitationProfileIsUsedWhenOtherProfilesAreMissing() throws {
+        try writeManagedProfile(folder: .invitation, photo: invitationPhoto)
+
+        XCTAssertEqual(resolvedPhoto(for: jamiId1), invitationPhoto)
+    }
+
+    func testNoProfileResolvesToNil() {
+        XCTAssertNil(ProfilePathHelper.existingContactProfilePath(accountId: accountId,
+                                                                  contactId: jamiId1,
+                                                                  documents: documents))
+    }
 }

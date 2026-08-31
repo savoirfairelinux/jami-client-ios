@@ -169,3 +169,9 @@ class JamiURI {
         return nil
     }
 }
+
+extension ProfileType {
+    init(uri: String) {
+        self = JamiURI(from: uri).isJami ? .ring : .sip
+    }
+}

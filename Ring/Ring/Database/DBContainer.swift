@@ -99,62 +99,6 @@ final class DBContainer {
                                               createIfNotExists: createIfNotExists)
     }
 
-    private func isFileExists(path: String) -> Bool {
-        if path.isEmpty {
-            return false
-        }
-        let fileManager = FileManager.default
-        return fileManager.fileExists(atPath: path)
-    }
-
-    func contactProfilePath(accountId: String, profileURI: String, createifNotExists: Bool) -> String? {
-        guard let documents = Constants.documentsPath else { return nil }
-        return ProfilePathHelper.contactProfilePath(accountId: accountId,
-                                                    profileURI: profileURI,
-                                                    documents: documents,
-                                                    createIfNotExists: createifNotExists)
-    }
-
-    func contactProfileOverridePath(accountId: String,
-                                    profileURI: String,
-                                    createIfNotExists: Bool) -> String? {
-        guard let documents = Constants.documentsPath else { return nil }
-        return ProfilePathHelper.contactProfileOverridePath(accountId: accountId,
-                                                            profileURI: profileURI,
-                                                            documents: documents,
-                                                            createIfNotExists: createIfNotExists)
-    }
-
-    func accountProfilePath(accountId: String) -> String? {
-        guard let documents = Constants.documentsPath else { return nil }
-        return ProfilePathHelper.accountProfilePath(accountId: accountId, documents: documents)
-    }
-
-    func isAccountProfileExists(accountId: String) -> Bool {
-        guard let path = accountProfilePath(accountId: accountId) else { return false }
-        return isFileExists(path: path)
-    }
-
-    func isContactProfileExists(accountId: String, profileURI: String) -> Bool {
-        guard let path = contactProfilePath(accountId: accountId, profileURI: profileURI, createifNotExists: false) else { return false }
-        return isFileExists(path: path)
-    }
-
-    func removeProfile(accountId: String, profileURI: String) {
-        guard let path = contactProfilePath(accountId: accountId, profileURI: profileURI, createifNotExists: false) else { return }
-        do {
-            try FileManager.default.removeItem(atPath: path)
-        } catch _ as NSError {}
-        removeProfileOverride(accountId: accountId, profileURI: profileURI)
-    }
-
-    func removeProfileOverride(accountId: String, profileURI: String) {
-        guard let path = contactProfileOverridePath(accountId: accountId,
-                                                    profileURI: profileURI,
-                                                    createIfNotExists: false) else { return }
-        try? FileManager.default.removeItem(atPath: path)
-    }
-
     func createAccountfolder(for accountId: String) {
         guard let accountFolder = accountFolderPath(accountId: accountId) else { return }
         let fileManager = FileManager.default
@@ -170,10 +114,7 @@ final class DBContainer {
 
     func removeContacts(accountId: String) {
         guard let contacts = self.contactsPath(accountId: accountId, createIfNotExists: false) else { return }
-        let fileManager = FileManager.default
-        do {
-            try fileManager.removeItem(atPath: contacts)
-        } catch _ as NSError {}
+        try? FileManager.default.removeItem(atPath: contacts)
     }
 
     func removeAccountFolder(accountId: String) {

@@ -128,14 +128,8 @@ class ContactViewModel: ViewModel, Stateable {
             }
             let schema: URIType = account.type == .sip ? .sip : .ring
             guard let contactURI = JamiURI(schema: schema, infoHash: jamiId).uriString else { return }
-            var initialProfile = Profile(uri: jamiId, alias: "", photo: "", type: schema.getString())
-            if let profile = self.contactService.getProfile(uri: contactURI, accountId: conversation.accountId) {
-                initialProfile = profile
-            }
             self.profileService.getProfile(uri: contactURI,
-                                           createIfNotexists: false,
                                            accountId: conversation.accountId)
-                .startWith(initialProfile)
                 .subscribe(onNext: { [weak self] profile in
                     guard let self = self else { return }
                     self.displayName.accept((profile.alias ?? "").simplified())

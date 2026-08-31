@@ -50,15 +50,15 @@ struct Profile {
         Profile(uri: "", alias: nil, photo: nil, type: "")
     }
 
-    var hasNoOverrides: Bool {
-        alias.nonEmptyOverride() == nil && photo.nonEmptyOverride() == nil
+    var isEmpty: Bool {
+        alias.nonEmptyTrimmed() == nil && photo.nonEmptyTrimmed() == nil
     }
 
-    func merging(localOverride: Profile?) -> Profile {
-        guard let localOverride else { return self }
+    func merging(preferring preferred: Profile?) -> Profile {
+        guard let preferred else { return self }
         return Profile(uri: uri,
-                       alias: localOverride.alias.nonEmptyOverride() ?? alias,
-                       photo: localOverride.photo.nonEmptyOverride() ?? photo,
+                       alias: preferred.alias.nonEmptyTrimmed() ?? alias,
+                       photo: preferred.photo.nonEmptyTrimmed() ?? photo,
                        type: type)
     }
 }
@@ -109,12 +109,12 @@ class VCardUtils {
         return vCardString.data(using: .utf8)
     }
 
-    class func dataForLocalOverride(_ profile: Profile) -> Data? {
+    class func vCardData(for profile: Profile) -> Data? {
         var lines = [VCardFields.begin.rawValue]
-        if let alias = profile.alias.nonEmptyOverride() {
+        if let alias = profile.alias.nonEmptyTrimmed() {
             lines.append(VCardFields.fullName.rawValue + alias)
         }
-        if let photo = profile.photo.nonEmptyOverride() {
+        if let photo = profile.photo.nonEmptyTrimmed() {
             lines.append(VCardFields.photoJPEG.rawValue + photo)
         }
         lines.append(VCardFields.telephone.rawValue + profile.uri)
@@ -173,7 +173,7 @@ class VCardUtils {
     class func parseMergedProfile(basePath: String?, overridePath: String?) -> Profile? {
         let base = basePath.flatMap { parseToProfile(filePath: $0) }
         let localOverride = overridePath.flatMap { parseToProfile(filePath: $0) }
-        return base?.merging(localOverride: localOverride) ?? localOverride
+        return base?.merging(preferring: localOverride) ?? localOverride
     }
 
     class func getNameFromVCard(filePath: String) -> String? {
@@ -215,7 +215,7 @@ class VCardUtils {
 }
 
 private extension Optional where Wrapped == String {
-    func nonEmptyOverride() -> String? {
+    func nonEmptyTrimmed() -> String? {
         guard let trimmed = self?.trimmingCharacters(in: .whitespacesAndNewlines),
               !trimmed.isEmpty else {
             return nil

@@ -54,7 +54,7 @@ class Contact {
     }
 
     private func fetchProfile() {
-        profileService.getProfile(uri: self.uri, createIfNotexists: false, accountId: self.accountID)
+        profileService.getProfile(uri: self.uri, accountId: self.accountID)
             .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe(
                 onNext: { [weak self] profile in
