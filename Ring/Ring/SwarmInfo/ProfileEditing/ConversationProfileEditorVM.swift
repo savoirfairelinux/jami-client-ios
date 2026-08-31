@@ -71,7 +71,7 @@ final class ConversationProfileEditorVM: ObservableObject {
                 injectionBag.profileService.getLocalProfileOverride(uri: $0,
                                                                     accountId: conversation.accountId)
             }
-            let merged = base?.merging(localOverride: local) ?? local
+            let merged = base?.merging(preferring: local) ?? local
             name = merged?.alias ?? ""
             avatar = merged?.photo?.toImageData().flatMap(UIImage.init(data:))
             initialLocalPhoto = local?.photo

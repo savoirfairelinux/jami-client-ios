@@ -36,6 +36,7 @@ class ProfilesService {
 
     private let profilesLock = NSLock()
     private var profiles: ThreadSafeDictionary<ProfileKey, ReplaySubject<Profile>>
+    private var directoryProfiles: ThreadSafeDictionary<ProfileKey, Profile>
     var accountProfiles: ThreadSafeDictionary<String, ReplaySubject<Profile>>
 
     private let avatarsCache = NSCache<NSString, UIImage>()
@@ -50,6 +51,7 @@ class ProfilesService {
 
     init(withProfilesAdapter adapter: ProfilesAdapter, dbManager: DBManager) {
         self.profiles = ThreadSafeDictionary(lock: profilesLock)
+        self.directoryProfiles = ThreadSafeDictionary(lock: profilesLock)
         self.accountProfiles = ThreadSafeDictionary(lock: profilesLock)
         profilesAdapter = adapter
         self.dbManager = dbManager
@@ -57,43 +59,43 @@ class ProfilesService {
     }
 
     func profileReceived(contact uri: String, withAccountId accountId: String, path: String) {
-        let uri = JamiURI(schema: URIType.ring, infoHash: uri)
-        guard let uriString = uri.uriString,
-              let profile = VCardUtils.parseToProfile(filePath: path) else { return }
-        _ = self.dbManager
-            .createOrUpdateRingProfile(profileUri: uriString,
-                                       alias: profile.alias,
-                                       image: profile.photo,
-                                       accountId: accountId)
-        self.triggerProfileSignal(uri: uriString, createIfNotexists: false, accountId: accountId)
+        guard let uriString = JamiURI(schema: URIType.ring, infoHash: uri).uriString else { return }
+        self.triggerProfileSignal(uri: uriString, accountId: accountId)
     }
 
-    private func triggerProfileSignal(uri: String, createIfNotexists: Bool, accountId: String) {
-        guard let profileObservable = self.profiles[ProfileKey(accountId: accountId, uri: uri)] else {
+    func cacheDirectoryProfile(uri: String, accountId: String, alias: String?, photo: String?) {
+        let profile = Profile(uri: uri, alias: alias, photo: photo, type: ProfileType.ring.rawValue)
+        guard !profile.isEmpty else { return }
+        directoryProfiles[ProfileKey(accountId: accountId, uri: uri)] = profile
+        triggerProfileSignal(uri: uri, accountId: accountId)
+    }
+
+    private func triggerProfileSignal(uri: String, accountId: String) {
+        let key = ProfileKey(accountId: accountId, uri: uri)
+        guard let profileObservable = self.profiles[key] else {
             return
         }
+        let directoryProfile = directoryProfiles[key]
         self.dbManager
-            .profileObservable(for: uri, createIfNotExists: createIfNotexists, accountId: accountId)
+            .profileObservable(for: uri, accountId: accountId)
             .subscribe(on: self.resolutionScheduler)
             .subscribe { profile in
-                profileObservable.onNext(profile)
+                profileObservable.onNext(directoryProfile?.merging(preferring: profile) ?? profile)
             } onError: { [weak self] error in
                 // Emit an empty profile instead of erroring so the cached subject stays alive for a later real profile.
                 self?.log.debug("No profile for \(uri): \(error). Emitting empty placeholder.")
-                profileObservable.onNext(Profile.empty)
+                profileObservable.onNext(directoryProfile ?? Profile.empty)
             }
             .disposed(by: self.disposeBag)
     }
 
-    func getProfile(uri: String, createIfNotexists: Bool, accountId: String) -> Observable<Profile> {
+    func getProfile(uri: String, accountId: String) -> Observable<Profile> {
         let (subject, inserted) = profiles.getOrInsert(key: ProfileKey(accountId: accountId, uri: uri)) {
             ReplaySubject<Profile>.create(bufferSize: 1)
         }
         if inserted {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-                self?.triggerProfileSignal(uri: uri,
-                                           createIfNotexists: createIfNotexists,
-                                           accountId: accountId)
+                self?.triggerProfileSignal(uri: uri, accountId: accountId)
             }
         }
         return subject.asObservable().share()
@@ -117,7 +119,7 @@ class ProfilesService {
                                                        photo: photo,
                                                        accountId: accountId)
         if saved {
-            triggerProfileSignal(uri: uri, createIfNotexists: false, accountId: accountId)
+            triggerProfileSignal(uri: uri, accountId: accountId)
         }
         return saved
     }

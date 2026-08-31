@@ -215,7 +215,7 @@ class DBManager {
         do {
             let result = try self.getConversationsFor(contactUri: contactUri,
                                                       createIfNotExists: true,
-                                                      dataBase: dataBase, accountId: accountId)
+                                                      dataBase: dataBase)
             return "\(result ?? -1)"
         } catch {}
         return ""
@@ -236,7 +236,7 @@ class DBManager {
                     let author: String? = incoming ? contactUri : nil
                     guard let conversationID = try self?.getConversationsFor(contactUri: contactUri,
                                                                              createIfNotExists: true,
-                                                                             dataBase: dataBase, accountId: accountId) else {
+                                                                             dataBase: dataBase) else {
                         throw DBBridgingError.saveMessageFailed
                     }
                     let result = self?.addMessageTo(conversation: conversationID, author: author,
@@ -421,12 +421,9 @@ class DBManager {
                     throw DBBridgingError.deleteConversationFailed
                 }
                 try dataBase.transaction {
-                    guard (try self.getProfile(for: participantUri, createIfNotExists: false, accountId: accountId)) != nil else {
-                        throw DBBridgingError.deleteConversationFailed
-                    }
                     guard let conversationsId = try self.getConversationsFor(contactUri: participantUri,
-                                                                             createIfNotExists: true,
-                                                                             dataBase: dataBase, accountId: accountId) else {
+                                                                             createIfNotExists: false,
+                                                                             dataBase: dataBase) else {
                         throw DBBridgingError.deleteConversationFailed
                     }
                     guard let interactions = try self.interactionHepler
@@ -461,12 +458,10 @@ class DBManager {
         }
     }
 
-    func profileObservable(for profileUri: String, createIfNotExists: Bool, accountId: String) -> Observable<Profile> {
+    func profileObservable(for profileUri: String, accountId: String) -> Observable<Profile> {
         return Observable.create { observable in
             do {
-                if let profile = try self.getProfile(for: profileUri,
-                                                     createIfNotExists: createIfNotExists,
-                                                     accountId: accountId) {
+                if let profile = try self.getProfile(for: profileUri, accountId: accountId) {
                     observable.onNext(profile)
                     observable.on(.completed)
                 } else {
@@ -494,23 +489,6 @@ class DBManager {
     func accountProfile(for accountId: String) -> Profile? {
         guard let path = self.dbConnections.accountProfilePath(accountId: accountId) else { return nil }
         return self.getProfileFromPath(path: path)
-    }
-
-    func createOrUpdateRingProfile(profileUri: String, alias: String?, image: String?, accountId: String) -> Bool {
-        let type = profileUri.contains("ring") ? ProfileType.ring : ProfileType.sip
-        if type == ProfileType.sip {
-            self.dbConnections.createAccountfolder(for: accountId)
-        }
-        guard let path = self.dbConnections.contactProfilePath(accountId: accountId, profileURI: profileUri, createifNotExists: true) else { return false }
-
-        let profile = Profile(uri: profileUri, alias: alias, photo: image, type: type.rawValue)
-
-        do {
-            try self.saveProfile(profile: profile, path: path)
-        } catch {
-            return false
-        }
-        return self.dbConnections.isContactProfileExists(accountId: accountId, profileURI: profileUri)
     }
 
     func saveAccountProfile(alias: String?, photo: String?, accountId: String, accountURI: String) -> Bool {
@@ -646,30 +624,18 @@ class DBManager {
         return nil
     }
 
-    func getProfile(for profileUri: String, createIfNotExists: Bool, accountId: String,
-                    alias: String? = nil, photo: String? = nil) throws -> Profile? {
-        let type = profileUri.contains("ring") ? ProfileType.ring : ProfileType.sip
-        if createIfNotExists && type == ProfileType.sip {
-            self.dbConnections.createAccountfolder(for: accountId)
-        }
-        guard let profilePath = self.dbConnections
-                .contactProfilePath(accountId: accountId,
-                                    profileURI: profileUri,
-                                    createifNotExists: createIfNotExists) else { return nil }
-        let profileExists = self.dbConnections
-            .isContactProfileExists(accountId: accountId, profileURI: profileUri)
-        if !profileExists && createIfNotExists {
-            let profile = Profile(uri: profileUri, alias: alias, photo: photo, type: type.rawValue)
-            try self.saveProfile(profile: profile, path: profilePath)
-        }
+    func getProfile(for profileUri: String, accountId: String) throws -> Profile? {
         let localOverride = localProfileOverride(for: profileUri, accountId: accountId)
-        return getProfileFromPath(path: profilePath)?.merging(localOverride: localOverride) ?? localOverride
+        guard let path = self.dbConnections
+                .existingContactProfilePath(accountId: accountId, profileURI: profileUri) else {
+            return localOverride
+        }
+        return getProfileFromPath(path: path)?.merging(preferring: localOverride) ?? localOverride
     }
 
     func getProfileWithoutLocalOverride(for profileUri: String, accountId: String) -> Profile? {
-        guard let path = dbConnections.contactProfilePath(accountId: accountId,
-                                                          profileURI: profileUri,
-                                                          createifNotExists: false) else { return nil }
+        guard let path = dbConnections.existingContactProfilePath(accountId: accountId,
+                                                                  profileURI: profileUri) else { return nil }
         return getProfileFromPath(path: path)
     }
 
@@ -686,7 +652,7 @@ class DBManager {
                                   accountId: String) -> Bool {
         let type = profileUri.contains("ring") ? ProfileType.ring : ProfileType.sip
         let profile = Profile(uri: profileUri, alias: alias, photo: photo, type: type.rawValue)
-        if profile.hasNoOverrides {
+        if profile.isEmpty {
             dbConnections.removeProfileOverride(accountId: accountId, profileURI: profileUri)
             return true
         }
@@ -725,7 +691,7 @@ class DBManager {
     }
 
     private func getConversationsFor(contactUri: String,
-                                     createIfNotExists: Bool, dataBase: Connection, accountId: String) throws -> Int64? {
+                                     createIfNotExists: Bool, dataBase: Connection) throws -> Int64? {
         if let contactConversations = try self.conversationHelper
             .selectConversationsForProfile(profileUri: contactUri, dataBase: dataBase),
            let conv = contactConversations.first {
@@ -735,9 +701,6 @@ class DBManager {
             return nil
         }
         let conversationID = Int64.random(in: 0...10000000)
-        do {
-            _ = try self.getProfile(for: contactUri, createIfNotExists: true, accountId: accountId)
-        } catch {}
         let conversationForContact = Conversation(conversationID, contactUri)
         if !self.conversationHelper.insert(item: conversationForContact, dataBase: dataBase) {
             return nil
