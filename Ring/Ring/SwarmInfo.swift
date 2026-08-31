@@ -477,7 +477,7 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
         if isSelf {
             profileObservable = self.profileService.getAccountProfile(accountId: accountId)
         } else {
-            profileObservable = self.profileService.getProfile(uri: uriString, createIfNotexists: false, accountId: accountId)
+            profileObservable = self.profileService.getProfile(uri: uriString, accountId: accountId)
         }
         profileObservable
             .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))

@@ -150,9 +150,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     var accountProfileName: String = ""
     var myContactsLocation: CLLocationCoordinate2D?
     var myCoordinate: CLLocationCoordinate2D?
-    // jams
-    var jamsAvatarData: Data?
-    var jamsName: String = ""
+    var temporaryPeerProfile: Profile?
 
     var accountService: AccountsService
     var profileService: ProfilesService
@@ -336,18 +334,16 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
             jamiId = nil
         }
         guard let jamiId = jamiId else { return }
-        var avatar: String?
-        if let avatarData = self.jamsAvatarData {
-            avatar = String(data: avatarData, encoding: .utf8)
-        }
+        let payload = self.profileService.accountVCardPayload(accountId: conversation.accountId)
         self.requestsService
             .sendContactRequest(to: jamiId,
                                 withAccountId: conversation.accountId,
-                                avatar: avatar,
-                                alias: jamsName)
+                                payload: payload,
+                                peerProfile: temporaryPeerProfile)
             .subscribe(onCompleted: { [weak self, weak conversation] in
                 guard let self = self,
                       let conversation = conversation else { return }
+                self.temporaryPeerProfile = nil
                 if conversation.isCoredialog() {
                     self.presenceService.subscribeBuddy(withAccountId: conversation.accountId,
                                                         withJamiId: jamiId,
@@ -1157,7 +1153,6 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
             guard let contactURI = JamiURI(schema: schema, infoHash: id).uriString else { return }
             self.profileService
                 .getProfile(uri: contactURI,
-                            createIfNotexists: false,
                             accountId: account.id)
                 .observe(on: MainScheduler.instance)
                 .subscribe(onNext: { [weak self] profile in
