@@ -238,8 +238,15 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
         self.userName.accept(user.username)
         self.displayName.accept(user.firstName + " " + user.lastName)
         self.profileImageData.accept(user.profilePicture)
-        self.swiftUIModel.jamsAvatarData = user.profilePicture
-        self.swiftUIModel.jamsName = user.firstName + " " + user.lastName
+        if self.accountService.getAccount(fromAccountId: conversation.accountId)?.jamiId != user.jamiId,
+           let uri = JamiURI(schema: .ring, infoHash: user.jamiId).uriString {
+            let alias = (user.firstName + " " + user.lastName).simplified()
+            let profile = Profile(uri: uri,
+                                  alias: alias.isEmpty ? nil : alias,
+                                  photo: user.profilePicture?.base64EncodedString(),
+                                  type: ProfileType.ring.rawValue)
+            self.swiftUIModel.temporaryPeerProfile = profile.isEmpty ? nil : profile
+        }
         self.setConversation(conversation) // required to trigger the didSet
     }
 
@@ -272,6 +279,13 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
             if account.type == AccountType.sip {
                 self.userName.accept(self.conversation.hash)
                 self.isAccountSip = true
+                if let participantId = conversation.getParticipants().first?.jamiId,
+                   let uri = ProfilesService.profileUriString(
+                       for: JamiURI(schema: .sip, infoHash: participantId)
+                   ) {
+                    self.subscribeNonSwarmProfiles(uri: uri,
+                                                   accountId: self.conversation.accountId)
+                }
                 return
             }
             self.updateBlockedStatus()
@@ -415,7 +429,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
 
     private func subscribeNonSwarmProfiles(uri: String, accountId: String) {
         self.profileService
-            .getProfile(uri: uri, createIfNotexists: false, accountId: accountId)
+            .getProfile(uri: uri, accountId: accountId)
             .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe {[weak self] profile in
                 guard let self = self else { return }

@@ -38,7 +38,6 @@ class WelcomeVM: ViewModel, ObservableObject {
 
     private let accountService: AccountsService
     private let nameService: NameService
-    private let profileService: ProfilesService
     let injectionBag: InjectionBag
 
     let disposeBag = DisposeBag()
@@ -51,7 +50,6 @@ class WelcomeVM: ViewModel, ObservableObject {
     required init (with injectionBag: InjectionBag) {
         self.accountService = injectionBag.accountService
         self.nameService = injectionBag.nameService
-        self.profileService = injectionBag.profileService
         self.injectionBag = injectionBag
     }
 

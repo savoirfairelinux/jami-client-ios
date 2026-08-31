@@ -82,6 +82,7 @@ class GeneratedInteractionsManager {
                     self.removeConversation(accountId: account.id,
                                             contactRingId: uriString,
                                             shouldUpdateConversation: shouldUpdateConversations)
+                    return
                 default:
                     return
                 }
