@@ -717,19 +717,29 @@ class ConversationsService {
         guard let jamiId = conversation.getParticipants().first?.jamiId else { return }
         let schema: URIType = conversation.isSip() ? .sip : .ring
         guard let uri = JamiURI(schema: schema, infoHash: jamiId).uriString else { return }
+        let finish: () -> Void = { [weak self] in
+            guard let self = self else { return }
+            self.removeSavedFiles(accountId: conversation.accountId, conversationId: conversation.id)
+            var values = self.conversations.value
+            if let index = values.firstIndex(of: conversation) {
+                values.remove(at: index)
+                self.conversations.accept(values)
+            }
+            if !keepConversation {
+                var serviceEvent = ServiceEvent(withEventType: .conversationRemoved)
+                serviceEvent.addEventInput(.conversationId, value: conversation.id)
+                serviceEvent.addEventInput(.accountId, value: conversation.accountId)
+                serviceEvent.addEventInput(.peerUri, value: uri)
+                self.responseStream.onNext(serviceEvent)
+            }
+        }
         self.dbManager.clearHistoryFor(accountId: conversation.accountId, and: uri, keepConversation: keepConversation)
             .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
-            .subscribe(onCompleted: { [weak self] in
-                guard let self = self else { return }
-                self.removeSavedFiles(accountId: conversation.accountId, conversationId: conversation.id)
-                var values = self.conversations.value
-                if let index = values.firstIndex(of: conversation) {
-                    values.remove(at: index)
-                    self.conversations.accept(values)
-                }
-            }, onError: { error in
-                self.log.error(error)
-            })
+            .subscribe(onCompleted: finish,
+                       onError: { [weak self] error in
+                           self?.log.error(error)
+                           finish()
+                       })
             .disposed(by: self.disposeBag)
     }
 

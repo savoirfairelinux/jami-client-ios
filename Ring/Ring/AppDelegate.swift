@@ -50,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         ContactsService(withContactsAdapter: ContactsAdapter(), dbManager: self.dBManager)
     }()
     private lazy var profileService: ProfilesService = {
-        ProfilesService(withProfilesAdapter: ProfilesAdapter(), dbManager: self.dBManager)
+        ProfilesService(withProfilesAdapter: ProfilesAdapter())
     }()
     private lazy var dataTransferService: DataTransferService = {
         DataTransferService(withDataTransferAdapter: DataTransferAdapter(),
@@ -63,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         LocationSharingService(dbManager: self.dBManager)
     }()
     private lazy var requestsService: RequestsService = {
-        RequestsService(withRequestsAdapter: RequestsAdapter(), dbManager: self.dBManager)
+        RequestsService(withRequestsAdapter: RequestsAdapter())
     }()
 
     private let voipRegistry = PKPushRegistry(queue: DispatchQueue.main)
@@ -603,33 +603,25 @@ extension AppDelegate {
     }
 
     func findAccountAndStartCall(uri: JamiURI, isVideo: Bool, type: AccountType) {
-        guard let currentAccount = self.accountService
-                .currentAccount else { return }
-        var hash = uri.hash ?? ""
-        var uriString = uri.uriString ?? ""
-        for account in self.accountService.accounts where account.type == type {
-            if type == AccountType.sip {
-                let conatactUri = JamiURI(schema: URIType.sip,
-                                          infoHash: hash,
-                                          account: account)
-                hash = conatactUri.hash ?? ""
-                uriString = conatactUri.uriString ?? ""
-            }
-            if hash.isEmpty || uriString.isEmpty { return }
-            self.contactsService
-                .getProfileForUri(uri: uriString,
-                                  accountId: account.id)
-                .subscribe(onNext: { (profile) in
-                    if currentAccount != account {
-                        self.accountService.currentAccount = account
-                    }
-                    self.appCoordinator
-                        .startCall(participant: hash,
-                                   name: profile.alias ?? "",
-                                   isVideo: isVideo)
-                })
-                .disposed(by: self.disposeBag)
+        guard let currentAccount = self.accountService.currentAccount,
+              let hash = uri.hash, !hash.isEmpty else { return }
+        let matching = self.accountService.accounts.filter { $0.type == type }
+        let ordered = matching.filter { $0 == currentAccount } + matching.filter { $0 != currentAccount }
+        guard let account = ordered.first(where: { self.knowsPeer(hash: hash, type: type, account: $0) })
+                ?? ordered.first else { return }
+        if account != currentAccount {
+            self.accountService.currentAccount = account
         }
+        self.appCoordinator.startCall(participant: hash, name: "", isVideo: isVideo)
+    }
+
+    private func knowsPeer(hash: String, type: AccountType, account: AccountModel) -> Bool {
+        guard type == AccountType.sip else {
+            return self.contactsService.isContact(hash: hash, accountId: account.id)
+        }
+        guard let uriString = ProfilesService
+                .profileUriString(for: JamiURI(schema: URIType.sip, infoHash: hash)) else { return false }
+        return self.profileService.hasStoredProfile(uri: uriString, accountId: account.id)
     }
 }
 

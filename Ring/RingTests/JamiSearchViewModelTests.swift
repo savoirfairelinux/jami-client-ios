@@ -50,7 +50,7 @@ final class JamiSearchViewModelTests: XCTestCase {
         let accountService: AccountsService = AccountsService(withAccountAdapter: AccountAdapter(), dbManager: dBManager)
         let contactsService: ContactsService = ContactsService(withContactsAdapter: ContactsAdapter(), dbManager: dBManager)
         let profileService: ProfilesService =
-            ProfilesService(withProfilesAdapter: ProfilesAdapter(), dbManager: dBManager)
+            ProfilesService(withProfilesAdapter: ProfilesAdapter())
         let dataTransferService: DataTransferService =
             DataTransferService(withDataTransferAdapter: DataTransferAdapter(),
                                 dbManager: dBManager)
@@ -59,7 +59,7 @@ final class JamiSearchViewModelTests: XCTestCase {
         let locationSharingService: LocationSharingService =
             LocationSharingService(dbManager: dBManager)
         let requestsService: RequestsService =
-            RequestsService(withRequestsAdapter: RequestsAdapter(), dbManager: dBManager)
+            RequestsService(withRequestsAdapter: RequestsAdapter())
 
         collaborationAdapter = ObjCMockCollaborationAdapter()
         collaborationService = CollaborationService(withCollaborationAdapter: collaborationAdapter)

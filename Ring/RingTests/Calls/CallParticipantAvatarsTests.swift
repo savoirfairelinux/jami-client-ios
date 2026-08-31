@@ -45,11 +45,7 @@ final class CallParticipantAvatarsTests: XCTestCase {
     }
 
     func testRegisteredNameArrivingAfterProviderResolvesName() {
-        let database = DBManager(conversationHelper: ConversationDataHelper(),
-                                 interactionHepler: InteractionDataHelper(),
-                                 dbConnections: DBContainer())
-        let profileService = ProfilesService(withProfilesAdapter: ProfilesAdapter(),
-                                             dbManager: database)
+        let profileService = ProfilesService(withProfilesAdapter: ProfilesAdapter())
         let nameService = NameService(withNameRegistrationAdapter: NameRegistrationAdapter())
         let avatars = CallParticipantAvatars(accountId: accountId1,
                                              profileService: profileService,
