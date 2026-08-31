@@ -354,8 +354,7 @@ class JamiSearchViewModel: ObservableObject {
                                                isContact: { self.injectionBag.contactsService.contact(withHash: $0) != nil })
         var jamsSearch: [ConversationViewModel] = []
         for model in newContacts where !blockedIds.contains(model.jamiId) {
-            let newConversation = self.createTemporaryJamsConversation(with: model, accountId: accountId)
-            jamsSearch.append(newConversation)
+            jamsSearch.append(self.createTemporaryJamsConversation(with: model, accountId: accountId))
         }
         return jamsSearch
     }

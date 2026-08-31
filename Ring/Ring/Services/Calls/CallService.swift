@@ -367,6 +367,7 @@ final class CallService {
         event.addEventInput(.callUUID, value: call.callKitUUID?.uuidString ?? "")
         event.addEventInput(.accountId, value: call.accountId)
         event.addEventInput(.callId, value: call.id.raw)
+        event.addEventInput(.name, value: call.displayName)
         event.addEventInput(.callType,
                             value: (call.direction == .incoming
                                         ? CallType.incoming : CallType.outgoing).rawValue)

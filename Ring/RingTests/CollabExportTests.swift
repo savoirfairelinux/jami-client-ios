@@ -37,6 +37,7 @@ class CollabExportTests: XCTestCase {
         let dbManager = DBManager(conversationHelper: ConversationDataHelper(),
                                   interactionHepler: InteractionDataHelper(),
                                   dbConnections: DBContainer())
+        let profileService = ProfilesService(withProfilesAdapter: ProfilesAdapter())
         injectionBag = InjectionBag(
             withDaemonService: DaemonService(dRingAdaptor: DRingAdapter()),
             withAccountService: AccountsService(withAccountAdapter: AccountAdapter(),
@@ -53,11 +54,9 @@ class CollabExportTests: XCTestCase {
             withAudioService: AudioService(),
             withDataTransferService: DataTransferService(
                 withDataTransferAdapter: DataTransferAdapter(), dbManager: dbManager),
-            withProfileService: ProfilesService(withProfilesAdapter: ProfilesAdapter(),
-                                                dbManager: dbManager),
+            withProfileService: profileService,
             withLocationSharingService: LocationSharingService(dbManager: dbManager),
-            withRequestsService: RequestsService(withRequestsAdapter: RequestsAdapter(),
-                                                 dbManager: dbManager),
+            withRequestsService: RequestsService(withRequestsAdapter: RequestsAdapter()),
             withSystemService: SystemService(withSystemAdapter: SystemAdapter()),
             withPeerSharingService: TestPeerSharingFactory.createService(),
             withCollaborationService: CollaborationService(

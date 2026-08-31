@@ -28,7 +28,6 @@ import RxRelay
  - receive only a contact request. When the other side does not support swarm.
  - receive only a conversation request. When the other side does support swarm and we already added contact for the peer.
  - receive both: a conversation request and a contact request. When the other side does support swarm and we do not have contact for the peer. In this case, we will keep only a conversation request.
- This class responsible for saving contacts vcard when contact request accepted or sent
  */
 
 enum RequestServiceError: Error {
@@ -45,15 +44,13 @@ class RequestsService {
 
     // MARK: observable requests
     let requests = BehaviorRelay(value: [RequestModel]())
-    let dbManager: DBManager
 
     private let responseStream = PublishSubject<ServiceEvent>()
     var sharedResponseStream: Observable<ServiceEvent>
 
     // MARK: initial loading
 
-    init(withRequestsAdapter requestsAdapter: RequestsAdapter, dbManager: DBManager) {
-        self.dbManager = dbManager
+    init(withRequestsAdapter requestsAdapter: RequestsAdapter) {
         self.requestsAdapter = requestsAdapter
         self.sharedResponseStream = responseStream.share()
         /**
@@ -139,8 +136,9 @@ class RequestsService {
             request.accountId == accountId && request.conversationId == conversationId
         }) {
             var values = requests.value
-            _ = values.remove(at: index)
+            let request = values.remove(at: index)
             self.requests.accept(values)
+            emit(.contactRequestAccepted, for: request)
         }
     }
 
@@ -188,24 +186,33 @@ class RequestsService {
         return !requests.isEmpty
     }
 
+    private func emit(_ eventType: ServiceEventType, for request: RequestModel?) {
+        guard let request, let uri = request.peerURI else { return }
+        var event = ServiceEvent(withEventType: eventType)
+        event.addEventInput(.accountId, value: request.accountId)
+        event.addEventInput(.peerUri, value: uri)
+        if let profile = request.peerProfile {
+            event.addEventInput(.profile, value: profile)
+        }
+        self.responseStream.onNext(event)
+    }
+
     // MARK: Request actions
     /**
      acceptContactRequest called for contact requests.
-     In case of success it will save profile for contact
      */
     func acceptContactRequest(jamiId: String, withAccount accountId: String) -> Observable<Void> {
         return Observable.create { [weak self] observable in
             guard let self = self else { return Disposables.create { } }
+            let request = self.requests.value.first {
+                $0.participants.first?.jamiId == jamiId && $0.accountId == accountId
+            }
             let success = self.requestsAdapter.acceptTrustRequest(fromContact: jamiId,
                                                                   withAccountId: accountId)
             if success {
-                if let request = self.requests.value.filter({ $0.participants.first?.jamiId == jamiId && $0.accountId == accountId
-                }).first {
-                    /// save profile
-                    let photo = (request.avatar != nil) ? request.avatar!.base64EncodedString() : ""
-                    let participantURI = JamiURI.init(schema: .ring, infoHash: jamiId)
-                    _ = self.createProfile(with: participantURI.uriString!, alias: request.name, photo: photo, accountId: request.accountId)
+                if let request {
                     self.removeRequest(withJamiId: jamiId, accountId: accountId)
+                    self.emit(.contactRequestAccepted, for: request)
                     if request.conversationId.isEmpty {
                         /// emit event so message could be generated for db
                         var event = ServiceEvent(withEventType: .contactAdded)
@@ -236,16 +243,9 @@ class RequestsService {
             guard let self = self else { return Disposables.create { } }
             let request = self.getRequest(withId: conversationId, accountId: accountId)
             let type = request?.conversationType ?? .invitesOnly
-            if let request = request,
-               request.isCoredialog(),
-               let jamiId = request.participants.first?.jamiId {
-                /// save profile
-                let photo = (request.avatar != nil) ? request.avatar!.base64EncodedString() : ""
-                let participantURI = JamiURI.init(schema: .ring, infoHash: jamiId)
-                _ = self.createProfile(with: participantURI.uriString!, alias: request.name, photo: photo, accountId: request.accountId)
-            }
             self.requestsAdapter.acceptConversationRequest(accountId, conversationId: conversationId)
             self.removeRequest(with: conversationId, accountId: accountId)
+            self.emit(.contactRequestAccepted, for: request)
             self.requestAccepted(conversationId: conversationId, withAccount: accountId, conversationType: type)
             observable.on(.completed)
             return Disposables.create { }
@@ -258,12 +258,15 @@ class RequestsService {
     func discardContactRequest(jamiId: String, withAccount accountId: String) -> Observable<Void> {
         return Observable.create { [weak self] observable in
             guard let self = self else { return Disposables.create { } }
+            let request = self.requests.value.first {
+                $0.participants.first?.jamiId == jamiId && $0.accountId == accountId
+            }
             let success = self.requestsAdapter.discardTrustRequest(fromContact: jamiId,
                                                                    withAccountId: accountId)
             if success {
                 self.removeRequest(withJamiId: jamiId, accountId: accountId)
-                if let request = self.requests.value.filter({ $0.participants.first?.jamiId == jamiId && $0.accountId == accountId
-                }).first, request.conversationId.isEmpty {
+                self.emit(.contactRequestRemoved, for: request)
+                if let request, request.conversationId.isEmpty {
                     /// emit event so message could be generated for db
                     var event = ServiceEvent(withEventType: .contactRequestDiscarded)
                     event.addEventInput(.accountId, value: accountId)
@@ -281,52 +284,33 @@ class RequestsService {
     func discardConverversationRequest(conversationId: String, withAccount accountId: String) -> Observable<Void> {
         return Observable.create { [weak self] observable in
             guard let self = self else { return Disposables.create { } }
+            let request = self.getRequest(withId: conversationId, accountId: accountId)
             self.requestsAdapter.declineConversationRequest(accountId, conversationId: conversationId)
             self.removeRequest(with: conversationId, accountId: accountId)
+            self.emit(.contactRequestRemoved, for: request)
             observable.on(.completed)
             return Disposables.create { }
         }
     }
-    /**
-     In case of success profile for contact will be saved
-     */
-    func sendContactRequest(to jamiId: String, withAccountId accountId: String, avatar: String? = nil, alias: String) -> Completable {
+    func sendContactRequest(to jamiId: String,
+                            withAccountId accountId: String,
+                            payload: Data?,
+                            peerProfile: Profile? = nil) -> Completable {
         return Completable.create { [weak self] completable in
             guard let self = self else { return Disposables.create { } }
-            do {
-                var payload: Data?
-                if let accountProfile = self.dbManager.accountProfile(for: accountId) {
-                    let cardChanged = accountProfile.alias != nil || accountProfile.photo != nil
-                    if cardChanged {
-                        payload = try VCardUtils.dataWithImageAndUUID(from: accountProfile)
-                    }
+            self.requestsAdapter.sendTrustRequest(toContact: jamiId, payload: payload, withAccountId: accountId)
+            if let uri = JamiURI(schema: .ring, infoHash: jamiId).uriString {
+                var event = ServiceEvent(withEventType: .contactRequestSent)
+                event.addEventInput(.accountId, value: accountId)
+                event.addEventInput(.peerUri, value: uri)
+                if var peerProfile {
+                    peerProfile.uri = uri
+                    event.addEventInput(.profile, value: peerProfile)
                 }
-                self.requestsAdapter.sendTrustRequest(toContact: jamiId, payload: payload, withAccountId: accountId)
-                let participantURI = JamiURI.init(schema: .ring, infoHash: jamiId)
-                let photo = avatar ?? ""
-                _ = self.createProfile(with: participantURI.uriString!, alias: alias, photo: photo, accountId: accountId)
-                completable(.completed)
-            } catch {
-                completable(.error(ContactServiceError.vCardSerializationFailed))
+                self.responseStream.onNext(event)
             }
+            completable(.completed)
             return Disposables.create { }
-        }
-    }
-
-    // MARK: database actions
-    private func createProfile(with contactUri: String, alias: String, photo: String, accountId: String) -> Profile? {
-        do {
-            return try self.dbManager.getProfile(for: contactUri, createIfNotExists: true, accountId: accountId, alias: alias, photo: photo)
-        } catch {
-            return nil
-        }
-    }
-
-    private func getProfile(with contactUri: String, accountId: String) -> Profile? {
-        do {
-            return try self.dbManager.getProfile(for: contactUri, createIfNotExists: false, accountId: accountId)
-        } catch {
-            return nil
         }
     }
 
@@ -335,8 +319,9 @@ class RequestsService {
             request.conversationId == conversationId && request.accountId == accountId
         }) {
             var values = self.requests.value
-            values.remove(at: index)
+            let request = values.remove(at: index)
             self.requests.accept(values)
+            emit(.contactRequestRemoved, for: request)
         }
     }
 }
