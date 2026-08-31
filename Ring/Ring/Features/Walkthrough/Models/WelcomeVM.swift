@@ -348,9 +348,19 @@ extension WelcomeVM {
                            password: password,
                            sipServer: server)
         if created {
+            self.createInitialSipProfile()
             self.accountCreated(stateHandler: stateHandler)
         } else {
             self.setState(state: .error(error: .unknown))
         }
+    }
+
+    private func createInitialSipProfile() {
+        guard let account = self.accountService.currentAccount else { return }
+        let accountUri = AccountModelHelper(withAccount: account).uri ?? ""
+        self.profileService.updateAccountProfile(accountId: account.id,
+                                                 alias: nil,
+                                                 photo: nil,
+                                                 accountURI: accountUri)
     }
 }

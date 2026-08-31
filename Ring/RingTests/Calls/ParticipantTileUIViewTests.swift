@@ -23,23 +23,15 @@ import RxSwift
 final class ParticipantTileUIViewTests: XCTestCase {
 
     private func makeProvider(name: String) -> AvatarProvider {
-        let dbManager = DBManager(conversationHelper: ConversationDataHelper(),
-                                  interactionHepler: InteractionDataHelper(),
-                                  dbConnections: DBContainer())
         let provider = AvatarProvider(
-            profileService: ProfilesService(withProfilesAdapter: ProfilesAdapter(),
-                                            dbManager: dbManager),
+            profileService: ProfilesService(withProfilesAdapter: ProfilesAdapter()),
             size: Constants.AvatarSize.call160)
         provider.profileName = name
         return provider
     }
 
     private func makePendingProvider(name: String) -> (AvatarProvider, PublishSubject<Data?>) {
-        let dbManager = DBManager(conversationHelper: ConversationDataHelper(),
-                                  interactionHepler: InteractionDataHelper(),
-                                  dbConnections: DBContainer())
-        let profileService = ProfilesService(withProfilesAdapter: ProfilesAdapter(),
-                                             dbManager: dbManager)
+        let profileService = ProfilesService(withProfilesAdapter: ProfilesAdapter())
         let avatarData = PublishSubject<Data?>()
         let provider = AvatarProvider(
             profileService: profileService,

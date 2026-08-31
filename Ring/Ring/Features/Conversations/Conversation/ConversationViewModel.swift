@@ -238,8 +238,6 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
         self.userName.accept(user.username)
         self.displayName.accept(user.firstName + " " + user.lastName)
         self.profileImageData.accept(user.profilePicture)
-        self.swiftUIModel.jamsAvatarData = user.profilePicture
-        self.swiftUIModel.jamsName = user.firstName + " " + user.lastName
         self.setConversation(conversation) // required to trigger the didSet
     }
 
@@ -415,7 +413,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
 
     private func subscribeNonSwarmProfiles(uri: String, accountId: String) {
         self.profileService
-            .getProfile(uri: uri, createIfNotexists: false, accountId: accountId)
+            .getProfile(uri: uri, accountId: accountId)
             .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe {[weak self] profile in
                 guard let self = self else { return }
