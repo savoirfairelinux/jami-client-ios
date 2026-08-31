@@ -64,10 +64,10 @@
 // ProfileEditor
 "profileEditor.editGroup" = "Edit group";
 "profileEditor.editContact" = "Edit contact";
-"profileEditor.name" = "Name";
+"profileEditor.name" = "Jina";
 "profileEditor.groupNamePlaceholder" = "Enter a group name";
 "profileEditor.contactNamePlaceholder" = "Enter a name";
-"profileEditor.description" = "Description";
+"profileEditor.description" = "Maelezo";
 "profileEditor.descriptionPlaceholder" = "Enter a description";
 "profileEditor.localChangesFooter" = "This name and picture are visible only on this device.";
 "profileEditor.resetOriginal" = "Use original name and picture";
@@ -762,12 +762,12 @@
 "peerServices.open" = "Kufungua";
 
 // Collaborative documents
-"collab.documents" = "Documents";
+"collab.documents" = "Hati";
 "collab.menu" = "Document actions";
 "collab.newDocument" = "New document";
 "collab.untitled" = "Untitled document";
 "collab.documentNameHint" = "Document name";
-"collab.create" = "Create";
+"collab.create" = "Kujenga";
 "collab.rename" = "Rename";
 "collab.openError" = "This document could not be opened.";
 "collab.noDocuments" = "No document has been written in this conversation yet.";
@@ -786,9 +786,9 @@
 "collab.versionBy" = "%1$@ — %2$@";
 "collab.versionDeltas" = "%1$@ — %2$@, %3$d change(s)";
 "collab.linkTitle" = "Kiungo";
-"collab.linkHint" = "Address";
-"collab.linkAdd" = "Add";
-"collab.linkRemove" = "Remove";
+"collab.linkHint" = "Anwani";
+"collab.linkAdd" = "Ongeza";
+"collab.linkRemove" = "Ondoa";
 "collab.exportPdf" = "Export to PDF";
 "collab.export" = "Export a local copy";
 "collab.exportHtml" = "Export to HTML";
@@ -803,9 +803,9 @@
 "collab.editableDocument" = "Editable document";
 "collab.createError" = "This document could not be created.";
 "collab.bold" = "Ujasiri";
-"collab.italic" = "Italic";
+"collab.italic" = "Kiswahili";
 "collab.underline" = "Underline";
-"collab.strikethrough" = "Strikethrough";
+"collab.strikethrough" = "Kuvunja";
 "collab.heading" = "Heading %d";
 "collab.bulletList" = "Bulleted list";
 "collab.orderedList" = "Numbered list";
@@ -818,7 +818,7 @@
 "collab.undo" = "Undo";
 "collab.redo" = "Redo";
 "collab.remove" = "Ondoa";
-"collab.open" = "Open";
+"collab.open" = "Kufungua";
 "collab.downloadAndOpen" = "Download and open";
 // Full labels shown inside the document-list row menu.
 "collab.removeLocallyMenu" = "Remove from this device";

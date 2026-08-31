@@ -67,7 +67,7 @@
 "profileEditor.name" = "Name";
 "profileEditor.groupNamePlaceholder" = "Enter a group name";
 "profileEditor.contactNamePlaceholder" = "Enter a name";
-"profileEditor.description" = "Description";
+"profileEditor.description" = "Aglam";
 "profileEditor.descriptionPlaceholder" = "Enter a description";
 "profileEditor.localChangesFooter" = "This name and picture are visible only on this device.";
 "profileEditor.resetOriginal" = "Use original name and picture";
@@ -80,7 +80,7 @@
 "profileEditor.resetPicture" = "Use original picture";
 "profileEditor.discardTitle" = "Discard changes?";
 "profileEditor.discardMessage" = "Your unsaved changes will be lost.";
-"profileEditor.discard" = "Discard";
+"profileEditor.discard" = "Sefsex";
 "profileEditor.saveError" = "The changes could not be saved. Please try again.";
 "profileEditor.editGroupHint" = "Opens the group editor";
 "profileEditor.editContactHint" = "Opens the contact editor";
@@ -767,7 +767,7 @@
 "collab.newDocument" = "New document";
 "collab.untitled" = "Untitled document";
 "collab.documentNameHint" = "Document name";
-"collab.create" = "Create";
+"collab.create" = "Snulfu";
 "collab.rename" = "Rename";
 "collab.openError" = "This document could not be opened.";
 "collab.noDocuments" = "No document has been written in this conversation yet.";
@@ -787,7 +787,7 @@
 "collab.versionDeltas" = "%1$@ — %2$@, %3$d change(s)";
 "collab.linkTitle" = "Link";
 "collab.linkHint" = "Address";
-"collab.linkAdd" = "Add";
+"collab.linkAdd" = "Rnu";
 "collab.linkRemove" = "Remove";
 "collab.exportPdf" = "Export to PDF";
 "collab.export" = "Export a local copy";

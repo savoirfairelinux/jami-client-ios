@@ -64,7 +64,7 @@
 // ProfileEditor
 "profileEditor.editGroup" = "Edit group";
 "profileEditor.editContact" = "Edit contact";
-"profileEditor.name" = "Name";
+"profileEditor.name" = "ਨਾਂ";
 "profileEditor.groupNamePlaceholder" = "Enter a group name";
 "profileEditor.contactNamePlaceholder" = "Enter a name";
 "profileEditor.description" = "Description";
@@ -767,7 +767,7 @@
 "collab.newDocument" = "New document";
 "collab.untitled" = "Untitled document";
 "collab.documentNameHint" = "Document name";
-"collab.create" = "Create";
+"collab.create" = "ਬਣਾਓ";
 "collab.rename" = "Rename";
 "collab.openError" = "This document could not be opened.";
 "collab.noDocuments" = "No document has been written in this conversation yet.";
@@ -803,9 +803,9 @@
 "collab.editableDocument" = "Editable document";
 "collab.createError" = "This document could not be created.";
 "collab.bold" = "Bold";
-"collab.italic" = "Italic";
+"collab.italic" = "ਟੇਡੇ ਅੱਖਰ";
 "collab.underline" = "Underline";
-"collab.strikethrough" = "Strikethrough";
+"collab.strikethrough" = "ਸਟ੍ਰਾਇਕਥਰੂ ਕਰੋ";
 "collab.heading" = "Heading %d";
 "collab.bulletList" = "Bulleted list";
 "collab.orderedList" = "Numbered list";
@@ -818,7 +818,7 @@
 "collab.undo" = "Undo";
 "collab.redo" = "Redo";
 "collab.remove" = "Remove";
-"collab.open" = "Open";
+"collab.open" = "ਖੋਲ੍ਹੋ";
 "collab.downloadAndOpen" = "Download and open";
 // Full labels shown inside the document-list row menu.
 "collab.removeLocallyMenu" = "Remove from this device";

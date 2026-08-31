@@ -803,9 +803,9 @@
 "collab.editableDocument" = "Editable document";
 "collab.createError" = "This document could not be created.";
 "collab.bold" = "තදකුරු";
-"collab.italic" = "Italic";
+"collab.italic" = "ඇලකුරු";
 "collab.underline" = "Underline";
-"collab.strikethrough" = "Strikethrough";
+"collab.strikethrough" = "මැදි ඉරැති";
 "collab.heading" = "Heading %d";
 "collab.bulletList" = "Bulleted list";
 "collab.orderedList" = "Numbered list";

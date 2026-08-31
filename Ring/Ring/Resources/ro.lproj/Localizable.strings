@@ -64,10 +64,10 @@
 // ProfileEditor
 "profileEditor.editGroup" = "Edit group";
 "profileEditor.editContact" = "Edit contact";
-"profileEditor.name" = "Name";
+"profileEditor.name" = "Nume";
 "profileEditor.groupNamePlaceholder" = "Enter a group name";
 "profileEditor.contactNamePlaceholder" = "Enter a name";
-"profileEditor.description" = "Description";
+"profileEditor.description" = "Descriere";
 "profileEditor.descriptionPlaceholder" = "Enter a description";
 "profileEditor.localChangesFooter" = "This name and picture are visible only on this device.";
 "profileEditor.resetOriginal" = "Use original name and picture";
@@ -80,7 +80,7 @@
 "profileEditor.resetPicture" = "Use original picture";
 "profileEditor.discardTitle" = "Discard changes?";
 "profileEditor.discardMessage" = "Your unsaved changes will be lost.";
-"profileEditor.discard" = "Discard";
+"profileEditor.discard" = "Nu salva";
 "profileEditor.saveError" = "The changes could not be saved. Please try again.";
 "profileEditor.editGroupHint" = "Opens the group editor";
 "profileEditor.editContactHint" = "Opens the contact editor";
@@ -762,12 +762,12 @@
 "peerServices.open" = "Deschide";
 
 // Collaborative documents
-"collab.documents" = "Documents";
+"collab.documents" = "Documente";
 "collab.menu" = "Document actions";
 "collab.newDocument" = "New document";
 "collab.untitled" = "Untitled document";
 "collab.documentNameHint" = "Document name";
-"collab.create" = "Create";
+"collab.create" = "Creează";
 "collab.rename" = "Rename";
 "collab.openError" = "This document could not be opened.";
 "collab.noDocuments" = "No document has been written in this conversation yet.";
@@ -785,10 +785,10 @@
 "collab.versionRestoreError" = "This version could not be restored.";
 "collab.versionBy" = "%1$@ — %2$@";
 "collab.versionDeltas" = "%1$@ — %2$@, %3$d change(s)";
-"collab.linkTitle" = "Link";
-"collab.linkHint" = "Address";
-"collab.linkAdd" = "Add";
-"collab.linkRemove" = "Remove";
+"collab.linkTitle" = "Asociază";
+"collab.linkHint" = "Adresa";
+"collab.linkAdd" = "Adaugă";
+"collab.linkRemove" = "Șterge";
 "collab.exportPdf" = "Export to PDF";
 "collab.export" = "Export a local copy";
 "collab.exportHtml" = "Export to HTML";
@@ -803,9 +803,9 @@
 "collab.editableDocument" = "Editable document";
 "collab.createError" = "This document could not be created.";
 "collab.bold" = "Gros";
-"collab.italic" = "Italic";
+"collab.italic" = "Înclinat";
 "collab.underline" = "Underline";
-"collab.strikethrough" = "Strikethrough";
+"collab.strikethrough" = "Tăiat";
 "collab.heading" = "Heading %d";
 "collab.bulletList" = "Bulleted list";
 "collab.orderedList" = "Numbered list";
@@ -816,9 +816,9 @@
 "collab.insertImage" = "Insert image";
 "collab.clearFormat" = "Clear formatting";
 "collab.undo" = "Anulează";
-"collab.redo" = "Redo";
+"collab.redo" = "Refă";
 "collab.remove" = "Șterge";
-"collab.open" = "Open";
+"collab.open" = "Deschide";
 "collab.downloadAndOpen" = "Download and open";
 // Full labels shown inside the document-list row menu.
 "collab.removeLocallyMenu" = "Remove from this device";
