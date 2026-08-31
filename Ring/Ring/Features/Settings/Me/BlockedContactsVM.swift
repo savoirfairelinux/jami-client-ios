@@ -50,7 +50,7 @@ class BlockedContactsRowVM: AvatarProvider, Identifiable {
 
     private func getProfile() {
         if let uri = contact.uriString {
-            self.profileService.getProfile(uri: uri, createIfNotexists: false, accountId: account.id)
+            self.profileService.getProfile(uri: uri, accountId: account.id)
                 .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
                 .subscribe(onNext: { [weak self ](profile) in
                     guard let self = self else { return }

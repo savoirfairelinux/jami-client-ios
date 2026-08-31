@@ -36,11 +36,13 @@ class ProfilesService {
 
     private let profilesLock = NSLock()
     private var profiles: ThreadSafeDictionary<ProfileKey, ReplaySubject<Profile>>
+    private var jamsSearchProfiles: ThreadSafeDictionary<ProfileKey, Profile>
+    private var profileVersions: ThreadSafeDictionary<ProfileKey, Int>
     var accountProfiles: ThreadSafeDictionary<String, ReplaySubject<Profile>>
 
     private let avatarsCache = NSCache<NSString, UIImage>()
 
-    let dbManager: DBManager
+    private let profileStore: ProfileStore
 
     // Shared scheduler for profile resolution so we don't allocate a new
     // background queue on every resolution request.
@@ -48,63 +50,136 @@ class ProfilesService {
 
     let disposeBag = DisposeBag()
 
-    init(withProfilesAdapter adapter: ProfilesAdapter, dbManager: DBManager) {
+    init(withProfilesAdapter adapter: ProfilesAdapter,
+         profileStore: ProfileStore = ProfileStore()) {
         self.profiles = ThreadSafeDictionary(lock: profilesLock)
+        self.jamsSearchProfiles = ThreadSafeDictionary(lock: profilesLock)
+        self.profileVersions = ThreadSafeDictionary(lock: profilesLock)
         self.accountProfiles = ThreadSafeDictionary(lock: profilesLock)
-        profilesAdapter = adapter
-        self.dbManager = dbManager
+        self.profilesAdapter = adapter
+        self.profileStore = profileStore
         avatarsCache.totalCostLimit = 8 * 1024 * 1024
     }
 
     func profileReceived(contact uri: String, withAccountId accountId: String, path: String) {
-        let uri = JamiURI(schema: URIType.ring, infoHash: uri)
-        guard let uriString = uri.uriString,
-              let profile = VCardUtils.parseToProfile(filePath: path) else { return }
-        _ = self.dbManager
-            .createOrUpdateRingProfile(profileUri: uriString,
-                                       alias: profile.alias,
-                                       image: profile.photo,
-                                       accountId: accountId)
-        self.triggerProfileSignal(uri: uriString, createIfNotexists: false, accountId: accountId)
+        guard let uriString = JamiURI(schema: URIType.ring, infoHash: uri).uriString else { return }
+        removePeerProfiles(uri: uriString, accountId: accountId)
+        self.triggerProfileSignal(uri: uriString, accountId: accountId)
     }
 
-    private func triggerProfileSignal(uri: String, createIfNotexists: Bool, accountId: String) {
-        guard let profileObservable = self.profiles[ProfileKey(accountId: accountId, uri: uri)] else {
+    func cacheJamsSearchProfile(uri: String, accountId: String, alias: String?, photo: String?) {
+        let uri = normalizedURI(uri)
+        let profile = Profile(uri: uri, alias: alias, photo: photo, type: ProfileType.ring.rawValue)
+        guard !profile.isEmpty else { return }
+        jamsSearchProfiles[ProfileKey(accountId: accountId, uri: uri)] = profile
+        triggerProfileSignal(uri: uri, accountId: accountId)
+    }
+
+    func invitationAccepted(_ profile: Profile, accountId: String) {
+        profileStore.save(profile, accountId: accountId, source: .invitation)
+        triggerProfileSignal(uri: profile.uri, accountId: accountId)
+    }
+
+    func invitationSent(uri: String, accountId: String) {
+        let uri = normalizedURI(uri)
+        if let profile = jamsSearchProfiles[ProfileKey(accountId: accountId, uri: uri)] {
+            profileStore.save(profile, accountId: accountId, source: .jamsSearch)
+        }
+        triggerProfileSignal(uri: uri, accountId: accountId)
+    }
+
+    func peerDiscarded(uri: String, accountId: String) {
+        removePeerProfiles(uri: uri, accountId: accountId)
+        triggerProfileSignal(uri: uri, accountId: accountId)
+    }
+
+    func conversationDeleted(uri: String, accountId: String) {
+        let uri = normalizedURI(uri)
+        jamsSearchProfiles.removeValue(forKey: ProfileKey(accountId: accountId, uri: uri))
+        profileStore.removeManagedProfiles(uri: uri, accountId: accountId)
+        triggerProfileSignal(uri: uri, accountId: accountId)
+    }
+
+    func accountContactsCleared(accountId: String) {
+        for key in jamsSearchProfiles.keys where key.accountId == accountId {
+            jamsSearchProfiles.removeValue(forKey: key)
+        }
+        profileStore.removeAllManagedProfiles(accountId: accountId)
+    }
+
+    private func triggerProfileSignal(uri: String, accountId: String) {
+        let uri = normalizedURI(uri)
+        let key = ProfileKey(accountId: accountId, uri: uri)
+        guard let profileObservable = self.profiles[key] else {
             return
         }
-        self.dbManager
-            .profileObservable(for: uri, createIfNotExists: createIfNotexists, accountId: accountId)
+        let version = profileVersions.mutate { versions -> Int in
+            let next = (versions[key] ?? 0) + 1
+            versions[key] = next
+            return next
+        }
+        Observable.deferred { [weak self] () -> Observable<Profile> in
+            guard let self else { return .just(Profile.empty) }
+            return .just(self.resolveProfile(for: key))
+        }
             .subscribe(on: self.resolutionScheduler)
-            .subscribe { profile in
+            .subscribe(onNext: { [weak self] profile in
+                guard self?.profileVersions[key] == version else { return }
                 profileObservable.onNext(profile)
-            } onError: { [weak self] error in
-                // Emit an empty profile instead of erroring so the cached subject stays alive for a later real profile.
-                self?.log.debug("No profile for \(uri): \(error). Emitting empty placeholder.")
-                profileObservable.onNext(Profile.empty)
-            }
+            })
             .disposed(by: self.disposeBag)
     }
 
-    func getProfile(uri: String, createIfNotexists: Bool, accountId: String) -> Observable<Profile> {
+    func getProfile(uri: String, accountId: String) -> Observable<Profile> {
+        let uri = normalizedURI(uri)
         let (subject, inserted) = profiles.getOrInsert(key: ProfileKey(accountId: accountId, uri: uri)) {
             ReplaySubject<Profile>.create(bufferSize: 1)
         }
         if inserted {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-                self?.triggerProfileSignal(uri: uri,
-                                           createIfNotexists: createIfNotexists,
-                                           accountId: accountId)
+                self?.triggerProfileSignal(uri: uri, accountId: accountId)
             }
         }
         return subject.asObservable().share()
     }
 
+    private func resolveProfile(for key: ProfileKey) -> Profile {
+        let localOverride = profileStore.profile(uri: key.uri, accountId: key.accountId, source: .localOverride)
+        let peerProfile = profileStore.profile(uri: key.uri, accountId: key.accountId, source: .contact)
+            ?? profileStore.legacyContactProfile(uri: key.uri, accountId: key.accountId)
+            ?? jamsSearchProfile(for: key)
+            ?? invitationProfile(for: key)
+        return peerProfile?.merging(preferring: localOverride) ?? localOverride ?? Profile.empty
+    }
+
+    private func jamsSearchProfile(for key: ProfileKey) -> Profile? {
+        jamsSearchProfiles[key]
+            ?? profileStore.profile(uri: key.uri, accountId: key.accountId, source: .jamsSearch)
+    }
+
+    private func invitationProfile(for key: ProfileKey) -> Profile? {
+        profileStore.profile(uri: key.uri, accountId: key.accountId, source: .invitation)
+    }
+
+    private func removePeerProfiles(uri: String, accountId: String) {
+        let uri = normalizedURI(uri)
+        jamsSearchProfiles.removeValue(forKey: ProfileKey(accountId: accountId, uri: uri))
+        profileStore.remove(uri: uri, accountId: accountId, source: .jamsSearch)
+        profileStore.remove(uri: uri, accountId: accountId, source: .invitation)
+    }
+
+    private func normalizedURI(_ uri: String) -> String {
+        JamiURI(from: uri).uriString ?? uri
+    }
+
     func getProfileWithoutLocalOverride(uri: String, accountId: String) -> Profile? {
-        dbManager.getProfileWithoutLocalOverride(for: uri, accountId: accountId)
+        let uri = normalizedURI(uri)
+        return profileStore.profile(uri: uri, accountId: accountId, source: .contact)
+            ?? profileStore.legacyContactProfile(uri: uri, accountId: accountId)
     }
 
     func getLocalProfileOverride(uri: String, accountId: String) -> Profile? {
-        dbManager.localProfileOverride(for: uri, accountId: accountId)
+        profileStore.profile(uri: normalizedURI(uri), accountId: accountId, source: .localOverride)
     }
 
     @discardableResult
@@ -112,12 +187,18 @@ class ProfilesService {
                                     accountId: String,
                                     alias: String?,
                                     photo: String?) -> Bool {
-        let saved = dbManager.saveLocalProfileOverride(profileUri: uri,
-                                                       alias: alias,
-                                                       photo: photo,
-                                                       accountId: accountId)
+        let uri = normalizedURI(uri)
+        let type = uri.contains("ring") ? ProfileType.ring : ProfileType.sip
+        let profile = Profile(uri: uri, alias: alias, photo: photo, type: type.rawValue)
+        let saved: Bool
+        if profile.isEmpty {
+            profileStore.remove(uri: uri, accountId: accountId, source: .localOverride)
+            saved = true
+        } else {
+            saved = profileStore.save(profile, accountId: accountId, source: .localOverride)
+        }
         if saved {
-            triggerProfileSignal(uri: uri, createIfNotexists: false, accountId: accountId)
+            triggerProfileSignal(uri: uri, accountId: accountId)
         }
         return saved
     }
@@ -141,16 +222,23 @@ extension ProfilesService {
         guard let profileObservable = self.accountProfiles[accountId] else {
             return
         }
-        self.dbManager
-            .accountProfileObservable(for: accountId)
+        Observable.deferred { [weak self] () -> Observable<Profile> in
+            guard let self else { return .just(Profile.empty) }
+            return .just(self.profileStore.accountProfile(accountId: accountId) ?? Profile.empty)
+        }
             .subscribe(on: self.resolutionScheduler)
             .subscribe(onNext: { profile in
                 profileObservable.onNext(profile)
-            }, onError: { [weak self] error in
-                self?.log.debug("No account profile for \(accountId): \(error). Emitting empty placeholder.")
-                profileObservable.onNext(Profile.empty)
             })
             .disposed(by: self.disposeBag)
+    }
+
+    /// The account's own vCard, as sent with an outgoing trust request.
+    /// Nil when the user never set a name or a picture.
+    func accountVCardPayload(accountId: String) -> Data? {
+        guard let profile = profileStore.accountProfile(accountId: accountId),
+              !profile.isEmpty else { return nil }
+        return try? VCardUtils.dataWithImageAndUUID(from: profile)
     }
 
     func accountProfileUpdated(accountId: String) {
@@ -158,9 +246,9 @@ extension ProfilesService {
     }
 
     func updateAccountProfile(accountId: String, alias: String?, photo: String?, accountURI: String) {
-        if self.dbManager
-            .saveAccountProfile(alias: alias, photo: photo,
-                                accountId: accountId, accountURI: accountURI) {
+        let type = accountURI.contains("ring") ? ProfileType.ring : ProfileType.sip
+        let profile = Profile(uri: accountURI, alias: alias, photo: photo, type: type.rawValue)
+        if self.profileStore.saveAccountProfile(profile, accountId: accountId) {
             self.triggerAccountProfileSignal(accountId: accountId)
         }
     }
