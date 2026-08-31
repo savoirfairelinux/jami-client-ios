@@ -343,9 +343,9 @@ public final class AdapterService: AdapterDelegate {
             .nameFromMergedProfile(basePath: buildVCardPath(accountId: accountId,
                                                             contactId: contactId,
                                                             type: type),
-                                   overridePath: overrideVCardPath(accountId: accountId,
-                                                                   contactId: contactId,
-                                                                   type: type))
+                                   customPath: customVCardPath(accountId: accountId,
+                                                               contactId: contactId,
+                                                               type: type))
         return nonEmptyName(name)
     }
 
@@ -355,8 +355,8 @@ public final class AdapterService: AdapterDelegate {
 
     private func contactProfilePhotoAndName(accountId: String, contactId: String, type: String) -> (photo: String?, name: String?) {
         let path = buildVCardPath(accountId: accountId, contactId: contactId, type: type)
-        let overridePath = overrideVCardPath(accountId: accountId, contactId: contactId, type: type)
-        guard let profile = VCardUtils.parseMergedProfile(basePath: path, overridePath: overridePath) else {
+        let customPath = customVCardPath(accountId: accountId, contactId: contactId, type: type)
+        guard let profile = VCardUtils.parseMergedProfile(basePath: path, customPath: customPath) else {
             return (nil, nil)
         }
         return (profile.photo, nonEmptyName(profile.alias))
@@ -367,11 +367,11 @@ public final class AdapterService: AdapterDelegate {
         return (trimmed?.isEmpty == false) ? trimmed : nil
     }
 
-    private func overrideVCardPath(accountId: String, contactId: String, type: String) -> String? {
+    private func customVCardPath(accountId: String, contactId: String, type: String) -> String? {
         guard type == "conversation", let documents = Constants.documentsPath else { return nil }
-        return ProfilePathHelper.existingContactProfileOverridePath(accountId: accountId,
-                                                                    contactId: contactId,
-                                                                    documents: documents)
+        return ProfilePathHelper.customProfilePath(accountId: accountId,
+                                                   contactId: contactId,
+                                                   documents: documents)
     }
 
     private func buildVCardPath(accountId: String, contactId: String, type: String) -> String? {

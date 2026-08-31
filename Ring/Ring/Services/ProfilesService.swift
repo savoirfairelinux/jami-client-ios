@@ -143,12 +143,12 @@ class ProfilesService {
     }
 
     private func resolveStoredProfile(for key: ProfileKey) -> Profile? {
-        let localOverride = profileStore.profile(uri: key.uri, accountId: key.accountId, source: .localOverride)
+        let customProfile = profileStore.profile(uri: key.uri, accountId: key.accountId, source: .custom)
         let peerProfile = profileStore.profile(uri: key.uri, accountId: key.accountId, source: .contact)
             ?? profileStore.legacyContactProfile(uri: key.uri, accountId: key.accountId)
             ?? profileStore.profile(uri: key.uri, accountId: key.accountId, source: .jamsSearch)
             ?? invitationProfile(for: key)
-        return peerProfile?.merging(preferring: localOverride) ?? localOverride
+        return peerProfile?.merging(preferring: customProfile) ?? customProfile
     }
 
     private func invitationProfile(for key: ProfileKey) -> Profile? {
@@ -165,30 +165,30 @@ class ProfilesService {
         JamiURI(from: uri).uriString ?? uri
     }
 
-    func getProfileWithoutLocalOverride(uri: String, accountId: String) -> Profile? {
+    func getOriginalProfile(uri: String, accountId: String) -> Profile? {
         let uri = normalizedURI(uri)
         return profileStore.profile(uri: uri, accountId: accountId, source: .contact)
             ?? profileStore.legacyContactProfile(uri: uri, accountId: accountId)
     }
 
-    func getLocalProfileOverride(uri: String, accountId: String) -> Profile? {
-        profileStore.profile(uri: normalizedURI(uri), accountId: accountId, source: .localOverride)
+    func getCustomProfile(uri: String, accountId: String) -> Profile? {
+        profileStore.profile(uri: normalizedURI(uri), accountId: accountId, source: .custom)
     }
 
     @discardableResult
-    func updateLocalProfileOverride(uri: String,
-                                    accountId: String,
-                                    alias: String?,
-                                    photo: String?) -> Bool {
+    func updateCustomProfile(uri: String,
+                             accountId: String,
+                             alias: String?,
+                             photo: String?) -> Bool {
         let uri = normalizedURI(uri)
         let type = ProfileType(uri: uri)
         let profile = Profile(uri: uri, alias: alias, photo: photo, type: type.rawValue)
         let saved: Bool
         if profile.isEmpty {
-            profileStore.remove(uri: uri, accountId: accountId, source: .localOverride)
+            profileStore.remove(uri: uri, accountId: accountId, source: .custom)
             saved = true
         } else {
-            saved = profileStore.save(profile, accountId: accountId, source: .localOverride)
+            saved = profileStore.save(profile, accountId: accountId, source: .custom)
         }
         if saved {
             triggerProfileSignal(uri: uri, accountId: accountId)

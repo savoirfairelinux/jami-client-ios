@@ -108,7 +108,7 @@ final class VCardUtilsTests: XCTestCase {
         XCTAssertEqual(data, expectedData)
     }
 
-    func testLocalOverrideOmitsFieldsThatWereNotCustomized() throws {
+    func testCustomProfileOmitsFieldsThatWereNotCustomized() throws {
         let profile = Profile(uri: getJamiUri(),
                               alias: profileName1,
                               photo: nil,
@@ -121,7 +121,7 @@ final class VCardUtilsTests: XCTestCase {
         XCTAssertNil(parsed?.photo)
     }
 
-    func testLocalOverrideCanBeReadWithoutRemoteProfile() throws {
+    func testCustomProfileCanBeReadWithoutRemoteProfile() throws {
         let profile = Profile(uri: getJamiUri(),
                               alias: profileName1,
                               photo: photo,
@@ -134,7 +134,7 @@ final class VCardUtilsTests: XCTestCase {
         defer { try? FileManager.default.removeItem(at: url) }
 
         let parsed = VCardUtils.parseMergedProfile(basePath: nil,
-                                                   overridePath: url.path)
+                                                   customPath: url.path)
 
         XCTAssertEqual(parsed?.alias, profileName1)
         XCTAssertEqual(parsed?.photo, photo)
@@ -168,6 +168,12 @@ final class ProfilePathHelperTests: XCTestCase {
         documents
             .appendingPathComponent(accountId, isDirectory: true)
             .appendingPathComponent("profiles", isDirectory: true)
+    }
+
+    private var customProfilesFolder: URL {
+        documents
+            .appendingPathComponent(accountId, isDirectory: true)
+            .appendingPathComponent("custom-profiles", isDirectory: true)
     }
 
     private func vCard(photo: String) -> Data {
@@ -282,6 +288,46 @@ final class ProfilePathHelperTests: XCTestCase {
     }
 
     func testNoProfileResolvesToNil() {
+        XCTAssertNil(ProfilePathHelper.existingContactProfilePath(accountId: accountId,
+                                                                  contactId: jamiId1,
+                                                                  documents: documents))
+    }
+
+    // MARK: - Custom peer profiles
+
+    private var customProfileURL: URL {
+        let encoded = Data(jamiId1.utf8).base64EncodedString()
+        return customProfilesFolder.appendingPathComponent("\(encoded).vcf")
+    }
+
+    func testCustomProfileIsReadFromCustomProfilesFolder() throws {
+        // Arrange
+        try writeManagedProfile(folder: .custom, photo: profilePhoto)
+        // Act
+        let path = try XCTUnwrap(ProfilePathHelper.customProfilePath(accountId: accountId,
+                                                                     contactId: jamiId1,
+                                                                     documents: documents))
+        // Assert
+        XCTAssertEqual(path, customProfileURL.path)
+        XCTAssertEqual(VCardUtils.parseToProfile(filePath: path)?.photo, profilePhoto)
+    }
+
+    func testCustomProfileIsKeyedByHashWhateverTheURIForm() throws {
+        // Arrange
+        try writeManagedProfile(folder: .custom, photo: profilePhoto)
+        // Act & Assert
+        for contactId in [jamiId1, "ring:\(jamiId1)", "jami:\(jamiId1)", "<\(jamiId1)@ring.dht>"] {
+            let path = ProfilePathHelper.customProfilePath(accountId: accountId,
+                                                           contactId: contactId,
+                                                           documents: documents)
+            XCTAssertEqual(path, customProfileURL.path, "failed for \(contactId)")
+        }
+    }
+
+    func testCustomProfileIsNotMistakenForAProfile() throws {
+        // Arrange
+        try writeManagedProfile(folder: .custom, photo: profilePhoto)
+        // Act & Assert
         XCTAssertNil(ProfilePathHelper.existingContactProfilePath(accountId: accountId,
                                                                   contactId: jamiId1,
                                                                   documents: documents))

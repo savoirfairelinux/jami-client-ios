@@ -234,20 +234,20 @@ final class ConversationDestructiveActionExecutor {
                         .removeConversationFromDB(conversation: conversation,
                                                   keepConversation: false)
                 } else {
-                    self?.clearLocalProfileOverride(for: conversation)
+                    self?.clearCustomProfile(for: conversation)
                 }
                 completion?()
             })
             .disposed(by: disposeBag)
     }
 
-    private func clearLocalProfileOverride(for conversation: ConversationModel) {
+    private func clearCustomProfile(for conversation: ConversationModel) {
         guard let participantId = conversation.getParticipants().first?.jamiId else { return }
         let schema: URIType = conversation.isSip() ? .sip : .ring
         guard let uri = JamiURI(schema: schema, infoHash: participantId).uriString else { return }
-        profileService.updateLocalProfileOverride(uri: uri,
-                                                  accountId: conversation.accountId,
-                                                  alias: nil,
-                                                  photo: nil)
+        profileService.updateCustomProfile(uri: uri,
+                                           accountId: conversation.accountId,
+                                           alias: nil,
+                                           photo: nil)
     }
 }

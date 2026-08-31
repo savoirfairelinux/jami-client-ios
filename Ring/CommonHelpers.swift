@@ -82,11 +82,12 @@ enum CommonHelpers {
 enum ManagedProfileFolder: String, CaseIterable {
     case jamsSearch = "jams-profiles"
     case invitation = "invitation-profiles"
+    case custom = "custom-profiles"
+
+    static let contactProfileFallbacks: [ManagedProfileFolder] = [.jamsSearch, .invitation]
 }
 
 enum ProfilePathHelper {
-    static let overrideFileSuffix = "_o.vcf"
-
     static func jamiHash(from uri: String) -> String {
         return uri
             .replacingOccurrences(of: "<", with: "")
@@ -149,17 +150,6 @@ enum ProfilePathHelper {
         return profilesFolder + "\(encoded).vcf"
     }
 
-    static func contactProfileOverridePath(accountId: String,
-                                           profileURI: String,
-                                           documents: URL,
-                                           createIfNotExists: Bool) -> String? {
-        guard let profilesFolder = contactsPath(accountId: accountId,
-                                                documents: documents,
-                                                createIfNotExists: createIfNotExists) else { return nil }
-        let encoded = Data(profileURI.utf8).base64EncodedString()
-        return profilesFolder + encoded + overrideFileSuffix
-    }
-
     static func profileFolderPath(accountId: String,
                                   folder: ManagedProfileFolder,
                                   documents: URL) -> String {
@@ -195,6 +185,14 @@ enum ProfilePathHelper {
         return folderURL.appendingPathComponent(encoded + ".vcf").path
     }
 
+    static func customProfilePath(accountId: String, contactId: String, documents: URL) -> String? {
+        return profilePath(accountId: accountId,
+                           contactId: contactId,
+                           folder: .custom,
+                           documents: documents,
+                           createIfNotExists: false)
+    }
+
     static func existingContactProfilePath(accountId: String, contactId: String, documents: URL) -> String? {
         if let path = contactProfilePath(accountId: accountId,
                                          contactId: contactId,
@@ -211,28 +209,12 @@ enum ProfilePathHelper {
             }
             return path
         }
-        for folder in ManagedProfileFolder.allCases {
+        for folder in ManagedProfileFolder.contactProfileFallbacks {
             guard let path = profilePath(accountId: accountId,
                                          contactId: contactId,
                                          folder: folder,
                                          documents: documents,
                                          createIfNotExists: false),
-                  FileManager.default.fileExists(atPath: path) else {
-                continue
-            }
-            return path
-        }
-        return nil
-    }
-
-    static func existingContactProfileOverridePath(accountId: String,
-                                                   contactId: String,
-                                                   documents: URL) -> String? {
-        for profileURI in profileURICandidates(for: contactId) {
-            guard let path = contactProfileOverridePath(accountId: accountId,
-                                                        profileURI: profileURI,
-                                                        documents: documents,
-                                                        createIfNotExists: false),
                   FileManager.default.fileExists(atPath: path) else {
                 continue
             }

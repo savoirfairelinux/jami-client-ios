@@ -237,14 +237,14 @@ final class ProfilesServiceTests: XCTestCase {
         let uri = try XCTUnwrap(JamiURI(schema: .ring, infoHash: jamiId1).uriString)
         seed(profile(profileName1, uri: uri), accountId: accountId1, source: .invitation)
         seed(profile(profileName2, uri: uri), accountId: accountId1, source: .jamsSearch)
-        seed(profile("My name for them", uri: uri), accountId: accountId1, source: .localOverride)
+        seed(profile("My name for them", uri: uri), accountId: accountId1, source: .custom)
         seed(profile(profileName1, uri: uri), accountId: accountId1, source: .contact)
 
         service.conversationDeleted(uri: uri, accountId: accountId1)
 
         XCTAssertNil(stored(uri: uri, accountId: accountId1, source: .invitation))
         XCTAssertNil(stored(uri: uri, accountId: accountId1, source: .jamsSearch))
-        XCTAssertNil(stored(uri: uri, accountId: accountId1, source: .localOverride))
+        XCTAssertNil(stored(uri: uri, accountId: accountId1, source: .custom))
         XCTAssertNotNil(stored(uri: uri, accountId: accountId1, source: .contact),
                         "the peer's own vCard belongs to libjami and must survive")
     }
@@ -396,7 +396,7 @@ final class RequestsServiceEventTests: XCTestCase {
 
 final class ProfileMergingTests: XCTestCase {
 
-    func testLocalOverrideReplacesOnlyCustomizedName() {
+    func testCustomProfileReplacesOnlyCustomizedName() {
         let remote = Profile(uri: "jami:peer",
                              alias: "Remote name",
                              photo: "remote-photo",
@@ -412,7 +412,7 @@ final class ProfileMergingTests: XCTestCase {
         XCTAssertEqual(merged.photo, "remote-photo")
     }
 
-    func testLocalOverrideReplacesOnlyCustomizedPhoto() {
+    func testCustomProfileReplacesOnlyCustomizedPhoto() {
         let remote = Profile(uri: "jami:peer",
                              alias: "Remote name",
                              photo: "remote-photo",
@@ -428,7 +428,7 @@ final class ProfileMergingTests: XCTestCase {
         XCTAssertEqual(merged.photo, "local-photo")
     }
 
-    func testEmptyLocalOverrideRestoresRemoteProfile() {
+    func testEmptyCustomProfileRestoresRemoteProfile() {
         let remote = Profile(uri: "jami:peer",
                              alias: "Updated remote name",
                              photo: "updated-remote-photo",

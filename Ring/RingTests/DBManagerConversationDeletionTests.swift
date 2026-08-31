@@ -120,22 +120,22 @@ final class DBManagerConversationDeletionTests: XCTestCase {
                                                        profileURI: $0,
                                                        documents: documents)
         }
-        let overridePath = ProfilePathHelper.contactProfileOverridePath(accountId: accountId,
-                                                                        profileURI: uri,
+        let customProfile = try XCTUnwrap(ProfilePathHelper.profilePath(accountId: accountId,
+                                                                        contactId: uri,
+                                                                        folder: .custom,
                                                                         documents: documents,
-                                                                        createIfNotExists: true)
-        let localOverride = try XCTUnwrap(overridePath)
+                                                                        createIfNotExists: true))
         let data = Data("profile".utf8)
         try data.write(to: URL(fileURLWithPath: peerVCard))
-        for path in legacyProfiles + [localOverride] {
+        for path in legacyProfiles + [customProfile] {
             try data.write(to: URL(fileURLWithPath: path))
         }
 
         store.removeLegacyContactProfiles(uri: uri, accountId: accountId)
-        store.remove(uri: uri, accountId: accountId, source: .localOverride)
+        store.remove(uri: uri, accountId: accountId, source: .custom)
 
         XCTAssertTrue(FileManager.default.fileExists(atPath: peerVCard))
-        for path in legacyProfiles + [localOverride] {
+        for path in legacyProfiles + [customProfile] {
             XCTAssertFalse(FileManager.default.fileExists(atPath: path))
         }
     }

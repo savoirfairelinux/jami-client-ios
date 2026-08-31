@@ -19,20 +19,29 @@
 import Foundation
 
 enum ProfileSource {
-    case localOverride
+    case custom
     case contact
     case jamsSearch
     case invitation
+
+    var managedFolder: ManagedProfileFolder? {
+        switch self {
+        case .custom: return .custom
+        case .jamsSearch: return .jamsSearch
+        case .invitation: return .invitation
+        case .contact: return nil
+        }
+    }
 }
 
 enum ManagedProfileSource: CaseIterable {
-    case localOverride
+    case custom
     case jamsSearch
     case invitation
 
     var profileSource: ProfileSource {
         switch self {
-        case .localOverride: return .localOverride
+        case .custom: return .custom
         case .jamsSearch: return .jamsSearch
         case .invitation: return .invitation
         }
@@ -51,7 +60,7 @@ class ProfileStore {
               FileManager.default.fileExists(atPath: path),
               let profile = VCardUtils.parseToProfile(filePath: path) else { return nil }
         switch source {
-        case .localOverride:
+        case .custom:
             return profile
         case .contact, .jamsSearch, .invitation:
             return profile.isEmpty ? nil : profile
@@ -59,7 +68,7 @@ class ProfileStore {
     }
 
     func hasProfile(uri: String, accountId: String) -> Bool {
-        let sources: [ProfileSource] = [.contact, .localOverride]
+        let sources: [ProfileSource] = [.contact, .custom]
         return sources.contains { source in
             guard let path = path(uri: uri,
                                   accountId: accountId,
@@ -188,29 +197,16 @@ class ProfileStore {
                       source: ProfileSource,
                       createIfNotExists: Bool) -> String? {
         guard let documents = Constants.documentsPath else { return nil }
-        switch source {
-        case .contact:
+        guard let folder = source.managedFolder else {
             return ProfilePathHelper.contactProfilePath(accountId: accountId,
                                                         contactId: uri,
                                                         documents: documents)
-        case .localOverride:
-            return ProfilePathHelper.contactProfileOverridePath(accountId: accountId,
-                                                                profileURI: uri,
-                                                                documents: documents,
-                                                                createIfNotExists: createIfNotExists)
-        case .jamsSearch:
-            return ProfilePathHelper.profilePath(accountId: accountId,
-                                                 contactId: uri,
-                                                 folder: .jamsSearch,
-                                                 documents: documents,
-                                                 createIfNotExists: createIfNotExists)
-        case .invitation:
-            return ProfilePathHelper.profilePath(accountId: accountId,
-                                                 contactId: uri,
-                                                 folder: .invitation,
-                                                 documents: documents,
-                                                 createIfNotExists: createIfNotExists)
         }
+        return ProfilePathHelper.profilePath(accountId: accountId,
+                                             contactId: uri,
+                                             folder: folder,
+                                             documents: documents,
+                                             createIfNotExists: createIfNotExists)
     }
 
     private func sipPeerProfilePath(uri: String,

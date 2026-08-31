@@ -161,19 +161,19 @@ class VCardUtils {
         return parseProfile(from: profileStr)
     }
 
-    class func nameFromMergedProfile(basePath: String?, overridePath: String?) -> String? {
-        if let overridePath,
-           let name = getNameFromVCard(filePath: overridePath),
+    class func nameFromMergedProfile(basePath: String?, customPath: String?) -> String? {
+        if let customPath,
+           let name = getNameFromVCard(filePath: customPath),
            !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             return name
         }
         return basePath.flatMap { getNameFromVCard(filePath: $0) }
     }
 
-    class func parseMergedProfile(basePath: String?, overridePath: String?) -> Profile? {
+    class func parseMergedProfile(basePath: String?, customPath: String?) -> Profile? {
         let base = basePath.flatMap { parseToProfile(filePath: $0) }
-        let localOverride = overridePath.flatMap { parseToProfile(filePath: $0) }
-        return base?.merging(preferring: localOverride) ?? localOverride
+        let customProfile = customPath.flatMap { parseToProfile(filePath: $0) }
+        return base?.merging(preferring: customProfile) ?? customProfile
     }
 
     class func getNameFromVCard(filePath: String) -> String? {

@@ -32,7 +32,7 @@ final class ConversationProfileEditorVM: ObservableObject {
     private let profileService: ProfilesService
     private var initialName = ""
     private var initialDescription = ""
-    private let initialLocalPhoto: String?
+    private let initialCustomPhoto: String?
     private let baseContactName: String?
     private let baseContactAvatar: UIImage?
     @Published private var avatarWasChanged = false
@@ -56,7 +56,7 @@ final class ConversationProfileEditorVM: ObservableObject {
             avatar = info[ConversationAttributes.avatar.rawValue]?
                 .toImageData()
                 .flatMap { $0.isEmpty ? nil : UIImage(data: $0) }
-            initialLocalPhoto = nil
+            initialCustomPhoto = nil
             baseContactName = nil
             baseContactAvatar = nil
         } else {
@@ -64,17 +64,17 @@ final class ConversationProfileEditorVM: ObservableObject {
             let uri = Self.contactURI(for: conversation, injectionBag: injectionBag)
             contactURI = uri
             let base = uri.flatMap {
-                injectionBag.profileService.getProfileWithoutLocalOverride(uri: $0,
-                                                                           accountId: conversation.accountId)
+                injectionBag.profileService.getOriginalProfile(uri: $0,
+                                                               accountId: conversation.accountId)
             }
-            let local = uri.flatMap {
-                injectionBag.profileService.getLocalProfileOverride(uri: $0,
-                                                                    accountId: conversation.accountId)
+            let custom = uri.flatMap {
+                injectionBag.profileService.getCustomProfile(uri: $0,
+                                                             accountId: conversation.accountId)
             }
-            let merged = base?.merging(preferring: local) ?? local
+            let merged = base?.merging(preferring: custom) ?? custom
             name = merged?.alias ?? ""
             avatar = merged?.photo?.toImageData().flatMap(UIImage.init(data:))
-            initialLocalPhoto = local?.photo
+            initialCustomPhoto = custom?.photo
             baseContactName = base?.alias
             baseContactAvatar = base?.photo?.toImageData().flatMap(UIImage.init(data:))
         }
@@ -98,15 +98,15 @@ final class ConversationProfileEditorVM: ObservableObject {
 
     var canResetContactProfile: Bool {
         guard !isSwarm else { return false }
-        return normalized(name) != normalized(baseContactName ?? "") || hasContactPictureOverride
+        return normalized(name) != normalized(baseContactName ?? "") || hasCustomContactPicture
     }
 
     var canRemoveAvatar: Bool {
-        isSwarm ? avatar != nil : hasContactPictureOverride
+        isSwarm ? avatar != nil : hasCustomContactPicture
     }
 
-    private var hasContactPictureOverride: Bool {
-        !useOriginalContactAvatar && (initialLocalPhoto != nil || avatarWasChanged)
+    private var hasCustomContactPicture: Bool {
+        !useOriginalContactAvatar && (initialCustomPhoto != nil || avatarWasChanged)
     }
 
     func avatarDidChange() {
@@ -174,24 +174,24 @@ final class ConversationProfileEditorVM: ObservableObject {
         }
         let trimmedName = normalized(name)
         let originalName = normalized(baseContactName ?? "")
-        let aliasOverride = trimmedName.isEmpty || trimmedName == originalName ? nil : trimmedName
-        var photoOverride = initialLocalPhoto
+        let customAlias = trimmedName.isEmpty || trimmedName == originalName ? nil : trimmedName
+        var customPhoto = initialCustomPhoto
         if avatarWasChanged {
             if useOriginalContactAvatar {
-                photoOverride = nil
+                customPhoto = nil
             } else {
                 guard let image = avatar?.fixOrientation(),
                       let data = image.convertToDataForSwarm() else {
                     saveFailed = true
                     return
                 }
-                photoOverride = data.base64EncodedString()
+                customPhoto = data.base64EncodedString()
             }
         }
-        let saved = profileService.updateLocalProfileOverride(uri: contactURI,
-                                                              accountId: conversation.accountId,
-                                                              alias: aliasOverride,
-                                                              photo: photoOverride)
+        let saved = profileService.updateCustomProfile(uri: contactURI,
+                                                       accountId: conversation.accountId,
+                                                       alias: customAlias,
+                                                       photo: customPhoto)
         guard saved else {
             saveFailed = true
             return
