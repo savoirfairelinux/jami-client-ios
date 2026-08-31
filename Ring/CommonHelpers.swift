@@ -121,14 +121,25 @@ enum ProfilePathHelper {
         return fileManager.fileExists(atPath: profilesFolder) ? profilesFolder : nil
     }
 
-    static func contactProfilePath(accountId: String,
-                                   profileURI: String,
-                                   documents: URL,
-                                   createIfNotExists: Bool) -> String? {
+    static func legacyContactProfilePath(accountId: String,
+                                         profileURI: String,
+                                         documents: URL) -> String? {
         guard let profilesFolder = contactsPath(accountId: accountId,
                                                 documents: documents,
-                                                createIfNotExists: createIfNotExists) else { return nil }
+                                                createIfNotExists: false) else { return nil }
         let encoded = Data(profileURI.utf8).base64EncodedString()
+        return profilesFolder + "\(encoded).vcf"
+    }
+
+    static func contactProfilePath(accountId: String,
+                                   contactId: String,
+                                   documents: URL) -> String? {
+        let hash = jamiHash(from: contactId)
+        guard !hash.isEmpty,
+              let profilesFolder = contactsPath(accountId: accountId,
+                                                documents: documents,
+                                                createIfNotExists: false) else { return nil }
+        let encoded = Data(hash.utf8).base64EncodedString()
         return profilesFolder + "\(encoded).vcf"
     }
 
@@ -144,11 +155,16 @@ enum ProfilePathHelper {
     }
 
     static func existingContactProfilePath(accountId: String, contactId: String, documents: URL) -> String? {
+        if let path = contactProfilePath(accountId: accountId,
+                                         contactId: contactId,
+                                         documents: documents),
+           FileManager.default.fileExists(atPath: path) {
+            return path
+        }
         for profileURI in profileURICandidates(for: contactId) {
-            guard let path = contactProfilePath(accountId: accountId,
-                                                profileURI: profileURI,
-                                                documents: documents,
-                                                createIfNotExists: false),
+            guard let path = legacyContactProfilePath(accountId: accountId,
+                                                      profileURI: profileURI,
+                                                      documents: documents),
                   FileManager.default.fileExists(atPath: path) else {
                 continue
             }

@@ -201,10 +201,6 @@ class RequestsService {
             if success {
                 if let request = self.requests.value.filter({ $0.participants.first?.jamiId == jamiId && $0.accountId == accountId
                 }).first {
-                    /// save profile
-                    let photo = (request.avatar != nil) ? request.avatar!.base64EncodedString() : ""
-                    let participantURI = JamiURI.init(schema: .ring, infoHash: jamiId)
-                    _ = self.createProfile(with: participantURI.uriString!, alias: request.name, photo: photo, accountId: request.accountId)
                     self.removeRequest(withJamiId: jamiId, accountId: accountId)
                     if request.conversationId.isEmpty {
                         /// emit event so message could be generated for db
@@ -236,14 +232,6 @@ class RequestsService {
             guard let self = self else { return Disposables.create { } }
             let request = self.getRequest(withId: conversationId, accountId: accountId)
             let type = request?.conversationType ?? .invitesOnly
-            if let request = request,
-               request.isCoredialog(),
-               let jamiId = request.participants.first?.jamiId {
-                /// save profile
-                let photo = (request.avatar != nil) ? request.avatar!.base64EncodedString() : ""
-                let participantURI = JamiURI.init(schema: .ring, infoHash: jamiId)
-                _ = self.createProfile(with: participantURI.uriString!, alias: request.name, photo: photo, accountId: request.accountId)
-            }
             self.requestsAdapter.acceptConversationRequest(accountId, conversationId: conversationId)
             self.removeRequest(with: conversationId, accountId: accountId)
             self.requestAccepted(conversationId: conversationId, withAccount: accountId, conversationType: type)
@@ -287,10 +275,7 @@ class RequestsService {
             return Disposables.create { }
         }
     }
-    /**
-     In case of success profile for contact will be saved
-     */
-    func sendContactRequest(to jamiId: String, withAccountId accountId: String, avatar: String? = nil, alias: String) -> Completable {
+    func sendContactRequest(to jamiId: String, withAccountId accountId: String) -> Completable {
         return Completable.create { [weak self] completable in
             guard let self = self else { return Disposables.create { } }
             do {
@@ -302,9 +287,6 @@ class RequestsService {
                     }
                 }
                 self.requestsAdapter.sendTrustRequest(toContact: jamiId, payload: payload, withAccountId: accountId)
-                let participantURI = JamiURI.init(schema: .ring, infoHash: jamiId)
-                let photo = avatar ?? ""
-                _ = self.createProfile(with: participantURI.uriString!, alias: alias, photo: photo, accountId: accountId)
                 completable(.completed)
             } catch {
                 completable(.error(ContactServiceError.vCardSerializationFailed))
@@ -314,17 +296,9 @@ class RequestsService {
     }
 
     // MARK: database actions
-    private func createProfile(with contactUri: String, alias: String, photo: String, accountId: String) -> Profile? {
-        do {
-            return try self.dbManager.getProfile(for: contactUri, createIfNotExists: true, accountId: accountId, alias: alias, photo: photo)
-        } catch {
-            return nil
-        }
-    }
-
     private func getProfile(with contactUri: String, accountId: String) -> Profile? {
         do {
-            return try self.dbManager.getProfile(for: contactUri, createIfNotExists: false, accountId: accountId)
+            return try self.dbManager.getProfile(for: contactUri, accountId: accountId)
         } catch {
             return nil
         }

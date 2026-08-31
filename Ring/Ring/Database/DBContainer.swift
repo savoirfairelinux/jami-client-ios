@@ -107,12 +107,11 @@ final class DBContainer {
         return fileManager.fileExists(atPath: path)
     }
 
-    func contactProfilePath(accountId: String, profileURI: String, createifNotExists: Bool) -> String? {
+    func existingContactProfilePath(accountId: String, profileURI: String) -> String? {
         guard let documents = Constants.documentsPath else { return nil }
-        return ProfilePathHelper.contactProfilePath(accountId: accountId,
-                                                    profileURI: profileURI,
-                                                    documents: documents,
-                                                    createIfNotExists: createifNotExists)
+        return ProfilePathHelper.existingContactProfilePath(accountId: accountId,
+                                                            contactId: profileURI,
+                                                            documents: documents)
     }
 
     func contactProfileOverridePath(accountId: String,
@@ -135,16 +134,20 @@ final class DBContainer {
         return isFileExists(path: path)
     }
 
-    func isContactProfileExists(accountId: String, profileURI: String) -> Bool {
-        guard let path = contactProfilePath(accountId: accountId, profileURI: profileURI, createifNotExists: false) else { return false }
-        return isFileExists(path: path)
-    }
-
     func removeProfile(accountId: String, profileURI: String) {
-        guard let path = contactProfilePath(accountId: accountId, profileURI: profileURI, createifNotExists: false) else { return }
-        do {
-            try FileManager.default.removeItem(atPath: path)
-        } catch _ as NSError {}
+        if let documents = Constants.documentsPath {
+            var paths = [ProfilePathHelper.contactProfilePath(accountId: accountId,
+                                                              contactId: profileURI,
+                                                              documents: documents)]
+            paths += ProfilePathHelper.profileURICandidates(for: profileURI).map {
+                ProfilePathHelper.legacyContactProfilePath(accountId: accountId,
+                                                           profileURI: $0,
+                                                           documents: documents)
+            }
+            for path in paths.compactMap({ $0 }) {
+                try? FileManager.default.removeItem(atPath: path)
+            }
+        }
         removeProfileOverride(accountId: accountId, profileURI: profileURI)
     }
 

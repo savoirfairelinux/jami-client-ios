@@ -156,13 +156,13 @@ class ContactsService {
 
     // MARK: get contact profile
     func getProfileForUri(uri: String, accountId: String) -> Observable<Profile> {
-        return self.dbManager.profileObservable(for: uri, createIfNotExists: false, accountId: accountId)
+        return self.dbManager.profileObservable(for: uri, accountId: accountId)
             .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
     }
 
     func getProfile(uri: String, accountId: String) -> Profile? {
         do {
-            return try self.dbManager.getProfile(for: uri, createIfNotExists: false, accountId: accountId)
+            return try self.dbManager.getProfile(for: uri, accountId: accountId)
         } catch {
             return nil
         }

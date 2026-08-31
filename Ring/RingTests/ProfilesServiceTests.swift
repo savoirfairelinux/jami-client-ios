@@ -30,7 +30,6 @@ final class ProfilesServiceTests: XCTestCase {
         var seed: [Key: Profile] = [:]
 
         override func profileObservable(for profileUri: String,
-                                        createIfNotExists: Bool,
                                         accountId: String) -> Observable<Profile> {
             let key = Key(uri: profileUri, accountId: accountId)
             if let profile = seed[key] {
@@ -74,7 +73,7 @@ final class ProfilesServiceTests: XCTestCase {
 
         // Account 1 subscribes first — mirrors the Share Extension activating account 1
         // and its daemon pushing profile vcards before the main app (on account 2) opens.
-        service.getProfile(uri: uri, createIfNotexists: false, accountId: accountId1)
+        service.getProfile(uri: uri, accountId: accountId1)
             .take(1)
             .subscribe(onNext: { profile in
                 alias1 = profile.alias
@@ -84,7 +83,7 @@ final class ProfilesServiceTests: XCTestCase {
 
         // Account 2 subscribes shortly after — if the cache is keyed by URI alone, it
         // will receive the ReplaySubject seeded with account 1's profile.
-        service.getProfile(uri: uri, createIfNotexists: false, accountId: accountId2)
+        service.getProfile(uri: uri, accountId: accountId2)
             .take(1)
             .subscribe(onNext: { profile in
                 alias2 = profile.alias
@@ -100,6 +99,82 @@ final class ProfilesServiceTests: XCTestCase {
                        "account 2 must receive its own profile, not account 1's cached one")
     }
 
+    // MARK: - Directory profiles
+
+    private let directoryAlias = "Ada Lovelace"
+    private let directoryPhoto = "directory-photo"
+
+    private func resolvedProfile(uri: String) async throws -> Profile {
+        let resolved = expectation(description: "profile resolved")
+        var result: Profile?
+        service.getProfile(uri: uri, accountId: accountId1)
+            .take(1)
+            .subscribe(onNext: { profile in
+                result = profile
+                resolved.fulfill()
+            })
+            .disposed(by: bag)
+        await fulfillment(of: [resolved], timeout: 2.0)
+        return try XCTUnwrap(result)
+    }
+
+    func testDirectoryProfileIsUsedWhenNothingIsStored() async throws {
+        // Arrange
+        let uri = try XCTUnwrap(JamiURI(schema: .ring, infoHash: jamiId1).uriString)
+        // Act
+        service.cacheDirectoryProfile(uri: uri,
+                                      accountId: accountId1,
+                                      alias: directoryAlias,
+                                      photo: directoryPhoto)
+        let profile = try await resolvedProfile(uri: uri)
+        // Assert
+        XCTAssertEqual(profile.alias, directoryAlias)
+        XCTAssertEqual(profile.photo, directoryPhoto)
+    }
+
+    func testStoredProfileWinsOverDirectoryProfile() async throws {
+        // Arrange
+        let uri = try XCTUnwrap(JamiURI(schema: .ring, infoHash: jamiId1).uriString)
+        database.seed[.init(uri: uri, accountId: accountId1)] =
+            Profile(uri: uri, alias: profileName1, photo: "stored-photo", type: ProfileType.ring.rawValue)
+        // Act
+        service.cacheDirectoryProfile(uri: uri,
+                                      accountId: accountId1,
+                                      alias: directoryAlias,
+                                      photo: directoryPhoto)
+        let profile = try await resolvedProfile(uri: uri)
+        // Assert
+        XCTAssertEqual(profile.alias, profileName1)
+        XCTAssertEqual(profile.photo, "stored-photo")
+    }
+
+    func testDirectoryProfileFillsGapsInAStoredProfile() async throws {
+        // Arrange
+        let uri = try XCTUnwrap(JamiURI(schema: .ring, infoHash: jamiId1).uriString)
+        database.seed[.init(uri: uri, accountId: accountId1)] =
+            Profile(uri: uri, alias: profileName1, photo: nil, type: ProfileType.ring.rawValue)
+        // Act
+        service.cacheDirectoryProfile(uri: uri,
+                                      accountId: accountId1,
+                                      alias: directoryAlias,
+                                      photo: directoryPhoto)
+        let profile = try await resolvedProfile(uri: uri)
+        // Assert
+        XCTAssertEqual(profile.alias, profileName1)
+        XCTAssertEqual(profile.photo, directoryPhoto)
+    }
+
+    func testEmptyDirectoryProfileIsNotCached() async throws {
+        // Arrange
+        let uri = try XCTUnwrap(JamiURI(schema: .ring, infoHash: jamiId1).uriString)
+        // Act
+        service.cacheDirectoryProfile(uri: uri, accountId: accountId1, alias: nil, photo: nil)
+        let profile = try await resolvedProfile(uri: uri)
+        // Assert
+        XCTAssertNil(profile.alias)
+        XCTAssertNil(profile.photo)
+    }
+
     func testLocalOverrideReplacesOnlyCustomizedName() {
         let remote = Profile(uri: "jami:peer",
                              alias: "Remote name",
@@ -110,7 +185,7 @@ final class ProfilesServiceTests: XCTestCase {
                             photo: nil,
                             type: ProfileType.ring.rawValue)
 
-        let merged = remote.merging(localOverride: local)
+        let merged = remote.merging(preferring: local)
 
         XCTAssertEqual(merged.alias, "My contact name")
         XCTAssertEqual(merged.photo, "remote-photo")
@@ -126,7 +201,7 @@ final class ProfilesServiceTests: XCTestCase {
                             photo: "local-photo",
                             type: ProfileType.ring.rawValue)
 
-        let merged = remote.merging(localOverride: local)
+        let merged = remote.merging(preferring: local)
 
         XCTAssertEqual(merged.alias, "Remote name")
         XCTAssertEqual(merged.photo, "local-photo")
@@ -142,10 +217,10 @@ final class ProfilesServiceTests: XCTestCase {
                             photo: nil,
                             type: ProfileType.ring.rawValue)
 
-        let merged = remote.merging(localOverride: local)
+        let merged = remote.merging(preferring: local)
 
         XCTAssertEqual(merged.alias, "Updated remote name")
         XCTAssertEqual(merged.photo, "updated-remote-photo")
-        XCTAssertTrue(local.hasNoOverrides)
+        XCTAssertTrue(local.isEmpty)
     }
 }
