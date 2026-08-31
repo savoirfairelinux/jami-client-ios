@@ -91,6 +91,7 @@ class ConversationsManager {
         self.subscribeContactsEvents()
         self.subscribeLocationSharingEvent()
         self.subscribeRequestEvents()
+        self.subscribeProfileEvents()
         self.controlAccountsState()
     }
 
@@ -378,6 +379,55 @@ class ConversationsManager {
                 else { return }
                 let type: ConversationType = event.getEventInput(.conversationType) ?? .invitesOnly
                 self.conversationService.addConversationFromAcceptedRequest(conversationId: conversationId, accountId: accountId, accountURI: account.jamiId, type: type)
+            })
+            .disposed(by: self.disposeBag)
+    }
+
+    private func subscribeProfileEvents() {
+        self.requestService.sharedResponseStream
+            .subscribe(onNext: { [weak self] event in
+                guard let self = self,
+                      let accountId: String = event.getEventInput(.accountId),
+                      let peerUri: String = event.getEventInput(.peerUri)
+                else { return }
+                switch event.eventType {
+                case .contactRequestSent:
+                    self.profileService.invitationSent(uri: peerUri, accountId: accountId)
+                case .contactRequestAccepted:
+                    guard let profile: Profile = event.getEventInput(.profile) else { return }
+                    self.profileService.invitationAccepted(profile, accountId: accountId)
+                case .contactRequestRemoved:
+                    self.profileService.peerDiscarded(uri: peerUri, accountId: accountId)
+                default:
+                    break
+                }
+            })
+            .disposed(by: self.disposeBag)
+
+        self.contactsService.sharedResponseStream
+            .subscribe(onNext: { [weak self] event in
+                guard let self = self,
+                      let accountId: String = event.getEventInput(.accountId) else { return }
+                switch event.eventType {
+                case .allContactsRemoved:
+                    self.profileService.accountContactsCleared(accountId: accountId)
+                case .contactRemoved:
+                    guard let peerUri: String = event.getEventInput(.peerUri) else { return }
+                    self.profileService.peerDiscarded(uri: peerUri, accountId: accountId)
+                default:
+                    break
+                }
+            })
+            .disposed(by: self.disposeBag)
+
+        self.conversationService.sharedResponseStream
+            .filter({ $0.eventType == ServiceEventType.conversationRemoved })
+            .subscribe(onNext: { [weak self] event in
+                guard let self = self,
+                      let accountId: String = event.getEventInput(.accountId),
+                      let peerUri: String = event.getEventInput(.peerUri)
+                else { return }
+                self.profileService.conversationDeleted(uri: peerUri, accountId: accountId)
             })
             .disposed(by: self.disposeBag)
     }

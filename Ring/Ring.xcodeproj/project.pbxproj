@@ -71,6 +71,8 @@
 		0EDA00020000000000001002 /* ConversationDestructiveAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA00010000000000001001 /* ConversationDestructiveAction.swift */; };
 		0EDA00040000000000001004 /* SmartListRowModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA00030000000000001003 /* SmartListRowModifiers.swift */; };
 		0EDA00060000000000001006 /* ConversationDestructiveActionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA00050000000000001005 /* ConversationDestructiveActionTests.swift */; };
+		DB0100020000000000000002 /* DBManagerConversationDeletionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0100010000000000000001 /* DBManagerConversationDeletionTests.swift */; };
+		DB0200020000000000000002 /* ProfileStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0200010000000000000001 /* ProfileStore.swift */; };
 		0EDCC8601F98150500B121D7 /* UIView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDCC85F1F98150500B121D7 /* UIView+Rx.swift */; };
 		0EE1B5501F75AD4700BA98EE /* VCardUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE1B54F1F75AD4700BA98EE /* VCardUtils.swift */; };
 		0EF78DE31FD0AE3000FC6966 /* ConversationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF78DE21FD0AE3000FC6966 /* ConversationsManager.swift */; };
@@ -749,6 +751,8 @@
 		0EDA00010000000000001001 /* ConversationDestructiveAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationDestructiveAction.swift; sourceTree = "<group>"; };
 		0EDA00030000000000001003 /* SmartListRowModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SmartListRowModifiers.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Views/SmartListRowModifiers.swift; sourceTree = SOURCE_ROOT; };
 		0EDA00050000000000001005 /* ConversationDestructiveActionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationDestructiveActionTests.swift; sourceTree = "<group>"; };
+		DB0100010000000000000001 /* DBManagerConversationDeletionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManagerConversationDeletionTests.swift; sourceTree = "<group>"; };
+		DB0200010000000000000001 /* ProfileStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStore.swift; sourceTree = "<group>"; };
 		0EDCC85F1F98150500B121D7 /* UIView+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Rx.swift"; sourceTree = "<group>"; };
 		0EE1B54F1F75AD4700BA98EE /* VCardUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCardUtils.swift; sourceTree = "<group>"; };
 		0EEFBA3B1F83DA21000EDBAD /* libsecp256k1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsecp256k1.a; path = ../DEPS/arm64/lib/libsecp256k1.a; sourceTree = "<group>"; };
@@ -2941,6 +2945,7 @@
 				0E44B62D202B9DC40060F71B /* Helpers */,
 				0E63F1F3202907090001F248 /* Ring.entitlements */,
 				0E0FF1A81FC38409003898C2 /* Database */,
+				DB0200030000000000000003 /* Storage */,
 				02E1A0261DDE4C2E00D75B59 /* Services */,
 				1A2D18B81F2916BA00B2C785 /* Models */,
 				564C44571E8D7F68000F92B1 /* Constants */,
@@ -3020,6 +3025,14 @@
 				04399A961D1C2F6100E99CD9 /* libz.tbd */,
 			);
 			name = SYS_DEPS;
+			sourceTree = "<group>";
+		};
+		DB0200030000000000000003 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				DB0200010000000000000001 /* ProfileStore.swift */,
+			);
+			path = Storage;
 			sourceTree = "<group>";
 		};
 		0E0FF1A81FC38409003898C2 /* Database */ = {
@@ -3279,6 +3292,7 @@
 				260AE62629B8E89300D66D5E /* JamiSearchViewModelTests.swift */,
 				260AE62E29BA3B6900D66D5E /* ConversationModelTests.swift */,
 				0EDA00050000000000001005 /* ConversationDestructiveActionTests.swift */,
+				DB0100010000000000000001 /* DBManagerConversationDeletionTests.swift */,
 				260AE63229BA5DF600D66D5E /* SwarmInfoTests.swift */,
 				26AVATAR0029BA000000000001 /* AvatarProviderTests.swift */,
 				26GRPAVT0029BA000000000001 /* GroupAvatarRendererTests.swift */,
@@ -4310,6 +4324,7 @@
 				62A88D3B1F6C3ACC00F8AB18 /* PresenceService.swift in Sources */,
 				26AAB2C7300E7EEF00EE8FED /* EventBroadcaster.swift in Sources */,
 				0E0FF1B51FC3947B003898C2 /* DBManager.swift in Sources */,
+				DB0200020000000000000002 /* ProfileStore.swift in Sources */,
 				0E0FF1B91FC398C5003898C2 /* InteractionDataHelper.swift in Sources */,
 				26C6A2602927EC4E007786B8 /* SwarmInfo.swift in Sources */,
 				268AA5C12472D42700B654A0 /* ConfirmationAlert.swift in Sources */,
@@ -4502,6 +4517,7 @@
 				024B61311DF7656A00C4F9DE /* FixtureFailInitDRingAdapter.mm in Sources */,
 				260AE62F29BA3B6900D66D5E /* ConversationModelTests.swift in Sources */,
 				0EDA00060000000000001006 /* ConversationDestructiveActionTests.swift in Sources */,
+				DB0100020000000000000002 /* DBManagerConversationDeletionTests.swift in Sources */,
 				260AE63729BE177000D66D5E /* ContactUtilsTests.swift in Sources */,
 				26F1D8F02FC76A78002AA754 /* PeerSharingServiceTests.swift in Sources */,
 				26F1D9A12FC76A78002AA754 /* PeerSharingViewModelTests.swift in Sources */,

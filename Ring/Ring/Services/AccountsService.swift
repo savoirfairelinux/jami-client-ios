@@ -267,10 +267,6 @@ class AccountsService: AccountAdapterDelegate {
         }
     }
 
-    func getAccountProfile(accountId: String) -> Profile? {
-        return self.dbManager.accountProfile(for: accountId)
-    }
-
     /**
      Gets an account from the list of accounts handled by the application.
 
@@ -1032,8 +1028,6 @@ extension AccountsService {
             guard let account = self.accountAdapter.addAccount(accountDetails) else { return false }
             _ = try self.dbManager.createDatabaseForAccount(accountId: account, createFolder: true)
             guard let newAccount = self.getAccount(fromAccountId: account) else { return false }
-            let accountUri = AccountModelHelper.init(withAccount: newAccount).uri ?? ""
-            _ = self.dbManager.saveAccountProfile(alias: nil, photo: nil, accountId: account, accountURI: accountUri)
             self.currentAccount = newAccount
             if let sharedDefaults = UserDefaults(suiteName: Constants.appGroupIdentifier) {
                 sharedDefaults.set(account, forKey: Constants.selectedAccountID)
