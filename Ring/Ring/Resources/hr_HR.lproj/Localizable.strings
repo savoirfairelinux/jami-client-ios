@@ -64,10 +64,10 @@
 // ProfileEditor
 "profileEditor.editGroup" = "Edit group";
 "profileEditor.editContact" = "Edit contact";
-"profileEditor.name" = "Name";
+"profileEditor.name" = "Ime";
 "profileEditor.groupNamePlaceholder" = "Enter a group name";
 "profileEditor.contactNamePlaceholder" = "Enter a name";
-"profileEditor.description" = "Description";
+"profileEditor.description" = "Opisivanje";
 "profileEditor.descriptionPlaceholder" = "Enter a description";
 "profileEditor.localChangesFooter" = "This name and picture are visible only on this device.";
 "profileEditor.resetOriginal" = "Use original name and picture";
@@ -762,12 +762,12 @@
 "peerServices.open" = "Otvori";
 
 // Collaborative documents
-"collab.documents" = "Documents";
+"collab.documents" = "Dokumenti";
 "collab.menu" = "Document actions";
 "collab.newDocument" = "New document";
 "collab.untitled" = "Untitled document";
 "collab.documentNameHint" = "Document name";
-"collab.create" = "Create";
+"collab.create" = "Stvori";
 "collab.rename" = "Rename";
 "collab.openError" = "This document could not be opened.";
 "collab.noDocuments" = "No document has been written in this conversation yet.";
@@ -785,10 +785,10 @@
 "collab.versionRestoreError" = "This version could not be restored.";
 "collab.versionBy" = "%1$@ — %2$@";
 "collab.versionDeltas" = "%1$@ — %2$@, %3$d change(s)";
-"collab.linkTitle" = "Link";
-"collab.linkHint" = "Address";
-"collab.linkAdd" = "Add";
-"collab.linkRemove" = "Remove";
+"collab.linkTitle" = "Poveznica";
+"collab.linkHint" = "Adresa";
+"collab.linkAdd" = "Dodavanje";
+"collab.linkRemove" = "Ukloni";
 "collab.exportPdf" = "Export to PDF";
 "collab.export" = "Export a local copy";
 "collab.exportHtml" = "Export to HTML";
@@ -802,23 +802,23 @@
 "collab.sendError" = "Your changes could not be sent.";
 "collab.editableDocument" = "Editable document";
 "collab.createError" = "This document could not be created.";
-"collab.bold" = "Bold";
-"collab.italic" = "Italic";
+"collab.bold" = "Podebljano";
+"collab.italic" = "Kurziv";
 "collab.underline" = "Underline";
-"collab.strikethrough" = "Strikethrough";
+"collab.strikethrough" = "Precrtaj";
 "collab.heading" = "Heading %d";
 "collab.bulletList" = "Bulleted list";
 "collab.orderedList" = "Numbered list";
 "collab.alignLeft" = "Align left";
-"collab.alignCenter" = "Center";
+"collab.alignCenter" = "Centrum";
 "collab.alignRight" = "Align right";
 "collab.alignJustify" = "Justify";
 "collab.insertImage" = "Insert image";
 "collab.clearFormat" = "Clear formatting";
 "collab.undo" = "Natrag";
-"collab.redo" = "Redo";
+"collab.redo" = "Naprijed";
 "collab.remove" = "Ukloni";
-"collab.open" = "Open";
+"collab.open" = "Otvori";
 "collab.downloadAndOpen" = "Download and open";
 // Full labels shown inside the document-list row menu.
 "collab.removeLocallyMenu" = "Remove from this device";

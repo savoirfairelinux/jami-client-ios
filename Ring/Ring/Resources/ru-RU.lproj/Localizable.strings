@@ -64,10 +64,10 @@
 // ProfileEditor
 "profileEditor.editGroup" = "Edit group";
 "profileEditor.editContact" = "Edit contact";
-"profileEditor.name" = "Name";
+"profileEditor.name" = "Имя";
 "profileEditor.groupNamePlaceholder" = "Enter a group name";
 "profileEditor.contactNamePlaceholder" = "Enter a name";
-"profileEditor.description" = "Description";
+"profileEditor.description" = "Описание";
 "profileEditor.descriptionPlaceholder" = "Enter a description";
 "profileEditor.localChangesFooter" = "This name and picture are visible only on this device.";
 "profileEditor.resetOriginal" = "Use original name and picture";
@@ -80,7 +80,7 @@
 "profileEditor.resetPicture" = "Use original picture";
 "profileEditor.discardTitle" = "Discard changes?";
 "profileEditor.discardMessage" = "Your unsaved changes will be lost.";
-"profileEditor.discard" = "Discard";
+"profileEditor.discard" = "Отклонить";
 "profileEditor.saveError" = "The changes could not be saved. Please try again.";
 "profileEditor.editGroupHint" = "Opens the group editor";
 "profileEditor.editContactHint" = "Opens the contact editor";
@@ -762,12 +762,12 @@
 "peerServices.open" = "Открыть";
 
 // Collaborative documents
-"collab.documents" = "Documents";
+"collab.documents" = "Документы";
 "collab.menu" = "Document actions";
 "collab.newDocument" = "New document";
 "collab.untitled" = "Untitled document";
 "collab.documentNameHint" = "Document name";
-"collab.create" = "Create";
+"collab.create" = "Создать";
 "collab.rename" = "Rename";
 "collab.openError" = "This document could not be opened.";
 "collab.noDocuments" = "No document has been written in this conversation yet.";
@@ -786,9 +786,9 @@
 "collab.versionBy" = "%1$@ — %2$@";
 "collab.versionDeltas" = "%1$@ — %2$@, %3$d change(s)";
 "collab.linkTitle" = "Ссылка";
-"collab.linkHint" = "Address";
-"collab.linkAdd" = "Add";
-"collab.linkRemove" = "Remove";
+"collab.linkHint" = "Адрес";
+"collab.linkAdd" = "Добавить";
+"collab.linkRemove" = "Убрать";
 "collab.exportPdf" = "Export to PDF";
 "collab.export" = "Export a local copy";
 "collab.exportHtml" = "Export to HTML";
@@ -803,9 +803,9 @@
 "collab.editableDocument" = "Editable document";
 "collab.createError" = "This document could not be created.";
 "collab.bold" = "Полужирный";
-"collab.italic" = "Italic";
+"collab.italic" = "Курсив";
 "collab.underline" = "Underline";
-"collab.strikethrough" = "Strikethrough";
+"collab.strikethrough" = "Зачеркнуть";
 "collab.heading" = "Heading %d";
 "collab.bulletList" = "Bulleted list";
 "collab.orderedList" = "Numbered list";
@@ -816,9 +816,9 @@
 "collab.insertImage" = "Insert image";
 "collab.clearFormat" = "Clear formatting";
 "collab.undo" = "Отменить";
-"collab.redo" = "Redo";
+"collab.redo" = "Повторить";
 "collab.remove" = "Убрать";
-"collab.open" = "Open";
+"collab.open" = "Открыть";
 "collab.downloadAndOpen" = "Download and open";
 // Full labels shown inside the document-list row menu.
 "collab.removeLocallyMenu" = "Remove from this device";
