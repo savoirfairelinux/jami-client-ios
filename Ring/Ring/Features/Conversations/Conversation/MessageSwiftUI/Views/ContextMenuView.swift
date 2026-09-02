@@ -38,7 +38,6 @@ struct ContextMenuView: View {
     @SwiftUI.State private var actionsOpacity: CGFloat = 0
     @SwiftUI.State private var backgroundOpacity: CGFloat = 0
     @SwiftUI.State private var messageOffsetDiff: CGFloat = 0
-    @SwiftUI.State private var cornerRadius: CGFloat = 0
     @SwiftUI.State private var scrollViewHeight: CGFloat = 0
     @SwiftUI.State private var emojiBarOpacity: CGFloat = 0
     @SwiftUI.State private var messageOpacity: CGFloat = 1
@@ -130,7 +129,6 @@ struct ContextMenuView: View {
             withAnimation(.spring(response: 0.35, dampingFraction: 0.8, blendDuration: 0).delay(0.05)) {
                 scrollViewHeight = model.messageHeight
                 messageOffsetDiff = model.bottomOffset
-                cornerRadius = model.menuCornerRadius
             }
 
             withAnimation(.easeOut(duration: 0.2).delay(0.18)) {
@@ -169,7 +167,7 @@ struct ContextMenuView: View {
                         height: model.messageFrame.height
                     )
             }
-            .cornerRadius(cornerRadius)
+            .cornerRadius(model.menuCornerRadius)
             .scaleEffect(messageScale, anchor: model.messsageAnchor)
             .shadow(color: Color(model.shadowColor), radius: messageShadow)
             .frame(
@@ -178,7 +176,7 @@ struct ContextMenuView: View {
             )
             // invisible tap area for accessibility
             Rectangle()
-                .cornerRadius(cornerRadius)
+                .cornerRadius(model.menuCornerRadius)
                 .scaleEffect(messageScale, anchor: model.messsageAnchor)
                 .frame(
                     width: model.messageFrame.width,
@@ -267,7 +265,6 @@ struct ContextMenuView: View {
             messageShadow = 0
             backgroundOpacity = 0
             messageOffsetDiff = 0
-            cornerRadius = 0
             emojiBarOpacity = 0
             messageOpacity = 0
         }
@@ -468,7 +465,6 @@ private struct GlassModifier<S: Shape>: ViewModifier {
                         .stroke(Color.white.opacity(0.25), lineWidth: 0.5)
                 )
                 .shadow(color: Color.black.opacity(0.15), radius: 12, x: 0, y: 6)
-                .clipShape(shape)
         }
     }
 }
