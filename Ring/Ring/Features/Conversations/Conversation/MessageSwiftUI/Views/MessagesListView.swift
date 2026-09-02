@@ -73,11 +73,8 @@ struct MessagesListView: View {
     @SwiftUI.State private var reactionsForMessage: ReactionsContainerModel?
     @SwiftUI.State private var showReactionsView = false
 
-    @SwiftUI.State private var dotCount = 0
-    @SwiftUI.State private var syncPhase = 0
-
     @SwiftUI.State private var envAppeared = false
-    private let timer = Timer.publish(every: 0.5, on: .main, in: .common).autoconnect()
+    @SwiftUI.State private var isApplicationActive = UIApplication.shared.applicationState == .active
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.sizeCategory) private var sizeCategory
@@ -113,6 +110,12 @@ struct MessagesListView: View {
             }
         }
         .environment(\.avatarProviderFactory, model.makeAvatarFactory() as AvatarProviderFactory?)
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
+            isApplicationActive = true
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
+            isApplicationActive = false
+        }
         .onChange(of: model.screenTapped, perform: { _ in
             /* We cannot use SwiftUI's onTapGesture here because it would
              interfere with the interactions of the buttons in the player view.
@@ -215,22 +218,12 @@ struct MessagesListView: View {
                     Text("")
                         .id("lastMessage")
                     if !model.typingIndicatorText.isEmpty {
-                        HStack {
-                            Text("\(model.typingIndicatorText)\(String(repeating: ".", count: dotCount))")
-                                .font(.footnote)
-                                .foregroundColor(Color(UIColor.secondaryLabel))
-                            Spacer()
-                        }
-                        .flipped()
-                        .padding(.horizontal)
-                        .padding(.vertical, 5)
-                        .accessibilityElement()
-                        .accessibilityLabel("\(model.typingIndicatorText)")
+                        TypingIndicatorView(
+                            text: model.typingIndicatorText,
+                            isApplicationActive: isApplicationActive
+                        )
                         .id(model.typingIndicatorText)
                         .transition(.opacity)
-                        .onReceive(timer) { _ in
-                            dotCount = (dotCount + 1) % 4
-                        }
                     }
                     // messages
                     ForEach(model.messagesModels) { message in
@@ -355,7 +348,7 @@ struct MessagesListView: View {
     }
 
     private func syncingConversationView() -> some View {
-        SyncingConversationView(model: model, syncPhase: $syncPhase, timer: timer)
+        SyncingConversationView(model: model, isApplicationActive: isApplicationActive)
     }
 
     func blockView() -> some View {
@@ -397,6 +390,30 @@ struct MessagesListView: View {
 }
 
 // MARK: - Extracted Subviews
+
+private struct TypingIndicatorView: View {
+    private static let animationInterval: TimeInterval = 0.5
+
+    let text: String
+    let isApplicationActive: Bool
+
+    var body: some View {
+        TimelineView(.animation(minimumInterval: Self.animationInterval, paused: !isApplicationActive)) { context in
+            let dotCount = Int(context.date.timeIntervalSinceReferenceDate / Self.animationInterval) % 4
+            HStack {
+                Text("\(text)\(String(repeating: ".", count: dotCount))")
+                    .font(.footnote)
+                    .foregroundColor(Color(UIColor.secondaryLabel))
+                Spacer()
+            }
+        }
+        .flipped()
+        .padding(.horizontal)
+        .padding(.vertical, 5)
+        .accessibilityElement()
+        .accessibilityLabel(text)
+    }
+}
 
 private struct TemporaryConversationView: View {
     @ObservedObject var model: MessagesListVM
@@ -494,9 +511,10 @@ private struct EndedConversationView: View {
 }
 
 private struct SyncingConversationView: View {
+    private static let animationInterval: TimeInterval = 0.5
+
     @ObservedObject var model: MessagesListVM
-    @Binding var syncPhase: Int
-    let timer: Publishers.Autoconnect<Timer.TimerPublisher>
+    let isApplicationActive: Bool
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.sizeCategory) private var sizeCategory
@@ -528,13 +546,21 @@ private struct SyncingConversationView: View {
                     .multilineTextAlignment(.center)
             }
             .padding(.horizontal, textHorizontalPadding)
-            HStack(spacing: dotSpacing) {
-                ForEach(0..<3, id: \.self) { index in
-                    Circle()
-                        .fill(Color.jami)
-                        .frame(width: dotSize, height: dotSize)
-                        .opacity(reduceMotion ? 1.0 : dotOpacities[(index - syncPhase + 3) % 3])
-                        .animation(reduceMotion ? nil : .easeInOut(duration: 0.4), value: syncPhase)
+            TimelineView(
+                .animation(
+                    minimumInterval: Self.animationInterval,
+                    paused: !isApplicationActive || reduceMotion
+                )
+            ) { context in
+                let syncPhase = Int(context.date.timeIntervalSinceReferenceDate / Self.animationInterval) % 3
+                HStack(spacing: dotSpacing) {
+                    ForEach(0..<3, id: \.self) { index in
+                        Circle()
+                            .fill(Color.jami)
+                            .frame(width: dotSize, height: dotSize)
+                            .opacity(reduceMotion ? 1.0 : dotOpacities[(index - syncPhase + 3) % 3])
+                            .animation(reduceMotion ? nil : .easeInOut(duration: 0.4), value: syncPhase)
+                    }
                 }
             }
             .accessibilityHidden(true)
@@ -544,11 +570,6 @@ private struct SyncingConversationView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(UIColor.systemBackground))
-        .onReceive(timer) { _ in
-            if !reduceMotion {
-                syncPhase = (syncPhase + 1) % 3
-            }
-        }
     }
 }
 
