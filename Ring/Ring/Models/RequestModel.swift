@@ -93,8 +93,7 @@ class RequestModel {
 
     func updatefrom(dictionary: [String: String]) {
         if let type = dictionary[ConversationAttributes.mode.rawValue],
-           let typeInt = Int(type),
-           let conversationType = ConversationType(rawValue: typeInt) {
+           let conversationType = ConversationType(daemonMode: type) {
             self.conversationType = conversationType
         }
 

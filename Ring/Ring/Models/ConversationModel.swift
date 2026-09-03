@@ -24,12 +24,17 @@ import RxSwift
 import RxRelay
 
 enum ConversationType: Int {
-    case oneToOne
-    case adminInvitesOnly
-    case invitesOnly
-    case publicChat
-    case nonSwarm
-    case sip
+    case oneToOne = 0
+    case adminInvitesOnly = 1
+    case invitesOnly = 2
+    case publicChat = 3
+    case nonSwarm = 100
+    case sip = 101
+
+    init?(daemonMode: String) {
+        guard let mode = Int(daemonMode) else { return nil }
+        self.init(rawValue: mode)
+    }
 
     var stringValue: String {
         switch self {
@@ -213,8 +218,7 @@ class ConversationModel: Equatable {
 
     static func parseType(from info: [String: String]) -> ConversationType {
         if let mode = info[ConversationAttributes.mode.rawValue],
-           let modeInt = Int(mode),
-           let type = ConversationType(rawValue: modeInt) {
+           let type = ConversationType(daemonMode: mode) {
             return type
         }
         // Swarm conversations default to invitesOnly when mode is missing
@@ -240,8 +244,7 @@ class ConversationModel: Equatable {
         }
         updateProfile(profile: info)
         if let type = info[ConversationAttributes.mode.rawValue],
-           let typeInt = Int(type),
-           let conversationType = ConversationType(rawValue: typeInt) {
+           let conversationType = ConversationType(daemonMode: type) {
             self.type = conversationType
         }
     }
