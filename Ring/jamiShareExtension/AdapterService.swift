@@ -20,6 +20,7 @@ import RxSwift
 import Foundation
 import Photos
 import Atomics
+import UIKit
 
 // swiftlint:disable type_body_length
 public final class AdapterService: AdapterDelegate {
@@ -367,6 +368,26 @@ public final class AdapterService: AdapterDelegate {
         return (trimmed?.isEmpty == false) ? trimmed : nil
     }
 
+    private static func groupMember(photo: String?, profileName: String?,
+                                    registeredName: String?, jamiId: String,
+                                    decodePixels: CGFloat) -> GroupAvatarMember {
+        let image: UIImage?
+        if let photo = photo, !photo.isEmpty {
+            image = AvatarLoader.decode(base64: photo, targetPixels: decodePixels)
+        } else {
+            image = nil
+        }
+        let name: String
+        if let profileName = profileName, !profileName.isEmpty {
+            name = profileName
+        } else if let registeredName = registeredName, !registeredName.isEmpty {
+            name = registeredName
+        } else {
+            name = jamiId
+        }
+        return GroupAvatarMember(image: image, name: name)
+    }
+
     private func customVCardPath(accountId: String, contactId: String, type: String) -> String? {
         guard type == "conversation", let documents = Constants.documentsPath else { return nil }
         return ProfilePathHelper.customProfilePath(accountId: accountId,
@@ -405,7 +426,7 @@ public final class AdapterService: AdapterDelegate {
 
     func resolveLocalAccountAvatar(accountId: String) -> Single<String> {
         return Single.create { [weak self] observer in
-            DispatchQueue.global(qos: .background).async {
+            AvatarLoader.queue.async {
                 let avatar = self?.contactProfileAvatar(accountId: accountId, contactId: accountId, type: "account") ?? ""
                 observer(.success(avatar))
             }
@@ -557,7 +578,7 @@ public final class AdapterService: AdapterDelegate {
         }
 
         return Single.create { [weak self] observer in
-            DispatchQueue.global(qos: .background).async {
+            AvatarLoader.queue.async {
                 let avatar = self?.contactProfileAvatar(accountId: accountId, contactId: address, type: "conversation")
                 observer(.success(avatar))
             }
@@ -565,7 +586,7 @@ public final class AdapterService: AdapterDelegate {
         }
     }
 
-    func getGroupMemberProfiles(accountId: String, conversationId: String) -> Single<(members: [GroupAvatarMember], overflowCount: Int)> {
+    func getGroupMemberProfiles(accountId: String, conversationId: String, decodePixels: CGFloat) -> Single<(members: [GroupAvatarMember], overflowCount: Int)> {
         return Single.deferred { [weak self] in
             guard let self else { return .just(([], 0)) }
 
@@ -605,12 +626,11 @@ public final class AdapterService: AdapterDelegate {
 
             let candidates = profiles.map { profile in
                 GroupAvatarCandidate(
-                    member: GroupAvatarMember.resolve(
-                        profilePhoto: profile.photo,
-                        profileName: profile.name,
-                        registeredName: nil,
-                        jamiId: profile.address
-                    ),
+                    member: Self.groupMember(photo: profile.photo,
+                                             profileName: profile.name,
+                                             registeredName: nil,
+                                             jamiId: profile.address,
+                                             decodePixels: decodePixels),
                     role: profile.role
                 )
             }
@@ -625,14 +645,14 @@ public final class AdapterService: AdapterDelegate {
 
                 guard let self else { return .just(member) }
                 return self.lookupUsername(accountId: accountId, address: profile.address)
+                    .observe(on: AvatarLoader.scheduler)
                     .map { response in
                         let registeredName = (response.state == .found && !(response.name?.isEmpty ?? true)) ? response.name : nil
-                        return GroupAvatarMember.resolve(
-                            profilePhoto: profile.photo,
-                            profileName: profile.name,
-                            registeredName: registeredName,
-                            jamiId: profile.address
-                        )
+                        return Self.groupMember(photo: profile.photo,
+                                                profileName: profile.name,
+                                                registeredName: registeredName,
+                                                jamiId: profile.address,
+                                                decodePixels: decodePixels)
                     }
             }
 

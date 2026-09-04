@@ -340,6 +340,8 @@ struct ConversationSection: View {
     }
 }
 
+private let shareButtonBarHeight: CGFloat = 80
+
 struct ConversationsView: View {
     let conversations: [ConversationViewModel]
     @Binding var selectedConversationIds: Set<String>
@@ -354,6 +356,12 @@ struct ConversationsView: View {
             )
 
             if shouldShowShareButton {
+                ShareButtonBackground()
+                    .frame(maxWidth: .infinity)
+                    .frame(height: shareButtonBarHeight)
+                    .allowsHitTesting(false)
+                    .accessibilityHidden(true)
+
                 ShareButtonView(
                     selectedCount: selectedConversationIds.count,
                     isSending: isSending,
@@ -374,21 +382,23 @@ struct ConversationScrollView: View {
 
     var body: some View {
         ScrollView(showsIndicators: false) {
-            ForEach(conversations) { conversation in
-                ConversationSelectableRow(
-                    conversation: conversation,
-                    isSelected: selectedConversationIds.contains(conversation.id),
-                    toggleAction: {
-                        toggleSelection(for: conversation.id)
-                    }
-                )
+            LazyVStack(alignment: .leading) {
+                ForEach(conversations) { conversation in
+                    ConversationSelectableRow(
+                        conversation: conversation,
+                        isSelected: selectedConversationIds.contains(conversation.id),
+                        toggleAction: {
+                            toggleSelection(for: conversation.id)
+                        }
+                    )
+                }
+                Spacer()
+                    .frame(height: shareButtonBarHeight)
             }
-            // Add bottom spacing to prevent conversations from being hidden behind the send button
-            Spacer()
-                .frame(height: 80)
         }
         .accessibilityIdentifier(ShareExtensionAccessibilityIdentifiers.conversationsList)
         .padding(.horizontal)
+        .modifier(HiddenBottomScrollEdgeEffect())
     }
 
     private func toggleSelection(for conversationId: String) {
@@ -430,7 +440,6 @@ struct ShareButtonView: View {
         .accessibilityIdentifier(ShareExtensionAccessibilityIdentifiers.shareButton)
         .padding()
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(ShareButtonBackground())
     }
 
     private var buttonText: String {
@@ -477,22 +486,30 @@ struct ShareButtonStyle: ButtonStyle {
 
 struct ShareButtonBackground: View {
     var body: some View {
-        ZStack {
-            VisualEffectView(effect: UIBlurEffect(style: .regular))
-                .mask(
-                    LinearGradient(
-                        gradient: Gradient(colors: [
-                            Color(.systemBackground).opacity(0.7),
-                            Color(.systemBackground).opacity(0.5),
-                            Color(.systemBackground).opacity(0.1)
-                        ]),
-                        startPoint: .bottom,
-                        endPoint: .top
-                    )
+        VisualEffectView(effect: UIBlurEffect(style: .regular))
+            .mask(
+                LinearGradient(
+                    gradient: Gradient(colors: [
+                        Color(.systemBackground).opacity(0.7),
+                        Color(.systemBackground).opacity(0.5),
+                        Color(.systemBackground).opacity(0.1)
+                    ]),
+                    startPoint: .bottom,
+                    endPoint: .top
                 )
+            )
+            .ignoresSafeArea(edges: .bottom)
+            .shadow(color: Color(.systemBackground), radius: 15, x: 0, y: 5)
+    }
+}
+
+private struct HiddenBottomScrollEdgeEffect: ViewModifier {
+    func body(content: Content) -> some View {
+        if #available(iOS 26.0, *) {
+            content.scrollEdgeEffectHidden(true, for: .bottom)
+        } else {
+            content
         }
-        .ignoresSafeArea(edges: .bottom)
-        .shadow(color: Color(.systemBackground), radius: 15, x: 0, y: 5)
     }
 }
 
