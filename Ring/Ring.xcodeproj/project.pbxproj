@@ -431,6 +431,7 @@
 		2E95DB7F67AC7C0D12E4014C /* LinkToAccountVMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CC8DA55AF00F04FF329D3E /* LinkToAccountVMTests.swift */; };
 		3D0E697A2DDCD9C80046FA3D /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D0E69792DDCD9C80046FA3D /* ShareViewController.swift */; };
 		3D0E69812DDCD9C80046FA3D /* jamiShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3D0E69772DDCD9C80046FA3D /* jamiShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		3D7A1B0D2E6A4F0100924590 /* AvatarLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7A1B0C2E6A4F0100924590 /* AvatarLoader.swift */; };
 		3D0E69882DDCDBE70046FA3D /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D0E69872DDCDBE70046FA3D /* ShareView.swift */; };
 		3D1D839A2DE60E9B00D4BD9E /* ShareViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1D83992DE60E9B00D4BD9E /* ShareViewModel.swift */; };
 		3D3E68CB2DEF657200E6203F /* VCardUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE1B54F1F75AD4700BA98EE /* VCardUtils.swift */; };
@@ -1631,6 +1632,7 @@
 		3D417F562DDE28CB001BAD76 /* libTelephonyBasebandDynamic.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libTelephonyBasebandDynamic.tbd; path = usr/lib/libTelephonyBasebandDynamic.tbd; sourceTree = SDKROOT; };
 		3D417F572DDE28CB001BAD76 /* libswiftCoreNFC.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libswiftCoreNFC.tbd; path = usr/lib/swift/libswiftCoreNFC.tbd; sourceTree = SDKROOT; };
 		3D48AB3C2E006C5100924590 /* ConversationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewModel.swift; sourceTree = "<group>"; };
+		3D7A1B0C2E6A4F0100924590 /* AvatarLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarLoader.swift; sourceTree = "<group>"; };
 		3D48AB402E00709600924590 /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
 		3D6E7C4A2DDCFF7A00C6EB24 /* jamiShareExtension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "jamiShareExtension-Bridging-Header.h"; sourceTree = "<group>"; };
 		3DAAC4692DDD1AC500D94B71 /* AdapterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdapterDelegate.swift; sourceTree = "<group>"; };
@@ -3663,6 +3665,7 @@
 			children = (
 				3DD777512E046A3000023295 /* jamiShareExtension.entitlements */,
 				3D48AB402E00709600924590 /* AccountViewModel.swift */,
+				3D7A1B0C2E6A4F0100924590 /* AvatarLoader.swift */,
 				3D48AB3C2E006C5100924590 /* ConversationViewModel.swift */,
 				3DAAC46A2DDD1AC500D94B71 /* Adapter.h */,
 				3D1D83992DE60E9B00D4BD9E /* ShareViewModel.swift */,
@@ -4600,6 +4603,7 @@
 				3D1D839A2DE60E9B00D4BD9E /* ShareViewModel.swift in Sources */,
 				3DAAC4702DDD1AC500D94B71 /* AdapterDelegate.swift in Sources */,
 				3D48AB412E00709D00924590 /* AccountViewModel.swift in Sources */,
+				3D7A1B0D2E6A4F0100924590 /* AvatarLoader.swift in Sources */,
 				3DAAC4712DDD1AC500D94B71 /* AdapterService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

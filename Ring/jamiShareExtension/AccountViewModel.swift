@@ -51,6 +51,7 @@ class AccountViewModel: ObservableObject, Identifiable, Equatable {
 
     private let adapterService: AdapterService
     private let disposeBag = DisposeBag()
+    private let avatarPixels = Constants.defaultAvatarSize * UIScreen.main.scale
 
     init(id: String, adapterService: AdapterService, initialName: String = "", initialAvatar: String = "", initialAvatarType: AvatarType = .jamiid) {
         self.id = id
@@ -75,15 +76,9 @@ class AccountViewModel: ObservableObject, Identifiable, Equatable {
         }
 
         let avatarString = avatar
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            guard let data = Data(base64Encoded: avatarString) else {
-                return
-            }
-            let processedImage = UIImage.resizeImage(from: data, targetSize: Constants.defaultAvatarSize)
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self, self.avatar == avatarString else { return }
-                self.processedAvatar = processedImage
-            }
+        AvatarLoader.decode(base64: avatarString, targetPixels: avatarPixels) { [weak self] image in
+            guard let self = self, self.avatar == avatarString else { return }
+            self.processedAvatar = image
         }
     }
 

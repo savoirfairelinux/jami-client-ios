@@ -374,18 +374,19 @@ struct ConversationScrollView: View {
 
     var body: some View {
         ScrollView(showsIndicators: false) {
-            ForEach(conversations) { conversation in
-                ConversationSelectableRow(
-                    conversation: conversation,
-                    isSelected: selectedConversationIds.contains(conversation.id),
-                    toggleAction: {
-                        toggleSelection(for: conversation.id)
-                    }
-                )
+            LazyVStack(alignment: .leading) {
+                ForEach(conversations) { conversation in
+                    ConversationSelectableRow(
+                        conversation: conversation,
+                        isSelected: selectedConversationIds.contains(conversation.id),
+                        toggleAction: {
+                            toggleSelection(for: conversation.id)
+                        }
+                    )
+                }
+                Spacer()
+                    .frame(height: 80)
             }
-            // Add bottom spacing to prevent conversations from being hidden behind the send button
-            Spacer()
-                .frame(height: 80)
         }
         .accessibilityIdentifier(ShareExtensionAccessibilityIdentifiers.conversationsList)
         .padding(.horizontal)

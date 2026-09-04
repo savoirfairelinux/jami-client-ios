@@ -41,6 +41,7 @@ class ConversationViewModel: ObservableObject, Identifiable, Equatable {
     private let adapterService: AdapterService
     private let disposeBag = DisposeBag()
     private var hasLoadedDetails = false
+    private let avatarPixels = Constants.defaultAvatarSize * UIScreen.main.scale
 
     init(id: String, accountId: String, adapterService: AdapterService, initialName: String = "", initialAvatar: String = "", initialAvatarType: AvatarType = .jamiid) {
         self.id = id
@@ -65,15 +66,9 @@ class ConversationViewModel: ObservableObject, Identifiable, Equatable {
         }
 
         let avatarString = avatar
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            guard let data = Data(base64Encoded: avatarString) else {
-                return
-            }
-            let processedImage = UIImage.resizeImage(from: data, targetSize: Constants.defaultAvatarSize)
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self, self.avatar == avatarString else { return }
-                self.processedAvatar = processedImage
-            }
+        AvatarLoader.decode(base64: avatarString, targetPixels: avatarPixels) { [weak self] image in
+            guard let self = self, self.avatar == avatarString else { return }
+            self.processedAvatar = image
         }
     }
 
@@ -105,8 +100,8 @@ class ConversationViewModel: ObservableObject, Identifiable, Equatable {
 
     private func loadGroupAvatarIfNeeded() {
         guard avatarType == .group else { return }
-        adapterService.getGroupMemberProfiles(accountId: accountId, conversationId: id)
-            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
+        adapterService.getGroupMemberProfiles(accountId: accountId, conversationId: id, decodePixels: avatarPixels)
+            .subscribe(on: AvatarLoader.scheduler)
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { [weak self] result in
                 let image = GroupAvatarRenderer.render(members: result.members, overflowCount: result.overflowCount, totalSize: Constants.defaultAvatarSize)
