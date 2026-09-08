@@ -68,4 +68,21 @@ final class VideoPipelineTests: XCTestCase {
                        "the next call must not receive the previous preview frame")
         _ = subscription
     }
+
+    func testAVideoMessageRecordsTheCameraFrames() throws {
+        let video = TestLibJamiVideoAPI()
+        let pipeline = VideoPipeline(video: video)
+        pipeline.setHardwareAccelerated(true)
+        let path = "/recordings/message.webm"
+
+        pipeline.openMediumCameraInput()
+        XCTAssertEqual(pipeline.startLocalRecorder(audioOnly: false, path: path), path)
+        let sampleBuffer = try makeCaptureSampleBuffer()
+        pipeline.capturer.onFrame?(try XCTUnwrap(CMSampleBufferGetImageBuffer(sampleBuffer)),
+                                   sampleBuffer)
+
+        XCTAssertEqual(video.framesRecorded(at: path), 1,
+                       "captured frames must reach the recorder; libjami drops any frame "
+                       + "addressed to a video input it has not opened")
+    }
 }

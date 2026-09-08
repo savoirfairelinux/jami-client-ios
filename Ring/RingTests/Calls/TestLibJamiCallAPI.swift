@@ -206,6 +206,10 @@ final class TestLibJamiVideoAPI: LibJamiVideoAPI {
     var onSinkRegistrationStarted: ((SinkId) -> Void)?
     private(set) var listenerStates: [SinkId: Bool] = [:]
     private var knownSinks: Set<SinkId> = []
+    private var openInputs: Set<String> = []
+    private var deliveredFrames: [String: Int] = [:]
+    private var recordingInputs: [String: String] = [:]
+    private var defaultDeviceName = ""
 
     func registerSink(_ sinkId: SinkId, width: Int, height: Int, hasListeners: Bool) {
         onSinkRegistrationStarted?(sinkId)
@@ -222,17 +226,32 @@ final class TestLibJamiVideoAPI: LibJamiVideoAPI {
         listenerStates[sinkId] = hasListeners
     }
     func renderSize(_ sinkId: SinkId) -> CGSize { .zero }
-    func writeOutgoingFrame(_ buffer: CVImageBuffer, angle: Int, videoInputId: String) {}
+
+    func framesRecorded(at path: String) -> Int {
+        guard let input = recordingInputs[path] else { return 0 }
+        return deliveredFrames[input] ?? 0
+    }
+
+    func writeOutgoingFrame(_ buffer: CVImageBuffer, angle: Int, videoInputId: String) {
+        guard openInputs.contains(videoInputId) else { return }
+        deliveredFrames[videoInputId, default: 0] += 1
+    }
+
     func addVideoDevice(name: String, info: [String: Any]) {}
-    func setDefaultDevice(_ name: String) {}
-    func defaultDevice() -> String { "front" }
-    func openVideoInput(_ path: String) {}
-    func closeVideoInput(_ path: String) {}
+    func setDefaultDevice(_ name: String) { defaultDeviceName = name }
+    func defaultDevice() -> String { defaultDeviceName }
+    func openVideoInput(_ path: String) { openInputs.insert(path) }
+    func closeVideoInput(_ path: String) { openInputs.remove(path) }
     func setDecodingAccelerated(_ state: Bool) {}
     func setEncodingAccelerated(_ state: Bool) {}
     func decodingAccelerated() -> Bool { true }
     func encodingAccelerated() -> Bool { true }
-    func startLocalRecording(videoInputId: String, path: String) -> String? { nil }
+
+    func startLocalRecording(videoInputId: String, path: String) -> String? {
+        recordingInputs[path] = videoInputId
+        return path
+    }
+
     func stopLocalRecording(path: String) {}
     func createMediaPlayer(path: String) -> String? { nil }
     func pausePlayer(playerId: String, pause: Bool) {}
