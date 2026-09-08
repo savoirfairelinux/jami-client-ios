@@ -222,10 +222,12 @@ final class VideoPipeline: NSObject {
 
     func openMediumCameraInput() {
         video.openVideoInput(Self.cameraSourceURI(from: CameraDevice.medium))
+        setCurrentDeviceId(CameraDevice.medium)
     }
 
     func closeMediumCameraInput() {
         video.closeVideoInput(Self.cameraSourceURI(from: CameraDevice.medium))
+        setCurrentDeviceId(video.defaultDevice())
     }
 
     func createPlayer(path: String) -> String? {
