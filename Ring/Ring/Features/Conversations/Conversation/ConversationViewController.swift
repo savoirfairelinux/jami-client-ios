@@ -326,6 +326,7 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
     }
 
     func recordVideo() {
+        guard !viewModel.hasLiveCall() else { return }
         if AVCaptureDevice.authorizationStatus(for: AVMediaType.audio) == AVAuthorizationStatus.authorized {
             if AVCaptureDevice.authorizationStatus(for: AVMediaType.video) == AVAuthorizationStatus.authorized {
                 recordVideoFile()

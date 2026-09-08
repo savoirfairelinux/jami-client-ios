@@ -108,7 +108,7 @@ final class CallsManager: CallCameraCoordinating {
                 break
             }
         case let .callEnded(call, _):
-            if !callService.stateMirror.calls.contains(where: { !$0.value.status.isTerminal }) {
+            if !callService.hasLiveCall {
                 // No call left to take the capture over — stop a warm-up
                 // libjami never claimed (normal ends go through
                 // libjami's StopCapture signal as well; stop is idempotent).
@@ -215,16 +215,17 @@ final class CallsManager: CallCameraCoordinating {
 
     func prepareCameraForOutgoingCall(audioOnly: Bool) {
         guard !audioOnly else { return }
+        videoService.claimCameraForCall()
         videoService.startPreviewCapture()
     }
 
     func prepareCameraForAnswerWithVideo() {
+        videoService.claimCameraForCall()
         videoService.startPreviewCapture()
     }
 
     func cancelCameraPreparation() {
-        let hasLiveCall = callService.stateMirror.calls.contains { !$0.value.status.isTerminal }
-        guard !hasLiveCall else { return }
+        guard !callService.hasLiveCall else { return }
         videoService.stopPreviewCapture()
         Task { await videoService.resetCameraPosition() }
     }

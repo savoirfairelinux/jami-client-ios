@@ -65,6 +65,7 @@ class MediaRecordViewModel: ObservableObject, Stateable, ViewModel {
     }()
 
     private let videoService: VideoService
+    private let callService: CallService
     private let accountService: AccountsService
     private let fileTransferService: DataTransferService
     let injectionBag: InjectionBag
@@ -76,6 +77,7 @@ class MediaRecordViewModel: ObservableObject, Stateable, ViewModel {
     @MainActor private lazy var orientationMonitor = DeviceOrientationMonitor()
     private var cameraStarted = false
     private var cameraDisposeBag = DisposeBag()
+    private let callDisposeBag = DisposeBag()
     private var playerDisposeBag = DisposeBag()
     private var recordingTimer: Timer?
     private var recordingSeconds: Int = 0
@@ -86,6 +88,7 @@ class MediaRecordViewModel: ObservableObject, Stateable, ViewModel {
 
     required init(with injectionBag: InjectionBag) {
         self.videoService = injectionBag.videoService
+        self.callService = injectionBag.callService
         self.accountService = injectionBag.accountService
         self.fileTransferService = injectionBag.dataTransferService
         self.injectionBag = injectionBag
@@ -96,11 +99,13 @@ class MediaRecordViewModel: ObservableObject, Stateable, ViewModel {
     /// Must be called after setting `conversation` and `audioOnly`.
     func setup() {
         subscribeCameraFrames()
+        subscribeCameraClaim()
     }
 
     @MainActor
     func previewAppeared() {
         guard !audioOnly else { return }
+        guard !callService.hasLiveCall else { return cancel() }
         orientationMonitor.start { [weak self] input in
             self?.videoService.setCameraOrientation(input)
         }
@@ -187,6 +192,23 @@ class MediaRecordViewModel: ObservableObject, Stateable, ViewModel {
 
     func registerSlider(_ sink: @escaping (Float) -> Void) {
         sliderPositionSink = sink
+    }
+
+    private func subscribeCameraClaim() {
+        videoService.cameraClaimedByCall.asObservable()
+            .subscribe(onNext: { [weak self] in
+                DispatchQueue.main.async { self?.yieldCameraToCall() }
+            })
+            .disposed(by: callDisposeBag)
+    }
+
+    private func yieldCameraToCall() {
+        guard cameraStarted else { return }
+        if isRecording {
+            stopRecording()
+        } else if !isReadyToSend {
+            cancel()
+        }
     }
 
     private func subscribeCameraFrames() {

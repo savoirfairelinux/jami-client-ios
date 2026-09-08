@@ -144,6 +144,10 @@ final class CallService {
         onSystemEvent?(event)
     }
 
+    var hasLiveCall: Bool {
+        return stateMirror.calls.contains { !$0.value.status.isTerminal }
+    }
+
     // MARK: - Outgoing calls
 
     func startOutgoingCall(uri: String, account: AccountModel, isAudioOnly: Bool) {

@@ -74,6 +74,7 @@ final class VideoService {
 
     let videoInputManager = FrameStream()
     let capturedVideoFrame = PublishSubject<LocalFrameInfo?>()
+    let cameraClaimedByCall = PublishSubject<Void>()
     let playerInfo = PublishSubject<Player>()
 
     // MARK: - libjami wiring
@@ -148,6 +149,11 @@ final class VideoService {
 
     func startMediumCamera() {
         pipeline.openMediumCameraInput()
+    }
+
+    func claimCameraForCall() {
+        pipeline.closeMediumCameraInput()
+        cameraClaimedByCall.onNext(())
     }
 
     /// On return the local preview transform has been recomputed for the new

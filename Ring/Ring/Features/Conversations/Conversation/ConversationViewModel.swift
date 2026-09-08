@@ -603,6 +603,10 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
         }
     }
 
+    func hasLiveCall() -> Bool {
+        return callService.hasLiveCall
+    }
+
     func haveCurrentCall() -> Bool {
         if !self.conversation.isDialog() {
             return false
