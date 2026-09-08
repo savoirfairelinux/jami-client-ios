@@ -259,6 +259,13 @@ class PlayerViewModel {
 
     func closePlayer() {
         transition(to: .idle)
+        releasePlayer()
+    }
+
+    // MARK: - Private helpers
+
+    private func releasePlayer() {
+        invalidateTimer()
         let idToClose = playerId
         playerId = ""
         playBackDisposeBag = DisposeBag()
@@ -266,8 +273,6 @@ class PlayerViewModel {
             videoService?.closePlayer(playerId: idToClose)
         }
     }
-
-    // MARK: - Private helpers
 
     /// Recreate the daemon player after it was closed externally (e.g. before a call).
     /// firstFrame is already available so we skip extraction and go straight to playing.
@@ -371,6 +376,6 @@ class PlayerViewModel {
     }
 
     deinit {
-        closePlayer()
+        releasePlayer()
     }
 }
