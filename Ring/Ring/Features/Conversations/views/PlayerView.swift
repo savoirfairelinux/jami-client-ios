@@ -129,7 +129,7 @@ class PlayerCoordinator: ObservableObject {
 
         viewModel.playerDuration
             .asObservable()
-            .observe(on: MainScheduler.instance)
+            .observe(on: MainScheduler.asyncInstance)
             .subscribe(onNext: { [weak self] value in
                 self?.duration = value
             })
@@ -137,7 +137,7 @@ class PlayerCoordinator: ObservableObject {
 
         viewModel.pause
             .asObservable()
-            .observe(on: MainScheduler.instance)
+            .observe(on: MainScheduler.asyncInstance)
             .subscribe(onNext: { [weak self] value in
                 self?.isPaused = value
             })
@@ -145,7 +145,7 @@ class PlayerCoordinator: ObservableObject {
 
         viewModel.audioMuted
             .asObservable()
-            .observe(on: MainScheduler.instance)
+            .observe(on: MainScheduler.asyncInstance)
             .subscribe(onNext: { [weak self] value in
                 self?.isMuted = value
             })
@@ -153,7 +153,7 @@ class PlayerCoordinator: ObservableObject {
 
         viewModel.hasVideo
             .asObservable()
-            .observe(on: MainScheduler.instance)
+            .observe(on: MainScheduler.asyncInstance)
             .subscribe(onNext: { [weak self] value in
                 self?.hasVideo = value
             })
