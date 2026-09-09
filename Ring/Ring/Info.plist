@@ -62,7 +62,6 @@
 		<string>audio</string>
 		<string>fetch</string>
 		<string>location</string>
-		<string>remote-notification</string>
 		<string>voip</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
