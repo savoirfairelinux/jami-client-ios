@@ -24,7 +24,6 @@ import CoreFoundation
 import os
 import Darwin
 import Contacts
-import RxSwift
 import Atomics
 
 /*
@@ -129,91 +128,84 @@ class AutoDispatchGroup {
     }
 }
 
-class HTTPStreamHandler: NSObject, URLSessionDataDelegate {
-    private lazy var session: URLSession = {
-        let config = URLSessionConfiguration.default
-        config.timeoutIntervalForRequest = 10
-        config.timeoutIntervalForResource = 10
-        config.requestCachePolicy = .reloadIgnoringLocalCacheData
-        return URLSession(configuration: config, delegate: self, delegateQueue: nil)
-    }()
+private enum ProxyFetchError: Error {
+    case status(Int)
+    case valuesMissing(Int)
+}
 
-    private var dataBuffer = Data()
-    private var task: URLSessionDataTask?
-    private var subject = PublishSubject<String>()
-    private let taskQueue = DispatchQueue(label: Constants.appIdentifier + ".HTTPStreamHandler.queue")
+class ProxyValueFetcher {
+    private static let attemptTimeout: TimeInterval = 10
+    private let maxRetries = 1
+    private let retryDelay: TimeInterval = 1
+    private let session: URLSession = {
+        let config = URLSessionConfiguration.default
+        config.timeoutIntervalForRequest = ProxyValueFetcher.attemptTimeout
+        config.timeoutIntervalForResource = ProxyValueFetcher.attemptTimeout
+        config.waitsForConnectivity = true
+        config.requestCachePolicy = .reloadIgnoringLocalCacheData
+        return URLSession(configuration: config)
+    }()
 
     func invalidateAndCancelSession() {
         session.invalidateAndCancel()
     }
 
-    private func startTask(url: URL) {
-        taskQueue.sync { [weak self] in
-            guard let self = self else { return }
-            self.task = self.session.dataTask(with: url)
-            log("Starting URL Stream: \(url)")
-            self.task?.resume()
+    func fetch(from url: URL, deadline: Date, onLine: (String) -> Bool, missingValues: () -> Int) async throws -> Int {
+        var attempt = 0
+        while true {
+            do {
+                try await streamLines(from: url, onLine: onLine)
+                let missing = missingValues()
+                guard missing > 0 else { return attempt + 1 }
+                throw ProxyFetchError.valuesMissing(missing)
+            } catch {
+                if Task.isCancelled || !isTransient(error) || !canRetry(after: attempt, before: deadline) {
+                    throw error
+                }
+                log("Retrying value fetch after error: \(error)")
+            }
+            attempt += 1
+            try await Task.sleep(nanoseconds: UInt64(retryDelay * 1_000_000_000))
         }
     }
 
-    func startStreaming(from url: URL) -> Observable<String> {
-        return subject
-            .do(onSubscribe: { [weak self] in
-                self?.startTask(url: url)
-            })
-            .do(onDispose: { [weak self] in
-                _ = self?.cancelPendingDataTask()
-            })
-    }
-
-    private func cancelPendingDataTask() -> Bool {
-        taskQueue.sync { [weak self] in
-            guard let self = self else { return false }
-            if self.task?.state == .running {
-                self.task?.cancel()
-                return true
-            }
+    private func isTransient(_ error: Error) -> Bool {
+        switch error {
+        case ProxyFetchError.status(let code):
+            return code >= 500
+        case ProxyFetchError.valuesMissing:
+            return true
+        case let urlError as URLError:
+            return [.timedOut, .networkConnectionLost, .notConnectedToInternet,
+                    .cannotConnectToHost, .cannotFindHost, .dnsLookupFailed].contains(urlError.code)
+        default:
             return false
         }
     }
 
-    func finishStreaming() {
-        if cancelPendingDataTask() {
-            subject.onCompleted()
+    static func failureDescription(_ error: Error) -> String {
+        switch error {
+        case ProxyFetchError.status(let code):
+            return "status: \(code)"
+        case ProxyFetchError.valuesMissing(let count):
+            return "values missing: \(count)"
+        default:
+            let nsError = error as NSError
+            return "error domain: \(nsError.domain) code: \(nsError.code)"
         }
     }
 
-    func cancelStreaming() {
-        if cancelPendingDataTask() {
-            log("Stream handling canceled")
-            subject.onError(URLError(.cancelled))
-        }
+    private func canRetry(after attempt: Int, before deadline: Date) -> Bool {
+        return attempt < maxRetries && Date().addingTimeInterval(retryDelay + Self.attemptTimeout) <= deadline
     }
 
-    // MARK: URLSessionDataDelegate
-    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
-        var receivedStrings = [String]()
-        taskQueue.sync { [weak self] in
-            guard let self = self else { return }
-            self.dataBuffer.append(data)
-            while let range = self.dataBuffer.range(of: "\n".data(using: .utf8)!) {
-                let lineData = self.dataBuffer.subdata(in: 0..<range.lowerBound)
-                self.dataBuffer.removeSubrange(0..<range.upperBound)
-                if let lineString = String(data: lineData, encoding: .utf8) {
-                    receivedStrings.append(lineString)
-                }
-            }
-        }
-        for string in receivedStrings {
-            subject.onNext(string)
-        }
-    }
-
-    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
-        if let error = error {
-            self.subject.onError(error)
-        } else {
-            self.subject.onCompleted()
+    private func streamLines(from url: URL, onLine: (String) -> Bool) async throws {
+        log("Starting URL Stream: \(url)")
+        let (bytes, response) = try await session.bytes(from: url)
+        let status = (response as? HTTPURLResponse)?.statusCode ?? 0
+        guard status == 200 else { throw ProxyFetchError.status(status) }
+        for try await line in bytes.lines {
+            guard onLine(line) else { return }
         }
     }
 }
@@ -268,6 +260,7 @@ class NotificationService: UNNotificationServiceExtension {
     private static let localShareExtensionNotificationName = Notification.Name(Constants.appIdentifier + ".shareExtensionActive.internal")
 
     private let notificationTimeout = DispatchTimeInterval.seconds(25)
+    private let streamDeadline: TimeInterval = 15
     private let notificationCenter = CFNotificationCenterGetDarwinNotifyCenter()
     private var contentHandler: ((UNNotificationContent) -> Void)?
     private var bestAttemptContent = UNMutableNotificationContent()
@@ -275,8 +268,8 @@ class NotificationService: UNNotificationServiceExtension {
     // All asynchronous tasks are managed using the AutoDispatchGroup which tracks tasks using
     // IDs. Both the streaming and Jami backend tasks will be waited upon using this group.
     private let autoDispatchGroup = AutoDispatchGroup()
-    private let httpStreamHandler = HTTPStreamHandler()
-    private let disposeBag = DisposeBag()
+    private let valueFetcher = ProxyValueFetcher()
+    private var streamTask: Task<Void, Never>?
 
     // The following objects are used to manage access to the Jami backend for synchronization
     private var accountIsActive = ManagedAtomic<Bool>(false)
@@ -284,6 +277,7 @@ class NotificationService: UNNotificationServiceExtension {
     private var adapterService: AdapterService = AdapterService(withAdapter: Adapter())
     private var jamiTaskId: String = ""
     private var idsToProcess: Set<String> = []
+    private var processedIds: Set<String> = []
     private var processAll: Bool = false
     private let taskPropertyQueue = DispatchQueue(label: Constants.appIdentifier + ".TaskProperty.queue")
     private var originalNotificationData: [String: String] = [:]
@@ -303,7 +297,7 @@ class NotificationService: UNNotificationServiceExtension {
 
     deinit {
         removeNotificationExtensionQueryListener()
-        httpStreamHandler.invalidateAndCancelSession()
+        valueFetcher.invalidateAndCancelSession()
     }
 
     // Entry point for processing incoming notification requests.
@@ -390,22 +384,26 @@ class NotificationService: UNNotificationServiceExtension {
         autoDispatchGroup.enter(id: taskId)
         let startedAt = Date()
 
-        httpStreamHandler.startStreaming(from: url)
-            .subscribe(onNext: { [weak self] line in
-                self?.processStreamLine(line, with: request, keyURL: keyURL, treatedMessagesURL: treatedMessagesURL)
-            }, onError: { [weak self] error in
-                if (error as? URLError)?.code == .cancelled {
-                    self?.logStreamingExit("cancelled", startedAt: startedAt)
+        let task = Task { [weak self] in
+            guard let self = self else { return }
+            defer { self.autoDispatchGroup.leave(id: taskId) }
+            do {
+                let deadline = self.receivedAt.addingTimeInterval(self.streamDeadline)
+                let attempts = try await self.valueFetcher.fetch(from: url, deadline: deadline, onLine: { line in
+                    self.processStreamLine(line, with: request, keyURL: keyURL, treatedMessagesURL: treatedMessagesURL)
+                }, missingValues: {
+                    self.didFinish.load(ordering: .relaxed) || self.processAll ? 0 : self.idsToProcess.count
+                })
+                self.logStreamingExit("completed attempts: \(attempts)", startedAt: startedAt)
+            } catch {
+                if Task.isCancelled || (error as? URLError)?.code == .cancelled {
+                    self.logStreamingExit("cancelled", startedAt: startedAt)
                 } else {
-                    let nsError = error as NSError
-                    self?.logStreamingExit("error domain: \(nsError.domain) code: \(nsError.code)", startedAt: startedAt)
+                    self.logStreamingExit(ProxyValueFetcher.failureDescription(error), startedAt: startedAt)
                 }
-                self?.autoDispatchGroup.leave(id: taskId)
-            }, onCompleted: { [weak self] in
-                self?.logStreamingExit("completed", startedAt: startedAt)
-                self?.autoDispatchGroup.leave(id: taskId)
-            })
-            .disposed(by: disposeBag)
+            }
+        }
+        taskPropertyQueue.sync { streamTask = task }
     }
 
     private func logStreamingExit(_ outcome: String, startedAt: Date) {
@@ -413,19 +411,19 @@ class NotificationService: UNNotificationServiceExtension {
     }
 
     // Processes each line received from the data stream.
-    private func processStreamLine(_ line: String, with request: UNNotificationRequest, keyURL: URL, treatedMessagesURL: URL) {
+    private func processStreamLine(_ line: String, with request: UNNotificationRequest, keyURL: URL, treatedMessagesURL: URL) -> Bool {
         do {
             guard let jsonData = line.data(using: .utf8),
                   let map = try JSONSerialization.jsonObject(with: jsonData, options: .allowFragments) as? [String: Any],
                   let id = map["id"] as? String,
                   map["cypher"] != nil else {
                 log("Line doesn't contain a valid schema")
-                return
+                return true
             }
 
-            guard idsToProcess.contains(id) || processAll else {
-                log("Skipping line; ID is not in the list: \(id)")
-                return
+            guard (idsToProcess.contains(id) || processAll) && processedIds.insert(id).inserted else {
+                log("Skipping line; ID is not in the list or already processed: \(id)")
+                return true
             }
 
             log("Processing ID: \(id)")
@@ -433,11 +431,12 @@ class NotificationService: UNNotificationServiceExtension {
             processMap(map: map, keyURL: keyURL, treatedMessagesURL: treatedMessagesURL, userInfo: request.content.userInfo)
             if !processAll && idsToProcess.isEmpty {
                 log("All IDs processed; Finishing stream")
-                httpStreamHandler.finishStreaming()
+                return false
             }
         } catch {
             log("Stream decoding error: \(error) line: \(line)")
         }
+        return true
     }
 
     private func processMap(map: [String: Any], keyURL: URL, treatedMessagesURL: URL, userInfo: [AnyHashable: Any]) {
@@ -608,6 +607,7 @@ class NotificationService: UNNotificationServiceExtension {
             notificationLogger.notice("finish exit: alreadyFinished reason: \(reason.rawValue, privacy: .public) elapsed: \(elapsed, format: .fixed(precision: 2), privacy: .public)s")
             return
         }
+        self.taskPropertyQueue.sync { self.streamTask }?.cancel()
         removeNotificationExtensionQueryListener()
         let accountWasActive = self.accountIsActive.compareExchange(expected: true, desired: false, ordering: .relaxed).original
         if accountWasActive {
@@ -633,7 +633,6 @@ class NotificationService: UNNotificationServiceExtension {
                 pendingLocalNotifications.removeAll()
             }
         }
-        self.httpStreamHandler.cancelStreaming()
         if let contentHandler = contentHandler {
             contentHandler(self.bestAttemptContent)
         }
