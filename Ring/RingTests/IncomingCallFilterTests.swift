@@ -20,6 +20,37 @@ import XCTest
 
 final class IncomingCallFilterTests: XCTestCase {
 
+    func testCallPayloadUsesCachedDisplayName() {
+        let payload = IncomingCallPayloadBuilder.build(
+            originalData: ["key": "value", "accountId": "stale"],
+            peerId: jamiId1,
+            hasVideo: true,
+            accountId: "account-id",
+            cachedDisplayName: "Alice"
+        )
+
+        XCTAssertEqual(payload["key"] as? String, "value")
+        XCTAssertEqual(payload["peerId"] as? String, jamiId1)
+        XCTAssertEqual(payload["hasVideo"] as? String, "true")
+        XCTAssertEqual(payload["accountId"] as? String, "account-id")
+        XCTAssertEqual(payload["displayName"] as? String, "Alice")
+    }
+
+    func testCallPayloadFallsBackToPeerIdWithoutCachedName() {
+        let payload = IncomingCallPayloadBuilder.build(
+            originalData: [:],
+            peerId: jamiId1,
+            hasVideo: false,
+            accountId: "account-id",
+            cachedDisplayName: ""
+        )
+
+        XCTAssertEqual(payload["peerId"] as? String, jamiId1)
+        XCTAssertEqual(payload["hasVideo"] as? String, "false")
+        XCTAssertEqual(payload["accountId"] as? String, "account-id")
+        XCTAssertEqual(payload["displayName"] as? String, jamiId1)
+    }
+
     func testAllowUnknownAcceptsStranger() {
         let filter = IncomingCallFilter(allowUnknown: true, contactDetails: [])
         XCTAssertTrue(filter.shouldAccept(peerId: jamiId1))

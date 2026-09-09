@@ -40,9 +40,9 @@ import Atomics
  *  6. The action is taken, which may involve presenting a local notification or stopping the current backend
  *     instance and handing off control the foreground app (in the case of an incoming call)
  *
- * The class also handles the retrieval of contact names from the name server, which is done asynchronously.
- * In the case of a name being required, the notification is enqueued and the name is retrieved before the
- * notification is presented.
+ * The class also handles asynchronous contact-name retrieval for message and active-call notifications.
+ * Direct incoming calls use only locally cached names and are handed to the app immediately; a network lookup
+ * must never delay CallKit presentation.
  *
  * The actions taken based on the notification data are as follows:
  *  - If the data is a call, the call is presented (the extension can be stopped as the foreground app will take over)
@@ -260,13 +260,13 @@ class NotificationService: UNNotificationServiceExtension {
     private var syncCompleted = false
     private var waitForCloning = false
 
-    // A queue of pending local notifications, waiting for a name lookup
+    // A queue of pending message and active-call notifications waiting for a name lookup.
     private let notificationQueue = DispatchQueue(label: Constants.appIdentifier + ".Notification.queue")
     private var pendingLocalNotifications = [String: [LocalNotification]]() // local notification waiting for name lookup
-    private var pendingCalls = [String: [AnyHashable: Any]]() // calls waiting for name lookup
     private var pendingActiveCallNotifications = [String: (notification: LocalNotification, participants: [String])]() // active call notifications waiting for name lookup
     private var names = [String: String]() // map of peerId and best name
     private let thumbnailSize = 100
+    private let didFinish = ManagedAtomic<Bool>(false)
 
     deinit {
         removeNotificationExtensionQueryListener()
@@ -398,33 +398,15 @@ class NotificationService: UNNotificationServiceExtension {
                 log("Dropping call from \(peerId): account rejects unknown callers and peer is not a contact")
                 return
             }
-            ({ [weak self] (peerId, hasVideo) in
-                guard let self = self else {
-                    return
-                }
-                var info: [AnyHashable: Any] = [:]
-                // Include all original notification data fields
-                for (key, value) in self.originalNotificationData {
-                    info[key] = value
-                }
-                // Add call-specific fields
-                info["peerId"] = peerId
-                info["hasVideo"] = hasVideo
-                info["accountId"] = self.accountId
-                let name = self.bestName(accountId: self.accountId, contactId: peerId)
-                // jami will be started. Set accounts to not active state
-                if self.accountIsActive.compareExchange(expected: true, desired: false, ordering: .relaxed).original {
-                    self.adapterService.stop(accountId: self.accountId)
-                }
-                info["displayName"] = name.isEmpty ? peerId : name
-                self.pendingCalls[peerId] = info
-
-                if name.isEmpty {
-                    // Enter the dispatch group to wait for the address lookup process to finish.
-                    self.autoDispatchGroup.enter(id: peerId)
-                    self.startAddressLookup(address: peerId)
-                }
-            })(peerId, "\(hasVideo)")
+            let name = self.bestName(accountId: self.accountId, contactId: peerId)
+            let info = IncomingCallPayloadBuilder.build(
+                originalData: self.originalNotificationData,
+                peerId: peerId,
+                hasVideo: hasVideo,
+                accountId: self.accountId,
+                cachedDisplayName: name
+            )
+            self.finish(callInfo: info)
             return
         case .gitMessage(let convId):
             self.handleGitMessage(convId: convId, loadAll: convId.isEmpty) // async
@@ -544,7 +526,7 @@ class NotificationService: UNNotificationServiceExtension {
     private func verifyTasksStatus() {
         // waiting for lookup
         self.notificationQueue.sync {
-            if !pendingCalls.isEmpty || !pendingLocalNotifications.isEmpty {
+            if !pendingLocalNotifications.isEmpty {
                 return
             }
         }
@@ -559,7 +541,15 @@ class NotificationService: UNNotificationServiceExtension {
         }
     }
 
-    private func finish() {
+    private func finish(callInfo: [AnyHashable: Any]? = nil) {
+        let result = didFinish.compareExchange(
+            expected: false,
+            desired: true,
+            ordering: .acquiringAndReleasing
+        )
+        guard result.exchanged else {
+            return
+        }
         removeNotificationExtensionQueryListener()
         if self.accountIsActive.compareExchange(expected: true, desired: false, ordering: .relaxed).original {
             self.adapterService.stop(accountId: self.accountId)
@@ -568,7 +558,7 @@ class NotificationService: UNNotificationServiceExtension {
         }
         // cleanup pending notifications
         self.notificationQueue.sync {
-            if !self.pendingCalls.isEmpty, let info = self.pendingCalls.first?.value {
+            if let info = callInfo {
                 self.presentCall(info: info)
             } else {
                 for notifications in pendingLocalNotifications {
@@ -728,16 +718,6 @@ extension NotificationService {
         let name = self.names[address]
         self.notificationQueue.sync { [weak self] in
             guard let self = self else { return }
-            for call in pendingCalls where call.key == address {
-                var info = call.value
-                if let name = name {
-                    info["displayName"] = name
-                }
-                // Leave group after updating name
-                self.autoDispatchGroup.leave(id: address)
-                return
-            }
-
             if let (notification, participants) = self.pendingActiveCallNotifications[address],
                let accountId = notification.content.userInfo[Constants.NotificationUserInfoKeys.accountID.rawValue] as? String {
                 self.handleActiveCallNotification(notification: notification, participants: participants, accountId: accountId)
@@ -997,11 +977,9 @@ extension NotificationService {
     }
 
     private func presentCall(info: [AnyHashable: Any]) {
-        // TODO: see if this should sync after daemon stop
         CXProvider.reportNewIncomingVoIPPushPayload(info, completion: { error in
             log("NotificationService", "Did report voip notification, error: \(String(describing: error))")
         })
-        self.pendingCalls.removeAll()
         self.pendingLocalNotifications.removeAll()
     }
 
