@@ -156,13 +156,21 @@ class HTTPStreamHandler: NSObject, URLSessionDataDelegate {
     }
 
     func startStreaming(from url: URL) -> Observable<String> {
-        return subject
-            .do(onSubscribe: { [weak self] in
-                self?.startTask(url: url)
-            })
-            .do(onDispose: { [weak self] in
-                _ = self?.cancelPendingDataTask()
-            })
+        return Observable.deferred { [weak self] () -> Observable<String> in
+            guard let self = self else { return .empty() }
+            let attempt = PublishSubject<String>()
+            self.taskQueue.sync {
+                self.subject = attempt
+                self.dataBuffer = Data()
+            }
+            return attempt
+                .do(onSubscribe: { [weak self] in
+                    self?.startTask(url: url)
+                })
+                .do(onDispose: { [weak self] in
+                    _ = self?.cancelPendingDataTask()
+                })
+        }
     }
 
     private func cancelPendingDataTask() -> Bool {
@@ -170,6 +178,7 @@ class HTTPStreamHandler: NSObject, URLSessionDataDelegate {
             guard let self = self else { return false }
             if self.task?.state == .running {
                 self.task?.cancel()
+                self.task = nil
                 return true
             }
             return false
@@ -186,8 +195,8 @@ class HTTPStreamHandler: NSObject, URLSessionDataDelegate {
     // MARK: URLSessionDataDelegate
     func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
         var receivedStrings = [String]()
-        taskQueue.sync { [weak self] in
-            guard let self = self else { return }
+        let attempt = taskQueue.sync { [weak self] () -> PublishSubject<String>? in
+            guard let self = self, dataTask === self.task else { return nil }
             self.dataBuffer.append(data)
             while let range = self.dataBuffer.range(of: "\n".data(using: .utf8)!) {
                 let lineData = self.dataBuffer.subdata(in: 0..<range.lowerBound)
@@ -196,17 +205,24 @@ class HTTPStreamHandler: NSObject, URLSessionDataDelegate {
                     receivedStrings.append(lineString)
                 }
             }
+            return self.subject
         }
+        guard let attempt = attempt else { return }
         for string in receivedStrings {
-            subject.onNext(string)
+            attempt.onNext(string)
         }
     }
 
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+        let attempt = taskQueue.sync { [weak self] () -> PublishSubject<String>? in
+            guard let self = self, task === self.task else { return nil }
+            return self.subject
+        }
+        guard let attempt = attempt else { return }
         if let error = error {
-            self.subject.onError(error)
+            attempt.onError(error)
         } else {
-            self.subject.onCompleted()
+            attempt.onCompleted()
         }
     }
 }
@@ -219,6 +235,7 @@ class NotificationService: UNNotificationServiceExtension {
     private static let localShareExtensionNotificationName = Notification.Name(Constants.appIdentifier + ".shareExtensionActive.internal")
 
     private let notificationTimeout = DispatchTimeInterval.seconds(25)
+    private let streamRetryWindow: TimeInterval = 12
     private let notificationCenter = CFNotificationCenterGetDarwinNotifyCenter()
     private var contentHandler: ((UNNotificationContent) -> Void)?
     private var bestAttemptContent = UNMutableNotificationContent()
@@ -323,8 +340,16 @@ class NotificationService: UNNotificationServiceExtension {
     private func startStreaming(from url: URL, for request: UNNotificationRequest, keyURL: URL, treatedMessagesURL: URL) {
         let taskId = UUID().uuidString
         autoDispatchGroup.enter(id: taskId)
+        let retryWindowEnd = Date().addingTimeInterval(streamRetryWindow)
 
         httpStreamHandler.startStreaming(from: url)
+            .retry(when: { errors in
+                errors.flatMap { error -> Observable<Void> in
+                    guard Date() < retryWindowEnd else { return .error(error) }
+                    log("Retrying value fetch after error: \(error)")
+                    return .just(())
+                }
+            })
             .subscribe(onNext: { [weak self] line in
                 self?.processStreamLine(line, with: request, keyURL: keyURL, treatedMessagesURL: treatedMessagesURL)
             }, onError: { [weak self] error in
