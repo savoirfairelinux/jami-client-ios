@@ -97,6 +97,14 @@ class DaemonService {
         }
     }
 
+    /// Starts the daemon unless this service already started it successfully.
+    /// Lifecycle callbacks may request startup more than once, so callers that
+    /// do not consider an already-running daemon an error should use this API.
+    func startDaemonIfNeeded() throws {
+        guard !self.daemonStarted else { return }
+        try self.startDaemon()
+    }
+
     /**
      Stops the Ring daemon.
 

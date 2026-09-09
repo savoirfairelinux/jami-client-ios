@@ -29,6 +29,21 @@ import XCTest
  - fails to achieve one or the other as we expect it to do.
  */
 class DaemonServiceTests: XCTestCase {
+    private final class CountingDRingAdapter: DRingAdapter {
+        private(set) var initCallCount = 0
+        private(set) var startCallCount = 0
+
+        override func initDaemon() -> Bool {
+            initCallCount += 1
+            return true
+        }
+
+        override func startDaemon() -> Bool {
+            startCallCount += 1
+            return true
+        }
+    }
+
     /**
      Tests that the Ring Daemon Service starts the daemon correctly
 
@@ -95,5 +110,25 @@ class DaemonServiceTests: XCTestCase {
         XCTAssertThrowsError(try daemonService.startDaemon()) { (error) in
             XCTAssertEqual(error as? StartDaemonError, StartDaemonError.startFailure)
         }
+    }
+
+    func testStartIfNeededStartsDaemonOnlyOnce() throws {
+        let adapter = CountingDRingAdapter()
+        let daemonService = DaemonService(dRingAdaptor: adapter)
+
+        try daemonService.startDaemonIfNeeded()
+        try daemonService.startDaemonIfNeeded()
+
+        XCTAssertTrue(daemonService.daemonStarted)
+        XCTAssertEqual(adapter.initCallCount, 1)
+        XCTAssertEqual(adapter.startCallCount, 1)
+    }
+
+    func testStartIfNeededCanRetryAfterFailure() {
+        let daemonService = DaemonService(dRingAdaptor: FixtureFailInitDRingAdapter())
+
+        XCTAssertThrowsError(try daemonService.startDaemonIfNeeded())
+        XCTAssertThrowsError(try daemonService.startDaemonIfNeeded())
+        XCTAssertFalse(daemonService.daemonStarted)
     }
 }

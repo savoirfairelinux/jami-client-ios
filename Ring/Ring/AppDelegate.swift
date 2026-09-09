@@ -43,6 +43,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     private let collaborationService = CollaborationService(withCollaborationAdapter: CollaborationAdapter())
     private var conversationManager: ConversationsManager?
     private var interactionsManager: GeneratedInteractionsManager?
+    private enum RuntimeInitializationState {
+        case notStarted
+        case starting
+        case started
+    }
+    private var runtimeInitializationState = RuntimeInitializationState.notStarted
     internal lazy var accountService: AccountsService = {
         AccountsService(withAccountAdapter: AccountAdapter(), dbManager: self.dBManager)
     }()
@@ -157,48 +163,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         self.callsManager = callsManager
         self.injectionBag.callsManager = callsManager
 
-        // starts the daemon
-        self.startDaemon()
-
-        #if DEBUG
-        self.setUpTestDataIfNeed()
-        #endif
-
-        // requests permission to use the camera
-        // will enumerate and add devices once permission has been granted
-        self.videoService.setupInputs()
-
-        // Observe connectivity changes and reconnect DHT. The first path
-        // evaluation is not a change: the daemon has just registered with that
-        // very network, so reporting it would re-register the account and drop
-        // every DHT operation in flight.
-        self.networkService.connectivityChangedObservable
-            .subscribe(onNext: { _ in
-                self.daemonService.connectivityChanged()
-            })
-            .disposed(by: self.disposeBag)
-
-        // start monitoring for network changes
-        self.networkService.monitorNetworkType()
-
-        self.interactionsManager = GeneratedInteractionsManager(accountService: self.accountService,
-                                                                requestsService: self.requestsService,
-                                                                conversationService: self.conversationsService,
-                                                                callService: self.callService)
-
-        // load accounts during splashscreen
-        // and ask the AppCoordinator to handle the first screen once loading is finished
-        self.conversationManager = ConversationsManager(with: self.conversationsService,
-                                                        accountsService: self.accountService,
-                                                        nameService: self.nameService,
-                                                        dataTransferService: self.dataTransferService,
-                                                        callService: self.callService,
-                                                        callsManager: callsManager,
-                                                        locationSharingService: self.locationSharingService, contactsService: self.contactsService,
-                                                        requestsService: self.requestsService, profileService: self.profileService,
-                                                        presenceService: self.presenceService)
-
-        prepareAccounts()
         self.voipRegistry.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(registerNotifications),
                                                name: NSNotification.Name(rawValue: NotificationName.enablePushNotifications.rawValue),
@@ -208,7 +172,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                                                name: NSNotification.Name(rawValue: NotificationName.disablePushNotifications.rawValue),
                                                object: nil)
 
-        self.clearBadgeNumber()
         if let path = self.certificatePath() {
             setenv("CA_ROOT_FILE", path, 1)
         }
@@ -354,12 +317,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     func sceneWillEnterForeground() {
+        guard self.startDaemonIfNeeded() else { return }
         self.updateNotificationAvailability()
         guard let account = self.accountService.currentAccount else { return }
         self.presenceService.subscribeBuddies(withAccount: account.id, withContacts: self.contactsService.contacts.value, subscribe: true)
     }
 
     func sceneDidBecomeActive() {
+        guard self.startDaemonIfNeeded() else { return }
         self.clearBadgeNumber()
         guard let account = self.accountService.currentAccount else { return }
         self.presenceService.subscribeBuddies(withAccount: account.id, withContacts: self.contactsService.contacts.value, subscribe: true)
@@ -404,18 +369,74 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     // MARK: - Ring Daemon
-    private func startDaemon() {
+    @discardableResult
+    private func startDaemonIfNeeded() -> Bool {
+        dispatchPrecondition(condition: .onQueue(.main))
+        switch self.runtimeInitializationState {
+        case .started:
+            return true
+        case .starting:
+            return false
+        case .notStarted:
+            self.runtimeInitializationState = .starting
+        }
+
         do {
-            try self.daemonService.startDaemon()
+            try self.daemonService.startDaemonIfNeeded()
         } catch StartDaemonError.initializationFailure {
             log.error("Daemon failed to initialize.")
+            self.runtimeInitializationState = .notStarted
+            return false
         } catch StartDaemonError.startFailure {
             log.error("Daemon failed to start.")
-        } catch StartDaemonError.daemonAlreadyRunning {
-            log.error("Daemon already running.")
+            self.runtimeInitializationState = .notStarted
+            return false
         } catch {
             log.error("Unknown error in Daemon start.")
+            self.runtimeInitializationState = .notStarted
+            return false
         }
+
+        #if DEBUG
+        self.setUpTestDataIfNeed()
+        #endif
+
+        // Requests camera permission and enumerates devices once it is granted.
+        self.videoService.setupInputs()
+
+        // Ignore the monitor's initial path evaluation because the daemon just
+        // registered using that network.
+        self.networkService.connectivityChangedObservable
+            .subscribe(onNext: { [weak self] _ in
+                self?.daemonService.connectivityChanged()
+            })
+            .disposed(by: self.disposeBag)
+        self.networkService.monitorNetworkType()
+
+        self.interactionsManager = GeneratedInteractionsManager(accountService: self.accountService,
+                                                                requestsService: self.requestsService,
+                                                                conversationService: self.conversationsService,
+                                                                callService: self.callService)
+
+        guard let callsManager = self.callsManager else {
+            self.runtimeInitializationState = .notStarted
+            return false
+        }
+        self.conversationManager = ConversationsManager(with: self.conversationsService,
+                                                        accountsService: self.accountService,
+                                                        nameService: self.nameService,
+                                                        dataTransferService: self.dataTransferService,
+                                                        callService: self.callService,
+                                                        callsManager: callsManager,
+                                                        locationSharingService: self.locationSharingService,
+                                                        contactsService: self.contactsService,
+                                                        requestsService: self.requestsService,
+                                                        profileService: self.profileService,
+                                                        presenceService: self.presenceService)
+        self.prepareAccounts()
+        self.clearBadgeNumber()
+        self.runtimeInitializationState = .started
+        return true
     }
 
     func updateNotificationAvailability() {
@@ -447,6 +468,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             if UIApplication.shared.applicationState == .background && !self.presentingCallScreen && !(self.callsManager?.hasActiveCalls() ?? false) {
                 return
             }
+            guard self.startDaemonIfNeeded() else { return }
             // emit signal that app is active for notification extension
             CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), CFNotificationName(Constants.notificationAppIsActive), nil, nil, true)
 
@@ -511,6 +533,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 extension AppDelegate {
 
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        guard self.startDaemonIfNeeded() else {
+            completionHandler()
+            return
+        }
         let data = response.notification.request.content.userInfo
         let actionIdentifier = response.actionIdentifier
         self.handleNotificationActions(data: data, actionIdentifier: actionIdentifier)
@@ -571,6 +597,7 @@ extension AppDelegate {
     }
 
     func findContactAndStartCall(hash: String, isVideo: Bool) {
+        guard self.startDaemonIfNeeded() else { return }
         if callsManager?.hasActiveCalls() == true {
             return
         }
@@ -649,6 +676,10 @@ extension AppDelegate {
             completionHandler(.noData)
             return
         }
+        guard self.startDaemonIfNeeded() else {
+            completionHandler(.failed)
+            return
+        }
         var dictionary = [String: String]()
         for key in userInfo.keys {
             if let value = userInfo[key] {
@@ -687,7 +718,10 @@ extension AppDelegate: PKPushRegistryDelegate {
                                          withVideo: hasVideo.boolValue,
                                          displayName: displayName,
                                          accountId: accountId,
-                                         pushNotificationPayload: dictionary) { error in
+                                         pushNotificationPayload: dictionary,
+                                         prepareForPayload: { [weak self] in
+                                             self?.startDaemonIfNeeded() ?? false
+                                         }) { error in
             if error != nil {
                 self.updateCallScreenState(presenting: false)
             }

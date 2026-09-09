@@ -250,10 +250,12 @@ final class CallsManager: CallCameraCoordinating {
                             displayName: String,
                             accountId: String,
                             pushNotificationPayload: [String: String],
+                            prepareForPayload: (() -> Bool)? = nil,
                             completion: ((Error?) -> Void)?) {
         callKit.previewPendingCall(peerId: peerId, accountId: accountId,
                                    displayName: displayName, hasVideo: withVideo,
                                    completion: completion)
+        guard prepareForPayload?() ?? true else { return }
         callService.emitPendingCallPreview(pushNotificationPayload: pushNotificationPayload)
     }
 
