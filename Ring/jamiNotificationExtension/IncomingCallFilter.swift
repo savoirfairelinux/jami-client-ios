@@ -43,6 +43,24 @@ struct IncomingCallFilter {
     }
 }
 
+struct IncomingCallPayloadBuilder {
+    static func build(originalData: [String: String],
+                      peerId: String,
+                      hasVideo: Bool,
+                      accountId: String,
+                      cachedDisplayName: String) -> [AnyHashable: Any] {
+        var payload: [AnyHashable: Any] = [:]
+        for (key, value) in originalData {
+            payload[key] = value
+        }
+        payload["peerId"] = peerId
+        payload["hasVideo"] = String(hasVideo)
+        payload["accountId"] = accountId
+        payload["displayName"] = cachedDisplayName.isEmpty ? peerId : cachedDisplayName
+        return payload
+    }
+}
+
 extension String {
     func normalizeJamiId() -> String {
         return self.replacingOccurrences(of: "ring:", with: "")
