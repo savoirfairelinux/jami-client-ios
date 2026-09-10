@@ -245,18 +245,6 @@ final class CallsManager: CallCameraCoordinating {
 
     // MARK: - Push placeholders
 
-    func previewPendingCall(peerId: String,
-                            withVideo: Bool,
-                            displayName: String,
-                            accountId: String,
-                            pushNotificationPayload: [String: String],
-                            completion: ((Error?) -> Void)?) {
-        callKit.previewPendingCall(peerId: peerId, accountId: accountId,
-                                   displayName: displayName, hasVideo: withVideo,
-                                   completion: completion)
-        callService.emitPendingCallPreview(pushNotificationPayload: pushNotificationPayload)
-    }
-
     func stopAllUnhandeledCalls() {
         callKit.stopAllPendingCalls()
     }
