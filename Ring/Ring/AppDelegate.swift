@@ -123,6 +123,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        self.voipRegistry.delegate = self
+        self.voipRegistry.desiredPushTypes = Set([PKPushType.voIP])
+
 
         // ignore sigpipe
         typealias SigHandler = @convention(c) (Int32) -> Void
@@ -199,7 +202,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                                                         presenceService: self.presenceService)
 
         prepareAccounts()
-        self.voipRegistry.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(registerNotifications),
                                                name: NSNotification.Name(rawValue: NotificationName.enablePushNotifications.rawValue),
                                                object: nil)
