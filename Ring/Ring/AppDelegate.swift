@@ -66,7 +66,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         RequestsService(withRequestsAdapter: RequestsAdapter())
     }()
 
-    private let voipRegistry = PKPushRegistry(queue: DispatchQueue.main)
+    private static let voipPushQueue = DispatchQueue(label: "com.savoirfairelinux.ring.voipPush")
+    private let voipRegistry = PKPushRegistry(queue: AppDelegate.voipPushQueue)
     /*
      When the app is in the background, but the call screen is present, notifications
      should be handled by Jami.app and not by the notification extension.
