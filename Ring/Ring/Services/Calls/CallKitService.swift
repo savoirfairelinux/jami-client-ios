@@ -64,24 +64,32 @@ final class CallKitService: NSObject {
     func previewPendingCall(peerId: String, accountId: String, displayName: String,
                             hasVideo: Bool, completion: ((Error?) -> Void)?) {
         let uuid = UUID()
-        if let replaced = directory.addPlaceholder(uuid: uuid, peerId: peerId,
-                                                   accountId: accountId,
-                                                   displayName: displayName,
-                                                   hasVideo: hasVideo) {
-            endCallKitCall(uuid: replaced, isRemoteEnd: false)
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            if let replaced = self.directory.addPlaceholder(uuid: uuid, peerId: peerId,
+                                                            accountId: accountId,
+                                                            displayName: displayName,
+                                                            hasVideo: hasVideo) {
+                self.endCallKitCall(uuid: replaced, isRemoteEnd: false)
+            }
+            self.scheduleExpiry(uuid: uuid)
         }
 
         let update = CXCallUpdate()
         update.remoteHandle = CXHandle(type: .phoneNumber, value: peerId)
         configure(update, callerName: displayName, hasVideo: hasVideo)
         provider.reportNewIncomingCall(with: uuid, update: update) { [weak self] error in
-            if error != nil {
-                self?.directory.remove(uuid: uuid)
+            if error != nil, let self = self {
+                switch self.directory.recordCallAction(uuid: uuid, .declined) {
+                case .applyToCall(let callId):
+                    self.directory.remove(uuid: uuid)
+                    self.onAction?(.end(callId: callId))
+                case .storedOnPlaceholder, .unknownCall:
+                    break
+                }
             }
             completion?(error)
         }
-
-        scheduleExpiry(uuid: uuid)
     }
 
     private func scheduleExpiry(uuid: UUID) {
