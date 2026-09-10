@@ -64,13 +64,6 @@ final class CallKitService: NSObject {
     func previewPendingCall(peerId: String, accountId: String, displayName: String,
                             hasVideo: Bool, completion: ((Error?) -> Void)?) {
         let uuid = UUID()
-        if let replaced = directory.addPlaceholder(uuid: uuid, peerId: peerId,
-                                                   accountId: accountId,
-                                                   displayName: displayName,
-                                                   hasVideo: hasVideo) {
-            endCallKitCall(uuid: replaced, isRemoteEnd: false)
-        }
-
         let update = CXCallUpdate()
         update.remoteHandle = CXHandle(type: .phoneNumber, value: peerId)
         configure(update, callerName: displayName, hasVideo: hasVideo)
@@ -81,7 +74,16 @@ final class CallKitService: NSObject {
             completion?(error)
         }
 
-        scheduleExpiry(uuid: uuid)
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            if let replaced = self.directory.addPlaceholder(uuid: uuid, peerId: peerId,
+                                                            accountId: accountId,
+                                                            displayName: displayName,
+                                                            hasVideo: hasVideo) {
+                self.endCallKitCall(uuid: replaced, isRemoteEnd: false)
+            }
+            self.scheduleExpiry(uuid: uuid)
+        }
     }
 
     private func scheduleExpiry(uuid: UUID) {
