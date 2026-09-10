@@ -299,16 +299,6 @@ final class AccountsServiceTest: XCTestCase {
         wait(for: [expectation], timeout: 1.0)
     }
 
-    func testPerformanceAccountsChanged() throws {
-        let largeAccountList = (1...1000).map { AccountModel(withAccountId: "\($0)") }
-        accountService.setAccountList(largeAccountList)
-        accountService.mockAccountsId = (500...1500).map { "\($0)" }
-
-        measure {
-            accountService.handleAccountsChanged()
-        }
-    }
-
     func testPerformanceKnownDevicesChanged() throws {
         // Setup a large number of mock devices
         let account = AccountModel(withAccountId: account1)

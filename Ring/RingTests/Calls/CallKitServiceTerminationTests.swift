@@ -35,9 +35,16 @@ private final class MockCXProvider: CXProvider {
         invalidateCount += 1
     }
 
+    private var pendingReports: [(Error?) -> Void] = []
+
     override func reportNewIncomingCall(with uuid: UUID, update: CXCallUpdate,
                                         completion: @escaping (Error?) -> Void) {
-        completion(incomingCallError)
+        pendingReports.append(completion)
+    }
+
+    /// CallKit answers a report on its delegate queue, after the submit returned.
+    func completeReport(at index: Int) {
+        pendingReports[index](incomingCallError)
     }
 
     override func reportCall(with uuid: UUID, endedAt dateEnded: Date?,
@@ -75,9 +82,17 @@ final class CallKitServiceTerminationTests: XCTestCase {
         service = CallKitService(provider: provider)
     }
 
+    /// The placeholder is recorded on the main queue, after the report is submitted.
+    private func drainMainQueue() {
+        let drained = expectation(description: "pending main-queue work ran")
+        DispatchQueue.main.async { drained.fulfill() }
+        wait(for: [drained], timeout: 1)
+    }
+
     func testEndAllCallsOnTerminationStopsPendingCallsAndInvalidatesProvider() {
         service.previewPendingCall(peerId: CallTestFixtures.peerUri, accountId: accountId1,
                                    displayName: profileName1, hasVideo: false, completion: nil)
+        drainMainQueue()
         XCTAssertFalse(service.directory.allPlaceholderUUIDs().isEmpty)
 
         service.endAllCallsOnTermination()
@@ -88,14 +103,38 @@ final class CallKitServiceTerminationTests: XCTestCase {
                        "provider invalidated so CallKit ends its calls synchronously")
     }
 
-    func testFailedPendingCallReportRemovesPlaceholder() {
+    func testFailedPendingCallReportDeclinesMatchingIncomingCall() throws {
         provider.incomingCallError = NSError(domain: "CallKit", code: 1)
+        let call = CallTestFixtures.call(direction: .incoming, status: .ringing)
+        var endedCallIds: [CallId] = []
+        service.onAction = { action in
+            guard case .end(let callId) = action else {
+                XCTFail("a rejected report must only end the matching call")
+                return
+            }
+            endedCallIds.append(callId)
+        }
 
-        service.previewPendingCall(peerId: CallTestFixtures.peerUri, accountId: accountId1,
+        service.previewPendingCall(peerId: call.peerHash, accountId: call.accountId,
                                    displayName: profileName1, hasVideo: false, completion: nil)
+        drainMainQueue()
+        provider.completeReport(at: 0)
 
+        let uuid = try XCTUnwrap(service.directory.placeholderUUID(peerId: call.peerHash,
+                                                                   accountId: call.accountId))
+        XCTAssertEqual(service.directory.placeholder(uuid: uuid)?.decision, .declined)
+        XCTAssertTrue(endedCallIds.isEmpty,
+                      "the decline waits until libjami reports the call")
+
+        let handle = CallKitHandle(value: call.peerUri, displayName: profileName1,
+                                   isPhoneNumber: false)
+        service.reportIncomingCall(call, handle: handle)
+
+        XCTAssertEqual(endedCallIds, [call.id])
+        XCTAssertEqual(service.directory.uuid(for: call.id), uuid,
+                       "the matching call reuses the rejected placeholder")
         XCTAssertTrue(service.directory.allPlaceholderUUIDs().isEmpty,
-                      "a rejected report must not leave a phantom call to match later")
+                      "the placeholder is consumed when the call arrives")
     }
 
     func testCompletedStartTransactionDoesNotReviveEndedOutgoingCall() {
