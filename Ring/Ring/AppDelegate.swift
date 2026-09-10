@@ -36,6 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     private let videoService = VideoService(videoAdapter: VideoAdapter())
     private let audioService = AudioService(audioAdapter: AudioAdapter())
     private let callService = CallService(callsAdapter: CallsAdapter())
+    private let callKitService = CallKitService()
     private var callsManager: CallsManager?
     private let systemService = SystemService(withSystemAdapter: SystemAdapter())
     private let networkService = NetworkService()
@@ -66,7 +67,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         RequestsService(withRequestsAdapter: RequestsAdapter())
     }()
 
-    private let voipRegistry = PKPushRegistry(queue: DispatchQueue.main)
+    private static let voipPushQueue = DispatchQueue(label: "com.savoirfairelinux.ring.voipPush")
+    private let voipRegistry = PKPushRegistry(queue: AppDelegate.voipPushQueue)
     /*
      When the app is in the background, but the call screen is present, notifications
      should be handled by Jami.app and not by the notification extension.
@@ -128,6 +130,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         typealias SigHandler = @convention(c) (Int32) -> Void
         let SIG_IGN = unsafeBitCast(OpaquePointer(bitPattern: 1), to: SigHandler.self)
         signal(SIGPIPE, SIG_IGN)
+
         // swiftlint:enable nesting
         UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
         if UserDefaults.standard.value(forKey: automaticDownloadFilesKey) == nil {
@@ -144,6 +147,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         log.removeAllDestinations()
         #endif
 
+        self.voipRegistry.delegate = self
+        self.voipRegistry.desiredPushTypes = Set([PKPushType.voIP])
+
         PreferenceManager.registerDonationsDefaults()
 
         self.addListenerForNotification()
@@ -151,13 +157,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let callsManager = CallsManager(callService: self.callService,
                                         videoService: self.videoService,
                                         audioService: self.audioService,
+                                        callKit: self.callKitService,
                                         accountsService: self.accountService,
                                         contactsService: self.contactsService,
                                         nameService: self.nameService)
         self.callsManager = callsManager
         self.injectionBag.callsManager = callsManager
-        self.voipRegistry.delegate = self
-        self.voipRegistry.desiredPushTypes = Set([PKPushType.voIP])
+
+        self.conversationManager = ConversationsManager(with: self.conversationsService,
+                                                        accountsService: self.accountService,
+                                                        nameService: self.nameService,
+                                                        dataTransferService: self.dataTransferService,
+                                                        callService: self.callService,
+                                                        callsManager: callsManager,
+                                                        locationSharingService: self.locationSharingService, contactsService: self.contactsService,
+                                                        requestsService: self.requestsService, profileService: self.profileService,
+                                                        presenceService: self.presenceService)
 
         // starts the daemon
         self.startDaemon()
@@ -190,15 +205,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
         // load accounts during splashscreen
         // and ask the AppCoordinator to handle the first screen once loading is finished
-        self.conversationManager = ConversationsManager(with: self.conversationsService,
-                                                        accountsService: self.accountService,
-                                                        nameService: self.nameService,
-                                                        dataTransferService: self.dataTransferService,
-                                                        callService: self.callService,
-                                                        callsManager: callsManager,
-                                                        locationSharingService: self.locationSharingService, contactsService: self.contactsService,
-                                                        requestsService: self.requestsService, profileService: self.profileService,
-                                                        presenceService: self.presenceService)
 
         prepareAccounts()
         NotificationCenter.default.addObserver(self, selector: #selector(registerNotifications),
@@ -669,30 +675,23 @@ extension AppDelegate: PKPushRegistryDelegate {
     }
 
     func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType, completion: @escaping () -> Void) {
-        self.updateCallScreenState(presenting: true)
-        let peerId: String = payload.dictionaryPayload["peerId"] as? String ?? ""
-        let hasVideo = payload.dictionaryPayload["hasVideo"] as? String ?? "true"
-        let displayName = payload.dictionaryPayload["displayName"] as? String ?? ""
-        let accountId = payload.dictionaryPayload["accountId"] as? String ?? ""
+        let data = payload.dictionaryPayload
+        let peerId: String = data["peerId"] as? String ?? ""
+        let hasVideo = data["hasVideo"] as? String ?? "true"
+        let displayName = data["displayName"] as? String ?? ""
+        let accountId = data["accountId"] as? String ?? ""
 
-        var dictionary = [String: String]()
-        for key in payload.dictionaryPayload.keys {
-            if let value = payload.dictionaryPayload[key] {
-                let keyString = String(describing: key)
-                let valueString = String(describing: value)
-                dictionary[keyString] = valueString
-            }
-        }
-
-        callsManager?.previewPendingCall(peerId: peerId,
-                                         withVideo: hasVideo.boolValue,
-                                         displayName: displayName,
-                                         accountId: accountId,
-                                         pushNotificationPayload: dictionary) { error in
-            if error != nil {
-                self.updateCallScreenState(presenting: false)
-            }
+        callKitService.previewPendingCall(peerId: peerId,
+                                          accountId: accountId,
+                                          displayName: displayName,
+                                          hasVideo: hasVideo.boolValue) { _ in
+            self.updateCallScreenState(presenting: true)
             completion()
+            var dictionary = [String: String]()
+            for (key, value) in data {
+                dictionary[String(describing: key)] = String(describing: value)
+            }
+            self.callService.emitPendingCallPreview(pushNotificationPayload: dictionary)
         }
     }
 }
