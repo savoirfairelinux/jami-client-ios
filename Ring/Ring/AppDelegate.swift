@@ -156,6 +156,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                                         nameService: self.nameService)
         self.callsManager = callsManager
         self.injectionBag.callsManager = callsManager
+        self.voipRegistry.delegate = self
+        self.voipRegistry.desiredPushTypes = Set([PKPushType.voIP])
 
         // starts the daemon
         self.startDaemon()
@@ -199,7 +201,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                                                         presenceService: self.presenceService)
 
         prepareAccounts()
-        self.voipRegistry.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(registerNotifications),
                                                name: NSNotification.Name(rawValue: NotificationName.enablePushNotifications.rawValue),
                                                object: nil)
