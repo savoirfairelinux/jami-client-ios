@@ -71,8 +71,6 @@
 		0EDA00020000000000001002 /* ConversationDestructiveAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA00010000000000001001 /* ConversationDestructiveAction.swift */; };
 		0EDA00040000000000001004 /* SmartListRowModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA00030000000000001003 /* SmartListRowModifiers.swift */; };
 		0EDA00060000000000001006 /* ConversationDestructiveActionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA00050000000000001005 /* ConversationDestructiveActionTests.swift */; };
-		DB0100020000000000000002 /* DBManagerConversationDeletionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0100010000000000000001 /* DBManagerConversationDeletionTests.swift */; };
-		DB0200020000000000000002 /* ProfileStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0200010000000000000001 /* ProfileStore.swift */; };
 		0EDCC8601F98150500B121D7 /* UIView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDCC85F1F98150500B121D7 /* UIView+Rx.swift */; };
 		0EE1B5501F75AD4700BA98EE /* VCardUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE1B54F1F75AD4700BA98EE /* VCardUtils.swift */; };
 		0EF78DE31FD0AE3000FC6966 /* ConversationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF78DE21FD0AE3000FC6966 /* ConversationsManager.swift */; };
@@ -431,7 +429,6 @@
 		2E95DB7F67AC7C0D12E4014C /* LinkToAccountVMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CC8DA55AF00F04FF329D3E /* LinkToAccountVMTests.swift */; };
 		3D0E697A2DDCD9C80046FA3D /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D0E69792DDCD9C80046FA3D /* ShareViewController.swift */; };
 		3D0E69812DDCD9C80046FA3D /* jamiShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3D0E69772DDCD9C80046FA3D /* jamiShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		3D7A1B0D2E6A4F0100924590 /* AvatarLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7A1B0C2E6A4F0100924590 /* AvatarLoader.swift */; };
 		3D0E69882DDCDBE70046FA3D /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D0E69872DDCDBE70046FA3D /* ShareView.swift */; };
 		3D1D839A2DE60E9B00D4BD9E /* ShareViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1D83992DE60E9B00D4BD9E /* ShareViewModel.swift */; };
 		3D3E68CB2DEF657200E6203F /* VCardUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE1B54F1F75AD4700BA98EE /* VCardUtils.swift */; };
@@ -488,6 +485,7 @@
 		3D48AB3D2E006C5A00924590 /* ConversationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D48AB3C2E006C5100924590 /* ConversationViewModel.swift */; };
 		3D48AB412E00709D00924590 /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D48AB402E00709600924590 /* AccountViewModel.swift */; };
 		3D6E7C582DDD058800C6EB24 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE07E11F0D924700D36361 /* Strings.swift */; };
+		3D7A1B0D2E6A4F0100924590 /* AvatarLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7A1B0C2E6A4F0100924590 /* AvatarLoader.swift */; };
 		3DAAC4702DDD1AC500D94B71 /* AdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAAC4692DDD1AC500D94B71 /* AdapterDelegate.swift */; };
 		3DAAC4712DDD1AC500D94B71 /* AdapterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAAC46C2DDD1AC500D94B71 /* AdapterService.swift */; };
 		3DAAC4732DDD1AC500D94B71 /* Adapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3DAAC46E2DDD1AC500D94B71 /* Adapter.mm */; };
@@ -602,6 +600,8 @@
 		C30000000000000000000016 /* CollabDocumentRemoval.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30000000000000000000015 /* CollabDocumentRemoval.swift */; };
 		C39ADB74167B420FBFEF18B2 /* ExpandableAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFEB4CB31604F75894DCEE5 /* ExpandableAvatar.swift */; };
 		C40000000000000000000002 /* CollaborationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40000000000000000000001 /* CollaborationServiceTests.swift */; };
+		DB0100020000000000000002 /* DBManagerConversationDeletionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0100010000000000000001 /* DBManagerConversationDeletionTests.swift */; };
+		DB0200020000000000000002 /* ProfileStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0200010000000000000001 /* ProfileStore.swift */; };
 		E8ACE0B8E94AB3DEABA30A1A /* AvatarHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD989EC28085426384411E8 /* AvatarHelpers.swift */; };
 		F10000000000000000000003 /* ConversationProfileEditorVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000004 /* ConversationProfileEditorVM.swift */; };
 		F10000000000000000000005 /* ConversationProfileEditorAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000006 /* ConversationProfileEditorAvatar.swift */; };
@@ -752,8 +752,6 @@
 		0EDA00010000000000001001 /* ConversationDestructiveAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationDestructiveAction.swift; sourceTree = "<group>"; };
 		0EDA00030000000000001003 /* SmartListRowModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SmartListRowModifiers.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Views/SmartListRowModifiers.swift; sourceTree = SOURCE_ROOT; };
 		0EDA00050000000000001005 /* ConversationDestructiveActionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationDestructiveActionTests.swift; sourceTree = "<group>"; };
-		DB0100010000000000000001 /* DBManagerConversationDeletionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManagerConversationDeletionTests.swift; sourceTree = "<group>"; };
-		DB0200010000000000000001 /* ProfileStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStore.swift; sourceTree = "<group>"; };
 		0EDCC85F1F98150500B121D7 /* UIView+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Rx.swift"; sourceTree = "<group>"; };
 		0EE1B54F1F75AD4700BA98EE /* VCardUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCardUtils.swift; sourceTree = "<group>"; };
 		0EEFBA3B1F83DA21000EDBAD /* libsecp256k1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsecp256k1.a; path = ../DEPS/arm64/lib/libsecp256k1.a; sourceTree = "<group>"; };
@@ -1632,9 +1630,9 @@
 		3D417F562DDE28CB001BAD76 /* libTelephonyBasebandDynamic.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libTelephonyBasebandDynamic.tbd; path = usr/lib/libTelephonyBasebandDynamic.tbd; sourceTree = SDKROOT; };
 		3D417F572DDE28CB001BAD76 /* libswiftCoreNFC.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libswiftCoreNFC.tbd; path = usr/lib/swift/libswiftCoreNFC.tbd; sourceTree = SDKROOT; };
 		3D48AB3C2E006C5100924590 /* ConversationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewModel.swift; sourceTree = "<group>"; };
-		3D7A1B0C2E6A4F0100924590 /* AvatarLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarLoader.swift; sourceTree = "<group>"; };
 		3D48AB402E00709600924590 /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
 		3D6E7C4A2DDCFF7A00C6EB24 /* jamiShareExtension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "jamiShareExtension-Bridging-Header.h"; sourceTree = "<group>"; };
+		3D7A1B0C2E6A4F0100924590 /* AvatarLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarLoader.swift; sourceTree = "<group>"; };
 		3DAAC4692DDD1AC500D94B71 /* AdapterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdapterDelegate.swift; sourceTree = "<group>"; };
 		3DAAC46A2DDD1AC500D94B71 /* Adapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Adapter.h; sourceTree = "<group>"; };
 		3DAAC46C2DDD1AC500D94B71 /* AdapterService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdapterService.swift; sourceTree = "<group>"; };
@@ -1823,6 +1821,8 @@
 		C30000000000000000000015 /* CollabDocumentRemoval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollabDocumentRemoval.swift; sourceTree = "<group>"; };
 		C40000000000000000000001 /* CollaborationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollaborationServiceTests.swift; sourceTree = "<group>"; };
 		C760772C22CC601BCEA3449C /* IdentityBackdrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityBackdrop.swift; sourceTree = "<group>"; };
+		DB0100010000000000000001 /* DBManagerConversationDeletionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManagerConversationDeletionTests.swift; sourceTree = "<group>"; };
+		DB0200010000000000000001 /* ProfileStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStore.swift; sourceTree = "<group>"; };
 		DDE8CA20E60048678054756B /* PeerSharingSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerSharingSheet.swift; sourceTree = "<group>"; };
 		EECD5DF711D545048AA5E270 /* PeerSharingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerSharingViewModel.swift; sourceTree = "<group>"; };
 		F10000000000000000000004 /* ConversationProfileEditorVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationProfileEditorVM.swift; sourceTree = "<group>"; };
@@ -3029,14 +3029,6 @@
 			name = SYS_DEPS;
 			sourceTree = "<group>";
 		};
-		DB0200030000000000000003 /* Storage */ = {
-			isa = PBXGroup;
-			children = (
-				DB0200010000000000000001 /* ProfileStore.swift */,
-			);
-			path = Storage;
-			sourceTree = "<group>";
-		};
 		0E0FF1A81FC38409003898C2 /* Database */ = {
 			isa = PBXGroup;
 			children = (
@@ -3812,6 +3804,14 @@
 			);
 			name = Collab;
 			path = Features/Collab;
+			sourceTree = "<group>";
+		};
+		DB0200030000000000000003 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				DB0200010000000000000001 /* ProfileStore.swift */,
+			);
+			path = Storage;
 			sourceTree = "<group>";
 		};
 		F10000000000000000000009 /* ProfileEditing */ = {
@@ -4816,7 +4816,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = MSHYCBXK85;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -4860,7 +4860,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -5056,7 +5056,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = MSHYCBXK85;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -5649,7 +5649,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = MSHYCBXK85;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
