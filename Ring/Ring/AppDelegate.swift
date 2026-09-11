@@ -647,9 +647,10 @@ extension AppDelegate {
         didReceiveRemoteNotification userInfo: [AnyHashable: Any],
         fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void
     ) {
-        // Low-priority pushes (presence, expired values): a no-op while the account
-        // is inactive, and we must not activate it in the background. Ignore them.
+        // A low-priority push can launch the app with accounts active. Release
+        // them unless a call or post-call sync still needs them.
         guard application.applicationState != .background else {
+            self.conversationManager?.updateBackgroundState()
             completionHandler(.noData)
             return
         }

@@ -45,7 +45,7 @@ class ConversationsManager {
     private var maxSizeForAutoaccept: Int {
         return UserDefaults.standard.integer(forKey: acceptTransferLimitKey) * 1024 * 1024
     }
-    private let appState: BehaviorRelay<ServiceEventType>
+    private let appState = PublishRelay<ServiceEventType>()
     private var pendingCallBackgroundTask: UIBackgroundTaskIdentifier = .invalid
     private let postCallSyncTimeout: TimeInterval = 3
     private var pendingPostCallSync: PendingPostCallSync?
@@ -74,8 +74,6 @@ class ConversationsManager {
         self.requestService = requestsService
         self.profileService = profileService
         self.presenceService = presenceService
-        self.appState = BehaviorRelay<ServiceEventType>(
-            value: UIApplication.shared.applicationState == .background ? .appEnterBackground : .appEnterForeground)
         ProfilesAdapter.delegate = self
 
         ConversationsAdapter.messagesDelegate = self
