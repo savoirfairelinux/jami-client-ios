@@ -689,6 +689,7 @@ extension AppDelegate: PKPushRegistryDelegate {
     }
 
     private func reportIncomingCallPush(payload: PKPushPayload, completion: @escaping () -> Void) {
+        DispatchQueue.main.async { self.updateCallScreenState(presenting: true) }
         let data = payload.dictionaryPayload
         let peerId: String = data["peerId"] as? String ?? ""
         let hasVideo = data["hasVideo"] as? String ?? "true"
@@ -698,8 +699,10 @@ extension AppDelegate: PKPushRegistryDelegate {
         callKitService.previewPendingCall(peerId: peerId,
                                           accountId: accountId,
                                           displayName: displayName,
-                                          hasVideo: hasVideo.boolValue) { _ in
-            self.updateCallScreenState(presenting: true)
+                                          hasVideo: hasVideo.boolValue) { error in
+            if error != nil {
+                self.updateCallScreenState(presenting: false)
+            }
             completion()
             var dictionary = [String: String]()
             for (key, value) in data {
