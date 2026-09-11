@@ -675,7 +675,20 @@ extension AppDelegate: PKPushRegistryDelegate {
     func pushRegistry(_ registry: PKPushRegistry, didUpdate pushCredentials: PKPushCredentials, for type: PKPushType) {
     }
 
+    @available(iOS 26.4, *)
+    func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingVoIPPushWith payload: PKPushPayload, metadata: PKVoIPPushMetadata, withCompletionHandler completion: @escaping () -> Void) {
+        guard metadata.mustReport else {
+            completion()
+            return
+        }
+        reportIncomingCallPush(payload: payload, completion: completion)
+    }
+
     func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType, completion: @escaping () -> Void) {
+        reportIncomingCallPush(payload: payload, completion: completion)
+    }
+
+    private func reportIncomingCallPush(payload: PKPushPayload, completion: @escaping () -> Void) {
         let data = payload.dictionaryPayload
         let peerId: String = data["peerId"] as? String ?? ""
         let hasVideo = data["hasVideo"] as? String ?? "true"
