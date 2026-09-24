@@ -44,6 +44,13 @@ enum ConversationEvent: @unchecked Sendable {
                                         preferences: [String: String])
 }
 
+extension ConversationEvent {
+    var isOrderedWithConversationState: Bool {
+        if case .activeCallsChanged = self { return false }
+        return true
+    }
+}
+
 final class ConversationEventSource: NSObject {
 
     private let onEvent: (ConversationEvent) -> Void

@@ -66,7 +66,7 @@ class ConversationsService {
 
     private(set) lazy var eventSource = ConversationEventSource { [weak self] event in
         guard let self = self else { return }
-        if case .activeCallsChanged = event {
+        guard event.isOrderedWithConversationState else {
             self.onEvent?(event)
             return
         }
