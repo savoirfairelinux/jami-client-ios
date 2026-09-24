@@ -207,7 +207,10 @@ final class VideoService {
 
     func closePlayer(playerId: String) {
         playerSinkSubscriptions[playerId] = nil
-        pipeline.closePlayer(playerId: playerId)
+        let pipeline = self.pipeline
+        DispatchQueue.global(qos: .utility).async {
+            pipeline.closePlayer(playerId: playerId)
+        }
     }
 
     func mutePlayerAudio(playerId: String, mute: Bool) {

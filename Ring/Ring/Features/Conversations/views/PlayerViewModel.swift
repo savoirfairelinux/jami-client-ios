@@ -269,9 +269,7 @@ class PlayerViewModel {
         let idToClose = playerId
         playerId = ""
         playBackDisposeBag = DisposeBag()
-        DispatchQueue.global(qos: .utility).async { [weak videoService] in
-            videoService?.closePlayer(playerId: idToClose)
-        }
+        videoService.closePlayer(playerId: idToClose)
     }
 
     /// Recreate the daemon player after it was closed externally (e.g. before a call).
