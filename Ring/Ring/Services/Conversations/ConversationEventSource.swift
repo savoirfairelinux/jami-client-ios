@@ -23,7 +23,6 @@ enum ConversationEvent: @unchecked Sendable {
                                 payloads: [String: String])
     case messageStatusChanged(accountId: String, conversationId: String, peer: String,
                               messageId: String, status: MessageStatus)
-    case activeCallsChanged(accountId: String, conversationId: String, calls: [[String: String]])
     case composingStatusChanged(accountId: String, conversationId: String, from: String, status: Int)
     case swarmLoaded(accountId: String, conversationId: String,
                      messages: [SwarmMessageWrap], requestId: Int)
@@ -47,6 +46,8 @@ enum ConversationEvent: @unchecked Sendable {
 final class ConversationEventSource: NSObject {
 
     private let onEvent: (ConversationEvent) -> Void
+    var onActiveCallsChanged: ((_ accountId: String, _ conversationId: String,
+                                _ calls: [[String: String]]) -> Void)?
 
     init(onEvent: @escaping (ConversationEvent) -> Void) {
         self.onEvent = onEvent
@@ -73,8 +74,7 @@ extension ConversationEventSource: MessagesAdapterDelegate {
     }
 
     func activeCallsChanged(conversationId: String, accountId: String, calls: [[String: String]]) {
-        onEvent(.activeCallsChanged(accountId: accountId, conversationId: conversationId,
-                                    calls: calls))
+        onActiveCallsChanged?(accountId, conversationId, calls)
     }
 
     func composingStatusChanged(accountId: String, conversationId: String,

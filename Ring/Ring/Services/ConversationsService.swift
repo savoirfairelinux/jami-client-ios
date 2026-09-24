@@ -66,10 +66,6 @@ class ConversationsService {
 
     private(set) lazy var eventSource = ConversationEventSource { [weak self] event in
         guard let self = self else { return }
-        if case .activeCallsChanged = event {
-            self.onEvent?(event)
-            return
-        }
         self.serialOperationQueue.async {
             self.onEvent?(event)
         }

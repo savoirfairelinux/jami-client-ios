@@ -99,6 +99,9 @@ class ConversationsManager {
         conversationService.onEvent = { [weak self] event in
             self?.handle(event)
         }
+        conversationService.eventSource.onActiveCallsChanged = { [weak self] accountId, conversationId, calls in
+            self?.activeCallsChanged(conversationId: conversationId, accountId: accountId, calls: calls)
+        }
         conversationService.startEvents()
     }
 
@@ -110,9 +113,6 @@ class ConversationsManager {
         case let .messageStatusChanged(accountId, conversationId, peer, messageId, status):
             messageStatusChanged(status, for: messageId, from: accountId,
                                  to: peer, in: conversationId)
-
-        case let .activeCallsChanged(accountId, conversationId, calls):
-            activeCallsChanged(conversationId: conversationId, accountId: accountId, calls: calls)
 
         case let .composingStatusChanged(accountId, conversationId, from, status):
             composingStatusChanged(accountId: accountId, conversationId: conversationId,
