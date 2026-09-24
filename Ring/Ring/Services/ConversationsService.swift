@@ -55,8 +55,10 @@ class ConversationsService {
     var conversations = BehaviorRelay(value: [ConversationModel]())
     var conversationReady = BehaviorRelay(value: "")
 
-    var requestedReplyTargets = [String]()
-    var replyTargets = BehaviorRelay(value: [MessageModel]())
+    private let replyTargetRegistry = ReplyTargetRegistry()
+    var replyTargets: BehaviorRelay<[MessageModel]> {
+        return replyTargetRegistry.targets
+    }
 
     let dbManager: DBManager
 
@@ -308,21 +310,16 @@ class ConversationsService {
     }
 
     func loadTargetReply(conversationId: String, accountId: String, target: String) -> LoadReplyResult {
-        if self.requestedReplyTargets.contains(target) {
+        if !self.replyTargetRegistry.request(target) {
             return .duplicateRequest
         }
-        self.requestedReplyTargets.append(target)
 
-        if let message = self.findReplyTargetsById(target) {
+        if let message = self.replyTargetRegistry.target(withId: target) {
             return .messageFound(message)
         } else {
             self.triggerConversationLoad(accountId: accountId, conversationId: conversationId, replyToId: target)
             return .loadTriggered
         }
-    }
-
-    private func findReplyTargetsById(_ id: String) -> MessageModel? {
-        return self.replyTargets.value.first(where: { $0.id == id })
     }
 
     private func triggerConversationLoad(accountId: String, conversationId: String, replyToId: String) {
@@ -348,14 +345,6 @@ class ConversationsService {
 
     func sendSwarmMessage(conversationId: String, accountId: String, message: String, parentId: String) {
         self.conversationsAdapter.sendSwarmMessage(accountId, conversationId: conversationId, message: message, parentId: parentId, flag: 0)
-    }
-
-    func insertReplies(messages: [MessageModel], accountId: String, conversationId: String, fromLoaded: Bool) -> Bool {
-        if self.isTargetReply(messages: messages) {
-            self.processReplyTargetMessage(with: messages.first)
-            return true
-        }
-        return true
     }
 
     // MARK: actions for ConversationsManager
@@ -423,7 +412,7 @@ class ConversationsService {
     private func isTargetReply(messages: [MessageModel]) -> Bool {
         if let targetMessage = messages.first,
            messages.count == 1,
-           self.requestedReplyTargets.contains(targetMessage.id) {
+           self.replyTargetRegistry.isRequested(targetMessage.id) {
             return true
         }
         return false
@@ -431,20 +420,7 @@ class ConversationsService {
 
     private func processReplyTargetMessage(with message: MessageModel?) {
         guard let target = message else { return }
-        self.updateReplyTargets(with: target)
-        self.removeMessageIdFromRequestedTargets(target.id)
-    }
-
-    private func updateReplyTargets(with message: MessageModel) {
-        var updatedTargets = replyTargets.value
-        if !updatedTargets.contains(where: { $0.id == message.id }) {
-            updatedTargets.append(message)
-            self.replyTargets.accept(updatedTargets)
-        }
-    }
-
-    private func removeMessageIdFromRequestedTargets(_ messageId: String) {
-        self.requestedReplyTargets.removeAll { $0 == messageId }
+        self.replyTargetRegistry.resolve(target)
     }
 
     func conversationReady(conversationId: String, accountId: String, accountURI: String) {
