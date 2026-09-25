@@ -96,8 +96,8 @@ class ConversationsManager {
     // MARK: libjami conversation signals
 
     private func startConversationEventPipeline() {
-        conversationService.onEvent = { [weak self] event in
-            self?.handle(event)
+        conversationService.onEvent = { [weak self] event, state in
+            self?.handle(event, state: state)
         }
         conversationService.eventSource.onActiveCallsChanged = { [weak self] accountId, conversationId, calls in
             self?.activeCallsChanged(conversationId: conversationId, accountId: accountId, calls: calls)
@@ -105,57 +105,57 @@ class ConversationsManager {
         conversationService.startEvents()
     }
 
-    private func handle(_ event: ConversationEvent) {
+    private func handle(_ event: ConversationEvent, state: ConversationState) {
         switch event {
         case let .incomingAccountMessage(accountId, from, messageId, payloads):
             didReceiveMessage(payloads, from: from, messageId: messageId, to: accountId)
 
         case let .messageStatusChanged(accountId, conversationId, peer, messageId, status):
             messageStatusChanged(status, for: messageId, from: accountId,
-                                 to: peer, in: conversationId)
+                                 to: peer, in: conversationId, state: state)
 
         case let .composingStatusChanged(accountId, conversationId, from, status):
-            composingStatusChanged(accountId: accountId, conversationId: conversationId,
-                                   from: from, status: status)
+            state.composingStatusChanged(accountId: accountId, conversationId: conversationId,
+                                         from: from, status: status)
 
         case let .swarmLoaded(accountId, conversationId, messages, requestId):
             conversationLoaded(conversationId: conversationId, accountId: accountId,
-                               messages: messages, requestId: requestId)
+                               messages: messages, requestId: requestId, state: state)
 
         case let .swarmMessageReceived(accountId, conversationId, message):
-            newInteraction(conversationId: conversationId, accountId: accountId, message: message)
+            newInteraction(conversationId: conversationId, accountId: accountId,
+                           message: message, state: state)
 
         case let .swarmMessageUpdated(accountId, conversationId, message):
-            messageUpdated(conversationId: conversationId, accountId: accountId, message: message)
+            messageUpdated(conversationId: conversationId, accountId: accountId,
+                           message: message, state: state)
 
         case let .reactionAdded(accountId, conversationId, messageId, reaction):
-            reactionAdded(conversationId: conversationId, accountId: accountId,
-                          messageId: messageId, reaction: reaction)
+            state.reactionAdded(conversationId: conversationId, accountId: accountId,
+                                messageId: messageId, reaction: reaction)
 
         case let .reactionRemoved(accountId, conversationId, messageId, reactionId):
-            reactionRemoved(conversationId: conversationId, accountId: accountId,
-                            messageId: messageId, reactionId: reactionId)
+            state.reactionRemoved(conversationId: conversationId, accountId: accountId,
+                                  messageId: messageId, reactionId: reactionId)
 
         case let .conversationReady(accountId, conversationId):
-            conversationReady(conversationId: conversationId, accountId: accountId)
+            conversationReady(conversationId: conversationId, accountId: accountId, state: state)
 
-        case let .conversationRemoved(accountId, conversationId):
-            conversationRemoved(conversationId: conversationId, accountId: accountId)
-
-        case let .conversationDeclined(accountId, conversationId):
-            conversationDeclined(conversationId: conversationId, accountId: accountId)
+        case let .conversationRemoved(accountId, conversationId),
+             let .conversationDeclined(accountId, conversationId):
+            conversationRemoved(conversationId: conversationId, accountId: accountId, state: state)
 
         case let .conversationMemberEvent(accountId, conversationId, memberUri, event):
             conversationMemberEvent(conversationId: conversationId, accountId: accountId,
-                                    memberUri: memberUri, event: event)
+                                    memberUri: memberUri, event: event, state: state)
 
         case let .conversationProfileUpdated(accountId, conversationId, profile):
-            conversationProfileUpdated(conversationId: conversationId, accountId: accountId,
-                                       profile: profile)
+            state.conversationProfileUpdated(conversationId: conversationId, accountId: accountId,
+                                             profile: profile)
 
         case let .conversationPreferencesUpdated(accountId, conversationId, preferences):
-            conversationPreferencesUpdated(conversationId: conversationId, accountId: accountId,
-                                           preferences: preferences)
+            state.conversationPreferencesUpdated(conversationId: conversationId, accountId: accountId,
+                                                 preferences: preferences)
         }
     }
 
@@ -717,41 +717,33 @@ class ConversationsManager {
             .disposed(by: self.disposeBag)
     }
 
-    func messageStatusChanged(_ status: MessageStatus, for messageId: String, from accountId: String,
-                              to jamiId: String, in conversationId: String) {
+    private func messageStatusChanged(_ status: MessageStatus, for messageId: String, from accountId: String,
+                                      to jamiId: String, in conversationId: String, state: ConversationState) {
         guard let localJamiId = self.accountsService.getAccount(fromAccountId: accountId)?.jamiId else { return }
         if localJamiId == jamiId {
             return
         }
-        self.conversationService.messageStatusChanged(status,
-                                                      for: messageId,
-                                                      from: accountId,
-                                                      to: jamiId,
-                                                      in: conversationId)
-    }
-
-    func conversationProfileUpdated(conversationId: String, accountId: String, profile: [String: String]) {
-        conversationService.conversationProfileUpdated(conversationId: conversationId, accountId: accountId, profile: profile)
-    }
-
-    func conversationPreferencesUpdated(conversationId: String, accountId: String, preferences: [String: String]) {
-        conversationService.conversationPreferencesUpdated(conversationId: conversationId, accountId: accountId, preferences: preferences)
+        state.messageStatusChanged(status,
+                                   for: messageId,
+                                   from: accountId,
+                                   to: jamiId,
+                                   in: conversationId)
     }
 }
 
 extension ConversationsManager {
-    func conversationMemberEvent(conversationId: String, accountId: String,
-                                 memberUri: String, event: Int) {
+    private func conversationMemberEvent(conversationId: String, accountId: String,
+                                         memberUri: String, event: Int, state: ConversationState) {
         guard let conversationEvent = ConversationMemberEvent(rawValue: event) else { return }
         guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
         // Check if we leave the conversation on another device. In this case remove conversation.
         if conversationEvent == .leave,
            account.jamiId == memberUri {
-            self.conversationService.conversationRemoved(conversationId: conversationId, accountId: accountId)
+            state.conversationRemoved(conversationId: conversationId, accountId: accountId)
         } else {
-            self.conversationService.conversationMemberEvent(conversationId: conversationId,
-                                                             accountId: accountId,
-                                                             accountURI: account.jamiId)
+            state.conversationMemberEvent(conversationId: conversationId,
+                                          accountId: accountId,
+                                          accountURI: account.jamiId)
         }
     }
 
@@ -775,13 +767,13 @@ extension ConversationsManager {
         }
     }
 
-    func conversationReady(conversationId: String, accountId: String) {
+    private func conversationReady(conversationId: String, accountId: String, state: ConversationState) {
         guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
         guard let currentAccount = self.accountsService.currentAccount else { return }
         if account == currentAccount {
-            self.conversationService.conversationReady(conversationId: conversationId,
-                                                       accountId: accountId,
-                                                       accountURI: account.jamiId)
+            state.conversationReady(conversationId: conversationId,
+                                    accountId: accountId,
+                                    accountURI: account.jamiId)
         }
     }
 
@@ -802,7 +794,8 @@ extension ConversationsManager {
 
     }
 
-    func conversationLoaded(conversationId: String, accountId: String, messages: [SwarmMessageWrap], requestId: Int) {
+    private func conversationLoaded(conversationId: String, accountId: String, messages: [SwarmMessageWrap],
+                                    requestId: Int, state: ConversationState) {
         guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
         // Convert array of dictionaries to messages.
         let messagesModels = messages.map { wrapInfo -> MessageModel in
@@ -810,24 +803,12 @@ extension ConversationsManager {
             updateTransferInfoIfNeed(newMessage: newMessage, conversationId: conversationId, accountId: accountId)
             return newMessage
         }
-        _ = self.conversationService.insertMessages(messages: messagesModels, accountId: accountId, localJamiId: account.jamiId, conversationId: conversationId, fromLoaded: true)
+        _ = state.insertMessages(messages: messagesModels, accountId: accountId, localJamiId: account.jamiId, conversationId: conversationId, fromLoaded: true)
     }
 
-    func reactionAdded(conversationId: String, accountId: String, messageId: String, reaction: [String: String]) {
-        self.conversationService.reactionAdded(conversationId: conversationId, accountId: accountId, messageId: messageId, reaction: reaction)
-    }
-
-    func composingStatusChanged(accountId: String, conversationId: String, from: String, status: Int) {
-        self.conversationService.composingStatusChanged(accountId: accountId, conversationId: conversationId, from: from, status: status)
-    }
-
-    func reactionRemoved(conversationId: String, accountId: String, messageId: String, reactionId: String) {
-        self.conversationService.reactionRemoved(conversationId: conversationId, accountId: accountId, messageId: messageId, reactionId: reactionId)
-    }
-
-    func messageUpdated(conversationId: String, accountId: String, message: SwarmMessageWrap) {
+    private func messageUpdated(conversationId: String, accountId: String, message: SwarmMessageWrap, state: ConversationState) {
         guard let jamiId = self.accountsService.getAccount(fromAccountId: accountId)?.jamiId else { return }
-        self.conversationService.messageUpdated(conversationId: conversationId, accountId: accountId, message: message, localJamiId: jamiId)
+        state.messageUpdated(conversationId: conversationId, accountId: accountId, message: message, localJamiId: jamiId)
     }
 
     func isDownloadingEnabled(for size: Int) -> Bool {
@@ -839,14 +820,14 @@ extension ConversationsManager {
         return Int(size) <= maxSizeForAutoaccept
     }
 
-    func newInteraction(conversationId: String, accountId: String, message: SwarmMessageWrap) {
+    private func newInteraction(conversationId: String, accountId: String, message: SwarmMessageWrap, state: ConversationState) {
         guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
         let newMessage = MessageModel(with: message, localJamiId: account.jamiId)
         self.confirmPostCallSyncIfNeeded(accountId: accountId, message: newMessage)
         if newMessage.type == .fileTransfer {
             newMessage.transferStatus = newMessage.incoming ? .awaiting : .success
         }
-        if self.conversationService.insertMessages(messages: [newMessage], accountId: accountId, localJamiId: account.jamiId, conversationId: conversationId, fromLoaded: false) {
+        if state.insertMessages(messages: [newMessage], accountId: accountId, localJamiId: account.jamiId, conversationId: conversationId, fromLoaded: false) {
             let incoming = message.body[MessageAttributes.author.rawValue] != account.jamiId
             if incoming {
                 if newMessage.transferStatus != .awaiting || !isDownloadingEnabled(for: newMessage.totalSize) {
@@ -862,14 +843,9 @@ extension ConversationsManager {
         }
     }
 
-    func conversationRemoved(conversationId: String, accountId: String) {
+    private func conversationRemoved(conversationId: String, accountId: String, state: ConversationState) {
         self.requestService.conversationRemoved(conversationId: conversationId, accountId: accountId)
-        self.conversationService.conversationRemoved(conversationId: conversationId, accountId: accountId)
-    }
-
-    func conversationDeclined(conversationId: String, accountId: String) {
-        self.requestService.conversationRemoved(conversationId: conversationId, accountId: accountId)
-        self.conversationService.conversationRemoved(conversationId: conversationId, accountId: accountId)
+        state.conversationRemoved(conversationId: conversationId, accountId: accountId)
     }
 
     func activeCallsChanged(conversationId: String, accountId: String, calls: [[String: String]]) {
