@@ -55,7 +55,8 @@ final class LinkToAccountVMTests: XCTestCase {
         let dataTransferService = DataTransferService(withDataTransferAdapter: DataTransferAdapter(),
                                                       dbManager: dBManager)
         let conversationsService = ConversationsService(withConversationsAdapter: ConversationsAdapter(),
-                                                        dbManager: dBManager)
+                                                        dbManager: dBManager,
+                                                        accounts: accountService)
         let locationSharingService = LocationSharingService(dbManager: dBManager)
         let requestsService = RequestsService(withRequestsAdapter: RequestsAdapter())
 

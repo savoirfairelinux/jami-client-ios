@@ -68,18 +68,26 @@ class ConversationsService {
     }
 
     let dbManager: DBManager
+    private let accounts: ConversationAccountLookup
 
     private let serialOperationQueue = DispatchQueue(label: "com.jami.ConversationsService.operationQueue")
     private let state: ConversationState
 
     var onEvent: ((ConversationEvent, ConversationState) -> Void)?
 
-    private(set) lazy var eventSource = ConversationEventSource { [weak self] event in
-        guard let self = self else { return }
-        self.perform { state in
-            self.onEvent?(event, state)
-        }
-    }
+    private(set) lazy var eventSource = ConversationEventSource(
+        onStateEvent: { [weak self] event in
+            guard let self = self else { return }
+            self.perform { state in
+                self.apply(event, to: state)
+            }
+        },
+        onEvent: { [weak self] event in
+            guard let self = self else { return }
+            self.perform { state in
+                self.onEvent?(event, state)
+            }
+        })
 
     func startEvents() {
         eventSource.attachToAdapter()
@@ -87,11 +95,13 @@ class ConversationsService {
 
     // MARK: initial loading
 
-    init(withConversationsAdapter adapter: ConversationsAdapter, dbManager: DBManager) {
+    init(withConversationsAdapter adapter: ConversationsAdapter, dbManager: DBManager,
+         accounts: ConversationAccountLookup) {
         self.responseStream.disposed(by: disposeBag)
         self.sharedResponseStream = responseStream.share()
         self.conversationsAdapter = adapter
         self.dbManager = dbManager
+        self.accounts = accounts
         self.state = ConversationState(adapter: adapter,
                                        dbManager: dbManager,
                                        queue: serialOperationQueue,
@@ -104,6 +114,59 @@ class ConversationsService {
         let state = self.state
         serialOperationQueue.async {
             work(state)
+        }
+    }
+
+    // swiftlint:disable:next cyclomatic_complexity
+    private func apply(_ event: ConversationStateEvent, to state: ConversationState) {
+        switch event {
+        case let .messageStatusChanged(accountId, conversationId, peer, messageId, status):
+            guard let localJamiId = accounts.jamiId(forAccountId: accountId),
+                  localJamiId != peer else { return }
+            state.messageStatusChanged(status, for: messageId, from: accountId,
+                                       to: peer, in: conversationId)
+
+        case let .composingStatusChanged(accountId, conversationId, from, status):
+            state.composingStatusChanged(accountId: accountId, conversationId: conversationId,
+                                         from: from, status: status)
+
+        case let .swarmMessageUpdated(accountId, conversationId, message):
+            guard let localJamiId = accounts.jamiId(forAccountId: accountId) else { return }
+            state.messageUpdated(conversationId: conversationId, accountId: accountId,
+                                 message: message, localJamiId: localJamiId)
+
+        case let .reactionAdded(accountId, conversationId, messageId, reaction):
+            state.reactionAdded(conversationId: conversationId, accountId: accountId,
+                                messageId: messageId, reaction: reaction)
+
+        case let .reactionRemoved(accountId, conversationId, messageId, reactionId):
+            state.reactionRemoved(conversationId: conversationId, accountId: accountId,
+                                  messageId: messageId, reactionId: reactionId)
+
+        case let .conversationReady(accountId, conversationId):
+            guard let localJamiId = accounts.jamiId(forAccountId: accountId),
+                  accountId == accounts.currentAccountId else { return }
+            state.conversationReady(conversationId: conversationId, accountId: accountId,
+                                    accountURI: localJamiId)
+
+        case let .conversationMemberEvent(accountId, conversationId, memberUri, event):
+            guard let memberEvent = ConversationMemberEvent(rawValue: event),
+                  let localJamiId = accounts.jamiId(forAccountId: accountId) else { return }
+            // Check if we leave the conversation on another device. In this case remove conversation.
+            if memberEvent == .leave, localJamiId == memberUri {
+                state.conversationRemoved(conversationId: conversationId, accountId: accountId)
+            } else {
+                state.conversationMemberEvent(conversationId: conversationId, accountId: accountId,
+                                              accountURI: localJamiId)
+            }
+
+        case let .conversationProfileUpdated(accountId, conversationId, profile):
+            state.conversationProfileUpdated(conversationId: conversationId, accountId: accountId,
+                                             profile: profile)
+
+        case let .conversationPreferencesUpdated(accountId, conversationId, preferences):
+            state.conversationPreferencesUpdated(conversationId: conversationId, accountId: accountId,
+                                                 preferences: preferences)
         }
     }
 

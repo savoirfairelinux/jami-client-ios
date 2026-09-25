@@ -18,23 +18,16 @@
 
 import Foundation
 
-enum ConversationEvent: @unchecked Sendable {
-    case incomingAccountMessage(accountId: String, from: String, messageId: String,
-                                payloads: [String: String])
+enum ConversationStateEvent: @unchecked Sendable {
     case messageStatusChanged(accountId: String, conversationId: String, peer: String,
                               messageId: String, status: MessageStatus)
     case composingStatusChanged(accountId: String, conversationId: String, from: String, status: Int)
-    case swarmLoaded(accountId: String, conversationId: String,
-                     messages: [SwarmMessageWrap], requestId: Int)
-    case swarmMessageReceived(accountId: String, conversationId: String, message: SwarmMessageWrap)
     case swarmMessageUpdated(accountId: String, conversationId: String, message: SwarmMessageWrap)
     case reactionAdded(accountId: String, conversationId: String, messageId: String,
                        reaction: [String: String])
     case reactionRemoved(accountId: String, conversationId: String, messageId: String,
                          reactionId: String)
     case conversationReady(accountId: String, conversationId: String)
-    case conversationRemoved(accountId: String, conversationId: String)
-    case conversationDeclined(accountId: String, conversationId: String)
     case conversationMemberEvent(accountId: String, conversationId: String,
                                  memberUri: String, event: Int)
     case conversationProfileUpdated(accountId: String, conversationId: String,
@@ -43,13 +36,26 @@ enum ConversationEvent: @unchecked Sendable {
                                         preferences: [String: String])
 }
 
+enum ConversationEvent: @unchecked Sendable {
+    case incomingAccountMessage(accountId: String, from: String, messageId: String,
+                                payloads: [String: String])
+    case swarmLoaded(accountId: String, conversationId: String,
+                     messages: [SwarmMessageWrap], requestId: Int)
+    case swarmMessageReceived(accountId: String, conversationId: String, message: SwarmMessageWrap)
+    case conversationRemoved(accountId: String, conversationId: String)
+    case conversationDeclined(accountId: String, conversationId: String)
+}
+
 final class ConversationEventSource: NSObject {
 
+    private let onStateEvent: (ConversationStateEvent) -> Void
     private let onEvent: (ConversationEvent) -> Void
     var onActiveCallsChanged: ((_ accountId: String, _ conversationId: String,
                                 _ calls: [[String: String]]) -> Void)?
 
-    init(onEvent: @escaping (ConversationEvent) -> Void) {
+    init(onStateEvent: @escaping (ConversationStateEvent) -> Void,
+         onEvent: @escaping (ConversationEvent) -> Void) {
+        self.onStateEvent = onStateEvent
         self.onEvent = onEvent
         super.init()
     }
@@ -69,8 +75,8 @@ extension ConversationEventSource: MessagesAdapterDelegate {
 
     func messageStatusChanged(_ status: MessageStatus, for messageId: String, from accountId: String,
                               to jamiId: String, in conversationId: String) {
-        onEvent(.messageStatusChanged(accountId: accountId, conversationId: conversationId,
-                                      peer: jamiId, messageId: messageId, status: status))
+        onStateEvent(.messageStatusChanged(accountId: accountId, conversationId: conversationId,
+                                           peer: jamiId, messageId: messageId, status: status))
     }
 
     func activeCallsChanged(conversationId: String, accountId: String, calls: [[String: String]]) {
@@ -79,8 +85,8 @@ extension ConversationEventSource: MessagesAdapterDelegate {
 
     func composingStatusChanged(accountId: String, conversationId: String,
                                 from: String, status: Int) {
-        onEvent(.composingStatusChanged(accountId: accountId, conversationId: conversationId,
-                                        from: from, status: status))
+        onStateEvent(.composingStatusChanged(accountId: accountId, conversationId: conversationId,
+                                             from: from, status: status))
     }
 
     func conversationLoaded(conversationId: String, accountId: String,
@@ -95,24 +101,24 @@ extension ConversationEventSource: MessagesAdapterDelegate {
     }
 
     func messageUpdated(conversationId: String, accountId: String, message: SwarmMessageWrap) {
-        onEvent(.swarmMessageUpdated(accountId: accountId, conversationId: conversationId,
-                                     message: message))
+        onStateEvent(.swarmMessageUpdated(accountId: accountId, conversationId: conversationId,
+                                          message: message))
     }
 
     func reactionAdded(conversationId: String, accountId: String,
                        messageId: String, reaction: [String: String]) {
-        onEvent(.reactionAdded(accountId: accountId, conversationId: conversationId,
-                               messageId: messageId, reaction: reaction))
+        onStateEvent(.reactionAdded(accountId: accountId, conversationId: conversationId,
+                                    messageId: messageId, reaction: reaction))
     }
 
     func reactionRemoved(conversationId: String, accountId: String,
                          messageId: String, reactionId: String) {
-        onEvent(.reactionRemoved(accountId: accountId, conversationId: conversationId,
-                                 messageId: messageId, reactionId: reactionId))
+        onStateEvent(.reactionRemoved(accountId: accountId, conversationId: conversationId,
+                                      messageId: messageId, reactionId: reactionId))
     }
 
     func conversationReady(conversationId: String, accountId: String) {
-        onEvent(.conversationReady(accountId: accountId, conversationId: conversationId))
+        onStateEvent(.conversationReady(accountId: accountId, conversationId: conversationId))
     }
 
     func conversationRemoved(conversationId: String, accountId: String) {
@@ -125,20 +131,20 @@ extension ConversationEventSource: MessagesAdapterDelegate {
 
     func conversationMemberEvent(conversationId: String, accountId: String,
                                  memberUri: String, event: Int) {
-        onEvent(.conversationMemberEvent(accountId: accountId, conversationId: conversationId,
-                                         memberUri: memberUri, event: event))
+        onStateEvent(.conversationMemberEvent(accountId: accountId, conversationId: conversationId,
+                                              memberUri: memberUri, event: event))
     }
 
     func conversationProfileUpdated(conversationId: String, accountId: String,
                                     profile: [String: String]) {
-        onEvent(.conversationProfileUpdated(accountId: accountId, conversationId: conversationId,
-                                            profile: profile))
+        onStateEvent(.conversationProfileUpdated(accountId: accountId, conversationId: conversationId,
+                                                 profile: profile))
     }
 
     func conversationPreferencesUpdated(conversationId: String, accountId: String,
                                         preferences: [String: String]) {
-        onEvent(.conversationPreferencesUpdated(accountId: accountId,
-                                                conversationId: conversationId,
-                                                preferences: preferences))
+        onStateEvent(.conversationPreferencesUpdated(accountId: accountId,
+                                                     conversationId: conversationId,
+                                                     preferences: preferences))
     }
 }
