@@ -20,9 +20,6 @@ import XCTest
 @testable import Ring
 
 final class ConversationEventOrderingTests: XCTestCase {
-    private let accountId = "event-account"
-    private let conversationId = "event-conversation"
-
     func testDaemonCallbackReturnsWhileEventHandlingIsBusy() {
         let service = makeService(adapter: ObjCMockConversationsAdapter())
         let release = DispatchSemaphore(value: 0)
@@ -33,8 +30,8 @@ final class ConversationEventOrderingTests: XCTestCase {
             guard case let .conversationReady(accountId, conversationId) = event else {
                 return XCTFail("Unexpected event")
             }
-            XCTAssertEqual(accountId, "account")
-            XCTAssertEqual(conversationId, "conversation")
+            XCTAssertEqual(accountId, accountId1)
+            XCTAssertEqual(conversationId, conversationId1)
             _ = release.wait(timeout: .now() + 2)
             lock.lock()
             handledCount += 1
@@ -43,7 +40,7 @@ final class ConversationEventOrderingTests: XCTestCase {
         }
         let source = service.eventSource
 
-        source.conversationReady(conversationId: "conversation", accountId: "account")
+        source.conversationReady(conversationId: conversationId1, accountId: accountId1)
         lock.lock()
         XCTAssertEqual(handledCount, 0)
         lock.unlock()
@@ -60,34 +57,26 @@ final class ConversationEventOrderingTests: XCTestCase {
     }
 
     private func checkReadyBeforeUpdates(existingConversation: Bool) {
-        let accountId = self.accountId
-        let conversationId = self.conversationId
         let adapter = ObjCMockConversationsAdapter()
         let service = makeService(adapter: adapter)
         if existingConversation {
-            service.addSwarmConversationId(conversationId: conversationId, accountId: accountId,
-                                           jamiId: jamiId1)
+            service.addSwarmConversationId(conversationId: conversationId1, accountId: accountId1,
+                                           jamiId: jamiId2)
         }
         let finished = expectation(description: "Updates applied in order")
         service.onEvent = { [unowned service] event in
             switch event {
             case let .conversationReady(accountId, conversationId):
                 service.conversationReady(conversationId: conversationId, accountId: accountId,
-                                          accountURI: "local")
+                                          accountURI: jamiId1)
                 let conversation = service.getConversationForId(conversationId: conversationId,
                                                                 accountId: accountId)
-                XCTAssertEqual(conversation?.title, "Original")
+                XCTAssertEqual(conversation?.title, title1)
                 XCTAssertEqual(conversation?.preferences.ignoreNotifications, false)
-            case let .conversationProfileUpdated(accountId, conversationId, profile):
-                service.conversationProfileUpdated(conversationId: conversationId, accountId: accountId,
-                                                   profile: profile)
-            case let .conversationPreferencesUpdated(accountId, conversationId, preferences):
-                service.conversationPreferencesUpdated(conversationId: conversationId, accountId: accountId,
-                                                       preferences: preferences)
-            case .composingStatusChanged:
-                let conversation = service.getConversationForId(conversationId: conversationId,
-                                                                accountId: accountId)
-                XCTAssertEqual(conversation?.title, "Updated")
+            case .incomingAccountMessage(_, _, "updated", _):
+                let conversation = service.getConversationForId(conversationId: conversationId1,
+                                                                accountId: accountId1)
+                XCTAssertEqual(conversation?.title, profileName1)
                 XCTAssertEqual(conversation?.preferences.ignoreNotifications, true)
                 finished.fulfill()
             default:
@@ -96,19 +85,16 @@ final class ConversationEventOrderingTests: XCTestCase {
         }
         let source = service.eventSource
 
-        source.conversationReady(conversationId: conversationId, accountId: accountId)
-        source.conversationProfileUpdated(conversationId: conversationId, accountId: accountId,
-                                          profile: ["title": "Updated"])
-        source.conversationPreferencesUpdated(conversationId: conversationId, accountId: accountId,
+        source.conversationReady(conversationId: conversationId1, accountId: accountId1)
+        source.conversationProfileUpdated(conversationId: conversationId1, accountId: accountId1,
+                                          profile: ["title": profileName1])
+        source.conversationPreferencesUpdated(conversationId: conversationId1, accountId: accountId1,
                                               preferences: ["ignoreNotifications": "true"])
-        source.composingStatusChanged(accountId: accountId, conversationId: conversationId,
-                                      from: "peer", status: 0)
+        source.didReceiveMessage([:], from: jamiId2, messageId: "updated", to: accountId1)
         wait(for: [finished], timeout: 2)
     }
 
     func testMembersMessagesAndRemovalAreAppliedDuringEventDelivery() {
-        let accountId = self.accountId
-        let conversationId = self.conversationId
         let adapter = ObjCMockConversationsAdapter()
         let service = makeService(adapter: adapter)
         let finished = expectation(description: "Message inserted without redispatching to the same queue")
@@ -116,18 +102,18 @@ final class ConversationEventOrderingTests: XCTestCase {
             switch event {
             case let .conversationReady(accountId, conversationId):
                 service.conversationReady(conversationId: conversationId, accountId: accountId,
-                                          accountURI: "local")
+                                          accountURI: jamiId1)
             case let .conversationMemberEvent(accountId, conversationId, _, _):
-                adapter.members = [["uri": "peer", "role": "member"]]
+                adapter.members = [["uri": jamiId2, "role": "member"]]
                 service.conversationMemberEvent(conversationId: conversationId, accountId: accountId,
-                                                accountURI: "local")
+                                                accountURI: jamiId1)
                 let conversation = service.getConversationForId(conversationId: conversationId,
                                                                 accountId: accountId)
-                XCTAssertEqual(conversation?.getParticipants().map { $0.jamiId }, ["peer"])
+                XCTAssertEqual(conversation?.getParticipants().map { $0.jamiId }, [jamiId2])
             case let .swarmMessageReceived(accountId, conversationId, payload):
-                let message = MessageModel(with: payload, localJamiId: "local")
+                let message = MessageModel(with: payload, localJamiId: jamiId1)
                 XCTAssertTrue(service.insertMessages(messages: [message], accountId: accountId,
-                                                     localJamiId: "local", conversationId: conversationId,
+                                                     localJamiId: jamiId1, conversationId: conversationId,
                                                      fromLoaded: false))
                 let conversation = service.getConversationForId(conversationId: conversationId,
                                                                 accountId: accountId)
@@ -142,24 +128,24 @@ final class ConversationEventOrderingTests: XCTestCase {
         }
         let source = service.eventSource
 
-        source.conversationReady(conversationId: conversationId, accountId: accountId)
-        source.conversationMemberEvent(conversationId: conversationId, accountId: accountId,
-                                       memberUri: "peer", event: 1)
+        source.conversationReady(conversationId: conversationId1, accountId: accountId1)
+        source.conversationMemberEvent(conversationId: conversationId1, accountId: accountId1,
+                                       memberUri: jamiId2, event: 1)
         let message = SwarmMessageWrap()
         message.id = "message"
         message.type = "text/plain"
         message.linearizedParent = ""
-        message.body = ["id": "message", "type": "text/plain", "body": "Hello", "author": "peer"]
+        message.body = ["id": "message", "type": "text/plain", "body": "Hello", "author": jamiId2]
         message.reactions = []
         message.editions = []
         message.status = [:]
-        source.newInteraction(conversationId: conversationId, accountId: accountId, message: message)
-        source.conversationRemoved(conversationId: conversationId, accountId: accountId)
+        source.newInteraction(conversationId: conversationId1, accountId: accountId1, message: message)
+        source.conversationRemoved(conversationId: conversationId1, accountId: accountId1)
         wait(for: [finished], timeout: 2)
     }
 
     private func makeService(adapter: ObjCMockConversationsAdapter) -> ConversationsService {
-        adapter.info = ["mode": "0", "title": "Original"]
+        adapter.info = ["mode": "0", "title": title1]
         adapter.preferences = ["ignoreNotifications": "false"]
         adapter.members = []
         let dbManager = DBManager(conversationHelper: ConversationDataHelper(),

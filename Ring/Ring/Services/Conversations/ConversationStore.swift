@@ -81,6 +81,7 @@ final class ConversationStore {
     // MARK: loading
 
     func loadConversations(accountId: String, accountURI: String) {
+        dispatchPrecondition(condition: .onQueue(queue))
         var currentConversations = [ConversationModel]()
         self.conversations.accept(currentConversations)
         var conversationToLoad = [String]() // list of swarm conversation we need to load first message
@@ -129,12 +130,14 @@ final class ConversationStore {
     }
 
     func clearConversationsData(accountId: String) {
+        dispatchPrecondition(condition: .onQueue(queue))
         self.conversations.value.forEach { conversation in
             self.adapter.clearCashe(forConversationId: conversation.id, accountId: accountId)
         }
     }
 
     func addConversationFromAcceptedRequest(conversationId: String, accountId: String, accountURI: String, type: ConversationType) {
+        dispatchPrecondition(condition: .onQueue(queue))
         if self.getConversationForId(conversationId: conversationId, accountId: accountId) != nil {
             return
         }
@@ -156,10 +159,12 @@ final class ConversationStore {
     }
 
     func replaceConversations(_ conversations: [ConversationModel]) {
+        dispatchPrecondition(condition: .onQueue(queue))
         self.conversations.accept(conversations)
     }
 
     func removeConversation(_ conversation: ConversationModel) {
+        dispatchPrecondition(condition: .onQueue(queue))
         var values = self.conversations.value
         if let index = values.firstIndex(of: conversation) {
             values.remove(at: index)
@@ -168,6 +173,7 @@ final class ConversationStore {
     }
 
     func addSwarmConversationId(conversationId: String, accountId: String, jamiId: String) {
+        dispatchPrecondition(condition: .onQueue(queue))
         if self.getConversationForId(conversationId: conversationId, accountId: accountId) != nil { return }
         var conversations = self.conversations.value
         let conversation = ConversationModel(withId: conversationId, accountId: accountId, type: .oneToOne)
@@ -290,16 +296,19 @@ final class ConversationStore {
     }
 
     func reactionAdded(conversationId: String, accountId: String, messageId: String, reaction: [String: String]) {
+        dispatchPrecondition(condition: .onQueue(queue))
         guard let conversation = self.getConversationForId(conversationId: conversationId, accountId: accountId) else { return }
         conversation.reactionAdded(messageId: messageId, reaction: reaction)
     }
 
     func reactionRemoved(conversationId: String, accountId: String, messageId: String, reactionId: String) {
+        dispatchPrecondition(condition: .onQueue(queue))
         guard let conversation = self.getConversationForId(conversationId: conversationId, accountId: accountId) else { return }
         conversation.reactionRemoved(messageId: messageId, reactionId: reactionId)
     }
 
     func composingStatusChanged(accountId: String, conversationId: String, from: String, status: Int) {
+        dispatchPrecondition(condition: .onQueue(queue))
         guard self.getConversationForId(conversationId: conversationId, accountId: accountId) != nil else {
             return
         }
@@ -310,12 +319,14 @@ final class ConversationStore {
     }
 
     func messageUpdated(conversationId: String, accountId: String, message: SwarmMessageWrap, localJamiId: String) {
+        dispatchPrecondition(condition: .onQueue(queue))
         guard let conversation = self.getConversationForId(conversationId: conversationId, accountId: accountId) else { return }
         conversation.messageUpdated(swarmMessage: message, localJamiId: localJamiId)
     }
 
     func messageStatusChanged(_ status: MessageStatus, for messageId: String, from accountId: String,
                               to jamiId: String, in conversationId: String) {
+        dispatchPrecondition(condition: .onQueue(queue))
         guard let conversation = self.conversations.value.filter({ conversation in
             if !conversationId.isEmpty {
                 return  conversation.id == conversationId &&
@@ -328,6 +339,7 @@ final class ConversationStore {
     }
 
     func conversationProfileUpdated(conversationId: String, accountId: String, profile: [String: String]) {
+        dispatchPrecondition(condition: .onQueue(queue))
         guard let conversation = self.conversations.value.filter({ conversation in
             return  conversation.id == conversationId && conversation.accountId == accountId
         }).first else { return }
@@ -340,6 +352,7 @@ final class ConversationStore {
     }
 
     func conversationPreferencesUpdated(conversationId: String, accountId: String, preferences: [String: String]) {
+        dispatchPrecondition(condition: .onQueue(queue))
         guard let conversation = self.conversations.value.filter({ conversation in
             return  conversation.id == conversationId && conversation.accountId == accountId
         }).first else { return }
@@ -359,6 +372,7 @@ final class ConversationStore {
                                interactionId: String,
                                accountId: String,
                                to jamiId: String) {
+        dispatchPrecondition(condition: .onQueue(queue))
         var conversationUnwraped: ConversationModel?
         if !conversationId.isEmpty {
             conversationUnwraped = self.getConversationForId(conversationId: conversationId, accountId: accountId)
@@ -395,6 +409,7 @@ final class ConversationStore {
      after adding new interactions for conversation we check if conversation order need to be changed
      */
     func sortIfNeeded() {
+        dispatchPrecondition(condition: .onQueue(queue))
         let receivedDates = self.conversations.value.map({ conv in
             return conv.lastMessage?.receivedDate ?? Date()
         })
