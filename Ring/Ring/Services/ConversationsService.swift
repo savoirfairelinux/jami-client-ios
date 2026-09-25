@@ -74,16 +74,23 @@ class ConversationsService {
 
     var onEvent: ((ConversationEvent) -> Void)?
 
-    private(set) lazy var eventSource = ConversationEventSource { [weak self] event in
-        guard let self = self else { return }
-        guard event.isOrderedWithConversationState else {
-            self.onEvent?(event)
-            return
-        }
-        self.serialOperationQueue.async {
-            self.onEvent?(event)
-        }
-    }
+    private(set) lazy var eventSource = ConversationEventSource(
+        onStateEvent: { [weak self] event in
+            guard let self = self else { return }
+            self.perform { store in
+                self.apply(event, to: store)
+            }
+        },
+        onEvent: { [weak self] event in
+            guard let self = self else { return }
+            guard event.isOrderedWithConversationState else {
+                self.onEvent?(event)
+                return
+            }
+            self.serialOperationQueue.async {
+                self.onEvent?(event)
+            }
+        })
 
     func startEvents() {
         eventSource.attachToAdapter()
@@ -107,6 +114,30 @@ class ConversationsService {
         let store = self.store
         serialOperationQueue.async {
             work(store)
+        }
+    }
+
+    private func apply(_ event: ConversationStateEvent, to store: ConversationStore) {
+        switch event {
+        case let .composingStatusChanged(accountId, conversationId, from, status):
+            store.composingStatusChanged(accountId: accountId, conversationId: conversationId,
+                                         from: from, status: status)
+
+        case let .reactionAdded(accountId, conversationId, messageId, reaction):
+            store.reactionAdded(conversationId: conversationId, accountId: accountId,
+                                messageId: messageId, reaction: reaction)
+
+        case let .reactionRemoved(accountId, conversationId, messageId, reactionId):
+            store.reactionRemoved(conversationId: conversationId, accountId: accountId,
+                                  messageId: messageId, reactionId: reactionId)
+
+        case let .conversationProfileUpdated(accountId, conversationId, profile):
+            store.conversationProfileUpdated(conversationId: conversationId, accountId: accountId,
+                                             profile: profile)
+
+        case let .conversationPreferencesUpdated(accountId, conversationId, preferences):
+            store.conversationPreferencesUpdated(conversationId: conversationId, accountId: accountId,
+                                                 preferences: preferences)
         }
     }
 
@@ -237,18 +268,6 @@ class ConversationsService {
         store.conversationMemberEvent(conversationId: conversationId, accountId: accountId, accountURI: accountURI)
     }
 
-    func reactionAdded(conversationId: String, accountId: String, messageId: String, reaction: [String: String]) {
-        store.reactionAdded(conversationId: conversationId, accountId: accountId, messageId: messageId, reaction: reaction)
-    }
-
-    func reactionRemoved(conversationId: String, accountId: String, messageId: String, reactionId: String) {
-        store.reactionRemoved(conversationId: conversationId, accountId: accountId, messageId: messageId, reactionId: reactionId)
-    }
-
-    func composingStatusChanged(accountId: String, conversationId: String, from: String, status: Int) {
-        store.composingStatusChanged(accountId: accountId, conversationId: conversationId, from: from, status: status)
-    }
-
     func messageUpdated(conversationId: String, accountId: String, message: SwarmMessageWrap, localJamiId: String) {
         store.messageUpdated(conversationId: conversationId, accountId: accountId, message: message, localJamiId: localJamiId)
     }
@@ -256,14 +275,6 @@ class ConversationsService {
     func messageStatusChanged(_ status: MessageStatus, for messageId: String, from accountId: String,
                               to jamiId: String, in conversationId: String) {
         store.messageStatusChanged(status, for: messageId, from: accountId, to: jamiId, in: conversationId)
-    }
-
-    func conversationProfileUpdated(conversationId: String, accountId: String, profile: [String: String]) {
-        store.conversationProfileUpdated(conversationId: conversationId, accountId: accountId, profile: profile)
-    }
-
-    func conversationPreferencesUpdated(conversationId: String, accountId: String, preferences: [String: String]) {
-        store.conversationPreferencesUpdated(conversationId: conversationId, accountId: accountId, preferences: preferences)
     }
 
     // MARK: conversations management
