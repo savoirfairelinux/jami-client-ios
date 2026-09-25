@@ -105,7 +105,7 @@ final class ContactPickerViewModel: ObservableObject, ViewModel {
     }
 
     private func bindConversationSections() {
-        let conversations = conversationsService.conversations.value
+        let conversations = conversationsService.currentConversations
             .compactMap { SwarmInfo(injectionBag: self.injectionBag, conversation: $0) }
 
         for swarmInfo in conversations {

@@ -65,9 +65,8 @@ final class ConversationEventOrderingTests: XCTestCase {
         let adapter = ObjCMockConversationsAdapter()
         let service = makeService(adapter: adapter)
         if existingConversation {
-            service.conversations.accept([
-                ConversationModel(withId: conversationId, accountId: accountId, type: .invitesOnly)
-            ])
+            service.addSwarmConversationId(conversationId: conversationId, accountId: accountId,
+                                           jamiId: "peer")
         }
         let finished = expectation(description: "Updates applied in order")
         service.onEvent = { [unowned service] event, state in

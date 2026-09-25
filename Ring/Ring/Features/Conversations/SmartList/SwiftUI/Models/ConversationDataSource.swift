@@ -140,7 +140,7 @@ class ConversationDataSource: ObservableObject {
     private func restoreConversation(jamiId: String, accountId: String) {
         guard let viewModel = restoreBlockedConversation(jamiId: jamiId) else { return }
         // Retrieve the conversation and determine its correct index to maintain the order
-        guard let targetIndex = conversationsService.conversations.value.firstIndex(where: { $0 == viewModel.conversation }) else {
+        guard let targetIndex = conversationsService.currentConversations.firstIndex(where: { $0 == viewModel.conversation }) else {
             return
         }
         DispatchQueue.main.async { [weak self] in
