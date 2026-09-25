@@ -55,7 +55,8 @@ final class JamiSearchViewModelTests: XCTestCase {
             DataTransferService(withDataTransferAdapter: DataTransferAdapter(),
                                 dbManager: dBManager)
         let conversationsService: ConversationsService =
-            ConversationsService(withConversationsAdapter: ConversationsAdapter(), dbManager: dBManager)
+            ConversationsService(withConversationsAdapter: ConversationsAdapter(), dbManager: dBManager,
+                                 accounts: accountService)
         let locationSharingService: LocationSharingService =
             LocationSharingService(dbManager: dBManager)
         let requestsService: RequestsService =

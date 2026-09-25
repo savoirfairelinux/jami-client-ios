@@ -65,7 +65,8 @@ final class SwarmInfoTests: XCTestCase {
             DataTransferService(withDataTransferAdapter: DataTransferAdapter(),
                                 dbManager: dBManager)
         conversationsService = MockConversationsService(withConversationsAdapter: ConversationsAdapter(),
-                                                        dbManager: dBManager)
+                                                        dbManager: dBManager,
+                                                        accounts: accountService)
         let locationSharingService: LocationSharingService =
             LocationSharingService(dbManager: dBManager)
         let requestsService: RequestsService =

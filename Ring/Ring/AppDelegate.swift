@@ -58,7 +58,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                             dbManager: self.dBManager)
     }()
     private lazy var conversationsService: ConversationsService = {
-        ConversationsService(withConversationsAdapter: ConversationsAdapter(), dbManager: self.dBManager)
+        ConversationsService(withConversationsAdapter: ConversationsAdapter(), dbManager: self.dBManager,
+                             accounts: self.accountService)
     }()
     private lazy var locationSharingService: LocationSharingService = {
         LocationSharingService(dbManager: self.dBManager)
