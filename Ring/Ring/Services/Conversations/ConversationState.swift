@@ -23,8 +23,8 @@ import RxRelay
 // swiftlint:disable type_body_length
 final class ConversationState {
 
-    let conversations = BehaviorRelay(value: [ConversationModel]())
-    let conversationReady = BehaviorRelay(value: "")
+    private let conversations = BehaviorRelay(value: [ConversationModel]())
+    private let conversationReady = BehaviorRelay(value: "")
 
     private let adapter: ConversationsAdapter
     private let dbManager: DBManager
@@ -49,6 +49,18 @@ final class ConversationState {
     }
 
     // MARK: lookup
+
+    var conversationsStream: Observable<[ConversationModel]> {
+        return conversations.asObservable()
+    }
+
+    var currentConversations: [ConversationModel] {
+        return conversations.value
+    }
+
+    var conversationReadyStream: Observable<String> {
+        return conversationReady.asObservable()
+    }
 
     func getConversationForParticipant(jamiId: String, accountId: String) -> ConversationModel? {
         return self.conversations.value.filter { conversation in
@@ -137,6 +149,18 @@ final class ConversationState {
         var currentConversations = self.conversations.value
         currentConversations.append(conversation)
         self.publishNewConversation(conversationId: conversationId, accountId: accountId, conversations: &currentConversations)
+    }
+
+    func replaceConversations(_ conversations: [ConversationModel]) {
+        self.conversations.accept(conversations)
+    }
+
+    func removeConversation(_ conversation: ConversationModel) {
+        var values = self.conversations.value
+        if let index = values.firstIndex(of: conversation) {
+            values.remove(at: index)
+            self.conversations.accept(values)
+        }
     }
 
     func addSwarmConversationId(conversationId: String, accountId: String, jamiId: String) {

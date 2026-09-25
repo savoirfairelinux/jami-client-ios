@@ -52,11 +52,14 @@ class ConversationsService {
     private let responseStream = PublishSubject<ServiceEvent>()
     var sharedResponseStream: Observable<ServiceEvent>
 
-    var conversations: BehaviorRelay<[ConversationModel]> {
-        return state.conversations
+    var conversations: Observable<[ConversationModel]> {
+        return state.conversationsStream
     }
-    var conversationReady: BehaviorRelay<String> {
-        return state.conversationReady
+    var currentConversations: [ConversationModel] {
+        return state.currentConversations
+    }
+    var conversationReady: Observable<String> {
+        return state.conversationReadyStream
     }
 
     private let replyTargetRegistry = ReplyTargetRegistry()
@@ -134,7 +137,7 @@ class ConversationsService {
     }
 
     func updateConversationMessages(conversationId: String) {
-        for conversation in self.conversations.value where conversation.id == conversationId {
+        for conversation in self.currentConversations where conversation.id == conversationId {
             conversation.clearMessages()
             self.conversationsAdapter.loadConversationMessages(conversation.accountId, conversationId: conversationId, from: "", size: 40)
         }
@@ -252,31 +255,33 @@ class ConversationsService {
                 .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
                 .subscribe(onNext: { [weak self] savedMessage in
                     guard let self = self else { return }
-                    let hash = JamiURI(from: recipientURI).hash
-                    /// append new message so it can be found if a status update is received before the DB finishes reload
-                    if shouldRefreshConversations, let conversation = self.conversations.value
-                        .filter({ conversation in
-                            return conversation.getParticipants().first?.jamiId == hash &&
-                                conversation.accountId == toAccountId
-                        })
-                        .first {
-                        let content = (message.type.isContact || message.type == .call) ?
-                            GeneratedMessage.init(from: message.content).toMessage(with: Int(duration))
-                            : message.content
-                        message.content = content
-                        message.id = savedMessage.messageID
-                        conversation.appendNonSwarm(message: message)
-                        if let lastMessage = conversation.lastMessage {
-                            if lastMessage.receivedDate < message.receivedDate {
+                    self.perform { state in
+                        let hash = JamiURI(from: recipientURI).hash
+                        /// append new message so it can be found if a status update is received before the DB finishes reload
+                        if shouldRefreshConversations, let conversation = state.currentConversations
+                            .filter({ conversation in
+                                return conversation.getParticipants().first?.jamiId == hash &&
+                                    conversation.accountId == toAccountId
+                            })
+                            .first {
+                            let content = (message.type.isContact || message.type == .call) ?
+                                GeneratedMessage.init(from: message.content).toMessage(with: Int(duration))
+                                : message.content
+                            message.content = content
+                            message.id = savedMessage.messageID
+                            conversation.appendNonSwarm(message: message)
+                            if let lastMessage = conversation.lastMessage {
+                                if lastMessage.receivedDate < message.receivedDate {
+                                    conversation.lastMessage = message
+                                }
+
+                            } else {
                                 conversation.lastMessage = message
                             }
-
-                        } else {
-                            conversation.lastMessage = message
+                            state.sortIfNeeded()
                         }
-                        self.perform { $0.sortIfNeeded() }
+                        completable(.completed)
                     }
-                    completable(.completed)
                 }, onError: { error in
                     completable(.error(error))
                 })
@@ -403,17 +408,15 @@ class ConversationsService {
         let finish: () -> Void = { [weak self] in
             guard let self = self else { return }
             self.removeSavedFiles(accountId: conversation.accountId, conversationId: conversation.id)
-            var values = self.conversations.value
-            if let index = values.firstIndex(of: conversation) {
-                values.remove(at: index)
-                self.conversations.accept(values)
-            }
-            if !keepConversation {
-                var serviceEvent = ServiceEvent(withEventType: .conversationRemoved)
-                serviceEvent.addEventInput(.conversationId, value: conversation.id)
-                serviceEvent.addEventInput(.accountId, value: conversation.accountId)
-                serviceEvent.addEventInput(.peerUri, value: uri)
-                self.responseStream.onNext(serviceEvent)
+            self.perform { state in
+                state.removeConversation(conversation)
+                if !keepConversation {
+                    var serviceEvent = ServiceEvent(withEventType: .conversationRemoved)
+                    serviceEvent.addEventInput(.conversationId, value: conversation.id)
+                    serviceEvent.addEventInput(.accountId, value: conversation.accountId)
+                    serviceEvent.addEventInput(.peerUri, value: uri)
+                    self.responseStream.onNext(serviceEvent)
+                }
             }
         }
         self.dbManager.clearHistoryFor(accountId: conversation.accountId, and: uri, keepConversation: keepConversation)
@@ -451,13 +454,15 @@ class ConversationsService {
         } catch { }
         /// add conversation to db
         let conversationId = dbManager.createConversationsFor(contactUri: uri, accountId: accountId)
-        if !self.conversations.value.map({ $0.id }).contains(conversationId) {
+        if !self.currentConversations.map({ $0.id }).contains(conversationId) {
             /// new conversation. Need to update conversation list
             self.dbManager
                 .getConversationsObservable(for: accountId)
                 .subscribe { [weak self] conversationModels in
-                    self?.conversations.accept(conversationModels)
-                    self?.perform { $0.sortIfNeeded() }
+                    self?.perform { state in
+                        state.replaceConversations(conversationModels)
+                        state.sortIfNeeded()
+                    }
                 } onError: { _ in
                 }
                 .disposed(by: self.disposeBag)
@@ -467,13 +472,13 @@ class ConversationsService {
     // MARK: helpers
 
     func getConversationForParticipant(jamiId: String, accountId: String) -> ConversationModel? {
-        return self.conversations.value.filter { conversation in
+        return self.currentConversations.filter { conversation in
             conversation.getParticipants().first?.jamiId == jamiId && conversation.isCoredialog() && conversation.accountId == accountId
         }.first
     }
 
     func getConversationForId(conversationId: String, accountId: String) -> ConversationModel? {
-        return self.conversations.value.filter { conversation in
+        return self.currentConversations.filter { conversation in
             conversation.id == conversationId && conversation.accountId == accountId
         }.first
     }
@@ -522,31 +527,33 @@ class ConversationsService {
                 .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
                 .subscribe(onNext: { [weak self] dbMessage in
                     guard let self = self else { return }
-                    let hash = JamiURI(from: contactUri).hash
-                    if updateConversation, let conversation = self.conversations.value
-                        .filter({ conversation in
-                            return conversation.getParticipants().first?.jamiId == hash &&
-                                conversation.accountId == accountId
-                        })
-                        .first {
-                        let content = (message.type.isContact || message.type == .call) ?
-                            GeneratedMessage.init(from: message.content).toMessage(with: Int(0))
-                            : message.content
-                        message.content = content
-                        message.id = dbMessage.messageID
-                        message.daemonId = transferId
-                        conversation.appendNonSwarm(message: message)
-                        self.perform { $0.sortIfNeeded() }
+                    self.perform { state in
+                        let hash = JamiURI(from: contactUri).hash
+                        if updateConversation, let conversation = state.currentConversations
+                            .filter({ conversation in
+                                return conversation.getParticipants().first?.jamiId == hash &&
+                                    conversation.accountId == accountId
+                            })
+                            .first {
+                            let content = (message.type.isContact || message.type == .call) ?
+                                GeneratedMessage.init(from: message.content).toMessage(with: Int(0))
+                                : message.content
+                            message.content = content
+                            message.id = dbMessage.messageID
+                            message.daemonId = transferId
+                            conversation.appendNonSwarm(message: message)
+                            state.sortIfNeeded()
+                        }
+                        let serviceEventType: ServiceEventType = .dataTransferMessageUpdated
+                        var serviceEvent = ServiceEvent(withEventType: serviceEventType)
+                        serviceEvent.addEventInput(.transferId, value: transferId)
+                        serviceEvent.addEventInput(.conversationId, value: conversationId)
+                        serviceEvent.addEventInput(.state, value: DataTransferStatus.created)
+                        serviceEvent.addEventInput(.accountId, value: accountId)
+                        serviceEvent.addEventInput(.messageId, value: messageId)
+                        self.responseStream.onNext(serviceEvent)
+                        completable(.completed)
                     }
-                    let serviceEventType: ServiceEventType = .dataTransferMessageUpdated
-                    var serviceEvent = ServiceEvent(withEventType: serviceEventType)
-                    serviceEvent.addEventInput(.transferId, value: transferId)
-                    serviceEvent.addEventInput(.conversationId, value: conversationId)
-                    serviceEvent.addEventInput(.state, value: DataTransferStatus.created)
-                    serviceEvent.addEventInput(.accountId, value: accountId)
-                    serviceEvent.addEventInput(.messageId, value: messageId)
-                    self.responseStream.onNext(serviceEvent)
-                    completable(.completed)
                 }, onError: { error in
                     completable(.error(error))
                 })

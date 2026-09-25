@@ -411,7 +411,7 @@ class RequestsViewModel: ObservableObject {
     func subscribeToNewRequests() {
         let conversationsStream = conversationService.conversations
             .share()
-            .startWith(conversationService.conversations.value)
+            .startWith(conversationService.currentConversations)
 
         let requestsStream = requestsService.requests.asObservable()
 
