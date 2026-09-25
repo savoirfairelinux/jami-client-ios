@@ -78,13 +78,7 @@ final class ConversationEventOrderingTests: XCTestCase {
                                                                 accountId: accountId)
                 XCTAssertEqual(conversation?.title, "Original")
                 XCTAssertEqual(conversation?.preferences.ignoreNotifications, false)
-            case let .conversationProfileUpdated(accountId, conversationId, profile):
-                service.conversationProfileUpdated(conversationId: conversationId, accountId: accountId,
-                                                   profile: profile)
-            case let .conversationPreferencesUpdated(accountId, conversationId, preferences):
-                service.conversationPreferencesUpdated(conversationId: conversationId, accountId: accountId,
-                                                       preferences: preferences)
-            case .composingStatusChanged:
+            case .incomingAccountMessage(_, _, "updated", _):
                 let conversation = service.getConversationForId(conversationId: conversationId,
                                                                 accountId: accountId)
                 XCTAssertEqual(conversation?.title, "Updated")
@@ -101,8 +95,7 @@ final class ConversationEventOrderingTests: XCTestCase {
                                           profile: ["title": "Updated"])
         source.conversationPreferencesUpdated(conversationId: conversationId, accountId: accountId,
                                               preferences: ["ignoreNotifications": "true"])
-        source.composingStatusChanged(accountId: accountId, conversationId: conversationId,
-                                      from: "peer", status: 0)
+        source.didReceiveMessage([:], from: "peer", messageId: "updated", to: accountId)
         wait(for: [finished], timeout: 2)
     }
 

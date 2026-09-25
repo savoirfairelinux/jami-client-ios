@@ -114,10 +114,6 @@ class ConversationsManager {
         case let .activeCallsChanged(accountId, conversationId, calls):
             activeCallsChanged(conversationId: conversationId, accountId: accountId, calls: calls)
 
-        case let .composingStatusChanged(accountId, conversationId, from, status):
-            composingStatusChanged(accountId: accountId, conversationId: conversationId,
-                                   from: from, status: status)
-
         case let .swarmLoaded(accountId, conversationId, messages, requestId):
             conversationLoaded(conversationId: conversationId, accountId: accountId,
                                messages: messages, requestId: requestId)
@@ -127,14 +123,6 @@ class ConversationsManager {
 
         case let .swarmMessageUpdated(accountId, conversationId, message):
             messageUpdated(conversationId: conversationId, accountId: accountId, message: message)
-
-        case let .reactionAdded(accountId, conversationId, messageId, reaction):
-            reactionAdded(conversationId: conversationId, accountId: accountId,
-                          messageId: messageId, reaction: reaction)
-
-        case let .reactionRemoved(accountId, conversationId, messageId, reactionId):
-            reactionRemoved(conversationId: conversationId, accountId: accountId,
-                            messageId: messageId, reactionId: reactionId)
 
         case let .conversationReady(accountId, conversationId):
             conversationReady(conversationId: conversationId, accountId: accountId)
@@ -148,14 +136,6 @@ class ConversationsManager {
         case let .conversationMemberEvent(accountId, conversationId, memberUri, event):
             conversationMemberEvent(conversationId: conversationId, accountId: accountId,
                                     memberUri: memberUri, event: event)
-
-        case let .conversationProfileUpdated(accountId, conversationId, profile):
-            conversationProfileUpdated(conversationId: conversationId, accountId: accountId,
-                                       profile: profile)
-
-        case let .conversationPreferencesUpdated(accountId, conversationId, preferences):
-            conversationPreferencesUpdated(conversationId: conversationId, accountId: accountId,
-                                           preferences: preferences)
         }
     }
 
@@ -729,14 +709,6 @@ class ConversationsManager {
                                                       to: jamiId,
                                                       in: conversationId)
     }
-
-    func conversationProfileUpdated(conversationId: String, accountId: String, profile: [String: String]) {
-        conversationService.conversationProfileUpdated(conversationId: conversationId, accountId: accountId, profile: profile)
-    }
-
-    func conversationPreferencesUpdated(conversationId: String, accountId: String, preferences: [String: String]) {
-        conversationService.conversationPreferencesUpdated(conversationId: conversationId, accountId: accountId, preferences: preferences)
-    }
 }
 
 extension ConversationsManager {
@@ -811,18 +783,6 @@ extension ConversationsManager {
             return newMessage
         }
         _ = self.conversationService.insertMessages(messages: messagesModels, accountId: accountId, localJamiId: account.jamiId, conversationId: conversationId, fromLoaded: true)
-    }
-
-    func reactionAdded(conversationId: String, accountId: String, messageId: String, reaction: [String: String]) {
-        self.conversationService.reactionAdded(conversationId: conversationId, accountId: accountId, messageId: messageId, reaction: reaction)
-    }
-
-    func composingStatusChanged(accountId: String, conversationId: String, from: String, status: Int) {
-        self.conversationService.composingStatusChanged(accountId: accountId, conversationId: conversationId, from: from, status: status)
-    }
-
-    func reactionRemoved(conversationId: String, accountId: String, messageId: String, reactionId: String) {
-        self.conversationService.reactionRemoved(conversationId: conversationId, accountId: accountId, messageId: messageId, reactionId: reactionId)
     }
 
     func messageUpdated(conversationId: String, accountId: String, message: SwarmMessageWrap) {
