@@ -340,7 +340,8 @@ std::map<std::string, std::string> nameServers;
             auto certPath = [[[Constants documentsPath] URLByAppendingPathComponent:accountId] URLByAppendingPathComponent:certificates].path.UTF8String;
             auto crlPath = [[[Constants documentsPath] URLByAppendingPathComponent:accountId] URLByAppendingPathComponent:crls].path.UTF8String;
             auto ocspPath = [[[Constants documentsPath] URLByAppendingPathComponent:accountId] URLByAppendingPathComponent:ocsp].path.UTF8String;
-            peerId = getPeerId(decrypted->owner->getId().toString(),
+            peerId = getPeerId(decrypted->owner->getLongId().toString(),
+                               decrypted->owner->getId().toString(),
                                certPath,
                                crlPath,
                                ocspPath);
@@ -514,43 +515,30 @@ isMessageTreated(uint64_t id, const std::string& path)
 }
 
 std::string
-getPeerId(const std::string& key,
+getPeerId(const std::string& longId,
+          const std::string& shortId,
           const std::string& certPath,
           const std::string& crlPath,
           const std::string& ocspPath)
 {
-    std::map<std::string, std::shared_ptr<dht::crypto::Certificate>> certs;
-    auto dir_content = readDirectory(certPath);
-    unsigned n = 0;
-    for (const auto& f : dir_content) {
+    for (const auto& name : {longId, shortId}) {
+        auto data = loadFile(certPath + fileSeparator + name);
+        if (data.empty())
+            continue;
         try {
-            auto crt = std::make_shared<dht::crypto::Certificate>(
-                loadFile(certPath + fileSeparator + f));
-            auto id = crt->getId().toString();
-            auto longId = crt->getLongId().toString();
-            if (id != f && longId != f)
-                throw std::logic_error("Certificate id mismatch");
-            while (crt) {
-                id = crt->getId().toString();
-                longId = crt->getLongId().toString();
-                certs.emplace(std::move(id), crt);
-                certs.emplace(std::move(longId), crt);
-                loadRevocations(*crt, crlPath, ocspPath);
-                crt = crt->issuer;
-                ++n;
-            }
+            auto crt = std::make_shared<dht::crypto::Certificate>(data);
+            if (crt->getId().toString() != shortId)
+                return {};
+            for (auto c = crt; c; c = c->issuer)
+                loadRevocations(*c, crlPath, ocspPath);
+            dht::InfoHash peer_account_id;
+            if (not foundPeerDevice(crt, peer_account_id))
+                return {};
+            return peer_account_id.toString();
         } catch (const std::exception& e) {
         }
     }
-    auto cit = certs.find(key);
-    if (cit == certs.cend()) {
-        return {};
-    }
-    dht::InfoHash peer_account_id;
-    if (not foundPeerDevice(cit->second, peer_account_id)) {
-        return {};
-    }
-    return peer_account_id.toString();
+    return {};
 }
 
 void
