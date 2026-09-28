@@ -117,7 +117,7 @@ final class ConversationEventOrderingTests: XCTestCase {
                                                      fromLoaded: false))
                 let conversation = service.getConversationForId(conversationId: conversationId,
                                                                 accountId: accountId)
-                XCTAssertEqual(conversation?.messages.map { $0.id }, ["message"])
+                XCTAssertEqual(conversation?.newMessages.value.messages.map { $0.id }, ["message"])
             case let .conversationRemoved(accountId, conversationId):
                 service.conversationRemoved(conversationId: conversationId, accountId: accountId)
                 XCTAssertNil(service.getConversationForId(conversationId: conversationId, accountId: accountId))

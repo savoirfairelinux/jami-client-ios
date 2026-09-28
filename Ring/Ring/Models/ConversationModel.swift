@@ -237,13 +237,10 @@ struct ConversationInfo {
 
 class ConversationModel: Equatable {
     var newMessages = BehaviorRelay<LoadedMessages>(value: LoadedMessages(messages: [MessageModel](), fromHistory: false))
-    var messages = [MessageModel]()
-    var lastMessage: MessageModel?
     let id: String
     let accountId: String
     private let infoRelay: BehaviorRelay<ConversationInfo>
     let numberOfUnreadMessages = BehaviorRelay<Int>(value: 0)
-    let disposeBag = DisposeBag()
     let reactionsUpdated = PublishSubject<MessageModel>()
     let messagesUpdated = PublishSubject<[MessageModel]>()
 
@@ -295,7 +292,6 @@ class ConversationModel: Equatable {
         self.id = id
         self.accountId = accountId
         self.infoRelay = info
-        self.subscribeUnreadMessages()
     }
 
     convenience init(id: String = "", accountId: String = "", info: ConversationInfo) {
@@ -336,65 +332,10 @@ class ConversationModel: Equatable {
         return lhs.id == rhs.id
     }
 
-    private func subscribeUnreadMessages() {
-        if self.isSwarm() { return }
-        self.newMessages.asObservable()
-            .share()
-            .subscribe { [weak self] _ in
-                guard let self = self else { return }
-                let number = self.messages.filter({ $0.status != .displayed && $0.type == .text && $0.incoming }).count
-                self.numberOfUnreadMessages.accept(number)
-            } onError: { _ in
-            }
-            .disposed(by: self.disposeBag)
-    }
-
-    func getMessage(withDaemonID daemonID: String) -> MessageModel? {
-        return self.messages.filter({ message in
-            return message.daemonId == daemonID
-        }).first
-    }
-
-    func getMessage(messageId: String) -> MessageModel? {
-        return self.messages.filter({ message in
-            return message.id == messageId
-        }).first
-    }
-
     func getLastReadMessage() -> String? {
         return self.participants.filter { participant in
             participant.isLocal
         }.first?.lastDisplayed
-    }
-
-    func getLastDisplayedMessageForDialog() -> String? {
-        let last = self.participants.filter { participant in
-            !participant.isLocal
-        }.first?.lastDisplayed
-        if let message = self.messages.filter({ ($0.id == last) }).first {
-            if !message.incoming {
-                return last
-            } else if let index = self.messages.firstIndex(where: { message in
-                message.id == last
-            }) {
-                if let newMessage = self.messages[0..<index].reversed().filter({ !$0.incoming }).first {
-                    return newMessage.id
-                }
-            }
-        }
-        return last
-    }
-
-    func setAllMessagesAsRead() {
-        var updated = [MessageModel]()
-        for index in self.messages.indices where self.messages[index].status != .displayed &&
-            self.messages[index].incoming && self.messages[index].type == .text {
-            updated.append(self.updateMessage(at: index, { $0.status = .displayed }))
-        }
-        if !updated.isEmpty {
-            messagesUpdated.onNext(updated)
-        }
-        self.numberOfUnreadMessages.accept(0)
     }
 
     func isCoredialog() -> Bool {
@@ -456,16 +397,6 @@ class ConversationModel: Equatable {
         return "swarm:" + self.id
     }
 
-    func allMessagesLoaded() -> Bool {
-        guard let firstMessage = self.messages.first else { return false }
-        return firstMessage.parentId.isEmpty
-    }
-
-    func appendNonSwarm(message: MessageModel) {
-        self.messages.append(message)
-        self.newMessages.accept(LoadedMessages(messages: [message], fromHistory: false))
-    }
-
     func isSwarm() -> Bool {
         return self.type != .nonSwarm && self.type != .sip
     }
@@ -474,66 +405,4 @@ class ConversationModel: Equatable {
         return self.type == .sip
     }
 
-    func clearMessages() {
-        messages = [MessageModel]()
-        newMessages.accept(LoadedMessages(messages: [MessageModel](), fromHistory: false, reset: true))
-        lastMessage = nil
-        numberOfUnreadMessages.accept(0)
-    }
-
-    func reactionAdded(messageId: String, reaction: [String: String]) {
-        guard let message = self.updateMessage(messageId: messageId, {
-            $0.reactionAdded(reaction: reaction)
-        }) else { return }
-        reactionsUpdated.onNext(message)
-    }
-
-    func reactionRemoved(messageId: String, reactionId: String) {
-        guard let message = self.updateMessage(messageId: messageId, {
-            $0.reactionRemoved(reactionId: reactionId)
-        }) else { return }
-        reactionsUpdated.onNext(message)
-    }
-
-    func messageUpdated(swarmMessage: SwarmMessageWrap, localJamiId: String) {
-        guard let message = self.updateMessage(messageId: swarmMessage.id, {
-            $0.messageUpdated(message: swarmMessage, localJamiId: localJamiId)
-        }) else { return }
-        messagesUpdated.onNext([message])
-    }
-
-    func messageStatusUpdated(status: MessageStatus, messageId: String, jamiId: String) {
-        guard let message = self.updateMessage(messageId: messageId, {
-            $0.messageStatusUpdated(status: status, jamiId: jamiId)
-        }) else { return }
-        messagesUpdated.onNext([message])
-    }
-
-    func transferStatusUpdated(status: DataTransferStatus, messageId: String, transferId: String) {
-        guard let index = self.messages.firstIndex(where: { message in
-            (!messageId.isEmpty && message.id == messageId) ||
-                (message.type == .fileTransfer && message.daemonId == transferId)
-        }) else { return }
-        messagesUpdated.onNext([self.updateMessage(at: index, { $0.transferStatus = status })])
-    }
-
-    private func updateMessage(messageId: String, _ change: (inout MessageData) -> Void) -> MessageModel? {
-        guard let index = self.messages.firstIndex(where: { $0.id == messageId }) else { return nil }
-        return self.updateMessage(at: index, change)
-    }
-
-    private func updateMessage(at index: Int, _ change: (inout MessageData) -> Void) -> MessageModel {
-        let message = self.messages[index].updating(change)
-        self.messages[index] = message
-        if self.lastMessage?.id == message.id {
-            self.lastMessage = message
-        }
-        return message
-    }
-
-    func updateUnreadMessages(count: Int) {
-        var unreadMessages = numberOfUnreadMessages.value
-        unreadMessages += count
-        numberOfUnreadMessages.accept(unreadMessages)
-    }
 }
