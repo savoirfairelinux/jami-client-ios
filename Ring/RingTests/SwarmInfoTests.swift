@@ -208,10 +208,9 @@ final class SwarmInfoTests: XCTestCase {
     }
 
     func testCallTargetForGroupConversationUsesResolvedURIWithoutDisplayName() {
-        let conversation = ConversationModel(withId: conversationId1,
-                                             accountId: accountId1,
-                                             type: .invitesOnly)
-        conversation.addParticipant(jamiId: jamiId1)
+        var state = ConversationState(type: .invitesOnly)
+        state.addParticipant(jamiId: jamiId1)
+        let conversation = ConversationModel(id: conversationId1, accountId: accountId1, state: state)
         let viewModel = makeSwarmInfoViewModel(conversation: conversation, title: title1)
 
         let target = viewModel.callTarget
@@ -261,10 +260,9 @@ final class SwarmInfoTests: XCTestCase {
     }
 
     func testOneToOneProfileEditorEditsTheLocalContactProfile() {
-        let conversation = ConversationModel(withId: conversationId1,
-                                             accountId: accountId1,
-                                             type: .oneToOne)
-        conversation.addParticipant(jamiId: jamiId1)
+        var state = ConversationState(type: .oneToOne)
+        state.addParticipant(jamiId: jamiId1)
+        let conversation = ConversationModel(id: conversationId1, accountId: accountId1, state: state)
         let viewModel = makeSwarmInfoViewModel(conversation: conversation, title: title1)
 
         guard let editingConversation = viewModel.conversationToEdit else {
@@ -385,10 +383,9 @@ final class SwarmInfoTests: XCTestCase {
     }
 
     func testCoreDialogResolvesTitleFromParticipantNotFromInfos() {
-        let conversation = ConversationModel(withId: conversationId1,
-                                             accountId: accountId1,
-                                             type: .oneToOne)
-        conversation.addParticipant(jamiId: jamiId1)
+        var state = ConversationState(type: .oneToOne)
+        state.addParticipant(jamiId: jamiId1)
+        let conversation = ConversationModel(id: conversationId1, accountId: accountId1, state: state)
         let swarmInfo = SwarmInfo(injectionBag: injectionBag, conversation: conversation)
 
         XCTAssertTrue(swarmInfo.title.value.isEmpty)
@@ -396,9 +393,8 @@ final class SwarmInfoTests: XCTestCase {
     }
 
     private func makeGroupConversation() -> ConversationModel {
-        return ConversationModel(withId: conversationId1,
-                                 accountId: accountId1,
-                                 type: .invitesOnly)
+        return ConversationModel(id: conversationId1, accountId: accountId1,
+                                 state: ConversationState(type: .invitesOnly))
     }
 
     private func makeSwarmInfoViewModel(conversation: ConversationModel,

@@ -98,10 +98,9 @@ final class JamiSearchViewModelTests: XCTestCase {
     }
 
     func createSwarmConversation(jamiId: String, type: ConversationType) -> ConversationModel {
-        let conversation = ConversationModel(withId: "", accountId: "", type: type)
-        let participants = [["uri": jamiId]]
-        conversation.addParticipantsFromArray(participantsInfo: participants, accountURI: "")
-        return conversation
+        var state = ConversationState(type: type)
+        state.addParticipantsFromArray(participantsInfo: [["uri": jamiId]], accountURI: "")
+        return ConversationModel(state: state)
     }
 
     func createSwarmInfo(jamiId: String, name: String, containsSearchQuery: Bool, hasParticipantWithRegisteredName: Bool) -> TestableSwarmInfo {
@@ -125,9 +124,9 @@ final class JamiSearchViewModelTests: XCTestCase {
         let accountId = "account"
         let conversationId = "conversation"
         let documentId = "document"
-        conversationVM.conversation = ConversationModel(withId: conversationId,
+        conversationVM.conversation = ConversationModel(id: conversationId,
                                                         accountId: accountId,
-                                                        type: .oneToOne)
+                                                        state: ConversationState(type: .oneToOne))
 
         let unreadUpdated = expectation(description: "Document notification updates the conversation badge")
         conversationVM.$unreadMessages

@@ -518,9 +518,9 @@ class ConversationsService {
             /// new conversation. Need to update conversation list
             self.dbManager
                 .getConversationsObservable(for: accountId)
-                .subscribe { [weak self] conversationModels in
+                .subscribe { [weak self] storedConversations in
                     self?.perform { store in
-                        store.replaceConversations(conversationModels)
+                        store.replaceConversations(with: storedConversations)
                         store.sortIfNeeded()
                     }
                 } onError: { _ in

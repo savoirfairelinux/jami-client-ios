@@ -67,10 +67,9 @@ final class CallServiceStateMirrorTests: XCTestCase {
 
     func testOutgoingCallURIForOneToOneConversationUsesParticipant() {
         let service = makeService()
-        let conversation = ConversationModel(withId: "conversation-id",
-                                             accountId: "account-id",
-                                             type: .oneToOne)
-        conversation.addParticipant(jamiId: "participant-id")
+        var state = ConversationState(type: .oneToOne)
+        state.addParticipant(jamiId: "participant-id")
+        let conversation = ConversationModel(id: "conversation-id", accountId: "account-id", state: state)
 
         XCTAssertEqual(service.outgoingCallURI(for: conversation), "participant-id")
     }
@@ -111,18 +110,16 @@ final class CallServiceStateMirrorTests: XCTestCase {
 
     func testOutgoingCallURIIsNilForGroupWithoutParticipants() {
         let service = makeService()
-        let conversation = ConversationModel(withId: "conversation-id",
-                                             accountId: "account-id",
-                                             type: .invitesOnly)
+        let conversation = ConversationModel(id: "conversation-id", accountId: "account-id",
+                                             state: ConversationState(type: .invitesOnly))
 
         XCTAssertNil(service.outgoingCallURI(for: conversation))
     }
 
     private func makeGroupConversation() -> ConversationModel {
-        let conversation = ConversationModel(withId: "conversation-id",
-                                             accountId: "account-id",
-                                             type: .invitesOnly)
-        conversation.addParticipant(jamiId: "participant-id")
+        var state = ConversationState(type: .invitesOnly)
+        state.addParticipant(jamiId: "participant-id")
+        let conversation = ConversationModel(id: "conversation-id", accountId: "account-id", state: state)
         return conversation
     }
 }
