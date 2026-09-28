@@ -77,11 +77,18 @@ enum ConversationAttributes: String {
     case avatar = "avatar"
     case mode = "mode"
     case conversationId = "id"
+    case syncing = "syncing"
 }
 
 enum ConversationPreferenceAttributes: String {
     case color
     case ignoreNotifications
+}
+
+enum ConversationMemberAttributes: String {
+    case uri
+    case role
+    case lastDisplayed
 }
 
 struct ConversationPreferences {
@@ -108,32 +115,30 @@ struct ConversationParticipant: Equatable, Hashable {
     var lastDisplayed: String = ""
     var isLocal: Bool = false
 
-    private static func stripUriPrefix(_ uri: String) -> String {
-        return uri
-            .replacingOccurrences(of: "ring:", with: "")
-            .replacingOccurrences(of: "jami:", with: "")
+    private static func jamiId(from uri: String) -> String {
+        return JamiURI(from: uri).hash ?? uri
     }
 
     init (info: [String: String], isLocal: Bool) {
         self.isLocal = isLocal
-        if let jamiId = info["uri"], !jamiId.isEmpty {
-            self.jamiId = Self.stripUriPrefix(jamiId)
+        if let uri = info[ConversationMemberAttributes.uri.rawValue], !uri.isEmpty {
+            self.jamiId = Self.jamiId(from: uri)
         }
-        if let role = info["role"],
+        if let role = info[ConversationMemberAttributes.role.rawValue],
            let memberRole = ParticipantRole(rawValue: role) {
             self.role = memberRole
         }
-        if let lastRead = info["lastDisplayed"] {
+        if let lastRead = info[ConversationMemberAttributes.lastDisplayed.rawValue] {
             self.lastDisplayed = lastRead
         }
     }
 
     init (jamiId: String) {
-        self.jamiId = Self.stripUriPrefix(jamiId)
+        self.jamiId = Self.jamiId(from: jamiId)
     }
 
     init (jamiId: String, isLocal: Bool) {
-        self.jamiId = Self.stripUriPrefix(jamiId)
+        self.jamiId = Self.jamiId(from: jamiId)
         self.isLocal = isLocal
     }
 
@@ -152,69 +157,24 @@ struct LoadedMessages {
     var reset = false
 }
 
-class ConversationModel: Equatable {
-    var newMessages = BehaviorRelay<LoadedMessages>(value: LoadedMessages(messages: [MessageModel](), fromHistory: false))
-    private var participants = [ConversationParticipant]()
-    var messages = [MessageModel]()
-    var hash = ""/// contact hash for dialog, conversation title for multiparticipants
-    var accountId: String = ""
-    var id: String = ""
-    var lastMessage: MessageModel?
-    private var type: ConversationType
-    let numberOfUnreadMessages = BehaviorRelay<Int>(value: 0)
-    let disposeBag = DisposeBag()
-    var avatar: String = ""
-    var title: String = ""
-    var description: String = ""
+struct ConversationInfo {
+    var type: ConversationType
+    /// contact hash for dialog, conversation title for multiparticipants
+    var hash = ""
+    var avatar = ""
+    var title = ""
+    var description = ""
     var preferences = ConversationPreferences()
-    var synchronizing = BehaviorRelay<Bool>(value: false)
-    let reactionsUpdated = PublishSubject<MessageModel>()
-    let messagesUpdated = PublishSubject<[MessageModel]>()
+    var participants = [ConversationParticipant]()
+    var isSynchronizing = false
 
     init(type: ConversationType) {
         self.type = type
     }
 
-    convenience init(withParticipantUri participantUri: JamiURI, accountId: String, type: ConversationType, isLocal: Bool = false) {
-        self.init(type: type)
-        self.participants = [ConversationParticipant(jamiId: participantUri.hash ?? "", isLocal: isLocal)]
-        self.hash = participantUri.hash ?? ""
-        self.accountId = accountId
-        self.subscribeUnreadMessages()
-    }
-
-    convenience init (withParticipantUri participantUri: JamiURI, accountId: String, hash: String, type: ConversationType) {
-        self.init(type: type)
-        self.participants = [ConversationParticipant(jamiId: participantUri.hash ?? "")]
-        self.hash = hash
-        self.accountId = accountId
-        self.subscribeUnreadMessages()
-    }
-
-    convenience init (withId conversationId: String, accountId: String, type: ConversationType) {
-        self.init(type: type)
-        self.id = conversationId
-        self.accountId = accountId
-        self.subscribeUnreadMessages()
-    }
-
-    convenience init (request: RequestModel) {
-        self.init(type: request.conversationType)
-        self.id = request.conversationId
-        self.accountId = request.accountId
-        self.participants = request.participants
-        self.avatar = request.avatar?.base64EncodedString() ?? ""
-        self.title = request.name
-        self.subscribeUnreadMessages()
-    }
-
-    convenience init (withId conversationId: String, accountId: String, info: [String: String]) {
-        self.init(type: ConversationModel.parseType(from: info))
-        self.id = conversationId
-        self.accountId = accountId
-        self.updateInfo(info: info)
-        updateProfile(profile: info)
-        self.subscribeUnreadMessages()
+    init(daemonInfo: [String: String]) {
+        self.init(type: ConversationInfo.parseType(from: daemonInfo))
+        self.updateInfo(info: daemonInfo)
     }
 
     static func parseType(from info: [String: String]) -> ConversationType {
@@ -226,17 +186,17 @@ class ConversationModel: Equatable {
         return .invitesOnly
     }
 
-    func addParticipant(jamiId: String) {
+    mutating func addParticipant(jamiId: String) {
         self.participants.append(ConversationParticipant(jamiId: jamiId, isLocal: false))
     }
 
-    func updateInfo(info: [String: String]) {
-        if let syncing = info["syncing"], syncing == "true" {
-            self.synchronizing.accept(true)
+    mutating func updateInfo(info: [String: String]) {
+        if let syncing = info[ConversationAttributes.syncing.rawValue], syncing == "true" {
+            self.isSynchronizing = true
         } else if info[ConversationAttributes.mode.rawValue] == nil {
-            self.synchronizing.accept(true)
+            self.isSynchronizing = true
         } else {
-            self.synchronizing.accept(false)
+            self.isSynchronizing = false
         }
         if let hash = info[ConversationAttributes.title.rawValue], !hash.isEmpty {
             self.hash = hash
@@ -248,7 +208,7 @@ class ConversationModel: Equatable {
         }
     }
 
-    func updateProfile(profile: [String: String]) {
+    mutating func updateProfile(profile: [String: String]) {
         if let avatar = profile[ConversationAttributes.avatar.rawValue] {
             self.avatar = avatar
         }
@@ -260,8 +220,104 @@ class ConversationModel: Equatable {
         }
     }
 
-    func updatePreferences(preferences: [String: String]) {
+    mutating func updatePreferences(preferences: [String: String]) {
         self.preferences.update(info: preferences)
+    }
+
+    mutating func setParticipants(from participantsInfo: [[String: String]], accountURI: String) {
+        let localJamiId = JamiURI(from: accountURI).hash
+        self.participants = participantsInfo.compactMap { participantInfo in
+            guard let uri = participantInfo[ConversationMemberAttributes.uri.rawValue], !uri.isEmpty else { return nil }
+            var participant = ConversationParticipant(info: participantInfo, isLocal: false)
+            participant.isLocal = participant.jamiId == localJamiId
+            return participant
+        }
+    }
+}
+
+class ConversationModel: Equatable {
+    var newMessages = BehaviorRelay<LoadedMessages>(value: LoadedMessages(messages: [MessageModel](), fromHistory: false))
+    var messages = [MessageModel]()
+    var lastMessage: MessageModel?
+    let id: String
+    let accountId: String
+    private let infoRelay: BehaviorRelay<ConversationInfo>
+    let numberOfUnreadMessages = BehaviorRelay<Int>(value: 0)
+    let disposeBag = DisposeBag()
+    let reactionsUpdated = PublishSubject<MessageModel>()
+    let messagesUpdated = PublishSubject<[MessageModel]>()
+
+    var info: ConversationInfo {
+        return infoRelay.value
+    }
+
+    var infoChanges: Observable<ConversationInfo> {
+        return infoRelay.asObservable()
+    }
+
+    var hash: String {
+        return info.hash
+    }
+
+    var avatar: String {
+        return info.avatar
+    }
+
+    var title: String {
+        return info.title
+    }
+
+    var description: String {
+        return info.description
+    }
+
+    var preferences: ConversationPreferences {
+        return info.preferences
+    }
+
+    var isSynchronizing: Bool {
+        return info.isSynchronizing
+    }
+
+    var synchronizing: Observable<Bool> {
+        return infoRelay.map { $0.isSynchronizing }.distinctUntilChanged()
+    }
+
+    private var type: ConversationType {
+        return info.type
+    }
+
+    private var participants: [ConversationParticipant] {
+        return info.participants
+    }
+
+    init(id: String, accountId: String, info: BehaviorRelay<ConversationInfo>) {
+        self.id = id
+        self.accountId = accountId
+        self.infoRelay = info
+        self.subscribeUnreadMessages()
+    }
+
+    convenience init(id: String = "", accountId: String = "", info: ConversationInfo) {
+        self.init(id: id, accountId: accountId, info: BehaviorRelay(value: info))
+    }
+
+    convenience init(type: ConversationType) {
+        self.init(info: ConversationInfo(type: type))
+    }
+
+    convenience init(withParticipantUri participantUri: JamiURI, accountId: String, type: ConversationType, isLocal: Bool = false) {
+        var info = ConversationInfo(type: type)
+        info.participants = [ConversationParticipant(jamiId: participantUri.hash ?? "", isLocal: isLocal)]
+        info.hash = participantUri.hash ?? ""
+        self.init(accountId: accountId, info: info)
+    }
+
+    convenience init (withParticipantUri participantUri: JamiURI, accountId: String, hash: String, type: ConversationType) {
+        var info = ConversationInfo(type: type)
+        info.participants = [ConversationParticipant(jamiId: participantUri.hash ?? "")]
+        info.hash = hash
+        self.init(accountId: accountId, info: info)
     }
 
     static func == (lhs: ConversationModel, rhs: ConversationModel) -> Bool {
@@ -329,16 +385,6 @@ class ConversationModel: Equatable {
         return last
     }
 
-    func addParticipantsFromArray(participantsInfo: [[String: String]], accountURI: String) {
-        self.participants = [ConversationParticipant]()
-        participantsInfo.forEach { participantInfo in
-            guard let uri = participantInfo["uri"], !uri.isEmpty else { return }
-            let isLocal = uri.replacingOccurrences(of: "ring:", with: "") == accountURI.replacingOccurrences(of: "ring:", with: "")
-            let participant = ConversationParticipant(info: participantInfo, isLocal: isLocal)
-            self.participants.append(participant)
-        }
-    }
-
     func setAllMessagesAsRead() {
         var updated = [MessageModel]()
         for index in self.messages.indices where self.messages[index].status != .displayed &&
@@ -349,17 +395,6 @@ class ConversationModel: Equatable {
             messagesUpdated.onNext(updated)
         }
         self.numberOfUnreadMessages.accept(0)
-    }
-
-    func updateLastDisplayedMessage(participantsInfo: [[String: String]]) {
-        for index in self.participants.indices {
-            for info in participantsInfo {
-                guard let jamiId = info["uri"],
-                      let lastDisplayed = info["lastDisplayed"],
-                      jamiId == self.participants[index].jamiId else { continue }
-                self.participants[index].lastDisplayed = lastDisplayed
-            }
-        }
     }
 
     func isCoredialog() -> Bool {

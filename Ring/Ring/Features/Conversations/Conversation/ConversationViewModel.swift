@@ -327,12 +327,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
     }
 
     private func subscribeConversationSynchronization() {
-        let syncObservable = self.conversation.flatMap { conversation -> BehaviorRelay<Bool> in
-            let innerObservable = conversation.synchronizing
-            return innerObservable
-        }
-        syncObservable?
-            .startWith(self.conversation.synchronizing.value)
+        self.conversation?.synchronizing
             .subscribe { [weak self] synchronizing in
                 DispatchQueue.main.async {
                     guard let self = self else { return }

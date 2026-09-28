@@ -163,8 +163,8 @@ class ConversationsService {
     func getSwarmMembers(conversationId: String, accountId: String, accountURI: String) -> [ParticipantData] {
         if let participantsInfo = conversationsAdapter.getConversationMembers(accountId, conversationId: conversationId) {
             return participantsInfo.compactMap({ info in
-                if let jamiId = info["uri"],
-                   let roleText = info["role"] {
+                if let jamiId = info[ConversationMemberAttributes.uri.rawValue],
+                   let roleText = info[ConversationMemberAttributes.role.rawValue] {
                     let role: ParticipantRole = ParticipantRole(rawValue: roleText) ?? .member
                     return ParticipantData(jamiId: jamiId, role: role)
                 }
@@ -518,9 +518,9 @@ class ConversationsService {
             /// new conversation. Need to update conversation list
             self.dbManager
                 .getConversationsObservable(for: accountId)
-                .subscribe { [weak self] conversationModels in
+                .subscribe { [weak self] storedConversations in
                     self?.perform { store in
-                        store.replaceConversations(conversationModels)
+                        store.replaceConversations(with: storedConversations)
                         store.sortIfNeeded()
                     }
                 } onError: { _ in

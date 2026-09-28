@@ -23,9 +23,10 @@ final class ConversationDestructiveActionTests: XCTestCase {
 
     func createConversation(conversationId: String, jamiId: String, type: ConversationType, accountId: String) -> ConversationModel {
         let uri = JamiURI.init(schema: URIType.ring, infoHash: jamiId)
-        let conversation = ConversationModel(withParticipantUri: uri, accountId: accountId, type: type)
-        conversation.id = conversationId
-        return conversation
+        var info = ConversationInfo(type: type)
+        info.participants = [ConversationParticipant(jamiId: uri.hash ?? "")]
+        info.hash = uri.hash ?? ""
+        return ConversationModel(id: conversationId, accountId: accountId, info: info)
     }
 
     func testSmartListDestructiveActions_SwarmOneToOne() {
@@ -43,10 +44,11 @@ final class ConversationDestructiveActionTests: XCTestCase {
 
     func testSmartListDestructiveActions_SwarmGroup() {
         // Arrange
-        let conversation = ConversationModel(withId: conversationId1, accountId: accountId1, type: .invitesOnly)
-        conversation.addParticipant(jamiId: jamiId1)
-        conversation.addParticipant(jamiId: jamiId2)
-        conversation.addParticipant(jamiId: jamiId3)
+        var info = ConversationInfo(type: .invitesOnly)
+        info.addParticipant(jamiId: jamiId1)
+        info.addParticipant(jamiId: jamiId2)
+        info.addParticipant(jamiId: jamiId3)
+        let conversation = ConversationModel(id: conversationId1, accountId: accountId1, info: info)
 
         // Act
         let actions = ConversationDestructiveAction.availableActions(for: conversation)
@@ -72,8 +74,10 @@ final class ConversationDestructiveActionTests: XCTestCase {
     func testSmartListDestructiveActions_Sip() {
         // Arrange
         let uri = JamiURI(schema: .sip, infoHash: sipTestNumber1)
-        let conversation = ConversationModel(withParticipantUri: uri, accountId: accountId1, hash: sipTestNumber1, type: .sip)
-        conversation.id = conversationId1
+        var info = ConversationInfo(type: .sip)
+        info.participants = [ConversationParticipant(jamiId: uri.hash ?? "")]
+        info.hash = sipTestNumber1
+        let conversation = ConversationModel(id: conversationId1, accountId: accountId1, info: info)
 
         // Act
         let actions = ConversationDestructiveAction.availableActions(for: conversation)
