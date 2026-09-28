@@ -167,6 +167,15 @@ enum InteractionType: String {
 
 typealias SavedMessageForConversation = (messageID: String, conversationID: String)
 
+struct StoredConversation {
+    let id: String
+    let accountId: String
+    let participantUri: JamiURI
+    let type: ConversationType
+    let messages: [MessageModel]
+    let lastMessage: MessageModel?
+}
+
 // swiftlint:disable type_body_length
 // swiftlint:disable file_length
 class DBManager {
@@ -257,7 +266,7 @@ class DBManager {
         }
     }
 
-    func getConversationsObservable(for accountId: String) -> Observable<[ConversationModel]> {
+    func getConversationsObservable(for accountId: String) -> Observable<[StoredConversation]> {
         return Observable.create { observable in
             do {
                 guard let dataBase = self.dbConnections.forAccount(account: accountId) else {
@@ -448,11 +457,11 @@ class DBManager {
     }
 
     // MARK: Private functions
-    private func buildConversationsForAccount(accountId: String) throws -> [ConversationModel] {
+    private func buildConversationsForAccount(accountId: String) throws -> [StoredConversation] {
         guard let dataBase = self.dbConnections.forAccount(account: accountId) else {
             throw DBBridgingError.getConversationFailed
         }
-        var conversationsToReturn = [ConversationModel]()
+        var conversationsToReturn = [StoredConversation]()
 
         guard let conversations = try self.conversationHelper.selectAll(dataBase: dataBase),
               !conversations.isEmpty else {
@@ -467,10 +476,6 @@ class DBManager {
             }
             let uriType = participant.contains("ring:") ? URIType.ring : URIType.sip
             let uri = JamiURI.init(schema: uriType, infoHash: participant)
-            let conversationModel = ConversationModel(withParticipantUri: uri,
-                                                      accountId: accountId,
-                                                      type: uriType == .sip ? .sip : .nonSwarm)
-            conversationModel.id = String(conversationID)
             var messages = [MessageModel]()
             guard let interactions = try self.interactionHepler
                     .selectInteractionsForConversation(
@@ -494,9 +499,12 @@ class DBManager {
                     }
                 }
             }
-            conversationModel.messages = messages
-            conversationModel.lastMessage = lastMessage
-            conversationsToReturn.append(conversationModel)
+            conversationsToReturn.append(StoredConversation(id: String(conversationID),
+                                                            accountId: accountId,
+                                                            participantUri: uri,
+                                                            type: uriType == .sip ? .sip : .nonSwarm,
+                                                            messages: messages,
+                                                            lastMessage: lastMessage))
         }
         return conversationsToReturn
     }

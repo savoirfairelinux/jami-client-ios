@@ -25,9 +25,10 @@ final class ConversationModelTests: XCTestCase {
 
     func createConversation(conversationId: String, jamiId: String, type: ConversationType, accountId: String) -> ConversationModel {
         let uri = JamiURI.init(schema: URIType.ring, infoHash: jamiId)
-        let conversation = ConversationModel(withParticipantUri: uri, accountId: accountId, type: type)
-        conversation.id = conversationId
-        return conversation
+        var state = ConversationState(type: type)
+        state.participants = [ConversationParticipant(jamiId: uri.hash ?? "")]
+        state.hash = uri.hash ?? ""
+        return ConversationModel(id: conversationId, accountId: accountId, state: state)
     }
 
     func testConversationsEqual_SwarmTemporary_EqualJamiId_DifferentAccounts() {
