@@ -523,11 +523,11 @@ class DBManager {
             GeneratedMessage.init(from: interaction.body).toMessage(with: Int(interaction.duration))
             : interaction.body
         let date = Date(timeIntervalSince1970: TimeInterval(interaction.timestamp))
-        let message = MessageModel(withId: interaction.daemonID,
-                                   receivedDate: date,
-                                   content: content,
-                                   authorURI: author,
-                                   incoming: interaction.incoming)
+        var message = MessageData(withId: interaction.daemonID,
+                                  receivedDate: date,
+                                  content: content,
+                                  authorURI: author,
+                                  incoming: interaction.incoming)
         let isTransfer = interaction.type == InteractionType.iTransfer.rawValue ||
             interaction.type == InteractionType.oTransfer.rawValue
         message.type = InteractionType(rawValue: interaction.type)?.toMessageType() ?? .text
@@ -539,7 +539,7 @@ class DBManager {
             }
         }
         message.id = String(interaction.id)
-        return message
+        return MessageModel(message)
     }
 
     // swiftlint:disable:next function_parameter_count

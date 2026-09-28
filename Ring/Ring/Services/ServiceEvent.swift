@@ -42,7 +42,6 @@ enum ServiceEventType {
     case callsCompleted
     case dataTransferCreated
     case dataTransferChanged
-    case dataTransferMessageUpdated
     case deviceRevocationEnded
     case newIncomingMessage
     case nameRegistrationEnded

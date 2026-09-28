@@ -33,7 +33,7 @@ class MessageContainerModel: Identifiable, Equatable {
     let contactViewModel: ContactMessageVM
     /// Only for `.collabDocument`; every other message leaves it nil.
     let collabDocViewModel: CollabDocMessageVM?
-    let message: MessageModel
+    private(set) var message: MessageModel
     let disposeBag = DisposeBag()
     let replyTarget: MessageReplyTargetVM
     let reactionsModel: ReactionsContainerModel
@@ -142,14 +142,29 @@ class MessageContainerModel: Identifiable, Equatable {
         self.contactViewModel.swarmColorUpdated(color: color)
     }
 
-    func reactionsUpdated() {
+    func reactionsUpdated(_ message: MessageModel) {
+        self.apply(message)
         self.reactionsModel.reactionsUpdated()
     }
 
-    func messageUpdated() {
+    func messageUpdated(_ message: MessageModel) {
+        self.apply(message)
         self.messageContent.updateMessageEditions()
         self.messageRow.updateMessageStatus()
         self.collabDocViewModel?.messageUpdated()
+        if message.type == .fileTransfer {
+            self.messageContent.setTransferStatus(transferStatus: message.transferStatus)
+        }
+    }
+
+    private func apply(_ message: MessageModel) {
+        self.message = message
+        self.stackViewModel.message = message
+        self.messageContent.message = message
+        self.messageRow.message = message
+        self.contactViewModel.message = message
+        self.collabDocViewModel?.message = message
+        self.reactionsModel.message = message
     }
 
     func displayLastSent(state: Bool) {

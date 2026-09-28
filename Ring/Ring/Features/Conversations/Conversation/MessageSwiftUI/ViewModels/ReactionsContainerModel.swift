@@ -53,7 +53,7 @@ class ReactionsRowViewModel: Identifiable, ObservableObject, NameObserver {
 class ReactionsContainerModel: ObservableObject {
     @Published var reactionsRow = [ReactionsRowViewModel]()
     @Published var displayValue: String = ""
-    let message: MessageModel
+    var message: MessageModel
     private var infoState: PublishSubject<State>?
     var reactionsRowCreated = false
 

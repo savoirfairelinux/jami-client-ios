@@ -149,6 +149,7 @@ class ConversationParticipant: Equatable, Hashable {
 struct LoadedMessages {
     var messages: [MessageModel]
     var fromHistory: Bool
+    var reset = false
 }
 
 class ConversationModel: Equatable {
@@ -167,8 +168,8 @@ class ConversationModel: Equatable {
     var description: String = ""
     var preferences = ConversationPreferences()
     var synchronizing = BehaviorRelay<Bool>(value: false)
-    let reactionsUpdated = PublishSubject<String>()
-    let messageUpdated = PublishSubject<String>()
+    let reactionsUpdated = PublishSubject<MessageModel>()
+    let messagesUpdated = PublishSubject<[MessageModel]>()
 
     init(type: ConversationType) {
         self.type = type
@@ -340,24 +341,14 @@ class ConversationModel: Equatable {
         }
     }
 
-    func setMessageAsRead(messageId: String, daemonId: String) {
-        if let message = self.messages.filter({ messageModel in
-            messageModel.id == messageId && messageModel.daemonId == daemonId
-        }).first {
-            message.status = .displayed
-        }
-        if !self.isSwarm() {
-            let number = self.messages.filter({ $0.status != .displayed && $0.type == .text && $0.incoming }).count
-            self.numberOfUnreadMessages.accept(number)
-        }
-    }
-
     func setAllMessagesAsRead() {
-        let unreadMessages = self.messages.filter({ messages in
-            return messages.status != .displayed && messages.incoming && messages.type == .text
-        })
-        unreadMessages.forEach { message in
-            message.status = .displayed
+        var updated = [MessageModel]()
+        for index in self.messages.indices where self.messages[index].status != .displayed &&
+            self.messages[index].incoming && self.messages[index].type == .text {
+            updated.append(self.updateMessage(at: index, { $0.status = .displayed }))
+        }
+        if !updated.isEmpty {
+            messagesUpdated.onNext(updated)
         }
         self.numberOfUnreadMessages.accept(0)
     }
@@ -452,33 +443,59 @@ class ConversationModel: Equatable {
 
     func clearMessages() {
         messages = [MessageModel]()
-        newMessages.accept(LoadedMessages(messages: [MessageModel](), fromHistory: false))
+        newMessages.accept(LoadedMessages(messages: [MessageModel](), fromHistory: false, reset: true))
         lastMessage = nil
         numberOfUnreadMessages.accept(0)
     }
 
     func reactionAdded(messageId: String, reaction: [String: String]) {
-        guard let message = self.getMessage(messageId: messageId) else { return }
-        message.reactionAdded(reaction: reaction)
-        reactionsUpdated.onNext(messageId)
+        guard let message = self.updateMessage(messageId: messageId, {
+            $0.reactionAdded(reaction: reaction)
+        }) else { return }
+        reactionsUpdated.onNext(message)
     }
 
     func reactionRemoved(messageId: String, reactionId: String) {
-        guard let message = self.getMessage(messageId: messageId) else { return }
-        message.reactionRemoved(reactionId: reactionId)
-        reactionsUpdated.onNext(messageId)
+        guard let message = self.updateMessage(messageId: messageId, {
+            $0.reactionRemoved(reactionId: reactionId)
+        }) else { return }
+        reactionsUpdated.onNext(message)
     }
 
     func messageUpdated(swarmMessage: SwarmMessageWrap, localJamiId: String) {
-        guard let message = self.getMessage(messageId: swarmMessage.id) else { return }
-        message.messageUpdated(message: swarmMessage, localJamiId: localJamiId)
-        messageUpdated.onNext(swarmMessage.id)
+        guard let message = self.updateMessage(messageId: swarmMessage.id, {
+            $0.messageUpdated(message: swarmMessage, localJamiId: localJamiId)
+        }) else { return }
+        messagesUpdated.onNext([message])
     }
 
     func messageStatusUpdated(status: MessageStatus, messageId: String, jamiId: String) {
-        guard let message = self.getMessage(messageId: messageId) else { return }
-        message.messageStatusUpdated(status: status, messageId: messageId, jamiId: jamiId)
-        messageUpdated.onNext(messageId)
+        guard let message = self.updateMessage(messageId: messageId, {
+            $0.messageStatusUpdated(status: status, jamiId: jamiId)
+        }) else { return }
+        messagesUpdated.onNext([message])
+    }
+
+    func transferStatusUpdated(status: DataTransferStatus, messageId: String, transferId: String) {
+        guard let index = self.messages.firstIndex(where: { message in
+            (!messageId.isEmpty && message.id == messageId) ||
+                (message.type == .fileTransfer && message.daemonId == transferId)
+        }) else { return }
+        messagesUpdated.onNext([self.updateMessage(at: index, { $0.transferStatus = status })])
+    }
+
+    private func updateMessage(messageId: String, _ change: (inout MessageData) -> Void) -> MessageModel? {
+        guard let index = self.messages.firstIndex(where: { $0.id == messageId }) else { return nil }
+        return self.updateMessage(at: index, change)
+    }
+
+    private func updateMessage(at index: Int, _ change: (inout MessageData) -> Void) -> MessageModel {
+        let message = self.messages[index].updating(change)
+        self.messages[index] = message
+        if self.lastMessage?.id == message.id {
+            self.lastMessage = message
+        }
+        return message
     }
 
     func updateUnreadMessages(count: Int) {

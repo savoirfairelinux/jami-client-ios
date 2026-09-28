@@ -380,17 +380,7 @@ final class ConversationStore {
             conversationUnwraped = self.getConversationForParticipant(jamiId: jamiId, accountId: accountId)
         }
         guard let conversation = conversationUnwraped else { return }
-        let messages = conversation.messages
-        if let message = messages.first(where: { messageModel in
-            messageModel.id == interactionId
-        }) {
-            message.transferStatus = transferStatus
-        }
-        let serviceEventType: ServiceEventType = .dataTransferMessageUpdated
-        var serviceEvent = ServiceEvent(withEventType: serviceEventType)
-        serviceEvent.addEventInput(.transferId, value: transferId)
-        serviceEvent.addEventInput(.state, value: transferStatus)
-        self.responseStream.onNext(serviceEvent)
+        conversation.transferStatusUpdated(status: transferStatus, messageId: interactionId, transferId: transferId)
         /// for non swarm conversationId is empty. Update status in db
         if !conversation.isSwarm() {
             self.dbManager
