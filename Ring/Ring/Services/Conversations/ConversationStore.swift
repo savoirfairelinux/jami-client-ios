@@ -29,10 +29,123 @@ struct TypingStatus {
 private final class ConversationRecord {
     let conversation: ConversationModel
     let state: BehaviorRelay<ConversationState>
+    var messages = [MessageModel]()
+    var lastMessage: MessageModel?
 
     init(conversation: ConversationModel, state: BehaviorRelay<ConversationState>) {
         self.conversation = conversation
         self.state = state
+    }
+
+    func appendNonSwarm(messages newMessages: [MessageModel]) {
+        self.messages.append(contentsOf: newMessages)
+        let newestFirst = Array(newMessages.reversed())
+        self.conversation.newMessages.accept(LoadedMessages(messages: newestFirst, fromHistory: false))
+        self.updateNonSwarmUnreadCount()
+    }
+
+    func reconcile(with stored: StoredConversation) {
+        let knownIds = Set(self.messages.map { $0.id })
+        let missing = stored.messages
+            .filter { !knownIds.contains($0.id) }
+            .sorted { $0.receivedDate < $1.receivedDate }
+        if let oldestMissing = missing.first {
+            let newestKnown = self.messages.map { $0.receivedDate }.max()
+            if newestKnown.map({ $0 <= oldestMissing.receivedDate }) ?? true {
+                self.appendNonSwarm(messages: missing)
+            } else {
+                self.messages = (self.messages + missing).sorted { $0.receivedDate < $1.receivedDate }
+                self.conversation.newMessages.accept(LoadedMessages(messages: [MessageModel](), fromHistory: false,
+                                                                    reset: true))
+                self.conversation.newMessages.accept(LoadedMessages(messages: Array(self.messages.reversed()),
+                                                                    fromHistory: true))
+                self.updateNonSwarmUnreadCount()
+            }
+        }
+        if let storedLast = stored.lastMessage,
+           self.lastMessage.map({ $0.receivedDate < storedLast.receivedDate }) ?? true {
+            self.lastMessage = storedLast
+        }
+    }
+
+    private func updateNonSwarmUnreadCount() {
+        guard !self.conversation.isSwarm() else { return }
+        let unread = self.messages.filter({ $0.status != .displayed && $0.type == .text && $0.incoming }).count
+        self.conversation.numberOfUnreadMessages.accept(unread)
+    }
+
+    func clearMessages() {
+        self.messages = [MessageModel]()
+        self.conversation.newMessages.accept(LoadedMessages(messages: [MessageModel](), fromHistory: false,
+                                                            reset: true))
+        self.lastMessage = nil
+        self.conversation.numberOfUnreadMessages.accept(0)
+    }
+
+    func setAllMessagesAsRead() {
+        var updated = [MessageModel]()
+        for index in self.messages.indices where self.messages[index].status != .displayed &&
+            self.messages[index].incoming && self.messages[index].type == .text {
+            updated.append(self.updateMessage(at: index, { $0.status = .displayed }))
+        }
+        if !updated.isEmpty {
+            self.conversation.messagesUpdated.onNext(updated)
+        }
+        self.conversation.numberOfUnreadMessages.accept(0)
+    }
+
+    func reactionAdded(messageId: String, reaction: [String: String]) {
+        guard let message = self.updateMessage(messageId: messageId, {
+            $0.reactionAdded(reaction: reaction)
+        }) else { return }
+        self.conversation.reactionsUpdated.onNext(message)
+    }
+
+    func reactionRemoved(messageId: String, reactionId: String) {
+        guard let message = self.updateMessage(messageId: messageId, {
+            $0.reactionRemoved(reactionId: reactionId)
+        }) else { return }
+        self.conversation.reactionsUpdated.onNext(message)
+    }
+
+    func messageUpdated(swarmMessage: SwarmMessageWrap, localJamiId: String) {
+        guard let message = self.updateMessage(messageId: swarmMessage.id, {
+            $0.messageUpdated(message: swarmMessage, localJamiId: localJamiId)
+        }) else { return }
+        self.conversation.messagesUpdated.onNext([message])
+    }
+
+    func messageStatusUpdated(status: MessageStatus, messageId: String, jamiId: String) {
+        guard let message = self.updateMessage(messageId: messageId, {
+            $0.messageStatusUpdated(status: status, jamiId: jamiId)
+        }) else { return }
+        self.conversation.messagesUpdated.onNext([message])
+    }
+
+    func transferStatusUpdated(status: DataTransferStatus, messageId: String, transferId: String) {
+        guard let index = self.messages.firstIndex(where: { message in
+            (!messageId.isEmpty && message.id == messageId) ||
+                (message.type == .fileTransfer && message.daemonId == transferId)
+        }) else { return }
+        self.conversation.messagesUpdated.onNext([self.updateMessage(at: index, { $0.transferStatus = status })])
+    }
+
+    func updateUnreadMessages(count: Int) {
+        self.conversation.numberOfUnreadMessages.accept(self.conversation.numberOfUnreadMessages.value + count)
+    }
+
+    private func updateMessage(messageId: String, _ change: (inout MessageData) -> Void) -> MessageModel? {
+        guard let index = self.messages.firstIndex(where: { $0.id == messageId }) else { return nil }
+        return self.updateMessage(at: index, change)
+    }
+
+    private func updateMessage(at index: Int, _ change: (inout MessageData) -> Void) -> MessageModel {
+        let message = self.messages[index].updating(change)
+        self.messages[index] = message
+        if self.lastMessage?.id == message.id {
+            self.lastMessage = message
+        }
+        return message
     }
 }
 
@@ -97,7 +210,6 @@ final class ConversationStore {
         var currentConversations = [ConversationModel]()
         self.loadGeneration += 1
         let generation = self.loadGeneration
-        self.records.removeAll()
         self.conversations.accept(currentConversations)
         var conversationToLoad = [String]() // list of swarm conversation we need to load first message
         // get swarms conversations
@@ -180,8 +292,8 @@ final class ConversationStore {
     func replaceConversations(with storedConversations: [StoredConversation]) {
         dispatchPrecondition(condition: .onQueue(queue))
         self.loadGeneration += 1
-        self.records.removeAll()
         self.conversations.accept(storedConversations.map { self.makeConversation(from: $0) })
+        self.removeUnpublishedRecords()
     }
 
     func removeConversation(_ conversation: ConversationModel) {
@@ -216,11 +328,8 @@ final class ConversationStore {
      */
     func insertMessages(messages: [MessageModel], accountId: String, localJamiId: String, conversationId: String, fromLoaded: Bool) -> Bool {
         dispatchPrecondition(condition: .onQueue(queue))
-        guard let conversation = self.conversations.value
-                .filter({ conversation in
-                    return conversation.id == conversationId && conversation.accountId == accountId
-                })
-                .first else { return false }
+        guard let conversation = self.getConversationForId(conversationId: conversationId, accountId: accountId),
+              let record = self.record(for: conversation) else { return false }
 
         if self.isTargetReply(messages: messages) {
             self.processReplyTargetMessage(with: messages.first)
@@ -228,7 +337,7 @@ final class ConversationStore {
         }
 
         // If all the loaded messages are of type .merge or .profile or have already been added, we need to load the next set of messages.
-        let filtered = messages.filter { newMessage in newMessage.type != .merge && newMessage.type != .profile && !conversation.messages.contains(where: { message in
+        let filtered = messages.filter { newMessage in newMessage.type != .merge && newMessage.type != .profile && !record.messages.contains(where: { message in
             message.id == newMessage.id
         })
         }
@@ -243,24 +352,24 @@ final class ConversationStore {
         var newMessages = [MessageModel]()
         filtered.forEach { newMessage in
             newMessages.append(newMessage)
-            guard let lastMessage = conversation.lastMessage,
+            guard let lastMessage = record.lastMessage,
                   lastMessage.receivedDate > newMessage.receivedDate else {
-                conversation.lastMessage = newMessage
+                record.lastMessage = newMessage
                 return
             }
         }
 
         if fromLoaded {
-            conversation.messages.append(contentsOf: newMessages)
+            record.messages.append(contentsOf: newMessages)
         } else {
-            conversation.messages.insert(contentsOf: newMessages, at: 0)
+            record.messages.insert(contentsOf: newMessages, at: 0)
         }
 
         self.scheduleSort()
 
         if !fromLoaded {
             let incomingMessages = newMessages.filter({ $0.authorId != localJamiId && !$0.authorId.isEmpty })
-            conversation.updateUnreadMessages(count: incomingMessages.count)
+            record.updateUnreadMessages(count: incomingMessages.count)
         }
 
         conversation.newMessages.accept(LoadedMessages(messages: newMessages, fromHistory: fromLoaded))
@@ -324,13 +433,13 @@ final class ConversationStore {
     func reactionAdded(conversationId: String, accountId: String, messageId: String, reaction: [String: String]) {
         dispatchPrecondition(condition: .onQueue(queue))
         guard let conversation = self.getConversationForId(conversationId: conversationId, accountId: accountId) else { return }
-        conversation.reactionAdded(messageId: messageId, reaction: reaction)
+        self.record(for: conversation)?.reactionAdded(messageId: messageId, reaction: reaction)
     }
 
     func reactionRemoved(conversationId: String, accountId: String, messageId: String, reactionId: String) {
         dispatchPrecondition(condition: .onQueue(queue))
         guard let conversation = self.getConversationForId(conversationId: conversationId, accountId: accountId) else { return }
-        conversation.reactionRemoved(messageId: messageId, reactionId: reactionId)
+        self.record(for: conversation)?.reactionRemoved(messageId: messageId, reactionId: reactionId)
     }
 
     func composingStatusChanged(accountId: String, conversationId: String, from: String, status: Int) {
@@ -347,7 +456,7 @@ final class ConversationStore {
     func messageUpdated(conversationId: String, accountId: String, message: SwarmMessageWrap, localJamiId: String) {
         dispatchPrecondition(condition: .onQueue(queue))
         guard let conversation = self.getConversationForId(conversationId: conversationId, accountId: accountId) else { return }
-        conversation.messageUpdated(swarmMessage: message, localJamiId: localJamiId)
+        self.record(for: conversation)?.messageUpdated(swarmMessage: message, localJamiId: localJamiId)
     }
 
     func messageStatusChanged(_ status: MessageStatus, for messageId: String, from accountId: String,
@@ -361,7 +470,7 @@ final class ConversationStore {
             return conversation.getParticipants().first?.jamiId == jamiId &&
                 conversation.accountId == accountId
         }).first else { return }
-        conversation.messageStatusUpdated(status: status, messageId: messageId, jamiId: jamiId)
+        self.record(for: conversation)?.messageStatusUpdated(status: status, messageId: messageId, jamiId: jamiId)
     }
 
     func conversationProfileUpdated(conversationId: String, accountId: String, profile: [String: String]) {
@@ -390,6 +499,37 @@ final class ConversationStore {
         self.responseStream.onNext(serviceEvent)
     }
 
+    // MARK: messages
+
+    func messages(of conversation: ConversationModel) -> [MessageModel] {
+        dispatchPrecondition(condition: .onQueue(queue))
+        return self.record(for: conversation)?.messages ?? []
+    }
+
+    func appendNonSwarm(message: MessageModel, to conversation: ConversationModel) {
+        dispatchPrecondition(condition: .onQueue(queue))
+        self.record(for: conversation)?.appendNonSwarm(messages: [message])
+    }
+
+    func updateLastMessageIfNewer(_ message: MessageModel, in conversation: ConversationModel) {
+        dispatchPrecondition(condition: .onQueue(queue))
+        guard let record = self.record(for: conversation) else { return }
+        if let lastMessage = record.lastMessage, lastMessage.receivedDate >= message.receivedDate {
+            return
+        }
+        record.lastMessage = message
+    }
+
+    func clearMessages(of conversation: ConversationModel) {
+        dispatchPrecondition(condition: .onQueue(queue))
+        self.record(for: conversation)?.clearMessages()
+    }
+
+    func setAllMessagesAsRead(in conversation: ConversationModel) {
+        dispatchPrecondition(condition: .onQueue(queue))
+        self.record(for: conversation)?.setAllMessagesAsRead()
+    }
+
     // MARK: file transfer
 
     func transferStatusChanged(_ transferStatus: DataTransferStatus,
@@ -406,7 +546,8 @@ final class ConversationStore {
             conversationUnwraped = self.getConversationForParticipant(jamiId: jamiId, accountId: accountId)
         }
         guard let conversation = conversationUnwraped else { return }
-        conversation.transferStatusUpdated(status: transferStatus, messageId: interactionId, transferId: transferId)
+        self.record(for: conversation)?.transferStatusUpdated(status: transferStatus, messageId: interactionId,
+                                                              transferId: transferId)
         /// for non swarm conversationId is empty. Update status in db
         if !conversation.isSwarm() {
             self.dbManager
@@ -427,7 +568,7 @@ final class ConversationStore {
     func sortIfNeeded() {
         dispatchPrecondition(condition: .onQueue(queue))
         let receivedDates = self.conversations.value.map({ conv in
-            return conv.lastMessage?.receivedDate ?? Date()
+            return self.record(for: conv)?.lastMessage?.receivedDate ?? Date()
         })
         if !receivedDates.isDescending() {
             var currentConversations = self.conversations.value
@@ -447,9 +588,11 @@ final class ConversationStore {
     private func sortAndUpdate(conversations: inout [ConversationModel]) {
         /// sort conversaton by last message date
         let sorted = conversations.sorted(by: { conversation1, conversations2 in
-            guard let lastMessage1 = conversation1.lastMessage,
-                  let lastMessage2 = conversations2.lastMessage else {
-                return conversation1.messages.count > conversations2.messages.count
+            let record1 = self.record(for: conversation1)
+            let record2 = self.record(for: conversations2)
+            guard let lastMessage1 = record1?.lastMessage,
+                  let lastMessage2 = record2?.lastMessage else {
+                return (record1?.messages.count ?? 0) > (record2?.messages.count ?? 0)
             }
             return lastMessage1.receivedDate > lastMessage2.receivedDate
         })
@@ -476,6 +619,10 @@ final class ConversationStore {
     }
 
     private func makeConversation(id: String, accountId: String, state: ConversationState) -> ConversationModel {
+        if let record = self.existingRecord(id: id, accountId: accountId) {
+            record.state.accept(state)
+            return record.conversation
+        }
         let relay = BehaviorRelay(value: state)
         let conversation = ConversationModel(id: id, accountId: accountId, state: relay)
         self.records[ObjectIdentifier(conversation)] = ConversationRecord(conversation: conversation, state: relay)
@@ -483,13 +630,26 @@ final class ConversationStore {
     }
 
     private func makeConversation(from stored: StoredConversation) -> ConversationModel {
+        if let record = self.existingRecord(id: stored.id, accountId: stored.accountId) {
+            record.reconcile(with: stored)
+            return record.conversation
+        }
         var state = ConversationState(type: stored.type)
         state.participants = [ConversationParticipant(jamiId: stored.participantUri.hash ?? "", isLocal: false)]
         state.hash = stored.participantUri.hash ?? ""
         let conversation = self.makeConversation(id: stored.id, accountId: stored.accountId, state: state)
-        conversation.messages = stored.messages
-        conversation.lastMessage = stored.lastMessage
+        let record = self.record(for: conversation)
+        record?.messages = stored.messages
+        record?.lastMessage = stored.lastMessage
         return conversation
+    }
+
+    private func existingRecord(id: String, accountId: String) -> ConversationRecord? {
+        return self.records.values.first { $0.conversation.id == id && $0.conversation.accountId == accountId }
+    }
+
+    private func record(for conversation: ConversationModel) -> ConversationRecord? {
+        return self.records[ObjectIdentifier(conversation)]
     }
 
     private func removeUnpublishedRecords() {

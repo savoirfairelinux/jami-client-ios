@@ -895,10 +895,18 @@ extension ConversationViewModel {
             return
         }
         if let url = fileURL, let conversationModel = conversationModel {
-            if conversationModel.messages.contains(where: { $0.content == message.content }) {
-                self.sendFile(filePath: url.path, displayName: fileName, conversationModel: conversationModel)
-            } else if let data = FileManager.default.contents(atPath: url.path) {
-                self.sendAndSaveFile(displayName: fileName, imageData: data, conversationModel: conversationModel)
+            let content = message.content
+            self.conversationsService.readMessages(of: conversationModel) { [weak self] messages in
+                let alreadyShared = messages.contains(where: { $0.content == content })
+                DispatchQueue.main.async {
+                    guard let self = self else { return }
+                    if alreadyShared {
+                        self.sendFile(filePath: url.path, displayName: fileName, conversationModel: conversationModel)
+                    } else if let data = FileManager.default.contents(atPath: url.path) {
+                        self.sendAndSaveFile(displayName: fileName, imageData: data,
+                                             conversationModel: conversationModel)
+                    }
+                }
             }
             return
         }
