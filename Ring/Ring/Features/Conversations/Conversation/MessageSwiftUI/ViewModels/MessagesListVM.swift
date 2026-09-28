@@ -215,9 +215,9 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     }
     var conversation: ConversationModel! {
         didSet {
-            conversationService.performSerially { [weak self] in
-                guard let self = self else { return }
-                self.invalidateAndSetupConversationSubscriptions()
+            let conversation: ConversationModel = self.conversation
+            conversationService.readMessages(of: conversation) { [weak self] snapshot in
+                self?.invalidateAndSetupConversationSubscriptions(conversation: conversation, snapshot: snapshot)
             }
             self.updateColorPreference()
             self.updateLastDisplayed()
@@ -250,11 +250,11 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
         return factory
     }
 
-    func invalidateAndSetupConversationSubscriptions() {
+    func invalidateAndSetupConversationSubscriptions(conversation: ConversationModel, snapshot: [MessageModel]) {
         self.conversationDisposeBag = DisposeBag()
-        self.subscribeForNewMessages()
-        self.subscribeMessageUpdates()
-        self.subscribeReactions()
+        self.subscribeForNewMessages(conversation: conversation, snapshot: snapshot)
+        self.subscribeMessageUpdates(conversation: conversation)
+        self.subscribeReactions(conversation: conversation)
     }
 
     @Published var typingIndicatorText = ""
@@ -358,11 +358,11 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
             .disposed(by: self.disposeBag)
     }
 
-    func receiveReply(newMessage: MessageContainerModel, fromHistory: Bool) {
+    func receiveReply(newMessage: MessageContainerModel, fromHistory: Bool, batch: [MessageModel]) {
         let replyId = newMessage.message.reply
         if let replyContentTarget = self.getReplyContentTarget(for: replyId) {
             newMessage.replyTarget.target = replyContentTarget
-        } else if let message = self.conversation.getMessage(messageId: replyId) {
+        } else if let message = batch.first(where: { $0.id == replyId }) {
             newMessage.setReplyTarget(message: message)
         } else {
             self.loadReplyTarget(newMessage: newMessage)
@@ -464,8 +464,8 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
             .disposed(by: self.disposeBag)
     }
 
-    func subscribeReactions() {
-        self.conversation.reactionsUpdated
+    func subscribeReactions(conversation: ConversationModel) {
+        conversation.reactionsUpdated
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] message in
                 guard let self = self else { return }
@@ -498,8 +498,8 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
             .disposed(by: self.disposeBag)
     }
 
-    func subscribeMessageUpdates() {
-        self.conversation.messagesUpdated
+    func subscribeMessageUpdates(conversation: ConversationModel) {
+        conversation.messagesUpdated
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] messages in
                 guard let self = self else { return }
@@ -508,8 +508,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
             .disposed(by: self.conversationDisposeBag)
     }
 
-    func subscribeForNewMessages() {
-        let snapshot = conversation.messages
+    func subscribeForNewMessages(conversation: ConversationModel, snapshot: [MessageModel]) {
         conversation.newMessages.share()
             .startWith(LoadedMessages(messages: snapshot, fromHistory: true, reset: snapshot.isEmpty))
             .observe(on: MainScheduler.instance)
@@ -617,7 +616,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
             self.updateLastDelivered(message: container)
 
             if newMessage.isReply() {
-                self.receiveReply(newMessage: container, fromHistory: fromHistory)
+                self.receiveReply(newMessage: container, fromHistory: fromHistory, batch: messages)
             }
 
             return container

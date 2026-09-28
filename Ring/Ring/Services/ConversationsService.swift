@@ -110,8 +110,10 @@ class ConversationsService {
                                        responseStream: responseStream)
     }
 
-    func performSerially(_ work: @escaping () -> Void) {
-        serialOperationQueue.async(execute: work)
+    func readMessages(of conversation: ConversationModel, _ body: @escaping ([MessageModel]) -> Void) {
+        perform { store in
+            body(store.messages(of: conversation))
+        }
     }
 
     private func perform(_ work: @escaping (ConversationStore) -> Void) {
@@ -175,9 +177,11 @@ class ConversationsService {
     }
 
     func updateConversationMessages(conversationId: String) {
-        for conversation in self.currentConversations where conversation.id == conversationId {
-            conversation.clearMessages()
-            self.conversationsAdapter.loadConversationMessages(conversation.accountId, conversationId: conversationId, from: "", size: 40)
+        perform { store in
+            for conversation in store.currentConversations where conversation.id == conversationId {
+                store.clearMessages(of: conversation)
+                self.conversationsAdapter.loadConversationMessages(conversation.accountId, conversationId: conversationId, from: "", size: 40)
+            }
         }
     }
 
@@ -327,15 +331,8 @@ class ConversationsService {
                                 $0.content = content
                                 $0.id = savedMessage.messageID
                             }
-                            conversation.appendNonSwarm(message: storedMessage)
-                            if let lastMessage = conversation.lastMessage {
-                                if lastMessage.receivedDate < storedMessage.receivedDate {
-                                    conversation.lastMessage = storedMessage
-                                }
-
-                            } else {
-                                conversation.lastMessage = storedMessage
-                            }
+                            store.appendNonSwarm(message: storedMessage, to: conversation)
+                            store.updateLastMessageIfNewer(storedMessage, in: conversation)
                             store.sortIfNeeded()
                         }
                         completable(.completed)
@@ -413,19 +410,20 @@ class ConversationsService {
                          date: Date,
                          interactionType: InteractionType,
                          shouldUpdateConversation: Bool) {
-        /// do not add multiple contact interactions
-        if let hash = JamiURI(from: contactUri).hash,
-           interactionType == .contact,
-           let conversation = self.getConversationForParticipant(jamiId: hash, accountId: accountId),
-           conversation.messages.map({ ($0.content) }).contains(messageContent) {
-            return
-
+        perform { store in
+            /// do not add multiple contact interactions
+            if let hash = JamiURI(from: contactUri).hash,
+               interactionType == .contact,
+               let conversation = store.getConversationForParticipant(jamiId: hash, accountId: accountId),
+               store.messages(of: conversation).map({ ($0.content) }).contains(messageContent) {
+                return
+            }
+            self.generateMessage(messageContent: messageContent,
+                                 duration: 0, contactUri: contactUri,
+                                 accountId: accountId,
+                                 date: date, interactionType: interactionType,
+                                 shouldUpdateConversation: shouldUpdateConversation)
         }
-        self.generateMessage(messageContent: messageContent,
-                             duration: 0, contactUri: contactUri,
-                             accountId: accountId,
-                             date: date, interactionType: interactionType,
-                             shouldUpdateConversation: shouldUpdateConversation)
     }
 
     // swiftlint:disable:next function_parameter_count
@@ -600,7 +598,7 @@ class ConversationsService {
                                 $0.id = dbMessage.messageID
                                 $0.daemonId = transferId
                             }
-                            conversation.appendNonSwarm(message: storedMessage)
+                            store.appendNonSwarm(message: storedMessage, to: conversation)
                             store.sortIfNeeded()
                         }
                         completable(.completed)
@@ -630,15 +628,16 @@ class ConversationsService {
             guard let self = self,
                   let conversationURI = conversation.getConversationURI() else { return Disposables.create { } }
 
-            self.perform { _ in
+            self.perform { store in
                 var lastUnreadMessageId: String?
+                let messages = store.messages(of: conversation)
 
                 if conversation.isSwarm() {
-                    let lastMessage = conversation.messages.first
+                    let lastMessage = messages.first
                     lastUnreadMessageId = lastMessage?.id
                 } else {
                     // Filter out read, outgoing, and transfer messages
-                    let unreadMessages = conversation.messages.filter({ messages in
+                    let unreadMessages = messages.filter({ messages in
                         return messages.status != .displayed && messages.incoming && messages.type == .text
                     })
                     let messagesIds = unreadMessages.map({ $0.id }).filter({ !$0.isEmpty })
@@ -653,7 +652,7 @@ class ConversationsService {
                 }
 
                 // update messages  status localy
-                conversation.setAllMessagesAsRead()
+                store.setAllMessagesAsRead(in: conversation)
 
                 if let lastUnreadMessageId = lastUnreadMessageId {
                     self.conversationsAdapter

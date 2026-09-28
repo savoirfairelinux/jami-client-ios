@@ -104,12 +104,10 @@ class GeneratedInteractionsManager {
             return
         }
         // remove conversation if it contain only contact messages
-        let messages = conversation.messages.filter({ !$0.type.isContact })
-
-        if !messages.isEmpty {
-            return
+        self.conversationService.readMessages(of: conversation) { [weak self] messages in
+            guard messages.allSatisfy({ $0.type.isContact }) else { return }
+            self?.conversationService.removeConversationFromDB(conversation: conversation, keepConversation: false)
         }
-        self.conversationService.removeConversationFromDB(conversation: conversation, keepConversation: false)
     }
 
     private func subscribeToCallEvents() {
