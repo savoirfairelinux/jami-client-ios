@@ -102,7 +102,7 @@ struct ConversationPreferences {
     }
 }
 
-class ConversationParticipant: Equatable, Hashable {
+struct ConversationParticipant: Equatable, Hashable {
     var jamiId: String = ""
     var role: ParticipantRole = .member
     var lastDisplayed: String = ""
@@ -227,9 +227,7 @@ class ConversationModel: Equatable {
     }
 
     func addParticipant(jamiId: String) {
-        let participant = ConversationParticipant(jamiId: jamiId)
-        participant.isLocal = false
-        self.participants.append(participant)
+        self.participants.append(ConversationParticipant(jamiId: jamiId, isLocal: false))
     }
 
     func updateInfo(info: [String: String]) {
@@ -354,12 +352,12 @@ class ConversationModel: Equatable {
     }
 
     func updateLastDisplayedMessage(participantsInfo: [[String: String]]) {
-        self.participants.forEach { participant in
-            participantsInfo.forEach { info in
+        for index in self.participants.indices {
+            for info in participantsInfo {
                 guard let jamiId = info["uri"],
                       let lastDisplayed = info["lastDisplayed"],
-                      jamiId == participant.jamiId else { return }
-                participant.lastDisplayed = lastDisplayed
+                      jamiId == self.participants[index].jamiId else { continue }
+                self.participants[index].lastDisplayed = lastDisplayed
             }
         }
     }
