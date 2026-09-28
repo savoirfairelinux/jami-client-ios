@@ -110,6 +110,10 @@ class ConversationsService {
                                        responseStream: responseStream)
     }
 
+    func performSerially(_ work: @escaping () -> Void) {
+        serialOperationQueue.async(execute: work)
+    }
+
     private func perform(_ work: @escaping (ConversationStore) -> Void) {
         let store = self.store
         serialOperationQueue.async {
@@ -319,16 +323,18 @@ class ConversationsService {
                             let content = (message.type.isContact || message.type == .call) ?
                                 GeneratedMessage.init(from: message.content).toMessage(with: Int(duration))
                                 : message.content
-                            message.content = content
-                            message.id = savedMessage.messageID
-                            conversation.appendNonSwarm(message: message)
+                            let storedMessage = message.updating {
+                                $0.content = content
+                                $0.id = savedMessage.messageID
+                            }
+                            conversation.appendNonSwarm(message: storedMessage)
                             if let lastMessage = conversation.lastMessage {
-                                if lastMessage.receivedDate < message.receivedDate {
-                                    conversation.lastMessage = message
+                                if lastMessage.receivedDate < storedMessage.receivedDate {
+                                    conversation.lastMessage = storedMessage
                                 }
 
                             } else {
-                                conversation.lastMessage = message
+                                conversation.lastMessage = storedMessage
                             }
                             store.sortIfNeeded()
                         }
@@ -382,9 +388,10 @@ class ConversationsService {
                        byAuthor author: String,
                        type: MessageType,
                        incoming: Bool) -> MessageModel {
-        let message = MessageModel(withId: messageId, receivedDate: Date(), content: content, authorURI: author, incoming: incoming)
+        var message = MessageData(withId: messageId, receivedDate: Date(), content: content,
+                                  authorURI: author, incoming: incoming)
         message.type = type
-        return message
+        return MessageModel(message)
     }
 
     func saveMessage(message: MessageModel,
@@ -429,9 +436,10 @@ class ConversationsService {
                          date: Date,
                          interactionType: InteractionType,
                          shouldUpdateConversation: Bool) {
-        let message = MessageModel(withId: "", receivedDate: date, content: messageContent, authorURI: "", incoming: false)
+        var message = MessageData(withId: "", receivedDate: date, content: messageContent,
+                                  authorURI: "", incoming: false)
         message.type = interactionType.toMessageType()
-        self.saveMessageModelToDb(message: message,
+        self.saveMessageModelToDb(message: MessageModel(message),
                                   toConversationWith: contactUri,
                                   toAccountId: accountId,
                                   duration: duration,
@@ -564,11 +572,12 @@ class ConversationsService {
             }
             let author = isIncoming ? contactUri : ""
             let date = Date()
-            let message = MessageModel(withId: transferId,
-                                       receivedDate: date, content: messageContent,
-                                       authorURI: author, incoming: isIncoming)
-            message.transferStatus = isIncoming ? .awaiting : .created
-            message.type = .fileTransfer
+            var messageData = MessageData(withId: transferId,
+                                          receivedDate: date, content: messageContent,
+                                          authorURI: author, incoming: isIncoming)
+            messageData.transferStatus = isIncoming ? .awaiting : .created
+            messageData.type = .fileTransfer
+            let message = MessageModel(messageData)
             self.dbManager.saveMessage(for: accountId, with: contactUri,
                                        message: message, incoming: isIncoming,
                                        interactionType: interactionType, duration: 0)
@@ -586,20 +595,14 @@ class ConversationsService {
                             let content = (message.type.isContact || message.type == .call) ?
                                 GeneratedMessage.init(from: message.content).toMessage(with: Int(0))
                                 : message.content
-                            message.content = content
-                            message.id = dbMessage.messageID
-                            message.daemonId = transferId
-                            conversation.appendNonSwarm(message: message)
+                            let storedMessage = message.updating {
+                                $0.content = content
+                                $0.id = dbMessage.messageID
+                                $0.daemonId = transferId
+                            }
+                            conversation.appendNonSwarm(message: storedMessage)
                             store.sortIfNeeded()
                         }
-                        let serviceEventType: ServiceEventType = .dataTransferMessageUpdated
-                        var serviceEvent = ServiceEvent(withEventType: serviceEventType)
-                        serviceEvent.addEventInput(.transferId, value: transferId)
-                        serviceEvent.addEventInput(.conversationId, value: conversationId)
-                        serviceEvent.addEventInput(.state, value: DataTransferStatus.created)
-                        serviceEvent.addEventInput(.accountId, value: accountId)
-                        serviceEvent.addEventInput(.messageId, value: messageId)
-                        self.responseStream.onNext(serviceEvent)
                         completable(.completed)
                     }
                 }, onError: { error in
@@ -627,38 +630,40 @@ class ConversationsService {
             guard let self = self,
                   let conversationURI = conversation.getConversationURI() else { return Disposables.create { } }
 
-            var lastUnreadMessageId: String?
+            self.perform { _ in
+                var lastUnreadMessageId: String?
 
-            if conversation.isSwarm() {
-                let lastMessage = conversation.messages.first
-                lastUnreadMessageId = lastMessage?.id
-            } else {
-                // Filter out read, outgoing, and transfer messages
-                let unreadMessages = conversation.messages.filter({ messages in
-                    return messages.status != .displayed && messages.incoming && messages.type == .text
-                })
-                let messagesIds = unreadMessages.map({ $0.id }).filter({ !$0.isEmpty })
-                self.dbManager
-                    .setMessagesAsRead(messagesIDs: messagesIds,
-                                       withStatus: .displayed,
-                                       accountId: accountId)
-                    .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
-                    .subscribe()
-                    .disposed(by: self.disposeBag)
-                lastUnreadMessageId = unreadMessages.last?.id
+                if conversation.isSwarm() {
+                    let lastMessage = conversation.messages.first
+                    lastUnreadMessageId = lastMessage?.id
+                } else {
+                    // Filter out read, outgoing, and transfer messages
+                    let unreadMessages = conversation.messages.filter({ messages in
+                        return messages.status != .displayed && messages.incoming && messages.type == .text
+                    })
+                    let messagesIds = unreadMessages.map({ $0.id }).filter({ !$0.isEmpty })
+                    self.dbManager
+                        .setMessagesAsRead(messagesIDs: messagesIds,
+                                           withStatus: .displayed,
+                                           accountId: accountId)
+                        .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
+                        .subscribe()
+                        .disposed(by: self.disposeBag)
+                    lastUnreadMessageId = unreadMessages.last?.id
+                }
+
+                // update messages  status localy
+                conversation.setAllMessagesAsRead()
+
+                if let lastUnreadMessageId = lastUnreadMessageId {
+                    self.conversationsAdapter
+                        .setMessageDisplayedFrom(conversationURI,
+                                                 byAccount: accountId,
+                                                 messageId: lastUnreadMessageId,
+                                                 status: .displayed)
+                }
+                completable(.completed)
             }
-
-            // update messages  status localy
-            conversation.setAllMessagesAsRead()
-
-            if let lastUnreadMessageId = lastUnreadMessageId {
-                self.conversationsAdapter
-                    .setMessageDisplayedFrom(conversationURI,
-                                             byAccount: accountId,
-                                             messageId: lastUnreadMessageId,
-                                             status: .displayed)
-            }
-            completable(.completed)
             return Disposables.create { }
         })
     }

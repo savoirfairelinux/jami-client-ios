@@ -757,11 +757,13 @@ extension ConversationsManager {
         }
     }
 
-    func updateTransferInfoIfNeed(newMessage: MessageModel, conversationId: String, accountId: String) {
+    func updateTransferInfoIfNeed(newMessage: inout MessageModel, conversationId: String, accountId: String) {
         guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
         if newMessage.type == .fileTransfer {
             let progress = self.dataTransferService.getTransferProgress(withId: newMessage.daemonId, accountId: accountId, conversationId: conversationId, isSwarm: true)
-            newMessage.transferStatus = progress == 0 ? .awaiting : progress == newMessage.totalSize ? .success : .ongoing
+            let transferStatus: DataTransferStatus = progress == 0 ? .awaiting
+                : progress == newMessage.totalSize ? .success : .ongoing
+            newMessage = newMessage.updating { $0.transferStatus = transferStatus }
             if newMessage.transferStatus == .awaiting &&
                 (isDownloadingEnabled(for: newMessage.totalSize) || newMessage.authorId == account.jamiId) {
                 var filename = ""
@@ -778,8 +780,8 @@ extension ConversationsManager {
         guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
         // Convert array of dictionaries to messages.
         let messagesModels = messages.map { wrapInfo -> MessageModel in
-            let newMessage = MessageModel(with: wrapInfo, localJamiId: account.jamiId)
-            updateTransferInfoIfNeed(newMessage: newMessage, conversationId: conversationId, accountId: accountId)
+            var newMessage = MessageModel(with: wrapInfo, localJamiId: account.jamiId)
+            updateTransferInfoIfNeed(newMessage: &newMessage, conversationId: conversationId, accountId: accountId)
             return newMessage
         }
         _ = self.conversationService.insertMessages(messages: messagesModels, accountId: accountId, localJamiId: account.jamiId, conversationId: conversationId, fromLoaded: true)
@@ -801,10 +803,11 @@ extension ConversationsManager {
 
     func newInteraction(conversationId: String, accountId: String, message: SwarmMessageWrap) {
         guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
-        let newMessage = MessageModel(with: message, localJamiId: account.jamiId)
+        var newMessage = MessageModel(with: message, localJamiId: account.jamiId)
         self.confirmPostCallSyncIfNeeded(accountId: accountId, message: newMessage)
         if newMessage.type == .fileTransfer {
-            newMessage.transferStatus = newMessage.incoming ? .awaiting : .success
+            let transferStatus: DataTransferStatus = newMessage.incoming ? .awaiting : .success
+            newMessage = newMessage.updating { $0.transferStatus = transferStatus }
         }
         if self.conversationService.insertMessages(messages: [newMessage], accountId: accountId, localJamiId: account.jamiId, conversationId: conversationId, fromLoaded: false) {
             let incoming = message.body[MessageAttributes.author.rawValue] != account.jamiId

@@ -200,7 +200,6 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     // dictionary of message id and array of participants for whom the message is last read
     // Track last-read participant IDs per message; view will render providers for these IDs
     var lastRead: ThreadSafeDictionary<String, BehaviorRelay<[String]>>
-    private let subscriptionQueue = DispatchQueue(label: "com.myapp.subscriptionQueue", qos: .userInitiated)
     var lastDelivered: MessageContainerModel? {
         didSet {
             if let previous = oldValue {
@@ -216,7 +215,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     }
     var conversation: ConversationModel! {
         didSet {
-            subscriptionQueue.async { [weak self] in
+            conversationService.performSerially { [weak self] in
                 guard let self = self else { return }
                 self.invalidateAndSetupConversationSubscriptions()
             }
@@ -392,8 +391,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     }
 
     func targetReplyReceived(target: MessageModel) {
-        self.messagesModels.forEach { [weak self, weak target] messageModel in
-            guard let self = self, let target = target else { return }
+        self.messagesModels.forEach { messageModel in
             self.updateTargetReplyIfNeed(target: target, container: messageModel)
         }
     }
@@ -468,9 +466,10 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
 
     func subscribeReactions() {
         self.conversation.reactionsUpdated
-            .subscribe(onNext: { [weak self] messageId in
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] message in
                 guard let self = self else { return }
-                self.reactionsUpdated(messageId: messageId)
+                self.reactionsUpdated(message)
             })
             .disposed(by: self.conversationDisposeBag)
     }
@@ -500,21 +499,23 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     }
 
     func subscribeMessageUpdates() {
-        self.conversation.messageUpdated
-            .subscribe(onNext: { [weak self] messageId in
+        self.conversation.messagesUpdated
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] messages in
                 guard let self = self else { return }
-                self.messageUpdated(messageId: messageId)
+                self.messagesUpdated(messages)
             })
             .disposed(by: self.conversationDisposeBag)
     }
 
     func subscribeForNewMessages() {
+        let snapshot = conversation.messages
         conversation.newMessages.share()
-            .startWith(LoadedMessages(messages: conversation.messages, fromHistory: true))
+            .startWith(LoadedMessages(messages: snapshot, fromHistory: true, reset: snapshot.isEmpty))
             .observe(on: MainScheduler.instance)
             .subscribe { [weak self] messages in
                 guard let self = self else { return }
-                if self.conversation.messages.isEmpty {
+                if messages.reset {
                     self.messagesModels = [MessageContainerModel]()
                     return
                 }
@@ -541,17 +542,23 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
             .disposed(by: self.conversationDisposeBag)
     }
 
-    func messageUpdated(messageId: String) {
-        guard let message = self.getMessage(messageId: messageId) else { return }
-        self.updateLastRead(message: message)
-        self.updateLastDelivered(message: message)
-        message.messageUpdated()
-        self.computeSequencing()
+    func messagesUpdated(_ messages: [MessageModel]) {
+        var updatedAny = false
+        for message in messages {
+            guard let container = self.getMessage(messageId: message.id) else { continue }
+            container.messageUpdated(message)
+            self.updateLastRead(message: container)
+            self.updateLastDelivered(message: container)
+            updatedAny = true
+        }
+        if updatedAny {
+            self.computeSequencing()
+        }
     }
 
-    func reactionsUpdated(messageId: String) {
-        guard let message = self.getMessage(messageId: messageId) else { return }
-        message.reactionsUpdated()
+    func reactionsUpdated(_ message: MessageModel) {
+        guard let container = self.getMessage(messageId: message.id) else { return }
+        container.reactionsUpdated(message)
     }
 
     func scrolledToTargetReply() {
@@ -732,7 +739,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     }
 
     private func updateLastRead(message: MessageContainerModel, participantId: String) {
-        guard !message.message.incoming, message.message.statusForParticipantValue(participantId) == .displayed,
+        guard !message.message.incoming, message.message.statusForParticipant[participantId] == .displayed,
               let newIndex = self.getMessageIndex(messageId: message.id) else { return }
         /*
          If there is no current last read message for the participant, set this
@@ -771,32 +778,13 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     }
 
     private func updateLastRead(message: MessageContainerModel) {
-        for status in message.message.statusForParticipantSnapshot() {
+        for status in message.message.statusForParticipant {
             updateLastRead(message: message, participantId: status.key)
         }
     }
 
     // swiftlint:disable cyclomatic_complexity
     private func subscribeMessage(container: MessageContainerModel) {
-        if container.message.type == .fileTransfer {
-            self.conversationService
-                .sharedResponseStream
-                .filter({ [weak container] (transferEvent) in
-                    guard let container = container,
-                          let transferId: String = transferEvent.getEventInput(ServiceEventInput.transferId) else { return false }
-                    return  transferEvent.eventType == ServiceEventType.dataTransferMessageUpdated &&
-                        container.message.daemonId == transferId
-                })
-                .subscribe(onNext: { [weak container] transferEvent in
-                    guard let container = container,
-                          let transferStatus: DataTransferStatus = transferEvent.getEventInput(ServiceEventInput.state) else {
-                        return
-                    }
-                    container.message.transferStatus = transferStatus
-                    container.messageContent.setTransferStatus(transferStatus: transferStatus)
-                })
-                .disposed(by: container.disposeBag)
-        }
         container.messageInfoState.subscribe { [weak self, weak container] state in
             guard let self = self, let container = container, let state = state as? MessageInfo else { return }
             switch state {
@@ -951,12 +939,14 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     }
 
     func deleteMessage(message: MessageContentVM) {
-        DispatchQueue.global(qos: .userInitiated).async { [weak self, weak message] in
-            guard let self = self, let message = message else { return }
-            guard let container = self.getMessage(messageId: message.message.id) else { return }
-            if container.message.type == .text || container.message.type == .fileTransfer {
-                self.conversationService.editSwarmMessage(conversationId: self.conversation.id, accountId: self.conversation.accountId, message: "", parentId: message.message.id)
-            }
+        guard let container = self.getMessage(messageId: message.message.id),
+              container.message.type == .text || container.message.type == .fileTransfer else { return }
+        let messageId = container.message.id
+        let conversationId = self.conversation.id
+        let accountId = self.conversation.accountId
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            self?.conversationService.editSwarmMessage(conversationId: conversationId, accountId: accountId,
+                                                       message: "", parentId: messageId)
         }
     }
 

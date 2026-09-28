@@ -136,7 +136,7 @@ enum ContactAction: String {
     }
 }
 
-class MessageAction: Identifiable, Equatable, Hashable {
+struct MessageAction: Identifiable, Equatable, Hashable {
     var id: String = ""
     var author: String = ""
     var content: String = ""
@@ -163,7 +163,7 @@ class MessageAction: Identifiable, Equatable, Hashable {
     }
 }
 
-public class MessageModel {
+struct MessageData {
 
     var id: String = ""
     /// daemonId for dht messages, file transfer id for datatransfer
@@ -176,7 +176,7 @@ public class MessageModel {
     var uri: String = ""
     var status: MessageStatus = .sending
     var transferStatus: DataTransferStatus = .unknown
-    var incoming: Bool
+    var incoming: Bool = false
     var parentId: String = ""
     var type: MessageType = .text
     var reply: String = ""
@@ -192,7 +192,6 @@ public class MessageModel {
     var collabDocumentId: String = ""
     /// The name the document was created with; it can be renamed afterwards.
     var collabDocumentName: String = ""
-    private let statusAccessLock = NSLock()
 
     init(withId id: String, receivedDate: Date, content: String, authorURI: String, incoming: Bool) {
         self.daemonId = id
@@ -202,7 +201,7 @@ public class MessageModel {
         self.incoming = incoming
     }
 
-    convenience init (with swarmMessage: SwarmMessageWrap, localJamiId: String) {
+    init(with swarmMessage: SwarmMessageWrap, localJamiId: String) {
         self.init(withInfo: swarmMessage.body, localJamiId: localJamiId)
         for reaction in swarmMessage.reactions {
             self.reactions.insert(MessageAction(withInfo: reaction))
@@ -214,14 +213,12 @@ public class MessageModel {
         self.updateStatus(with: swarmMessage, localJamiId: localJamiId)
     }
 
-    func updateStatus(with swarmMessage: SwarmMessageWrap, localJamiId: String) {
+    mutating func updateStatus(with swarmMessage: SwarmMessageWrap, localJamiId: String) {
         let filteredStatus = swarmMessage.status.filter { $0.key != localJamiId }
 
         for (key, value) in filteredStatus {
             if let status = MessageStatus(rawValue: value.int32Value) {
-                statusAccessLock.lock()
                 statusForParticipant[key] = status
-                statusAccessLock.unlock()
                 /*
                  The message status is set to 'displayed' if at least one participant
                  has seen the message, and it is set to 'sent' if at least one participant
@@ -338,7 +335,7 @@ public class MessageModel {
         return self.type.getInteractionString(name: name, isIncoming: incoming)
     }
 
-    func updateFrom(info: [String: String]) {
+    mutating func updateFrom(info: [String: String]) {
         if let content = info[MessageAttributes.body.rawValue], self.type == .text {
             self.content = content
         }
@@ -366,11 +363,11 @@ public class MessageModel {
         return !self.reply.isEmpty
     }
 
-    func reactionAdded(reaction: [String: String]) {
+    mutating func reactionAdded(reaction: [String: String]) {
         self.reactions.insert(MessageAction(withInfo: reaction))
     }
 
-    func reactionRemoved(reactionId: String) {
+    mutating func reactionRemoved(reactionId: String) {
         if let reactionToRemove = self.reactions.first(where: { $0.id == reactionId }) {
             self.reactions.remove(reactionToRemove)
         }
@@ -393,7 +390,7 @@ public class MessageModel {
         return !self.editions.isEmpty
     }
 
-    func messageUpdated(message: SwarmMessageWrap, localJamiId: String) {
+    mutating func messageUpdated(message: SwarmMessageWrap, localJamiId: String) {
         self.editions = Set<MessageAction>()
         self.reactions = Set<MessageAction>()
         self.updateFrom(info: message.body)
@@ -406,27 +403,11 @@ public class MessageModel {
         self.updateStatus(with: message, localJamiId: localJamiId)
     }
 
-    func messageStatusUpdated(status: MessageStatus, messageId: String, jamiId: String) {
-        statusAccessLock.lock()
+    mutating func messageStatusUpdated(status: MessageStatus, jamiId: String) {
         self.statusForParticipant[jamiId] = status
         if status.rawValue <= MessageStatus.displayed.rawValue && self.status.rawValue < status.rawValue {
             self.status = status
         }
-        statusAccessLock.unlock()
-    }
-
-    func statusForParticipantValue(_ jamiId: String) -> MessageStatus? {
-        statusAccessLock.lock()
-        let value = self.statusForParticipant[jamiId]
-        statusAccessLock.unlock()
-        return value
-    }
-
-    func statusForParticipantSnapshot() -> [String: MessageStatus] {
-        statusAccessLock.lock()
-        let snapshot = self.statusForParticipant
-        statusAccessLock.unlock()
-        return snapshot
     }
 
     func isSending() -> Bool {
@@ -459,7 +440,7 @@ public class MessageModel {
         return Array(self.reactions.filter({ item in item.author == jamiId }).map({ item in item.id }))
     }
 
-    private func updateAccessibilityLabel(for messageType: MessageType, receivedDate: Date) {
+    private mutating func updateAccessibilityLabel(for messageType: MessageType, receivedDate: Date) {
 
         let timestamp = String(receivedDate.getTimeLabelString())
 
@@ -503,7 +484,7 @@ public class MessageModel {
         updateDeletedStatusAccessibilityLabel()
     }
 
-    private func updateReadStatusAccessibilityLabel() {
+    private mutating func updateReadStatusAccessibilityLabel() {
         if !self.incoming {
             switch self.status {
             case .displayed:
@@ -516,15 +497,75 @@ public class MessageModel {
         }
     }
 
-    private func updateEditedStatusAccessibilityLabel() {
+    private mutating func updateEditedStatusAccessibilityLabel() {
         if self.isMessageEdited() {
             self.accessibilityLabelValue += ". " + L10n.Accessibility.messageBubbleEdited
         }
     }
 
-    private func updateDeletedStatusAccessibilityLabel() {
+    private mutating func updateDeletedStatusAccessibilityLabel() {
         if self.isMessageDeleted() {
             self.accessibilityLabelValue = L10n.Accessibility.messageBubbleDeleted
         }
+    }
+}
+
+@dynamicMemberLookup
+public final class MessageModel {
+    private let data: MessageData
+
+    init(_ data: MessageData) {
+        self.data = data
+    }
+
+    convenience init(withId id: String, receivedDate: Date, content: String, authorURI: String, incoming: Bool) {
+        self.init(MessageData(withId: id, receivedDate: receivedDate, content: content,
+                              authorURI: authorURI, incoming: incoming))
+    }
+
+    convenience init(with swarmMessage: SwarmMessageWrap, localJamiId: String) {
+        self.init(MessageData(with: swarmMessage, localJamiId: localJamiId))
+    }
+
+    convenience init(withInfo info: [String: String], localJamiId: String) {
+        self.init(MessageData(withInfo: info, localJamiId: localJamiId))
+    }
+
+    subscript<T>(dynamicMember keyPath: KeyPath<MessageData, T>) -> T {
+        return data[keyPath: keyPath]
+    }
+
+    func updating(_ change: (inout MessageData) -> Void) -> MessageModel {
+        var updated = data
+        change(&updated)
+        return MessageModel(updated)
+    }
+
+    func isReply() -> Bool {
+        return data.isReply()
+    }
+
+    func isMessageDeleted() -> Bool {
+        return data.isMessageDeleted()
+    }
+
+    func isMessageEdited() -> Bool {
+        return data.isMessageEdited()
+    }
+
+    func isSending() -> Bool {
+        return data.isSending()
+    }
+
+    func isDelivered() -> Bool {
+        return data.isDelivered()
+    }
+
+    func getContactInteractionString(name: String) -> String? {
+        return data.getContactInteractionString(name: name)
+    }
+
+    func reactionsMessageIdsBySender(jamiId: String) -> [String] {
+        return data.reactionsMessageIdsBySender(jamiId: jamiId)
     }
 }

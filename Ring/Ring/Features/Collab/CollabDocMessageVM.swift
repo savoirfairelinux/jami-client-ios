@@ -29,7 +29,7 @@ import SwiftUI
  */
 class CollabDocMessageVM: ObservableObject {
 
-    let message: MessageModel
+    var message: MessageModel
     private let contextMenuState: PublishSubject<State>
     private let disposeBag = DisposeBag()
 
