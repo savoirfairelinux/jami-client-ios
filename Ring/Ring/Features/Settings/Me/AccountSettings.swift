@@ -68,6 +68,7 @@ class AccountSettings: ObservableObject {
 
     var notificationsPermitted: Bool = LocalNotificationsHelper.isEnabled()
     let accountService: AccountsService
+    let nameService: NameService
     let account: AccountModel
 
     let disposeBag = DisposeBag()
@@ -75,6 +76,7 @@ class AccountSettings: ObservableObject {
     init(account: AccountModel, injectionBag: InjectionBag) {
         self.account = account
         self.accountService = injectionBag.accountService
+        self.nameService = injectionBag.nameService
         self.setUpInitialParameters()
     }
 
@@ -249,6 +251,7 @@ extension AccountSettings {
     func saveNameServer() {
         let property = ConfigKeyModel(withKey: ConfigKey.ringNsURI)
         self.accountService.setAccountProperty(property: property, value: self.serverName, accountId: account.id)
+        self.nameService.invalidateAddressLookups(accountId: account.id)
     }
 }
 
