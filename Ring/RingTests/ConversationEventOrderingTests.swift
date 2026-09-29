@@ -17,6 +17,7 @@
  */
 
 import XCTest
+import RxSwift
 @testable import Ring
 
 final class ConversationEventOrderingTests: XCTestCase {
@@ -117,7 +118,9 @@ final class ConversationEventOrderingTests: XCTestCase {
                                                      fromLoaded: false))
                 let conversation = service.getConversationForId(conversationId: conversationId,
                                                                 accountId: accountId)
-                XCTAssertEqual(conversation?.newMessages.value.messages.map { $0.id }, ["message"])
+                var insertedIds = [String]()
+                _ = conversation?.newMessages.take(1).subscribe(onNext: { insertedIds = $0.messages.map { $0.id } })
+                XCTAssertEqual(insertedIds, ["message"])
             case let .conversationRemoved(accountId, conversationId):
                 service.conversationRemoved(conversationId: conversationId, accountId: accountId)
                 XCTAssertNil(service.getConversationForId(conversationId: conversationId, accountId: accountId))

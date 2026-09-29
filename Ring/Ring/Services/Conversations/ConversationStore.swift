@@ -28,20 +28,20 @@ struct TypingStatus {
 
 private final class ConversationRecord {
     let conversation: ConversationModel
-    let info: BehaviorRelay<ConversationInfo>
+    let streams: ConversationStreams
     var messages = [MessageModel]()
     var lastMessage: MessageModel?
 
     init(id: String, accountId: String, info: ConversationInfo) {
-        let relay = BehaviorRelay(value: info)
-        self.info = relay
-        self.conversation = ConversationModel(id: id, accountId: accountId, info: relay)
+        let streams = ConversationStreams(info: info)
+        self.streams = streams
+        self.conversation = ConversationModel(id: id, accountId: accountId, streams: streams)
     }
 
     func appendNonSwarm(messages newMessages: [MessageModel]) {
         self.messages.append(contentsOf: newMessages)
         let newestFirst = Array(newMessages.reversed())
-        self.conversation.newMessages.accept(LoadedMessages(messages: newestFirst, fromHistory: false))
+        self.streams.newMessages.accept(LoadedMessages(messages: newestFirst, fromHistory: false))
         self.updateNonSwarmUnreadCount()
     }
 
@@ -56,10 +56,10 @@ private final class ConversationRecord {
                 self.appendNonSwarm(messages: missing)
             } else {
                 self.messages = (self.messages + missing).sorted { $0.receivedDate < $1.receivedDate }
-                self.conversation.newMessages.accept(LoadedMessages(messages: [MessageModel](), fromHistory: false,
-                                                                    reset: true))
-                self.conversation.newMessages.accept(LoadedMessages(messages: Array(self.messages.reversed()),
-                                                                    fromHistory: true))
+                self.streams.newMessages.accept(LoadedMessages(messages: [MessageModel](), fromHistory: false,
+                                                               reset: true))
+                self.streams.newMessages.accept(LoadedMessages(messages: Array(self.messages.reversed()),
+                                                               fromHistory: true))
                 self.updateNonSwarmUnreadCount()
             }
         }
@@ -72,15 +72,15 @@ private final class ConversationRecord {
     private func updateNonSwarmUnreadCount() {
         guard !self.conversation.isSwarm() else { return }
         let unread = self.messages.filter({ $0.status != .displayed && $0.type == .text && $0.incoming }).count
-        self.conversation.numberOfUnreadMessages.accept(unread)
+        self.streams.unreadMessages.accept(unread)
     }
 
     func clearMessages() {
         self.messages = [MessageModel]()
-        self.conversation.newMessages.accept(LoadedMessages(messages: [MessageModel](), fromHistory: false,
-                                                            reset: true))
+        self.streams.newMessages.accept(LoadedMessages(messages: [MessageModel](), fromHistory: false,
+                                                       reset: true))
         self.lastMessage = nil
-        self.conversation.numberOfUnreadMessages.accept(0)
+        self.streams.unreadMessages.accept(0)
     }
 
     func setAllMessagesAsRead() {
@@ -90,37 +90,37 @@ private final class ConversationRecord {
             updated.append(self.updateMessage(at: index, { $0.status = .displayed }))
         }
         if !updated.isEmpty {
-            self.conversation.messagesUpdated.onNext(updated)
+            self.streams.messagesUpdated.onNext(updated)
         }
-        self.conversation.numberOfUnreadMessages.accept(0)
+        self.streams.unreadMessages.accept(0)
     }
 
     func reactionAdded(messageId: String, reaction: [String: String]) {
         guard let message = self.updateMessage(messageId: messageId, {
             $0.reactionAdded(reaction: reaction)
         }) else { return }
-        self.conversation.reactionsUpdated.onNext(message)
+        self.streams.reactionsUpdated.onNext(message)
     }
 
     func reactionRemoved(messageId: String, reactionId: String) {
         guard let message = self.updateMessage(messageId: messageId, {
             $0.reactionRemoved(reactionId: reactionId)
         }) else { return }
-        self.conversation.reactionsUpdated.onNext(message)
+        self.streams.reactionsUpdated.onNext(message)
     }
 
     func messageUpdated(swarmMessage: SwarmMessageWrap, localJamiId: String) {
         guard let message = self.updateMessage(messageId: swarmMessage.id, {
             $0.messageUpdated(message: swarmMessage, localJamiId: localJamiId)
         }) else { return }
-        self.conversation.messagesUpdated.onNext([message])
+        self.streams.messagesUpdated.onNext([message])
     }
 
     func messageStatusUpdated(status: MessageStatus, messageId: String, jamiId: String) {
         guard let message = self.updateMessage(messageId: messageId, {
             $0.messageStatusUpdated(status: status, jamiId: jamiId)
         }) else { return }
-        self.conversation.messagesUpdated.onNext([message])
+        self.streams.messagesUpdated.onNext([message])
     }
 
     func transferStatusUpdated(status: DataTransferStatus, messageId: String, transferId: String) {
@@ -128,11 +128,11 @@ private final class ConversationRecord {
             (!messageId.isEmpty && message.id == messageId) ||
                 (message.type == .fileTransfer && message.daemonId == transferId)
         }) else { return }
-        self.conversation.messagesUpdated.onNext([self.updateMessage(at: index, { $0.transferStatus = status })])
+        self.streams.messagesUpdated.onNext([self.updateMessage(at: index, { $0.transferStatus = status })])
     }
 
     func updateUnreadMessages(count: Int) {
-        self.conversation.numberOfUnreadMessages.accept(self.conversation.numberOfUnreadMessages.value + count)
+        self.streams.unreadMessages.accept(self.streams.unreadMessages.value + count)
     }
 
     private func updateMessage(messageId: String, _ change: (inout MessageData) -> Void) -> MessageModel? {
@@ -323,7 +323,6 @@ final class ConversationStore {
     func insertMessages(messages: [MessageModel], accountId: String, localJamiId: String, conversationId: String, fromLoaded: Bool) -> Bool {
         dispatchPrecondition(condition: .onQueue(queue))
         guard let record = self.record(id: conversationId, accountId: accountId) else { return false }
-        let conversation = record.conversation
 
         if self.isTargetReply(messages: messages) {
             self.processReplyTargetMessage(with: messages.first)
@@ -366,7 +365,7 @@ final class ConversationStore {
             record.updateUnreadMessages(count: incomingMessages.count)
         }
 
-        conversation.newMessages.accept(LoadedMessages(messages: newMessages, fromHistory: fromLoaded))
+        record.streams.newMessages.accept(LoadedMessages(messages: newMessages, fromHistory: fromLoaded))
         return true
     }
 
@@ -606,7 +605,7 @@ final class ConversationStore {
     private func makeRecord(id: String, accountId: String, info: ConversationInfo,
                             reusing candidates: [ConversationRecord]) -> ConversationRecord {
         if let existing = Self.record(id: id, accountId: accountId, in: candidates) {
-            existing.info.accept(info)
+            existing.streams.info.accept(info)
             return existing
         }
         return ConversationRecord(id: id, accountId: accountId, info: info)
@@ -647,9 +646,9 @@ final class ConversationStore {
     }
 
     private func update(_ record: ConversationRecord, _ change: (inout ConversationInfo) -> Void) {
-        var conversationInfo = record.info.value
+        var conversationInfo = record.streams.info.value
         change(&conversationInfo)
-        record.info.accept(conversationInfo)
+        record.streams.info.accept(conversationInfo)
     }
 
     private func publishNewConversation(conversationId: String, accountId: String, records: inout [ConversationRecord]) {
@@ -692,7 +691,7 @@ final class ConversationStore {
     private func updateUnreadMessages(conversation: ConversationModel, accountId: String) {
         if let lastRead = conversation.getLastReadMessage(), let jamiId = conversation.getLocalParticipants()?.jamiId {
             let unreadInteractions = self.adapter.countInteractions(accountId, conversationId: conversation.id, from: lastRead, to: "", authorUri: jamiId)
-            conversation.numberOfUnreadMessages.accept(Int(unreadInteractions))
+            self.record(for: conversation)?.streams.unreadMessages.accept(Int(unreadInteractions))
         }
     }
 

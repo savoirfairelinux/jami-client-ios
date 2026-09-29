@@ -713,7 +713,7 @@ extension ConversationViewModel {
     }
 
     private func subscribeUnreadMessages() {
-        messageUnreadCount = conversation.numberOfUnreadMessages.value
+        messageUnreadCount = conversation.unreadMessagesCount
         updateUnreadCount()
         self.conversation.numberOfUnreadMessages
             .observe(on: MainScheduler.instance)
