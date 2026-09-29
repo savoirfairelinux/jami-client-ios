@@ -47,26 +47,33 @@ class ConversationDataSource: ObservableObject {
 
     private func subscribeToConversations() {
         self.conversationsService.conversations
-            .share()
-            .observe(on: ConcurrentDispatchQueueScheduler(qos: .background))
-            .flatMapLatest { [weak self] conversations -> Observable<[ConversationViewModel]> in
-                // Map on background thread
-                guard let self = self else { return .empty() }
-                let mappedViewModels = self.mapConversationsToViewModels(conversations)
-                return Observable.just(mappedViewModels)
-                    .observe(on: MainScheduler.instance) // Ensure update on main thread
-            }
-            .subscribe(onNext: { [weak self] updatedViewModels in
-                self?.conversationViewModels = updatedViewModels
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] conversations in
+                guard let self = self else { return }
+                self.conversationViewModels = self.mapConversationsToViewModels(conversations)
             })
             .disposed(by: disposeBag)
     }
 
     private func mapConversationsToViewModels(_ conversations: [ConversationModel]) -> [ConversationViewModel] {
-        conversations.compactMap { conversationModel -> ConversationViewModel? in
-            let isBlocked = isConversationWithBlockedContact(conversationModel)
-            guard let newViewModel = createOrRetrieveViewModel(for: conversationModel,
-                                                               isBlocked: isBlocked) else {
+        var viewModelsByConversation = [ObjectIdentifier: ConversationViewModel]()
+        for viewModel in conversationViewModels {
+            if let conversation = viewModel.conversation {
+                viewModelsByConversation[ObjectIdentifier(conversation)] = viewModel
+            }
+        }
+        let bannedContacts = Set(contactsService.contacts.value.filter { $0.banned }.map { $0.hash })
+        return conversations.compactMap { conversationModel -> ConversationViewModel? in
+            let isBlocked = isConversationWithBlockedContact(conversationModel, bannedContacts: bannedContacts)
+            if isBlocked,
+               let existing = blockedConversation.first(where: { $0.conversation == conversationModel }) {
+                if existing.conversation !== conversationModel {
+                    existing.conversation = conversationModel
+                }
+                return nil
+            }
+            guard let newViewModel = viewModelsByConversation[ObjectIdentifier(conversationModel)] ??
+                    createOrRetrieveViewModel(for: conversationModel, isBlocked: isBlocked) else {
                 return nil
             }
 
@@ -83,6 +90,7 @@ class ConversationDataSource: ObservableObject {
 
     private func createOrRetrieveViewModel(for conversationModel: ConversationModel, isBlocked: Bool) -> ConversationViewModel? {
         if let viewModel = conversationViewModels.first(where: { $0.conversation == conversationModel }) {
+            viewModel.conversation = conversationModel
             return viewModel
         }
         // Attempt to restore a blocked conversation if not blocked
@@ -125,6 +133,7 @@ class ConversationDataSource: ObservableObject {
     private func observeContactAdded() {
         self.contactsService.sharedResponseStream
             .filter { $0.eventType == .contactAdded }
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] event in
                 guard let self = self,
                       let accountId: String = event.getEventInput(.accountId),
@@ -140,14 +149,16 @@ class ConversationDataSource: ObservableObject {
     private func restoreConversation(jamiId: String, accountId: String) {
         guard let viewModel = restoreBlockedConversation(jamiId: jamiId) else { return }
         // Retrieve the conversation and determine its correct index to maintain the order
-        guard let targetIndex = conversationsService.currentConversations.firstIndex(where: { $0 == viewModel.conversation }) else {
+        let storeConversations = conversationsService.currentConversations
+        guard let targetIndex = storeConversations.firstIndex(where: { $0 == viewModel.conversation }) else {
+            self.blockedConversation.append(viewModel)
             return
         }
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            let safeIndex = min(targetIndex, self.conversationViewModels.count)
-            self.conversationViewModels.insert(viewModel, at: safeIndex)
-        }
+        let preceding = Set(storeConversations[..<targetIndex].map { ObjectIdentifier($0) })
+        let insertIndex = self.conversationViewModels.filter { visible in
+            visible.conversation.map { preceding.contains(ObjectIdentifier($0)) } ?? false
+        }.count
+        self.conversationViewModels.insert(viewModel, at: insertIndex)
     }
 
     private func observeContactRemoved() {
@@ -208,12 +219,12 @@ class ConversationDataSource: ObservableObject {
             .disposed(by: disposeBag)
     }
 
-    private func isConversationWithBlockedContact(_ conversation: ConversationModel) -> Bool {
+    private func isConversationWithBlockedContact(_ conversation: ConversationModel,
+                                                  bannedContacts: Set<String>) -> Bool {
         guard conversation.isCoredialog(),
-              let jamiId = conversation.getParticipants().first?.jamiId,
-              let contact = self.contactsService.contact(withHash: jamiId) else {
+              let jamiId = conversation.getParticipants().first?.jamiId else {
             return false
         }
-        return contact.banned
+        return bannedContacts.contains(jamiId)
     }
 }
