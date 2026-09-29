@@ -20,6 +20,7 @@
  */
 
 import RxSwift
+import RxRelay
 import SwiftyBeaver
 
 let registeredNamesKey = "REGISTERED_NAMES_KEY"
@@ -46,12 +47,38 @@ class NameService {
     /// Status of the current username lookup request
     var usernameLookupStatus = PublishSubject<LookupNameResponse>()
 
+    private struct AddressLookupKey: Hashable {
+        let accountId: String
+        let address: String
+    }
+
+    private enum AddressLookupState {
+        case idle
+        case pending(Date)
+        case found
+        case notFound(Date)
+        case failed(Date)
+    }
+
+    private final class AddressLookup {
+        var state = AddressLookupState.idle
+        let name = BehaviorRelay<String?>(value: nil)
+    }
+
+    private let addressLookupsLock = NSLock()
+    private var addressLookups = [AddressLookupKey: AddressLookup]()
+    private let addressLookupRetryInterval: TimeInterval = 30
+    private let notFoundLifetime: TimeInterval = 5 * 60
+    private let currentDate: () -> Date
+
     private let userSearchResponseStream = PublishSubject<UserSearchResponse>()
     /// Triggered when we receive a UserSearchResponse from the daemon
     let userSearchResponseShared: Observable<UserSearchResponse>
 
-    init(withNameRegistrationAdapter nameRegistrationAdapter: NameRegistrationAdapter) {
+    init(withNameRegistrationAdapter nameRegistrationAdapter: NameRegistrationAdapter,
+         currentDate: @escaping () -> Date = Date.init) {
         self.nameRegistrationAdapter = nameRegistrationAdapter
+        self.currentDate = currentDate
         self.sharedRegistrationStatus = registrationStatus.share()
 
         self.userSearchResponseStream.disposed(by: self.disposeBag)
@@ -91,6 +118,61 @@ class NameService {
     func lookupAddress(withAccount account: String, nameserver: String, address: String) {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             self?.nameRegistrationAdapter.lookupAddress(withAccount: account, nameserver: nameserver, address: address)
+        }
+    }
+
+    func registeredName(forAddress address: String, accountId: String) -> Observable<String> {
+        let key = AddressLookupKey(accountId: accountId, address: address)
+        let now = currentDate()
+        addressLookupsLock.lock()
+        let lookup = addressLookups[key] ?? AddressLookup()
+        addressLookups[key] = lookup
+        let shouldLookUp = self.needsLookup(lookup.state, now: now)
+        if shouldLookUp {
+            lookup.state = .pending(now)
+        }
+        addressLookupsLock.unlock()
+        if shouldLookUp {
+            lookupAddress(withAccount: accountId, nameserver: "", address: address)
+        }
+        return lookup.name.compactMap { $0 }
+    }
+
+    private func needsLookup(_ state: AddressLookupState, now: Date) -> Bool {
+        switch state {
+        case .idle:
+            return true
+        case .found:
+            return false
+        case .pending(let date), .failed(let date):
+            return now.timeIntervalSince(date) > addressLookupRetryInterval
+        case .notFound(let date):
+            return now.timeIntervalSince(date) > notFoundLifetime
+        }
+    }
+
+    private func addressLookupFinished(with response: LookupNameResponse) {
+        guard let address = response.requestedName, let accountId = response.accountId else { return }
+        let foundName = response.state == .found ? response.name ?? "" : ""
+        addressLookupsLock.lock()
+        guard let lookup = addressLookups[AddressLookupKey(accountId: accountId, address: address)] else {
+            addressLookupsLock.unlock()
+            return
+        }
+        if case .found = lookup.state {
+            addressLookupsLock.unlock()
+            return
+        }
+        if !foundName.isEmpty {
+            lookup.state = .found
+        } else if response.state == .found || response.state == .notFound {
+            lookup.state = .notFound(currentDate())
+        } else {
+            lookup.state = .failed(currentDate())
+        }
+        addressLookupsLock.unlock()
+        if !foundName.isEmpty {
+            lookup.name.accept(foundName)
         }
     }
 
@@ -150,6 +232,7 @@ extension NameService: NameRegistrationAdapterDelegate {
             log.error("Lookup name error")
         }
 
+        addressLookupFinished(with: response)
         usernameLookupStatus.onNext(response)
     }
 

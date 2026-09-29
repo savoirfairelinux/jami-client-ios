@@ -243,6 +243,7 @@
 		26159D0F3035EB2A00553450 /* libyrs.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26159D083035EA7100553450 /* libyrs.xcframework */; };
 		2617A1212C493BC5002CFD4A /* AccountsServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2617A1202C493BC5002CFD4A /* AccountsServiceTest.swift */; };
 		2617A1232C493FB7002CFD4A /* MockAccountsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2617A1222C493FB7002CFD4A /* MockAccountsService.swift */; };
+		26A1B2C3D4E5F60A00AABB11 /* MockNameRegistrationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A1B2C3D4E5F60900AABB11 /* MockNameRegistrationAdapter.swift */; };
 		261A90842F1FF75C00438171 /* libjami-core.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 261A90832F1FF75B00438171 /* libjami-core.xcframework */; };
 		261A90862F1FF77D00438171 /* libjami-core.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 261A90832F1FF75B00438171 /* libjami-core.xcframework */; };
 		261A90892F1FF7AD00438171 /* libjami-core.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 261A90832F1FF75B00438171 /* libjami-core.xcframework */; };
@@ -343,6 +344,7 @@
 		26A072FD295A7145006D8163 /* ContextMenuVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A072FC295A7145006D8163 /* ContextMenuVM.swift */; };
 		26A1B2C3D4E5F60800AABB01 /* ThreadSafeDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A1B2C3D4E5F60700AABB01 /* ThreadSafeDictionary.swift */; };
 		26A1B2C3D4E5F60A00AABB02 /* ThreadSafeDictionaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A1B2C3D4E5F60900AABB02 /* ThreadSafeDictionaryTests.swift */; };
+		26A1B2C3D4E5F60A00AABB10 /* NameServiceAddressLookupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A1B2C3D4E5F60900AABB10 /* NameServiceAddressLookupTests.swift */; };
 		26A34ED52C6E83D500A41DD4 /* ImportFromArchiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A34ED42C6E83D500A41DD4 /* ImportFromArchiveView.swift */; };
 		26A34ED82C6EAE9A00A41DD4 /* DocumentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A34ED72C6EAE9A00A41DD4 /* DocumentPicker.swift */; };
 		26A34EDA2C6EB7C800A41DD4 /* BackupAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A34ED92C6EB7C800A41DD4 /* BackupAccount.swift */; };
@@ -871,6 +873,7 @@
 		26159D083035EA7100553450 /* libyrs.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libyrs.xcframework; path = ../xcframework/libyrs.xcframework; sourceTree = "<group>"; };
 		2617A1202C493BC5002CFD4A /* AccountsServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsServiceTest.swift; sourceTree = "<group>"; };
 		2617A1222C493FB7002CFD4A /* MockAccountsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAccountsService.swift; sourceTree = "<group>"; };
+		26A1B2C3D4E5F60900AABB11 /* MockNameRegistrationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNameRegistrationAdapter.swift; sourceTree = "<group>"; };
 		261A90832F1FF75B00438171 /* libjami-core.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "libjami-core.xcframework"; path = "../xcframework/libjami-core.xcframework"; sourceTree = "<group>"; };
 		2625814D2B4DE40200314C42 /* MessagePanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagePanelView.swift; sourceTree = "<group>"; };
 		2625814F2B4EF15D00314C42 /* MessagePanelVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagePanelVM.swift; sourceTree = "<group>"; };
@@ -970,6 +973,7 @@
 		26A072FC295A7145006D8163 /* ContextMenuVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextMenuVM.swift; sourceTree = "<group>"; };
 		26A1B2C3D4E5F60700AABB01 /* ThreadSafeDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadSafeDictionary.swift; sourceTree = "<group>"; };
 		26A1B2C3D4E5F60900AABB02 /* ThreadSafeDictionaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadSafeDictionaryTests.swift; sourceTree = "<group>"; };
+		26A1B2C3D4E5F60900AABB10 /* NameServiceAddressLookupTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameServiceAddressLookupTests.swift; sourceTree = "<group>"; };
 		26A34ED42C6E83D500A41DD4 /* ImportFromArchiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFromArchiveView.swift; sourceTree = "<group>"; };
 		26A34ED72C6EAE9A00A41DD4 /* DocumentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPicker.swift; sourceTree = "<group>"; };
 		26A34ED92C6EB7C800A41DD4 /* BackupAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupAccount.swift; sourceTree = "<group>"; };
@@ -2990,6 +2994,7 @@
 				04399A101D1C2D9D00E99CD9 /* RingTests.swift */,
 				A7MD00102F20000100000004 /* MessageMarkdownTests.swift */,
 				26A1B2C3D4E5F60900AABB02 /* ThreadSafeDictionaryTests.swift */,
+				26A1B2C3D4E5F60900AABB10 /* NameServiceAddressLookupTests.swift */,
 				26BA01010000000000000002 /* ProfilesServiceTests.swift */,
 				26BA01020000000000000002 /* NetworkServiceTests.swift */,
 				26BA01030000000000000002 /* CollabExportTests.swift */,
@@ -3317,6 +3322,7 @@
 				260AE62829B8ECA400D66D5E /* TestableFilteredDataSource.swift */,
 				260AE62A29B8F97300D66D5E /* TestableSwarmInfo.swift */,
 				2617A1222C493FB7002CFD4A /* MockAccountsService.swift */,
+				26A1B2C3D4E5F60900AABB11 /* MockNameRegistrationAdapter.swift */,
 				263C16762D9702F2008E102C /* ObjCMockCallsAdapter.h */,
 				263C16772D9702F2008E102C /* ObjCMockCallsAdapter.m */,
 				AA0002010000000000000002 /* MockPhotoLibrarySaver.swift */,
@@ -4553,10 +4559,12 @@
 				024B612C1DF7654F00C4F9DE /* DaemonServiceTests.swift in Sources */,
 				024B61321DF7656A00C4F9DE /* FixtureFailStartDRingAdapter.mm in Sources */,
 				2617A1232C493FB7002CFD4A /* MockAccountsService.swift in Sources */,
+				26A1B2C3D4E5F60A00AABB11 /* MockNameRegistrationAdapter.swift in Sources */,
 				263C16782D9702F2008E102C /* ObjCMockCallsAdapter.m in Sources */,
 				AA0002020000000000000002 /* MockPhotoLibrarySaver.swift in Sources */,
 				AA0003020000000000000003 /* MediaPreviewModelSaveTests.swift in Sources */,
 				26A1B2C3D4E5F60A00AABB02 /* ThreadSafeDictionaryTests.swift in Sources */,
+				26A1B2C3D4E5F60A00AABB10 /* NameServiceAddressLookupTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
