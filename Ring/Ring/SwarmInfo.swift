@@ -39,7 +39,7 @@ protocol SwarmInfoProtocol {
 
     var participants: BehaviorRelay<[ParticipantInfo]> { get set }
     var contacts: BehaviorRelay<[ParticipantInfo]> { get set }
-    var conversation: ConversationModel? { get set }
+    var conversation: ConversationModel? { get }
     var conversationEnded: BehaviorRelay<Bool> { get set }
     var id: String { get set }
 
@@ -154,11 +154,10 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
         return participants.value.first { $0.jamiId == localJamiId }
     }
     var contacts = BehaviorRelay(value: [ParticipantInfo]()) // contacts that could be added to swarm
-    var conversation: ConversationModel?
+    private(set) var conversation: ConversationModel?
 
     private let nameService: NameService
     private let profileService: ProfilesService
-    private let conversationsService: ConversationsService
     private let contactsService: ContactsService
     private let accountsService: AccountsService
     private let requestsService: RequestsService
@@ -166,13 +165,15 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
     private let localJamiId: String?
     private let disposeBag = DisposeBag()
     private var tempBag = DisposeBag()
+    private var members = Set<ParticipantData>()
+    private var avatarSource: String?
+    private let stateScheduler = SerialDispatchQueueScheduler(qos: .userInitiated)
 
     // to get info during swarm creation
     init(injectionBag: InjectionBag, accountId: String, avatarHeight: CGFloat = Constants.defaultAvatarSize) {
         self.avatarHeight = avatarHeight
         self.nameService = injectionBag.nameService
         self.profileService = injectionBag.profileService
-        self.conversationsService = injectionBag.conversationsService
         self.contactsService = injectionBag.contactsService
         self.accountsService = injectionBag.accountService
         self.requestsService = injectionBag.requestsService
@@ -205,21 +206,21 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
     convenience init(injectionBag: InjectionBag, conversation: ConversationModel, avatarHeight: CGFloat = Constants.defaultAvatarSize) {
         self.init(injectionBag: injectionBag, accountId: conversation.accountId, avatarHeight: avatarHeight)
         self.conversation = conversation
-        self.conversationEnded.accept(self.isConversationEnded())
-        self.subscribeConversationEvents()
-        self.updateInfo()
-        self.setParticipants()
-        self.updateColorPreference()
+        self.apply(conversation.info)
+        conversation.infoChanges
+            .observe(on: self.stateScheduler)
+            .subscribe(onNext: { [weak self] info in
+                self?.apply(info)
+            })
+            .disposed(by: self.disposeBag)
     }
 
-    func isConversationEnded() -> Bool {
-        guard let conversation = self.conversation else { return false }
-
-        if conversation.getAllParticipants().isEmpty {
+    private func isConversationEnded(_ info: ConversationInfo) -> Bool {
+        if info.participants.isEmpty {
             return false
         }
 
-        let hasActiveOtherParticipants = conversation.getParticipants().contains { participant in
+        let hasActiveOtherParticipants = info.participants.filter { !$0.isLocal }.contains { participant in
             switch participant.role {
             case .banned, .left:
                 return false
@@ -232,17 +233,17 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
             return false
         }
 
-        if conversation.isCoredialog() {
+        let localParticipant = info.participants.first { $0.isLocal }
+        if info.isCoredialog {
             // check if conversation with self
-            let localParticipants = conversation.getAllLocalParticipants()
-            if let participant = localParticipants.first {
+            if let participant = localParticipant {
                 return participant.role == .left
             }
 
             return true
         }
 
-        return conversation.getLocalParticipants()?.role != .admin
+        return localParticipant?.role != .admin
     }
 
     func addContacts(contacts: [ContactModel]) {
@@ -350,112 +351,34 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
             .disposed(by: tempBag)
     }
 
-    private func subscribeConversationEvents() {
-        self.conversationsService
-            .sharedResponseStream
-            .filter({ [weak self] (event) -> Bool in
-                return event.eventType == ServiceEventType.conversationPreferencesUpdated &&
-                    event.getEventInput(ServiceEventInput.accountId) == self?.accountId &&
-                    event.getEventInput(ServiceEventInput.conversationId) == self?.conversation?.id
-            })
-            .subscribe {[weak self] _ in
-                self?.updateColorPreference()
-            } onError: { _ in
+    private func apply(_ info: ConversationInfo) {
+        if !info.isCoredialog {
+            if info.avatar != self.avatarSource {
+                self.avatarSource = info.avatar
+                self.avatarData.accept(info.avatar.toImageData().flatMap { $0.isEmpty ? nil : $0 })
             }
-            .disposed(by: self.disposeBag)
-        self.conversationsService
-            .sharedResponseStream
-            .filter({ [weak self] (event) -> Bool in
-                return event.eventType == ServiceEventType.conversationProfileUpdated &&
-                    event.getEventInput(ServiceEventInput.accountId) == self?.accountId &&
-                    event.getEventInput(ServiceEventInput.conversationId) == self?.conversation?.id
-            })
-            .subscribe {[weak self] _ in
-                DispatchQueue.global(qos: .background).async {
-                    self?.updateInfo()
-                }
-            } onError: { _ in
-            }
-            .disposed(by: self.disposeBag)
-
-        self.conversationsService
-            .sharedResponseStream
-            .filter({ [weak self] (event) -> Bool in
-                return event.eventType == ServiceEventType.conversationMemberEvent &&
-                    event.getEventInput(ServiceEventInput.accountId) == self?.accountId &&
-                    event.getEventInput(ServiceEventInput.conversationId) == self?.conversation?.id
-            })
-            .subscribe {[weak self] _ in
-                DispatchQueue.global(qos: .background).async {
-                    self?.updateParticipants()
-                }
-            } onError: { _ in
-            }
-            .disposed(by: self.disposeBag)
-
-        self.conversationsService
-            .conversationReady
-            .filter { [weak self] id in !id.isEmpty && id == self?.conversation?.id }
-            .subscribe { [weak self] _ in
-                DispatchQueue.global(qos: .background).async {
-                    self?.updateParticipants()
-                }
-            } onError: { _ in
-            }
-            .disposed(by: self.disposeBag)
+            Self.accept(info.title, to: self.title)
+            Self.accept(info.description, to: self.description)
+        }
+        Self.accept(info.preferences.color, to: self.color)
+        let members = Set(info.participants.map { ParticipantData(jamiId: $0.jamiId, role: $0.role) })
+        if members != self.members {
+            self.members = members
+            self.setParticipants(Array(members))
+        }
+        Self.accept(self.isConversationEnded(info), to: self.conversationEnded)
     }
 
-    private var hasConversationProfile: Bool {
-        conversation?.isCoredialog() == false
+    private static func accept<Value: Equatable>(_ value: Value, to relay: BehaviorRelay<Value>) {
+        if relay.value != value {
+            relay.accept(value)
+        }
     }
 
-    private func updateInfo() {
-        guard hasConversationProfile, let conversation = self.conversation else { return }
-        let info = self.conversationsService.getConversationInfo(conversationId: conversation.id, accountId: self.accountId)
-        if let avatar = info[ConversationAttributes.avatar.rawValue] {
-            let imageData = avatar.toImageData().flatMap { $0.isEmpty ? nil : $0 }
-            self.avatarData.accept(imageData)
+    private func setParticipants(_ members: [ParticipantData]) {
+        let participantsInfo = members.compactMap { member in
+            createParticipant(jamiId: member.jamiId, role: member.role)
         }
-        if let title = info[ConversationAttributes.title.rawValue] {
-            self.title.accept(title)
-        }
-        if let description = info[ConversationAttributes.description.rawValue] {
-            self.description.accept(description)
-        }
-    }
-    private func updateColorPreference() {
-        guard let conversation = self.conversation else { return }
-        self.color.accept(conversation.preferences.color)
-    }
-
-    private func setParticipants() {
-        guard let conversation = self.conversation else { return }
-        var participantsInfo = [ParticipantInfo]()
-        let memberList = conversation.getAllParticipants()
-        memberList.forEach { participant in
-            if let participantInfo = createParticipant(jamiId: participant.jamiId, role: participant.role) {
-                participantsInfo.append(participantInfo)
-            }
-        }
-        if participantsInfo.isEmpty { return }
-        self.insertAndSortParticipants(participants: participantsInfo)
-    }
-
-    private func updateParticipants() {
-        guard let conversation = self.conversation else { return }
-        var participantsInfo = [ParticipantInfo]()
-        self.participants.accept(participantsInfo)
-        self.insertAndSortParticipants(participants: participantsInfo)
-        if let localJamiId = self.localJamiId {
-            let memberList = conversationsService.getSwarmMembers(conversationId: conversation.id, accountId: accountId, accountURI: localJamiId)
-            memberList.forEach { participant in
-                if let participantInfo = createParticipant(jamiId: participant.jamiId, role: participant.role) {
-                    participantsInfo.append(participantInfo)
-                }
-            }
-        }
-        if participantsInfo.isEmpty { return }
-        self.conversationEnded.accept(self.isConversationEnded())
         self.insertAndSortParticipants(participants: participantsInfo)
     }
 

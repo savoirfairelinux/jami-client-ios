@@ -28,7 +28,7 @@ struct MemberList: View {
     // MARK: - Body
     var body: some View {
         Section(header: Text(L10n.Swarm.members)) {
-            ForEach(viewModel.swarmInfo.participants.value, id: \.self) { participant in
+            ForEach(viewModel.members, id: \.self) { participant in
                 MemberItem(
                     participant: participant,
                     isInvited: participant.role == .invited,
@@ -39,7 +39,7 @@ struct MemberList: View {
             .onDelete(perform: viewModel.isAdmin ? delete : nil)
         }
         .environment(\.editMode, $editMode)
-        .onChange(of: viewModel.swarmInfo.participants.value) { _ in
+        .onChange(of: viewModel.members) { _ in
             if editMode == .active {
                 editMode = .inactive
             }

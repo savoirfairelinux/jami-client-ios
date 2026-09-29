@@ -405,7 +405,7 @@ public struct SwarmInfoView: View, StateEmittingView {
                 Picker("", selection: $selectedView) {
                     ForEach(swarmViews, id: \.self) { view in
                         Text(view == .memberList ?
-                                "\(viewModel.swarmInfo.participants.value.count) \(view.title)" :
+                                "\(viewModel.members.count) \(view.title)" :
                                 view.title)
                     }
                 }

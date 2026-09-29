@@ -177,6 +177,11 @@ struct ConversationInfo {
         self.updateInfo(info: daemonInfo)
     }
 
+    var isCoredialog: Bool {
+        if self.participants.count > 2 { return false }
+        return self.type == .nonSwarm || self.type == .oneToOne || self.type == .sip
+    }
+
     static func parseType(from info: [String: String]) -> ConversationType {
         if let mode = info[ConversationAttributes.mode.rawValue],
            let type = ConversationType(daemonMode: mode) {
@@ -367,8 +372,7 @@ class ConversationModel: Equatable {
     }
 
     func isCoredialog() -> Bool {
-        if self.participants.count > 2 { return false }
-        return self.type == .nonSwarm || self.type == .oneToOne || self.type == .sip
+        return info.isCoredialog
     }
 
     func isCoreDialogMatch(conversation: ConversationModel) -> Bool {
