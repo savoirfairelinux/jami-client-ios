@@ -32,6 +32,7 @@ class SwarmInfoVM: ObservableObject {
     @Published var finalColor: String = UIColor.defaultSwarmColorHex
     @Published var selectedColor: String = String()
     @Published private(set) var isAdmin = false
+    @Published private(set) var members = [ParticipantInfo]()
 
     var swarmInfo: SwarmInfoProtocol
     var conversation: ConversationModel?
@@ -157,6 +158,7 @@ class SwarmInfoVM: ObservableObject {
             supportsExpansion: true
         )
         self.isAdmin = currentUserIsAdmin(in: swarmInfo.participants.value)
+        self.members = swarmInfo.participants.value
 
         setupBindings()
     }
@@ -171,6 +173,13 @@ class SwarmInfoVM: ObservableObject {
     // MARK: - Setup
 
     private func setupBindings() {
+        swarmInfo.participants
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] participants in
+                self?.members = participants
+            })
+            .disposed(by: disposeBag)
+
         swarmInfo.participants
             .map { [weak self] participants in
                 self?.currentUserIsAdmin(in: participants) ?? false
@@ -288,7 +297,7 @@ class SwarmInfoVM: ObservableObject {
         guard let conversationId = conversation?.id,
               let accountId = conversation?.accountId else { return }
 
-        let idsToDelete = indexOffset.map { swarmInfo.participants.value[$0].jamiId }
+        let idsToDelete = indexOffset.map { members[$0].jamiId }
 
         for memberId in idsToDelete {
             conversationService.removeConversationMember(accountId: accountId, conversationId: conversationId, memberId: memberId)
