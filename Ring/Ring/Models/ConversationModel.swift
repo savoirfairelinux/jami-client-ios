@@ -241,21 +241,49 @@ struct ConversationState {
     }
 }
 
+final class ConversationStreams {
+    let state: BehaviorRelay<ConversationState>
+    let newMessages = BehaviorRelay<LoadedMessages>(value: LoadedMessages(messages: [MessageModel](), fromHistory: false))
+    let messagesUpdated = PublishSubject<[MessageModel]>()
+    let reactionsUpdated = PublishSubject<MessageModel>()
+    let unreadMessages = BehaviorRelay<Int>(value: 0)
+
+    init(state: ConversationState) {
+        self.state = BehaviorRelay(value: state)
+    }
+}
+
 class ConversationModel: Equatable {
-    var newMessages = BehaviorRelay<LoadedMessages>(value: LoadedMessages(messages: [MessageModel](), fromHistory: false))
     let id: String
     let accountId: String
-    private let stateRelay: BehaviorRelay<ConversationState>
-    let numberOfUnreadMessages = BehaviorRelay<Int>(value: 0)
-    let reactionsUpdated = PublishSubject<MessageModel>()
-    let messagesUpdated = PublishSubject<[MessageModel]>()
+    private let streams: ConversationStreams
 
     var state: ConversationState {
-        return stateRelay.value
+        return streams.state.value
     }
 
     var stateChanges: Observable<ConversationState> {
-        return stateRelay.asObservable()
+        return streams.state.asObservable()
+    }
+
+    var newMessages: Observable<LoadedMessages> {
+        return streams.newMessages.asObservable()
+    }
+
+    var messagesUpdated: Observable<[MessageModel]> {
+        return streams.messagesUpdated.asObservable()
+    }
+
+    var reactionsUpdated: Observable<MessageModel> {
+        return streams.reactionsUpdated.asObservable()
+    }
+
+    var numberOfUnreadMessages: Observable<Int> {
+        return streams.unreadMessages.asObservable()
+    }
+
+    var unreadMessagesCount: Int {
+        return streams.unreadMessages.value
     }
 
     var hash: String {
@@ -283,7 +311,7 @@ class ConversationModel: Equatable {
     }
 
     var synchronizing: Observable<Bool> {
-        return stateRelay.map { $0.isSynchronizing }.distinctUntilChanged()
+        return streams.state.map { $0.isSynchronizing }.distinctUntilChanged()
     }
 
     private var type: ConversationType {
@@ -294,14 +322,14 @@ class ConversationModel: Equatable {
         return state.participants
     }
 
-    init(id: String, accountId: String, state: BehaviorRelay<ConversationState>) {
+    init(id: String, accountId: String, streams: ConversationStreams) {
         self.id = id
         self.accountId = accountId
-        self.stateRelay = state
+        self.streams = streams
     }
 
     convenience init(id: String = "", accountId: String = "", state: ConversationState) {
-        self.init(id: id, accountId: accountId, state: BehaviorRelay(value: state))
+        self.init(id: id, accountId: accountId, streams: ConversationStreams(state: state))
     }
 
     convenience init(type: ConversationType) {
