@@ -104,22 +104,13 @@ class ParticipantInfo: Equatable, Hashable {
     }
 
     func lookupName(nameService: NameService, accountId: String) {
-        nameService.usernameLookupStatus.share()
-            .filter({ [weak self] lookupNameResponse in
-                guard let self = self else { return false }
-                return lookupNameResponse.requestedName != nil &&
-                    lookupNameResponse.requestedName == self.jamiId
-            })
-            .asObservable()
+        nameService.registeredName(forAddress: self.jamiId, accountId: accountId)
             .take(1)
-            .subscribe(onNext: { [weak self] lookupNameResponse in
-                guard let self = self else { return }
-                if let name = lookupNameResponse.name, !name.isEmpty, self.registeredName.value != name {
-                    self.registeredName.accept(name)
-                }
+            .subscribe(onNext: { [weak self] name in
+                guard let self = self, self.registeredName.value != name else { return }
+                self.registeredName.accept(name)
             })
             .disposed(by: self.disposeBag)
-        nameService.lookupAddress(withAccount: accountId, nameserver: "", address: self.jamiId)
     }
 }
 
