@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5d43f3d_935dd404",
+        "filename": "Ring/Ring.xcodeproj/project.pbxproj",
+        "patchSetId": 1
+      },
+      "lineNbr": 4832,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-09-30T16:58:54Z",
+      "side": 1,
+      "message": "[error] Line 4832: 🔴 `CURRENT_PROJECT_VERSION` is being decremented from `1` to `0`. Build numbers must be monotonically increasing for TestFlight/App Store uploads, and resetting to `0` can cause archive/upload rejection or versioning regressions. Keep/increment the prior value instead (e.g., `2` for the first 4.20 build) and apply consistently to all affected build configurations.",
+      "revId": "8a191ace7f119475f9bc6ae60e780f8565e0658a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
