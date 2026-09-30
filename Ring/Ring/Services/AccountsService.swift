@@ -19,6 +19,7 @@
 import RxCocoa
 import RxSwift
 import SwiftyBeaver
+import os
 
 enum LinkNewDeviceError: Error {
     case unknownError
@@ -59,6 +60,8 @@ struct AuthResult {
     let state: AuthState
     let details: [String: String]
 }
+
+private let accountLogger = Logger(subsystem: Constants.appIdentifier, category: "Account")
 
 // swiftlint:disable type_body_length
 // swiftlint:disable file_length
@@ -720,6 +723,7 @@ class AccountsService: AccountAdapterDelegate {
     }
 
     func setAccountsActive(active: Bool) {
+        accountLogger.notice("setAccountsActive: \(active, privacy: .public)")
         self.accountAdapter.setAccountsActive(active)
     }
 
