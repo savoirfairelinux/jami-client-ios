@@ -90,10 +90,11 @@ struct NotificationConfig {
     let groupTitle: String
 }
 
-// A local log helper that prints an easy to see log with the thread info
+let notificationLogger = Logger(subsystem: Constants.appIdentifier, category: "NotificationExtension")
+
 func log(_ messages: String...) {
     let message = messages.joined(separator: " ")
-    print("------ [\(Unmanaged.passUnretained(Thread.current).toOpaque())] \(message)")
+    notificationLogger.debug("\(message, privacy: .private)")
 }
 
 // MARK: AutoDispatchGroup helper
@@ -250,6 +251,14 @@ class NotificationService: UNNotificationServiceExtension {
     private var names = [String: String]() // map of peerId and best name
     private let thumbnailSize = 100
     private let didFinish = ManagedAtomic<Bool>(false)
+    private var receivedAt = Date()
+
+    private enum FinishReason: String {
+        case completed
+        case timedOut
+        case systemExpiry
+        case call
+    }
 
     deinit {
         removeNotificationExtensionQueryListener()
@@ -259,12 +268,13 @@ class NotificationService: UNNotificationServiceExtension {
     // Entry point for processing incoming notification requests.
     override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
         self.contentHandler = contentHandler
+        self.receivedAt = Date()
         setupNotificationExtensionQueryListener()
 
         Task {
             self.processNotificationRequest(request)
-            _ = autoDispatchGroup.wait(timeout: .now() + notificationTimeout)
-            self.finish()
+            let waitResult = autoDispatchGroup.wait(timeout: .now() + notificationTimeout)
+            self.finish(reason: waitResult == .timedOut ? .timedOut : .completed)
         }
     }
 
@@ -274,6 +284,7 @@ class NotificationService: UNNotificationServiceExtension {
         guard !requestData.isEmpty,
               let accountId = requestData[NotificationField.accountId.rawValue] else {
             log("There was an error processing the notification request")
+            logRequestExit("invalidRequest", data: requestData)
             return
         }
 
@@ -281,16 +292,19 @@ class NotificationService: UNNotificationServiceExtension {
         saveDataIfNeeded(data: requestData)
         guard !appIsActive() else {
             log("App is in foreground")
+            logRequestExit("appActive", data: requestData)
             return
         }
 
         guard !shareExtensionHasAccountActive(accountId: accountId) else {
             log("Share extension has this account active")
+            logRequestExit("shareExtensionActive", data: requestData)
             return
         }
 
         guard !isResubscribe(accountId: accountId, data: requestData) else {
             log("This is a resubscribe notification")
+            logRequestExit("resubscribed", data: requestData)
             return
         }
 
@@ -298,16 +312,34 @@ class NotificationService: UNNotificationServiceExtension {
 
         self.accountId = accountId
         self.originalNotificationData = requestData
-        prepareAndStartStreaming(for: request, with: requestData)
+        guard prepareAndStartStreaming(for: request, with: requestData) else {
+            logRequestExit("missingProxyURL", data: requestData)
+            return
+        }
+        logRequestExit("streaming", data: requestData)
+    }
+
+    private func logRequestExit(_ outcome: String, data: [String: String]) {
+        let pushType: String
+        if data["timeout"] != nil && data["timeout"] != "<null>" {
+            pushType = "resubscribe"
+        } else if data["exp"] != nil {
+            pushType = "expired"
+        } else {
+            pushType = "value"
+        }
+        let idsCount = data["ids"].map { $0.split(separator: ",").count } ?? 0
+        let pushTypes = data["pt"] ?? ""
+        notificationLogger.notice("processNotificationRequest exit: \(outcome, privacy: .public) push: \(pushType, privacy: .public) ids: \(idsCount, privacy: .public) pt: \(pushTypes, privacy: .public)")
     }
 
     // Prepares for and starts the data stream based on notification data.
-    private func prepareAndStartStreaming(for request: UNNotificationRequest, with requestData: [String: String]) {
+    private func prepareAndStartStreaming(for request: UNNotificationRequest, with requestData: [String: String]) -> Bool {
         guard let keyURL = getKeyURL(data: requestData),
               let treatedMessagesURL = getTreatedMessagesURL(data: requestData),
               let proxyURL = getProxyCaches(data: requestData),
               let url = getRequestURL(data: requestData, path: proxyURL) else {
-            return
+            return false
         }
 
         // Transform the comma-separated ids string
@@ -317,20 +349,25 @@ class NotificationService: UNNotificationServiceExtension {
         self.processAll = self.idsToProcess.isEmpty
 
         startStreaming(from: url, for: request, keyURL: keyURL, treatedMessagesURL: treatedMessagesURL)
+        return true
     }
 
     // Starts streaming data from a specified URL and processes received lines.
     private func startStreaming(from url: URL, for request: UNNotificationRequest, keyURL: URL, treatedMessagesURL: URL) {
         let taskId = UUID().uuidString
         autoDispatchGroup.enter(id: taskId)
+        let startedAt = Date()
 
         httpStreamHandler.startStreaming(from: url)
             .subscribe(onNext: { [weak self] line in
                 self?.processStreamLine(line, with: request, keyURL: keyURL, treatedMessagesURL: treatedMessagesURL)
             }, onError: { [weak self] error in
                 log("Error streaming data: \(error)")
+                let nsError = error as NSError
+                notificationLogger.notice("startStreaming exit: error domain: \(nsError.domain, privacy: .public) code: \(nsError.code, privacy: .public) duration: \(Date().timeIntervalSince(startedAt), format: .fixed(precision: 2), privacy: .public)s unmatched ids: \(self?.idsToProcess.count ?? 0, privacy: .public)")
                 self?.autoDispatchGroup.leave(id: taskId)
             }, onCompleted: { [weak self] in
+                notificationLogger.notice("startStreaming exit: completed duration: \(Date().timeIntervalSince(startedAt), format: .fixed(precision: 2), privacy: .public)s unmatched ids: \(self?.idsToProcess.count ?? 0, privacy: .public)")
                 self?.autoDispatchGroup.leave(id: taskId)
             })
             .disposed(by: disposeBag)
@@ -371,8 +408,10 @@ class NotificationService: UNNotificationServiceExtension {
         case .call(let peerId, let hasVideo):
             guard self.shouldAcceptIncomingCall(peerId: peerId) else {
                 log("Dropping call from \(peerId): account rejects unknown callers and peer is not a contact")
+                logProcessMapExit(decrypted: "call", filter: "rejected")
                 return
             }
+            logProcessMapExit(decrypted: "call", filter: "accepted")
             let name = self.bestName(accountId: self.accountId, contactId: peerId)
             let info = IncomingCallPayloadBuilder.build(
                 originalData: self.originalNotificationData,
@@ -381,17 +420,23 @@ class NotificationService: UNNotificationServiceExtension {
                 accountId: self.accountId,
                 cachedDisplayName: name
             )
-            self.finish(callInfo: info)
+            self.finish(reason: .call, callInfo: info)
             return
         case .gitMessage(let convId):
+            logProcessMapExit(decrypted: convId.isEmpty ? "gitMessageAll" : "gitMessage", filter: "none")
             self.handleGitMessage(convId: convId, loadAll: convId.isEmpty) // async
         case .clone:
+            logProcessMapExit(decrypted: "clone", filter: "none")
             // Should start daemon and wait until clone completed
             self.taskPropertyQueue.sync { self.waitForCloning = true }
             self.handleGitMessage(convId: "", loadAll: false) // async
         case .unknown:
-            break
+            logProcessMapExit(decrypted: "unknown", filter: "none")
         }
+    }
+
+    private func logProcessMapExit(decrypted: String, filter: String) {
+        notificationLogger.notice("processMap exit: decrypted: \(decrypted, privacy: .public) filter: \(filter, privacy: .public)")
     }
 
     private func shouldAcceptIncomingCall(peerId: String) -> Bool {
@@ -404,7 +449,7 @@ class NotificationService: UNNotificationServiceExtension {
 
     override func serviceExtensionTimeWillExpire() {
         log("Notification handling timeout")
-        finish()
+        finish(reason: .systemExpiry)
     }
 
     private func isResubscribe(accountId: String, data: [String: String]) -> Bool {
@@ -516,23 +561,28 @@ class NotificationService: UNNotificationServiceExtension {
         }
     }
 
-    private func finish(callInfo: [AnyHashable: Any]? = nil) {
+    private func finish(reason: FinishReason, callInfo: [AnyHashable: Any]? = nil) {
+        let elapsed = Date().timeIntervalSince(self.receivedAt)
         let result = didFinish.compareExchange(
             expected: false,
             desired: true,
             ordering: .acquiringAndReleasing
         )
         guard result.exchanged else {
+            notificationLogger.notice("finish exit: alreadyFinished reason: \(reason.rawValue, privacy: .public) elapsed: \(elapsed, format: .fixed(precision: 2), privacy: .public)s")
             return
         }
         removeNotificationExtensionQueryListener()
-        if self.accountIsActive.compareExchange(expected: true, desired: false, ordering: .relaxed).original {
+        let accountWasActive = self.accountIsActive.compareExchange(expected: true, desired: false, ordering: .relaxed).original
+        if accountWasActive {
             self.adapterService.stop(accountId: self.accountId)
         } else {
             self.adapterService.removeDelegate()
         }
         // cleanup pending notifications
         self.notificationQueue.sync {
+            let pendingCount = pendingLocalNotifications.values.reduce(0) { $0 + $1.count }
+            notificationLogger.notice("finish exit: \(reason.rawValue, privacy: .public) elapsed: \(elapsed, format: .fixed(precision: 2), privacy: .public)s accountWasActive: \(accountWasActive, privacy: .public) pending: \(pendingCount, privacy: .public)")
             if let info = callInfo {
                 self.presentCall(info: info)
             } else {
@@ -954,6 +1004,11 @@ extension NotificationService {
     private func presentCall(info: [AnyHashable: Any]) {
         CXProvider.reportNewIncomingVoIPPushPayload(info, completion: { error in
             log("NotificationService", "Did report voip notification, error: \(String(describing: error))")
+            if let error = error as NSError? {
+                notificationLogger.notice("VoIP handoff error domain: \(error.domain, privacy: .public) code: \(error.code, privacy: .public)")
+            } else {
+                notificationLogger.notice("VoIP handoff succeeded")
+            }
         })
         self.pendingLocalNotifications.removeAll()
     }

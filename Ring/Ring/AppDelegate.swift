@@ -670,6 +670,8 @@ extension AppDelegate {
     }
 }
 
+private let pushKitLogger = Logger(subsystem: Constants.appIdentifier, category: "PushKit")
+
 // MARK: PKPushRegistryDelegate
 extension AppDelegate: PKPushRegistryDelegate {
     func pushRegistry(_ registry: PKPushRegistry, didUpdate pushCredentials: PKPushCredentials, for type: PKPushType) {
@@ -677,6 +679,7 @@ extension AppDelegate: PKPushRegistryDelegate {
 
     @available(iOS 26.4, *)
     func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingVoIPPushWith payload: PKPushPayload, metadata: PKVoIPPushMetadata, withCompletionHandler completion: @escaping () -> Void) {
+        pushKitLogger.notice("VoIP push delivered mustReport: \(metadata.mustReport, privacy: .public)")
         guard metadata.mustReport else {
             completion()
             return
@@ -685,6 +688,7 @@ extension AppDelegate: PKPushRegistryDelegate {
     }
 
     func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType, completion: @escaping () -> Void) {
+        pushKitLogger.notice("VoIP push delivered mustReport: legacy")
         reportIncomingCallPush(payload: payload, completion: completion)
     }
 
@@ -700,6 +704,11 @@ extension AppDelegate: PKPushRegistryDelegate {
                                           accountId: accountId,
                                           displayName: displayName,
                                           hasVideo: hasVideo.boolValue) { error in
+            if let error = error as NSError? {
+                pushKitLogger.notice("CallKit report failed domain: \(error.domain, privacy: .public) code: \(error.code, privacy: .public)")
+            } else {
+                pushKitLogger.notice("CallKit report succeeded")
+            }
             if error != nil {
                 self.updateCallScreenState(presenting: false)
             }
