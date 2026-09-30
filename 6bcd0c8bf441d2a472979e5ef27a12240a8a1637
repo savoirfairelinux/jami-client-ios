@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34af2cc8_33d476c6",
+        "filename": "daemon",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-09-30T17:00:20Z",
+      "side": 1,
+      "message": "[warning] Line 1: 🟡 This submodule bump is opaque as submitted: please include a short rationale in the commit message (or link the reviewed daemon change/range) describing notable API/behavior/security-impacting changes and expected client impact. Without that traceability, downstream reviewers cannot assess risk from the pointer update alone.",
+      "revId": "6bcd0c8bf441d2a472979e5ef27a12240a8a1637",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
