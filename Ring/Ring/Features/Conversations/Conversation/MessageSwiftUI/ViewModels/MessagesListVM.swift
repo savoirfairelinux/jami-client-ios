@@ -186,6 +186,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     var lastMessageDisposeBag = DisposeBag()
 
     var conversationDisposeBag = DisposeBag()
+    private var shownConversationDisposeBag = DisposeBag()
     let disposeBag = DisposeBag()
 
     var lastMessageBeforeScroll: String?
@@ -219,6 +220,10 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
             conversationService.readMessages(of: conversation) { [weak self] snapshot in
                 self?.invalidateAndSetupConversationSubscriptions(conversation: conversation, snapshot: snapshot)
             }
+            self.shownConversationDisposeBag = DisposeBag()
+            self.subscribeSwarmPreferences(conversation: conversation)
+            self.subscribeUserAvatarForLocationSharing(accountId: conversation.accountId)
+            self.subscribeToTypingStatus(conversationId: conversation.id)
             self.updateColorPreference()
             self.updateLastDisplayed()
             self.callBannerViewModel = CallBannerViewModel(injectionBag: self.injectionBag, conversation: self.conversation, state: self.messagePanelStateSubject)
@@ -282,12 +287,9 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
         self.contextMenuModel.currentJamiAccountId = self.accountService.currentAccount?.jamiId
 
         self.subscribeLocationEvents()
-        self.subscribeSwarmPreferences()
-        self.subscribeUserAvatarForLocationSharing()
         self.subscribeReplyTarget()
         self.subscribeMessagesActions()
         self.subscribeContextMenu()
-        self.subscribeToTypingStatus()
     }
 
     func subscribeScreenTapped(screenTapped: Observable<Bool>) {
@@ -433,11 +435,12 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
             .disposed(by: self.disposeBag)
     }
 
-    func subscribeUserAvatarForLocationSharing() {
-        profileService.getAccountProfile(accountId: self.conversation.accountId)
+    func subscribeUserAvatarForLocationSharing(accountId: String) {
+        profileService.getAccountProfile(accountId: accountId)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] profile in
                 guard let self = self else { return }
-                let account = self.accountService.getAccount(fromAccountId: self.conversation.accountId)
+                let account = self.accountService.getAccount(fromAccountId: accountId)
                 let defaultAvatar = UIImage.defaultJamiAvatarFor(profileName: profile.alias, account: account, size: 16)
                 // The view has a max size 50. Create a larger image for better resolution.
                 if let photo = profile.photo,
@@ -449,7 +452,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
                 self.accountProfileName = profile.alias ?? ""
                 self.updateCoordinatesList()
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: self.shownConversationDisposeBag)
     }
 
     func subscribeReplyTarget() {
@@ -825,18 +828,21 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     }
     // swiftlint:enable cyclomatic_complexity
 
-    private func subscribeSwarmPreferences() {
+    private func subscribeSwarmPreferences(conversation: ConversationModel) {
+        let accountId = conversation.accountId
+        let conversationId = conversation.id
         self.conversationService
             .sharedResponseStream
-            .filter({ [weak self] (event) -> Bool in
+            .filter({ (event) -> Bool in
                 return event.eventType == ServiceEventType.conversationPreferencesUpdated &&
-                    event.getEventInput(ServiceEventInput.accountId) == self?.conversation.accountId &&
-                    event.getEventInput(ServiceEventInput.conversationId) == self?.conversation.id
+                    event.getEventInput(ServiceEventInput.accountId) == accountId &&
+                    event.getEventInput(ServiceEventInput.conversationId) == conversationId
             })
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
                 self?.updateColorPreference()
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: self.shownConversationDisposeBag)
     }
 
     private func subscribeMessagesActions() {
@@ -859,11 +865,10 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
             .disposed(by: self.disposeBag)
     }
 
-    func subscribeToTypingStatus() {
+    func subscribeToTypingStatus(conversationId: String) {
         conversationService.typingStatusStream
-            .filter { [weak self] status in
-                guard let self = self else { return false }
-                return status.conversationId == self.conversation.id
+            .filter { status in
+                return status.conversationId == conversationId
             }
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] status in
@@ -883,7 +888,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
 
                 self.updateTypingIndicatorText()
             })
-            .disposed(by: disposeBag)
+            .disposed(by: self.shownConversationDisposeBag)
     }
 
     private func updateTypingIndicatorText() {
@@ -1128,9 +1133,10 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     }
 
     private func getInformationForContact(id: String) {
+        let accountId = self.conversation.accountId
         DispatchQueue.global(qos: .background).async {[weak self] in
             guard let self = self else { return }
-            guard let account = self.accountService.getAccount(fromAccountId: self.conversation.accountId) else { return }
+            guard let account = self.accountService.getAccount(fromAccountId: accountId) else { return }
             if self.contactsService.contact(withHash: id) == nil {
                 DispatchQueue.main.async { [weak self] in
                     self?.updateName(name: id, jamiId: id)

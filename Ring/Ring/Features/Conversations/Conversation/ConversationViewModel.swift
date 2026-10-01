@@ -696,13 +696,14 @@ extension ConversationViewModel {
     }
 
     private func subscribeToContactAdded() {
+        let conversationId = self.conversation.id
         self.contactsService.sharedResponseStream
-            .filter { [weak self] event in
-                guard let self = self else { return false }
+            .filter { event in
                 return event.eventType == .contactAdded &&
-                    event.getEventInput(.conversationId) == self.conversation.id
+                    event.getEventInput(.conversationId) == conversationId
             }
             .take(1)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] event in
                 guard let self = self,
                       let peerUri: String = event.getEventInput(.peerUri),
