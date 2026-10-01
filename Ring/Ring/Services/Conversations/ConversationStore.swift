@@ -31,6 +31,8 @@ private final class ConversationRecord {
     let streams: ConversationStreams
     var messages = [MessageModel]()
     var lastMessage: MessageModel?
+    private(set) var unreadGeneration = 0
+    private(set) var lastReadMarkedAsRead: String?
 
     init(id: String, accountId: String, info: ConversationInfo) {
         let streams = ConversationStreams(info: info)
@@ -92,6 +94,8 @@ private final class ConversationRecord {
         if !updated.isEmpty {
             self.streams.messagesUpdated.onNext(updated)
         }
+        self.unreadGeneration += 1
+        self.lastReadMarkedAsRead = self.conversation.getLastReadMessage()
         self.streams.unreadMessages.accept(0)
     }
 
@@ -132,6 +136,7 @@ private final class ConversationRecord {
     }
 
     func updateUnreadMessages(count: Int) {
+        self.unreadGeneration += 1
         self.streams.unreadMessages.accept(self.streams.unreadMessages.value + count)
     }
 
@@ -164,6 +169,7 @@ final class ConversationStore {
     private let replyTargets: ReplyTargetRegistry
     private let responseStream: PublishSubject<ServiceEvent>
     private let disposeBag = DisposeBag()
+    private let unreadCountQueue = DispatchQueue(label: "com.jami.ConversationStore.unreadCount", qos: .utility)
 
     init(adapter: ConversationsAdapter,
          dbManager: DBManager,
@@ -684,14 +690,31 @@ final class ConversationStore {
 
     private func scheduleUnreadCount(for conversation: ConversationModel, accountId: String) {
         queue.async { [weak self] in
-            self?.updateUnreadMessages(conversation: conversation, accountId: accountId)
+            self?.countUnreadMessages(conversation: conversation, accountId: accountId)
         }
     }
 
-    private func updateUnreadMessages(conversation: ConversationModel, accountId: String) {
-        if let lastRead = conversation.getLastReadMessage(), let jamiId = conversation.getLocalParticipants()?.jamiId {
-            let unreadInteractions = self.adapter.countInteractions(accountId, conversationId: conversation.id, from: lastRead, to: "", authorUri: jamiId)
-            self.record(for: conversation)?.streams.unreadMessages.accept(Int(unreadInteractions))
+    private func countUnreadMessages(conversation: ConversationModel, accountId: String) {
+        dispatchPrecondition(condition: .onQueue(queue))
+        guard conversation.isSwarm(),
+              let record = self.record(for: conversation),
+              let lastRead = conversation.getLastReadMessage(),
+              let jamiId = conversation.getLocalParticipants()?.jamiId,
+              lastRead != record.lastReadMarkedAsRead else { return }
+        let generation = record.unreadGeneration
+        unreadCountQueue.async { [weak self] in
+            guard let self = self else { return }
+            let unread = self.adapter.countInteractions(accountId, conversationId: conversation.id,
+                                                        from: lastRead, to: "", authorUri: jamiId)
+            self.queue.async {
+                guard self.record(for: conversation) === record else { return }
+                guard record.unreadGeneration == generation,
+                      conversation.getLastReadMessage() == lastRead else {
+                    self.countUnreadMessages(conversation: conversation, accountId: accountId)
+                    return
+                }
+                record.streams.unreadMessages.accept(Int(unread))
+            }
         }
     }
 
