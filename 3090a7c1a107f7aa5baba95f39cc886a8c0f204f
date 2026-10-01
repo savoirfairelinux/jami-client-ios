@@ -16,6 +16,23 @@
       "message": "[error] Line 223: 🔴 `currentlyTypingUsers` is not reset when the shown conversation changes. After `shownConversationDisposeBag` is replaced, the old conversation’s typing stream is disposed, so you may never receive “stopped typing” events for those users; their names can remain visible in the new conversation’s typing indicator. Clear `currentlyTypingUsers` (and refresh the indicator text) in `conversation.didSet` right before creating new shown-conversation subscriptions.",
       "revId": "3090a7c1a107f7aa5baba95f39cc886a8c0f204f",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f5d57b1_66874a3a",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-01T19:41:35Z",
+      "side": 1,
+      "message": "[error] Line 285: 🔴 The three shown-conversation subscriptions were removed from `init` and now only run in `conversation.didSet`. In Swift, `didSet` is not called for assignments performed during initialization, so the initial conversation can start without typing/swarm/avatar subscriptions until a later conversation switch. Please invoke the same subscription setup once for the initial `conversation` in `init` (or call a shared `bindShownConversation(_:)` method from both `init` and `didSet`).",
+      "revId": "3090a7c1a107f7aa5baba95f39cc886a8c0f204f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
