@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aceb3e52_fa00c00f",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-01T19:39:29Z",
+      "side": 1,
+      "message": "[error] Line 223: 🔴 `currentlyTypingUsers` is not reset when the shown conversation changes. After `shownConversationDisposeBag` is replaced, the old conversation’s typing stream is disposed, so you may never receive “stopped typing” events for those users; their names can remain visible in the new conversation’s typing indicator. Clear `currentlyTypingUsers` (and refresh the indicator text) in `conversation.didSet` right before creating new shown-conversation subscriptions.",
+      "revId": "3090a7c1a107f7aa5baba95f39cc886a8c0f204f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
