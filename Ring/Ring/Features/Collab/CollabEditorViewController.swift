@@ -47,13 +47,11 @@ class CollabEditorViewController: UIViewController {
     private let loadingView = UIActivityIndicatorView(style: .large)
     private let errorLabel = UILabel()
 
-    private let formatBar = UIScrollView()
-    private let formatStack = UIStackView()
+    private let formatBar = CollabFormatBar()
     private let versionBar = UIStackView()
     private let versionLabel = UILabel()
     private let historyPanel = CollabHistoryPanel()
 
-    private var buttons = [CollabFormat: UIButton]()
     private var barBottom: NSLayoutConstraint!
 
     /// The version list, on screen or just off the trailing edge.
@@ -66,17 +64,6 @@ class CollabEditorViewController: UIViewController {
 
     /// Updates produced by the page before it was allowed to talk to the daemon.
     private var pendingLocalUpdates = [String]()
-
-    private var currentLink = ""
-
-    /// What the page can be asked to do, and what its buttons stand for.
-    private enum CollabFormat: Hashable {
-        case bold, italic, underline, strike
-        case header(Int)
-        case list(String)
-        case align(String)
-        case link, image, clear, undo, redo
-    }
 
     init(viewModel: CollabEditorViewModel) {
         self.viewModel = viewModel
@@ -156,27 +143,13 @@ class CollabEditorViewController: UIViewController {
 
     private func setUpFormatBar() {
         self.formatBar.translatesAutoresizingMaskIntoConstraints = false
-        self.formatBar.showsHorizontalScrollIndicator = false
-        self.formatBar.backgroundColor = .jamiFormBackground
+        self.formatBar.onFormat = { [weak self] format in self?.apply(format) }
         self.view.addSubview(self.formatBar)
-
-        self.formatStack.axis = .horizontal
-        self.formatStack.spacing = CollabEditorViewController.buttonSpacing
-        self.formatStack.alignment = .center
-        self.formatStack.translatesAutoresizingMaskIntoConstraints = false
-        self.formatBar.addSubview(self.formatStack)
-
-        for item in CollabEditorViewController.formatItems {
-            let button = self.makeButton(item)
-            self.buttons[item.format] = button
-            self.formatStack.addArrangedSubview(button)
-        }
 
         self.barBottom = self.formatBar.bottomAnchor
             .constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
         self.webFullWidth = self.webView.trailingAnchor
             .constraint(equalTo: self.view.trailingAnchor)
-        let height = CollabEditorViewController.barHeight
         NSLayoutConstraint.activate([
             self.webView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             self.webView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
@@ -185,16 +158,7 @@ class CollabEditorViewController: UIViewController {
 
             self.formatBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             self.formatBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            self.formatBar.heightAnchor.constraint(equalToConstant: height),
-            self.barBottom,
-
-            self.formatStack.topAnchor.constraint(equalTo: self.formatBar.topAnchor),
-            self.formatStack.bottomAnchor.constraint(equalTo: self.formatBar.bottomAnchor),
-            self.formatStack.leadingAnchor.constraint(equalTo: self.formatBar.leadingAnchor,
-                                                      constant: CollabEditorViewController.margin),
-            self.formatStack.trailingAnchor.constraint(equalTo: self.formatBar.trailingAnchor,
-                                                       constant: -CollabEditorViewController.margin),
-            self.formatStack.heightAnchor.constraint(equalTo: self.formatBar.heightAnchor)
+            self.barBottom
         ])
     }
 
@@ -262,27 +226,6 @@ class CollabEditorViewController: UIViewController {
             self.errorLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor,
                                                       constant: -CollabEditorViewController.margin)
         ])
-    }
-
-    private func makeButton(_ item: FormatItem) -> UIButton {
-        let button = UIButton(type: .system)
-        if let symbol = item.symbol {
-            button.setImage(UIImage(systemName: symbol), for: .normal)
-        } else {
-            button.setTitle(item.title, for: .normal)
-            button.titleLabel?.font = .preferredFont(forTextStyle: .headline)
-            button.titleLabel?.adjustsFontForContentSizeCategory = true
-        }
-        button.accessibilityLabel = item.label
-        button.alpha = CollabEditorViewController.inactiveAlpha
-        button.tintColor = .jamiPrimaryControl
-        button.translatesAutoresizingMaskIntoConstraints = false
-        let side = CollabEditorViewController.touchTarget
-        button.widthAnchor.constraint(greaterThanOrEqualToConstant: side).isActive = true
-        button.heightAnchor.constraint(equalToConstant: side).isActive = true
-        button.addAction(UIAction { [weak self] _ in self?.apply(item.format) },
-                         for: .touchUpInside)
-        return button
     }
 
     // MARK: - Binding
@@ -428,7 +371,7 @@ class CollabEditorViewController: UIViewController {
 
     // MARK: - Format bar
 
-    private func apply(_ format: CollabFormat) {
+    private func apply(_ format: CollabFormatBar.Format) {
         switch format {
         case .bold: self.callEditor("toggle", self.quote("bold"))
         case .italic: self.callEditor("toggle", self.quote("italic"))
@@ -445,37 +388,12 @@ class CollabEditorViewController: UIViewController {
         }
     }
 
-    /// Lights up the buttons that describe the text under the caret.
+    /// What the page says of the text under the caret, for the bar to show.
     private func showFormats(_ json: String) {
         guard let data = json.data(using: .utf8),
               let root = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
               let formats = root["formats"] as? [String: Any] else { return }
-        self.currentLink = formats["link"] as? String ?? ""
-
-        let header = formats["header"] as? Int ?? 0
-        let list = formats["list"] as? String ?? ""
-        let align = formats["align"] as? String ?? ""
-
-        func active(_ format: CollabFormat) -> Bool {
-            switch format {
-            case .bold: return formats["bold"] as? Bool ?? false
-            case .italic: return formats["italic"] as? Bool ?? false
-            case .underline: return formats["underline"] as? Bool ?? false
-            case .strike: return formats["strike"] as? Bool ?? false
-            case .header(let level): return header == level
-            case .list(let kind): return list == kind
-            // Left alignment is the absence of the attribute.
-            case .align(let side): return side == "left" ? align.isEmpty : align == side
-            case .link: return !self.currentLink.isEmpty
-            default: return false
-            }
-        }
-
-        for (format, button) in self.buttons {
-            let selected = active(format)
-            button.isSelected = selected
-            button.alpha = selected ? 1 : CollabEditorViewController.inactiveAlpha
-        }
+        self.formatBar.show(formats)
     }
 
     // MARK: - Pieces
@@ -489,47 +407,9 @@ class CollabEditorViewController: UIViewController {
 
     fileprivate static let bridgeName = "jami"
 
-    private static let barHeight: CGFloat = 48
-    private static let touchTarget: CGFloat = 44
     private static let buttonSpacing: CGFloat = 4
     private static let margin: CGFloat = 8
     private static let panelWidth: CGFloat = 300
-    private static let inactiveAlpha: CGFloat = 0.55
-
-    private struct FormatItem {
-        let format: CollabFormat
-        let symbol: String?
-        let title: String?
-        let label: String
-
-        init(_ format: CollabFormat, symbol: String? = nil, title: String? = nil, label: String) {
-            self.format = format
-            self.symbol = symbol
-            self.title = title
-            self.label = label
-        }
-    }
-
-    private static let formatItems: [FormatItem] = [
-        FormatItem(.bold, symbol: "bold", label: L10n.Collab.bold),
-        FormatItem(.italic, symbol: "italic", label: L10n.Collab.italic),
-        FormatItem(.underline, symbol: "underline", label: L10n.Collab.underline),
-        FormatItem(.strike, symbol: "strikethrough", label: L10n.Collab.strikethrough),
-        FormatItem(.header(1), title: "H1", label: L10n.Collab.heading(1)),
-        FormatItem(.header(2), title: "H2", label: L10n.Collab.heading(2)),
-        FormatItem(.header(3), title: "H3", label: L10n.Collab.heading(3)),
-        FormatItem(.list("bullet"), symbol: "list.bullet", label: L10n.Collab.bulletList),
-        FormatItem(.list("ordered"), symbol: "list.number", label: L10n.Collab.orderedList),
-        FormatItem(.align("left"), symbol: "text.alignleft", label: L10n.Collab.alignLeft),
-        FormatItem(.align("center"), symbol: "text.aligncenter", label: L10n.Collab.alignCenter),
-        FormatItem(.align("right"), symbol: "text.alignright", label: L10n.Collab.alignRight),
-        FormatItem(.align("justify"), symbol: "text.justify", label: L10n.Collab.alignJustify),
-        FormatItem(.link, symbol: "link", label: L10n.Collab.linkTitle),
-        FormatItem(.image, symbol: "photo", label: L10n.Collab.insertImage),
-        FormatItem(.clear, symbol: "textformat", label: L10n.Collab.clearFormat),
-        FormatItem(.undo, symbol: "arrow.uturn.backward", label: L10n.Collab.undo),
-        FormatItem(.redo, symbol: "arrow.uturn.forward", label: L10n.Collab.redo)
-    ]
 }
 
 // MARK: - Telling the user what became of the document
@@ -614,7 +494,7 @@ extension CollabEditorViewController {
     private func promptLink() {
         let alert = UIAlertController(title: L10n.Collab.linkTitle, message: nil, preferredStyle: .alert)
         alert.addTextField { field in
-            field.text = self.currentLink
+            field.text = self.formatBar.currentLink
             field.placeholder = L10n.Collab.linkHint
             field.keyboardType = .URL
             field.autocapitalizationType = .none
@@ -625,7 +505,7 @@ extension CollabEditorViewController {
                 .trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
             self.callEditor("setLink", self.quote(address))
         })
-        if !self.currentLink.isEmpty {
+        if !self.formatBar.currentLink.isEmpty {
             alert.addAction(UIAlertAction(title: L10n.Collab.linkRemove,
                                           style: .destructive) { [weak self] _ in
                 guard let self = self else { return }
