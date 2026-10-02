@@ -47,8 +47,14 @@ class CollabEditorViewController: UIViewController {
     private let loadingView = UIActivityIndicatorView(style: .large)
     private let errorLabel = UILabel()
 
-    private let formatBar = UIScrollView()
-    private let formatStack = UIStackView()
+    private let formatBar = UIStackView()
+    /// The rows of the bar: one where it all fits, two on a narrow screen.
+    private var formatRows = [FormatRow]()
+    /// The bar's controls in desktop order; a separator is drawn anew on each row.
+    private var barViews = [(item: BarItem, view: UIView?)]()
+    private var iconWidths = [NSLayoutConstraint]()
+    private var barHeightConstraint: NSLayoutConstraint!
+    private var isBarSplit: Bool?
     private let versionBar = UIStackView()
     private let versionLabel = UILabel()
     private let historyPanel = CollabHistoryPanel()
@@ -177,29 +183,27 @@ class CollabEditorViewController: UIViewController {
     }
 
     private func setUpFormatBar() {
+        self.formatBar.axis = .vertical
+        self.formatBar.distribution = .fillEqually
         self.formatBar.translatesAutoresizingMaskIntoConstraints = false
-        self.formatBar.showsHorizontalScrollIndicator = false
         self.formatBar.backgroundColor = .jamiFormBackground
         self.view.addSubview(self.formatBar)
 
-        self.formatStack.axis = .horizontal
-        self.formatStack.spacing = CollabEditorViewController.buttonSpacing
-        self.formatStack.alignment = .center
-        self.formatStack.translatesAutoresizingMaskIntoConstraints = false
-        self.formatBar.addSubview(self.formatStack)
+        self.formatRows = (0..<2).map { _ in FormatRow() }
+        self.formatRows.forEach { self.formatBar.addArrangedSubview($0.scrollView) }
 
         for item in CollabEditorViewController.barItems {
             switch item {
             case .format(let format):
                 let button = self.makeButton(format)
                 self.buttons[format.format] = button
-                self.formatStack.addArrangedSubview(button)
+                self.barViews.append((item, button))
             case .chooser(let chooser):
                 let button = self.makeChooser(chooser)
                 self.choosers[chooser] = button
-                self.formatStack.addArrangedSubview(button)
+                self.barViews.append((item, button))
             case .separator:
-                self.formatStack.addArrangedSubview(self.makeSeparator())
+                self.barViews.append((item, nil))
             }
         }
         self.showChoices()
@@ -208,7 +212,8 @@ class CollabEditorViewController: UIViewController {
             .constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
         self.webFullWidth = self.webView.trailingAnchor
             .constraint(equalTo: self.view.trailingAnchor)
-        let height = CollabEditorViewController.barHeight
+        self.barHeightConstraint = self.formatBar.heightAnchor
+            .constraint(equalToConstant: CollabEditorViewController.barHeight)
         NSLayoutConstraint.activate([
             self.webView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             self.webView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
@@ -217,17 +222,74 @@ class CollabEditorViewController: UIViewController {
 
             self.formatBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             self.formatBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            self.formatBar.heightAnchor.constraint(equalToConstant: height),
-            self.barBottom,
-
-            self.formatStack.topAnchor.constraint(equalTo: self.formatBar.topAnchor),
-            self.formatStack.bottomAnchor.constraint(equalTo: self.formatBar.bottomAnchor),
-            self.formatStack.leadingAnchor.constraint(equalTo: self.formatBar.leadingAnchor,
-                                                      constant: CollabEditorViewController.margin),
-            self.formatStack.trailingAnchor.constraint(equalTo: self.formatBar.trailingAnchor,
-                                                       constant: -CollabEditorViewController.margin),
-            self.formatStack.heightAnchor.constraint(equalTo: self.formatBar.heightAnchor)
+            self.barHeightConstraint,
+            self.barBottom
         ])
+        self.arrangeFormatBar()
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        self.arrangeFormatBar()
+    }
+
+    /**
+     The whole bar fits on one row of a wide screen, in the desktop's order. A
+     phone has no room for it: the choosers and undo go on top and the rest of
+     the buttons below, each row spread to the width, so none is out of sight.
+     */
+    private func arrangeFormatBar() {
+        let split = self.traitCollection.horizontalSizeClass != .regular
+        guard split != self.isBarSplit else { return }
+        self.isBarSplit = split
+
+        let rows: [[UIView]]
+        if split {
+            let top = self.barViews.filter { CollabEditorViewController.isOnTopRow($0.item) != false }
+            let bottom = self.barViews.filter { CollabEditorViewController.isOnTopRow($0.item) != true }
+            rows = [self.rowViews(top), self.rowViews(bottom)]
+        } else {
+            rows = [self.rowViews(self.barViews), []]
+        }
+        self.formatRows.forEach { $0.clear() }
+        for (row, views) in zip(self.formatRows, rows) {
+            row.show(views, spread: split)
+        }
+        let iconWidth = split ? CollabEditorViewController.compactIconWidth
+            : CollabEditorViewController.touchTarget
+        self.iconWidths.forEach { $0.constant = iconWidth }
+        self.barHeightConstraint.constant = CollabEditorViewController.barHeight
+            * CGFloat(rows.filter { !$0.isEmpty }.count)
+    }
+
+    /// Which row of a phone's bar an item is on; a separator may be on either.
+    private static func isOnTopRow(_ item: BarItem) -> Bool? {
+        switch item {
+        case .chooser:
+            return true
+        case .format(let format):
+            return format.format == .undo || format.format == .redo
+        case .separator:
+            return nil
+        }
+    }
+
+    /// Separators only stand between groups that are both on the row.
+    private func rowViews(_ items: [(item: BarItem, view: UIView?)]) -> [UIView] {
+        var views = [UIView]()
+        var separatorPending = false
+        for (_, view) in items {
+            guard let view = view else {
+                separatorPending = !views.isEmpty
+                continue
+            }
+            if separatorPending {
+                views.append(self.makeSeparator())
+                separatorPending = false
+            }
+            views.append(view)
+        }
+        return views
     }
 
     private func setUpVersionBar() {
@@ -304,7 +366,9 @@ class CollabEditorViewController: UIViewController {
         button.tintColor = .jamiPrimaryControl
         button.translatesAutoresizingMaskIntoConstraints = false
         let side = CollabEditorViewController.touchTarget
-        button.widthAnchor.constraint(greaterThanOrEqualToConstant: side).isActive = true
+        let width = button.widthAnchor.constraint(greaterThanOrEqualToConstant: side)
+        width.isActive = true
+        self.iconWidths.append(width)
         button.heightAnchor.constraint(equalToConstant: side).isActive = true
         button.addAction(UIAction { [weak self] _ in self?.apply(item.format) },
                          for: .touchUpInside)
@@ -339,6 +403,8 @@ class CollabEditorViewController: UIViewController {
             }
         ])
         button.translatesAutoresizingMaskIntoConstraints = false
+        // On a narrow row the names are what gives way, not the buttons.
+        button.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         let side = CollabEditorViewController.touchTarget
         NSLayoutConstraint.activate([
             button.widthAnchor.constraint(greaterThanOrEqualToConstant: side),
@@ -563,6 +629,8 @@ class CollabEditorViewController: UIViewController {
 
     private static let barHeight: CGFloat = 48
     private static let touchTarget: CGFloat = 44
+    /// A phone's row of buttons is as tall to touch, a little narrower.
+    private static let compactIconWidth: CGFloat = 38
     private static let buttonSpacing: CGFloat = 4
     private static let margin: CGFloat = 8
     private static let panelWidth: CGFloat = 300
@@ -597,6 +665,60 @@ class CollabEditorViewController: UIViewController {
         let value: String
         let symbol: String
         let label: String
+    }
+
+    /**
+     One row of the bar. What does not fit can still be scrolled to; on a phone
+     the row is spread to the width, and its choosers give up room to the
+     buttons before it scrolls.
+     */
+    private final class FormatRow {
+        let scrollView = UIScrollView()
+        private let stack = UIStackView()
+        private var fillWidth = [NSLayoutConstraint]()
+
+        init() {
+            self.scrollView.showsHorizontalScrollIndicator = false
+            self.stack.axis = .horizontal
+            self.stack.alignment = .center
+            self.stack.translatesAutoresizingMaskIntoConstraints = false
+            self.scrollView.addSubview(self.stack)
+
+            let content = self.scrollView.contentLayoutGuide
+            let frame = self.scrollView.frameLayoutGuide
+            let margin = CollabEditorViewController.margin
+            let spread = self.stack.widthAnchor
+                .constraint(equalTo: frame.widthAnchor, constant: -2 * margin)
+            spread.priority = .defaultHigh
+            self.fillWidth = [
+                self.stack.widthAnchor
+                    .constraint(greaterThanOrEqualTo: frame.widthAnchor, constant: -2 * margin),
+                spread
+            ]
+            NSLayoutConstraint.activate([
+                self.stack.topAnchor.constraint(equalTo: content.topAnchor),
+                self.stack.bottomAnchor.constraint(equalTo: content.bottomAnchor),
+                self.stack.leadingAnchor.constraint(equalTo: content.leadingAnchor, constant: margin),
+                self.stack.trailingAnchor.constraint(equalTo: content.trailingAnchor, constant: -margin),
+                self.stack.heightAnchor.constraint(equalTo: frame.heightAnchor)
+            ])
+        }
+
+        func clear() {
+            self.stack.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        }
+
+        func show(_ views: [UIView], spread: Bool) {
+            views.forEach { self.stack.addArrangedSubview($0) }
+            self.scrollView.isHidden = views.isEmpty
+            self.stack.distribution = spread ? .equalSpacing : .fill
+            self.stack.spacing = spread ? 0 : CollabEditorViewController.buttonSpacing
+            if spread {
+                NSLayoutConstraint.activate(self.fillWidth)
+            } else {
+                NSLayoutConstraint.deactivate(self.fillWidth)
+            }
+        }
     }
 
     /// Left is the default, and is written as the absence of the attribute.
