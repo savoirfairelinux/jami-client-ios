@@ -816,6 +816,13 @@
 "collab.clearFormat" = "Clear formatting";
 "collab.undo" = "Undo";
 "collab.redo" = "Redo";
+"collab.paragraphStyle" = "Paragraph style";
+"collab.normalText" = "Normal text";
+"collab.font" = "Font";
+"collab.defaultFont" = "Default font";
+"collab.fontSize" = "Font size";
+"collab.baseSize" = "Base size";
+"collab.alignment" = "Paragraph alignment";
 "collab.remove" = "Remove";
 "collab.open" = "Open";
 "collab.downloadAndOpen" = "Download and open";
