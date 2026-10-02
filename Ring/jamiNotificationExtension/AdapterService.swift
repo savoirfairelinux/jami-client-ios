@@ -63,6 +63,7 @@ class AdapterService {
     enum InteractionType: String {
         case message = "text/plain"
         case fileTransfer = "application/data-transfer+json"
+        case collabDocument = "application/collab-doc+json"
     }
 
     enum EventType: Int {
@@ -73,6 +74,8 @@ class AdapterService {
         case conversationCloned
         case invitation
         case activeCall
+        case documentShared
+        case documentDownloaded
     }
 
     enum PeerConnectionRequestType {
@@ -269,7 +272,18 @@ extension AdapterService: AdapterDelegate {
                 self.loadingFiles[fileId] = data
                 handler(.fileTransferInProgress, data)
             }
+        case .collabDocument:
+            guard let announcement = CollabDocumentAnnouncement(message: message) else { return }
+            handler(.documentShared, EventData(accountId: accountId, jamiId: from, conversationId: conversationId,
+                                               content: announcement.name, groupTitle: "", documentId: announcement.documentId))
         }
+    }
+
+    func collaborativeDocumentDownloaded(accountId: String, conversationId: String, documentId: String) {
+        guard let handler = self.eventHandler else {
+            return
+        }
+        handler(.documentDownloaded, EventData(accountId: accountId, conversationId: conversationId, documentId: documentId))
     }
 
     func activeCallsChanged(conversationId: String, accountId: String, calls: [[String: String]]) {

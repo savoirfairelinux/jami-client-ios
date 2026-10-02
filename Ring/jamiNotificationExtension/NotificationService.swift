@@ -285,6 +285,10 @@ class NotificationService: UNNotificationServiceExtension {
     private var itemsToPresent = 0
     private var syncCompleted = false
     private var waitForCloning = false
+    // Documents announced while syncing. The daemon downloads them on its own;
+    // waiting for it lets a document open on this device without a peer.
+    private var documentsToDownload: Set<String> = []
+    private var downloadedDocuments: Set<String> = []
 
     // A queue of pending message and active-call notifications waiting for a name lookup.
     private let notificationQueue = DispatchQueue(label: Constants.appIdentifier + ".Notification.queue")
@@ -578,8 +582,37 @@ class NotificationService: UNNotificationServiceExtension {
                 CommonHelpers.setUpdatedConversations(accountId: self.accountId, conversationId: eventData.conversationId)
                 self.taskPropertyQueue.sync { self.itemsToPresent += 1 }
                 self.configureAndPresentCallNotification(config: notifConfig, calls: calls, accountId: eventData.accountId)
+            case .documentShared:
+                self.documentShared(eventData, accountJamiId: accountJamiId)
+            case .documentDownloaded:
+                self.documentDownloaded(eventData)
             }
         }
+    }
+
+    private func documentShared(_ eventData: EventData, accountJamiId: String) {
+        CommonHelpers.setUpdatedConversations(accountId: self.accountId, conversationId: eventData.conversationId)
+        self.taskPropertyQueue.sync {
+            if !self.downloadedDocuments.contains(eventData.documentId) {
+                self.documentsToDownload.insert(eventData.documentId)
+            }
+        }
+        if accountJamiId == eventData.jamiId {
+            return
+        }
+        let name = eventData.content.isEmpty ? L10n.Collab.untitled : eventData.content
+        let config = NotificationConfig(from: eventData.jamiId, url: nil, body: L10n.Collab.documentShared(name),
+                                        conversationId: eventData.conversationId, groupTitle: eventData.groupTitle)
+        self.taskPropertyQueue.sync { self.itemsToPresent += 1 }
+        self.configureAndPresentNotification(config: config, type: LocalNotificationType.message)
+    }
+
+    private func documentDownloaded(_ eventData: EventData) {
+        self.taskPropertyQueue.sync {
+            self.downloadedDocuments.insert(eventData.documentId)
+            self.documentsToDownload.remove(eventData.documentId)
+        }
+        self.verifyTasksStatus()
     }
 
     private func verifyTasksStatus() {
@@ -592,9 +625,9 @@ class NotificationService: UNNotificationServiceExtension {
         self.taskPropertyQueue.sync {
             // We could finish in two cases:
             // 1. we did not start account we are not waiting for the signals from the daemon
-            // 2. conversation synchronization completed and all files downloaded
+            // 2. conversation synchronization completed and all files and documents downloaded
             if !self.accountIsActive.load(ordering: .relaxed) ||
-                (self.syncCompleted && self.itemsToPresent == 0 && !self.waitForCloning) {
+                (self.syncCompleted && self.itemsToPresent == 0 && !self.waitForCloning && self.documentsToDownload.isEmpty) {
                 self.autoDispatchGroup.leave(id: jamiTaskId)
             }
         }
