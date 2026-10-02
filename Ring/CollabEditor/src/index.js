@@ -324,9 +324,14 @@ class Editor {
         this.format(name, !formats[name])
     }
 
+    /*
+     * Chosen from a list of paragraph styles, as on the desktop, so choosing
+     * the style a line already has keeps it. 0 is normal text.
+     */
     setHeader(level) {
-        const formats = this.quill.getFormat() || {}
-        this.format('header', formats.header === level ? false : level)
+        const header = Number(level)
+        if (!Number.isInteger(header) || header < 0 || header > 3) return
+        this.format('header', header > 0 ? header : false)
     }
 
     setList(style) {

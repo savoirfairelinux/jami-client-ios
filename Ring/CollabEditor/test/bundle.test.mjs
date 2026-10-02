@@ -863,3 +863,20 @@ test('a font and a size are exported as the clients draw them', options, async (
     assert.doesNotMatch(html, /some-new-font/)
     assert.deepEqual(host.logs, [])
 })
+
+test('a paragraph style is chosen, not toggled', options, async () => {
+    const { dom, host, editor } = await launch()
+    const peer = receive(editor, [{ insert: 'Title' }])
+    host.updates.length = 0
+
+    await select(dom, 2)
+    editor.setHeader(1)
+    editor.setHeader(1)
+    assert.deepEqual(relayed(host, peer), [{ insert: 'Title', attributes: { header: 1 } }])
+    editor.setHeader(3)
+    for (const level of [NaN, -1, 4, 1.5, undefined, 'abc']) editor.setHeader(level)
+    assert.equal(lastSelection(host).formats.header, 3)
+    editor.setHeader(0)
+    assert.deepEqual(relayed(host, peer), [{ insert: 'Title' }])
+    assert.deepEqual(host.logs, [])
+})

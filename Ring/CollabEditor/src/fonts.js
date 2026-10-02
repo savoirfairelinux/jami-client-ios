@@ -39,9 +39,6 @@ export const DOCUMENT_FONTS = [
 export const MIN_FONT_SIZE = 1
 export const MAX_FONT_SIZE = 400
 
-/* The sizes offered, as on the desktop. */
-export const FONT_SIZES = [8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 28, 36, 48, 72]
-
 /*
  * A font id is a short lowercase name. Whatever is kept is sent again with
  * every character typed into it.

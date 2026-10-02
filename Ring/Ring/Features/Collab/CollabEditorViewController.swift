@@ -369,7 +369,25 @@ class CollabEditorViewController: UIViewController {
         return String(json.dropFirst().dropLast())
     }
 
-    // MARK: - Format bar
+    // MARK: - Pieces
+
+    private func showTitle() {
+        self.navigationItem.title = self.viewModel.title
+        self.navigationItem.prompt = self.viewModel.participantsDescription
+    }
+
+    // MARK: - Constants
+
+    fileprivate static let bridgeName = "jami"
+
+    private static let buttonSpacing: CGFloat = 4
+    private static let margin: CGFloat = 8
+    private static let panelWidth: CGFloat = 300
+}
+
+// MARK: - The format bar
+
+extension CollabEditorViewController {
 
     private func apply(_ format: CollabFormatBar.Format) {
         switch format {
@@ -378,6 +396,8 @@ class CollabEditorViewController: UIViewController {
         case .underline: self.callEditor("toggle", self.quote("underline"))
         case .strike: self.callEditor("toggle", self.quote("strike"))
         case .header(let level): self.callEditor("setHeader", String(level))
+        case .font(let id): self.callEditor("setFont", self.quote(id))
+        case .size(let points): self.callEditor("setSize", String(points))
         case .list(let kind): self.callEditor("setList", self.quote(kind))
         case .align(let side): self.callEditor("setAlign", self.quote(side))
         case .clear: self.callEditor("clearFormat")
@@ -396,20 +416,19 @@ class CollabEditorViewController: UIViewController {
         self.formatBar.show(formats)
     }
 
-    // MARK: - Pieces
-
-    private func showTitle() {
-        self.navigationItem.title = self.viewModel.title
-        self.navigationItem.prompt = self.viewModel.participantsDescription
+    /// The fonts are the page's: it is what draws them.
+    private func loadFonts() {
+        self.webView.evaluateJavaScript("window.JamiEditor.fonts()") { [weak self] result, _ in
+            guard let self = self,
+                  let json = result as? String,
+                  let data = json.data(using: .utf8),
+                  let list = try? JSONSerialization.jsonObject(with: data) as? [[String: String]] else { return }
+            self.formatBar.fonts = list.compactMap { entry in
+                guard let id = entry["id"], let family = entry["family"] else { return nil }
+                return CollabFormatBar.Font(id: id, family: family)
+            }
+        }
     }
-
-    // MARK: - Constants
-
-    fileprivate static let bridgeName = "jami"
-
-    private static let buttonSpacing: CGFloat = 4
-    private static let margin: CGFloat = 8
-    private static let panelWidth: CGFloat = 300
 }
 
 // MARK: - Telling the user what became of the document
@@ -851,6 +870,7 @@ extension CollabEditorViewController: WKScriptMessageHandler {
 
         switch name {
         case "onReady":
+            self.loadFonts()
             self.openDocument()
         case "onUpdate":
             if self.viewModel.opened {

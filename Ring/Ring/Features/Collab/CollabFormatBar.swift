@@ -27,30 +27,50 @@ import UIKit
  */
 class CollabFormatBar: UIView {
 
-    /// What the page can be asked to do, and what the buttons stand for.
+    /// What the page can be asked to do from the bar.
     enum Format: Hashable {
         case bold, italic, underline, strike
         case header(Int)
+        case font(String)
+        case size(Double)
         case list(String)
         case align(String)
         case link, image, clear, undo, redo
     }
 
-    /// A button was tapped: do what it stands for.
+    /// A font a document may name, as the page offers it.
+    struct Font {
+        let id: String
+        let family: String
+    }
+
+    /// A button was tapped or a choice made: do what it stands for.
     var onFormat: ((Format) -> Void)?
+
+    /// The fonts to choose from.
+    var fonts = [Font]() {
+        didSet { self.showChoices() }
+    }
 
     /// The address of the link under the caret, if there is one.
     private(set) var currentLink = ""
+    private var currentHeader = 0
+    private var currentFont = ""
+    private var currentSize: Double = 0
+    private var currentAlign = ""
 
     private let scrollView = UIScrollView()
     private let stack = UIStackView()
     private var buttons = [Format: UIButton]()
+    private var choosers = [Chooser: UIButton]()
 
     private static let height: CGFloat = 48
     private static let touchTarget: CGFloat = 44
     private static let buttonSpacing: CGFloat = 4
     private static let margin: CGFloat = 8
     private static let inactiveAlpha: CGFloat = 0.55
+    private static let chooserMaxWidth: CGFloat = 160
+    private static let separatorHeight: CGFloat = 24
 
     init() {
         super.init(frame: .zero)
@@ -74,10 +94,20 @@ class CollabFormatBar: UIView {
         self.scrollView.addSubview(self.stack)
 
         for item in CollabFormatBar.items {
-            let button = self.makeButton(item)
-            self.buttons[item.format] = button
-            self.stack.addArrangedSubview(button)
+            switch item {
+            case .button(let button):
+                let view = self.makeButton(button)
+                self.buttons[button.format] = view
+                self.stack.addArrangedSubview(view)
+            case .chooser(let chooser):
+                let view = self.makeChooser(chooser)
+                self.choosers[chooser] = view
+                self.stack.addArrangedSubview(view)
+            case .separator:
+                self.stack.addArrangedSubview(self.makeSeparator())
+            }
         }
+        self.showChoices()
 
         let content = self.scrollView.contentLayoutGuide
         let frame = self.scrollView.frameLayoutGuide
@@ -98,15 +128,44 @@ class CollabFormatBar: UIView {
         ])
     }
 
-    private func makeButton(_ item: Item) -> UIButton {
-        let button = UIButton(type: .system)
-        if let symbol = item.symbol {
-            button.setImage(UIImage(systemName: symbol), for: .normal)
-        } else {
-            button.setTitle(item.title, for: .normal)
-            button.titleLabel?.font = .preferredFont(forTextStyle: .headline)
-            button.titleLabel?.adjustsFontForContentSizeCategory = true
+    /// Shows what the text under the caret has, as the page reports it.
+    func show(_ formats: [String: Any]) {
+        self.currentLink = formats["link"] as? String ?? ""
+        self.currentHeader = formats["header"] as? Int ?? 0
+        self.currentFont = formats["font"] as? String ?? ""
+        self.currentSize = formats["size"] as? Double ?? 0
+        self.currentAlign = formats["align"] as? String ?? ""
+        self.showChoices()
+
+        let list = formats["list"] as? String ?? ""
+
+        func active(_ format: Format) -> Bool {
+            switch format {
+            case .bold: return formats["bold"] as? Bool ?? false
+            case .italic: return formats["italic"] as? Bool ?? false
+            case .underline: return formats["underline"] as? Bool ?? false
+            case .strike: return formats["strike"] as? Bool ?? false
+            case .list(let kind): return list == kind
+            case .link: return !self.currentLink.isEmpty
+            default: return false
+            }
         }
+
+        for (format, button) in self.buttons {
+            let selected = active(format)
+            button.isSelected = selected
+            button.alpha = selected ? 1 : CollabFormatBar.inactiveAlpha
+        }
+    }
+}
+
+// MARK: - The controls
+
+extension CollabFormatBar {
+
+    private func makeButton(_ item: Button) -> UIButton {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: item.symbol), for: .normal)
         button.accessibilityLabel = item.label
         button.alpha = CollabFormatBar.inactiveAlpha
         button.tintColor = .jamiPrimaryControl
@@ -119,71 +178,233 @@ class CollabFormatBar: UIView {
         return button
     }
 
-    /// Lights up the buttons that describe the text under the caret, as the
-    /// page reports it.
-    func show(_ formats: [String: Any]) {
-        self.currentLink = formats["link"] as? String ?? ""
-
-        let header = formats["header"] as? Int ?? 0
-        let list = formats["list"] as? String ?? ""
-        let align = formats["align"] as? String ?? ""
-
-        func active(_ format: Format) -> Bool {
-            switch format {
-            case .bold: return formats["bold"] as? Bool ?? false
-            case .italic: return formats["italic"] as? Bool ?? false
-            case .underline: return formats["underline"] as? Bool ?? false
-            case .strike: return formats["strike"] as? Bool ?? false
-            case .header(let level): return header == level
-            case .list(let kind): return list == kind
-            // Left alignment is the absence of the attribute.
-            case .align(let side): return side == "left" ? align.isEmpty : align == side
-            case .link: return !self.currentLink.isEmpty
-            default: return false
-            }
+    /**
+     A button that opens the list it chooses from. The list is built when it
+     opens, so that it ticks what the text under the caret has then.
+     */
+    private func makeChooser(_ chooser: Chooser) -> UIButton {
+        let spacing = CollabFormatBar.buttonSpacing
+        var configuration = UIButton.Configuration.plain()
+        configuration.titleLineBreakMode = .byTruncatingTail
+        configuration.imagePlacement = .trailing
+        configuration.imagePadding = spacing
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: spacing,
+                                                              bottom: 0, trailing: spacing)
+        configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { attributes in
+            var attributes = attributes
+            attributes.font = .preferredFont(forTextStyle: .subheadline)
+            return attributes
         }
+        let button = UIButton(configuration: configuration)
+        button.tintColor = .jamiPrimaryControl
+        button.accessibilityLabel = chooser.label
+        button.showsMenuAsPrimaryAction = true
+        button.menu = UIMenu(children: [
+            UIDeferredMenuElement.uncached { [weak self] completion in
+                completion(self?.choices(for: chooser) ?? [])
+            }
+        ])
+        button.translatesAutoresizingMaskIntoConstraints = false
+        let side = CollabFormatBar.touchTarget
+        NSLayoutConstraint.activate([
+            button.widthAnchor.constraint(greaterThanOrEqualToConstant: side),
+            button.widthAnchor.constraint(lessThanOrEqualToConstant: CollabFormatBar.chooserMaxWidth),
+            button.heightAnchor.constraint(equalToConstant: side)
+        ])
+        return button
+    }
 
-        for (format, button) in self.buttons {
-            let selected = active(format)
-            button.isSelected = selected
-            button.alpha = selected ? 1 : CollabFormatBar.inactiveAlpha
+    private func makeSeparator() -> UIView {
+        let line = UIView()
+        line.backgroundColor = .separator
+        line.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            line.widthAnchor.constraint(equalToConstant: 1),
+            line.heightAnchor.constraint(equalToConstant: CollabFormatBar.separatorHeight)
+        ])
+        return line
+    }
+}
+
+// MARK: - Choosing a style, a font, a size, an alignment
+
+extension CollabFormatBar {
+
+    private func paragraphStyleName(_ level: Int) -> String {
+        return level == 0 ? L10n.Collab.normalText : L10n.Collab.heading(level)
+    }
+
+    /// A font this client does not offer is shown as unavailable: a newer client chose it.
+    private var currentFontName: String {
+        if self.currentFont.isEmpty { return L10n.Collab.defaultFont }
+        return self.fonts.first { $0.id == self.currentFont }?.family ?? L10n.Collab.unavailableFont
+    }
+
+    private func sizeName(_ size: Double) -> String {
+        return CollabFormatBar.sizeFormatter.string(from: NSNumber(value: size)) ?? String(size)
+    }
+
+    private var currentAlignment: Alignment {
+        let alignments = CollabFormatBar.alignments
+        return alignments.first { $0.value == self.currentAlign } ?? alignments[0]
+    }
+
+    /// Shows on each chooser what the text under the caret has.
+    private func showChoices() {
+        let chevron = UIImage(systemName: "chevron.down",
+                              withConfiguration: UIImage.SymbolConfiguration(textStyle: .caption2))
+        for (chooser, button) in self.choosers {
+            var title: String?
+            var image = chevron
+            let value: String
+            switch chooser {
+            case .paragraphStyle:
+                value = self.paragraphStyleName(self.currentHeader)
+                title = value
+            case .font:
+                value = self.currentFontName
+                title = value
+            case .size:
+                if self.currentSize > 0 {
+                    value = self.sizeName(self.currentSize)
+                    title = value
+                } else {
+                    value = L10n.Collab.baseSize
+                    image = UIImage(systemName: "textformat.size")
+                }
+            case .alignment:
+                value = self.currentAlignment.label
+                image = UIImage(systemName: self.currentAlignment.symbol)
+            }
+            button.configuration?.title = title
+            button.configuration?.image = image
+            button.accessibilityValue = value
         }
     }
 
-    // MARK: - Buttons
+    private func choices(for chooser: Chooser) -> [UIMenuElement] {
+        switch chooser {
+        case .paragraphStyle:
+            return (0...3).map { level in
+                self.choice(self.paragraphStyleName(level), .header(level),
+                            isCurrent: self.currentHeader == level)
+            }
+        case .font:
+            let fonts = self.fonts.map { font in
+                self.choice(font.family, .font(font.id), isCurrent: self.currentFont == font.id)
+            }
+            return [
+                self.choice(L10n.Collab.defaultFont, .font(""), isCurrent: self.currentFont.isEmpty),
+                UIMenu(options: .displayInline, children: fonts)
+            ]
+        case .size:
+            let sizes = CollabFormatBar.fontSizes.map { size in
+                self.choice(self.sizeName(size), .size(size), isCurrent: self.currentSize == size)
+            }
+            return [
+                self.choice(L10n.Collab.baseSize, .size(0), isCurrent: self.currentSize == 0),
+                UIMenu(options: .displayInline, children: sizes)
+            ]
+        case .alignment:
+            return CollabFormatBar.alignments.map { alignment in
+                self.choice(alignment.label, .align(alignment.value),
+                            symbol: alignment.symbol,
+                            isCurrent: alignment.value == self.currentAlignment.value)
+            }
+        }
+    }
 
-    private struct Item {
+    private func choice(_ title: String, _ format: Format,
+                        symbol: String? = nil, isCurrent: Bool) -> UIAction {
+        return UIAction(title: title,
+                        image: symbol.flatMap { UIImage(systemName: $0) },
+                        state: isCurrent ? .on : .off) { [weak self] _ in
+            self?.onFormat?(format)
+        }
+    }
+}
+
+// MARK: - What the bar holds
+
+extension CollabFormatBar {
+
+    private struct Button {
         let format: Format
-        let symbol: String?
-        let title: String?
+        let symbol: String
         let label: String
 
-        init(_ format: Format, symbol: String? = nil, title: String? = nil, label: String) {
+        init(_ format: Format, symbol: String, label: String) {
             self.format = format
             self.symbol = symbol
-            self.title = title
             self.label = label
         }
     }
 
+    /// The buttons that open a list to choose from, as on the desktop.
+    private enum Chooser: Hashable {
+        case paragraphStyle, font, size, alignment
+
+        var label: String {
+            switch self {
+            case .paragraphStyle: return L10n.Collab.paragraphStyle
+            case .font: return L10n.Collab.font
+            case .size: return L10n.Collab.fontSize
+            case .alignment: return L10n.Collab.alignment
+            }
+        }
+    }
+
+    private enum Item {
+        case button(Button)
+        case chooser(Chooser)
+        case separator
+    }
+
+    private struct Alignment {
+        let value: String
+        let symbol: String
+        let label: String
+    }
+
+    /// The sizes offered, in points, as on the desktop.
+    private static let fontSizes: [Double] = [8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 28, 36, 48, 72]
+
+    private static let sizeFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 2
+        return formatter
+    }()
+
+    /// Left is the default, and is written as the absence of the attribute.
+    private static let alignments: [Alignment] = [
+        Alignment(value: "left", symbol: "text.alignleft", label: L10n.Collab.alignLeft),
+        Alignment(value: "center", symbol: "text.aligncenter", label: L10n.Collab.alignCenter),
+        Alignment(value: "right", symbol: "text.alignright", label: L10n.Collab.alignRight),
+        Alignment(value: "justify", symbol: "text.justify", label: L10n.Collab.alignJustify)
+    ]
+
+    /// In the order of the desktop client's bar: what the text looks like, then
+    /// how it is emphasized, how its paragraphs are laid out, and what it holds.
     private static let items: [Item] = [
-        Item(.bold, symbol: "bold", label: L10n.Collab.bold),
-        Item(.italic, symbol: "italic", label: L10n.Collab.italic),
-        Item(.underline, symbol: "underline", label: L10n.Collab.underline),
-        Item(.strike, symbol: "strikethrough", label: L10n.Collab.strikethrough),
-        Item(.header(1), title: "H1", label: L10n.Collab.heading(1)),
-        Item(.header(2), title: "H2", label: L10n.Collab.heading(2)),
-        Item(.header(3), title: "H3", label: L10n.Collab.heading(3)),
-        Item(.list("bullet"), symbol: "list.bullet", label: L10n.Collab.bulletList),
-        Item(.list("ordered"), symbol: "list.number", label: L10n.Collab.orderedList),
-        Item(.align("left"), symbol: "text.alignleft", label: L10n.Collab.alignLeft),
-        Item(.align("center"), symbol: "text.aligncenter", label: L10n.Collab.alignCenter),
-        Item(.align("right"), symbol: "text.alignright", label: L10n.Collab.alignRight),
-        Item(.align("justify"), symbol: "text.justify", label: L10n.Collab.alignJustify),
-        Item(.link, symbol: "link", label: L10n.Collab.linkTitle),
-        Item(.image, symbol: "photo", label: L10n.Collab.insertImage),
-        Item(.clear, symbol: "textformat", label: L10n.Collab.clearFormat),
-        Item(.undo, symbol: "arrow.uturn.backward", label: L10n.Collab.undo),
-        Item(.redo, symbol: "arrow.uturn.forward", label: L10n.Collab.redo)
+        .chooser(.paragraphStyle),
+        .chooser(.font),
+        .chooser(.size),
+        .separator,
+        .button(Button(.bold, symbol: "bold", label: L10n.Collab.bold)),
+        .button(Button(.italic, symbol: "italic", label: L10n.Collab.italic)),
+        .button(Button(.underline, symbol: "underline", label: L10n.Collab.underline)),
+        .button(Button(.strike, symbol: "strikethrough", label: L10n.Collab.strikethrough)),
+        .separator,
+        .chooser(.alignment),
+        .button(Button(.list("bullet"), symbol: "list.bullet", label: L10n.Collab.bulletList)),
+        .button(Button(.list("ordered"), symbol: "list.number", label: L10n.Collab.orderedList)),
+        .separator,
+        .button(Button(.link, symbol: "link", label: L10n.Collab.linkTitle)),
+        .button(Button(.image, symbol: "photo", label: L10n.Collab.insertImage)),
+        .button(Button(.clear, symbol: "textformat", label: L10n.Collab.clearFormat)),
+        .separator,
+        .button(Button(.undo, symbol: "arrow.uturn.backward", label: L10n.Collab.undo)),
+        .button(Button(.redo, symbol: "arrow.uturn.forward", label: L10n.Collab.redo))
     ]
 }
