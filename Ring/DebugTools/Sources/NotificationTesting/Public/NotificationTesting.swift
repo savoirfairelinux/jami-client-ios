@@ -197,10 +197,15 @@ public enum NotificationTesting {
     // MARK: - Flush
 
     /// Drain the OTel SimpleSpanProcessor and ship any buffered logs.
+    /// Blocks until both the OTel flush and the log HTTP POST complete, or
+    /// until `timeout` elapses — whichever comes first. Safe to call from
+    /// the notification extension before invoking the content handler.
     public static func flushPendingSpans(timeout: TimeInterval = 2.0) {
         TelemetryService.shared.flushPendingSpans(timeout: timeout)
         if LogForwarder.shared.isEnabled {
-            LogForwarder.shared.shipLogs()
+            let sema = DispatchSemaphore(value: 0)
+            LogForwarder.shared.shipLogs { sema.signal() }
+            _ = sema.wait(timeout: .now() + timeout)
         }
     }
 
@@ -345,6 +350,24 @@ public enum NotificationTesting {
             accountId: accountId,
             send: send
         )
+    }
+
+    // MARK: - Receiver tracing
+
+    /// Emit receiver-side foreground span for a notification test message body.
+    ///
+    /// Called from the daemon's message callback, so it must not block: the flush
+    /// runs on a background queue instead of waiting on the caller's thread.
+    public static func emitForegroundMessageReceivedSpans(messageBody: String, conversationId: String) {
+        guard let traceparent = extractTraceparent(from: messageBody) else { return }
+        var attrs: [String: String] = ["conversation.id": conversationId, "push.result": "received-foreground"]
+        if let hex = traceIdHex(from: traceparent) {
+            attrs["sender.trace.id"] = hex
+        }
+        emitInstantSpan(name: SpanName.messageReceived, parentTraceparent: traceparent, attributes: attrs)
+        DispatchQueue.global(qos: .utility).async {
+            flushPendingSpans(timeout: 2.0)
+        }
     }
 
     // MARK: - Trace ID parser

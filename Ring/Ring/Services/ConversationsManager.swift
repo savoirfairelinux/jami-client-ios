@@ -805,16 +805,7 @@ extension ConversationsManager {
     func newInteraction(conversationId: String, accountId: String, message: SwarmMessageWrap) {
         guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
         #if DEBUG_TOOLS_ENABLED
-        let body = (message.body[MessageAttributes.body.rawValue] as? String) ?? ""
-        if let traceparent = NotificationTesting.extractTraceparent(from: body) {
-            var attrs: [String: String] = ["conversation.id": conversationId]
-            if let hex = NotificationTesting.traceIdHex(from: traceparent) {
-                attrs["sender.trace.id"] = hex
-            }
-            NotificationTesting.emitInstantSpan(name: "message.received", parentTraceparent: traceparent, attributes: attrs)
-        } else if let traceId = NotificationTesting.extractTraceId(from: body), !traceId.isEmpty {
-            NotificationTesting.emitInstantSpan(name: "message.received", attributes: ["trace.id": traceId, "conversation.id": conversationId])
-        }
+        NotificationTesting.emitForegroundMessageReceivedSpans(messageBody: (message.body[MessageAttributes.body.rawValue] as? String) ?? "", conversationId: conversationId)
         #endif
         let newMessage = MessageModel(with: message, localJamiId: account.jamiId)
         self.confirmPostCallSyncIfNeeded(accountId: accountId, message: newMessage)

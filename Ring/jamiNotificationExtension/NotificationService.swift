@@ -358,7 +358,7 @@ class NotificationService: UNNotificationServiceExtension {
             .filter { String(describing: $0.key) != "aps" }
             .map { "\(String(describing: $0.key))=\(String(describing: $0.value))" }
             .joined(separator: " ")
-        bufferSpan(name: "push.received", attributes: ["payload": payload, "process": "extension"])
+        bufferSpan(name: SpanName.pushReceived, attributes: ["payload": payload, "process": "extension"])
         #endif
         self.contentHandler = contentHandler
         self.receivedAt = Date()
@@ -385,7 +385,7 @@ class NotificationService: UNNotificationServiceExtension {
         guard !appIsActive() else {
             logRequestExit(.appActive, data: requestData)
             #if DEBUG_TOOLS_ENABLED
-            bufferSpan(name: "push.skipped", attributes: ["reason": "app_foreground"])
+            bufferSpan(name: SpanName.pushSkipped, attributes: ["reason": "app_foreground"])
             #endif
             return
         }
@@ -393,7 +393,7 @@ class NotificationService: UNNotificationServiceExtension {
         guard !shareExtensionHasAccountActive(accountId: accountId) else {
             logRequestExit(.shareExtensionActive, data: requestData)
             #if DEBUG_TOOLS_ENABLED
-            bufferSpan(name: "push.skipped", attributes: ["reason": "share_extension_active"])
+            bufferSpan(name: SpanName.pushSkipped, attributes: ["reason": "share_extension_active"])
             #endif
             return
         }
@@ -401,7 +401,7 @@ class NotificationService: UNNotificationServiceExtension {
         guard !isResubscribe(accountId: accountId, data: requestData) else {
             logRequestExit(.resubscribed, data: requestData)
             #if DEBUG_TOOLS_ENABLED
-            bufferSpan(name: "push.resubscribe", attributes: ["account.id": accountId])
+            bufferSpan(name: SpanName.pushResubscribe, attributes: ["account.id": accountId])
             #endif
             return
         }
@@ -448,7 +448,7 @@ class NotificationService: UNNotificationServiceExtension {
     // Starts streaming data from a specified URL and processes received lines.
     private func startStreaming(from url: URL, for request: UNNotificationRequest, keyURL: URL, treatedMessagesURL: URL) {
         #if DEBUG_TOOLS_ENABLED
-        bufferSpan(name: "push.stream.started", attributes: ["url": url.absoluteString])
+        bufferSpan(name: SpanName.pushStreamStarted, attributes: ["url": url.absoluteString])
         #endif
         let taskId = UUID().uuidString
         autoDispatchGroup.enter(id: taskId)
@@ -473,7 +473,7 @@ class NotificationService: UNNotificationServiceExtension {
                 self.logStreamingExit("completed attempts: \(attempts)", startedAt: startedAt)
                 #if DEBUG_TOOLS_ENABLED
                 if linesReceived == 0 {
-                    self.bufferSpan(name: "push.stream.empty")
+                    self.bufferSpan(name: SpanName.pushStreamEmpty)
                 }
                 #endif
             } catch {
@@ -482,7 +482,7 @@ class NotificationService: UNNotificationServiceExtension {
                 } else {
                     self.logStreamingExit(ProxyValueFetcher.failureDescription(error), startedAt: startedAt)
                     #if DEBUG_TOOLS_ENABLED
-                    self.bufferSpan(name: "push.stream.error", attributes: ["error": ProxyValueFetcher.failureDescription(error)])
+                    self.bufferSpan(name: SpanName.pushStreamError, attributes: ["error": ProxyValueFetcher.failureDescription(error)])
                     #endif
                 }
             }
@@ -513,7 +513,7 @@ class NotificationService: UNNotificationServiceExtension {
 
             log("Processing ID: \(id)")
             #if DEBUG_TOOLS_ENABLED
-            bufferSpan(name: "push.line.received", attributes: ["line.id": id])
+            bufferSpan(name: SpanName.pushStreamDataReceived, attributes: ["line.id": id])
             #endif
             idsToProcess.remove(id)
             processMap(map: map, keyURL: keyURL, treatedMessagesURL: treatedMessagesURL, userInfo: request.content.userInfo)
@@ -536,13 +536,13 @@ class NotificationService: UNNotificationServiceExtension {
         #if DEBUG_TOOLS_ENABLED
         switch result {
         case .call(let peerId, _):
-            bufferSpan(name: "push.decrypted", attributes: ["type": "call", "peer.id": peerId])
+            bufferSpan(name: SpanName.pushPayloadDecrypted, attributes: ["type": "call", "peer.id": peerId])
         case .gitMessage(let convId):
-            bufferSpan(name: "push.decrypted", attributes: ["type": "git_message", "conversation.id": convId])
+            bufferSpan(name: SpanName.pushPayloadDecrypted, attributes: ["type": "git_message", "conversation.id": convId])
         case .clone:
-            bufferSpan(name: "push.decrypted", attributes: ["type": "clone"])
+            bufferSpan(name: SpanName.pushPayloadDecrypted, attributes: ["type": "clone"])
         case .unknown:
-            bufferSpan(name: "push.decrypted", attributes: ["type": "unknown"])
+            bufferSpan(name: SpanName.pushPayloadDecrypted, attributes: ["type": "unknown"])
         }
         #endif
         switch result {
@@ -589,7 +589,7 @@ class NotificationService: UNNotificationServiceExtension {
 
     override func serviceExtensionTimeWillExpire() {
         #if DEBUG_TOOLS_ENABLED
-        bufferSpan(name: "push.timeout", attributes: ["error": "time limit reached"])
+        bufferSpan(name: SpanName.pushTimeout, attributes: ["error": "time limit reached"])
         self.pushResult = "expired"
         #endif
         finish(reason: .systemExpiry)
@@ -622,7 +622,7 @@ class NotificationService: UNNotificationServiceExtension {
 
         jamiTaskId = UUID().uuidString
         #if DEBUG_TOOLS_ENABLED
-        bufferSpan(name: "push.backend.started", attributes: ["conversation.id": convId, "loadAll": String(loadAll)])
+        bufferSpan(name: SpanName.pushDaemonStarted, attributes: ["conversation.id": convId, "loadAll": String(loadAll)])
         #endif
         self.autoDispatchGroup.enter(id: jamiTaskId)
         self.adapterService.startAccountsWithListener(accountId: self.accountId, convId: convId, loadAll: loadAll) { [weak self] event, eventData in
@@ -668,7 +668,7 @@ class NotificationService: UNNotificationServiceExtension {
         self.taskPropertyQueue.sync { self.streamTask }?.cancel()
         #if DEBUG_TOOLS_ENABLED
         let durationMs = Int(Date().timeIntervalSince(startTime) * 1000)
-        bufferSpan(name: "push.finished", attributes: [
+        bufferSpan(name: SpanName.pushFinished, attributes: [
             "push.result": self.pushResult,
             "finish.reason": reason.rawValue,
             "duration_ms": String(durationMs)
@@ -882,22 +882,20 @@ extension NotificationService {
            let traceparent = NotificationTesting.extractTraceparent(from: eventData.content) {
             senderTraceparent = traceparent
         }
+        let spanName: String
+        switch event {
+        case .message:              spanName = SpanName.pushEventMessage
+        case .fileTransferDone:     spanName = SpanName.pushEventFileTransferDone
+        case .fileTransferInProgress: spanName = SpanName.pushEventFileTransferProgress
+        case .syncCompleted:        spanName = SpanName.pushEventSyncCompleted
+        case .conversationCloned:   spanName = SpanName.pushEventConversationCloned
+        case .invitation:           spanName = SpanName.pushEventInvitation
+        case .activeCall:           spanName = SpanName.pushEventActiveCall
+        }
         bufferSpan(
-            name: "push.event.\(debugEventName(for: event))",
+            name: spanName,
             attributes: ["conversation.id": eventData.conversationId, "from": eventData.jamiId]
         )
-    }
-
-    private func debugEventName(for event: AdapterService.EventType) -> String {
-        switch event {
-        case .message: return "message"
-        case .fileTransferDone: return "file_transfer_done"
-        case .fileTransferInProgress: return "file_transfer_in_progress"
-        case .syncCompleted: return "sync_completed"
-        case .conversationCloned: return "conversation_cloned"
-        case .invitation: return "invitation"
-        case .activeCall: return "active_call"
-        }
     }
     #endif
 }
@@ -1209,7 +1207,7 @@ extension NotificationService {
 
     private func presentLocalNotification(notification: LocalNotification) {
         #if DEBUG_TOOLS_ENABLED
-        bufferSpan(name: "push.notification.presented", attributes: ["type": notification.type.rawValue, "title": notification.content.title])
+        bufferSpan(name: SpanName.pushNotificationPresented, attributes: ["type": notification.type.rawValue, "title": notification.content.title])
         #endif
         let content = notification.content
         setNotificationCount(notification: content)
@@ -1227,7 +1225,7 @@ extension NotificationService {
 
     private func presentCall(info: [AnyHashable: Any]) {
         #if DEBUG_TOOLS_ENABLED
-        bufferSpan(name: "push.call.reported", attributes: ["peer.id": "\(info["peerId"] ?? "unknown")"])
+        bufferSpan(name: SpanName.pushCallReported, attributes: ["peer.id": "\(info["peerId"] ?? "unknown")"])
         #endif
         CXProvider.reportNewIncomingVoIPPushPayload(info, completion: { error in
             if let error = error as NSError? {
