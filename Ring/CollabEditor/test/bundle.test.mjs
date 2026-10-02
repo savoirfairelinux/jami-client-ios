@@ -777,6 +777,22 @@ test('the default font and the base size remove the attributes', options, async 
     assert.deepEqual(host.logs, [])
 })
 
+test('the selection says the size of text with none of its own', options, async () => {
+    const { dom, host, editor } = await launch()
+    // The stylesheet is not loaded here, so the base size it sets is set inline.
+    dom.window.document.querySelector('.ql-editor').style.fontSize = '16px'
+    receive(editor, [{ insert: 'plain ' }, { insert: 'sized', attributes: { size: 30 } }])
+
+    await select(dom, 0, 5)
+    assert.equal(lastSelection(host).formats.size, 0)
+    assert.equal(lastSelection(host).defaultSize, 12)
+
+    await select(dom, 6, 5)
+    assert.equal(lastSelection(host).formats.size, 30)
+    assert.equal(lastSelection(host).defaultSize, 12)
+    assert.deepEqual(host.logs, [])
+})
+
 test('clearing the formatting clears the font and the size', options, async () => {
     const { dom, host, editor } = await launch()
     const peer = receive(editor, [{ insert: 'word', attributes: { font: 'roboto', size: 30, i: true } }])

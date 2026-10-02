@@ -57,6 +57,8 @@ class CollabFormatBar: UIView {
     private var currentHeader = 0
     private var currentFont = ""
     private var currentSize: Double = 0
+    /// The size, in points, of text with none of its own, as the page says.
+    private var baseSize: Double = 0
     private var currentAlign = ""
 
     private let rowStack = UIStackView()
@@ -131,12 +133,14 @@ class CollabFormatBar: UIView {
         self.arrange()
     }
 
-    /// Shows what the text under the caret has, as the page reports it.
-    func show(_ formats: [String: Any]) {
+    /// Shows what the text under the caret has, as the page reports it, with
+    /// the size of text that has none of its own.
+    func show(_ formats: [String: Any], baseSize: Double) {
         self.currentLink = formats["link"] as? String ?? ""
         self.currentHeader = formats["header"] as? Int ?? 0
         self.currentFont = formats["font"] as? String ?? ""
         self.currentSize = formats["size"] as? Double ?? 0
+        self.baseSize = baseSize
         self.currentAlign = formats["align"] as? String ?? ""
         self.showChoices()
 
@@ -389,13 +393,14 @@ extension CollabFormatBar {
                 value = self.currentFontName
                 title = value
             case .size:
-                // Text with no size of its own follows the reader's text size.
+                // Text with no size of its own is at the page's base size,
+                // which is what it shows then, as on the desktop.
                 if self.currentSize > 0 {
                     value = self.sizeName(self.currentSize)
                     title = value
                 } else {
                     value = L10n.Collab.baseSize
-                    image = UIImage(systemName: "textformat.size")
+                    title = self.baseSize > 0 ? self.sizeName(self.baseSize) : value
                 }
             case .alignment:
                 value = self.currentAlignment.label
