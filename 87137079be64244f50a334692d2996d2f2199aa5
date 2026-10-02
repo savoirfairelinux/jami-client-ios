@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65d40750_2915a721",
+        "filename": "Ring/Ring/Features/Collab/CollabEditorViewController.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 644,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-02T14:09:05Z",
+      "side": 1,
+      "message": "[warning] Line 644: 🟡 `baseSizePoints` is hardcoded to `12` (derived from 16px). This can drift from the actual editor/page base font size if CSS defaults or shared editor settings change. Prefer reading the effective base size from the same source the editor uses (or a shared constant used by both platforms) so the chooser always reflects the true base size.",
+      "revId": "87137079be64244f50a334692d2996d2f2199aa5",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
