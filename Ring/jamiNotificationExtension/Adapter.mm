@@ -170,6 +170,16 @@ std::map<std::string, std::string> nameServers;
             [delegate activeCallsChangedWithConversationId:conversationId accountId:accountId calls:callsDictionary];
         }
     }));
+
+    confHandlers.insert(exportable_callback<ConversationSignal::CollaborativeDocumentDownloaded>([weakDelegate = Adapter.delegate](const std::string& account_id, const std::string& conversation_id, const std::string& document_id) {
+        id<AdapterDelegate> delegate = weakDelegate;
+        if (delegate) {
+            NSString* accountId = [NSString stringWithUTF8String:account_id.c_str()];
+            NSString* conversationId = [NSString stringWithUTF8String:conversation_id.c_str()];
+            NSString* documentId = [NSString stringWithUTF8String:document_id.c_str()];
+            [delegate collaborativeDocumentDownloadedWithAccountId:accountId conversationId:conversationId documentId:documentId];
+        }
+    }));
     registerSignalHandlers(confHandlers);
 }
 
