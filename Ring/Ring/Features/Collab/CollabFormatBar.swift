@@ -389,14 +389,15 @@ extension CollabFormatBar {
                 value = self.currentFontName
                 title = value
             case .size:
-                // Text with no size of its own follows the reader's text size.
+                // Text with no size of its own is at the page's base size,
+                // which is what it shows then, as on the desktop.
                 if self.currentSize > 0 {
                     value = self.sizeName(self.currentSize)
-                    title = value
                 } else {
                     value = L10n.Collab.baseSize
-                    image = UIImage(systemName: "textformat.size")
                 }
+                title = self.sizeName(self.currentSize > 0 ? self.currentSize
+                                        : CollabFormatBar.baseSizePoints)
             case .alignment:
                 value = self.currentAlignment.label
                 image = UIImage(systemName: self.currentAlignment.symbol)
@@ -493,6 +494,9 @@ extension CollabFormatBar {
 
     /// The sizes offered, in points, as on the desktop.
     private static let fontSizes: [Double] = [8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 28, 36, 48, 72]
+    /// The size of text with none of its own, in points: the page's
+    /// `--jami-text-size` of 16px (styles.css).
+    private static let baseSizePoints: Double = 12
 
     private static let sizeFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
