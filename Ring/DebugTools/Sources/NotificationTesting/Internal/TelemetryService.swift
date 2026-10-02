@@ -174,7 +174,8 @@ final class TelemetryService {
                 let statusCode = spanData["status"] as? Int ?? 0
                 let attrs = spanData["attributes"] as? [String: Any] ?? [:]
 
-                let builder = tracer.spanBuilder(spanName: "daemon.\(name)")
+                let spanName = name.hasPrefix("daemon.") ? name : "daemon.\(name)"
+                let builder = tracer.spanBuilder(spanName: spanName)
                 builder.setAttribute(key: "daemon.traceId", value: .string(traceIdHex))
                 builder.setAttribute(key: "daemon.spanId", value: .string(spanIdHex))
                 if !parentHex.isEmpty && parentHex != "0000000000000000" {
@@ -234,17 +235,16 @@ final class TelemetryService {
         let bundleVersion = (Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String)
             ?? (Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String)
             ?? "unknown"
+        let roleSuffix = role.map { ".\($0.rawValue)" } ?? ""
         let resource = Resource(attributes: [
-            "service.name": .string("jami.ios.\(processSource)"),
+            "service.name": .string("jami.ios.\(processSource)\(roleSuffix)"),
             "service.version": .string(bundleVersion),
             "telemetry.sdk.language": .string("swift"),
             "role": .string(role?.rawValue ?? "unknown")
         ])
 
-        let sessionConfig = URLSessionConfiguration.default
-        sessionConfig.waitsForConnectivity = true
+        let sessionConfig = URLSessionConfiguration.ephemeral
         sessionConfig.timeoutIntervalForRequest = 10
-        sessionConfig.urlCache = nil
         let session = URLSession(configuration: sessionConfig)
         let httpClient = BaseHTTPClient(session: session)
 

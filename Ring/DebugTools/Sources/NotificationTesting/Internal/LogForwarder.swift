@@ -147,7 +147,7 @@ final class LogForwarder {
             effectiveTraceId = String(message[start.upperBound..<end])
         }
         let roleString = role?.rawValue ?? "unknown"
-        var json = "{\"ts\":\"\(timestamp)\",\"event\":\"\(event.rawValue)\",\"source\":\"\(source)\",\"role\":\"\(roleString)\""
+        var json = "{\"ts\":\"\(timestamp)\",\"source\":\"\(source)\",\"role\":\"\(roleString)\""
         if !effectiveTraceId.isEmpty {
             json += ",\"traceId\":\"\(escapeJSON(effectiveTraceId))\""
         }

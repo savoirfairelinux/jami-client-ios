@@ -25,7 +25,7 @@ import os
 ///
 /// Drives a `DispatchSourceTimer` that calls a host-supplied closure with a
 /// freshly generated `[TP:<w3c-traceparent>] ping <seq> <localTime>` body on
-/// each tick (traceparent continues the `push.test-send` span). The closure
+/// each tick (traceparent continues the `message.send` span). The closure
 /// is expected to route the message into the host's `ConversationsService.sendSwarmMessage`.
 ///
 /// This indirection (closure instead of a concrete service) keeps DebugTools
@@ -128,7 +128,7 @@ final class IntervalSender {
         let timestamp = dateFormatter.string(from: Date())
 
         let (handle, traceparent) = TelemetryService.shared.startSpan(
-            name: "push.test-send",
+            name: SpanName.messageSend,
             attributes: [
                 "conversation.id": conversationId,
                 "sequence": String(sequence)
