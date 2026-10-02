@@ -4202,6 +4202,7 @@
 				"$(PROJECT_DIR)/CollabEditor/editor.html",
 				"$(PROJECT_DIR)/CollabEditor/package.json",
 				"$(PROJECT_DIR)/CollabEditor/src/binding.js",
+				"$(PROJECT_DIR)/CollabEditor/src/fonts.js",
 				"$(PROJECT_DIR)/CollabEditor/src/host.js",
 				"$(PROJECT_DIR)/CollabEditor/src/index.js",
 				"$(PROJECT_DIR)/CollabEditor/src/jamiformat.js",
