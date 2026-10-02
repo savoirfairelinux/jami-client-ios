@@ -43,6 +43,8 @@
  * dropped when writing.
  */
 
+import { fontIdOf, fontSizeOf } from './fonts.js'
+
 const INLINE_TO_QUILL = {
     b: 'bold',
     i: 'italic',
@@ -50,6 +52,8 @@ const INLINE_TO_QUILL = {
     s: 'strike',
     link: 'link',
     w: 'width',
+    font: 'font',
+    size: 'size',
 }
 
 const INLINE_TO_JAMI = {
@@ -59,7 +63,11 @@ const INLINE_TO_JAMI = {
     strike: 's',
     link: 'link',
     width: 'w',
+    font: 'font',
+    size: 'size',
 }
+
+const DOCUMENT_ATTRIBUTES = ['b', 'i', 'u', 's', 'link', 'w', 'font', 'size', 'header', 'list', 'align']
 
 const LIST_STYLES = ['bullet', 'ordered']
 const ALIGN_STYLES = ['center', 'right', 'justify']
@@ -79,6 +87,22 @@ function normalizeBlock(attrs) {
     return out
 }
 
+/**
+ * A size as Quill holds it, "18pt", in points: the unit the document gives
+ * sizes in. 0 for anything else, or for a size a document may not hold.
+ */
+export function sizeFromQuill(value) {
+    if (typeof value === 'number') return fontSizeOf(value)
+    if (typeof value !== 'string' || !/^\d+(\.\d+)?pt$/.test(value)) return 0
+    return fontSizeOf(parseFloat(value))
+}
+
+/** A size in points, as Quill holds it; '' when the document may not hold it. */
+export function sizeToQuill(points) {
+    const size = fontSizeOf(points)
+    return size > 0 ? size + 'pt' : ''
+}
+
 /*
  * Values are given a type on the way through, not just a name.
  *
@@ -96,6 +120,12 @@ function inlineToQuill(attrs) {
         if (jami === 'w') {
             const width = parseInt(v, 10)
             if (width > 0) out[quill] = width
+        } else if (jami === 'font') {
+            const id = fontIdOf(v)
+            if (id) out[quill] = id
+        } else if (jami === 'size') {
+            const size = sizeToQuill(v)
+            if (size) out[quill] = size
         } else if (jami === 'link') {
             if (typeof v === 'string' && v !== '') out[quill] = v
         } else {
@@ -114,6 +144,13 @@ function inlineToJami(attrs) {
         if (quill === 'width') {
             const width = parseInt(v, 10)
             if (width > 0) out[jami] = width
+        } else if (quill === 'font') {
+            const id = fontIdOf(v)
+            if (id) out[jami] = id
+        } else if (quill === 'size') {
+            // A number, as the desktop client reads it with QJsonValue::toDouble().
+            const size = sizeFromQuill(v)
+            if (size > 0) out[jami] = size
         } else if (quill === 'link') {
             if (typeof v === 'string' && v !== '') out[jami] = v
         } else {
@@ -214,6 +251,22 @@ export function quillToJami(delta, Delta) {
         if (line.newline !== null && !last) out.insert('\n', inlineToJami(line.newline))
     })
     return out
+}
+
+/**
+ * @p delta with nothing in it but what this editor may change: the text, and
+ * the attributes it knows.
+ */
+export function withoutUnknownAttributes(delta, Delta) {
+    return new Delta(delta.ops.map((op) => {
+        if (!op.attributes) return op
+        const { attributes, ...rest } = op
+        const known = {}
+        for (const key of DOCUMENT_ATTRIBUTES) {
+            if (key in attributes) known[key] = attributes[key]
+        }
+        return Object.keys(known).length > 0 ? { ...rest, attributes: known } : rest
+    }))
 }
 
 export { inlineToJami, inlineToQuill, normalizeBlock }

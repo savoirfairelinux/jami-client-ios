@@ -116,6 +116,7 @@ test('the bundle exposes the interface the application calls', options, async ()
     assert.equal(host.ready, true, host.logs.join('\n'))
     for (const name of ['applyUpdate', 'applyAwareness', 'removeCursor', 'toggle',
                         'setHeader', 'setList', 'setAlign', 'setLink', 'clearFormat',
+                        'setFont', 'setSize', 'fonts',
                         'undo', 'redo', 'insertImage', 'setImageWidth', 'setEditable',
                         'exportAs', 'showVersion', 'leaveVersion']) {
         assert.equal(typeof editor[name], 'function', `missing ${name}`)
@@ -630,5 +631,235 @@ test('an address a peer wrote is not the one that is exported', options, async (
                                 /javascript:|vbscript:|data:text/i, format)
         }
     }
+    assert.deepEqual(host.logs, [])
+})
+
+/* ----------------------------------------------------------- font and size */
+
+/** Gives the editor what a peer holds, as an update on the wire. */
+function receive(editor, ops) {
+    const peer = new Y.Doc()
+    peer.getText('content').applyDelta(ops)
+    editor.applyUpdate(Buffer.from(Y.encodeStateAsUpdate(peer)).toString('base64'))
+    return peer
+}
+
+/** What a peer that received everything the editor sent holds. */
+function relayed(host, peer) {
+    for (const update of host.updates) Y.applyUpdate(peer, Buffer.from(update, 'base64'))
+    return peer.getText('content').toDelta()
+}
+
+/**
+ * Selects characters of the first line the way a finger does, through the
+ * page's selection, and waits for the editor to take it as its own.
+ */
+async function select(dom, index, length = 0) {
+    const document = dom.window.document
+    const root = document.querySelector('.ql-editor')
+    const locate = (at) => {
+        const walker = document.createTreeWalker(root, dom.window.NodeFilter.SHOW_TEXT)
+        let seen = 0
+        for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+            if (at <= seen + node.data.length) return [node, at - seen]
+            seen += node.data.length
+        }
+        assert.fail('no such characters')
+    }
+    root.focus()
+    dom.window.getSelection().setBaseAndExtent(...locate(index), ...locate(index + length))
+    document.dispatchEvent(new dom.window.Event('selectionchange'))
+    await new Promise((resolve) => setTimeout(resolve, 10))
+}
+
+const lastSelection = (host) => JSON.parse(host.selections[host.selections.length - 1])
+
+test('the fonts offered are the ones the other clients ship', options, async () => {
+    const { host, editor } = await launch()
+    const fonts = JSON.parse(editor.fonts())
+    assert.equal(fonts.length, 4)
+    assert.deepEqual(fonts[0], { id: 'sans-serif', family: 'Sans Serif' })
+    assert.ok(fonts.some((font) => font.id === 'cursive'))
+    assert.deepEqual(host.logs, [])
+})
+
+test('the page draws each font in a font of the platform', options, async () => {
+    const { dom, host } = await launch()
+    const sheets = [...dom.window.document.querySelectorAll('style')]
+        .map((style) => style.textContent).join('\n')
+    assert.match(sheets, /\[data-font="serif"\][^}]*font-family: serif;/)
+    assert.doesNotMatch(sheets, /@font-face/)
+    assert.deepEqual(host.logs, [])
+})
+
+test('a font and a size go to the selection, and travel', options, async () => {
+    const { dom, host, editor } = await launch()
+    const peer = receive(editor, [{ insert: 'one two three' }])
+    host.updates.length = 0
+
+    await select(dom, 4, 3)
+    editor.setFont('serif')
+    editor.setSize(18)
+
+    assert.deepEqual(relayed(host, peer), [
+        { insert: 'one ' },
+        { insert: 'two', attributes: { font: 'serif', size: 18 } },
+        { insert: ' three' },
+    ])
+    const { formats } = lastSelection(host)
+    assert.equal(formats.font, 'serif')
+    assert.equal(formats.size, 18)
+    const span = dom.window.document.querySelector('.ql-editor [data-font]')
+    assert.equal(span.getAttribute('data-font'), 'serif')
+    assert.equal(span.style.fontSize, '18pt')
+    assert.deepEqual(host.logs, [])
+})
+
+test('with nothing selected, the word under the caret takes the font', options, async () => {
+    const { dom, host, editor } = await launch()
+    const peer = receive(editor, [{ insert: 'one two three' }])
+    host.updates.length = 0
+
+    await select(dom, 5)
+    editor.setFont('monospace')
+    editor.setSize(24)
+
+    assert.deepEqual(relayed(host, peer), [
+        { insert: 'one ' },
+        { insert: 'two', attributes: { font: 'monospace', size: 24 } },
+        { insert: ' three' },
+    ])
+    assert.deepEqual(host.logs, [])
+})
+
+test('at the edge of a word, the font is kept for what is typed next', options, async () => {
+    const { dom, host, editor } = await launch()
+    receive(editor, [{ insert: 'one two' }])
+    host.updates.length = 0
+
+    await select(dom, 3)
+    editor.setFont('cursive')
+
+    // Nothing written is changed; the choice waits for the next character.
+    assert.deepEqual(host.updates, [])
+    assert.equal(lastSelection(host).formats.font, 'cursive')
+    assert.deepEqual(host.logs, [])
+})
+
+test('a font this client does not ship cannot be chosen', options, async () => {
+    const { dom, host, editor } = await launch()
+    receive(editor, [{ insert: 'one two' }])
+    host.updates.length = 0
+
+    await select(dom, 0, 3)
+    for (const id of ['some-new-font', 'Liberation Sans', '../x']) editor.setFont(id)
+    for (const size of [0.5, 401, NaN]) editor.setSize(size)
+
+    assert.deepEqual(host.updates, [])
+    assert.deepEqual(host.logs, [])
+})
+
+test('the default font and the base size remove the attributes', options, async () => {
+    const { dom, host, editor } = await launch()
+    const peer = receive(editor, [{ insert: 'word', attributes: { font: 'monospace', size: 30, b: true } }])
+    host.updates.length = 0
+
+    await select(dom, 0, 4)
+    assert.equal(lastSelection(host).formats.size, 30)
+    editor.setFont('')
+    editor.setSize(0)
+
+    assert.deepEqual(relayed(host, peer), [{ insert: 'word', attributes: { b: true } }])
+    assert.deepEqual(host.logs, [])
+})
+
+test('clearing the formatting clears the font and the size', options, async () => {
+    const { dom, host, editor } = await launch()
+    const peer = receive(editor, [{ insert: 'word', attributes: { font: 'monospace', size: 30, i: true } }])
+    host.updates.length = 0
+
+    await select(dom, 0, 4)
+    editor.clearFormat()
+
+    assert.deepEqual(relayed(host, peer), [{ insert: 'word' }])
+    assert.deepEqual(host.logs, [])
+})
+
+test('a font a newer client chose survives an edit made here', options, async () => {
+    const { dom, host, editor } = await launch()
+    const peer = receive(editor, [
+        { insert: 'new', attributes: { font: 'some-new-font' } },
+        { insert: ' old' },
+    ])
+    host.updates.length = 0
+
+    await select(dom, 4, 3)
+    editor.toggle('bold')
+
+    assert.deepEqual(relayed(host, peer), [
+        { insert: 'new', attributes: { font: 'some-new-font' } },
+        { insert: ' ' },
+        { insert: 'old', attributes: { b: true } },
+    ])
+    await select(dom, 0, 3)
+    assert.equal(lastSelection(host).formats.font, 'some-new-font')
+    assert.deepEqual(host.logs, [])
+})
+
+test('an attribute this client does not know survives an edit made here', options, async () => {
+    const { dom, host, editor } = await launch()
+    const peer = receive(editor, [
+        { insert: 'red', attributes: { color: '#ff0000' } },
+        { insert: ' plain' },
+    ])
+    host.updates.length = 0
+
+    await select(dom, 4, 5)
+    editor.toggle('bold')
+
+    assert.deepEqual(relayed(host, peer), [
+        { insert: 'red', attributes: { color: '#ff0000' } },
+        { insert: ' ' },
+        { insert: 'plain', attributes: { b: true } },
+    ])
+    assert.deepEqual(host.logs, [])
+})
+
+test('pasted text keeps only a font the document can name', options, async () => {
+    const { dom, host, editor } = await launch()
+    const peer = receive(editor, [{ insert: 'x' }])
+    host.updates.length = 0
+
+    await select(dom, 1)
+    const paste = new dom.window.Event('paste', { bubbles: true, cancelable: true })
+    const html = '<span style="font-family: monospace; font-size: 16px">a</span>'
+        + '<span style="font-size: large">b</span>'
+        + '<span data-font="gelasio" style="font-size: 9pt">c</span>'
+    paste.clipboardData = {
+        getData: (type) => (type === 'text/html' ? html : 'abc'),
+        files: [],
+    }
+    dom.window.document.querySelector('.ql-editor').dispatchEvent(paste)
+
+    assert.deepEqual(relayed(host, peer), [
+        { insert: 'x' },
+        { insert: 'a', attributes: { font: 'monospace' } },
+        { insert: 'b' },
+        { insert: 'c', attributes: { size: 9 } },
+    ])
+    assert.deepEqual(host.logs, [])
+})
+
+test('a font and a size are exported as the clients draw them', options, async () => {
+    const { host, editor } = await launch()
+    receive(editor, [
+        { insert: 'a', attributes: { font: 'serif', size: 14 } },
+        { insert: 'b', attributes: { font: 'some-new-font' } },
+    ])
+    const html = editor.exportAs('html', 'T', []).text
+    assert.match(html, /<span style="font-family: serif; font-size: 14pt">a<\/span>/)
+    // An id no font is offered under has no family to name.
+    assert.match(html, />b</)
+    assert.doesNotMatch(html, /some-new-font/)
     assert.deepEqual(host.logs, [])
 })

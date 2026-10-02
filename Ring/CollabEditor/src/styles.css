@@ -28,6 +28,7 @@ html, body {
     -webkit-text-size-adjust: 100%;
 }
 
+/* The fonts a document can name are declared by the page; see fonts.js. */
 body {
     font-family: Roboto, "Noto Sans", system-ui, sans-serif;
     font-size: var(--jami-text-size);
