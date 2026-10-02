@@ -1,5 +1,5 @@
 import { build } from 'esbuild'
-import { mkdirSync, copyFileSync } from 'node:fs'
+import { mkdirSync, copyFileSync, readdirSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -34,3 +34,12 @@ await build({
 })
 
 copyFileSync(resolve(here, 'editor.html'), resolve(outdir, 'editor.html'))
+
+// The fonts a document can name, with their licenses, as released upstream.
+const fonts = resolve(here, 'fonts')
+mkdirSync(resolve(outdir, 'fonts'), { recursive: true })
+for (const name of readdirSync(fonts)) {
+    if (name.endsWith('.ttf') || name.endsWith('.txt')) {
+        copyFileSync(resolve(fonts, name), resolve(outdir, 'fonts', name))
+    }
+}

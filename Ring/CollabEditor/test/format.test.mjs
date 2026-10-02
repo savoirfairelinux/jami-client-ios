@@ -24,7 +24,7 @@ import assert from 'node:assert/strict'
 import Delta from 'quill-delta'
 import * as Y from 'yjs'
 
-import { jamiToQuill, quillToJami } from '../src/jamiformat.js'
+import { jamiToQuill, quillToJami, sizeFromQuill, sizeToQuill } from '../src/jamiformat.js'
 
 const toJami = (ops) => quillToJami(new Delta(ops), Delta).ops
 const toQuill = (ops) => jamiToQuill(ops, Delta).ops
@@ -135,10 +135,55 @@ test('unknown attributes do not travel', () => {
     // Quill has formats the document has no key for. Sending them would make
     // the document say things no other client can read back.
     assert.deepEqual(
-        toJami([{ insert: 'x', attributes: { background: '#ff0000', font: 'monospace' } },
+        toJami([{ insert: 'x', attributes: { background: '#ff0000', color: '#00ff00' } },
                 { insert: '\n' }]),
         [{ insert: 'x' }],
     )
+})
+
+test('a font is an id and a size is a number of points', () => {
+    const quill = [
+        { insert: 'a', attributes: { font: 'liberation-serif' } },
+        { insert: 'b', attributes: { size: '18pt' } },
+        { insert: 'c', attributes: { font: 'eb-garamond', size: '10.5pt', bold: true } },
+        { insert: '\n' },
+    ]
+    assert.deepEqual(toJami(quill), [
+        { insert: 'a', attributes: { font: 'liberation-serif' } },
+        { insert: 'b', attributes: { size: 18 } },
+        { insert: 'c', attributes: { b: true, font: 'eb-garamond', size: 10.5 } },
+    ])
+    assert.deepEqual(toQuill(toJami(quill)), quill)
+})
+
+test('a font this client does not ship is kept for the clients that do', () => {
+    // A newer client may offer a font this one lacks. Dropping the id would
+    // strip it from the document at the next edit of that text.
+    const jami = [{ insert: 'x', attributes: { font: 'some-new-font' } }]
+    assert.deepEqual(toQuill(jami), [{ insert: 'x', attributes: { font: 'some-new-font' } }, { insert: '\n' }])
+    assert.deepEqual(toJami(toQuill(jami)), jami)
+})
+
+test('a font or a size a document may not hold is dropped', () => {
+    for (const font of ['Liberation Sans', '../x', '', 12, 'a'.repeat(65)]) {
+        assert.deepEqual(toQuill([{ insert: 'x', attributes: { font } }]), [{ insert: 'x\n' }], String(font))
+    }
+    for (const size of [0, -3, 401, '12', '12pt', true]) {
+        assert.deepEqual(toQuill([{ insert: 'x', attributes: { size } }]), [{ insert: 'x\n' }], String(size))
+    }
+    for (const size of ['huge', '0pt', '900pt', '3em']) {
+        assert.deepEqual(toJami([{ insert: 'x', attributes: { size } }, { insert: '\n' }]),
+                         [{ insert: 'x' }], size)
+    }
+})
+
+test('pixels from pasted text are given in points', () => {
+    assert.deepEqual(toJami([{ insert: 'x', attributes: { size: '16px' } }, { insert: '\n' }]),
+                     [{ insert: 'x', attributes: { size: 12 } }])
+    assert.equal(sizeFromQuill('13px'), 9.75)
+    assert.equal(sizeFromQuill(14), 14)
+    assert.equal(sizeToQuill(14), '14pt')
+    assert.equal(sizeToQuill(0), '')
 })
 
 test('a round trip through a real CRDT changes nothing', () => {

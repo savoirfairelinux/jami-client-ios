@@ -43,6 +43,8 @@
  * dropped when writing.
  */
 
+import { fontIdOf, fontSizeOf } from './fonts.js'
+
 const INLINE_TO_QUILL = {
     b: 'bold',
     i: 'italic',
@@ -50,6 +52,8 @@ const INLINE_TO_QUILL = {
     s: 'strike',
     link: 'link',
     w: 'width',
+    font: 'font',
+    size: 'size',
 }
 
 const INLINE_TO_JAMI = {
@@ -59,6 +63,8 @@ const INLINE_TO_JAMI = {
     strike: 's',
     link: 'link',
     width: 'w',
+    font: 'font',
+    size: 'size',
 }
 
 const LIST_STYLES = ['bullet', 'ordered']
@@ -79,6 +85,26 @@ function normalizeBlock(attrs) {
     return out
 }
 
+/**
+ * A size as Quill holds it, a CSS length, in points: the unit the document
+ * gives sizes in. Pasted text can bring pixels, which are three quarters of a
+ * point. 0 for anything else, or for a size a document may not hold.
+ */
+export function sizeFromQuill(value) {
+    if (typeof value === 'number') return fontSizeOf(value)
+    const match = /^\s*(\d+(?:\.\d+)?)(pt|px)\s*$/.exec(typeof value === 'string' ? value : '')
+    if (!match) return 0
+    const amount = parseFloat(match[1])
+    const points = match[2] === 'px' ? amount * 0.75 : amount
+    return fontSizeOf(Math.round(points * 100) / 100)
+}
+
+/** A size in points, as Quill holds it; '' when the document may not hold it. */
+export function sizeToQuill(points) {
+    const size = fontSizeOf(points)
+    return size > 0 ? size + 'pt' : ''
+}
+
 /*
  * Values are given a type on the way through, not just a name.
  *
@@ -96,6 +122,12 @@ function inlineToQuill(attrs) {
         if (jami === 'w') {
             const width = parseInt(v, 10)
             if (width > 0) out[quill] = width
+        } else if (jami === 'font') {
+            const id = fontIdOf(v)
+            if (id) out[quill] = id
+        } else if (jami === 'size') {
+            const size = sizeToQuill(v)
+            if (size) out[quill] = size
         } else if (jami === 'link') {
             if (typeof v === 'string' && v !== '') out[quill] = v
         } else {
@@ -114,6 +146,13 @@ function inlineToJami(attrs) {
         if (quill === 'width') {
             const width = parseInt(v, 10)
             if (width > 0) out[jami] = width
+        } else if (quill === 'font') {
+            const id = fontIdOf(v)
+            if (id) out[jami] = id
+        } else if (quill === 'size') {
+            // A number, as the desktop client reads it with QJsonValue::toDouble().
+            const size = sizeFromQuill(v)
+            if (size > 0) out[jami] = size
         } else if (quill === 'link') {
             if (typeof v === 'string' && v !== '') out[jami] = v
         } else {

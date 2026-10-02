@@ -35,6 +35,7 @@ class CollabSchemeHandler: NSObject, WKURLSchemeHandler {
     static let pageURL = URL(string: "\(scheme)://\(host)/editor.html")!
 
     private static let attachmentPath = "/attachment/"
+    private static let fontPath = "/fonts/"
 
     /// Named explicitly rather than opened by path.
     private static let editorFiles = [
@@ -57,6 +58,12 @@ class CollabSchemeHandler: NSObject, WKURLSchemeHandler {
         }
         if let mimeType = CollabSchemeHandler.editorFiles[url.path] {
             self.serveAsset(named: url.lastPathComponent, mimeType: mimeType, to: task)
+        } else if url.path == CollabSchemeHandler.fontPath + url.lastPathComponent,
+                  CollabSchemeHandler.isFontFile(url.lastPathComponent) {
+            self.serveAsset(named: url.lastPathComponent,
+                            in: "collab/fonts",
+                            mimeType: "font/ttf",
+                            to: task)
         } else if url.path.hasPrefix(CollabSchemeHandler.attachmentPath) {
             self.serveAttachment(url.lastPathComponent, to: task)
         } else {
@@ -66,8 +73,23 @@ class CollabSchemeHandler: NSObject, WKURLSchemeHandler {
 
     func webView(_ webView: WKWebView, stop task: WKURLSchemeTask) {}
 
-    private func serveAsset(named name: String, mimeType: String, to task: WKURLSchemeTask) {
-        guard let url = Bundle.main.url(forResource: name, withExtension: nil, subdirectory: "collab"),
+    /**
+     Whether the page may ask for this file of the fonts a document can name:
+     one style of one family, and nothing that leads out of their directory.
+     */
+    static func isFontFile(_ name: String) -> Bool {
+        let styles = ["Regular", "Bold", "Italic", "BoldItalic"]
+        guard name.hasSuffix(".ttf") else { return false }
+        let parts = name.dropLast(4).split(separator: "-", omittingEmptySubsequences: false)
+        guard parts.count == 2, styles.contains(String(parts[1])) else { return false }
+        return !parts[0].isEmpty && parts[0].allSatisfy { $0.isASCII && $0.isLetter }
+    }
+
+    private func serveAsset(named name: String,
+                            in directory: String = "collab",
+                            mimeType: String,
+                            to task: WKURLSchemeTask) {
+        guard let url = Bundle.main.url(forResource: name, withExtension: nil, subdirectory: directory),
               let data = try? Data(contentsOf: url) else {
             self.refuse(task)
             return
