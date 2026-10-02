@@ -29,7 +29,8 @@ import './styles.css'
 
 import { JamiQuillBinding } from './binding.js'
 import { exportDocument } from './export.js'
-import { jamiToQuill } from './jamiformat.js'
+import { DOCUMENT_FONTS, documentFont, fontIdOf, fontSizeOf, fontStyleSheet } from './fonts.js'
+import { jamiToQuill, sizeFromQuill, sizeToQuill } from './jamiformat.js'
 
 const Delta = Quill.import('delta')
 const REMOTE_ORIGIN = 'jami-remote'
@@ -95,6 +96,72 @@ class JamiImage extends Image {
 Quill.register(JamiImage, true)
 Quill.register('modules/cursors', QuillCursors)
 
+/* ------------------------------------------------------------ font and size */
+
+const Parchment = Quill.import('parchment')
+
+/*
+ * The font of a run, as the id the document holds rather than as a family.
+ *
+ * Quill's own font format only takes the values it was given in advance, and
+ * an id it does not know would be dropped from the editor -- and then, since
+ * the binding makes the document say what the editor says, from the document,
+ * on the first keystroke. An id this client does not offer is a font a newer
+ * client chose, so it is kept, and drawn in the editor's font. The style sheet
+ * says how each offered one is drawn.
+ */
+class FontAttributor extends Parchment.Attributor {
+    canAdd(node, value) {
+        return fontIdOf(value) !== '' && super.canAdd(node, value)
+    }
+}
+
+/*
+ * The size of a run, in points, which is what the document holds and what
+ * the desktop client draws in. A size set here wins over a heading's own,
+ * as in a word processor: it is set on the text, inside the heading.
+ */
+class SizeAttributor extends Parchment.StyleAttributor {
+    canAdd(node, value) {
+        return sizeFromQuill(value) > 0 && super.canAdd(node, value)
+    }
+
+    add(node, value) {
+        return super.add(node, sizeToQuill(sizeFromQuill(value)))
+    }
+
+    value(node) {
+        return sizeToQuill(sizeFromQuill(super.value(node)))
+    }
+}
+
+Quill.register({
+    'formats/font': new FontAttributor('font', 'data-font', { scope: Parchment.Scope.INLINE }),
+    'formats/size': new SizeAttributor('size', 'font-size', { scope: Parchment.Scope.INLINE }),
+}, true)
+
+/*
+ * What pasted text keeps of its typeface: a family the document can name,
+ * and a size that reads as a length.
+ */
+function pastedCharacterFormats(delta) {
+    for (const op of delta.ops) {
+        const attributes = op.attributes
+        if (!attributes) continue
+        if ('font' in attributes && !documentFont(attributes.font)) delete attributes.font
+        if ('size' in attributes) {
+            const points = sizeFromQuill(attributes.size)
+            if (points > 0) attributes.size = sizeToQuill(points)
+            else delete attributes.size
+        }
+        if (Object.keys(attributes).length === 0) delete op.attributes
+    }
+    return delta
+}
+
+/** Whether the character is part of a word, as Qt's QChar::isLetterOrNumber() says. */
+const WORD_CHARACTER = /[\p{L}\p{N}]/u
+
 /* ------------------------------------------------------------------ editor */
 
 class Editor {
@@ -134,6 +201,8 @@ class Editor {
             },
         })
         this.cursors = this.quill.getModule('cursors')
+        this.installFonts()
+        this.quill.clipboard.addMatcher(Node.ELEMENT_NODE, (node, delta) => pastedCharacterFormats(delta))
 
         this.ydoc = new Y.Doc()
         // The branch name the daemon and the desktop client agree on.
@@ -197,6 +266,9 @@ class Editor {
                 strike: !!formats.strike,
                 link: typeof formats.link === 'string' ? formats.link : '',
                 header: typeof formats.header === 'number' ? formats.header : 0,
+                // A selection in several fonts or sizes is in none of them.
+                font: typeof formats.font === 'string' ? formats.font : '',
+                size: sizeFromQuill(formats.size),
                 list: typeof formats.list === 'string' ? formats.list : '',
                 align: typeof formats.align === 'string' ? formats.align : '',
             },
@@ -293,6 +365,79 @@ class Editor {
         }
         if (!ALLOWED_LINK_SCHEMES.includes(scheme)) return
         this.format('link', withScheme)
+    }
+
+    /*
+     * Font and size go to the selection; with nothing selected, to the word the
+     * caret is inside, as in a word processor; and otherwise to what is typed
+     * next, which is forgotten once the caret moves. This is what the desktop
+     * client does.
+     */
+
+    /** Sets the font, by id, or gives the editor's own back with ''. */
+    setFont(id) {
+        // Only a font this client offers can be chosen here: anything else would
+        // be drawn in some other typeface by whoever chose it.
+        if (id && !documentFont(id)) return
+        this.applyCharacterChoice('font', id || false)
+    }
+
+    /** Sets the size in points, or gives the base size back with 0. */
+    setSize(points) {
+        const size = Number(points)
+        if (size > 0 && !fontSizeOf(size)) return
+        this.applyCharacterChoice('size', size > 0 ? sizeToQuill(size) : false)
+    }
+
+    applyCharacterChoice(name, value) {
+        let range = this.quill.getSelection()
+        if (!range) {
+            this.quill.focus()
+            range = this.quill.getSelection()
+        }
+        if (!range) return
+        const target = range.length > 0 ? range : this.wordAround(range.index)
+        if (target) {
+            this.quill.formatText(target.index, target.length, name, value, 'user')
+        } else {
+            // Quill keeps a format given to a caret for the text typed there.
+            this.quill.format(name, value, 'user')
+        }
+        this.reportSelection()
+    }
+
+    /**
+     * The word the caret at @p index is inside, if it is inside one: a
+     * character of the word on each side of it. At either end of a word the
+     * caret is where new text goes, and a word processor leaves the word alone
+     * there.
+     */
+    wordAround(index) {
+        const [line, offset] = this.quill.getLine(index)
+        if (!line) return null
+        const start = index - offset
+        // A picture is a character of the line too, and is no letter.
+        const text = this.quill.getContents(start, line.length()).ops
+            .map((op) => (typeof op.insert === 'string' ? op.insert : '\uFFFC'))
+            .join('')
+        const inWord = (i) => i >= 0 && i < text.length && WORD_CHARACTER.test(text[i])
+        if (!inWord(offset - 1) || !inWord(offset)) return null
+        let from = offset - 1
+        let to = offset + 1
+        while (inWord(from - 1)) from -= 1
+        while (inWord(to)) to += 1
+        return { index: start + from, length: to - from }
+    }
+
+    /** The fonts the user may choose from, in the order they are offered. */
+    fonts() {
+        return JSON.stringify(DOCUMENT_FONTS.map(({ id, family }) => ({ id, family })))
+    }
+
+    installFonts() {
+        const style = document.createElement('style')
+        style.textContent = fontStyleSheet()
+        document.head.appendChild(style)
     }
 
     clearFormat() {
@@ -729,6 +874,9 @@ window.JamiEditor = {
     setAlign: guard(Editor.prototype.setAlign),
     setLink: guard(Editor.prototype.setLink),
     clearFormat: guard(Editor.prototype.clearFormat),
+    setFont: guard(Editor.prototype.setFont),
+    setSize: guard(Editor.prototype.setSize),
+    fonts: guard(Editor.prototype.fonts),
     undo: guard(Editor.prototype.undo),
     redo: guard(Editor.prototype.redo),
     insertImage: guard(Editor.prototype.insertImage),
