@@ -255,6 +255,7 @@ private enum ProcessMapExit: String {
 // MARK: NotificationService
 class NotificationService: UNNotificationServiceExtension {
     typealias LocalNotification = (content: UNMutableNotificationContent, type: LocalNotificationType)
+    typealias PendingDocumentNotification = (conversationId: String, documentId: String, config: NotificationConfig)
 
     private static let localNotificationName = Notification.Name(Constants.appIdentifier + ".appActive.internal")
     private static let localShareExtensionNotificationName = Notification.Name(Constants.appIdentifier + ".shareExtensionActive.internal")
@@ -285,6 +286,13 @@ class NotificationService: UNNotificationServiceExtension {
     private var itemsToPresent = 0
     private var syncCompleted = false
     private var waitForCloning = false
+    // Documents announced while syncing. The daemon downloads each one right after
+    // its announcement, so its notification is held until the download ends:
+    // presenting it on the announcement would leave the daemon running behind a
+    // presented notification. Notifications still held when the extension
+    // finishes are presented after the daemon stops.
+    private var documentDownloads = CollabDocumentDownloads()
+    private var documentNotifications = [PendingDocumentNotification]()
 
     // A queue of pending message and active-call notifications waiting for a name lookup.
     private let notificationQueue = DispatchQueue(label: Constants.appIdentifier + ".Notification.queue")
@@ -578,6 +586,8 @@ class NotificationService: UNNotificationServiceExtension {
                 CommonHelpers.setUpdatedConversations(accountId: self.accountId, conversationId: eventData.conversationId)
                 self.taskPropertyQueue.sync { self.itemsToPresent += 1 }
                 self.configureAndPresentCallNotification(config: notifConfig, calls: calls, accountId: eventData.accountId)
+            case .documentShared, .documentReplicated:
+                self.handleDocumentEvent(event, eventData: eventData, accountJamiId: accountJamiId)
             }
         }
     }
@@ -592,9 +602,9 @@ class NotificationService: UNNotificationServiceExtension {
         self.taskPropertyQueue.sync {
             // We could finish in two cases:
             // 1. we did not start account we are not waiting for the signals from the daemon
-            // 2. conversation synchronization completed and all files downloaded
+            // 2. conversation synchronization completed, all files downloaded and all documents replicated
             if !self.accountIsActive.load(ordering: .relaxed) ||
-                (self.syncCompleted && self.itemsToPresent == 0 && !self.waitForCloning) {
+                (self.syncCompleted && self.itemsToPresent == 0 && !self.waitForCloning && !self.documentDownloads.isAwaiting) {
                 self.autoDispatchGroup.leave(id: jamiTaskId)
             }
         }
@@ -619,6 +629,10 @@ class NotificationService: UNNotificationServiceExtension {
         } else {
             self.adapterService.removeDelegate()
         }
+        let heldDocumentNotifications = self.taskPropertyQueue.sync { () -> [NotificationConfig] in
+            defer { self.documentNotifications.removeAll() }
+            return self.documentNotifications.map { $0.config }
+        }
         // cleanup pending notifications
         self.notificationQueue.sync {
             let pendingCount = pendingLocalNotifications.values.reduce(0) { $0 + $1.count }
@@ -635,6 +649,9 @@ class NotificationService: UNNotificationServiceExtension {
                     }
                 }
                 pendingLocalNotifications.removeAll()
+                for config in heldDocumentNotifications {
+                    self.presentLocalNotification(notification: self.configureNotification(config: config, type: .message))
+                }
             }
         }
         if let contentHandler = contentHandler {
@@ -1219,4 +1236,61 @@ extension NotificationService {
         }
     }
 
+}
+
+// MARK: Collaborative documents
+extension NotificationService {
+    private func handleDocumentEvent(_ event: AdapterService.EventType, eventData: EventData, accountJamiId: String?) {
+        switch event {
+        case .documentShared:
+            self.documentShared(eventData, accountJamiId: accountJamiId)
+        case .documentReplicated:
+            self.documentReplicated(eventData)
+        default:
+            break
+        }
+    }
+
+    private func documentShared(_ eventData: EventData, accountJamiId: String?) {
+        CommonHelpers.setUpdatedConversations(accountId: self.accountId, conversationId: eventData.conversationId)
+        let conversationId = eventData.conversationId
+        let documentId = eventData.documentId
+        let name = eventData.content.isEmpty ? L10n.Collab.untitled : eventData.content
+        let config = NotificationConfig(from: eventData.jamiId, url: nil, body: L10n.Collab.documentShared(name),
+                                        conversationId: conversationId, groupTitle: eventData.groupTitle)
+        let presentNow = self.taskPropertyQueue.sync { () -> Bool in
+            self.documentDownloads.documentAnnounced(conversationId: conversationId, documentId: documentId)
+            if accountJamiId == eventData.jamiId {
+                return false
+            }
+            if self.documentDownloads.isAwaiting(conversationId: conversationId, documentId: documentId) {
+                self.documentNotifications.append((conversationId: conversationId, documentId: documentId, config: config))
+                return false
+            }
+            self.itemsToPresent += 1
+            return true
+        }
+        if presentNow {
+            self.configureAndPresentNotification(config: config, type: LocalNotificationType.message)
+        }
+    }
+
+    private func documentReplicated(_ eventData: EventData) {
+        let conversationId = eventData.conversationId
+        let documentId = eventData.documentId
+        let ready = self.taskPropertyQueue.sync { () -> [NotificationConfig] in
+            self.documentDownloads.documentReplicated(conversationId: conversationId, documentId: documentId)
+            let isThisDocument = { (pending: PendingDocumentNotification) in
+                pending.conversationId == conversationId && pending.documentId == documentId
+            }
+            let configs = self.documentNotifications.filter(isThisDocument).map { $0.config }
+            self.documentNotifications.removeAll(where: isThisDocument)
+            self.itemsToPresent += configs.count
+            return configs
+        }
+        for config in ready {
+            self.configureAndPresentNotification(config: config, type: LocalNotificationType.message)
+        }
+        self.verifyTasksStatus()
+    }
 }

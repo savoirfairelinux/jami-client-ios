@@ -170,6 +170,17 @@ std::map<std::string, std::string> nameServers;
             [delegate activeCallsChangedWithConversationId:conversationId accountId:accountId calls:callsDictionary];
         }
     }));
+
+    // Whether or not the document is stored, no download of it is in progress anymore.
+    confHandlers.insert(exportable_callback<ConversationSignal::CollaborativeDocumentReplicated>([weakDelegate = Adapter.delegate](const std::string& account_id, const std::string& conversation_id, const std::string& document_id, bool) {
+        id<AdapterDelegate> delegate = weakDelegate;
+        if (delegate) {
+            NSString* accountId = [NSString stringWithUTF8String:account_id.c_str()];
+            NSString* conversationId = [NSString stringWithUTF8String:conversation_id.c_str()];
+            NSString* documentId = [NSString stringWithUTF8String:document_id.c_str()];
+            [delegate collaborativeDocumentReplicatedWithAccountId:accountId conversationId:conversationId documentId:documentId];
+        }
+    }));
     registerSignalHandlers(confHandlers);
 }
 
