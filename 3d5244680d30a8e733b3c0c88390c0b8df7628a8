@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf16188a_2d02ff6a",
+        "filename": "Ring/Ring/Features/Collab/CollabEditorViewController.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 631,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-02T14:08:14Z",
+      "side": 1,
+      "message": "[warning] Line 631: 🟡 `compactIconWidth` is set to `38`, and `arrangeFormatBar()` applies it as the minimum button width on compact layouts. This drops below the standard 44x44 pt touch target and can hurt accessibility/tap reliability. Keep min width at 44 and recover space via chooser compression/spacing or row composition instead.",
+      "revId": "3d5244680d30a8e733b3c0c88390c0b8df7628a8",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
