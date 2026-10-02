@@ -822,7 +822,7 @@
 "collab.defaultFont" = "Default font";
 "collab.unavailableFont" = "Unavailable font";
 "collab.fontSize" = "Font size";
-"collab.baseSize" = "Base size";
+"collab.defaultSize" = "Default size";
 "collab.alignment" = "Paragraph alignment";
 "collab.remove" = "Remove";
 "collab.open" = "Open";

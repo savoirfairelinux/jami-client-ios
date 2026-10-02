@@ -413,7 +413,7 @@ extension CollabEditorViewController {
         guard let data = json.data(using: .utf8),
               let root = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
               let formats = root["formats"] as? [String: Any] else { return }
-        self.formatBar.show(formats)
+        self.formatBar.show(formats, baseSize: root["defaultSize"] as? Double ?? 0)
     }
 
     /// The fonts are the page's: it is what draws them.

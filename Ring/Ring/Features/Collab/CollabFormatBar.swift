@@ -57,6 +57,8 @@ class CollabFormatBar: UIView {
     private var currentHeader = 0
     private var currentFont = ""
     private var currentSize: Double = 0
+    /// The size, in points, of text with none of its own, as the page says.
+    private var baseSize: Double = 0
     private var currentAlign = ""
 
     private let rowStack = UIStackView()
@@ -131,12 +133,14 @@ class CollabFormatBar: UIView {
         self.arrange()
     }
 
-    /// Shows what the text under the caret has, as the page reports it.
-    func show(_ formats: [String: Any]) {
+    /// Shows what the text under the caret has, as the page reports it, with
+    /// the size of text that has none of its own.
+    func show(_ formats: [String: Any], baseSize: Double) {
         self.currentLink = formats["link"] as? String ?? ""
         self.currentHeader = formats["header"] as? Int ?? 0
         self.currentFont = formats["font"] as? String ?? ""
         self.currentSize = formats["size"] as? Double ?? 0
+        self.baseSize = baseSize
         self.currentAlign = formats["align"] as? String ?? ""
         self.showChoices()
 
@@ -393,8 +397,8 @@ extension CollabFormatBar {
                     value = self.sizeName(self.currentSize)
                     title = value
                 } else {
-                    value = L10n.Collab.baseSize
-                    image = UIImage(systemName: "textformat.size")
+                    value = self.baseSize > 0 ? self.sizeName(self.baseSize) : L10n.Collab.defaultSize
+                    title = value
                 }
             case .alignment:
                 value = self.currentAlignment.label
@@ -426,7 +430,7 @@ extension CollabFormatBar {
                 self.choice(self.sizeName(size), .size(size), isCurrent: self.currentSize == size)
             }
             return [
-                self.choice(L10n.Collab.baseSize, .size(0), isCurrent: self.currentSize == 0),
+                self.choice(L10n.Collab.defaultSize, .size(0), isCurrent: self.currentSize == 0),
                 UIMenu(options: .displayInline, children: sizes)
             ]
         case .alignment:

@@ -272,6 +272,9 @@ class Editor {
                 list: typeof formats.list === 'string' ? formats.list : '',
                 align: typeof formats.align === 'string' ? formats.align : '',
             },
+            // What a size of 0 above stands for: the page's, not a constant
+            // the application would have to keep in step with the stylesheet.
+            defaultSize: this.defaultSize(),
         }))
         this.placeResizeHandles()
         if (!range) return
@@ -515,6 +518,12 @@ class Editor {
             ? (parseFloat(style.paddingLeft) || 0) + (parseFloat(style.paddingRight) || 0)
             : 0
         return root.clientWidth - padding
+    }
+
+    /** The size, in points, of text that has none of its own. */
+    defaultSize() {
+        const px = parseFloat(window.getComputedStyle(this.quill.root).fontSize)
+        return px > 0 ? Math.round(px * 0.75) : 0
     }
 
     /* ---------------------------------------------------------- image sizing */

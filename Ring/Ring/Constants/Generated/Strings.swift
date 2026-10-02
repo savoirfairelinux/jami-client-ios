@@ -729,8 +729,6 @@ internal enum L10n {
     internal static let alignment = L10n.tr("Localizable", "collab.alignment", fallback: "Paragraph alignment")
     /// Align right
     internal static let alignRight = L10n.tr("Localizable", "collab.alignRight", fallback: "Align right")
-    /// Base size
-    internal static let baseSize = L10n.tr("Localizable", "collab.baseSize", fallback: "Base size")
     /// Bold
     internal static let bold = L10n.tr("Localizable", "collab.bold", fallback: "Bold")
     /// Bulleted list
@@ -751,6 +749,8 @@ internal enum L10n {
     internal static let createError = L10n.tr("Localizable", "collab.createError", fallback: "This document could not be created.")
     /// Default font
     internal static let defaultFont = L10n.tr("Localizable", "collab.defaultFont", fallback: "Default font")
+    /// Default size
+    internal static let defaultSize = L10n.tr("Localizable", "collab.defaultSize", fallback: "Default size")
     /// Document name
     internal static let documentNameHint = L10n.tr("Localizable", "collab.documentNameHint", fallback: "Document name")
     /// Document removed
