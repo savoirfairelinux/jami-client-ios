@@ -573,7 +573,6 @@
 		A7MD00102F20000200000008 /* MessageBubbleTextBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7MD00102F20000100000006 /* MessageBubbleTextBody.swift */; };
 		A7MD00102F20000300000002 /* MessageBubbleTextRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7MD00102F20000300000001 /* MessageBubbleTextRenderer.swift */; };
 		785444169CC44DFAB5B9A81C /* NotificationTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78CF26A24774B48AB5AC705 /* NotificationTesting.swift */; };
-		79C958A7AC7E407E8BB434E3 /* DebugTools.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CCABA90337445F891CF2E09 /* DebugTools.framework */; };
 		7A4F14205EDE4990A4795840 /* DebugTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA14BE2F65140AABB4C4B11 /* DebugTools.swift */; };
 		7A6611169CC44DFAB5B9A82D /* NotificationTestingConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DEAD6A24774B48AB5AC706 /* NotificationTestingConfigView.swift */; };
 		AA0001020000000000000001 /* PhotoLibrarySaving.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0001010000000000000001 /* PhotoLibrarySaving.swift */; };
@@ -628,6 +627,7 @@
 		FB726FE5280249DA8219EDE9 /* PeerSharingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECD5DF711D545048AA5E270 /* PeerSharingViewModel.swift */; };
 		CB797FF0F25A44818BFBCA35 /* DebugTools.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CCABA90337445F891CF2E09 /* DebugTools.framework */; };
 		D3C4E5F6A7B849C0D1E2F3A4 /* TelemetryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A2C3D4E5F647A8B9C0D1E2 /* TelemetryService.swift */; };
+		0707DB8C4F5741A089FB5230 /* SpanNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F1667B2DA14B42920D3F0D /* SpanNames.swift */; };
 		E4D5F6A7B8C94AD1E2F3A4B5 /* LogForwarder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B3D4E5F6A748B9C0D1E2F3 /* LogForwarder.swift */; };
 /* End PBXBuildFile section */
 
@@ -653,26 +653,12 @@
 			remoteGlobalIDString = 26A88C03266FFFC800888EED;
 			remoteInfo = jamiNotificationExtension;
 		};
-		37B31662D8B14AAF9C23E467 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 043999EB1D1C2D9D00E99CD9 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DDE1FD856CF742B5A9766BDF;
-			remoteInfo = DebugTools;
-		};
 		3D0E697F2DDCD9C80046FA3D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 043999EB1D1C2D9D00E99CD9 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 3D0E69762DDCD9C70046FA3D;
 			remoteInfo = jamiShareExtension;
-		};
-		D908467B39EB4F829EB2C66A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 043999EB1D1C2D9D00E99CD9 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DDE1FD856CF742B5A9766BDF;
-			remoteInfo = DebugTools;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -689,17 +675,6 @@
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		26F1D88D2FC36F23002AA754 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				26F1D88C2FC36F23002AA754 /* libopentelemetry.xcframework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		645BDD6424B5FEFF009129B1 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -712,13 +687,11 @@
 				26001CCA2D792489009A8E23 /* SQLite.xcframework in Embed Frameworks */,
 				26001CCC2D79248B009A8E23 /* RxSwift.xcframework in Embed Frameworks */,
 				26001CD22D792490009A8E23 /* RxCocoa.xcframework in Embed Frameworks */,
-				26F1D88A2FC36988002AA754 /* libopentelemetry.xcframework in Embed Frameworks */,
 				44DFB3AF288704900023878C /* AMPopTip.xcframework in Embed Frameworks */,
 				44DFB3AD288704900023878C /* GSKStretchyHeaderView.xcframework in Embed Frameworks */,
 				26001CD42D792492009A8E23 /* RxBlocking.xcframework in Embed Frameworks */,
 				26001CCE2D79248D009A8E23 /* RxRelay.xcframework in Embed Frameworks */,
 				26001CD62D792494009A8E23 /* Reusable.xcframework in Embed Frameworks */,
-				300F6F549C694A199DB0A050 /* DebugTools.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1845,6 +1818,7 @@
 		AA11BB22CC33DD44EE550001 /* AccountSettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsTests.swift; sourceTree = "<group>"; };
 		AFD989EC28085426384411E8 /* AvatarHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarHelpers.swift; sourceTree = "<group>"; };
 		B1A2C3D4E5F647A8B9C0D1E2 /* TelemetryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TelemetryService.swift; path = DebugTools/Sources/NotificationTesting/Internal/TelemetryService.swift; sourceTree = SOURCE_ROOT; };
+		34F1667B2DA14B42920D3F0D /* SpanNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SpanNames.swift; path = DebugTools/Sources/NotificationTesting/Internal/SpanNames.swift; sourceTree = SOURCE_ROOT; };
 		BB06BD8029D491F80064F0FC /* CustomAnnotationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotationModel.swift; sourceTree = "<group>"; };
 		BB06BD8229D492AA0064F0FC /* LocationSharingVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSharingVM.swift; sourceTree = "<group>"; };
 		BB06BD8429D4C1210064F0FC /* DurationPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationPicker.swift; sourceTree = "<group>"; };
@@ -1973,14 +1947,12 @@
 				26001C222D78E1A2009A8E23 /* libpjmedia.xcframework in Frameworks */,
 				26001C3C2D78E1A3009A8E23 /* libpjmedia-audiodev.xcframework in Frameworks */,
 				04399A941D1C2F5800E99CD9 /* libiconv.tbd in Frameworks */,
-				26F1D8892FC36988002AA754 /* libopentelemetry.xcframework in Frameworks */,
 				26001C602D78E1A4009A8E23 /* libgit2.xcframework in Frameworks */,
 				04399A2C1D1C2DE900E99CD9 /* AVFoundation.framework in Frameworks */,
 				26001C2A2D78E1A2009A8E23 /* libyaml-cpp.xcframework in Frameworks */,
 				26001C502D78E1A3009A8E23 /* libspeex.xcframework in Frameworks */,
 				26001C362D78E1A2009A8E23 /* libpjsip-simple.xcframework in Frameworks */,
 				04399A2A1D1C2DE300E99CD9 /* CoreMedia.framework in Frameworks */,
-				79C958A7AC7E407E8BB434E3 /* DebugTools.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2047,7 +2019,6 @@
 				26001C8E2D78E3E6009A8E23 /* libopendht.xcframework in Frameworks */,
 				26001C8A2D78E3E6009A8E23 /* libllhttp.xcframework in Frameworks */,
 				26A88C7626700ABC00888EED /* libz.tbd in Frameworks */,
-				26F1D88B2FC36F23002AA754 /* libopentelemetry.xcframework in Frameworks */,
 				26A88C75267009EC00888EED /* CoreVideo.framework in Frameworks */,
 				26001C762D78E3E5009A8E23 /* libdhtnet.xcframework in Frameworks */,
 				26001C962D78E3E6009A8E23 /* libpjmedia-audiodev.xcframework in Frameworks */,
@@ -2066,7 +2037,6 @@
 				26F82D062D7A09C300954A7B /* libnatpmp.xcframework in Frameworks */,
 				26001CA02D78E3E6009A8E23 /* libpjsip-simple.xcframework in Frameworks */,
 				26001C982D78E3E6009A8E23 /* libpjmedia-codec.xcframework in Frameworks */,
-				CB797FF0F25A44818BFBCA35 /* DebugTools.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3879,6 +3849,7 @@
 				5D11E883DB7A430E8986A5E9 /* IntervalSender.swift */,
 				1082257BBE4D4C0687DA9F2E /* TraceIdParser.swift */,
 				B1A2C3D4E5F647A8B9C0D1E2 /* TelemetryService.swift */,
+				34F1667B2DA14B42920D3F0D /* SpanNames.swift */,
 				C2B3D4E5F6A748B9C0D1E2F3 /* LogForwarder.swift */,
 			);
 			path = Internal;
@@ -3980,6 +3951,9 @@
 				043999F01D1C2D9D00E99CD9 /* Frameworks */,
 				043999F11D1C2D9D00E99CD9 /* Resources */,
 				645BDD6424B5FEFF009129B1 /* Embed Frameworks */,
+				6532921B2E01421DADD0925B /* Embed DebugTools Framework (Testing) */,
+				F6D5D7D03AE444D198758728 /* Prune Static Debug Frameworks (Testing) */,
+				668A0DE504B943DF86B0AAD0 /* Verify No DebugTools Artifacts */,
 				26A88C0C266FFFC800888EED /* Embed App Extensions */,
 				C20000000000000000000001 /* ⚙️ Collaborative Editor */,
 			);
@@ -3988,7 +3962,6 @@
 			dependencies = (
 				26A88C0A266FFFC800888EED /* PBXTargetDependency */,
 				3D0E69802DDCD9C80046FA3D /* PBXTargetDependency */,
-				679BFEA779B14EE4B6FB32EB /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				0701DF66E84019629D7EFF42 /* Calls */,
@@ -4053,12 +4026,12 @@
 				26A88C00266FFFC800888EED /* Sources */,
 				26A88C01266FFFC800888EED /* Frameworks */,
 				26A88C02266FFFC800888EED /* Resources */,
-				26F1D88D2FC36F23002AA754 /* Embed Frameworks */,
+				08FC0642C6C040BD866A89E4 /* Prune Static Debug Frameworks (Testing) */,
+				3F70F498B50C4BF9912C5E03 /* Verify No DebugTools Artifacts */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				A897DA0169EF4DD78D57F9E2 /* PBXTargetDependency */,
 			);
 			name = jamiNotificationExtension;
 			packageProductDependencies = (
@@ -4309,7 +4282,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
+	/* Begin PBXShellScriptBuildPhase section */
+		08FC0642C6C040BD866A89E4 /* Prune Static Debug Frameworks (Testing) */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Prune Static Debug Frameworks (Testing)";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/bin/sh \"${PROJECT_DIR}/BuildScripts/prune-static-debug-frameworks.sh\"\n";
+		};
 		1ABE07C31F0C28E000D36361 /* ⚠️ Swiftlint Analysis */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -4338,6 +4326,21 @@
 			shellPath = /bin/sh;
 			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n${PROJECT_DIR}/swiftgen/swiftgen.sh\n";
 		};
+		3F70F498B50C4BF9912C5E03 /* Verify No DebugTools Artifacts */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Verify No DebugTools Artifacts";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/bin/sh \"${PROJECT_DIR}/BuildScripts/verify-no-debug-tools.sh\"\n";
+		};
 		6236602D200914C9002598C1 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -4352,6 +4355,7 @@
 			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin:/usr/local/bin\"\ncd \"${PROJECT_DIR}/..\"\n./compile-ios.sh --platform=iPhoneOS\n";
 		};
 		C20000000000000000000001 /* ⚙️ Collaborative Editor */ = {
+		6532921B2E01421DADD0925B /* Embed DebugTools Framework (Testing) */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -4378,6 +4382,43 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin:/usr/local/bin\"\n\"${PROJECT_DIR}/CollabEditor/build.sh\" \"${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}\"\n";
+			);
+			name = "Embed DebugTools Framework (Testing)";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/bin/sh \"${PROJECT_DIR}/BuildScripts/embed-debug-tools.sh\"\n";
+		};
+		668A0DE504B943DF86B0AAD0 /* Verify No DebugTools Artifacts */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Verify No DebugTools Artifacts";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/bin/sh \"${PROJECT_DIR}/BuildScripts/verify-no-debug-tools.sh\"\n";
+		};
+		F6D5D7D03AE444D198758728 /* Prune Static Debug Frameworks (Testing) */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Prune Static Debug Frameworks (Testing)";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/bin/sh \"${PROJECT_DIR}/BuildScripts/prune-static-debug-frameworks.sh\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -4800,6 +4841,7 @@
 				55BF95025C0746ED9407B0EA /* IntervalSender.swift in Sources */,
 				0E79DD394CD244799BE7250B /* TraceIdParser.swift in Sources */,
 				D3C4E5F6A7B849C0D1E2F3A4 /* TelemetryService.swift in Sources */,
+				0707DB8C4F5741A089FB5230 /* SpanNames.swift in Sources */,
 				E4D5F6A7B8C94AD1E2F3A4B5 /* LogForwarder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4826,16 +4868,6 @@
 			isa = PBXTargetDependency;
 			target = 3D0E69762DDCD9C70046FA3D /* jamiShareExtension */;
 			targetProxy = 3D0E697F2DDCD9C80046FA3D /* PBXContainerItemProxy */;
-		};
-		679BFEA779B14EE4B6FB32EB /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DDE1FD856CF742B5A9766BDF /* DebugTools */;
-			targetProxy = 37B31662D8B14AAF9C23E467 /* PBXContainerItemProxy */;
-		};
-		A897DA0169EF4DD78D57F9E2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DDE1FD856CF742B5A9766BDF /* DebugTools */;
-			targetProxy = D908467B39EB4F829EB2C66A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -5204,11 +5236,21 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = MSHYCBXK85;
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = MSHYCBXK85;
-				GCC_C_LANGUAGE_STANDARD = c11;
+					DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+					DEFINES_MODULE = YES;
+					DEVELOPMENT_TEAM = MSHYCBXK85;
+					"DEVELOPMENT_TEAM[sdk=iphoneos*]" = MSHYCBXK85;
+					"FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*]" = (
+						"$(inherited)",
+						"$(BUILT_PRODUCTS_DIR)",
+						"$(SRCROOT)/../xcframework/libopentelemetry.xcframework/ios-arm64",
+					);
+					"FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*]" = (
+						"$(inherited)",
+						"$(BUILT_PRODUCTS_DIR)",
+						"$(SRCROOT)/../xcframework/libopentelemetry.xcframework/ios-arm64_x86_64-simulator",
+					);
+					GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = JamiNotificationExtension/NotificationPrefixHeader.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -5227,10 +5269,16 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				NEW_SETTING = "";
-				OTHER_CFLAGS = "-DMSGPACK_NO_BOOST";
-				OTHER_LDFLAGS = "";
+					MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+					NEW_SETTING = "";
+					OTHER_CFLAGS = "-DMSGPACK_NO_BOOST";
+					OTHER_LDFLAGS = (
+						"$(inherited)",
+						"-framework",
+						DebugTools,
+						"-framework",
+						libopentelemetry,
+					);
 				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring.jamiNotificationExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = iOS_filtering_notifications;
@@ -5911,6 +5959,7 @@
 					IntervalSender.swift,
 					TraceIdParser.swift,
 					TelemetryService.swift,
+					SpanNames.swift,
 					LogForwarder.swift,
 				);
 				GENERATE_INFOPLIST_FILE = YES;
@@ -6437,7 +6486,16 @@
 				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = MSHYCBXK85;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*]" = (
+					"$(inherited)",
+					"$(BUILT_PRODUCTS_DIR)",
+					"$(SRCROOT)/../xcframework/libopentelemetry.xcframework/ios-arm64",
+				);
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*]" = (
+					"$(inherited)",
+					"$(BUILT_PRODUCTS_DIR)",
+					"$(SRCROOT)/../xcframework/libopentelemetry.xcframework/ios-arm64_x86_64-simulator",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Ring/RingPrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
@@ -6453,6 +6511,13 @@
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
 				MARKETING_VERSION = 4.09;
 				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					DebugTools,
+					"-framework",
+					libopentelemetry,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
