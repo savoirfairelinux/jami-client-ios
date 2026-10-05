@@ -144,8 +144,8 @@
 
 // Smartlist
 "smartlist.yesterday" = "دونن";
-"smartlist.results" = "عمومی دایرکتوری";
-"smartlist.jamsResults" = "Organization directory";
+"smartlist.results" = "Jami search";
+"smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "دانیشیقلار";
 "smartlist.conversationsSearchHint" = "You don't have any conversations yet.";
 "smartlist.publicDirectoryHint" = "People on Jami outside your contacts.";
@@ -154,7 +154,7 @@
 "smartlist.noConversationsFound" = "No conversations match the search.";
 "smartlist.newContact" = "New contact";
 "smartlist.newGroup" = "New group";
-"smartlist.accounts" = "حسابلار";
+"smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "نتیجه یوخدور";
 "smartlist.noConversation" = "دانیشیق اولماز";
@@ -169,7 +169,6 @@
 "smartlist.invitations" = "دعوتلر";
 "smartlist.aboutJami" = "جامی حاقّيندا";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "حسابلار";
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, do you want to make a donation?";
 "smartlist.inSynchronization" = "Syncing…";
@@ -586,7 +585,7 @@
 "generalSettings.fileTransfer" = "فایل لیږد";
 "generalSettings.locationSharing" = "مکان بؤلمه سی";
 "generalSettings.automaticAcceptIncomingFiles" = "آتاکت اولاراق گلين فایللاري قبول ائتمک";
-"generalSettings.acceptTransferLimit" = "قبول ائد ن لیک لری";
+"generalSettings.acceptTransferLimit" = "Maximum automatic download size";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
 "generalSettings.limitLocationSharingDuration" = "یئر بؤلمه سی نین مودّتی محدود اولسون";
 "generalSettings.locationSharingDuration" = "موقف پايين مودّتي";

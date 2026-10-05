@@ -144,8 +144,8 @@
 
 // Smartlist
 "smartlist.yesterday" = "Dün";
-"smartlist.results" = "Aleni dizin";
-"smartlist.jamsResults" = "Organization directory";
+"smartlist.results" = "Jami search";
+"smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "Görüşmeler";
 "smartlist.conversationsSearchHint" = "You don't have any conversations yet.";
 "smartlist.publicDirectoryHint" = "People on Jami outside your contacts.";
@@ -154,7 +154,7 @@
 "smartlist.noConversationsFound" = "Aramayla eşleşen görüşme yok.";
 "smartlist.newContact" = "Yeni kişi";
 "smartlist.newGroup" = "Yeni grup";
-"smartlist.accounts" = "Hesaplar";
+"smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Alınan davetler";
 "smartlist.noResults" = "Sonuç yok";
 "smartlist.noConversation" = "Görüşme yok";
@@ -169,7 +169,6 @@
 "smartlist.invitations" = "Davetiyeler";
 "smartlist.aboutJami" = "Jami Hakkında";
 "smartlist.inviteFriends" = "Arkadaşlarını davet et";
-"smartlist.accounts" = "Hesaplar";
 "smartlist.disableDonation" = "Şimdi değil";
 "smartlist.donationExplanation" = "Jami'yi kullanmaktan hoşlanıyor ve misyonumuza güveniyorsan bağış yapmak ister misin?";
 "smartlist.inSynchronization" = "Eşitleniyor…";
@@ -586,7 +585,7 @@
 "generalSettings.fileTransfer" = "Dosya aktarımı";
 "generalSettings.locationSharing" = "Konum paylaşımı";
 "generalSettings.automaticAcceptIncomingFiles" = "Gelen dosyaları otomatik olarak kabul et";
-"generalSettings.acceptTransferLimit" = "Aktarma sınırını kabul et";
+"generalSettings.acceptTransferLimit" = "Maximum automatic download size";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = sınırsız)";
 "generalSettings.limitLocationSharingDuration" = "Konum paylaşımının süresini sınırla";
 "generalSettings.locationSharingDuration" = "Konum paylaşım süresi";

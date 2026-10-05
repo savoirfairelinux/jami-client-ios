@@ -144,8 +144,8 @@
 
 // Smartlist
 "smartlist.yesterday" = "昨日";
-"smartlist.results" = "公開台帳";
-"smartlist.jamsResults" = "Organization directory";
+"smartlist.results" = "Jami search";
+"smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "会話";
 "smartlist.conversationsSearchHint" = "You don't have any conversations yet.";
 "smartlist.publicDirectoryHint" = "People on Jami outside your contacts.";
@@ -154,7 +154,7 @@
 "smartlist.noConversationsFound" = "検索に一致する会話はありません。";
 "smartlist.newContact" = "新しい連絡先";
 "smartlist.newGroup" = "新しいグループ";
-"smartlist.accounts" = "アカウント";
+"smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "招待を受信しました";
 "smartlist.noResults" = "検索結果はありません";
 "smartlist.noConversation" = "会話はありません";
@@ -169,7 +169,6 @@
 "smartlist.invitations" = "招待";
 "smartlist.aboutJami" = "Jamiについて";
 "smartlist.inviteFriends" = "友達を招待";
-"smartlist.accounts" = "アカウント";
 "smartlist.disableDonation" = "後で";
 "smartlist.donationExplanation" = "Jami の使用を楽しみ、私たちのミッションに共感していただけるなら、寄付をしませんか？";
 "smartlist.inSynchronization" = "同期中…";
@@ -586,7 +585,7 @@
 "generalSettings.fileTransfer" = "ファイル転送";
 "generalSettings.locationSharing" = "場所共有";
 "generalSettings.automaticAcceptIncomingFiles" = "ファイルの受信を自動的に許可";
-"generalSettings.acceptTransferLimit" = "譲渡制限を承認する";
+"generalSettings.acceptTransferLimit" = "Maximum automatic download size";
 "generalSettings.acceptTransferLimitDescription" = "（MB、0 = 無制限）";
 "generalSettings.limitLocationSharingDuration" = "場所共有の期間を制限する";
 "generalSettings.locationSharingDuration" = "ポジションシェア期間";

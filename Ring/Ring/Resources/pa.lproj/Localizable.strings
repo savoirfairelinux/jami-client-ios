@@ -144,8 +144,8 @@
 
 // Smartlist
 "smartlist.yesterday" = "ਕੱਲ੍ਹ";
-"smartlist.results" = "ਜਨਤਕ ਨਾਮਾਵਲੀ";
-"smartlist.jamsResults" = "Organization directory";
+"smartlist.results" = "Jami search";
+"smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "ਗੱਲਾਂਬਾਤਾਂ";
 "smartlist.conversationsSearchHint" = "You don't have any conversations yet.";
 "smartlist.publicDirectoryHint" = "People on Jami outside your contacts.";
@@ -154,7 +154,7 @@
 "smartlist.noConversationsFound" = "No conversations match the search.";
 "smartlist.newContact" = "New contact";
 "smartlist.newGroup" = "New group";
-"smartlist.accounts" = "ਖਾਤੇ";
+"smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "ਕੋਈ ਨਤੀਜਾ ਨਹੀਂ";
 "smartlist.noConversation" = "No conversations";
@@ -169,7 +169,6 @@
 "smartlist.invitations" = "ਸੱਦੇ";
 "smartlist.aboutJami" = "Jami ਬਾਰੇ";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "ਖਾਤੇ";
 "smartlist.disableDonation" = "ਹਾਲੇ ਨਹੀਂ";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, do you want to make a donation?";
 "smartlist.inSynchronization" = "Syncing…";
@@ -586,7 +585,7 @@
 "generalSettings.fileTransfer" = "ਫ਼ਾਈਲ ਤਬਾਦਲਾ";
 "generalSettings.locationSharing" = "Location sharing";
 "generalSettings.automaticAcceptIncomingFiles" = "Automatically accept incoming files";
-"generalSettings.acceptTransferLimit" = "Accept transfer limit";
+"generalSettings.acceptTransferLimit" = "Maximum automatic download size";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
 "generalSettings.limitLocationSharingDuration" = "Limit the duration of location sharing";
 "generalSettings.locationSharingDuration" = "Position share duration";

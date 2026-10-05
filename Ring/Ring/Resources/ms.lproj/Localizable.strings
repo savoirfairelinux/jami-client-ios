@@ -144,8 +144,8 @@
 
 // Smartlist
 "smartlist.yesterday" = "Semalam";
-"smartlist.results" = "പൊതുവായ ഡയറക്ടറി";
-"smartlist.jamsResults" = "Organization directory";
+"smartlist.results" = "Jami search";
+"smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "സംഭാഷണങ്ങൾ";
 "smartlist.conversationsSearchHint" = "You don't have any conversations yet.";
 "smartlist.publicDirectoryHint" = "People on Jami outside your contacts.";
@@ -154,7 +154,7 @@
 "smartlist.noConversationsFound" = "No conversations match the search.";
 "smartlist.newContact" = "New contact";
 "smartlist.newGroup" = "New group";
-"smartlist.accounts" = "Akaun";
+"smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "ഫലങ്ങളില്ല";
 "smartlist.noConversation" = "സംഭാഷണം വേണ്ട";
@@ -169,7 +169,6 @@
 "smartlist.invitations" = "ക്ഷണങ്ങള്";
 "smartlist.aboutJami" = "ജാമിയെ കുറിച്ച്";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Akaun";
 "smartlist.disableDonation" = "Bukan sekarang";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, do you want to make a donation?";
 "smartlist.inSynchronization" = "Syncing…";
@@ -586,7 +585,7 @@
 "generalSettings.fileTransfer" = "ഫയൽ കൈമാറ്റം";
 "generalSettings.locationSharing" = "സ്ഥാനം പങ്കിടൽ";
 "generalSettings.automaticAcceptIncomingFiles" = "സ്വപ്രേരിതമായി വരുന്ന ഫയലുകൾ സ്വീകരിക്കുക";
-"generalSettings.acceptTransferLimit" = "കൈമാറ്റ പരിധി അംഗീകരിക്കുക";
+"generalSettings.acceptTransferLimit" = "Maximum automatic download size";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
 "generalSettings.limitLocationSharingDuration" = "സ്ഥാനം പങ്കിടുന്നതിന്റെ കാലാവധി പരിമിതപ്പെടുത്തുക";
 "generalSettings.locationSharingDuration" = "പോസിഷൻ ഓഹരി കാലാവധി";

@@ -144,8 +144,8 @@
 
 // Smartlist
 "smartlist.yesterday" = "Eilen";
-"smartlist.results" = "Julkinen kansio";
-"smartlist.jamsResults" = "Organisointikansio";
+"smartlist.results" = "Jami search";
+"smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "Keskustelu";
 "smartlist.conversationsSearchHint" = "Sinulla ei ole vielä keskusteluja.";
 "smartlist.publicDirectoryHint" = "Henkilöt Jami-yhteystietojen ulkopuolella.";
@@ -154,7 +154,7 @@
 "smartlist.noConversationsFound" = "Hakua vastaavaa keskustelua ei löytynyt.";
 "smartlist.newContact" = "Uusi henkilö";
 "smartlist.newGroup" = "Uusi ryhmä";
-"smartlist.accounts" = "Tilit";
+"smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Kutsut vastaanotettu";
 "smartlist.noResults" = "Ei tuloksia";
 "smartlist.noConversation" = "Ei keskusteluja";
@@ -169,7 +169,6 @@
 "smartlist.invitations" = "Kutsut";
 "smartlist.aboutJami" = "Tietoa Jamista";
 "smartlist.inviteFriends" = "Kutsu ystäviä";
-"smartlist.accounts" = "Tilit";
 "smartlist.disableDonation" = "Ei nyt";
 "smartlist.donationExplanation" = "Jos pidät Jamista ja uskot tehtäväämme, Haluatko tehdä lahjoituksen?";
 "smartlist.inSynchronization" = "Synkronoidaan...";
@@ -586,7 +585,7 @@
 "generalSettings.fileTransfer" = "Tiedostonsiirto";
 "generalSettings.locationSharing" = "Sijainnin jakaminen";
 "generalSettings.automaticAcceptIncomingFiles" = "Hyväksy autom. saapuvat tiedostot";
-"generalSettings.acceptTransferLimit" = "Hyväksy siirtoraja";
+"generalSettings.acceptTransferLimit" = "Maximum automatic download size";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = rajoittamaton)";
 "generalSettings.limitLocationSharingDuration" = "Rajoita sijainnin jakamisen kestoa";
 "generalSettings.locationSharingDuration" = "Sijainnin jakamisen kesto";

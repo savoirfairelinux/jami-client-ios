@@ -144,8 +144,8 @@
 
 // Smartlist
 "smartlist.yesterday" = "Eile";
-"smartlist.results" = "Avalik kataloog";
-"smartlist.jamsResults" = "Organisatsiooni kataloog";
+"smartlist.results" = "Jami search";
+"smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "Vestlused";
 "smartlist.conversationsSearchHint" = "Sul pole veel ühtegi vestlust.";
 "smartlist.publicDirectoryHint" = "Inimesed Jami võrgus väljaspool sinu aadressiraamatut.";
@@ -154,7 +154,7 @@
 "smartlist.noConversationsFound" = "Ühtegi vestlust ei vasta sinu otsingule.";
 "smartlist.newContact" = "Uus kontakt";
 "smartlist.newGroup" = "Uus grupp";
-"smartlist.accounts" = "Kasutajakontod";
+"smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Sulle on kutseid";
 "smartlist.noResults" = "Pole tulemusi";
 "smartlist.noConversation" = "Pole vestlusi";
@@ -169,7 +169,6 @@
 "smartlist.invitations" = "Kutsed";
 "smartlist.aboutJami" = "Teave Jami kohta";
 "smartlist.inviteFriends" = "Kutsu sõpru";
-"smartlist.accounts" = "Kasutajakontod";
 "smartlist.disableDonation" = "Mitte praegu";
 "smartlist.donationExplanation" = "Kui sulle Jami meeldib ja sa usud meie visiooni, siis kas sa oleksid nõus meid rahaliselt toetama?";
 "smartlist.inSynchronization" = "Sünkroonin andmeid...";
@@ -586,7 +585,7 @@
 "generalSettings.fileTransfer" = "Failide ülekandmine";
 "generalSettings.locationSharing" = "Asukoha jagamine";
 "generalSettings.automaticAcceptIncomingFiles" = "Automaatiliselt luba allalaadida saabuvaid faile";
-"generalSettings.acceptTransferLimit" = "Laaditavate failide mahu piirmäär";
+"generalSettings.acceptTransferLimit" = "Maximum automatic download size";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = piiramatu)";
 "generalSettings.limitLocationSharingDuration" = "Piira asukoha jagamise kestust";
 "generalSettings.locationSharingDuration" = "Asukoha jagamise kestus";

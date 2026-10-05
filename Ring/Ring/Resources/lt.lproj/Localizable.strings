@@ -144,8 +144,8 @@
 
 // Smartlist
 "smartlist.yesterday" = "Vakar";
-"smartlist.results" = "Viešasis katalogas";
-"smartlist.jamsResults" = "Organization directory";
+"smartlist.results" = "Jami search";
+"smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "Pokalbiai";
 "smartlist.conversationsSearchHint" = "You don't have any conversations yet.";
 "smartlist.publicDirectoryHint" = "People on Jami outside your contacts.";
@@ -154,7 +154,7 @@
 "smartlist.noConversationsFound" = "Nėra pokalbių, atitinkančių paiešką.";
 "smartlist.newContact" = "Naujas adresatas";
 "smartlist.newGroup" = "Nauja grupė";
-"smartlist.accounts" = "Paskyros";
+"smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Gauti kvietimai";
 "smartlist.noResults" = "Jokių rezultatų";
 "smartlist.noConversation" = "Pokalbių nėra";
@@ -169,7 +169,6 @@
 "smartlist.invitations" = "Pakvietimai";
 "smartlist.aboutJami" = "Apie Jami";
 "smartlist.inviteFriends" = "Pakviesti draugus";
-"smartlist.accounts" = "Paskyros";
 "smartlist.disableDonation" = "Ne dabar";
 "smartlist.donationExplanation" = "Jei jums patinka naudotis Jami ir tikite mūsų misija, ar norėtumėte paaukoti?";
 "smartlist.inSynchronization" = "Sinchronizuojama…";
@@ -586,7 +585,7 @@
 "generalSettings.fileTransfer" = "Failų persiuntimas";
 "generalSettings.locationSharing" = "Vietovės bendrinimas";
 "generalSettings.automaticAcceptIncomingFiles" = "Automatiškai priimti gaunamus failus";
-"generalSettings.acceptTransferLimit" = "Priėmimo perdavimo riba";
+"generalSettings.acceptTransferLimit" = "Maximum automatic download size";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = neribota)";
 "generalSettings.limitLocationSharingDuration" = "Riboti vietos bendrinimo trukmę";
 "generalSettings.locationSharingDuration" = "Vietos bendrinimo trukmė";

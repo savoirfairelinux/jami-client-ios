@@ -144,8 +144,8 @@
 
 // Smartlist
 "smartlist.yesterday" = "Келесі күні";
-"smartlist.results" = "Қоғамдық кітапша";
-"smartlist.jamsResults" = "Organization directory";
+"smartlist.results" = "Jami search";
+"smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "Әңгіме";
 "smartlist.conversationsSearchHint" = "You don't have any conversations yet.";
 "smartlist.publicDirectoryHint" = "People on Jami outside your contacts.";
@@ -154,7 +154,7 @@
 "smartlist.noConversationsFound" = "No conversations match the search.";
 "smartlist.newContact" = "New contact";
 "smartlist.newGroup" = "New group";
-"smartlist.accounts" = "Есеп айырысу";
+"smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Нәтиже жоқ";
 "smartlist.noConversation" = "Әңгіме жоқ";
@@ -169,7 +169,6 @@
 "smartlist.invitations" = "Шақырулар";
 "smartlist.aboutJami" = "Жами туралы";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Есеп айырысу";
 "smartlist.disableDonation" = "Қазір емес";
 "smartlist.donationExplanation" = "Егер сізге Jami-ді пайдалану ұнаса және біздің миссияға сенсеңіз, қайырымдылық жасағыңыз келе ме?";
 "smartlist.inSynchronization" = "Syncing…";
@@ -586,7 +585,7 @@
 "generalSettings.fileTransfer" = "Файлдарды беру";
 "generalSettings.locationSharing" = "Орналасу ортақ";
 "generalSettings.automaticAcceptIncomingFiles" = "Түсетін файлдарды автоматты түрде қабылдау";
-"generalSettings.acceptTransferLimit" = "Алудың шекті мөлшерін қабылдау";
+"generalSettings.acceptTransferLimit" = "Maximum automatic download size";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
 "generalSettings.limitLocationSharingDuration" = "Орналасқан жерді бөлісудің ұзақтығын шектеу";
 "generalSettings.locationSharingDuration" = "Орналасқан позициялар";

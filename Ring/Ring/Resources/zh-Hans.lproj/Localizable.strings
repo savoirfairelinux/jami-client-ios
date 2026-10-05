@@ -144,8 +144,8 @@
 
 // Smartlist
 "smartlist.yesterday" = "昨日";
-"smartlist.results" = "公開目錄";
-"smartlist.jamsResults" = "組織目錄";
+"smartlist.results" = "Jami search";
+"smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "交談";
 "smartlist.conversationsSearchHint" = "您尚無任何交談。";
 "smartlist.publicDirectoryHint" = "不在聯絡人清單中的 Jami 使用者。";
@@ -154,7 +154,7 @@
 "smartlist.noConversationsFound" = "無任何交談符合搜尋符。";
 "smartlist.newContact" = "新建聯絡人";
 "smartlist.newGroup" = "新建群組";
-"smartlist.accounts" = "帳號";
+"smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "邀請已經傳送";
 "smartlist.noResults" = "尚無結果";
 "smartlist.noConversation" = "尚無交談";
@@ -169,7 +169,6 @@
 "smartlist.invitations" = "邀請";
 "smartlist.aboutJami" = "關於 Jami";
 "smartlist.inviteFriends" = "邀請朋友";
-"smartlist.accounts" = "帳號";
 "smartlist.disableDonation" = "暫時不要";
 "smartlist.donationExplanation" = "如果您喜愛使用 Jami 並相信我們的使命，您願意捐款贊助嗎？";
 "smartlist.inSynchronization" = "進行同步…";
@@ -586,7 +585,7 @@
 "generalSettings.fileTransfer" = "檔案傳輸";
 "generalSettings.locationSharing" = "位置分享";
 "generalSettings.automaticAcceptIncomingFiles" = "自動接受傳來的檔案";
-"generalSettings.acceptTransferLimit" = "接受傳輸限制";
+"generalSettings.acceptTransferLimit" = "Maximum automatic download size";
 "generalSettings.acceptTransferLimitDescription" = "(MB，0 = 無限制)";
 "generalSettings.limitLocationSharingDuration" = "限制位置分享的時間";
 "generalSettings.locationSharingDuration" = "位置分享持續時間";

@@ -144,8 +144,8 @@
 
 // Smartlist
 "smartlist.yesterday" = "Tegnap";
-"smartlist.results" = "Nyilvános címtár";
-"smartlist.jamsResults" = "Organization directory";
+"smartlist.results" = "Jami search";
+"smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "Beszélgetések";
 "smartlist.conversationsSearchHint" = "You don't have any conversations yet.";
 "smartlist.publicDirectoryHint" = "People on Jami outside your contacts.";
@@ -154,7 +154,7 @@
 "smartlist.noConversationsFound" = "Nincsenek a keresési feltételeknek megfelelő beszélgetések.";
 "smartlist.newContact" = "Új kapcsolattartó";
 "smartlist.newGroup" = "Új csoport";
-"smartlist.accounts" = "Fiókok";
+"smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Meghívások megérkeztek";
 "smartlist.noResults" = "Nincs eredmény";
 "smartlist.noConversation" = "Beszélgetés nem található";
@@ -169,7 +169,6 @@
 "smartlist.invitations" = "Meghívások";
 "smartlist.aboutJami" = "A Jami névjegye";
 "smartlist.inviteFriends" = "Barátok és ismerősök meghívása";
-"smartlist.accounts" = "Fiókok";
 "smartlist.disableDonation" = "Máskor";
 "smartlist.donationExplanation" = "Ha értékeli a Jami használatát, és hisz a küldetésünkben, szeretne adományozni?";
 "smartlist.inSynchronization" = "Szinkronizálás…";
@@ -586,7 +585,7 @@
 "generalSettings.fileTransfer" = "Fájlküldés";
 "generalSettings.locationSharing" = "Helymegosztás";
 "generalSettings.automaticAcceptIncomingFiles" = "A bejövő fájlok önműködő elfogadása";
-"generalSettings.acceptTransferLimit" = "Fájlküldési korlátozás elfogadása";
+"generalSettings.acceptTransferLimit" = "Maximum automatic download size";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = korlátlan)";
 "generalSettings.limitLocationSharingDuration" = "Helymegosztás időtartamának korlátozása";
 "generalSettings.locationSharingDuration" = "Helymegosztás időtartama";

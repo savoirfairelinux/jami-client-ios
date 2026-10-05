@@ -144,8 +144,8 @@
 
 // Smartlist
 "smartlist.yesterday" = "Ieri";
-"smartlist.results" = "Lista publică";
-"smartlist.jamsResults" = "Lista organizației";
+"smartlist.results" = "Jami search";
+"smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "Conversații";
 "smartlist.conversationsSearchHint" = "Încă nu ai conversații.";
 "smartlist.publicDirectoryHint" = "Persoane de pe Jami din afara contactelor tale.";
@@ -154,7 +154,7 @@
 "smartlist.noConversationsFound" = "Nicio conversație nu corespunde căutării.";
 "smartlist.newContact" = "Contact nou";
 "smartlist.newGroup" = "Grup nou";
-"smartlist.accounts" = "Conturi";
+"smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Invitații primite";
 "smartlist.noResults" = "Niciun rezultat";
 "smartlist.noConversation" = "Nicio conversație";
@@ -169,7 +169,6 @@
 "smartlist.invitations" = "Invitații";
 "smartlist.aboutJami" = "Despre Jami";
 "smartlist.inviteFriends" = "Invită prieteni";
-"smartlist.accounts" = "Conturi";
 "smartlist.disableDonation" = "Nu acum";
 "smartlist.donationExplanation" = "Dacă îți place să folosești Jami și crezi că misiunea noastră este importantă, vrei să faci o donație?";
 "smartlist.inSynchronization" = "Sincronizare…";
@@ -586,7 +585,7 @@
 "generalSettings.fileTransfer" = "Transfer de fișiere";
 "generalSettings.locationSharing" = "Distribuirea poziției";
 "generalSettings.automaticAcceptIncomingFiles" = "Acceptă automat fișierele primite";
-"generalSettings.acceptTransferLimit" = "Limita fișierului acceptat";
+"generalSettings.acceptTransferLimit" = "Maximum automatic download size";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = nelimitat)";
 "generalSettings.limitLocationSharingDuration" = "Limitează durata distribuirii poziției";
 "generalSettings.locationSharingDuration" = "Durata distribuirii poziției";

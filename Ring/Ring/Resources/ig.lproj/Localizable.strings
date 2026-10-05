@@ -144,8 +144,8 @@
 
 // Smartlist
 "smartlist.yesterday" = "N'ụbọchị gara aga";
-"smartlist.results" = "Public directory";
-"smartlist.jamsResults" = "Organization directory";
+"smartlist.results" = "Jami search";
+"smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "Mkparịta ụka";
 "smartlist.conversationsSearchHint" = "You don't have any conversations yet.";
 "smartlist.publicDirectoryHint" = "People on Jami outside your contacts.";
@@ -154,7 +154,7 @@
 "smartlist.noConversationsFound" = "No conversations match the search.";
 "smartlist.newContact" = "New contact";
 "smartlist.newGroup" = "New group";
-"smartlist.accounts" = "Ihe ndekọ";
+"smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Enweghị nsonaazụ";
 "smartlist.noConversation" = "Enweghị mkparịta ụka";
@@ -169,7 +169,6 @@
 "smartlist.invitations" = "Akwụkwọ ịkpọ òkù";
 "smartlist.aboutJami" = "Banyere Jami";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Ihe ndekọ";
 "smartlist.disableDonation" = "Ọbụghị ugbu a";
 "smartlist.donationExplanation" = "Ọ bụrụ na ị na-enwe mmasị iji Jami ma kwenye na ebumnobi anyị, ị chọrọ inye onyinye?";
 "smartlist.inSynchronization" = "Syncing…";
@@ -586,7 +585,7 @@
 "generalSettings.fileTransfer" = "Nyefe faịlụ";
 "generalSettings.locationSharing" = "Ịkekọrịta ebe";
 "generalSettings.automaticAcceptIncomingFiles" = "Akpọrọ faịlụ na-abata na akpaghị aka";
-"generalSettings.acceptTransferLimit" = "Nweta oke nnyefe";
+"generalSettings.acceptTransferLimit" = "Maximum automatic download size";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
 "generalSettings.limitLocationSharingDuration" = "Kwụsị oge nke ịkekọrịta ebe";
 "generalSettings.locationSharingDuration" = "Oge nke òkè ọnọdụ";

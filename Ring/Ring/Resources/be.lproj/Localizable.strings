@@ -144,8 +144,8 @@
 
 // Smartlist
 "smartlist.yesterday" = "Учора";
-"smartlist.results" = "Public directory";
-"smartlist.jamsResults" = "Organization directory";
+"smartlist.results" = "Jami search";
+"smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "Размовы";
 "smartlist.conversationsSearchHint" = "You don't have any conversations yet.";
 "smartlist.publicDirectoryHint" = "People on Jami outside your contacts.";
@@ -154,7 +154,7 @@
 "smartlist.noConversationsFound" = "No conversations match the search.";
 "smartlist.newContact" = "New contact";
 "smartlist.newGroup" = "New group";
-"smartlist.accounts" = "Рэкамендацыі";
+"smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Ніякіх вынікаў";
 "smartlist.noConversation" = "Ніякіх размоў";
@@ -169,7 +169,6 @@
 "smartlist.invitations" = "Запрашэнні";
 "smartlist.aboutJami" = "Пра Джані";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Рэкамендацыі";
 "smartlist.disableDonation" = "Не зараз";
 "smartlist.donationExplanation" = "Калі вам падабаецца карыстацца Jami і вы верыце ў нашу місію, хочаце зрабіць ахвяраванне?";
 "smartlist.inSynchronization" = "Syncing…";
@@ -586,7 +585,7 @@
 "generalSettings.fileTransfer" = "Перадача файлаў";
 "generalSettings.locationSharing" = "Падзяленне месцазнаходжання";
 "generalSettings.automaticAcceptIncomingFiles" = "Аўтаматычна прымаць паступаючыя файлы";
-"generalSettings.acceptTransferLimit" = "Прыняць ліміт перадачы";
+"generalSettings.acceptTransferLimit" = "Maximum automatic download size";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
 "generalSettings.limitLocationSharingDuration" = "Абмежаванне тэрміну дзеяння месцазнаходжання";
 "generalSettings.locationSharingDuration" = "Працягласць пазіцыйных акцый";

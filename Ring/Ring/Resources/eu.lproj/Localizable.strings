@@ -144,8 +144,8 @@
 
 // Smartlist
 "smartlist.yesterday" = "Atzo";
-"smartlist.results" = "Zerrenda publikoa";
-"smartlist.jamsResults" = "Organization directory";
+"smartlist.results" = "Jami search";
+"smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "Elkarrizketak";
 "smartlist.conversationsSearchHint" = "You don't have any conversations yet.";
 "smartlist.publicDirectoryHint" = "People on Jami outside your contacts.";
@@ -154,7 +154,7 @@
 "smartlist.noConversationsFound" = "No conversations match the search.";
 "smartlist.newContact" = "New contact";
 "smartlist.newGroup" = "New group";
-"smartlist.accounts" = "Kontuak";
+"smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Emaitzarik ez";
 "smartlist.noConversation" = "Ez dago elkarrizketarik.";
@@ -169,7 +169,6 @@
 "smartlist.invitations" = "Gonbidapenak";
 "smartlist.aboutJami" = "Jamiri buruz";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Kontuak";
 "smartlist.disableDonation" = "Orain ez";
 "smartlist.donationExplanation" = "Jami erabiltzea gustatzen bazaizu eta gure misioan sinesten baduzu, dohaintza bat egin nahi duzu?";
 "smartlist.inSynchronization" = "Syncing…";
@@ -586,7 +585,7 @@
 "generalSettings.fileTransfer" = "Fitxategi-transferentzia";
 "generalSettings.locationSharing" = "Kokapenaren banaketa";
 "generalSettings.automaticAcceptIncomingFiles" = "Sarrera jasotako fitxategiak automatikoki onartzen dira";
-"generalSettings.acceptTransferLimit" = "Onartu transferentziaren muga";
+"generalSettings.acceptTransferLimit" = "Maximum automatic download size";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
 "generalSettings.limitLocationSharingDuration" = "Leku partekatzearen iraupena mugatzea";
 "generalSettings.locationSharingDuration" = "Postuak partekatzeko iraupena";

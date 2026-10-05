@@ -144,8 +144,8 @@
 
 // Smartlist
 "smartlist.yesterday" = "I går";
-"smartlist.results" = "Fellesregister";
-"smartlist.jamsResults" = "Organization directory";
+"smartlist.results" = "Jami search";
+"smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "Samtal";
 "smartlist.conversationsSearchHint" = "You don't have any conversations yet.";
 "smartlist.publicDirectoryHint" = "People on Jami outside your contacts.";
@@ -154,7 +154,7 @@
 "smartlist.noConversationsFound" = "Ingen samtalar samsvarar med søket.";
 "smartlist.newContact" = "Ny kontakt";
 "smartlist.newGroup" = "Ny gruppe";
-"smartlist.accounts" = "Rekontering";
+"smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Innbydingar motteke";
 "smartlist.noResults" = "Ingen resultat";
 "smartlist.noConversation" = "Ingen samtal";
@@ -169,7 +169,6 @@
 "smartlist.invitations" = "Invitasjonar";
 "smartlist.aboutJami" = "Om Jami";
 "smartlist.inviteFriends" = "By inn vener";
-"smartlist.accounts" = "Rekontering";
 "smartlist.disableDonation" = "Ikkje no";
 "smartlist.donationExplanation" = "Dersom du likar å bruka Jami og trur på saka vår, har du lyst til å donera?";
 "smartlist.inSynchronization" = "Synkroniserer …";
@@ -586,7 +585,7 @@
 "generalSettings.fileTransfer" = "File overføring";
 "generalSettings.locationSharing" = "Støddsdeileg";
 "generalSettings.automaticAcceptIncomingFiles" = "Ta automatisk imot innkommende filer";
-"generalSettings.acceptTransferLimit" = "Ta imot overførselsgrenset";
+"generalSettings.acceptTransferLimit" = "Maximum automatic download size";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = ubegrensa)";
 "generalSettings.limitLocationSharingDuration" = "Begrens tidsla for deling av plasseringar";
 "generalSettings.locationSharingDuration" = "Varighet av posisjonshandel";

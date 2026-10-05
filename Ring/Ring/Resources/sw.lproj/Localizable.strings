@@ -144,8 +144,8 @@
 
 // Smartlist
 "smartlist.yesterday" = "Jana";
-"smartlist.results" = "Orodha ya umma";
-"smartlist.jamsResults" = "Organization directory";
+"smartlist.results" = "Jami search";
+"smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "Mazungumzo";
 "smartlist.conversationsSearchHint" = "You don't have any conversations yet.";
 "smartlist.publicDirectoryHint" = "People on Jami outside your contacts.";
@@ -154,7 +154,7 @@
 "smartlist.noConversationsFound" = "No conversations match the search.";
 "smartlist.newContact" = "New contact";
 "smartlist.newGroup" = "New group";
-"smartlist.accounts" = "Malipo";
+"smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Hakuna matokeo";
 "smartlist.noConversation" = "Hakuna mazungumzo";
@@ -169,7 +169,6 @@
 "smartlist.invitations" = "Maombi";
 "smartlist.aboutJami" = "Kuhusu Jami";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Malipo";
 "smartlist.disableDonation" = "Si sasa";
 "smartlist.donationExplanation" = "Ikiwa unafurahia kutumia Jami na unaamini katika dhamira yetu, je, ungependa kutoa mchango?";
 "smartlist.inSynchronization" = "Syncing…";
@@ -586,7 +585,7 @@
 "generalSettings.fileTransfer" = "Uhamisho wa faili";
 "generalSettings.locationSharing" = "Kushiriki eneo";
 "generalSettings.automaticAcceptIncomingFiles" = "Kubali faili zinazoingia moja kwa moja";
-"generalSettings.acceptTransferLimit" = "Kubali kikomo cha uhamisho";
+"generalSettings.acceptTransferLimit" = "Maximum automatic download size";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
 "generalSettings.limitLocationSharingDuration" = "Kupanua muda wa kushiriki eneo";
 "generalSettings.locationSharingDuration" = "Muda wa hisa za nafasi";
