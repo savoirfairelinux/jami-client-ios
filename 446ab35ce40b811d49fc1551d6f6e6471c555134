@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aa20f0a3_353443f5",
+        "filename": "Ring/Ring/Services/NameService.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-05T20:04:49Z",
+      "side": 1,
+      "message": "[warning] 🟡 The new cache-sharing/TTL behavior adds non-trivial state transitions (`idle/pending/found/notFound/failed`) but this patchset does not include targeted tests for concurrent deduplication, 30s retry, 5min negative cache expiry, and account invalidation. Add focused unit tests to lock in these semantics and prevent regressions.",
+      "revId": "446ab35ce40b811d49fc1551d6f6e6471c555134",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "32c863fe_eca90ecc",
         "filename": "Ring/Ring/Services/NameService.swift",
         "patchSetId": 3
@@ -14,6 +31,23 @@
       "writtenOn": "2026-10-05T20:03:11Z",
       "side": 1,
       "message": "[warning] Line 69: 🟡 `addressLookups` only grows and never evicts successful or stale entries, so long-lived sessions that encounter many unique addresses can accumulate memory indefinitely. Add bounded eviction (LRU/cap), or periodically prune by age/state to keep cache size predictable.",
+      "revId": "446ab35ce40b811d49fc1551d6f6e6471c555134",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b900dc3_91411f8e",
+        "filename": "Ring/Ring/Services/NameService.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-05T20:04:49Z",
+      "side": 1,
+      "message": "[error] Line 136: 🔴 Removing cached entries on invalidation drops the `AddressLookup` relay objects while existing subscribers still hold the old relays. Those subscribers can remain stuck on stale values and never receive lookups from the new name server unless the caller explicitly resubscribes. Keep per-key relay objects stable and reset their state/value (`idle` + `nil`) instead of deleting them, or broadcast an invalidation event that forces resubscription.",
       "revId": "446ab35ce40b811d49fc1551d6f6e6471c555134",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
