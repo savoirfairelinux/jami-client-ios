@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32c863fe_eca90ecc",
+        "filename": "Ring/Ring/Services/NameService.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-05T20:03:11Z",
+      "side": 1,
+      "message": "[warning] Line 69: 🟡 `addressLookups` only grows and never evicts successful or stale entries, so long-lived sessions that encounter many unique addresses can accumulate memory indefinitely. Add bounded eviction (LRU/cap), or periodically prune by age/state to keep cache size predictable.",
+      "revId": "446ab35ce40b811d49fc1551d6f6e6471c555134",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15b17a4f_a72d656f",
+        "filename": "Ring/Ring/SwarmInfo.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-05T20:03:11Z",
+      "side": 1,
+      "message": "[warning] Line 106: 🟡 `lookupName` now creates a subscription that never completes (`take(1)` was removed). If this method is called more than once per `ParticipantInfo` instance (e.g., participant list rebuilds), subscriptions accumulate in `disposeBag`, increasing retained observers and duplicate work. Store/replace a single lookup disposable or make the stream one-shot per call.",
+      "revId": "446ab35ce40b811d49fc1551d6f6e6471c555134",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
