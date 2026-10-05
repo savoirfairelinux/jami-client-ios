@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33e60eca_c73e095e",
+        "filename": "Ring/Ring/Services/Conversations/ConversationStore.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-05T18:46:52Z",
+      "side": 1,
+      "message": "[warning] Line 49: 🟡 In `reconcile(with:)`, historical backfill through `appendNonSwarm(messages:)` emits `newMessages` with `fromHistory: false`. During reload/reconciliation this can make old persisted messages look like fresh arrivals to observers. For reconciliation paths, emit as history (`fromHistory: true`) or use the reset+history emission path consistently.",
+      "revId": "09f088f78de2d74acc7bc6c5d127ac400c986445",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68f43914_922b48ce",
+        "filename": "Ring/Ring/Services/Conversations/ConversationStore.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-05T18:46:52Z",
+      "side": 1,
+      "message": "[error] Line 368: 🔴 Unread count logic regressed after moving message state into `ConversationRecord`: `insertMessages` now increments via `updateUnreadMessages(count:)` using only `authorId` checks, but no longer has the old full recomputation (`status !\u003d .displayed \u0026\u0026 type \u003d\u003d .text \u0026\u0026 incoming`) that previously ran from `ConversationModel.subscribeUnreadMessages`. This can overcount unread (e.g., incoming file/system messages or already displayed states). Recompute unread from `record.messages` with the previous predicate after inserts/updates, or centralize unread recalculation in one method and call it on every message mutation path.",
+      "revId": "09f088f78de2d74acc7bc6c5d127ac400c986445",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6575322_1d9030cb",
+        "filename": "Ring/RingTests/ConversationEventOrderingTests.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-05T18:46:52Z",
+      "side": 1,
+      "message": "[warning] Line 118: 🟡 The updated assertion now checks only `conversation?.newMessages.value.messages`, which validates the latest emitted batch, not persisted store state/order. This weakens coverage for the refactor goal (“keep messages in the store”). Add an assertion against store-backed retrieval (through service/store API) to ensure messages are actually retained and ordered in storage, not just emitted.",
+      "revId": "09f088f78de2d74acc7bc6c5d127ac400c986445",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
