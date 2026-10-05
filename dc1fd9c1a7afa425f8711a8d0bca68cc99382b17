@@ -16,6 +16,24 @@
       "message": "[error] Line 228: 🔴 `setParticipants(from:accountURI:)` regresses local-participant detection for non-hash URIs (notably SIP). `localJamiId` is computed as `JamiURI(from: accountURI).hash`, which is `nil` for SIP addresses, so `isLocal` is always false. This changes behavior compared to the previous normalization and can break logic that relies on identifying the local member. Normalize both sides with the same fallback (e.g. `JamiURI(from: accountURI).hash ?? accountURI`) before comparing.",
       "revId": "dc1fd9c1a7afa425f8711a8d0bca68cc99382b17",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e96a107_ec6d411b",
+        "filename": "Ring/Ring/Models/ConversationModel.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-05T19:01:03Z",
+      "side": 1,
+      "message": "JamiURI(from:).hash is only nil for an\n  empty string. For sip:user@host it returns user, and both sides are\n  normalized with the same parser. setParticipants is only reached for swarm\n  conversations with account.jamiId, so SIP addresses don\u0027t occur here.",
+      "parentUuid": "a8dad333_b6d791ec",
+      "revId": "dc1fd9c1a7afa425f8711a8d0bca68cc99382b17",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
