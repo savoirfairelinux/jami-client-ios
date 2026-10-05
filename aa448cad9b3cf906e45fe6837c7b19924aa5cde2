@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0fb1977_52252cee",
+        "filename": "Ring/Ring/Models/ConversationModel.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-05T19:38:49Z",
+      "side": 1,
+      "message": "[warning] Line 236: 🟡 `ConversationStreams` and `ConversationModel.init(..., streams:)` are module-visible, so mutation is still possible from outside `ConversationStore` by constructing or passing a writable stream container. If the intent is strict encapsulation, make `ConversationStreams` and the streams-based initializer `private`/`fileprivate` (or `internal` only in store scope) so only the store can publish.",
+      "revId": "aa448cad9b3cf906e45fe6837c7b19924aa5cde2",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2480b3ec_93f16c3f",
+        "filename": "Ring/RingTests/ConversationEventOrderingTests.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-05T19:38:49Z",
+      "side": 1,
+      "message": "[warning] Line 120: 🟡 The test now relies on synchronous emission from `BehaviorRelay` (`take(1)` + immediate assert). This can become flaky if delivery context changes. Prefer a deterministic wait pattern (e.g., expectation fulfilled in `onNext`) so the assertion is robust to scheduler/implementation changes.",
+      "revId": "aa448cad9b3cf906e45fe6837c7b19924aa5cde2",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
