@@ -144,8 +144,8 @@
 
 // Smartlist
 "smartlist.yesterday" = "Өчигдөр";
-"smartlist.results" = "Нийтийн захиалг";
-"smartlist.jamsResults" = "Organization directory";
+"smartlist.results" = "Jami search";
+"smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "Хэлэлцүүлэг";
 "smartlist.conversationsSearchHint" = "You don't have any conversations yet.";
 "smartlist.publicDirectoryHint" = "People on Jami outside your contacts.";
@@ -154,7 +154,7 @@
 "smartlist.noConversationsFound" = "No conversations match the search.";
 "smartlist.newContact" = "New contact";
 "smartlist.newGroup" = "New group";
-"smartlist.accounts" = "Санхүүжилт";
+"smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Үр дүнгүй";
 "smartlist.noConversation" = "Хэлэлцүүлэггүй";
@@ -169,7 +169,6 @@
 "smartlist.invitations" = "Нэрлэг";
 "smartlist.aboutJami" = "Жэмигийн тухай";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Санхүүжилт";
 "smartlist.disableDonation" = "Одоо биш";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, do you want to make a donation?";
 "smartlist.inSynchronization" = "Syncing…";
@@ -586,7 +585,7 @@
 "generalSettings.fileTransfer" = "Файлын шилжүүлэн суулга";
 "generalSettings.locationSharing" = "Байгууллагын хуваалц";
 "generalSettings.automaticAcceptIncomingFiles" = "Авториар орж ирж буй файлуудыг хүлээн ав";
-"generalSettings.acceptTransferLimit" = "Хөдөлмөрийн шилжилтийн хязгаар хүлээн зөвшөөрө";
+"generalSettings.acceptTransferLimit" = "Maximum automatic download size";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
 "generalSettings.limitLocationSharingDuration" = "Байгууллагын хуваалцлын хугацааг хязгаарла";
 "generalSettings.locationSharingDuration" = "Тодруулгын хувьцааны хугацаа";

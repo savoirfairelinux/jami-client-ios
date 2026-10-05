@@ -144,8 +144,8 @@
 
 // Smartlist
 "smartlist.yesterday" = "Hieraŭ";
-"smartlist.results" = "Publika adresaro";
-"smartlist.jamsResults" = "Organization directory";
+"smartlist.results" = "Jami search";
+"smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "Konversacioj";
 "smartlist.conversationsSearchHint" = "You don't have any conversations yet.";
 "smartlist.publicDirectoryHint" = "People on Jami outside your contacts.";
@@ -154,7 +154,7 @@
 "smartlist.noConversationsFound" = "No conversations match the search.";
 "smartlist.newContact" = "New contact";
 "smartlist.newGroup" = "New group";
-"smartlist.accounts" = "Kontoj";
+"smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Nula trovaĵon";
 "smartlist.noConversation" = "Neniu konversacio";
@@ -169,7 +169,6 @@
 "smartlist.invitations" = "Invitoj";
 "smartlist.aboutJami" = "Pri Jami";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Kontoj";
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, do you want to make a donation?";
 "smartlist.inSynchronization" = "Syncing…";
@@ -586,7 +585,7 @@
 "generalSettings.fileTransfer" = "Transdono de dosieroj";
 "generalSettings.locationSharing" = "Loka dividado";
 "generalSettings.automaticAcceptIncomingFiles" = "Aŭtomate akceptu alvenantajn dosierojn";
-"generalSettings.acceptTransferLimit" = "Akceptu translokiglimon";
+"generalSettings.acceptTransferLimit" = "Maximum automatic download size";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
 "generalSettings.limitLocationSharingDuration" = "Limigu la daŭron de la kuniga loko";
 "generalSettings.locationSharingDuration" = "La daŭro de poziciaj akcioj";

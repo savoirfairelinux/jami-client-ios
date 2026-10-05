@@ -144,8 +144,8 @@
 
 // Smartlist
 "smartlist.yesterday" = "Juče";
-"smartlist.results" = "Javni imenik";
-"smartlist.jamsResults" = "Organization directory";
+"smartlist.results" = "Jami search";
+"smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "Razgovori";
 "smartlist.conversationsSearchHint" = "You don't have any conversations yet.";
 "smartlist.publicDirectoryHint" = "People on Jami outside your contacts.";
@@ -154,7 +154,7 @@
 "smartlist.noConversationsFound" = "Ниједна преписка не одговара претрази.";
 "smartlist.newContact" = "Novi kontakt";
 "smartlist.newGroup" = "Nova grupa";
-"smartlist.accounts" = "Nalozi";
+"smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Primljene pozivnice";
 "smartlist.noResults" = "Nema rezultata";
 "smartlist.noConversation" = "Nema razgovora";
@@ -169,7 +169,6 @@
 "smartlist.invitations" = "Pozivnice";
 "smartlist.aboutJami" = "O Jami";
 "smartlist.inviteFriends" = "Pozovi prijatelje";
-"smartlist.accounts" = "Nalozi";
 "smartlist.disableDonation" = "Ne sada";
 "smartlist.donationExplanation" = "Ако уживате у коришћењу Јами-ја и верујете у нашу мисију, да ли желите да дате донацију?";
 "smartlist.inSynchronization" = "Sinhronizacija…";
@@ -586,7 +585,7 @@
 "generalSettings.fileTransfer" = "Prenos podatka";
 "generalSettings.locationSharing" = "Дељење локације";
 "generalSettings.automaticAcceptIncomingFiles" = "Automatski prihvati dolazne datoteke";
-"generalSettings.acceptTransferLimit" = "Прихватајте лимит преноса";
+"generalSettings.acceptTransferLimit" = "Maximum automatic download size";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = neograničeno)";
 "generalSettings.limitLocationSharingDuration" = "Ограничити трајање поделе локације";
 "generalSettings.locationSharingDuration" = "Продолжителност позиционих акција";

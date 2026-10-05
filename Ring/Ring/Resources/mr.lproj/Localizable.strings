@@ -144,8 +144,8 @@
 
 // Smartlist
 "smartlist.yesterday" = "काल";
-"smartlist.results" = "सार्वजनिक निर्देशिका";
-"smartlist.jamsResults" = "Organization directory";
+"smartlist.results" = "Jami search";
+"smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "चर्चा";
 "smartlist.conversationsSearchHint" = "You don't have any conversations yet.";
 "smartlist.publicDirectoryHint" = "People on Jami outside your contacts.";
@@ -154,7 +154,7 @@
 "smartlist.noConversationsFound" = "No conversations match the search.";
 "smartlist.newContact" = "New contact";
 "smartlist.newGroup" = "New group";
-"smartlist.accounts" = "खाते";
+"smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "कोणतेही परिणाम नाहीत";
 "smartlist.noConversation" = "चर्चा नाही";
@@ -169,7 +169,6 @@
 "smartlist.invitations" = "आमंत्रणे";
 "smartlist.aboutJami" = "जेमी बद्दल";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "खाते";
 "smartlist.disableDonation" = "आता नाही";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, do you want to make a donation?";
 "smartlist.inSynchronization" = "Syncing…";
@@ -586,7 +585,7 @@
 "generalSettings.fileTransfer" = "फाइल ट्रान्सफर";
 "generalSettings.locationSharing" = "स्थान सामायिकरण";
 "generalSettings.automaticAcceptIncomingFiles" = "येणाऱ्या फायली स्वयंचलितपणे स्वीकारा";
-"generalSettings.acceptTransferLimit" = "हस्तांतरण मर्यादा स्वीकारा";
+"generalSettings.acceptTransferLimit" = "Maximum automatic download size";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
 "generalSettings.limitLocationSharingDuration" = "स्थान सामायिक करण्याच्या कालावधीची मर्यादा";
 "generalSettings.locationSharingDuration" = "पदभाग कालावधी";

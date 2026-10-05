@@ -144,8 +144,8 @@
 
 // Smartlist
 "smartlist.yesterday" = "Вчера";
-"smartlist.results" = "Публичный каталог";
-"smartlist.jamsResults" = "Organization directory";
+"smartlist.results" = "Jami search";
+"smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "Разговоры";
 "smartlist.conversationsSearchHint" = "You don't have any conversations yet.";
 "smartlist.publicDirectoryHint" = "People on Jami outside your contacts.";
@@ -154,7 +154,7 @@
 "smartlist.noConversationsFound" = "Нет бесед, соответствующих запросу.";
 "smartlist.newContact" = "Новый контакт";
 "smartlist.newGroup" = "Новая группа";
-"smartlist.accounts" = "Аккаунты";
+"smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Приглашения получены";
 "smartlist.noResults" = "Нет результатов";
 "smartlist.noConversation" = "Нет разговоров";
@@ -169,7 +169,6 @@
 "smartlist.invitations" = "Приглашения";
 "smartlist.aboutJami" = "О программе Джами";
 "smartlist.inviteFriends" = "Пригласить друзей";
-"smartlist.accounts" = "Аккаунты";
 "smartlist.disableDonation" = "Не сейчас";
 "smartlist.donationExplanation" = "Если вам нравится использовать Jami и вы верите в нашу миссию, не хотите ли сделать пожертвование?";
 "smartlist.inSynchronization" = "Синхронизация…";
@@ -586,7 +585,7 @@
 "generalSettings.fileTransfer" = "Передача файла";
 "generalSettings.locationSharing" = "Доступ к местоположению";
 "generalSettings.automaticAcceptIncomingFiles" = "Автоматически принимать входящие файлы";
-"generalSettings.acceptTransferLimit" = "Принять лимит на передачу";
+"generalSettings.acceptTransferLimit" = "Maximum automatic download size";
 "generalSettings.acceptTransferLimitDescription" = "(МБ, 0 = неограничено)";
 "generalSettings.limitLocationSharingDuration" = "Ограничить продолжительность совместного размещения";
 "generalSettings.locationSharingDuration" = "Продолжительность трансляции местоположения";

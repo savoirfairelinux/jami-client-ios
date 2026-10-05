@@ -144,8 +144,8 @@
 
 // Smartlist
 "smartlist.yesterday" = "Hôm qua";
-"smartlist.results" = "Danh bạ công khai";
-"smartlist.jamsResults" = "Organization directory";
+"smartlist.results" = "Jami search";
+"smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "Các cuộc trò chuyện";
 "smartlist.conversationsSearchHint" = "You don't have any conversations yet.";
 "smartlist.publicDirectoryHint" = "People on Jami outside your contacts.";
@@ -154,7 +154,7 @@
 "smartlist.noConversationsFound" = "Không có cuộc trò chuyện nào khớp với tìm kiếm.";
 "smartlist.newContact" = "Liên hệ mới";
 "smartlist.newGroup" = "Nhóm mới";
-"smartlist.accounts" = "Tài khoản";
+"smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Lời mời nhận được";
 "smartlist.noResults" = "Không có kết quả";
 "smartlist.noConversation" = "Không có cuộc trò chuyện";
@@ -169,7 +169,6 @@
 "smartlist.invitations" = "Thỉnh cầu";
 "smartlist.aboutJami" = "Về Jami";
 "smartlist.inviteFriends" = "Mời bạn bè";
-"smartlist.accounts" = "Tài khoản";
 "smartlist.disableDonation" = "Lúc khác";
 "smartlist.donationExplanation" = "Nếu bạn thích sử dụng Jami và tin vào sứ mệnh của chúng tôi, bạn có muốn quyên góp không?";
 "smartlist.inSynchronization" = "Đang đồng bộ…";
@@ -586,7 +585,7 @@
 "generalSettings.fileTransfer" = "Chuyển tập tin";
 "generalSettings.locationSharing" = "Chia sẻ vị trí";
 "generalSettings.automaticAcceptIncomingFiles" = "Tự động chấp nhận các tệp nhập";
-"generalSettings.acceptTransferLimit" = "Thấp nhận giới hạn chuyển nhượng";
+"generalSettings.acceptTransferLimit" = "Maximum automatic download size";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = không giới hạn)";
 "generalSettings.limitLocationSharingDuration" = "Giới hạn thời gian chia sẻ vị trí";
 "generalSettings.locationSharingDuration" = "Thời gian chia sẻ vị trí";

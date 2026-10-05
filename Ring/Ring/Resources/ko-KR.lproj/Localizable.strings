@@ -144,8 +144,8 @@
 
 // Smartlist
 "smartlist.yesterday" = "어제";
-"smartlist.results" = "공공 디렉토리";
-"smartlist.jamsResults" = "Organization directory";
+"smartlist.results" = "Jami search";
+"smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "대화";
 "smartlist.conversationsSearchHint" = "You don't have any conversations yet.";
 "smartlist.publicDirectoryHint" = "People on Jami outside your contacts.";
@@ -154,7 +154,7 @@
 "smartlist.noConversationsFound" = "검색과 일치하는 대화가 없습니다.";
 "smartlist.newContact" = "새 연락처";
 "smartlist.newGroup" = "새 모임";
-"smartlist.accounts" = "회계";
+"smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "초대 받음";
 "smartlist.noResults" = "결과도 없습니다";
 "smartlist.noConversation" = "대화가 없다";
@@ -169,7 +169,6 @@
 "smartlist.invitations" = "초대";
 "smartlist.aboutJami" = "Jami에 관하여";
 "smartlist.inviteFriends" = "친구 초대";
-"smartlist.accounts" = "회계";
 "smartlist.disableDonation" = "나중에";
 "smartlist.donationExplanation" = "Jami를 잘 사용 중이고 우리의 사명을 응원한다면 후원해 주시겠습니까?";
 "smartlist.inSynchronization" = "동기화 중…";
@@ -586,7 +585,7 @@
 "generalSettings.fileTransfer" = "파일 전송";
 "generalSettings.locationSharing" = "위치 공유";
 "generalSettings.automaticAcceptIncomingFiles" = "자동으로 입력 파일을 받아";
-"generalSettings.acceptTransferLimit" = "환승 제한을 받아 들인다";
+"generalSettings.acceptTransferLimit" = "Maximum automatic download size";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = 무제한)";
 "generalSettings.limitLocationSharingDuration" = "위치 공유 기간을 제한";
 "generalSettings.locationSharingDuration" = "위치 공유 기간";

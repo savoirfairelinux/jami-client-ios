@@ -144,8 +144,8 @@
 
 // Smartlist
 "smartlist.yesterday" = "Gestern";
-"smartlist.results" = "Öffentliches Verzeichnis";
-"smartlist.jamsResults" = "Organisationsverzeichnis";
+"smartlist.results" = "Jami search";
+"smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "Unterhaltungen";
 "smartlist.conversationsSearchHint" = "Sie haben noch keine Unterhaltungen.";
 "smartlist.publicDirectoryHint" = "Personen auf Jami außerhalb Ihrer Kontakte.";
@@ -154,7 +154,7 @@
 "smartlist.noConversationsFound" = "Keine Unterhaltungen entsprechen der Suche.";
 "smartlist.newContact" = "Neuer Kontakt";
 "smartlist.newGroup" = "Neue Gruppe";
-"smartlist.accounts" = "Konten";
+"smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Einladungen erhalten";
 "smartlist.noResults" = "Keine Ergebnisse";
 "smartlist.noConversation" = "Keine Unterhaltungen";
@@ -169,7 +169,6 @@
 "smartlist.invitations" = "Einladungen";
 "smartlist.aboutJami" = "Über Jami";
 "smartlist.inviteFriends" = "Freunde einladen";
-"smartlist.accounts" = "Konten";
 "smartlist.disableDonation" = "Nicht jetzt";
 "smartlist.donationExplanation" = "Wenn Sie gerne Jami nutzen und an unsere Mission glauben, möchten Sie eine Spende tätigen?";
 "smartlist.inSynchronization" = "Wird synchronisiert…";
@@ -586,7 +585,7 @@
 "generalSettings.fileTransfer" = "Dateiübertragung";
 "generalSettings.locationSharing" = "Standortfreigabe";
 "generalSettings.automaticAcceptIncomingFiles" = "Eingehende Dateien automatisch annehmen";
-"generalSettings.acceptTransferLimit" = "Annahme-Übertragungslimit";
+"generalSettings.acceptTransferLimit" = "Maximum automatic download size";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unbegrenzt)";
 "generalSettings.limitLocationSharingDuration" = "Dauer der Standortfreigabe begrenzen";
 "generalSettings.locationSharingDuration" = "Dauer der Positionsfreigabe";

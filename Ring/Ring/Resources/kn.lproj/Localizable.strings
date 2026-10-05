@@ -144,8 +144,8 @@
 
 // Smartlist
 "smartlist.yesterday" = "ನಿನ್ನೆ";
-"smartlist.results" = "ಸಾರ್ವಜನಿಕ ಡೈರೆಕ್ಟರಿ";
-"smartlist.jamsResults" = "Organization directory";
+"smartlist.results" = "Jami search";
+"smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "ಸಂಭಾಷಣೆ";
 "smartlist.conversationsSearchHint" = "You don't have any conversations yet.";
 "smartlist.publicDirectoryHint" = "People on Jami outside your contacts.";
@@ -154,7 +154,7 @@
 "smartlist.noConversationsFound" = "No conversations match the search.";
 "smartlist.newContact" = "New contact";
 "smartlist.newGroup" = "New group";
-"smartlist.accounts" = "ಖಾತೆಗಳು";
+"smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "ಫಲಿತಾಂಶಗಳಿಲ್ಲ";
 "smartlist.noConversation" = "ಯಾವುದೇ ಸಂಭಾಷಣೆಗಳಿಲ್ಲ";
@@ -169,7 +169,6 @@
 "smartlist.invitations" = "ಆಹ್ವಾನಗಳು";
 "smartlist.aboutJami" = "ಜಾಮಿ ಬಗ್ಗೆ";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "ಖಾತೆಗಳು";
 "smartlist.disableDonation" = "ಈಗ ಬೇಡ";
 "smartlist.donationExplanation" = "ನೀವು Jami ಬಳಸುವುದನ್ನು ಆನಂದಿಸಿದರೆ ಮತ್ತು ನಮ್ಮ ಧ್ಯೇಯದಲ್ಲಿ ನಂಬಿಕೆ ಇಟ್ಟರೆ, ನೀವು ದಾನ ಮಾಡಲು ಬಯಸುವಿರಾ?";
 "smartlist.inSynchronization" = "Syncing…";
@@ -586,7 +585,7 @@
 "generalSettings.fileTransfer" = "ಫೈಲ್ ವರ್ಗಾವಣೆ";
 "generalSettings.locationSharing" = "ಸ್ಥಳ ಹಂಚಿಕೆ";
 "generalSettings.automaticAcceptIncomingFiles" = "ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಒಳಬರುವ ಫೈಲ್ಗಳನ್ನು ಸ್ವೀಕರಿಸಿ";
-"generalSettings.acceptTransferLimit" = "ವರ್ಗಾವಣೆ ಮಿತಿಯನ್ನು ಸ್ವೀಕರಿಸಿ";
+"generalSettings.acceptTransferLimit" = "Maximum automatic download size";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
 "generalSettings.limitLocationSharingDuration" = "ಸ್ಥಳ ಹಂಚಿಕೆಯ ಅವಧಿಯನ್ನು ಮಿತಿಗೊಳಿಸಿ";
 "generalSettings.locationSharingDuration" = "ಸ್ಥಾನದ ಪಾಲಿನ ಅವಧಿ";

@@ -144,8 +144,8 @@
 
 // Smartlist
 "smartlist.yesterday" = "Χθες";
-"smartlist.results" = "Δημόσιος κατάλογος";
-"smartlist.jamsResults" = "Organization directory";
+"smartlist.results" = "Jami search";
+"smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "Συνομιλίες";
 "smartlist.conversationsSearchHint" = "You don't have any conversations yet.";
 "smartlist.publicDirectoryHint" = "People on Jami outside your contacts.";
@@ -154,7 +154,7 @@
 "smartlist.noConversationsFound" = "Καμία συνομιλία δεν ταιριάζει με την αναζήτηση.";
 "smartlist.newContact" = "Νέα επαφή";
 "smartlist.newGroup" = "Νέα ομάδα";
-"smartlist.accounts" = "Λογαριασμοί";
+"smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Ληφθείσες προσκλήσεις";
 "smartlist.noResults" = "Χωρίς αποτελέσματα";
 "smartlist.noConversation" = "Δεν έχουμε συνομιλίες.";
@@ -169,7 +169,6 @@
 "smartlist.invitations" = "Προσκλήσεις";
 "smartlist.aboutJami" = "Σχετικά με το Jami";
 "smartlist.inviteFriends" = "Πρόσκληση φίλων";
-"smartlist.accounts" = "Λογαριασμοί";
 "smartlist.disableDonation" = "Όχι τώρα";
 "smartlist.donationExplanation" = "Εάν σας αρέσει να χρησιμοποιείτε το Jami και πιστεύετε στην αποστολή μας, θέλετε να κάνετε μια δωρεά;";
 "smartlist.inSynchronization" = "Συγχρονισμός…";
@@ -586,7 +585,7 @@
 "generalSettings.fileTransfer" = "Μεταφορά Αρχείων";
 "generalSettings.locationSharing" = "Συνοχή τοποθεσιών";
 "generalSettings.automaticAcceptIncomingFiles" = "Αποδέχεται αυτόματα εισερχόμενα αρχεία";
-"generalSettings.acceptTransferLimit" = "Αποδέχεται όριο μεταφοράς";
+"generalSettings.acceptTransferLimit" = "Maximum automatic download size";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = απεριόριστο)";
 "generalSettings.limitLocationSharingDuration" = "Περιορίστε τη διάρκεια της μοιράσεως θέσεων";
 "generalSettings.locationSharingDuration" = "Διάρκεια των μετοχών θέσης";

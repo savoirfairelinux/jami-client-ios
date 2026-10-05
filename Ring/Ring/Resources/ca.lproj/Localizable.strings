@@ -144,8 +144,8 @@
 
 // Smartlist
 "smartlist.yesterday" = "Ahir";
-"smartlist.results" = "Directori públic";
-"smartlist.jamsResults" = "Organization directory";
+"smartlist.results" = "Jami search";
+"smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "Converses";
 "smartlist.conversationsSearchHint" = "You don't have any conversations yet.";
 "smartlist.publicDirectoryHint" = "People on Jami outside your contacts.";
@@ -154,7 +154,7 @@
 "smartlist.noConversationsFound" = "No hi ha cap conversa que coincideixi amb la cerca.";
 "smartlist.newContact" = "Contacte nou";
 "smartlist.newGroup" = "Grup nou";
-"smartlist.accounts" = "Comptes";
+"smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Invitacions rebudes";
 "smartlist.noResults" = "Sense resultats";
 "smartlist.noConversation" = "No hi ha converses.";
@@ -169,7 +169,6 @@
 "smartlist.invitations" = "Invitacions";
 "smartlist.aboutJami" = "Sobre Jami...";
 "smartlist.inviteFriends" = "Convida amics";
-"smartlist.accounts" = "Comptes";
 "smartlist.disableDonation" = "Ara no";
 "smartlist.donationExplanation" = "Si gaudiu utilitzant Jami i creieu en la nostra missió, voleu fer un donatiu?";
 "smartlist.inSynchronization" = "S'està sincronitzant…";
@@ -586,7 +585,7 @@
 "generalSettings.fileTransfer" = "Transferència de fitxers";
 "generalSettings.locationSharing" = "Partil·lació de localització";
 "generalSettings.automaticAcceptIncomingFiles" = "Accepta automàticament fitxers entrants";
-"generalSettings.acceptTransferLimit" = "Acceptar límit de transferència";
+"generalSettings.acceptTransferLimit" = "Maximum automatic download size";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = il·limitat)";
 "generalSettings.limitLocationSharingDuration" = "Limitar la durada de la partil·lació de localització";
 "generalSettings.locationSharingDuration" = "Durada de la quota de posicions";

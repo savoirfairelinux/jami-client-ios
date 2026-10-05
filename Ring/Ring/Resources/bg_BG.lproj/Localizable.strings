@@ -144,8 +144,8 @@
 
 // Smartlist
 "smartlist.yesterday" = "Вчера";
-"smartlist.results" = "Обществен каталог";
-"smartlist.jamsResults" = "Organization directory";
+"smartlist.results" = "Jami search";
+"smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "Разговори";
 "smartlist.conversationsSearchHint" = "You don't have any conversations yet.";
 "smartlist.publicDirectoryHint" = "People on Jami outside your contacts.";
@@ -154,7 +154,7 @@
 "smartlist.noConversationsFound" = "No conversations match the search.";
 "smartlist.newContact" = "New contact";
 "smartlist.newGroup" = "New group";
-"smartlist.accounts" = "Профили";
+"smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Няма резултати";
 "smartlist.noConversation" = "Няма разговори";
@@ -169,7 +169,6 @@
 "smartlist.invitations" = "Покани";
 "smartlist.aboutJami" = "Относно Jami";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Профили";
 "smartlist.disableDonation" = "Не сега";
 "smartlist.donationExplanation" = "Ако харесвате да използвате Jami и вярвате в нашата мисия, искате ли да направите дарение?";
 "smartlist.inSynchronization" = "Syncing…";
@@ -586,7 +585,7 @@
 "generalSettings.fileTransfer" = "Прехвърляне на файлове";
 "generalSettings.locationSharing" = "Споделяне на местоположението";
 "generalSettings.automaticAcceptIncomingFiles" = "Автоматично приемате входящи файлове";
-"generalSettings.acceptTransferLimit" = "Приемане на прехвърляне";
+"generalSettings.acceptTransferLimit" = "Maximum automatic download size";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
 "generalSettings.limitLocationSharingDuration" = "Ограничаване на продължителността на споделянето на местоположението";
 "generalSettings.locationSharingDuration" = "Продължителност на позиционните акции";

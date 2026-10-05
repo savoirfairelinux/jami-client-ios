@@ -144,8 +144,8 @@
 
 // Smartlist
 "smartlist.yesterday" = "昨天";
-"smartlist.results" = "公共目录";
-"smartlist.jamsResults" = "组织目录";
+"smartlist.results" = "Jami search";
+"smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "会话";
 "smartlist.conversationsSearchHint" = "你还没有任何对话。";
 "smartlist.publicDirectoryHint" = "不在联系人列表中的jami用户。";
@@ -154,7 +154,7 @@
 "smartlist.noConversationsFound" = "无匹配的对话。";
 "smartlist.newContact" = "新联系人";
 "smartlist.newGroup" = "新群组";
-"smartlist.accounts" = "账户";
+"smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "邀请已发送";
 "smartlist.noResults" = "无结果";
 "smartlist.noConversation" = "无对话";
@@ -169,7 +169,6 @@
 "smartlist.invitations" = "邀请";
 "smartlist.aboutJami" = "关于 Jami";
 "smartlist.inviteFriends" = "邀請好友";
-"smartlist.accounts" = "账户";
 "smartlist.disableDonation" = "现在不要";
 "smartlist.donationExplanation" = "如果您喜欢使用 Jami 并相信我们的使命，您愿意捐款吗？";
 "smartlist.inSynchronization" = "同步中…";
@@ -586,7 +585,7 @@
 "generalSettings.fileTransfer" = "文件传输";
 "generalSettings.locationSharing" = "位置共享";
 "generalSettings.automaticAcceptIncomingFiles" = "自动接受传入文件";
-"generalSettings.acceptTransferLimit" = "接受传输限制";
+"generalSettings.acceptTransferLimit" = "Maximum automatic download size";
 "generalSettings.acceptTransferLimitDescription" = "（MB，0 = 無限制）";
 "generalSettings.limitLocationSharingDuration" = "限制位置共享的時間";
 "generalSettings.locationSharingDuration" = "位置分享持續時間";

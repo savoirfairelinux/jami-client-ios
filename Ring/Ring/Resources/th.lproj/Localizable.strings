@@ -144,8 +144,8 @@
 
 // Smartlist
 "smartlist.yesterday" = "เมื่อวาน";
-"smartlist.results" = "ไดเรกทอรีสาธารณะ";
-"smartlist.jamsResults" = "Organization directory";
+"smartlist.results" = "Jami search";
+"smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "บทสนทนา";
 "smartlist.conversationsSearchHint" = "You don't have any conversations yet.";
 "smartlist.publicDirectoryHint" = "People on Jami outside your contacts.";
@@ -154,7 +154,7 @@
 "smartlist.noConversationsFound" = "No conversations match the search.";
 "smartlist.newContact" = "New contact";
 "smartlist.newGroup" = "New group";
-"smartlist.accounts" = "บัญชี";
+"smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "ไม่มีผลลัพธ์";
 "smartlist.noConversation" = "ไม่มีการพูดคุย";
@@ -169,7 +169,6 @@
 "smartlist.invitations" = "คำเชิญ";
 "smartlist.aboutJami" = "เกี่ยวกับ Jami";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "บัญชี";
 "smartlist.disableDonation" = "ไม่ใช่ตอนนี้";
 "smartlist.donationExplanation" = "หากคุณชอบใช้ Jami และเชื่อในพันธกิจของเรา คุณต้องการบริจาคหรือไม่?";
 "smartlist.inSynchronization" = "Syncing…";
@@ -586,7 +585,7 @@
 "generalSettings.fileTransfer" = "การถ่ายโอนไฟล์";
 "generalSettings.locationSharing" = "การแบ่งปันสถานที่";
 "generalSettings.automaticAcceptIncomingFiles" = "รับไฟล์ที่เข้ามาโดยอัตโนมัติ";
-"generalSettings.acceptTransferLimit" = "ยอมรับขีดขั้นต่ําการโอน";
+"generalSettings.acceptTransferLimit" = "Maximum automatic download size";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
 "generalSettings.limitLocationSharingDuration" = "จํากัดระยะเวลาในการแบ่งที่ตั้ง";
 "generalSettings.locationSharingDuration" = "ระยะเวลาส่วนแบ่งตําแหน่ง";

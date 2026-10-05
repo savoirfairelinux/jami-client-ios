@@ -144,8 +144,8 @@
 
 // Smartlist
 "smartlist.yesterday" = "Dje";
-"smartlist.results" = "Drejtori publike";
-"smartlist.jamsResults" = "Drejtori enti";
+"smartlist.results" = "Jami search";
+"smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "Biseda";
 "smartlist.conversationsSearchHint" = "S’keni ende ndonjë bisedë.";
 "smartlist.publicDirectoryHint" = "Persona në Jami, por jashtë kontakteve tuaj.";
@@ -154,7 +154,7 @@
 "smartlist.noConversationsFound" = "S’ka ndonjë bisedë që përkon me kërkimin.";
 "smartlist.newContact" = "Kontakt i ri";
 "smartlist.newGroup" = "Grup i ri";
-"smartlist.accounts" = "Llogari";
+"smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Ftesat u morën";
 "smartlist.noResults" = "S’ka përfundime";
 "smartlist.noConversation" = "S’ka biseda";
@@ -169,7 +169,6 @@
 "smartlist.invitations" = "Ftesa";
 "smartlist.aboutJami" = "Mbi Jami-n";
 "smartlist.inviteFriends" = "Ftoni shokë";
-"smartlist.accounts" = "Llogari";
 "smartlist.disableDonation" = "Jo tani";
 "smartlist.donationExplanation" = "Nëse ju shijon të përdorni Jami-n dhe besoni në misionin tonë, doni të bëni një dhurim?";
 "smartlist.inSynchronization" = "Po bëhet njëkohësim…";
@@ -586,7 +585,7 @@
 "generalSettings.fileTransfer" = "Shpërngulje kartelash";
 "generalSettings.locationSharing" = "Tregim vendndodhjeje";
 "generalSettings.automaticAcceptIncomingFiles" = "Prano automatikisht kartela ardhëse";
-"generalSettings.acceptTransferLimit" = "Kufi pranimi shpërnguljesh";
+"generalSettings.acceptTransferLimit" = "Maximum automatic download size";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = e pakufizuar)";
 "generalSettings.limitLocationSharingDuration" = "Kufizo kohëzgjatjen e tregimit të vendndodhjes";
 "generalSettings.locationSharingDuration" = "Kohëzgjatje tregimi pozicioni";

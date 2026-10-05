@@ -144,8 +144,8 @@
 
 // Smartlist
 "smartlist.yesterday" = "Včera";
-"smartlist.results" = "Veřejný adresář";
-"smartlist.jamsResults" = "Organization directory";
+"smartlist.results" = "Jami search";
+"smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "Konverzace";
 "smartlist.conversationsSearchHint" = "You don't have any conversations yet.";
 "smartlist.publicDirectoryHint" = "People on Jami outside your contacts.";
@@ -154,7 +154,7 @@
 "smartlist.noConversationsFound" = "Hledání neodpovídají žádné konverzace.";
 "smartlist.newContact" = "Nový kontakt";
 "smartlist.newGroup" = "Nová skupina";
-"smartlist.accounts" = "Účty";
+"smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Pozvání přijato";
 "smartlist.noResults" = "Žádné výsledky";
 "smartlist.noConversation" = "Žádné konverzace";
@@ -169,7 +169,6 @@
 "smartlist.invitations" = "Pozvání";
 "smartlist.aboutJami" = "O Jami";
 "smartlist.inviteFriends" = "Pozvat přátele";
-"smartlist.accounts" = "Účty";
 "smartlist.disableDonation" = "Teď ne";
 "smartlist.donationExplanation" = "Pokud vás baví používat Jami a věříte v naše poslání, chcete přispět?";
 "smartlist.inSynchronization" = "Synchronizace…";
@@ -586,7 +585,7 @@
 "generalSettings.fileTransfer" = "Přenos souboru";
 "generalSettings.locationSharing" = "Sdílení polohy";
 "generalSettings.automaticAcceptIncomingFiles" = "Automaticky přijmout příchozí soubory";
-"generalSettings.acceptTransferLimit" = "Přijmout limit přenosu";
+"generalSettings.acceptTransferLimit" = "Maximum automatic download size";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = neomezeno)";
 "generalSettings.limitLocationSharingDuration" = "Limit doby sdílení polohy";
 "generalSettings.locationSharingDuration" = "Doba sdílení pozice";

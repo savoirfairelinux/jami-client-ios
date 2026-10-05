@@ -144,8 +144,8 @@
 
 // Smartlist
 "smartlist.yesterday" = "Երեկ";
-"smartlist.results" = "Հանրային ցուցակ";
-"smartlist.jamsResults" = "Organization directory";
+"smartlist.results" = "Jami search";
+"smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "Զրույցներ";
 "smartlist.conversationsSearchHint" = "You don't have any conversations yet.";
 "smartlist.publicDirectoryHint" = "People on Jami outside your contacts.";
@@ -154,7 +154,7 @@
 "smartlist.noConversationsFound" = "No conversations match the search.";
 "smartlist.newContact" = "New contact";
 "smartlist.newGroup" = "New group";
-"smartlist.accounts" = "Հաշվետոմսեր";
+"smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Ոչ մի արդյունք";
 "smartlist.noConversation" = "Ոչ մի խոսակցություն";
@@ -169,7 +169,6 @@
 "smartlist.invitations" = "հրավիրումներ";
 "smartlist.aboutJami" = "Ջամիի մասին";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Հաշվետոմսեր";
 "smartlist.disableDonation" = "Ոչ հիմա";
 "smartlist.donationExplanation" = "Եթե ձեզ դուր է գալիս օգտագործել Jami-ն և հավատում եք մեր առաքելությանը, ցանկանո՞ւմ եք նվիրատվություն կատարել։";
 "smartlist.inSynchronization" = "Syncing…";
@@ -586,7 +585,7 @@
 "generalSettings.fileTransfer" = "Ֆայլերի փոխանցում";
 "generalSettings.locationSharing" = "Տեղի բաժանում";
 "generalSettings.automaticAcceptIncomingFiles" = "Ավտոմատորեն ընդունեք մուտքագրվող ֆայլերը";
-"generalSettings.acceptTransferLimit" = "Ընդունեք փոխանցման սահմանը";
+"generalSettings.acceptTransferLimit" = "Maximum automatic download size";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
 "generalSettings.limitLocationSharingDuration" = "Կարգավորեք տեղակայման ժամանակահատվածը";
 "generalSettings.locationSharingDuration" = "Պաշտոնային բաժնետոմսերի տեւողությունը";
