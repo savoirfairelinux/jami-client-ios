@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7529e0e6_5279416c",
+        "filename": "Ring/Ring/Resources/de.lproj/Localizable.strings",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-05T07:24:28Z",
+      "side": 1,
+      "message": "[warning] Line 146: 🟡 This change replaces previously localized labels with English literals (e.g., `\"Jami search\"`, `\"Organization search\"`, `\"Your accounts\"`) and the same pattern appears across many locale files in this patchset. That causes mixed-language UI regressions for non-English users. Keep existing translations until updated locale strings are available, or add proper translated values for each affected locale before merge.",
+      "revId": "9e43b888bf9d8d20ae2152c14361f04e34794c40",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15196c69_e66aa3d8",
+        "filename": "Ring/Ring/Resources/de.lproj/Localizable.strings",
+        "patchSetId": 1
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-05T07:24:28Z",
+      "side": 1,
+      "message": "[warning] Line 587: 🟡 `generalSettings.acceptTransferLimit` is now hardcoded in English (`\"Maximum automatic download size\"`) while neighboring strings remain localized, creating inconsistent UX in localized builds. Please provide locale-specific translations (or temporarily retain prior localized text) for this key across all modified `.lproj` files.",
+      "revId": "9e43b888bf9d8d20ae2152c14361f04e34794c40",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
