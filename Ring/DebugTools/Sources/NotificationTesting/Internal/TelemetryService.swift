@@ -33,6 +33,7 @@ final class TelemetryService {
     private let osLog = os.Logger(subsystem: "cx.ring.jami", category: "telemetry")
 
     private var tracer: Tracer?
+    private var httpClient: InFlightHTTPClient?
     private var providerBuilt = false
     private var endpointURL: URL?
     private var processSource: String = "unknown"
@@ -211,10 +212,18 @@ final class TelemetryService {
     // MARK: - Flush
 
     func flushPendingSpans(timeout: TimeInterval = 2.0) {
-        let providerRef: TracerProviderSdk? = queue.sync {
-            return OpenTelemetry.instance.tracerProvider as? TracerProviderSdk
+        let (providerRef, client) = queue.sync {
+            (OpenTelemetry.instance.tracerProvider as? TracerProviderSdk, httpClient)
         }
+        let deadline = Date().addingTimeInterval(timeout)
         providerRef?.forceFlush(timeout: timeout)
+        // forceFlush returns once every span has been handed to the network,
+        // not once it has been sent. Wait for the requests themselves: the
+        // notification extension is suspended right after this call, which
+        // would cancel any request still running.
+        if let client, !client.waitForInFlight(timeout: max(0, deadline.timeIntervalSinceNow)) {
+            osLog.warning("[telemetry] flush timed out with span requests still in flight")
+        }
     }
 
     // MARK: - Private
@@ -246,7 +255,8 @@ final class TelemetryService {
         let sessionConfig = URLSessionConfiguration.ephemeral
         sessionConfig.timeoutIntervalForRequest = 10
         let session = URLSession(configuration: sessionConfig)
-        let httpClient = BaseHTTPClient(session: session)
+        let httpClient = InFlightHTTPClient(base: BaseHTTPClient(session: session))
+        self.httpClient = httpClient
 
         let exporterConfig = OtlpConfiguration(timeout: 5.0)
         let exporter = OtlpHttpTraceExporter(
@@ -313,6 +323,31 @@ final class TelemetryService {
         guard let date = isoFormatter.date(from: iso)
                 ?? isoFormatterNoFrac.date(from: iso) else { return nil }
         return Int64(date.timeIntervalSince1970 * 1_000_000_000)
+    }
+}
+
+/// HTTP client that counts the requests still in flight, so that a flush can
+/// wait for them. The OTLP exporter sends each span asynchronously and its own
+/// flush only covers spans not yet handed to the client.
+private final class InFlightHTTPClient: HTTPClient {
+    private let base: HTTPClient
+    private let inFlight = DispatchGroup()
+
+    init(base: HTTPClient) {
+        self.base = base
+    }
+
+    func send(request: URLRequest, completion: @escaping (Result<HTTPURLResponse, Error>) -> Void) {
+        inFlight.enter()
+        base.send(request: request) { [inFlight] result in
+            completion(result)
+            inFlight.leave()
+        }
+    }
+
+    /// Returns false if requests are still running after `timeout`.
+    func waitForInFlight(timeout: TimeInterval) -> Bool {
+        return inFlight.wait(timeout: .now() + timeout) == .success
     }
 }
 
