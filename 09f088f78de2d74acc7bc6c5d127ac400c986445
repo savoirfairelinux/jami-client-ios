@@ -3,6 +3,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "79011d79_9bb77d31",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-05T18:48:58Z",
+      "side": 1,
+      "message": "[warning] Line 218: 🟡 `didSet` captures `conversation` and uses it later in an async `readMessages` callback. If the selected conversation changes quickly, an older callback can run after a newer selection and rewire subscriptions to the stale conversation (`invalidateAndSetupConversationSubscriptions(conversation: snapshot:)`). Guard against staleness before subscribing (e.g., `guard self?.conversation \u003d\u003d\u003d conversation else { return }`) or cancel/version callbacks so only the latest selection applies.",
+      "revId": "09f088f78de2d74acc7bc6c5d127ac400c986445",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cd2f418_7c2c74e3",
+        "filename": "Ring/Ring/Services/Conversations/ConversationStore.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-05T18:48:58Z",
+      "side": 1,
+      "message": "[error] Line 47: 🔴 `ConversationRecord.reconcile(with:)` only appends missing message IDs and never applies updates/removals for already-known IDs. Because `loadConversations`/`replaceConversations` now reuse existing records, persisted changes (edited status/content, deletions, clears) can be ignored and stale in-memory messages survive reload. Reconcile should treat storage as source-of-truth for existing IDs (or fully replace `messages` with `stored.messages` while preserving the `ConversationModel` instance), then emit/reset streams accordingly.",
+      "revId": "09f088f78de2d74acc7bc6c5d127ac400c986445",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "33e60eca_c73e095e",
         "filename": "Ring/Ring/Services/Conversations/ConversationStore.swift",
         "patchSetId": 2
