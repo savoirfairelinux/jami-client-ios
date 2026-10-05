@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c5f896fc_9a1b55ae",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-05T19:21:40Z",
+      "side": 1,
+      "message": "didSet queues each setup on the serial conversation queue in order, so the most recently selected conversation\u0027s setup always runs last",
+      "parentUuid": "79011d79_9bb77d31",
+      "revId": "09f088f78de2d74acc7bc6c5d127ac400c986445",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2cd2f418_7c2c74e3",
         "filename": "Ring/Ring/Services/Conversations/ConversationStore.swift",
         "patchSetId": 2
@@ -31,6 +49,24 @@
       "writtenOn": "2026-10-05T18:48:58Z",
       "side": 1,
       "message": "[error] Line 47: 🔴 `ConversationRecord.reconcile(with:)` only appends missing message IDs and never applies updates/removals for already-known IDs. Because `loadConversations`/`replaceConversations` now reuse existing records, persisted changes (edited status/content, deletions, clears) can be ignored and stale in-memory messages survive reload. Reconcile should treat storage as source-of-truth for existing IDs (or fully replace `messages` with `stored.messages` while preserving the `ConversationModel` instance), then emit/reset streams accordingly.",
+      "revId": "09f088f78de2d74acc7bc6c5d127ac400c986445",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ed3ea1d_be998851",
+        "filename": "Ring/Ring/Services/Conversations/ConversationStore.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-05T19:21:40Z",
+      "side": 1,
+      "message": "Every write to these messages also updates the record, nothing deletes them from the DB, and clearing history removes the record. The only thing reconcile can find missing is a message saved during the reload window.",
+      "parentUuid": "2cd2f418_7c2c74e3",
       "revId": "09f088f78de2d74acc7bc6c5d127ac400c986445",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -54,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7bd17ce0_7b1b6ece",
+        "filename": "Ring/Ring/Services/Conversations/ConversationStore.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-05T19:21:40Z",
+      "side": 1,
+      "message": "That branch is taken only when every recovered message is newer than all known ones. Older ones go through a reset and are re-emitted as history, and the unread count is recalculated rather than added to.",
+      "parentUuid": "33e60eca_c73e095e",
+      "revId": "09f088f78de2d74acc7bc6c5d127ac400c986445",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "68f43914_922b48ce",
         "filename": "Ring/Ring/Services/Conversations/ConversationStore.swift",
         "patchSetId": 2
@@ -71,6 +125,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fb5936f4_490e7e39",
+        "filename": "Ring/Ring/Services/Conversations/ConversationStore.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-05T19:21:40Z",
+      "side": 1,
+      "message": "The swarm count was already incremental before this series, and the non-swarm recalculation is kept in updateNonSwarmUnreadCount().",
+      "parentUuid": "68f43914_922b48ce",
+      "revId": "09f088f78de2d74acc7bc6c5d127ac400c986445",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a6575322_1d9030cb",
         "filename": "Ring/RingTests/ConversationEventOrderingTests.swift",
         "patchSetId": 2
@@ -82,6 +154,24 @@
       "writtenOn": "2026-10-05T18:46:52Z",
       "side": 1,
       "message": "[warning] Line 118: 🟡 The updated assertion now checks only `conversation?.newMessages.value.messages`, which validates the latest emitted batch, not persisted store state/order. This weakens coverage for the refactor goal (“keep messages in the store”). Add an assertion against store-backed retrieval (through service/store API) to ensure messages are actually retained and ordered in storage, not just emitted.",
+      "revId": "09f088f78de2d74acc7bc6c5d127ac400c986445",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd17849f_0e31adb2",
+        "filename": "Ring/RingTests/ConversationEventOrderingTests.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-05T19:21:40Z",
+      "side": 1,
+      "message": "The swarm count was already incremental before this series, and the non-swarm recalculation is\n     kept in updateNonSwarmUnreadCount()",
+      "parentUuid": "a6575322_1d9030cb",
       "revId": "09f088f78de2d74acc7bc6c5d127ac400c986445",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
