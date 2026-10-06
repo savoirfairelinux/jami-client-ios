@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "536d3ee7_b5370dab",
+        "filename": "Ring/Ring/SwarmInfo.swift",
+        "patchSetId": 7
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-06T15:18:37Z",
+      "side": 1,
+      "message": "[error] Line 106: 🔴 `take(1)` does not actually guarantee completion here because `registeredName(forAddress:)` only emits on `.found`. For `.notFound`/`.error`, this subscription stays alive indefinitely, so repeated `lookupName(...)` calls for unresolved participants still accumulate disposables/observers over time. This recreates the long-session growth issue in a narrower form. Fix by making the lookup stream emit a terminal value for negative outcomes (e.g., `String?` or a result enum) so `take(1)` can complete, or by ensuring only one in-flight subscription exists per participant/address and disposing/replacing it explicitly.",
+      "revId": "7e4eef1c92d6287dfd938a4a5d0b012e62ff0c7f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
