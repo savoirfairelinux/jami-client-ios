@@ -117,8 +117,17 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
         view.backgroundColor = UIColor.systemBackground
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateNavBarContentWidth()
+    }
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        updateNavBarContentWidth()
+    }
+
+    private func updateNavBarContentWidth() {
         guard let navigationBar = navigationController?.navigationBar else { return }
         let margins = navigationBar.layoutMargins
         let width = navigationBar.bounds.width - margins.left - margins.right
