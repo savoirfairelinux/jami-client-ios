@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3694e8b7_90334c68",
+        "filename": "Ring/jamiNotificationExtension/NotificationService.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-06T22:30:17Z",
+      "side": 1,
+      "message": "[warning] Line 286: 🟡 The download-tracking sets are keyed only by `documentId`, but the daemon signal carries `(accountId, conversationId, documentId)`. If two conversations announce documents with the same URI/hash, one download can clear the other and let the extension exit early. Track pending downloads by a composite key (at least `conversationId + documentId`, ideally `accountId + conversationId + documentId`) in both `documentShared` and `documentDownloaded`.",
+      "revId": "c0aef4af178eb56b278c77c7f5d04cb440c129c4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
