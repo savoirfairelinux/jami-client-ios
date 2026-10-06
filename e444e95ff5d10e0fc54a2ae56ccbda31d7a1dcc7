@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a4766bd0_409447c4",
+        "filename": "Ring/Ring/Services/NameService.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-06T15:26:46Z",
+      "side": 1,
+      "message": "Growth is bounded by distinct members and contacts shown, each entry is small",
+      "parentUuid": "6efc738f_fb1c21f1",
+      "revId": "e444e95ff5d10e0fc54a2ae56ccbda31d7a1dcc7",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a9243a04_dbfbbea8",
         "filename": "Ring/Ring/SwarmInfo.swift",
         "patchSetId": 6
@@ -31,6 +49,24 @@
       "writtenOn": "2026-10-06T15:10:41Z",
       "side": 1,
       "message": "[error] Line 106: 🔴 `lookupName` now subscribes without completion (`take(1)` was removed), so each call adds another live subscription until `ParticipantInfo` deallocates. If this method is invoked multiple times for the same participant, observers/disposables accumulate and can duplicate updates later. Restore one-shot behavior (`take(1)` once a name is received) or keep a single reusable disposable per participant/address.",
+      "revId": "e444e95ff5d10e0fc54a2ae56ccbda31d7a1dcc7",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1835fda5_0f6a6e55",
+        "filename": "Ring/Ring/SwarmInfo.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-06T15:26:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a9243a04_dbfbbea8",
       "revId": "e444e95ff5d10e0fc54a2ae56ccbda31d7a1dcc7",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
