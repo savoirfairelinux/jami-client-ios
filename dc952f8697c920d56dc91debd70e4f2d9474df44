@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5fb3d89_a65e646d",
+        "filename": "Ring/Ring/SwarmInfo.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-06T16:15:17Z",
+      "side": 1,
+      "message": "[error] Line 107: 🔴 Adding `.take(1)` here causes the subscription to complete on the BehaviorRelay’s immediate seed emission (typically `\"\"`), so asynchronous name lookup results are never applied for new participants. This breaks registered-name resolution in the common cold-cache path. Remove `.take(1)` (or move any one-shot logic after filtering out unresolved values) so the later daemon response can update `registeredName`.",
+      "revId": "dc952f8697c920d56dc91debd70e4f2d9474df44",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
