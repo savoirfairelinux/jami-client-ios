@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3f64f0d_ca6aed22",
+        "filename": "Ring/Ring/SwarmInfo.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-06T14:59:57Z",
+      "side": 1,
+      "message": "[warning] Line 348: 🟡 `apply(_:)` only updates `avatarData`, `title`, and `description` when `!info.isCoredialog`. If a conversation transitions from non-core to core-dialog classification (the classification now depends on participant count), previously set group profile values can remain stale in the relays. Add an `else` branch that explicitly clears or recomputes these relays for core-dialog state to avoid UI state drift.",
+      "revId": "f8f498c408a335e2009ef088712d6a17541dcb4e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
