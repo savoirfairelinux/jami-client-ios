@@ -16,6 +16,24 @@
       "message": "[error] Line 107: 🔴 Adding `.take(1)` here causes the subscription to complete on the BehaviorRelay’s immediate seed emission (typically `\"\"`), so asynchronous name lookup results are never applied for new participants. This breaks registered-name resolution in the common cold-cache path. Remove `.take(1)` (or move any one-shot logic after filtering out unresolved values) so the later daemon response can update `registeredName`.",
       "revId": "dc952f8697c920d56dc91debd70e4f2d9474df44",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8490e449_0b1a5b6d",
+        "filename": "Ring/Ring/SwarmInfo.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-06T17:20:39Z",
+      "side": 1,
+      "message": "It can\u0027t take an empty seed: the lookup relay starts at nil, registeredName(forAddress:) returns compactMap { $0 }, and only a found, non-empty name is ever accepted.",
+      "parentUuid": "a5fb3d89_a65e646d",
+      "revId": "dc952f8697c920d56dc91debd70e4f2d9474df44",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
