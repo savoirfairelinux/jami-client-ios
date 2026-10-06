@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6efc738f_fb1c21f1",
+        "filename": "Ring/Ring/Services/NameService.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-06T15:10:41Z",
+      "side": 1,
+      "message": "[error] Line 65: 🔴 `addressLookups` is append-only and entries are never evicted (found/notFound/failed all stay forever). With participant churn, this causes unbounded in-memory growth per account/address. Add lifecycle management (e.g., periodic TTL sweep + explicit cleanup on account teardown/name-server change) and remove stale lookup objects.",
+      "revId": "e444e95ff5d10e0fc54a2ae56ccbda31d7a1dcc7",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9243a04_dbfbbea8",
+        "filename": "Ring/Ring/SwarmInfo.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-06T15:10:41Z",
+      "side": 1,
+      "message": "[error] Line 106: 🔴 `lookupName` now subscribes without completion (`take(1)` was removed), so each call adds another live subscription until `ParticipantInfo` deallocates. If this method is invoked multiple times for the same participant, observers/disposables accumulate and can duplicate updates later. Restore one-shot behavior (`take(1)` once a name is received) or keep a single reusable disposable per participant/address.",
+      "revId": "e444e95ff5d10e0fc54a2ae56ccbda31d7a1dcc7",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
