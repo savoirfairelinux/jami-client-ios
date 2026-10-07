@@ -16,6 +16,24 @@
       "message": "[warning] Line 644: 🟡 `baseSizePoints` is hardcoded to `12` (derived from 16px). This can drift from the actual editor/page base font size if CSS defaults or shared editor settings change. Prefer reading the effective base size from the same source the editor uses (or a shared constant used by both platforms) so the chooser always reflects the true base size.",
       "revId": "87137079be64244f50a334692d2996d2f2199aa5",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9682d2e_0152ad6c",
+        "filename": "Ring/Ring/Features/Collab/CollabEditorViewController.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 644,
+      "author": {
+        "id": 617
+      },
+      "writtenOn": "2026-10-07T12:31:01Z",
+      "side": 1,
+      "message": "Done in PS3: the page now reports its base size with the selection (\"defaultSize\", as the Android editor does), and the size chooser shows that instead of a constant. Covered by a new bundle test, \"the selection says the size of text with none of its own\".",
+      "parentUuid": "65d40750_2915a721",
+      "revId": "87137079be64244f50a334692d2996d2f2199aa5",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
