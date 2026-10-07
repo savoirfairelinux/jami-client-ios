@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42bafaa2_6571d94e",
+        "filename": "Ring/CollabEditor/src/index.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-07T18:07:19Z",
+      "side": 1,
+      "message": "[warning] Line 385: 🟡 `setSize(points)` coerces any non-numeric input with `Number(points)`, and values like `undefined`/`\u0027abc\u0027` become `NaN`, which currently falls through to `size \u003e 0 ? ... : false` and clears size formatting. Treat invalid input as a no-op (like `setFont` does for unsupported IDs) and only clear when the caller explicitly passes `0`/empty.",
+      "revId": "b672c3714cd61354ecea247175173f4e5410fa34",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
