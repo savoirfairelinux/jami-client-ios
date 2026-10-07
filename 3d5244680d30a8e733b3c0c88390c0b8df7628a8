@@ -16,6 +16,24 @@
       "message": "[warning] Line 631: 🟡 `compactIconWidth` is set to `38`, and `arrangeFormatBar()` applies it as the minimum button width on compact layouts. This drops below the standard 44x44 pt touch target and can hurt accessibility/tap reliability. Keep min width at 44 and recover space via chooser compression/spacing or row composition instead.",
       "revId": "3d5244680d30a8e733b3c0c88390c0b8df7628a8",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06b18c81_6d80e14a",
+        "filename": "Ring/Ring/Features/Collab/CollabEditorViewController.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 631,
+      "author": {
+        "id": 617
+      },
+      "writtenOn": "2026-10-07T12:31:01Z",
+      "side": 1,
+      "message": "Agreed that 38 pt is below the 44 pt target, which the repository\u0027s own UI rules (.agents/topics/ui-design.md) also require. The trade-off: in compact width the bottom row holds 9 buttons and 2 separators, which need 414 pt at 44 pt, while most iPhones are 375-393 pt wide. Either the two list buttons move up next to the alignment chooser, which keeps everything visible at 44 pt but truncates the style and font names further on those phones, or the buttons go back to 44 pt and the bottom row scrolls under 414 pt, partly hiding \"clear formatting\". Kateryna is testing the series on devices; leaving the choice to her.",
+      "parentUuid": "bf16188a_2d02ff6a",
+      "revId": "3d5244680d30a8e733b3c0c88390c0b8df7628a8",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
