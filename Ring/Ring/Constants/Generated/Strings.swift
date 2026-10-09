@@ -765,12 +765,12 @@ internal enum L10n {
     internal static func documentRemovedMessage(_ p1: Any) -> String {
       return L10n.tr("Localizable", "collab.documentRemovedMessage", String(describing: p1), fallback: "\"%@\" was removed by its author.")
     }
+    /// Documents
+    internal static let documents = L10n.tr("Localizable", "collab.documents", fallback: "Documents")
     /// New document: %@
     internal static func documentShared(_ p1: Any) -> String {
       return L10n.tr("Localizable", "collab.documentShared", String(describing: p1), fallback: "New document: %@")
     }
-    /// Documents
-    internal static let documents = L10n.tr("Localizable", "collab.documents", fallback: "Documents")
     /// Download and open
     internal static let downloadAndOpen = L10n.tr("Localizable", "collab.downloadAndOpen", fallback: "Download and open")
     /// Editable document
@@ -803,8 +803,8 @@ internal enum L10n {
     internal static let exportText = L10n.tr("Localizable", "collab.exportText", fallback: "Export to plain text")
     /// Font
     internal static let font = L10n.tr("Localizable", "collab.font", fallback: "Font")
-    /// Font size
-    internal static let fontSize = L10n.tr("Localizable", "collab.fontSize", fallback: "Font size")
+    /// Size
+    internal static let fontSize = L10n.tr("Localizable", "collab.fontSize", fallback: "Size")
     /// Heading %d
     internal static func heading(_ p1: Int) -> String {
       return L10n.tr("Localizable", "collab.heading", p1, fallback: "Heading %d")
@@ -845,8 +845,8 @@ internal enum L10n {
     internal static let openError = L10n.tr("Localizable", "collab.openError", fallback: "This document could not be opened.")
     /// Numbered list
     internal static let orderedList = L10n.tr("Localizable", "collab.orderedList", fallback: "Numbered list")
-    /// Paragraph style
-    internal static let paragraphStyle = L10n.tr("Localizable", "collab.paragraphStyle", fallback: "Paragraph style")
+    /// Style
+    internal static let paragraphStyle = L10n.tr("Localizable", "collab.paragraphStyle", fallback: "Style")
     /// Redo
     internal static let redo = L10n.tr("Localizable", "collab.redo", fallback: "Redo")
     /// Remove
@@ -881,6 +881,8 @@ internal enum L10n {
     internal static let sendError = L10n.tr("Localizable", "collab.sendError", fallback: "Your changes could not be sent.")
     /// Strikethrough
     internal static let strikethrough = L10n.tr("Localizable", "collab.strikethrough", fallback: "Strikethrough")
+    /// Text format
+    internal static let textFormat = L10n.tr("Localizable", "collab.textFormat", fallback: "Text format")
     /// Unavailable font
     internal static let unavailableFont = L10n.tr("Localizable", "collab.unavailableFont", fallback: "Unavailable font")
     /// Underline

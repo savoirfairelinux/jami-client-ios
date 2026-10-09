@@ -48,9 +48,7 @@ class CollabFormatBar: UIView {
     var onFormat: ((Format) -> Void)?
 
     /// The fonts to choose from.
-    var fonts = [Font]() {
-        didSet { self.showChoices() }
-    }
+    var fonts = [Font]()
 
     /// The address of the link under the caret, if there is one.
     private(set) var currentLink = ""
@@ -60,27 +58,21 @@ class CollabFormatBar: UIView {
     /// The size, in points, of text with none of its own, as the page says.
     private var baseSize: Double = 0
     private var currentAlign = ""
+    private var activeFormats = Set<Format>()
 
-    private let rowStack = UIStackView()
-    /// The rows of the bar: one where it all fits, two on a narrow screen.
-    private var rows = [FormatRow]()
-    /// The bar's controls in desktop order; a separator is drawn anew on each row.
-    private var controls = [(item: Item, view: UIView?)]()
+    private let capsule = CollabFormatBar.makeCapsule()
+    private let stack = UIStackView()
     private var buttons = [Format: UIButton]()
-    private var choosers = [Chooser: UIButton]()
-    private var iconWidths = [NSLayoutConstraint]()
-    private var heightConstraint: NSLayoutConstraint!
-    private var isSplit: Bool?
+    private var wideOnly = [UIView]()
 
-    private static let height: CGFloat = 48
+    private static let capsuleHeight: CGFloat = 48
+    private static let capsuleInset: CGFloat = 4
     private static let touchTarget: CGFloat = 44
-    /// A phone's row of buttons is as tall to touch, a little narrower.
-    private static let compactIconWidth: CGFloat = 38
-    private static let buttonSpacing: CGFloat = 4
+    private static let selectionSide: CGFloat = 34
+    private static let groupSpacing: CGFloat = 4
     private static let margin: CGFloat = 8
-    private static let inactiveAlpha: CGFloat = 0.55
-    private static let chooserMaxWidth: CGFloat = 160
     private static let separatorHeight: CGFloat = 24
+    private static let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 17)
 
     init() {
         super.init(frame: .zero)
@@ -92,45 +84,69 @@ class CollabFormatBar: UIView {
     }
 
     private func setUp() {
-        self.backgroundColor = .jamiFormBackground
-        self.rowStack.axis = .vertical
-        self.rowStack.distribution = .fillEqually
-        self.rowStack.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(self.rowStack)
+        self.backgroundColor = .clear
+        self.addInteraction(UILargeContentViewerInteraction())
 
-        self.rows = (0..<2).map { _ in FormatRow() }
-        self.rows.forEach { self.rowStack.addArrangedSubview($0.scrollView) }
-
-        for item in CollabFormatBar.items {
-            switch item {
-            case .button(let button):
-                let view = self.makeButton(button)
-                self.buttons[button.format] = view
-                self.controls.append((item, view))
-            case .chooser(let chooser):
-                let view = self.makeChooser(chooser)
-                self.choosers[chooser] = view
-                self.controls.append((item, view))
-            case .separator:
-                self.controls.append((item, nil))
-            }
+        if #unavailable(iOS 26.0) {
+            self.layer.shadowColor = UIColor.black.cgColor
+            self.layer.shadowOpacity = 0.12
+            self.layer.shadowRadius = 8
+            self.layer.shadowOffset = CGSize(width: 0, height: 2)
         }
-        self.showChoices()
+        self.stack.alignment = .center
+        [self.capsule, self.stack].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+        self.addSubview(self.capsule)
+        self.capsule.contentView.addSubview(self.stack)
 
-        self.heightConstraint = self.heightAnchor.constraint(equalToConstant: CollabFormatBar.height)
+        self.stack.addArrangedSubview(self.makeFormatMenu())
+        for group in CollabFormatBar.groups {
+            let views = [self.makeSeparator()] + group.buttons.map { self.makeButton($0) }
+            views.forEach { self.stack.addArrangedSubview($0) }
+            if group.isWideOnly { self.wideOnly += views }
+        }
+        self.showWideOnly(false)
+
+        let guide = self.safeAreaLayoutGuide
+        let content = self.capsule.contentView
+        let margin = CollabFormatBar.margin
+        let inset = CollabFormatBar.capsuleInset
         NSLayoutConstraint.activate([
-            self.heightConstraint,
-            self.rowStack.topAnchor.constraint(equalTo: self.topAnchor),
-            self.rowStack.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            self.rowStack.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            self.rowStack.trailingAnchor.constraint(equalTo: self.trailingAnchor)
+            self.capsule.heightAnchor.constraint(equalToConstant: CollabFormatBar.capsuleHeight),
+            self.capsule.topAnchor.constraint(equalTo: self.topAnchor, constant: margin),
+            self.capsule.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -margin),
+            self.capsule.centerXAnchor.constraint(equalTo: guide.centerXAnchor),
+            self.capsule.leadingAnchor.constraint(greaterThanOrEqualTo: guide.leadingAnchor, constant: margin),
+            self.capsule.trailingAnchor.constraint(lessThanOrEqualTo: guide.trailingAnchor, constant: -margin),
+
+            self.stack.centerYAnchor.constraint(equalTo: content.centerYAnchor),
+            self.stack.leadingAnchor.constraint(equalTo: content.leadingAnchor, constant: inset),
+            self.stack.trailingAnchor.constraint(equalTo: content.trailingAnchor, constant: -inset)
         ])
-        self.arrange()
     }
 
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        self.arrange()
+    private static var wideWidth: CGFloat {
+        let groups = CollabFormatBar.groups
+        let buttons = 1 + groups.reduce(0) { $0 + $1.buttons.count }
+        return CGFloat(buttons) * CollabFormatBar.touchTarget
+            + CGFloat(groups.count) * CollabFormatBar.separatorWidth
+            + 2 * CollabFormatBar.capsuleInset
+    }
+
+    private static var separatorWidth: CGFloat {
+        return 1 + 2 * CollabFormatBar.groupSpacing
+    }
+
+    private func showWideOnly(_ isWide: Bool) {
+        guard self.wideOnly.first?.isHidden == isWide else { return }
+        self.wideOnly.forEach { $0.isHidden = !isWide }
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        let available = self.safeAreaLayoutGuide.layoutFrame.width - 2 * CollabFormatBar.margin
+        self.showWideOnly(available >= CollabFormatBar.wideWidth)
+        self.layer.shadowPath = UIBezierPath(roundedRect: self.capsule.frame,
+                                             cornerRadius: CollabFormatBar.capsuleHeight / 2).cgPath
     }
 
     /// Shows what the text under the caret has, as the page reports it, with
@@ -142,143 +158,23 @@ class CollabFormatBar: UIView {
         self.currentSize = formats["size"] as? Double ?? 0
         self.baseSize = baseSize
         self.currentAlign = formats["align"] as? String ?? ""
-        self.showChoices()
 
-        let list = formats["list"] as? String ?? ""
-
-        func active(_ format: Format) -> Bool {
-            switch format {
-            case .bold: return formats["bold"] as? Bool ?? false
-            case .italic: return formats["italic"] as? Bool ?? false
-            case .underline: return formats["underline"] as? Bool ?? false
-            case .strike: return formats["strike"] as? Bool ?? false
-            case .list(let kind): return list == kind
-            case .link: return !self.currentLink.isEmpty
-            default: return false
-            }
+        var active = Set<Format>()
+        let attributes: [(String, Format)] = [("bold", .bold), ("italic", .italic),
+                                              ("underline", .underline), ("strike", .strike)]
+        for (name, format) in attributes where formats[name] as? Bool ?? false {
+            active.insert(format)
         }
+        if let list = formats["list"] as? String {
+            active.insert(.list(list))
+        }
+        if !self.currentLink.isEmpty {
+            active.insert(.link)
+        }
+        self.activeFormats = active
 
         for (format, button) in self.buttons {
-            let selected = active(format)
-            button.isSelected = selected
-            button.alpha = selected ? 1 : CollabFormatBar.inactiveAlpha
-        }
-    }
-}
-
-// MARK: - Rows
-
-extension CollabFormatBar {
-
-    /**
-     The whole bar fits on one row of a wide screen, in the desktop's order. A
-     phone has no room for it: the choosers and undo go on top and the rest of
-     the buttons below, each row spread to the width, so none is out of sight.
-     */
-    private func arrange() {
-        let split = self.traitCollection.horizontalSizeClass != .regular
-        guard split != self.isSplit else { return }
-        self.isSplit = split
-
-        let views: [[UIView]]
-        if split {
-            let top = self.controls.filter { CollabFormatBar.isOnTopRow($0.item) != false }
-            let bottom = self.controls.filter { CollabFormatBar.isOnTopRow($0.item) != true }
-            views = [self.rowViews(top), self.rowViews(bottom)]
-        } else {
-            views = [self.rowViews(self.controls), []]
-        }
-        self.rows.forEach { $0.clear() }
-        for (row, rowViews) in zip(self.rows, views) {
-            row.show(rowViews, spread: split)
-        }
-        let iconWidth = split ? CollabFormatBar.compactIconWidth : CollabFormatBar.touchTarget
-        self.iconWidths.forEach { $0.constant = iconWidth }
-        self.heightConstraint.constant = CollabFormatBar.height
-            * CGFloat(views.filter { !$0.isEmpty }.count)
-    }
-
-    /// Which row of a phone's bar an item is on; a separator may be on either.
-    private static func isOnTopRow(_ item: Item) -> Bool? {
-        switch item {
-        case .chooser:
-            return true
-        case .button(let button):
-            return button.format == .undo || button.format == .redo
-        case .separator:
-            return nil
-        }
-    }
-
-    /// Separators only stand between groups that are both on the row.
-    private func rowViews(_ items: [(item: Item, view: UIView?)]) -> [UIView] {
-        var views = [UIView]()
-        var separatorPending = false
-        for (_, view) in items {
-            guard let view = view else {
-                separatorPending = !views.isEmpty
-                continue
-            }
-            if separatorPending {
-                views.append(self.makeSeparator())
-                separatorPending = false
-            }
-            views.append(view)
-        }
-        return views
-    }
-
-    /**
-     One row of the bar. What does not fit can still be scrolled to; on a phone
-     the row is spread to the width, and its choosers give up room to the
-     buttons before it scrolls.
-     */
-    private final class FormatRow {
-        let scrollView = UIScrollView()
-        private let stack = UIStackView()
-        private var fillWidth = [NSLayoutConstraint]()
-
-        init() {
-            self.scrollView.showsHorizontalScrollIndicator = false
-            self.stack.axis = .horizontal
-            self.stack.alignment = .center
-            self.stack.translatesAutoresizingMaskIntoConstraints = false
-            self.scrollView.addSubview(self.stack)
-
-            let content = self.scrollView.contentLayoutGuide
-            let frame = self.scrollView.frameLayoutGuide
-            let margin = CollabFormatBar.margin
-            let spread = self.stack.widthAnchor
-                .constraint(equalTo: frame.widthAnchor, constant: -2 * margin)
-            spread.priority = .defaultHigh
-            self.fillWidth = [
-                self.stack.widthAnchor
-                    .constraint(greaterThanOrEqualTo: frame.widthAnchor, constant: -2 * margin),
-                spread
-            ]
-            NSLayoutConstraint.activate([
-                self.stack.topAnchor.constraint(equalTo: content.topAnchor),
-                self.stack.bottomAnchor.constraint(equalTo: content.bottomAnchor),
-                self.stack.leadingAnchor.constraint(equalTo: content.leadingAnchor, constant: margin),
-                self.stack.trailingAnchor.constraint(equalTo: content.trailingAnchor, constant: -margin),
-                self.stack.heightAnchor.constraint(equalTo: frame.heightAnchor)
-            ])
-        }
-
-        func clear() {
-            self.stack.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        }
-
-        func show(_ views: [UIView], spread: Bool) {
-            views.forEach { self.stack.addArrangedSubview($0) }
-            self.scrollView.isHidden = views.isEmpty
-            self.stack.distribution = spread ? .equalSpacing : .fill
-            self.stack.spacing = spread ? 0 : CollabFormatBar.buttonSpacing
-            if spread {
-                NSLayoutConstraint.activate(self.fillWidth)
-            } else {
-                NSLayoutConstraint.deactivate(self.fillWidth)
-            }
+            button.isSelected = active.contains(format)
         }
     }
 }
@@ -287,74 +183,88 @@ extension CollabFormatBar {
 
 extension CollabFormatBar {
 
-    private func makeButton(_ item: Button) -> UIButton {
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: item.symbol), for: .normal)
-        button.accessibilityLabel = item.label
-        button.alpha = CollabFormatBar.inactiveAlpha
-        button.tintColor = .jamiPrimaryControl
+    private static func makeCapsule() -> UIVisualEffectView {
+        if #available(iOS 26.0, *) {
+            let view = UIVisualEffectView(effect: UIGlassEffect())
+            view.cornerConfiguration = .capsule()
+            return view
+        }
+        let view = UIVisualEffectView(effect: UIBlurEffect(style: .systemThinMaterial))
+        view.layer.cornerRadius = CollabFormatBar.capsuleHeight / 2
+        view.layer.cornerCurve = .continuous
+        view.clipsToBounds = true
+        return view
+    }
+
+    private func makeIconButton(symbol: UIImage?, label: String) -> UIButton {
+        var configuration = UIButton.Configuration.plain()
+        configuration.image = symbol
+        configuration.preferredSymbolConfigurationForImage = CollabFormatBar.symbolConfiguration
+        configuration.baseForegroundColor = .jamiPrimaryControl
+        configuration.contentInsets = .zero
+        let side = CollabFormatBar.selectionSide
+        let inset = (CollabFormatBar.touchTarget - side) / 2
+        configuration.cornerStyle = .fixed
+        configuration.background.cornerRadius = side / 2
+        configuration.background.backgroundInsets = NSDirectionalEdgeInsets(
+            top: inset, leading: inset, bottom: inset, trailing: inset)
+        let button = UIButton(configuration: configuration)
+        button.configurationUpdateHandler = { button in
+            button.configuration?.background.backgroundColor = button.isSelected ? .secondarySystemFill : .clear
+        }
+        button.accessibilityLabel = label
+        button.showsLargeContentViewer = true
+        button.largeContentTitle = label
         button.translatesAutoresizingMaskIntoConstraints = false
-        let side = CollabFormatBar.touchTarget
-        let width = button.widthAnchor.constraint(greaterThanOrEqualToConstant: side)
-        width.isActive = true
-        self.iconWidths.append(width)
-        button.heightAnchor.constraint(equalToConstant: side).isActive = true
-        button.addAction(UIAction { [weak self] _ in self?.onFormat?(item.format) },
-                         for: .touchUpInside)
+        NSLayoutConstraint.activate([
+            button.widthAnchor.constraint(equalToConstant: CollabFormatBar.touchTarget),
+            button.heightAnchor.constraint(equalToConstant: CollabFormatBar.touchTarget)
+        ])
         return button
     }
 
-    /**
-     A button that opens the list it chooses from. The list is built when it
-     opens, so that it ticks what the text under the caret has then.
-     */
-    private func makeChooser(_ chooser: Chooser) -> UIButton {
-        let spacing = CollabFormatBar.buttonSpacing
-        var configuration = UIButton.Configuration.plain()
-        configuration.titleLineBreakMode = .byTruncatingTail
-        configuration.imagePlacement = .trailing
-        configuration.imagePadding = spacing
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: spacing,
-                                                              bottom: 0, trailing: spacing)
-        configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { attributes in
-            var attributes = attributes
-            attributes.font = .preferredFont(forTextStyle: .subheadline)
-            return attributes
-        }
-        let button = UIButton(configuration: configuration)
-        button.tintColor = .jamiPrimaryControl
-        button.accessibilityLabel = chooser.label
+    private func makeButton(_ item: Button) -> UIButton {
+        let button = self.makeIconButton(symbol: item.image, label: item.label)
+        button.addAction(UIAction { [weak self] _ in self?.onFormat?(item.format) },
+                         for: .touchUpInside)
+        self.buttons[item.format] = button
+        return button
+    }
+
+    private func makeFormatMenu() -> UIButton {
+        let button = self.makeIconButton(symbol: UIImage(systemName: "textformat"),
+                                         label: L10n.Collab.textFormat)
         button.showsMenuAsPrimaryAction = true
+        if #available(iOS 16.0, *) {
+            button.preferredMenuElementOrder = .fixed
+        }
         button.menu = UIMenu(children: [
             UIDeferredMenuElement.uncached { [weak self] completion in
-                completion(self?.choices(for: chooser) ?? [])
+                completion(self?.formatMenu() ?? [])
             }
-        ])
-        button.translatesAutoresizingMaskIntoConstraints = false
-        // On a narrow row the names are what gives way, not the buttons.
-        button.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-        let side = CollabFormatBar.touchTarget
-        NSLayoutConstraint.activate([
-            button.widthAnchor.constraint(greaterThanOrEqualToConstant: side),
-            button.widthAnchor.constraint(lessThanOrEqualToConstant: CollabFormatBar.chooserMaxWidth),
-            button.heightAnchor.constraint(equalToConstant: side)
         ])
         return button
     }
 
     private func makeSeparator() -> UIView {
+        let container = UIView()
         let line = UIView()
         line.backgroundColor = .separator
-        line.translatesAutoresizingMaskIntoConstraints = false
+        [container, line].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+        container.addSubview(line)
         NSLayoutConstraint.activate([
+            container.widthAnchor.constraint(equalToConstant: CollabFormatBar.separatorWidth),
+            container.heightAnchor.constraint(equalToConstant: CollabFormatBar.separatorHeight),
             line.widthAnchor.constraint(equalToConstant: 1),
-            line.heightAnchor.constraint(equalToConstant: CollabFormatBar.separatorHeight)
+            line.centerXAnchor.constraint(equalTo: container.centerXAnchor),
+            line.topAnchor.constraint(equalTo: container.topAnchor),
+            line.bottomAnchor.constraint(equalTo: container.bottomAnchor)
         ])
-        return line
+        return container
     }
 }
 
-// MARK: - Choosing a style, a font, a size, an alignment
+// MARK: - The text format menu
 
 extension CollabFormatBar {
 
@@ -377,36 +287,49 @@ extension CollabFormatBar {
         return alignments.first { $0.value == self.currentAlign } ?? alignments[0]
     }
 
-    /// Shows on each chooser what the text under the caret has.
-    private func showChoices() {
-        let chevron = UIImage(systemName: "chevron.down",
-                              withConfiguration: UIImage.SymbolConfiguration(textStyle: .caption2))
-        for (chooser, button) in self.choosers {
-            var title: String?
-            var image = chevron
-            let value: String
-            switch chooser {
-            case .paragraphStyle:
-                value = self.paragraphStyleName(self.currentHeader)
-                title = value
-            case .font:
-                value = self.currentFontName
-                title = value
-            case .size:
-                if self.currentSize > 0 {
-                    value = self.sizeName(self.currentSize)
-                    title = value
-                } else {
-                    value = self.baseSize > 0 ? self.sizeName(self.baseSize) : L10n.Collab.defaultSize
-                    title = value
-                }
-            case .alignment:
-                value = self.currentAlignment.label
-                image = UIImage(systemName: self.currentAlignment.symbol)
-            }
-            button.configuration?.title = title
-            button.configuration?.image = image
-            button.accessibilityValue = value
+    private func value(of chooser: Chooser) -> String {
+        switch chooser {
+        case .paragraphStyle:
+            return self.paragraphStyleName(self.currentHeader)
+        case .font:
+            return self.currentFontName
+        case .size:
+            if self.currentSize > 0 { return self.sizeName(self.currentSize) }
+            return self.baseSize > 0 ? self.sizeName(self.baseSize) : L10n.Collab.defaultSize
+        }
+    }
+
+    private func formatMenu() -> [UIMenuElement] {
+        let choosers = Chooser.allCases.map { chooser -> UIMenuElement in
+            let menu = UIMenu(title: chooser.label, children: self.choices(for: chooser))
+            menu.subtitle = self.value(of: chooser)
+            return menu
+        }
+        let alignments = CollabFormatBar.alignments.map { alignment in
+            self.choice(alignment.label, .align(alignment.value), symbol: alignment.symbol,
+                        isCurrent: alignment.value == self.currentAlignment.value)
+        }
+        return [
+            self.palette(CollabFormatBar.marks.map { self.action(for: $0) }),
+            UIMenu(options: .displayInline, children: choosers),
+            self.palette(alignments),
+            UIMenu(options: .displayInline, children: CollabFormatBar.lists.map { self.action(for: $0) }),
+            self.action(for: CollabFormatBar.clear)
+        ]
+    }
+
+    private func palette(_ children: [UIMenuElement]) -> UIMenu {
+        let menu = UIMenu(options: .displayInline, children: children)
+        if #available(iOS 16.0, *) {
+            menu.preferredElementSize = .small
+        }
+        return menu
+    }
+
+    private func action(for item: Button) -> UIAction {
+        return UIAction(title: item.label, image: item.image,
+                        state: self.activeFormats.contains(item.format) ? .on : .off) { [weak self] _ in
+            self?.onFormat?(item.format)
         }
     }
 
@@ -433,12 +356,6 @@ extension CollabFormatBar {
                 self.choice(L10n.Collab.defaultSize, .size(0), isCurrent: self.currentSize == 0),
                 UIMenu(options: .displayInline, children: sizes)
             ]
-        case .alignment:
-            return CollabFormatBar.alignments.map { alignment in
-                self.choice(alignment.label, .align(alignment.value),
-                            symbol: alignment.symbol,
-                            isCurrent: alignment.value == self.currentAlignment.value)
-            }
         }
     }
 
@@ -458,34 +375,36 @@ extension CollabFormatBar {
 
     private struct Button {
         let format: Format
-        let symbol: String
+        let symbols: [String]
         let label: String
 
-        init(_ format: Format, symbol: String, label: String) {
+        init(_ format: Format, symbols: String..., label: String) {
             self.format = format
-            self.symbol = symbol
+            self.symbols = symbols
             self.label = label
+        }
+
+        var image: UIImage? {
+            return self.symbols.lazy.compactMap { UIImage(systemName: $0) }.first
         }
     }
 
-    /// The buttons that open a list to choose from, as on the desktop.
-    private enum Chooser: Hashable {
-        case paragraphStyle, font, size, alignment
+    /// The lists of the text format menu, as on the desktop.
+    private enum Chooser: CaseIterable {
+        case paragraphStyle, font, size
 
         var label: String {
             switch self {
             case .paragraphStyle: return L10n.Collab.paragraphStyle
             case .font: return L10n.Collab.font
             case .size: return L10n.Collab.fontSize
-            case .alignment: return L10n.Collab.alignment
             }
         }
     }
 
-    private enum Item {
-        case button(Button)
-        case chooser(Chooser)
-        case separator
+    private struct Group {
+        let buttons: [Button]
+        var isWideOnly = false
     }
 
     private struct Alignment {
@@ -512,27 +431,28 @@ extension CollabFormatBar {
         Alignment(value: "justify", symbol: "text.justify", label: L10n.Collab.alignJustify)
     ]
 
-    /// In the order of the desktop client's bar: what the text looks like, then
-    /// how it is emphasized, how its paragraphs are laid out, and what it holds.
-    private static let items: [Item] = [
-        .chooser(.paragraphStyle),
-        .chooser(.font),
-        .chooser(.size),
-        .separator,
-        .button(Button(.bold, symbol: "bold", label: L10n.Collab.bold)),
-        .button(Button(.italic, symbol: "italic", label: L10n.Collab.italic)),
-        .button(Button(.underline, symbol: "underline", label: L10n.Collab.underline)),
-        .button(Button(.strike, symbol: "strikethrough", label: L10n.Collab.strikethrough)),
-        .separator,
-        .chooser(.alignment),
-        .button(Button(.list("bullet"), symbol: "list.bullet", label: L10n.Collab.bulletList)),
-        .button(Button(.list("ordered"), symbol: "list.number", label: L10n.Collab.orderedList)),
-        .separator,
-        .button(Button(.link, symbol: "link", label: L10n.Collab.linkTitle)),
-        .button(Button(.image, symbol: "photo", label: L10n.Collab.insertImage)),
-        .button(Button(.clear, symbol: "textformat", label: L10n.Collab.clearFormat)),
-        .separator,
-        .button(Button(.undo, symbol: "arrow.uturn.backward", label: L10n.Collab.undo)),
-        .button(Button(.redo, symbol: "arrow.uturn.forward", label: L10n.Collab.redo))
+    private static let marks: [Button] = [
+        Button(.bold, symbols: "bold", label: L10n.Collab.bold),
+        Button(.italic, symbols: "italic", label: L10n.Collab.italic),
+        Button(.underline, symbols: "underline", label: L10n.Collab.underline),
+        Button(.strike, symbols: "strikethrough", label: L10n.Collab.strikethrough)
+    ]
+
+    private static let lists: [Button] = [
+        Button(.list("bullet"), symbols: "list.bullet", label: L10n.Collab.bulletList),
+        Button(.list("ordered"), symbols: "list.number", label: L10n.Collab.orderedList)
+    ]
+
+    private static let clear = Button(.clear, symbols: "eraser", "clear", label: L10n.Collab.clearFormat)
+
+    /// After the text format menu: how the text is emphasized, where there is
+    /// room, then how its paragraphs are laid out, what it holds, and its history.
+    private static let groups: [Group] = [
+        Group(buttons: Array(CollabFormatBar.marks.prefix(3)) + [CollabFormatBar.clear], isWideOnly: true),
+        Group(buttons: CollabFormatBar.lists),
+        Group(buttons: [Button(.link, symbols: "link", label: L10n.Collab.linkTitle),
+                        Button(.image, symbols: "photo", label: L10n.Collab.insertImage)]),
+        Group(buttons: [Button(.undo, symbols: "arrow.uturn.backward", label: L10n.Collab.undo),
+                        Button(.redo, symbols: "arrow.uturn.forward", label: L10n.Collab.redo)])
     ]
 }
