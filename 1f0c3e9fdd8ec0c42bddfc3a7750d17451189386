@@ -16,6 +16,24 @@
       "message": "[error] Line 130: 🔴 `showWideOnly(_:)` has inverted guard logic, so visibility updates are skipped exactly when the wide-only controls should toggle. Starting state is hidden (`showWideOnly(false)`), and when width becomes wide, `guard self.wideOnly.first?.isHidden \u003d\u003d isWide else { return }` returns early, leaving controls hidden permanently. This is a functional regression in the new layout behavior. Compare against the desired hidden state (`!isWide`) instead, e.g. `let shouldHide \u003d !isWide; guard self.wideOnly.first?.isHidden !\u003d shouldHide else { return }`, then apply `isHidden \u003d shouldHide`.",
       "revId": "1f0c3e9fdd8ec0c42bddfc3a7750d17451189386",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54981ae9_e5bf22e7",
+        "filename": "Ring/Ring/Features/Collab/CollabFormatBar.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-09T16:24:35Z",
+      "side": 1,
+      "message": "The guard isn\u0027t inverted. The target is isHidden \u003d\u003d !isWide, so an update is needed exactly when isHidden \u003d\u003d isWide, which is the\n  case the guard lets through.",
+      "parentUuid": "bfb56db9_f984108f",
+      "revId": "1f0c3e9fdd8ec0c42bddfc3a7750d17451189386",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
