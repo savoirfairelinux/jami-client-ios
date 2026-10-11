@@ -52,7 +52,6 @@ class SwarmInfoVM: ObservableObject {
     private var contactsSubscriptionsDisposeBag = DisposeBag()
 
     private let accountService: AccountsService
-    private let nameService: NameService
     let profileService: ProfilesService
     private let conversationService: ConversationsService
     private let callService: CallService
@@ -144,7 +143,6 @@ class SwarmInfoVM: ObservableObject {
 
         self.accountService = injectionBag.accountService
         self.conversationService = injectionBag.conversationsService
-        self.nameService = injectionBag.nameService
         self.profileService = injectionBag.profileService
         self.callService = injectionBag.callService
         self.destructiveActionExecutor = ConversationDestructiveActionExecutor(injectionBag: injectionBag)

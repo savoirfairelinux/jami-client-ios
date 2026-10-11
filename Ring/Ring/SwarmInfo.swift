@@ -29,9 +29,6 @@ protocol SwarmInfoProtocol {
     var participantsNames: BehaviorRelay<[String]> { get set }
     var participantsAvatars: BehaviorRelay<[Data]> { get set }
 
-    var avatarHeight: CGFloat { get set }
-    var avatarSpacing: CGFloat { get set }
-
     var finalTitle: BehaviorRelay<String> { get set }
     var participantsString: BehaviorRelay<String> { get set }
 
@@ -125,8 +122,6 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
     var participantsAvatars: BehaviorRelay<[Data]> = BehaviorRelay(value: [Data()])
     var conversationEnded: BehaviorRelay<Bool> = BehaviorRelay(value: false)
 
-    var avatarHeight: CGFloat = Constants.defaultAvatarSize
-    var avatarSpacing: CGFloat = 2
     lazy var id: String = {
         return conversation?.id ?? ""
     }()
@@ -158,7 +153,6 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
 
     private let nameService: NameService
     private let profileService: ProfilesService
-    private let contactsService: ContactsService
     private let accountsService: AccountsService
     private let requestsService: RequestsService
     private let accountId: String
@@ -170,11 +164,9 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
     private let stateScheduler = SerialDispatchQueueScheduler(qos: .userInitiated)
 
     // to get info during swarm creation
-    init(injectionBag: InjectionBag, accountId: String, avatarHeight: CGFloat = Constants.defaultAvatarSize) {
-        self.avatarHeight = avatarHeight
+    init(injectionBag: InjectionBag, accountId: String) {
         self.nameService = injectionBag.nameService
         self.profileService = injectionBag.profileService
-        self.contactsService = injectionBag.contactsService
         self.accountsService = injectionBag.accountService
         self.requestsService = injectionBag.requestsService
         self.accountId = accountId
@@ -203,8 +195,8 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
     }
 
     // to get info for existing swarm
-    convenience init(injectionBag: InjectionBag, conversation: ConversationModel, avatarHeight: CGFloat = Constants.defaultAvatarSize) {
-        self.init(injectionBag: injectionBag, accountId: conversation.accountId, avatarHeight: avatarHeight)
+    convenience init(injectionBag: InjectionBag, conversation: ConversationModel) {
+        self.init(injectionBag: injectionBag, accountId: conversation.accountId)
         self.conversation = conversation
         self.apply(conversation.info)
         conversation.infoChanges
