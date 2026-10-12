@@ -36,7 +36,7 @@ struct MessageBubbleView: View {
     var body: some View {
         VStack(alignment: .leading) {
             if model.messageDeleted {
-                MessageBubbleWithTimeWrapper(model: model) {
+                MessageBubbleWithTimeWrapper(model: model, requestMenu: requestMenu) {
                     Text(model.messageDeletedText)
                         .font(model.styling.secondaryFont)
                         .foregroundColor(model.editionColor)
@@ -77,6 +77,9 @@ struct MessageBubbleView: View {
         .conditionalModifier(AccessibilityActionModifier(actionName: ContextualMenuItem.deleteMessage.toString(), action: { model.contextMenuSelect(item: .deleteMessage) }), apply: model.menuItems.contains(.deleteMessage))
         .conditionalModifier(AccessibilityActionModifier(actionName: ContextualMenuItem.deleteFile.toString(), action: { model.contextMenuSelect(item: .deleteFile) }), apply: model.menuItems.contains(.deleteFile))
         .conditionalModifier(AccessibilityActionModifier(actionName: ContextualMenuItem.edit.toString(), action: { model.contextMenuSelect(item: .edit) }), apply: model.menuItems.contains(.edit))
+        .conditionalModifier(AccessibilityActionModifier(actionName: ContextualMenuItem.editHistory.toString(),
+                                                         action: { requestMenu(.editHistory) }),
+                             apply: model.menuItems.contains(.editHistory))
         .accessibilityAddTraits(.isButton)
     }
 
@@ -84,12 +87,12 @@ struct MessageBubbleView: View {
     private func textBubble<Content: View>(@ViewBuilder _ text: @escaping (_ minWidth: CGFloat?) -> Content) -> some View {
         if model.isHistory && model.hasBubbleBackground {
             ReplyBubbleContainer(model: model, reply: messageModel.replyTarget, layout: .text, onLongPress: receivedLongPress()) { minBubbleWidth in
-                MessageBubbleWithTimeWrapper(model: model) {
+                MessageBubbleWithTimeWrapper(model: model, requestMenu: requestMenu) {
                     text(minBubbleWidth.map { max(0, $0 - 2 * model.textInset) })
                 }
             }
         } else {
-            MessageBubbleWithTimeWrapper(model: model) {
+            MessageBubbleWithTimeWrapper(model: model, requestMenu: requestMenu) {
                 if model.isHistory {
                     VStack(alignment: model.isIncoming ? .leading : .trailing, spacing: 4) {
                         ReplyQuote(reply: messageModel.replyTarget, message: model, onLongPress: receivedLongPress())
@@ -204,11 +207,14 @@ struct MessageBubbleView: View {
     }
 
     private func receivedLongPress() -> (() -> Void) {
-        return {
-            if model.menuItems.isEmpty { return }
-            if suppressLongPress { return }
-            menuRequest = .actions
-        }
+        return { requestMenu(.actions) }
+    }
+
+    private func requestMenu(_ mode: ContextMenuMode) {
+        if model.menuItems.isEmpty { return }
+        if mode == .editHistory && !model.menuItems.contains(.editHistory) { return }
+        if suppressLongPress { return }
+        menuRequest = mode
     }
 }
 
@@ -216,10 +222,18 @@ struct MessageBubbleWithTimeWrapper<Content: View>: View {
     @ObservedObject var model: MessageContentVM
     @Environment(\.layoutDirection)
     private var layoutDirection
+    @ScaledMetric(relativeTo: .caption2)
+    private var editedFontSize = TimeLayout.editedFontSize
+    @ScaledMetric(relativeTo: .caption2)
+    private var editedChevronSize = TimeLayout.editedChevronSize
+    @ScaledMetric(relativeTo: .caption2)
+    private var editedRowHeight = TimeLayout.editedRowHeight
+    let requestMenu: (ContextMenuMode) -> Void
     let content: Content
 
-    init(model: MessageContentVM, @ViewBuilder content: () -> Content) {
+    init(model: MessageContentVM, requestMenu: @escaping (ContextMenuMode) -> Void, @ViewBuilder content: () -> Content) {
         self.model = model
+        self.requestMenu = requestMenu
         self.content = content()
     }
 
@@ -234,11 +248,27 @@ struct MessageBubbleWithTimeWrapper<Content: View>: View {
                 }
             }
         case .editedRow:
-            VStack(alignment: .leading, spacing: TimeLayout.editedSpacing) {
+            // The hidden copy reserves the footer's width so a short text keeps its leading edge.
+            VStack(alignment: .leading, spacing: TimeLayout.editedFooterTop) {
                 content
                 editingIndicator()
+                    .hidden()
             }
+            .overlay(alignment: .bottomLeading) {
+                editedLabel()
+            }
+            .overlay(alignment: .bottomTrailing) {
+                MessageTimeView(text: model.timeText, color: model.timeColor)
+                    .frame(height: editedRowHeight)
+            }
+            .padding(.bottom, max(0, TimeLayout.editedFooterBottom - model.textVerticalInset))
             .applyMessageStyle(model: model)
+            .overlay(alignment: .bottom) {
+                Color.clear
+                    .frame(height: TimeLayout.editedFooterTop + editedRowHeight + TimeLayout.editedFooterBottom)
+                    .messageGesture(onLongPress: { requestMenu(.actions) },
+                                    onTap: { _, _ in requestMenu(.editHistory) })
+            }
         case .belowText:
             VStack(alignment: .trailing, spacing: TimeLayout.editedSpacing) {
                 content
@@ -252,19 +282,24 @@ struct MessageBubbleWithTimeWrapper<Content: View>: View {
     }
 
     private func editingIndicator() -> some View {
-        HStack(spacing: 2) {
-            Image(systemName: "pencil")
-                .resizable()
-                .font(Font.body.weight(.bold))
-                .foregroundColor(model.editionColor)
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 15, height: 12)
-            Text(model.editIndicator)
-                .font(.footnote)
-                .foregroundColor(model.editionColor)
+        HStack(spacing: TimeLayout.editedTimeSpacing) {
+            editedLabel()
             MessageTimeView(text: model.timeText, color: model.timeColor)
-                .padding(.leading, TimeLayout.editedSpacing)
         }
+        .frame(height: editedRowHeight)
+    }
+
+    private func editedLabel() -> some View {
+        // Stronger than the time and joined to its chevron, so it reads as the tappable part.
+        (Text(model.editIndicator + "\u{2009}")
+            .font(.system(size: editedFontSize, weight: .medium))
+         + Text(Image(systemName: "chevron.forward"))
+            .font(.system(size: editedChevronSize, weight: .bold)))
+            .foregroundColor(model.styling.textColor.opacity(TimeLayout.editedOpacity))
+            .lineLimit(1)
+            .fixedSize()
+            .allowsHitTesting(false)
+            .frame(height: editedRowHeight)
     }
 }
 
@@ -287,6 +322,13 @@ extension View {
 private enum TimeLayout {
     static let outsideSpacing: CGFloat = 2
     static let editedSpacing: CGFloat = 4
+    static let editedFooterTop: CGFloat = 12
+    static let editedFooterBottom: CGFloat = 12
+    static let editedRowHeight: CGFloat = 13
+    static let editedTimeSpacing: CGFloat = 10
+    static let editedFontSize: CGFloat = 11
+    static let editedChevronSize: CGFloat = 8
+    static let editedOpacity: CGFloat = 0.75
     static let capsuleInset: CGFloat = 8
 }
 

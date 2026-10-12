@@ -197,6 +197,10 @@
 "conversation.replyQuoteUnavailable" = "Message not loaded";
 "conversation.yourself" = "You";
 "conversation.edited" = "Edited";
+"conversation.editHistory" = "Edit history";
+"conversation.editHistoryCurrent" = "Current";
+"conversation.editHistoryEdit" = "Edit %d";
+"conversation.editHistoryOriginal" = "Original";
 "conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 // An ellipsis is not directly shown in the following typing indicator strings.
@@ -685,6 +689,9 @@
 "accessibility.messageReactionIncludingYou" = "%@, including you";
 "accessibility.messageReactionsMore" = "%d more";
 "accessibility.removeReaction" = "Remove %@";
+"accessibility.editHistoryAdded" = "Added: %@";
+"accessibility.editHistoryCopied" = "Copied";
+"accessibility.editHistoryRemoved" = "Removed: %@";
 "accessibility.scrollToLatestMessage" = "Scroll to latest message";
 "accessibility.newMessagesCount" = "%d new messages";
 "accessibility.oneNewMessage" = "1 new message";

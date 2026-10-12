@@ -188,7 +188,7 @@ struct MessageData {
     var totalSize: Int = 0
     var parents = [String]()
     var reactions = Set<MessageAction>()
-    var editions = Set<MessageAction>()
+    var editions = [MessageAction]()
     var statusForParticipant = [String: MessageStatus]()
     var accessibilityLabelValue: String = ""
     var tid: String = ""
@@ -210,9 +210,7 @@ struct MessageData {
         for reaction in swarmMessage.reactions {
             self.reactions.insert(MessageAction(withInfo: reaction))
         }
-        for edition in swarmMessage.editions {
-            self.editions.insert(MessageAction(withInfo: edition))
-        }
+        self.editions = swarmMessage.editions.map { MessageAction(withInfo: $0) }
 
         self.updateStatus(with: swarmMessage, localJamiId: localJamiId)
     }
@@ -399,15 +397,12 @@ struct MessageData {
     }
 
     mutating func messageUpdated(message: SwarmMessageWrap, localJamiId: String) {
-        self.editions = Set<MessageAction>()
         self.reactions = Set<MessageAction>()
         self.updateFrom(info: message.body)
         for reaction in message.reactions {
             self.reactions.insert(MessageAction(withInfo: reaction))
         }
-        for edition in message.editions {
-            self.editions.insert(MessageAction(withInfo: edition))
-        }
+        self.editions = message.editions.map { MessageAction(withInfo: $0) }
         self.updateStatus(with: message, localJamiId: localJamiId)
     }
 
