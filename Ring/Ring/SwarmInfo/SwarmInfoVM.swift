@@ -30,7 +30,7 @@ class SwarmInfoVM: ObservableObject {
     @Published var description: String = ""
 
     @Published var finalColor: String = UIColor.defaultSwarmColorHex
-    @Published var selectedColor: String = String()
+    @Published private(set) var selectedColor: String = String()
     @Published private(set) var isAdmin = false
     @Published private(set) var members = [ParticipantInfo]()
 
@@ -224,6 +224,8 @@ class SwarmInfoVM: ObservableObject {
     }
 
     func updateSwarmColor(selectedColor: String) {
+        guard selectedColor != self.selectedColor else { return }
+        self.selectedColor = selectedColor
         guard var prefsInfo = conversationService.getConversationPreferences(accountId: conversation.accountId, conversationId: conversation.id) else { return }
 
         prefsInfo[ConversationPreferenceAttributes.color.rawValue] = selectedColor
