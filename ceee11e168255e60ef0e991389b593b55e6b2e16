@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d185155_ebd64fbe",
+        "filename": "Ring/Ring/Resources/es.lproj/Localizable.strings",
+        "patchSetId": 1
+      },
+      "lineNbr": 806,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-12T07:24:22Z",
+      "side": 1,
+      "message": "[warning] Line 806: 🟡 The newly added collaboration UI keys (`collab.textFormat`, `collab.paragraphStyle`, `collab.normalText`, `collab.font`, `collab.defaultFont`, `collab.unavailableFont`, `collab.defaultSize`) are still English literals in this locale, and the same pattern appears across many other touched `*.lproj/Localizable.strings` files. For a l10n bump, this introduces visible untranslated UI in non-English locales. Please provide locale translations for these new keys (or intentionally omit locale entries so fallback behavior is explicit and tracked).",
+      "revId": "ceee11e168255e60ef0e991389b593b55e6b2e16",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
