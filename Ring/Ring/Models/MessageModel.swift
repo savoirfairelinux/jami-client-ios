@@ -116,7 +116,7 @@ enum ContactAction: String {
     case add
     case remove
     case join
-    case banned
+    case ban
     case unban
 
     func getInteractionString(name: String, isIncomig: Bool) -> String {
@@ -128,7 +128,7 @@ enum ContactAction: String {
             return isIncomig ? L10n.GeneratedMessage.invitationAccepted(name) : L10n.GeneratedMessage.youJoined
         case .remove:
             return L10n.GeneratedMessage.contactLeftConversation(name)
-        case.banned:
+        case .ban:
             return L10n.GeneratedMessage.contactBlocked(name)
         case .unban:
             return L10n.GeneratedMessage.contactUnblocked(name)
