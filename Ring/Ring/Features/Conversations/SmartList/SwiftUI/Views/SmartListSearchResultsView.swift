@@ -205,7 +205,7 @@ struct SmartListSearchResultsView: View {
         }
     }
 
-    private func blockedContactsView(conversation: ConversationViewModel) -> some View {
+    private func blockedContactsView(conversation: ConversationRowVM) -> some View {
         VStack(alignment: .leading, spacing: Layout.verticalPadding) {
             Text(L10n.AccountPage.blockedContacts)
                 .fontWeight(.semibold)

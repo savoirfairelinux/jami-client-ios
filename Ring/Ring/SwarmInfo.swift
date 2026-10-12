@@ -99,7 +99,8 @@ class ParticipantInfo: Equatable, Hashable {
     }
 
     static func loaded(jamiId: String, role: ParticipantRole, accountId: String, isLocal: Bool,
-                       profileService: ProfilesService, nameService: NameService) -> ParticipantInfo? {
+                       injectionBag: InjectionBag) -> ParticipantInfo? {
+        let profileService = injectionBag.profileService
         let participantInfo = ParticipantInfo(jamiId: jamiId, role: role, profileService: profileService)
         let uri = JamiURI.init(schema: .ring, infoHash: jamiId)
         guard let uriString = uri.uriString else { return nil }
@@ -116,7 +117,7 @@ class ParticipantInfo: Equatable, Hashable {
             } onError: { _ in
             }
             .disposed(by: participantInfo.disposeBag)
-        participantInfo.lookupName(nameService: nameService, accountId: accountId)
+        participantInfo.lookupName(nameService: injectionBag.nameService, accountId: accountId)
         return participantInfo
     }
 
@@ -131,7 +132,6 @@ class ParticipantInfo: Equatable, Hashable {
     }
 }
 
-// swiftlint:disable type_body_length
 class SwarmInfo: SwarmInfoProtocol, Identifiable {
     let avatarData: BehaviorRelay<Data?> = BehaviorRelay(value: nil)
     let title = BehaviorRelay(value: "")
@@ -170,8 +170,7 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
     }
     let conversation: ConversationModel
 
-    private let nameService: NameService
-    private let profileService: ProfilesService
+    private let injectionBag: InjectionBag
     private let accountId: String
     private let localJamiId: String?
     private let disposeBag = DisposeBag()
@@ -181,8 +180,7 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
     private let stateScheduler = SerialDispatchQueueScheduler(qos: .userInitiated)
 
     init(injectionBag: InjectionBag, conversation: ConversationModel) {
-        self.nameService = injectionBag.nameService
-        self.profileService = injectionBag.profileService
+        self.injectionBag = injectionBag
         self.conversation = conversation
         self.accountId = conversation.accountId
         self.localJamiId = injectionBag.accountService.getAccount(fromAccountId: conversation.accountId)?.jamiId
@@ -354,7 +352,7 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
     private func createParticipant(jamiId: String, role: ParticipantRole) -> ParticipantInfo? {
         return ParticipantInfo.loaded(jamiId: jamiId, role: role, accountId: accountId,
                                       isLocal: jamiId == localJamiId,
-                                      profileService: profileService, nameService: nameService)
+                                      injectionBag: injectionBag)
     }
 
     private func insertAndSortParticipants(participants: [ParticipantInfo]) {

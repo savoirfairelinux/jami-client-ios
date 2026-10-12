@@ -21,6 +21,7 @@ import RxSwift
 import RxCocoa
 import SwiftyBeaver
 import SwiftUI
+import Combine
 
 enum MessageSequencing {
     case singleMessage
@@ -81,6 +82,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
     internal let disposeBag = DisposeBag()
 
     private var conversationBindingsDisposeBag = DisposeBag()
+    private var cancellables = Set<AnyCancellable>()
     private var messageUnreadCount = 0
     private var documentUnreadCount = 0
 
@@ -229,25 +231,27 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
             .disposed(by: self.disposeBag)
     }
 
-    private func setConversation(_ conversation: ConversationModel) {
-        self.conversation = conversation
-    }
-
-    convenience init(with injectionBag: InjectionBag, conversation: ConversationModel, user: JamiSearchViewModel.JamsUserSearchModel) {
+    convenience init(with injectionBag: InjectionBag, row: ConversationRowVM) {
         self.init(with: injectionBag)
-        self.userName.accept(user.username)
-        self.displayName.accept(user.firstName + " " + user.lastName)
-        self.profileImageData.accept(user.profilePicture)
-        if self.accountService.getAccount(fromAccountId: conversation.accountId)?.jamiId != user.jamiId,
-           let uri = JamiURI(schema: .ring, infoHash: user.jamiId).uriString {
-            let alias = (user.firstName + " " + user.lastName).simplified()
-            let profile = Profile(uri: uri,
-                                  alias: alias.isEmpty ? nil : alias,
-                                  photo: user.profilePicture?.base64EncodedString(),
-                                  type: ProfileType.ring.rawValue)
-            self.swiftUIModel.temporaryPeerProfile = profile.isEmpty ? nil : profile
-        }
-        self.setConversation(conversation) // required to trigger the didSet
+        self.userName.accept(row.userName.value)
+        self.displayName.accept(row.displayName.value)
+        self.profileImageData.accept(row.profileImageData.value)
+        self.swiftUIModel.isTemporary = row.isTemporary
+        self.swiftUIModel.temporaryPeerProfile = row.temporaryPeerProfile
+        self.swiftUIModel.$isTemporary
+            .dropFirst()
+            .sink { [weak self, weak row] isTemporary in
+                row?.isTemporary = isTemporary
+                row?.temporaryPeerProfile = self?.swiftUIModel.temporaryPeerProfile
+            }
+            .store(in: &self.cancellables)
+        row.conversationChanges
+            .compactMap { $0 }
+            .distinctUntilChanged { $0 === $1 }
+            .subscribe(onNext: { [weak self] conversation in
+                self?.conversation = conversation
+            })
+            .disposed(by: self.disposeBag)
     }
 
     var swiftUIModel: MessagesListVM

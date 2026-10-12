@@ -292,55 +292,6 @@ public struct SwarmInfoView: View, StateEmittingView {
         }
     }
 
-    private var profileActions: [SwarmProfileAction] {
-        SwarmProfileAction.available(canCall: viewModel.callTarget != nil,
-                                     canEdit: viewModel.canEditProfile,
-                                     canAddParticipants: viewModel.canAddParticipants)
-    }
-
-    private var profileActionButtons: some View {
-        HStack(spacing: Layout.generalMargin) {
-            ForEach(profileActions, id: \.self) { action in
-                profileActionButton(action)
-            }
-        }
-        .padding(.top, Layout.callButtonsMargin)
-    }
-
-    private func profileActionButton(_ action: SwarmProfileAction) -> some View {
-        Button(action: { perform(action) }) {
-            VStack(spacing: Layout.callButtonsMargin) {
-                Image(systemName: action.systemImage)
-                    .font(.system(size: 20, weight: .semibold))
-                    .foregroundStyle(buttonTint)
-                    .frame(width: Layout.callButtonSize, height: Layout.callButtonSize)
-                    .background(RoundedRectangle(cornerRadius: Layout.verticalMargin).fill(callButtonBackground))
-
-                Text(action.title)
-                    .font(.caption)
-                    .foregroundStyle(headerForeground)
-                    .lineLimit(1)
-            }
-        }
-        .buttonStyle(.plain)
-        .accessibilityLabel(action.accessibilityLabel(for: viewModel.title,
-                                                      isGroup: viewModel.isGroupProfile))
-        .accessibilityHint(action.accessibilityHint(isGroup: viewModel.isGroupProfile))
-    }
-
-    private func perform(_ action: SwarmProfileAction) {
-        switch action {
-        case .audioCall:
-            placeAudioCall()
-        case .videoCall:
-            placeVideoCall()
-        case .editProfile:
-            editProfile()
-        case .addParticipant:
-            inviteParticipants()
-        }
-    }
-
     private var avatarView: some View {
         Group {
             if provider.canExpand {
@@ -356,10 +307,9 @@ public struct SwarmInfoView: View, StateEmittingView {
             provider: viewModel.provider,
             isExpanded: isAvatarExpanded,
             isGroup: viewModel.isGroupProfile,
-            onToggle: { setAvatarExpanded(!isAvatarExpanded) }
-        ) {
-            scrimmedInfo
-        }
+            onToggle: { setAvatarExpanded(!isAvatarExpanded) },
+            bottomOverlay: { scrimmedInfo }
+        )
     }
 
     private var avatarImage: some View {
@@ -468,6 +418,61 @@ public struct SwarmInfoView: View, StateEmittingView {
             Color.clear
                 .frame(height: Layout.floatingButtonClearance)
                 .accessibilityHidden(true)
+        }
+    }
+}
+
+// MARK: - Profile Actions
+
+private extension SwarmInfoView {
+    var profileActions: [SwarmProfileAction] {
+        SwarmProfileAction.available(canCall: viewModel.callTarget != nil,
+                                     canEdit: viewModel.canEditProfile,
+                                     canAddParticipants: viewModel.canAddParticipants)
+    }
+
+    var profileActionButtons: some View {
+        HStack(spacing: Layout.generalMargin) {
+            ForEach(profileActions, id: \.self) { action in
+                profileActionButton(action)
+            }
+        }
+        .padding(.top, Layout.callButtonsMargin)
+    }
+
+    func profileActionButton(_ action: SwarmProfileAction) -> some View {
+        Button {
+            perform(action)
+        } label: {
+            VStack(spacing: Layout.callButtonsMargin) {
+                Image(systemName: action.systemImage)
+                    .font(.system(size: 20, weight: .semibold))
+                    .foregroundStyle(buttonTint)
+                    .frame(width: Layout.callButtonSize, height: Layout.callButtonSize)
+                    .background(RoundedRectangle(cornerRadius: Layout.verticalMargin).fill(callButtonBackground))
+
+                Text(action.title)
+                    .font(.caption)
+                    .foregroundStyle(headerForeground)
+                    .lineLimit(1)
+            }
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(action.accessibilityLabel(for: viewModel.title,
+                                                      isGroup: viewModel.isGroupProfile))
+        .accessibilityHint(action.accessibilityHint(isGroup: viewModel.isGroupProfile))
+    }
+
+    func perform(_ action: SwarmProfileAction) {
+        switch action {
+        case .audioCall:
+            placeAudioCall()
+        case .videoCall:
+            placeVideoCall()
+        case .editProfile:
+            editProfile()
+        case .addParticipant:
+            inviteParticipants()
         }
     }
 }

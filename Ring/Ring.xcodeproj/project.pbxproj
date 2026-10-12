@@ -223,6 +223,7 @@
 		26001CD62D792494009A8E23 /* Reusable.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB395288704790023878C /* Reusable.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		26069B6724C9FCE8002361A3 /* ObjCHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 26069B6624C9FCE8002361A3 /* ObjCHandler.m */; };
 		260717702CAD901D00494875 /* ConversationDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2607176F2CAD901D00494875 /* ConversationDataSource.swift */; };
+		501BD34220906BB4ED10657C /* ConversationRowVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E28423D964515DF1212415 /* ConversationRowVM.swift */; };
 		260717722CADB36A00494875 /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260717712CADB36A00494875 /* SettingsCoordinator.swift */; };
 		26074FDB24F7FFC100374570 /* MediaPreviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26074FDA24F7FFC100374570 /* MediaPreviewModel.swift */; };
 		260AE62529B65A4B00D66D5E /* ContactsUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260AE62429B65A4B00D66D5E /* ContactsUtils.swift */; };
@@ -857,6 +858,7 @@
 		26069B6524C9FCE8002361A3 /* ObjCHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjCHandler.h; sourceTree = "<group>"; };
 		26069B6624C9FCE8002361A3 /* ObjCHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjCHandler.m; sourceTree = "<group>"; };
 		2607176F2CAD901D00494875 /* ConversationDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConversationDataSource.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Models/ConversationDataSource.swift; sourceTree = SOURCE_ROOT; };
+		16E28423D964515DF1212415 /* ConversationRowVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConversationRowVM.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Models/ConversationRowVM.swift; sourceTree = SOURCE_ROOT; };
 		260717712CADB36A00494875 /* SettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinator.swift; sourceTree = "<group>"; };
 		26074FDA24F7FFC100374570 /* MediaPreviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPreviewModel.swift; sourceTree = "<group>"; };
 		260AE62429B65A4B00D66D5E /* ContactsUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsUtils.swift; sourceTree = "<group>"; };
@@ -3467,6 +3469,7 @@
 				26E081232BC07824001B4C18 /* RequestsViewModel.swift */,
 				26600A982BEA855900EFCFD1 /* ThreadSafeArray.swift */,
 				2607176F2CAD901D00494875 /* ConversationDataSource.swift */,
+				16E28423D964515DF1212415 /* ConversationRowVM.swift */,
 				265B75A02DCBBB0500CB1622 /* AccountMigrationModel.swift */,
 			);
 			path = Models;
@@ -4369,6 +4372,7 @@
 				1A2D189A1F2642C000B2C785 /* NotificationCenter+Ring.swift in Sources */,
 				1DF75AC4296E0A940055EA87 /* View+Helpers.swift in Sources */,
 				260717702CAD901D00494875 /* ConversationDataSource.swift in Sources */,
+				501BD34220906BB4ED10657C /* ConversationRowVM.swift in Sources */,
 				BB06BD8329D492AA0064F0FC /* LocationSharingVM.swift in Sources */,
 				2637E5632DDE274E00ACCF91 /* CallBannerView.swift in Sources */,
 				0E44B62F202B9DE40060F71B /* LocalNotificationsHelper.swift in Sources */,

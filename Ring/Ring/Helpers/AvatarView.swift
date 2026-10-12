@@ -309,7 +309,8 @@ extension AvatarProvider {
 
 struct AvatarSwiftUIView: View {
     @ObservedObject var source: AvatarProvider
-    @Environment(\.colorScheme) var colorScheme
+    @Environment(\.colorScheme)
+    var colorScheme
     var sizeOverride: CGFloat?
 
     private var effectiveSize: CGFloat { sizeOverride ?? source.size.points }

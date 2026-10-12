@@ -26,7 +26,7 @@ import RxSwift
 
 final class JamiSearchViewModelTests: XCTestCase {
 
-    var conversationVM: ConversationViewModel!
+    var conversationVM: ConversationRowVM!
     var injectionBag: InjectionBag!
     var dataSource: TestableFilteredDataSource!
     var searchViewModel: JamiSearchViewModel!
@@ -80,7 +80,7 @@ final class JamiSearchViewModelTests: XCTestCase {
                                     withSystemService: systemService,
                                     withPeerSharingService: TestPeerSharingFactory.createService(),
                                     withCollaborationService: collaborationService)
-        conversationVM = ConversationViewModel(with: injectionBag)
+        conversationVM = ConversationRowVM(with: injectionBag)
         conversationVM.conversation = ConversationModel(type: .oneToOne)
         dataSource = TestableFilteredDataSource(conversations: [conversationVM], injectionBag: injectionBag)
         searchViewModel = JamiSearchViewModel(with: injectionBag, source: dataSource, searchOnlyExistingConversations: false)
@@ -108,16 +108,6 @@ final class JamiSearchViewModelTests: XCTestCase {
         participant.registeredName.accept(name)
         let swarmInfo = TestableSwarmInfo(participants: [participant], containsSearchQuery: containsSearchQuery, hasParticipantWithRegisteredName: hasParticipantWithRegisteredName)
         return swarmInfo
-    }
-
-    func createSipAccount() -> AccountModel {
-        let account = AccountModel(withAccountId: "sip-account")
-        account.details = AccountConfigModel(withDetails: [
-            ConfigKey.accountType.rawValue: AccountType.sip.rawValue,
-            ConfigKey.accountUsername.rawValue: "user",
-            ConfigKey.accountHostname.rawValue: "sip.example.org"
-        ])
-        return account
     }
 
     func testDocumentNotificationUpdatesConversationUnread() {
@@ -334,7 +324,7 @@ final class JamiSearchViewModelTests: XCTestCase {
         let account = createSipAccount()
         injectionBag.accountService.setAccountList([account])
         let creationExpectation = expectation(description: "SIP temporary conversation created")
-        var temporaryConversation: ConversationViewModel?
+        var temporaryConversation: ConversationRowVM?
         let disposable = searchViewModel.temporaryConversation
             .skip(1)
             .compactMap { $0 }
@@ -359,7 +349,7 @@ final class JamiSearchViewModelTests: XCTestCase {
     func testTemporaryConversationExist_True() {
         // Arrange
         let conversation = self.createSwarmConversation(jamiId: jamiId1, type: .oneToOne)
-        conversationVM = ConversationViewModel(with: injectionBag)
+        conversationVM = ConversationRowVM(with: injectionBag)
         conversationVM.conversation = conversation
         searchViewModel.temporaryConversation.accept(conversationVM)
         // Act
@@ -371,7 +361,7 @@ final class JamiSearchViewModelTests: XCTestCase {
     func testTemporaryConversationExist_False() {
         // Arrange
         let conversation = self.createSwarmConversation(jamiId: jamiId1, type: .oneToOne)
-        conversationVM = ConversationViewModel(with: injectionBag)
+        conversationVM = ConversationRowVM(with: injectionBag)
         conversationVM.conversation = conversation
         searchViewModel.temporaryConversation.accept(conversationVM)
         // Act
@@ -422,5 +412,17 @@ final class JamiSearchViewModelTests: XCTestCase {
                                                 organization: "org",
                                                 jamiId: jamiId,
                                                 profilePicture: Data([0x01]))
+    }
+}
+
+private extension JamiSearchViewModelTests {
+    func createSipAccount() -> AccountModel {
+        let account = AccountModel(withAccountId: "sip-account")
+        account.details = AccountConfigModel(withDetails: [
+            ConfigKey.accountType.rawValue: AccountType.sip.rawValue,
+            ConfigKey.accountUsername.rawValue: "user",
+            ConfigKey.accountHostname.rawValue: "sip.example.org"
+        ])
+        return account
     }
 }

@@ -148,7 +148,7 @@ class ConversationsCoordinator: RootCoordinator, StateableResponsive, Conversati
                        let navigationController = self.rootViewController as? UINavigationController,
                        let conversationModel = self.getConversationViewModelForId(conversationId: conversationId),
                        let conversationController = navigationController.topViewController as? ConversationViewController,
-                       conversationController.viewModel == conversationModel {
+                       conversationController.viewModel.conversation == conversationModel.conversation {
                         return
                     }
                 }
@@ -186,7 +186,6 @@ class ConversationsCoordinator: RootCoordinator, StateableResponsive, Conversati
     }
 }
 // swiftlint:enable cyclomatic_complexity
-// swiftlint:enable type_body_length
 
 // MARK: - State
 extension ConversationsCoordinator {
@@ -293,24 +292,15 @@ extension ConversationsCoordinator {
             return
         }
         if let model = getConversationViewModelForParticipant(jamiId: uriString) {
-            reloadAndShowConversation(model)
+            self.showConversation(withConversationViewModel: model, withAnimation: false)
         }
     }
 
     func openConversationFromNotification(conversationId: String, accountId: String) {
         self.popToSmartList()
         if let model = getConversationViewModelForId(conversationId: conversationId) {
-            reloadAndShowConversation(model)
+            self.showConversation(withConversationViewModel: model, withAnimation: false)
         }
-    }
-
-    private func reloadAndShowConversation(_ model: ConversationViewModel) {
-        /*
-         Messages will be reloaded. Remove existing messages
-         to ensure the message order is correct.
-         */
-        model.cleanMessages()
-        self.showConversation(withConversationViewModel: model, withAnimation: false)
     }
 
     func openNewConversation(jamiId: String) {
@@ -323,7 +313,7 @@ extension ConversationsCoordinator {
         let conversation = ConversationModel(withParticipantUri: uri,
                                              accountId: account.id,
                                              type: .oneToOne)
-        let newConversation = ConversationViewModel(with: self.injectionBag)
+        let newConversation = ConversationRowVM(with: self.injectionBag)
         newConversation.conversation = conversation
         self.showConversation(withConversationViewModel: newConversation)
     }
@@ -353,7 +343,7 @@ extension ConversationsCoordinator {
         self.showConversation(withConversationViewModel: model, withAnimation: true)
     }
 
-    private func conversationViewModel(for route: CallConversationRoute) -> ConversationViewModel? {
+    private func conversationViewModel(for route: CallConversationRoute) -> ConversationRowVM? {
         let models = conversationsSource.conversationViewModels
             .filter { $0.conversation.accountId == route.accountId }
         if let conversationId = route.conversationId, !conversationId.isEmpty {
@@ -395,13 +385,13 @@ extension ConversationsCoordinator {
         self.openConversation(conversationId: conversationModel.id, accountId: conversationModel.accountId, shouldOpenSmarList: true, withAnimation: true)
     }
 
-    func getConversationViewModelForParticipant(jamiId: String) -> ConversationViewModel? {
+    func getConversationViewModelForParticipant(jamiId: String) -> ConversationRowVM? {
         return self.conversationsSource.conversationViewModels.first(where: { model in
             model.conversation.isCoredialog() && model.conversation.getParticipants().first?.jamiId == jamiId
         })
     }
 
-    func getConversationViewModelForId(conversationId: String) -> ConversationViewModel? {
+    func getConversationViewModelForId(conversationId: String) -> ConversationRowVM? {
         return self.conversationsSource.conversationViewModels.first(where: { model in
             model.conversation.id == conversationId
         })
@@ -443,7 +433,7 @@ extension ConversationsCoordinator {
         }
     }
 
-    private func findConversationForOutgoingCall(contactRingId: String, account: AccountModel) -> ConversationViewModel? {
+    private func findConversationForOutgoingCall(contactRingId: String, account: AccountModel) -> ConversationRowVM? {
         if let call = ActiveCall(contactRingId),
            let conversation = getConversationViewModelForId(conversationId: call.conversationId) {
             return conversation

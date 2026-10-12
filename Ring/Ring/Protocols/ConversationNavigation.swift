@@ -25,7 +25,7 @@ import RxRelay
 enum ConversationState: State {
     case startCall(contactRingId: String, userName: String)
     case startAudioCall(contactRingId: String, userName: String)
-    case conversationDetail(conversationViewModel: ConversationViewModel)
+    case conversationDetail(conversationViewModel: ConversationRowVM)
     case contactDetail(conversationViewModel: ConversationModel)
     case qrCode
     case createSwarm(onCreated: ((_ conversationId: String) -> Void)?)
@@ -64,7 +64,6 @@ protocol ConversationNavigation: AnyObject {
 
 extension ConversationNavigation where Self: Coordinator, Self: StateableResponsive {
 
-    // swiftlint:disable cyclomatic_complexity
     func callbackPlaceCall() {
         self.stateSubject
             .subscribe(onNext: { [weak self] (state) in
@@ -146,16 +145,17 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                      lockWhilePresenting: VCType.contact.rawValue)
     }
 
-    func showConversation (withConversationViewModel conversationViewModel: ConversationViewModel, withAnimation: Bool = true) {
+    func showConversation (withConversationViewModel conversationViewModel: ConversationRowVM, withAnimation: Bool = true) {
         if let flag = self.presentingVC[VCType.conversation.rawValue], flag {
             return
         }
         self.presentingVC[VCType.conversation.rawValue] = true
-        let conversationHostingVC = ConversationViewController(viewModel: conversationViewModel)
+        let screenViewModel = ConversationViewModel(with: self.injectionBag, row: conversationViewModel)
+        let conversationHostingVC = ConversationViewController(viewModel: screenViewModel)
         self.present(viewController: conversationHostingVC,
                      withStyle: .push,
                      withAnimation: withAnimation,
-                     withStateable: conversationViewModel,
+                     withStateable: screenViewModel,
                      lockWhilePresenting: VCType.conversation.rawValue)
     }
 

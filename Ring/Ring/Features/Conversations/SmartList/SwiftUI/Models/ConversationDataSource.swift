@@ -22,8 +22,8 @@ import RxSwift
 import RxRelay
 
 class ConversationDataSource: ObservableObject {
-    @Published var conversationViewModels = [ConversationViewModel]()
-    var blockedConversation = [ConversationViewModel]()
+    @Published var conversationViewModels = [ConversationRowVM]()
+    var blockedConversation = [ConversationRowVM]()
     let conversationsService: ConversationsService
     let contactsService: ContactsService
     let accountsService: AccountsService
@@ -32,7 +32,7 @@ class ConversationDataSource: ObservableObject {
 
     var onNewConversationViewModelCreated: ((ConversationModel) -> Void)?
     var onConversationRestored: ((ConversationModel) -> Void)?
-    var getTemporaryConversation: ((ConversationModel) -> ConversationViewModel?)?
+    var getTemporaryConversation: ((ConversationModel) -> ConversationRowVM?)?
 
     init(with injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
@@ -55,15 +55,15 @@ class ConversationDataSource: ObservableObject {
             .disposed(by: disposeBag)
     }
 
-    private func mapConversationsToViewModels(_ conversations: [ConversationModel]) -> [ConversationViewModel] {
-        var viewModelsByConversation = [ObjectIdentifier: ConversationViewModel]()
+    private func mapConversationsToViewModels(_ conversations: [ConversationModel]) -> [ConversationRowVM] {
+        var viewModelsByConversation = [ObjectIdentifier: ConversationRowVM]()
         for viewModel in conversationViewModels {
             if let conversation = viewModel.conversation {
                 viewModelsByConversation[ObjectIdentifier(conversation)] = viewModel
             }
         }
         let bannedContacts = Set(contactsService.contacts.value.filter { $0.banned }.map { $0.hash })
-        return conversations.compactMap { conversationModel -> ConversationViewModel? in
+        return conversations.compactMap { conversationModel -> ConversationRowVM? in
             let isBlocked = isConversationWithBlockedContact(conversationModel, bannedContacts: bannedContacts)
             if isBlocked,
                let existing = blockedConversation.first(where: { $0.conversation == conversationModel }) {
@@ -88,7 +88,7 @@ class ConversationDataSource: ObservableObject {
         }
     }
 
-    private func createOrRetrieveViewModel(for conversationModel: ConversationModel, isBlocked: Bool) -> ConversationViewModel? {
+    private func createOrRetrieveViewModel(for conversationModel: ConversationModel, isBlocked: Bool) -> ConversationRowVM? {
         if let viewModel = conversationViewModels.first(where: { $0.conversation == conversationModel }) {
             viewModel.conversation = conversationModel
             return viewModel
@@ -106,12 +106,12 @@ class ConversationDataSource: ObservableObject {
             return tempConversation
         }
 
-        let newViewModel = ConversationViewModel(with: injectionBag)
+        let newViewModel = ConversationRowVM(with: injectionBag)
         newViewModel.conversation = conversationModel
         return newViewModel
     }
 
-    func restoreBlockedConversation(jamiId: String) -> ConversationViewModel? {
+    func restoreBlockedConversation(jamiId: String) -> ConversationRowVM? {
         guard let blockedIndex = blockedConversation.firstIndex(where: { $0.isCoreConversationWith(jamiId: jamiId) }) else {
             return nil
         }
@@ -193,7 +193,7 @@ class ConversationDataSource: ObservableObject {
             if self.blockedConversation.contains(where: { $0.isCoreConversationWith(jamiId: jamiId) }) { return }
             // If not, check if the conversation exists in conversationsService
             if let conversationModel = self.conversationsService.getConversationForParticipant(jamiId: jamiId, accountId: accountId) {
-                let newViewModel = ConversationViewModel(with: self.injectionBag)
+                let newViewModel = ConversationRowVM(with: self.injectionBag)
                 newViewModel.conversation = conversationModel
                 self.blockedConversation.append(newViewModel)
             }

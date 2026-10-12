@@ -53,16 +53,16 @@ class ConversationsViewModel: ObservableObject {
     }
 
     // temporary conversation for jami or sip
-    @Published var temporaryConversation: ConversationViewModel? {
+    @Published var temporaryConversation: ConversationRowVM? {
         didSet { updateSearchStatusIfNeeded() }
     }
     // jams search  result
-    @Published var jamsSearchResult = [ConversationViewModel]() {
+    @Published var jamsSearchResult = [ConversationRowVM]() {
         didSet { updateSearchStatusIfNeeded() }
     }
 
     // conversation for blocked contact
-    @Published var blockedConversation: ConversationViewModel? {
+    @Published var blockedConversation: ConversationRowVM? {
         didSet { updateSearchStatusIfNeeded() }
     }
     @Published var publicDirectoryTitle = L10n.Smartlist.results
@@ -75,7 +75,7 @@ class ConversationsViewModel: ObservableObject {
 
     private let conversationsSource: ConversationDataSource
 
-    @Published var filteredConversations: [ConversationViewModel] = []
+    @Published var filteredConversations: [ConversationRowVM] = []
 
     /// Identity of the conversations `List`. Changing this (on account switch)
     /// forces SwiftUI to discard and rebuild the entire list, releasing the
@@ -219,7 +219,7 @@ class ConversationsViewModel: ObservableObject {
         }
     }
 
-    private func findMatchingTemporaryConversation(for conversation: ConversationModel) -> ConversationViewModel? {
+    private func findMatchingTemporaryConversation(for conversation: ConversationModel) -> ConversationRowVM? {
         if let tempConversation = temporaryConversation, tempConversation.conversation.isCoreDialogMatch(conversation: conversation) {
             return tempConversation
         }
@@ -238,7 +238,7 @@ class ConversationsViewModel: ObservableObject {
         }
     }
 
-    func showConversation(withConversationViewModel conversationViewModel: ConversationViewModel,
+    func showConversation(withConversationViewModel conversationViewModel: ConversationRowVM,
                           publisher: ConversationStatePublisher) {
         markConversationPresented(conversationViewModel)
         let state = ConversationState
@@ -291,17 +291,17 @@ class ConversationsViewModel: ObservableObject {
         publisher.emitState(state)
     }
 
-    private func createTemporarySwarmConversation(with hash: String, accountId: String) -> ConversationViewModel {
+    private func createTemporarySwarmConversation(with hash: String, accountId: String) -> ConversationRowVM {
         let uri = JamiURI.init(schema: URIType.ring, infoHash: hash)
         let isSelf = self.accountsService.getAccount(fromAccountId: accountId)?.jamiId == hash
         let conversation = ConversationModel(withParticipantUri: uri,
                                              accountId: accountId,
                                              type: .oneToOne,
                                              isLocal: isSelf)
-        let newConversation = ConversationViewModel(with: self.injectionBag)
+        let newConversation = ConversationRowVM(with: self.injectionBag)
         newConversation.userName.accept(hash)
         newConversation.conversation = conversation
-        newConversation.swiftUIModel.isTemporary = true
+        newConversation.isTemporary = true
         return newConversation
     }
 
@@ -323,7 +323,7 @@ class ConversationsViewModel: ObservableObject {
                                              accountId: account.id,
                                              hash: number,
                                              type: .sip)
-        let newConversation = ConversationViewModel(with: self.injectionBag)
+        let newConversation = ConversationRowVM(with: self.injectionBag)
         newConversation.conversation = conversation
         let state = ConversationState
             .conversationDetail(conversationViewModel:
@@ -331,8 +331,7 @@ class ConversationsViewModel: ObservableObject {
         publisher.emitState(state)
     }
 
-    func performDestructiveAction(_ action: ConversationDestructiveAction, conversationViewModel: ConversationViewModel) {
-        conversationViewModel.closeAllPlayers()
+    func performDestructiveAction(_ action: ConversationDestructiveAction, conversationViewModel: ConversationRowVM) {
         guard let conversation = conversationViewModel.conversation else { return }
         destructiveActionExecutor.perform(action, on: conversation)
     }
@@ -342,7 +341,7 @@ class ConversationsViewModel: ObservableObject {
         let temporaryConversationId = "temporary"
         var presentedId: String = ""
 
-        mutating func updatePresentedConversation(conversationViewModel: ConversationViewModel) {
+        mutating func updatePresentedConversation(conversationViewModel: ConversationRowVM) {
             if conversationViewModel.conversation.id.isEmpty {
                 presentedId = temporaryConversationId
             } else {
@@ -366,7 +365,7 @@ class ConversationsViewModel: ObservableObject {
     /// the query should be cleared instead.
     private var suspendedSearchQuery: String?
 
-    private func markConversationPresented(_ conversationViewModel: ConversationViewModel) {
+    private func markConversationPresented(_ conversationViewModel: ConversationRowVM) {
         presentedConversation.updatePresentedConversation(conversationViewModel: conversationViewModel)
         if searchFlow.isActive {
             suspendedSearchQuery = searchQuery
@@ -461,12 +460,6 @@ class ConversationsViewModel: ObservableObject {
 
     var accountInfoToShare: String {
         return self.accountsService.accountInfoToShare?.joined(separator: "\n") ?? ""
-    }
-
-    func closeAllPlayers() {
-        conversationsSource.conversationViewModels.forEach { conversationModel in
-            conversationModel.closeAllPlayers()
-        }
     }
 }
 // swiftlint:enable type_body_length
