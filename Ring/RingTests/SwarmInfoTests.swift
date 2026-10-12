@@ -391,12 +391,6 @@ final class SwarmInfoTests: XCTestCase {
         XCTAssertFalse(swarmInfo.finalTitle.value.isEmpty)
     }
 
-    private func makeGroupConversation(title: String = "") -> ConversationModel {
-        var info = ConversationInfo(type: .invitesOnly)
-        info.title = title
-        return ConversationModel(id: conversationId1, accountId: accountId1, info: info)
-    }
-
     private func makeSwarmInfoViewModel(conversation: ConversationModel,
                                         title: String) -> SwarmInfoVM {
         let testableSwarmInfo = TestableSwarmInfo(participants: [],
@@ -406,5 +400,13 @@ final class SwarmInfoTests: XCTestCase {
         let viewModel = SwarmInfoVM(with: injectionBag, swarmInfo: testableSwarmInfo)
         viewModel.title = title
         return viewModel
+    }
+}
+
+private extension SwarmInfoTests {
+    func makeGroupConversation(title: String = "") -> ConversationModel {
+        var info = ConversationInfo(type: .invitesOnly)
+        info.title = title
+        return ConversationModel(id: conversationId1, accountId: accountId1, info: info)
     }
 }

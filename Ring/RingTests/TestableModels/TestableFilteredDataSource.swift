@@ -24,9 +24,9 @@ import RxSwift
 
 class TestableFilteredDataSource: ConversationDataSource {
 
-    init(conversations: [Ring.ConversationViewModel], injectionBag: InjectionBag) {
+    init(conversations: [Ring.ConversationRowVM], injectionBag: InjectionBag) {
         super.init(with: injectionBag)
         self.disposeBag = DisposeBag()
-        self.conversationViewModels = conversations
+        self.rows = conversations
     }
 }

@@ -52,8 +52,8 @@ enum SearchStatus {
 }
 
 protocol FilterConversationDelegate: AnyObject {
-    func temporaryConversationCreated(conversation: ConversationViewModel?)
-    func showConversation(withConversationViewModel conversationViewModel: ConversationViewModel)
+    func temporaryConversationCreated(conversation: ConversationRowVM?)
+    func showConversation(withRow row: ConversationRowVM)
 }
 
 class JamiSearchViewModel: ObservableObject {
@@ -72,21 +72,21 @@ class JamiSearchViewModel: ObservableObject {
     private let disposeBag = DisposeBag()
 
     // Temporary conversation created when perform search for a new contact.
-    var temporaryConversation = BehaviorRelay<ConversationViewModel?>(value: nil)
+    var temporaryConversation = BehaviorRelay<ConversationRowVM?>(value: nil)
 
     // Conversation with blocked contact.
-    var blockedConversation = BehaviorRelay<ConversationViewModel?>(value: nil)
+    var blockedConversation = BehaviorRelay<ConversationRowVM?>(value: nil)
 
-    var filteredResults: [ConversationViewModel] {
+    var filteredResults: [ConversationRowVM] {
         if searchBarText.value.isEmpty {
-            return dataSource.conversationViewModels
+            return dataSource.rows
         } else {
-            return dataSource.conversationViewModels.filter { $0.matches(searchBarText.value) }
+            return dataSource.rows.filter { $0.matches(searchBarText.value) }
         }
     }
 
     // Jams temporary conversations created when perform search for a new contact
-    let jamsTemporaryResults = BehaviorRelay<[ConversationViewModel]>(value: [])
+    let jamsTemporaryResults = BehaviorRelay<[ConversationRowVM]>(value: [])
 
     let searchBarText = BehaviorRelay<String>(value: "")
     var isSearching: Observable<Bool>!
@@ -127,9 +127,9 @@ class JamiSearchViewModel: ObservableObject {
         }
     }
 
-    static func removeFilteredConversations(from conversationViewModels: [ConversationViewModel],
-                                            with filteredResults: [ConversationViewModel]) -> [ConversationViewModel] {
-        return conversationViewModels
+    static func removeFilteredConversations(from rows: [ConversationRowVM],
+                                            with filteredResults: [ConversationRowVM]) -> [ConversationRowVM] {
+        return rows
             .filter({ !filteredResults.contains($0) })
     }
 
@@ -147,7 +147,7 @@ class JamiSearchViewModel: ObservableObject {
         self.delegate = delegate
     }
 
-    private func temporaryConversationCreated(tempConversation: ConversationViewModel?) {
+    private func temporaryConversationCreated(tempConversation: ConversationRowVM?) {
         self.temporaryConversation.accept(tempConversation)
         if let delegate = self.delegate {
             delegate.temporaryConversationCreated(conversation: tempConversation)
@@ -164,7 +164,7 @@ class JamiSearchViewModel: ObservableObject {
         return blockedConversation.isCoreConversationWith(jamiId: jamiId)
     }
 
-    func isConversation(_ conversation: ConversationViewModel, match searchQuery: String) -> Bool {
+    func isConversation(_ conversation: ConversationRowVM, match searchQuery: String) -> Bool {
         guard conversation.model().isCoredialog() else {
             return false
         }
@@ -187,7 +187,7 @@ class JamiSearchViewModel: ObservableObject {
     }
 
     func isConversationExists(for searchQuery: String) -> Bool {
-        let coreDialog = self.dataSource.conversationViewModels
+        let coreDialog = self.dataSource.rows
             .filter({[weak self] conversation in
                 guard let self = self else { return false }
                 return self.isConversation(conversation, match: searchQuery)
@@ -195,7 +195,7 @@ class JamiSearchViewModel: ObservableObject {
         return coreDialog != nil || blockedConversationExists(for: searchQuery)
     }
 
-    private func createTemporaryConversation(searchQuery: String, account: AccountModel) -> ConversationViewModel {
+    private func createTemporaryConversation(searchQuery: String, account: AccountModel) -> ConversationRowVM {
         switch account.type {
         case .sip:
             return self.createTemporarySipConversation(with: searchQuery, account: account)
@@ -227,7 +227,7 @@ class JamiSearchViewModel: ObservableObject {
     }
 
     private func searchBlocked(searchQuery: String) {
-        if let conversation = self.dataSource.blockedConversation.filter({ $0.isCoreConversationWith(jamiId: searchQuery) }).first {
+        if let conversation = self.dataSource.blockedRows.filter({ $0.isCoreConversationWith(jamiId: searchQuery) }).first {
             self.blockedConversation.accept(conversation)
         }
     }
@@ -339,7 +339,7 @@ class JamiSearchViewModel: ObservableObject {
         searchModels.filter { isBlocked($0.jamiId) || !isContact($0.jamiId) }
     }
 
-    private func convertToConversations(from searchModels: [JamiSearchViewModel.JamsUserSearchModel], accountId: String) -> [ConversationViewModel] {
+    private func convertToConversations(from searchModels: [JamiSearchViewModel.JamsUserSearchModel], accountId: String) -> [ConversationRowVM] {
         var blockedIds = Set<String>()
         for model in searchModels {
             self.searchBlocked(searchQuery: model.jamiId)
@@ -352,58 +352,58 @@ class JamiSearchViewModel: ObservableObject {
             .directoryResultsExcludingContacts(from: searchModels,
                                                isBlocked: { blockedIds.contains($0) },
                                                isContact: { self.injectionBag.contactsService.contact(withHash: $0) != nil })
-        var jamsSearch: [ConversationViewModel] = []
+        var jamsSearch: [ConversationRowVM] = []
         for model in newContacts where !blockedIds.contains(model.jamiId) {
             jamsSearch.append(self.createTemporaryJamsConversation(with: model, accountId: accountId))
         }
         return jamsSearch
     }
 
-    private func createTemporarySwarmConversation(with hash: String, accountId: String, userName: String? = nil) -> ConversationViewModel {
+    private func createTemporarySwarmConversation(with hash: String, accountId: String, userName: String? = nil) -> ConversationRowVM {
         let uri = JamiURI.init(schema: URIType.ring, infoHash: hash)
         let isSelf = self.accountsService.getAccount(fromAccountId: accountId)?.jamiId == hash
         let conversation = ConversationModel(withParticipantUri: uri,
                                              accountId: accountId,
                                              type: .oneToOne,
                                              isLocal: isSelf)
-        let newConversation = ConversationViewModel(with: self.injectionBag)
+        let newConversation = ConversationRowVM(with: self.injectionBag)
         if let userName = userName {
             newConversation.userName.accept(userName)
         } else {
             newConversation.userName.accept(hash)
         }
         newConversation.conversation = conversation
-        newConversation.swiftUIModel.isTemporary = true
+        newConversation.isTemporary = true
         return newConversation
     }
 
-    private func createTemporarySipConversation(with searchQuery: String, account: AccountModel) -> ConversationViewModel {
+    private func createTemporarySipConversation(with searchQuery: String, account: AccountModel) -> ConversationRowVM {
         let trimmed = searchQuery.trimmedSipNumber()
         let uri = JamiURI.init(schema: URIType.sip, infoHash: trimmed, account: account)
         let conversation = ConversationModel(withParticipantUri: uri,
                                              accountId: account.id,
                                              hash: trimmed,
                                              type: .sip)
-        let newConversation = ConversationViewModel(with: self.injectionBag)
+        let newConversation = ConversationRowVM(with: self.injectionBag)
         newConversation.userName.accept(trimmed)
         newConversation.conversation = conversation
         return newConversation
     }
 
-    private func createTemporaryJamsConversation(with user: JamsUserSearchModel, accountId: String) -> ConversationViewModel {
+    private func createTemporaryJamsConversation(with user: JamsUserSearchModel, accountId: String) -> ConversationRowVM {
         let uri = JamiURI.init(schema: URIType.ring, infoHash: user.jamiId)
         let isSelf = self.accountsService.getAccount(fromAccountId: accountId)?.jamiId == user.jamiId
         let conversation = ConversationModel(withParticipantUri: uri, accountId: accountId, type: .oneToOne, isLocal: isSelf)
-        let newConversation = ConversationViewModel(with: injectionBag,
-                                                    conversation: conversation,
-                                                    user: user)
-        newConversation.swiftUIModel.isTemporary = true
+        let newConversation = ConversationRowVM(with: injectionBag,
+                                                conversation: conversation,
+                                                user: user)
+        newConversation.isTemporary = true
         return newConversation
     }
 
-    func showConversation(conversation: ConversationViewModel) {
+    func showConversation(conversation: ConversationRowVM) {
         if let delegate = delegate {
-            delegate.showConversation(withConversationViewModel: conversation)
+            delegate.showConversation(withRow: conversation)
         }
     }
 

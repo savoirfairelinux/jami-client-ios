@@ -26,7 +26,7 @@ import RxSwift
 
 final class JamiSearchViewModelTests: XCTestCase {
 
-    var conversationVM: ConversationViewModel!
+    var row: ConversationRowVM!
     var injectionBag: InjectionBag!
     var dataSource: TestableFilteredDataSource!
     var searchViewModel: JamiSearchViewModel!
@@ -80,15 +80,15 @@ final class JamiSearchViewModelTests: XCTestCase {
                                     withSystemService: systemService,
                                     withPeerSharingService: TestPeerSharingFactory.createService(),
                                     withCollaborationService: collaborationService)
-        conversationVM = ConversationViewModel(with: injectionBag)
-        conversationVM.conversation = ConversationModel(type: .oneToOne)
-        dataSource = TestableFilteredDataSource(conversations: [conversationVM], injectionBag: injectionBag)
+        row = ConversationRowVM(with: injectionBag)
+        row.conversation = ConversationModel(type: .oneToOne)
+        dataSource = TestableFilteredDataSource(conversations: [row], injectionBag: injectionBag)
         searchViewModel = JamiSearchViewModel(with: injectionBag, source: dataSource, searchOnlyExistingConversations: false)
     }
 
     override func tearDownWithError() throws {
         try super.tearDownWithError()
-        conversationVM = nil
+        row = nil
         collaborationService = nil
         collaborationAdapter = nil
         cancellables.removeAll()
@@ -110,26 +110,16 @@ final class JamiSearchViewModelTests: XCTestCase {
         return swarmInfo
     }
 
-    func createSipAccount() -> AccountModel {
-        let account = AccountModel(withAccountId: "sip-account")
-        account.details = AccountConfigModel(withDetails: [
-            ConfigKey.accountType.rawValue: AccountType.sip.rawValue,
-            ConfigKey.accountUsername.rawValue: "user",
-            ConfigKey.accountHostname.rawValue: "sip.example.org"
-        ])
-        return account
-    }
-
     func testDocumentNotificationUpdatesConversationUnread() {
         let accountId = "account"
         let conversationId = "conversation"
         let documentId = "document"
-        conversationVM.conversation = ConversationModel(id: conversationId,
+        row.conversation = ConversationModel(id: conversationId,
                                                         accountId: accountId,
                                                         info: ConversationInfo(type: .oneToOne))
 
         let unreadUpdated = expectation(description: "Document notification updates the conversation badge")
-        conversationVM.$unreadMessages
+        row.$unreadMessages
             .filter { $0 == 1 }
             .first()
             .sink { _ in unreadUpdated.fulfill() }
@@ -146,7 +136,7 @@ final class JamiSearchViewModelTests: XCTestCase {
     func testConversationExists_ForOneToOneConversation_QueryIsHash_Exists() {
         // Arrange
         let conversation = self.createSwarmConversation(jamiId: jamiId1, type: .oneToOne)
-        conversationVM.conversation = conversation
+        row.conversation = conversation
         // Act
         let searchQuery = jamiId1
         let result = searchViewModel.isConversationExists(for: searchQuery)
@@ -158,7 +148,7 @@ final class JamiSearchViewModelTests: XCTestCase {
     func testConversationExists_ForOneToOneConversation_QueryIsHash_DoesNotExist() {
         // Arrange
         let conversation = self.createSwarmConversation(jamiId: jamiId1, type: .oneToOne)
-        conversationVM.conversation = conversation
+        row.conversation = conversation
         // Act
         let searchQuery = jamiId2
         let result = searchViewModel.isConversationExists(for: searchQuery)
@@ -169,9 +159,9 @@ final class JamiSearchViewModelTests: XCTestCase {
     func testConversationExists_ForOneToOneConversation_QueryIsRegisteredName_Exists() {
         // Arrange
         let conversation = self.createSwarmConversation(jamiId: jamiId1, type: .oneToOne)
-        conversationVM.conversation = conversation
+        row.conversation = conversation
         let swarmInfo = self.createSwarmInfo(jamiId: jamiId1, name: registeredName1, containsSearchQuery: true, hasParticipantWithRegisteredName: true)
-        conversationVM.swarmInfo = swarmInfo
+        row.swarmInfo = swarmInfo
         // Act
         let searchQuery = registeredName1
         let result = searchViewModel.isConversationExists(for: searchQuery)
@@ -182,9 +172,9 @@ final class JamiSearchViewModelTests: XCTestCase {
     func testConversationExists_PrivateConversation_QueryIsRegisteredName_Exists() {
         // Arrange
         let conversation = self.createSwarmConversation(jamiId: jamiId1, type: .invitesOnly)
-        conversationVM.conversation = conversation
+        row.conversation = conversation
         let swarmInfo = self.createSwarmInfo(jamiId: jamiId1, name: registeredName1, containsSearchQuery: true, hasParticipantWithRegisteredName: true)
-        conversationVM.swarmInfo = swarmInfo
+        row.swarmInfo = swarmInfo
         // Act
         let searchQuery = registeredName1
         let result = searchViewModel.isConversationExists(for: searchQuery)
@@ -195,9 +185,9 @@ final class JamiSearchViewModelTests: XCTestCase {
     func testConversationExists_PrivateConversation_QueryIsRegisteredName_DoesNotExist() {
         // Arrange
         let conversation = self.createSwarmConversation(jamiId: jamiId1, type: .invitesOnly)
-        conversationVM.conversation = conversation
+        row.conversation = conversation
         let swarmInfo = self.createSwarmInfo(jamiId: jamiId1, name: registeredName1, containsSearchQuery: false, hasParticipantWithRegisteredName: false)
-        conversationVM.swarmInfo = swarmInfo
+        row.swarmInfo = swarmInfo
         // Act
         let searchQuery = registeredName2
         let result = searchViewModel.isConversationExists(for: searchQuery)
@@ -208,7 +198,7 @@ final class JamiSearchViewModelTests: XCTestCase {
     func testConversationExists_PrivateConversation_QueryIsHash_DoesNotExist() {
         // Arrange
         let conversation = self.createSwarmConversation(jamiId: jamiId1, type: .invitesOnly)
-        conversationVM.conversation = conversation
+        row.conversation = conversation
         // Act
         let searchQuery = jamiId2
         let result = searchViewModel.isConversationExists(for: searchQuery)
@@ -219,7 +209,7 @@ final class JamiSearchViewModelTests: XCTestCase {
     func testConversationExists_PrivateConversation_QueryIsHash_Exists() {
         // Arrange
         let conversation = self.createSwarmConversation(jamiId: jamiId1, type: .invitesOnly)
-        conversationVM.conversation = conversation
+        row.conversation = conversation
         // Act
         let searchQuery = jamiId1
         let result = searchViewModel.isConversationExists(for: searchQuery)
@@ -230,9 +220,9 @@ final class JamiSearchViewModelTests: XCTestCase {
     func testConversationExists_ForOneToOneConversation_QueryIsRegisteredName_DoesNotExist() {
         // Arrange
         let conversation = self.createSwarmConversation(jamiId: jamiId1, type: .oneToOne)
-        conversationVM.conversation = conversation
+        row.conversation = conversation
         let swarmInfo = self.createSwarmInfo(jamiId: jamiId1, name: registeredName1, containsSearchQuery: false, hasParticipantWithRegisteredName: false)
-        conversationVM.swarmInfo = swarmInfo
+        row.swarmInfo = swarmInfo
         // Act
         let searchQuery = registeredName2
         let result = searchViewModel.isConversationExists(for: searchQuery)
@@ -243,10 +233,10 @@ final class JamiSearchViewModelTests: XCTestCase {
     func testConversationMatch_OneToOneConversation_QueryIsHash_Match() {
         // Arrange
         let conversation = self.createSwarmConversation(jamiId: jamiId1, type: .oneToOne)
-        conversationVM.conversation = conversation
+        row.conversation = conversation
         // Act
         let searchQuery = jamiId1
-        let result = searchViewModel.isConversation(conversationVM, match: searchQuery)
+        let result = searchViewModel.isConversation(row, match: searchQuery)
         // Assert
         XCTAssertTrue(result)
     }
@@ -254,12 +244,12 @@ final class JamiSearchViewModelTests: XCTestCase {
     func testConversationMatch_OneToOneConversation_QueryIsRegisteredName_Match() {
         // Arrange
         let conversation = self.createSwarmConversation(jamiId: jamiId1, type: .oneToOne)
-        conversationVM.conversation = conversation
+        row.conversation = conversation
         let swarmInfo = self.createSwarmInfo(jamiId: jamiId1, name: registeredName1, containsSearchQuery: true, hasParticipantWithRegisteredName: true)
-        conversationVM.swarmInfo = swarmInfo
+        row.swarmInfo = swarmInfo
         // Act
         let searchQuery = registeredName1
-        let result = searchViewModel.isConversation(conversationVM, match: searchQuery)
+        let result = searchViewModel.isConversation(row, match: searchQuery)
         // Assert
         XCTAssertTrue(result)
     }
@@ -267,12 +257,12 @@ final class JamiSearchViewModelTests: XCTestCase {
     func testConversationMatch_PrivateConversation_QueryIsRegisteredName_Match() {
         // Arrange
         let conversation = self.createSwarmConversation(jamiId: jamiId1, type: .invitesOnly)
-        conversationVM.conversation = conversation
+        row.conversation = conversation
         let swarmInfo = self.createSwarmInfo(jamiId: jamiId1, name: registeredName1, containsSearchQuery: true, hasParticipantWithRegisteredName: true)
-        conversationVM.swarmInfo = swarmInfo
+        row.swarmInfo = swarmInfo
         // Act
         let searchQuery = registeredName1
-        let result = searchViewModel.isConversation(conversationVM, match: searchQuery)
+        let result = searchViewModel.isConversation(row, match: searchQuery)
         // Assert
         XCTAssertFalse(result)
     }
@@ -280,12 +270,12 @@ final class JamiSearchViewModelTests: XCTestCase {
     func testConversationMatch_SwarmConversation_QueryIsRegisteredName_DoesNotMatch() {
         // Arrange
         let conversation = self.createSwarmConversation(jamiId: jamiId1, type: .oneToOne)
-        conversationVM.conversation = conversation
+        row.conversation = conversation
         let swarmInfo = self.createSwarmInfo(jamiId: jamiId1, name: registeredName1, containsSearchQuery: false, hasParticipantWithRegisteredName: false)
-        conversationVM.swarmInfo = swarmInfo
+        row.swarmInfo = swarmInfo
         // Act
         let searchQuery = registeredName1 + "1"
-        let result = searchViewModel.isConversation(conversationVM, match: searchQuery)
+        let result = searchViewModel.isConversation(row, match: searchQuery)
         // Assert
         XCTAssertFalse(result)
     }
@@ -294,11 +284,11 @@ final class JamiSearchViewModelTests: XCTestCase {
         // Arrange
         let uri = JamiURI(schema: .sip, infoHash: sipTestNumber1)
         let conversation = ConversationModel(withParticipantUri: uri, accountId: "", hash: sipTestNumber1, type: .sip)
-        conversationVM.conversation = conversation
-        conversationVM.userName.accept(sipTestNumber1)
+        row.conversation = conversation
+        row.userName.accept(sipTestNumber1)
         // Act
         let searchQuery = sipTestNumber1
-        let result = searchViewModel.isConversation(conversationVM, match: searchQuery)
+        let result = searchViewModel.isConversation(row, match: searchQuery)
         // Assert
         XCTAssertTrue(result)
     }
@@ -307,11 +297,11 @@ final class JamiSearchViewModelTests: XCTestCase {
         // Arrange
         let uri = JamiURI(schema: .sip, infoHash: sipTestNumber1)
         let conversation = ConversationModel(withParticipantUri: uri, accountId: "", hash: sipTestNumber1, type: .sip)
-        conversationVM.conversation = conversation
-        conversationVM.userName.accept(sipTestNumber1)
+        row.conversation = conversation
+        row.userName.accept(sipTestNumber1)
         // Act
         let searchQuery = sipTestNumber1 + "1"
-        let result = searchViewModel.isConversation(conversationVM, match: searchQuery)
+        let result = searchViewModel.isConversation(row, match: searchQuery)
         // Assert
         XCTAssertFalse(result)
     }
@@ -320,11 +310,11 @@ final class JamiSearchViewModelTests: XCTestCase {
         // Arrange
         let uri = JamiURI(schema: .sip, infoHash: sipTestNumber1)
         let conversation = ConversationModel(withParticipantUri: uri, accountId: "", hash: sipTestNumber1, type: .sip)
-        conversationVM.conversation = conversation
-        conversationVM.userName.accept(sipTestNumber1)
+        row.conversation = conversation
+        row.userName.accept(sipTestNumber1)
         // Act
         let searchQuery = sipTestNumber1
-        let result = searchViewModel.isConversation(conversationVM, match: searchQuery)
+        let result = searchViewModel.isConversation(row, match: searchQuery)
         // Assert
         XCTAssertTrue(result)
     }
@@ -334,7 +324,7 @@ final class JamiSearchViewModelTests: XCTestCase {
         let account = createSipAccount()
         injectionBag.accountService.setAccountList([account])
         let creationExpectation = expectation(description: "SIP temporary conversation created")
-        var temporaryConversation: ConversationViewModel?
+        var temporaryConversation: ConversationRowVM?
         let disposable = searchViewModel.temporaryConversation
             .skip(1)
             .compactMap { $0 }
@@ -359,9 +349,9 @@ final class JamiSearchViewModelTests: XCTestCase {
     func testTemporaryConversationExist_True() {
         // Arrange
         let conversation = self.createSwarmConversation(jamiId: jamiId1, type: .oneToOne)
-        conversationVM = ConversationViewModel(with: injectionBag)
-        conversationVM.conversation = conversation
-        searchViewModel.temporaryConversation.accept(conversationVM)
+        row = ConversationRowVM(with: injectionBag)
+        row.conversation = conversation
+        searchViewModel.temporaryConversation.accept(row)
         // Act
         let result = searchViewModel.temporaryConversationExists(for: jamiId1)
         // Assert
@@ -371,9 +361,9 @@ final class JamiSearchViewModelTests: XCTestCase {
     func testTemporaryConversationExist_False() {
         // Arrange
         let conversation = self.createSwarmConversation(jamiId: jamiId1, type: .oneToOne)
-        conversationVM = ConversationViewModel(with: injectionBag)
-        conversationVM.conversation = conversation
-        searchViewModel.temporaryConversation.accept(conversationVM)
+        row = ConversationRowVM(with: injectionBag)
+        row.conversation = conversation
+        searchViewModel.temporaryConversation.accept(row)
         // Act
         let result = searchViewModel.temporaryConversationExists(for: jamiId2)
         // Assert
@@ -422,5 +412,17 @@ final class JamiSearchViewModelTests: XCTestCase {
                                                 organization: "org",
                                                 jamiId: jamiId,
                                                 profilePicture: Data([0x01]))
+    }
+}
+
+private extension JamiSearchViewModelTests {
+    func createSipAccount() -> AccountModel {
+        let account = AccountModel(withAccountId: "sip-account")
+        account.details = AccountConfigModel(withDetails: [
+            ConfigKey.accountType.rawValue: AccountType.sip.rawValue,
+            ConfigKey.accountUsername.rawValue: "user",
+            ConfigKey.accountHostname.rawValue: "sip.example.org"
+        ])
+        return account
     }
 }

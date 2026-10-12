@@ -90,8 +90,8 @@ class ActiveCallsViewModel: ObservableObject, Stateable {
         }
     }
 
-    private func findConversation(for call: ActiveCall) -> ConversationViewModel? {
-        return conversationsSource.conversationViewModels.first { $0.conversation?.id == call.conversationId }
+    private func findConversation(for call: ActiveCall) -> ConversationRowVM? {
+        return conversationsSource.rows.first { $0.conversation?.id == call.conversationId }
     }
 }
 

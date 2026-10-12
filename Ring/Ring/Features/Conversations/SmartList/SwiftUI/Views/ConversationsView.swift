@@ -21,7 +21,7 @@
 import SwiftUI
 
 struct SwipeActionsModifier: ViewModifier {
-    let conversation: ConversationViewModel
+    let conversation: ConversationRowVM
     let model: ConversationsViewModel
     @SwiftUI.State private var activeAction: ConversationDestructiveAction?
 
@@ -59,7 +59,7 @@ struct SwipeActionsModifier: ViewModifier {
             title: Text(action.title(for: conversation.conversation)),
             message: Text(action.confirmationMessage(for: conversation.conversation)),
             primaryButton: .destructive(Text(action.confirmationButtonTitle(for: conversation.conversation))) {
-                model.performDestructiveAction(action, conversationViewModel: conversation)
+                model.performDestructiveAction(action, row: conversation)
             },
             secondaryButton: .cancel()
         )
@@ -67,7 +67,7 @@ struct SwipeActionsModifier: ViewModifier {
 }
 
 extension View {
-    func conditionalSmartListSwipeActions(conversation: ConversationViewModel, model: ConversationsViewModel) -> some View {
+    func conditionalSmartListSwipeActions(conversation: ConversationRowVM, model: ConversationsViewModel) -> some View {
         self.modifier(SwipeActionsModifier(conversation: conversation, model: model))
     }
 }
@@ -80,7 +80,7 @@ struct ConversationsView: View {
             if let model = model {
                 Button(action: { [weak conversation, weak model] in
                     guard let conversation = conversation, let model = model else { return }
-                    model.showConversation(withConversationViewModel: conversation,
+                    model.showConversation(withRow: conversation,
                                            publisher: stateEmitter)
                 }, label: {
                     // withSeparator: false — the in-content Divider() slides with the
@@ -111,7 +111,7 @@ struct TempConversationsView: View {
                 .contentShape(Rectangle())
                 .onTapGesture { [weak conversation, weak model] in
                     guard let conversation = conversation, let model = model else { return }
-                    model.showConversation(withConversationViewModel: conversation,
+                    model.showConversation(withRow: conversation,
                                            publisher: state)
                 }
                 .transition(.opacity)
@@ -130,7 +130,7 @@ struct JamsSearchResultView: View {
                 .contentShape(Rectangle())
                 .onTapGesture { [weak conversation, weak model] in
                     guard let conversation = conversation, let model = model else { return }
-                    model.showConversation(withConversationViewModel: conversation,
+                    model.showConversation(withRow: conversation,
                                            publisher: state)
                 }
                 .transition(.opacity)
@@ -156,7 +156,7 @@ struct ActiveCallIndicator: View {
 }
 
 struct ConversationRowView: View {
-    @ObservedObject var model: ConversationViewModel
+    @ObservedObject var model: ConversationRowVM
     var withSeparator: Bool = true
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -167,45 +167,9 @@ struct ConversationRowView: View {
                 }
                 Spacer()
                     .frame(width: 12)
-                VStack(alignment: .leading) {
-                    Text(model.nameWithSuffix)
-                        .fontWeight(model.unreadMessages > 0 ? .bold : .regular)
-                        .foregroundColor(.primary)
-                        .lineLimit(1)
-                    if model.swiftUIModel.isBlocked {
-                        Spacer()
-                            .frame(height: 5)
-                        Text(L10n.Swarm.blocked)
-                            .italic()
-                            .font(.footnote)
-                            .foregroundColor(.secondary)
-                            .lineLimit(1)
-                    } else if !model.lastMessage.isEmpty {
-                        Spacer()
-                            .frame(height: 5)
-                        HStack(alignment: .bottom, spacing: 4) {
-                            Text(model.lastMessageDate + " -")
-                                .fontWeight(.regular)
-                                .font(.footnote)
-                                .foregroundColor(.primary)
-                                .lineLimit(1)
-                            Text( model.lastMessage)
-                                .font(.footnote)
-                                .foregroundColor(.secondary)
-                                .lineLimit(1)
-                        }
-                    } else if model.swiftUIModel.isSyncing {
-                        Spacer()
-                            .frame(height: 5)
-                        Text(L10n.Smartlist.inSynchronization)
-                            .italic()
-                            .font(.footnote)
-                            .foregroundColor(.secondary)
-                            .lineLimit(1)
-                    }
-                }
+                nameAndStatus
                 Spacer()
-                if model.swiftUIModel.callBannerViewModel.isVisible {
+                if model.hasIncomingCall {
                     ActiveCallIndicator()
                 }
                 if model.unreadMessages > 0 {
@@ -228,6 +192,46 @@ struct ConversationRowView: View {
         .accessibilityElement(children: /*@START_MENU_TOKEN@*/.ignore/*@END_MENU_TOKEN@*/)
         .accessibilityLabel(constreuctChatRowAccessibilityLabel())
 
+    }
+
+    private var nameAndStatus: some View {
+        VStack(alignment: .leading) {
+            Text(model.nameWithSuffix)
+                .fontWeight(model.unreadMessages > 0 ? .bold : .regular)
+                .foregroundColor(.primary)
+                .lineLimit(1)
+            if model.isBlocked {
+                Spacer()
+                    .frame(height: 5)
+                Text(L10n.Swarm.blocked)
+                    .italic()
+                    .font(.footnote)
+                    .foregroundColor(.secondary)
+                    .lineLimit(1)
+            } else if !model.lastMessage.isEmpty {
+                Spacer()
+                    .frame(height: 5)
+                HStack(alignment: .bottom, spacing: 4) {
+                    Text(model.lastMessageDate + " -")
+                        .fontWeight(.regular)
+                        .font(.footnote)
+                        .foregroundColor(.primary)
+                        .lineLimit(1)
+                    Text( model.lastMessage)
+                        .font(.footnote)
+                        .foregroundColor(.secondary)
+                        .lineLimit(1)
+                }
+            } else if model.isSyncing {
+                Spacer()
+                    .frame(height: 5)
+                Text(L10n.Smartlist.inSynchronization)
+                    .italic()
+                    .font(.footnote)
+                    .foregroundColor(.secondary)
+                    .lineLimit(1)
+            }
+        }
     }
 
     private var presenceIndicator: some View {
@@ -260,9 +264,9 @@ struct ConversationRowView: View {
             label += ". " + L10n.Accessibility.conversationRowUnreadCount(model.unreadMessages)
         }
 
-        if model.swiftUIModel.isBlocked {
+        if model.isBlocked {
             label += ". " + L10n.Accessibility.conversationRowBlocked
-        } else if model.swiftUIModel.isSyncing {
+        } else if model.isSyncing {
             label += ". " + L10n.Accessibility.conversationRowSyncing
         } else if !model.lastMessage.isEmpty {
             label += ". " + L10n.Accessibility.conversationRowLastMessage(model.lastMessageDate) + ": \(model.lastMessage)"

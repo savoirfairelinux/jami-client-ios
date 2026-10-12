@@ -22,17 +22,17 @@ import RxSwift
 import RxRelay
 
 class ConversationDataSource: ObservableObject {
-    @Published var conversationViewModels = [ConversationViewModel]()
-    var blockedConversation = [ConversationViewModel]()
+    @Published var rows = [ConversationRowVM]()
+    var blockedRows = [ConversationRowVM]()
     let conversationsService: ConversationsService
     let contactsService: ContactsService
     let accountsService: AccountsService
     var disposeBag = DisposeBag()
     let injectionBag: InjectionBag
 
-    var onNewConversationViewModelCreated: ((ConversationModel) -> Void)?
+    var onNewRowCreated: ((ConversationModel) -> Void)?
     var onConversationRestored: ((ConversationModel) -> Void)?
-    var getTemporaryConversation: ((ConversationModel) -> ConversationViewModel?)?
+    var getTemporaryConversation: ((ConversationModel) -> ConversationRowVM?)?
 
     init(with injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
@@ -50,54 +50,54 @@ class ConversationDataSource: ObservableObject {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] conversations in
                 guard let self = self else { return }
-                self.conversationViewModels = self.mapConversationsToViewModels(conversations)
+                self.rows = self.mapConversationsToRows(conversations)
             })
             .disposed(by: disposeBag)
     }
 
-    private func mapConversationsToViewModels(_ conversations: [ConversationModel]) -> [ConversationViewModel] {
-        var viewModelsByConversation = [ObjectIdentifier: ConversationViewModel]()
-        for viewModel in conversationViewModels {
-            if let conversation = viewModel.conversation {
-                viewModelsByConversation[ObjectIdentifier(conversation)] = viewModel
+    private func mapConversationsToRows(_ conversations: [ConversationModel]) -> [ConversationRowVM] {
+        var rowsByConversation = [ObjectIdentifier: ConversationRowVM]()
+        for row in rows {
+            if let conversation = row.conversation {
+                rowsByConversation[ObjectIdentifier(conversation)] = row
             }
         }
         let bannedContacts = Set(contactsService.contacts.value.filter { $0.banned }.map { $0.hash })
-        return conversations.compactMap { conversationModel -> ConversationViewModel? in
+        return conversations.compactMap { conversationModel -> ConversationRowVM? in
             let isBlocked = isConversationWithBlockedContact(conversationModel, bannedContacts: bannedContacts)
             if isBlocked,
-               let existing = blockedConversation.first(where: { $0.conversation == conversationModel }) {
+               let existing = blockedRows.first(where: { $0.conversation == conversationModel }) {
                 if existing.conversation !== conversationModel {
                     existing.conversation = conversationModel
                 }
                 return nil
             }
-            guard let newViewModel = viewModelsByConversation[ObjectIdentifier(conversationModel)] ??
-                    createOrRetrieveViewModel(for: conversationModel, isBlocked: isBlocked) else {
+            guard let row = rowsByConversation[ObjectIdentifier(conversationModel)] ??
+                    createOrRetrieveRow(for: conversationModel, isBlocked: isBlocked) else {
                 return nil
             }
 
             if isBlocked {
-                newViewModel.updateBlockedStatus()
-                blockedConversation.append(newViewModel)
+                row.updateBlockedStatus()
+                blockedRows.append(row)
                 return nil
             }
 
-            onNewConversationViewModelCreated?(conversationModel)
-            return newViewModel
+            onNewRowCreated?(conversationModel)
+            return row
         }
     }
 
-    private func createOrRetrieveViewModel(for conversationModel: ConversationModel, isBlocked: Bool) -> ConversationViewModel? {
-        if let viewModel = conversationViewModels.first(where: { $0.conversation == conversationModel }) {
-            viewModel.conversation = conversationModel
-            return viewModel
+    private func createOrRetrieveRow(for conversationModel: ConversationModel, isBlocked: Bool) -> ConversationRowVM? {
+        if let row = rows.first(where: { $0.conversation == conversationModel }) {
+            row.conversation = conversationModel
+            return row
         }
         // Attempt to restore a blocked conversation if not blocked
         if !isBlocked,
            let jamiId = conversationModel.getParticipants().first?.jamiId,
-           let restoredViewModel = restoreBlockedConversation(jamiId: jamiId) {
-            return restoredViewModel
+           let restoredRow = restoreBlockedConversation(jamiId: jamiId) {
+            return restoredRow
         }
 
         // Update temporary conversation if exists
@@ -106,20 +106,20 @@ class ConversationDataSource: ObservableObject {
             return tempConversation
         }
 
-        let newViewModel = ConversationViewModel(with: injectionBag)
-        newViewModel.conversation = conversationModel
-        return newViewModel
+        let newRow = ConversationRowVM(with: injectionBag)
+        newRow.conversation = conversationModel
+        return newRow
     }
 
-    func restoreBlockedConversation(jamiId: String) -> ConversationViewModel? {
-        guard let blockedIndex = blockedConversation.firstIndex(where: { $0.isCoreConversationWith(jamiId: jamiId) }) else {
+    func restoreBlockedConversation(jamiId: String) -> ConversationRowVM? {
+        guard let blockedIndex = blockedRows.firstIndex(where: { $0.isCoreConversationWith(jamiId: jamiId) }) else {
             return nil
         }
-        let viewModel = blockedConversation.remove(at: blockedIndex)
+        let row = blockedRows.remove(at: blockedIndex)
 
         // Reset conversation to trigger didSet
-        let conversation = viewModel.conversation
-        viewModel.conversation = conversation
+        let conversation = row.conversation
+        row.conversation = conversation
 
         // Notify if a conversation has been restored
         if let onConversationRestored = self.onConversationRestored,
@@ -127,7 +127,7 @@ class ConversationDataSource: ObservableObject {
             onConversationRestored(conversation)
         }
 
-        return viewModel
+        return row
     }
 
     private func observeContactAdded() {
@@ -147,18 +147,18 @@ class ConversationDataSource: ObservableObject {
     }
 
     private func restoreConversation(jamiId: String, accountId: String) {
-        guard let viewModel = restoreBlockedConversation(jamiId: jamiId) else { return }
+        guard let row = restoreBlockedConversation(jamiId: jamiId) else { return }
         // Retrieve the conversation and determine its correct index to maintain the order
         let storeConversations = conversationsService.currentConversations
-        guard let targetIndex = storeConversations.firstIndex(where: { $0 == viewModel.conversation }) else {
-            self.blockedConversation.append(viewModel)
+        guard let targetIndex = storeConversations.firstIndex(where: { $0 == row.conversation }) else {
+            self.blockedRows.append(row)
             return
         }
         let preceding = Set(storeConversations[..<targetIndex].map { ObjectIdentifier($0) })
-        let insertIndex = self.conversationViewModels.filter { visible in
+        let insertIndex = self.rows.filter { visible in
             visible.conversation.map { preceding.contains(ObjectIdentifier($0)) } ?? false
         }.count
-        self.conversationViewModels.insert(viewModel, at: insertIndex)
+        self.rows.insert(row, at: insertIndex)
     }
 
     private func observeContactRemoved() {
@@ -184,18 +184,18 @@ class ConversationDataSource: ObservableObject {
 
     private func moveOrAddConversationToBanned(jamiId: String, accountId: String) {
         // Check if the conversation is already in active conversations
-        if let index = self.conversationViewModels.firstIndex(where: { $0.isCoreConversationWith(jamiId: jamiId) }) {
-            let conversationViewModel = self.conversationViewModels.remove(at: index)
-            conversationViewModel.updateBlockedStatus()
-            self.blockedConversation.append(conversationViewModel)
+        if let index = self.rows.firstIndex(where: { $0.isCoreConversationWith(jamiId: jamiId) }) {
+            let row = self.rows.remove(at: index)
+            row.updateBlockedStatus()
+            self.blockedRows.append(row)
         } else {
             // Ignore if already in the banned
-            if self.blockedConversation.contains(where: { $0.isCoreConversationWith(jamiId: jamiId) }) { return }
+            if self.blockedRows.contains(where: { $0.isCoreConversationWith(jamiId: jamiId) }) { return }
             // If not, check if the conversation exists in conversationsService
             if let conversationModel = self.conversationsService.getConversationForParticipant(jamiId: jamiId, accountId: accountId) {
-                let newViewModel = ConversationViewModel(with: self.injectionBag)
-                newViewModel.conversation = conversationModel
-                self.blockedConversation.append(newViewModel)
+                let newRow = ConversationRowVM(with: self.injectionBag)
+                newRow.conversation = conversationModel
+                self.blockedRows.append(newRow)
             }
         }
     }
@@ -212,7 +212,7 @@ class ConversationDataSource: ObservableObject {
                       let accountId: String = event.getEventInput(.accountId) else { return }
                 DispatchQueue.main.async { [weak self] in
                     guard let self = self else { return }
-                    self.conversationViewModels.removeAll { $0.conversation.id == conversationId && $0.conversation.accountId == accountId
+                    self.rows.removeAll { $0.conversation.id == conversationId && $0.conversation.accountId == accountId
                     }
                 }
             })

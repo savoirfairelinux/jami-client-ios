@@ -53,16 +53,16 @@ class ConversationsViewModel: ObservableObject {
     }
 
     // temporary conversation for jami or sip
-    @Published var temporaryConversation: ConversationViewModel? {
+    @Published var temporaryConversation: ConversationRowVM? {
         didSet { updateSearchStatusIfNeeded() }
     }
     // jams search  result
-    @Published var jamsSearchResult = [ConversationViewModel]() {
+    @Published var jamsSearchResult = [ConversationRowVM]() {
         didSet { updateSearchStatusIfNeeded() }
     }
 
     // conversation for blocked contact
-    @Published var blockedConversation: ConversationViewModel? {
+    @Published var blockedConversation: ConversationRowVM? {
         didSet { updateSearchStatusIfNeeded() }
     }
     @Published var publicDirectoryTitle = L10n.Smartlist.results
@@ -75,7 +75,7 @@ class ConversationsViewModel: ObservableObject {
 
     private let conversationsSource: ConversationDataSource
 
-    @Published var filteredConversations: [ConversationViewModel] = []
+    @Published var filteredConversations: [ConversationRowVM] = []
 
     /// Identity of the conversations `List`. Changing this (on account switch)
     /// forces SwiftUI to discard and rebuild the entire list, releasing the
@@ -132,12 +132,12 @@ class ConversationsViewModel: ObservableObject {
     }
 
     private func setupFilteredConversations() {
-        Publishers.CombineLatest($searchQuery, conversationsSource.$conversationViewModels)
-            .map { searchQuery, conversationViewModels in
+        Publishers.CombineLatest($searchQuery, conversationsSource.$rows)
+            .map { searchQuery, rows in
                 if searchQuery.isEmpty {
-                    return conversationViewModels
+                    return rows
                 } else {
-                    return conversationViewModels.filter { $0.matches(searchQuery) }
+                    return rows.filter { $0.matches(searchQuery) }
                 }
             }
             .assign(to: &$filteredConversations)
@@ -208,7 +208,7 @@ class ConversationsViewModel: ObservableObject {
     }
 
     private func setupNewConversationHandler() {
-        conversationsSource.onNewConversationViewModelCreated = { [weak self] conversationModel in
+        conversationsSource.onNewRowCreated = { [weak self] conversationModel in
             guard let self = self else { return }
             self.conversationFromTemporaryCreated(conversation: conversationModel)
         }
@@ -219,7 +219,7 @@ class ConversationsViewModel: ObservableObject {
         }
     }
 
-    private func findMatchingTemporaryConversation(for conversation: ConversationModel) -> ConversationViewModel? {
+    private func findMatchingTemporaryConversation(for conversation: ConversationModel) -> ConversationRowVM? {
         if let tempConversation = temporaryConversation, tempConversation.conversation.isCoreDialogMatch(conversation: conversation) {
             return tempConversation
         }
@@ -238,12 +238,11 @@ class ConversationsViewModel: ObservableObject {
         }
     }
 
-    func showConversation(withConversationViewModel conversationViewModel: ConversationViewModel,
+    func showConversation(withRow row: ConversationRowVM,
                           publisher: ConversationStatePublisher) {
-        markConversationPresented(conversationViewModel)
+        markConversationPresented(row)
         let state = ConversationState
-            .conversationDetail(conversationViewModel:
-                                    conversationViewModel)
+            .conversationDetail(row: row)
         publisher.emitState(state)
     }
 
@@ -259,24 +258,22 @@ class ConversationsViewModel: ObservableObject {
         guard let account = accountsService.currentAccount else { return }
 
         // Attempt to find an existing one-to-one conversation with the specified jamiId
-        if let existingConversation = conversationsSource.conversationViewModels.first(where: {
+        if let existingConversation = conversationsSource.rows.first(where: {
             $0.conversation.isCoredialog() && $0.conversation.getParticipants().first?.jamiId == jamiId
         }) {
             // Update and show the existing conversation
             markConversationPresented(existingConversation)
             let state = ConversationState
-                .conversationDetail(conversationViewModel:
-                                        existingConversation)
+                .conversationDetail(row: existingConversation)
             publisher.emitState(state)
             return
         }
 
         // Attempt to find blocked conversation
-        if let blockedConversation = conversationsSource.blockedConversation.first(where: { $0.isCoreConversationWith(jamiId: jamiId) }) {
+        if let blockedConversation = conversationsSource.blockedRows.first(where: { $0.isCoreConversationWith(jamiId: jamiId) }) {
             markConversationPresented(blockedConversation)
             let state = ConversationState
-                .conversationDetail(conversationViewModel:
-                                        blockedConversation)
+                .conversationDetail(row: blockedConversation)
             publisher.emitState(state)
             return
         }
@@ -286,22 +283,21 @@ class ConversationsViewModel: ObservableObject {
         temporaryConversation = tempConversation
         markConversationPresented(tempConversation)
         let state = ConversationState
-            .conversationDetail(conversationViewModel:
-                                    tempConversation)
+            .conversationDetail(row: tempConversation)
         publisher.emitState(state)
     }
 
-    private func createTemporarySwarmConversation(with hash: String, accountId: String) -> ConversationViewModel {
+    private func createTemporarySwarmConversation(with hash: String, accountId: String) -> ConversationRowVM {
         let uri = JamiURI.init(schema: URIType.ring, infoHash: hash)
         let isSelf = self.accountsService.getAccount(fromAccountId: accountId)?.jamiId == hash
         let conversation = ConversationModel(withParticipantUri: uri,
                                              accountId: accountId,
                                              type: .oneToOne,
                                              isLocal: isSelf)
-        let newConversation = ConversationViewModel(with: self.injectionBag)
+        let newConversation = ConversationRowVM(with: self.injectionBag)
         newConversation.userName.accept(hash)
         newConversation.conversation = conversation
-        newConversation.swiftUIModel.isTemporary = true
+        newConversation.isTemporary = true
         return newConversation
     }
 
@@ -323,17 +319,15 @@ class ConversationsViewModel: ObservableObject {
                                              accountId: account.id,
                                              hash: number,
                                              type: .sip)
-        let newConversation = ConversationViewModel(with: self.injectionBag)
+        let newConversation = ConversationRowVM(with: self.injectionBag)
         newConversation.conversation = conversation
         let state = ConversationState
-            .conversationDetail(conversationViewModel:
-                                    newConversation)
+            .conversationDetail(row: newConversation)
         publisher.emitState(state)
     }
 
-    func performDestructiveAction(_ action: ConversationDestructiveAction, conversationViewModel: ConversationViewModel) {
-        conversationViewModel.closeAllPlayers()
-        guard let conversation = conversationViewModel.conversation else { return }
+    func performDestructiveAction(_ action: ConversationDestructiveAction, row: ConversationRowVM) {
+        guard let conversation = row.conversation else { return }
         destructiveActionExecutor.perform(action, on: conversation)
     }
 
@@ -342,11 +336,11 @@ class ConversationsViewModel: ObservableObject {
         let temporaryConversationId = "temporary"
         var presentedId: String = ""
 
-        mutating func updatePresentedConversation(conversationViewModel: ConversationViewModel) {
-            if conversationViewModel.conversation.id.isEmpty {
+        mutating func updatePresentedConversation(row: ConversationRowVM) {
+            if row.conversation.id.isEmpty {
                 presentedId = temporaryConversationId
             } else {
-                presentedId = conversationViewModel.conversation.id
+                presentedId = row.conversation.id
             }
         }
 
@@ -366,8 +360,8 @@ class ConversationsViewModel: ObservableObject {
     /// the query should be cleared instead.
     private var suspendedSearchQuery: String?
 
-    private func markConversationPresented(_ conversationViewModel: ConversationViewModel) {
-        presentedConversation.updatePresentedConversation(conversationViewModel: conversationViewModel)
+    private func markConversationPresented(_ row: ConversationRowVM) {
+        presentedConversation.updatePresentedConversation(row: row)
         if searchFlow.isActive {
             suspendedSearchQuery = searchQuery
         }
@@ -461,12 +455,6 @@ class ConversationsViewModel: ObservableObject {
 
     var accountInfoToShare: String {
         return self.accountsService.accountInfoToShare?.joined(separator: "\n") ?? ""
-    }
-
-    func closeAllPlayers() {
-        conversationsSource.conversationViewModels.forEach { conversationModel in
-            conversationModel.closeAllPlayers()
-        }
     }
 }
 // swiftlint:enable type_body_length

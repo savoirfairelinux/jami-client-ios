@@ -20,16 +20,14 @@ import RxRelay
 class SwarmInviteCandidates {
     let candidates = BehaviorRelay(value: [ParticipantInfo]())
 
-    private let profileService: ProfilesService
-    private let nameService: NameService
+    private let injectionBag: InjectionBag
     private let requestsService: RequestsService
     private let accountId: String
     private let localJamiId: String?
     private let disposeBag = DisposeBag()
 
     init(injectionBag: InjectionBag, accountId: String, members: Observable<[ParticipantInfo]>) {
-        self.profileService = injectionBag.profileService
-        self.nameService = injectionBag.nameService
+        self.injectionBag = injectionBag
         self.requestsService = injectionBag.requestsService
         self.accountId = accountId
         self.localJamiId = injectionBag.accountService.getAccount(fromAccountId: accountId)?.jamiId
@@ -56,7 +54,7 @@ class SwarmInviteCandidates {
             }
             return ParticipantInfo.loaded(jamiId: contact.hash, role: .unknown, accountId: accountId,
                                           isLocal: contact.hash == localJamiId,
-                                          profileService: profileService, nameService: nameService)
+                                          injectionBag: injectionBag)
         }
     }
 }

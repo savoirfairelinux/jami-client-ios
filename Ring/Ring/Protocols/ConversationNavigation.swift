@@ -25,7 +25,7 @@ import RxRelay
 enum ConversationState: State {
     case startCall(contactRingId: String, userName: String)
     case startAudioCall(contactRingId: String, userName: String)
-    case conversationDetail(conversationViewModel: ConversationViewModel)
+    case conversationDetail(row: ConversationRowVM)
     case contactDetail(conversationViewModel: ConversationModel)
     case qrCode
     case createSwarm(onCreated: ((_ conversationId: String) -> Void)?)
@@ -64,14 +64,13 @@ protocol ConversationNavigation: AnyObject {
 
 extension ConversationNavigation where Self: Coordinator, Self: StateableResponsive {
 
-    // swiftlint:disable cyclomatic_complexity
     func callbackPlaceCall() {
         self.stateSubject
             .subscribe(onNext: { [weak self] (state) in
                 guard let self = self, let state = state as? ConversationState else { return }
                 switch state {
-                case .conversationDetail(let conversationViewModel):
-                    self.showConversation(withConversationViewModel: conversationViewModel)
+                case .conversationDetail(let row):
+                    self.showConversation(withRow: row)
                 case .contactDetail(let conversationModel):
                     self.presentContactInfo(conversation: conversationModel)
                 case .qrCode:
@@ -146,11 +145,12 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                      lockWhilePresenting: VCType.contact.rawValue)
     }
 
-    func showConversation (withConversationViewModel conversationViewModel: ConversationViewModel, withAnimation: Bool = true) {
+    func showConversation (withRow row: ConversationRowVM, withAnimation: Bool = true) {
         if let flag = self.presentingVC[VCType.conversation.rawValue], flag {
             return
         }
         self.presentingVC[VCType.conversation.rawValue] = true
+        let conversationViewModel = ConversationViewModel(with: self.injectionBag, row: row)
         let conversationHostingVC = ConversationViewController(viewModel: conversationViewModel)
         self.present(viewController: conversationHostingVC,
                      withStyle: .push,
