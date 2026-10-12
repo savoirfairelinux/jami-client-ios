@@ -116,7 +116,7 @@ enum ContactAction: String {
     case add
     case remove
     case join
-    case banned
+    case banned = "ban"
     case unban
 
     func getInteractionString(name: String, isIncomig: Bool) -> String {
