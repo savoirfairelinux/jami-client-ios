@@ -22,7 +22,7 @@ import RxSwift
 import RxRelay
 
 class ConversationDataSource: ObservableObject {
-    @Published var conversationViewModels = [ConversationRowVM]()
+    @Published var conversationRows = [ConversationRowVM]()
     var blockedConversation = [ConversationRowVM]()
     let conversationsService: ConversationsService
     let contactsService: ContactsService
@@ -30,7 +30,7 @@ class ConversationDataSource: ObservableObject {
     var disposeBag = DisposeBag()
     let injectionBag: InjectionBag
 
-    var onNewConversationViewModelCreated: ((ConversationModel) -> Void)?
+    var onNewConversationRowCreated: ((ConversationModel) -> Void)?
     var onConversationRestored: ((ConversationModel) -> Void)?
     var getTemporaryConversation: ((ConversationModel) -> ConversationRowVM?)?
 
@@ -50,14 +50,14 @@ class ConversationDataSource: ObservableObject {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] conversations in
                 guard let self = self else { return }
-                self.conversationViewModels = self.mapConversationsToViewModels(conversations)
+                self.conversationRows = self.mapConversationsToRows(conversations)
             })
             .disposed(by: disposeBag)
     }
 
-    private func mapConversationsToViewModels(_ conversations: [ConversationModel]) -> [ConversationRowVM] {
+    private func mapConversationsToRows(_ conversations: [ConversationModel]) -> [ConversationRowVM] {
         var viewModelsByConversation = [ObjectIdentifier: ConversationRowVM]()
-        for viewModel in conversationViewModels {
+        for viewModel in conversationRows {
             if let conversation = viewModel.conversation {
                 viewModelsByConversation[ObjectIdentifier(conversation)] = viewModel
             }
@@ -83,13 +83,13 @@ class ConversationDataSource: ObservableObject {
                 return nil
             }
 
-            onNewConversationViewModelCreated?(conversationModel)
+            onNewConversationRowCreated?(conversationModel)
             return newViewModel
         }
     }
 
     private func createOrRetrieveViewModel(for conversationModel: ConversationModel, isBlocked: Bool) -> ConversationRowVM? {
-        if let viewModel = conversationViewModels.first(where: { $0.conversation == conversationModel }) {
+        if let viewModel = conversationRows.first(where: { $0.conversation == conversationModel }) {
             viewModel.conversation = conversationModel
             return viewModel
         }
@@ -155,10 +155,10 @@ class ConversationDataSource: ObservableObject {
             return
         }
         let preceding = Set(storeConversations[..<targetIndex].map { ObjectIdentifier($0) })
-        let insertIndex = self.conversationViewModels.filter { visible in
+        let insertIndex = self.conversationRows.filter { visible in
             visible.conversation.map { preceding.contains(ObjectIdentifier($0)) } ?? false
         }.count
-        self.conversationViewModels.insert(viewModel, at: insertIndex)
+        self.conversationRows.insert(viewModel, at: insertIndex)
     }
 
     private func observeContactRemoved() {
@@ -184,8 +184,8 @@ class ConversationDataSource: ObservableObject {
 
     private func moveOrAddConversationToBanned(jamiId: String, accountId: String) {
         // Check if the conversation is already in active conversations
-        if let index = self.conversationViewModels.firstIndex(where: { $0.isCoreConversationWith(jamiId: jamiId) }) {
-            let conversationViewModel = self.conversationViewModels.remove(at: index)
+        if let index = self.conversationRows.firstIndex(where: { $0.isCoreConversationWith(jamiId: jamiId) }) {
+            let conversationViewModel = self.conversationRows.remove(at: index)
             conversationViewModel.updateBlockedStatus()
             self.blockedConversation.append(conversationViewModel)
         } else {
@@ -212,7 +212,7 @@ class ConversationDataSource: ObservableObject {
                       let accountId: String = event.getEventInput(.accountId) else { return }
                 DispatchQueue.main.async { [weak self] in
                     guard let self = self else { return }
-                    self.conversationViewModels.removeAll { $0.conversation.id == conversationId && $0.conversation.accountId == accountId
+                    self.conversationRows.removeAll { $0.conversation.id == conversationId && $0.conversation.accountId == accountId
                     }
                 }
             })

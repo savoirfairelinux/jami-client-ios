@@ -27,6 +27,6 @@ class TestableFilteredDataSource: ConversationDataSource {
     init(conversations: [Ring.ConversationRowVM], injectionBag: InjectionBag) {
         super.init(with: injectionBag)
         self.disposeBag = DisposeBag()
-        self.conversationViewModels = conversations
+        self.conversationRows = conversations
     }
 }

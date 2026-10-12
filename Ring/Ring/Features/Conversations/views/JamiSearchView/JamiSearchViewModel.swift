@@ -53,7 +53,7 @@ enum SearchStatus {
 
 protocol FilterConversationDelegate: AnyObject {
     func temporaryConversationCreated(conversation: ConversationRowVM?)
-    func showConversation(withConversationViewModel conversationViewModel: ConversationRowVM)
+    func showConversation(_ row: ConversationRowVM)
 }
 
 class JamiSearchViewModel: ObservableObject {
@@ -79,9 +79,9 @@ class JamiSearchViewModel: ObservableObject {
 
     var filteredResults: [ConversationRowVM] {
         if searchBarText.value.isEmpty {
-            return dataSource.conversationViewModels
+            return dataSource.conversationRows
         } else {
-            return dataSource.conversationViewModels.filter { $0.matches(searchBarText.value) }
+            return dataSource.conversationRows.filter { $0.matches(searchBarText.value) }
         }
     }
 
@@ -127,9 +127,9 @@ class JamiSearchViewModel: ObservableObject {
         }
     }
 
-    static func removeFilteredConversations(from conversationViewModels: [ConversationRowVM],
+    static func removeFilteredConversations(from conversationRows: [ConversationRowVM],
                                             with filteredResults: [ConversationRowVM]) -> [ConversationRowVM] {
-        return conversationViewModels
+        return conversationRows
             .filter({ !filteredResults.contains($0) })
     }
 
@@ -187,7 +187,7 @@ class JamiSearchViewModel: ObservableObject {
     }
 
     func isConversationExists(for searchQuery: String) -> Bool {
-        let coreDialog = self.dataSource.conversationViewModels
+        let coreDialog = self.dataSource.conversationRows
             .filter({[weak self] conversation in
                 guard let self = self else { return false }
                 return self.isConversation(conversation, match: searchQuery)
@@ -403,7 +403,7 @@ class JamiSearchViewModel: ObservableObject {
 
     func showConversation(conversation: ConversationRowVM) {
         if let delegate = delegate {
-            delegate.showConversation(withConversationViewModel: conversation)
+            delegate.showConversation(conversation)
         }
     }
 

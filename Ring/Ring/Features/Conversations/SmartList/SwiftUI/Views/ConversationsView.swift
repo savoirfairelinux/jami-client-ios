@@ -59,7 +59,7 @@ struct SwipeActionsModifier: ViewModifier {
             title: Text(action.title(for: conversation.conversation)),
             message: Text(action.confirmationMessage(for: conversation.conversation)),
             primaryButton: .destructive(Text(action.confirmationButtonTitle(for: conversation.conversation))) {
-                model.performDestructiveAction(action, conversationViewModel: conversation)
+                model.performDestructiveAction(action, row: conversation)
             },
             secondaryButton: .cancel()
         )
@@ -80,7 +80,7 @@ struct ConversationsView: View {
             if let model = model {
                 Button(action: { [weak conversation, weak model] in
                     guard let conversation = conversation, let model = model else { return }
-                    model.showConversation(withConversationViewModel: conversation,
+                    model.showConversation(conversation,
                                            publisher: stateEmitter)
                 }, label: {
                     // withSeparator: false — the in-content Divider() slides with the
@@ -111,7 +111,7 @@ struct TempConversationsView: View {
                 .contentShape(Rectangle())
                 .onTapGesture { [weak conversation, weak model] in
                     guard let conversation = conversation, let model = model else { return }
-                    model.showConversation(withConversationViewModel: conversation,
+                    model.showConversation(conversation,
                                            publisher: state)
                 }
                 .transition(.opacity)
@@ -130,7 +130,7 @@ struct JamsSearchResultView: View {
                 .contentShape(Rectangle())
                 .onTapGesture { [weak conversation, weak model] in
                     guard let conversation = conversation, let model = model else { return }
-                    model.showConversation(withConversationViewModel: conversation,
+                    model.showConversation(conversation,
                                            publisher: state)
                 }
                 .transition(.opacity)

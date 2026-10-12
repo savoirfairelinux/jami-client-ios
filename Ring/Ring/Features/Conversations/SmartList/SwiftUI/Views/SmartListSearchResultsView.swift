@@ -214,7 +214,7 @@ struct SmartListSearchResultsView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .contentShape(Rectangle())
                 .onTapGesture {
-                    model.showConversation(withConversationViewModel: conversation,
+                    model.showConversation(conversation,
                                            publisher: stateEmitter)
                 }
         }

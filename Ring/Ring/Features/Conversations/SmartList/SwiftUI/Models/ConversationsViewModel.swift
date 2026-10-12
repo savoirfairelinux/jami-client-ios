@@ -132,12 +132,12 @@ class ConversationsViewModel: ObservableObject {
     }
 
     private func setupFilteredConversations() {
-        Publishers.CombineLatest($searchQuery, conversationsSource.$conversationViewModels)
-            .map { searchQuery, conversationViewModels in
+        Publishers.CombineLatest($searchQuery, conversationsSource.$conversationRows)
+            .map { searchQuery, conversationRows in
                 if searchQuery.isEmpty {
-                    return conversationViewModels
+                    return conversationRows
                 } else {
-                    return conversationViewModels.filter { $0.matches(searchQuery) }
+                    return conversationRows.filter { $0.matches(searchQuery) }
                 }
             }
             .assign(to: &$filteredConversations)
@@ -208,7 +208,7 @@ class ConversationsViewModel: ObservableObject {
     }
 
     private func setupNewConversationHandler() {
-        conversationsSource.onNewConversationViewModelCreated = { [weak self] conversationModel in
+        conversationsSource.onNewConversationRowCreated = { [weak self] conversationModel in
             guard let self = self else { return }
             self.conversationFromTemporaryCreated(conversation: conversationModel)
         }
@@ -238,12 +238,11 @@ class ConversationsViewModel: ObservableObject {
         }
     }
 
-    func showConversation(withConversationViewModel conversationViewModel: ConversationRowVM,
+    func showConversation(_ row: ConversationRowVM,
                           publisher: ConversationStatePublisher) {
-        markConversationPresented(conversationViewModel)
+        markConversationPresented(row)
         let state = ConversationState
-            .conversationDetail(conversationViewModel:
-                                    conversationViewModel)
+            .conversationDetail(row: row)
         publisher.emitState(state)
     }
 
@@ -259,14 +258,13 @@ class ConversationsViewModel: ObservableObject {
         guard let account = accountsService.currentAccount else { return }
 
         // Attempt to find an existing one-to-one conversation with the specified jamiId
-        if let existingConversation = conversationsSource.conversationViewModels.first(where: {
+        if let existingConversation = conversationsSource.conversationRows.first(where: {
             $0.conversation.isCoredialog() && $0.conversation.getParticipants().first?.jamiId == jamiId
         }) {
             // Update and show the existing conversation
             markConversationPresented(existingConversation)
             let state = ConversationState
-                .conversationDetail(conversationViewModel:
-                                        existingConversation)
+                .conversationDetail(row: existingConversation)
             publisher.emitState(state)
             return
         }
@@ -275,8 +273,7 @@ class ConversationsViewModel: ObservableObject {
         if let blockedConversation = conversationsSource.blockedConversation.first(where: { $0.isCoreConversationWith(jamiId: jamiId) }) {
             markConversationPresented(blockedConversation)
             let state = ConversationState
-                .conversationDetail(conversationViewModel:
-                                        blockedConversation)
+                .conversationDetail(row: blockedConversation)
             publisher.emitState(state)
             return
         }
@@ -286,8 +283,7 @@ class ConversationsViewModel: ObservableObject {
         temporaryConversation = tempConversation
         markConversationPresented(tempConversation)
         let state = ConversationState
-            .conversationDetail(conversationViewModel:
-                                    tempConversation)
+            .conversationDetail(row: tempConversation)
         publisher.emitState(state)
     }
 
@@ -326,13 +322,12 @@ class ConversationsViewModel: ObservableObject {
         let newConversation = ConversationRowVM(with: self.injectionBag)
         newConversation.conversation = conversation
         let state = ConversationState
-            .conversationDetail(conversationViewModel:
-                                    newConversation)
+            .conversationDetail(row: newConversation)
         publisher.emitState(state)
     }
 
-    func performDestructiveAction(_ action: ConversationDestructiveAction, conversationViewModel: ConversationRowVM) {
-        guard let conversation = conversationViewModel.conversation else { return }
+    func performDestructiveAction(_ action: ConversationDestructiveAction, row: ConversationRowVM) {
+        guard let conversation = row.conversation else { return }
         destructiveActionExecutor.perform(action, on: conversation)
     }
 
@@ -341,11 +336,11 @@ class ConversationsViewModel: ObservableObject {
         let temporaryConversationId = "temporary"
         var presentedId: String = ""
 
-        mutating func updatePresentedConversation(conversationViewModel: ConversationRowVM) {
-            if conversationViewModel.conversation.id.isEmpty {
+        mutating func updatePresentedConversation(row: ConversationRowVM) {
+            if row.conversation.id.isEmpty {
                 presentedId = temporaryConversationId
             } else {
-                presentedId = conversationViewModel.conversation.id
+                presentedId = row.conversation.id
             }
         }
 
@@ -365,8 +360,8 @@ class ConversationsViewModel: ObservableObject {
     /// the query should be cleared instead.
     private var suspendedSearchQuery: String?
 
-    private func markConversationPresented(_ conversationViewModel: ConversationRowVM) {
-        presentedConversation.updatePresentedConversation(conversationViewModel: conversationViewModel)
+    private func markConversationPresented(_ row: ConversationRowVM) {
+        presentedConversation.updatePresentedConversation(row: row)
         if searchFlow.isActive {
             suspendedSearchQuery = searchQuery
         }

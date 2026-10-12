@@ -146,7 +146,7 @@ class ConversationsCoordinator: RootCoordinator, StateableResponsive, Conversati
                     if accountCalls.first?.value.incomingNotAcceptedNotIgnoredCalls().count == 1,
                        let conversationId = accountCalls.first?.value.incomingNotAcceptedNotIgnoredCalls().first?.conversationId,
                        let navigationController = self.rootViewController as? UINavigationController,
-                       let conversationModel = self.getConversationViewModelForId(conversationId: conversationId),
+                       let conversationModel = self.row(forConversationId: conversationId),
                        let conversationController = navigationController.topViewController as? ConversationViewController,
                        conversationController.viewModel.conversation == conversationModel.conversation {
                         return
@@ -291,23 +291,23 @@ extension ConversationsCoordinator {
         guard let uriString = JamiURI(schema: URIType.ring, infoHash: participantId).uriString else {
             return
         }
-        if let model = getConversationViewModelForParticipant(jamiId: uriString) {
-            self.showConversation(withConversationViewModel: model, withAnimation: false)
+        if let model = row(forParticipant: uriString) {
+            self.showConversation(model, withAnimation: false)
         }
     }
 
     func openConversationFromNotification(conversationId: String, accountId: String) {
         self.popToSmartList()
-        if let model = getConversationViewModelForId(conversationId: conversationId) {
-            self.showConversation(withConversationViewModel: model, withAnimation: false)
+        if let model = row(forConversationId: conversationId) {
+            self.showConversation(model, withAnimation: false)
         }
     }
 
     func openNewConversation(jamiId: String) {
         guard let account = self.accountService.currentAccount else { return }
         let uri = JamiURI(schema: URIType.ring, infoHash: jamiId)
-        if let conversation = self.getConversationViewModelForParticipant(jamiId: jamiId) {
-            self.showConversation(withConversationViewModel: conversation)
+        if let conversation = self.row(forParticipant: jamiId) {
+            self.showConversation(conversation)
             return
         }
         let conversation = ConversationModel(withParticipantUri: uri,
@@ -315,15 +315,15 @@ extension ConversationsCoordinator {
                                              type: .oneToOne)
         let newConversation = ConversationRowVM(with: self.injectionBag)
         newConversation.conversation = conversation
-        self.showConversation(withConversationViewModel: newConversation)
+        self.showConversation(newConversation)
     }
 
     func openConversation(conversationId: String, accountId: String, shouldOpenSmarList: Bool, withAnimation: Bool) {
         if shouldOpenSmarList {
             popToSmartList()
         }
-        if let model = getConversationViewModelForId(conversationId: conversationId) {
-            self.showConversation(withConversationViewModel: model, withAnimation: withAnimation)
+        if let model = row(forConversationId: conversationId) {
+            self.showConversation(model, withAnimation: withAnimation)
         }
         if !shouldOpenSmarList {
             let viewControllers = navigationController.viewControllers
@@ -334,17 +334,17 @@ extension ConversationsCoordinator {
     }
 
     func openConversationFromCall(route: CallConversationRoute) {
-        guard let model = conversationViewModel(for: route) else {
+        guard let model = row(for: route) else {
             self.popToSmartList()
             return
         }
         if popToExistingConversation(model.conversation) { return }
         self.popToSmartList()
-        self.showConversation(withConversationViewModel: model, withAnimation: true)
+        self.showConversation(model, withAnimation: true)
     }
 
-    private func conversationViewModel(for route: CallConversationRoute) -> ConversationRowVM? {
-        let models = conversationsSource.conversationViewModels
+    private func row(for route: CallConversationRoute) -> ConversationRowVM? {
+        let models = conversationsSource.conversationRows
             .filter { $0.conversation.accountId == route.accountId }
         if let conversationId = route.conversationId, !conversationId.isEmpty {
             return models.first { $0.conversation.id == conversationId }
@@ -385,14 +385,14 @@ extension ConversationsCoordinator {
         self.openConversation(conversationId: conversationModel.id, accountId: conversationModel.accountId, shouldOpenSmarList: true, withAnimation: true)
     }
 
-    func getConversationViewModelForParticipant(jamiId: String) -> ConversationRowVM? {
-        return self.conversationsSource.conversationViewModels.first(where: { model in
+    func row(forParticipant jamiId: String) -> ConversationRowVM? {
+        return self.conversationsSource.conversationRows.first(where: { model in
             model.conversation.isCoredialog() && model.conversation.getParticipants().first?.jamiId == jamiId
         })
     }
 
-    func getConversationViewModelForId(conversationId: String) -> ConversationRowVM? {
-        return self.conversationsSource.conversationViewModels.first(where: { model in
+    func row(forConversationId conversationId: String) -> ConversationRowVM? {
+        return self.conversationsSource.conversationRows.first(where: { model in
             model.conversation.id == conversationId
         })
     }
@@ -429,22 +429,22 @@ extension ConversationsCoordinator {
 
     private func navigateToConversationIfNeeded(for contactRingId: String, account: AccountModel) {
         if let conversation = findConversationForOutgoingCall(contactRingId: contactRingId, account: account) {
-            showConversation(withConversationViewModel: conversation, withAnimation: false)
+            showConversation(conversation, withAnimation: false)
         }
     }
 
     private func findConversationForOutgoingCall(contactRingId: String, account: AccountModel) -> ConversationRowVM? {
         if let call = ActiveCall(contactRingId),
-           let conversation = getConversationViewModelForId(conversationId: call.conversationId) {
+           let conversation = row(forConversationId: call.conversationId) {
             return conversation
         }
 
-        if let conversation = getConversationViewModelForParticipant(jamiId: contactRingId) {
+        if let conversation = row(forParticipant: contactRingId) {
             return conversation
         }
 
         let swarmId = contactRingId.replacingOccurrences(of: "swarm:", with: "")
-        if let conversation = getConversationViewModelForId(conversationId: swarmId) {
+        if let conversation = row(forConversationId: swarmId) {
             return conversation
         }
 
