@@ -46,7 +46,7 @@ struct ContextMenuView: View {
     var body: some View {
         ZStack {
             GeometryReader { geo in
-                let topOffset = max(0, model.messageFrame.origin.y + messageOffsetDiff - (model.isShortMsg ? model.emojiBarHeight : 0))
+                let topOffset = max(0, model.messageFrame.origin.y + messageOffsetDiff - (model.isShortMsg && model.showsEmojiBar ? model.emojiBarHeight : 0))
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 0) {
                         // top spacing to position message at its original Y
@@ -57,9 +57,11 @@ struct ContextMenuView: View {
 
                         // emoji picker if short message, otherwise see below
                         if model.isShortMsg {
-                            makeWithSpacers(elementForAlignment: makeEmojiBar())
-                                .frame(width: model.screenWidth, alignment: model.isOurMsg ? .trailing : .leading)
-                                .opacity(emojiBarOpacity)
+                            if model.showsEmojiBar {
+                                makeWithSpacers(elementForAlignment: makeEmojiBar())
+                                    .frame(width: model.screenWidth, alignment: model.isOurMsg ? .trailing : .leading)
+                                    .opacity(emojiBarOpacity)
+                            }
                             Spacer()
                                 .frame(height: model.emojiVerticalPadding)
                         }
@@ -78,7 +80,7 @@ struct ContextMenuView: View {
                         }
                         .frame(width: model.screenWidth, alignment: model.isOurMsg ? .trailing : .leading)
                         // emoji bar below message for long messages
-                        if !model.isShortMsg {
+                        if !model.isShortMsg && model.showsEmojiBar {
                             Spacer()
                                 .frame(height: model.defaultVerticalPadding)
                             makeWithSpacers(elementForAlignment: makeEmojiBar())
@@ -155,9 +157,11 @@ struct ContextMenuView: View {
 
     /// Enable scrolling only when content exceeds available space.
     private func updateScrollEnabled(availableHeight: CGFloat) {
-        let topOffset = max(0, model.messageFrame.origin.y + messageOffsetDiff - (model.isShortMsg ? model.emojiBarHeight : 0))
+        let topOffset = max(0, model.messageFrame.origin.y + messageOffsetDiff - (model.isShortMsg && model.showsEmojiBar ? model.emojiBarHeight : 0))
         var contentHeight: CGFloat = topOffset + model.defaultVerticalPadding
-        contentHeight += model.emojiBarHeight
+        if model.showsEmojiBar {
+            contentHeight += model.emojiBarHeight
+        }
         if model.isShortMsg {
             contentHeight += model.emojiVerticalPadding + model.defaultVerticalPadding
         }
@@ -218,7 +222,16 @@ struct ContextMenuView: View {
             makeActions()
         case .reactions:
             makeReactions()
+        case .editHistory:
+            makeEditHistory()
         }
+    }
+
+    func makeEditHistory() -> some View {
+        MessageEditHistoryView(versions: model.editHistory, highlightColor: Color(model.preferencesColor))
+            .frame(height: model.menuSize.height)
+            .enableNestedScrolling()
+            .modifier(GlassModifier(shape: RoundedRectangle(cornerRadius: model.menuCornerRadius, style: .continuous)))
     }
 
     @ViewBuilder
@@ -250,6 +263,12 @@ struct ContextMenuView: View {
             ForEach(model.menuItems) { item in
                 VStack(spacing: 0) {
                     Button {
+                        if item == .editHistory {
+                            withAnimation(.spring(response: 0.35, dampingFraction: 0.8)) {
+                                model.showEditHistory()
+                            }
+                            return
+                        }
                         let shouldShowKeyboard = item == .copy || item == .deleteMessage
                         let state: ContextMenuPresentingState = shouldShowKeyboard ? .willDismissWithAction : .willDismissWithTextEditingAction
                         model.contentVM?.contextMenuSelect(item: item)
