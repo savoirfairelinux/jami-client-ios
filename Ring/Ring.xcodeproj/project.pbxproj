@@ -267,6 +267,7 @@
 		263F61742B4460B200240AEE /* ReactionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263F61732B4460B200240AEE /* ReactionsView.swift */; };
 		263F61762B45BBA100240AEE /* ReactionsContainerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263F61752B45BBA100240AEE /* ReactionsContainerModel.swift */; };
 		263F61782B45E8FD00240AEE /* MessageBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263F61772B45E8FD00240AEE /* MessageBubbleView.swift */; };
+		A7C3E1F72F80A10100C0FFEE /* MessageEditHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C3E1F62F80A10100C0FFEE /* MessageEditHistoryView.swift */; };
 		2640BA9A2B974E4B006D189A /* MessageProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2640BA992B974E4B006D189A /* MessageProtocols.swift */; };
 		26454F7C2B7E770900CFF06C /* TestEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26454F7B2B7E770900CFF06C /* TestEnvironment.swift */; };
 		26454FB72B7FDCB200CFF06C /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26454FB62B7FDCB200CFF06C /* AboutViewController.swift */; };
@@ -343,6 +344,7 @@
 		269DA09928E23D37007D51D6 /* MessageRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269DA09828E23D37007D51D6 /* MessageRowView.swift */; };
 		269DA09D28E23F57007D51D6 /* MessagesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269DA09C28E23F57007D51D6 /* MessagesListView.swift */; };
 		269DA09F28E244F1007D51D6 /* MessagesListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269DA09E28E244F1007D51D6 /* MessagesListVM.swift */; };
+		A7EH00102F20000300000002 /* MessageEditHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EH00102F20000300000001 /* MessageEditHistory.swift */; };
 		A7MG00102F20000300000002 /* MessageGrouping.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7MG00102F20000300000001 /* MessageGrouping.swift */; };
 		26A072F92959F461006D8163 /* ContextMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A072F82959F461006D8163 /* ContextMenuView.swift */; };
 		26A072FD295A7145006D8163 /* ContextMenuVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A072FC295A7145006D8163 /* ContextMenuVM.swift */; };
@@ -911,6 +913,7 @@
 		263F61732B4460B200240AEE /* ReactionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionsView.swift; sourceTree = "<group>"; };
 		263F61752B45BBA100240AEE /* ReactionsContainerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionsContainerModel.swift; sourceTree = "<group>"; };
 		263F61772B45E8FD00240AEE /* MessageBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBubbleView.swift; sourceTree = "<group>"; };
+		A7C3E1F62F80A10100C0FFEE /* MessageEditHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageEditHistoryView.swift; sourceTree = "<group>"; };
 		2640BA992B974E4B006D189A /* MessageProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageProtocols.swift; sourceTree = "<group>"; };
 		26454F7B2B7E770900CFF06C /* TestEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestEnvironment.swift; sourceTree = "<group>"; };
 		26454FB62B7FDCB200CFF06C /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
@@ -989,6 +992,7 @@
 		269DA09828E23D37007D51D6 /* MessageRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRowView.swift; sourceTree = "<group>"; };
 		269DA09C28E23F57007D51D6 /* MessagesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesListView.swift; sourceTree = "<group>"; };
 		269DA09E28E244F1007D51D6 /* MessagesListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesListVM.swift; sourceTree = "<group>"; };
+		A7EH00102F20000300000001 /* MessageEditHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageEditHistory.swift; sourceTree = "<group>"; };
 		A7MG00102F20000300000001 /* MessageGrouping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageGrouping.swift; sourceTree = "<group>"; };
 		26A072F82959F461006D8163 /* ContextMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextMenuView.swift; sourceTree = "<group>"; };
 		26A072FC295A7145006D8163 /* ContextMenuVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextMenuVM.swift; sourceTree = "<group>"; };
@@ -3452,6 +3456,7 @@
 				265DFB1029302A8700834B97 /* ContactMessageView.swift */,
 				26A072F82959F461006D8163 /* ContextMenuView.swift */,
 				263F61772B45E8FD00240AEE /* MessageBubbleView.swift */,
+				A7C3E1F62F80A10100C0FFEE /* MessageEditHistoryView.swift */,
 				A7MD00102F20000300000001 /* MessageBubbleTextRenderer.swift */,
 				A7MD00102F20000300000003 /* MessageTimeView.swift */,
 				263F61712B4460A400240AEE /* ReactionRowView.swift */,
@@ -3469,6 +3474,7 @@
 				2637E5642DDE27B600ACCF91 /* CallBannerViewModel.swift */,
 				260C73F029196B66005C513F /* MessageReplyTargetVM.swift */,
 				269DA09E28E244F1007D51D6 /* MessagesListVM.swift */,
+				A7EH00102F20000300000001 /* MessageEditHistory.swift */,
 				A7MG00102F20000300000001 /* MessageGrouping.swift */,
 				26EF35EA28E38DA200D97E14 /* MessageContentVM.swift */,
 				265DFAF22929C01400834B97 /* MessageRowVM.swift */,
@@ -4369,6 +4375,7 @@
 				26625BBB2BAA0749009D2DDB /* SmartListContainer.swift in Sources */,
 				2640BA9A2B974E4B006D189A /* MessageProtocols.swift in Sources */,
 				263F61782B45E8FD00240AEE /* MessageBubbleView.swift in Sources */,
+				A7C3E1F72F80A10100C0FFEE /* MessageEditHistoryView.swift in Sources */,
 				A7MD00102F20000300000002 /* MessageBubbleTextRenderer.swift in Sources */,
 				A7MD00102F20000300000004 /* MessageTimeView.swift in Sources */,
 				26E081242BC07824001B4C18 /* RequestsViewModel.swift in Sources */,
@@ -4510,6 +4517,7 @@
 				26F544A32C5AABD20069A7A4 /* CreateAccountView.swift in Sources */,
 				1A20417A1F1E547F00C08435 /* Stateable.swift in Sources */,
 				269DA09F28E244F1007D51D6 /* MessagesListVM.swift in Sources */,
+				A7EH00102F20000300000002 /* MessageEditHistory.swift in Sources */,
 				A7MG00102F20000300000002 /* MessageGrouping.swift in Sources */,
 				26D08ABE2696296300E37574 /* RequestsAdapter.mm in Sources */,
 				265DFB07292FBC4200834B97 /* TransferHelper.swift in Sources */,

@@ -50,6 +50,7 @@ enum ContextualMenuItem: Identifiable {
     case deleteMessage
     case deleteFile
     case edit
+    case editHistory
 
     func toString() -> String {
         switch self {
@@ -71,6 +72,8 @@ enum ContextualMenuItem: Identifiable {
             return L10n.Global.deleteFile
         case .edit:
             return L10n.Global.editMessage
+        case .editHistory:
+            return L10n.Conversation.editHistory
         }
     }
 
@@ -103,6 +106,8 @@ enum ContextualMenuItem: Identifiable {
             return "xmark.bin"
         case .edit:
             return "pencil"
+        case .editHistory:
+            return "clock.arrow.circlepath"
         }
     }
 }
@@ -153,6 +158,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
         }
     }
     @Published var editIndicator = L10n.Conversation.edited
+    @Published private(set) var editions = [MessageAction]()
     @Published var editionColor = Color.secondary
     @Published private(set) var isEmojiOnly = false
     @Published private(set) var endsEmojiRun = true
@@ -546,14 +552,18 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
 
     private func textMenuItems() -> [ContextualMenuItem] {
         if isIncoming {
-            return [.reply, .copy, .forward]
+            return [.reply, .copy, .forward] + editHistoryMenuItems()
         }
         var items: [ContextualMenuItem] = [.reply]
         if metadata == nil {
             items.append(.edit)
         }
         items += [.copy, .forward, .deleteMessage]
-        return items
+        return items + editHistoryMenuItems()
+    }
+
+    private func editHistoryMenuItems() -> [ContextualMenuItem] {
+        message.isMessageEdited() && !message.isMessageDeleted() ? [.editHistory] : []
     }
 
     private func fileTransferMenuItems() -> [ContextualMenuItem] {
@@ -734,6 +744,10 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
         self.messageDeleted = self.message.isMessageDeleted()
         self.messageEdited = self.message.isMessageEdited()
         self.accessibilityLabelValue = self.message.accessibilityLabelValue
+        // File transfer menus don't depend on edits and are refreshed with the transfer info.
+        if self.type != .fileTransfer {
+            self.updateMenuitems()
+        }
         if self.messageDeleted || self.messageEdited {
             self.updateMessageStyle()
         }
@@ -742,6 +756,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
             self.messageDeletedText = L10n.Conversation.deletedMessage(self.username)
             self.updateUserName()
         }
+        self.editions = self.message.editions
     }
 
     func updateUserName() {
@@ -896,6 +911,8 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
             delete()
         case .edit:
             edit()
+        case .editHistory:
+            break
         }
     }
 

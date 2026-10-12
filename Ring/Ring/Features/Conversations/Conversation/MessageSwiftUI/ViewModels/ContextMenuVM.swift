@@ -27,6 +27,7 @@ import SwiftyBeaver
 enum ContextMenuMode {
     case actions
     case reactions
+    case editHistory
 }
 
 class ContextMenuVM: ObservableObject {
@@ -41,10 +42,12 @@ class ContextMenuVM: ObservableObject {
     @Published private(set) var menuItems = [ContextualMenuItem]()
     @Published private(set) var messageDateText = ""
     @Published private(set) var mode: ContextMenuMode = .actions
-    @Published private(set) var reactionsEmptied = false
+    @Published private(set) var listEmptied = false
     @Published private(set) var pendingReactionRemovals = Set<String>()
+    @Published private(set) var editHistory = [MessageVersion]()
     private(set) var avatarFactory: AvatarProviderFactory?
     private var reactionsSubscription: AnyCancellable?
+    private var editHistorySubscription: AnyCancellable?
 
     func configure(with message: MessageBubbleView, mode: ContextMenuMode, localJamiId: String?, avatarFactory: AvatarProviderFactory) {
         self.currentJamiAccountId = localJamiId
@@ -53,11 +56,16 @@ class ContextMenuVM: ObservableObject {
         self.containerModel = message.messageModel
         self.avatarFactory = avatarFactory
         self.mode = mode
-        reactionsEmptied = false
+        listEmptied = false
         pendingReactionRemovals = []
         reactionsSubscription = nil
+        editHistorySubscription = nil
         if mode == .reactions {
             observeReactions(message.messageModel.reactionsModel)
+        }
+        editHistory = []
+        if mode == .editHistory {
+            observeEditHistory(message.model)
         }
 
         let incoming = message.model.message.incoming
@@ -116,10 +124,10 @@ class ContextMenuVM: ObservableObject {
     private var minMenuWidth: CGFloat {
         Self.bodyMetrics.scaledValue(for: 220)
     }
-    private var maxReactionsListHeight: CGFloat {
+    private var maxListHeight: CGFloat {
         Self.bodyMetrics.scaledValue(for: 330)
     }
-    private var minReactionsListWidth: CGFloat {
+    private var minListWidth: CGFloat {
         Self.bodyMetrics.scaledValue(for: 200)
     }
     private let screenPadding: CGFloat = 100
@@ -148,6 +156,10 @@ class ContextMenuVM: ObservableObject {
         return max(0, min(screenWidth - emojiBarHorizontalPadding, emojiColumnWidth * maxEmojiColumns))
     }
     let emojiBarHorizontalInset: CGFloat = 8
+
+    var showsEmojiBar: Bool {
+        mode != .editHistory
+    }
 
     private(set) var isShortMsg: Bool = true
     private(set) var incomingMessageMarginSize: CGFloat = 58
@@ -183,9 +195,15 @@ class ContextMenuVM: ObservableObject {
     // MARK: - Size calculations
 
     private func updateContextMenuSize() {
-        if mode == .reactions {
+        switch mode {
+        case .reactions:
             updateReactionsListSize()
             return
+        case .editHistory:
+            updateEditHistorySize()
+            return
+        case .actions:
+            break
         }
         let fontAttributes = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .body)]
         let messageDateAttributes = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .footnote)]
@@ -224,13 +242,59 @@ class ContextMenuVM: ObservableObject {
                                                                   isLocal: isLocal,
                                                                   usesAccessibilitySize: usesAccessibilitySize))
         }
+        let separatorsHeight = CGFloat(max(0, rows.count - 1)) / UIScreen.main.scale
+        let height = min(rowsHeight + separatorsHeight, maxListHeight) + ReactionsView.verticalPadding * 2
+        menuSize = CGSize(width: min(maxListWidth, max(minListWidth, rowsWidth)),
+                          height: min(height, screenHeight - screenPadding))
+    }
+
+    private func updateEditHistorySize() {
+        let idealWidth = editHistory.map { MessageVersionRow.idealWidth(of: $0) }.max() ?? 0
+        let width = min(maxListWidth, max(minListWidth, idealWidth))
+        let rowsHeight = editHistory.reduce(CGFloat(0)) { $0 + MessageVersionRow.height(of: $1, width: width) }
+        let separatorsHeight = CGFloat(max(0, editHistory.count - 1)) / UIScreen.main.scale
+        let height = min(rowsHeight + separatorsHeight, maxListHeight) + MessageEditHistoryView.verticalPadding * 2
+        menuSize = CGSize(width: width, height: min(height, screenHeight - screenPadding))
+    }
+
+    private var maxListWidth: CGFloat {
         let placementInset = isOurMsg ? max(10, screenWidth - messageFrame.maxX) : messageFrame.minX
         let availableWidth = screenWidth - placementInset - emojiBarHorizontalPadding
-        let maxWidth = min(emojiBarMaxWidth + emojiBarHorizontalInset * 2, availableWidth)
-        let separatorsHeight = CGFloat(max(0, rows.count - 1)) / UIScreen.main.scale
-        let height = min(rowsHeight + separatorsHeight, maxReactionsListHeight) + ReactionsView.verticalPadding * 2
-        menuSize = CGSize(width: min(maxWidth, max(minReactionsListWidth, rowsWidth)),
-                          height: min(height, screenHeight - screenPadding))
+        return min(emojiBarMaxWidth + emojiBarHorizontalInset * 2, availableWidth)
+    }
+
+    func showEditHistory() {
+        guard let contentVM = contentVM else { return }
+        mode = .editHistory
+        observeEditHistory(contentVM)
+        if editHistory.isEmpty {
+            listEmptied = true
+            return
+        }
+        updateContextMenuSize()
+    }
+
+    private func observeEditHistory(_ contentVM: MessageContentVM) {
+        editHistory = Self.versions(of: contentVM)
+        // @Published emits before the value is stored, so read the message on the next main-queue pass.
+        editHistorySubscription = contentVM.$editions
+            .dropFirst()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self, weak contentVM] _ in
+                guard let self = self, let contentVM = contentVM else { return }
+                let versions = Self.versions(of: contentVM)
+                if versions.isEmpty {
+                    self.listEmptied = true
+                } else if versions != self.editHistory {
+                    self.editHistory = versions
+                    self.updateEditHistorySize()
+                }
+            }
+    }
+
+    private static func versions(of message: MessageContentVM) -> [MessageVersion] {
+        if message.messageDeleted { return [] }
+        return MessageEditHistory.versions(current: message.content, editions: message.editions)
     }
 
     func observeReactions(_ reactions: ReactionsContainerModel) {
@@ -241,7 +305,7 @@ class ContextMenuVM: ObservableObject {
             .sink { [weak self, weak reactions] _ in
                 guard let self = self, let reactions = reactions else { return }
                 if reactions.reactionsRow.isEmpty {
-                    self.reactionsEmptied = true
+                    self.listEmptied = true
                 } else {
                     self.objectWillChange.send()
                     self.updateReactionsListSize()
@@ -249,8 +313,9 @@ class ContextMenuVM: ObservableObject {
             }
     }
 
-    func stopObservingReactions() {
+    func stopObserving() {
         reactionsSubscription = nil
+        editHistorySubscription = nil
     }
 
     private let minMessageDisplayHeight: CGFloat = 400

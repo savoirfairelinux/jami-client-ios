@@ -109,6 +109,14 @@ internal enum L10n {
     }
     /// Attachments removed
     internal static let draftAttachmentsDiscarded = L10n.tr("Localizable", "accessibility.draftAttachmentsDiscarded", fallback: "Attachments removed")
+    /// Added: %@
+    internal static func editHistoryAdded(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "accessibility.editHistoryAdded", String(describing: p1), fallback: "Added: %@")
+    }
+    /// Removed: %@
+    internal static func editHistoryRemoved(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "accessibility.editHistoryRemoved", String(describing: p1), fallback: "Removed: %@")
+    }
     /// File received, name not available
     internal static let fileTransferUnnamed = L10n.tr("Localizable", "accessibility.fileTransferUnnamed", fallback: "File received, name not available")
     /// In reply to message
@@ -1005,6 +1013,16 @@ internal enum L10n {
     }
     /// Edited
     internal static let edited = L10n.tr("Localizable", "conversation.edited", fallback: "Edited")
+    /// Edit history
+    internal static let editHistory = L10n.tr("Localizable", "conversation.editHistory", fallback: "Edit history")
+    /// Current
+    internal static let editHistoryCurrent = L10n.tr("Localizable", "conversation.editHistoryCurrent", fallback: "Current")
+    /// Edit %d
+    internal static func editHistoryEdit(_ p1: Int) -> String {
+      return L10n.tr("Localizable", "conversation.editHistoryEdit", p1, fallback: "Edit %d")
+    }
+    /// Original
+    internal static let editHistoryOriginal = L10n.tr("Localizable", "conversation.editHistoryOriginal", fallback: "Original")
     /// Could not save image
     internal static let errorSavingImage = L10n.tr("Localizable", "conversation.errorSavingImage", fallback: "Could not save image")
     /// An error occurred while saving the image to the photo library.
