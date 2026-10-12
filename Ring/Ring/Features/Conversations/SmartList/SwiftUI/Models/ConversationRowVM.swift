@@ -57,7 +57,12 @@ class ConversationRowVM: ObservableObject, Identifiable {
     }()
     var profileImageData = BehaviorRelay<Data?>(value: nil)
     var contactPresence = BehaviorRelay<PresenceStatus>(value: .offline)
-    var swarmInfo: SwarmInfoProtocol?
+    let swarmInfoChanges = BehaviorRelay<SwarmInfoProtocol?>(value: nil)
+    var swarmInfo: SwarmInfoProtocol? {
+        didSet {
+            swarmInfoChanges.accept(swarmInfo)
+        }
+    }
 
     lazy var avatarProvider: AvatarProvider = {
         return AvatarProvider(
@@ -305,6 +310,7 @@ class ConversationRowVM: ObservableObject, Identifiable {
                             profileService: self.injectionBag.profileService,
                             size: .default55
                         )
+                        self.swarmInfoChanges.accept(swarmInfo)
                         self.objectWillChange.send()
                     }
                 }

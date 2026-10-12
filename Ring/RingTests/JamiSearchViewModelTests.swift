@@ -115,8 +115,8 @@ final class JamiSearchViewModelTests: XCTestCase {
         let conversationId = "conversation"
         let documentId = "document"
         row.conversation = ConversationModel(id: conversationId,
-                                                        accountId: accountId,
-                                                        info: ConversationInfo(type: .oneToOne))
+                                             accountId: accountId,
+                                             info: ConversationInfo(type: .oneToOne))
 
         let unreadUpdated = expectation(description: "Document notification updates the conversation badge")
         row.$unreadMessages
