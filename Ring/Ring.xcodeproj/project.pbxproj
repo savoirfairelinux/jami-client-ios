@@ -613,6 +613,7 @@
 		F10000000000000000000003 /* ConversationProfileEditorVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000004 /* ConversationProfileEditorVM.swift */; };
 		F10000000000000000000005 /* ConversationProfileEditorAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000006 /* ConversationProfileEditorAvatar.swift */; };
 		F10000000000000000000007 /* ConversationProfileEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000008 /* ConversationProfileEditorView.swift */; };
+		A7C3E1F52F80A10100C0FFEE /* PeerSharingTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C3E1F42F80A10100C0FFEE /* PeerSharingTracker.swift */; };
 		FB726FE5280249DA8219EDE9 /* PeerSharingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECD5DF711D545048AA5E270 /* PeerSharingViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -1839,6 +1840,7 @@
 		DB0100010000000000000001 /* DBManagerConversationDeletionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManagerConversationDeletionTests.swift; sourceTree = "<group>"; };
 		DB0200010000000000000001 /* ProfileStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStore.swift; sourceTree = "<group>"; };
 		DDE8CA20E60048678054756B /* PeerSharingSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerSharingSheet.swift; sourceTree = "<group>"; };
+		A7C3E1F42F80A10100C0FFEE /* PeerSharingTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerSharingTracker.swift; sourceTree = "<group>"; };
 		EECD5DF711D545048AA5E270 /* PeerSharingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerSharingViewModel.swift; sourceTree = "<group>"; };
 		F10000000000000000000004 /* ConversationProfileEditorVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationProfileEditorVM.swift; sourceTree = "<group>"; };
 		F10000000000000000000006 /* ConversationProfileEditorAvatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationProfileEditorAvatar.swift; sourceTree = "<group>"; };
@@ -3669,6 +3671,7 @@
 		3C5BC51ADFD347D4A4A9253D /* PeerSharing */ = {
 			isa = PBXGroup;
 			children = (
+				A7C3E1F42F80A10100C0FFEE /* PeerSharingTracker.swift */,
 				EECD5DF711D545048AA5E270 /* PeerSharingViewModel.swift */,
 				DDE8CA20E60048678054756B /* PeerSharingSheet.swift */,
 			);
@@ -4501,6 +4504,7 @@
 				1A2D18A41F27EF5200B2C785 /* AppCoordinator.swift in Sources */,
 				26F1D8E22FC73C39002AA754 /* PeerServicesAdapterDelegate.swift in Sources */,
 				26F1D8E32FC73C39002AA754 /* PeerSharingService.swift in Sources */,
+				A7C3E1F52F80A10100C0FFEE /* PeerSharingTracker.swift in Sources */,
 				FB726FE5280249DA8219EDE9 /* PeerSharingViewModel.swift in Sources */,
 				0769ACCE032643E496BC13A5 /* PeerSharingSheet.swift in Sources */,
 				26D87CEB2BBB4A5F0086E4AA /* AccountsViewModel.swift in Sources */,
