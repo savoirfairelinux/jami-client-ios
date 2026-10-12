@@ -18,15 +18,12 @@ import SwiftUI
 
 struct MemberList: View {
     // MARK: - Properties
-    @StateObject var viewModel: SwarmInfoVM
+    @ObservedObject var viewModel: SwarmInfoVM
     @SwiftUI.State private var editMode = EditMode.inactive
-
-    private var localJamiId: String {
-        viewModel.injectionBag.accountService.currentAccount?.jamiId ?? ""
-    }
 
     // MARK: - Body
     var body: some View {
+        let localJamiId = viewModel.localJamiId
         Section(header: Text(L10n.Swarm.members)) {
             ForEach(viewModel.members, id: \.self) { participant in
                 MemberItem(

@@ -256,7 +256,7 @@ class ConversationViewModel: Stateable, ObservableObject {
         if !conversation.isSwarm() {
             /// send not swarm message
             guard let participantJamiId = conversation.getParticipants().first?.jamiId,
-                  let account = self.accountService.currentAccount else { return }
+                  let account = self.accountService.getAccount(fromAccountId: conversation.accountId) else { return }
             // if in call send sip msg
             if let call = self.callService.call(participantId: participantJamiId, accountId: conversation.accountId) {
                 self.callService.sendInCallMessage(callId: call, message: content, accountId: account)
@@ -280,7 +280,7 @@ class ConversationViewModel: Stateable, ObservableObject {
     }
 
     func setMessagesAsRead() {
-        guard let account = self.accountService.currentAccount,
+        guard let account = self.accountService.getAccount(fromAccountId: conversation.accountId),
               let ringId = AccountModelHelper(withAccount: account).ringId else { return }
         self.conversationsService
             .setMessagesAsRead(forConversation: self.conversation,
@@ -339,9 +339,8 @@ extension ConversationViewModel {
     }
 
     func startSendingLocation(duration: TimeInterval? = nil) {
-        guard let account = self.accountService.currentAccount,
-              let jamiId = self.conversation.getParticipants().first?.jamiId else { return }
-        self.locationSharingService.startSharingLocation(from: account.id,
+        guard let jamiId = self.conversation.getParticipants().first?.jamiId else { return }
+        self.locationSharingService.startSharingLocation(from: self.conversation.accountId,
                                                          to: jamiId,
                                                          duration: duration)
     }

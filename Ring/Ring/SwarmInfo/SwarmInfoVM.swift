@@ -197,9 +197,12 @@ class SwarmInfoVM: ObservableObject {
         .disposed(by: disposeBag)
     }
 
+    var localJamiId: String? {
+        accountService.getAccount(fromAccountId: conversation.accountId)?.jamiId
+    }
+
     private func currentUserIsAdmin(in participants: [ParticipantInfo]) -> Bool {
-        guard !conversation.isCoredialog(),
-              let jamiId = accountService.getAccount(fromAccountId: conversation.accountId)?.jamiId else {
+        guard !conversation.isCoredialog(), let jamiId = localJamiId else {
             return false
         }
         return participants.contains { $0.role == .admin && $0.jamiId == jamiId }
@@ -268,6 +271,7 @@ class SwarmInfoVM: ObservableObject {
     }
 
     func removeMember(indexOffset: IndexSet) {
+        guard isAdmin else { return }
         let idsToDelete = indexOffset.map { members[$0].jamiId }
 
         for memberId in idsToDelete {
