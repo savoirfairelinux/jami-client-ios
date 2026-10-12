@@ -276,8 +276,7 @@ struct MessagesListView: View {
                 return
             }
             guard let snapshot = captureKeyWindowSnapshot(erasingRect: frame) else { return }
-            model.contextMenuModel.messageFrame = frame
-            model.contextMenuModel.configure(with: message)
+            model.configureContextMenu(with: message, frame: frame)
             currentSnapshot = snapshot
             contextMenuPresentingState = .shouldPresent
 
