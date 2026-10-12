@@ -21,23 +21,23 @@ import RxSwift
 import RxRelay
 
 protocol SwarmInfoProtocol {
-    var avatarData: BehaviorRelay<Data?> { get set }
-    var title: BehaviorRelay<String> { get set }
-    var color: BehaviorRelay<String> { get set }
-    var type: BehaviorRelay<ConversationType> { get set }
-    var description: BehaviorRelay<String> { get set }
-    var participantsNames: BehaviorRelay<[String]> { get set }
-    var participantsAvatars: BehaviorRelay<[Data]> { get set }
+    var avatarData: BehaviorRelay<Data?> { get }
+    var title: BehaviorRelay<String> { get }
+    var color: BehaviorRelay<String> { get }
+    var type: BehaviorRelay<ConversationType> { get }
+    var description: BehaviorRelay<String> { get }
+    var participantsNames: BehaviorRelay<[String]> { get }
+    var participantsAvatars: BehaviorRelay<[Data]> { get }
 
-    var finalTitle: BehaviorRelay<String> { get set }
-    var participantsString: BehaviorRelay<String> { get set }
+    var finalTitle: BehaviorRelay<String> { get }
+    var participantsString: BehaviorRelay<String> { get }
 
-    var finalAvatarData: Observable<Data?> { get set }
+    var finalAvatarData: Observable<Data?> { get }
 
-    var participants: BehaviorRelay<[ParticipantInfo]> { get set }
+    var participants: BehaviorRelay<[ParticipantInfo]> { get }
     var conversation: ConversationModel { get }
-    var conversationEnded: BehaviorRelay<Bool> { get set }
-    var id: String { get set }
+    var conversationEnded: BehaviorRelay<Bool> { get }
+    var id: String { get }
 
     func hasParticipantWithRegisteredName(name: String) -> Bool
     func contains(searchQuery: String) -> Bool
@@ -133,21 +133,21 @@ class ParticipantInfo: Equatable, Hashable {
 
 // swiftlint:disable type_body_length
 class SwarmInfo: SwarmInfoProtocol, Identifiable {
-    var avatarData: BehaviorRelay<Data?> = BehaviorRelay(value: nil)
-    var title = BehaviorRelay(value: "")
-    var color = BehaviorRelay<String>(value: "")
-    var type = BehaviorRelay(value: ConversationType.oneToOne)
-    var description = BehaviorRelay(value: "")
-    var participantsNames: BehaviorRelay<[String]> = BehaviorRelay(value: [""])
-    var participantsAvatars: BehaviorRelay<[Data]> = BehaviorRelay(value: [Data()])
-    var conversationEnded: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    let avatarData: BehaviorRelay<Data?> = BehaviorRelay(value: nil)
+    let title = BehaviorRelay(value: "")
+    let color = BehaviorRelay<String>(value: "")
+    let type = BehaviorRelay(value: ConversationType.oneToOne)
+    let description = BehaviorRelay(value: "")
+    let participantsNames: BehaviorRelay<[String]> = BehaviorRelay(value: [""])
+    let participantsAvatars: BehaviorRelay<[Data]> = BehaviorRelay(value: [Data()])
+    let conversationEnded: BehaviorRelay<Bool> = BehaviorRelay(value: false)
 
     lazy var id: String = {
         return conversation.id
     }()
 
-    var finalTitle = BehaviorRelay<String>(value: "")
-    var participantsString = BehaviorRelay(value: "")
+    let finalTitle = BehaviorRelay<String>(value: "")
+    let participantsString = BehaviorRelay(value: "")
 
     lazy var finalAvatarData: Observable<Data?> = {
         return Observable
@@ -161,7 +161,7 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
             }
     }()
 
-    var participants = BehaviorRelay(value: [ParticipantInfo]()) // particiapnts already added to swarm
+    let participants = BehaviorRelay(value: [ParticipantInfo]()) // participants already added to swarm
     var nonLocalParticipants: [ParticipantInfo] {
         return participants.value.filter { $0.jamiId != localJamiId }
     }

@@ -34,16 +34,17 @@ class SwarmInfoVM: ObservableObject {
     @Published private(set) var isAdmin = false
     @Published private(set) var members = [ParticipantInfo]()
 
-    var swarmInfo: SwarmInfoProtocol
-    var conversation: ConversationModel?
+    let swarmInfo: SwarmInfoProtocol
+    var conversation: ConversationModel {
+        swarmInfo.conversation
+    }
 
     /// Built when the documents tab is first shown, so a conversation that is
     /// never asked for its documents never asks the daemon for them.
-    lazy var collabDocuments: CollabDocumentsVM? = {
-        guard let conversation = self.conversation else { return nil }
+    lazy var collabDocuments: CollabDocumentsVM = {
         return CollabDocumentsVM(with: self.injectionBag,
-                                 accountId: conversation.accountId,
-                                 conversationId: conversation.id,
+                                 accountId: self.conversation.accountId,
+                                 conversationId: self.conversation.id,
                                  participants: self.swarmInfo.participants.asObservable())
     }()
 
@@ -71,19 +72,17 @@ class SwarmInfoVM: ObservableObject {
     }
 
     var canEditProfile: Bool {
-        guard let conversation else { return false }
         return Self.profileEditingAllowed(isCoreDialog: conversation.isCoredialog(),
                                           hasRemoteParticipant: !conversation.isOnlyLocalParticipant(),
                                           isAdmin: isAdmin)
     }
 
     var canAddParticipants: Bool {
-        guard let conversation else { return false }
         return !conversation.isCoredialog()
     }
 
     var isGroupProfile: Bool {
-        conversation?.isCoredialog() == false
+        !conversation.isCoredialog()
     }
 
     var conversationToEdit: ConversationModel? {
@@ -97,44 +96,34 @@ class SwarmInfoVM: ObservableObject {
     }
 
     var callTarget: CallTarget? {
-        guard let conversation,
-              let uri = callService.outgoingCallURI(for: conversation) else { return nil }
+        guard let uri = callService.outgoingCallURI(for: conversation) else { return nil }
         return (uri: uri, displayName: conversation.isCoredialog() ? title : "")
     }
 
     let provider: AvatarProvider
 
     var removeConversationText: String {
-        guard let conversation = self.conversation else {
-            return L10n.Swarm.removeConversation
-        }
         return ConversationDestructiveAction.removeConversation.title(for: conversation)
     }
 
     var removeConversationConfirmation: String {
-        guard let conversation = self.conversation else {
-            return L10n.Alerts.confirmLeaveConversation
-        }
         return ConversationDestructiveAction.removeConversation.confirmationMessage(for: conversation)
     }
 
     var removeConversationAlertButton: String {
-        guard let conversation = self.conversation else {
-            return L10n.Global.remove
-        }
         return ConversationDestructiveAction.removeConversation.confirmationButtonTitle(for: conversation)
     }
 
     var blockContactIcon: String {
-        destructiveActionIcon(.blockContact, fallback: "person.crop.circle.badge.xmark")
+        ConversationDestructiveAction.blockContact.icon(for: conversation)
     }
 
     var removeContactIcon: String {
-        destructiveActionIcon(.removeContact, fallback: "person.crop.circle.badge.minus")
+        ConversationDestructiveAction.removeContact.icon(for: conversation)
     }
 
     var removeConversationIcon: String {
-        destructiveActionIcon(.removeConversation, fallback: "trash")
+        ConversationDestructiveAction.removeConversation.icon(for: conversation)
     }
 
     // MARK: - Initialization
@@ -149,7 +138,6 @@ class SwarmInfoVM: ObservableObject {
         self.destructiveActionExecutor = ConversationDestructiveActionExecutor(injectionBag: injectionBag)
 
         self.swarmInfo = swarmInfo
-        self.conversation = swarmInfo.conversation
         self.provider = AvatarProvider.from(
             swarmInfo: swarmInfo,
             profileService: profileService,
@@ -160,13 +148,6 @@ class SwarmInfoVM: ObservableObject {
         self.members = swarmInfo.participants.value
 
         setupBindings()
-    }
-
-    private func destructiveActionIcon(_ action: ConversationDestructiveAction, fallback: String) -> String {
-        guard let conversation = self.conversation else {
-            return fallback
-        }
-        return action.icon(for: conversation)
     }
 
     // MARK: - Setup
@@ -217,8 +198,7 @@ class SwarmInfoVM: ObservableObject {
     }
 
     private func currentUserIsAdmin(in participants: [ParticipantInfo]) -> Bool {
-        guard let conversation,
-              !conversation.isCoredialog(),
+        guard !conversation.isCoredialog(),
               let jamiId = accountService.getAccount(fromAccountId: conversation.accountId)?.jamiId else {
             return false
         }
@@ -228,8 +208,7 @@ class SwarmInfoVM: ObservableObject {
     // MARK: - Contact Information Methods
 
     func getContactJamiId() -> String? {
-        guard let conversation = self.conversation,
-              conversation.isCoredialog() else {
+        guard conversation.isCoredialog() else {
             return nil
         }
         // For regular conversations, return the first non-local participant
@@ -245,12 +224,10 @@ class SwarmInfoVM: ObservableObject {
     }
 
     func updateSwarmColor(selectedColor: String) {
-        guard let conversationId = conversation?.id,
-              let accountId = conversation?.accountId,
-              var prefsInfo = conversationService.getConversationPreferences(accountId: accountId, conversationId: conversationId) else { return }
+        guard var prefsInfo = conversationService.getConversationPreferences(accountId: conversation.accountId, conversationId: conversation.id) else { return }
 
         prefsInfo[ConversationPreferenceAttributes.color.rawValue] = selectedColor
-        self.conversationService.updateConversationPrefs(accountId: accountId, conversationId: conversationId, prefs: prefsInfo)
+        self.conversationService.updateConversationPrefs(accountId: conversation.accountId, conversationId: conversation.id, prefs: prefsInfo)
     }
 
     // MARK: - Participants Management
@@ -258,7 +235,7 @@ class SwarmInfoVM: ObservableObject {
     func updateContactList() {
         self.contactsSubscriptionsDisposeBag = DisposeBag()
         let inviteCandidates = SwarmInviteCandidates(injectionBag: injectionBag,
-                                                     accountId: swarmInfo.conversation.accountId,
+                                                     accountId: conversation.accountId,
                                                      members: swarmInfo.participants.asObservable())
         self.inviteCandidates = inviteCandidates
 
@@ -282,28 +259,21 @@ class SwarmInfoVM: ObservableObject {
     }
 
     func addMember() {
-        guard let conversationId = conversation?.id,
-              let accountId = conversation?.accountId else { return }
-
         for participant in selections {
-            conversationService.addConversationMember(accountId: accountId, conversationId: conversationId, memberId: participant)
+            conversationService.addConversationMember(accountId: conversation.accountId, conversationId: conversation.id, memberId: participant)
         }
         selections.removeAll()
     }
 
     func removeMember(indexOffset: IndexSet) {
-        guard let conversationId = conversation?.id,
-              let accountId = conversation?.accountId else { return }
-
         let idsToDelete = indexOffset.map { members[$0].jamiId }
 
         for memberId in idsToDelete {
-            conversationService.removeConversationMember(accountId: accountId, conversationId: conversationId, memberId: memberId)
+            conversationService.removeConversationMember(accountId: conversation.accountId, conversationId: conversation.id, memberId: memberId)
         }
     }
 
     func removeContact(stateEmitter: ConversationStatePublisher) {
-        guard let conversation = self.conversation else { return }
         destructiveActionExecutor.perform(.removeContact,
                                           on: conversation,
                                           removeConversationAfterContactRemoval: false,
@@ -312,13 +282,11 @@ class SwarmInfoVM: ObservableObject {
     }
 
     func removeConversation(stateEmitter: ConversationStatePublisher) {
-        guard let conversation = self.conversation else { return }
         destructiveActionExecutor.perform(.removeConversation, on: conversation)
         stateEmitter.emitState(ConversationState.conversationRemoved)
     }
 
     func blockContact(stateEmitter: ConversationStatePublisher) {
-        guard let conversation = self.conversation else { return }
         destructiveActionExecutor.perform(.blockContact,
                                           on: conversation,
                                           removeConversationAfterContactRemoval: false,
