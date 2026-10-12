@@ -805,6 +805,7 @@
 "collab.italic" = "Kursiv";
 "collab.underline" = "Unterstreichen";
 "collab.strikethrough" = "Durchgestrichen";
+"collab.textFormat" = "Text format";
 "collab.heading" = "Überschrift %d";
 "collab.bulletList" = "Aufzählungsliste";
 "collab.orderedList" = "Nummerierte Liste";
@@ -816,6 +817,14 @@
 "collab.clearFormat" = "Formatierung löschen";
 "collab.undo" = "Rückgängig";
 "collab.redo" = "Rückgängig";
+"collab.paragraphStyle" = "Style";
+"collab.normalText" = "Normal text";
+"collab.font" = "Font";
+"collab.defaultFont" = "Default font";
+"collab.unavailableFont" = "Unavailable font";
+"collab.fontSize" = "Größe";
+"collab.defaultSize" = "Default size";
+"collab.alignment" = "Absatzausrichtung";
 "collab.remove" = "Entfernen";
 "collab.open" = "Öffnen";
 "collab.downloadAndOpen" = "Herunterladen und öffnen";

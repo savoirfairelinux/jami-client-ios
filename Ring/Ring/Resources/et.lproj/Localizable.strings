@@ -144,8 +144,8 @@
 
 // Smartlist
 "smartlist.yesterday" = "Eile";
-"smartlist.results" = "Jami search";
-"smartlist.jamsResults" = "Organization search";
+"smartlist.results" = "Jami otsing";
+"smartlist.jamsResults" = "Organisatsiooni otsing";
 "smartlist.conversations" = "Vestlused";
 "smartlist.conversationsSearchHint" = "Sul pole veel ühtegi vestlust.";
 "smartlist.publicDirectoryHint" = "Inimesed Jami võrgus väljaspool sinu aadressiraamatut.";
@@ -154,7 +154,7 @@
 "smartlist.noConversationsFound" = "Ühtegi vestlust ei vasta sinu otsingule.";
 "smartlist.newContact" = "Uus kontakt";
 "smartlist.newGroup" = "Uus grupp";
-"smartlist.accounts" = "Your accounts";
+"smartlist.accounts" = "Sinu kasutajakontod";
 "smartlist.invitationReceived" = "Sulle on kutseid";
 "smartlist.noResults" = "Pole tulemusi";
 "smartlist.noConversation" = "Pole vestlusi";
@@ -585,7 +585,7 @@
 "generalSettings.fileTransfer" = "Failide ülekandmine";
 "generalSettings.locationSharing" = "Asukoha jagamine";
 "generalSettings.automaticAcceptIncomingFiles" = "Automaatiliselt luba allalaadida saabuvaid faile";
-"generalSettings.acceptTransferLimit" = "Maximum automatic download size";
+"generalSettings.acceptTransferLimit" = "Automaatse üleslaadimise mahu ülempiir";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = piiramatu)";
 "generalSettings.limitLocationSharingDuration" = "Piira asukoha jagamise kestust";
 "generalSettings.locationSharingDuration" = "Asukoha jagamise kestus";
@@ -805,6 +805,7 @@
 "collab.italic" = "Kaldkiri";
 "collab.underline" = "Allajoonitud kiri";
 "collab.strikethrough" = "Läbikriipsutus";
+"collab.textFormat" = "Text format";
 "collab.heading" = "Pealkiri %d";
 "collab.bulletList" = "Nummerdamata loend";
 "collab.orderedList" = "Nummerdatud loend";
@@ -816,6 +817,14 @@
 "collab.clearFormat" = "Eemalda vormindus";
 "collab.undo" = "Pööra toiming tagasi";
 "collab.redo" = "Korda toimingut";
+"collab.paragraphStyle" = "Style";
+"collab.normalText" = "Normal text";
+"collab.font" = "Font";
+"collab.defaultFont" = "Default font";
+"collab.unavailableFont" = "Unavailable font";
+"collab.fontSize" = "Size";
+"collab.defaultSize" = "Default size";
+"collab.alignment" = "Lõigu joondumine";
 "collab.remove" = "Eemalda";
 "collab.open" = "Avatud";
 "collab.downloadAndOpen" = "Laadi alla ja ava";

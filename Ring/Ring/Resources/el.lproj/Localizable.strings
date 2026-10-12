@@ -805,6 +805,7 @@
 "collab.italic" = "Πλάγια";
 "collab.underline" = "Underline";
 "collab.strikethrough" = "Διακριτή διαγραφή";
+"collab.textFormat" = "Text format";
 "collab.heading" = "Heading %d";
 "collab.bulletList" = "Bulleted list";
 "collab.orderedList" = "Numbered list";
@@ -816,6 +817,14 @@
 "collab.clearFormat" = "Clear formatting";
 "collab.undo" = "Αναίρεση";
 "collab.redo" = "Redo";
+"collab.paragraphStyle" = "Style";
+"collab.normalText" = "Normal text";
+"collab.font" = "Font";
+"collab.defaultFont" = "Default font";
+"collab.unavailableFont" = "Unavailable font";
+"collab.fontSize" = "Μέγεθος";
+"collab.defaultSize" = "Default size";
+"collab.alignment" = "Paragraph alignment";
 "collab.remove" = "Απομακρύνετε";
 "collab.open" = "Ανοίξτε";
 "collab.downloadAndOpen" = "Download and open";

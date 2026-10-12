@@ -805,6 +805,7 @@
 "collab.italic" = "சாய்ந்த";
 "collab.underline" = "Underline";
 "collab.strikethrough" = "அடித்தம்";
+"collab.textFormat" = "Text format";
 "collab.heading" = "Heading %d";
 "collab.bulletList" = "Bulleted list";
 "collab.orderedList" = "Numbered list";
@@ -816,6 +817,14 @@
 "collab.clearFormat" = "Clear formatting";
 "collab.undo" = "Undo";
 "collab.redo" = "Redo";
+"collab.paragraphStyle" = "Style";
+"collab.normalText" = "Normal text";
+"collab.font" = "Font";
+"collab.defaultFont" = "Default font";
+"collab.unavailableFont" = "Unavailable font";
+"collab.fontSize" = "Size";
+"collab.defaultSize" = "Default size";
+"collab.alignment" = "Paragraph alignment";
 "collab.remove" = "நீக்கவும்";
 "collab.open" = "திறந்த";
 "collab.downloadAndOpen" = "Download and open";

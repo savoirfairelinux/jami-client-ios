@@ -144,8 +144,8 @@
 
 // Smartlist
 "smartlist.yesterday" = "昨天";
-"smartlist.results" = "Jami search";
-"smartlist.jamsResults" = "Organization search";
+"smartlist.results" = "Jami搜索";
+"smartlist.jamsResults" = "机构搜索";
 "smartlist.conversations" = "對話";
 "smartlist.conversationsSearchHint" = "你还没有任何对话。";
 "smartlist.publicDirectoryHint" = "不在联系人列表中的jami用户。";
@@ -154,7 +154,7 @@
 "smartlist.noConversationsFound" = "无匹配的对话。";
 "smartlist.newContact" = "新联系人";
 "smartlist.newGroup" = "新群组";
-"smartlist.accounts" = "Your accounts";
+"smartlist.accounts" = "你的账户";
 "smartlist.invitationReceived" = "邀请已发送";
 "smartlist.noResults" = "无结果";
 "smartlist.noConversation" = "沒有對話";
@@ -585,7 +585,7 @@
 "generalSettings.fileTransfer" = "文件传输";
 "generalSettings.locationSharing" = "位置共享";
 "generalSettings.automaticAcceptIncomingFiles" = "自动接收文件";
-"generalSettings.acceptTransferLimit" = "Maximum automatic download size";
+"generalSettings.acceptTransferLimit" = "自动下载大小上限";
 "generalSettings.acceptTransferLimitDescription" = "（MB，0 = 無限制）";
 "generalSettings.limitLocationSharingDuration" = "限制位置共享的时间";
 "generalSettings.locationSharingDuration" = "位置股份持续时间";
@@ -805,6 +805,7 @@
 "collab.italic" = "倾斜";
 "collab.underline" = "下划线";
 "collab.strikethrough" = "删除线";
+"collab.textFormat" = "Text format";
 "collab.heading" = "标题%d";
 "collab.bulletList" = "项目符号列表";
 "collab.orderedList" = "编号列表";
@@ -816,6 +817,14 @@
 "collab.clearFormat" = "清除格式";
 "collab.undo" = "復原";
 "collab.redo" = "復原還原";
+"collab.paragraphStyle" = "Style";
+"collab.normalText" = "Normal text";
+"collab.font" = "Font";
+"collab.defaultFont" = "Default font";
+"collab.unavailableFont" = "Unavailable font";
+"collab.fontSize" = "大小";
+"collab.defaultSize" = "Default size";
+"collab.alignment" = "段落对齐";
 "collab.remove" = "删除";
 "collab.open" = "開啟";
 "collab.downloadAndOpen" = "下载并打开";

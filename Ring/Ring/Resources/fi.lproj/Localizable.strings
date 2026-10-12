@@ -805,6 +805,7 @@
 "collab.italic" = "Kursivointi";
 "collab.underline" = "Alleviivaa";
 "collab.strikethrough" = "Yliviivattu";
+"collab.textFormat" = "Text format";
 "collab.heading" = "Otsikko %d";
 "collab.bulletList" = "Luettelomerkki";
 "collab.orderedList" = "Numeroitu";
@@ -816,6 +817,14 @@
 "collab.clearFormat" = "Tyhjennä muotoilu";
 "collab.undo" = "Peru";
 "collab.redo" = "Tee uudelleen";
+"collab.paragraphStyle" = "Style";
+"collab.normalText" = "Normal text";
+"collab.font" = "Font";
+"collab.defaultFont" = "Default font";
+"collab.unavailableFont" = "Unavailable font";
+"collab.fontSize" = "Koko";
+"collab.defaultSize" = "Default size";
+"collab.alignment" = "Kappaleen tasaus";
 "collab.remove" = "Poista";
 "collab.open" = "Avaa";
 "collab.downloadAndOpen" = "Lataa ja avaa";

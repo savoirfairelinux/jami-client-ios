@@ -144,8 +144,8 @@
 
 // Smartlist
 "smartlist.yesterday" = "Ayer";
-"smartlist.results" = "Jami search";
-"smartlist.jamsResults" = "Organization search";
+"smartlist.results" = "Búsqueda de Jami";
+"smartlist.jamsResults" = "Búsqueda de organizaciones";
 "smartlist.conversations" = "Conversaciones";
 "smartlist.conversationsSearchHint" = "Aún no tienes conversaciones.";
 "smartlist.publicDirectoryHint" = "Usuarios de Jami que no son contactos tuyos.";
@@ -154,7 +154,7 @@
 "smartlist.noConversationsFound" = "Ninguna conversación coincide con la búsqueda.";
 "smartlist.newContact" = "Nuevo contacto";
 "smartlist.newGroup" = "Nuevo grupo";
-"smartlist.accounts" = "Your accounts";
+"smartlist.accounts" = "Tus cuentas";
 "smartlist.invitationReceived" = "Invitaciones recibidas";
 "smartlist.noResults" = "Sin resultados";
 "smartlist.noConversation" = "No hay conversaciones";
@@ -585,7 +585,7 @@
 "generalSettings.fileTransfer" = "Transferencia de archivos";
 "generalSettings.locationSharing" = "Compartir ubicación";
 "generalSettings.automaticAcceptIncomingFiles" = "Aceptar automáticamente los archivos entrantes";
-"generalSettings.acceptTransferLimit" = "Maximum automatic download size";
+"generalSettings.acceptTransferLimit" = "Tamaño máximo de descarga automática";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
 "generalSettings.limitLocationSharingDuration" = "Limitar la duración del uso compartido de la ubicación";
 "generalSettings.locationSharingDuration" = "Duración del tiempo compartido";
@@ -805,6 +805,7 @@
 "collab.italic" = "Cursiva";
 "collab.underline" = "Subrayado";
 "collab.strikethrough" = "Tachado";
+"collab.textFormat" = "Text format";
 "collab.heading" = "Encabezado%d";
 "collab.bulletList" = "Lista de bolos";
 "collab.orderedList" = "Lista numerada";
@@ -816,6 +817,14 @@
 "collab.clearFormat" = "Formato limpio";
 "collab.undo" = "Deshacer";
 "collab.redo" = "Rehacer";
+"collab.paragraphStyle" = "Style";
+"collab.normalText" = "Normal text";
+"collab.font" = "Font";
+"collab.defaultFont" = "Default font";
+"collab.unavailableFont" = "Unavailable font";
+"collab.fontSize" = "Tamaño";
+"collab.defaultSize" = "Default size";
+"collab.alignment" = "Ajuste del párrafo";
 "collab.remove" = "Eliminar";
 "collab.open" = "Abrir";
 "collab.downloadAndOpen" = "Descargar y abrir";

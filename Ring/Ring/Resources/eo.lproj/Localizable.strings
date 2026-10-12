@@ -805,6 +805,7 @@
 "collab.italic" = "Italic";
 "collab.underline" = "Underline";
 "collab.strikethrough" = "La trafo";
+"collab.textFormat" = "Text format";
 "collab.heading" = "Heading %d";
 "collab.bulletList" = "Bulleted list";
 "collab.orderedList" = "Numbered list";
@@ -816,6 +817,14 @@
 "collab.clearFormat" = "Clear formatting";
 "collab.undo" = "Malfari";
 "collab.redo" = "Refari";
+"collab.paragraphStyle" = "Style";
+"collab.normalText" = "Normal text";
+"collab.font" = "Font";
+"collab.defaultFont" = "Default font";
+"collab.unavailableFont" = "Unavailable font";
+"collab.fontSize" = "Grando";
+"collab.defaultSize" = "Default size";
+"collab.alignment" = "Paragraph alignment";
 "collab.remove" = "Forigi";
 "collab.open" = "Malfermu";
 "collab.downloadAndOpen" = "Download and open";

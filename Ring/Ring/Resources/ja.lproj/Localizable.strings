@@ -805,6 +805,7 @@
 "collab.italic" = "斜体";
 "collab.underline" = "Underline";
 "collab.strikethrough" = "取り消し線";
+"collab.textFormat" = "Text format";
 "collab.heading" = "Heading %d";
 "collab.bulletList" = "Bulleted list";
 "collab.orderedList" = "Numbered list";
@@ -816,6 +817,14 @@
 "collab.clearFormat" = "Clear formatting";
 "collab.undo" = "取り消し";
 "collab.redo" = "やり直し";
+"collab.paragraphStyle" = "Style";
+"collab.normalText" = "Normal text";
+"collab.font" = "Font";
+"collab.defaultFont" = "Default font";
+"collab.unavailableFont" = "Unavailable font";
+"collab.fontSize" = "サイズ";
+"collab.defaultSize" = "Default size";
+"collab.alignment" = "Paragraph alignment";
 "collab.remove" = "削除";
 "collab.open" = "開く";
 "collab.downloadAndOpen" = "Download and open";
