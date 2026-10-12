@@ -200,7 +200,7 @@ class ConversationRowVM: ObservableObject, Identifiable {
         let isSelfConversation = self.model().isOnlyLocalParticipant()
         if isSelfConversation {
             let localJamiId = self.model().getLocalParticipants()?.jamiId ?? ""
-            let registeredName = self.accountService.currentAccount?.registeredName ?? ""
+            let registeredName = self.accountService.getAccount(fromAccountId: self.model().accountId)?.registeredName ?? ""
             return localJamiId.containsCaseInsensitive(string: searchQuery) ||
                 (!registeredName.isEmpty && registeredName.containsCaseInsensitive(string: searchQuery))
         }

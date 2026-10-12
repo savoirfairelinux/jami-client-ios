@@ -223,6 +223,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
             self.updateLastDisplayed()
             self.callBannerViewModel = CallBannerViewModel(injectionBag: self.injectionBag, conversation: self.conversation, state: self.messagePanelStateSubject)
             self.messagePanel.canWriteDocuments = self.conversation.isSwarm()
+            self.contextMenuModel.currentJamiAccountId = self.accountService.getAccount(fromAccountId: conversation.accountId)?.jamiId
         }
     }
 
@@ -279,7 +280,6 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
         self.locationSharingService = injectionBag.locationSharingService
         self.messagePanel = MessagePanelVM(messagePanelState: self.messagePanelStateSubject)
         self.callBannerViewModel = CallBannerViewModel(injectionBag: injectionBag, conversation: self.conversation, state: self.messagePanelStateSubject)
-        self.contextMenuModel.currentJamiAccountId = self.accountService.currentAccount?.jamiId
 
         self.subscribeLocationEvents()
         self.subscribeSwarmPreferences()
@@ -300,7 +300,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     }
 
     func unblock() {
-        guard let account = accountService.currentAccount,
+        guard let account = accountService.getAccount(fromAccountId: conversation.accountId),
               conversation.isCoredialog(),
               let jamiId = conversation.getParticipants().first?.jamiId,
               let contact = contactsService.contact(withHash: jamiId) else {
@@ -1243,24 +1243,21 @@ extension MessagesListVM {
     }
 
     func startSendingLocation(duration: TimeInterval) {
-        guard let account = self.accountService.currentAccount,
-              let jamiId = self.conversation.getParticipants().first?.jamiId else { return }
-        self.locationSharingService.startSharingLocation(from: account.id,
+        guard let jamiId = self.conversation.getParticipants().first?.jamiId else { return }
+        self.locationSharingService.startSharingLocation(from: self.conversation.accountId,
                                                          to: jamiId,
                                                          duration: duration)
     }
 
     func stopSendingLocation() {
-        guard let account = self.accountService.currentAccount,
-              let jamiId = self.conversation.getParticipants().first?.jamiId else { return }
-        self.locationSharingService.stopSharingLocation(accountId: account.id,
+        guard let jamiId = self.conversation.getParticipants().first?.jamiId else { return }
+        self.locationSharingService.stopSharingLocation(accountId: self.conversation.accountId,
                                                         contactUri: jamiId)
     }
 
     func getMyLocationSharingRemainedTime() -> Int {
-        guard let account = self.accountService.currentAccount,
-              let jamiId = self.conversation.getParticipants().first?.jamiId else { return 0}
-        return self.locationSharingService.getMyLocationSharingRemainedTime(accountId: account.id, contactUri: jamiId)
+        guard let jamiId = self.conversation.getParticipants().first?.jamiId else { return 0 }
+        return self.locationSharingService.getMyLocationSharingRemainedTime(accountId: self.conversation.accountId, contactUri: jamiId)
     }
 
     func getMyLocationSharingRemainedTimeText() -> String {
