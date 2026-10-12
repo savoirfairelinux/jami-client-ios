@@ -35,12 +35,10 @@ protocol SwarmInfoProtocol {
     var finalAvatarData: Observable<Data?> { get set }
 
     var participants: BehaviorRelay<[ParticipantInfo]> { get set }
-    var contacts: BehaviorRelay<[ParticipantInfo]> { get set }
-    var conversation: ConversationModel? { get }
+    var conversation: ConversationModel { get }
     var conversationEnded: BehaviorRelay<Bool> { get set }
     var id: String { get set }
 
-    func addContacts(contacts: [ContactModel])
     func hasParticipantWithRegisteredName(name: String) -> Bool
     func contains(searchQuery: String) -> Bool
 }
@@ -100,6 +98,28 @@ class ParticipantInfo: Equatable, Hashable {
         profileName.accept(profile.alias ?? "")
     }
 
+    static func loaded(jamiId: String, role: ParticipantRole, accountId: String, isLocal: Bool,
+                       profileService: ProfilesService, nameService: NameService) -> ParticipantInfo? {
+        let participantInfo = ParticipantInfo(jamiId: jamiId, role: role, profileService: profileService)
+        let uri = JamiURI.init(schema: .ring, infoHash: jamiId)
+        guard let uriString = uri.uriString else { return nil }
+        let profileObservable: Observable<Profile>
+        if isLocal {
+            profileObservable = profileService.getAccountProfile(accountId: accountId)
+        } else {
+            profileObservable = profileService.getProfile(uri: uriString, accountId: accountId)
+        }
+        profileObservable
+            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
+            .subscribe { [weak participantInfo] profile in
+                participantInfo?.apply(profile)
+            } onError: { _ in
+            }
+            .disposed(by: participantInfo.disposeBag)
+        participantInfo.lookupName(nameService: nameService, accountId: accountId)
+        return participantInfo
+    }
+
     func lookupName(nameService: NameService, accountId: String) {
         nameService.registeredName(forAddress: self.jamiId, accountId: accountId)
             .take(1)
@@ -123,7 +143,7 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
     var conversationEnded: BehaviorRelay<Bool> = BehaviorRelay(value: false)
 
     lazy var id: String = {
-        return conversation?.id ?? ""
+        return conversation.id
     }()
 
     var finalTitle = BehaviorRelay<String>(value: "")
@@ -148,13 +168,10 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
     var localParticipant: ParticipantInfo? {
         return participants.value.first { $0.jamiId == localJamiId }
     }
-    var contacts = BehaviorRelay(value: [ParticipantInfo]()) // contacts that could be added to swarm
-    private(set) var conversation: ConversationModel?
+    let conversation: ConversationModel
 
     private let nameService: NameService
     private let profileService: ProfilesService
-    private let accountsService: AccountsService
-    private let requestsService: RequestsService
     private let accountId: String
     private let localJamiId: String?
     private let disposeBag = DisposeBag()
@@ -163,14 +180,12 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
     private var avatarSource: String?
     private let stateScheduler = SerialDispatchQueueScheduler(qos: .userInitiated)
 
-    // to get info during swarm creation
-    init(injectionBag: InjectionBag, accountId: String) {
+    init(injectionBag: InjectionBag, conversation: ConversationModel) {
         self.nameService = injectionBag.nameService
         self.profileService = injectionBag.profileService
-        self.accountsService = injectionBag.accountService
-        self.requestsService = injectionBag.requestsService
-        self.accountId = accountId
-        self.localJamiId = accountsService.getAccount(fromAccountId: accountId)?.jamiId
+        self.conversation = conversation
+        self.accountId = conversation.accountId
+        self.localJamiId = injectionBag.accountService.getAccount(fromAccountId: conversation.accountId)?.jamiId
 
         Observable
             .combineLatest(self.title.asObservable(),
@@ -192,12 +207,7 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
             } onError: { _ in
             }
             .disposed(by: self.disposeBag)
-    }
 
-    // to get info for existing swarm
-    convenience init(injectionBag: InjectionBag, conversation: ConversationModel) {
-        self.init(injectionBag: injectionBag, accountId: conversation.accountId)
-        self.conversation = conversation
         self.apply(conversation.info)
         conversation.infoChanges
             .observe(on: self.stateScheduler)
@@ -238,39 +248,6 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
         return localParticipant?.role != .admin
     }
 
-    func addContacts(contacts: [ContactModel]) {
-        var contactsInfo = [ParticipantInfo]()
-        self.contacts.accept(contactsInfo)
-        let requests = self.requestsService.requests.value
-        contacts.forEach { contact in
-            let requestIndex = requests.firstIndex(where: { request in
-                request.participants.contains { participant in
-                    participant.jamiId == contact.hash
-                }
-            })
-            // filter out banned and pending contacts
-            if contact.banned || requestIndex != nil { return }
-            // filter out contact that is already added to swarm participants
-            if self.participants.value.filter({ participantInfo in
-                participantInfo.jamiId == contact.hash
-            }).first != nil {
-                return
-            }
-
-            // filter out already added contacts
-            if self.contacts.value.filter({ contactInfo in
-                contactInfo.jamiId == contact.hash
-            }).first != nil {
-                return
-            }
-            if let contactInfo = createParticipant(jamiId: contact.hash, role: ParticipantRole.unknown) {
-                contactsInfo.append(contactInfo)
-            }
-        }
-        if contactsInfo.isEmpty { return }
-        self.insertAndSortContacts(contacts: contactsInfo)
-    }
-
     func hasParticipantWithRegisteredName(name: String) -> Bool {
         return nonLocalParticipants.contains { participant in
             participant.registeredName.value.lowercased() == name.lowercased()
@@ -296,7 +273,7 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
 
         guard !participants.value.isEmpty else { return }
 
-        let isDialog = conversation?.isCoredialog() ?? false
+        let isDialog = conversation.isCoredialog()
 
         // Create a single shared observable for all participant data
         // swiftlint:disable large_tuple
@@ -375,31 +352,9 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
     }
 
     private func createParticipant(jamiId: String, role: ParticipantRole) -> ParticipantInfo? {
-        let participantInfo = ParticipantInfo(jamiId: jamiId, role: role, profileService: self.profileService)
-        let uri = JamiURI.init(schema: .ring, infoHash: jamiId)
-        guard let uriString = uri.uriString else { return nil }
-        let isSelf = jamiId == localJamiId
-        let profileObservable: Observable<Profile>
-        if isSelf {
-            profileObservable = self.profileService.getAccountProfile(accountId: accountId)
-        } else {
-            profileObservable = self.profileService.getProfile(uri: uriString, accountId: accountId)
-        }
-        profileObservable
-            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
-            .subscribe { [weak participantInfo] profile in
-                participantInfo?.apply(profile)
-            } onError: { _ in
-            }
-            .disposed(by: participantInfo.disposeBag)
-        participantInfo.lookupName(nameService: self.nameService, accountId: self.accountId)
-        return participantInfo
-    }
-
-    private func insertAndSortContacts(contacts: [ParticipantInfo]) {
-        var currentValue = [ParticipantInfo]()
-        currentValue.append(contentsOf: contacts)
-        self.contacts.accept(currentValue)
+        return ParticipantInfo.loaded(jamiId: jamiId, role: role, accountId: accountId,
+                                      isLocal: jamiId == localJamiId,
+                                      profileService: profileService, nameService: nameService)
     }
 
     private func insertAndSortParticipants(participants: [ParticipantInfo]) {
@@ -428,7 +383,7 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
     }
 
     private func buildAvatar() -> Data? {
-        guard conversation?.isCoredialog() ?? false else { return nil }
+        guard conversation.isCoredialog() else { return nil }
         if let participant = nonLocalParticipants.first {
             return participant.avatarData.value
         }
@@ -443,7 +398,7 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
     }
 
     private func buildTitleFrom(names: [String]) -> String {
-        if conversation?.isCoredialog() ?? false,
+        if conversation.isCoredialog(),
            let name = nonLocalParticipants.first?.finalName.value, !name.isEmpty {
             return name
         }

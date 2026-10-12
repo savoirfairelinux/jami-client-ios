@@ -291,7 +291,7 @@ extension AvatarProvider {
                      profileService: ProfilesService,
                      size: Constants.AvatarSize,
                      supportsExpansion: Bool = false) -> AvatarProvider {
-        let isGroup = !(swarmInfo.conversation?.isCoredialog() ?? false)
+        let isGroup = !swarmInfo.conversation.isCoredialog()
         let provider = AvatarProvider(
             profileService: profileService,
             size: size,
