@@ -102,7 +102,7 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
     }
 
     convenience init(viewModel: ConversationViewModel) {
-        let containerView = ConversationContainerView(viewModel: viewModel)
+        let containerView = ConversationContainerView(viewModel: viewModel, peerSharing: viewModel.peerSharing)
         self.init(rootView: containerView)
         self.viewModel = viewModel
     }

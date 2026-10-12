@@ -45,13 +45,13 @@ class ConversationViewModel: Stateable, ObservableObject {
     @Published private(set) var name: String = ""
     @Published private(set) var navUserName: String = ""
     @Published private(set) var isBlocked: Bool = false
-    @Published private(set) var hasPeerSharing: Bool = false
     @Published var navBarContentWidth: CGFloat = 0
     @Published private(set) var navBarAvatarProvider: AvatarProvider
 
     let row: ConversationRowVM
     private(set) var conversation: ConversationModel
     let swiftUIModel: MessagesListVM
+    let peerSharing: PeerSharingTracker
     let shouldDismiss = BehaviorRelay<Bool>(value: false)
 
     var isAccountSip: Bool {
@@ -69,12 +69,10 @@ class ConversationViewModel: Stateable, ObservableObject {
     private let profileService: ProfilesService
     private let callService: CallService
     private let locationSharingService: LocationSharingService
-    private let peerSharingService: PeerSharingService
     private let collaborationService: CollaborationService
     private let dataTransferService: DataTransferService
 
     private let disposeBag = DisposeBag()
-    private var conversationBindingsDisposeBag = DisposeBag()
     private var swarmInfoDisposeBag = DisposeBag()
     private var cancellables = Set<AnyCancellable>()
 
@@ -89,7 +87,7 @@ class ConversationViewModel: Stateable, ObservableObject {
         self.profileService = injectionBag.profileService
         self.callService = injectionBag.callService
         self.locationSharingService = injectionBag.locationSharingService
-        self.peerSharingService = injectionBag.peerSharingService
+        self.peerSharing = PeerSharingTracker(peerSharingService: injectionBag.peerSharingService)
         self.collaborationService = injectionBag.collaborationService
         self.dataTransferService = injectionBag.dataTransferService
         self.row = row
@@ -203,10 +201,9 @@ class ConversationViewModel: Stateable, ObservableObject {
 
     private func attach(to conversation: ConversationModel) {
         self.conversation = conversation
-        conversationBindingsDisposeBag = DisposeBag()
         swiftUIModel.conversation = conversation
         guard !row.isAccountSip else { return }
-        setupPeerSharingAvailability()
+        peerSharing.track(conversation, isBlocked: row.isConversationForBlockedContact())
     }
 
     func editMessage(content: String, messageId: String) {
@@ -347,65 +344,6 @@ extension ConversationViewModel {
         self.locationSharingService.startSharingLocation(from: account.id,
                                                          to: jamiId,
                                                          duration: duration)
-    }
-}
-
-// MARK: Peer sharing
-extension ConversationViewModel {
-
-    func makePeerSharingViewModel() -> PeerSharingViewModel? {
-        guard conversation.isCoredialog(),
-              let jamiId = conversation.getParticipants().first?.jamiId else { return nil }
-        return PeerSharingViewModel(
-            accountId: conversation.accountId,
-            peerId: jamiId,
-            peerSharingService: peerSharingService
-        )
-    }
-
-    private func setupPeerSharingAvailability() {
-        setHasPeerSharing(false, for: conversation)
-        guard conversation.isCoredialog(),
-              !row.isConversationForBlockedContact(),
-              let peerId = conversation.getParticipants().first?.jamiId else { return }
-
-        let accountId = conversation.accountId
-
-        peerSharingService.observePeerServices(accountId: accountId, peerId: peerId)
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] result in
-                self?.applyPeerSharingResult(accountId: accountId, peerId: peerId, result: result)
-            })
-            .disposed(by: conversationBindingsDisposeBag)
-
-        peerSharingService.queryPeerServices(accountId: accountId, peerId: peerId)
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] result in
-                self?.applyPeerSharingResult(accountId: accountId, peerId: peerId, result: result)
-            })
-            .disposed(by: conversationBindingsDisposeBag)
-    }
-
-    private func applyPeerSharingResult(accountId: String, peerId: String, result: PeerServicesResult) {
-        guard conversation.accountId == accountId,
-              conversation.isCoredialog(),
-              conversation.getParticipants().first?.jamiId == peerId else { return }
-        setHasPeerSharing(result.hasExposedServices, for: conversation)
-    }
-
-    private func setHasPeerSharing(_ value: Bool, for conversation: ConversationModel) {
-        let update = { [weak self, weak conversation] in
-            guard let self = self,
-                  let conversation = conversation,
-                  self.conversation == conversation else { return }
-            self.hasPeerSharing = value
-        }
-
-        if Thread.isMainThread {
-            update()
-        } else {
-            DispatchQueue.main.async(execute: update)
-        }
     }
 }
 

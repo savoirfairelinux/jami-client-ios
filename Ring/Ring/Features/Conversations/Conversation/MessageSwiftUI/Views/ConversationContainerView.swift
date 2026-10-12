@@ -20,6 +20,7 @@ import SwiftUI
 
 struct ConversationContainerView: View {
     @ObservedObject var viewModel: ConversationViewModel
+    @ObservedObject var peerSharing: PeerSharingTracker
     @StateObject private var mediaPreviewPresenter = MediaPreviewPresenter()
     @SwiftUI.State private var showPeerServices = false
     @SwiftUI.State private var peerSharingVM: PeerSharingViewModel?
@@ -33,7 +34,7 @@ struct ConversationContainerView: View {
     private var visibleTrailingButtons: [TrailingButton] {
         guard !viewModel.isBlocked else { return [] }
         var buttons: [TrailingButton] = []
-        if viewModel.hasPeerSharing { buttons.append(.peerSharing) }
+        if peerSharing.hasPeerSharing { buttons.append(.peerSharing) }
         buttons.append(.audioCall)
         if !viewModel.isAccountSip { buttons.append(.videoCall) }
         return buttons
@@ -66,11 +67,11 @@ struct ConversationContainerView: View {
             .sheet(isPresented: $showPeerServices, onDismiss: {
                 peerSharingVM?.closePeerSession()
                 peerSharingVM = nil
-            }) {
+            }, content: {
                 if let peerVM = peerSharingVM {
                     PeerSharingSheet(viewModel: peerVM)
                 }
-            }
+            })
     }
 
     // MARK: - Title View
@@ -129,7 +130,7 @@ struct ConversationContainerView: View {
 
     private var peerServicesButton: some View {
         Button(action: {
-            guard let peerVM = viewModel.makePeerSharingViewModel() else { return }
+            guard let peerVM = peerSharing.makePeerSharingViewModel() else { return }
             peerSharingVM = peerVM
             showPeerServices = true
         }, label: {
