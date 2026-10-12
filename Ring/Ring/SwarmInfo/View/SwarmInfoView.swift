@@ -146,7 +146,7 @@ public struct SwarmInfoView: View, StateEmittingView {
 
     // MARK: - Computed Properties
     private var swarmViews: [SwarmSettingView] {
-        guard let conversation = viewModel.conversation else { return [.about] }
+        let conversation = viewModel.conversation
         var views: [SwarmSettingView] = [.about]
         if !conversation.isCoredialog() {
             views.append(.memberList)
@@ -425,11 +425,9 @@ public struct SwarmInfoView: View, StateEmittingView {
         case .memberList:
             MemberList(viewModel: viewModel)
         case .documents:
-            if let documents = viewModel.collabDocuments {
-                CollabDocumentsView(viewModel: documents,
-                                    stateEmitter: stateEmitter,
-                                    requestRemoval: requestDocumentRemoval)
-            }
+            CollabDocumentsView(viewModel: viewModel.collabDocuments,
+                                stateEmitter: stateEmitter,
+                                requestRemoval: requestDocumentRemoval)
         }
     }
 
@@ -441,11 +439,11 @@ public struct SwarmInfoView: View, StateEmittingView {
 
     private func documentRemovalAlert(for pending: PendingDocumentRemoval) -> Alert {
         let documents = viewModel.collabDocuments
-        let name = documents?.title(of: pending.document) ?? pending.document.name
+        let name = documents.title(of: pending.document)
         return Alert(title: Text(pending.removal.alertTitle),
                      message: Text(pending.removal.alertMessage(for: name)),
                      primaryButton: .destructive(Text(L10n.Collab.remove)) {
-                        documents?.perform(pending.removal, on: pending.document)
+                        documents.perform(pending.removal, on: pending.document)
                      },
                      secondaryButton: .cancel(Text(L10n.Global.cancel)))
     }
