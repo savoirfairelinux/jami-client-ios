@@ -287,6 +287,9 @@ struct MessageContentView: View {
         .offset(y: messageModel.messageContent.isHistory ? padding : 0)
         .scaleEffect(model.scale)
         .suppressLongPress(suppressLongPress)
+        .sheet(isPresented: $model.showsEditHistory) {
+            MessageEditHistoryView(versions: model.editHistory)
+        }
         .background(
             GeometryReader { proxy in
                 Color.clear

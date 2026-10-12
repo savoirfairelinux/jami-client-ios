@@ -48,6 +48,7 @@ enum ContextualMenuItem: Identifiable {
     case deleteMessage
     case deleteFile
     case edit
+    case editHistory
 
     func toString() -> String {
         switch self {
@@ -69,6 +70,8 @@ enum ContextualMenuItem: Identifiable {
             return L10n.Global.deleteFile
         case .edit:
             return L10n.Global.editMessage
+        case .editHistory:
+            return L10n.Conversation.editHistory
         }
     }
 
@@ -101,6 +104,8 @@ enum ContextualMenuItem: Identifiable {
             return "xmark.bin"
         case .edit:
             return "pencil"
+        case .editHistory:
+            return "clock.arrow.circlepath"
         }
     }
 }
@@ -134,6 +139,8 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     @Published var messageEdited = false
     @Published var messageDeletedText = ""
     @Published var editIndicator = L10n.Conversation.edited
+    @Published private(set) var editHistory = [MessageAction]()
+    @Published var showsEditHistory = false
     @Published var editionColor = Color.secondary
     @Published var scale: CGFloat = 1
     var url: URL?
@@ -407,14 +414,18 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
 
     private func textMenuItems() -> [ContextualMenuItem] {
         if isIncoming {
-            return [.reply, .copy, .forward]
+            return [.reply, .copy, .forward] + editHistoryMenuItems()
         }
         var items: [ContextualMenuItem] = [.reply]
         if metadata == nil {
             items.append(.edit)
         }
         items += [.copy, .forward, .deleteMessage]
-        return items
+        return items + editHistoryMenuItems()
+    }
+
+    private func editHistoryMenuItems() -> [ContextualMenuItem] {
+        message.isMessageEdited() && !message.isMessageDeleted() ? [.editHistory] : []
     }
 
     private func fileTransferMenuItems() -> [ContextualMenuItem] {
@@ -582,6 +593,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
             self.content = self.message.content
             self.messageDeleted = self.message.isMessageDeleted()
             self.messageEdited = self.message.isMessageEdited()
+            self.editHistory = self.message.editions
             self.accessibilityLabelValue = self.message.accessibilityLabelValue
             if self.messageDeleted || self.messageEdited {
                 self.updateMessageStyle()
@@ -590,6 +602,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
             if self.message.isMessageDeleted() {
                 self.messageDeletedText = L10n.Conversation.deletedMessage(self.username)
             }
+            self.updateMenuitems()
         }
         if self.message.isMessageDeleted() {
             self.requestName(jamiId: self.message.authorId)
@@ -712,6 +725,8 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
             delete()
         case .edit:
             edit()
+        case .editHistory:
+            showsEditHistory = true
         }
     }
 

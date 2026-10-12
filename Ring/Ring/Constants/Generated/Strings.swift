@@ -939,6 +939,8 @@ internal enum L10n {
     }
     /// Edited
     internal static let edited = L10n.tr("Localizable", "conversation.edited", fallback: "Edited")
+    /// Edit history
+    internal static let editHistory = L10n.tr("Localizable", "conversation.editHistory", fallback: "Edit history")
     /// Could not save image
     internal static let errorSavingImage = L10n.tr("Localizable", "conversation.errorSavingImage", fallback: "Could not save image")
     /// An error occurred while saving the image to the photo library.

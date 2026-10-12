@@ -195,6 +195,7 @@
 "conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "You";
 "conversation.edited" = "Edited";
+"conversation.editHistory" = "Edit history";
 "conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 // An ellipsis is not directly shown in the following typing indicator strings.

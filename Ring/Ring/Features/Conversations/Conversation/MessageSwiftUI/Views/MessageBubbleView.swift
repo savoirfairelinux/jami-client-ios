@@ -73,6 +73,9 @@ struct MessageBubbleView: View {
         .conditionalModifier(AccessibilityActionModifier(actionName: ContextualMenuItem.deleteMessage.toString(), action: { model.contextMenuSelect(item: .deleteMessage) }), apply: model.menuItems.contains(.deleteMessage))
         .conditionalModifier(AccessibilityActionModifier(actionName: ContextualMenuItem.deleteFile.toString(), action: { model.contextMenuSelect(item: .deleteFile) }), apply: model.menuItems.contains(.deleteFile))
         .conditionalModifier(AccessibilityActionModifier(actionName: ContextualMenuItem.edit.toString(), action: { model.contextMenuSelect(item: .edit) }), apply: model.menuItems.contains(.edit))
+        .conditionalModifier(AccessibilityActionModifier(actionName: ContextualMenuItem.editHistory.toString(),
+                                                         action: { model.contextMenuSelect(item: .editHistory) }),
+                             apply: model.menuItems.contains(.editHistory))
         .accessibilityAddTraits(.isButton)
     }
 
@@ -131,6 +134,7 @@ struct MessageBubbleWithEditionWrapper<Content: View>: View {
     @ObservedObject var model: MessageContentVM
     let content: Content
     let messageEditedPadding: CGFloat = 4
+    let editIndicatorHitPadding: CGFloat = 8
 
     init(model: MessageContentVM, @ViewBuilder content: () -> Content) {
         self.model = model
@@ -142,7 +146,15 @@ struct MessageBubbleWithEditionWrapper<Content: View>: View {
             content
 
             if model.messageEdited && !model.messageDeleted {
-                editingIndicator()
+                Button {
+                    model.contextMenuSelect(item: .editHistory)
+                } label: {
+                    editingIndicator()
+                        .padding(.vertical, editIndicatorHitPadding)
+                        .contentShape(Rectangle())
+                        .padding(.vertical, -editIndicatorHitPadding)
+                }
+                .buttonStyle(.plain)
             }
         }
         .applyMessageStyle(model: model)

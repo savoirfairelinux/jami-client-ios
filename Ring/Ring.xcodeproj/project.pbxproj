@@ -266,6 +266,7 @@
 		263F61742B4460B200240AEE /* ReactionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263F61732B4460B200240AEE /* ReactionsView.swift */; };
 		263F61762B45BBA100240AEE /* ReactionsContainerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263F61752B45BBA100240AEE /* ReactionsContainerModel.swift */; };
 		263F61782B45E8FD00240AEE /* MessageBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263F61772B45E8FD00240AEE /* MessageBubbleView.swift */; };
+		A7C3E1F72F80A10100C0FFEE /* MessageEditHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C3E1F62F80A10100C0FFEE /* MessageEditHistoryView.swift */; };
 		2640BA9A2B974E4B006D189A /* MessageProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2640BA992B974E4B006D189A /* MessageProtocols.swift */; };
 		26454F7C2B7E770900CFF06C /* TestEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26454F7B2B7E770900CFF06C /* TestEnvironment.swift */; };
 		26454FB72B7FDCB200CFF06C /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26454FB62B7FDCB200CFF06C /* AboutViewController.swift */; };
@@ -897,6 +898,7 @@
 		263F61732B4460B200240AEE /* ReactionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionsView.swift; sourceTree = "<group>"; };
 		263F61752B45BBA100240AEE /* ReactionsContainerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionsContainerModel.swift; sourceTree = "<group>"; };
 		263F61772B45E8FD00240AEE /* MessageBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBubbleView.swift; sourceTree = "<group>"; };
+		A7C3E1F62F80A10100C0FFEE /* MessageEditHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageEditHistoryView.swift; sourceTree = "<group>"; };
 		2640BA992B974E4B006D189A /* MessageProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageProtocols.swift; sourceTree = "<group>"; };
 		26454F7B2B7E770900CFF06C /* TestEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestEnvironment.swift; sourceTree = "<group>"; };
 		26454FB62B7FDCB200CFF06C /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
@@ -3423,6 +3425,7 @@
 				265DFB1029302A8700834B97 /* ContactMessageView.swift */,
 				26A072F82959F461006D8163 /* ContextMenuView.swift */,
 				263F61772B45E8FD00240AEE /* MessageBubbleView.swift */,
+				A7C3E1F62F80A10100C0FFEE /* MessageEditHistoryView.swift */,
 				A7MD00102F20000300000001 /* MessageBubbleTextRenderer.swift */,
 				263F61712B4460A400240AEE /* ReactionRowView.swift */,
 				263F61732B4460B200240AEE /* ReactionsView.swift */,
@@ -4334,6 +4337,7 @@
 				26625BBB2BAA0749009D2DDB /* SmartListContainer.swift in Sources */,
 				2640BA9A2B974E4B006D189A /* MessageProtocols.swift in Sources */,
 				263F61782B45E8FD00240AEE /* MessageBubbleView.swift in Sources */,
+				A7C3E1F72F80A10100C0FFEE /* MessageEditHistoryView.swift in Sources */,
 				A7MD00102F20000300000002 /* MessageBubbleTextRenderer.swift in Sources */,
 				26E081242BC07824001B4C18 /* RequestsViewModel.swift in Sources */,
 				264FB66229775B1C00BEFBBF /* SystemService.swift in Sources */,
