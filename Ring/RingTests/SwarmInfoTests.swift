@@ -88,7 +88,8 @@ final class SwarmInfoTests: XCTestCase {
                                     withSystemService: systemService,
                                     withPeerSharingService: TestPeerSharingFactory.createService(),
                                     withCollaborationService: CollaborationService(withCollaborationAdapter: ObjCMockCollaborationAdapter()))
-        swarmInfo = SwarmInfo(injectionBag: injectionBag, accountId: "")
+        swarmInfo = SwarmInfo(injectionBag: injectionBag,
+                              conversation: ConversationModel(info: ConversationInfo(type: .invitesOnly)))
     }
 
     override func tearDownWithError() throws {
@@ -189,7 +190,7 @@ final class SwarmInfoTests: XCTestCase {
 
     func testContainsSearchQuery_QueryIsTitle_True() {
         // Arrange
-        swarmInfo.title.accept(title1)
+        let swarmInfo = SwarmInfo(injectionBag: injectionBag, conversation: makeGroupConversation(title: title1))
         // Act
         let result = swarmInfo.contains(searchQuery: title1)
         // Assert
@@ -312,7 +313,7 @@ final class SwarmInfoTests: XCTestCase {
     }
 
     func testWhitespaceOnlyTitleFallsBackToParticipantNames() {
-        let swarmInfo = SwarmInfo(injectionBag: injectionBag, accountId: accountId1)
+        let swarmInfo = SwarmInfo(injectionBag: injectionBag, conversation: makeGroupConversation())
         swarmInfo.participantsNames.accept(["Alice"])
         swarmInfo.title.accept("")
         let derivedTitle = swarmInfo.finalTitle.value
@@ -323,9 +324,7 @@ final class SwarmInfoTests: XCTestCase {
     }
 
     func testSurroundingWhitespaceIsStrippedFromTitle() {
-        let swarmInfo = SwarmInfo(injectionBag: injectionBag, accountId: accountId1)
-
-        swarmInfo.title.accept("  Team  ")
+        let swarmInfo = SwarmInfo(injectionBag: injectionBag, conversation: makeGroupConversation(title: "  Team  "))
 
         XCTAssertEqual(swarmInfo.finalTitle.value, "Team")
     }
@@ -343,7 +342,7 @@ final class SwarmInfoTests: XCTestCase {
     }
 
     func testEmptyConversationAvatarDoesNotMaskParticipantAvatar() {
-        let swarmInfo = SwarmInfo(injectionBag: injectionBag, accountId: accountId1)
+        let swarmInfo = SwarmInfo(injectionBag: injectionBag, conversation: makeGroupConversation())
         let bag = DisposeBag()
         var emissions = [Data?]()
         swarmInfo.finalAvatarData
@@ -356,7 +355,7 @@ final class SwarmInfoTests: XCTestCase {
     }
 
     func testConversationAvatarIsUsedWhenItHasContent() {
-        let swarmInfo = SwarmInfo(injectionBag: injectionBag, accountId: accountId1)
+        let swarmInfo = SwarmInfo(injectionBag: injectionBag, conversation: makeGroupConversation())
         let avatar = Data([0x01, 0x02, 0x03])
         let bag = DisposeBag()
         var emissions = [Data?]()
@@ -392,9 +391,10 @@ final class SwarmInfoTests: XCTestCase {
         XCTAssertFalse(swarmInfo.finalTitle.value.isEmpty)
     }
 
-    private func makeGroupConversation() -> ConversationModel {
-        return ConversationModel(id: conversationId1, accountId: accountId1,
-                                 info: ConversationInfo(type: .invitesOnly))
+    private func makeGroupConversation(title: String = "") -> ConversationModel {
+        var info = ConversationInfo(type: .invitesOnly)
+        info.title = title
+        return ConversationModel(id: conversationId1, accountId: accountId1, info: info)
     }
 
     private func makeSwarmInfoViewModel(conversation: ConversationModel,

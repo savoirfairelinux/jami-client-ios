@@ -34,14 +34,13 @@ class TestableSwarmInfo: SwarmInfoProtocol {
     var participantsString = BehaviorRelay<String>(value: "")
 
     lazy var id: String = {
-        return conversation?.id ?? ""
+        return conversation.id
     }()
 
     var finalTitle = BehaviorRelay(value: "")
     var finalAvatarData: Observable<Data?> = Observable.just(Data())
     var participants = BehaviorRelay(value: [ParticipantInfo]())
-    var contacts = BehaviorRelay(value: [ParticipantInfo]())
-    var conversation: ConversationModel?
+    var conversation = ConversationModel(type: .invitesOnly)
     var conversationEnded = BehaviorRelay<Bool>(value: false)
 
     // parameters
@@ -53,8 +52,6 @@ class TestableSwarmInfo: SwarmInfoProtocol {
         self.containsSearchQuery = containsSearchQuery
         self.hasParticipantWithRegisteredName = hasParticipantWithRegisteredName
     }
-
-    func addContacts(contacts: [Ring.ContactModel]) {}
 
     func hasParticipantWithRegisteredName(name: String) -> Bool {
         return hasParticipantWithRegisteredName

@@ -114,7 +114,7 @@ final class ContactPickerViewModel: ObservableObject, ViewModel {
                 profileService: profileService,
                 size: .medium45
             )
-            if let conversation = swarmInfo.conversation, conversation.isCoredialog(),
+            if swarmInfo.conversation.isCoredialog(),
                let peerJamiId = swarmInfo.nonLocalParticipants.first?.jamiId {
                 conversationPresenceTrackers[swarmInfo.id] = PresenceTracker(
                     jamiId: peerJamiId,

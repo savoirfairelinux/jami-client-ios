@@ -579,6 +579,7 @@
 		BB1E8C7329159DFC005AE1D6 /* MembersList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1E8C6E29159DF6005AE1D6 /* MembersList.swift */; };
 		BB1E8C7529159DFC005AE1D6 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1E8C7029159DFC005AE1D6 /* SettingsView.swift */; };
 		BB1E8C7A29159E3E005AE1D6 /* SwarmInfoVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1E8C7929159E3E005AE1D6 /* SwarmInfoVM.swift */; };
+		57CDD516008ECB3B425A73F0 /* SwarmInviteCandidates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59925B0D7D5637130975B6FC /* SwarmInviteCandidates.swift */; };
 		BB3AB06C29316FA6006906BA /* ViewDidLoadModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3AB06929316FA0006906BA /* ViewDidLoadModifier.swift */; };
 		BB3B0A412971AEE30083CAD8 /* LocationSharingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3B0A402971AEE30083CAD8 /* LocationSharingView.swift */; };
 		BB4C6E2629229131001C901A /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4C6E2529229131001C901A /* ColorExtension.swift */; };
@@ -1804,6 +1805,7 @@
 		BB1E8C6E29159DF6005AE1D6 /* MembersList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembersList.swift; sourceTree = "<group>"; };
 		BB1E8C7029159DFC005AE1D6 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		BB1E8C7929159E3E005AE1D6 /* SwarmInfoVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwarmInfoVM.swift; sourceTree = "<group>"; };
+		59925B0D7D5637130975B6FC /* SwarmInviteCandidates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwarmInviteCandidates.swift; sourceTree = "<group>"; };
 		BB3AB06929316FA0006906BA /* ViewDidLoadModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewDidLoadModifier.swift; sourceTree = "<group>"; };
 		BB3B0A402971AEE30083CAD8 /* LocationSharingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSharingView.swift; sourceTree = "<group>"; };
 		BB4C6E2529229131001C901A /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
@@ -3789,6 +3791,7 @@
 			children = (
 				BB1E8C7829159E2B005AE1D6 /* View */,
 				BB1E8C7929159E3E005AE1D6 /* SwarmInfoVM.swift */,
+				59925B0D7D5637130975B6FC /* SwarmInviteCandidates.swift */,
 				F10000000000000000000009 /* ProfileEditing */,
 			);
 			path = SwarmInfo;
@@ -4438,6 +4441,7 @@
 				263F61722B4460A400240AEE /* ReactionRowView.swift in Sources */,
 				56BBC9DF1EDDC9D300CDAF8B /* LookupNameResponse.m in Sources */,
 				BB1E8C7A29159E3E005AE1D6 /* SwarmInfoVM.swift in Sources */,
+				57CDD516008ECB3B425A73F0 /* SwarmInviteCandidates.swift in Sources */,
 				2625814E2B4DE40200314C42 /* MessagePanelView.swift in Sources */,
 				66F295DE2166A5930044ED6F /* Devices+Helpers.swift in Sources */,
 				260AE64029C23AEC00D66D5E /* CallsHelper.swift in Sources */,

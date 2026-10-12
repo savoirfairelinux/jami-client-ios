@@ -50,6 +50,7 @@ class SwarmInfoVM: ObservableObject {
     // MARK: - Private Properties
     private let disposeBag = DisposeBag()
     private var contactsSubscriptionsDisposeBag = DisposeBag()
+    private var inviteCandidates: SwarmInviteCandidates?
 
     private let accountService: AccountsService
     let profileService: ProfilesService
@@ -256,8 +257,12 @@ class SwarmInfoVM: ObservableObject {
 
     func updateContactList() {
         self.contactsSubscriptionsDisposeBag = DisposeBag()
+        let inviteCandidates = SwarmInviteCandidates(injectionBag: injectionBag,
+                                                     accountId: swarmInfo.conversation.accountId,
+                                                     members: swarmInfo.participants.asObservable())
+        self.inviteCandidates = inviteCandidates
 
-        let contactUpdates = swarmInfo.contacts
+        let contactUpdates = inviteCandidates.candidates
             .observe(on: ConcurrentDispatchQueueScheduler(qos: .background))
             .map { contacts -> [ParticipantRow] in
                 return contacts.map { ParticipantRow(participantData: $0) }
@@ -269,16 +274,11 @@ class SwarmInfoVM: ObservableObject {
                 self?.participantsRows = rows
             })
             .disposed(by: self.contactsSubscriptionsDisposeBag)
-
-        injectionBag.contactsService.contacts
-            .subscribe(onNext: { [weak self] contacts in
-                self?.swarmInfo.addContacts(contacts: contacts)
-            })
-            .disposed(by: self.contactsSubscriptionsDisposeBag)
     }
 
     func removeExistingSubscription() {
         self.contactsSubscriptionsDisposeBag = DisposeBag()
+        self.inviteCandidates = nil
     }
 
     func addMember() {

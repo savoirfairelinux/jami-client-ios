@@ -29,7 +29,7 @@ class SwarmCreationUIModel: ObservableObject {
     let disposeBag = DisposeBag()
     private let accountId: String
     private let conversationService: ConversationsService
-    private var swarmInfo: SwarmInfoProtocol
+    private let inviteCandidates: SwarmInviteCandidates
     var swarmCreated: ((_ conversationId: String, _ accountId: String) -> Void)
 
     @Published var swarmName: String = ""
@@ -41,7 +41,9 @@ class SwarmCreationUIModel: ObservableObject {
         self.swarmCreated = swarmCreated
         self.conversationService = injectionBag.conversationsService
         self.accountId = accountId
-        self.swarmInfo = SwarmInfo(injectionBag: injectionBag, accountId: accountId)
+        self.inviteCandidates = SwarmInviteCandidates(injectionBag: injectionBag,
+                                                      accountId: accountId,
+                                                      members: .just([]))
         // 1 member is administrtor so remove 1 from maximum limit
         strSearchText.subscribe { searchText in
             if !searchText.isEmpty {
@@ -57,7 +59,7 @@ class SwarmCreationUIModel: ObservableObject {
         }
         .disposed(by: disposeBag)
 
-        self.swarmInfo.contacts
+        self.inviteCandidates.candidates
             .observe(on: MainScheduler.instance)
             .subscribe { [weak self] infos in
                 guard let self = self else { return }
@@ -71,17 +73,6 @@ class SwarmCreationUIModel: ObservableObject {
 
             }
             .disposed(by: self.disposeBag)
-        injectionBag
-            .contactsService
-            .contacts
-            .asObservable()
-            .subscribe { [weak self] contacts in
-                guard let self = self else { return }
-                self.swarmInfo.addContacts(contacts: contacts)
-            } onError: { _ in
-            }
-            .disposed(by: self.disposeBag)
-
     }
 
     func createTheSwarm() {
