@@ -350,31 +350,35 @@ extension ConversationViewModel {
 extension ConversationViewModel {
 
     private func changeConversationIfNeeded(items: [String]) {
-        guard let accountId = self.accountService.currentAccount?.id else { return }
         if items.contains(where: { $0 == self.conversation.id }) { return } // if items contains the current conversation, we do not need to change it
         guard let selectedConversationId = items.first else { return }
-        self.stateSubject.onNext(ConversationState.openConversationForConversationId(conversationId: selectedConversationId, accountId: accountId, shouldOpenSmarList: true, withAnimation: true))
+        self.stateSubject.onNext(ConversationState.openConversationForConversationId(conversationId: selectedConversationId,
+                                                                                     accountId: conversation.accountId,
+                                                                                     shouldOpenSmarList: true,
+                                                                                     withAnimation: true))
     }
 
-    private func shareMessage(message: MessageContentVM, with conversationId: String, fileURL: URL?, fileName: String) {
-        guard let accountId = self.accountService.currentAccount?.id else { return }
-        let conversationModel = self.conversationsService.getConversationForId(conversationId: conversationId, accountId: accountId) ?? self.conversation
+    private func shareMessage(message: MessageContentVM, to conversationModel: ConversationModel, fileURL: URL?, fileName: String) {
         if message.type != .fileTransfer {
             self.sendMessage(withContent: message.content, conversationModel: conversationModel)
             return
         }
         if let url = fileURL {
             let content = message.content
+            let dataTransferService = self.dataTransferService
             self.conversationsService.readMessages(of: conversationModel) { [weak self] messages in
                 let alreadyShared = messages.contains(where: { $0.content == content })
-                DispatchQueue.main.async {
-                    guard let self = self else { return }
-                    if alreadyShared {
-                        self.sendFile(filePath: url.path, displayName: fileName, conversationModel: conversationModel)
-                    } else if let data = FileManager.default.contents(atPath: url.path) {
-                        self.sendAndSaveFile(displayName: fileName, imageData: data,
-                                             conversationModel: conversationModel)
+                if alreadyShared {
+                    DispatchQueue.main.async {
+                        self?.sendFile(filePath: url.path, displayName: fileName, conversationModel: conversationModel)
                     }
+                    return
+                }
+                DispatchQueue.global(qos: .userInitiated).async {
+                    guard let data = FileManager.default.contents(atPath: url.path) else { return }
+                    dataTransferService.sendAndSaveFile(displayName: fileName,
+                                                        conversation: conversationModel,
+                                                        imageData: data)
                 }
             }
             return
@@ -389,11 +393,11 @@ extension ConversationViewModel {
             guard let substring = message.content.split(separator: "\n").first else { return }
             fileName = String(substring)
         }
-        selectedConversations.forEach { [ weak self, weak message ] item in
-            guard let self = self, let message = message else { return }
-            self.shareMessage(message: message, with: item, fileURL: url, fileName: fileName)
+        let targets = selectedConversations.compactMap {
+            self.conversationsService.getConversationForId(conversationId: $0, accountId: conversation.accountId)
         }
-        self.changeConversationIfNeeded(items: selectedConversations)
+        targets.forEach { self.shareMessage(message: message, to: $0, fileURL: url, fileName: fileName) }
+        self.changeConversationIfNeeded(items: targets.map(\.id))
     }
 
     func slectContactsToShareMessage(message: MessageContentVM) {
