@@ -34,7 +34,8 @@ class ContextMenuVM: ObservableObject {
     var sendEmojiUpdate = BehaviorRelay(value: [String: String]())
     @Published private(set) var menuItems = [ContextualMenuItem]()
 
-    func configure(with message: MessageBubbleView) {
+    func configure(with message: MessageBubbleView, localJamiId: String?) {
+        self.currentJamiAccountId = localJamiId
         self.presentingMessageView = message
         self.contentVM = message.model
         self.containerModel = message.messageModel
@@ -131,7 +132,7 @@ class ContextMenuVM: ObservableObject {
             : UIColor.black.withAlphaComponent(0.8)
     }
 
-    var currentJamiAccountId: String?
+    private(set) var currentJamiAccountId: String?
     private var myAuthoredReactionIds: [String] = []
 
     var screenWidth: CGFloat {
