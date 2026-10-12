@@ -163,11 +163,10 @@ struct SettingsView: View {
                     showColorPicker = true
                 }
                 .sheet(isPresented: $showColorPicker) {
-                    AccessibleCustomColorPicker(isPresented: $showColorPicker, selectedColor: $viewmodel.selectedColor,
+                    AccessibleCustomColorPicker(isPresented: $showColorPicker,
+                                                selectedColor: Binding(get: { viewmodel.selectedColor },
+                                                                       set: { viewmodel.updateSwarmColor(selectedColor: $0) }),
                                                 currentColor: viewmodel.finalColor)
-                }
-                .onChange(of: viewmodel.selectedColor) { newValue in
-                    viewmodel.updateSwarmColor(selectedColor: newValue)
                 }
                 .padding(iconPadding)
 
