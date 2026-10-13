@@ -509,14 +509,20 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     }
 
     func subscribeForNewMessages(conversation: ConversationModel, snapshot: [MessageModel]) {
+        let snapshotMessages = LoadedMessages(messages: snapshot, fromHistory: true, reset: snapshot.isEmpty)
         conversation.newMessages.share()
-            .startWith(LoadedMessages(messages: snapshot, fromHistory: true, reset: snapshot.isEmpty))
+            .map { (messages: $0, isSnapshot: false) }
+            .startWith((messages: snapshotMessages, isSnapshot: true))
             .observe(on: MainScheduler.instance)
-            .subscribe { [weak self] messages in
+            .subscribe { [weak self] batch in
                 guard let self = self else { return }
+                let messages = batch.messages
                 if messages.reset {
                     self.messagesModels = [MessageContainerModel]()
                     return
+                }
+                if batch.isSnapshot {
+                    self.loading = false
                 }
                 let insertionCount: Int = self.insert(messages: messages.messages,
                                                       fromHistory: messages.fromHistory)
@@ -525,6 +531,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
                 }
                 self.computeSequencing()
                 self.updateNumberOfNewMessages()
+                guard !batch.isSnapshot else { return }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
                     guard let self = self else {return }
                     self.loading = false
