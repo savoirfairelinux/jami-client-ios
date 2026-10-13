@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cd37a6b_b0995690",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-13T16:15:18Z",
+      "side": 1,
+      "message": "[warning] Line 517: 🟡 `loading` is set to `false` only after the `messages.reset` early-return check. For an empty initial snapshot (`reset \u003d\u003d true`), this returns immediately and can leave the UI in a perpetual loading state if no follow-up batch arrives. Move the snapshot-loading update before the reset guard (or handle reset+snapshot explicitly) so initial empty-history conversations always stop loading.",
+      "revId": "8972d1eccdfe9dee76e98e9681ff90d3569543c9",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
