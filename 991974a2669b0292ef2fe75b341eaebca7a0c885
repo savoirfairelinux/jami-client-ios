@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "daa301b7_8d63a675",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 1149,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-13T20:52:34Z",
+      "side": 1,
+      "message": "[warning] Line 1149: 🟡 The non-contact fast path was removed, but there is no visible fallback in this hunk when `getProfile` fails (network/error path), only when a profile is returned without a name. Please ensure the failure callback still triggers `nameLookup(id:)` (and a deterministic temporary `updateName`) so unknown member names do not remain unresolved indefinitely.",
+      "revId": "991974a2669b0292ef2fe75b341eaebca7a0c885",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
