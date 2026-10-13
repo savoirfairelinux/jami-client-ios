@@ -32,12 +32,20 @@ struct ContactMessageView: View {
             }
             Spacer()
                 .frame(width: model.inset)
-            Text(model.content)
-                .foregroundColor(model.styling.textColor)
-                .lineLimit(1)
-                .background(model.backgroundColor)
-                .font(model.styling.textFont)
-                .truncationMode(.middle)
+            HStack(spacing: 0) {
+                Text(model.textBeforeName)
+                    .layoutPriority(1)
+                Text(model.name)
+                    .truncationMode(.middle)
+                Text(model.textAfterName)
+                    .layoutPriority(1)
+            }
+            .foregroundColor(model.styling.textColor)
+            .lineLimit(1)
+            .background(model.backgroundColor)
+            .font(model.styling.textFont)
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(model.content)
         }
         .padding(.horizontal, model.inset)
         .frame(minHeight: model.height)

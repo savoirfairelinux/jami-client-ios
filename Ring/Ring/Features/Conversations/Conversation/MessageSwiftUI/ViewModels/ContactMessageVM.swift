@@ -29,6 +29,9 @@ class ContactMessageVM: ObservableObject, MessageAppearanceProtocol, NameObserve
             self.observableContent.accept(content)
         }
     }
+    @Published var textBeforeName: String
+    @Published var name: String = ""
+    @Published var textAfterName: String = ""
     @Published var borderColor: Color
     @Published var backgroundColor: Color
     var disposeBag = DisposeBag()
@@ -44,7 +47,17 @@ class ContactMessageVM: ObservableObject, MessageAppearanceProtocol, NameObserve
         didSet {
             let jamiId = message.uri.isEmpty ? message.authorId : message.uri
             let name = self.username.isEmpty ? jamiId : self.username
-            self.content = self.message.getContactInteractionString(name: name) ?? ""
+            let content = self.message.getContactInteractionString(name: name) ?? ""
+            if let nameRange = content.range(of: name) {
+                self.textBeforeName = String(content[..<nameRange.lowerBound])
+                self.name = name
+                self.textAfterName = String(content[nameRange.upperBound...])
+            } else {
+                self.textBeforeName = content
+                self.name = ""
+                self.textAfterName = ""
+            }
+            self.content = content
         }
     }
     var infoState: PublishSubject<State>?
@@ -56,6 +69,7 @@ class ContactMessageVM: ObservableObject, MessageAppearanceProtocol, NameObserve
         self.height = message.type == .initial ? 25 : 45
         self.borderColor = message.type == .initial ? Color(UIColor.clear) : Color(UIColor.secondaryLabel)
         self.content = message.content
+        self.textBeforeName = message.content
         self.observableContent.accept(message.content)
         if message.type != .initial {
             self.styling.textFont = self.styling.secondaryFont
