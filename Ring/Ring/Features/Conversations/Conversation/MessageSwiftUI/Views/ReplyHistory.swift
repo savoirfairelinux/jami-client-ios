@@ -38,57 +38,71 @@ struct MessageReplyStyle: ViewModifier {
 
 struct ReplyHistory: View {
     @StateObject var model: MessageReplyTargetVM
-    var target: MessageContentVM? {
-        return model.target
-    }
-    @Environment(\.colorScheme)
-    var colorScheme
-    @Environment(\.openURL)
-    var openURL
 
     var body: some View {
         VStack(alignment: model.alignment, spacing: 4) {
-            if let target = self.target {
+            if let target = model.target {
                 Text(model.inReplyTo)
                     .font(model.styling.secondaryFont)
                     .foregroundColor(model.styling.secondaryTextColor)
                     .onAppear {
                         target.onAppear()
                     }
-                if target.type == .fileTransfer {
-                    MediaView(message: target, onLongGesture: {}, minHeight: 20, maxHeight: 100, withPlayerControls: true, cornerRadius: 15)
-                        .opacity(0.7)
-                        .simultaneousGesture(
-                            TapGesture()
-                                .onEnded {
-                                    model.scrollToReplyTarget()
-                                }
-                        )
-                } else if target.type == .text {
-                    if let metadata = target.metadata {
-                        URLPreview(metadata: metadata, maxDimension: target.maxDimension * model.sizeIndex)
-                            .cornerRadius(target.cornerRadius)
-                            .opacity(0.7)
-                            .simultaneousGesture(
-                                TapGesture()
-                                    .onEnded {
-                                        model.scrollToReplyTarget()
-                                    }
-                            )
-                    } else {
-                        Text(target.displayContent)
-                            .modifier(MessageReplyStyle(model: target))
-                            .font(target.styling.textFont)
-                            .lineLimit(nil)
-                            .opacity(0.4)
-                            .simultaneousGesture(
-                                TapGesture()
-                                    .onEnded {
-                                        model.scrollToReplyTarget()
-                                    }
-                            )
-                    }
-                }
+                ReplyTargetContent(model: model, target: target)
+            }
+        }
+    }
+}
+
+private struct ReplyTargetContent: View {
+    let model: MessageReplyTargetVM
+    @ObservedObject var target: MessageContentVM
+
+    var body: some View {
+        if target.messageDeleted {
+            Text(L10n.Conversation.lastMessageDeleted)
+                .italic()
+                .modifier(MessageReplyStyle(model: target))
+                .font(target.styling.secondaryFont)
+                .opacity(0.4)
+                .simultaneousGesture(
+                    TapGesture()
+                        .onEnded {
+                            model.scrollToReplyTarget()
+                        }
+                )
+        } else if target.type == .fileTransfer {
+            MediaView(message: target, onLongGesture: {}, minHeight: 20, maxHeight: 100, withPlayerControls: true, cornerRadius: 15)
+                .opacity(0.7)
+                .simultaneousGesture(
+                    TapGesture()
+                        .onEnded {
+                            model.scrollToReplyTarget()
+                        }
+                )
+        } else if target.type == .text {
+            if let metadata = target.metadata {
+                URLPreview(metadata: metadata, maxDimension: target.maxDimension * model.sizeIndex)
+                    .cornerRadius(target.cornerRadius)
+                    .opacity(0.7)
+                    .simultaneousGesture(
+                        TapGesture()
+                            .onEnded {
+                                model.scrollToReplyTarget()
+                            }
+                    )
+            } else {
+                Text(target.displayContent)
+                    .modifier(MessageReplyStyle(model: target))
+                    .font(target.styling.textFont)
+                    .lineLimit(nil)
+                    .opacity(0.4)
+                    .simultaneousGesture(
+                        TapGesture()
+                            .onEnded {
+                                model.scrollToReplyTarget()
+                            }
+                    )
             }
         }
     }
