@@ -509,11 +509,17 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     }
 
     func subscribeForNewMessages(conversation: ConversationModel, snapshot: [MessageModel]) {
+        let snapshotMessages = LoadedMessages(messages: snapshot, fromHistory: true, reset: snapshot.isEmpty)
         conversation.newMessages.share()
-            .startWith(LoadedMessages(messages: snapshot, fromHistory: true, reset: snapshot.isEmpty))
+            .map { (messages: $0, isSnapshot: false) }
+            .startWith((messages: snapshotMessages, isSnapshot: true))
             .observe(on: MainScheduler.instance)
-            .subscribe { [weak self] messages in
+            .subscribe { [weak self] batch in
                 guard let self = self else { return }
+                let messages = batch.messages
+                if batch.isSnapshot {
+                    self.loading = false
+                }
                 if messages.reset {
                     self.messagesModels = [MessageContainerModel]()
                     return
@@ -527,7 +533,9 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
                 self.updateNumberOfNewMessages()
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
                     guard let self = self else {return }
-                    self.loading = false
+                    if !batch.isSnapshot {
+                        self.loading = false
+                    }
                     // check if we have reply target to scroll to.
                     if let tempTarget = self.temporaryReplyTarget,
                        self.getMessage(messageId: tempTarget) != nil {
