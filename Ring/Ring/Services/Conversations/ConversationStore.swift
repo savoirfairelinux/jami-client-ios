@@ -335,8 +335,8 @@ final class ConversationStore {
             return true
         }
 
-        // If all the loaded messages are of type .merge or .profile or have already been added, we need to load the next set of messages.
-        let filtered = messages.filter { newMessage in newMessage.type != .merge && newMessage.type != .profile && !record.messages.contains(where: { message in
+        // If all the loaded messages are of type .merge, .profile or .vote or have already been added, we need to load the next set of messages.
+        let filtered = messages.filter { newMessage in newMessage.type != .merge && newMessage.type != .profile && newMessage.type != .vote && !record.messages.contains(where: { message in
             message.id == newMessage.id
         })
         }

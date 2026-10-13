@@ -49,6 +49,7 @@ enum MessageType: Equatable {
     case initial
     case profile
     case collabDocument
+    case vote
 
     var rawValue: String {
         switch self {
@@ -60,6 +61,7 @@ enum MessageType: Equatable {
         case .initial: return "initial"
         case .profile: return "application/update-profile"
         case .collabDocument: return "application/collab-doc+json"
+        case .vote: return "vote"
         }
     }
 
@@ -73,6 +75,7 @@ enum MessageType: Equatable {
         case "initial": self = .initial
         case "application/update-profile": self = .profile
         case "application/collab-doc+json": self = .collabDocument
+        case "vote": self = .vote
         default: return nil
         }
     }
@@ -86,7 +89,8 @@ enum MessageType: Equatable {
              (.initial, .initial),
              (.contact, .contact),
              (.profile, .profile),
-             (.collabDocument, .collabDocument):
+             (.collabDocument, .collabDocument),
+             (.vote, .vote):
             return true
         default:
             return false
