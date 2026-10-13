@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb6ea37b_103e1848",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-13T17:48:25Z",
+      "side": 1,
+      "message": "[error] Line 225: 🔴 `currentJamiAccountId` is now assigned only inside `conversation`\u0027s `didSet`, but Swift property observers do not fire for assignments done during `init`. Since the previous init-time assignment was removed, first-load context-menu actions can still run with an unset account id. Set `contextMenuModel.currentJamiAccountId` explicitly in `init` using `conversation.accountId` (same resolution logic), and keep `didSet` for later conversation switches.",
+      "revId": "0681f3ac1bd68b868aa400d4edb3da4f41db92fb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
