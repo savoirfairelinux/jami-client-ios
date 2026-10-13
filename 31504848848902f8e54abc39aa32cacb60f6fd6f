@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0659ffa6_296ed394",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/ContactMessageVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-13T19:17:24Z",
+      "side": 1,
+      "message": "[warning] 🟡 This behavior change would benefit from a regression test covering localized variants where the name is not at the start and where the name substring can also appear in action text. That protects against false split points and future i18n regressions.",
+      "revId": "31504848848902f8e54abc39aa32cacb60f6fd6f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8a437a2_622c854d",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/ContactMessageVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-13T19:17:24Z",
+      "side": 1,
+      "message": "[warning] Line 50: 🟡 Splitting with `content.range(of: name)` is fragile because it truncates the first textual match, not necessarily the actual inserted display-name token. If the same substring appears in surrounding localized text (or multiple times), truncation can target the wrong segment and hide action text again. Prefer deriving segments from a format/template placeholder (or returning structured parts from `getContactInteractionString`) instead of searching the rendered string.",
+      "revId": "31504848848902f8e54abc39aa32cacb60f6fd6f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
