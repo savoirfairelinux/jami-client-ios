@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72308bfc_4d71cbdb",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-13T14:15:00Z",
+      "side": 1,
+      "message": "[warning] Line 86: 🟡 The view-model behavior was significantly refactored to depend on `ConversationRowVM` streams (`bestName`, `isBlocked`, `isSyncing`, `swarmInfoChanges`), but this patch does not add focused tests for these bindings. Add unit tests that assert the conversation screen model updates when each row field changes (especially blocked/syncing and swarm-info transitions), so regressions in this new split model are caught early.",
+      "revId": "76f70f33782ddff9b7bfda61c57c849ec646d961",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
