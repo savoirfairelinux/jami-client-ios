@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "235ec159_b733c3cf",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-13T14:04:51Z",
+      "side": 1,
+      "message": "[error] Line 278: 🔴 `contextMenuModel.currentJamiAccountId` is now only set in `conversation`\u0027s `didSet`, but `didSet` is not invoked during initialization. For the initial conversation, this value can remain `nil`, which can break account-scoped context-menu behaviors until `conversation` changes later. Initialize it in `init` using `conversation.accountId` (same logic as in `didSet`) to avoid first-load regression.",
+      "revId": "1f79526a3aa4ed422a8be1a03f06e556575fedb8",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
