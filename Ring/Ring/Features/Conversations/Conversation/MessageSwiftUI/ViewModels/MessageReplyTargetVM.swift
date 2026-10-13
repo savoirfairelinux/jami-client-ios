@@ -74,6 +74,9 @@ class MessageReplyTargetVM: ObservableObject, MessageAppearanceProtocol, NameObs
 
     func setInfoState(state: PublishSubject<State>) {
         self.infoState = state
+        if target != nil {
+            updateUsernameForReply()
+        }
     }
 
     private func replyIsIncoming() -> Bool {
