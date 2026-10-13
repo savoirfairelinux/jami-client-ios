@@ -1144,13 +1144,6 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
         DispatchQueue.global(qos: .background).async {[weak self] in
             guard let self = self else { return }
             guard let account = self.accountService.getAccount(fromAccountId: self.conversation.accountId) else { return }
-            if self.contactsService.contact(withHash: id) == nil {
-                DispatchQueue.main.async { [weak self] in
-                    self?.updateName(name: id, jamiId: id)
-                    self?.nameLookup(id: id)
-                }
-                return
-            }
             let schema: URIType = account.type == .sip ? .sip : .ring
             guard let contactURI = JamiURI(schema: schema, infoHash: id).uriString else { return }
             self.profileService
