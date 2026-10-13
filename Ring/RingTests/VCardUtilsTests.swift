@@ -68,6 +68,21 @@ final class VCardUtilsTests: XCTestCase {
         XCTAssertEqual(profile?.uri, getJamiUri())
     }
 
+    func testParseToProfileKeepsPhotoFollowedByEmptyPhoto() {
+        let data = """
+        BEGIN:VCARD
+        FN:\(profileName1)
+        PHOTO:\(photo)
+        PHOTO;ENCODING=BASE64;TYPE=PNG:
+        VERSION:2.1
+        END:VCARD
+        """.data(using: .utf8)!
+
+        let profile = VCardUtils.parseDataToProfile(data: data)
+
+        XCTAssertEqual(profile?.photo, photo)
+    }
+
     func testDataWithImageAndUUID_whenProfileHasPhotoAndAlias() throws {
         // Arrange
         let profile = Profile(uri: getJamiUri(), alias: profileName1, photo: photo, type: ProfileType.ring.rawValue)

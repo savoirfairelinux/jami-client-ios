@@ -136,7 +136,9 @@ class VCardUtils {
             guard let (key, value) = parseLine(line) else { return }
             switch true {
             case key.hasPrefix("PHOTO"):
-                avatar = String(value)
+                if avatar.nonEmptyTrimmed() == nil {
+                    avatar = String(value)
+                }
             case key == "FN":
                 alias = String(value)
             case key == "TEL;other":
