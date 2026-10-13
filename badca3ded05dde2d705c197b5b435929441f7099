@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86764bfb_44e9b310",
+        "filename": "Ring/Ring/Models/MessageModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-13T14:07:33Z",
+      "side": 1,
+      "message": "[error] Line 141: 🔴 `MessageAction.id` defaults to an empty string, and `MessageEditHistoryView` renders editions via `List(versions)` keyed by that `id`. If edition payloads do not carry a unique `interactionId` (or reuse one), multiple rows share the same identity, which can collapse/replace entries in SwiftUI and show incomplete edit history. Use a guaranteed-unique stable identifier for editions (e.g., backend edition id; otherwise derive from timestamp+content hash as fallback) before rendering.",
+      "revId": "badca3ded05dde2d705c197b5b435929441f7099",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b45ad5fa_8618a935",
+        "filename": "Ring/Ring/Models/MessageModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-13T14:07:33Z",
+      "side": 1,
+      "message": "[warning] Line 211: 🟡 Editions are copied with `map` but never ordered by timestamp, so display order depends entirely on transport ordering. Since this feature is explicitly timeline-based, normalize order in the client (e.g., sort by parsed `date`, with a deterministic fallback for missing dates) both on initial load and in `messageUpdated` to avoid inconsistent history ordering.",
+      "revId": "badca3ded05dde2d705c197b5b435929441f7099",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
