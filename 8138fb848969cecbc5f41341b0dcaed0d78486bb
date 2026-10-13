@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c589070f_92fd10ef",
+        "filename": "Ring/Ring/Features/Conversations/PeerSharing/PeerSharingTracker.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-13T14:16:08Z",
+      "side": 1,
+      "message": "[error] Line 39: 🔴 `track` updates `accountId`/`peerId` via `onMain` (async when called off-main), but subscribes immediately afterward. If `queryPeerServices` emits synchronously, `apply` runs before IDs are set and drops the result, leaving `hasPeerSharing` stuck `false`. Set `accountId`/`peerId` synchronously before subscribing (and only marshal the published `hasPeerSharing` write to main), or move subscription setup inside the main-thread block so state is initialized before any emission.",
+      "revId": "8138fb848969cecbc5f41341b0dcaed0d78486bb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
