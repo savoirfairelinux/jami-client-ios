@@ -16,6 +16,24 @@
       "message": "[warning] Line 118: 🟡 This mapping fix is correct, but it should be covered by a regression test to prevent future enum/raw-value drift (e.g., `banned` accidentally reverting to default raw value). Add/update a test that parses a daemon `\"ban\"` action and asserts it resolves to `ContactAction.banned` and renders the blocked-member interaction text, so this invitation/ban misclassification cannot reappear.",
       "revId": "fe907092a006a47b0de6203685d5ef45de2fcb94",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b135c63_a1c38b15",
+        "filename": "Ring/Ring/Models/MessageModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-13T18:59:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b021ccd_87f4e124",
+      "revId": "fe907092a006a47b0de6203685d5ef45de2fcb94",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
