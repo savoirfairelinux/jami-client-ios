@@ -34,7 +34,7 @@ struct ContactMessageView: View {
                 .frame(width: model.inset)
             Text(model.content)
                 .foregroundColor(model.styling.textColor)
-                .lineLimit(1)
+                .lineLimit(2)
                 .background(model.backgroundColor)
                 .font(model.styling.textFont)
                 .truncationMode(.middle)
