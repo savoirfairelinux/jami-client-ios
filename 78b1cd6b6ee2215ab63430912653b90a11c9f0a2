@@ -16,6 +16,24 @@
       "message": "[warning] Line 138: 🟡 Please add a regression test for multiple `PHOTO` entries (e.g., non-empty followed by empty, and empty followed by non-empty). This behavior change is subtle and easy to regress; a targeted test would lock in the intended “first non-empty photo wins” rule from the commit message.",
       "revId": "78b1cd6b6ee2215ab63430912653b90a11c9f0a2",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89513c28_4b37cde1",
+        "filename": "Ring/Ring/Helpers/VCardUtils.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-13T20:09:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84370c9e_c6c186f8",
+      "revId": "78b1cd6b6ee2215ab63430912653b90a11c9f0a2",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
