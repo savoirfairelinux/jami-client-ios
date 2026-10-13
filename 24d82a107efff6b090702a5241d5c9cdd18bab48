@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da151399_c6535d3e",
+        "filename": "Ring/Ring/SwarmInfo/SwarmInviteCandidates.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-13T13:55:36Z",
+      "side": 1,
+      "message": "[warning] Line 37: 🟡 `withLatestFrom(members)` only recomputes when `contacts` emits, so candidate filtering does not refresh when membership changes (e.g., participant added/removed while the picker is open). Use `Observable.combineLatest(injectionBag.contactsService.contacts, members)` (or merge member changes into the trigger) so `excluding memberIds` stays correct on both streams.",
+      "revId": "24d82a107efff6b090702a5241d5c9cdd18bab48",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
