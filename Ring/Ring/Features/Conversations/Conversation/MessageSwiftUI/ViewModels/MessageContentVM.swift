@@ -135,6 +135,8 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     @Published var messageDeletedText = ""
     @Published var editIndicator = L10n.Conversation.edited
     @Published var editionColor = Color.secondary
+    @Published var timeColor = Color.secondary
+    @Published var isEmojiOnly = false
     @Published var scale: CGFloat = 1
     var url: URL?
     var fileSize: Int64 = 0
@@ -151,6 +153,12 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     var styling: MessageStyling = MessageStyling()
 
     var message: MessageModel
+    @Published private(set) var timeString = ""
+    let accessibilityDateLabel: String
+    @Published private(set) var accessibilityDateValue = ""
+    var inlineTimeString: String? {
+        isEmojiOnly || (messageEdited && !messageDeleted) ? nil : timeString
+    }
     var isIncoming: Bool
     var isHistory: Bool
     var type: MessageType = .text
@@ -226,7 +234,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     }
 
     private var linkBackgroundUIColor: UIColor {
-        if type.isContact || content.containsOnlyEmoji && !messageDeleted && !messageEdited {
+        if type.isContact || isEmojiOnly {
             return .clear
         }
         return isIncoming ? UIColor.jamiMessageCellReceived : preferencesColor
@@ -274,6 +282,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
         self.contextMenuState = contextMenuState
         self.transferState = transferState
         self.message = message
+        self.accessibilityDateLabel = message.incoming ? L10n.Accessibility.messageReceivedDate : L10n.Accessibility.messageSentDate
         self.type = message.type
         self.isIncoming = message.incoming
         self.isHistory = isHistory
@@ -285,8 +294,14 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
         self.transferStatus = message.transferStatus
         self.preferencesColor = preferencesColor
         self.playerWidth = maxDimension
+        self.refreshDates()
         self.updateMessageStyle()
         self.fetchMetadata()
+    }
+
+    func refreshDates() {
+        timeString = message.receivedDate.messageTimeString()
+        accessibilityDateValue = message.receivedDate.messageFullDateString()
     }
 
     func setInfoState(state: PublishSubject<State>) {
@@ -299,11 +314,13 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     }
 
     private func updateMessageStyle() {
+        self.isEmojiOnly = self.content.containsOnlyEmoji && !self.messageDeleted && !self.messageEdited
         self.updateBackgroundColor()
         self.updateTextColor()
         self.updateTextFont()
         self.updateInset()
         self.editionColor = self.isIncoming ? styling.secondaryTextColor : Color(red: 0.95, green: 0.95, blue: 0.95)
+        self.timeColor = self.backgroundColor == .clear ? styling.secondaryTextColor : self.editionColor
         invalidateTextPresentationCache()
     }
 
@@ -319,15 +336,15 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     }
 
     private func updateTextFont() {
-        if self.content.containsOnlyEmoji && !self.messageDeleted && !self.messageEdited {
-            self.styling.textFont = Font(UIFont.systemFont(ofSize: 38.0, weight: UIFont.Weight.medium))
+        if self.isEmojiOnly {
+            self.styling.textFont = Font(UIFont.systemFont(ofSize: 44.0, weight: UIFont.Weight.medium))
         } else {
             self.styling.textFont = self.styling.defaultTextFont
         }
     }
 
     private func updateBackgroundColor() {
-        if self.type.isContact || self.content.containsOnlyEmoji && !self.messageDeleted && !self.messageEdited {
+        if self.type.isContact || self.isEmojiOnly {
             self.backgroundColor = .clear
         } else {
             self.backgroundColor = isIncoming ? Color.jamiMessageCellReceived : Color(preferencesColor)
@@ -335,7 +352,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     }
 
     private func updateInset() {
-        if self.content.containsOnlyEmoji && !self.messageDeleted && !self.messageEdited {
+        if self.isEmojiOnly {
             self.textInset = 0
             self.textVerticalInset = 2
         } else {

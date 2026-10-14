@@ -35,7 +35,7 @@ struct MessageBubbleView: View {
         VStack(alignment: .leading) {
             if model.messageDeleted {
                 MessageBubbleWithEditionWrapper(model: model) {
-                    Text(model.messageDeletedText)
+                    (Text(model.messageDeletedText) + MessageTimeView.reservedSpace(for: model.inlineTimeString))
                         .font(model.styling.secondaryFont)
                         .foregroundColor(model.editionColor)
                 }
@@ -43,7 +43,7 @@ struct MessageBubbleView: View {
                 if model.type == .call {
                     renderCallMessage()
                 } else if model.type == .fileTransfer {
-                    MediaView(message: model, onLongGesture: receivedLongPress(), minHeight: 50, maxHeight: 300, withPlayerControls: true, cornerRadius: 0)
+                    renderFileTransfer()
                 } else if model.type == .text {
                     renderTextContent()
                 }
@@ -64,6 +64,7 @@ struct MessageBubbleView: View {
         )
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(Text(model.accessibilityLabelValue))
+        .accessibilityCustomContent(Text(model.accessibilityDateLabel), Text(model.accessibilityDateValue))
         .conditionalModifier(AccessibilityActionModifier(actionName: ContextualMenuItem.preview.toString(), action: { model.contextMenuSelect(item: .preview) }), apply: model.menuItems.contains(.preview))
         .conditionalModifier(AccessibilityActionModifier(actionName: ContextualMenuItem.forward.toString(), action: { model.contextMenuSelect(item: .forward) }), apply: model.menuItems.contains(.forward))
         .conditionalModifier(AccessibilityActionModifier(actionName: ContextualMenuItem.share.toString(), action: { model.contextMenuSelect(item: .share) }), apply: model.menuItems.contains(.share))
@@ -77,7 +78,10 @@ struct MessageBubbleView: View {
     }
 
     private func renderCallMessage() -> some View {
-        Text(model.content)
+        (Text(model.content) + MessageTimeView.reservedSpace(for: model.timeString))
+            .overlay(alignment: MessageTimeView.inlineAlignment) {
+                MessageTimeView(text: model.timeString, color: model.timeColor)
+            }
             .padding(.horizontal, model.textInset)
             .padding(.vertical, model.textVerticalInset)
             .foregroundColor(model.styling.textColor)
@@ -90,14 +94,15 @@ struct MessageBubbleView: View {
     private func renderTextContent() -> some View {
         Group {
             if let metadata = model.metadata {
-                URLPreview(metadata: metadata, maxDimension: model.maxDimension)
-                    .modifier(MessageCornerRadius(model: model))
-                    .messageGesture(onLongPress: receivedLongPress())
+                VStack(alignment: .trailing, spacing: TimeLayout.outsideSpacing) {
+                    URLPreview(metadata: metadata, maxDimension: model.maxDimension)
+                        .modifier(MessageCornerRadius(model: model))
+                        .messageGesture(onLongPress: receivedLongPress())
+                    MessageTimeView(text: model.timeString, color: model.styling.secondaryTextColor)
+                }
             } else if model.isFullURL, let url = model.getURL() {
                 MessageBubbleWithEditionWrapper(model: model) {
-                    Text(model.content)
-                        .font(model.styling.textFont)
-                        .underline()
+                    (Text(model.content).font(model.styling.textFont).underline() + MessageTimeView.reservedSpace(for: model.inlineTimeString))
                         .onTapGesture {
                             openURL(url)
                         }
@@ -112,9 +117,29 @@ struct MessageBubbleView: View {
     @ViewBuilder
     private func renderBubbleTextBody() -> some View {
         MessageBubbleWithEditionWrapper(model: model) {
-            MessageBubbleTextRenderer(textBody: model.bubbleTextBody, font: model.styling.textFont)
+            MessageBubbleTextRenderer(textBody: model.bubbleTextBody, font: model.styling.textFont, reservedTime: model.inlineTimeString)
                 .lineLimit(nil)
                 .messageGesture(onLongPress: receivedLongPress())
+        }
+    }
+
+    @ViewBuilder
+    private func renderFileTransfer() -> some View {
+        let media = MediaView(message: model, onLongGesture: receivedLongPress(), minHeight: 50, maxHeight: 300, withPlayerControls: true, cornerRadius: 0)
+        if model.player == nil && model.finalImage != nil {
+            media
+                .overlay(alignment: .bottomTrailing) {
+                    MessageTimeView(text: model.timeString, color: .white)
+                        .padding(.horizontal, TimeLayout.capsuleHorizontalPadding)
+                        .padding(.vertical, TimeLayout.capsuleVerticalPadding)
+                        .background(Capsule().fill(Color.black.opacity(0.4)))
+                        .padding(TimeLayout.capsuleInset)
+                }
+        } else {
+            VStack(alignment: .trailing, spacing: TimeLayout.outsideSpacing) {
+                media
+                MessageTimeView(text: model.timeString, color: model.styling.secondaryTextColor)
+            }
         }
     }
 
@@ -137,15 +162,27 @@ struct MessageBubbleWithEditionWrapper<Content: View>: View {
         self.content = content()
     }
 
-    var body: some View {
-        VStack(alignment: .leading, spacing: messageEditedPadding) {
-            content
-
-            if model.messageEdited && !model.messageDeleted {
-                editingIndicator()
+    @ViewBuilder var body: some View {
+        if model.isEmojiOnly {
+            VStack(alignment: model.isIncoming ? .leading : .trailing, spacing: -TimeLayout.emojiTimeTuck) {
+                content
+                    .applyMessageStyle(model: model)
+                MessageTimeView(text: model.timeString, color: Color(UIColor.tertiaryLabel))
             }
+        } else {
+            VStack(alignment: .leading, spacing: messageEditedPadding) {
+                if let inlineTime = model.inlineTimeString {
+                    content
+                        .overlay(alignment: MessageTimeView.inlineAlignment) {
+                            MessageTimeView(text: inlineTime, color: model.timeColor)
+                        }
+                } else {
+                    content
+                    editingIndicator()
+                }
+            }
+            .applyMessageStyle(model: model)
         }
-        .applyMessageStyle(model: model)
     }
 
     private func editingIndicator() -> some View {
@@ -159,8 +196,47 @@ struct MessageBubbleWithEditionWrapper<Content: View>: View {
             Text(model.editIndicator)
                 .font(.footnote)
                 .foregroundColor(model.editionColor)
+            MessageTimeView(text: model.timeString, color: model.timeColor)
+                .padding(.leading, TimeLayout.editedSpacing)
         }
     }
+}
+
+struct MessageTimeView: View {
+    let text: String
+    let color: Color
+    var accessibilityText: String?
+
+    static let font = Font.caption2.monospacedDigit()
+    static let inlineAlignment = Alignment(horizontal: .trailing, vertical: .lastTextBaseline)
+
+    var body: some View {
+        Text(text)
+            .font(Self.font)
+            .foregroundColor(color)
+            .lineLimit(1)
+            .fixedSize()
+            .allowsHitTesting(false)
+            .accessibilityLabel(accessibilityText ?? text)
+            .accessibilityHidden(accessibilityText == nil)
+    }
+
+    static func reservedSpace(for time: String?) -> Text {
+        guard let time = time else { return Text("") }
+        let unbreakableTime = time.replacingOccurrences(of: " ", with: "\u{00A0}")
+        return Text("\u{2002}\u{2002}" + unbreakableTime)
+            .font(font)
+            .foregroundColor(.clear)
+    }
+}
+
+private enum TimeLayout {
+    static let outsideSpacing: CGFloat = 2
+    static let editedSpacing: CGFloat = 4
+    static let capsuleHorizontalPadding: CGFloat = 6
+    static let capsuleVerticalPadding: CGFloat = 2
+    static let capsuleInset: CGFloat = 8
+    static let emojiTimeTuck: CGFloat = 4
 }
 
 struct AccessibilityActionModifier: ViewModifier {
