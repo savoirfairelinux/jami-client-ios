@@ -1046,6 +1046,9 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     private let messageGroupingInterval = 10 * 60 // 10 minutes
 
     private func isBreakingSequence(message: MessageModel, secondMessage: MessageModel) -> Bool {
+        if message.type.isContact && secondMessage.type.isContact {
+            return false
+        }
         let differentUri = message.uri != secondMessage.uri
         let messageTypeCheck = message.type.isCentered || secondMessage.type.isCentered
         let differentAuthor = message.authorId != secondMessage.authorId

@@ -71,7 +71,7 @@ struct MessageRowView: View {
     @Environment(\.avatarProviderFactory)
     var avatarFactory: AvatarProviderFactory?
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: model.centeredMessage ? 0 : nil) {
             if model.shouldShowTimeString {
                 Text(model.timeString)
                     .font(.caption)

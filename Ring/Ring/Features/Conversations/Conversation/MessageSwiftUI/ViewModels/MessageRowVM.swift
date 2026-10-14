@@ -47,8 +47,9 @@ class MessageRowVM: ObservableObject, MessageAppearanceProtocol, MessageReadObse
 
     var sequencing: MessageSequencing = .unknown {
         didSet {
-            topSpace = (sequencing == .singleMessage || sequencing == .firstOfSequence) ? 2 : 0
-            bottomSpace = (sequencing == .singleMessage || sequencing == .lastOfSequence) ? 2 : 0
+            let sequenceEdgeSpace: CGFloat = centeredMessage ? 6 : 2
+            topSpace = (sequencing == .singleMessage || sequencing == .firstOfSequence) ? sequenceEdgeSpace : 0
+            bottomSpace = (sequencing == .singleMessage || sequencing == .lastOfSequence) ? sequenceEdgeSpace : 0
         }
     }
 

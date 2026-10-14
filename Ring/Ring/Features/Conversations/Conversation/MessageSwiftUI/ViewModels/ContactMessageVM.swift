@@ -53,7 +53,7 @@ class ContactMessageVM: ObservableObject, MessageAppearanceProtocol, NameObserve
         self.message = message
         self.backgroundColor = Color(UIColor.clear)
         self.inset = message.type == .initial ? 0 : 7
-        self.height = message.type == .initial ? 25 : 45
+        self.height = message.type == .initial ? 25 : 28
         self.borderColor = message.type == .initial ? Color(UIColor.clear) : Color(UIColor.secondaryLabel)
         self.content = message.content
         self.observableContent.accept(message.content)
