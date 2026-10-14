@@ -16,6 +16,24 @@
       "message": "[warning] Line 1149: 🟡 The non-contact fast path was removed, but there is no visible fallback in this hunk when `getProfile` fails (network/error path), only when a profile is returned without a name. Please ensure the failure callback still triggers `nameLookup(id:)` (and a deterministic temporary `updateName`) so unknown member names do not remain unresolved indefinitely.",
       "revId": "991974a2669b0292ef2fe75b341eaebca7a0c885",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbbe389b_9f299e3b",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 1149,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-14T14:07:21Z",
+      "side": 1,
+      "message": "getProfile never fails",
+      "parentUuid": "daa301b7_8d63a675",
+      "revId": "991974a2669b0292ef2fe75b341eaebca7a0c885",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
