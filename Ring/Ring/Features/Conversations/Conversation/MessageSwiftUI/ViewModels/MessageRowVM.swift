@@ -34,6 +34,7 @@ class MessageRowVM: ObservableObject, MessageAppearanceProtocol, MessageReadObse
     var incoming: Bool
     var infoState: PublishSubject<State>?
     var centeredMessage: Bool
+    let isMemberEvent: Bool
 
     var message: MessageModel
     var disposeBag = DisposeBag()
@@ -56,6 +57,7 @@ class MessageRowVM: ObservableObject, MessageAppearanceProtocol, MessageReadObse
         self.message = message
         self.incoming = message.incoming
         self.centeredMessage = message.type.isCentered
+        self.isMemberEvent = message.type.isContact
         self.readBorderColor = Color(UIColor.systemBackground)
         self.timeString = self.message.receivedDate.getTimeLabelString()
         self.updateMessageStatus()

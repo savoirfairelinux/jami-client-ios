@@ -71,7 +71,7 @@ struct MessageRowView: View {
     @Environment(\.avatarProviderFactory)
     var avatarFactory: AvatarProviderFactory?
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: model.isMemberEvent ? 0 : nil) {
             if model.shouldShowTimeString {
                 Text(model.timeString)
                     .font(.caption)
@@ -146,6 +146,7 @@ struct MessageRowView: View {
                     }
                 }
                 .offset(x: 1)
+                .padding(.top, model.isMemberEvent ? 4 : 0)
                 .accessibilityHidden(true)
             }
             Spacer()
