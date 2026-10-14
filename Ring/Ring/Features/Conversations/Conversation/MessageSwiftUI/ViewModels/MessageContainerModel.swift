@@ -50,11 +50,13 @@ class MessageContainerModel: Identifiable, Equatable {
         return self.transferSubject.asObservable()
     }()
 
-    var shouldShowTimeString: Bool = false {
+    var startsNewGroup: Bool = false
+
+    var startsNewDay: Bool = false {
         didSet {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
-                self.messageRow.shouldShowTimeString = self.shouldShowTimeString
+                self.messageRow.startsNewDay = self.startsNewDay
             }
         }
     }
