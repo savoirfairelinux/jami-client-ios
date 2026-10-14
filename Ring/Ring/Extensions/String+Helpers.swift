@@ -16,11 +16,25 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
+import CoreText
 import Foundation
 import MobileCoreServices
 import CoreImage.CIFilterBuiltins
 
 extension String {
+    var lastParagraphIsRightToLeft: Bool {
+        let paragraphStart = lastIndex(where: \.isNewline).map { index(after: $0) } ?? startIndex
+        let paragraphWithTrailingSpace = String(self[paragraphStart...]) + " "
+        let trailingSpaceIndex = (paragraphWithTrailingSpace as NSString).length - 1
+        let line = CTLineCreateWithAttributedString(NSAttributedString(string: paragraphWithTrailingSpace))
+        let runs = CTLineGetGlyphRuns(line) as? [CTRun] ?? []
+        let trailingRun = runs.first { run in
+            let range = CTRunGetStringRange(run)
+            return range.location <= trailingSpaceIndex && trailingSpaceIndex < range.location + range.length
+        }
+        return trailingRun.map { CTRunGetStatus($0).contains(.rightToLeft) } ?? false
+    }
+
     func createResizedImage(targetSize: CGFloat) -> UIImage? {
         guard let data = Data(base64Encoded: self, options: .ignoreUnknownCharacters) else {
             return nil

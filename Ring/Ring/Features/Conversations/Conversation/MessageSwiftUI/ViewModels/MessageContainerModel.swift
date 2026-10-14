@@ -50,11 +50,13 @@ class MessageContainerModel: Identifiable, Equatable {
         return self.transferSubject.asObservable()
     }()
 
-    var shouldShowTimeString: Bool = false {
+    var startsNewGroup: Bool = false
+
+    var startsNewDay: Bool = false {
         didSet {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
-                self.messageRow.shouldShowTimeString = self.shouldShowTimeString
+                self.messageRow.startsNewDay = self.startsNewDay
             }
         }
     }
@@ -149,12 +151,18 @@ class MessageContainerModel: Identifiable, Equatable {
 
     func messageUpdated(_ message: MessageModel) {
         self.apply(message)
+        self.refreshDates()
         self.messageContent.updateMessageEditions()
         self.messageRow.updateMessageStatus()
         self.collabDocViewModel?.messageUpdated()
         if message.type == .fileTransfer {
             self.messageContent.setTransferStatus(transferStatus: message.transferStatus)
         }
+    }
+
+    func refreshDates() {
+        self.messageContent.refreshDates()
+        self.messageRow.refreshDates()
     }
 
     private func apply(_ message: MessageModel) {
