@@ -287,6 +287,19 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
         self.subscribeMessagesActions()
         self.subscribeContextMenu()
         self.subscribeToTypingStatus()
+        self.subscribeTimeChanges()
+    }
+
+    private func subscribeTimeChanges() {
+        Observable.merge(NotificationCenter.default.rx.notification(UIApplication.significantTimeChangeNotification),
+                         NotificationCenter.default.rx.notification(.NSSystemTimeZoneDidChange))
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                self.computeSequencing()
+                self.messagesModels.forEach { $0.refreshDates() }
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func subscribeScreenTapped(screenTapped: Observable<Bool>) {
@@ -1021,38 +1034,59 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     // MARK: sequencing
 
     private func computeSequencing() {
-        var lastMessageTime: Date?
-        for (index, model) in self.messagesModels.enumerated().reversed() {
-            let currentMessageTime = model.message.receivedDate
-            if index == self.messagesModels.count - 1 {
-                // always show first message's time
-                model.shouldShowTimeString = true
-            } else if let last = lastMessageTime {
-                // only show time for new messages if beyond an arbitrary time frame from the previously shown time
-                let timeDifference = currentMessageTime.timeIntervalSinceReferenceDate - last.timeIntervalSinceReferenceDate
-                model.shouldShowTimeString = Int(timeDifference) < messageGroupingInterval ? false : true
-            } else {
-                model.shouldShowTimeString = false
+        var previousMessage: MessageModel?
+        var memberEventsStart: Date?
+        for model in self.messagesModels.reversed() {
+            let current = model.message
+            let startsNewDay = isFirstOfDay(current, after: previousMessage)
+            let continuesMemberEvents = current.type.isContact && previousMessage?.type.isContact == true
+            let groupStart = continuesMemberEvents ? memberEventsStart : previousMessage?.receivedDate
+            let startsNewGroup = startsNewDay || exceedsGroupingInterval(current.receivedDate, since: groupStart)
+            model.startsNewDay = startsNewDay
+            model.startsNewGroup = startsNewGroup
+            let extendsMemberEventGroup = continuesMemberEvents && !startsNewGroup
+            if current.type.isContact && !extendsMemberEventGroup {
+                memberEventsStart = current.receivedDate
             }
-            lastMessageTime = currentMessageTime
+            previousMessage = current
         }
         for (index, model) in self.messagesModels.enumerated() {
             model.sequencing = getMessageSequencing(forIndex: index)
+            model.endsEmojiRun = endsEmojiRun(at: index)
             model.shouldDisplayContactInfo = shouldDisplayContactInfo(message: model) && shouldDisplayContactInfoForConversation()
             model.shouldDisplayContactInfoForConversation = shouldDisplayContactInfoForConversation()
         }
     }
 
-    private let messageGroupingInterval = 10 * 60 // 10 minutes
+    private let messageGroupingInterval: TimeInterval = 10 * 60 // 10 minutes
+
+    private func isFirstOfDay(_ message: MessageModel, after previous: MessageModel?) -> Bool {
+        guard let previous = previous else { return true }
+        return !Calendar.current.isDate(message.receivedDate, inSameDayAs: previous.receivedDate)
+    }
+
+    private func exceedsGroupingInterval(_ date: Date, since groupStart: Date?) -> Bool {
+        guard let groupStart = groupStart else { return true }
+        return date.timeIntervalSince(groupStart) >= messageGroupingInterval
+    }
+
+    private func endsEmojiRun(at index: Int) -> Bool {
+        let current = self.messagesModels[index].message
+        guard index > 0, current.isEmojiOnly() else { return true }
+        let next = self.messagesModels[index - 1]
+        return next.startsNewGroup || !next.message.isEmojiOnly() || next.message.authorId != current.authorId
+    }
 
     private func isBreakingSequence(message: MessageModel, secondMessage: MessageModel) -> Bool {
+        if message.type.isContact && secondMessage.type.isContact {
+            return false
+        }
         let differentUri = message.uri != secondMessage.uri
         let messageTypeCheck = message.type.isCentered || secondMessage.type.isCentered
         let differentAuthor = message.authorId != secondMessage.authorId
         let isReplyCheck = message.isReply() || secondMessage.isReply()
         let hasReactions = !message.reactions.isEmpty || !secondMessage.reactions.isEmpty
-        let isEmojiOnlyMessage = (message.type == .text && message.content.containsOnlyEmoji && !message.isMessageDeleted() && !message.isMessageEdited()) ||
-            (secondMessage.type == .text && secondMessage.content.containsOnlyEmoji && !secondMessage.isMessageDeleted() && !secondMessage.isMessageEdited())
+        let isEmojiOnlyMessage = message.isEmojiOnly() || secondMessage.isEmojiOnly()
 
         return differentUri || messageTypeCheck || differentAuthor ||
             isReplyCheck || hasReactions || isEmojiOnlyMessage
@@ -1069,40 +1103,24 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
 
     private func getMessageSequencing(forIndex index: Int) -> MessageSequencing {
         let messageItem = self.messagesModels[index]
-        if self.messagesModels.count == 1 || index == self.messagesModels.count - 1 {
-            return .singleMessage
-        }
         let previousMessageItem = index + 1 < self.messagesModels.count ? self.messagesModels[index + 1] : nil
-        let nextMessageItem = index - 1 >= 0 ? self.messagesModels[index - 1] : nil
-
-        if nextMessageItem == nil {
-            if let previousMessageItem = previousMessageItem {
-                let isNewSequence = messageItem.shouldShowTimeString || self.isBreakingSequence(message: previousMessageItem.message, secondMessage: messageItem.message)
-                return isNewSequence ? .singleMessage : .lastOfSequence
-            } else {
-                return .singleMessage
-            }
-        }
-        if previousMessageItem == nil {
+        let nextMessageItem = index > 0 ? self.messagesModels[index - 1] : nil
+        let startsSequence = previousMessageItem.map {
+            messageItem.startsNewGroup || self.isBreakingSequence(message: $0.message, secondMessage: messageItem.message)
+        } ?? true
+        let endsSequence = nextMessageItem.map {
+            $0.startsNewGroup || self.isBreakingSequence(message: $0.message, secondMessage: messageItem.message)
+        } ?? true
+        switch (startsSequence, endsSequence) {
+        case (true, true):
             return .singleMessage
+        case (true, false):
+            return .firstOfSequence
+        case (false, true):
+            return .lastOfSequence
+        case (false, false):
+            return .middleOfSequence
         }
-        if let next = nextMessageItem, let previous = previousMessageItem {
-            let isNewSequence = messageItem.shouldShowTimeString || self.isBreakingSequence(message: previous.message, secondMessage: messageItem.message)
-            let changingSequenceAfter = next.shouldShowTimeString || self.isBreakingSequence(message: next.message, secondMessage: messageItem.message)
-            if isNewSequence && changingSequenceAfter {
-                return .singleMessage
-            }
-            if !isNewSequence && changingSequenceAfter {
-                return .lastOfSequence
-            }
-            if isNewSequence && !changingSequenceAfter {
-                return .firstOfSequence
-            }
-            if !isNewSequence && !changingSequenceAfter {
-                return .middleOfSequence
-            }
-        }
-        return .singleMessage
     }
 
     // MARK: participant information

@@ -71,68 +71,50 @@ struct MessageRowView: View {
     @Environment(\.avatarProviderFactory)
     var avatarFactory: AvatarProviderFactory?
     var body: some View {
-        VStack(alignment: .leading, spacing: model.isMemberEvent ? 0 : nil) {
-            if model.shouldShowTimeString {
-                Text(model.timeString)
-                    .font(.caption)
-                    .foregroundColor(model.styling.secondaryTextColor)
-                    .frame(maxWidth: .infinity, alignment: .center)
-                    .padding(10)
+        VStack(alignment: .leading, spacing: 0) {
+            if let daySeparatorText = model.daySeparatorText {
+                daySeparator(daySeparatorText)
             }
-            Spacer()
-                .frame(height: model.topSpace)
-            if model.centeredMessage {
-                // The rows drawn across the conversation rather than as a
-                // bubble. Which one it is follows from the message; that it is
-                // one of them at all is the flag's to say.
-                Group {
-                    if let collabDoc = messageModel.collabDocViewModel {
-                        HStack(spacing: 0) {
-                            Spacer(minLength: Layout.centeredMessageMargin)
-                            CollabDocMessageView(model: collabDoc)
-                                .layoutPriority(1)
-                            Spacer(minLength: Layout.centeredMessageMargin)
+            Group {
+                if model.centeredMessage {
+                    centeredEvent()
+                } else if model.incoming {
+                    HStack(alignment: .bottom) {
+                        if model.shouldDisplayAavatar,
+                           let factory = avatarFactory {
+                            Spacer()
+                                .frame(width: 10)
+                            let jamiId = messageModel.message.uri.isEmpty ? messageModel.message.authorId : messageModel.message.uri
+                            AvatarSwiftUIView(source: factory.provider(for: jamiId, size: Constants.AvatarSize.conversation30))
+                            Spacer()
+                                .frame(width: 10)
+                        } else {
+                            Spacer()
+                                .frame(width: model.leadingSpace)
                         }
-                    } else {
-                        ContactMessageView(model: messageModel.contactViewModel)
-                    }
-                }
-                .frame(maxWidth: .infinity, alignment: .center)
-            } else if model.incoming {
-                HStack(alignment: .bottom) {
-                    if model.shouldDisplayAavatar,
-                       let factory = avatarFactory {
+                        MessageStackView(messageModel: messageModel, onLongPress: onLongPress, showReactionsView: showReactionsView)
+                    }.padding(.trailing, 50)
+                } else {
+                    HStack(alignment: .bottom, spacing: 2) {
                         Spacer()
-                            .frame(width: 10)
-                        let jamiId = messageModel.message.uri.isEmpty ? messageModel.message.authorId : messageModel.message.uri
-                        AvatarSwiftUIView(source: factory.provider(for: jamiId, size: Constants.AvatarSize.conversation30))
-                        Spacer()
-                            .frame(width: 10)
-                    } else {
-                        Spacer()
-                            .frame(width: model.leadingSpace)
-                    }
-                    MessageStackView(messageModel: messageModel, onLongPress: onLongPress, showReactionsView: showReactionsView)
-                }.padding(.trailing, 50)
-            } else {
-                HStack(alignment: .bottom, spacing: 2) {
-                    Spacer()
-                    MessageStackView(messageModel: messageModel, onLongPress: onLongPress, showReactionsView: showReactionsView)
-                    if model.showReciveIndicator {
-                        Image("messageSentIndicator")
-                            .resizable()
-                            .frame(width: 13, height: 13)
-                    } else if model.showSentIndicator {
-                        Circle()
-                            .strokeBorder(Color.gray, lineWidth: 1)
-                            .frame(width: 12, height: 12)
-                    } else {
-                        Spacer()
-                            .frame(width: 13, height: 13)
+                        MessageStackView(messageModel: messageModel, onLongPress: onLongPress, showReactionsView: showReactionsView)
+                        if model.showReciveIndicator {
+                            Image("messageSentIndicator")
+                                .resizable()
+                                .frame(width: 13, height: 13)
+                        } else if model.showSentIndicator {
+                            Circle()
+                                .strokeBorder(Color.gray, lineWidth: 1)
+                                .frame(width: 12, height: 12)
+                        } else {
+                            Spacer()
+                                .frame(width: 13, height: 13)
 
-                    }
-                }.padding(.leading, 50)
+                        }
+                    }.padding(.leading, 50)
+                }
             }
+            .padding(.top, model.topSpace)
             if let readIds = model.readIds, !readIds.isEmpty {
                 HStack(alignment: .top, spacing: -3) {
                     Spacer()
@@ -146,19 +128,58 @@ struct MessageRowView: View {
                     }
                 }
                 .offset(x: 1)
-                .padding(.top, model.isMemberEvent ? 4 : 0)
+                .padding(.top, Layout.readReceiptsSpacing)
                 .accessibilityHidden(true)
             }
-            Spacer()
-                .frame(height: model.bottomSpace)
         }
-        .padding(.top, 1)
-        .padding(.bottom, 1)
-        .padding(.leading, 5)
-        .padding(.trailing, 5)
+        .padding(.bottom, model.bottomSpace)
+        .padding(.horizontal, 5)
+    }
+
+    private func centeredEvent() -> some View {
+        VStack(spacing: Layout.eventTimeSpacing) {
+            // The rows drawn across the conversation rather than as a
+            // bubble. Which one it is follows from the message; that it is
+            // one of them at all is the flag's to say.
+            Group {
+                if let collabDoc = messageModel.collabDocViewModel {
+                    HStack(spacing: 0) {
+                        Spacer(minLength: Layout.centeredMessageMargin)
+                        CollabDocMessageView(model: collabDoc)
+                            .layoutPriority(1)
+                        Spacer(minLength: Layout.centeredMessageMargin)
+                    }
+                } else {
+                    ContactMessageView(model: messageModel.contactViewModel)
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .center)
+            if let eventGroupTimeText = model.eventGroupTimeText {
+                MessageTimeView(text: eventGroupTimeText,
+                                color: Color(UIColor.tertiaryLabel),
+                                accessibilityText: model.eventGroupAccessibilityText)
+            }
+        }
+    }
+
+    private func daySeparator(_ text: String) -> some View {
+        Text(text)
+            .font(.caption.weight(.semibold))
+            .foregroundColor(model.styling.secondaryTextColor)
+            .padding(.horizontal, Layout.daySeparatorHorizontalPadding)
+            .padding(.vertical, Layout.daySeparatorVerticalPadding)
+            .background(Capsule().fill(Color(UIColor.tertiarySystemFill)))
+            .frame(maxWidth: .infinity, alignment: .center)
+            .padding(.vertical, Layout.daySeparatorOuterPadding)
+            .accessibilityAddTraits(.isHeader)
     }
 
     private enum Layout {
         static let centeredMessageMargin: CGFloat = 30
+        static let daySeparatorHorizontalPadding: CGFloat = 10
+        static let daySeparatorVerticalPadding: CGFloat = 4
+        static let daySeparatorOuterPadding: CGFloat = 10
+        static let eventTimeSpacing: CGFloat = 6
+        static let readReceiptsSpacing: CGFloat = 4
     }
 }

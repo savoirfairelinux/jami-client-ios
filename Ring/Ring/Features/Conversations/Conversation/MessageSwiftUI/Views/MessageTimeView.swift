@@ -1,0 +1,57 @@
+/*
+ *  Copyright (C) 2026-2026 Savoir-faire Linux Inc.
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ */
+
+import SwiftUI
+
+struct MessageTimeView: View {
+    let text: String
+    let color: Color
+    var accessibilityText: String?
+
+    fileprivate static let font = Font.caption2.monospacedDigit()
+
+    var body: some View {
+        Text(text)
+            .font(Self.font)
+            .foregroundColor(color)
+            .lineLimit(1)
+            .fixedSize()
+            .allowsHitTesting(false)
+            .accessibilityLabel(accessibilityText ?? text)
+            .accessibilityHidden(accessibilityText == nil)
+    }
+}
+
+extension Text {
+    func withInlineTime(_ time: String?, color: Color) -> some View {
+        (self + Self.reservedSpace(for: time))
+            .overlay(alignment: Alignment(horizontal: .trailing, vertical: .lastTextBaseline)) {
+                if let time = time {
+                    MessageTimeView(text: time, color: color)
+                }
+            }
+    }
+
+    private static func reservedSpace(for time: String?) -> Text {
+        guard let time = time else { return Text("") }
+        let unbreakableTime = time.replacingOccurrences(of: " ", with: "\u{00A0}")
+        return Text("\u{2002}\u{2002}" + unbreakableTime)
+            .font(MessageTimeView.font)
+            .foregroundColor(.clear)
+    }
+}

@@ -710,7 +710,10 @@ class NotificationService: UNNotificationServiceExtension {
                                                  true)
         }
     }
+}
 
+// MARK: Request data
+extension NotificationService {
     private func saveDataIfNeeded(data: [String: String]) {
         guard let userDefaults = UserDefaults(suiteName: Constants.appGroupIdentifier) else {
             return

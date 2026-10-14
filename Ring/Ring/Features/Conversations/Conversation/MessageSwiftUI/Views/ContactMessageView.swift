@@ -23,23 +23,19 @@ struct ContactMessageView: View {
     @Environment(\.avatarProviderFactory)
     var avatarFactory: AvatarProviderFactory?
     var body: some View {
-        HStack(alignment: .center) {
+        HStack(alignment: .center, spacing: model.inset) {
             if model.needAvatar {
                 if let factory = avatarFactory {
                     let jamiId = model.message.uri.isEmpty ? model.message.authorId : model.message.uri
                     AvatarSwiftUIView(source: factory.provider(for: jamiId, size: Constants.AvatarSize.conversation20))
                 }
             }
-            Spacer()
-                .frame(width: model.inset)
             Text(model.content)
                 .foregroundColor(model.styling.textColor)
                 .lineLimit(2)
-                .background(model.backgroundColor)
                 .font(model.styling.textFont)
                 .truncationMode(.middle)
         }
         .padding(.horizontal, model.inset)
-        .frame(minHeight: model.height)
     }
 }

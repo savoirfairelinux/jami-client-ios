@@ -50,12 +50,21 @@ class MessageContainerModel: Identifiable, Equatable {
         return self.transferSubject.asObservable()
     }()
 
-    var shouldShowTimeString: Bool = false {
+    var startsNewGroup: Bool = false
+
+    var startsNewDay: Bool = false {
         didSet {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
-                self.messageRow.shouldShowTimeString = self.shouldShowTimeString
+                self.messageRow.startsNewDay = self.startsNewDay
             }
+        }
+    }
+
+    var endsEmojiRun: Bool = true {
+        didSet {
+            guard oldValue != endsEmojiRun else { return }
+            self.messageContent.setEndsEmojiRun(endsEmojiRun)
         }
     }
 
@@ -139,7 +148,6 @@ class MessageContainerModel: Identifiable, Equatable {
 
     func swarmColorUpdated(color: UIColor) {
         self.messageContent.swarmColorUpdated(color: color)
-        self.contactViewModel.swarmColorUpdated(color: color)
     }
 
     func reactionsUpdated(_ message: MessageModel) {
@@ -155,6 +163,11 @@ class MessageContainerModel: Identifiable, Equatable {
         if message.type == .fileTransfer {
             self.messageContent.setTransferStatus(transferStatus: message.transferStatus)
         }
+    }
+
+    func refreshDates() {
+        self.messageContent.refreshDates()
+        self.messageRow.refreshDates()
     }
 
     private func apply(_ message: MessageModel) {

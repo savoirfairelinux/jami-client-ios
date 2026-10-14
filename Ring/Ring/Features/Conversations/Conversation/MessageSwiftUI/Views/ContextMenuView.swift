@@ -202,6 +202,14 @@ struct ContextMenuView: View {
 
     func makeActions() -> some View {
         VStack(spacing: 0) {
+            Text(model.messageDateText)
+                .font(.footnote)
+                .foregroundColor(Color(UIColor.secondaryLabel))
+                .fixedSize(horizontal: false, vertical: true)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, model.menuPadding)
+                .padding(.vertical, model.messageDateVerticalPadding)
+            Divider()
             ForEach(model.menuItems) { item in
                 VStack(spacing: 0) {
                     Button {

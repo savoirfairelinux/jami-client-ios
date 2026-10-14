@@ -563,6 +563,7 @@
 		A7MD00102F20000200000006 /* MessageMarkdownTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7MD00102F20000100000004 /* MessageMarkdownTests.swift */; };
 		A7MD00102F20000200000008 /* MessageBubbleTextBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7MD00102F20000100000006 /* MessageBubbleTextBody.swift */; };
 		A7MD00102F20000300000002 /* MessageBubbleTextRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7MD00102F20000300000001 /* MessageBubbleTextRenderer.swift */; };
+		A7MD00102F20000300000004 /* MessageTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7MD00102F20000300000003 /* MessageTimeView.swift */; };
 		AA0001020000000000000001 /* PhotoLibrarySaving.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0001010000000000000001 /* PhotoLibrarySaving.swift */; };
 		AA0002020000000000000002 /* MockPhotoLibrarySaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0002010000000000000002 /* MockPhotoLibrarySaver.swift */; };
 		AA0003020000000000000003 /* MediaPreviewModelSaveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0003010000000000000003 /* MediaPreviewModelSaveTests.swift */; };
@@ -1798,6 +1799,7 @@
 		A7MD00102F20000100000004 /* MessageMarkdownTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageMarkdownTests.swift; sourceTree = "<group>"; };
 		A7MD00102F20000100000006 /* MessageBubbleTextBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBubbleTextBody.swift; sourceTree = "<group>"; };
 		A7MD00102F20000300000001 /* MessageBubbleTextRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBubbleTextRenderer.swift; sourceTree = "<group>"; };
+		A7MD00102F20000300000003 /* MessageTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTimeView.swift; sourceTree = "<group>"; };
 		AA0001010000000000000001 /* PhotoLibrarySaving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibrarySaving.swift; sourceTree = "<group>"; };
 		AA0002010000000000000002 /* MockPhotoLibrarySaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPhotoLibrarySaver.swift; sourceTree = "<group>"; };
 		AA0003010000000000000003 /* MediaPreviewModelSaveTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPreviewModelSaveTests.swift; sourceTree = "<group>"; };
@@ -3439,6 +3441,7 @@
 				26A072F82959F461006D8163 /* ContextMenuView.swift */,
 				263F61772B45E8FD00240AEE /* MessageBubbleView.swift */,
 				A7MD00102F20000300000001 /* MessageBubbleTextRenderer.swift */,
+				A7MD00102F20000300000003 /* MessageTimeView.swift */,
 				263F61712B4460A400240AEE /* ReactionRowView.swift */,
 				263F61732B4460B200240AEE /* ReactionsView.swift */,
 				2625814D2B4DE40200314C42 /* MessagePanelView.swift */,
@@ -4352,6 +4355,7 @@
 				2640BA9A2B974E4B006D189A /* MessageProtocols.swift in Sources */,
 				263F61782B45E8FD00240AEE /* MessageBubbleView.swift in Sources */,
 				A7MD00102F20000300000002 /* MessageBubbleTextRenderer.swift in Sources */,
+				A7MD00102F20000300000004 /* MessageTimeView.swift in Sources */,
 				26E081242BC07824001B4C18 /* RequestsViewModel.swift in Sources */,
 				264FB66229775B1C00BEFBBF /* SystemService.swift in Sources */,
 				0E99F1A022417A0400CF8BD6 /* JamiURI.swift in Sources */,

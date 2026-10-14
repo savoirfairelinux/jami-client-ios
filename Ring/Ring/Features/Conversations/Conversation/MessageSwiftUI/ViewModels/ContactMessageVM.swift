@@ -29,13 +29,8 @@ class ContactMessageVM: ObservableObject, MessageAppearanceProtocol, NameObserve
             self.observableContent.accept(content)
         }
     }
-    @Published var borderColor: Color
-    @Published var backgroundColor: Color
     var disposeBag = DisposeBag()
-    let cornerRadius: CGFloat = 20
-    let avatarSize: CGFloat = 15
     var inset: CGFloat
-    var height: CGFloat
     var styling: MessageStyling = MessageStyling()
     var observableContent = BehaviorRelay<String>(value: "")
 
@@ -51,10 +46,7 @@ class ContactMessageVM: ObservableObject, MessageAppearanceProtocol, NameObserve
 
     init(message: MessageModel) {
         self.message = message
-        self.backgroundColor = Color(UIColor.clear)
         self.inset = message.type == .initial ? 0 : 7
-        self.height = message.type == .initial ? 25 : 28
-        self.borderColor = message.type == .initial ? Color(UIColor.clear) : Color(UIColor.secondaryLabel)
         self.content = message.content
         self.observableContent.accept(message.content)
         if message.type != .initial {
@@ -70,13 +62,6 @@ class ContactMessageVM: ObservableObject, MessageAppearanceProtocol, NameObserve
             let jamiId = message.uri.isEmpty ? message.authorId : message.uri
             needAvatar = true
             requestName(jamiId: jamiId)
-        }
-    }
-
-    func swarmColorUpdated(color: UIColor) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.borderColor = self.message.type != .initial ? Color(color) : Color(UIColor.clear)
         }
     }
 }
