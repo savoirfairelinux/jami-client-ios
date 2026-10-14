@@ -287,6 +287,17 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
         self.subscribeMessagesActions()
         self.subscribeContextMenu()
         self.subscribeToTypingStatus()
+        self.subscribeDayChange()
+    }
+
+    private func subscribeDayChange() {
+        NotificationCenter.default.rx
+            .notification(UIApplication.significantTimeChangeNotification)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] _ in
+                self?.messagesModels.forEach { $0.messageRow.refreshDaySeparator() }
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func subscribeScreenTapped(screenTapped: Observable<Bool>) {
@@ -1021,20 +1032,20 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     // MARK: sequencing
 
     private func computeSequencing() {
-        var lastMessageTime: Date?
-        for (index, model) in self.messagesModels.enumerated().reversed() {
-            let currentMessageTime = model.message.receivedDate
-            if index == self.messagesModels.count - 1 {
-                // always show first message's time
-                model.shouldShowTimeString = true
-            } else if let last = lastMessageTime {
-                // only show time for new messages if beyond an arbitrary time frame from the previously shown time
-                let timeDifference = currentMessageTime.timeIntervalSinceReferenceDate - last.timeIntervalSinceReferenceDate
-                model.shouldShowTimeString = Int(timeDifference) < messageGroupingInterval ? false : true
-            } else {
-                model.shouldShowTimeString = false
+        var previousMessage: MessageModel?
+        var memberEventsStart: Date?
+        for model in self.messagesModels.reversed() {
+            let current = model.message
+            let continuesMemberEvents = current.type.isContact && previousMessage?.type.isContact == true
+            let groupReference = continuesMemberEvents ? memberEventsStart : previousMessage?.receivedDate
+            let startsNewDay = previousMessage.map { !Calendar.current.isDate(current.receivedDate, inSameDayAs: $0.receivedDate) } ?? true
+            let startsNewGroup = startsNewDay || groupReference.map { current.receivedDate.timeIntervalSince($0) >= messageGroupingInterval } ?? true
+            model.startsNewDay = startsNewDay
+            model.startsNewGroup = startsNewGroup
+            if current.type.isContact && (startsNewGroup || !continuesMemberEvents) {
+                memberEventsStart = current.receivedDate
             }
-            lastMessageTime = currentMessageTime
+            previousMessage = current
         }
         for (index, model) in self.messagesModels.enumerated() {
             model.sequencing = getMessageSequencing(forIndex: index)
@@ -1043,7 +1054,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
         }
     }
 
-    private let messageGroupingInterval = 10 * 60 // 10 minutes
+    private let messageGroupingInterval: TimeInterval = 10 * 60 // 10 minutes
 
     private func isBreakingSequence(message: MessageModel, secondMessage: MessageModel) -> Bool {
         if message.type.isContact && secondMessage.type.isContact {
@@ -1080,7 +1091,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
 
         if nextMessageItem == nil {
             if let previousMessageItem = previousMessageItem {
-                let isNewSequence = messageItem.shouldShowTimeString || self.isBreakingSequence(message: previousMessageItem.message, secondMessage: messageItem.message)
+                let isNewSequence = messageItem.startsNewGroup || self.isBreakingSequence(message: previousMessageItem.message, secondMessage: messageItem.message)
                 return isNewSequence ? .singleMessage : .lastOfSequence
             } else {
                 return .singleMessage
@@ -1090,8 +1101,8 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
             return .singleMessage
         }
         if let next = nextMessageItem, let previous = previousMessageItem {
-            let isNewSequence = messageItem.shouldShowTimeString || self.isBreakingSequence(message: previous.message, secondMessage: messageItem.message)
-            let changingSequenceAfter = next.shouldShowTimeString || self.isBreakingSequence(message: next.message, secondMessage: messageItem.message)
+            let isNewSequence = messageItem.startsNewGroup || self.isBreakingSequence(message: previous.message, secondMessage: messageItem.message)
+            let changingSequenceAfter = next.startsNewGroup || self.isBreakingSequence(message: next.message, secondMessage: messageItem.message)
             if isNewSequence && changingSequenceAfter {
                 return .singleMessage
             }

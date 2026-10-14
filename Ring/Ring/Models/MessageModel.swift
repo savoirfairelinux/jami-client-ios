@@ -446,7 +446,7 @@ struct MessageData {
 
     private mutating func updateAccessibilityLabel(for messageType: MessageType, receivedDate: Date) {
 
-        let timestamp = String(receivedDate.getTimeLabelString())
+        let timestamp = receivedDate.messageFullDateString()
 
         switch messageType {
         case .text:

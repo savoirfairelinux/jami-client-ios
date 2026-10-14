@@ -22,7 +22,8 @@ import SwiftUI
 
 class MessageRowVM: ObservableObject, MessageAppearanceProtocol, MessageReadObserver {
     @Published var readIds: [String]?
-    @Published var timeString: String = ""
+    @Published var daySeparatorText: String?
+    @Published var eventGroupTimeText: String?
     @Published var topSpace: CGFloat = 0
     @Published var bottomSpace: CGFloat = 0
     @Published var leadingSpace: CGFloat = 0
@@ -39,9 +40,9 @@ class MessageRowVM: ObservableObject, MessageAppearanceProtocol, MessageReadObse
     var disposeBag = DisposeBag()
     var readDisposeBag = DisposeBag()
 
-    var shouldShowTimeString = false {
+    var startsNewDay = false {
         didSet {
-            self.timeString = self.shouldShowTimeString ? self.message.receivedDate.getTimeLabelString() : ""
+            refreshDaySeparator()
         }
     }
 
@@ -50,6 +51,9 @@ class MessageRowVM: ObservableObject, MessageAppearanceProtocol, MessageReadObse
             let sequenceEdgeSpace: CGFloat = centeredMessage ? 6 : 2
             topSpace = (sequencing == .singleMessage || sequencing == .firstOfSequence) ? sequenceEdgeSpace : 0
             bottomSpace = (sequencing == .singleMessage || sequencing == .lastOfSequence) ? sequenceEdgeSpace : 0
+            let closesEventGroup = (message.type.isContact || message.type == .initial)
+                && (sequencing == .singleMessage || sequencing == .lastOfSequence)
+            eventGroupTimeText = closesEventGroup ? message.receivedDate.messageTimeString() : nil
         }
     }
 
@@ -58,8 +62,14 @@ class MessageRowVM: ObservableObject, MessageAppearanceProtocol, MessageReadObse
         self.incoming = message.incoming
         self.centeredMessage = message.type.isCentered
         self.readBorderColor = Color(UIColor.systemBackground)
-        self.timeString = self.message.receivedDate.getTimeLabelString()
         self.updateMessageStatus()
+    }
+
+    func refreshDaySeparator() {
+        let text = startsNewDay ? message.receivedDate.conversationDayLabel() : nil
+        if text != daySeparatorText {
+            daySeparatorText = text
+        }
     }
 
     func setInfoState(state: PublishSubject<State>) {
