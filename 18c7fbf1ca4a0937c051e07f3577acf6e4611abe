@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8472567_2c712e5e",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-14T13:54:26Z",
+      "side": 1,
+      "message": "[warning] Line 289: 🟡 `subscribeDayChange()` refreshes only day-separator labels, but message times are precomputed and cached elsewhere (`MessageContentVM.timeString` / `eventGroupTimeText`). After significant time changes (timezone, 12/24h setting, locale), visible per-message timestamps can become stale while separators update. Recompute all displayed time strings on this notification (or derive them at render time from `Date`) to keep the UI consistent.",
+      "revId": "18c7fbf1ca4a0937c051e07f3577acf6e4611abe",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
