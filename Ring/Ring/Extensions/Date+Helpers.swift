@@ -19,72 +19,73 @@
  */
 
 extension Date {
-    func dayNumberOfWeek() -> Int? {
-        return Calendar.current.dateComponents([.weekday], from: self).weekday
-    }
-
-    func dayOfWeek() -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEEE"
-        return dateFormatter.string(from: self)
-    }
-
     func conversationTimestamp() -> String {
-        var dateFormatter: DateFormatter = {
-            let formatter = DateFormatter()
-            formatter.dateStyle = .medium
-            return formatter
-        }()
-        var hourFormatter: DateFormatter = {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "HH:mm"
-            return formatter
-        }()
-        let dateToday = Date()
-        var dateString = ""
-        let todayWeekOfYear = Calendar.current.component(.weekOfYear, from: dateToday)
-        let todayDay = Calendar.current.component(.day, from: dateToday)
-        let todayMonth = Calendar.current.component(.month, from: dateToday)
-        let todayYear = Calendar.current.component(.year, from: dateToday)
-        let weekOfYear = Calendar.current.component(.weekOfYear, from: self)
-        let day = Calendar.current.component(.day, from: self)
-        let month = Calendar.current.component(.month, from: self)
-        let year = Calendar.current.component(.year, from: self)
-        if todayDay == day && todayMonth == month && todayYear == year {
-            dateString = hourFormatter.string(from: self)
-        } else if day == todayDay - 1 {
-            dateString = L10n.Smartlist.yesterday
-        } else if todayYear == year && todayWeekOfYear == weekOfYear {
-            dateString = self.dayOfWeek()
-        } else {
-            dateString = dateFormatter.string(from: self)
+        if Calendar.current.isDateInToday(self) {
+            return messageTimeString()
         }
-
-        return dateString
+        return dayString(currentYear: Date.smartListDayInCurrentYearFormatter, otherYear: Date.smartListDayFormatter)
     }
 
-    func getTimeLabelString() -> String {
-        let currentDateTime = Date()
-
-        // prepare formatter
-        let dateFormatter = DateFormatter()
-
-        if Calendar.current.compare(currentDateTime, to: self, toGranularity: .day) == .orderedSame {
-            // age: [0, received the previous day[
-            dateFormatter.dateFormat = "h:mma"
-        } else if Calendar.current.compare(currentDateTime, to: self, toGranularity: .weekOfYear) == .orderedSame {
-            // age: [received the previous day, received 7 days ago[
-            dateFormatter.dateFormat = "E h:mma"
-        } else if Calendar.current.compare(currentDateTime, to: self, toGranularity: .year) == .orderedSame {
-            // age: [received 7 days ago, received the previous year[
-            dateFormatter.dateFormat = "MMM d, h:mma"
-        } else {
-            // age: [received the previous year, inf[
-            dateFormatter.dateFormat = "MMM d, yyyy h:mma"
-        }
-
-        // generate the string containing the message time
-        return dateFormatter.string(from: self).uppercased()
+    func conversationDayLabel() -> String {
+        return dayString(currentYear: Date.dayInCurrentYearFormatter, otherYear: Date.dayFormatter)
     }
 
+    func messageTimeString() -> String {
+        return formatted(date: .omitted, time: .shortened)
+    }
+
+    func messageFullDateString() -> String {
+        return Date.fullDateFormatter.string(from: self)
+    }
+
+    private func dayString(currentYear: DateFormatter, otherYear: DateFormatter) -> String {
+        let calendar = Calendar.current
+        if calendar.isDateInToday(self) || calendar.isDateInYesterday(self) {
+            return Date.relativeDayFormatter.string(from: self)
+        }
+        if isWithinLastWeek(calendar: calendar) {
+            return Date.weekdayFormatter.string(from: self)
+        }
+        if calendar.isDate(self, equalTo: Date(), toGranularity: .year) {
+            return currentYear.string(from: self)
+        }
+        return otherYear.string(from: self)
+    }
+
+    private func isWithinLastWeek(calendar: Calendar) -> Bool {
+        let today = calendar.startOfDay(for: Date())
+        let day = calendar.startOfDay(for: self)
+        guard let days = calendar.dateComponents([.day], from: day, to: today).day else { return false }
+        return (2...6).contains(days)
+    }
+
+    private static func makeFormatter(_ configure: (DateFormatter) -> Void) -> DateFormatter {
+        let formatter = DateFormatter()
+        formatter.locale = .autoupdatingCurrent
+        formatter.timeZone = .autoupdatingCurrent
+        formatter.formattingContext = .beginningOfSentence
+        configure(formatter)
+        return formatter
+    }
+
+    private static func templateFormatter(_ template: String) -> DateFormatter {
+        return makeFormatter { $0.setLocalizedDateFormatFromTemplate(template) }
+    }
+
+    private static let relativeDayFormatter = makeFormatter {
+        $0.dateStyle = .medium
+        $0.timeStyle = .none
+        $0.doesRelativeDateFormatting = true
+    }
+
+    private static let fullDateFormatter = makeFormatter {
+        $0.dateStyle = .full
+        $0.timeStyle = .short
+    }
+
+    private static let weekdayFormatter = templateFormatter("EEEE")
+    private static let dayInCurrentYearFormatter = templateFormatter("EEEMMMd")
+    private static let dayFormatter = templateFormatter("yMMMd")
+    private static let smartListDayInCurrentYearFormatter = templateFormatter("MMMd")
+    private static let smartListDayFormatter = templateFormatter("yyMd")
 }

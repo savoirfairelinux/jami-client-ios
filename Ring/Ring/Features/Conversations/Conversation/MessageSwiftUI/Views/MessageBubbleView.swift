@@ -28,22 +28,25 @@ struct MessageBubbleView: View {
     var openURL
     @Environment(\.suppressLongPress)
     private var suppressLongPress
+    @Environment(\.layoutDirection)
+    private var layoutDirection
     var onLongPress: (_ frame: CGRect, _ message: MessageBubbleView) -> Void
     let padding: CGFloat = 12
 
     var body: some View {
         VStack(alignment: .leading) {
             if model.messageDeleted {
-                MessageBubbleWithEditionWrapper(model: model) {
+                MessageBubbleWithTimeWrapper(model: model) {
                     Text(model.messageDeletedText)
                         .font(model.styling.secondaryFont)
                         .foregroundColor(model.editionColor)
+                        .withInlineTime(model.inlineTimeText(in: layoutDirection), color: model.timeColor)
                 }
             } else {
                 if model.type == .call {
                     renderCallMessage()
                 } else if model.type == .fileTransfer {
-                    MediaView(message: model, onLongGesture: receivedLongPress(), minHeight: 50, maxHeight: 300, withPlayerControls: true, cornerRadius: 0)
+                    renderFileTransfer()
                 } else if model.type == .text {
                     renderTextContent()
                 }
@@ -64,6 +67,7 @@ struct MessageBubbleView: View {
         )
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(Text(model.accessibilityLabelValue))
+        .accessibilityCustomContent(Text(model.accessibilityDateLabel), Text(model.fullDateText))
         .conditionalModifier(AccessibilityActionModifier(actionName: ContextualMenuItem.preview.toString(), action: { model.contextMenuSelect(item: .preview) }), apply: model.menuItems.contains(.preview))
         .conditionalModifier(AccessibilityActionModifier(actionName: ContextualMenuItem.forward.toString(), action: { model.contextMenuSelect(item: .forward) }), apply: model.menuItems.contains(.forward))
         .conditionalModifier(AccessibilityActionModifier(actionName: ContextualMenuItem.share.toString(), action: { model.contextMenuSelect(item: .share) }), apply: model.menuItems.contains(.share))
@@ -78,6 +82,7 @@ struct MessageBubbleView: View {
 
     private func renderCallMessage() -> some View {
         Text(model.content)
+            .withInlineTime(model.timeText, color: model.timeColor)
             .padding(.horizontal, model.textInset)
             .padding(.vertical, model.textVerticalInset)
             .foregroundColor(model.styling.textColor)
@@ -90,14 +95,18 @@ struct MessageBubbleView: View {
     private func renderTextContent() -> some View {
         Group {
             if let metadata = model.metadata {
-                URLPreview(metadata: metadata, maxDimension: model.maxDimension)
-                    .modifier(MessageCornerRadius(model: model))
-                    .messageGesture(onLongPress: receivedLongPress())
+                VStack(alignment: .trailing, spacing: TimeLayout.outsideSpacing) {
+                    URLPreview(metadata: metadata, maxDimension: model.maxDimension)
+                        .modifier(MessageCornerRadius(model: model))
+                        .messageGesture(onLongPress: receivedLongPress())
+                    MessageTimeView(text: model.timeText, color: model.styling.secondaryTextColor)
+                }
             } else if model.isFullURL, let url = model.getURL() {
-                MessageBubbleWithEditionWrapper(model: model) {
+                MessageBubbleWithTimeWrapper(model: model) {
                     Text(model.content)
                         .font(model.styling.textFont)
                         .underline()
+                        .withInlineTime(model.inlineTimeText(in: layoutDirection), color: model.timeColor)
                         .onTapGesture {
                             openURL(url)
                         }
@@ -111,10 +120,33 @@ struct MessageBubbleView: View {
 
     @ViewBuilder
     private func renderBubbleTextBody() -> some View {
-        MessageBubbleWithEditionWrapper(model: model) {
-            MessageBubbleTextRenderer(textBody: model.bubbleTextBody, font: model.styling.textFont)
+        MessageBubbleWithTimeWrapper(model: model) {
+            MessageBubbleTextRenderer(textBody: model.bubbleTextBody,
+                                      font: model.styling.textFont,
+                                      inlineTime: model.inlineTimeText(in: layoutDirection),
+                                      timeColor: model.timeColor)
                 .lineLimit(nil)
                 .messageGesture(onLongPress: receivedLongPress())
+        }
+    }
+
+    @ViewBuilder
+    private func renderFileTransfer() -> some View {
+        let media = MediaView(message: model, onLongGesture: receivedLongPress(), minHeight: 50, maxHeight: 300, withPlayerControls: true, cornerRadius: 0)
+        if model.showsTimeOverImage {
+            media
+                .overlay(alignment: .bottomTrailing) {
+                    MessageTimeView(text: model.timeText, color: .white)
+                        .padding(.horizontal, TimeLayout.capsuleHorizontalPadding)
+                        .padding(.vertical, TimeLayout.capsuleVerticalPadding)
+                        .background(Capsule().fill(Color.black.opacity(0.4)))
+                        .padding(TimeLayout.capsuleInset)
+                }
+        } else {
+            VStack(alignment: .trailing, spacing: TimeLayout.outsideSpacing) {
+                media
+                MessageTimeView(text: model.timeText, color: model.styling.secondaryTextColor)
+            }
         }
     }
 
@@ -127,8 +159,10 @@ struct MessageBubbleView: View {
     }
 }
 
-struct MessageBubbleWithEditionWrapper<Content: View>: View {
+struct MessageBubbleWithTimeWrapper<Content: View>: View {
     @ObservedObject var model: MessageContentVM
+    @Environment(\.layoutDirection)
+    private var layoutDirection
     let content: Content
     let messageEditedPadding: CGFloat = 4
 
@@ -137,15 +171,30 @@ struct MessageBubbleWithEditionWrapper<Content: View>: View {
         self.content = content()
     }
 
-    var body: some View {
-        VStack(alignment: .leading, spacing: messageEditedPadding) {
-            content
-
-            if model.messageEdited && !model.messageDeleted {
+    @ViewBuilder var body: some View {
+        switch model.timePlacement(in: layoutDirection) {
+        case .belowEmoji:
+            VStack(alignment: model.isIncoming ? .leading : .trailing, spacing: -TimeLayout.emojiTimeTuck) {
+                content
+                    .applyMessageStyle(model: model)
+                MessageTimeView(text: model.timeText, color: Color(UIColor.tertiaryLabel))
+            }
+        case .editedRow:
+            VStack(alignment: .leading, spacing: messageEditedPadding) {
+                content
                 editingIndicator()
             }
+            .applyMessageStyle(model: model)
+        case .belowText:
+            VStack(alignment: .trailing, spacing: messageEditedPadding) {
+                content
+                MessageTimeView(text: model.timeText, color: model.timeColor)
+            }
+            .applyMessageStyle(model: model)
+        case .inline:
+            content
+                .applyMessageStyle(model: model)
         }
-        .applyMessageStyle(model: model)
     }
 
     private func editingIndicator() -> some View {
@@ -159,8 +208,19 @@ struct MessageBubbleWithEditionWrapper<Content: View>: View {
             Text(model.editIndicator)
                 .font(.footnote)
                 .foregroundColor(model.editionColor)
+            MessageTimeView(text: model.timeText, color: model.timeColor)
+                .padding(.leading, TimeLayout.editedSpacing)
         }
     }
+}
+
+private enum TimeLayout {
+    static let outsideSpacing: CGFloat = 2
+    static let editedSpacing: CGFloat = 4
+    static let capsuleHorizontalPadding: CGFloat = 6
+    static let capsuleVerticalPadding: CGFloat = 2
+    static let capsuleInset: CGFloat = 8
+    static let emojiTimeTuck: CGFloat = 4
 }
 
 struct AccessibilityActionModifier: ViewModifier {
