@@ -72,12 +72,8 @@ struct MessageRowView: View {
     var avatarFactory: AvatarProviderFactory?
     var body: some View {
         VStack(alignment: .leading, spacing: model.isMemberEvent ? 0 : nil) {
-            if model.shouldShowTimeString {
-                Text(model.timeString)
-                    .font(.caption)
-                    .foregroundColor(model.styling.secondaryTextColor)
-                    .frame(maxWidth: .infinity, alignment: .center)
-                    .padding(10)
+            if let daySeparatorText = model.daySeparatorText {
+                daySeparator(daySeparatorText)
             }
             Spacer()
                 .frame(height: model.topSpace)
@@ -98,6 +94,9 @@ struct MessageRowView: View {
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .center)
+                if let eventGroupTimeText = model.eventGroupTimeText {
+                    eventGroupTime(eventGroupTimeText, accessibilityText: model.eventGroupAccessibilityText)
+                }
             } else if model.incoming {
                 HStack(alignment: .bottom) {
                     if model.shouldDisplayAavatar,
@@ -158,7 +157,27 @@ struct MessageRowView: View {
         .padding(.trailing, 5)
     }
 
+    private func daySeparator(_ text: String) -> some View {
+        Text(text)
+            .font(.caption.weight(.semibold))
+            .foregroundColor(model.styling.secondaryTextColor)
+            .padding(.horizontal, Layout.daySeparatorHorizontalPadding)
+            .padding(.vertical, Layout.daySeparatorVerticalPadding)
+            .background(Capsule().fill(Color(UIColor.tertiarySystemFill)))
+            .frame(maxWidth: .infinity, alignment: .center)
+            .padding(.vertical, Layout.daySeparatorOuterPadding)
+            .accessibilityAddTraits(.isHeader)
+    }
+
+    private func eventGroupTime(_ text: String, accessibilityText: String?) -> some View {
+        MessageTimeView(text: text, color: Color(UIColor.tertiaryLabel), accessibilityText: accessibilityText)
+            .frame(maxWidth: .infinity, alignment: .center)
+    }
+
     private enum Layout {
         static let centeredMessageMargin: CGFloat = 30
+        static let daySeparatorHorizontalPadding: CGFloat = 10
+        static let daySeparatorVerticalPadding: CGFloat = 4
+        static let daySeparatorOuterPadding: CGFloat = 10
     }
 }

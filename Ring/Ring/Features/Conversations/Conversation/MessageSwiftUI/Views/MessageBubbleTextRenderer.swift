@@ -21,15 +21,19 @@ import SwiftUI
 struct MessageBubbleTextRenderer: View {
     let textBody: MessageBubbleTextBody
     let font: Font
+    var inlineTime: String?
+    var timeColor: Color = .secondary
 
     var body: some View {
         switch textBody {
         case .plain(let text):
             Text(text)
                 .font(font)
+                .withInlineTime(inlineTime, color: timeColor)
         case .rich(let attributed):
             Text(attributed)
                 .font(font)
+                .withInlineTime(inlineTime, color: timeColor)
         }
     }
 }

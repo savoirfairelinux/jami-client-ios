@@ -235,7 +235,7 @@ struct MessageData {
                 }
             }
         }
-        self.updateAccessibilityLabel(for: self.type, receivedDate: self.receivedDate)
+        self.updateAccessibilityLabel(for: self.type)
     }
 
     // swiftlint:disable:next cyclomatic_complexity
@@ -332,7 +332,7 @@ struct MessageData {
             break
         }
 
-        self.updateAccessibilityLabel(for: self.type, receivedDate: receivedDate)
+        self.updateAccessibilityLabel(for: self.type)
     }
 
     func getContactInteractionString(name: String) -> String? {
@@ -360,7 +360,7 @@ struct MessageData {
             self.parents.append(contentsOf: parents)
         }
 
-        self.updateAccessibilityLabel(for: self.type, receivedDate: receivedDate)
+        self.updateAccessibilityLabel(for: self.type)
     }
 
     func isReply() -> Bool {
@@ -392,6 +392,10 @@ struct MessageData {
 
     func isMessageEdited() -> Bool {
         return !self.editions.isEmpty
+    }
+
+    func isEmojiOnly() -> Bool {
+        return self.type == .text && self.content.containsOnlyEmoji && !self.isMessageDeleted() && !self.isMessageEdited()
     }
 
     mutating func messageUpdated(message: SwarmMessageWrap, localJamiId: String) {
@@ -444,18 +448,15 @@ struct MessageData {
         return Array(self.reactions.filter({ item in item.author == jamiId }).map({ item in item.id }))
     }
 
-    private mutating func updateAccessibilityLabel(for messageType: MessageType, receivedDate: Date) {
-
-        let timestamp = String(receivedDate.getTimeLabelString())
-
+    private mutating func updateAccessibilityLabel(for messageType: MessageType) {
         switch messageType {
         case .text:
             let spokenBody = MessageMarkdown.displayText(from: self.content)
             self.accessibilityLabelValue = self.content.isEmpty
-                ? L10n.Accessibility.textNotAvailable(timestamp)
+                ? L10n.Accessibility.textEmpty
                 : (self.incoming
-                    ? L10n.Accessibility.Text.receivedOn(spokenBody, timestamp)
-                    : L10n.Accessibility.Text.sentOn(spokenBody, timestamp))
+                    ? L10n.Accessibility.Text.received(spokenBody)
+                    : L10n.Accessibility.Text.sent(spokenBody))
 
         case .call:
             if self.content.contains(" - ") {
@@ -469,10 +470,10 @@ struct MessageData {
 
         case .fileTransfer:
             self.accessibilityLabelValue = self.content.isEmpty
-                ? L10n.Accessibility.fileTransferNoName(timestamp)
+                ? L10n.Accessibility.fileTransferUnnamed
                 : (self.incoming
-                    ? L10n.Accessibility.FileTransfer.receivedOn(self.content, timestamp)
-                    : L10n.Accessibility.FileTransfer.sentOn(self.content, timestamp))
+                    ? L10n.Accessibility.FileTransfer.received(self.content)
+                    : L10n.Accessibility.FileTransfer.sent(self.content))
 
         default:
             return
@@ -555,6 +556,10 @@ public final class MessageModel {
 
     func isMessageEdited() -> Bool {
         return data.isMessageEdited()
+    }
+
+    func isEmojiOnly() -> Bool {
+        return data.isEmojiOnly()
     }
 
     func isSending() -> Bool {

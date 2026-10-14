@@ -105,6 +105,13 @@ enum ContextualMenuItem: Identifiable {
     }
 }
 
+enum MessageTimePlacement {
+    case inline
+    case belowText
+    case editedRow
+    case belowEmoji
+}
+
 // swiftlint:disable type_body_length
 class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProtocol, NameObserver {
 
@@ -132,9 +139,17 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     @Published var finalImage: UIImage?
     @Published var messageDeleted = false
     @Published var messageEdited = false
-    @Published var messageDeletedText = ""
+    @Published var messageDeletedText = "" {
+        didSet {
+            guard oldValue != messageDeletedText else { return }
+            cachedShownTextIsRightToLeft = nil
+        }
+    }
     @Published var editIndicator = L10n.Conversation.edited
     @Published var editionColor = Color.secondary
+    @Published var timeColor = Color.secondary
+    @Published var isEmojiOnly = false
+    @Published private(set) var endsEmojiRun = true
     @Published var scale: CGFloat = 1
     var url: URL?
     var fileSize: Int64 = 0
@@ -151,6 +166,12 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     var styling: MessageStyling = MessageStyling()
 
     var message: MessageModel
+    @Published private(set) var timeText = ""
+    let accessibilityDateLabel: String
+    @Published private(set) var fullDateText = ""
+    var showsTimeOverImage: Bool {
+        player == nil && finalImage != nil
+    }
     var isIncoming: Bool
     var isHistory: Bool
     var type: MessageType = .text
@@ -196,10 +217,12 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     private var lastContentForURLInfo: String = ""
     private var cachedDisplayContent: String?
     private var cachedBubbleTextBody: MessageBubbleTextBody?
+    private var cachedShownTextIsRightToLeft: Bool?
 
     private func invalidateTextPresentationCache() {
         cachedDisplayContent = nil
         cachedBubbleTextBody = nil
+        cachedShownTextIsRightToLeft = nil
     }
 
     /// Returns cached URL info, recomputing only when content changes.
@@ -211,6 +234,45 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
         cachedURLInfo = info
         lastContentForURLInfo = content
         return info
+    }
+
+    private var shownText: String {
+        if messageDeleted {
+            return messageDeletedText
+        }
+        if isFullURL {
+            return content
+        }
+        switch bubbleTextBody {
+        case .plain(let text):
+            return text
+        case .rich(let attributed):
+            return String(attributed.characters)
+        }
+    }
+
+    private var shownTextIsRightToLeft: Bool {
+        if let cached = cachedShownTextIsRightToLeft { return cached }
+        let isRightToLeft = shownText.lastParagraphIsRightToLeft
+        cachedShownTextIsRightToLeft = isRightToLeft
+        return isRightToLeft
+    }
+
+    func timePlacement(in layoutDirection: LayoutDirection) -> MessageTimePlacement {
+        if isEmojiOnly {
+            return .belowEmoji
+        }
+        if messageEdited && !messageDeleted {
+            return .editedRow
+        }
+        if shownTextIsRightToLeft != (layoutDirection == .rightToLeft) {
+            return .belowText
+        }
+        return .inline
+    }
+
+    func inlineTimeText(in layoutDirection: LayoutDirection) -> String? {
+        timePlacement(in: layoutDirection) == .inline ? timeText : nil
     }
 
     var isFullURL: Bool {
@@ -225,8 +287,12 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
         UIColor.adaptiveMessageLinkColor(on: linkBackgroundUIColor)
     }
 
+    private var hasBubbleBackground: Bool {
+        !type.isContact && !isEmojiOnly
+    }
+
     private var linkBackgroundUIColor: UIColor {
-        if type.isContact || content.containsOnlyEmoji && !messageDeleted && !messageEdited {
+        if !hasBubbleBackground {
             return .clear
         }
         return isIncoming ? UIColor.jamiMessageCellReceived : preferencesColor
@@ -274,6 +340,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
         self.contextMenuState = contextMenuState
         self.transferState = transferState
         self.message = message
+        self.accessibilityDateLabel = message.incoming ? L10n.Accessibility.messageReceivedDate : L10n.Accessibility.messageSentDate
         self.type = message.type
         self.isIncoming = message.incoming
         self.isHistory = isHistory
@@ -285,8 +352,14 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
         self.transferStatus = message.transferStatus
         self.preferencesColor = preferencesColor
         self.playerWidth = maxDimension
+        self.refreshDates()
         self.updateMessageStyle()
         self.fetchMetadata()
+    }
+
+    func refreshDates() {
+        timeText = message.receivedDate.messageTimeString()
+        fullDateText = message.receivedDate.messageFullDateString()
     }
 
     func setInfoState(state: PublishSubject<State>) {
@@ -299,11 +372,13 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     }
 
     private func updateMessageStyle() {
+        self.isEmojiOnly = self.message.isEmojiOnly()
         self.updateBackgroundColor()
         self.updateTextColor()
         self.updateTextFont()
         self.updateInset()
         self.editionColor = self.isIncoming ? styling.secondaryTextColor : Color(red: 0.95, green: 0.95, blue: 0.95)
+        self.timeColor = self.hasBubbleBackground ? self.editionColor : styling.secondaryTextColor
         invalidateTextPresentationCache()
     }
 
@@ -319,15 +394,15 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     }
 
     private func updateTextFont() {
-        if self.content.containsOnlyEmoji && !self.messageDeleted && !self.messageEdited {
-            self.styling.textFont = Font(UIFont.systemFont(ofSize: 38.0, weight: UIFont.Weight.medium))
+        if self.isEmojiOnly {
+            self.styling.textFont = Font(UIFont.systemFont(ofSize: 44.0, weight: UIFont.Weight.medium))
         } else {
             self.styling.textFont = self.styling.defaultTextFont
         }
     }
 
     private func updateBackgroundColor() {
-        if self.type.isContact || self.content.containsOnlyEmoji && !self.messageDeleted && !self.messageEdited {
+        if !self.hasBubbleBackground {
             self.backgroundColor = .clear
         } else {
             self.backgroundColor = isIncoming ? Color.jamiMessageCellReceived : Color(preferencesColor)
@@ -335,12 +410,18 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     }
 
     private func updateInset() {
-        if self.content.containsOnlyEmoji && !self.messageDeleted && !self.messageEdited {
+        if self.isEmojiOnly {
             self.textInset = 0
             self.textVerticalInset = 2
         } else {
             self.textInset = 15
             self.textVerticalInset = 10
+        }
+    }
+
+    func setEndsEmojiRun(_ endsEmojiRun: Bool) {
+        DispatchQueue.main.async { [weak self] in
+            self?.endsEmojiRun = endsEmojiRun
         }
     }
 

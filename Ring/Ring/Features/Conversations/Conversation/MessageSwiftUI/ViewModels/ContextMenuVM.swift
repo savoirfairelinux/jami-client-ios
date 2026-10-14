@@ -33,6 +33,7 @@ class ContextMenuVM: ObservableObject {
 
     var sendEmojiUpdate = BehaviorRelay(value: [String: String]())
     @Published private(set) var menuItems = [ContextualMenuItem]()
+    @Published private(set) var messageDateText = ""
 
     func configure(with message: MessageBubbleView, localJamiId: String?) {
         self.currentJamiAccountId = localJamiId
@@ -42,6 +43,7 @@ class ContextMenuVM: ObservableObject {
 
         let incoming = message.model.message.incoming
         menuItems = message.model.menuItems
+        messageDateText = message.model.fullDateText
         actionsAnchor = incoming ? .topLeading : .topTrailing
         messsageAnchor = incoming ? .bottomLeading : .bottomTrailing
         isOurMsg = !incoming
@@ -81,6 +83,7 @@ class ContextMenuVM: ObservableObject {
         Self.bodyMetrics.scaledValue(for: 42)
     }
     let menuPadding: CGFloat = 15
+    let messageDateVerticalPadding: CGFloat = 10
     let menuCornerRadius: CGFloat = 14
     let defaultVerticalPadding: CGFloat = 6
     let maxScaleFactor: CGFloat = 1.1
@@ -154,9 +157,10 @@ class ContextMenuVM: ObservableObject {
     // MARK: - Size calculations
 
     private func updateContextMenuSize() {
-        let height = CGFloat(menuItems.count) * itemHeight + menuPadding * 2
         let fontAttributes = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .body)]
-        var width = minMenuWidth
+        let messageDateAttributes = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .footnote)]
+        let messageDate = messageDateText as NSString
+        var width = max(minMenuWidth, messageDate.size(withAttributes: messageDateAttributes).width + menuPadding * 2)
         for item in menuItems {
             let size = (item.toString() as NSString).size(withAttributes: fontAttributes)
             let newWidth = size.width + menuImageSize + menuPadding * 3
@@ -164,8 +168,13 @@ class ContextMenuVM: ObservableObject {
                 width = newWidth
             }
         }
-        let newHeight = min(height, screenHeight - screenPadding)
         let newWidth = min(width, screenWidth - screenPadding)
+        let messageDateHeight = messageDate.boundingRect(with: CGSize(width: newWidth - menuPadding * 2, height: .greatestFiniteMagnitude),
+                                                         options: [.usesLineFragmentOrigin, .usesFontLeading],
+                                                         attributes: messageDateAttributes,
+                                                         context: nil).height
+        let height = CGFloat(menuItems.count) * itemHeight + menuPadding * 2 + ceil(messageDateHeight) + messageDateVerticalPadding * 2
+        let newHeight = min(height, screenHeight - screenPadding)
         menuSize = CGSize(width: newWidth, height: newHeight)
     }
 
