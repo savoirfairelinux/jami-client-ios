@@ -135,6 +135,8 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     @Published var messageDeletedText = ""
     @Published var editIndicator = L10n.Conversation.edited
     @Published var editionColor = Color.secondary
+    @Published var timeColor = Color.secondary
+    @Published var isEmojiOnly = false
     @Published var scale: CGFloat = 1
     var url: URL?
     var fileSize: Int64 = 0
@@ -151,6 +153,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     var styling: MessageStyling = MessageStyling()
 
     var message: MessageModel
+    let timeString: String
     var isIncoming: Bool
     var isHistory: Bool
     var type: MessageType = .text
@@ -274,6 +277,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
         self.contextMenuState = contextMenuState
         self.transferState = transferState
         self.message = message
+        self.timeString = message.receivedDate.messageTimeString()
         self.type = message.type
         self.isIncoming = message.incoming
         self.isHistory = isHistory
@@ -299,11 +303,13 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     }
 
     private func updateMessageStyle() {
+        self.isEmojiOnly = self.content.containsOnlyEmoji && !self.messageDeleted && !self.messageEdited
         self.updateBackgroundColor()
         self.updateTextColor()
         self.updateTextFont()
         self.updateInset()
         self.editionColor = self.isIncoming ? styling.secondaryTextColor : Color(red: 0.95, green: 0.95, blue: 0.95)
+        self.timeColor = self.backgroundColor == .clear ? styling.secondaryTextColor : self.editionColor
         invalidateTextPresentationCache()
     }
 
@@ -320,7 +326,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
 
     private func updateTextFont() {
         if self.content.containsOnlyEmoji && !self.messageDeleted && !self.messageEdited {
-            self.styling.textFont = Font(UIFont.systemFont(ofSize: 38.0, weight: UIFont.Weight.medium))
+            self.styling.textFont = Font(UIFont.systemFont(ofSize: 44.0, weight: UIFont.Weight.medium))
         } else {
             self.styling.textFont = self.styling.defaultTextFont
         }

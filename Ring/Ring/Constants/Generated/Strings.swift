@@ -765,12 +765,12 @@ internal enum L10n {
     internal static func documentRemovedMessage(_ p1: Any) -> String {
       return L10n.tr("Localizable", "collab.documentRemovedMessage", String(describing: p1), fallback: "\"%@\" was removed by its author.")
     }
+    /// Documents
+    internal static let documents = L10n.tr("Localizable", "collab.documents", fallback: "Documents")
     /// New document: %@
     internal static func documentShared(_ p1: Any) -> String {
       return L10n.tr("Localizable", "collab.documentShared", String(describing: p1), fallback: "New document: %@")
     }
-    /// Documents
-    internal static let documents = L10n.tr("Localizable", "collab.documents", fallback: "Documents")
     /// Download and open
     internal static let downloadAndOpen = L10n.tr("Localizable", "collab.downloadAndOpen", fallback: "Download and open")
     /// Editable document

@@ -21,15 +21,20 @@ import SwiftUI
 struct MessageBubbleTextRenderer: View {
     let textBody: MessageBubbleTextBody
     let font: Font
+    var reservedTime: String?
 
     var body: some View {
         switch textBody {
         case .plain(let text):
-            Text(text)
+            reservingTime(Text(text))
                 .font(font)
         case .rich(let attributed):
-            Text(attributed)
+            reservingTime(Text(attributed))
                 .font(font)
         }
+    }
+
+    private func reservingTime(_ text: Text) -> Text {
+        return text + MessageTimeView.reservedSpace(for: reservedTime)
     }
 }
