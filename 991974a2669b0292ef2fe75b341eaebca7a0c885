@@ -34,6 +34,24 @@
       "parentUuid": "daa301b7_8d63a675",
       "revId": "991974a2669b0292ef2fe75b341eaebca7a0c885",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "521c9e2d_83a17ed4",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 1149,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-14T14:08:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bbbe389b_9f299e3b",
+      "revId": "991974a2669b0292ef2fe75b341eaebca7a0c885",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
