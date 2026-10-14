@@ -16,6 +16,24 @@
       "message": "[warning] Line 59: 🟡 `isMemberEvent` is currently derived from `message.type.isContact`, but that predicate is broader than “member events” (it can include other contact/system event types). Because `MessageRowView` now uses this flag to remove stack spacing and add read-receipt top padding, non-member contact events can inherit member-event-specific spacing tweaks. Derive this flag from a narrower member-event check (or rename + explicitly document broader intent) so styling scope matches the change goal.",
       "revId": "a5d777c618447834e8d43527fb57c8fba3745d5c",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f58eeb95_a627da48",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessageRowVM.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-14T16:25:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3af172d_94f59a2c",
+      "revId": "a5d777c618447834e8d43527fb57c8fba3745d5c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ],
   "submitRequirementResults": []

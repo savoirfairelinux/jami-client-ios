@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd3290df_6e98e031",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/ContactMessageVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-14T16:25:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1950d53c_e91db9f4",
+      "revId": "d58f22656526b3780709b260b3baf14ce17c9750",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1eb247c2_ee6b3c20",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-10-14T13:50:09Z",
       "side": 1,
       "message": "[warning] Line 48: 🟡 `sequenceEdgeSpace` is keyed on `centeredMessage`, which likely affects all centered rows (not just member/contact events). This broadens spacing changes beyond the stated scope and can regress layout for other centered system messages. Restrict the 6pt edge spacing to contact/member-event rows (e.g., `message.type.isContact`) or gate it with a dedicated flag set by the grouping logic.",
+      "revId": "d58f22656526b3780709b260b3baf14ce17c9750",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "580bfc18_af52dc13",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessageRowVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-14T16:25:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1eb247c2_ee6b3c20",
       "revId": "d58f22656526b3780709b260b3baf14ce17c9750",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -65,6 +101,42 @@
       "writtenOn": "2026-10-14T13:52:52Z",
       "side": 1,
       "message": "[error] Line 1048: 🔴 The new contact shortcut groups **all** contact/system events together, not just member events. This can merge semantically different rows (for example, an initial/conversation-state event followed by a member event) into one visual sequence, which hides intended boundaries. Restrict this path to member-event types only (e.g., add `isMemberEvent` and require both messages to satisfy it) and keep other contact event types on the normal break logic.",
+      "revId": "d58f22656526b3780709b260b3baf14ce17c9750",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b59827a6_90d863ee",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 1048,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-14T16:25:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05a865f5_477fa765",
+      "revId": "d58f22656526b3780709b260b3baf14ce17c9750",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2a224fb_630a372f",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 1048,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-14T16:25:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da0f6a4e_9b231167",
       "revId": "d58f22656526b3780709b260b3baf14ce17c9750",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
