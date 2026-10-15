@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f88f1300_c729fcb3",
+        "filename": "Ring/Ring/Extensions/Date+Helpers.swift",
+        "patchSetId": 7
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-15T20:05:43Z",
+      "side": 1,
+      "message": "DateFormatter has been thread-safe since iOS 7.",
+      "parentUuid": "4ee4223a_eca20cac",
+      "revId": "7da9b7e86c52a0e782aa3276c79d3dfb35d50a86",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b47b3f80_9098f9fb",
         "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
         "patchSetId": 7
