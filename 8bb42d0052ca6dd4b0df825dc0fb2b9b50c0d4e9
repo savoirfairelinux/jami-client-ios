@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8c7c95c_38f987bf",
+        "filename": "Ring/Ring/Extensions/Date+Helpers.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-15T17:11:07Z",
+      "side": 1,
+      "message": "[warning] Line 75: 🟡 These new static shared `DateFormatter` instances (`relativeDayFormatter`, `fullDateFormatter`, and template-based formatters) are process-wide mutable objects, and `DateFormatter` is not thread-safe. Concurrent calls from different view-model/update paths can produce flaky formatting or crashes. Prefer value-type `Date.FormatStyle` where possible, or serialize formatter access (or use per-call/per-thread formatters).",
+      "revId": "8bb42d0052ca6dd4b0df825dc0fb2b9b50c0d4e9",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29484b98_2cd411a5",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-15T17:11:07Z",
+      "side": 1,
+      "message": "[warning] Line 294: 🟡 `subscribeTimeChanges()` now refreshes cached timestamps on significant time/timezone changes, but locale-driven formatting changes (language or 12/24h preference) are still missed. Those often arrive via `NSLocale.currentLocaleDidChangeNotification`, so cached `timeString`/day labels can remain stale until another time event occurs. Merge locale-change notifications into this observable (or trigger a refresh on app foreground) to keep timestamp formatting consistent.",
+      "revId": "8bb42d0052ca6dd4b0df825dc0fb2b9b50c0d4e9",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
