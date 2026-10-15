@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "698a012a_41a82b18",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 3
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-15T15:23:58Z",
+      "side": 1,
+      "message": "[warning] Line 666: 🟡 The accessibility keys were renamed (`textNotAvailable`/`fileTransferNoName`/`*.receivedOn`/`*.sentOn` → new keys), but only `en.lproj` was updated; other `*.lproj/Localizable.strings` files still carry only the old keys. This causes a regression where non-English VoiceOver strings fall back to English for these messages. Please add the new keys across shipped locales (or keep backward-compatible keys until translations are synchronized).",
+      "revId": "61916ac7001e70cc105afebe3b11e58a2d83d508",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
