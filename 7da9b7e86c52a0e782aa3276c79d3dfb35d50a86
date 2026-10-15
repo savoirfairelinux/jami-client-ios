@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4394e136_a7a70ddc",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 7
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-15T19:03:40Z",
+      "side": 1,
+      "message": "[warning] Line 88: 🟡 Accessibility keys were renamed/split (`text.receivedOn`→`text.received`, `fileTransfer.*On`→new keys, plus `messageReceivedDate`/`messageSentDate`), but this patch only updates `en.lproj`. Non-English locales still contain the old keys and will fall back to English for these VoiceOver strings. Please propagate the new keys to the localized `.strings` files (or keep backward-compatible key usage until translations land).",
+      "revId": "7da9b7e86c52a0e782aa3276c79d3dfb35d50a86",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ee4223a_eca20cac",
+        "filename": "Ring/Ring/Extensions/Date+Helpers.swift",
+        "patchSetId": 7
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-15T19:03:40Z",
+      "side": 1,
+      "message": "[error] Line 75: 🔴 `DateFormatter` instances are now process-wide singletons (`relativeDayFormatter`, `fullDateFormatter`, and template formatters). `DateFormatter` is not thread-safe, so concurrent access from different queues can produce races/crashes or corrupted output. Please switch these helpers to thread-safe formatting (e.g., `Date.FormatStyle`/`formatted(...)` paths) or confine formatter access to a single serial context.",
+      "revId": "7da9b7e86c52a0e782aa3276c79d3dfb35d50a86",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b47b3f80_9098f9fb",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 7
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-15T19:03:40Z",
+      "side": 1,
+      "message": "[warning] Line 294: 🟡 Time refresh currently listens to significant-time and timezone changes only. Locale / 12h-24h preference changes (`NSLocale.currentLocaleDidChangeNotification`) are still missed, so visible message times/day labels can remain stale until the next reload. Include locale-change notification in this merged observable and trigger the same `computeSequencing()` + `refreshDates()` flow.",
+      "revId": "7da9b7e86c52a0e782aa3276c79d3dfb35d50a86",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
