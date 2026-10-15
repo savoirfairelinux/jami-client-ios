@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5920f5c6_0cccf2f8",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessageContentVM.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-15T15:30:10Z",
+      "side": 1,
+      "message": "[warning] Line 156: 🟡 `timeString`/`accessibilityDateValue` are captured once in `init` and never recomputed, while `MessageContainerModel.messageUpdated(_:)` can swap in a new `MessageModel` (including updated `receivedDate`). This can leave visible and accessibility timestamps stale after message updates from the daemon. Make these values derived from `message.receivedDate` (computed properties) or refresh them whenever `message` is replaced.",
+      "revId": "0e380b51cf40d39c9ed3f5cf1bc481358494166c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dbbb9e0_8cb7560c",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessageRowVM.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-15T15:30:10Z",
+      "side": 1,
+      "message": "[warning] Line 54: 🟡 `eventGroupTimeText` is now only generated for `.contact` and `.initial`, but `.collabDocument` is also a centered conversation event (`MessageType.isCentered`). As a result, document announcement rows no longer show any timestamp, which contradicts the redesign goal of showing message times consistently. Include `.collabDocument` in this condition (or provide a per-row time path for that view) so centered document events still expose a visible time.",
+      "revId": "0e380b51cf40d39c9ed3f5cf1bc481358494166c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
