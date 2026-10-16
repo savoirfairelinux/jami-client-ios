@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3493ce08_d2137e15",
+        "filename": "daemon",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-16T17:02:35Z",
+      "side": 1,
+      "message": "[error] Line 1: 🔴 This submodule pointer update is not reviewable as-is: the commit message provides no upstream range summary (what changed between `1c057cc` and `4719d04`), no security-impact note, and no compatibility/testing notes for iOS client integration. Please include a concise changelog of daemon-side changes that affect client behavior (protocol/API/config), plus any required app-side follow-ups. Without that context, we cannot assess regression or security risk for this update.",
+      "revId": "903b994da42e60c1aa84865808ffc2cba980c0a0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
