@@ -202,19 +202,6 @@ class DBManager {
         self.dbConnections.removeDBForAccount(account: accountId, removeFolder: removeFolder)
     }
 
-    func createConversationsFor(contactUri: String, accountId: String) -> String {
-        guard let dataBase = self.dbConnections.forAccount(account: accountId) else {
-            return ""
-        }
-        do {
-            let result = try self.getConversationsFor(contactUri: contactUri,
-                                                      createIfNotExists: true,
-                                                      dataBase: dataBase)
-            return "\(result ?? -1)"
-        } catch {}
-        return ""
-    }
-
     // swiftlint:disable:next function_parameter_count
     func saveMessage(for accountId: String, with contactUri: String,
                      message: MessageModel, incoming: Bool,

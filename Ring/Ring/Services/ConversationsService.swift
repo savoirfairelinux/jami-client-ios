@@ -316,9 +316,13 @@ class ConversationsService {
                 .subscribe(onNext: { [weak self] savedMessage in
                     guard let self = self else { return }
                     self.perform { store in
+                        guard shouldRefreshConversations else {
+                            completable(.completed)
+                            return
+                        }
                         let hash = JamiURI(from: recipientURI).hash
                         /// append new message so it can be found if a status update is received before the DB finishes reload
-                        if shouldRefreshConversations, let conversation = store.currentConversations
+                        if let conversation = store.currentConversations
                             .filter({ conversation in
                                 return conversation.getParticipants().first?.jamiId == hash &&
                                     conversation.accountId == toAccountId
@@ -334,6 +338,8 @@ class ConversationsService {
                             store.appendNonSwarm(message: storedMessage, to: conversation)
                             store.updateLastMessageIfNewer(storedMessage, in: conversation)
                             store.sortIfNeeded()
+                        } else {
+                            store.reloadSipConversations(accountId: toAccountId)
                         }
                         completable(.completed)
                     }
@@ -465,32 +471,6 @@ class ConversationsService {
             .appendingPathComponent(accountId)
             .appendingPathComponent(conversationId)
         try? FileManager.default.removeItem(atPath: recordedURL.path)
-    }
-
-    func createSipConversation(uri: String, accountId: String) {
-        /// create db. Return if opening db failed
-        do {
-            /// return false if unable to open database connection
-            if try !dbManager.createDatabaseForAccount(accountId: accountId) {
-                return
-            }
-            /// if tables already exist an exeption will be thrown
-        } catch { }
-        /// add conversation to db
-        let conversationId = dbManager.createConversationsFor(contactUri: uri, accountId: accountId)
-        if !self.currentConversations.map({ $0.id }).contains(conversationId) {
-            /// new conversation. Need to update conversation list
-            self.dbManager
-                .getSipConversationsObservable(for: accountId)
-                .subscribe { [weak self] storedConversations in
-                    self?.perform { store in
-                        store.replaceSipConversations(with: storedConversations)
-                        store.sortIfNeeded()
-                    }
-                } onError: { _ in
-                }
-                .disposed(by: self.disposeBag)
-        }
     }
 
     // MARK: helpers
