@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df396c3b_f2069f6a",
+        "filename": "Ring/Ring/Resources/ar.lproj/Localizable.strings",
+        "patchSetId": 1
+      },
+      "lineNbr": 665,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-19T07:25:22Z",
+      "side": 1,
+      "message": "[error] Line 665: 🔴 This change introduces English literals for new accessibility keys (`accessibility.messageReceivedDate`, `accessibility.messageSentDate`, `accessibility.textEmpty`, `accessibility.fileTransferUnnamed`, and related `*.received/sent`) in a non-English locale. This regresses VoiceOver output from localized text to English. Please localize these new keys (or migrate existing translations from the replaced keys) before merge.",
+      "revId": "a3bb88005edda04dbe386e1011b923934ed976d9",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3ea678a_6668d2af",
+        "filename": "Ring/Ring/Resources/cmn.lproj/Localizable.strings",
+        "patchSetId": 1
+      },
+      "lineNbr": 804,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-19T07:25:22Z",
+      "side": 1,
+      "message": "[warning] Line 804: 🟡 The new values for `collab.textFormat`, `collab.paragraphStyle`, `collab.normalText`, `collab.defaultFont`, `collab.unavailableFont`, and `collab.defaultSize` include a leading hidden Unicode character (likely ZWNJ/ZWSP). Please remove the invisible prefix to avoid unexpected rendering/speech behavior and noisy future diffs.",
+      "revId": "a3bb88005edda04dbe386e1011b923934ed976d9",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
