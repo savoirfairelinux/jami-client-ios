@@ -16,6 +16,24 @@
       "message": "[error] Line 254: 🔴 Saving every in-call SIP message with `withId: \"\"` creates non-unique local message IDs. If storage/dedup logic keys on message ID (directly or indirectly), messages can overwrite each other, be dropped as duplicates, or break delivery-state correlation. Use a stable unique ID per outgoing in-call message (preferably from `sendInCallMessage` if available; otherwise generate a UUID before calling `saveOutgoingNonSwarmMessage`).",
       "revId": "c7958dbebcdc391bbd1a7d1949c695b69bd09c58",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92ca855a_e7d90e5a",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-19T15:35:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0fe0f3f_db79bae7",
+      "revId": "c7958dbebcdc391bbd1a7d1949c695b69bd09c58",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
