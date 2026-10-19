@@ -22,8 +22,12 @@ import SwiftUI
 
 struct DefaultTransferView: View {
     @StateObject var model: MessageContentVM
+    let time: String?
     let onLongGesture: () -> Void
+    @Environment(\.layoutDirection)
+    private var layoutDirection
     var body: some View {
+        let showsInlineTime = model.showsInlineTransferTime(in: layoutDirection)
         HStack(alignment: .top) {
             HStack(alignment: .top) {
                 Spacer()
@@ -36,37 +40,43 @@ struct DefaultTransferView: View {
                 Spacer()
                     .frame(width: 10)
             }
-            VStack(alignment: .leading) {
+            VStack(alignment: .trailing) {
                 VStack(alignment: .leading) {
-                    Text(model.fileName)
-                        .lineLimit(1)
-                        .truncationMode(.middle)
-                        .font(model.styling.textFont)
-                        .foregroundColor(model.styling.textColor)
-                        .font(.headline)
-                    Spacer()
-                        .frame(height: 10)
-                    Text(model.fileInfo)
-                        .foregroundColor(model.styling.textColor)
-                        .font(model.styling.secondaryFont)
-                    if model.showProgress {
-                        Spacer()
-                            .frame(height: 15)
-                        ProgressView(value: model.fileProgress, total: 1)
+                    VStack(alignment: .leading) {
+                        Text(model.fileName)
+                            .lineLimit(1)
+                            .truncationMode(.middle)
+                            .font(model.styling.textFont)
+                            .foregroundColor(model.styling.textColor)
+                            .font(.headline)
                         Spacer()
                             .frame(height: 10)
-                    }
-                }
-                if !model.transferActions.isEmpty {
-                    HStack {
-                        ForEach(model.transferActions) { action in
-                            Button(action.toString()) {
-                                model.transferAction(action: action)
-                            }
+                        Text(model.fileInfo)
+                            .foregroundColor(model.styling.textColor)
+                            .font(model.styling.secondaryFont)
+                            .withInlineTime(showsInlineTime ? time : nil, color: model.timeColor)
+                        if model.showProgress {
                             Spacer()
-                                .frame(width: 20)
+                                .frame(height: 15)
+                            ProgressView(value: model.fileProgress, total: 1)
+                            Spacer()
+                                .frame(height: 10)
                         }
                     }
+                    if !model.transferActions.isEmpty {
+                        HStack {
+                            ForEach(model.transferActions) { action in
+                                Button(action.toString()) {
+                                    model.transferAction(action: action)
+                                }
+                                Spacer()
+                                    .frame(width: 20)
+                            }
+                        }
+                    }
+                }
+                if !showsInlineTime, let time {
+                    MessageTimeView(text: time, color: model.timeColor)
                 }
             }
         }

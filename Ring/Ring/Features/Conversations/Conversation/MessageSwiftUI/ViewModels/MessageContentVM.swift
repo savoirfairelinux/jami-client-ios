@@ -169,9 +169,6 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     @Published private(set) var timeText = ""
     let accessibilityDateLabel: String
     @Published private(set) var fullDateText = ""
-    var showsTimeOverImage: Bool {
-        player == nil && finalImage != nil
-    }
     var isIncoming: Bool
     var isHistory: Bool
     var type: MessageType = .text
@@ -272,6 +269,10 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
 
     func inlineTimeText(in layoutDirection: LayoutDirection) -> String? {
         timePlacement(in: layoutDirection) == .inline ? timeText : nil
+    }
+
+    func showsInlineTransferTime(in layoutDirection: LayoutDirection) -> Bool {
+        transferActions.isEmpty && fileInfo.lastParagraphIsRightToLeft == (layoutDirection == .rightToLeft)
     }
 
     var isFullURL: Bool {

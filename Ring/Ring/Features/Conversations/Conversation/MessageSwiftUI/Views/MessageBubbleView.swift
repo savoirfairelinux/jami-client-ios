@@ -134,9 +134,14 @@ struct MessageBubbleView: View {
 
     @ViewBuilder
     private func renderFileTransfer() -> some View {
-        let media = MediaView(message: model, onLongGesture: receivedLongPress(), minHeight: 50, maxHeight: 300, withPlayerControls: true, cornerRadius: 0)
+        let media = MediaView(message: model, onLongGesture: receivedLongPress(), minHeight: 50, maxHeight: 300, withPlayerControls: true, cornerRadius: 0, transferCardTime: model.timeText)
             .marksMessageBubbleBottom()
-        if model.showsTimeOverImage {
+        if model.player != nil {
+            VStack(alignment: .trailing, spacing: TimeLayout.outsideSpacing) {
+                media
+                MessageTimeView(text: model.timeText, color: model.styling.secondaryTextColor)
+            }
+        } else if model.finalImage != nil {
             media
                 .overlay(alignment: .bottomTrailing) {
                     MessageTimeView(text: model.timeText, color: .white)
@@ -146,10 +151,7 @@ struct MessageBubbleView: View {
                         .padding(TimeLayout.capsuleInset)
                 }
         } else {
-            VStack(alignment: .trailing, spacing: TimeLayout.outsideSpacing) {
-                media
-                MessageTimeView(text: model.timeText, color: model.styling.secondaryTextColor)
-            }
+            media
         }
     }
 

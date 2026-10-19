@@ -93,6 +93,7 @@ struct MediaView: View {
     let maxHeight: CGFloat
     let withPlayerControls: Bool
     let cornerRadius: CGFloat
+    var transferCardTime: String?
     var body: some View {
         if let player = self.message.player {
             PlayerSwiftUI(model: message, player: player, onLongGesture: onLongGesture, withControls: withPlayerControls, customCornerRadius: cornerRadius)
@@ -100,7 +101,7 @@ struct MediaView: View {
             ImageOrGifView(message: message, image: image, onLongGesture: onLongGesture, minHeight: minHeight, maxHeight: maxHeight, customCornerRadius: cornerRadius)
 
         } else {
-            DefaultTransferView(model: message, onLongGesture: onLongGesture)
+            DefaultTransferView(model: message, time: transferCardTime, onLongGesture: onLongGesture)
                 .conditionalModifier(MessageCornerRadius(model: message), apply: cornerRadius == 0)
                 .conditionalCornerRadius(cornerRadius, apply: cornerRadius != 0)
         }
