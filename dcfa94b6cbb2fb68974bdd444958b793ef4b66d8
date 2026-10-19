@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9670b1a2_5098f944",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-19T20:01:41Z",
+      "side": 1,
+      "message": "[warning] 🟡 This patch changes grouping/contact-info behavior but adds no regression coverage for reply scenarios. Add or update tests to assert that first/single incoming replies get the expected name visibility and last/single incoming replies get avatar visibility, so future sequencing changes do not regress this UX.",
+      "revId": "dcfa94b6cbb2fb68974bdd444958b793ef4b66d8",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "942a1a62_9bf0e8ab",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 1093,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-19T20:01:41Z",
+      "side": 1,
+      "message": "[error] Line 1093: 🔴 `shouldDisplayName` still excludes replies via `!message.message.isReply()`, which conflicts with the stated behavior \"including on replies\". As written, an incoming reply that is `firstOfSequence`/`singleMessage` will not show the sender name. Remove the reply exclusion (or replace it with an explicit product rule) to keep name/avatar behavior consistent for reply messages.",
+      "revId": "dcfa94b6cbb2fb68974bdd444958b793ef4b66d8",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
