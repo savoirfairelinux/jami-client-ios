@@ -172,6 +172,9 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     var showsTimeOverImage: Bool {
         player == nil && finalImage != nil
     }
+    var showsTimeInsideTransferCard: Bool {
+        player == nil && finalImage == nil
+    }
     var isIncoming: Bool
     var isHistory: Bool
     var type: MessageType = .text

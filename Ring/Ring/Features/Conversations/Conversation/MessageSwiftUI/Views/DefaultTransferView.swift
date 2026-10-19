@@ -49,6 +49,7 @@ struct DefaultTransferView: View {
                     Text(model.fileInfo)
                         .foregroundColor(model.styling.textColor)
                         .font(model.styling.secondaryFont)
+                        .withInlineTime(model.timeText, color: model.timeColor)
                     if model.showProgress {
                         Spacer()
                             .frame(height: 15)

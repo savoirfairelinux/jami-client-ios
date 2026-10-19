@@ -145,6 +145,8 @@ struct MessageBubbleView: View {
                         .background(Capsule().fill(Color.black.opacity(0.4)))
                         .padding(TimeLayout.capsuleInset)
                 }
+        } else if model.showsTimeInsideTransferCard {
+            media
         } else {
             VStack(alignment: .trailing, spacing: TimeLayout.outsideSpacing) {
                 media
