@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7065c8e_83c3998a",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessageContentVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-19T20:35:16Z",
+      "side": 1,
+      "message": "[error] Line 175: 🔴 `showsTimeInsideTransferCard` is too broad (`player \u003d\u003d nil \u0026\u0026 finalImage \u003d\u003d nil`) and can match non-transfer message types that do not render inline time, which removes the fallback `MessageTimeView` and can make timestamps disappear. Gate this with an explicit transfer/message-type condition (e.g., default transfer without preview) so only the intended card layout suppresses the external timestamp.",
+      "revId": "d6a46191fcad4ce3ff3b20fdd0be4599ffbec585",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
