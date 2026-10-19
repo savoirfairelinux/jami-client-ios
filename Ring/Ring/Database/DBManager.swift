@@ -119,26 +119,12 @@ enum InteractionStatus: String {
         }
     }
 
-    init(status: DataTransferStatus) {
-        switch status {
-        case .created: self = .transferCreated
-        case .awaiting: self = .transferAwaiting
-        case .canceled: self = .transferCanceled
-        case .ongoing: self = .transferOngoing
-        case .success: self = .transferSuccess
-        case .error: self = .transferError
-        case .unknown: self = .unknown
-        }
-    }
 }
 
 enum DBBridgingError: Error {
     case saveMessageFailed
     case getConversationFailed
-    case updateIntercationFailed
     case deleteConversationFailed
-    case getProfileFailed
-    case deleteMessageFailed
 }
 
 enum InteractionType: String {
@@ -284,67 +270,12 @@ class DBManager {
         }
     }
 
-    func updateMessageStatus(daemonID: String, withStatus status: InteractionStatus, accountId: String) -> Completable {
-        return Completable.create { [weak self] completable in
-            if let self = self, let dataBase = self.dbConnections.forAccount(account: accountId) {
-                let success = self.interactionHepler
-                    .updateInteractionWithDaemonID(interactionDaemonID: daemonID,
-                                                   interactionStatus: status.rawValue,
-                                                   dataBase: dataBase)
-                if success {
-                    completable(.completed)
-                } else {
-                    completable(.error(DBBridgingError.updateIntercationFailed))
-                }
-            } else {
-                completable(.error(DBBridgingError.updateIntercationFailed))
-            }
-            return Disposables.create { }
-        }
-    }
-
     func conversationParticipants(accountId: String) -> [String] {
         guard let dataBase = self.dbConnections.forAccount(account: accountId),
               let conversations = try? self.conversationHelper.selectAll(dataBase: dataBase) else {
             return []
         }
         return conversations.map { $0.participant }
-    }
-
-    func updateFileName(daemonID: String, name: String, accountId: String) -> Completable {
-        return Completable.create { [weak self] completable in
-            if let self = self, let dataBase = self.dbConnections.forAccount(account: accountId) {
-                let success = self.interactionHepler
-                    .updateInteractionContentWithID(daemonID: daemonID, content: name, dataBase: dataBase)
-                if success {
-                    completable(.completed)
-                } else {
-                    completable(.error(DBBridgingError.updateIntercationFailed))
-                }
-            } else {
-                completable(.error(DBBridgingError.updateIntercationFailed))
-            }
-            return Disposables.create { }
-        }
-    }
-
-    func updateTransferStatus(daemonID: String, withStatus transferStatus: DataTransferStatus, accountId: String) -> Completable {
-        return Completable.create { [weak self] completable in
-            if let self = self, let dataBase = self.dbConnections.forAccount(account: accountId) {
-                let success = self.interactionHepler
-                    .updateInteractionWithDaemonID(interactionDaemonID: daemonID,
-                                                   interactionStatus: InteractionStatus(status: transferStatus).rawValue,
-                                                   dataBase: dataBase)
-                if success {
-                    completable(.completed)
-                } else {
-                    completable(.error(DBBridgingError.updateIntercationFailed))
-                }
-            } else {
-                completable(.error(DBBridgingError.updateIntercationFailed))
-            }
-            return Disposables.create { }
-        }
     }
 
     func setMessagesAsRead(messagesIDs: [String], withStatus status: MessageStatus, accountId: String) -> Completable {
@@ -366,21 +297,6 @@ class DBManager {
                 }
             } else {
                 completable(.error(DBBridgingError.saveMessageFailed))
-            }
-            return Disposables.create { }
-        }
-    }
-
-    func deleteMessage(messagesId: Int64, accountId: String) -> Completable {
-        return Completable.create { [weak self] completable in
-            if let self = self, let dataBase = self.dbConnections.forAccount(account: accountId) {
-                if self.interactionHepler.delete(interactionId: messagesId, dataBase: dataBase) {
-                    completable(.completed)
-                } else {
-                    completable(.error(DBBridgingError.deleteMessageFailed))
-                }
-            } else {
-                completable(.error(DBBridgingError.deleteMessageFailed))
             }
             return Disposables.create { }
         }
@@ -471,11 +387,11 @@ class DBManager {
         for conversationID in conversations.map({ $0.id }) {
             guard let participants = try self.getParticipantsForConversation(conversationID: conversationID,
                                                                              dataBase: dataBase),
-                  let participant = participants.first else {
+                  let participant = participants.first,
+                  !participant.contains("ring:") else {
                 continue
             }
-            let uriType = participant.contains("ring:") ? URIType.ring : URIType.sip
-            let uri = JamiURI.init(schema: uriType, infoHash: participant)
+            let uri = JamiURI.init(schema: .sip, infoHash: participant)
             var messages = [MessageModel]()
             guard let interactions = try self.interactionHepler
                     .selectInteractionsForConversation(
@@ -502,7 +418,7 @@ class DBManager {
             conversationsToReturn.append(StoredConversation(id: String(conversationID),
                                                             accountId: accountId,
                                                             participantUri: uri,
-                                                            type: uriType == .sip ? .sip : .nonSwarm,
+                                                            type: .sip,
                                                             messages: messages,
                                                             lastMessage: lastMessage))
         }
@@ -557,15 +473,11 @@ class DBManager {
                               message: MessageModel,
                               duration: Int,
                               dataBase: Connection) -> String? {
-        var status = InteractionStatus.unknown.rawValue
-        if interactionType == .oTransfer {
-            status = InteractionStatus(status: message.transferStatus).rawValue
-        }
         let timeInterval = message.receivedDate.timeIntervalSince1970
         let interaction = Interaction(id: defaultID, author: author,
                                       conversation: conversationID, timestamp: Int64(timeInterval), duration: Int64(duration),
                                       body: message.content, type: interactionType.rawValue,
-                                      status: status, daemonID: message.daemonId,
+                                      status: InteractionStatus.unknown.rawValue, daemonID: message.daemonId,
                                       incoming: message.incoming)
         if let result = self.interactionHepler.insert(item: interaction, dataBase: dataBase) {
             return String(result)

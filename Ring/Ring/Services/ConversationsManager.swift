@@ -558,36 +558,7 @@ class ConversationsManager {
                 self.handleNewMessage(from: peerUri,
                                       to: accountId,
                                       messageId: "",
-                                      message: messageContent,
-                                      peerName: event.getEventInput(ServiceEventInput.name))
-            })
-            .disposed(by: disposeBag)
-
-        self.callService.newMessage
-            .filter({ (event) in
-                return  event.eventType == ServiceEventType.newOutgoingMessage
-            })
-            .subscribe(onNext: { [weak self] event in
-                guard let self = self else { return }
-                if self.accountsService.boothMode() {
-                    return
-                }
-                guard let accountId: String = event.getEventInput(ServiceEventInput.accountId),
-                      let messageContent: String = event.getEventInput(ServiceEventInput.content),
-                      let peerUri: String = event.getEventInput(ServiceEventInput.peerUri),
-                      let accountURi: String = event.getEventInput(ServiceEventInput.accountUri)
-                else { return }
-                let message = self.conversationService.createMessage(withId: "",
-                                                                     withContent: messageContent,
-                                                                     byAuthor: accountURi,
-                                                                     type: .text,
-                                                                     incoming: false)
-                self.conversationService.saveMessage(message: message,
-                                                     toConversationWith: peerUri,
-                                                     toAccountId: accountId,
-                                                     shouldRefreshConversations: true)
-                    .subscribe()
-                    .disposed(by: self.disposeBag)
+                                      message: messageContent)
             })
             .disposed(by: disposeBag)
     }
@@ -596,8 +567,7 @@ class ConversationsManager {
         self.dataTransferService
             .sharedResponseStream
             .filter({ (event) in
-                return  event.eventType == ServiceEventType.dataTransferCreated ||
-                    event.eventType == ServiceEventType.dataTransferChanged
+                return  event.eventType == ServiceEventType.dataTransferChanged
             })
             .subscribe(onNext: { [weak self] event in
                 guard let self = self else { return }
@@ -608,52 +578,31 @@ class ConversationsManager {
                       let accountId: String = event.getEventInput(ServiceEventInput.accountId),
                       let conversationId: String = event.getEventInput(ServiceEventInput.conversationId),
                       let messageId: String = event.getEventInput(ServiceEventInput.messageId),
-                      let transferInfo = self.dataTransferService.dataTransferInfo(withId: transferId, accountId: accountId, conversationId: conversationId, isSwarm: !conversationId.isEmpty),
-                      let currentAccount = self.accountsService.currentAccount else {
+                      self.dataTransferService.dataTransferInfo(withId: transferId, accountId: accountId, conversationId: conversationId) != nil else {
                     self.log.error("ConversationsManager: unable to find transferInfo")
                     return
                 }
-                switch event.eventType {
-                case .dataTransferCreated:
-                    let photoIdentifier: String? = event.getEventInput(.localPhotolID)
-                    self.conversationService
-                        .generateDataTransferMessage(transferId: transferId,
-                                                     transferInfo: transferInfo,
-                                                     accountId: transferInfo.accountId,
-                                                     photoIdentifier: photoIdentifier,
-                                                     updateConversation: currentAccount.id == transferInfo.accountId,
-                                                     conversationId: conversationId, messageId: messageId)
-                        .subscribe()
-                        .disposed(by: self.disposeBag)
-                case .dataTransferChanged:
-                    guard let eventCode: Int = event.getEventInput(ServiceEventInput.state),
-                          var dtEvent = NSDataTransferEventCode(rawValue: UInt32(eventCode)) else { return }
-                    if conversationId.isEmpty {
-                        dtEvent = transferInfo.lastEvent
-                    }
-                    self.log.debug("ConversationsManager: dataTransferChanged - id:\(transferId) status:\(stringFromEventCode(with: dtEvent))")
-                    var status: DataTransferStatus = .unknown
-                    switch dtEvent {
-                    case .closed_by_host, .closed_by_peer:
-                        status = DataTransferStatus.canceled
-                    case .invalid, .unsupported, .invalid_pathname, .unjoinable_peer:
-                        status = DataTransferStatus.error
-                    case .wait_peer_acceptance, .wait_host_acceptance:
-                        status = DataTransferStatus.awaiting
-                    case .ongoing:
-                        status = DataTransferStatus.ongoing
-                    case .finished:
-                        status = DataTransferStatus.success
-                    case .created:
-                        break
-                    @unknown default:
-                        break
-                    }
-                    let peer = !conversationId.isEmpty ? "" : transferInfo.peer
-                    self.conversationService.transferStatusChanged(status, for: transferId, conversationId: conversationId, interactionId: messageId, accountId: accountId, to: peer ?? "")
-                default:
+                guard let eventCode: Int = event.getEventInput(ServiceEventInput.state),
+                      let dtEvent = NSDataTransferEventCode(rawValue: UInt32(eventCode)) else { return }
+                self.log.debug("ConversationsManager: dataTransferChanged - id:\(transferId) status:\(stringFromEventCode(with: dtEvent))")
+                var status: DataTransferStatus = .unknown
+                switch dtEvent {
+                case .closed_by_host, .closed_by_peer:
+                    status = DataTransferStatus.canceled
+                case .invalid, .unsupported, .invalid_pathname, .unjoinable_peer:
+                    status = DataTransferStatus.error
+                case .wait_peer_acceptance, .wait_host_acceptance:
+                    status = DataTransferStatus.awaiting
+                case .ongoing:
+                    status = DataTransferStatus.ongoing
+                case .finished:
+                    status = DataTransferStatus.success
+                case .created:
+                    break
+                @unknown default:
                     break
                 }
+                self.conversationService.transferStatusChanged(status, for: transferId, conversationId: conversationId, interactionId: messageId, accountId: accountId)
             })
             .disposed(by: disposeBag)
     }
@@ -674,7 +623,7 @@ class ConversationsManager {
         self.locationSharingService.handleReceivedLocationUpdate(from: peerUri, to: accountId, messageId: messageId, locationJSON: content)
     }
 
-    func handleNewMessage(from peerUri: String, to accountId: String, messageId: String, message content: String, peerName: String?) {
+    func handleNewMessage(from peerUri: String, to accountId: String, messageId: String, message content: String) {
         guard let currentAccount = self.accountsService.currentAccount,
               let accountForMessage = self.accountsService.getAccount(fromAccountId: accountId),
               AccountModelHelper.init(withAccount: accountForMessage).isAccountSip(),
@@ -735,8 +684,7 @@ extension ConversationsManager {
             self.handleNewMessage(from: senderAccount,
                                   to: receiverAccountId,
                                   messageId: messageId,
-                                  message: content,
-                                  peerName: nil)
+                                  message: content)
         } else if let content = message[geoLocationMIMEType] {
             self.handleReceivedLocationUpdate(from: senderAccount,
                                               to: receiverAccountId,
@@ -758,7 +706,7 @@ extension ConversationsManager {
     func updateTransferInfoIfNeed(newMessage: inout MessageModel, conversationId: String, accountId: String) {
         guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
         if newMessage.type == .fileTransfer {
-            let progress = self.dataTransferService.getTransferProgress(withId: newMessage.daemonId, accountId: accountId, conversationId: conversationId, isSwarm: true)
+            let progress = self.dataTransferService.getTransferProgress(withId: newMessage.daemonId, accountId: accountId, conversationId: conversationId)
             let transferStatus: DataTransferStatus = progress == 0 ? .awaiting
                 : progress == newMessage.totalSize ? .success : .ongoing
             newMessage = newMessage.updating { $0.transferStatus = transferStatus }

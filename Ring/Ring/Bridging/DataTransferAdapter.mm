@@ -24,12 +24,10 @@
 #import "Ring-Swift.h"
 
 @implementation NSDataTransferInfo
-@synthesize accountId, lastEvent, flags, totalSize, bytesProgress, peer, displayName, path, mimetype, conversationId;
+@synthesize accountId, totalSize, bytesProgress, displayName, path, mimetype, conversationId;
 
 - (id) init {
     if (self = [super init]) {
-        self->lastEvent = invalid;
-        self->flags = 0;
         self->totalSize = 0;
         self->bytesProgress = 0;
     }

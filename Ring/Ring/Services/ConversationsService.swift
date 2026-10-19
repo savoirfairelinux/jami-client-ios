@@ -324,7 +324,7 @@ class ConversationsService {
                                     conversation.accountId == toAccountId
                             })
                             .first {
-                            let content = (message.type.isContact || message.type == .call) ?
+                            let content = message.type == .call ?
                                 GeneratedMessage.init(from: message.content).toMessage(with: Int(duration))
                                 : message.content
                             let storedMessage = message.updating {
@@ -354,8 +354,7 @@ class ConversationsService {
             let contentDict = [self.textPlainMIMEType: content]
             let messageId = String(self.conversationsAdapter.sendMessage(withContent: contentDict, withAccountId: senderAccount.id, to: jamiId, flag: 0))
             let accountHelper = AccountModelHelper(withAccount: senderAccount)
-            let type = accountHelper.isAccountSip() ? URIType.sip : URIType.ring
-            let contactUri = JamiURI.init(schema: type, infoHash: jamiId, account: senderAccount)
+            let contactUri = JamiURI.init(schema: .sip, infoHash: jamiId, account: senderAccount)
             guard let stringUri = contactUri.uriString else {
                 completable(.completed)
                 return Disposables.create {}
@@ -422,18 +421,6 @@ class ConversationsService {
                                   interactionType: interactionType)
             .subscribe()
             .disposed(by: self.disposeBag)
-    }
-
-    func deleteMessage(messagesId: Int64, accountId: String) -> Completable {
-        return Completable.create(subscribe: { [weak self] completable in
-            guard let self = self else { return Disposables.create { } }
-            self.dbManager
-                .deleteMessage(messagesId: messagesId, accountId: accountId)
-                .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
-                .subscribe(onCompleted: { completable(.completed) }, onError: { error in completable(.error(error)) })
-                .disposed(by: self.disposeBag)
-            return Disposables.create { }
-        })
     }
 
     func removeConversationFromDB(conversation: ConversationModel, keepConversation: Bool) {
@@ -522,88 +509,21 @@ class ConversationsService {
 
     // MARK: file transfer
 
-    func generateDataTransferMessage(transferId: String,
-                                     transferInfo: NSDataTransferInfo,
-                                     accountId: String,
-                                     photoIdentifier: String?,
-                                     updateConversation: Bool,
-                                     conversationId: String,
-                                     messageId: String) -> Completable {
-
-        return Completable.create(subscribe: { [weak self] completable in
-            guard let self = self else { return Disposables.create { } }
-
-            let fileSizeWithUnit = ByteCountFormatter.string(fromByteCount: Int64(transferInfo.totalSize), countStyle: .file)
-            var messageContent = transferInfo.displayName + "\n" + fileSizeWithUnit
-            if let photoIdentifier = photoIdentifier {
-                messageContent = transferInfo.displayName + "\n" + fileSizeWithUnit + "\n" + photoIdentifier
-            }
-            let isIncoming = transferInfo.flags == 1
-            let interactionType: InteractionType = isIncoming ? .iTransfer : .oTransfer
-            guard let contactUri = JamiURI.init(schema: URIType.ring,
-                                                infoHash: transferInfo.peer).uriString else {
-                completable(.completed)
-                return Disposables.create { }
-            }
-            let author = isIncoming ? contactUri : ""
-            let date = Date()
-            var messageData = MessageData(withId: transferId,
-                                          receivedDate: date, content: messageContent,
-                                          authorURI: author, incoming: isIncoming)
-            messageData.transferStatus = isIncoming ? .awaiting : .created
-            messageData.type = .fileTransfer
-            let message = MessageModel(messageData)
-            self.dbManager.saveMessage(for: accountId, with: contactUri,
-                                       message: message, incoming: isIncoming,
-                                       interactionType: interactionType, duration: 0)
-                .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
-                .subscribe(onNext: { [weak self] dbMessage in
-                    guard let self = self else { return }
-                    self.perform { store in
-                        let hash = JamiURI(from: contactUri).hash
-                        if updateConversation, let conversation = store.currentConversations
-                            .filter({ conversation in
-                                return conversation.getParticipants().first?.jamiId == hash &&
-                                    conversation.accountId == accountId
-                            })
-                            .first {
-                            let content = (message.type.isContact || message.type == .call) ?
-                                GeneratedMessage.init(from: message.content).toMessage(with: Int(0))
-                                : message.content
-                            let storedMessage = message.updating {
-                                $0.content = content
-                                $0.id = dbMessage.messageID
-                                $0.daemonId = transferId
-                            }
-                            store.appendNonSwarm(message: storedMessage, to: conversation)
-                            store.sortIfNeeded()
-                        }
-                        completable(.completed)
-                    }
-                }, onError: { error in
-                    completable(.error(error))
-                })
-                .disposed(by: self.disposeBag)
-            return Disposables.create { }
-        })
-    }
-
     func transferStatusChanged(_ transferStatus: DataTransferStatus,
                                for transferId: String,
                                conversationId: String,
                                interactionId: String,
-                               accountId: String,
-                               to jamiId: String) {
+                               accountId: String) {
         perform { store in
             store.transferStatusChanged(transferStatus, for: transferId, conversationId: conversationId,
-                                        interactionId: interactionId, accountId: accountId, to: jamiId)
+                                        interactionId: interactionId, accountId: accountId)
         }
     }
 
     func setMessagesAsRead(forConversation conversation: ConversationModel, accountId: String, accountURI: String) -> Completable {
         return Completable.create(subscribe: { [weak self] completable in
-            guard let self = self,
-                  let conversationURI = conversation.getConversationURI() else { return Disposables.create { } }
+            guard let self = self else { return Disposables.create { } }
+            let conversationURI = conversation.getConversationURI()
 
             self.perform { store in
                 var lastUnreadMessageId: String?
@@ -625,7 +545,6 @@ class ConversationsService {
                         .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
                         .subscribe()
                         .disposed(by: self.disposeBag)
-                    lastUnreadMessageId = unreadMessages.last?.id
                 }
 
                 // update messages  status localy

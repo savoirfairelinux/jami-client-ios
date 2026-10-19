@@ -26,22 +26,17 @@ import CoreLocation
 class LocationSharingServiceTests: XCTestCase {
 
     private var locationSharingService: LocationSharingService!
-    private var dbManager: DBManager!
     private var disposeBag: DisposeBag!
 
     override func setUp() {
         super.setUp()
 
-        dbManager = DBManager(conversationHelper: ConversationDataHelper(),
-                              interactionHepler: InteractionDataHelper(),
-                              dbConnections: DBContainer())
-        locationSharingService = LocationSharingService(dbManager: dbManager)
+        locationSharingService = LocationSharingService()
         disposeBag = DisposeBag()
     }
 
     override func tearDown() {
         locationSharingService = nil
-        dbManager = nil
         disposeBag = nil
 
         super.tearDown()

@@ -98,19 +98,17 @@ public final class DataTransferService: DataTransferAdapterDelegate {
     private let disposeBag = DisposeBag()
     private let responseStream = PublishSubject<ServiceEvent>()
     var sharedResponseStream: Observable<ServiceEvent>
-    let dbManager: DBManager
 
-    init(withDataTransferAdapter dataTransferAdapter: DataTransferAdapter, dbManager: DBManager) {
+    init(withDataTransferAdapter dataTransferAdapter: DataTransferAdapter) {
         self.responseStream.disposed(by: disposeBag)
         self.sharedResponseStream = responseStream.share()
         self.dataTransferAdapter = dataTransferAdapter
-        self.dbManager = dbManager
         DataTransferAdapter.delegate = self
     }
 
     // MARK: transfer info
 
-    func dataTransferInfo(withId fileId: String, accountId: String, conversationId: String, isSwarm: Bool) -> NSDataTransferInfo? {
+    func dataTransferInfo(withId fileId: String, accountId: String, conversationId: String) -> NSDataTransferInfo? {
         let info = NSDataTransferInfo()
         var err: NSDataTransferError
         info.conversationId = conversationId
@@ -122,7 +120,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         return info
     }
 
-    func getTransferProgress(withId transferId: String, accountId: String, conversationId: String, isSwarm: Bool) -> Int {
+    func getTransferProgress(withId transferId: String, accountId: String, conversationId: String) -> Int {
         let info = NSDataTransferInfo()
         info.conversationId = conversationId
         _ = self.dataTransferAdapter.dataTransferInfo(withId: transferId, accountId: accountId, with: info)
@@ -288,16 +286,12 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         }
 
         self.log.info("DataTransferService: event: \(stringFromEventCode(with: event))")
-        let isSwarm = !conversationId.isEmpty
-        let info = dataTransferInfo(withId: transferId, accountId: accountId, conversationId: conversationId, isSwarm: isSwarm)
-        /// do not emit an created event for outgoing transfer, since it already saved in db for non swarm conversation. For swarm conversation message created when interaction received
-        if event == .created && info?.flags != 1 {
+        if event == .created {
             return
         }
         /// we aggregate all non-create type transfer events into the update category
         /// emit service event
-        let serviceEventType: ServiceEventType = event == .created ? .dataTransferCreated : .dataTransferChanged
-        var serviceEvent = ServiceEvent(withEventType: serviceEventType)
+        var serviceEvent = ServiceEvent(withEventType: .dataTransferChanged)
         serviceEvent.addEventInput(.transferId, value: transferId)
         serviceEvent.addEventInput(.state, value: eventCode)
         serviceEvent.addEventInput(.conversationId, value: conversationId)

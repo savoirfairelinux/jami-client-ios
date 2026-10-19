@@ -38,13 +38,11 @@ enum ServiceEventType {
     case notificationEnabled
     case callEnded
     case callsCompleted
-    case dataTransferCreated
     case dataTransferChanged
     case deviceRevocationEnded
     case newIncomingMessage
     case nameRegistrationEnded
     case callProviderPreviewPendingCall
-    case newOutgoingMessage
     case migrationEnded
     case lastDisplayedMessageUpdated
     case presenseSubscribed
@@ -83,12 +81,10 @@ enum ServiceEventInput {
     case mediaState
     case transferId
     case conversationId
-    case localPhotolID
     case proxyAddress
     case deviceId
     case content
     case peerUri
-    case accountUri
     case name
     case callUUID
     case callId

@@ -60,17 +60,6 @@ final class ConversationDestructiveActionTests: XCTestCase {
         XCTAssertEqual(ConversationDestructiveAction.removeConversation.confirmationButtonTitle(for: conversation), L10n.Global.leave)
     }
 
-    func testSmartListDestructiveActions_LegacyNonSwarm() {
-        // Arrange
-        let conversation = createConversation(conversationId: conversationId1, jamiId: jamiId1, type: .nonSwarm, accountId: accountId1)
-
-        // Act
-        let actions = ConversationDestructiveAction.availableActions(for: conversation)
-
-        // Assert
-        XCTAssertEqual(actions, [.blockContact, .removeContact])
-    }
-
     func testSmartListDestructiveActions_Sip() {
         // Arrange
         let uri = JamiURI(schema: .sip, infoHash: sipTestNumber1)

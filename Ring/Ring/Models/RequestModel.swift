@@ -148,7 +148,7 @@ class RequestModel {
     }
 
     func isCoredialog() -> Bool {
-        return self.conversationType == .nonSwarm || self.conversationType == .oneToOne
+        return self.conversationType == .oneToOne
     }
 
     func isDialog() -> Bool {

@@ -59,22 +59,16 @@ typedef NS_ENUM(UInt32, NSDataTransferFlags)  {
 {
 @public
     NSString* accountId;
-    NSDataTransferEventCode lastEvent;
-    UInt32 flags;
     int64_t totalSize;
     int64_t bytesProgress;
-    NSString* peer;
     NSString* displayName;
     NSString* path;
     NSString* mimetype;
     NSString* conversationId;
 }
 @property (strong, nonatomic) NSString* accountId;
-@property (nonatomic) NSDataTransferEventCode lastEvent;
-@property (nonatomic) UInt32 flags;
 @property (nonatomic) int64_t totalSize;
 @property (nonatomic) int64_t bytesProgress;
-@property (strong, nonatomic) NSString* peer;
 @property (strong, nonatomic) NSString* displayName;
 @property (strong, nonatomic) NSString* path;
 @property (strong, nonatomic) NSString* conversationId;
