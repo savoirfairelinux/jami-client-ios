@@ -33,6 +33,23 @@
       "message": "[warning] Line 804: 🟡 The new values for `collab.textFormat`, `collab.paragraphStyle`, `collab.normalText`, `collab.defaultFont`, `collab.unavailableFont`, and `collab.defaultSize` include a leading hidden Unicode character (likely ZWNJ/ZWSP). Please remove the invisible prefix to avoid unexpected rendering/speech behavior and noisy future diffs.",
       "revId": "a3bb88005edda04dbe386e1011b923934ed976d9",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e5ee6aa_9062cbec",
+        "filename": "Ring/Ring/Resources/de.lproj/Localizable.strings",
+        "patchSetId": 1
+      },
+      "lineNbr": 845,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-19T07:26:28Z",
+      "side": 1,
+      "message": "[warning] Line 845: 🟡 `collab.documentShared` was added with an English literal (`\"New document: %@\"`) in a localized file. This creates mixed-language UI in German (and the same pattern appears in other locale files in this patch). Please localize this key per locale, or intentionally omit it from locale files to fall back consistently from the base language.",
+      "revId": "a3bb88005edda04dbe386e1011b923934ed976d9",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
