@@ -22,6 +22,7 @@ import SwiftUI
 
 struct DefaultTransferView: View {
     @StateObject var model: MessageContentVM
+    let time: String?
     let onLongGesture: () -> Void
     var body: some View {
         HStack(alignment: .top) {
@@ -49,6 +50,7 @@ struct DefaultTransferView: View {
                     Text(model.fileInfo)
                         .foregroundColor(model.styling.textColor)
                         .font(model.styling.secondaryFont)
+                        .withInlineTime(model.transferActions.isEmpty ? time : nil, color: model.timeColor)
                     if model.showProgress {
                         Spacer()
                             .frame(height: 15)
@@ -65,6 +67,10 @@ struct DefaultTransferView: View {
                             }
                             Spacer()
                                 .frame(width: 20)
+                        }
+                        if let time {
+                            Spacer(minLength: 0)
+                            MessageTimeView(text: time, color: model.timeColor)
                         }
                     }
                 }
