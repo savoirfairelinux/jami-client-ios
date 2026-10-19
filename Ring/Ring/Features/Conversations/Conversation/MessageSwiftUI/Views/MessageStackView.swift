@@ -22,9 +22,7 @@ import SwiftUI
 
 struct MessageStackView: View {
     let messageModel: MessageContainerModel
-    var model: MessageStackVM {
-        return messageModel.stackViewModel
-    }
+    @ObservedObject var model: MessageStackVM
     var onLongPress: (_ frame: CGRect, _ message: MessageBubbleView) -> Void
     var showReactionsView: (_ message: ReactionsContainerModel?) -> Void
     var body: some View {

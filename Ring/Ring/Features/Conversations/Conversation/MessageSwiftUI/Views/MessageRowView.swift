@@ -80,24 +80,22 @@ struct MessageRowView: View {
                     centeredEvent()
                 } else if model.incoming {
                     HStack(alignment: .messageBubbleBottom) {
-                        if model.shouldDisplayAavatar,
-                           let factory = avatarFactory {
+                        if model.reservesAvatarSlot {
                             Spacer()
                                 .frame(width: 10)
-                            let jamiId = messageModel.message.uri.isEmpty ? messageModel.message.authorId : messageModel.message.uri
-                            AvatarSwiftUIView(source: factory.provider(for: jamiId, size: Constants.AvatarSize.conversation30))
+                            avatarSlot()
                             Spacer()
                                 .frame(width: 10)
                         } else {
                             Spacer()
-                                .frame(width: model.leadingSpace)
+                                .frame(width: Layout.oneToOneLeadingSpace)
                         }
-                        MessageStackView(messageModel: messageModel, onLongPress: onLongPress, showReactionsView: showReactionsView)
+                        MessageStackView(messageModel: messageModel, model: messageModel.stackViewModel, onLongPress: onLongPress, showReactionsView: showReactionsView)
                     }.padding(.trailing, 50)
                 } else {
                     HStack(alignment: .messageBubbleBottom, spacing: 2) {
                         Spacer()
-                        MessageStackView(messageModel: messageModel, onLongPress: onLongPress, showReactionsView: showReactionsView)
+                        MessageStackView(messageModel: messageModel, model: messageModel.stackViewModel, onLongPress: onLongPress, showReactionsView: showReactionsView)
                         if model.showReciveIndicator {
                             Image("messageSentIndicator")
                                 .resizable()
@@ -134,6 +132,18 @@ struct MessageRowView: View {
         }
         .padding(.bottom, model.bottomSpace)
         .padding(.horizontal, 5)
+    }
+
+    @ViewBuilder
+    private func avatarSlot() -> some View {
+        let size = Constants.AvatarSize.conversation30
+        if model.shouldDisplayAavatar, let factory = avatarFactory {
+            let jamiId = messageModel.message.uri.isEmpty ? messageModel.message.authorId : messageModel.message.uri
+            AvatarSwiftUIView(source: factory.provider(for: jamiId, size: size))
+        } else {
+            Color.clear
+                .frame(width: size.rawValue, height: size.rawValue)
+        }
     }
 
     private func centeredEvent() -> some View {
@@ -175,6 +185,7 @@ struct MessageRowView: View {
     }
 
     private enum Layout {
+        static let oneToOneLeadingSpace: CGFloat = 12
         static let centeredMessageMargin: CGFloat = 30
         static let daySeparatorHorizontalPadding: CGFloat = 10
         static let daySeparatorVerticalPadding: CGFloat = 4
