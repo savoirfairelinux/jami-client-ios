@@ -50,8 +50,6 @@ class MessageContainerModel: Identifiable, Equatable {
         return self.transferSubject.asObservable()
     }()
 
-    var startsNewGroup: Bool = false
-
     var startsNewDay: Bool = false {
         didSet {
             guard oldValue != startsNewDay else { return }

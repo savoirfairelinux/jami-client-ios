@@ -341,6 +341,7 @@
 		269DA09928E23D37007D51D6 /* MessageRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269DA09828E23D37007D51D6 /* MessageRowView.swift */; };
 		269DA09D28E23F57007D51D6 /* MessagesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269DA09C28E23F57007D51D6 /* MessagesListView.swift */; };
 		269DA09F28E244F1007D51D6 /* MessagesListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269DA09E28E244F1007D51D6 /* MessagesListVM.swift */; };
+		A7MG00102F20000300000002 /* MessageGrouping.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7MG00102F20000300000001 /* MessageGrouping.swift */; };
 		26A072F92959F461006D8163 /* ContextMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A072F82959F461006D8163 /* ContextMenuView.swift */; };
 		26A072FD295A7145006D8163 /* ContextMenuVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A072FC295A7145006D8163 /* ContextMenuVM.swift */; };
 		26A1B2C3D4E5F60800AABB01 /* ThreadSafeDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A1B2C3D4E5F60700AABB01 /* ThreadSafeDictionary.swift */; };
@@ -982,6 +983,7 @@
 		269DA09828E23D37007D51D6 /* MessageRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRowView.swift; sourceTree = "<group>"; };
 		269DA09C28E23F57007D51D6 /* MessagesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesListView.swift; sourceTree = "<group>"; };
 		269DA09E28E244F1007D51D6 /* MessagesListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesListVM.swift; sourceTree = "<group>"; };
+		A7MG00102F20000300000001 /* MessageGrouping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageGrouping.swift; sourceTree = "<group>"; };
 		26A072F82959F461006D8163 /* ContextMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextMenuView.swift; sourceTree = "<group>"; };
 		26A072FC295A7145006D8163 /* ContextMenuVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextMenuVM.swift; sourceTree = "<group>"; };
 		26A1B2C3D4E5F60700AABB01 /* ThreadSafeDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadSafeDictionary.swift; sourceTree = "<group>"; };
@@ -3456,6 +3458,7 @@
 				2637E5642DDE27B600ACCF91 /* CallBannerViewModel.swift */,
 				260C73F029196B66005C513F /* MessageReplyTargetVM.swift */,
 				269DA09E28E244F1007D51D6 /* MessagesListVM.swift */,
+				A7MG00102F20000300000001 /* MessageGrouping.swift */,
 				26EF35EA28E38DA200D97E14 /* MessageContentVM.swift */,
 				265DFAF22929C01400834B97 /* MessageRowVM.swift */,
 				260C73F229196C6C005C513F /* MessageStackVM.swift */,
@@ -4494,6 +4497,7 @@
 				26F544A32C5AABD20069A7A4 /* CreateAccountView.swift in Sources */,
 				1A20417A1F1E547F00C08435 /* Stateable.swift in Sources */,
 				269DA09F28E244F1007D51D6 /* MessagesListVM.swift in Sources */,
+				A7MG00102F20000300000002 /* MessageGrouping.swift in Sources */,
 				26D08ABE2696296300E37574 /* RequestsAdapter.mm in Sources */,
 				265DFB07292FBC4200834B97 /* TransferHelper.swift in Sources */,
 				26B37339263C439B00E2EE28 /* CustomSearchController.swift in Sources */,

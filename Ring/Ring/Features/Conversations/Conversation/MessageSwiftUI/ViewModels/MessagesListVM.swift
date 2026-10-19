@@ -568,15 +568,15 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     }
 
     func messagesUpdated(_ messages: [MessageModel]) {
-        var updatedAny = false
+        var groupingChanged = false
         for message in messages {
             guard let container = self.getMessage(messageId: message.id) else { continue }
+            groupingChanged = groupingChanged || MessageGrouping.changesGrouping(from: container.message, to: message)
             container.messageUpdated(message)
             self.updateLastRead(message: container)
             self.updateLastDelivered(message: container)
-            updatedAny = true
         }
-        if updatedAny {
+        if groupingChanged {
             self.computeSequencing()
         }
     }
@@ -1034,97 +1034,22 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     // MARK: sequencing
 
     private func computeSequencing() {
-        var previousMessage: MessageModel?
-        var memberEventsStart: Date?
-        for model in self.messagesModels.reversed() {
-            let current = model.message
-            let startsNewDay = isFirstOfDay(current, after: previousMessage)
-            let continuesMemberEvents = current.type.isContact && previousMessage?.type.isContact == true
-            let groupStart = continuesMemberEvents ? memberEventsStart : previousMessage?.receivedDate
-            let startsNewGroup = startsNewDay || exceedsGroupingInterval(current.receivedDate, since: groupStart)
-            model.startsNewDay = startsNewDay
-            model.startsNewGroup = startsNewGroup
-            let extendsMemberEventGroup = continuesMemberEvents && !startsNewGroup
-            if current.type.isContact && !extendsMemberEventGroup {
-                memberEventsStart = current.receivedDate
-            }
-            previousMessage = current
+        let isGroupConversation = shouldDisplayContactInfoForConversation()
+        let groupings = MessageGrouping.groupings(newestFirst: self.messagesModels.map { $0.message },
+                                                  isGroupConversation: isGroupConversation)
+        for (model, grouping) in zip(self.messagesModels, groupings) {
+            model.startsNewDay = grouping.startsNewDay
+            model.sequencing = grouping.sequencing
+            model.endsEmojiRun = grouping.endsEmojiRun
+            model.shouldDisplayName = grouping.displaysName
+            model.shouldDisplayAvatar = grouping.displaysAvatar
+            model.shouldDisplayContactInfoForConversation = isGroupConversation
         }
-        for (index, model) in self.messagesModels.enumerated() {
-            model.sequencing = getMessageSequencing(forIndex: index)
-            model.endsEmojiRun = endsEmojiRun(at: index)
-            model.shouldDisplayName = shouldDisplayName(message: model) && shouldDisplayContactInfoForConversation()
-            model.shouldDisplayAvatar = shouldDisplayAvatar(message: model) && shouldDisplayContactInfoForConversation()
-            model.shouldDisplayContactInfoForConversation = shouldDisplayContactInfoForConversation()
-        }
-    }
-
-    private let messageGroupingInterval: TimeInterval = 10 * 60 // 10 minutes
-
-    private func isFirstOfDay(_ message: MessageModel, after previous: MessageModel?) -> Bool {
-        guard let previous = previous else { return true }
-        return !Calendar.current.isDate(message.receivedDate, inSameDayAs: previous.receivedDate)
-    }
-
-    private func exceedsGroupingInterval(_ date: Date, since groupStart: Date?) -> Bool {
-        guard let groupStart = groupStart else { return true }
-        return date.timeIntervalSince(groupStart) >= messageGroupingInterval
-    }
-
-    private func endsEmojiRun(at index: Int) -> Bool {
-        let current = self.messagesModels[index].message
-        guard index > 0, current.isEmojiOnly() else { return true }
-        let next = self.messagesModels[index - 1]
-        return next.startsNewGroup || !next.message.isEmojiOnly() || next.message.authorId != current.authorId
-    }
-
-    private func isBreakingSequence(older: MessageModel, newer: MessageModel) -> Bool {
-        if older.type.isContact && newer.type.isContact {
-            return false
-        }
-        let differentUri = older.uri != newer.uri
-        let messageTypeCheck = older.type.isCentered || newer.type.isCentered
-        let differentAuthor = older.authorId != newer.authorId
-        let startsWithReply = newer.isReply()
-        let isEmojiOnlyMessage = older.isEmojiOnly() || newer.isEmojiOnly()
-
-        return differentUri || messageTypeCheck || differentAuthor ||
-            startsWithReply || isEmojiOnlyMessage
-    }
-
-    private func shouldDisplayName(message: MessageContainerModel) -> Bool {
-        return (message.sequencing == .firstOfSequence || message.sequencing == .singleMessage) && message.message.incoming && !message.message.isReply()
-    }
-
-    private func shouldDisplayAvatar(message: MessageContainerModel) -> Bool {
-        return (message.sequencing == .lastOfSequence || message.sequencing == .singleMessage) && message.message.incoming
     }
 
     private func shouldDisplayContactInfoForConversation() -> Bool {
         // do not show names for one to one conversation
         return self.conversation.getParticipants().count > 1
-    }
-
-    private func getMessageSequencing(forIndex index: Int) -> MessageSequencing {
-        let messageItem = self.messagesModels[index]
-        let previousMessageItem = index + 1 < self.messagesModels.count ? self.messagesModels[index + 1] : nil
-        let nextMessageItem = index > 0 ? self.messagesModels[index - 1] : nil
-        let startsSequence = previousMessageItem.map {
-            messageItem.startsNewGroup || self.isBreakingSequence(older: $0.message, newer: messageItem.message)
-        } ?? true
-        let endsSequence = nextMessageItem.map {
-            $0.startsNewGroup || self.isBreakingSequence(older: messageItem.message, newer: $0.message)
-        } ?? true
-        switch (startsSequence, endsSequence) {
-        case (true, true):
-            return .singleMessage
-        case (true, false):
-            return .firstOfSequence
-        case (false, true):
-            return .lastOfSequence
-        case (false, false):
-            return .middleOfSequence
-        }
     }
 
     // MARK: participant information
