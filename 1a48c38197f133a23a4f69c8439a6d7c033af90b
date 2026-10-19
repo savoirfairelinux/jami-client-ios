@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf7f9195_5822f6c4",
+        "filename": "Ring/Ring/Services/Conversations/ConversationStore.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-19T15:16:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db5021e2_e802dc1f",
+      "revId": "1a48c38197f133a23a4f69c8439a6d7c033af90b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "89f1c878_5844ef27",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-10-19T14:40:14Z",
       "side": 1,
       "message": "[error] Line 543: 🔴 `lastUnreadMessageId` is no longer assigned before it is used later in `setMessagesAsRead`, so the `messageDisplayed` notification path becomes a no-op. This silently breaks read receipts for conversations that still depend on displayed acknowledgements. Keep assigning `lastUnreadMessageId \u003d unreadMessages.last?.id` and gate only the SIP-specific emission path (instead of removing the assignment globally).",
+      "revId": "1a48c38197f133a23a4f69c8439a6d7c033af90b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0f0880f_c5baa9c3",
+        "filename": "Ring/Ring/Services/ConversationsService.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-19T15:16:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "89f1c878_5844ef27",
       "revId": "1a48c38197f133a23a4f69c8439a6d7c033af90b",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
