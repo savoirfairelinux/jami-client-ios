@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbbfc851_39f990e4",
+        "filename": "Ring/Ring/Services/ConversationsManager.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-19T15:12:13Z",
+      "side": 1,
+      "message": "[error] Line 547: 🔴 Outgoing in-call SIP messages are no longer persisted after this change. The call-message subscription now only handles `.newIncomingMessage`, while `ConversationViewModel.sendMessage` returns immediately after `callService.sendInCallMessage(...)` for SIP calls. With the removal of the `.newOutgoingMessage` path, sent in-call messages have no persistence path and can disappear from conversation history/local echo. Please restore an outgoing persistence path (either reintroduce an outgoing call-message event and handler, or persist immediately when sending) and add a regression test for SIP in-call sent messages.",
+      "revId": "e724b943b7844ba71f1dfe755326a042e4dd320d",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
