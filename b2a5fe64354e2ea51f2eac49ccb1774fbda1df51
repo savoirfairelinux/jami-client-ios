@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4c3bd53_728f37e4",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessageRowView.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-19T20:39:22Z",
+      "side": 1,
+      "message": "[error] Line 108: 🔴 Outgoing rows lost the leading `Spacer()` that previously pushed the bubble/status cluster to the trailing edge. In this `HStack`, `MessageStackView` does not reliably expand to full row width on its own, so outgoing bubbles can render left-shifted (starting near the 50pt leading inset) instead of right-aligned. Reintroduce an explicit trailing-alignment mechanism for outgoing rows (e.g., add a conditional leading `Spacer()` when `!model.incoming`, or set the row/container to `frame(maxWidth: .infinity, alignment: .trailing)` for outgoing).",
+      "revId": "b2a5fe64354e2ea51f2eac49ccb1774fbda1df51",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
