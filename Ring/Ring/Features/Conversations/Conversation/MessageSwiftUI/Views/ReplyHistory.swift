@@ -21,7 +21,7 @@
 import SwiftUI
 
 struct MessageReplyStyle: ViewModifier {
-    @StateObject var model: MessageContentVM
+    @ObservedObject var model: MessageContentVM
 
     func body(content: Content) -> some View {
         content
@@ -37,7 +37,7 @@ struct MessageReplyStyle: ViewModifier {
 }
 
 struct ReplyHistory: View {
-    @StateObject var model: MessageReplyTargetVM
+    @ObservedObject var model: MessageReplyTargetVM
 
     var body: some View {
         VStack(alignment: model.alignment, spacing: 4) {

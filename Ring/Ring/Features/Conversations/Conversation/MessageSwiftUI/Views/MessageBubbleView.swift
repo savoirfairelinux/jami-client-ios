@@ -21,7 +21,7 @@ import UIKit
 
 struct MessageBubbleView: View {
     let messageModel: MessageContainerModel
-    @StateObject var model: MessageContentVM
+    @ObservedObject var model: MessageContentVM
     @SwiftUI.State private var frame: CGRect = .zero
     @SwiftUI.State private var presentMenu = false
     @Environment(\.openURL)

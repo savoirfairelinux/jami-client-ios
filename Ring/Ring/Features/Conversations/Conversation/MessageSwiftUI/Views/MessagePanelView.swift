@@ -61,7 +61,7 @@ struct MessageTopBaseView<Content>: View where Content: View {
 
 struct ReplyViewInMessagePanel: View {
     var messageToReply: MessageContentVM
-    @StateObject var model: MessagePanelVM
+    @ObservedObject var model: MessagePanelVM
     let padding: CGFloat = 10
 
     var body: some View {
@@ -99,7 +99,7 @@ struct ReplyViewInMessagePanel: View {
 
 struct EditMessagePanel: View {
     var messageToEdit: MessageContentVM
-    @StateObject var model: MessagePanelVM
+    @ObservedObject var model: MessagePanelVM
     @Binding var text: String
     let padding: CGFloat = 10
 
@@ -123,7 +123,7 @@ struct EditMessagePanel: View {
 }
 
 struct MessagePanelView: View {
-    @StateObject var model: MessagePanelVM
+    @ObservedObject var model: MessagePanelVM
     @Binding var isFocused: Bool
     @SwiftUI.State private var text: String = ""
     @SwiftUI.State private var textHeight: CGFloat = 42

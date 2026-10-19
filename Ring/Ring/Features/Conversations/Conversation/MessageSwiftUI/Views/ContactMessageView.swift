@@ -19,7 +19,7 @@
 import SwiftUI
 
 struct ContactMessageView: View {
-    @StateObject var model: ContactMessageVM
+    @ObservedObject var model: ContactMessageVM
     @Environment(\.avatarProviderFactory)
     var avatarFactory: AvatarProviderFactory?
     var body: some View {

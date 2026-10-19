@@ -21,7 +21,7 @@
 import SwiftUI
 
 struct DefaultTransferView: View {
-    @StateObject var model: MessageContentVM
+    @ObservedObject var model: MessageContentVM
     let time: String?
     let onLongGesture: () -> Void
     @Environment(\.layoutDirection)
