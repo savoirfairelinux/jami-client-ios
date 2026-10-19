@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95279824_44685e69",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessageGrouping.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-19T20:22:49Z",
+      "side": 1,
+      "message": "[warning] Line 33: 🟡 This refactor moves all sequencing/grouping rules into a pure helper but adds no tests in the same change. Add focused unit tests for contact-event grouping windows, day boundaries, emoji run endings, reply boundaries, and `changesGrouping` trigger fields to lock behavior and avoid subtle regressions.",
+      "revId": "9aea3f4f9392134b2114a647a7c059aed313847e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73f54a5b_699cc01b",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessageGrouping.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-19T20:22:49Z",
+      "side": 1,
+      "message": "[warning] Line 50: 🟡 `changesGrouping` does not include `incoming`, but `groupings(newestFirst:isGroupConversation:)` reads `message.incoming` to compute `displaysName` and `displaysAvatar`. If direction can change on update, those UI flags will stay stale because sequencing is skipped. Include `old.incoming !\u003d new.incoming` (or the underlying direction field) in this predicate.",
+      "revId": "9aea3f4f9392134b2114a647a7c059aed313847e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
