@@ -207,7 +207,7 @@ final class ConversationStore {
 
     // MARK: loading
 
-    func loadConversations(accountId: String, accountURI: String) {
+    func loadConversations(accountId: String, accountURI: String, isSip: Bool) {
         dispatchPrecondition(condition: .onQueue(queue))
         var currentRecords = [ConversationRecord]()
         let previousRecords = self.records.value
@@ -223,29 +223,19 @@ final class ConversationStore {
                               to: &currentRecords, reusing: previousRecords)
             }
         }
+        guard isSip else {
+            self.sortAndUpdate(records: &currentRecords)
+            self.loadLatestMessages(swarmIds: conversationToLoad, accountId: accountId)
+            self.scheduleUnreadCounts(for: currentRecords.map { $0.conversation }, accountId: accountId)
+            return
+        }
         // get conversations from db
         self.dbManager.getConversationsObservable(for: accountId)
             .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe(onNext: { [weak self] storedConversations in
                 self?.queue.async {
                     guard let self = self, generation == self.loadGeneration else { return }
-                    let oneToOne = currentRecords.map { $0.conversation }.filter { conv in
-                        conv.isCoredialog()
-                    }
-                    .map { conv in
-                        return conv.getParticipants().first?.jamiId
-                    }
-                    /// filter out contact requests
-                    let conversationsFromDB = storedConversations.filter { conversation in
-                        !(conversation.messages.count == 1 && conversation.messages.first!.content == L10n.GeneratedMessage.nonSwarmInvitationReceived)
-                    }
-                    /// Filter out conversations that already added to swarm
-                    .filter { conversation in
-                        guard let jamiId = conversation.participantUri.hash else { return true }
-                        return !oneToOne.contains(jamiId)
-                    }
-                    .map { self.makeRecord(from: $0, reusing: previousRecords) }
-                    currentRecords.append(contentsOf: conversationsFromDB)
+                    currentRecords.append(contentsOf: storedConversations.map { self.makeRecord(from: $0, reusing: previousRecords) })
                     self.sortAndUpdate(records: &currentRecords)
                     self.loadLatestMessages(swarmIds: conversationToLoad, accountId: accountId)
                     self.scheduleUnreadCounts(for: currentRecords.map { $0.conversation }, accountId: accountId)

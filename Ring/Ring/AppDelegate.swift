@@ -199,7 +199,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         self.networkService.monitorNetworkType()
 
         self.interactionsManager = GeneratedInteractionsManager(accountService: self.accountService,
-                                                                requestsService: self.requestsService,
                                                                 conversationService: self.conversationsService,
                                                                 callService: self.callService)
 
@@ -347,7 +346,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func reloadDataFor(account: AccountModel) {
         self.requestsService.loadRequests(withAccount: account.id, accountURI: account.jamiId)
         self.conversationManager?
-            .prepareConversationsForAccount(accountId: account.id, accountURI: account.jamiId)
+            .prepareConversationsForAccount(accountId: account.id, accountURI: account.jamiId,
+                                            isSip: account.type == .sip)
         self.contactsService.loadContacts(withAccount: account)
         self.presenceService.subscribeBuddies(withAccount: account.id, withContacts: self.contactsService.contacts.value, subscribe: true)
     }

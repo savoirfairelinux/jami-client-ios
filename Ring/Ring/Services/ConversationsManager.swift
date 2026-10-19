@@ -658,9 +658,9 @@ class ConversationsManager {
             .disposed(by: disposeBag)
     }
 
-    func prepareConversationsForAccount(accountId: String, accountURI: String) {
+    func prepareConversationsForAccount(accountId: String, accountURI: String, isSip: Bool) {
         self.conversationService
-            .getConversationsForAccount(accountId: accountId, accountURI: accountURI)
+            .getConversationsForAccount(accountId: accountId, accountURI: accountURI, isSip: isSip)
     }
 
     // MARK: Message Adapter delegate
@@ -676,14 +676,12 @@ class ConversationsManager {
 
     func handleNewMessage(from peerUri: String, to accountId: String, messageId: String, message content: String, peerName: String?) {
         guard let currentAccount = self.accountsService.currentAccount,
-              let accountForMessage = self.accountsService.getAccount(fromAccountId: accountId) else { return }
-        let shouldUpdateConversationsList = currentAccount.id == accountForMessage.id
-
-        let type = AccountModelHelper.init(withAccount: accountForMessage)
-            .isAccountSip() ? URIType.sip : URIType.ring
-        guard let uriString = JamiURI.init(schema: type,
+              let accountForMessage = self.accountsService.getAccount(fromAccountId: accountId),
+              AccountModelHelper.init(withAccount: accountForMessage).isAccountSip(),
+              let uriString = JamiURI.init(schema: .sip,
                                            infoHash: peerUri,
                                            account: accountForMessage).uriString else { return }
+        let shouldUpdateConversationsList = currentAccount.id == accountForMessage.id
         let message = self.conversationService.createMessage(withId: messageId,
                                                              withContent: content,
                                                              byAuthor: uriString,

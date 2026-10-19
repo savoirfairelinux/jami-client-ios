@@ -31,8 +31,6 @@ enum ServiceEventType {
     case exportOnRingEnded
     case contactAdded
     case contactRemoved
-    case contactRequestReceived
-    case contactRequestDiscarded
     case contactRequestSent
     case contactRequestAccepted
     case contactRequestRemoved

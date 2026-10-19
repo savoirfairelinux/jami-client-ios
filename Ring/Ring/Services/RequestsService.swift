@@ -266,13 +266,6 @@ class RequestsService {
             if success {
                 self.removeRequest(withJamiId: jamiId, accountId: accountId)
                 self.emit(.contactRequestRemoved, for: request)
-                if let request, request.conversationId.isEmpty {
-                    /// emit event so message could be generated for db
-                    var event = ServiceEvent(withEventType: .contactRequestDiscarded)
-                    event.addEventInput(.accountId, value: accountId)
-                    event.addEventInput(.uri, value: jamiId)
-                    self.responseStream.onNext(event)
-                }
                 observable.on(.completed)
             } else {
                 observable.on(.error(RequestServiceError.diacardTrusRequestFailed))
@@ -353,14 +346,6 @@ extension RequestsService: RequestsAdapterDelegate {
         var values = self.requests.value
         values.append(request)
         self.requests.accept(values)
-        if conversationId.isEmpty {
-            // emit event so message could be generated for db
-            var event = ServiceEvent(withEventType: .contactRequestReceived)
-            event.addEventInput(.accountId, value: accountId)
-            event.addEventInput(.uri, value: jamiId)
-            event.addEventInput(.date, value: receivedDate)
-            self.responseStream.onNext(event)
-        }
     }
     func conversationRequestReceived(conversationId: String, accountId: String, metadata: [String: String]) {
         /// add a conversation request. If a contact request exists for same conversation remove it.

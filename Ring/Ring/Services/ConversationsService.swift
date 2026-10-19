@@ -150,9 +150,9 @@ class ConversationsService {
     /**
      Called when application starts and when  account changed
      */
-    func getConversationsForAccount(accountId: String, accountURI: String) {
+    func getConversationsForAccount(accountId: String, accountURI: String, isSip: Bool) {
         perform { store in
-            store.loadConversations(accountId: accountId, accountURI: accountURI)
+            store.loadConversations(accountId: accountId, accountURI: accountURI, isSip: isSip)
         }
     }
 
@@ -401,29 +401,6 @@ class ConversationsService {
                                          duration: 0,
                                          shouldRefreshConversations: shouldRefreshConversations,
                                          interactionType: InteractionType.text)
-    }
-
-    // swiftlint:disable:next function_parameter_count
-    func generateMessage(messageContent: String,
-                         contactUri: String,
-                         accountId: String,
-                         date: Date,
-                         interactionType: InteractionType,
-                         shouldUpdateConversation: Bool) {
-        perform { store in
-            /// do not add multiple contact interactions
-            if let hash = JamiURI(from: contactUri).hash,
-               interactionType == .contact,
-               let conversation = store.getConversationForParticipant(jamiId: hash, accountId: accountId),
-               store.messages(of: conversation).map({ ($0.content) }).contains(messageContent) {
-                return
-            }
-            self.generateMessage(messageContent: messageContent,
-                                 duration: 0, contactUri: contactUri,
-                                 accountId: accountId,
-                                 date: date, interactionType: interactionType,
-                                 shouldUpdateConversation: shouldUpdateConversation)
-        }
     }
 
     // swiftlint:disable:next function_parameter_count
