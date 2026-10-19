@@ -54,6 +54,7 @@ class MessageContainerModel: Identifiable, Equatable {
 
     var startsNewDay: Bool = false {
         didSet {
+            guard oldValue != startsNewDay else { return }
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 self.messageRow.startsNewDay = self.startsNewDay
@@ -90,6 +91,7 @@ class MessageContainerModel: Identifiable, Equatable {
 
     var shouldDisplayContactInfoForConversation: Bool = false {
         didSet {
+            guard oldValue != shouldDisplayContactInfoForConversation else { return }
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 self.messageRow.shouldDisplayContactInfoForConversation(state: self.shouldDisplayContactInfoForConversation)

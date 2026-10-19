@@ -62,9 +62,11 @@ extension NameObserver {
     func subscribeToNameObservable(_ nameObservable: BehaviorRelay<String>) {
         nameObservable
             .startWith(nameObservable.value)
+            .distinctUntilChanged()
             .subscribe(onNext: { [weak self] newName in
                 DispatchQueue.main.async {[weak self] in
-                    self?.username = newName
+                    guard let self = self, self.username != newName else { return }
+                    self.username = newName
                 }
             })
             .disposed(by: disposeBag)

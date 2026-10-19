@@ -22,7 +22,7 @@ import Foundation
 import SwiftUI
 import RxSwift
 
-class MessageStackVM: MessageAppearanceProtocol, NameObserver {
+class MessageStackVM: ObservableObject, MessageAppearanceProtocol, NameObserver {
     @Published var username = ""
     var horizontalAllignment: HorizontalAlignment {
         self.message.incoming ? HorizontalAlignment.leading : HorizontalAlignment.trailing

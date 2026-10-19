@@ -27,7 +27,7 @@ class MessageRowVM: ObservableObject, MessageAppearanceProtocol, MessageReadObse
     @Published var eventGroupAccessibilityText: String?
     @Published var topSpace: CGFloat = 0
     @Published var bottomSpace: CGFloat = 0
-    @Published var leadingSpace: CGFloat = 0
+    @Published var reservesAvatarSlot = false
     @Published var readBorderColor: Color
     @Published var showSentIndicator: Bool = false
     @Published var showReciveIndicator: Bool = false
@@ -112,7 +112,7 @@ class MessageRowVM: ObservableObject, MessageAppearanceProtocol, MessageReadObse
     }
 
     func shouldDisplayContactInfoForConversation(state: Bool) {
-        leadingSpace = state ? 50 : 12
+        reservesAvatarSlot = state
     }
 
     func updateMessageStatus() {
