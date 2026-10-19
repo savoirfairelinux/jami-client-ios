@@ -67,7 +67,7 @@ class ContactsService {
     private func loadSipContacts(withAccount account: AccountModel) {
         self.contacts.accept([])
         var values = [ContactModel]()
-        for participant in self.dbManager.conversationParticipants(accountId: account.id) {
+        for participant in self.dbManager.sipParticipants(accountId: account.id) {
             let contact = ContactModel(withUri: JamiURI(schema: URIType.sip, infoHash: participant))
             guard values.firstIndex(of: contact) == nil else { continue }
             values.append(contact)

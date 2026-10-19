@@ -34,24 +34,6 @@ final class ConversationDataHelper {
     let tableProfiles = Table("profiles")
     let uri = SQLite.Expression<String>(value: "uri")
 
-    // to migrate from legacy db
-    let participantId = SQLite.Expression<Int64>("participant_id")
-
-    func migrateToDBForAccount(from oldDB: Connection,
-                               to newDB: Connection,
-                               accountProfileId: Int64,
-                               contactsMap: [Int64: String]) throws {
-        let query = table.filter(accountProfileId != participantId)
-        let items = try oldDB.prepare(query)
-        for item in  items {
-            if let uri = contactsMap[item[participantId]] {
-                let query = table.insert(id <- item[id],
-                                         participant <- "ring:" + uri)
-                try newDB.run(query)
-            }
-        }
-    }
-
     func createTable(accountDb: Connection) {
         do {
             try accountDb.run(table.create(ifNotExists: true) { table in
@@ -70,20 +52,6 @@ final class ConversationDataHelper {
         do {
             let rowId = try dataBase.run(query)
             guard rowId > 0 else {
-                return false
-            }
-            return true
-        } catch _ {
-            return false
-        }
-    }
-
-    func delete (item: Conversation, dataBase: Connection) -> Bool {
-        let conversationId = item.id
-        let query = table.filter(id == conversationId)
-        do {
-            let deletedRows = try dataBase.run(query.delete())
-            guard deletedRows == 1 else {
                 return false
             }
             return true

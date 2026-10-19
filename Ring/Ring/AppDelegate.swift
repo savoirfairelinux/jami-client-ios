@@ -54,14 +54,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         ProfilesService(withProfilesAdapter: ProfilesAdapter())
     }()
     private lazy var dataTransferService: DataTransferService = {
-        DataTransferService(withDataTransferAdapter: DataTransferAdapter(),
-                            dbManager: self.dBManager)
+        DataTransferService(withDataTransferAdapter: DataTransferAdapter())
     }()
     private lazy var conversationsService: ConversationsService = {
         ConversationsService(withConversationsAdapter: ConversationsAdapter(), dbManager: self.dBManager)
     }()
     private lazy var locationSharingService: LocationSharingService = {
-        LocationSharingService(dbManager: self.dBManager)
+        LocationSharingService()
     }()
     private lazy var requestsService: RequestsService = {
         RequestsService(withRequestsAdapter: RequestsAdapter())

@@ -52,11 +52,10 @@ final class LinkToAccountVMTests: XCTestCase {
         accountService = MockAccountsService(withAccountAdapter: AccountAdapter(), dbManager: dBManager)
         let contactsService = ContactsService(withContactsAdapter: ContactsAdapter(), dbManager: dBManager)
         let profileService = ProfilesService(withProfilesAdapter: ProfilesAdapter())
-        let dataTransferService = DataTransferService(withDataTransferAdapter: DataTransferAdapter(),
-                                                      dbManager: dBManager)
+        let dataTransferService = DataTransferService(withDataTransferAdapter: DataTransferAdapter())
         let conversationsService = ConversationsService(withConversationsAdapter: ConversationsAdapter(),
                                                         dbManager: dBManager)
-        let locationSharingService = LocationSharingService(dbManager: dBManager)
+        let locationSharingService = LocationSharingService()
         let requestsService = RequestsService(withRequestsAdapter: RequestsAdapter())
 
         injectionBag = InjectionBag(withDaemonService: daemonService,

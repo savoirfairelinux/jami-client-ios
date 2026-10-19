@@ -136,8 +136,6 @@ class LocationSharingService: NSObject {
 
     private let log = SwiftyBeaver.self
 
-    private let dbManager: DBManager
-
     private let disposeBag = DisposeBag()
     private let locationManager = CLLocationManager()
 
@@ -155,9 +153,7 @@ class LocationSharingService: NSObject {
     private let locationServiceEventStream = PublishSubject<ServiceEvent>()
     let locationServiceEventShared: Observable<ServiceEvent>
 
-    init(dbManager: DBManager) {
-        self.dbManager = dbManager
-
+    override init() {
         self.locationServiceEventStream.disposed(by: self.disposeBag)
         self.locationServiceEventShared = self.locationServiceEventStream.share()
         super.init()

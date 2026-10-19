@@ -31,15 +31,6 @@ enum MessageSequencing {
     case unknown
 }
 
-enum GeneratedMessageType: String {
-    case receivedContactRequest = "Contact request received"
-    case contactAdded = "Contact added"
-    case missedIncomingCall = "Missed incoming call"
-    case missedOutgoingCall = "Missed outgoing call"
-    case incomingCall = "Incoming call"
-    case outgoingCall = "Outgoing call"
-}
-
 class ConversationViewModel: Stateable, ObservableObject {
 
     @Published private(set) var name: String = ""
@@ -211,9 +202,8 @@ class ConversationViewModel: Stateable, ObservableObject {
     }
 
     func setIsComposingMsg(isComposing: Bool) {
-        guard let uri = conversation.getConversationURI() else { return }
         conversationsService.setIsComposingMsg(
-            to: uri,
+            to: conversation.getConversationURI(),
             from: conversation.accountId,
             isComposing: isComposing
         )

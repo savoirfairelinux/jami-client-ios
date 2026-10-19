@@ -47,7 +47,7 @@ private final class ConversationRecord {
         self.updateNonSwarmUnreadCount()
     }
 
-    func reconcile(with stored: StoredConversation) {
+    func reconcile(with stored: StoredSipConversation) {
         let knownIds = Set(self.messages.map { $0.id })
         let missing = stored.messages
             .filter { !knownIds.contains($0.id) }
@@ -230,12 +230,12 @@ final class ConversationStore {
             return
         }
         // get conversations from db
-        self.dbManager.getConversationsObservable(for: accountId)
+        self.dbManager.getSipConversationsObservable(for: accountId)
             .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe(onNext: { [weak self] storedConversations in
                 self?.queue.async {
                     guard let self = self, generation == self.loadGeneration else { return }
-                    currentRecords.append(contentsOf: storedConversations.map { self.makeRecord(from: $0, reusing: previousRecords) })
+                    currentRecords.append(contentsOf: storedConversations.map { self.makeSipRecord(from: $0, reusing: previousRecords) })
                     self.sortAndUpdate(records: &currentRecords)
                     self.loadLatestMessages(swarmIds: conversationToLoad, accountId: accountId)
                     self.scheduleUnreadCounts(for: currentRecords.map { $0.conversation }, accountId: accountId)
@@ -281,10 +281,10 @@ final class ConversationStore {
         self.publishNewConversation(conversationId: conversationId, accountId: accountId, records: &currentRecords)
     }
 
-    func replaceConversations(with storedConversations: [StoredConversation]) {
+    func replaceSipConversations(with storedConversations: [StoredSipConversation]) {
         dispatchPrecondition(condition: .onQueue(queue))
         let currentRecords = self.records.value
-        self.records.accept(storedConversations.map { self.makeRecord(from: $0, reusing: currentRecords) })
+        self.records.accept(storedConversations.map { self.makeSipRecord(from: $0, reusing: currentRecords) })
     }
 
     func removeConversation(_ conversation: ConversationModel) {
@@ -519,24 +519,10 @@ final class ConversationStore {
                                for transferId: String,
                                conversationId: String,
                                interactionId: String,
-                               accountId: String,
-                               to jamiId: String) {
+                               accountId: String) {
         dispatchPrecondition(condition: .onQueue(queue))
-        let foundRecord = conversationId.isEmpty
-            ? self.recordForParticipant(jamiId: jamiId, accountId: accountId)
-            : self.record(id: conversationId, accountId: accountId)
-        guard let record = foundRecord else { return }
+        guard let record = self.record(id: conversationId, accountId: accountId) else { return }
         record.transferStatusUpdated(status: transferStatus, messageId: interactionId, transferId: transferId)
-        /// for non swarm conversationId is empty. Update status in db
-        if !record.conversation.isSwarm() {
-            self.dbManager
-                .updateTransferStatus(daemonID: String(transferId),
-                                      withStatus: transferStatus,
-                                      accountId: accountId)
-                .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
-                .subscribe()
-                .disposed(by: self.disposeBag)
-        }
     }
 
     // MARK: ordering
@@ -607,12 +593,12 @@ final class ConversationStore {
         return ConversationRecord(id: id, accountId: accountId, info: info)
     }
 
-    private func makeRecord(from stored: StoredConversation, reusing candidates: [ConversationRecord]) -> ConversationRecord {
+    private func makeSipRecord(from stored: StoredSipConversation, reusing candidates: [ConversationRecord]) -> ConversationRecord {
         if let existing = Self.record(id: stored.id, accountId: stored.accountId, in: candidates) {
             existing.reconcile(with: stored)
             return existing
         }
-        var conversationInfo = ConversationInfo(type: stored.type)
+        var conversationInfo = ConversationInfo(type: .sip)
         conversationInfo.participants = [ConversationParticipant(jamiId: stored.participantUri.hash ?? "", isLocal: false)]
         conversationInfo.hash = stored.participantUri.hash ?? ""
         let record = ConversationRecord(id: stored.id, accountId: stored.accountId, info: conversationInfo)

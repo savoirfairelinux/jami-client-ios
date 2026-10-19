@@ -99,12 +99,12 @@ final class DBManagerConversationDeletionTests: XCTestCase {
         try insertConversation(uri: "sip:1001@example.com")
         try insertConversation(uri: "sip:1002@example.com")
 
-        XCTAssertEqual(Set(manager.conversationParticipants(accountId: accountId)),
+        XCTAssertEqual(Set(manager.sipParticipants(accountId: accountId)),
                        ["sip:1001@example.com", "sip:1002@example.com"])
     }
 
     func testConversationParticipantsIsEmptyWhenNoConversationExists() {
-        XCTAssertTrue(manager.conversationParticipants(accountId: accountId).isEmpty)
+        XCTAssertTrue(manager.sipParticipants(accountId: accountId).isEmpty)
     }
 
     func testDeletingConversationKeepsPeerVCardAndDeletesClientFiles() throws {
