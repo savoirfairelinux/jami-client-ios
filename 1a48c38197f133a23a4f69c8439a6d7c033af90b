@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db5021e2_e802dc1f",
+        "filename": "Ring/Ring/Services/Conversations/ConversationStore.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-19T14:40:14Z",
+      "side": 1,
+      "message": "[error] Line 599: 🔴 `makeRecord` now hardcodes `ConversationInfo(type: .sip)` for every DB-restored conversation. Any persisted non-SIP history (including legacy/migrated data) will be misclassified, which changes behavior (routing, feature gating, UI state) and can corrupt conversation semantics. Reconstruct type from stored data (e.g., URI/schema-derived) or persist and reuse the original type instead of forcing `.sip`.",
+      "revId": "1a48c38197f133a23a4f69c8439a6d7c033af90b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89f1c878_5844ef27",
+        "filename": "Ring/Ring/Services/ConversationsService.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-19T14:40:14Z",
+      "side": 1,
+      "message": "[error] Line 543: 🔴 `lastUnreadMessageId` is no longer assigned before it is used later in `setMessagesAsRead`, so the `messageDisplayed` notification path becomes a no-op. This silently breaks read receipts for conversations that still depend on displayed acknowledgements. Keep assigning `lastUnreadMessageId \u003d unreadMessages.last?.id` and gate only the SIP-specific emission path (instead of removing the assignment globally).",
+      "revId": "1a48c38197f133a23a4f69c8439a6d7c033af90b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
