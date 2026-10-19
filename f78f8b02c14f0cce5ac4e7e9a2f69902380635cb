@@ -16,6 +16,23 @@
       "message": "[error] Line 226: 🔴 The new non-SIP early return stops loading DB conversations, but it never removes legacy non-swarm Jami rows already stored for those accounts. That leaves obsolete private message data retained indefinitely, which conflicts with “keep the database for SIP accounts only.” Add a one-time migration/cleanup path (e.g., on non-SIP account load) to delete legacy DB conversations for that account.",
       "revId": "f78f8b02c14f0cce5ac4e7e9a2f69902380635cb",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81b5525f_a630b51f",
+        "filename": "Ring/Ring/Services/Conversations/ConversationStore.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-19T14:43:10Z",
+      "side": 1,
+      "message": "[warning] Line 235: 🟡 The previous merge logic deduplicated DB conversations against conversations already loaded from the daemon (`oneToOne`/participant-based filter), but this was removed when appending all `storedConversations`. For SIP accounts this can re-introduce duplicate conversation entries (DB + daemon for same peer), which can also distort ordering and unread counters. Restore a dedup step (participant URI hash or stable conversation identity) before `append(contentsOf:)`.",
+      "revId": "f78f8b02c14f0cce5ac4e7e9a2f69902380635cb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
