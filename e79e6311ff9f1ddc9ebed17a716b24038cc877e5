@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91819204_d16ab701",
+        "filename": "Ring/Ring/Services/Conversations/ConversationStore.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-19T14:42:05Z",
+      "side": 1,
+      "message": "[warning] Line 286: 🟡 `reloadStoredConversations` creates a new subscription every time it is called and stores it in the long-lived `disposeBag`. If `getConversationsObservable(for:)` is not guaranteed to complete immediately, repeated calls can accumulate observers and trigger duplicate reloads/work. Prefer a one-shot subscription (`take(1)`/`Single`) or cancel the previous in-flight reload before starting a new one.",
+      "revId": "e79e6311ff9f1ddc9ebed17a716b24038cc877e5",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
