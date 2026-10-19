@@ -95,7 +95,7 @@ struct MessageRowView: View {
                         MessageStackView(messageModel: messageModel, onLongPress: onLongPress, showReactionsView: showReactionsView)
                     }.padding(.trailing, 50)
                 } else {
-                    HStack(alignment: .bottom, spacing: 2) {
+                    HStack(alignment: .messageBubbleBottom, spacing: 2) {
                         Spacer()
                         MessageStackView(messageModel: messageModel, onLongPress: onLongPress, showReactionsView: showReactionsView)
                         if model.showReciveIndicator {
