@@ -20,7 +20,7 @@ import SwiftUI
 import RxSwift
 
 struct PlayerSwiftUI: View {
-    @StateObject var model: MessageContentVM
+    @ObservedObject var model: MessageContentVM
     var player: PlayerViewModel
     let onLongGesture: () -> Void
     var ratio: CGFloat = 1
@@ -53,7 +53,7 @@ struct PlayerSwiftUI: View {
 }
 
 struct ImageOrGifView: View {
-    @StateObject var message: MessageContentVM
+    @ObservedObject var message: MessageContentVM
 
     var image: UIImage
     let onLongGesture: () -> Void
@@ -87,7 +87,7 @@ struct ImageOrGifView: View {
 }
 
 struct MediaView: View {
-    @StateObject var message: MessageContentVM
+    @ObservedObject var message: MessageContentVM
     let onLongGesture: () -> Void
     let minHeight: CGFloat
     let maxHeight: CGFloat

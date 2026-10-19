@@ -19,7 +19,7 @@
 import SwiftUI
 
 struct ReactionsView: View {
-    @StateObject var model: ReactionsContainerModel
+    @ObservedObject var model: ReactionsContainerModel
     @SwiftUI.State private var contentHeight: CGFloat = 100
     let defailtSize: CGFloat = 300
 

@@ -121,7 +121,7 @@ struct ScaledImageViewWrapper: UIViewRepresentable {
 }
 
 struct MessageTextStyle: ViewModifier {
-    @StateObject var model: MessageContentVM
+    @ObservedObject var model: MessageContentVM
 
     func body(content: Content) -> some View {
         content
@@ -202,7 +202,7 @@ extension View {
 }
 
 struct MessageCornerRadius: ViewModifier {
-    @StateObject var model: MessageContentVM
+    @ObservedObject var model: MessageContentVM
 
     func body(content: Content) -> some View {
         content
@@ -215,8 +215,8 @@ struct MessageCornerRadius: ViewModifier {
 
 struct MessageContentView: View {
     let messageModel: MessageContainerModel
-    @StateObject var model: MessageContentVM
-    @StateObject var reactionsModel: ReactionsContainerModel
+    @ObservedObject var model: MessageContentVM
+    @ObservedObject var reactionsModel: ReactionsContainerModel
     var onLongPress: (_ frame: CGRect, _ message: MessageBubbleView) -> Void
     let padding: CGFloat = 12
     var showReactionsView: (_ message: ReactionsContainerModel?) -> Void

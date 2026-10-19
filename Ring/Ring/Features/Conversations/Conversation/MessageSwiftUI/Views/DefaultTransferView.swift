@@ -21,7 +21,7 @@
 import SwiftUI
 
 struct DefaultTransferView: View {
-    @StateObject var model: MessageContentVM
+    @ObservedObject var model: MessageContentVM
     let onLongGesture: () -> Void
     var body: some View {
         HStack(alignment: .top) {

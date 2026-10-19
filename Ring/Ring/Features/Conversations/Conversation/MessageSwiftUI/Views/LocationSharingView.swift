@@ -23,7 +23,7 @@ import SwiftUI
 // swiftlint:disable closure_body_length
 struct LocationSharingView: View {
 
-    @StateObject var model: MessagesListVM
+    @ObservedObject var model: MessagesListVM
     @SwiftUI.State private var forceUpdate = false
     @SwiftUI.State private var showCopyrightAlert = false
     var viewCornerRadius: CGFloat = 15
