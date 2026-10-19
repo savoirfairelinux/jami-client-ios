@@ -28,7 +28,6 @@ enum ConversationType: Int {
     case adminInvitesOnly = 1
     case invitesOnly = 2
     case publicChat = 3
-    case nonSwarm = 100
     case sip = 101
 
     init?(daemonMode: String) {
@@ -179,7 +178,7 @@ struct ConversationInfo {
 
     var isCoredialog: Bool {
         if self.participants.count > 2 { return false }
-        return self.type == .nonSwarm || self.type == .oneToOne || self.type == .sip
+        return self.type == .oneToOne || self.type == .sip
     }
 
     static func parseType(from info: [String: String]) -> ConversationType {
@@ -421,16 +420,12 @@ class ConversationModel: Equatable {
             .contains(participant)
     }
 
-    func getConversationURI() -> String? {
-        if self.type == .nonSwarm {
-            guard let jamiId = self.getParticipants().first?.jamiId else { return nil }
-            return "jami:" + jamiId
-        }
+    func getConversationURI() -> String {
         return "swarm:" + self.id
     }
 
     func isSwarm() -> Bool {
-        return self.type != .nonSwarm && self.type != .sip
+        return self.type != .sip
     }
 
     func isSip() -> Bool {

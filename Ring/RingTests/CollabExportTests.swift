@@ -53,9 +53,9 @@ class CollabExportTests: XCTestCase {
             withVideoService: VideoService(),
             withAudioService: AudioService(),
             withDataTransferService: DataTransferService(
-                withDataTransferAdapter: DataTransferAdapter(), dbManager: dbManager),
+                withDataTransferAdapter: DataTransferAdapter()),
             withProfileService: profileService,
-            withLocationSharingService: LocationSharingService(dbManager: dbManager),
+            withLocationSharingService: LocationSharingService(),
             withRequestsService: RequestsService(withRequestsAdapter: RequestsAdapter()),
             withSystemService: SystemService(withSystemAdapter: SystemAdapter()),
             withPeerSharingService: TestPeerSharingFactory.createService(),

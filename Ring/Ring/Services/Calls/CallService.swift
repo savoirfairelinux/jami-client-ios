@@ -388,7 +388,6 @@ final class CallService {
         event.addEventInput(.content, value: content)
         event.addEventInput(.peerUri, value: fromUri.filterOutHost())
         event.addEventInput(.accountId, value: call.accountId)
-        event.addEventInput(.name, value: call.bestName)
         responseStream.onNext(event)
     }
 

@@ -42,12 +42,10 @@ import SwiftyBeaver
 
 enum DataAccessError: Error {
     case datastoreConnectionError
-    case databaseMigrationError
     case databaseError
 }
 
 final class DBContainer {
-    var jamiDB: Connection?
     private var connections = [String: Connection?]()
     var connectionsSemaphore = DispatchSemaphore(value: 1)
     private let log = SwiftyBeaver.self

@@ -519,24 +519,10 @@ final class ConversationStore {
                                for transferId: String,
                                conversationId: String,
                                interactionId: String,
-                               accountId: String,
-                               to jamiId: String) {
+                               accountId: String) {
         dispatchPrecondition(condition: .onQueue(queue))
-        let foundRecord = conversationId.isEmpty
-            ? self.recordForParticipant(jamiId: jamiId, accountId: accountId)
-            : self.record(id: conversationId, accountId: accountId)
-        guard let record = foundRecord else { return }
+        guard let record = self.record(id: conversationId, accountId: accountId) else { return }
         record.transferStatusUpdated(status: transferStatus, messageId: interactionId, transferId: transferId)
-        /// for non swarm conversationId is empty. Update status in db
-        if !record.conversation.isSwarm() {
-            self.dbManager
-                .updateTransferStatus(daemonID: String(transferId),
-                                      withStatus: transferStatus,
-                                      accountId: accountId)
-                .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
-                .subscribe()
-                .disposed(by: self.disposeBag)
-        }
     }
 
     // MARK: ordering
@@ -612,7 +598,7 @@ final class ConversationStore {
             existing.reconcile(with: stored)
             return existing
         }
-        var conversationInfo = ConversationInfo(type: stored.type)
+        var conversationInfo = ConversationInfo(type: .sip)
         conversationInfo.participants = [ConversationParticipant(jamiId: stored.participantUri.hash ?? "", isLocal: false)]
         conversationInfo.hash = stored.participantUri.hash ?? ""
         let record = ConversationRecord(id: stored.id, accountId: stored.accountId, info: conversationInfo)
