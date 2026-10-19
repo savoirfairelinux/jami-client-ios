@@ -78,38 +78,8 @@ struct MessageRowView: View {
             Group {
                 if model.centeredMessage {
                     centeredEvent()
-                } else if model.incoming {
-                    HStack(alignment: .messageBubbleBottom) {
-                        if model.reservesAvatarSlot {
-                            Spacer()
-                                .frame(width: 10)
-                            avatarSlot()
-                            Spacer()
-                                .frame(width: 10)
-                        } else {
-                            Spacer()
-                                .frame(width: Layout.oneToOneLeadingSpace)
-                        }
-                        MessageStackView(messageModel: messageModel, model: messageModel.stackViewModel, onLongPress: onLongPress, showReactionsView: showReactionsView)
-                    }.padding(.trailing, 50)
                 } else {
-                    HStack(alignment: .messageBubbleBottom, spacing: 2) {
-                        Spacer()
-                        MessageStackView(messageModel: messageModel, model: messageModel.stackViewModel, onLongPress: onLongPress, showReactionsView: showReactionsView)
-                        if model.showReciveIndicator {
-                            Image("messageSentIndicator")
-                                .resizable()
-                                .frame(width: 13, height: 13)
-                        } else if model.showSentIndicator {
-                            Circle()
-                                .strokeBorder(Color.gray, lineWidth: 1)
-                                .frame(width: 12, height: 12)
-                        } else {
-                            Spacer()
-                                .frame(width: 13, height: 13)
-
-                        }
-                    }.padding(.leading, 50)
+                    bubbleRow()
                 }
             }
             .padding(.top, model.topSpace)
@@ -132,6 +102,45 @@ struct MessageRowView: View {
         }
         .padding(.bottom, model.bottomSpace)
         .padding(.horizontal, 5)
+    }
+
+    private func bubbleRow() -> some View {
+        HStack(alignment: .messageBubbleBottom, spacing: 0) {
+            if model.incoming && model.reservesAvatarSlot {
+                avatarSlot()
+                    .padding(.horizontal, Layout.avatarHorizontalPadding)
+            }
+            MessageStackView(messageModel: messageModel, model: messageModel.stackViewModel, onLongPress: onLongPress, showReactionsView: showReactionsView)
+            if !model.incoming {
+                sentStatus()
+                    .padding(.leading, Layout.sentStatusSpacing)
+            }
+        }
+        .padding(.leading, bubbleRowLeadingInset)
+        .padding(.trailing, model.incoming ? Layout.oppositeSideInset : 0)
+    }
+
+    private var bubbleRowLeadingInset: CGFloat {
+        if !model.incoming {
+            return Layout.oppositeSideInset
+        }
+        return model.reservesAvatarSlot ? 0 : Layout.oneToOneLeadingSpace
+    }
+
+    @ViewBuilder
+    private func sentStatus() -> some View {
+        if model.showReciveIndicator {
+            Image("messageSentIndicator")
+                .resizable()
+                .frame(width: 13, height: 13)
+        } else if model.showSentIndicator {
+            Circle()
+                .strokeBorder(Color.gray, lineWidth: 1)
+                .frame(width: 12, height: 12)
+        } else {
+            Color.clear
+                .frame(width: 13, height: 13)
+        }
     }
 
     @ViewBuilder
@@ -186,6 +195,9 @@ struct MessageRowView: View {
 
     private enum Layout {
         static let oneToOneLeadingSpace: CGFloat = 12
+        static let avatarHorizontalPadding: CGFloat = 10
+        static let oppositeSideInset: CGFloat = 50
+        static let sentStatusSpacing: CGFloat = 2
         static let centeredMessageMargin: CGFloat = 30
         static let daySeparatorHorizontalPadding: CGFloat = 10
         static let daySeparatorVerticalPadding: CGFloat = 4
