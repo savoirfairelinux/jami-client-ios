@@ -250,6 +250,8 @@ class ConversationViewModel: Stateable, ObservableObject {
             // if in call send sip msg
             if let call = self.callService.call(participantId: participantJamiId, accountId: conversation.accountId) {
                 self.callService.sendInCallMessage(callId: call, message: content, accountId: account)
+                self.conversationsService.saveOutgoingNonSwarmMessage(withId: "", content: content,
+                                                                      from: account, jamiId: participantJamiId)
                 return
             }
             self.conversationsService

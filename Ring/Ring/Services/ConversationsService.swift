@@ -353,30 +353,29 @@ class ConversationsService {
             guard let self = self else { return Disposables.create { } }
             let contentDict = [self.textPlainMIMEType: content]
             let messageId = String(self.conversationsAdapter.sendMessage(withContent: contentDict, withAccountId: senderAccount.id, to: jamiId, flag: 0))
-            let accountHelper = AccountModelHelper(withAccount: senderAccount)
-            let contactUri = JamiURI.init(schema: .sip, infoHash: jamiId, account: senderAccount)
-            guard let stringUri = contactUri.uriString else {
-                completable(.completed)
-                return Disposables.create {}
-            }
-            if let uri = accountHelper.uri {
-                let message = self.createMessage(withId: messageId,
-                                                 withContent: content,
-                                                 byAuthor: uri,
-                                                 type: .text,
-                                                 incoming: false)
-                self.saveMessage(message: message,
-                                 toConversationWith: stringUri,
-                                 toAccountId: senderAccount.id,
-                                 shouldRefreshConversations: true)
-                    .subscribe(onCompleted: { [weak self] in
-                        self?.log.debug("Message saved")
-                    })
-                    .disposed(by: self.disposeBag)
-            }
+            self.saveOutgoingNonSwarmMessage(withId: messageId, content: content, from: senderAccount, jamiId: jamiId)
             completable(.completed)
             return Disposables.create {}
         })
+    }
+
+    func saveOutgoingNonSwarmMessage(withId messageId: String, content: String, from senderAccount: AccountModel, jamiId: String) {
+        let accountHelper = AccountModelHelper(withAccount: senderAccount)
+        let contactUri = JamiURI.init(schema: .sip, infoHash: jamiId, account: senderAccount)
+        guard let stringUri = contactUri.uriString, let uri = accountHelper.uri else { return }
+        let message = self.createMessage(withId: messageId,
+                                         withContent: content,
+                                         byAuthor: uri,
+                                         type: .text,
+                                         incoming: false)
+        self.saveMessage(message: message,
+                         toConversationWith: stringUri,
+                         toAccountId: senderAccount.id,
+                         shouldRefreshConversations: true)
+            .subscribe(onCompleted: { [weak self] in
+                self?.log.debug("Message saved")
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func createMessage(withId messageId: String,
