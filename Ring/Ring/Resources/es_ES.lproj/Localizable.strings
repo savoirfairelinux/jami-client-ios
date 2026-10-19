@@ -143,7 +143,6 @@
 "contactPicker.contacts" = "Contactos";
 
 // Smartlist
-"smartlist.yesterday" = "Ayer";
 "smartlist.results" = "Búsqueda de Jami";
 "smartlist.jamsResults" = "Búsqueda de organizaciones";
 "smartlist.conversations" = "Conversaciones";
@@ -663,13 +662,15 @@
 "accessibility.messageBubbleEdited" = "Editado";
 "accessibility.messageBubbleRead" = "Read";
 "accessibility.messageBubbleUnread" = "Unread";
-"accessibility.textNotAvailable" = "Empty text message received on %@. This might not have been sent correctly.";
-"accessibility.fileTransferNoName" = "File received on %@, name not available";
+"accessibility.messageReceivedDate" = "Received";
+"accessibility.messageSentDate" = "Sent";
+"accessibility.textEmpty" = "Empty text message received. This might not have been sent correctly.";
+"accessibility.fileTransferUnnamed" = "File received, name not available";
 "accessibility.inReply" = "In reply to message";
-"accessibility.text.receivedOn" = "%1@, message received on %2@";
-"accessibility.text.sentOn" = "%1@, message sent on %2@";
-"accessibility.fileTransfer.receivedOn" = "File: %1@ , received on %2@";
-"accessibility.fileTransfer.sentOn" = "File: %1@, sent on %2@";
+"accessibility.text.received" = "%@, message received";
+"accessibility.text.sent" = "%@, message sent";
+"accessibility.fileTransfer.received" = "File: %@, received";
+"accessibility.fileTransfer.sent" = "File: %@, sent";
 "accessibility.call.lasted" = "Lasted %@";
 "accessibility.calls.default.toggleAudio" = "Silenciar micrófono";
 "accessibility.calls.default.toggleVideo" = "Iniciar cámara";
@@ -805,7 +806,7 @@
 "collab.italic" = "Cursiva";
 "collab.underline" = "Subrayado";
 "collab.strikethrough" = "Tachado";
-"collab.textFormat" = "Text format";
+"collab.textFormat" = "Formato de texto";
 "collab.heading" = "Encabezado%d";
 "collab.bulletList" = "Lista de bolos";
 "collab.orderedList" = "Lista numerada";
@@ -817,13 +818,13 @@
 "collab.clearFormat" = "Formato limpio";
 "collab.undo" = "Deshacer";
 "collab.redo" = "Rehacer";
-"collab.paragraphStyle" = "Style";
-"collab.normalText" = "Normal text";
-"collab.font" = "Font";
-"collab.defaultFont" = "Default font";
-"collab.unavailableFont" = "Unavailable font";
+"collab.paragraphStyle" = "Estilo";
+"collab.normalText" = "Texto normal";
+"collab.font" = "Fuente";
+"collab.defaultFont" = "Fuente por defecto";
+"collab.unavailableFont" = "Fuente no disponible";
 "collab.fontSize" = "Tamaño";
-"collab.defaultSize" = "Default size";
+"collab.defaultSize" = "Tamaño por defecto";
 "collab.alignment" = "Ajuste del párrafo";
 "collab.remove" = "Eliminar";
 "collab.open" = "Abrir";
@@ -846,3 +847,4 @@
 "collab.documentRemovedMessage" = "\"%@\" retirado por su autor.";
 "collab.documentRemovedLocally" = "Documento eliminado de este dispositivo";
 "collab.documentRemovedLocallyMessage" = "\"%@\" ya no está en este dispositivo. Al abrirlo otra vez se descarga de nuevo.";
+"collab.documentShared" = "New document: %@";

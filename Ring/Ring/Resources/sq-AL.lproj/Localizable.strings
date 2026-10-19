@@ -143,7 +143,6 @@
 "contactPicker.contacts" = "Kontakte";
 
 // Smartlist
-"smartlist.yesterday" = "Dje";
 "smartlist.results" = "Jami search";
 "smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "Biseda";
@@ -663,13 +662,15 @@
 "accessibility.messageBubbleEdited" = "U përpunua";
 "accessibility.messageBubbleRead" = "Të lexuar";
 "accessibility.messageBubbleUnread" = "Të palexuar";
-"accessibility.textNotAvailable" = "U mor mesazh tekst i zbrazët te %@. Ky mund mos jetë dërguar saktë.";
-"accessibility.fileTransferNoName" = "U mor kartelë te %@, s’ka emër";
+"accessibility.messageReceivedDate" = "Received";
+"accessibility.messageSentDate" = "Sent";
+"accessibility.textEmpty" = "Empty text message received. This might not have been sent correctly.";
+"accessibility.fileTransferUnnamed" = "File received, name not available";
 "accessibility.inReply" = "Në përgjigje të mesazhit";
-"accessibility.text.receivedOn" = "%1@, u mor mesazh te %2@";
-"accessibility.text.sentOn" = "%1@, u dërgua mesazh te %2@";
-"accessibility.fileTransfer.receivedOn" = "Kartelë: %1@ , marrë te %2@";
-"accessibility.fileTransfer.sentOn" = "Kartelë: %1@, dërguar te %2@";
+"accessibility.text.received" = "%@, message received";
+"accessibility.text.sent" = "%@, message sent";
+"accessibility.fileTransfer.received" = "File: %@, received";
+"accessibility.fileTransfer.sent" = "File: %@, sent";
 "accessibility.call.lasted" = "Zgjati %@";
 "accessibility.calls.default.toggleAudio" = "Heshtoje mikrofonin";
 "accessibility.calls.default.toggleVideo" = "Vëre kamerë në punë";
@@ -846,3 +847,4 @@
 "collab.documentRemovedMessage" = "\"%@\" was removed by its author.";
 "collab.documentRemovedLocally" = "Document removed from this device";
 "collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";
+"collab.documentShared" = "New document: %@";

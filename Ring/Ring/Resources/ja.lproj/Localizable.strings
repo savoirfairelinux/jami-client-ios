@@ -143,7 +143,6 @@
 "contactPicker.contacts" = "連絡先";
 
 // Smartlist
-"smartlist.yesterday" = "昨日";
 "smartlist.results" = "Jami search";
 "smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "会話";
@@ -663,13 +662,15 @@
 "accessibility.messageBubbleEdited" = "編集";
 "accessibility.messageBubbleRead" = "既読";
 "accessibility.messageBubbleUnread" = "未読";
-"accessibility.textNotAvailable" = "%@ に空のテキストメッセージを受信しました。正しく送信されなかった可能性があります。";
-"accessibility.fileTransferNoName" = "%@ にファイルを受信、名前は利用できません";
+"accessibility.messageReceivedDate" = "Received";
+"accessibility.messageSentDate" = "Sent";
+"accessibility.textEmpty" = "Empty text message received. This might not have been sent correctly.";
+"accessibility.fileTransferUnnamed" = "File received, name not available";
 "accessibility.inReply" = "メッセージへの返信";
-"accessibility.text.receivedOn" = "%1@、%2@ にメッセージを受信";
-"accessibility.text.sentOn" = "%1@、%2@ にメッセージを送信";
-"accessibility.fileTransfer.receivedOn" = "ファイル: %1@、%2@ に受信";
-"accessibility.fileTransfer.sentOn" = "ファイル: %1@、%2@ に送信";
+"accessibility.text.received" = "%@, message received";
+"accessibility.text.sent" = "%@, message sent";
+"accessibility.fileTransfer.received" = "File: %@, received";
+"accessibility.fileTransfer.sent" = "File: %@, sent";
 "accessibility.call.lasted" = "通話時間 %@";
 "accessibility.calls.default.toggleAudio" = "マイクをミュート";
 "accessibility.calls.default.toggleVideo" = "カメラを開始";
@@ -846,3 +847,4 @@
 "collab.documentRemovedMessage" = "\"%@\" was removed by its author.";
 "collab.documentRemovedLocally" = "Document removed from this device";
 "collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";
+"collab.documentShared" = "New document: %@";

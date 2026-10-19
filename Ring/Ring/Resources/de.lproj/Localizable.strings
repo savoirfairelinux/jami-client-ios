@@ -143,9 +143,8 @@
 "contactPicker.contacts" = "Kontakte";
 
 // Smartlist
-"smartlist.yesterday" = "Gestern";
-"smartlist.results" = "Jami search";
-"smartlist.jamsResults" = "Organization search";
+"smartlist.results" = "Jami-Suche";
+"smartlist.jamsResults" = "Organisationssuche";
 "smartlist.conversations" = "Unterhaltungen";
 "smartlist.conversationsSearchHint" = "Sie haben noch keine Unterhaltungen.";
 "smartlist.publicDirectoryHint" = "Personen auf Jami außerhalb Ihrer Kontakte.";
@@ -154,7 +153,7 @@
 "smartlist.noConversationsFound" = "Keine Unterhaltungen entsprechen der Suche.";
 "smartlist.newContact" = "Neuer Kontakt";
 "smartlist.newGroup" = "Neue Gruppe";
-"smartlist.accounts" = "Your accounts";
+"smartlist.accounts" = "Ihre Konten";
 "smartlist.invitationReceived" = "Einladungen erhalten";
 "smartlist.noResults" = "Keine Ergebnisse";
 "smartlist.noConversation" = "Keine Unterhaltungen";
@@ -585,7 +584,7 @@
 "generalSettings.fileTransfer" = "Dateiübertragung";
 "generalSettings.locationSharing" = "Standortfreigabe";
 "generalSettings.automaticAcceptIncomingFiles" = "Eingehende Dateien automatisch annehmen";
-"generalSettings.acceptTransferLimit" = "Maximum automatic download size";
+"generalSettings.acceptTransferLimit" = "Maximale Größe für automatische Downloads";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unbegrenzt)";
 "generalSettings.limitLocationSharingDuration" = "Dauer der Standortfreigabe begrenzen";
 "generalSettings.locationSharingDuration" = "Dauer der Positionsfreigabe";
@@ -663,13 +662,15 @@
 "accessibility.messageBubbleEdited" = "Bearbeitet";
 "accessibility.messageBubbleRead" = "Gelesen";
 "accessibility.messageBubbleUnread" = "Ungelesen";
-"accessibility.textNotAvailable" = "Leere Textnachricht auf %@ erhalten. Diese wurde möglicherweise nicht korrekt gesendet.";
-"accessibility.fileTransferNoName" = "Datei empfangen am %@, Name nicht verfügbar";
+"accessibility.messageReceivedDate" = "Received";
+"accessibility.messageSentDate" = "Sent";
+"accessibility.textEmpty" = "Empty text message received. This might not have been sent correctly.";
+"accessibility.fileTransferUnnamed" = "File received, name not available";
 "accessibility.inReply" = "Als Antwort auf die Nachricht";
-"accessibility.text.receivedOn" = "%1@, Nachricht erhalten am %2@";
-"accessibility.text.sentOn" = "%1@, Nachricht gesendet am %2@";
-"accessibility.fileTransfer.receivedOn" = "Datei: %1@ , empfangen am %2@";
-"accessibility.fileTransfer.sentOn" = "Datei: %1@, gesendet am %2@";
+"accessibility.text.received" = "%@, message received";
+"accessibility.text.sent" = "%@, message sent";
+"accessibility.fileTransfer.received" = "File: %@, received";
+"accessibility.fileTransfer.sent" = "File: %@, sent";
 "accessibility.call.lasted" = "Dauerte %@";
 "accessibility.calls.default.toggleAudio" = "Mikrofon stummschalten";
 "accessibility.calls.default.toggleVideo" = "Kamera starten";
@@ -805,7 +806,7 @@
 "collab.italic" = "Kursiv";
 "collab.underline" = "Unterstreichen";
 "collab.strikethrough" = "Durchgestrichen";
-"collab.textFormat" = "Text format";
+"collab.textFormat" = "Textformat";
 "collab.heading" = "Überschrift %d";
 "collab.bulletList" = "Aufzählungsliste";
 "collab.orderedList" = "Nummerierte Liste";
@@ -817,13 +818,13 @@
 "collab.clearFormat" = "Formatierung löschen";
 "collab.undo" = "Rückgängig";
 "collab.redo" = "Rückgängig";
-"collab.paragraphStyle" = "Style";
-"collab.normalText" = "Normal text";
-"collab.font" = "Font";
-"collab.defaultFont" = "Default font";
-"collab.unavailableFont" = "Unavailable font";
+"collab.paragraphStyle" = "Stil";
+"collab.normalText" = "Normaler Text";
+"collab.font" = "Schrift";
+"collab.defaultFont" = "Standardschrift";
+"collab.unavailableFont" = "Nicht verfügbare Schrift";
 "collab.fontSize" = "Größe";
-"collab.defaultSize" = "Default size";
+"collab.defaultSize" = "Standardgröße";
 "collab.alignment" = "Absatzausrichtung";
 "collab.remove" = "Entfernen";
 "collab.open" = "Öffnen";
@@ -846,3 +847,4 @@
 "collab.documentRemovedMessage" = "\"%@\" wurde von seinem Autor entfernt.";
 "collab.documentRemovedLocally" = "Dokument von diesem Gerät entfernt";
 "collab.documentRemovedLocallyMessage" = "\"%@\" ist nicht mehr auf diesem Gerät. Beim erneuten Öffnen wird es wieder heruntergeladen.";
+"collab.documentShared" = "New document: %@";

@@ -143,9 +143,8 @@
 "contactPicker.contacts" = "Yhteystiedot";
 
 // Smartlist
-"smartlist.yesterday" = "Eilen";
-"smartlist.results" = "Jami search";
-"smartlist.jamsResults" = "Organization search";
+"smartlist.results" = "Jami haku";
+"smartlist.jamsResults" = "Organisaatiohaku";
 "smartlist.conversations" = "Keskustelu";
 "smartlist.conversationsSearchHint" = "Sinulla ei ole vielä keskusteluja.";
 "smartlist.publicDirectoryHint" = "Henkilöt Jami-yhteystietojen ulkopuolella.";
@@ -154,7 +153,7 @@
 "smartlist.noConversationsFound" = "Hakua vastaavaa keskustelua ei löytynyt.";
 "smartlist.newContact" = "Uusi henkilö";
 "smartlist.newGroup" = "Uusi ryhmä";
-"smartlist.accounts" = "Your accounts";
+"smartlist.accounts" = "Sinun tilit";
 "smartlist.invitationReceived" = "Kutsut vastaanotettu";
 "smartlist.noResults" = "Ei tuloksia";
 "smartlist.noConversation" = "Ei keskusteluja";
@@ -585,7 +584,7 @@
 "generalSettings.fileTransfer" = "Tiedostonsiirto";
 "generalSettings.locationSharing" = "Sijainnin jakaminen";
 "generalSettings.automaticAcceptIncomingFiles" = "Hyväksy autom. saapuvat tiedostot";
-"generalSettings.acceptTransferLimit" = "Maximum automatic download size";
+"generalSettings.acceptTransferLimit" = "Latauksen autom. enimmäiskoko";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = rajoittamaton)";
 "generalSettings.limitLocationSharingDuration" = "Rajoita sijainnin jakamisen kestoa";
 "generalSettings.locationSharingDuration" = "Sijainnin jakamisen kesto";
@@ -663,13 +662,15 @@
 "accessibility.messageBubbleEdited" = "Muokattu";
 "accessibility.messageBubbleRead" = "Luettu";
 "accessibility.messageBubbleUnread" = "Lukematon";
-"accessibility.textNotAvailable" = "Tyhjä viesti vastaanotettu %@. Tätä ei ehkä lähetetty oikein.";
-"accessibility.fileTransferNoName" = "Tiedosto vastaanotettu %@, nimeä ei ole saatavilla";
+"accessibility.messageReceivedDate" = "Received";
+"accessibility.messageSentDate" = "Sent";
+"accessibility.textEmpty" = "Empty text message received. This might not have been sent correctly.";
+"accessibility.fileTransferUnnamed" = "File received, name not available";
 "accessibility.inReply" = "Vastauksena viestiin";
-"accessibility.text.receivedOn" = "%1@, viesti saapui %2@";
-"accessibility.text.sentOn" = "%1@, viesti lähetetty %2@";
-"accessibility.fileTransfer.receivedOn" = "Tiedosto: %1@ , vastaanotettu %2@";
-"accessibility.fileTransfer.sentOn" = "Tiedosto: %1@, lähetetty %2@";
+"accessibility.text.received" = "%@, message received";
+"accessibility.text.sent" = "%@, message sent";
+"accessibility.fileTransfer.received" = "File: %@, received";
+"accessibility.fileTransfer.sent" = "File: %@, sent";
 "accessibility.call.lasted" = "Kesto %@";
 "accessibility.calls.default.toggleAudio" = "Mykistä mikrofoni";
 "accessibility.calls.default.toggleVideo" = "Avaa kamera";
@@ -805,7 +806,7 @@
 "collab.italic" = "Kursivointi";
 "collab.underline" = "Alleviivaa";
 "collab.strikethrough" = "Yliviivattu";
-"collab.textFormat" = "Text format";
+"collab.textFormat" = "Tekstiformaatti";
 "collab.heading" = "Otsikko %d";
 "collab.bulletList" = "Luettelomerkki";
 "collab.orderedList" = "Numeroitu";
@@ -817,13 +818,13 @@
 "collab.clearFormat" = "Tyhjennä muotoilu";
 "collab.undo" = "Peru";
 "collab.redo" = "Tee uudelleen";
-"collab.paragraphStyle" = "Style";
-"collab.normalText" = "Normal text";
-"collab.font" = "Font";
-"collab.defaultFont" = "Default font";
-"collab.unavailableFont" = "Unavailable font";
+"collab.paragraphStyle" = "Tyyli";
+"collab.normalText" = "Normaali teksti";
+"collab.font" = "Fontti";
+"collab.defaultFont" = "Oletusfontti";
+"collab.unavailableFont" = "Ei fonttia";
 "collab.fontSize" = "Koko";
-"collab.defaultSize" = "Default size";
+"collab.defaultSize" = "Oletuskoko";
 "collab.alignment" = "Kappaleen tasaus";
 "collab.remove" = "Poista";
 "collab.open" = "Avaa";
@@ -846,3 +847,4 @@
 "collab.documentRemovedMessage" = "\"%@\" poistettiin tekijän toimesta.";
 "collab.documentRemovedLocally" = "Asiakirja poistettiin tästä laitteesta";
 "collab.documentRemovedLocallyMessage" = "Tiedosto \"%@\" ei ole enää tällä laitteella. Sen avaaminen lataa sen takaisin.";
+"collab.documentShared" = "New document: %@";

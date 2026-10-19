@@ -143,7 +143,6 @@
 "contactPicker.contacts" = "Kontakter";
 
 // Smartlist
-"smartlist.yesterday" = "I går";
 "smartlist.results" = "Jami search";
 "smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "Samtaler";
@@ -663,13 +662,15 @@
 "accessibility.messageBubbleEdited" = "Udfærdiget";
 "accessibility.messageBubbleRead" = "Læst";
 "accessibility.messageBubbleUnread" = "Ulæst";
-"accessibility.textNotAvailable" = "Tom tekstbesked modtaget %@. Den er muligvis ikke sendt korrekt.";
-"accessibility.fileTransferNoName" = "Fil modtaget %@, navn ikke tilgængeligt";
+"accessibility.messageReceivedDate" = "Received";
+"accessibility.messageSentDate" = "Sent";
+"accessibility.textEmpty" = "Empty text message received. This might not have been sent correctly.";
+"accessibility.fileTransferUnnamed" = "File received, name not available";
 "accessibility.inReply" = "Som svar på besked";
-"accessibility.text.receivedOn" = "%1@, besked modtaget %2@";
-"accessibility.text.sentOn" = "%1@, besked sendt %2@";
-"accessibility.fileTransfer.receivedOn" = "Fil: %1@, modtaget %2@";
-"accessibility.fileTransfer.sentOn" = "Fil: %1@, sendt %2@";
+"accessibility.text.received" = "%@, message received";
+"accessibility.text.sent" = "%@, message sent";
+"accessibility.fileTransfer.received" = "File: %@, received";
+"accessibility.fileTransfer.sent" = "File: %@, sent";
 "accessibility.call.lasted" = "Varede %@";
 "accessibility.calls.default.toggleAudio" = "Sluk mikrofon";
 "accessibility.calls.default.toggleVideo" = "Start kamera";
@@ -846,3 +847,4 @@
 "collab.documentRemovedMessage" = "\"%@\" was removed by its author.";
 "collab.documentRemovedLocally" = "Document removed from this device";
 "collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";
+"collab.documentShared" = "New document: %@";

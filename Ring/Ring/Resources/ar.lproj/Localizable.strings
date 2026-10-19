@@ -143,7 +143,6 @@
 "contactPicker.contacts" = "جهات الاتصال";
 
 // Smartlist
-"smartlist.yesterday" = "البارحة";
 "smartlist.results" = "Jami search";
 "smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "محادثات";
@@ -663,13 +662,15 @@
 "accessibility.messageBubbleEdited" = "تحرير";
 "accessibility.messageBubbleRead" = "مقروءة";
 "accessibility.messageBubbleUnread" = "غير مقروءة";
-"accessibility.textNotAvailable" = "تم استلام رسالة نصية فارغة في %@. قد لا تكون قد أُرسلت بشكل صحيح.";
-"accessibility.fileTransferNoName" = "تم استلام ملف في %@، الاسم غير متوفر";
+"accessibility.messageReceivedDate" = "Received";
+"accessibility.messageSentDate" = "Sent";
+"accessibility.textEmpty" = "Empty text message received. This might not have been sent correctly.";
+"accessibility.fileTransferUnnamed" = "File received, name not available";
 "accessibility.inReply" = "ردًا على رسالة";
-"accessibility.text.receivedOn" = "%1@، تم استلام الرسالة في %2@";
-"accessibility.text.sentOn" = "%1@، تم إرسال الرسالة في %2@";
-"accessibility.fileTransfer.receivedOn" = "ملف: %1@، تم استلامه في %2@";
-"accessibility.fileTransfer.sentOn" = "ملف: %1@، تم إرساله في %2@";
+"accessibility.text.received" = "%@, message received";
+"accessibility.text.sent" = "%@, message sent";
+"accessibility.fileTransfer.received" = "File: %@, received";
+"accessibility.fileTransfer.sent" = "File: %@, sent";
 "accessibility.call.lasted" = "استمرت %@";
 "accessibility.calls.default.toggleAudio" = "كتم ميكروفون";
 "accessibility.calls.default.toggleVideo" = "بدء الكاميرا";
@@ -822,7 +823,7 @@
 "collab.font" = "Font";
 "collab.defaultFont" = "Default font";
 "collab.unavailableFont" = "Unavailable font";
-"collab.fontSize" = "Size";
+"collab.fontSize" = "حجم";
 "collab.defaultSize" = "Default size";
 "collab.alignment" = "Paragraph alignment";
 "collab.remove" = "احذف";
@@ -846,3 +847,4 @@
 "collab.documentRemovedMessage" = "\"%@\" was removed by its author.";
 "collab.documentRemovedLocally" = "Document removed from this device";
 "collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";
+"collab.documentShared" = "New document: %@";

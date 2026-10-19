@@ -143,7 +143,6 @@
 "contactPicker.contacts" = "연락처";
 
 // Smartlist
-"smartlist.yesterday" = "어제";
 "smartlist.results" = "Jami search";
 "smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "대화";
@@ -663,13 +662,15 @@
 "accessibility.messageBubbleEdited" = "편집";
 "accessibility.messageBubbleRead" = "읽음";
 "accessibility.messageBubbleUnread" = "읽지 않음";
-"accessibility.textNotAvailable" = "%@에 빈 텍스트 메시지가 수신되었습니다. 올바르게 전송되지 않았을 수 있습니다.";
-"accessibility.fileTransferNoName" = "%@에 파일 수신됨, 이름을 사용할 수 없음";
+"accessibility.messageReceivedDate" = "Received";
+"accessibility.messageSentDate" = "Sent";
+"accessibility.textEmpty" = "Empty text message received. This might not have been sent correctly.";
+"accessibility.fileTransferUnnamed" = "File received, name not available";
 "accessibility.inReply" = "메시지에 대한 답장";
-"accessibility.text.receivedOn" = "%1@, %2@에 메시지 수신됨";
-"accessibility.text.sentOn" = "%1@, %2@에 메시지 전송됨";
-"accessibility.fileTransfer.receivedOn" = "파일: %1@, %2@에 수신됨";
-"accessibility.fileTransfer.sentOn" = "파일: %1@, %2@에 전송됨";
+"accessibility.text.received" = "%@, message received";
+"accessibility.text.sent" = "%@, message sent";
+"accessibility.fileTransfer.received" = "File: %@, received";
+"accessibility.fileTransfer.sent" = "File: %@, sent";
 "accessibility.call.lasted" = "%@ 동안 지속됨";
 "accessibility.calls.default.toggleAudio" = "무음 마이크";
 "accessibility.calls.default.toggleVideo" = "카메라 시작";
@@ -846,3 +847,4 @@
 "collab.documentRemovedMessage" = "\"%@\" was removed by its author.";
 "collab.documentRemovedLocally" = "Document removed from this device";
 "collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";
+"collab.documentShared" = "New document: %@";

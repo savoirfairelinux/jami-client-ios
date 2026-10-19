@@ -143,7 +143,6 @@
 "contactPicker.contacts" = "Контакти";
 
 // Smartlist
-"smartlist.yesterday" = "Јуче";
 "smartlist.results" = "Jami search";
 "smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "Разговори";
@@ -663,13 +662,15 @@
 "accessibility.messageBubbleEdited" = "Редактирана";
 "accessibility.messageBubbleRead" = "Прочитано";
 "accessibility.messageBubbleUnread" = "Непрочитано";
-"accessibility.textNotAvailable" = "Празна текстуална порука примљена %@. Можда није исправно послата.";
-"accessibility.fileTransferNoName" = "Датотека примљена %@, име није доступно";
+"accessibility.messageReceivedDate" = "Received";
+"accessibility.messageSentDate" = "Sent";
+"accessibility.textEmpty" = "Empty text message received. This might not have been sent correctly.";
+"accessibility.fileTransferUnnamed" = "File received, name not available";
 "accessibility.inReply" = "Као одговор на поруку";
-"accessibility.text.receivedOn" = "%1@, порука примљена %2@";
-"accessibility.text.sentOn" = "%1@, порука послата %2@";
-"accessibility.fileTransfer.receivedOn" = "Датотека: %1@ , примљена %2@";
-"accessibility.fileTransfer.sentOn" = "Датотека: %1@, послата %2@";
+"accessibility.text.received" = "%@, message received";
+"accessibility.text.sent" = "%@, message sent";
+"accessibility.fileTransfer.received" = "File: %@, received";
+"accessibility.fileTransfer.sent" = "File: %@, sent";
 "accessibility.call.lasted" = "Trajalo %@";
 "accessibility.calls.default.toggleAudio" = "Искључи микрофон";
 "accessibility.calls.default.toggleVideo" = "Укључи камеру";
@@ -846,3 +847,4 @@
 "collab.documentRemovedMessage" = "\"%@\" was removed by its author.";
 "collab.documentRemovedLocally" = "Document removed from this device";
 "collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";
+"collab.documentShared" = "New document: %@";

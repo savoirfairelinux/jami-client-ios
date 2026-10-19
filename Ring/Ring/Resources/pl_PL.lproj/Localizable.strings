@@ -143,7 +143,6 @@
 "contactPicker.contacts" = "Kontakty";
 
 // Smartlist
-"smartlist.yesterday" = "Wczoraj";
 "smartlist.results" = "Jami search";
 "smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "Rozmowy";
@@ -663,13 +662,15 @@
 "accessibility.messageBubbleEdited" = "Edytowany";
 "accessibility.messageBubbleRead" = "Przeczytane";
 "accessibility.messageBubbleUnread" = "Nieprzeczytane";
-"accessibility.textNotAvailable" = "Otrzymano pustą wiadomość %@. Mozliwe, że była niepoprawnie wysłana.";
-"accessibility.fileTransferNoName" = "Plik otrzymany%@, bez nazwy";
+"accessibility.messageReceivedDate" = "Received";
+"accessibility.messageSentDate" = "Sent";
+"accessibility.textEmpty" = "Empty text message received. This might not have been sent correctly.";
+"accessibility.fileTransferUnnamed" = "File received, name not available";
 "accessibility.inReply" = "W odpowiedzi na wiadomość";
-"accessibility.text.receivedOn" = "%1@, wiadomość otrzymana %2@";
-"accessibility.text.sentOn" = "%1@, wiadomość wysłana %2@";
-"accessibility.fileTransfer.receivedOn" = "Plik: %1@ , otrzymany %2@";
-"accessibility.fileTransfer.sentOn" = "Plik: %1@, wysłany %2@";
+"accessibility.text.received" = "%@, message received";
+"accessibility.text.sent" = "%@, message sent";
+"accessibility.fileTransfer.received" = "File: %@, received";
+"accessibility.fileTransfer.sent" = "File: %@, sent";
 "accessibility.call.lasted" = "Trwało %@";
 "accessibility.calls.default.toggleAudio" = "Wycisz mikrofon";
 "accessibility.calls.default.toggleVideo" = "Uruchom kamerę";
@@ -846,3 +847,4 @@
 "collab.documentRemovedMessage" = "\"%@\" was removed by its author.";
 "collab.documentRemovedLocally" = "Document removed from this device";
 "collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";
+"collab.documentShared" = "New document: %@";

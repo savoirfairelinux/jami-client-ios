@@ -143,7 +143,6 @@
 "contactPicker.contacts" = "Adresatai";
 
 // Smartlist
-"smartlist.yesterday" = "Vakar";
 "smartlist.results" = "Jami search";
 "smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "Pokalbiai";
@@ -663,13 +662,15 @@
 "accessibility.messageBubbleEdited" = "Redaguota";
 "accessibility.messageBubbleRead" = "Perskaityta";
 "accessibility.messageBubbleUnread" = "Neperskaityta";
-"accessibility.textNotAvailable" = "%@ gauta tuščia tekstinė žinutė. Ji galėjo būti išsiųsta neteisingai.";
-"accessibility.fileTransferNoName" = "Failas gautas %@, pavadinimas neprieinamas";
+"accessibility.messageReceivedDate" = "Received";
+"accessibility.messageSentDate" = "Sent";
+"accessibility.textEmpty" = "Empty text message received. This might not have been sent correctly.";
+"accessibility.fileTransferUnnamed" = "File received, name not available";
 "accessibility.inReply" = "Atsakant į žinutę";
-"accessibility.text.receivedOn" = "%1@, žinutė gauta %2@";
-"accessibility.text.sentOn" = "%1@, žinutė išsiųsta %2@";
-"accessibility.fileTransfer.receivedOn" = "Failas: %1@, gautas %2@";
-"accessibility.fileTransfer.sentOn" = "Failas: %1@, išsiųstas %2@";
+"accessibility.text.received" = "%@, message received";
+"accessibility.text.sent" = "%@, message sent";
+"accessibility.fileTransfer.received" = "File: %@, received";
+"accessibility.fileTransfer.sent" = "File: %@, sent";
 "accessibility.call.lasted" = "Trukmė: %@";
 "accessibility.calls.default.toggleAudio" = "Išjungti mikrofoną";
 "accessibility.calls.default.toggleVideo" = "Įjungti kamerą";
@@ -846,3 +847,4 @@
 "collab.documentRemovedMessage" = "\"%@\" was removed by its author.";
 "collab.documentRemovedLocally" = "Document removed from this device";
 "collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";
+"collab.documentShared" = "New document: %@";
