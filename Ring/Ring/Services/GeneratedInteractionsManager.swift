@@ -42,6 +42,7 @@ class GeneratedInteractionsManager {
     private func subscribeToCallEvents() {
         self.callService
             .sharedResponseStream
+            .filter({ $0.eventType == ServiceEventType.callEnded })
             .subscribe(onNext: { [weak self] callEvent in
                 guard let self = self else { return }
                 if self.accountService.boothMode() {
@@ -60,7 +61,6 @@ class GeneratedInteractionsManager {
                       let uri = JamiURI.init(schema: .sip, infoHash: jamiId, account: account).uriString else {
                     return
                 }
-                self.conversationService.createSipConversation(uri: uri, accountId: accountID)
 
                 guard let time: Int = callEvent.getEventInput(.callTime) else {
                     return

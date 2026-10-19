@@ -281,10 +281,20 @@ final class ConversationStore {
         self.publishNewConversation(conversationId: conversationId, accountId: accountId, records: &currentRecords)
     }
 
-    func replaceConversations(with storedConversations: [StoredConversation]) {
+    func reloadStoredConversations(accountId: String) {
         dispatchPrecondition(condition: .onQueue(queue))
-        let currentRecords = self.records.value
-        self.records.accept(storedConversations.map { self.makeRecord(from: $0, reusing: currentRecords) })
+        let generation = self.loadGeneration
+        self.dbManager.getConversationsObservable(for: accountId)
+            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
+            .subscribe(onNext: { [weak self] storedConversations in
+                self?.queue.async {
+                    guard let self = self, generation == self.loadGeneration else { return }
+                    let currentRecords = self.records.value
+                    self.records.accept(storedConversations.map { self.makeRecord(from: $0, reusing: currentRecords) })
+                    self.sortIfNeeded()
+                }
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func removeConversation(_ conversation: ConversationModel) {
