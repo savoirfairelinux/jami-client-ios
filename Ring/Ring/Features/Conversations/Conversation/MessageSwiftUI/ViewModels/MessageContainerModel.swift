@@ -68,12 +68,22 @@ class MessageContainerModel: Identifiable, Equatable {
         }
     }
 
-    var shouldDisplayContactInfo: Bool = false {
+    var shouldDisplayName: Bool = false {
         didSet {
+            guard oldValue != shouldDisplayName else { return }
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
-                self.stackViewModel.shouldDisplayName = self.shouldDisplayContactInfo
-                self.messageRow.shouldDisplayAavatar = self.shouldDisplayContactInfo
+                self.stackViewModel.shouldDisplayName = self.shouldDisplayName
+            }
+        }
+    }
+
+    var shouldDisplayAvatar: Bool = false {
+        didSet {
+            guard oldValue != shouldDisplayAvatar else { return }
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.messageRow.shouldDisplayAavatar = self.shouldDisplayAvatar
             }
         }
     }

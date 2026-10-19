@@ -1053,7 +1053,8 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
         for (index, model) in self.messagesModels.enumerated() {
             model.sequencing = getMessageSequencing(forIndex: index)
             model.endsEmojiRun = endsEmojiRun(at: index)
-            model.shouldDisplayContactInfo = shouldDisplayContactInfo(message: model) && shouldDisplayContactInfoForConversation()
+            model.shouldDisplayName = shouldDisplayName(message: model) && shouldDisplayContactInfoForConversation()
+            model.shouldDisplayAvatar = shouldDisplayAvatar(message: model) && shouldDisplayContactInfoForConversation()
             model.shouldDisplayContactInfoForConversation = shouldDisplayContactInfoForConversation()
         }
     }
@@ -1092,8 +1093,12 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
             isReplyCheck || hasReactions || isEmojiOnlyMessage
     }
 
-    private func shouldDisplayContactInfo(message: MessageContainerModel) -> Bool {
+    private func shouldDisplayName(message: MessageContainerModel) -> Bool {
         return (message.sequencing == .firstOfSequence || message.sequencing == .singleMessage) && message.message.incoming && !message.message.isReply()
+    }
+
+    private func shouldDisplayAvatar(message: MessageContainerModel) -> Bool {
+        return (message.sequencing == .lastOfSequence || message.sequencing == .singleMessage) && message.message.incoming
     }
 
     private func shouldDisplayContactInfoForConversation() -> Bool {

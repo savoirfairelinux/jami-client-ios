@@ -79,7 +79,7 @@ struct MessageRowView: View {
                 if model.centeredMessage {
                     centeredEvent()
                 } else if model.incoming {
-                    HStack(alignment: .bottom) {
+                    HStack(alignment: .messageBubbleBottom) {
                         if model.shouldDisplayAavatar,
                            let factory = avatarFactory {
                             Spacer()

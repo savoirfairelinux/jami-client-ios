@@ -91,6 +91,7 @@ extension View {
 
     func applyMessageStyle(model: MessageContentVM) -> some View {
         modifier(MessageTextStyle(model: model))
+            .marksMessageBubbleBottom()
     }
 
     // MARK: - Gesture suppression environment

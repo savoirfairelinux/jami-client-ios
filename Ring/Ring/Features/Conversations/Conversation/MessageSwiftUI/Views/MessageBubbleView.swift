@@ -90,6 +90,7 @@ struct MessageBubbleView: View {
             .background(model.backgroundColor)
             .font(model.styling.textFont)
             .modifier(MessageCornerRadius(model: model))
+            .marksMessageBubbleBottom()
     }
 
     private func renderTextContent() -> some View {
@@ -99,6 +100,7 @@ struct MessageBubbleView: View {
                     URLPreview(metadata: metadata, maxDimension: model.maxDimension)
                         .modifier(MessageCornerRadius(model: model))
                         .messageGesture(onLongPress: receivedLongPress())
+                        .marksMessageBubbleBottom()
                     MessageTimeView(text: model.timeText, color: model.styling.secondaryTextColor)
                 }
             } else if model.isFullURL, let url = model.getURL() {
@@ -133,6 +135,7 @@ struct MessageBubbleView: View {
     @ViewBuilder
     private func renderFileTransfer() -> some View {
         let media = MediaView(message: model, onLongGesture: receivedLongPress(), minHeight: 50, maxHeight: 300, withPlayerControls: true, cornerRadius: 0)
+            .marksMessageBubbleBottom()
         if model.showsTimeOverImage {
             media
                 .overlay(alignment: .bottomTrailing) {
@@ -212,6 +215,22 @@ struct MessageBubbleWithTimeWrapper<Content: View>: View {
             MessageTimeView(text: model.timeText, color: model.timeColor)
                 .padding(.leading, TimeLayout.editedSpacing)
         }
+    }
+}
+
+extension VerticalAlignment {
+    private enum MessageBubbleBottom: AlignmentID {
+        static func defaultValue(in context: ViewDimensions) -> CGFloat {
+            context[.bottom]
+        }
+    }
+
+    static let messageBubbleBottom = VerticalAlignment(MessageBubbleBottom.self)
+}
+
+extension View {
+    func marksMessageBubbleBottom() -> some View {
+        alignmentGuide(.messageBubbleBottom) { $0[.bottom] }
     }
 }
 
