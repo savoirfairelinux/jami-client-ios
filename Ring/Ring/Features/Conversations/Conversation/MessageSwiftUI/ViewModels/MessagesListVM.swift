@@ -1078,19 +1078,18 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
         return next.startsNewGroup || !next.message.isEmojiOnly() || next.message.authorId != current.authorId
     }
 
-    private func isBreakingSequence(message: MessageModel, secondMessage: MessageModel) -> Bool {
-        if message.type.isContact && secondMessage.type.isContact {
+    private func isBreakingSequence(older: MessageModel, newer: MessageModel) -> Bool {
+        if older.type.isContact && newer.type.isContact {
             return false
         }
-        let differentUri = message.uri != secondMessage.uri
-        let messageTypeCheck = message.type.isCentered || secondMessage.type.isCentered
-        let differentAuthor = message.authorId != secondMessage.authorId
-        let isReplyCheck = message.isReply() || secondMessage.isReply()
-        let hasReactions = !message.reactions.isEmpty || !secondMessage.reactions.isEmpty
-        let isEmojiOnlyMessage = message.isEmojiOnly() || secondMessage.isEmojiOnly()
+        let differentUri = older.uri != newer.uri
+        let messageTypeCheck = older.type.isCentered || newer.type.isCentered
+        let differentAuthor = older.authorId != newer.authorId
+        let startsWithReply = newer.isReply()
+        let isEmojiOnlyMessage = older.isEmojiOnly() || newer.isEmojiOnly()
 
         return differentUri || messageTypeCheck || differentAuthor ||
-            isReplyCheck || hasReactions || isEmojiOnlyMessage
+            startsWithReply || isEmojiOnlyMessage
     }
 
     private func shouldDisplayName(message: MessageContainerModel) -> Bool {
@@ -1111,10 +1110,10 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
         let previousMessageItem = index + 1 < self.messagesModels.count ? self.messagesModels[index + 1] : nil
         let nextMessageItem = index > 0 ? self.messagesModels[index - 1] : nil
         let startsSequence = previousMessageItem.map {
-            messageItem.startsNewGroup || self.isBreakingSequence(message: $0.message, secondMessage: messageItem.message)
+            messageItem.startsNewGroup || self.isBreakingSequence(older: $0.message, newer: messageItem.message)
         } ?? true
         let endsSequence = nextMessageItem.map {
-            $0.startsNewGroup || self.isBreakingSequence(message: $0.message, secondMessage: messageItem.message)
+            $0.startsNewGroup || self.isBreakingSequence(older: messageItem.message, newer: $0.message)
         } ?? true
         switch (startsSequence, endsSequence) {
         case (true, true):

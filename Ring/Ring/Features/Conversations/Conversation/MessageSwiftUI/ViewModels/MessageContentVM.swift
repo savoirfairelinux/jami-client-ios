@@ -184,7 +184,6 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
 
     private var sequencing: MessageSequencing = .unknown {
         didSet {
-            guard !isHistory else { return }
             self.corners = self.updatedCorners()
             // text need to be updated to trigger view redrowing
             let oldContent = self.content
