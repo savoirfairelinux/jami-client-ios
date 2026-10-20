@@ -48,12 +48,10 @@ class MediaRecordViewModel: ObservableObject, Stateable, ViewModel {
     private var sliderPositionSink: ((Float) -> Void)?
     @Published var isPaused: Bool = true
     @Published var isAudioMuted: Bool = true
-    @Published var hideInfo: Bool = false
     let dismissHandler = DismissHandler()
 
     // MARK: - Configuration (set by coordinator before setup())
 
-    var audioOnly: Bool = false
     var conversation: ConversationModel!
 
     // MARK: - Private
@@ -93,14 +91,13 @@ class MediaRecordViewModel: ObservableObject, Stateable, ViewModel {
 
     // MARK: - Setup
 
-    /// Must be called after setting `conversation` and `audioOnly`.
+    /// Must be called after setting `conversation`.
     func setup() {
         subscribeCameraFrames()
     }
 
     @MainActor
     func previewAppeared() {
-        guard !audioOnly else { return }
         orientationMonitor.start { [weak self] input in
             self?.videoService.setCameraOrientation(input)
         }
@@ -133,7 +130,7 @@ class MediaRecordViewModel: ObservableObject, Stateable, ViewModel {
                                                                      accountID: conversation.accountId,
                                                                      conversationID: conversation.id,
                                                                      isSwarm: conversation.isSwarm()) else { return }
-        guard let name = videoService.startLocalRecorder(audioOnly: audioOnly, path: url.path) else { return }
+        guard let name = videoService.startLocalRecorder(path: url.path) else { return }
         fileName = name
         fileDisplayName = URL(fileURLWithPath: name).lastPathComponent
         transition(to: .recording)
@@ -207,19 +204,16 @@ class MediaRecordViewModel: ObservableObject, Stateable, ViewModel {
             case .initial:
                 self.isRecording = false
                 self.isReadyToSend = false
-                self.hideInfo = !self.audioOnly
                 self.stopTimer()
                 self.recordDuration = ""
             case .recording:
                 self.isRecording = true
                 self.isReadyToSend = false
-                self.hideInfo = true
                 self.showPlayerControls = false
                 self.startTimer()
             case .recorded:
                 self.isRecording = false
                 self.isReadyToSend = true
-                self.hideInfo = true
                 self.stopTimer()
                 self.recordDuration = ""
             case .sent, .cancelled:

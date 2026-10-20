@@ -35,7 +35,6 @@ enum MessagePanelState: State {
     case sendPhoto
     case openGalery
     case shareLocation
-    case recordAudio
     case recordVido
     case sendFile
     case newCollabDocument
@@ -51,8 +50,6 @@ enum MessagePanelState: State {
             return L10n.Alerts.uploadPhoto
         case .shareLocation:
             return L10n.Alerts.locationSharing
-        case .recordAudio:
-            return L10n.Alerts.recordAudioMessage
         case .recordVido:
             return L10n.Alerts.recordVideoMessage
         case .sendFile:
@@ -72,8 +69,6 @@ enum MessagePanelState: State {
             return "photo"
         case .shareLocation:
             return "location"
-        case .recordAudio:
-            return "mic"
         case .recordVido:
             return "camera"
         case .sendFile:

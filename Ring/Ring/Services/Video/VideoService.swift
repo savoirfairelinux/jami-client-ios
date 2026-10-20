@@ -171,8 +171,8 @@ final class VideoService {
 
     // MARK: - Local recorder (media messages)
 
-    func startLocalRecorder(audioOnly: Bool, path: String) -> String? {
-        return pipeline.startLocalRecorder(audioOnly: audioOnly, path: path)
+    func startLocalRecorder(path: String) -> String? {
+        return pipeline.startLocalRecorder(path: path)
     }
 
     func stopLocalRecorder(path: String) {

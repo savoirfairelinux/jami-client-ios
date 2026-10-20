@@ -558,7 +558,6 @@
 "notifications.locationSharingStopped" = "Incoming location sharing stopped";
 "dataTransfer.readableStatusDecline" = "Decline";
 "dataTransfer.readableStatusAccept" = "Accept";
-"dataTransfer.infoMessage" = "Tap to start recording";
 "dataTransfer.sendMessage" = "Send";
 
 

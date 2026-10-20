@@ -211,9 +211,8 @@ final class VideoPipeline: NSObject {
 
     // MARK: - Local recorder / player passthroughs (media messages)
 
-    func startLocalRecorder(audioOnly: Bool, path: String) -> String? {
-        let input = audioOnly ? "" : Self.cameraSourceURI(from: CameraDevice.medium)
-        return video.startLocalRecording(videoInputId: input, path: path)
+    func startLocalRecorder(path: String) -> String? {
+        return video.startLocalRecording(videoInputId: Self.cameraSourceURI(from: CameraDevice.medium), path: path)
     }
 
     func stopLocalRecorder(path: String) {

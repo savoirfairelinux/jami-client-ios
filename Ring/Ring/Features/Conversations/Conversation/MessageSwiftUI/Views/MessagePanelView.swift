@@ -277,11 +277,6 @@ struct MessagePanelView: View {
     private func menuContent() -> some View {
         Group {
             Button(action: {
-                model.recordAudio()
-            }, label: {
-                Label(MessagePanelState.recordAudio.toString(), systemImage: MessagePanelState.recordAudio.imageName())
-            })
-            Button(action: {
                 model.recordVideo()
             }, label: {
                 Label(MessagePanelState.recordVido.toString(), systemImage: MessagePanelState.recordVido.imageName())

@@ -307,15 +307,7 @@ class ConversationViewModel: Stateable, ObservableObject {
         closeAllPlayers()
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            self.stateSubject.onNext(ConversationState.recordFile(conversation: self.conversation, audioOnly: false))
-        }
-    }
-
-    func recordAudioFile() {
-        closeAllPlayers()
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.stateSubject.onNext(ConversationState.recordFile(conversation: self.conversation, audioOnly: true))
+            self.stateSubject.onNext(ConversationState.recordFile(conversation: self.conversation))
         }
     }
 }
