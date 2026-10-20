@@ -33,6 +33,24 @@
       "message": "[error] Line 1093: 🔴 `shouldDisplayName` still excludes replies via `!message.message.isReply()`, which conflicts with the stated behavior \"including on replies\". As written, an incoming reply that is `firstOfSequence`/`singleMessage` will not show the sender name. Remove the reply exclusion (or replace it with an explicit product rule) to keep name/avatar behavior consistent for reply messages.",
       "revId": "dcfa94b6cbb2fb68974bdd444958b793ef4b66d8",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1920e783_8449f432",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 1093,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-20T12:45:55Z",
+      "side": 1,
+      "message": "Every reply already have sender name in header",
+      "parentUuid": "942a1a62_9bf0e8ab",
+      "revId": "dcfa94b6cbb2fb68974bdd444958b793ef4b66d8",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
