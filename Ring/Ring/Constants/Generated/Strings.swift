@@ -145,6 +145,16 @@ internal enum L10n {
     internal static let userPresenceAvailable = L10n.tr("Localizable", "accessibility.userPresenceAvailable", fallback: "Available")
     /// Online
     internal static let userPresenceOnline = L10n.tr("Localizable", "accessibility.userPresenceOnline", fallback: "Online")
+    /// Recording deleted
+    internal static let voiceMessageDeleted = L10n.tr("Localizable", "accessibility.voiceMessageDeleted", fallback: "Recording deleted")
+    /// Record voice message
+    internal static let voiceMessageRecord = L10n.tr("Localizable", "accessibility.voiceMessageRecord", fallback: "Record voice message")
+    /// Recording
+    internal static let voiceMessageRecording = L10n.tr("Localizable", "accessibility.voiceMessageRecording", fallback: "Recording")
+    /// Send voice message
+    internal static let voiceMessageSend = L10n.tr("Localizable", "accessibility.voiceMessageSend", fallback: "Send voice message")
+    /// Stop recording
+    internal static let voiceMessageStop = L10n.tr("Localizable", "accessibility.voiceMessageStop", fallback: "Stop recording")
     /// Welcome to Jami
     internal static let welcomeToJamiTitle = L10n.tr("Localizable", "accessibility.welcomeToJamiTitle", fallback: "Welcome to Jami")
     internal enum Account {
@@ -1012,6 +1022,8 @@ internal enum L10n {
     internal static func typingIndicatorTwoUsers(_ p1: Any, _ p2: Any) -> String {
       return L10n.tr("Localizable", "conversation.typingIndicatorTwoUsers", String(describing: p1), String(describing: p2), fallback: "%1@ and %2@ are typing")
     }
+    /// Voice messages are unavailable during a call
+    internal static let voiceMessageUnavailableInCall = L10n.tr("Localizable", "conversation.voiceMessageUnavailableInCall", fallback: "Voice messages are unavailable during a call")
     /// You
     internal static let yourself = L10n.tr("Localizable", "conversation.yourself", fallback: "You")
   }
