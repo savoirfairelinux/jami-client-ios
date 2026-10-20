@@ -124,6 +124,7 @@ struct EditMessagePanel: View {
 
 struct MessagePanelView: View {
     @ObservedObject var model: MessagePanelVM
+    @ObservedObject var voiceRecording: VoiceRecordingVM
     @Binding var isFocused: Bool
     @SwiftUI.State private var text: String = ""
     @SwiftUI.State private var textHeight: CGFloat = 42
@@ -164,25 +165,10 @@ struct MessagePanelView: View {
     @ViewBuilder
     private func moreActionsButton() -> some View {
         Menu(content: menuContent, label: {
-            Group {
-                if #available(iOS 26.0, *) {
-                    Image(systemName: "plus")
-                        .font(.system(size: 22, weight: .light))
-                        .foregroundColor(model.styling.secondaryTextColor)
-                        .frame(width: defaultControlSize, height: defaultControlSize)
-                        .glassEffect(in: .circle)
-                } else {
-                    ZStack {
-                        VisualEffect(style: .systemUltraThinMaterial, withVibrancy: false)
-                        Image(systemName: "plus")
-                            .font(.system(size: 22, weight: .light))
-                            .foregroundColor(model.styling.secondaryTextColor)
-                    }
-                    .frame(width: defaultControlSize, height: defaultControlSize)
-                    .clipShape(Circle())
-                    .shadow(color: Color.black.opacity(0.05), radius: 4, x: 0, y: 1)
-                }
-            }
+            Image(systemName: "plus")
+                .font(.system(size: 22, weight: .light))
+                .foregroundColor(model.styling.secondaryTextColor)
+                .messagePanelControlBackground(size: defaultControlSize)
         })
         .accessibilityLabel(L10n.Accessibility.conversationShareMedia)
         .accessibilityRemoveTraits(.isButton)
@@ -261,9 +247,20 @@ struct MessagePanelView: View {
                     }
             }
 
-            HStack(alignment: .bottom, spacing: textContainerLeadingInset) {
-                moreActionsButton()
-                messageTextField()
+            if let hint = voiceRecording.hint {
+                VoiceRecordingHint(text: hint)
+                    .padding(.top, padding)
+            }
+
+            Group {
+                if voiceRecording.state == .idle {
+                    HStack(alignment: .bottom, spacing: textContainerLeadingInset) {
+                        moreActionsButton()
+                        messageTextField()
+                    }
+                } else {
+                    VoiceRecordingPanel(model: voiceRecording)
+                }
             }
             .padding(.top, padding)
             .padding(.bottom, isFocused ? padding : 0)
@@ -276,6 +273,11 @@ struct MessagePanelView: View {
 
     private func menuContent() -> some View {
         Group {
+            Button(action: {
+                voiceRecording.start()
+            }, label: {
+                Label(L10n.Alerts.recordAudioMessage, systemImage: "mic")
+            })
             Button(action: {
                 model.recordVideo()
             }, label: {
@@ -318,5 +320,33 @@ struct MessagePanelView: View {
         text = ""
         model.cancelReply()
         model.cancelEdit()
+    }
+}
+
+private struct MessagePanelGlass<S: Shape>: ViewModifier {
+    let shape: S
+
+    @ViewBuilder
+    func body(content: Content) -> some View {
+        if #available(iOS 26.0, *) {
+            content
+                .glassEffect(in: shape)
+        } else {
+            content
+                .background(VisualEffect(style: .systemUltraThinMaterial, withVibrancy: false))
+                .clipShape(shape)
+                .shadow(color: Color.black.opacity(0.05), radius: 4, x: 0, y: 1)
+        }
+    }
+}
+
+extension View {
+    func messagePanelGlass<S: Shape>(in shape: S) -> some View {
+        modifier(MessagePanelGlass(shape: shape))
+    }
+
+    func messagePanelControlBackground(size: CGFloat) -> some View {
+        frame(width: size, height: size)
+            .messagePanelGlass(in: Circle())
     }
 }

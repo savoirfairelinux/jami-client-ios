@@ -249,6 +249,7 @@
 		261A90862F1FF77D00438171 /* libjami-core.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 261A90832F1FF75B00438171 /* libjami-core.xcframework */; };
 		261A90892F1FF7AD00438171 /* libjami-core.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 261A90832F1FF75B00438171 /* libjami-core.xcframework */; };
 		2625814E2B4DE40200314C42 /* MessagePanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2625814D2B4DE40200314C42 /* MessagePanelView.swift */; };
+		C94C207EE9322849DBB46FEF /* VoiceRecordingViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45DD950208150B9A2B591EF /* VoiceRecordingViews.swift */; };
 		262581502B4EF15D00314C42 /* MessagePanelVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2625814F2B4EF15D00314C42 /* MessagePanelVM.swift */; };
 		262F1CFA2C88BBBC002BF597 /* LinkToAccountVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262F1CF92C88BBBC002BF597 /* LinkToAccountVM.swift */; };
 		263289A42E16B965003D9DA8 /* Atomics in Frameworks */ = {isa = PBXBuildFile; productRef = 263289A32E16B965003D9DA8 /* Atomics */; };
@@ -288,6 +289,7 @@
 		265DFAF32929C01400834B97 /* MessageRowVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265DFAF22929C01400834B97 /* MessageRowVM.swift */; };
 		265DFB03292EB94B00834B97 /* MessageContainerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265DFB02292EB94B00834B97 /* MessageContainerModel.swift */; };
 		265DFB07292FBC4200834B97 /* TransferHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265DFB06292FBC4200834B97 /* TransferHelper.swift */; };
+		13FD4D141E6D03BE60ED303F /* VoiceRecordingVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4B2F4109DDE431843A88A2 /* VoiceRecordingVM.swift */; };
 		265DFB09292FD25000834B97 /* DefaultTransferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265DFB08292FD25000834B97 /* DefaultTransferView.swift */; };
 		265DFB0B292FD41100834B97 /* MessageSwiftUIViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265DFB0A292FD41100834B97 /* MessageSwiftUIViews.swift */; };
 		265DFB1129302A8700834B97 /* ContactMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265DFB1029302A8700834B97 /* ContactMessageView.swift */; };
@@ -891,6 +893,7 @@
 		26A1B2C3D4E5F60900AABB11 /* MockNameRegistrationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNameRegistrationAdapter.swift; sourceTree = "<group>"; };
 		261A90832F1FF75B00438171 /* libjami-core.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "libjami-core.xcframework"; path = "../xcframework/libjami-core.xcframework"; sourceTree = "<group>"; };
 		2625814D2B4DE40200314C42 /* MessagePanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagePanelView.swift; sourceTree = "<group>"; };
+		E45DD950208150B9A2B591EF /* VoiceRecordingViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecordingViews.swift; sourceTree = "<group>"; };
 		2625814F2B4EF15D00314C42 /* MessagePanelVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagePanelVM.swift; sourceTree = "<group>"; };
 		262AA981262C724700DC34AD /* libfmt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfmt.a; path = ../DEPS/arm64/lib/libfmt.a; sourceTree = "<group>"; };
 		262F1CF92C88BBBC002BF597 /* LinkToAccountVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkToAccountVM.swift; sourceTree = "<group>"; };
@@ -929,6 +932,7 @@
 		265DFAF22929C01400834B97 /* MessageRowVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageRowVM.swift; sourceTree = "<group>"; };
 		265DFB02292EB94B00834B97 /* MessageContainerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageContainerModel.swift; sourceTree = "<group>"; };
 		265DFB06292FBC4200834B97 /* TransferHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferHelper.swift; sourceTree = "<group>"; };
+		8F4B2F4109DDE431843A88A2 /* VoiceRecordingVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecordingVM.swift; sourceTree = "<group>"; };
 		265DFB08292FD25000834B97 /* DefaultTransferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTransferView.swift; sourceTree = "<group>"; };
 		265DFB0A292FD41100834B97 /* MessageSwiftUIViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageSwiftUIViews.swift; sourceTree = "<group>"; };
 		265DFB1029302A8700834B97 /* ContactMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactMessageView.swift; sourceTree = "<group>"; };
@@ -3450,6 +3454,7 @@
 				263F61712B4460A400240AEE /* ReactionRowView.swift */,
 				263F61732B4460B200240AEE /* ReactionsView.swift */,
 				2625814D2B4DE40200314C42 /* MessagePanelView.swift */,
+				E45DD950208150B9A2B591EF /* VoiceRecordingViews.swift */,
 				267B541F2F57A29800565A0E /* ConversationContainerView.swift */,
 			);
 			path = Views;
@@ -3467,6 +3472,7 @@
 				260C73F229196C6C005C513F /* MessageStackVM.swift */,
 				265DFB02292EB94B00834B97 /* MessageContainerModel.swift */,
 				265DFB06292FBC4200834B97 /* TransferHelper.swift */,
+				8F4B2F4109DDE431843A88A2 /* VoiceRecordingVM.swift */,
 				26BC15ED29302B00003FC8D1 /* ContactMessageVM.swift */,
 				26A072FC295A7145006D8163 /* ContextMenuVM.swift */,
 				BB06BD8229D492AA0064F0FC /* LocationSharingVM.swift */,
@@ -4477,6 +4483,7 @@
 				BB1E8C7A29159E3E005AE1D6 /* SwarmInfoVM.swift in Sources */,
 				57CDD516008ECB3B425A73F0 /* SwarmInviteCandidates.swift in Sources */,
 				2625814E2B4DE40200314C42 /* MessagePanelView.swift in Sources */,
+				C94C207EE9322849DBB46FEF /* VoiceRecordingViews.swift in Sources */,
 				66F295DE2166A5930044ED6F /* Devices+Helpers.swift in Sources */,
 				260AE64029C23AEC00D66D5E /* CallsHelper.swift in Sources */,
 				26454FB72B7FDCB200CFF06C /* AboutViewController.swift in Sources */,
@@ -4503,6 +4510,7 @@
 				A7MG00102F20000300000002 /* MessageGrouping.swift in Sources */,
 				26D08ABE2696296300E37574 /* RequestsAdapter.mm in Sources */,
 				265DFB07292FBC4200834B97 /* TransferHelper.swift in Sources */,
+				13FD4D141E6D03BE60ED303F /* VoiceRecordingVM.swift in Sources */,
 				26B37339263C439B00E2EE28 /* CustomSearchController.swift in Sources */,
 				56BBC9BC1ED7161200CDAF8B /* Date+Helpers.swift in Sources */,
 				564C44621E943DE6000F92B1 /* NameService.swift in Sources */,

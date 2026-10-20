@@ -39,6 +39,7 @@ enum MessagePanelState: State {
     case sendFile
     case newCollabDocument
     case joinActiveCall(call: ActiveCall, withVideo: Bool)
+    case microphonePermissionDenied
 
     func toString() -> String {
         switch self {
@@ -158,6 +159,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     var presenceService: PresenceService
     var transferHelper: TransferHelper
     var messagePanel: MessagePanelVM
+    let voiceRecording: VoiceRecordingVM
     var currentlyTypingUsers: Set<String> = []
     var callBannerViewModel: CallBannerViewModel
     private let injectionBag: InjectionBag
@@ -218,6 +220,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
             self.updateLastDisplayed()
             self.callBannerViewModel = CallBannerViewModel(injectionBag: self.injectionBag, conversation: self.conversation, state: self.messagePanelStateSubject)
             self.messagePanel.canWriteDocuments = self.conversation.isSwarm()
+            self.voiceRecording.conversation = self.conversation
         }
     }
 
@@ -273,6 +276,9 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
         self.transferHelper = transferHelper
         self.locationSharingService = injectionBag.locationSharingService
         self.messagePanel = MessagePanelVM(messagePanelState: self.messagePanelStateSubject)
+        self.voiceRecording = VoiceRecordingVM(injectionBag: injectionBag,
+                                               transferHelper: transferHelper,
+                                               messagePanelState: self.messagePanelStateSubject)
         self.callBannerViewModel = CallBannerViewModel(injectionBag: injectionBag, conversation: self.conversation, state: self.messagePanelStateSubject)
 
         self.subscribeLocationEvents()

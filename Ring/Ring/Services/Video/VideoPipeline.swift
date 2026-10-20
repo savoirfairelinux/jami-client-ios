@@ -215,6 +215,10 @@ final class VideoPipeline: NSObject {
         return video.startLocalRecording(videoInputId: Self.cameraSourceURI(from: CameraDevice.medium), path: path)
     }
 
+    func startLocalAudioRecorder(path: String) -> String? {
+        return video.startLocalRecording(videoInputId: "", path: path)
+    }
+
     func stopLocalRecorder(path: String) {
         video.stopLocalRecording(path: path)
     }
