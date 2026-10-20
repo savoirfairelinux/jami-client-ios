@@ -50,6 +50,40 @@
       "message": "[error] Line 154: 🔴 `send()` dispatches the transfer through `afterFileIsWritten` with `[weak self]`. If the user leaves the conversation before the delay fires, `self` becomes `nil` and the voice message is never sent (silent data loss). Capture `dataTransferService` and the already-resolved `conversation/path` strongly before scheduling, or trigger send from a recorder completion callback that is independent of `VoiceRecordingVM` lifetime.",
       "revId": "470326e3ba27c354aa2e8ac1ce9a0ace949dfc19",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "419a6343_4ada617b",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/VoiceRecordingVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-20T20:09:49Z",
+      "side": 1,
+      "message": "[warning] Line 171: 🟡 `transferHelper.releaseAllPlayers()` runs before confirming the recorder actually started. If `startLocalAudioRecorder` fails, current message playback is still torn down even though no recording begins. Move `releaseAllPlayers()` after a successful `startLocalAudioRecorder` (or restore playback state on failure) so recorder startup failures do not disrupt ongoing playback.",
+      "revId": "470326e3ba27c354aa2e8ac1ce9a0ace949dfc19",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49f08199_9e1c2047",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/VoiceRecordingVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-20T20:09:49Z",
+      "side": 1,
+      "message": "[warning] Line 172: 🟡 Recorder startup failure is silently ignored (`guard let path \u003d ... else { return }`). This leaves users with no feedback when tapping/holding the mic does nothing. Surface an explicit hint/alert (and ideally log the failure) when recorder initialization fails to make the failure mode actionable.",
+      "revId": "470326e3ba27c354aa2e8ac1ce9a0ace949dfc19",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
