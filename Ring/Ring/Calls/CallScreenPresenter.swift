@@ -35,6 +35,7 @@ final class CallScreenPresenter {
     private var dismissCancellable: AnyCancellable?
     private var isMinimized = false
     private var pendingDismissal = false
+    private var pendingRestore: PiPRestoreCompletion?
     private var inCallDeviceStateActive = false
 
     init(callService: CallService, navigationController: UINavigationController,
@@ -135,8 +136,18 @@ final class CallScreenPresenter {
         guard let controller = callController, !isMinimized else { return }
         isMinimized = true
         controller.dismiss(animated: false) { [weak self, weak controller] in
-            guard let self = self, let controller = controller,
-                  self.callController === controller, self.isMinimized else { return }
+            guard let self = self else { return }
+            let restore = self.pendingRestore
+            self.pendingRestore = nil
+            guard let controller = controller,
+                  self.callController === controller, self.isMinimized else {
+                restore?(false)
+                return
+            }
+            if let restore = restore {
+                self.restoreCallScreen(completion: restore)
+                return
+            }
             self.onOpenConversation?(route)
         }
     }
@@ -149,6 +160,11 @@ final class CallScreenPresenter {
         }
         guard isMinimized else {
             completion(true)
+            return
+        }
+        if controller.isBeingDismissed {
+            pendingRestore?(false)
+            pendingRestore = completion
             return
         }
         guard let top = topController() else {
