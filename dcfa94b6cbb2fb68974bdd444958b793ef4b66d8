@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a48df472_fff7fa9b",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-20T12:46:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9670b1a2_5098f944",
+      "revId": "dcfa94b6cbb2fb68974bdd444958b793ef4b66d8",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "942a1a62_9bf0e8ab",
@@ -49,6 +67,24 @@
       "side": 1,
       "message": "Every reply already have sender name in header",
       "parentUuid": "942a1a62_9bf0e8ab",
+      "revId": "dcfa94b6cbb2fb68974bdd444958b793ef4b66d8",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "463e1b9c_43ac0394",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 1093,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-20T12:46:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1920e783_8449f432",
       "revId": "dcfa94b6cbb2fb68974bdd444958b793ef4b66d8",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
