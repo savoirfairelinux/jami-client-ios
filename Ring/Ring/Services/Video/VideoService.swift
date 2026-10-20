@@ -175,6 +175,10 @@ final class VideoService {
         return pipeline.startLocalRecorder(path: path)
     }
 
+    func startLocalAudioRecorder(path: String) -> String? {
+        return pipeline.startLocalAudioRecorder(path: path)
+    }
+
     func stopLocalRecorder(path: String) {
         pipeline.stopLocalRecorder(path: path)
     }

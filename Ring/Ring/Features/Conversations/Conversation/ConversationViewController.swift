@@ -201,6 +201,8 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
                     self.viewModel.setIsComposingMsg(isComposing: typingStatus)
                 case .joinActiveCall(call: let call, withVideo: let withVideo):
                     self.viewModel.joinActiveCall(call: call, withVideo: withVideo)
+                case .microphonePermissionDenied:
+                    self.showNoPermissionsAlert(title: L10n.Alerts.noMediaPermissionsTitle)
                 }
             })
             .disposed(by: disposeBag)
