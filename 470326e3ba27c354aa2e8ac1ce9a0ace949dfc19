@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2abbc741_873c599c",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/VoiceRecordingVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-20T20:07:49Z",
+      "side": 1,
+      "message": "[warning] 🟡 This introduces a substantial recording state machine without corresponding tests. Add coverage for core transitions and guards (`hold→send`, `hold→cancel`, `lock→stop→preview→send`, min-duration discard, permission denied, and in-call blocking) to prevent regressions.",
+      "revId": "470326e3ba27c354aa2e8ac1ce9a0ace949dfc19",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1845597_3ae50839",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/VoiceRecordingVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-20T20:07:49Z",
+      "side": 1,
+      "message": "[warning] Line 49: 🟡 Using a fixed `fileFinalizationDelay` (1s) is brittle: under IO pressure the file may still be incomplete, and on fast paths it adds avoidable latency. Replace this timeout with an explicit recorder-finished signal (preferred) or a readiness check (e.g., file exists and size is stable) before preview/send/delete.",
+      "revId": "470326e3ba27c354aa2e8ac1ce9a0ace949dfc19",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "152e3a20_8171aa64",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/VoiceRecordingVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-20T20:07:49Z",
+      "side": 1,
+      "message": "[error] Line 154: 🔴 `send()` dispatches the transfer through `afterFileIsWritten` with `[weak self]`. If the user leaves the conversation before the delay fires, `self` becomes `nil` and the voice message is never sent (silent data loss). Capture `dataTransferService` and the already-resolved `conversation/path` strongly before scheduling, or trigger send from a recorder completion callback that is independent of `VoiceRecordingVM` lifetime.",
+      "revId": "470326e3ba27c354aa2e8ac1ce9a0ace949dfc19",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
