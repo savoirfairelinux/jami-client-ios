@@ -33,6 +33,23 @@
       "message": "[warning] Line 491: 🟡 Accessibility labels for mute/unmute use raw `NSLocalizedString(...)` while the file already has generated `L10n.Accessibility` accessors. Prefer `L10n.Accessibility.audioPlayerMute` / `.audioPlayerUnmute` (and similarly for seek) for compile-time key consistency and centralized fallback behavior.",
       "revId": "5a2fb0d20e55b32ee529c9ac53372861004df70f",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f16f8a42_16edb553",
+        "filename": "Ring/Ring/Features/Conversations/views/PlayerViewModel.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-20T15:28:31Z",
+      "side": 1,
+      "message": "[warning] Line 309: 🟡 Reinitialization now forces audio-only media to unmuted (`audioMuted.accept(false)`), which overrides the user’s current mute choice after interruptions (e.g., player recreation before/after calls). Preserve the existing mute state and only apply a default on first initialization, not every reinitialize path.",
+      "revId": "5a2fb0d20e55b32ee529c9ac53372861004df70f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
