@@ -178,6 +178,9 @@
 "conversation.addToContactsLabel" = "Add to contacts?";
 "conversation.notContactLabel" = "%@ is not in the contact list";
 "conversation.messagePlaceholder" = "Write to";
+"conversation.voiceMessageSlideToCancel" = "Slide to cancel";
+"conversation.voiceMessageHoldHint" = "Hold to record, release to send";
+"conversation.voiceMessageUnavailableInCall" = "Voice messages are unavailable during a call";
 "conversation.imageSaved" = "Saved";
 "conversation.errorSavingImage" = "Could not save image";
 "conversation.errorSavingImageMessage" = "An error occurred while saving the image to the photo library.";
@@ -649,6 +652,13 @@
 "accessibility.audioPlayerUnmute" = "Unmute";
 "accessibility.audioPlayerSeek" = "Seek";
 "accessibility.audioPlayerUnavailable" = "Audio unavailable";
+"accessibility.voiceMessageRecord" = "Record voice message";
+"accessibility.voiceMessageRecordHint" = "Hold to record, release to send. Double-tap to record hands-free";
+"accessibility.voiceMessageRecording" = "Recording";
+"accessibility.voiceMessageStop" = "Stop recording";
+"accessibility.voiceMessageDelete" = "Delete recording";
+"accessibility.voiceMessageDeleted" = "Recording deleted";
+"accessibility.voiceMessageSend" = "Send voice message";
 "accessibility.conversationRowUnreadCount" = "%@ unread messages.";
 "accessibility.conversationRowBlocked" = "Conversation blocked";
 "accessibility.conversationRowSyncing" = "Synchronization in progress";

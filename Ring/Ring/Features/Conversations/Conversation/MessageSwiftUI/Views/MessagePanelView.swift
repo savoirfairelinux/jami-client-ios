@@ -124,6 +124,8 @@ struct EditMessagePanel: View {
 
 struct MessagePanelView: View {
     @ObservedObject var model: MessagePanelVM
+    @ObservedObject var voiceRecording: VoiceRecordingVM
+    let accentColor: Color
     @Binding var isFocused: Bool
     @SwiftUI.State private var text: String = ""
     @SwiftUI.State private var textHeight: CGFloat = 42
@@ -164,25 +166,10 @@ struct MessagePanelView: View {
     @ViewBuilder
     private func moreActionsButton() -> some View {
         Menu(content: menuContent, label: {
-            Group {
-                if #available(iOS 26.0, *) {
-                    Image(systemName: "plus")
-                        .font(.system(size: 22, weight: .light))
-                        .foregroundColor(model.styling.secondaryTextColor)
-                        .frame(width: defaultControlSize, height: defaultControlSize)
-                        .glassEffect(in: .circle)
-                } else {
-                    ZStack {
-                        VisualEffect(style: .systemUltraThinMaterial, withVibrancy: false)
-                        Image(systemName: "plus")
-                            .font(.system(size: 22, weight: .light))
-                            .foregroundColor(model.styling.secondaryTextColor)
-                    }
-                    .frame(width: defaultControlSize, height: defaultControlSize)
-                    .clipShape(Circle())
-                    .shadow(color: Color.black.opacity(0.05), radius: 4, x: 0, y: 1)
-                }
-            }
+            Image(systemName: "plus")
+                .font(.system(size: 22, weight: .light))
+                .foregroundColor(model.styling.secondaryTextColor)
+                .messagePanelControlBackground(size: defaultControlSize)
         })
         .accessibilityLabel(L10n.Accessibility.conversationShareMedia)
         .accessibilityRemoveTraits(.isButton)
@@ -261,9 +248,28 @@ struct MessagePanelView: View {
                     }
             }
 
-            HStack(alignment: .bottom, spacing: textContainerLeadingInset) {
-                moreActionsButton()
-                messageTextField()
+            if let hint = voiceRecording.hint {
+                VoiceRecordingHint(text: hint)
+                    .padding(.top, padding)
+            }
+
+            Group {
+                if voiceRecording.showsPanel {
+                    VoiceRecordingPanel(model: voiceRecording, accentColor: accentColor)
+                } else {
+                    HStack(alignment: .bottom, spacing: textContainerLeadingInset) {
+                        if voiceRecording.state == .idle {
+                            moreActionsButton()
+                            messageTextField()
+                        }
+                        if !model.isEdit {
+                            VoiceRecordControls(model: voiceRecording,
+                                                accentColor: accentColor,
+                                                idleColor: model.styling.secondaryTextColor,
+                                                size: defaultControlSize)
+                        }
+                    }
+                }
             }
             .padding(.top, padding)
             .padding(.bottom, isFocused ? padding : 0)
@@ -276,6 +282,11 @@ struct MessagePanelView: View {
 
     private func menuContent() -> some View {
         Group {
+            Button(action: {
+                voiceRecording.startHandsFree()
+            }, label: {
+                Label(L10n.Alerts.recordAudioMessage, systemImage: "mic")
+            })
             Button(action: {
                 model.recordVideo()
             }, label: {
@@ -318,5 +329,30 @@ struct MessagePanelView: View {
         text = ""
         model.cancelReply()
         model.cancelEdit()
+    }
+}
+
+private struct MessagePanelControlBackground: ViewModifier {
+    let size: CGFloat
+
+    @ViewBuilder
+    func body(content: Content) -> some View {
+        if #available(iOS 26.0, *) {
+            content
+                .frame(width: size, height: size)
+                .glassEffect(in: .circle)
+        } else {
+            content
+                .frame(width: size, height: size)
+                .background(VisualEffect(style: .systemUltraThinMaterial, withVibrancy: false))
+                .clipShape(Circle())
+                .shadow(color: Color.black.opacity(0.05), radius: 4, x: 0, y: 1)
+        }
+    }
+}
+
+extension View {
+    func messagePanelControlBackground(size: CGFloat) -> some View {
+        modifier(MessagePanelControlBackground(size: size))
     }
 }

@@ -145,7 +145,7 @@ struct MessagesListView: View {
                 .layoutPriority(1)
                 .padding(.bottom, messageContainerHeight - 30)
                 if !model.isBlocked {
-                    MessagePanelView(model: model.messagePanel, isFocused: $isMessageBarFocused)
+                    MessagePanelView(model: model.messagePanel, voiceRecording: model.voiceRecording, accentColor: Color(model.swarmColor), isFocused: $isMessageBarFocused)
                         .alignmentGuide(VerticalAlignment.center) { dimensions in
                             DispatchQueue.main.async {
                                 self.messageContainerHeight = dimensions.height
