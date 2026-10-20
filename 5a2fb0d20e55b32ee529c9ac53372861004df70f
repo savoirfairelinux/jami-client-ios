@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42a21413_0827de6a",
+        "filename": "Ring/Ring/Features/Conversations/views/PlayerView.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-20T15:27:09Z",
+      "side": 1,
+      "message": "[error] Line 399: 🔴 On iOS 26, the full-screen controls branch wrapped in `GlassEffectContainer` does not disable hit-testing when `controlsVisible \u003d\u003d false`. The overlay becomes visually hidden but still intercepts taps, so taps intended to reveal controls can trigger invisible buttons instead. Apply `.allowsHitTesting(controlsVisible)` (or disable hit testing on the container when hidden) in the iOS 26 branch to keep behavior consistent with the non-iOS26 path.",
+      "revId": "5a2fb0d20e55b32ee529c9ac53372861004df70f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a3cb10c_49d37c13",
+        "filename": "Ring/Ring/Features/Conversations/views/PlayerView.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-20T15:27:09Z",
+      "side": 1,
+      "message": "[warning] Line 491: 🟡 Accessibility labels for mute/unmute use raw `NSLocalizedString(...)` while the file already has generated `L10n.Accessibility` accessors. Prefer `L10n.Accessibility.audioPlayerMute` / `.audioPlayerUnmute` (and similarly for seek) for compile-time key consistency and centralized fallback behavior.",
+      "revId": "5a2fb0d20e55b32ee529c9ac53372861004df70f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
