@@ -47,6 +47,10 @@ internal enum L10n {
     internal static let accountSummaryQrCode = L10n.tr("Localizable", "accessibility.accountSummaryQrCode", fallback: "QR Code")
     /// Double-tap to view the account QR code
     internal static let accountSummaryQrCodeHint = L10n.tr("Localizable", "accessibility.accountSummaryQrCodeHint", fallback: "Double-tap to view the account QR code")
+    /// Duration
+    internal static let audioPlayerDuration = L10n.tr("Localizable", "accessibility.audioPlayerDuration", fallback: "Duration")
+    /// Elapsed time
+    internal static let audioPlayerElapsedTime = L10n.tr("Localizable", "accessibility.audioPlayerElapsedTime", fallback: "Elapsed time")
     /// Mute
     internal static let audioPlayerMute = L10n.tr("Localizable", "accessibility.audioPlayerMute", fallback: "Mute")
     /// Pause

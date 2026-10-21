@@ -158,7 +158,7 @@ struct VoiceRecordingHint: View {
 
 // MARK: - Shared pieces
 
-private struct RecordingDot: View {
+struct RecordingDot: View {
     @Environment(\.accessibilityReduceMotion)
     private var reduceMotion
     @SwiftUI.State private var dimmed = false
