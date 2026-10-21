@@ -137,9 +137,15 @@ struct MessageBubbleView: View {
         let media = MediaView(message: model, onLongGesture: receivedLongPress(), minHeight: 50, maxHeight: 300, withPlayerControls: true, cornerRadius: 0, transferCardTime: model.timeText)
             .marksMessageBubbleBottom()
         if model.player != nil {
-            VStack(alignment: .trailing, spacing: TimeLayout.outsideSpacing) {
+            let time = MessageTimeView(text: model.timeText, color: model.styling.secondaryTextColor)
+            HStack(alignment: .bottom, spacing: TimeLayout.besideSpacing) {
+                if !model.isIncoming {
+                    time
+                }
                 media
-                MessageTimeView(text: model.timeText, color: model.styling.secondaryTextColor)
+                if model.isIncoming {
+                    time
+                }
             }
         } else if model.finalImage != nil {
             media
@@ -238,6 +244,7 @@ extension View {
 
 private enum TimeLayout {
     static let outsideSpacing: CGFloat = 2
+    static let besideSpacing: CGFloat = 6
     static let editedSpacing: CGFloat = 4
     static let capsuleHorizontalPadding: CGFloat = 6
     static let capsuleVerticalPadding: CGFloat = 2
