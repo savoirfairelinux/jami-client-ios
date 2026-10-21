@@ -190,7 +190,10 @@ private struct MediaPreviewContentView: View {
         switch model.content {
         case .player(let viewModel):
             PlayerView(viewModel: viewModel, sizeMode: .fullScreen, withControls: true,
-                       externalControlsVisible: $controlsVisible)
+                       externalControlsVisible: $controlsVisible,
+                       fullScreenActions: AnyView(MediaPreviewVideoActions(model: model, onDelete: { [self] in
+                           presentDeleteAlert()
+                       })))
                 .gesture(
                     DragGesture()
                         .onEnded { value in
@@ -377,6 +380,33 @@ private struct MediaPreviewTopBar: View {
         }
         .padding(.horizontal, 16)
         .padding(.top, safeArea.top)
+    }
+}
+
+private struct MediaPreviewVideoActions: View {
+    let model: MediaPreviewModel
+    let onDelete: () -> Void
+
+    var body: some View {
+        HStack(spacing: 24) {
+            actionButton(systemName: "square.and.arrow.up", accessibilityLabel: L10n.Global.share, action: model.share)
+            actionButton(systemName: "arrowshape.turn.up.right", accessibilityLabel: L10n.Global.forward, action: model.forward)
+            if model.canDelete {
+                actionButton(systemName: "trash", accessibilityLabel: L10n.Actions.deleteAction, action: onDelete)
+            }
+        }
+    }
+
+    private func actionButton(systemName: String, accessibilityLabel: String, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Image(systemName: systemName)
+                .font(.system(size: 20, weight: .semibold))
+                .foregroundColor(.white)
+                .frame(width: 44, height: 44)
+                .contentShape(Rectangle())
+        }
+        .buttonStyle(ScaleButtonStyle())
+        .accessibilityLabel(accessibilityLabel)
     }
 }
 

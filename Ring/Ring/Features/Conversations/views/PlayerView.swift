@@ -31,8 +31,8 @@ enum PlayButtonStyle {
 
     var iconSize: CGFloat {
         switch self {
-        case .fullScreen: return 48
-        case .videoMessage: return 28
+        case .fullScreen: return 34
+        case .videoMessage: return 21
         }
     }
 
@@ -56,6 +56,10 @@ struct AudioMessageColors {
 }
 
 // MARK: - Player State Coordinator
+
+final class PlaybackProgress: ObservableObject {
+    @Published var value: Float = 0
+}
 
 /// Manages the AVSampleBufferDisplayLayer and RxSwift subscriptions.
 class PlayerCoordinator: ObservableObject {
@@ -90,7 +94,10 @@ class PlayerCoordinator: ObservableObject {
         autoHideTask = nil
     }
 
-    var progress: Float = 0
+    let playback = PlaybackProgress()
+    var progress: Float = 0 {
+        didSet { playback.value = progress }
+    }
     @Published var elapsedTimeString: String = "00:00"
     var sliderUpdate: ((Float) -> Void)?
 
@@ -285,6 +292,7 @@ struct PlayerView: View {
     var sizeMode: PlayerMode
     var withControls: Bool
     var externalControlsVisible: Binding<Bool>?
+    var fullScreenActions: AnyView?
     var onVideoTap: ((_ frame: CGRect, _ frameProvider: @escaping () -> CGRect) -> Void)?
     var onVideoLongPress: (() -> Void)?
     var audioColors = AudioMessageColors(background: Color(UIColor.placeholderText),
@@ -386,12 +394,20 @@ struct PlayerView: View {
     }
 
     private var fullScreenControls: some View {
-        ZStack {
+        let insets = UIWindow.currentSafeAreaInsets
+        return ZStack {
             centerPlayButton
-            VStack {
+            VStack(spacing: 0) {
+                HStack {
+                    Spacer()
+                    fullScreenMuteButton
+                }
+                .padding(.top, insets.top)
                 Spacer()
-                fullScreenBottomBar
+                fullScreenTray
+                    .padding(.bottom, insets.bottom + 16)
             }
+            .padding(.horizontal, 16)
         }
     }
 
@@ -439,40 +455,49 @@ struct PlayerView: View {
         playPauseButton(.fullScreen)
     }
 
-    @ViewBuilder private var fullScreenBottomBar: some View {
-        VStack(spacing: 10) {
-            // Row 1: Time capsule + audio circle button
-            HStack(spacing: 10) {
-                Text("\(coordinator.elapsedTimeString) / \(coordinator.duration.durationString)")
-                    .font(.system(.callout, design: .monospaced))
-                    .foregroundColor(.white.opacity(0.9))
-                    .padding(.horizontal, 16)
-                    .frame(height: 44)
-                    .glassCapsuleBackground()
-
-                Spacer()
-
-                Button(action: {
-                    viewModel.muteAudio()
-                    coordinator.scheduleAutoHide()
-                }, label: {
-                    Image(systemName: muteIcon)
-                        .font(.system(size: 18, weight: .medium))
-                        .foregroundColor(.white)
-                        .frame(width: 44, height: 44)
-                })
+    private var fullScreenMuteButton: some View {
+        Button(action: {
+            viewModel.muteAudio()
+            coordinator.scheduleAutoHide()
+        }, label: {
+            Image(systemName: muteIcon)
+                .font(.system(size: 20, weight: .semibold))
+                .foregroundColor(.white)
+                .frame(width: 44, height: 44)
                 .glassCircleBackground()
-                .accessibilityLabel(muteAccessibilityLabel)
-            }
+        })
+        .buttonStyle(ScaleButtonStyle())
+        .accessibilityLabel(muteAccessibilityLabel)
+    }
 
-            // Row 2: Slider in capsule
-            seekSlider(autoHide: true, thumbSize: 18)
-                .padding(.horizontal, 16)
-                .frame(height: 60)
-                .glassCapsuleBackground()
+    private var fullScreenTray: some View {
+        VStack(spacing: 12) {
+            FullScreenScrubberRow(
+                playback: coordinator.playback,
+                duration: coordinator.duration,
+                onSeekStart: {
+                    coordinator.cancelAutoHide()
+                    coordinator.isSeeking = true
+                    viewModel.userStartSeeking()
+                    viewModel.seekTimeVariable.accept(coordinator.progress)
+                },
+                onSeekChange: { newValue in
+                    coordinator.progress = newValue
+                    coordinator.updateElapsedTime()
+                    viewModel.seekTimeVariable.accept(newValue)
+                },
+                onSeekEnd: {
+                    coordinator.isSeeking = false
+                    viewModel.seekTimeVariable.accept(coordinator.progress)
+                    viewModel.userStopSeeking()
+                    coordinator.scheduleAutoHide()
+                }
+            )
+            if let actions = fullScreenActions {
+                actions
+            }
         }
-        .padding(.horizontal, 20)
-        .padding(.bottom, 16)
+        .mediaTrayStyle()
     }
 
     private func seekSlider(autoHide: Bool, trackColor: Color = .white, thumbSize: CGFloat = 14) -> some View {
@@ -502,6 +527,24 @@ struct PlayerView: View {
         )
     }
 
+}
+
+private struct FullScreenScrubberRow: View {
+    @ObservedObject var playback: PlaybackProgress
+    let duration: Float
+    let onSeekStart: () -> Void
+    let onSeekChange: (Float) -> Void
+    let onSeekEnd: () -> Void
+
+    var body: some View {
+        let seconds = TimeInterval(duration / 1_000_000)
+        MediaScrubberRow(progress: playback.value,
+                         elapsed: seconds * TimeInterval(playback.value),
+                         duration: seconds,
+                         onSeekStart: onSeekStart,
+                         onSeekChange: onSeekChange,
+                         onSeekEnd: onSeekEnd)
+    }
 }
 
 // MARK: - In-Message Controls
@@ -608,7 +651,7 @@ extension PlayerView {
     private var audioPlayPauseButton: some View {
         Button(action: { viewModel.togglePause() }, label: {
             Image(systemName: audioButtonIcon)
-                .font(.system(size: 18, weight: .semibold))
+                .font(.system(size: 18, weight: .medium))
                 .foregroundColor(audioColors.control)
                 .frame(width: 44, height: 44)
                 .background(Circle().fill(audioColors.controlBackground))

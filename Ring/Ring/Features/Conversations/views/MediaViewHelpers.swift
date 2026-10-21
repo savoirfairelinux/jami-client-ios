@@ -253,6 +253,41 @@ struct MediaScrubber: View {
     }
 }
 
+struct MediaScrubberRow: View {
+    let progress: Float
+    let elapsed: TimeInterval
+    let duration: TimeInterval
+    let onSeekStart: () -> Void
+    let onSeekChange: (Float) -> Void
+    let onSeekEnd: () -> Void
+
+    var body: some View {
+        HStack(spacing: 12) {
+            timeLabel(elapsed)
+            MediaScrubber(progress: progress,
+                          accessibilityValue: String.compactDurationFormatted(seconds: elapsed),
+                          onSeekStart: onSeekStart,
+                          onSeekChange: onSeekChange,
+                          onSeekEnd: onSeekEnd)
+            timeLabel(duration)
+        }
+        .frame(height: 44)
+    }
+
+    private func timeLabel(_ seconds: TimeInterval) -> some View {
+        Text(String.compactDurationFormatted(seconds: seconds))
+            .font(.subheadline.monospacedDigit())
+            .foregroundColor(.white.opacity(0.7))
+    }
+}
+
+extension View {
+    func mediaTrayStyle() -> some View {
+        padding(14)
+            .glassRoundedBackground(cornerRadius: 26)
+    }
+}
+
 // MARK: - Duration Formatting
 
 extension Float {
