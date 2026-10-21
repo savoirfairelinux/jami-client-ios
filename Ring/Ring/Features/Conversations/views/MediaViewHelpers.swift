@@ -289,6 +289,70 @@ extension View {
         }
         .buttonStyle(ScaleButtonStyle())
     }
+
+    @ViewBuilder
+    func glassPlayPauseButton(isPaused: Bool, iconSize: CGFloat, size: CGFloat, action: @escaping () -> Void) -> some View {
+        let button = Button(action: action) {
+            Image(systemName: isPaused ? "play.fill" : "pause.fill")
+                .font(.system(size: iconSize, weight: .medium))
+                .foregroundColor(.white)
+                .frame(width: size, height: size)
+                .contentShape(Circle())
+        }
+        .accessibilityLabel(isPaused ? L10n.Accessibility.audioPlayerPlay : L10n.Accessibility.audioPlayerPause)
+        if #available(iOS 26, *) {
+            button.glassEffect(.clear.interactive(), in: .circle)
+        } else {
+            button
+                .glassCircleBackground()
+                .buttonStyle(ScaleButtonStyle())
+        }
+    }
+
+    func trayTextButton(_ title: String, weight: Font.Weight, alignment: Alignment, color: Color, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Text(title)
+                .font(.body.weight(weight))
+                .foregroundColor(color)
+                .lineLimit(1)
+                .minimumScaleFactor(0.8)
+                .frame(minWidth: 44, minHeight: 44, alignment: alignment)
+                .contentShape(Rectangle())
+        }
+        .frame(maxWidth: .infinity, alignment: alignment)
+    }
+}
+
+// MARK: - Media Scrubber Row
+
+struct MediaScrubberRow<Slider: View>: View {
+    let elapsed: String
+    let duration: String
+    @ViewBuilder let slider: () -> Slider
+
+    var body: some View {
+        HStack(spacing: 12) {
+            timeLabel(elapsed, accessibilityLabel: L10n.Accessibility.audioPlayerElapsedTime)
+            slider()
+            timeLabel(duration, accessibilityLabel: L10n.Accessibility.audioPlayerDuration)
+        }
+        .frame(height: 44)
+    }
+
+    private func timeLabel(_ time: String, accessibilityLabel: String) -> some View {
+        Text(time)
+            .font(.subheadline.monospacedDigit())
+            .foregroundColor(.white.opacity(0.7))
+            .accessibilityLabel(accessibilityLabel)
+            .accessibilityValue(time)
+    }
+}
+
+extension View {
+    func mediaTrayStyle() -> some View {
+        padding(14)
+            .glassRoundedBackground(cornerRadius: 26)
+    }
 }
 
 // MARK: - Duration Formatting

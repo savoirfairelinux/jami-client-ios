@@ -40,9 +40,9 @@ struct VoiceRecordingPanel: View {
             }
             .frame(height: VoiceRecordingLayout.rowHeight)
             HStack(spacing: 12) {
-                sideButton(L10n.Global.cancel, weight: .regular, alignment: .leading, action: model.cancel)
+                trayTextButton(L10n.Global.cancel, weight: .regular, alignment: .leading, color: Color(UIColor.jamiButtonPrimary), action: model.cancel)
                 centerControl
-                sideButton(L10n.DataTransfer.sendMessage, weight: .semibold, alignment: .trailing, action: model.send)
+                trayTextButton(L10n.DataTransfer.sendMessage, weight: .semibold, alignment: .trailing, color: Color(UIColor.jamiButtonPrimary), action: model.send)
                     .accessibilityLabel(L10n.Accessibility.voiceMessageSend)
             }
         }
@@ -120,19 +120,6 @@ struct VoiceRecordingPanel: View {
         .frame(width: VoiceRecordingLayout.controlSize, height: VoiceRecordingLayout.controlSize)
     }
 
-    private func sideButton(_ title: String, weight: Font.Weight, alignment: Alignment, action: @escaping () -> Void) -> some View {
-        Button(action: action) {
-            Text(title)
-                .font(.body.weight(weight))
-                .foregroundColor(Color(UIColor.jamiButtonPrimary))
-                .lineLimit(1)
-                .minimumScaleFactor(0.8)
-                .frame(minWidth: VoiceRecordingLayout.rowHeight, minHeight: VoiceRecordingLayout.rowHeight, alignment: alignment)
-                .contentShape(Rectangle())
-        }
-        .frame(maxWidth: .infinity, alignment: alignment)
-    }
-
     private func timeLabel(_ seconds: TimeInterval) -> some View {
         Text(String.durationFormatted(seconds: Int(seconds)))
             .font(.subheadline.monospacedDigit())
@@ -158,7 +145,7 @@ struct VoiceRecordingHint: View {
 
 // MARK: - Shared pieces
 
-private struct RecordingDot: View {
+struct RecordingDot: View {
     @Environment(\.accessibilityReduceMotion)
     private var reduceMotion
     @SwiftUI.State private var dimmed = false

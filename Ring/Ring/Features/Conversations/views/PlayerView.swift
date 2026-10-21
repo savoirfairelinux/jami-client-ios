@@ -31,8 +31,8 @@ enum PlayButtonStyle {
 
     var iconSize: CGFloat {
         switch self {
-        case .fullScreen: return 48
-        case .videoMessage: return 28
+        case .fullScreen: return 34
+        case .videoMessage: return 21
         }
     }
 
@@ -285,6 +285,7 @@ struct PlayerView: View {
     var sizeMode: PlayerMode
     var withControls: Bool
     var externalControlsVisible: Binding<Bool>?
+    var fullScreenActions: AnyView?
     var onVideoTap: ((_ frame: CGRect, _ frameProvider: @escaping () -> CGRect) -> Void)?
     var onVideoLongPress: (() -> Void)?
     var audioColors = AudioMessageColors(background: Color(UIColor.placeholderText),
@@ -386,45 +387,37 @@ struct PlayerView: View {
     }
 
     private var fullScreenControls: some View {
-        ZStack {
+        let insets = UIWindow.currentSafeAreaInsets
+        return ZStack {
             centerPlayButton
-            VStack {
+            VStack(spacing: 0) {
+                HStack(spacing: 8) {
+                    Spacer()
+                    if let actions = fullScreenActions {
+                        actions
+                    }
+                    fullScreenMuteButton
+                }
+                .padding(.top, insets.top)
                 Spacer()
-                fullScreenBottomBar
+                fullScreenTray
+                    .padding(.bottom, insets.bottom + 16)
             }
+            .padding(.horizontal, 16)
         }
     }
 
     // MARK: - Unified Play/Pause Button
 
-    @ViewBuilder
     private func playPauseButton(_ style: PlayButtonStyle) -> some View {
-        let button = Button(action: {
+        glassPlayPauseButton(isPaused: coordinator.isPaused, iconSize: style.iconSize, size: style.buttonSize) {
             viewModel.togglePause()
             if style.autoHide { coordinator.scheduleAutoHide() }
-        }, label: {
-            Image(systemName: playPauseIcon)
-                .font(.system(size: style.iconSize, weight: .medium))
-                .foregroundColor(.white)
-                .frame(width: style.buttonSize, height: style.buttonSize)
-                .contentShape(Circle())
-        })
-        .accessibilityLabel(playPauseAccessibilityLabel)
-        if #available(iOS 26, *) {
-            button.glassEffect(.clear.interactive(), in: .circle)
-        } else {
-            button
-                .glassCircleBackground()
-                .buttonStyle(ScaleButtonStyle())
         }
     }
 
     private var playPauseIcon: String {
         coordinator.isPaused ? "play.fill" : "pause.fill"
-    }
-
-    private var playPauseAccessibilityLabel: String {
-        coordinator.isPaused ? L10n.Accessibility.audioPlayerPlay : L10n.Accessibility.audioPlayerPause
     }
 
     private var muteIcon: String {
@@ -439,40 +432,18 @@ struct PlayerView: View {
         playPauseButton(.fullScreen)
     }
 
-    @ViewBuilder private var fullScreenBottomBar: some View {
-        VStack(spacing: 10) {
-            // Row 1: Time capsule + audio circle button
-            HStack(spacing: 10) {
-                Text("\(coordinator.elapsedTimeString) / \(coordinator.duration.durationString)")
-                    .font(.system(.callout, design: .monospaced))
-                    .foregroundColor(.white.opacity(0.9))
-                    .padding(.horizontal, 16)
-                    .frame(height: 44)
-                    .glassCapsuleBackground()
-
-                Spacer()
-
-                Button(action: {
-                    viewModel.muteAudio()
-                    coordinator.scheduleAutoHide()
-                }, label: {
-                    Image(systemName: muteIcon)
-                        .font(.system(size: 18, weight: .medium))
-                        .foregroundColor(.white)
-                        .frame(width: 44, height: 44)
-                })
-                .glassCircleBackground()
-                .accessibilityLabel(muteAccessibilityLabel)
-            }
-
-            // Row 2: Slider in capsule
-            seekSlider(autoHide: true)
-                .padding(.horizontal, 16)
-                .frame(height: 60)
-                .glassCapsuleBackground()
+    private var fullScreenMuteButton: some View {
+        glassIconButton(systemName: muteIcon, accessibilityLabel: muteAccessibilityLabel) {
+            viewModel.muteAudio()
+            coordinator.scheduleAutoHide()
         }
-        .padding(.horizontal, 20)
-        .padding(.bottom, 16)
+    }
+
+    private var fullScreenTray: some View {
+        MediaScrubberRow(elapsed: coordinator.elapsedTimeString, duration: coordinator.duration.durationString) {
+            seekSlider(autoHide: true)
+        }
+        .mediaTrayStyle()
     }
 
     private func seekSlider(autoHide: Bool, color: Color = .white) -> some View {
@@ -522,8 +493,7 @@ extension PlayerView {
         ZStack {
             videoMessageGradient
             videoMessagePlayButton
-            videoMessageTopBar
-            videoMessageBottomBar
+            videoMessageChrome
         }
     }
 
@@ -549,34 +519,26 @@ extension PlayerView {
         playPauseButton(.videoMessage)
     }
 
-    private var videoMessageTopBar: some View {
-        VStack {
-            HStack(alignment: .center) {
+    private var videoMessageChrome: some View {
+        VStack(spacing: 0) {
+            HStack {
                 Text("\(coordinator.elapsedTimeString) / \(coordinator.duration.durationString)")
-                    .font(.system(.caption, design: .monospaced))
+                    .font(.footnote.monospacedDigit())
+                    .fontWeight(.medium)
                     .foregroundColor(.white)
                 Spacer()
                 Button(action: { viewModel.muteAudio() }, label: {
                     Image(systemName: muteIcon)
                         .font(.system(size: 14, weight: .medium))
                         .foregroundColor(.white)
-                        .frame(width: 44, height: 44)
+                        .frame(width: 44, height: 44, alignment: .trailing)
                 })
                 .accessibilityLabel(muteAccessibilityLabel)
             }
-            .padding(.horizontal, 10)
-            .padding(.top, 2)
-            Spacer()
-        }
-    }
-
-    private var videoMessageBottomBar: some View {
-        VStack {
             Spacer()
             seekSlider(autoHide: true)
-                .padding(.horizontal, 10)
-                .padding(.bottom, 6)
         }
+        .padding(.horizontal, 16)
     }
 
     // MARK: Audio-Only In-Message Controls
@@ -609,7 +571,7 @@ extension PlayerView {
     private var audioPlayPauseButton: some View {
         Button(action: { viewModel.togglePause() }, label: {
             Image(systemName: audioButtonIcon)
-                .font(.system(size: 18, weight: .semibold))
+                .font(.system(size: 18, weight: .medium))
                 .foregroundColor(audioColors.control)
                 .frame(width: 44, height: 44)
                 .background(Circle().fill(audioColors.controlBackground))

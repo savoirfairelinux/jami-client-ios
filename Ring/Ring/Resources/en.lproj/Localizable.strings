@@ -650,6 +650,8 @@
 "accessibility.audioPlayerMute" = "Mute";
 "accessibility.audioPlayerUnmute" = "Unmute";
 "accessibility.audioPlayerSeek" = "Seek";
+"accessibility.audioPlayerElapsedTime" = "Elapsed time";
+"accessibility.audioPlayerDuration" = "Duration";
 "accessibility.audioPlayerUnavailable" = "Audio unavailable";
 "accessibility.voiceMessageRecording" = "Recording";
 "accessibility.voiceMessageStop" = "Stop recording";

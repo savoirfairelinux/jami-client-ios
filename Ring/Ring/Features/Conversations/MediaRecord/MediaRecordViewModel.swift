@@ -21,6 +21,7 @@ import RxCocoa
 import SwiftyBeaver
 
 enum RecordingState {
+    case initial
     case recording
     case recorded
     case sent
@@ -41,10 +42,9 @@ class MediaRecordViewModel: ObservableObject, Stateable, ViewModel {
     @Published var previewImage: UIImage?
     @Published var isRecording: Bool = false
     @Published var isReadyToSend: Bool = false
-    @Published var showPlayerControls: Bool = false
     @Published var recordDuration: String = ""
     @Published var playerDuration: Float = 0
-    private var sliderPositionSink: ((Float) -> Void)?
+    @Published private(set) var previewElapsed: TimeInterval = 0
     @Published var isPaused: Bool = true
     @Published var isAudioMuted: Bool = true
     let dismissHandler = DismissHandler()
@@ -60,8 +60,10 @@ class MediaRecordViewModel: ObservableObject, Stateable, ViewModel {
     let injectionBag: InjectionBag
 
     private(set) var fileName = ""
-    @Published private(set) var fileDisplayName: String = ""
     private(set) var player: PlayerViewModel?
+    private var isSeeking = false
+    private var previewProgress: Float = 0
+    private var previewSliderUpdate: ((Float) -> Void)?
 
     @MainActor private lazy var orientationMonitor = DeviceOrientationMonitor()
     private var cameraStarted = false
@@ -117,17 +119,30 @@ class MediaRecordViewModel: ObservableObject, Stateable, ViewModel {
         guard let url = fileTransferService.newRecordingURL(for: conversation) else { return }
         guard let name = videoService.startLocalRecorder(audioOnly: false, path: url.path) else { return }
         fileName = name
-        fileDisplayName = URL(fileURLWithPath: name).lastPathComponent
         transition(to: .recording)
     }
 
     func stopRecording() {
-        videoService.stopLocalRecorder(path: fileName)
+        let recordedFile = fileName
+        videoService.stopLocalRecorder(path: recordedFile)
         transition(to: .recorded)
         // Allow the recording file to finish writing before creating the player.
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
-            self?.createPlayer()
+            guard let self = self, self.fileName == recordedFile else { return }
+            self.createPlayer()
         }
+    }
+
+    func retake() {
+        discardRecording()
+        playerDisposeBag = DisposeBag()
+        playerDuration = 0
+        updatePreviewPosition(0)
+        isPaused = true
+        isAudioMuted = true
+        cameraDisposeBag = DisposeBag()
+        subscribeCameraFrames()
+        transition(to: .initial)
     }
 
     // MARK: - Send / Cancel
@@ -144,13 +159,18 @@ class MediaRecordViewModel: ObservableObject, Stateable, ViewModel {
 
     func cancel() {
         if isRecording { stopRecording() }
+        discardRecording()
+        videoService.videRecordingFinished()
+        transition(to: .cancelled)
+    }
+
+    private func discardRecording() {
         player?.closePlayer()
         player = nil
-        videoService.videRecordingFinished()
         if !fileName.isEmpty {
             try? FileManager.default.removeItem(atPath: fileName)
         }
-        transition(to: .cancelled)
+        fileName = ""
     }
 
     // MARK: - Camera
@@ -163,12 +183,40 @@ class MediaRecordViewModel: ObservableObject, Stateable, ViewModel {
 
     func togglePause() { player?.togglePause() }
     func muteAudio() { player?.muteAudio() }
-    func userStartSeeking() { player?.userStartSeeking() }
-    func userStopSeeking() { player?.userStopSeeking() }
-    func seek(to value: Float) { player?.seekTimeVariable.accept(value) }
 
-    func registerSlider(_ sink: @escaping (Float) -> Void) {
-        sliderPositionSink = sink
+    func userStartSeeking() {
+        isSeeking = true
+        player?.userStartSeeking()
+        player?.seekTimeVariable.accept(previewProgress)
+    }
+
+    func seek(to value: Float) {
+        updatePreviewPosition(value)
+        player?.seekTimeVariable.accept(value)
+    }
+
+    func userStopSeeking() {
+        isSeeking = false
+        player?.seekTimeVariable.accept(previewProgress)
+        player?.userStopSeeking()
+    }
+
+    func registerPreviewSlider(_ update: @escaping (Float) -> Void) {
+        previewSliderUpdate = update
+        update(previewProgress)
+    }
+
+    var previewDuration: TimeInterval {
+        playerDuration > 0 ? TimeInterval(playerDuration / 1_000_000) : TimeInterval(recordingSeconds)
+    }
+
+    private func updatePreviewPosition(_ progress: Float) {
+        previewProgress = progress
+        previewSliderUpdate?(progress)
+        let elapsed = (previewDuration * TimeInterval(progress)).rounded(.down)
+        if elapsed != previewElapsed {
+            previewElapsed = elapsed
+        }
     }
 
     private func subscribeCameraFrames() {
@@ -185,16 +233,16 @@ class MediaRecordViewModel: ObservableObject, Stateable, ViewModel {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             switch state {
+            case .initial:
+                self.isReadyToSend = false
             case .recording:
                 self.isRecording = true
                 self.isReadyToSend = false
-                self.showPlayerControls = false
                 self.startTimer()
             case .recorded:
                 self.isRecording = false
                 self.isReadyToSend = true
                 self.stopTimer()
-                self.recordDuration = ""
             case .sent, .cancelled:
                 self.isRecording = false
                 self.isReadyToSend = false
@@ -208,7 +256,7 @@ class MediaRecordViewModel: ObservableObject, Stateable, ViewModel {
 
     private func startTimer() {
         recordingSeconds = 0
-        recordDuration = "00:00"
+        recordDuration = String.durationFormatted(seconds: 0)
         recordingTimer?.invalidate()
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
@@ -246,14 +294,6 @@ class MediaRecordViewModel: ObservableObject, Stateable, ViewModel {
             })
             .disposed(by: playerDisposeBag)
 
-        newPlayer.playerReady.asObservable()
-            .filter { $0 }
-            .take(1)
-            .subscribe(onNext: { [weak self] _ in
-                DispatchQueue.main.async { self?.showPlayerControls = true }
-            })
-            .disposed(by: playerDisposeBag)
-
         newPlayer.pause.asObservable()
             .subscribe(onNext: { [weak self] paused in
                 DispatchQueue.main.async { self?.isPaused = paused }
@@ -268,13 +308,20 @@ class MediaRecordViewModel: ObservableObject, Stateable, ViewModel {
 
         newPlayer.playerDuration.asObservable()
             .subscribe(onNext: { [weak self] duration in
-                DispatchQueue.main.async { self?.playerDuration = duration }
+                DispatchQueue.main.async {
+                    guard let self = self else { return }
+                    self.playerDuration = duration
+                    self.updatePreviewPosition(self.previewProgress)
+                }
             })
             .disposed(by: playerDisposeBag)
 
         newPlayer.playerPosition.asObservable()
             .subscribe(onNext: { [weak self] position in
-                DispatchQueue.main.async { self?.sliderPositionSink?(position) }
+                DispatchQueue.main.async {
+                    guard let self = self, !self.isSeeking else { return }
+                    self.updatePreviewPosition(position)
+                }
             })
             .disposed(by: playerDisposeBag)
     }
