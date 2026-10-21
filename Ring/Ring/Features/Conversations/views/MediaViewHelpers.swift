@@ -53,101 +53,6 @@ extension View {
     }
 }
 
-// MARK: - Shared Media Seek Slider
-
-struct MediaSeekSlider: UIViewRepresentable {
-    var trackColor: Color = .white
-    var thumbSize: CGFloat = 14
-    var onRegister: (@escaping (Float) -> Void) -> Void
-    var onSeekStart: () -> Void
-    var onSeekChange: (Float) -> Void
-    var onSeekEnd: () -> Void
-
-    func makeCoordinator() -> Coordinator { Coordinator() }
-
-    func makeUIView(context: Context) -> UISlider {
-        let slider = UISlider()
-        slider.minimumValue = 0
-        slider.maximumValue = 1
-
-        let coordinator = context.coordinator
-        coordinator.onSeekStart = onSeekStart
-        coordinator.onSeekChange = onSeekChange
-        coordinator.onSeekEnd = onSeekEnd
-
-        // Register the direct-update sink so the caller can push position
-        // values at ~10x/sec without triggering SwiftUI body re-evaluation.
-        onRegister { [weak slider, weak coordinator] newValue in
-            guard let slider, coordinator?.isSeeking != true else { return }
-            slider.value = newValue
-        }
-
-        applyStyle(to: slider, color: UIColor(trackColor), thumbSize: thumbSize)
-        slider.accessibilityLabel = L10n.Accessibility.audioPlayerSeek
-        slider.addTarget(coordinator, action: #selector(Coordinator.touchDown(_:)), for: .touchDown)
-        slider.addTarget(coordinator, action: #selector(Coordinator.valueChanged(_:)), for: .valueChanged)
-        slider.addTarget(coordinator, action: #selector(Coordinator.touchUp(_:)),
-                         for: [.touchUpInside, .touchUpOutside, .touchCancel])
-        return slider
-    }
-
-    func updateUIView(_ slider: UISlider, context: Context) {
-        let coordinator = context.coordinator
-        coordinator.onSeekStart = onSeekStart
-        coordinator.onSeekChange = onSeekChange
-        coordinator.onSeekEnd = onSeekEnd
-
-        let uiColor = UIColor(trackColor)
-        guard coordinator.lastColor != uiColor || coordinator.lastThumbSize != thumbSize else { return }
-        applyStyle(to: slider, color: uiColor, thumbSize: thumbSize)
-        coordinator.lastColor = uiColor
-        coordinator.lastThumbSize = thumbSize
-    }
-
-    private func applyStyle(to slider: UISlider, color: UIColor, thumbSize: CGFloat) {
-        slider.minimumTrackTintColor = color
-        slider.maximumTrackTintColor = color.withAlphaComponent(0.35)
-        slider.thumbTintColor = color
-        let thumb = Self.makeCircle(size: thumbSize, color: color)
-        slider.setThumbImage(thumb, for: .normal)
-        slider.setThumbImage(thumb, for: .highlighted)
-    }
-
-    private static func makeCircle(size: CGFloat, color: UIColor) -> UIImage {
-        let cgSize = CGSize(width: size, height: size)
-        let renderer = UIGraphicsImageRenderer(size: cgSize)
-        return renderer.image { ctx in
-            color.setFill()
-            ctx.cgContext.fillEllipse(in: CGRect(origin: .zero, size: cgSize))
-        }
-    }
-
-    final class Coordinator: NSObject {
-        var isSeeking = false
-        var onSeekStart: () -> Void = {}
-        var onSeekChange: (Float) -> Void = { _ in }
-        var onSeekEnd: () -> Void = {}
-        var lastColor: UIColor?
-        var lastThumbSize: CGFloat = 0
-
-        @objc
-        func touchDown(_ slider: UISlider) {
-            isSeeking = true
-            onSeekStart()
-        }
-        @objc
-        func valueChanged(_ slider: UISlider) {
-            onSeekChange(slider.value)
-        }
-        @objc
-        func touchUp(_ slider: UISlider) {
-            onSeekChange(slider.value)
-            onSeekEnd()
-            isSeeking = false
-        }
-    }
-}
-
 // MARK: - Button Style
 
 struct ScaleButtonStyle: ButtonStyle {
@@ -195,16 +100,19 @@ struct MediaScrubber: View {
     var trackColor: Color = .white.opacity(0.35)
     var fillColor: Color = .white.opacity(0.7)
     var activeFillColor: Color = .white
+    var requiresHorizontalDrag = false
     let onSeekStart: () -> Void
     let onSeekChange: (Float) -> Void
     let onSeekEnd: () -> Void
 
     @GestureState private var isDragging = false
     @SwiftUI.State private var isSeeking = false
+    @SwiftUI.State private var isDragIgnored = false
 
     private static let restingHeight: CGFloat = 4
     private static let activeHeight: CGFloat = 8
     private static let accessibilityStep: Float = 0.1
+    private static let horizontalDragDistance: CGFloat = 10
 
     var body: some View {
         GeometryReader { geometry in
@@ -218,11 +126,14 @@ struct MediaScrubber: View {
             .frame(height: isSeeking ? Self.activeHeight : Self.restingHeight)
             .frame(maxHeight: .infinity)
             .contentShape(Rectangle())
-            .gesture(dragGesture(width: geometry.size.width))
+            .if(requiresHorizontalDrag) { $0.simultaneousGesture(dragGesture(width: geometry.size.width)) }
+            .if(!requiresHorizontalDrag) { $0.gesture(dragGesture(width: geometry.size.width)) }
         }
         .animation(.easeOut(duration: 0.15), value: isSeeking)
         .onChange(of: isDragging) { dragging in
-            guard !dragging, isSeeking else { return }
+            guard !dragging else { return }
+            isDragIgnored = false
+            guard isSeeking else { return }
             isSeeking = false
             onSeekEnd()
         }
@@ -238,12 +149,17 @@ struct MediaScrubber: View {
     }
 
     private func dragGesture(width: CGFloat) -> some Gesture {
-        DragGesture(minimumDistance: 0)
+        DragGesture(minimumDistance: requiresHorizontalDrag ? Self.horizontalDragDistance : 0)
             .updating($isDragging) { _, dragging, _ in
                 dragging = true
             }
             .onChanged { value in
                 if !isSeeking {
+                    guard !isDragIgnored else { return }
+                    if requiresHorizontalDrag, abs(value.translation.height) > abs(value.translation.width) {
+                        isDragIgnored = true
+                        return
+                    }
                     isSeeking = true
                     onSeekStart()
                 }
@@ -292,16 +208,15 @@ extension View {
 
 extension Float {
     var durationString: String {
-        guard self > 0 else { return "00:00" }
-        return String.durationFormatted(seconds: Int(self / 1_000_000))
+        String.compactDurationFormatted(seconds: TimeInterval(max(self, 0) / 1_000_000))
     }
 
     /// Returns the elapsed time string for a given progress (0..1) and total duration (microseconds).
     static func elapsedString(progress: Float, duration: Float) -> String {
-        guard duration > 0 else { return "00:00" }
+        guard duration > 0 else { return String.compactDurationFormatted(seconds: 0) }
         let totalSeconds = Int(duration / 1_000_000)
         let elapsed = Int(Float(totalSeconds) * min(max(progress, 0), 1))
-        return String.durationFormatted(seconds: elapsed)
+        return String.compactDurationFormatted(seconds: TimeInterval(elapsed))
     }
 }
 

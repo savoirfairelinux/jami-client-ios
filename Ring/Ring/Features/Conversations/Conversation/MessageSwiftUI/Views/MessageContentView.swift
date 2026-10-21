@@ -408,9 +408,9 @@ struct MessageContentView: View {
     }
 
     private func isInVideoSeekZone(_ location: CGPoint) -> Bool {
-        let sliderZoneHeight: CGFloat = 40
+        let scrubberZoneHeight: CGFloat = 44
         let viewHeight = max(model.playerHeight, 80)
-        return location.y > viewHeight - sliderZoneHeight
+        return location.y > viewHeight - scrubberZoneHeight
     }
 
     private func isInAudioSeekZone(_ location: CGPoint) -> Bool {

@@ -98,8 +98,7 @@ class PlayerCoordinator: ObservableObject {
     var progress: Float = 0 {
         didSet { playback.value = progress }
     }
-    @Published var elapsedTimeString: String = "00:00"
-    var sliderUpdate: ((Float) -> Void)?
+    @Published var elapsedTimeString: String = String.compactDurationFormatted(seconds: 0)
 
     private var lastBuffer: CMSampleBuffer?
     var isSeeking: Bool = false
@@ -174,7 +173,6 @@ class PlayerCoordinator: ObservableObject {
                 guard let self = self else { return }
                 if !self.isSeeking {
                     self.progress = position
-                    self.sliderUpdate?(position)
                     self.updateElapsedTime()
                 }
             })
@@ -475,23 +473,9 @@ struct PlayerView: View {
             FullScreenScrubberRow(
                 playback: coordinator.playback,
                 duration: coordinator.duration,
-                onSeekStart: {
-                    coordinator.cancelAutoHide()
-                    coordinator.isSeeking = true
-                    viewModel.userStartSeeking()
-                    viewModel.seekTimeVariable.accept(coordinator.progress)
-                },
-                onSeekChange: { newValue in
-                    coordinator.progress = newValue
-                    coordinator.updateElapsedTime()
-                    viewModel.seekTimeVariable.accept(newValue)
-                },
-                onSeekEnd: {
-                    coordinator.isSeeking = false
-                    viewModel.seekTimeVariable.accept(coordinator.progress)
-                    viewModel.userStopSeeking()
-                    coordinator.scheduleAutoHide()
-                }
+                onSeekStart: { startSeeking(autoHide: true) },
+                onSeekChange: seek(to:),
+                onSeekEnd: { stopSeeking(autoHide: true) }
             )
             if let actions = fullScreenActions {
                 actions
@@ -500,31 +484,35 @@ struct PlayerView: View {
         .mediaTrayStyle()
     }
 
-    private func seekSlider(autoHide: Bool, trackColor: Color = .white, thumbSize: CGFloat = 14) -> some View {
-        MediaSeekSlider(
-            trackColor: trackColor,
-            thumbSize: thumbSize,
-            onRegister: { sink in coordinator.sliderUpdate = sink },
-            onSeekStart: {
-                if autoHide { coordinator.cancelAutoHide() }
-                coordinator.isSeeking = true
-                viewModel.userStartSeeking()
-                viewModel.seekTimeVariable.accept(coordinator.progress)
-            },
-            onSeekChange: { newValue in
-                coordinator.progress = newValue
-                coordinator.updateElapsedTime()
-                if coordinator.isSeeking {
-                    viewModel.seekTimeVariable.accept(newValue)
-                }
-            },
-            onSeekEnd: {
-                coordinator.isSeeking = false
-                viewModel.seekTimeVariable.accept(coordinator.progress)
-                viewModel.userStopSeeking()
-                if autoHide { coordinator.scheduleAutoHide() }
-            }
+    private func seekScrubber(autoHide: Bool, color: Color = .white) -> some View {
+        PlaybackScrubber(
+            playback: coordinator.playback,
+            duration: coordinator.duration,
+            color: color,
+            onSeekStart: { startSeeking(autoHide: autoHide) },
+            onSeekChange: seek(to:),
+            onSeekEnd: { stopSeeking(autoHide: autoHide) }
         )
+    }
+
+    private func startSeeking(autoHide: Bool) {
+        if autoHide { coordinator.cancelAutoHide() }
+        coordinator.isSeeking = true
+        viewModel.userStartSeeking()
+        viewModel.seekTimeVariable.accept(coordinator.progress)
+    }
+
+    private func seek(to value: Float) {
+        coordinator.progress = value
+        coordinator.updateElapsedTime()
+        viewModel.seekTimeVariable.accept(value)
+    }
+
+    private func stopSeeking(autoHide: Bool) {
+        coordinator.isSeeking = false
+        viewModel.seekTimeVariable.accept(coordinator.progress)
+        viewModel.userStopSeeking()
+        if autoHide { coordinator.scheduleAutoHide() }
     }
 
 }
@@ -544,6 +532,28 @@ private struct FullScreenScrubberRow: View {
                          onSeekStart: onSeekStart,
                          onSeekChange: onSeekChange,
                          onSeekEnd: onSeekEnd)
+    }
+}
+
+private struct PlaybackScrubber: View {
+    @ObservedObject var playback: PlaybackProgress
+    let duration: Float
+    let color: Color
+    let onSeekStart: () -> Void
+    let onSeekChange: (Float) -> Void
+    let onSeekEnd: () -> Void
+
+    var body: some View {
+        let elapsed = TimeInterval(duration / 1_000_000) * TimeInterval(playback.value)
+        MediaScrubber(progress: playback.value,
+                      accessibilityValue: String.compactDurationFormatted(seconds: elapsed),
+                      trackColor: color.opacity(0.35),
+                      fillColor: color.opacity(0.7),
+                      activeFillColor: color,
+                      requiresHorizontalDrag: true,
+                      onSeekStart: onSeekStart,
+                      onSeekChange: onSeekChange,
+                      onSeekEnd: onSeekEnd)
     }
 }
 
@@ -615,9 +625,9 @@ extension PlayerView {
     private var videoMessageBottomBar: some View {
         VStack {
             Spacer()
-            seekSlider(autoHide: true)
+            seekScrubber(autoHide: true)
+                .frame(height: 44)
                 .padding(.horizontal, 10)
-                .padding(.bottom, 6)
         }
     }
 
@@ -632,7 +642,7 @@ extension PlayerView {
             }
             HStack(spacing: 10) {
                 audioPlayPauseButton
-                seekSlider(autoHide: false, trackColor: audioColors.control, thumbSize: 12)
+                seekScrubber(autoHide: false, color: audioColors.control)
                     .frame(height: 44)
                     .disabled(coordinator.playbackFailed)
                 Text(coordinator.audioTimeString)
