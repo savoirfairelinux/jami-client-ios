@@ -222,6 +222,7 @@ class ConversationViewModel: Stateable, ObservableObject {
         guard let uri = callService.outgoingCallURI(for: conversation) else { return }
         let name = getContactNameForCall()
         self.closeAllPlayers()
+        self.swiftUIModel.voiceRecording.interrupt()
         self.stateSubject.onNext(ConversationState.startCall(contactRingId: uri, userName: name))
     }
 
@@ -229,6 +230,7 @@ class ConversationViewModel: Stateable, ObservableObject {
         guard let uri = callService.outgoingCallURI(for: conversation) else { return }
         let name = getContactNameForCall()
         self.closeAllPlayers()
+        self.swiftUIModel.voiceRecording.interrupt()
         self.stateSubject.onNext(ConversationState.startAudioCall(contactRingId: uri, userName: name))
     }
 
@@ -308,14 +310,6 @@ class ConversationViewModel: Stateable, ObservableObject {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.stateSubject.onNext(ConversationState.recordFile(conversation: self.conversation, audioOnly: false))
-        }
-    }
-
-    func recordAudioFile() {
-        closeAllPlayers()
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.stateSubject.onNext(ConversationState.recordFile(conversation: self.conversation, audioOnly: true))
         }
     }
 }

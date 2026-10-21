@@ -58,12 +58,6 @@ class MediaRecordViewModel: ObservableObject, Stateable, ViewModel {
 
     // MARK: - Private
 
-    private static let recordingDateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd_HH:mm:ss"
-        return formatter
-    }()
-
     private let videoService: VideoService
     private let accountService: AccountsService
     private let fileTransferService: DataTransferService
@@ -128,11 +122,7 @@ class MediaRecordViewModel: ObservableObject, Stateable, ViewModel {
         player?.closePlayer()
         player = nil
 
-        let nameForRecordingFile = Self.recordingDateFormatter.string(from: Date()) + "_" + String(UInt64.random(in: 0...9999))
-        guard let url = fileTransferService.getFilePathForRecordings(forFile: nameForRecordingFile,
-                                                                     accountID: conversation.accountId,
-                                                                     conversationID: conversation.id,
-                                                                     isSwarm: conversation.isSwarm()) else { return }
+        guard let url = fileTransferService.newRecordingURL(for: conversation) else { return }
         guard let name = videoService.startLocalRecorder(audioOnly: audioOnly, path: url.path) else { return }
         fileName = name
         fileDisplayName = URL(fileURLWithPath: name).lastPathComponent

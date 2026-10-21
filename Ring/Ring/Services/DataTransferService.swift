@@ -244,7 +244,21 @@ public final class DataTransferService: DataTransferAdapterDelegate {
                                               conversationID: conversationID)
     }
 
-    func getFilePathForRecordings(forFile fileName: String, accountID: String, conversationID: String, isSwarm: Bool) -> URL? {
+    private static let recordingDateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd_HH:mm:ss"
+        return formatter
+    }()
+
+    func newRecordingURL(for conversation: ConversationModel) -> URL? {
+        let fileName = Self.recordingDateFormatter.string(from: Date()) + "_" + String(UInt64.random(in: 0...9999))
+        return getFilePathForRecordings(forFile: fileName,
+                                        accountID: conversation.accountId,
+                                        conversationID: conversation.id,
+                                        isSwarm: conversation.isSwarm())
+    }
+
+    private func getFilePathForRecordings(forFile fileName: String, accountID: String, conversationID: String, isSwarm: Bool) -> URL? {
         if isSwarm {
             return CommonHelpers.createFileUrlForSwarm(fileName: fileName, accountId: accountID, conversationId: conversationID)
         }

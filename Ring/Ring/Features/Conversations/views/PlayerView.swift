@@ -466,7 +466,7 @@ struct PlayerView: View {
             }
 
             // Row 2: Slider in capsule
-            seekSlider(autoHide: true, thumbSize: 18)
+            seekSlider(autoHide: true)
                 .padding(.horizontal, 16)
                 .frame(height: 60)
                 .glassCapsuleBackground()
@@ -475,10 +475,11 @@ struct PlayerView: View {
         .padding(.bottom, 16)
     }
 
-    private func seekSlider(autoHide: Bool, trackColor: Color = .white, thumbSize: CGFloat = 14) -> some View {
+    private func seekSlider(autoHide: Bool, color: Color = .white) -> some View {
         MediaSeekSlider(
-            trackColor: trackColor,
-            thumbSize: thumbSize,
+            trackColor: color.opacity(0.35),
+            fillColor: color.opacity(0.7),
+            activeFillColor: color,
             onRegister: { sink in coordinator.sliderUpdate = sink },
             onSeekStart: {
                 if autoHide { coordinator.cancelAutoHide() }
@@ -589,7 +590,7 @@ extension PlayerView {
             }
             HStack(spacing: 10) {
                 audioPlayPauseButton
-                seekSlider(autoHide: false, trackColor: audioColors.control, thumbSize: 12)
+                seekSlider(autoHide: false, color: audioColors.control)
                     .frame(height: 44)
                     .disabled(coordinator.playbackFailed)
                 Text(coordinator.audioTimeString)

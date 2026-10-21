@@ -56,8 +56,9 @@ extension View {
 // MARK: - Shared Media Seek Slider
 
 struct MediaSeekSlider: UIViewRepresentable {
-    var trackColor: Color = .white
-    var thumbSize: CGFloat = 14
+    var trackColor: Color = .white.opacity(0.35)
+    var fillColor: Color = .white.opacity(0.7)
+    var activeFillColor: Color = .white
     var onRegister: (@escaping (Float) -> Void) -> Void
     var onSeekStart: () -> Void
     var onSeekChange: (Float) -> Void
@@ -65,8 +66,8 @@ struct MediaSeekSlider: UIViewRepresentable {
 
     func makeCoordinator() -> Coordinator { Coordinator() }
 
-    func makeUIView(context: Context) -> UISlider {
-        let slider = UISlider()
+    func makeUIView(context: Context) -> ScrubberSlider {
+        let slider = ScrubberSlider()
         slider.minimumValue = 0
         slider.maximumValue = 1
 
@@ -82,7 +83,7 @@ struct MediaSeekSlider: UIViewRepresentable {
             slider.value = newValue
         }
 
-        applyStyle(to: slider, color: UIColor(trackColor), thumbSize: thumbSize)
+        applyColors(to: slider, coordinator: coordinator)
         slider.accessibilityLabel = L10n.Accessibility.audioPlayerSeek
         slider.addTarget(coordinator, action: #selector(Coordinator.touchDown(_:)), for: .touchDown)
         slider.addTarget(coordinator, action: #selector(Coordinator.valueChanged(_:)), for: .valueChanged)
@@ -91,35 +92,19 @@ struct MediaSeekSlider: UIViewRepresentable {
         return slider
     }
 
-    func updateUIView(_ slider: UISlider, context: Context) {
+    func updateUIView(_ slider: ScrubberSlider, context: Context) {
         let coordinator = context.coordinator
         coordinator.onSeekStart = onSeekStart
         coordinator.onSeekChange = onSeekChange
         coordinator.onSeekEnd = onSeekEnd
-
-        let uiColor = UIColor(trackColor)
-        guard coordinator.lastColor != uiColor || coordinator.lastThumbSize != thumbSize else { return }
-        applyStyle(to: slider, color: uiColor, thumbSize: thumbSize)
-        coordinator.lastColor = uiColor
-        coordinator.lastThumbSize = thumbSize
+        applyColors(to: slider, coordinator: coordinator)
     }
 
-    private func applyStyle(to slider: UISlider, color: UIColor, thumbSize: CGFloat) {
-        slider.minimumTrackTintColor = color
-        slider.maximumTrackTintColor = color.withAlphaComponent(0.35)
-        slider.thumbTintColor = color
-        let thumb = Self.makeCircle(size: thumbSize, color: color)
-        slider.setThumbImage(thumb, for: .normal)
-        slider.setThumbImage(thumb, for: .highlighted)
-    }
-
-    private static func makeCircle(size: CGFloat, color: UIColor) -> UIImage {
-        let cgSize = CGSize(width: size, height: size)
-        let renderer = UIGraphicsImageRenderer(size: cgSize)
-        return renderer.image { ctx in
-            color.setFill()
-            ctx.cgContext.fillEllipse(in: CGRect(origin: .zero, size: cgSize))
-        }
+    private func applyColors(to slider: ScrubberSlider, coordinator: Coordinator) {
+        let colors = [trackColor, fillColor, activeFillColor]
+        guard coordinator.appliedColors != colors else { return }
+        coordinator.appliedColors = colors
+        slider.setColors(track: UIColor(trackColor), fill: UIColor(fillColor), activeFill: UIColor(activeFillColor))
     }
 
     final class Coordinator: NSObject {
@@ -127,8 +112,7 @@ struct MediaSeekSlider: UIViewRepresentable {
         var onSeekStart: () -> Void = {}
         var onSeekChange: (Float) -> Void = { _ in }
         var onSeekEnd: () -> Void = {}
-        var lastColor: UIColor?
-        var lastThumbSize: CGFloat = 0
+        var appliedColors: [Color] = []
 
         @objc
         func touchDown(_ slider: UISlider) {
@@ -145,6 +129,126 @@ struct MediaSeekSlider: UIViewRepresentable {
             onSeekEnd()
             isSeeking = false
         }
+    }
+}
+
+final class ScrubberSlider: UISlider {
+    private static let restingHeight: CGFloat = 4
+    private static let activeHeight: CGFloat = 8
+    private static let minimumTouchHeight: CGFloat = 44
+    private static let accessibilityStep: Float = 0.1
+
+    private var trackColor: UIColor = .white
+    private var fillColor: UIColor = .white
+    private var activeFillColor: UIColor = .white
+
+    private var isActive = false {
+        didSet {
+            guard isActive != oldValue else { return }
+            updateTrackImages()
+            UIView.animate(withDuration: 0.15) { self.layoutIfNeeded() }
+        }
+    }
+
+    private var trackHeight: CGFloat {
+        isActive ? Self.activeHeight : Self.restingHeight
+    }
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        let clearThumb = UIGraphicsImageRenderer(size: CGSize(width: 1, height: 1)).image { _ in }
+        setThumbImage(clearThumb, for: .normal)
+        setThumbImage(clearThumb, for: .highlighted)
+        updateTrackImages()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    func setColors(track: UIColor, fill: UIColor, activeFill: UIColor) {
+        trackColor = track
+        fillColor = fill
+        activeFillColor = activeFill
+        updateTrackImages()
+    }
+
+    override var intrinsicContentSize: CGSize {
+        CGSize(width: UIView.noIntrinsicMetric, height: Self.minimumTouchHeight)
+    }
+
+    override func trackRect(forBounds bounds: CGRect) -> CGRect {
+        CGRect(x: bounds.minX, y: bounds.midY - trackHeight / 2, width: bounds.width, height: trackHeight)
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        guard traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) else { return }
+        updateTrackImages()
+    }
+
+    override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+        isActive = true
+        seek(to: touch)
+        return true
+    }
+
+    override func continueTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+        seek(to: touch)
+        return true
+    }
+
+    override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
+        isActive = false
+    }
+
+    override func cancelTracking(with event: UIEvent?) {
+        isActive = false
+    }
+
+    override func accessibilityIncrement() {
+        adjust(by: Self.accessibilityStep)
+    }
+
+    override func accessibilityDecrement() {
+        adjust(by: -Self.accessibilityStep)
+    }
+
+    private func seek(to touch: UITouch) {
+        let track = trackRect(forBounds: bounds)
+        guard track.width > 0 else { return }
+        let fraction = Float((touch.location(in: self).x - track.minX) / track.width)
+        setValue(clamped(fraction), animated: false)
+        sendActions(for: .valueChanged)
+    }
+
+    private func adjust(by step: Float) {
+        sendActions(for: .touchDown)
+        setValue(clamped(value + step), animated: false)
+        sendActions(for: .valueChanged)
+        sendActions(for: .touchUpInside)
+    }
+
+    private func clamped(_ newValue: Float) -> Float {
+        min(maximumValue, max(minimumValue, newValue))
+    }
+
+    private func updateTrackImages() {
+        let fill = isActive ? activeFillColor : fillColor
+        setMinimumTrackImage(Self.capsuleImage(color: fill, height: trackHeight, traits: traitCollection), for: .normal)
+        setMaximumTrackImage(Self.capsuleImage(color: trackColor, height: trackHeight, traits: traitCollection), for: .normal)
+        setNeedsLayout()
+    }
+
+    private static func capsuleImage(color: UIColor, height: CGFloat, traits: UITraitCollection) -> UIImage {
+        let size = CGSize(width: height + 1, height: height)
+        let resolved = color.resolvedColor(with: traits)
+        let image = UIGraphicsImageRenderer(size: size).image { _ in
+            resolved.setFill()
+            UIBezierPath(roundedRect: CGRect(origin: .zero, size: size), cornerRadius: height / 2).fill()
+        }
+        let cap = height / 2
+        return image.resizableImage(withCapInsets: UIEdgeInsets(top: 0, left: cap, bottom: 0, right: cap))
     }
 }
 
