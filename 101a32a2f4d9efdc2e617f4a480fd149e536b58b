@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13cc1a3c_f0d9e75f",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/VoiceRecordingVM.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-21T17:25:53Z",
+      "side": 1,
+      "message": "[error] Line 139: 🔴 `send()` defers `sendFile` via `afterFileIsWritten` and captures `self` weakly, so if `VoiceRecordingVM` is deallocated during that delay the voice message is silently dropped. Capture `dataTransferService`, `conversation`, and `path` strongly before scheduling (or move send orchestration to a longer-lived service) so delivery does not depend on view-model lifetime.",
+      "revId": "101a32a2f4d9efdc2e617f4a480fd149e536b58b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee191b08_56ca60db",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/VoiceRecordingVM.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-21T17:25:53Z",
+      "side": 1,
+      "message": "[warning] Line 202: 🟡 `transferHelper.releaseAllPlayers()` runs before confirming `startLocalRecorder` succeeded. If recorder startup fails, ongoing message playback is still interrupted even though no recording starts. Move player release after successful recorder creation, and surface a user-visible error/hint when `startLocalRecorder` returns `nil`.",
+      "revId": "101a32a2f4d9efdc2e617f4a480fd149e536b58b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28068311_805d7a16",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/VoiceRecordingVM.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-21T17:25:53Z",
+      "side": 1,
+      "message": "[warning] Line 237: 🟡 File readiness is gated by a fixed 1s delay (`fileFinalizationDelay`) in `afterFileIsWritten`, which is timing-dependent and can fail on slower I/O or add unnecessary latency on faster devices. Replace the hardcoded timeout with a deterministic completion signal from recorder stop (or explicit file-existence/size stabilization check with bounded retry) before preview/send/delete actions.",
+      "revId": "101a32a2f4d9efdc2e617f4a480fd149e536b58b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
