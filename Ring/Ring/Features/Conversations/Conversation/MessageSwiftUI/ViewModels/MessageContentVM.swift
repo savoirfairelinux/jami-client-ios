@@ -132,7 +132,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     @Published var showProgress: Bool = true
     @Published var playerHeight: CGFloat = 80
     @Published var playerWidth: CGFloat = 250
-    private let audioPlayerHeight: CGFloat = 56
+    private let audioPlayerHeight: CGFloat = 48
     @Published var player: PlayerViewModel?
     @Published var corners: UIRectCorner = [.allCorners]
     @Published var menuItems = [ContextualMenuItem]()
@@ -637,7 +637,8 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
         return AudioMessageColors(background: backgroundColor,
                                   foreground: styling.textColor,
                                   control: control,
-                                  controlBackground: control.opacity(isIncoming ? 0.15 : 0.22))
+                                  controlBackground: control.opacity(isIncoming ? 0.15 : 0.22),
+                                  timeBackground: styling.textColor.opacity(isIncoming ? 0.06 : 0.14))
     }
 
     func updatePlayer(player: PlayerViewModel?) {

@@ -134,20 +134,12 @@ struct MessageBubbleView: View {
 
     @ViewBuilder
     private func renderFileTransfer() -> some View {
-        let media = MediaView(message: model, onLongGesture: receivedLongPress(), minHeight: 50, maxHeight: 300, withPlayerControls: true, cornerRadius: 0, transferCardTime: model.timeText)
+        let media = MediaView(message: model, onLongGesture: receivedLongPress(), minHeight: 50, maxHeight: 300, withPlayerControls: true, cornerRadius: 0, time: model.timeText)
             .marksMessageBubbleBottom()
-        if model.player != nil {
-            VStack(alignment: .trailing, spacing: TimeLayout.outsideSpacing) {
-                media
-                MessageTimeView(text: model.timeText, color: model.styling.secondaryTextColor)
-            }
-        } else if model.finalImage != nil {
+        if model.finalImage != nil && model.player == nil {
             media
                 .overlay(alignment: .bottomTrailing) {
-                    MessageTimeView(text: model.timeText, color: .white)
-                        .padding(.horizontal, TimeLayout.capsuleHorizontalPadding)
-                        .padding(.vertical, TimeLayout.capsuleVerticalPadding)
-                        .background(Capsule().fill(Color.black.opacity(0.4)))
+                    MessageTimeCapsule(text: model.timeText, color: .white, background: Color.black.opacity(0.4))
                         .padding(TimeLayout.capsuleInset)
                 }
         } else {
@@ -239,8 +231,6 @@ extension View {
 private enum TimeLayout {
     static let outsideSpacing: CGFloat = 2
     static let editedSpacing: CGFloat = 4
-    static let capsuleHorizontalPadding: CGFloat = 6
-    static let capsuleVerticalPadding: CGFloat = 2
     static let capsuleInset: CGFloat = 8
 }
 

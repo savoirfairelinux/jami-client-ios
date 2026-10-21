@@ -53,6 +53,7 @@ struct AudioMessageColors {
     let foreground: Color
     let control: Color
     let controlBackground: Color
+    let timeBackground: Color
 }
 
 // MARK: - Player State Coordinator
@@ -291,7 +292,9 @@ struct PlayerView: View {
     var audioColors = AudioMessageColors(background: Color(UIColor.placeholderText),
                                          foreground: .white,
                                          control: .white,
-                                         controlBackground: Color.white.opacity(0.22))
+                                         controlBackground: Color.white.opacity(0.22),
+                                         timeBackground: Color.white.opacity(0.14))
+    var messageTime: String?
 
     @StateObject private var coordinator = PlayerCoordinator()
 
@@ -452,26 +455,32 @@ struct PlayerView: View {
             fillColor: color.opacity(0.7),
             activeFillColor: color,
             onRegister: { sink in coordinator.sliderUpdate = sink },
-            onSeekStart: {
-                if autoHide { coordinator.cancelAutoHide() }
-                coordinator.isSeeking = true
-                viewModel.userStartSeeking()
-                viewModel.seekTimeVariable.accept(coordinator.progress)
-            },
-            onSeekChange: { newValue in
-                coordinator.progress = newValue
-                coordinator.updateElapsedTime()
-                if coordinator.isSeeking {
-                    viewModel.seekTimeVariable.accept(newValue)
-                }
-            },
-            onSeekEnd: {
-                coordinator.isSeeking = false
-                viewModel.seekTimeVariable.accept(coordinator.progress)
-                viewModel.userStopSeeking()
-                if autoHide { coordinator.scheduleAutoHide() }
-            }
+            onSeekStart: { beginSeek(autoHide: autoHide) },
+            onSeekChange: { newValue in changeSeek(to: newValue) },
+            onSeekEnd: { endSeek(autoHide: autoHide) }
         )
+    }
+
+    private func beginSeek(autoHide: Bool) {
+        if autoHide { coordinator.cancelAutoHide() }
+        coordinator.isSeeking = true
+        viewModel.userStartSeeking()
+        viewModel.seekTimeVariable.accept(coordinator.progress)
+    }
+
+    private func changeSeek(to newValue: Float) {
+        coordinator.progress = newValue
+        coordinator.updateElapsedTime()
+        if coordinator.isSeeking {
+            viewModel.seekTimeVariable.accept(newValue)
+        }
+    }
+
+    private func endSeek(autoHide: Bool) {
+        coordinator.isSeeking = false
+        viewModel.seekTimeVariable.accept(coordinator.progress)
+        viewModel.userStopSeeking()
+        if autoHide { coordinator.scheduleAutoHide() }
     }
 
 }
@@ -527,14 +536,11 @@ extension PlayerView {
                     .fontWeight(.medium)
                     .foregroundColor(.white)
                 Spacer()
-                Button(action: { viewModel.muteAudio() }, label: {
-                    Image(systemName: muteIcon)
-                        .font(.system(size: 14, weight: .medium))
-                        .foregroundColor(.white)
-                        .frame(width: 44, height: 44, alignment: .trailing)
-                })
-                .accessibilityLabel(muteAccessibilityLabel)
+                if let messageTime = messageTime {
+                    MessageTimeCapsule(text: messageTime, color: .white, background: Color.black.opacity(0.4))
+                }
             }
+            .frame(height: 44)
             Spacer()
             seekSlider(autoHide: true)
         }
@@ -545,36 +551,42 @@ extension PlayerView {
 
     private var audioMessageControls: some View {
         ZStack {
-            if let onVideoLongPress = onVideoLongPress {
-                Color.clear
-                    .contentShape(Rectangle())
-                    .messageGesture(onLongPress: onVideoLongPress)
-            }
-            HStack(spacing: 10) {
+            MediaSeekFill(color: audioColors.controlBackground,
+                          isEnabled: !coordinator.playbackFailed,
+                          onRegister: { sink in coordinator.sliderUpdate = sink },
+                          onSeekStart: { beginSeek(autoHide: false) },
+                          onSeekChange: { newValue in changeSeek(to: newValue) },
+                          onSeekEnd: { endSeek(autoHide: false) },
+                          onLongPress: onVideoLongPress)
+            HStack(spacing: 8) {
                 audioPlayPauseButton
-                seekSlider(autoHide: false, color: audioColors.control)
-                    .frame(height: 44)
-                    .disabled(coordinator.playbackFailed)
                 Text(coordinator.audioTimeString)
                     .font(.footnote.monospacedDigit())
                     .fontWeight(.medium)
                     .foregroundColor(audioColors.foreground.opacity(0.85))
                     .lineLimit(1)
                     .dynamicTypeSize(...DynamicTypeSize.xxxLarge)
-                    .frame(minWidth: 34, alignment: .trailing)
+                    .allowsHitTesting(false)
+                Spacer(minLength: 0)
+                if let messageTime = messageTime {
+                    MessageTimeCapsule(text: messageTime,
+                                       color: audioColors.foreground.opacity(0.8),
+                                       background: audioColors.timeBackground)
+                }
             }
-            .padding(.leading, 6)
-            .padding(.trailing, 14)
+            .padding(.leading, 2)
+            .padding(.trailing, 10)
         }
     }
 
     private var audioPlayPauseButton: some View {
         Button(action: { viewModel.togglePause() }, label: {
             Image(systemName: audioButtonIcon)
-                .font(.system(size: 18, weight: .medium))
-                .foregroundColor(audioColors.control)
+                .font(.system(size: 14, weight: .semibold))
+                .foregroundColor(audioColors.background)
+                .frame(width: 34, height: 34)
+                .background(Circle().fill(audioColors.control))
                 .frame(width: 44, height: 44)
-                .background(Circle().fill(audioColors.controlBackground))
                 .contentShape(Circle())
         })
         .buttonStyle(ScaleButtonStyle())

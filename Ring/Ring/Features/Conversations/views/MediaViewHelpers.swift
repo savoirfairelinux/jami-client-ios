@@ -252,6 +252,152 @@ final class ScrubberSlider: UISlider {
     }
 }
 
+// MARK: - Media Seek Fill
+
+struct MediaSeekFill: UIViewRepresentable {
+    var color: Color
+    var isEnabled: Bool
+    var onRegister: (@escaping (Float) -> Void) -> Void
+    var onSeekStart: () -> Void
+    var onSeekChange: (Float) -> Void
+    var onSeekEnd: () -> Void
+    var onLongPress: (() -> Void)?
+
+    func makeCoordinator() -> Coordinator { Coordinator() }
+
+    func makeUIView(context: Context) -> SeekFillView {
+        let view = SeekFillView()
+        let coordinator = context.coordinator
+        update(coordinator)
+        view.fillColor = UIColor(color)
+
+        onRegister { [weak view, weak coordinator] newValue in
+            guard let view, coordinator?.isSeeking != true else { return }
+            view.progress = CGFloat(newValue)
+        }
+
+        let pan = UIPanGestureRecognizer(target: coordinator, action: #selector(Coordinator.pan(_:)))
+        pan.delegate = coordinator
+        view.addGestureRecognizer(pan)
+        let longPress = UILongPressGestureRecognizer(target: coordinator, action: #selector(Coordinator.longPress(_:)))
+        longPress.minimumPressDuration = 0.2
+        view.addGestureRecognizer(longPress)
+        return view
+    }
+
+    func updateUIView(_ view: SeekFillView, context: Context) {
+        update(context.coordinator)
+        view.fillColor = UIColor(color)
+    }
+
+    private func update(_ coordinator: Coordinator) {
+        coordinator.isEnabled = isEnabled
+        coordinator.onSeekStart = onSeekStart
+        coordinator.onSeekChange = onSeekChange
+        coordinator.onSeekEnd = onSeekEnd
+        coordinator.onLongPress = onLongPress
+    }
+
+    final class Coordinator: NSObject, UIGestureRecognizerDelegate {
+        var isSeeking = false
+        var isEnabled = true
+        var onSeekStart: () -> Void = {}
+        var onSeekChange: (Float) -> Void = { _ in }
+        var onSeekEnd: () -> Void = {}
+        var onLongPress: (() -> Void)?
+
+        @objc
+        func pan(_ recognizer: UIPanGestureRecognizer) {
+            guard let view = recognizer.view as? SeekFillView else { return }
+            switch recognizer.state {
+            case .began:
+                isSeeking = true
+                onSeekStart()
+                seek(view, to: recognizer)
+            case .changed:
+                seek(view, to: recognizer)
+            case .ended, .cancelled, .failed:
+                guard isSeeking else { return }
+                seek(view, to: recognizer)
+                onSeekEnd()
+                isSeeking = false
+            default:
+                break
+            }
+        }
+
+        @objc
+        func longPress(_ recognizer: UILongPressGestureRecognizer) {
+            guard recognizer.state == .began else { return }
+            onLongPress?()
+        }
+
+        private func seek(_ view: SeekFillView, to recognizer: UIPanGestureRecognizer) {
+            guard view.bounds.width > 0 else { return }
+            var fraction = recognizer.location(in: view).x / view.bounds.width
+            if view.effectiveUserInterfaceLayoutDirection == .rightToLeft {
+                fraction = 1 - fraction
+            }
+            let value = Float(min(max(fraction, 0), 1))
+            view.progress = CGFloat(value)
+            onSeekChange(value)
+        }
+
+        func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+            guard isEnabled, let pan = gestureRecognizer as? UIPanGestureRecognizer else { return false }
+            let velocity = pan.velocity(in: pan.view)
+            return abs(velocity.x) > abs(velocity.y)
+        }
+
+        func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
+                               shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+            guard let scrollView = otherGestureRecognizer.view as? UIScrollView else { return false }
+            return otherGestureRecognizer === scrollView.panGestureRecognizer
+        }
+    }
+}
+
+final class SeekFillView: UIView {
+    private let fillLayer = CALayer()
+
+    var fillColor: UIColor = .white {
+        didSet { updateFillColor() }
+    }
+
+    var progress: CGFloat = 0 {
+        didSet { setNeedsLayout() }
+    }
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        layer.addSublayer(fillLayer)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        let width = bounds.width * min(max(progress, 0), 1)
+        let originX = effectiveUserInterfaceLayoutDirection == .rightToLeft ? bounds.width - width : 0
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        fillLayer.frame = CGRect(x: originX, y: 0, width: width, height: bounds.height)
+        CATransaction.commit()
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        guard traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) else { return }
+        updateFillColor()
+    }
+
+    private func updateFillColor() {
+        fillLayer.backgroundColor = fillColor.resolvedColor(with: traitCollection).cgColor
+    }
+}
+
 // MARK: - Button Style
 
 struct ScaleButtonStyle: ButtonStyle {

@@ -26,6 +26,7 @@ struct PlayerSwiftUI: View {
     var ratio: CGFloat = 1
     var withControls: Bool
     var customCornerRadius: CGFloat = 0
+    var messageTime: String?
     @Environment(\.colorScheme)
     var colorScheme
 
@@ -40,7 +41,8 @@ struct PlayerSwiftUI: View {
             PlayerView(viewModel: player, sizeMode: .inConversationMessage, withControls: withControls,
                        onVideoTap: { frame, frameProvider in model.presentMediaPreview(sourceFrame: frame, sourceFrameProvider: frameProvider) },
                        onVideoLongPress: onLongGesture,
-                       audioColors: model.audioPlayerColors)
+                       audioColors: model.audioPlayerColors,
+                       messageTime: messageTime)
                 .frame(height: model.playerHeight * ratio)
                 .frame(width: model.playerWidth * ratio)
                 .conditionalModifier(MessageCornerRadius(model: model), apply: customCornerRadius == 0)
@@ -101,15 +103,15 @@ struct MediaView: View {
     let maxHeight: CGFloat
     let withPlayerControls: Bool
     let cornerRadius: CGFloat
-    var transferCardTime: String?
+    var time: String?
     var body: some View {
         if let player = self.message.player {
-            PlayerSwiftUI(model: message, player: player, onLongGesture: onLongGesture, withControls: withPlayerControls, customCornerRadius: cornerRadius)
+            PlayerSwiftUI(model: message, player: player, onLongGesture: onLongGesture, withControls: withPlayerControls, customCornerRadius: cornerRadius, messageTime: time)
         } else if let image = message.finalImage {
             ImageOrGifView(message: message, image: image, onLongGesture: onLongGesture, minHeight: minHeight, maxHeight: maxHeight, customCornerRadius: cornerRadius)
 
         } else {
-            DefaultTransferView(model: message, time: transferCardTime, onLongGesture: onLongGesture)
+            DefaultTransferView(model: message, time: time, onLongGesture: onLongGesture)
                 .conditionalModifier(MessageCornerRadius(model: message), apply: cornerRadius == 0)
                 .conditionalCornerRadius(cornerRadius, apply: cornerRadius != 0)
         }
