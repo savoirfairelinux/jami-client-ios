@@ -132,7 +132,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     @Published var showProgress: Bool = true
     @Published var playerHeight: CGFloat = 80
     @Published var playerWidth: CGFloat = 250
-    private let audioPlayerHeight: CGFloat = 56
+    private let audioPlayerHeight: CGFloat = 48
     @Published var player: PlayerViewModel?
     @Published var corners: UIRectCorner = [.allCorners]
     @Published var menuItems = [ContextualMenuItem]()
@@ -633,11 +633,24 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     }
 
     var audioPlayerColors: AudioMessageColors {
-        let control = isIncoming ? Color(preferencesColor) : styling.textColor
+        let textColor = styling.textColor
+        if isIncoming {
+            let secondary = Color(UIColor.secondaryLabel)
+            return AudioMessageColors(background: backgroundColor,
+                                      text: secondary,
+                                      control: textColor.opacity(0.12),
+                                      controlIcon: secondary,
+                                      progress: textColor.opacity(0.1),
+                                      time: secondary,
+                                      timeBackground: textColor.opacity(0.05))
+        }
         return AudioMessageColors(background: backgroundColor,
-                                  foreground: styling.textColor,
-                                  control: control,
-                                  controlBackground: control.opacity(isIncoming ? 0.15 : 0.22))
+                                  text: textColor.opacity(0.85),
+                                  control: textColor,
+                                  controlIcon: backgroundColor,
+                                  progress: textColor.opacity(0.22),
+                                  time: textColor.opacity(0.8),
+                                  timeBackground: textColor.opacity(0.14))
     }
 
     func updatePlayer(player: PlayerViewModel?) {

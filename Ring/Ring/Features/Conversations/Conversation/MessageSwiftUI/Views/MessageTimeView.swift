@@ -23,7 +23,7 @@ struct MessageTimeView: View {
     let color: Color
     var accessibilityText: String?
 
-    fileprivate static let font = Font.caption2.monospacedDigit()
+    fileprivate static let font = Font.system(size: 11).monospacedDigit()
 
     var body: some View {
         Text(text)
@@ -34,6 +34,20 @@ struct MessageTimeView: View {
             .allowsHitTesting(false)
             .accessibilityLabel(accessibilityText ?? text)
             .accessibilityHidden(accessibilityText == nil)
+    }
+}
+
+struct MessageTimeCapsule: View {
+    let text: String
+    var color: Color = .white
+    var background = Color.black.opacity(0.4)
+
+    var body: some View {
+        MessageTimeView(text: text, color: color)
+            .padding(.horizontal, 6)
+            .padding(.vertical, 2)
+            .background(Capsule().fill(background))
+            .allowsHitTesting(false)
     }
 }
 
