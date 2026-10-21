@@ -191,8 +191,6 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
                     self.selectItemsFromPhotoLibrary()
                 case .shareLocation:
                     self.startLocationSharing()
-                case .recordAudio:
-                    self.recordAudio()
                 case .recordVido:
                     self.recordVideo()
                 case .sendFile:
@@ -203,6 +201,8 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
                     self.viewModel.setIsComposingMsg(isComposing: typingStatus)
                 case .joinActiveCall(call: let call, withVideo: let withVideo):
                     self.viewModel.joinActiveCall(call: call, withVideo: withVideo)
+                case .microphonePermissionDenied:
+                    self.showNoPermissionsAlert(title: L10n.Alerts.noMediaPermissionsTitle)
                 }
             })
             .disposed(by: disposeBag)
@@ -364,21 +364,6 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
                             }
                         })
                     }
-                } else {
-                    self.showNoPermissionsAlert(title: L10n.Alerts.noMediaPermissionsTitle)
-                }
-            })
-        }
-    }
-
-    func recordAudio() {
-        if AVCaptureDevice.authorizationStatus(for: AVMediaType.audio) == AVAuthorizationStatus.authorized {
-            viewModel.recordAudioFile()
-        } else {
-            AVCaptureDevice.requestAccess(for: AVMediaType.audio, completionHandler: { [weak self] (granted: Bool) in
-                guard let self = self else { return }
-                if granted == true {
-                    self.viewModel.recordAudioFile()
                 } else {
                     self.showNoPermissionsAlert(title: L10n.Alerts.noMediaPermissionsTitle)
                 }
