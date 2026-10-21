@@ -291,6 +291,36 @@ extension View {
     }
 }
 
+// MARK: - Media Scrubber Row
+
+struct MediaScrubberRow<Slider: View>: View {
+    let elapsed: TimeInterval
+    let duration: TimeInterval
+    @ViewBuilder let slider: () -> Slider
+
+    var body: some View {
+        HStack(spacing: 12) {
+            timeLabel(elapsed)
+            slider()
+            timeLabel(duration)
+        }
+        .frame(height: 44)
+    }
+
+    private func timeLabel(_ seconds: TimeInterval) -> some View {
+        Text(String.durationFormatted(seconds: Int(seconds)))
+            .font(.subheadline.monospacedDigit())
+            .foregroundColor(.white.opacity(0.7))
+    }
+}
+
+extension View {
+    func mediaTrayStyle() -> some View {
+        padding(14)
+            .glassRoundedBackground(cornerRadius: 26)
+    }
+}
+
 // MARK: - Duration Formatting
 
 extension Float {
