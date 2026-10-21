@@ -119,7 +119,17 @@ struct UITextViewWrapper: UIViewRepresentable {
             placeholderLabel.lineBreakMode = .byTruncatingTail
             placeholderLabel.adjustsFontForContentSizeCategory = true
             placeholderLabel.isUserInteractionEnabled = false
+            placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
             textView.addSubview(placeholderLabel)
+
+            let linePadding = textView.textContainer.lineFragmentPadding
+            let insets = textView.textContainerInset
+            let frame = textView.frameLayoutGuide
+            NSLayoutConstraint.activate([
+                placeholderLabel.leadingAnchor.constraint(equalTo: frame.leadingAnchor, constant: insets.left + linePadding),
+                placeholderLabel.trailingAnchor.constraint(lessThanOrEqualTo: frame.trailingAnchor, constant: -(insets.right + linePadding)),
+                placeholderLabel.topAnchor.constraint(equalTo: frame.topAnchor, constant: insets.top)
+            ])
             updatePlaceholder(in: textView)
         }
 
@@ -128,20 +138,6 @@ struct UITextViewWrapper: UIViewRepresentable {
             placeholderLabel.font = textView.font
             placeholderLabel.textColor = .placeholderText
             placeholderLabel.isHidden = !textView.text.isEmpty
-
-            let linePadding = textView.textContainer.lineFragmentPadding
-            let textStartX = textView.textContainerInset.left + linePadding
-            let yPosition = textView.textContainerInset.top
-            let maxWidth = textView.bounds.width
-                - textStartX
-                - textView.textContainerInset.right
-                - linePadding
-            placeholderLabel.frame = CGRect(
-                x: textStartX,
-                y: yPosition,
-                width: max(0, maxWidth),
-                height: placeholderLabel.intrinsicContentSize.height
-            )
         }
 
         func textViewDidChange(_ textView: UITextView) {

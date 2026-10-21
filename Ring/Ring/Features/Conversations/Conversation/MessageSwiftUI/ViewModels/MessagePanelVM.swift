@@ -95,10 +95,6 @@ class MessagePanelVM: ObservableObject, MessageAppearanceProtocol {
         messagePanelState.onNext(MessagePanelState.recordVido)
     }
 
-    func recordAudio() {
-        messagePanelState.onNext(MessagePanelState.recordAudio)
-    }
-
     func sendFile() {
         messagePanelState.onNext(MessagePanelState.sendFile)
     }

@@ -35,11 +35,11 @@ enum MessagePanelState: State {
     case sendPhoto
     case openGalery
     case shareLocation
-    case recordAudio
     case recordVido
     case sendFile
     case newCollabDocument
     case joinActiveCall(call: ActiveCall, withVideo: Bool)
+    case microphonePermissionDenied
 
     func toString() -> String {
         switch self {
@@ -51,8 +51,6 @@ enum MessagePanelState: State {
             return L10n.Alerts.uploadPhoto
         case .shareLocation:
             return L10n.Alerts.locationSharing
-        case .recordAudio:
-            return L10n.Alerts.recordAudioMessage
         case .recordVido:
             return L10n.Alerts.recordVideoMessage
         case .sendFile:
@@ -72,8 +70,6 @@ enum MessagePanelState: State {
             return "photo"
         case .shareLocation:
             return "location"
-        case .recordAudio:
-            return "mic"
         case .recordVido:
             return "camera"
         case .sendFile:
@@ -163,6 +159,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     var presenceService: PresenceService
     var transferHelper: TransferHelper
     var messagePanel: MessagePanelVM
+    let voiceRecording: VoiceRecordingVM
     var currentlyTypingUsers: Set<String> = []
     var callBannerViewModel: CallBannerViewModel
     private let injectionBag: InjectionBag
@@ -223,6 +220,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
             self.updateLastDisplayed()
             self.callBannerViewModel = CallBannerViewModel(injectionBag: self.injectionBag, conversation: self.conversation, state: self.messagePanelStateSubject)
             self.messagePanel.canWriteDocuments = self.conversation.isSwarm()
+            self.voiceRecording.conversation = self.conversation
         }
     }
 
@@ -278,6 +276,9 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
         self.transferHelper = transferHelper
         self.locationSharingService = injectionBag.locationSharingService
         self.messagePanel = MessagePanelVM(messagePanelState: self.messagePanelStateSubject)
+        self.voiceRecording = VoiceRecordingVM(injectionBag: injectionBag,
+                                               transferHelper: transferHelper,
+                                               messagePanelState: self.messagePanelStateSubject)
         self.callBannerViewModel = CallBannerViewModel(injectionBag: injectionBag, conversation: self.conversation, state: self.messagePanelStateSubject)
 
         self.subscribeLocationEvents()

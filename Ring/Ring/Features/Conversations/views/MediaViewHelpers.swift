@@ -187,6 +187,72 @@ extension View {
     }
 }
 
+// MARK: - Media Scrubber
+
+struct MediaScrubber: View {
+    let progress: Float
+    let accessibilityValue: String
+    var trackColor: Color = .white.opacity(0.35)
+    var fillColor: Color = .white.opacity(0.7)
+    var activeFillColor: Color = .white
+    let onSeekStart: () -> Void
+    let onSeekChange: (Float) -> Void
+    let onSeekEnd: () -> Void
+
+    @GestureState private var isDragging = false
+    @SwiftUI.State private var isSeeking = false
+
+    private static let restingHeight: CGFloat = 4
+    private static let activeHeight: CGFloat = 8
+    private static let accessibilityStep: Float = 0.1
+
+    var body: some View {
+        GeometryReader { geometry in
+            ZStack(alignment: .leading) {
+                Capsule()
+                    .fill(trackColor)
+                Capsule()
+                    .fill(isSeeking ? activeFillColor : fillColor)
+                    .frame(width: geometry.size.width * CGFloat(min(1, max(0, progress))))
+            }
+            .frame(height: isSeeking ? Self.activeHeight : Self.restingHeight)
+            .frame(maxHeight: .infinity)
+            .contentShape(Rectangle())
+            .gesture(dragGesture(width: geometry.size.width))
+        }
+        .animation(.easeOut(duration: 0.15), value: isSeeking)
+        .onChange(of: isDragging) { dragging in
+            guard !dragging, isSeeking else { return }
+            isSeeking = false
+            onSeekEnd()
+        }
+        .accessibilityElement()
+        .accessibilityLabel(L10n.Accessibility.audioPlayerSeek)
+        .accessibilityValue(accessibilityValue)
+        .accessibilityAdjustableAction { direction in
+            let step = direction == .increment ? Self.accessibilityStep : -Self.accessibilityStep
+            onSeekStart()
+            onSeekChange(min(1, max(0, progress + step)))
+            onSeekEnd()
+        }
+    }
+
+    private func dragGesture(width: CGFloat) -> some Gesture {
+        DragGesture(minimumDistance: 0)
+            .updating($isDragging) { _, dragging, _ in
+                dragging = true
+            }
+            .onChanged { value in
+                if !isSeeking {
+                    isSeeking = true
+                    onSeekStart()
+                }
+                guard width > 0 else { return }
+                onSeekChange(Float(min(1, max(0, value.location.x / width))))
+            }
+    }
+}
+
 // MARK: - Duration Formatting
 
 extension Float {
