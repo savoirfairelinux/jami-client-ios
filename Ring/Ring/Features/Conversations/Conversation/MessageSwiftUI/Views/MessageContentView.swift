@@ -230,6 +230,7 @@ struct MessageContentView: View {
     @Environment(\.layoutDirection)
     var layoutDirection
     @SwiftUI.State private var bubbleWidth: CGFloat = 0
+    @SwiftUI.State private var audioSeekArea: CGRect = .null
     @SwiftUI.State private var bubbleDragOffset: CGFloat = 0
     @SwiftUI.State private var dragHapticFired: Bool = false
     @SwiftUI.State private var dragX: CGFloat = 0
@@ -295,6 +296,10 @@ struct MessageContentView: View {
         )
         .onPreferenceChange(BubbleWidthKey.self) { width in
             if width > 0 { self.bubbleWidth = width }
+        }
+        .coordinateSpace(name: AudioSeekAreaKey.coordinateSpace)
+        .onPreferenceChange(AudioSeekAreaKey.self) { area in
+            audioSeekArea = area
         }
         .contentShape(Rectangle())
         .offset(x: outwardSign() * dragX)
@@ -403,7 +408,7 @@ struct MessageContentView: View {
 
     private func isInSeekZone(_ location: CGPoint) -> Bool {
         model.player?.hasVideo.value == false
-            ? isInAudioSeekZone(location)
+            ? audioSeekArea.contains(location)
             : isInVideoSeekZone(location)
     }
 
@@ -411,13 +416,6 @@ struct MessageContentView: View {
         let sliderZoneHeight: CGFloat = 44
         let viewHeight = max(model.playerHeight, 80)
         return location.y > viewHeight - sliderZoneHeight
-    }
-
-    private func isInAudioSeekZone(_ location: CGPoint) -> Bool {
-        let controlsInset: CGFloat = 60
-        return location.y < model.playerHeight
-            && location.x > controlsInset
-            && location.x < bubbleWidth - controlsInset
     }
 
     private func updateAlignment() {
