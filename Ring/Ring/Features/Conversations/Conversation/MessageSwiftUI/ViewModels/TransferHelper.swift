@@ -39,6 +39,7 @@ class TransferHelper {
 
     private var players = [String: PlayerViewModel]()
     private var playbackDisposeBag = DisposeBag()
+    let playbackStarted = PublishSubject<Void>()
 
     func getPlayer(messageID: String) -> PlayerViewModel? {
         return players[messageID]
@@ -51,6 +52,7 @@ class TransferHelper {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self, weak player] _ in
                 self?.pauseOtherPlayers(than: player)
+                self?.playbackStarted.onNext(())
             })
             .disposed(by: playbackDisposeBag)
     }
@@ -59,6 +61,10 @@ class TransferHelper {
         players.values.forEach { $0.closePlayer() }
         players.removeAll()
         playbackDisposeBag = DisposeBag()
+    }
+
+    func releaseAllPlayers() {
+        players.values.forEach { $0.closePlayer() }
     }
 
     private func pauseOtherPlayers(than player: PlayerViewModel?) {
