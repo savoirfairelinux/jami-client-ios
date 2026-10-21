@@ -33,7 +33,6 @@ private enum Layout {
 private enum Style {
     static let iconSize: CGFloat = 20
     static let largeIconSize: CGFloat = 28
-    static let heroIconSize: CGFloat = 60
     static let primaryTextSize: CGFloat = 17
     static let secondaryTextSize: CGFloat = 15
     static let ringStrokeWidth: CGFloat = 3
@@ -54,17 +53,9 @@ private enum Animation {
     static let responseSendRow: Double = 0.35
 
     static let durationFast: Double = 0.25
-    static let durationNormal: Double = 0.3
-
-    static let waveformBarMinDuration: Double = 0.5
-    static let waveformBarMaxDuration: Double = 0.8
-    static let waveformBarStaggerDelay: Double = 0.06
-
-    static let waveformBarMinHeight: CGFloat = 8
-    static let waveformBarMaxHeight: CGFloat = 60
 }
 
-// MARK: - SendFileView
+// MARK: - MediaRecordView
 
 struct MediaRecordView: View {
     @ObservedObject var viewModel: MediaRecordViewModel
@@ -85,9 +76,6 @@ struct MediaRecordView: View {
         VStack(spacing: 0) {
             topBar
             Spacer()
-            if viewModel.audioOnly {
-                audioOnlyContent
-            }
             bottomBar
             if viewModel.showPlayerControls {
                 playerControlsPanel
@@ -106,11 +94,7 @@ struct MediaRecordView: View {
                 HStack {
                     cancelButton
                     Spacer()
-                    if viewModel.audioOnly {
-                        Color.clear.frame(width: Layout.touchTargetSize, height: Layout.touchTargetSize)
-                    } else {
-                        switchCameraButton
-                    }
+                    switchCameraButton
                 }
                 recordingTimerBadge
                     .opacity(viewModel.isRecording ? 1 : 0)
@@ -148,7 +132,7 @@ struct MediaRecordView: View {
 
     private var sendRow: some View {
         HStack(spacing: 12) {
-            Image(systemName: viewModel.audioOnly ? "waveform" : "video.fill")
+            Image(systemName: "video.fill")
                 .font(.system(size: Style.iconSize, weight: .semibold))
                 .foregroundColor(.white.opacity(0.7))
             Text(viewModel.fileDisplayName)
@@ -186,41 +170,6 @@ struct MediaRecordView: View {
 
     private var switchCameraButton: some View {
         glassIconButton(systemName: "arrow.triangle.2.circlepath.camera", accessibilityLabel: L10n.Accessibility.Calls.Default.switchCamera) { viewModel.switchCamera() }
-    }
-
-    // MARK: - Audio-only Content
-
-    @ViewBuilder
-    private var audioOnlyContent: some View {
-        VStack(spacing: 24) {
-            if !viewModel.hideInfo {
-                Text(L10n.DataTransfer.infoMessage)
-                    .font(.body)
-                    .multilineTextAlignment(.center)
-                    .foregroundColor(.secondary)
-                    .padding(.horizontal, 32)
-                    .transition(.opacity)
-            }
-            audioWaveformView
-        }
-        .padding(.vertical, 40)
-    }
-
-    private var audioWaveformView: some View {
-        ZStack {
-            if viewModel.isRecording {
-                AudioWaveformView(isAnimating: true)
-                    .frame(height: 80)
-                    .padding(.horizontal, 40)
-                    .transition(.opacity)
-            } else {
-                Image(systemName: "waveform")
-                    .font(.system(size: Style.heroIconSize, weight: .ultraLight))
-                    .foregroundColor(viewModel.isReadyToSend ? .green : .secondary)
-                    .transition(.opacity)
-            }
-        }
-        .animation(.easeInOut(duration: Animation.durationNormal), value: viewModel.isRecording)
     }
 
     // MARK: - Player Controls
@@ -307,17 +256,13 @@ private struct VideoPreviewLayer: View {
 
     var body: some View {
         GeometryReader { geo in
-            if viewModel.audioOnly {
-                Color(UIColor.systemBackground)
-            } else {
-                Color.black
-                if let image = viewModel.previewImage {
-                    Image(uiImage: image)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: geo.size.width, height: geo.size.height)
-                        .clipped()
-                }
+            Color.black
+            if let image = viewModel.previewImage {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: geo.size.width, height: geo.size.height)
+                    .clipped()
             }
         }
     }
@@ -345,55 +290,5 @@ private struct RecordButtonLabel: View {
         .glassCircleBackground()
         .animation(.spring(response: Animation.responseBadge, dampingFraction: Animation.dampingSnappy),
                    value: isRecording)
-    }
-}
-
-// MARK: - Audio Waveform Animation
-
-private struct AudioWaveformView: View {
-    let isAnimating: Bool
-    private let barCount = 20
-
-    var body: some View {
-        HStack(spacing: 4) {
-            ForEach(0..<barCount, id: \.self) { index in
-                WaveformBar(index: index, isAnimating: isAnimating)
-            }
-        }
-    }
-}
-
-private struct WaveformBar: View {
-    let index: Int
-    let isAnimating: Bool
-
-    @SwiftUI.State private var height: CGFloat = Animation.waveformBarMinHeight
-
-    var body: some View {
-        RoundedRectangle(cornerRadius: 3)
-            .fill(Color.jami)
-            .frame(width: 4, height: height)
-            .onAppear {
-                if isAnimating { startAnimation() }
-            }
-            .onChange(of: isAnimating) { animating in
-                if animating {
-                    startAnimation()
-                } else {
-                    withAnimation(.easeInOut(duration: Animation.durationNormal)) {
-                        height = Animation.waveformBarMinHeight
-                    }
-                }
-            }
-    }
-
-    private func startAnimation() {
-        withAnimation(
-            .easeInOut(duration: Double.random(in: Animation.waveformBarMinDuration...Animation.waveformBarMaxDuration))
-                .repeatForever(autoreverses: true)
-                .delay(Double(index) * Animation.waveformBarStaggerDelay)
-        ) {
-            height = CGFloat.random(in: Animation.waveformBarMinHeight...Animation.waveformBarMaxHeight)
-        }
     }
 }

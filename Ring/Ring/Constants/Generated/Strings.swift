@@ -1080,8 +1080,6 @@ internal enum L10n {
     internal static let title = L10n.tr("Localizable", "createProfile.title", fallback: "Personalize your profile")
   }
   internal enum DataTransfer {
-    /// Tap to start recording
-    internal static let infoMessage = L10n.tr("Localizable", "dataTransfer.infoMessage", fallback: "Tap to start recording")
     /// Accept
     internal static let readableStatusAccept = L10n.tr("Localizable", "dataTransfer.readableStatusAccept", fallback: "Accept")
     /// Pending…

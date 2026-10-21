@@ -21,7 +21,6 @@ import RxCocoa
 import SwiftyBeaver
 
 enum RecordingState {
-    case initial
     case recording
     case recorded
     case sent
@@ -48,18 +47,15 @@ class MediaRecordViewModel: ObservableObject, Stateable, ViewModel {
     private var sliderPositionSink: ((Float) -> Void)?
     @Published var isPaused: Bool = true
     @Published var isAudioMuted: Bool = true
-    @Published var hideInfo: Bool = false
     let dismissHandler = DismissHandler()
 
     // MARK: - Configuration (set by coordinator before setup())
 
-    var audioOnly: Bool = false
     var conversation: ConversationModel!
 
     // MARK: - Private
 
     private let videoService: VideoService
-    private let accountService: AccountsService
     private let fileTransferService: DataTransferService
     let injectionBag: InjectionBag
 
@@ -74,27 +70,23 @@ class MediaRecordViewModel: ObservableObject, Stateable, ViewModel {
     private var recordingTimer: Timer?
     private var recordingSeconds: Int = 0
 
-    let playBackFrame = PublishSubject<UIImage?>()
-
     // MARK: - Init
 
     required init(with injectionBag: InjectionBag) {
         self.videoService = injectionBag.videoService
-        self.accountService = injectionBag.accountService
         self.fileTransferService = injectionBag.dataTransferService
         self.injectionBag = injectionBag
     }
 
     // MARK: - Setup
 
-    /// Must be called after setting `conversation` and `audioOnly`.
+    /// Must be called after setting `conversation`.
     func setup() {
         subscribeCameraFrames()
     }
 
     @MainActor
     func previewAppeared() {
-        guard !audioOnly else { return }
         orientationMonitor.start { [weak self] input in
             self?.videoService.setCameraOrientation(input)
         }
@@ -123,7 +115,7 @@ class MediaRecordViewModel: ObservableObject, Stateable, ViewModel {
         player = nil
 
         guard let url = fileTransferService.newRecordingURL(for: conversation) else { return }
-        guard let name = videoService.startLocalRecorder(audioOnly: audioOnly, path: url.path) else { return }
+        guard let name = videoService.startLocalRecorder(audioOnly: false, path: url.path) else { return }
         fileName = name
         fileDisplayName = URL(fileURLWithPath: name).lastPathComponent
         transition(to: .recording)
@@ -184,7 +176,6 @@ class MediaRecordViewModel: ObservableObject, Stateable, ViewModel {
             .subscribe(onNext: { [weak self] frameInfo in
                 guard let frameInfo = frameInfo,
                       let image = UIImage.createFrom(sampleBuffer: frameInfo.sampleBuffer, orientation: frameInfo.imageOrientation) else { return }
-                self?.playBackFrame.onNext(image)
                 DispatchQueue.main.async { self?.previewImage = image }
             })
             .disposed(by: cameraDisposeBag)
@@ -194,22 +185,14 @@ class MediaRecordViewModel: ObservableObject, Stateable, ViewModel {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             switch state {
-            case .initial:
-                self.isRecording = false
-                self.isReadyToSend = false
-                self.hideInfo = !self.audioOnly
-                self.stopTimer()
-                self.recordDuration = ""
             case .recording:
                 self.isRecording = true
                 self.isReadyToSend = false
-                self.hideInfo = true
                 self.showPlayerControls = false
                 self.startTimer()
             case .recorded:
                 self.isRecording = false
                 self.isReadyToSend = true
-                self.hideInfo = true
                 self.stopTimer()
                 self.recordDuration = ""
             case .sent, .cancelled:
@@ -259,7 +242,6 @@ class MediaRecordViewModel: ObservableObject, Stateable, ViewModel {
                 guard let self = self,
                       let buffer = buffer,
                       let image = UIImage.createFrom(sampleBuffer: buffer) else { return }
-                self.playBackFrame.onNext(image)
                 DispatchQueue.main.async { self.previewImage = image }
             })
             .disposed(by: playerDisposeBag)
