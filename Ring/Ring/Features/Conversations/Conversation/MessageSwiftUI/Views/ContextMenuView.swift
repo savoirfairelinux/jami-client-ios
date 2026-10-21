@@ -162,6 +162,7 @@ struct ContextMenuView: View {
         ZStack {
             ScrollView {
                 model.presentingMessageView
+                    .roundsAllMessageCorners(true)
                     .frame(
                         width: model.messageFrame.width,
                         height: model.messageFrame.height

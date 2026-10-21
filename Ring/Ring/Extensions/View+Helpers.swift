@@ -102,6 +102,10 @@ extension View {
     func contextMenuActive(_ value: Bool) -> some View {
         environment(\.contextMenuActive, value)
     }
+
+    func roundsAllMessageCorners(_ value: Bool) -> some View {
+        environment(\.roundsAllMessageCorners, value)
+    }
 }
 
 extension Animation {
@@ -344,6 +348,10 @@ private struct ContextMenuActiveKey: EnvironmentKey {
     static let defaultValue: Bool = false
 }
 
+private struct RoundsAllMessageCornersKey: EnvironmentKey {
+    static let defaultValue: Bool = false
+}
+
 extension EnvironmentValues {
     var suppressLongPress: Bool {
         get { self[SuppressLongPressKey.self] }
@@ -353,6 +361,11 @@ extension EnvironmentValues {
     var contextMenuActive: Bool {
         get { self[ContextMenuActiveKey.self] }
         set { self[ContextMenuActiveKey.self] = newValue }
+    }
+
+    var roundsAllMessageCorners: Bool {
+        get { self[RoundsAllMessageCornersKey.self] }
+        set { self[RoundsAllMessageCornersKey.self] = newValue }
     }
 }
 

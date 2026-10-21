@@ -122,6 +122,8 @@ struct ScaledImageViewWrapper: UIViewRepresentable {
 
 struct MessageTextStyle: ViewModifier {
     @ObservedObject var model: MessageContentVM
+    @Environment(\.roundsAllMessageCorners)
+    private var roundsAllMessageCorners
 
     func body(content: Content) -> some View {
         content
@@ -133,7 +135,7 @@ struct MessageTextStyle: ViewModifier {
             .background(model.backgroundColor)
             .if(model.hasBorder) { view in
                 view.overlay(
-                    CornerRadiusShape(radius: model.cornerRadius, corners: model.corners)
+                    CornerRadiusShape(radius: model.cornerRadius, corners: roundsAllMessageCorners ? .allCorners : model.corners)
                         .stroke(model.borderColor, lineWidth: 2))
             }
             .modifier(MessageCornerRadius(model: model))
@@ -203,11 +205,13 @@ extension View {
 
 struct MessageCornerRadius: ViewModifier {
     @ObservedObject var model: MessageContentVM
+    @Environment(\.roundsAllMessageCorners)
+    private var roundsAllMessageCorners
 
     func body(content: Content) -> some View {
         content
             .if(!model.hasBorder) { view in
-                view.cornerRadius(radius: model.cornerRadius, corners: model.corners)
+                view.cornerRadius(radius: model.cornerRadius, corners: roundsAllMessageCorners ? .allCorners : model.corners)
             }
             .cornerRadius(3)
     }
