@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90f58823_7aed64bd",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/VoiceRecordingVM.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-21T20:48:07Z",
+      "side": 1,
+      "message": "[warning] Line 48: 🟡 Using a fixed 1s `fileFinalizationDelay` to gate preview binding/sending/deletion is timing-sensitive and can fail on slow devices or large I/O bursts. Replace the hardcoded delay with a readiness signal (daemon callback, file-exists+stable-size polling with timeout, or transfer-layer completion) before preview/send/delete actions.",
+      "revId": "e12e014a621ad857b1343bd893dbade68f16e4e7",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2f48663_1bb6bb55",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/VoiceRecordingVM.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-21T20:48:07Z",
+      "side": 1,
+      "message": "[warning] Line 212: 🟡 Recorder startup failure currently exits silently and can interrupt active playback because `releaseAllPlayers()` is called before confirming `startLocalRecorder` succeeded. Move player release after successful recorder start (or restore playback state on failure) and surface a user-visible hint/error when start fails, so mic tap is never a no-op.",
+      "revId": "e12e014a621ad857b1343bd893dbade68f16e4e7",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
