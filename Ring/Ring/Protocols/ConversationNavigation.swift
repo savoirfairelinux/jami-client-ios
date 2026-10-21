@@ -31,7 +31,7 @@ enum ConversationState: State {
     case createSwarm(onCreated: ((_ conversationId: String) -> Void)?)
     case createNewAccount
     case showDialpad(inCall: Bool)
-    case recordFile(conversation: ConversationModel, audioOnly: Bool)
+    case recordFile(conversation: ConversationModel)
     case showContactPicker(callID: String, contactSelectedCB: ((_ contact: [ConferencableItem]) -> Void)?, conversationSelectedCB: ((_ conversaionIds: [String]?) -> Void)?)
     case openConversationFromCall(conversation: ConversationModel)
     case needAccountMigration(accountId: String)
@@ -77,8 +77,8 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                     self.openQRCode()
                 case .createSwarm(let onCreated):
                     self.createSwarm(onCreated: onCreated)
-                case .recordFile(let conversation, let audioOnly):
-                    self.openRecordFile(conversation: conversation, audioOnly: audioOnly)
+                case .recordFile(let conversation):
+                    self.openRecordFile(conversation: conversation)
                 case .needAccountMigration(let accountId):
                     self.migrateAccount(accountId: accountId)
                 case .showAccountSettings(let account):
@@ -101,16 +101,15 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
         }
     }
 
-    func openRecordFile(conversation: ConversationModel, audioOnly: Bool) {
+    func openRecordFile(conversation: ConversationModel) {
         let viewModel = MediaRecordViewModel(with: self.injectionBag)
         viewModel.conversation = conversation
-        viewModel.audioOnly = audioOnly
         viewModel.setup()
         let hostingController = createDismissableVC(MediaRecordView(viewModel: viewModel),
                                                     dismissible: viewModel.dismissHandler)
         self.present(viewController: hostingController,
                      withStyle: .overCurrentContext,
-                     withAnimation: !audioOnly,
+                     withAnimation: true,
                      withStateable: viewModel)
     }
 
