@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e3100010_f244842f",
+        "filename": "Ring/Ring/Features/Conversations/Preview/MediaPreviewView.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-22T14:38:38Z",
+      "side": 1,
+      "message": "[warning] Line 340: 🟡 `handleDoubleTap(_:)` zooms even when the user double-taps the letterboxed area outside the actual image (aspect-fit margins). That computes a zoom rect centered outside valid image coordinates and can produce jumpy edge-focused zoom. Guard with `imageView.bounds.contains(point)` or clamp the point into bounds before building the rect so focal zoom always targets real image content.",
+      "revId": "ac52d5cdfd1fb9ebe6705f161065364e3c010bac",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6768ad77_b19d1c8c",
         "filename": "Ring/Ring/Features/Conversations/Preview/MediaPreviewView.swift",
         "patchSetId": 1
