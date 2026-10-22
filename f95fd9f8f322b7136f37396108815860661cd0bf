@@ -16,6 +16,23 @@
       "message": "[warning] Line 71: 🟡 Using `target.finalImage` here likely decodes the full asset during list rendering, which can increase memory pressure and cause scroll jank in long conversations with large photos. Prefer a thumbnail/cached preview path (the same lightweight source used by `MediaView`) and render that in the reply quote.",
       "revId": "f95fd9f8f322b7136f37396108815860661cd0bf",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9356074_07adae41",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ReplyHistory.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-22T15:04:09Z",
+      "side": 1,
+      "message": "[warning] Line 71: 🟡 This branch keys only on `finalImage` presence, not file type. If non-image transfers (especially videos with generated poster frames) populate `finalImage`, replies will render a thumbnail instead of the intended filename quote. Gate image rendering with an explicit image MIME/UTType check (or existing `isImage` helper), and fall back to filename text for audio/video/other files.",
+      "revId": "f95fd9f8f322b7136f37396108815860661cd0bf",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
