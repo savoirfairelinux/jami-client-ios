@@ -34,6 +34,24 @@
       "parentUuid": "1cfb1210_c7a8cd24",
       "revId": "24b80d47a9381714f05a5070574ee3392f7abf1e",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "379235c6_1bc1180f",
+        "filename": "Ring/Ring/Features/Conversations/views/MediaViewHelpers.swift",
+        "patchSetId": 10
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-22T14:19:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3138676c_19c84fed",
+      "revId": "24b80d47a9381714f05a5070574ee3392f7abf1e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
