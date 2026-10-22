@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1cfb1210_c7a8cd24",
+        "filename": "Ring/Ring/Features/Conversations/views/MediaViewHelpers.swift",
+        "patchSetId": 10
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-22T14:16:39Z",
+      "side": 1,
+      "message": "[error] Line 190: 🔴 `ScrubberSlider` overrides `beginTracking`/`endTracking` but never emits touch lifecycle events (or calls `super`), while `MediaSeekSlider.Coordinator` relies on `.touchDown`/`.touchUp*` to toggle `isSeeking` and to call `onSeekStart`/`onSeekEnd`. This can leave `isSeeking` false during drag, so seek updates are not forwarded (`PlayerView` gates seeks on `coordinator.isSeeking`) and preview/call player seek behavior becomes inconsistent. Emit the control events explicitly in `beginTracking`/`endTracking` (and `cancelTracking`) or call `super` in a way that preserves these events.",
+      "revId": "24b80d47a9381714f05a5070574ee3392f7abf1e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
