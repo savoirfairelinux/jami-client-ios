@@ -63,12 +63,4 @@ class PeerSharingTracker: ObservableObject {
         guard self.accountId == accountId, self.peerId == peerId else { return }
         hasPeerSharing = result.hasExposedServices
     }
-
-    private func onMain(_ update: @escaping () -> Void) {
-        if Thread.isMainThread {
-            update()
-        } else {
-            DispatchQueue.main.async(execute: update)
-        }
-    }
 }

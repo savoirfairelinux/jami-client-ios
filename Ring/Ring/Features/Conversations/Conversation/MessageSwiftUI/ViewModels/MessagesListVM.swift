@@ -97,6 +97,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     var temporaryReplyTarget: String? // used to keep a message id of a reply target that we should scroll if this message not loaded yet. ScrollToReplyTarget should be updated after messages loaded
     @Published var swarmColor = UIColor.defaultSwarmColor {
         didSet {
+            guard oldValue != swarmColor else { return }
             self.messagesModels.forEach { message in
                 message.swarmColorUpdated(color: swarmColor)
             }
@@ -200,6 +201,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     var lastRead: ThreadSafeDictionary<String, BehaviorRelay<[String]>>
     var lastDelivered: MessageContainerModel? {
         didSet {
+            assert(Thread.isMainThread)
             if let previous = oldValue {
                 // remove sent mark from previous last delivered message
                 previous.displayLastSent(state: false)
@@ -572,6 +574,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     }
 
     func messagesUpdated(_ messages: [MessageModel]) {
+        assert(Thread.isMainThread)
         var groupingChanged = false
         for message in messages {
             guard let container = self.getMessage(messageId: message.id) else { continue }
@@ -615,6 +618,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     }
 
     private func insert(messages: [MessageModel], fromHistory: Bool) -> Int {
+        assert(Thread.isMainThread)
         guard let localJamiId = self.accountService.getAccount(fromAccountId: self.conversation.accountId)?.jamiId else {
             return 0
         }
@@ -1042,6 +1046,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     // MARK: sequencing
 
     private func computeSequencing() {
+        assert(Thread.isMainThread)
         let isGroupConversation = shouldDisplayContactInfoForConversation()
         let groupings = MessageGrouping.groupings(newestFirst: self.messagesModels.map { $0.message },
                                                   isGroupConversation: isGroupConversation)

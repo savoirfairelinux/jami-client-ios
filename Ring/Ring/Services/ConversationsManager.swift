@@ -329,15 +329,6 @@ class ConversationsManager {
         }
     }
 
-    // Preserve ordering between cancellation and an already-due timeout.
-    private func onMain(_ block: @escaping () -> Void) {
-        if Thread.isMainThread {
-            block()
-        } else {
-            DispatchQueue.main.async(execute: block)
-        }
-    }
-
     func cleanConversationData() {
         guard let userDefaults = UserDefaults(suiteName: Constants.appGroupIdentifier) else {
             return

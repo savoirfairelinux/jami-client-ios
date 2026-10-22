@@ -53,10 +53,7 @@ class MessageContainerModel: Identifiable, Equatable {
     var startsNewDay: Bool = false {
         didSet {
             guard oldValue != startsNewDay else { return }
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                self.messageRow.startsNewDay = self.startsNewDay
-            }
+            self.messageRow.startsNewDay = startsNewDay
         }
     }
 
@@ -70,30 +67,21 @@ class MessageContainerModel: Identifiable, Equatable {
     var shouldDisplayName: Bool = false {
         didSet {
             guard oldValue != shouldDisplayName else { return }
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                self.stackViewModel.shouldDisplayName = self.shouldDisplayName
-            }
+            self.stackViewModel.shouldDisplayName = shouldDisplayName
         }
     }
 
     var shouldDisplayAvatar: Bool = false {
         didSet {
             guard oldValue != shouldDisplayAvatar else { return }
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                self.messageRow.shouldDisplayAavatar = self.shouldDisplayAvatar
-            }
+            self.messageRow.shouldDisplayAavatar = shouldDisplayAvatar
         }
     }
 
     var shouldDisplayContactInfoForConversation: Bool = false {
         didSet {
             guard oldValue != shouldDisplayContactInfoForConversation else { return }
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                self.messageRow.shouldDisplayContactInfoForConversation(state: self.shouldDisplayContactInfoForConversation)
-            }
+            self.messageRow.shouldDisplayContactInfoForConversation(state: shouldDisplayContactInfoForConversation)
         }
     }
 
@@ -121,15 +109,12 @@ class MessageContainerModel: Identifiable, Equatable {
     }
 
     func listenerForInfoStateAdded() {
-        DispatchQueue.main.async {[weak self] in
-            guard let self = self else { return }
-            self.stackViewModel.setInfoState(state: self.infoSubject)
-            self.messageContent.setInfoState(state: self.infoSubject)
-            self.messageRow.setInfoState(state: self.infoSubject)
-            self.contactViewModel.setInfoState(state: self.infoSubject)
-            self.replyTarget.setInfoState(state: self.infoSubject)
-            self.reactionsModel.setInfoState(state: self.infoSubject)
-        }
+        self.stackViewModel.setInfoState(state: self.infoSubject)
+        self.messageContent.setInfoState(state: self.infoSubject)
+        self.messageRow.setInfoState(state: self.infoSubject)
+        self.contactViewModel.setInfoState(state: self.infoSubject)
+        self.replyTarget.setInfoState(state: self.infoSubject)
+        self.reactionsModel.setInfoState(state: self.infoSubject)
     }
 
     func setReplyTarget(message: MessageModel) {
@@ -137,20 +122,6 @@ class MessageContainerModel: Identifiable, Equatable {
         target.maxImageSize = 100
         target.setInfoState(state: self.infoSubject)
         self.replyTarget.target = target
-    }
-
-    func updateTransferStatus(status: DataTransferStatus) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.messageContent.setTransferStatus(transferStatus: status)
-        }
-
-        if let reply = self.replyTarget.target {
-            DispatchQueue.main.async { [weak reply] in
-                guard let reply = reply else { return }
-                reply.setTransferStatus(transferStatus: status)
-            }
-        }
     }
 
     func startTargetReplyAnimation() {

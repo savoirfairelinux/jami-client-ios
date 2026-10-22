@@ -36,7 +36,7 @@ extension MessageReadObserver {
         idsObservable
             .startWith(idsObservable.value)
             .subscribe(onNext: { [weak self] ids in
-                DispatchQueue.main.async {[weak self] in
+                onMain { [weak self] in
                     let newValue = ids.isEmpty ? nil : ids
                     self?.readIds = newValue
                 }
@@ -64,7 +64,7 @@ extension NameObserver {
             .startWith(nameObservable.value)
             .distinctUntilChanged()
             .subscribe(onNext: { [weak self] newName in
-                DispatchQueue.main.async {[weak self] in
+                onMain { [weak self] in
                     guard let self = self, self.username != newName else { return }
                     self.username = newName
                 }

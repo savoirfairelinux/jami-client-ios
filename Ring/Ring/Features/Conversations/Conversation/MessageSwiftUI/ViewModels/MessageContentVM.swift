@@ -324,10 +324,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
 
     @Published var username = "" {
         didSet {
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                self.messageDeletedText = L10n.Conversation.deletedMessage(self.username)
-            }
+            self.messageDeletedText = L10n.Conversation.deletedMessage(username)
         }
     }
 
@@ -419,17 +416,12 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     }
 
     func setEndsEmojiRun(_ endsEmojiRun: Bool) {
-        DispatchQueue.main.async { [weak self] in
-            self?.endsEmojiRun = endsEmojiRun
-        }
+        self.endsEmojiRun = endsEmojiRun
     }
 
     func setSequencing(sequencing: MessageSequencing) {
         if self.sequencing != sequencing {
-            DispatchQueue.main.async {[weak self] in
-                guard let self = self else { return }
-                self.sequencing = sequencing
-            }
+            self.sequencing = sequencing
         }
     }
 
@@ -674,30 +666,22 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     }
 
     func swarmColorUpdated(color: UIColor) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.preferencesColor = color
-            self.updateBackgroundColor()
-            self.invalidateTextPresentationCache()
-        }
+        self.preferencesColor = color
+        self.updateBackgroundColor()
+        self.invalidateTextPresentationCache()
     }
 
     func updateMessageEditions() {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.content = self.message.content
-            self.messageDeleted = self.message.isMessageDeleted()
-            self.messageEdited = self.message.isMessageEdited()
-            self.accessibilityLabelValue = self.message.accessibilityLabelValue
-            if self.messageDeleted || self.messageEdited {
-                self.updateMessageStyle()
-            }
-
-            if self.message.isMessageDeleted() {
-                self.messageDeletedText = L10n.Conversation.deletedMessage(self.username)
-            }
+        self.content = self.message.content
+        self.messageDeleted = self.message.isMessageDeleted()
+        self.messageEdited = self.message.isMessageEdited()
+        self.accessibilityLabelValue = self.message.accessibilityLabelValue
+        if self.messageDeleted || self.messageEdited {
+            self.updateMessageStyle()
         }
+
         if self.message.isMessageDeleted() {
+            self.messageDeletedText = L10n.Conversation.deletedMessage(self.username)
             self.requestName(jamiId: self.message.authorId)
         }
     }
