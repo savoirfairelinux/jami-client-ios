@@ -19,6 +19,7 @@
 import Foundation
 import SwiftUI
 import RxSwift
+import UniformTypeIdentifiers
 
 enum TransferAction: Identifiable {
     var id: Self { self }
@@ -742,6 +743,21 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
 
     func isGifImage() -> Bool {
         return self.url?.pathExtension == "gif"
+    }
+
+    var fileSymbolName: String {
+        let fileExtension = (fileName as NSString).pathExtension.lowercased()
+        let fileType = UTType(filenameExtension: fileExtension)
+        if fileExtension == "ogg" || fileType?.conforms(to: .audio) == true {
+            return "waveform"
+        }
+        if fileExtension == "webm" || fileType?.conforms(to: .movie) == true {
+            return "video"
+        }
+        if fileType?.conforms(to: .image) == true {
+            return "photo"
+        }
+        return "doc"
     }
 
     func loadThumbnailIfNeeded() {
