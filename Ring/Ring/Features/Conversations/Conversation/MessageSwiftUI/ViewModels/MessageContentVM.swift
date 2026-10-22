@@ -138,6 +138,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     @Published var menuItems = [ContextualMenuItem]()
     @Published var backgroundColor: Color = Color.jamiMessageCellReceived
     @Published var finalImage: UIImage?
+    @Published private(set) var thumbnailSize: CGSize?
     @Published var messageDeleted = false
     @Published var messageEdited = false
     @Published var messageDeletedText = "" {
@@ -531,10 +532,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
         if self.url == nil {
             self.transferState.onNext(TransferState.getURL(viewModel: self))
         }
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.loadThumbnailIfNeeded()
-        }
+        self.loadThumbnailIfNeeded()
     }
 
     private func updateTransferActions() {
@@ -660,14 +658,11 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
         } else if !player.hasVideo.value {
             playerSize.height = audioPlayerHeight
         }
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.playerHeight = playerSize.height
-            self.playerWidth = playerSize.width
-            self.player = player
-            self.player!.delegate = self
-            self.borderColor = Color(UIColor.tertiaryLabel)
-        }
+        self.playerHeight = playerSize.height
+        self.playerWidth = playerSize.width
+        self.player = player
+        player.delegate = self
+        self.borderColor = Color(UIColor.tertiaryLabel)
     }
 
     func swarmColorUpdated(color: UIColor) {
@@ -743,6 +738,9 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
         self.isLoadingThumbnail = true
         let maxSize = self.imageSize
         let isGif = self.isGifImage()
+        if self.player == nil, !isGif {
+            self.thumbnailSize = UIImage.thumbnailSize(url: url, maxPixelSize: maxSize)
+        }
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             let image = isGif
                 ? UIImage.gifImageWithUrl(url, maxSize: maxSize)
