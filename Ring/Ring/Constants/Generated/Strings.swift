@@ -73,6 +73,8 @@ internal enum L10n {
     internal static let conversationCameraHint = L10n.tr("Localizable", "accessibility.conversationCameraHint", fallback: "Double-tap to open camera")
     /// Compose a message
     internal static let conversationComposeMessage = L10n.tr("Localizable", "accessibility.conversationComposeMessage", fallback: "Compose a message")
+    /// Message sent
+    internal static let conversationMessageSent = L10n.tr("Localizable", "accessibility.conversationMessageSent", fallback: "Message sent")
     /// Conversation blocked
     internal static let conversationRowBlocked = L10n.tr("Localizable", "accessibility.conversationRowBlocked", fallback: "Conversation blocked")
     /// Last message at %@
@@ -97,6 +99,16 @@ internal enum L10n {
     }
     /// Enter username to check availability.
     internal static let createAccountVerifyUsernamePrompt = L10n.tr("Localizable", "accessibility.createAccountVerifyUsernamePrompt", fallback: "Enter username to check availability.")
+    /// %@, unable to load
+    internal static func draftAttachmentFailed(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "accessibility.draftAttachmentFailed", String(describing: p1), fallback: "%@, unable to load")
+    }
+    /// %@, loading
+    internal static func draftAttachmentLoading(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "accessibility.draftAttachmentLoading", String(describing: p1), fallback: "%@, loading")
+    }
+    /// Attachments removed
+    internal static let draftAttachmentsDiscarded = L10n.tr("Localizable", "accessibility.draftAttachmentsDiscarded", fallback: "Attachments removed")
     /// File received, name not available
     internal static let fileTransferUnnamed = L10n.tr("Localizable", "accessibility.fileTransferUnnamed", fallback: "File received, name not available")
     /// In reply to message
