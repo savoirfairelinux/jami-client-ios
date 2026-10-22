@@ -40,11 +40,7 @@ private struct MediaPreviewContentView: View {
     @ObservedObject var overlayState: MediaPreviewPresenter
     let geometry: GeometryProxy
 
-    private let doubleTapZoomScale: CGFloat = 3
-    @SwiftUI.State private var imageScale: CGFloat = 1
-    @SwiftUI.State private var lastScale: CGFloat = 1
-    @SwiftUI.State private var imageOffset: CGSize = .zero
-    @SwiftUI.State private var lastOffset: CGSize = .zero
+    @SwiftUI.State private var isImageZoomed: Bool = false
 
     @SwiftUI.State private var controlsVisible: Bool = false
     private let thumbnailCornerRadius: CGFloat = 15
@@ -66,7 +62,7 @@ private struct MediaPreviewContentView: View {
             Color.black.opacity(overlayState.backgroundAlpha)
                 .contentShape(Rectangle())
                 .onTapGesture { toggleControls() }
-                .gesture(imageScale <= 1 ? dismissDragGesture : nil)
+                .gesture(isImageZoomed ? nil : dismissDragGesture)
 
             mediaContent()
                 .offset(y: overlayState.dragOffset)
@@ -207,65 +203,20 @@ private struct MediaPreviewContentView: View {
                         }
                 )
         case .image(let image):
-            Image(uiImage: image)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .scaleEffect(imageScale)
-                .offset(imageOffset)
-                .gesture(magnificationGesture)
-                .gesture(imageScale > 1 ? imagePanGesture : nil)
-                .gesture(imageScale <= 1 ? dismissDragGesture : nil)
-                .contentShape(Rectangle())
-                .onTapGesture(count: 2) { toggleZoom() }
-                .onTapGesture(count: 1) { toggleControls() }
-                .accessibilityAddTraits(.isButton)
+            ZoomableImageView(
+                image: image,
+                isZoomed: $isImageZoomed,
+                onSingleTap: { toggleControls() },
+                onPanBegan: { controlsVisible = false }
+            )
+                .gesture(isImageZoomed ? nil : dismissDragGesture)
+                .accessibilityElement()
+                .accessibilityAddTraits([.isButton, .isImage])
                 .accessibilityAction(named: L10n.Global.close) { dismiss() }
         }
     }
 
     // MARK: - Gestures
-
-    private var magnificationGesture: some Gesture {
-        MagnificationGesture()
-            .onChanged { value in
-                imageScale = max(1, lastScale * value)
-            }
-            .onEnded { value in
-                lastScale = max(1, lastScale * value)
-                imageScale = lastScale
-                if imageScale <= 1 {
-                    withAnimation(.easeInOut(duration: 0.2)) {
-                        imageOffset = .zero
-                        lastOffset = .zero
-                    }
-                }
-            }
-    }
-
-    /// Pan gesture active only when zoomed in (imageScale > 1).
-    private var imagePanGesture: some Gesture {
-        DragGesture()
-            .onChanged { value in
-                imageOffset = CGSize(
-                    width: lastOffset.width + value.translation.width,
-                    height: lastOffset.height + value.translation.height
-                )
-                if controlsVisible && abs(value.translation.height) > 10 {
-                    controlsVisible = false
-                }
-            }
-            .onEnded { value in
-                let verticalTranslation = value.translation.height
-                let verticalVelocity = value.predictedEndTranslation.height
-                let shouldDismiss = abs(verticalTranslation) > dismissThreshold
-                    || abs(verticalVelocity) > 800
-                if shouldDismiss {
-                    dismiss()
-                } else {
-                    lastOffset = imageOffset
-                }
-            }
-    }
 
     private var dismissDragGesture: some Gesture {
         DragGesture()
@@ -316,30 +267,154 @@ private struct MediaPreviewContentView: View {
 
     private func dismiss() {
         controlsVisible = false
-        imageScale = 1
-        lastScale = 1
-        imageOffset = .zero
-        lastOffset = .zero
+        isImageZoomed = false
         overlayState.dismiss()
-    }
-
-    private func toggleZoom() {
-        withAnimation(.easeInOut(duration: 0.25)) {
-            if imageScale > 1 {
-                imageScale = 1
-                lastScale = 1
-                imageOffset = .zero
-                lastOffset = .zero
-            } else {
-                imageScale = doubleTapZoomScale
-                lastScale = doubleTapZoomScale
-            }
-        }
     }
 
     private func toggleControls() {
         withAnimation(.spring(response: 0.35, dampingFraction: 0.8)) {
             controlsVisible.toggle()
+        }
+    }
+}
+
+// MARK: - Zoomable Image
+
+private struct ZoomableImageView: UIViewRepresentable {
+    let image: UIImage
+    @Binding var isZoomed: Bool
+    let onSingleTap: () -> Void
+    let onPanBegan: () -> Void
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+
+    func makeUIView(context: Context) -> ZoomableImageScrollView {
+        let scrollView = ZoomableImageScrollView(image: image)
+        scrollView.delegate = context.coordinator
+        let doubleTap = UITapGestureRecognizer(target: context.coordinator,
+                                               action: #selector(Coordinator.handleDoubleTap(_:)))
+        doubleTap.numberOfTapsRequired = 2
+        let singleTap = UITapGestureRecognizer(target: context.coordinator,
+                                               action: #selector(Coordinator.handleSingleTap))
+        singleTap.require(toFail: doubleTap)
+        scrollView.addGestureRecognizer(doubleTap)
+        scrollView.addGestureRecognizer(singleTap)
+        return scrollView
+    }
+
+    func updateUIView(_ scrollView: ZoomableImageScrollView, context: Context) {
+        context.coordinator.parent = self
+        scrollView.setImage(image)
+        if !isZoomed && scrollView.zoomScale > scrollView.minimumZoomScale {
+            scrollView.setZoomScale(scrollView.minimumZoomScale, animated: false)
+        }
+    }
+
+    final class Coordinator: NSObject, UIScrollViewDelegate {
+        var parent: ZoomableImageView
+        private let doubleTapZoomScale: CGFloat = 3
+
+        init(_ parent: ZoomableImageView) {
+            self.parent = parent
+        }
+
+        func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+            (scrollView as? ZoomableImageScrollView)?.imageView
+        }
+
+        func scrollViewDidZoom(_ scrollView: UIScrollView) {
+            (scrollView as? ZoomableImageScrollView)?.centerImage()
+            let zoomed = scrollView.zoomScale > scrollView.minimumZoomScale
+            scrollView.isScrollEnabled = zoomed
+            if parent.isZoomed != zoomed {
+                parent.isZoomed = zoomed
+            }
+        }
+
+        func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+            parent.onPanBegan()
+        }
+
+        @objc
+        func handleSingleTap() {
+            parent.onSingleTap()
+        }
+
+        @objc
+        func handleDoubleTap(_ recognizer: UITapGestureRecognizer) {
+            guard let scrollView = recognizer.view as? ZoomableImageScrollView else { return }
+            if scrollView.zoomScale > scrollView.minimumZoomScale {
+                scrollView.setZoomScale(scrollView.minimumZoomScale, animated: true)
+                return
+            }
+            let point = recognizer.location(in: scrollView.imageView)
+            let size = CGSize(width: scrollView.bounds.width / doubleTapZoomScale,
+                              height: scrollView.bounds.height / doubleTapZoomScale)
+            let rect = CGRect(x: point.x - size.width / 2, y: point.y - size.height / 2,
+                              width: size.width, height: size.height)
+            scrollView.zoom(to: rect, animated: true)
+        }
+    }
+}
+
+private final class ZoomableImageScrollView: UIScrollView {
+    let imageView = UIImageView()
+    private var fittedBoundsSize: CGSize = .zero
+
+    init(image: UIImage) {
+        super.init(frame: .zero)
+        imageView.image = image
+        imageView.contentMode = .scaleAspectFit
+        addSubview(imageView)
+        minimumZoomScale = 1
+        maximumZoomScale = 5
+        bouncesZoom = true
+        isScrollEnabled = false
+        showsVerticalScrollIndicator = false
+        showsHorizontalScrollIndicator = false
+        contentInsetAdjustmentBehavior = .never
+        backgroundColor = .clear
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    func setImage(_ image: UIImage) {
+        guard imageView.image !== image else { return }
+        imageView.image = image
+        fittedBoundsSize = .zero
+        setNeedsLayout()
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if bounds.size != fittedBoundsSize && zoomScale == minimumZoomScale {
+            fitImage()
+        }
+        centerImage()
+    }
+
+    private func fitImage() {
+        fittedBoundsSize = bounds.size
+        guard let imageSize = imageView.image?.size,
+              imageSize.width > 0, imageSize.height > 0,
+              bounds.width > 0, bounds.height > 0 else { return }
+        let scale = min(bounds.width / imageSize.width, bounds.height / imageSize.height)
+        let fittedSize = CGSize(width: imageSize.width * scale, height: imageSize.height * scale)
+        imageView.frame = CGRect(origin: .zero, size: fittedSize)
+        contentSize = fittedSize
+    }
+
+    func centerImage() {
+        let horizontalInset = max(0, (bounds.width - contentSize.width) / 2)
+        let verticalInset = max(0, (bounds.height - contentSize.height) / 2)
+        let inset = UIEdgeInsets(top: verticalInset, left: horizontalInset,
+                                 bottom: verticalInset, right: horizontalInset)
+        if contentInset != inset {
+            contentInset = inset
         }
     }
 }
