@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c81028ec_3760ff2a",
+        "filename": "Ring/Ring/Features/Conversations/views/MediaViewHelpers.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-22T16:17:40Z",
+      "side": 1,
+      "message": "[warning] Line 332: 🟡 `MediaSeekFill` now triggers long-press directly via `UILongPressGestureRecognizer`, which bypasses the shared `messageGesture` guardrails (`suppressLongPress` / `contextMenuActive`) used elsewhere in conversation bubbles. That can reintroduce accidental context-menu opens during swipe-to-reply or gesture conflicts in the message list. Keep seek handling here if needed, but route long-press back through the existing SwiftUI `messageGesture` path (or replicate the same suppression checks) so behavior stays consistent across message types.",
+      "revId": "63a029d242cc7b37b396a6cb12921aa6d049acc0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
