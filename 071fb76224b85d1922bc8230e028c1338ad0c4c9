@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2352561_e1a49db8",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessageContentVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 656,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-22T18:50:41Z",
+      "side": 1,
+      "message": "[error] Line 656: 🔴 `@Published` properties (`playerHeight`, `playerWidth`, `player`, `borderColor`) are now mutated directly without main-thread marshalling. This callback path can run off the main thread (Rx/transfer callbacks), which can trigger SwiftUI runtime violations (`Publishing changes from background threads`) and nondeterministic UI updates. Restore main-thread confinement (e.g., `DispatchQueue.main.async` / `await MainActor.run`) for all UI-bound state mutations, or make the VM `@MainActor` and enforce main-thread delivery upstream.",
+      "revId": "071fb76224b85d1922bc8230e028c1338ad0c4c9",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66ba891a_98c28331",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessageContentVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 739,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-22T18:50:41Z",
+      "side": 1,
+      "message": "[warning] Line 739: 🟡 `UIImage.thumbnailSize(url:maxPixelSize:)` performs file metadata I/O synchronously before dispatching decode work. In conversation lists this can add main-thread latency during cell setup/scrolling. Move header-size extraction to the background worker alongside decode, then publish the computed size back on main thread.",
+      "revId": "071fb76224b85d1922bc8230e028c1338ad0c4c9",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76d50c13_05050b85",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessageSwiftUIViews.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-22T18:50:41Z",
+      "side": 1,
+      "message": "[error] Line 112: 🔴 The new placeholder branch can permanently mask decode failures: when header parsing succeeds but thumbnail decoding later fails, `thumbnailSize` remains non-nil and this branch keeps rendering the placeholder instead of `DefaultTransferView`. That regresses failure handling and can hide file-transfer affordances. Clear `thumbnailSize` (or set a decode-failed flag) when thumbnail decode returns `nil`, so the view falls back to the file card.",
+      "revId": "071fb76224b85d1922bc8230e028c1338ad0c4c9",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
