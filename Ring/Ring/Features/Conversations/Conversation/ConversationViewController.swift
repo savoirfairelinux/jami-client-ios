@@ -394,6 +394,8 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
 
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         picker.dismiss(animated: true, completion: nil)
+        guard !results.isEmpty else { return }
+        let parentId = viewModel.takeReplyId()
         results.forEach { (result) in
             let imageFileName: String = result.itemProvider.suggestedName ?? "file"
             let provider = result.itemProvider
@@ -402,20 +404,20 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
                 provider.loadDataRepresentation(forTypeIdentifier: UTType.gif.identifier) { [weak self] (data, _) in
                     guard let self = self,
                           let data = data else { return }
-                    self.viewModel.sendAndSaveFile(displayName: imageFileName + ".gif", imageData: data)
+                    self.viewModel.sendAndSaveFile(displayName: imageFileName + ".gif", imageData: data, parentId: parentId)
                 }
             case .image:
                 provider.loadObject(ofClass: UIImage.self) { [weak self] (object, _) in
                     guard let self = self,
                           let image = object as? UIImage,
                           let imageData = image.jpegData(compressionQuality: 0.5) else { return }
-                    self.viewModel.sendAndSaveFile(displayName: imageFileName + ".jpeg", imageData: imageData)
+                    self.viewModel.sendAndSaveFile(displayName: imageFileName + ".jpeg", imageData: imageData, parentId: parentId)
                 }
             case .video:
                 provider.loadDataRepresentation(forTypeIdentifier: UTType.movie.identifier) { [weak self] (data, _) in
                     guard let self = self,
                           let data = data else { return }
-                    self.viewModel.sendAndSaveFile(displayName: imageFileName + ".mov", imageData: data)
+                    self.viewModel.sendAndSaveFile(displayName: imageFileName + ".mov", imageData: data, parentId: parentId)
                 }
             default:
                 break
@@ -443,6 +445,7 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
         picker.dismiss(animated: true, completion: nil)
 
         var image: UIImage!
+        let parentId = viewModel.takeReplyId()
 
         if picker.sourceType == UIImagePickerController.SourceType.camera {
             if let img = info[.editedImage] as? UIImage {
@@ -452,7 +455,7 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
             }
             let imageFileName = "IMG.jpeg"
             guard let imageData = image.jpegData(compressionQuality: 0.5) else { return }
-            viewModel.sendAndSaveFile(displayName: imageFileName, imageData: imageData)
+            viewModel.sendAndSaveFile(displayName: imageFileName, imageData: imageData, parentId: parentId)
             return
         }
         guard picker.sourceType == UIImagePickerController.SourceType.photoLibrary,
@@ -465,7 +468,7 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
                 image = img
             }
             guard let imageData = image.jpegData(compressionQuality: 0.5) else { return }
-            viewModel.sendAndSaveFile(displayName: imageFileName, imageData: imageData)
+            viewModel.sendAndSaveFile(displayName: imageFileName, imageData: imageData, parentId: parentId)
             return
         }
         guard phAsset.mediaType == .video else { return }
@@ -478,7 +481,7 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
                                       let videoData = NSData(contentsOf: asset.url) else {
                                     return
                                 }
-                                self.viewModel.sendAndSaveFile(displayName: imageFileName, imageData: videoData as Data)
+                                self.viewModel.sendAndSaveFile(displayName: imageFileName, imageData: videoData as Data, parentId: parentId)
                             })
     }
     // swiftlint:enable cyclomatic_complexity
@@ -559,11 +562,12 @@ extension ConversationViewController: UIDocumentPickerDelegate {
                 let filePath = url.absoluteURL.path
                 log.debug("Successfully imported \(filePath)")
                 let fileName = url.absoluteURL.lastPathComponent
+                let parentId = viewModel.takeReplyId()
                 do {
                     let data = try Data(contentsOf: url)
-                    viewModel.sendAndSaveFile(displayName: fileName, imageData: data)
+                    viewModel.sendAndSaveFile(displayName: fileName, imageData: data, parentId: parentId)
                 } catch {
-                    viewModel.sendFile(filePath: filePath, displayName: fileName)
+                    viewModel.sendFile(filePath: filePath, displayName: fileName, parentId: parentId)
                 }
                 url.stopAccessingSecurityScopedResource()
             }
