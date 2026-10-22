@@ -134,6 +134,7 @@ class MessageContainerModel: Identifiable, Equatable {
 
     func setReplyTarget(message: MessageModel) {
         let target = MessageContentVM(message: message, contextMenuState: PublishSubject<State>(), transferState: self.transferSubject, isHistory: false, preferencesColor: preferencesColor)
+        target.maxImageSize = 100
         target.setInfoState(state: self.infoSubject)
         self.replyTarget.target = target
     }

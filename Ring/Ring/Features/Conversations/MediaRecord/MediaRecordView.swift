@@ -69,6 +69,9 @@ struct MediaRecordView: View {
     private var contentLayer: some View {
         VStack(spacing: 0) {
             topBar
+            if let replyingTo = viewModel.replyingTo {
+                replyChip(name: replyingTo)
+            }
             Spacer()
             if viewModel.isReadyToSend {
                 previewTray
@@ -114,6 +117,19 @@ struct MediaRecordView: View {
         .padding(.horizontal, 12)
         .frame(height: Layout.timerHeight)
         .glassCapsuleBackground()
+    }
+
+    private func replyChip(name: String) -> some View {
+        (Text(L10n.Conversation.inReplyTo) + Text(" \(name)").bold())
+            .font(.footnote)
+            .foregroundColor(.white)
+            .lineLimit(1)
+            .truncationMode(.tail)
+            .padding(.horizontal, 12)
+            .frame(height: Layout.timerHeight)
+            .glassCapsuleBackground()
+            .padding(.top, 8)
+            .accessibilityElement(children: .combine)
     }
 
     private var cancelButton: some View {

@@ -181,8 +181,8 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
             .subscribe(onNext: { [weak self] (state) in
                 guard let self = self, let state = state as? MessagePanelState else { return }
                 switch state {
-                case .sendMessage(let content, let parentId):
-                    self.viewModel.sendMessage(withContent: content, parentId: parentId)
+                case .send(let messages):
+                    self.viewModel.send(messages)
                 case .sendPhoto:
                     self.takePicture()
                 case .editMessage(content: let content, messageId: let messageId):
@@ -195,6 +195,8 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
                     self.recordVideo()
                 case .sendFile:
                     self.importDocument()
+                case .attachmentFailed:
+                    self.showMessageAlert(title: L10n.DataTransfer.sendingFailed)
                 case .newCollabDocument:
                     self.promptNewCollabDocument()
                 case .registerTypingIndicator(let typingStatus):
@@ -399,23 +401,26 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
             let provider = result.itemProvider
             switch getAssetTypeFrom(itemProvider: provider) {
             case .gif:
-                provider.loadDataRepresentation(forTypeIdentifier: UTType.gif.identifier) { [weak self] (data, _) in
-                    guard let self = self,
-                          let data = data else { return }
-                    self.viewModel.sendAndSaveFile(displayName: imageFileName + ".gif", imageData: data)
+                let displayName = imageFileName + ".gif"
+                viewModel.attach(displayName: displayName, kind: .image) { completion in
+                    provider.loadDataRepresentation(forTypeIdentifier: UTType.gif.identifier) { (data, _) in
+                        completion(data.map { .data(displayName: displayName, data: $0) })
+                    }
                 }
             case .image:
-                provider.loadObject(ofClass: UIImage.self) { [weak self] (object, _) in
-                    guard let self = self,
-                          let image = object as? UIImage,
-                          let imageData = image.jpegData(compressionQuality: 0.5) else { return }
-                    self.viewModel.sendAndSaveFile(displayName: imageFileName + ".jpeg", imageData: imageData)
+                let displayName = imageFileName + ".jpeg"
+                viewModel.attach(displayName: displayName, kind: .image) { completion in
+                    provider.loadObject(ofClass: UIImage.self) { (object, _) in
+                        completion((object as? UIImage)?.jpegData(compressionQuality: 0.5).map { .data(displayName: displayName, data: $0) })
+                    }
                 }
             case .video:
-                provider.loadDataRepresentation(forTypeIdentifier: UTType.movie.identifier) { [weak self] (data, _) in
-                    guard let self = self,
-                          let data = data else { return }
-                    self.viewModel.sendAndSaveFile(displayName: imageFileName + ".mov", imageData: data)
+                let displayName = imageFileName + ".mov"
+                let viewModel: ConversationViewModel = self.viewModel
+                viewModel.attach(displayName: displayName, kind: .video) { completion in
+                    provider.loadFileRepresentation(forTypeIdentifier: UTType.movie.identifier) { (url, _) in
+                        completion(url.flatMap { viewModel.fileContent(copying: $0, displayName: displayName) })
+                    }
                 }
             default:
                 break
@@ -436,7 +441,6 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
     }
 
     // MARK: - UIImagePickerControllerDelegate
-    // swiftlint:disable cyclomatic_complexity
     internal func imagePickerController(_ picker: UIImagePickerController,
                                         didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
 
@@ -452,7 +456,7 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
             }
             let imageFileName = "IMG.jpeg"
             guard let imageData = image.jpegData(compressionQuality: 0.5) else { return }
-            viewModel.sendAndSaveFile(displayName: imageFileName, imageData: imageData)
+            viewModel.attach(displayName: imageFileName, kind: .image) { $0(.data(displayName: imageFileName, data: imageData)) }
             return
         }
         guard picker.sourceType == UIImagePickerController.SourceType.photoLibrary,
@@ -465,23 +469,21 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
                 image = img
             }
             guard let imageData = image.jpegData(compressionQuality: 0.5) else { return }
-            viewModel.sendAndSaveFile(displayName: imageFileName, imageData: imageData)
+            viewModel.attach(displayName: imageFileName, kind: .image) { $0(.data(displayName: imageFileName, data: imageData)) }
             return
         }
         guard phAsset.mediaType == .video else { return }
-        PHImageManager
-            .default()
-            .requestAVAsset(forVideo: phAsset,
-                            options: PHVideoRequestOptions(),
-                            resultHandler: { (asset, _, _) in
-                                guard let asset = asset as? AVURLAsset,
-                                      let videoData = NSData(contentsOf: asset.url) else {
-                                    return
-                                }
-                                self.viewModel.sendAndSaveFile(displayName: imageFileName, imageData: videoData as Data)
-                            })
+        let viewModel: ConversationViewModel = self.viewModel
+        viewModel.attach(displayName: imageFileName, kind: .video) { completion in
+            PHImageManager
+                .default()
+                .requestAVAsset(forVideo: phAsset,
+                                options: PHVideoRequestOptions(),
+                                resultHandler: { (asset, _, _) in
+                                    completion((asset as? AVURLAsset).flatMap { viewModel.fileContent(copying: $0.url, displayName: imageFileName) })
+                                })
+        }
     }
-    // swiftlint:enable cyclomatic_complexity
 
 }
 
@@ -559,13 +561,15 @@ extension ConversationViewController: UIDocumentPickerDelegate {
                 let filePath = url.absoluteURL.path
                 log.debug("Successfully imported \(filePath)")
                 let fileName = url.absoluteURL.lastPathComponent
-                do {
-                    let data = try Data(contentsOf: url)
-                    viewModel.sendAndSaveFile(displayName: fileName, imageData: data)
-                } catch {
-                    viewModel.sendFile(filePath: filePath, displayName: fileName)
+                let isImage = UTType(filenameExtension: url.pathExtension)?.conforms(to: .image) ?? false
+                let viewModel: ConversationViewModel = self.viewModel
+                viewModel.attach(displayName: fileName, kind: isImage ? .image : .document) { completion in
+                    DispatchQueue.global(qos: .userInitiated).async {
+                        let content = viewModel.fileContent(copying: url, displayName: fileName)
+                        url.stopAccessingSecurityScopedResource()
+                        completion(content)
+                    }
                 }
-                url.stopAccessingSecurityScopedResource()
             }
         }
         currentDocumentPickerMode = .none
