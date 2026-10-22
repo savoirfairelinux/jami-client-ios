@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e3f503f8_17458f4c",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessageContentVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-22T18:19:40Z",
+      "side": 1,
+      "message": "[error] Line 422: 🔴 UI-observable state is now mutated on the caller thread (`endsEmojiRun`, `sequencing`, and in `updateMessageEditions` fields like `content`/`messageDeleted`/`messageEdited`). These callbacks can be triggered from Rx/daemon pipelines off the main thread, which risks `Publishing changes from background threads is not allowed` crashes and nondeterministic UI updates. Apply main-thread confinement (`onMainThread`/`Thread.isMainThread` gate) around these writes, or mark the VM mutation surface `@MainActor` and hop to it explicitly.",
+      "revId": "5fd7e29d6608de0fe9d152748be2e8c17000bae7",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a69a4c18_b439937c",
         "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessageRowVM.swift",
         "patchSetId": 1
