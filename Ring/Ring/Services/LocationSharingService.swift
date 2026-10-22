@@ -312,7 +312,8 @@ extension LocationSharingService {
 
         if let incomingInstance = self.incomingInstances.get(accountId, peerUri) {
             if let incomingTime = incomingData.time {
-                if incomingInstance.lastReceivedTimeStamp < incomingTime {
+                // the same time comes from a resent position, or a stop sent within the same second
+                if incomingInstance.lastReceivedTimeStamp <= incomingTime {
                     incomingInstance.lastReceivedDate = Date()
                     incomingInstance.lastReceivedTimeStamp = incomingTime
                 } else {

@@ -114,6 +114,40 @@ class LocationSharingServiceTests: XCTestCase {
         XCTAssertEqual(peerUriAndData.2, 10000 / 60000)
     }
 
+    func testPositionResentWithSameTimeKeepsReceiving() {
+        let position = "{\"type\":\"Position\",\"lat\":37.7749,\"long\":-122.4194,\"time\":10000}"
+        locationSharingService.handleReceivedLocationUpdate(from: jamiId1, to: accountId1, messageId: "messageId1", locationJSON: position)
+        let incomingInstance = locationSharingService.getIncomingInstances().get(accountId1, jamiId1)
+        let nineMinutesAgo = Date(timeIntervalSinceNow: -9 * 60)
+        incomingInstance?.lastReceivedDate = nineMinutesAgo
+
+        locationSharingService.handleReceivedLocationUpdate(from: jamiId1, to: accountId1, messageId: "messageId2", locationJSON: position)
+
+        XCTAssertNotNil(incomingInstance)
+        XCTAssertGreaterThan(incomingInstance?.lastReceivedDate ?? nineMinutesAgo, nineMinutesAgo)
+    }
+
+    func testStopWithSameTimeAsLastPositionStopsReceiving() {
+        let position = "{\"type\":\"Position\",\"lat\":37.7749,\"long\":-122.4194,\"time\":10000}"
+        let stop = "{\"type\":\"Stop\",\"time\":10000}"
+        locationSharingService.handleReceivedLocationUpdate(from: jamiId1, to: accountId1, messageId: "messageId1", locationJSON: position)
+
+        locationSharingService.handleReceivedLocationUpdate(from: jamiId1, to: accountId1, messageId: "messageId2", locationJSON: stop)
+
+        XCTAssertFalse(locationSharingService.isAlreadySharing(accountId: accountId1, contactUri: jamiId1))
+        XCTAssertNil(locationSharingService.peerUriAndLocationReceived.value.1)
+    }
+
+    func testOlderPositionIsIgnored() {
+        let newerPosition = "{\"type\":\"Position\",\"lat\":37.7749,\"long\":-122.4194,\"time\":20000}"
+        let olderPosition = "{\"type\":\"Position\",\"lat\":45.5017,\"long\":-73.5673,\"time\":10000}"
+        locationSharingService.handleReceivedLocationUpdate(from: jamiId1, to: accountId1, messageId: "messageId1", locationJSON: newerPosition)
+
+        locationSharingService.handleReceivedLocationUpdate(from: jamiId1, to: accountId1, messageId: "messageId2", locationJSON: olderPosition)
+
+        XCTAssertEqual(locationSharingService.peerUriAndLocationReceived.value.1?.latitude, 37.7749)
+    }
+
     func testStopReceivingLocation() {
         let accountId = "accountId"
         let contactUri = "contactUri"
