@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "155b8fe5_3c44dfbc",
+        "filename": "Ring/Ring/Features/Conversations/Preview/MediaPreviewView.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-22T15:41:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1fc8fd7_74e04467",
+      "revId": "54b1c4bd7a7dcf9357c36f573dc14a68b16e7fb8",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0706da34_64e84f01",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-10-21T20:49:20Z",
       "side": 1,
       "message": "[error] Line 97: 🔴 `progress` now writes into `playback.value` (`@Published`) in `didSet`, but `progress` is fed by Rx player callbacks that are not guaranteed to run on the main thread. Publishing SwiftUI state off-main can trigger runtime warnings and flaky UI updates. Fix by ensuring all `progress` mutations (or at least `playback.value` assignment) happen on the main thread, e.g. `observe(on: MainScheduler.instance)` before setting `progress`, or dispatch/annotate with `@MainActor`.",
+      "revId": "54b1c4bd7a7dcf9357c36f573dc14a68b16e7fb8",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b49d170d_f406050e",
+        "filename": "Ring/Ring/Features/Conversations/views/PlayerView.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-22T15:41:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0706da34_64e84f01",
       "revId": "54b1c4bd7a7dcf9357c36f573dc14a68b16e7fb8",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }

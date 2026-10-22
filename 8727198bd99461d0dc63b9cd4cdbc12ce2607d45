@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5224561_41448074",
+        "filename": "Ring/Ring/Features/Conversations/MediaRecord/MediaRecordViewModel.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-22T15:41:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "944508a9_ae0c22e8",
+      "revId": "8727198bd99461d0dc63b9cd4cdbc12ce2607d45",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "76dadc30_42426942",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-10-22T14:55:53Z",
       "side": 1,
       "message": "[error] Line 95: 🔴 `PlayerCoordinator.progress` now updates `PlaybackProgress.value` (an `@Published` property) directly in `didSet`. `progress` is fed by Rx callbacks that are not guaranteed to run on the main thread, so this can publish state changes from a background thread and trigger SwiftUI runtime violations/crashes. Publish on the main thread (e.g., dispatch `playback.value` to `DispatchQueue.main` or guarantee upstream `observe(on: MainScheduler.instance)` before assigning `progress`).",
+      "revId": "8727198bd99461d0dc63b9cd4cdbc12ce2607d45",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79b7ddcf_539a1029",
+        "filename": "Ring/Ring/Features/Conversations/views/PlayerView.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-22T15:41:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76dadc30_42426942",
       "revId": "8727198bd99461d0dc63b9cd4cdbc12ce2607d45",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
