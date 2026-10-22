@@ -52,6 +52,8 @@ class MediaRecordViewModel: ObservableObject, Stateable, ViewModel {
     // MARK: - Configuration (set by coordinator before setup())
 
     var conversation: ConversationModel!
+    var replyingTo: String?
+    var onSend: (OutgoingMessage.Content) -> Void = { _ in }
 
     // MARK: - Private
 
@@ -152,7 +154,7 @@ class MediaRecordViewModel: ObservableObject, Stateable, ViewModel {
         let name = URL(fileURLWithPath: fileName).lastPathComponent
         player?.closePlayer()
         player = nil
-        fileTransferService.sendFile(conversation: conversation, filePath: fileName, displayName: name, localIdentifier: nil)
+        onSend(.file(path: fileName, displayName: name))
         videoService.videRecordingFinished()
         transition(to: .sent)
     }

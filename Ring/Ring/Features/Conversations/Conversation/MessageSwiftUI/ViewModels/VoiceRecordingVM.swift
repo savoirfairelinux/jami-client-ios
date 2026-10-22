@@ -37,6 +37,8 @@ final class VoiceRecordingVM: ObservableObject {
     @Published private(set) var previewElapsed: TimeInterval = 0
 
     var conversation: ConversationModel?
+    var onSend: (OutgoingMessage.Content) -> Void = { _ in }
+    var onStart: () -> Void = {}
 
     var isRecording: Bool {
         state == .recording
@@ -137,7 +139,7 @@ final class VoiceRecordingVM: ObservableObject {
     }
 
     func send() {
-        guard state != .idle, let path = recordingPath, let conversation = conversation else {
+        guard state != .idle, let path = recordingPath else {
             discardRecording()
             return
         }
@@ -147,13 +149,9 @@ final class VoiceRecordingVM: ObservableObject {
         }
         previewPlayer?.closePlayer()
         reset()
-        let dataTransferService = self.dataTransferService
-        afterFileIsWritten {
-            dataTransferService.sendFile(conversation: conversation,
-                                         filePath: path,
-                                         displayName: URL(fileURLWithPath: path).lastPathComponent,
-                                         localIdentifier: nil)
-        }
+        onSend(.file(path: path,
+                     displayName: URL(fileURLWithPath: path).lastPathComponent,
+                     readyAfter: Self.fileFinalizationDelay))
     }
 
     // MARK: - Preview
@@ -233,6 +231,7 @@ final class VoiceRecordingVM: ObservableObject {
         recordingStart = Date()
         elapsed = 0
         state = .recording
+        onStart()
         startElapsedTimer()
         UIAccessibility.post(notification: .announcement, argument: L10n.Accessibility.voiceMessageRecording)
     }

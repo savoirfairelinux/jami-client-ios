@@ -345,9 +345,6 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
         self.type = message.type
         self.isIncoming = message.incoming
         self.isHistory = isHistory
-        if self.isHistory {
-            maxImageSize = 100
-        }
         self.content = message.content
         self.accessibilityLabelValue = message.accessibilityLabelValue
         self.transferStatus = message.transferStatus

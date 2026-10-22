@@ -20,6 +20,49 @@
 import Foundation
 import RxSwift
 
+struct OutgoingMessage {
+    enum Content {
+        case text(String)
+        case data(displayName: String, data: Data)
+        case file(path: String, displayName: String, readyAfter: TimeInterval = 0)
+    }
+
+    let content: Content
+    let parentId: String
+}
+
+struct DraftAttachment: Identifiable {
+    enum Kind {
+        case image
+        case video
+        case document
+    }
+
+    enum Status {
+        case loading
+        case ready(OutgoingMessage.Content)
+        case failed
+    }
+
+    static let thumbnailSize: CGFloat = 64
+
+    let id = UUID()
+    let displayName: String
+    let kind: Kind
+    var status: Status = .loading
+    var thumbnail: UIImage?
+
+    var isLoading: Bool {
+        if case .loading = status { return true }
+        return false
+    }
+
+    var readyContent: OutgoingMessage.Content? {
+        if case .ready(let content) = status { return content }
+        return nil
+    }
+}
+
 class MessagePanelVM: ObservableObject, MessageAppearanceProtocol {
 
     @Published var placeholder = L10n.Conversation.messagePlaceholder
@@ -29,6 +72,7 @@ class MessagePanelVM: ObservableObject, MessageAppearanceProtocol {
     @Published var isEdit: Bool = false
     @Published var avatarImage: UIImage?
     @Published var inReplyTo = ""
+    @Published private(set) var attachments: [DraftAttachment] = []
     /// A collaborative document is a commit in the conversation's repository,
     /// so it can only be started where there is one.
     @Published var canWriteDocuments = false
@@ -38,8 +82,16 @@ class MessagePanelVM: ObservableObject, MessageAppearanceProtocol {
 
     let disposeBag = DisposeBag()
 
+    var isLoadingAttachments: Bool {
+        attachments.contains(where: { $0.isLoading })
+    }
+
     init(messagePanelState: PublishSubject<State>) {
         self.messagePanelState = messagePanelState
+    }
+
+    deinit {
+        attachments.compactMap(\.readyContent).forEach(Self.discardFile)
     }
 
     func subscribeBestName(bestName: Observable<String>) {
@@ -59,28 +111,110 @@ class MessagePanelVM: ObservableObject, MessageAppearanceProtocol {
 
     // MARK: MessagePanelState
 
-    func sendMessage(text: String) {
+    func isDraftEmpty(text: String) -> Bool {
+        text.isEmpty && attachments.isEmpty
+    }
+
+    func sendDraft(text: String) {
         if messageToEdit != nil {
             editMessage(text: text)
-        } else {
-            let textToSend = text.isEmpty ? defaultEmoji : text
-            let trimmed = textToSend.trimmingCharacters(in: .whitespacesAndNewlines)
-            if trimmed.isEmpty {
-                return
-            }
-            let parentId = self.messageToReply?.message.id ?? ""
-            messagePanelState.onNext(MessagePanelState.sendMessage(content: trimmed, parentId: parentId))
+            return
         }
+        guard !isLoadingAttachments else { return }
+        let contents = draftContents(text: text)
+        attachments.removeAll()
+        send(contents)
+    }
+
+    private func draftContents(text: String) -> [OutgoingMessage.Content] {
+        if isDraftEmpty(text: text) {
+            return [.text(defaultEmoji)]
+        }
+        let files = attachments.compactMap(\.readyContent)
+        let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        return trimmed.isEmpty ? files : files + [.text(trimmed)]
+    }
+
+    func send(_ content: OutgoingMessage.Content) {
+        send([content])
+    }
+
+    private func send(_ contents: [OutgoingMessage.Content]) {
+        guard !contents.isEmpty else { return }
+        let parentId = messageToReply?.message.id ?? ""
+        endReply()
+        messagePanelState.onNext(MessagePanelState.send(messages: contents.map { OutgoingMessage(content: $0, parentId: parentId) }))
+        UIAccessibility.post(notification: .announcement, argument: L10n.Accessibility.conversationMessageSent)
     }
 
     func editMessage(text: String) {
         let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
-        if trimmed.isEmpty {
+        if !trimmed.isEmpty, let message = messageToEdit {
+            messagePanelState.onNext(MessagePanelState.editMessage(content: trimmed, messageId: message.message.id))
+        }
+        cancelEdit()
+    }
+
+    func attach(displayName: String, kind: DraftAttachment.Kind, load: (@escaping (OutgoingMessage.Content?) -> Void) -> Void) {
+        guard messageToReply != nil else {
+            load { [weak self] content in
+                DispatchQueue.main.async {
+                    guard let self = self else {
+                        content.map(Self.discardFile)
+                        return
+                    }
+                    guard let content = content else {
+                        self.messagePanelState.onNext(MessagePanelState.attachmentFailed)
+                        return
+                    }
+                    self.messagePanelState.onNext(MessagePanelState.send(messages: [OutgoingMessage(content: content, parentId: "")]))
+                }
+            }
             return
         }
-        guard let message = messageToEdit else { return }
-        messagePanelState.onNext(MessagePanelState.editMessage(content: trimmed, messageId: message.message.id))
+        let attachment = DraftAttachment(displayName: displayName, kind: kind)
+        attachments.append(attachment)
+        load { [weak self] content in
+            DispatchQueue.global(qos: .userInitiated).async {
+                let thumbnail = content.flatMap { Self.thumbnail(for: $0, kind: kind) }
+                DispatchQueue.main.async {
+                    guard let self = self,
+                          let index = self.attachments.firstIndex(where: { $0.id == attachment.id }) else {
+                        content.map(Self.discardFile)
+                        return
+                    }
+                    if let content = content {
+                        self.attachments[index].thumbnail = thumbnail
+                        self.attachments[index].status = .ready(content)
+                    } else {
+                        self.attachments[index].status = .failed
+                    }
+                }
+            }
+        }
+    }
 
+    func removeAttachment(_ attachment: DraftAttachment) {
+        guard let index = attachments.firstIndex(where: { $0.id == attachment.id }) else { return }
+        attachments.remove(at: index).readyContent.map(Self.discardFile)
+    }
+
+    private static func thumbnail(for content: OutgoingMessage.Content, kind: DraftAttachment.Kind) -> UIImage? {
+        switch content {
+        case .data(_, let data):
+            return data.convertToImage(size: DraftAttachment.thumbnailSize)
+        case .file(let path, _, _):
+            guard kind == .image else { return nil }
+            return UIImage.getImagefromURL(fileURL: URL(fileURLWithPath: path), maxSize: DraftAttachment.thumbnailSize * UIScreen.main.scale)
+        case .text:
+            return nil
+        }
+    }
+
+    private static func discardFile(of content: OutgoingMessage.Content) {
+        if case .file(let path, _, _) = content {
+            try? FileManager.default.removeItem(atPath: path)
+        }
     }
 
     func openGalery() {
@@ -88,10 +222,12 @@ class MessagePanelVM: ObservableObject, MessageAppearanceProtocol {
     }
 
     func shareLocation() {
+        discardDraftAttachments()
         messagePanelState.onNext(MessagePanelState.shareLocation)
     }
 
     func recordVideo() {
+        discardDraftAttachments()
         messagePanelState.onNext(MessagePanelState.recordVido)
     }
 
@@ -104,22 +240,41 @@ class MessagePanelVM: ObservableObject, MessageAppearanceProtocol {
     }
 
     func newCollabDocument() {
+        discardDraftAttachments()
         messagePanelState.onNext(MessagePanelState.newCollabDocument)
     }
 
     func configureReplyTo(message: MessageContentVM) {
+        cancelEdit()
+        if messageToReply?.message.id != message.message.id {
+            discardDraftAttachments()
+            inReplyTo = ""
+        }
         messageToReply = message
         isEdit = true
     }
 
     func configureEdit(message: MessageContentVM) {
+        cancelReply()
         messageToEdit = message
         isEdit = true
     }
 
     func cancelReply() {
+        discardDraftAttachments()
+        endReply()
+    }
+
+    private func endReply() {
         messageToReply = nil
         isEdit = false
+    }
+
+    func discardDraftAttachments() {
+        guard !attachments.isEmpty else { return }
+        attachments.compactMap(\.readyContent).forEach(Self.discardFile)
+        attachments.removeAll()
+        UIAccessibility.post(notification: .announcement, argument: L10n.Accessibility.draftAttachmentsDiscarded)
     }
 
     func cancelEdit() {
