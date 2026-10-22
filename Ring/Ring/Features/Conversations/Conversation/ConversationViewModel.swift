@@ -309,7 +309,8 @@ class ConversationViewModel: Stateable, ObservableObject {
         closeAllPlayers()
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            self.stateSubject.onNext(ConversationState.recordFile(conversation: self.conversation))
+            self.stateSubject.onNext(ConversationState.recordFile(conversation: self.conversation,
+                                                                  replyTo: self.swiftUIModel.messagePanel.takeReplyId()))
         }
     }
 }
@@ -432,13 +433,13 @@ extension ConversationViewModel {
 // MARK: file transfer
 extension ConversationViewModel {
 
-    func sendFile(filePath: String, displayName: String, localIdentifier: String? = nil, conversationModel: ConversationModel? = nil) {
+    func sendFile(filePath: String, displayName: String, localIdentifier: String? = nil, conversationModel: ConversationModel? = nil, replyTo: String = "") {
         let conversation = conversationModel ?? self.conversation
-        self.dataTransferService.sendFile(conversation: conversation, filePath: filePath, displayName: displayName, localIdentifier: localIdentifier)
+        self.dataTransferService.sendFile(conversation: conversation, filePath: filePath, displayName: displayName, localIdentifier: localIdentifier, replyTo: replyTo)
     }
 
-    func sendAndSaveFile(displayName: String, imageData: Data, conversationModel: ConversationModel? = nil) {
+    func sendAndSaveFile(displayName: String, imageData: Data, conversationModel: ConversationModel? = nil, replyTo: String = "") {
         let conversation = conversationModel ?? self.conversation
-        self.dataTransferService.sendAndSaveFile(displayName: displayName, conversation: conversation, imageData: imageData)
+        self.dataTransferService.sendAndSaveFile(displayName: displayName, conversation: conversation, imageData: imageData, replyTo: replyTo)
     }
 }

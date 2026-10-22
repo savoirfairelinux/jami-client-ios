@@ -112,6 +112,12 @@ class MessagePanelVM: ObservableObject, MessageAppearanceProtocol {
         isEdit = true
     }
 
+    func takeReplyId() -> String {
+        guard let message = messageToReply else { return "" }
+        cancelReply()
+        return message.message.id
+    }
+
     func configureEdit(message: MessageContentVM) {
         messageToEdit = message
         isEdit = true

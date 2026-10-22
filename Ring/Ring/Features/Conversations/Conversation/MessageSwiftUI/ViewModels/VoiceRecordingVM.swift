@@ -37,6 +37,7 @@ final class VoiceRecordingVM: ObservableObject {
     @Published private(set) var previewElapsed: TimeInterval = 0
 
     var conversation: ConversationModel?
+    var takeReplyId: () -> String = { "" }
 
     var isRecording: Bool {
         state == .recording
@@ -148,11 +149,13 @@ final class VoiceRecordingVM: ObservableObject {
         previewPlayer?.closePlayer()
         reset()
         let dataTransferService = self.dataTransferService
+        let replyId = takeReplyId()
         afterFileIsWritten {
             dataTransferService.sendFile(conversation: conversation,
                                          filePath: path,
                                          displayName: URL(fileURLWithPath: path).lastPathComponent,
-                                         localIdentifier: nil)
+                                         localIdentifier: nil,
+                                         replyTo: replyId)
         }
     }
 

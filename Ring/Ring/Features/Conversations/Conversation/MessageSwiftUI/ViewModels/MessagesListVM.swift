@@ -281,6 +281,9 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
                                                messagePanelState: self.messagePanelStateSubject)
         self.callBannerViewModel = CallBannerViewModel(injectionBag: injectionBag, conversation: self.conversation, state: self.messagePanelStateSubject)
 
+        self.voiceRecording.takeReplyId = { [weak messagePanel = self.messagePanel] in
+            messagePanel?.takeReplyId() ?? ""
+        }
         self.subscribeLocationEvents()
         self.subscribeSwarmPreferences()
         self.subscribeUserAvatarForLocationSharing()

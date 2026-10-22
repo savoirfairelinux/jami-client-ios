@@ -148,17 +148,18 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         return err
     }
 
-    func sendFile(conversation: ConversationModel, filePath: String, displayName: String, localIdentifier: String?) {
+    func sendFile(conversation: ConversationModel, filePath: String, displayName: String, localIdentifier: String?, replyTo: String = "") {
         self.dataTransferAdapter.sendSwarmFile(withName: displayName,
                                                accountId: conversation.accountId,
                                                conversationId: conversation.id,
                                                withFilePath: filePath,
-                                               parent: "")
+                                               parent: replyTo)
     }
 
     func sendAndSaveFile(displayName: String,
                          conversation: ConversationModel,
-                         imageData: Data) {
+                         imageData: Data,
+                         replyTo: String = "") {
         var fileUrl: URL?
         if !conversation.isSwarm() {
             fileUrl = self.getFilePathForTransfer(forFile: displayName, accountID: conversation.accountId, conversationID: conversation.id)
@@ -171,7 +172,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         } catch {
             self.log.error("Unable to copy image to cache")
         }
-        self.sendFile(conversation: conversation, filePath: imagePath.path, displayName: displayName, localIdentifier: nil)
+        self.sendFile(conversation: conversation, filePath: imagePath.path, displayName: displayName, localIdentifier: nil, replyTo: replyTo)
     }
 
     // MARK: file path non swarm
