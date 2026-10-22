@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6768ad77_b19d1c8c",
+        "filename": "Ring/Ring/Features/Conversations/Preview/MediaPreviewView.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-22T14:37:08Z",
+      "side": 1,
+      "message": "[warning] Line 374: 🟡 `setImage(_:)` updates the bitmap but does not reset `zoomScale`/`contentOffset` when the displayed media changes. If this `UIViewRepresentable` instance is reused for another image, the next image can inherit the previous zoom/pan state and open already zoomed/cropped. Reset zoom/offset when a new image is assigned (e.g., set `zoomScale \u003d minimumZoomScale`, `contentOffset \u003d .zero`, then refit/center) so each media item starts from a consistent baseline.",
+      "revId": "ac52d5cdfd1fb9ebe6705f161065364e3c010bac",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
