@@ -29,7 +29,7 @@ enum MessageInfo: State {
 }
 
 enum MessagePanelState: State {
-    case sendMessage(content: String, parentId: String)
+    case send(messages: [OutgoingMessage])
     case editMessage(content: String, messageId: String)
     case registerTypingIndicator(typingStatus: Bool)
     case sendPhoto
@@ -37,13 +37,14 @@ enum MessagePanelState: State {
     case shareLocation
     case recordVido
     case sendFile
+    case attachmentFailed
     case newCollabDocument
     case joinActiveCall(call: ActiveCall, withVideo: Bool)
     case microphonePermissionDenied
 
     func toString() -> String {
         switch self {
-        case .sendMessage:
+        case .send:
             return "send message"
         case .editMessage:
             return "edit message"
@@ -281,6 +282,8 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
                                                messagePanelState: self.messagePanelStateSubject)
         self.callBannerViewModel = CallBannerViewModel(injectionBag: injectionBag, conversation: self.conversation, state: self.messagePanelStateSubject)
 
+        self.voiceRecording.onSend = self.messagePanel.send
+        self.voiceRecording.onStart = self.messagePanel.discardDraftAttachments
         self.subscribeLocationEvents()
         self.subscribeSwarmPreferences()
         self.subscribeUserAvatarForLocationSharing()
@@ -944,6 +947,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     func configureReply(message: MessageContentVM) {
         self.messagePanel.configureReplyTo(message: message)
         self.updateUsernameForReply(message: message)
+        UIAccessibility.post(notification: .announcement, argument: L10n.Conversation.inReplyTo + " " + self.messagePanel.inReplyTo)
     }
 
     func scrollToTargetReply(messageId: String) {

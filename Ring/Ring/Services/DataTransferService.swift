@@ -94,6 +94,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
     private let log = SwiftyBeaver.self
 
     private let dataTransferAdapter: DataTransferAdapter
+    private let outgoingFileQueue = DispatchQueue(label: "com.savoirfairelinux.ring.outgoingFiles")
 
     private let disposeBag = DisposeBag()
     private let responseStream = PublishSubject<ServiceEvent>()
@@ -148,30 +149,49 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         return err
     }
 
-    func sendFile(conversation: ConversationModel, filePath: String, displayName: String, localIdentifier: String?) {
+    func sendFile(conversation: ConversationModel, filePath: String, displayName: String, localIdentifier: String?, replyTo: String = "") {
         self.dataTransferAdapter.sendSwarmFile(withName: displayName,
                                                accountId: conversation.accountId,
                                                conversationId: conversation.id,
                                                withFilePath: filePath,
-                                               parent: "")
+                                               parent: replyTo)
     }
 
     func sendAndSaveFile(displayName: String,
                          conversation: ConversationModel,
-                         imageData: Data) {
-        var fileUrl: URL?
+                         imageData: Data,
+                         replyTo: String = "") {
+        let imagePath: URL? = outgoingFileQueue.sync {
+            guard let imagePath = self.fileUrlForSending(displayName: displayName, conversation: conversation) else { return nil }
+            do {
+                try imageData.write(to: URL(fileURLWithPath: imagePath.path), options: .atomic)
+            } catch {
+                self.log.error("Unable to copy image to cache")
+            }
+            return imagePath
+        }
+        guard let imagePath = imagePath else { return }
+        self.sendFile(conversation: conversation, filePath: imagePath.path, displayName: displayName, localIdentifier: nil, replyTo: replyTo)
+    }
+
+    func copyFileForSending(from url: URL, displayName: String, conversation: ConversationModel) -> URL? {
+        return outgoingFileQueue.sync {
+            guard let destination = self.fileUrlForSending(displayName: displayName, conversation: conversation) else { return nil }
+            do {
+                try FileManager.default.copyItem(at: url, to: destination)
+            } catch {
+                self.log.error("Unable to copy file for sending")
+                return nil
+            }
+            return destination
+        }
+    }
+
+    private func fileUrlForSending(displayName: String, conversation: ConversationModel) -> URL? {
         if !conversation.isSwarm() {
-            fileUrl = self.getFilePathForTransfer(forFile: displayName, accountID: conversation.accountId, conversationID: conversation.id)
-        } else {
-            fileUrl = CommonHelpers.createFileUrlForSwarm(fileName: displayName, accountId: conversation.accountId, conversationId: conversation.id)
+            return self.getFilePathForTransfer(forFile: displayName, accountID: conversation.accountId, conversationID: conversation.id)
         }
-        guard let imagePath = fileUrl else { return }
-        do {
-            try imageData.write(to: URL(fileURLWithPath: imagePath.path), options: .atomic)
-        } catch {
-            self.log.error("Unable to copy image to cache")
-        }
-        self.sendFile(conversation: conversation, filePath: imagePath.path, displayName: displayName, localIdentifier: nil)
+        return CommonHelpers.createFileUrlForSwarm(fileName: displayName, accountId: conversation.accountId, conversationId: conversation.id)
     }
 
     // MARK: file path non swarm
