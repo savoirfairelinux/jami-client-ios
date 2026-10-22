@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38ee98b5_74928933",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessageContainerModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-22T18:17:47Z",
+      "side": 1,
+      "message": "[error] Line 55: 🔴 Main-thread confinement was removed for UI-facing state updates (`messageRow`, `stackViewModel`, etc.). These setters can be triggered from Rx/daemon paths that are not guaranteed to run on the main thread, so this can update ObservableObject-backed state off-main and cause `Publishing changes from background threads is not allowed` failures. Keep the immediate-main-thread behavior, but gate with a helper like `onMainThread { ... }` (execute inline when already on main, dispatch otherwise).",
+      "revId": "5fd7e29d6608de0fe9d152748be2e8c17000bae7",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a69a4c18_b439937c",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessageRowVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-22T18:17:47Z",
+      "side": 1,
+      "message": "[error] Line 105: 🔴 `setSequencing`, `updateMessageStatus`, and `displayLastSent` now mutate published/display state on the caller thread. Message status/read updates commonly originate from asynchronous pipelines, so this introduces background-thread UI mutations. Wrap these writes with main-thread gating (`if Thread.isMainThread { ... } else { DispatchQueue.main.async { ... } }`) to avoid regressions.",
+      "revId": "5fd7e29d6608de0fe9d152748be2e8c17000bae7",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
