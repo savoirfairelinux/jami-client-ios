@@ -96,6 +96,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     var temporaryReplyTarget: String? // used to keep a message id of a reply target that we should scroll if this message not loaded yet. ScrollToReplyTarget should be updated after messages loaded
     @Published var swarmColor = UIColor.defaultSwarmColor {
         didSet {
+            guard oldValue != swarmColor else { return }
             self.messagesModels.forEach { message in
                 message.swarmColorUpdated(color: swarmColor)
             }

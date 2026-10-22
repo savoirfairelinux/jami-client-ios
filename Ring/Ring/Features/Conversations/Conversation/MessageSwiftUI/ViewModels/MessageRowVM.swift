@@ -104,10 +104,7 @@ class MessageRowVM: ObservableObject, MessageAppearanceProtocol, MessageReadObse
 
     func setSequencing(sequencing: MessageSequencing) {
         if self.sequencing != sequencing {
-            DispatchQueue.main.async {[weak self] in
-                guard let self = self else { return }
-                self.sequencing = sequencing
-            }
+            self.sequencing = sequencing
         }
     }
 
@@ -116,16 +113,10 @@ class MessageRowVM: ObservableObject, MessageAppearanceProtocol, MessageReadObse
     }
 
     func updateMessageStatus() {
-        DispatchQueue.main.async {[weak self] in
-            guard let self = self else { return }
-            self.showSentIndicator = self.message.isSending()
-        }
+        self.showSentIndicator = self.message.isSending()
     }
 
     func displayLastSent(state: Bool) {
-        DispatchQueue.main.async {[weak self] in
-            guard let self = self else { return }
-            self.showReciveIndicator = state
-        }
+        self.showReciveIndicator = state
     }
 }

@@ -36,7 +36,7 @@ extension MessageReadObserver {
         idsObservable
             .startWith(idsObservable.value)
             .subscribe(onNext: { [weak self] ids in
-                DispatchQueue.main.async {[weak self] in
+                onMainThread { [weak self] in
                     let newValue = ids.isEmpty ? nil : ids
                     self?.readIds = newValue
                 }
@@ -46,6 +46,14 @@ extension MessageReadObserver {
 
     func requestReadStatus(messageId: String) {
         self.infoState?.onNext(MessageInfo.updateRead(messageId: messageId, message: self))
+    }
+}
+
+private func onMainThread(_ work: @escaping () -> Void) {
+    if Thread.isMainThread {
+        work()
+    } else {
+        DispatchQueue.main.async(execute: work)
     }
 }
 
@@ -64,7 +72,7 @@ extension NameObserver {
             .startWith(nameObservable.value)
             .distinctUntilChanged()
             .subscribe(onNext: { [weak self] newName in
-                DispatchQueue.main.async {[weak self] in
+                onMainThread { [weak self] in
                     guard let self = self, self.username != newName else { return }
                     self.username = newName
                 }
