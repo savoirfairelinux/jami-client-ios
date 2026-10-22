@@ -55,6 +55,7 @@ struct MessagesListView: View {
     @ObservedObject var callBannerViewModel: CallBannerViewModel
     @SwiftUI.State var showScrollToLatestButton = false
     let scrollReserved = ScreenDimensionsManager.shared.adaptiveHeight * 1.5
+    private let messagesUnderPanelOverlap: CGFloat = -30
 
     // context menu
     @SwiftUI.State var contextMenuPresentingState: ContextMenuPresentingState = .none
@@ -62,7 +63,6 @@ struct MessagesListView: View {
     @SwiftUI.State private var presentingMessage: MessageBubbleView?
     @SwiftUI.State private var messageFrame: CGRect?
     @SwiftUI.State private var screenHeight: CGFloat = 0
-    @SwiftUI.State private var messageContainerHeight: CGFloat = 0
     @SwiftUI.State var isMessageBarFocused: Bool = false
     @SwiftUI.State var keyboardHeight: CGFloat = 0
     @SwiftUI.State private var keyboardWasActiveBeforeMenu: Bool = false
@@ -133,7 +133,7 @@ struct MessagesListView: View {
 
     private func conversationContentView() -> some View {
         ZStack(alignment: .top) {
-            ZStack(alignment: .bottom) {
+            VStack(spacing: messagesUnderPanelOverlap) {
                 ZStack(alignment: .bottomTrailing) {
                     createMessagesStackView()
                         .flipped()
@@ -142,16 +142,8 @@ struct MessagesListView: View {
                         createScrollToBottmView()
                     }
                 }
-                .layoutPriority(1)
-                .padding(.bottom, messageContainerHeight - 30)
                 if !model.isBlocked {
                     MessagePanelView(model: model.messagePanel, voiceRecording: model.voiceRecording, isFocused: $isMessageBarFocused)
-                        .alignmentGuide(VerticalAlignment.center) { dimensions in
-                            DispatchQueue.main.async {
-                                self.messageContainerHeight = dimensions.height
-                            }
-                            return dimensions[VerticalAlignment.center]
-                        }
                         .background(
                             GeometryReader { proxy in
                                 Color.clear.preference(
