@@ -110,6 +110,14 @@ struct MediaView: View {
         } else if let image = message.finalImage {
             ImageOrGifView(message: message, image: image, onLongGesture: onLongGesture, minHeight: minHeight, maxHeight: maxHeight, customCornerRadius: cornerRadius)
 
+        } else if let thumbnailSize = message.thumbnailSize {
+            Color(UIColor.secondarySystemFill)
+                .frame(idealWidth: thumbnailSize.width, idealHeight: thumbnailSize.height)
+                .aspectRatio(thumbnailSize, contentMode: .fit)
+                .frame(minHeight: minHeight, maxHeight: maxHeight)
+                .conditionalModifier(MessageCornerRadius(model: message), apply: cornerRadius == 0)
+                .conditionalCornerRadius(cornerRadius, apply: cornerRadius != 0)
+                .messageGesture(onLongPress: onLongGesture)
         } else {
             DefaultTransferView(model: message, time: messageTime, onLongGesture: onLongGesture)
                 .conditionalModifier(MessageCornerRadius(model: message), apply: cornerRadius == 0)

@@ -368,6 +368,20 @@ extension UIImage {
         return max(width, height)
     }
 
+    static func thumbnailSize(url: URL, maxPixelSize: CGFloat) -> CGSize? {
+        let options = [kCGImageSourceShouldCache: false] as CFDictionary
+        guard let imageSource = CGImageSourceCreateWithURL(url as CFURL, options),
+              let properties = CGImageSourceCopyPropertiesAtIndex(imageSource, 0, options) as? [CFString: Any],
+              let width = properties[kCGImagePropertyPixelWidth] as? CGFloat,
+              let height = properties[kCGImagePropertyPixelHeight] as? CGFloat,
+              width > 0, height > 0 else { return nil }
+        let orientation = properties[kCGImagePropertyOrientation] as? UInt32 ?? 1
+        let isRotated = orientation >= CGImagePropertyOrientation.leftMirrored.rawValue
+        let size = isRotated ? CGSize(width: height, height: width) : CGSize(width: width, height: height)
+        let scale = min(1, maxPixelSize / max(size.width, size.height))
+        return CGSize(width: (size.width * scale).rounded(), height: (size.height * scale).rounded())
+    }
+
     static func createResizedImage(imageSource: CGImageSource, size: CGFloat) -> UIImage? {
         var dict: [CFString: Any] = [
             kCGImageSourceCreateThumbnailWithTransform: true,

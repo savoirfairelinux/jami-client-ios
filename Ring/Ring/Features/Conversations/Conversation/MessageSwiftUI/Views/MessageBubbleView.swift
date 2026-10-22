@@ -136,7 +136,7 @@ struct MessageBubbleView: View {
     private func renderFileTransfer() -> some View {
         let media = MediaView(message: model, onLongGesture: receivedLongPress(), minHeight: 50, maxHeight: 300, withPlayerControls: true, cornerRadius: 0, messageTime: model.timeText)
             .marksMessageBubbleBottom()
-        if model.player == nil, model.finalImage != nil {
+        if model.player == nil, model.finalImage != nil || model.thumbnailSize != nil {
             media
                 .overlay(alignment: .bottomTrailing) {
                     MessageTimeCapsule(text: model.timeText)
