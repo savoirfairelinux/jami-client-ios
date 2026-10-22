@@ -72,14 +72,33 @@ private struct ReplyTargetContent: View {
                         }
                 )
         } else if target.type == .fileTransfer {
-            MediaView(message: target, onLongGesture: {}, minHeight: 20, maxHeight: 100, withPlayerControls: true, cornerRadius: 15)
-                .opacity(0.7)
-                .simultaneousGesture(
-                    TapGesture()
-                        .onEnded {
-                            model.scrollToReplyTarget()
-                        }
-                )
+            if let image = target.finalImage {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(minHeight: model.imageMinHeight, maxHeight: model.imageMaxHeight)
+                    .cornerRadius(15)
+                    .opacity(0.7)
+                    .simultaneousGesture(
+                        TapGesture()
+                            .onEnded {
+                                model.scrollToReplyTarget()
+                            }
+                    )
+            } else {
+                Text(target.displayContent)
+                    .modifier(MessageReplyStyle(model: target))
+                    .font(target.styling.textFont)
+                    .lineLimit(1)
+                    .truncationMode(.middle)
+                    .opacity(0.4)
+                    .simultaneousGesture(
+                        TapGesture()
+                            .onEnded {
+                                model.scrollToReplyTarget()
+                            }
+                    )
+            }
         } else if target.type == .text {
             if let metadata = target.metadata {
                 URLPreview(metadata: metadata, maxDimension: target.maxDimension * model.sizeIndex)
