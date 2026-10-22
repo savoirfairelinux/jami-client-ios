@@ -181,8 +181,8 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
             .subscribe(onNext: { [weak self] (state) in
                 guard let self = self, let state = state as? MessagePanelState else { return }
                 switch state {
-                case .sendMessage(let content, let parentId):
-                    self.viewModel.sendMessage(withContent: content, parentId: parentId)
+                case .send(let messages):
+                    self.viewModel.send(messages)
                 case .sendPhoto:
                     self.takePicture()
                 case .editMessage(content: let content, messageId: let messageId):
@@ -399,23 +399,22 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
             let provider = result.itemProvider
             switch getAssetTypeFrom(itemProvider: provider) {
             case .gif:
-                provider.loadDataRepresentation(forTypeIdentifier: UTType.gif.identifier) { [weak self] (data, _) in
-                    guard let self = self,
-                          let data = data else { return }
-                    self.viewModel.sendAndSaveFile(displayName: imageFileName + ".gif", imageData: data)
+                viewModel.attach(displayName: imageFileName + ".gif", kind: .image) { completion in
+                    provider.loadDataRepresentation(forTypeIdentifier: UTType.gif.identifier) { (data, _) in
+                        completion(data)
+                    }
                 }
             case .image:
-                provider.loadObject(ofClass: UIImage.self) { [weak self] (object, _) in
-                    guard let self = self,
-                          let image = object as? UIImage,
-                          let imageData = image.jpegData(compressionQuality: 0.5) else { return }
-                    self.viewModel.sendAndSaveFile(displayName: imageFileName + ".jpeg", imageData: imageData)
+                viewModel.attach(displayName: imageFileName + ".jpeg", kind: .image) { completion in
+                    provider.loadObject(ofClass: UIImage.self) { (object, _) in
+                        completion((object as? UIImage)?.jpegData(compressionQuality: 0.5))
+                    }
                 }
             case .video:
-                provider.loadDataRepresentation(forTypeIdentifier: UTType.movie.identifier) { [weak self] (data, _) in
-                    guard let self = self,
-                          let data = data else { return }
-                    self.viewModel.sendAndSaveFile(displayName: imageFileName + ".mov", imageData: data)
+                viewModel.attach(displayName: imageFileName + ".mov", kind: .video) { completion in
+                    provider.loadDataRepresentation(forTypeIdentifier: UTType.movie.identifier) { (data, _) in
+                        completion(data)
+                    }
                 }
             default:
                 break
@@ -436,7 +435,6 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
     }
 
     // MARK: - UIImagePickerControllerDelegate
-    // swiftlint:disable cyclomatic_complexity
     internal func imagePickerController(_ picker: UIImagePickerController,
                                         didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
 
@@ -452,7 +450,7 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
             }
             let imageFileName = "IMG.jpeg"
             guard let imageData = image.jpegData(compressionQuality: 0.5) else { return }
-            viewModel.sendAndSaveFile(displayName: imageFileName, imageData: imageData)
+            viewModel.attach(displayName: imageFileName, kind: .image) { $0(imageData) }
             return
         }
         guard picker.sourceType == UIImagePickerController.SourceType.photoLibrary,
@@ -465,23 +463,20 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
                 image = img
             }
             guard let imageData = image.jpegData(compressionQuality: 0.5) else { return }
-            viewModel.sendAndSaveFile(displayName: imageFileName, imageData: imageData)
+            viewModel.attach(displayName: imageFileName, kind: .image) { $0(imageData) }
             return
         }
         guard phAsset.mediaType == .video else { return }
-        PHImageManager
-            .default()
-            .requestAVAsset(forVideo: phAsset,
-                            options: PHVideoRequestOptions(),
-                            resultHandler: { (asset, _, _) in
-                                guard let asset = asset as? AVURLAsset,
-                                      let videoData = NSData(contentsOf: asset.url) else {
-                                    return
-                                }
-                                self.viewModel.sendAndSaveFile(displayName: imageFileName, imageData: videoData as Data)
-                            })
+        viewModel.attach(displayName: imageFileName, kind: .video) { completion in
+            PHImageManager
+                .default()
+                .requestAVAsset(forVideo: phAsset,
+                                options: PHVideoRequestOptions(),
+                                resultHandler: { (asset, _, _) in
+                                    completion((asset as? AVURLAsset).flatMap { try? Data(contentsOf: $0.url) })
+                                })
+        }
     }
-    // swiftlint:enable cyclomatic_complexity
 
 }
 
@@ -559,11 +554,9 @@ extension ConversationViewController: UIDocumentPickerDelegate {
                 let filePath = url.absoluteURL.path
                 log.debug("Successfully imported \(filePath)")
                 let fileName = url.absoluteURL.lastPathComponent
-                do {
-                    let data = try Data(contentsOf: url)
-                    viewModel.sendAndSaveFile(displayName: fileName, imageData: data)
-                } catch {
-                    viewModel.sendFile(filePath: filePath, displayName: fileName)
+                let isImage = UTType(filenameExtension: url.pathExtension)?.conforms(to: .image) ?? false
+                viewModel.attach(displayName: fileName, kind: isImage ? .image : .document) { completion in
+                    completion(try? Data(contentsOf: url))
                 }
                 url.stopAccessingSecurityScopedResource()
             }

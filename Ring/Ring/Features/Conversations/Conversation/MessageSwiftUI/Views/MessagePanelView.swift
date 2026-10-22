@@ -97,6 +97,103 @@ struct ReplyViewInMessagePanel: View {
     }
 }
 
+struct DraftAttachmentView: View {
+    let attachment: DraftAttachment
+    let remove: () -> Void
+    let size = DraftAttachment.thumbnailSize
+    let cornerRadius: CGFloat = 10
+    let removeIconSize: CGFloat = 20
+    let removeTargetSize: CGFloat = 44
+
+    var body: some View {
+        content
+            .frame(width: size, height: size)
+            .background(Color(UIColor.secondarySystemBackground))
+            .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
+            .overlay(statusOverlay)
+            .overlay(removeButton, alignment: .topTrailing)
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(accessibilityLabel)
+            .accessibilityAction(named: L10n.Global.remove, remove)
+    }
+
+    @ViewBuilder private var content: some View {
+        if let thumbnail = attachment.thumbnail {
+            Image(uiImage: thumbnail)
+                .resizable()
+                .scaledToFill()
+        } else {
+            VStack(spacing: 4) {
+                Image(systemName: attachment.kind == .video ? "film" : "doc")
+                    .font(.title3)
+                Text(attachment.displayName)
+                    .font(.caption2)
+                    .lineLimit(1)
+                    .truncationMode(.middle)
+            }
+            .foregroundColor(Color(UIColor.secondaryLabel))
+            .padding(4)
+        }
+    }
+
+    @ViewBuilder private var statusOverlay: some View {
+        switch attachment.status {
+        case .loading:
+            ProgressView()
+        case .failed:
+            Image(systemName: "exclamationmark.triangle.fill")
+                .font(.title3)
+                .foregroundColor(Color(UIColor.systemRed))
+        case .ready:
+            EmptyView()
+        }
+    }
+
+    private var removeButton: some View {
+        Button(action: remove, label: {
+            Image(systemName: "xmark.circle.fill")
+                .font(.system(size: removeIconSize))
+                .foregroundStyle(Color(UIColor.systemBackground), Color(UIColor.label))
+                .frame(width: removeTargetSize, height: removeTargetSize)
+                .contentShape(Rectangle())
+        })
+        .buttonStyle(.plain)
+        .offset(x: (removeTargetSize - removeIconSize) / 2, y: -(removeTargetSize - removeIconSize) / 2)
+    }
+
+    private var accessibilityLabel: String {
+        switch attachment.status {
+        case .loading:
+            return L10n.Accessibility.draftAttachmentLoading(attachment.displayName)
+        case .failed:
+            return L10n.Accessibility.draftAttachmentFailed(attachment.displayName)
+        case .ready:
+            return attachment.displayName
+        }
+    }
+}
+
+struct DraftAttachmentsView: View {
+    @ObservedObject var model: MessagePanelVM
+    let spacing: CGFloat = 10
+    let badgeInset: CGFloat = 12
+
+    var body: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: spacing) {
+                ForEach(model.attachments) { attachment in
+                    DraftAttachmentView(attachment: attachment) {
+                        model.removeAttachment(attachment)
+                    }
+                }
+            }
+            .padding(.top, badgeInset)
+            .padding(.trailing, badgeInset)
+        }
+        .fixedSize(horizontal: false, vertical: true)
+    }
+}
+
 struct EditMessagePanel: View {
     var messageToEdit: MessageContentVM
     @ObservedObject var model: MessagePanelVM
@@ -172,6 +269,7 @@ struct MessagePanelView: View {
         })
         .accessibilityLabel(L10n.Accessibility.conversationShareMedia)
         .accessibilityRemoveTraits(.isButton)
+        .disabled(model.messageToEdit != nil)
     }
 
     @ViewBuilder
@@ -201,11 +299,11 @@ struct MessagePanelView: View {
     @ViewBuilder
     private func sendEmojiButton() -> some View {
         Button(action: {
-            self.model.sendMessage(text: text)
-            cleanState()
+            self.model.sendDraft(text: text)
+            text = ""
         }, label: {
             ZStack {
-                if text.isEmpty {
+                if text.isEmpty && model.attachments.isEmpty {
                     Text(model.defaultEmoji)
                         .font(.system(size: 26))
                         .bold()
@@ -220,6 +318,7 @@ struct MessagePanelView: View {
             .contentShape(Rectangle())
         })
         .buttonStyle(.plain)
+        .disabled(model.isLoadingAttachments)
         .animation(.spring(response: 0.3, dampingFraction: 0.7), value: text.isEmpty)
     }
 
@@ -232,6 +331,10 @@ struct MessagePanelView: View {
                     .onAppear {
                         text = editMesage.content
                     }
+            }
+
+            if !model.attachments.isEmpty {
+                DraftAttachmentsView(model: model)
             }
 
             if let hint = voiceRecording.hint {
@@ -301,12 +404,6 @@ struct MessagePanelView: View {
                 })
             }
         }
-    }
-
-    func cleanState() {
-        text = ""
-        model.cancelReply()
-        model.cancelEdit()
     }
 }
 

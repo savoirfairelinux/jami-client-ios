@@ -309,7 +309,11 @@ class ConversationViewModel: Stateable, ObservableObject {
         closeAllPlayers()
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            self.stateSubject.onNext(ConversationState.recordFile(conversation: self.conversation))
+            let messagePanel = self.swiftUIModel.messagePanel
+            let replyingTo = messagePanel.messageToReply == nil ? nil : messagePanel.inReplyTo
+            self.stateSubject.onNext(ConversationState.recordFile(conversation: self.conversation,
+                                                                  replyingTo: replyingTo,
+                                                                  onSend: messagePanel.send))
         }
     }
 }
@@ -356,7 +360,7 @@ extension ConversationViewModel {
                 let alreadyShared = messages.contains(where: { $0.content == content })
                 if alreadyShared {
                     DispatchQueue.main.async {
-                        self?.sendFile(filePath: url.path, displayName: fileName, conversationModel: conversationModel)
+                        self?.dataTransferService.sendFile(conversation: conversationModel, filePath: url.path, displayName: fileName, localIdentifier: nil)
                     }
                     return
                 }
@@ -432,13 +436,26 @@ extension ConversationViewModel {
 // MARK: file transfer
 extension ConversationViewModel {
 
-    func sendFile(filePath: String, displayName: String, localIdentifier: String? = nil, conversationModel: ConversationModel? = nil) {
-        let conversation = conversationModel ?? self.conversation
-        self.dataTransferService.sendFile(conversation: conversation, filePath: filePath, displayName: displayName, localIdentifier: localIdentifier)
+    func attach(displayName: String, kind: DraftAttachment.Kind, load: (@escaping (Data?) -> Void) -> Void) {
+        self.swiftUIModel.messagePanel.attach(displayName: displayName, kind: kind, load: load)
     }
 
-    func sendAndSaveFile(displayName: String, imageData: Data, conversationModel: ConversationModel? = nil) {
-        let conversation = conversationModel ?? self.conversation
-        self.dataTransferService.sendAndSaveFile(displayName: displayName, conversation: conversation, imageData: imageData)
+    func send(_ messages: [OutgoingMessage]) {
+        let dataTransferService = self.dataTransferService
+        let conversation = self.conversation
+        for message in messages {
+            switch message.content {
+            case .text(let text):
+                self.sendMessage(withContent: text, parentId: message.parentId)
+            case .data(let displayName, let data):
+                DispatchQueue.global(qos: .userInitiated).async {
+                    dataTransferService.sendAndSaveFile(displayName: displayName, conversation: conversation, imageData: data, replyTo: message.parentId)
+                }
+            case .file(let path, let displayName, let readyAfter):
+                DispatchQueue.main.asyncAfter(deadline: .now() + readyAfter) {
+                    dataTransferService.sendFile(conversation: conversation, filePath: path, displayName: displayName, localIdentifier: nil, replyTo: message.parentId)
+                }
+            }
+        }
     }
 }
