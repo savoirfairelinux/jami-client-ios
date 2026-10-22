@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f129549_9512033f",
+        "filename": "Ring/Ring/Features/Conversations/views/PlayerView.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-22T17:16:54Z",
+      "side": 1,
+      "message": "[error] Line 548: 🔴 The in-message video mute control was removed and replaced by the timestamp capsule, which regresses an existing playback control without mention in the change scope. Keep the timestamp capsule, but preserve mute (e.g., keep the mute button in the trailing slot and place time elsewhere in the row) so this patch does not silently drop user functionality.",
+      "revId": "3557c2866e87e796251cecc8ebe3d1ac0e7731ad",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f3a235c_7cd9dfd9",
+        "filename": "Ring/Ring/Features/Conversations/views/PlayerView.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 640,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-22T17:16:54Z",
+      "side": 1,
+      "message": "[error] Line 640: 🔴 `audioPlayPauseButton` switched from `Button` to `Image` + `.onTapGesture`, which drops button semantics and the explicit accessibility label. VoiceOver and switch-control users lose proper role/announcement behavior. Restore a real `Button` (or add equivalent accessibility traits/label/action) and keep disabled behavior aligned with `playbackFailed`.",
+      "revId": "3557c2866e87e796251cecc8ebe3d1ac0e7731ad",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
