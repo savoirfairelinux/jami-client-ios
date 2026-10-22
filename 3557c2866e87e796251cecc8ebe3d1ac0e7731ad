@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9393d98e_a66e0f6d",
+        "filename": "Ring/Ring/Features/Conversations/views/PlayerView.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-22T17:24:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f129549_9512033f",
+      "revId": "3557c2866e87e796251cecc8ebe3d1ac0e7731ad",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f3a235c_7cd9dfd9",
@@ -49,6 +67,24 @@
       "side": 1,
       "message": "PlayerSwiftUI wraps the whole player as one accessibility element (children: .ignore, Play/Pause label, .isButton,\n  ▎ VoiceOver toggle action), so the inner Button/Image is never exposed",
       "parentUuid": "9f3a235c_7cd9dfd9",
+      "revId": "3557c2866e87e796251cecc8ebe3d1ac0e7731ad",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8f7ff16_9ecffd97",
+        "filename": "Ring/Ring/Features/Conversations/views/PlayerView.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 640,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-22T17:24:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b10ecee4_b59334ca",
       "revId": "3557c2866e87e796251cecc8ebe3d1ac0e7731ad",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }

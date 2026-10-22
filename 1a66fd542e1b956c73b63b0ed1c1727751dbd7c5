@@ -16,6 +16,24 @@
       "message": "[warning] Line 142: 🟡 Placing `MessageTimeView` in the same `HStack` as `media` can force the media/player view to shrink horizontally on narrow screens or larger Dynamic Type sizes, because the timestamp now consumes horizontal layout space that used to be vertical. Keep the timestamp visually beside the bubble without compressing player controls by giving `media` higher layout priority and/or constraining the time with `.fixedSize()` and explicit width behavior.",
       "revId": "1a66fd542e1b956c73b63b0ed1c1727751dbd7c5",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f0bcfbb_92095c6d",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessageBubbleView.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-22T17:24:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73eff37e_c12a2296",
+      "revId": "1a66fd542e1b956c73b63b0ed1c1727751dbd7c5",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
