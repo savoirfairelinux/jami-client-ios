@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f5012ef_eaa1c775",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/VoiceRecordingVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-22T14:20:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2abbc741_873c599c",
+      "revId": "470326e3ba27c354aa2e8ac1ce9a0ace949dfc19",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f1845597_3ae50839",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-10-20T20:07:49Z",
       "side": 1,
       "message": "[warning] Line 49: 🟡 Using a fixed `fileFinalizationDelay` (1s) is brittle: under IO pressure the file may still be incomplete, and on fast paths it adds avoidable latency. Replace this timeout with an explicit recorder-finished signal (preferred) or a readiness check (e.g., file exists and size is stable) before preview/send/delete.",
+      "revId": "470326e3ba27c354aa2e8ac1ce9a0ace949dfc19",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1ef57b8_c9fd8aa9",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/VoiceRecordingVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-22T14:20:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f1845597_3ae50839",
       "revId": "470326e3ba27c354aa2e8ac1ce9a0ace949dfc19",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -52,6 +88,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "324402e9_bbe8a113",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/VoiceRecordingVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-22T14:20:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "152e3a20_8171aa64",
+      "revId": "470326e3ba27c354aa2e8ac1ce9a0ace949dfc19",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "419a6343_4ada617b",
@@ -69,6 +123,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb90a34b_0ac072fa",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/VoiceRecordingVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-22T14:20:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "419a6343_4ada617b",
+      "revId": "470326e3ba27c354aa2e8ac1ce9a0ace949dfc19",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "49f08199_9e1c2047",
@@ -82,6 +154,24 @@
       "writtenOn": "2026-10-20T20:09:49Z",
       "side": 1,
       "message": "[warning] Line 172: 🟡 Recorder startup failure is silently ignored (`guard let path \u003d ... else { return }`). This leaves users with no feedback when tapping/holding the mic does nothing. Surface an explicit hint/alert (and ideally log the failure) when recorder initialization fails to make the failure mode actionable.",
+      "revId": "470326e3ba27c354aa2e8ac1ce9a0ace949dfc19",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cb3b8b5_fc128f6e",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/VoiceRecordingVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-22T14:20:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49f08199_9e1c2047",
       "revId": "470326e3ba27c354aa2e8ac1ce9a0ace949dfc19",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }

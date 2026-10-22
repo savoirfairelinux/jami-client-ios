@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "499b86ff_0fd07a32",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/VoiceRecordingVM.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-22T14:20:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90f58823_7aed64bd",
+      "revId": "e12e014a621ad857b1343bd893dbade68f16e4e7",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2f48663_1bb6bb55",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-10-21T20:48:07Z",
       "side": 1,
       "message": "[warning] Line 212: 🟡 Recorder startup failure currently exits silently and can interrupt active playback because `releaseAllPlayers()` is called before confirming `startLocalRecorder` succeeded. Move player release after successful recorder start (or restore playback state on failure) and surface a user-visible hint/error when start fails, so mic tap is never a no-op.",
+      "revId": "e12e014a621ad857b1343bd893dbade68f16e4e7",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca30920a_43fcfb3d",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/VoiceRecordingVM.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-22T14:20:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2f48663_1bb6bb55",
       "revId": "e12e014a621ad857b1343bd893dbade68f16e4e7",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }

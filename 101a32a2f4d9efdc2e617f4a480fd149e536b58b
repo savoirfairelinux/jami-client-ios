@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9fc2bad_10ff45ca",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/VoiceRecordingVM.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-22T14:20:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13cc1a3c_f0d9e75f",
+      "revId": "101a32a2f4d9efdc2e617f4a480fd149e536b58b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee191b08_56ca60db",
@@ -35,6 +53,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4549a93_8d55ebca",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/VoiceRecordingVM.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-22T14:20:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee191b08_56ca60db",
+      "revId": "101a32a2f4d9efdc2e617f4a480fd149e536b58b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "28068311_805d7a16",
@@ -48,6 +84,24 @@
       "writtenOn": "2026-10-21T17:25:53Z",
       "side": 1,
       "message": "[warning] Line 237: 🟡 File readiness is gated by a fixed 1s delay (`fileFinalizationDelay`) in `afterFileIsWritten`, which is timing-dependent and can fail on slower I/O or add unnecessary latency on faster devices. Replace the hardcoded timeout with a deterministic completion signal from recorder stop (or explicit file-existence/size stabilization check with bounded retry) before preview/send/delete actions.",
+      "revId": "101a32a2f4d9efdc2e617f4a480fd149e536b58b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c388045d_cb063a45",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/VoiceRecordingVM.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-22T14:20:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28068311_805d7a16",
       "revId": "101a32a2f4d9efdc2e617f4a480fd149e536b58b",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
