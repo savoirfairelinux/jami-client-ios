@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4aee412_7fd6aa4b",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ReplyHistory.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-22T15:02:10Z",
+      "side": 1,
+      "message": "[warning] Line 71: 🟡 Using `target.finalImage` here likely decodes the full asset during list rendering, which can increase memory pressure and cause scroll jank in long conversations with large photos. Prefer a thumbnail/cached preview path (the same lightweight source used by `MediaView`) and render that in the reply quote.",
+      "revId": "f95fd9f8f322b7136f37396108815860661cd0bf",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
