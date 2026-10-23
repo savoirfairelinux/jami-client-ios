@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79f6ce23_72258465",
+        "filename": "Ring/Ring/Extensions/UIColor+Ring.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-23T14:35:13Z",
+      "side": 1,
+      "message": "[warning] Line 169: 🟡 `UIColor(named:)!` force-unwrapping for the new bubble colors introduces a hard crash path if an asset is renamed/missing in a target/bundle variant. Prefer a safe fallback (e.g. `??` with an explicit default color) to keep rendering resilient.",
+      "revId": "077375ff94e3d532a7ebe8b0b4f4613db421133c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b05c623_3c6fef48",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessageContentView.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-23T14:35:13Z",
+      "side": 1,
+      "message": "[error] Line 220: 🔴 The edge width is set to `2`, but this change is specified as a **1pt** edge; SwiftUI `lineWidth` is in points, so this currently renders twice as thick as intended. Set `edgeWidth` to `1` (or rename/re-document if 2pt is intentional).",
+      "revId": "077375ff94e3d532a7ebe8b0b4f4613db421133c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
