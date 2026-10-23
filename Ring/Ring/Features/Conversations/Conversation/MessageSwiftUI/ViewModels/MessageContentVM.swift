@@ -287,19 +287,14 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     }
 
     var linkColor: UIColor {
-        UIColor.adaptiveMessageLinkColor(on: linkBackgroundUIColor)
+        UIColor.adaptiveMessageLinkColor(on: contrastBackgroundUIColor)
     }
 
-    private var hasBubbleBackground: Bool {
+    var hasBubbleBackground: Bool {
         !type.isContact && !isEmojiOnly
     }
 
-    private var linkBackgroundUIColor: UIColor {
-        if !hasBubbleBackground {
-            return .clear
-        }
-        return isIncoming ? UIColor.jamiMessageCellReceived : preferencesColor
-    }
+    private var contrastBackgroundUIColor: UIColor = .clear
 
     /// Plain-text preview for list and reply strip.
     var displayContent: String {
@@ -381,7 +376,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
 
     private func updateTextColor() {
         if self.isLink() {
-            let backgroundIsLightColor: Bool = self.backgroundColor.isLight(threshold: 0.8) ?? true
+            let backgroundIsLightColor: Bool = Color(self.contrastBackgroundUIColor).isLight(threshold: 0.8) ?? true
             self.styling.textColor = backgroundIsLightColor ? .blue : .white
         } else if !self.isIncoming && !self.type.isContact {
             self.styling.textColor = Color.white
@@ -400,9 +395,14 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
 
     private func updateBackgroundColor() {
         if !self.hasBubbleBackground {
+            self.contrastBackgroundUIColor = .clear
             self.backgroundColor = .clear
+        } else if self.isIncoming {
+            self.contrastBackgroundUIColor = .jamiMessageCellReceived
+            self.backgroundColor = Color(UIColor.messageBubbleReceived(tintedWith: preferencesColor))
         } else {
-            self.backgroundColor = isIncoming ? Color.jamiMessageCellReceived : Color(preferencesColor)
+            self.contrastBackgroundUIColor = preferencesColor
+            self.backgroundColor = Color(preferencesColor)
         }
     }
 

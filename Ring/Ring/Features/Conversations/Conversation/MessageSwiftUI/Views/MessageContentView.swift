@@ -130,7 +130,7 @@ struct MessageTextStyle: ViewModifier {
             .padding(.leading, model.textInset)
             .padding(.trailing, model.textInset)
             .foregroundColor(model.styling.textColor)
-            .background(model.backgroundColor)
+            .background(MessageBubbleFill(model: model))
             .if(model.hasBorder) { view in
                 view.overlay(
                     CornerRadiusShape(radius: model.cornerRadius, corners: model.corners)
@@ -198,6 +198,16 @@ extension View {
         onTap: ((_ frame: CGRect, _ frameProvider: @escaping () -> CGRect) -> Void)? = nil
     ) -> some View {
         modifier(MessageGestureHandler(onLongPress: onLongPress, onTap: onTap))
+    }
+}
+
+struct MessageBubbleFill: View {
+    @ObservedObject var model: MessageContentVM
+
+    var body: some View {
+        if model.hasBubbleBackground {
+            model.backgroundColor
+        }
     }
 }
 

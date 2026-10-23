@@ -96,6 +96,14 @@ extension UIColor {
                        alpha: alpha)
     }
 
+    func withLightness(of reference: UIColor, chromaScale: CGFloat, alpha: CGFloat) -> UIColor {
+        guard let tint = oklab, let target = reference.oklab else { return reference.withAlphaComponent(alpha) }
+        return UIColor(oklab: Oklab(lightness: target.lightness,
+                                    greenRed: tint.greenRed * chromaScale,
+                                    blueYellow: tint.blueYellow * chromaScale),
+                       alpha: alpha)
+    }
+
     public convenience init?(hexString: String) {
         let hexString: String = hexString.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         let scanner = Scanner(string: hexString)
@@ -162,7 +170,18 @@ extension UIColor {
     }
 
     static let jamiMessageCellReceivedText = UIColor(red: 48, green: 48, blue: 48, alpha: 1.0)
+    static let messageBubbleReceivedBase = UIColor(named: "messageBubbleReceivedBase")!
     static let jamiMessageCellTimeText = UIColor(red: 128, green: 128, blue: 128, alpha: 1.0)
+
+    static func messageBubbleReceived(tintedWith conversationColor: UIColor) -> UIColor {
+        UIColor { traitCollection in
+            let isDark = traitCollection.userInterfaceStyle == .dark
+            return conversationColor.withLightness(of: messageBubbleReceivedBase.resolvedColor(with: traitCollection),
+                                                   chromaScale: isDark ? 0.3 : 0.35,
+                                                   alpha: isDark ? 0.36 : 0.24)
+        }
+    }
+
     static var jamiMessageBackground: UIColor {
         return UIColor(named: "messageBackgroundColor") ?? UIColor(red: 252, green: 252, blue: 252, alpha: 1.0)
     }
