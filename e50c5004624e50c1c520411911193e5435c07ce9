@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a2fefcf_28429f79",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 559,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-23T23:17:08Z",
+      "side": 1,
+      "message": "[error] Line 559: 🔴 Document picking now always materializes the full file into memory (`Data(contentsOf:)`) and no longer falls back to path-based sending. This regresses large-file behavior (high memory pressure / OOM risk) and can drop sends when the read fails, whereas the previous path still sent via `sendFile`. Keep path-based transfer for non-image attachments (and only decode image bytes when needed for thumbnails), or add a `.file(...)` draft payload and route it to `dataTransferService.sendFile(...)` at send time.",
+      "revId": "e50c5004624e50c1c520411911193e5435c07ce9",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58550483_5d29910c",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagePanelVM.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-23T23:17:08Z",
+      "side": 1,
+      "message": "[warning] Line 150: 🟡 In the non-reply path, attachment load failures are silently dropped (`guard let data \u003d data else { return }`) with no state update or user feedback. Please surface the failure consistently (e.g., emit a failed draft state/toast/announcement) so users understand why tapping an attachment source produced no outgoing message.",
+      "revId": "e50c5004624e50c1c520411911193e5435c07ce9",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
