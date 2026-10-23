@@ -20,6 +20,7 @@
  */
 
 import Foundation
+import simd
 import UIKit
 
 extension UIColor {
@@ -47,6 +48,10 @@ extension UIColor {
 
         let brightness = Float(((components[0] * 299) + (components[1] * 587) + (components[2] * 114)) / 1000)
         return (brightness > threshold)
+    }
+
+    func rotatingHue(by degrees: CGFloat) -> UIColor {
+        OklabColor(self)?.rotatingHue(by: degrees).uiColor ?? self
     }
 
     public convenience init?(hexString: String) {
@@ -143,4 +148,81 @@ extension UIColor {
     // MARK: - Presence
     static let availablePresence = UIColor(hexString: "#E59028")!
     static let onlinePresence = UIColor(hexString: "#0B8271")!
+}
+
+struct OklabColor {
+    var lightness: CGFloat
+    var greenRed: CGFloat
+    var blueYellow: CGFloat
+    var alpha: CGFloat
+
+    private static let linearSRGBToLMS = simd_double3x3(rows: [
+        simd_double3(0.4122214708, 0.5363325363, 0.0514459929),
+        simd_double3(0.2119034982, 0.6806995451, 0.1073969566),
+        simd_double3(0.0883024619, 0.2817188376, 0.6299787005)
+    ])
+
+    private static let lmsToOklab = simd_double3x3(rows: [
+        simd_double3(0.2104542553, 0.7936177850, -0.0040720468),
+        simd_double3(1.9779984951, -2.4285922050, 0.4505937099),
+        simd_double3(0.0259040371, 0.7827717662, -0.8086757660)
+    ])
+
+    private static let oklabToLMS = simd_double3x3(rows: [
+        simd_double3(1, 0.3963377774, 0.2158037573),
+        simd_double3(1, -0.1055613458, -0.0638541728),
+        simd_double3(1, -0.0894841775, -1.2914855480)
+    ])
+
+    private static let lmsToLinearSRGB = simd_double3x3(rows: [
+        simd_double3(4.0767416621, -3.3077115913, 0.2309699292),
+        simd_double3(-1.2684380046, 2.6097574011, -0.3413193965),
+        simd_double3(-0.0041960863, -0.7034186147, 1.7076147010)
+    ])
+
+    var chroma: CGFloat {
+        hypot(greenRed, blueYellow)
+    }
+
+    init(lightness: CGFloat, greenRed: CGFloat, blueYellow: CGFloat, alpha: CGFloat) {
+        self.lightness = lightness
+        self.greenRed = greenRed
+        self.blueYellow = blueYellow
+        self.alpha = alpha
+    }
+
+    init?(_ color: UIColor) {
+        var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
+        guard color.getRed(&red, green: &green, blue: &blue, alpha: &alpha) else { return nil }
+        let linearRGB = simd_double3(Self.sRGBToLinear(red), Self.sRGBToLinear(green), Self.sRGBToLinear(blue))
+        let lms = Self.linearSRGBToLMS * linearRGB
+        let oklab = Self.lmsToOklab * simd_double3(cbrt(lms.x), cbrt(lms.y), cbrt(lms.z))
+        self.init(lightness: oklab.x, greenRed: oklab.y, blueYellow: oklab.z, alpha: alpha)
+    }
+
+    var uiColor: UIColor {
+        let lmsRoot = Self.oklabToLMS * simd_double3(lightness, greenRed, blueYellow)
+        let linearRGB = Self.lmsToLinearSRGB * (lmsRoot * lmsRoot * lmsRoot)
+        return UIColor(red: Self.linearToSRGB(linearRGB.x),
+                       green: Self.linearToSRGB(linearRGB.y),
+                       blue: Self.linearToSRGB(linearRGB.z),
+                       alpha: alpha)
+    }
+
+    func rotatingHue(by degrees: CGFloat) -> OklabColor {
+        let angle = degrees * .pi / 180
+        return OklabColor(lightness: lightness,
+                          greenRed: greenRed * cos(angle) - blueYellow * sin(angle),
+                          blueYellow: greenRed * sin(angle) + blueYellow * cos(angle),
+                          alpha: alpha)
+    }
+
+    private static func sRGBToLinear(_ component: Double) -> Double {
+        component <= 0.04045 ? component / 12.92 : pow((component + 0.055) / 1.055, 2.4)
+    }
+
+    private static func linearToSRGB(_ component: Double) -> Double {
+        let clamped = min(max(component, 0), 1)
+        return clamped <= 0.0031308 ? clamped * 12.92 : 1.055 * pow(clamped, 1 / 2.4) - 0.055
+    }
 }

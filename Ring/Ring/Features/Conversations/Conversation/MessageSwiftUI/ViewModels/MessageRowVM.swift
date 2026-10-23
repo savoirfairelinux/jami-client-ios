@@ -28,7 +28,6 @@ class MessageRowVM: ObservableObject, MessageAppearanceProtocol, MessageReadObse
     @Published var topSpace: CGFloat = 0
     @Published var bottomSpace: CGFloat = 0
     @Published var reservesAvatarSlot = false
-    @Published var readBorderColor: Color
     @Published var showSentIndicator: Bool = false
     @Published var showReciveIndicator: Bool = false
     @Published var shouldDisplayAavatar = false
@@ -68,7 +67,6 @@ class MessageRowVM: ObservableObject, MessageAppearanceProtocol, MessageReadObse
         self.message = message
         self.incoming = message.incoming
         self.centeredMessage = message.type.isCentered
-        self.readBorderColor = Color(UIColor.systemBackground)
         self.updateMessageStatus()
     }
 

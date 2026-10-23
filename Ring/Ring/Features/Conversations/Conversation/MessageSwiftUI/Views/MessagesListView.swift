@@ -109,6 +109,7 @@ struct MessagesListView: View {
                 endedConversationView()
             }
         }
+        .background(ConversationColorBackground(color: model.swarmColor))
         .environment(\.avatarProviderFactory, model.makeAvatarFactory() as AvatarProviderFactory?)
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
             isApplicationActive = true
@@ -382,6 +383,71 @@ struct MessagesListView: View {
 
 // MARK: - Extracted Subviews
 
+private struct ConversationColorBackground: View {
+    private struct Glow {
+        let hueShift: CGFloat
+        let peakOpacity: Double
+        let center: UnitPoint
+        let radiusScale: CGFloat
+    }
+
+    private static let glows = [
+        Glow(hueShift: 0, peakOpacity: 0.1, center: UnitPoint(x: 0.15, y: 0.08), radiusScale: 0.85),
+        Glow(hueShift: 60, peakOpacity: 0.08, center: UnitPoint(x: 0.92, y: 0.35), radiusScale: 0.77),
+        Glow(hueShift: -60, peakOpacity: 0.07, center: UnitPoint(x: 0.25, y: 0.92), radiusScale: 0.85)
+    ]
+
+    private static let neutralChromaLimit: CGFloat = 0.08
+    private static let darkestNeutralOnLight: CGFloat = 0.45
+    private static let lightestNeutralOnDark: CGFloat = 0.88
+
+    private static let falloffLocations: [Double] = [0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875, 1]
+
+    let color: UIColor
+
+    @Environment(\.colorScheme)
+    private var colorScheme
+
+    private var drawsGlow: Bool {
+        guard let oklab = OklabColor(color), oklab.chroma < Self.neutralChromaLimit else { return true }
+        return colorScheme == .dark
+            ? oklab.lightness <= Self.lightestNeutralOnDark
+            : oklab.lightness >= Self.darkestNeutralOnLight
+    }
+
+    var body: some View {
+        GeometryReader { proxy in
+            let extent = max(proxy.size.width, proxy.size.height)
+            ZStack {
+                Color(UIColor.systemBackground)
+                if drawsGlow {
+                    ForEach(Self.glows.indices, id: \.self) { index in
+                        gradient(for: Self.glows[index], extent: extent)
+                    }
+                }
+            }
+        }
+        .ignoresSafeArea()
+        .allowsHitTesting(false)
+        .accessibilityHidden(true)
+    }
+
+    private static func falloff(at distance: Double) -> Double {
+        pow(1 - distance * distance, 2)
+    }
+
+    private func gradient(for glow: Glow, extent: CGFloat) -> some View {
+        let glowColor = Color(color.rotatingHue(by: glow.hueShift))
+        return RadialGradient(stops: Self.falloffLocations.map { location in
+                                  Gradient.Stop(color: glowColor.opacity(glow.peakOpacity * Self.falloff(at: location)),
+                                                location: CGFloat(location))
+                              },
+                              center: glow.center,
+                              startRadius: 0,
+                              endRadius: extent * glow.radiusScale)
+    }
+}
+
 private struct TypingIndicatorView: View {
     private static let animationInterval: TimeInterval = 0.5
 
@@ -424,7 +490,7 @@ private struct TemporaryConversationView: View {
         let buttonVPadding: CGFloat = 10
         let factory = model.makeAvatarFactory()
         ZStack {
-            Color(UIColor.systemBackground).edgesIgnoringSafeArea(.all)
+            ConversationColorBackground(color: model.swarmColor)
             VStack(spacing: emptyStateSpacing) {
                 Spacer()
                 Group {
@@ -483,6 +549,7 @@ private struct TemporaryConversationView: View {
                 Spacer()
             }
         }
+        .contentShape(Rectangle())
     }
 }
 
@@ -560,7 +627,8 @@ private struct SyncingConversationView: View {
             Spacer()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(UIColor.systemBackground))
+        .background(ConversationColorBackground(color: model.swarmColor))
+        .contentShape(Rectangle())
     }
 }
 
