@@ -49,6 +49,16 @@ extension UIColor {
         return (brightness > threshold)
     }
 
+    func rotatingHue(by degrees: CGFloat) -> UIColor {
+        var hue: CGFloat = 0
+        var saturation: CGFloat = 0
+        var brightness: CGFloat = 0
+        var alpha: CGFloat = 0
+        guard getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha) else { return self }
+        let rotated = (hue + degrees / 360).truncatingRemainder(dividingBy: 1)
+        return UIColor(hue: rotated < 0 ? rotated + 1 : rotated, saturation: saturation, brightness: brightness, alpha: alpha)
+    }
+
     public convenience init?(hexString: String) {
         let hexString: String = hexString.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         let scanner = Scanner(string: hexString)
