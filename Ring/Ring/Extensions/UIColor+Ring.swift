@@ -85,6 +85,28 @@ extension UIColor {
                   alpha: alpha)
     }
 
+    private var relativeLuminance: CGFloat? {
+        var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
+        guard getRed(&red, green: &green, blue: &blue, alpha: &alpha) else { return nil }
+        return 0.2126 * Self.linearized(red) + 0.7152 * Self.linearized(green) + 0.0722 * Self.linearized(blue)
+    }
+
+    func contrastRatio(with other: UIColor) -> CGFloat {
+        guard let first = relativeLuminance, let second = other.relativeLuminance else { return 1 }
+        return (max(first, second) + 0.05) / (min(first, second) + 0.05)
+    }
+
+    func mixed(with other: UIColor, fraction: CGFloat) -> UIColor {
+        var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
+        var otherRed: CGFloat = 0, otherGreen: CGFloat = 0, otherBlue: CGFloat = 0, otherAlpha: CGFloat = 0
+        guard getRed(&red, green: &green, blue: &blue, alpha: &alpha),
+              other.getRed(&otherRed, green: &otherGreen, blue: &otherBlue, alpha: &otherAlpha) else { return self }
+        return UIColor(red: red + (otherRed - red) * fraction,
+                       green: green + (otherGreen - green) * fraction,
+                       blue: blue + (otherBlue - blue) * fraction,
+                       alpha: alpha + (otherAlpha - alpha) * fraction)
+    }
+
     func rotatingHue(by degrees: CGFloat) -> UIColor {
         guard let lab = oklab else { return self }
         var alpha: CGFloat = 0
@@ -179,6 +201,26 @@ extension UIColor {
             return conversationColor.withLightness(of: messageBubbleReceivedBase.resolvedColor(with: traitCollection),
                                                    chromaScale: isDark ? 0.3 : 0.35,
                                                    alpha: isDark ? 0.36 : 0.24)
+        }
+    }
+
+    private static func resolvedPerStyle(_ resolve: (UITraitCollection) -> UIColor) -> UIColor {
+        let light = resolve(UITraitCollection(userInterfaceStyle: .light))
+        let dark = resolve(UITraitCollection(userInterfaceStyle: .dark))
+        return UIColor { traitCollection in
+            traitCollection.userInterfaceStyle == .dark ? dark : light
+        }
+    }
+
+    static func messageBubbleSent(for conversationColor: UIColor) -> UIColor {
+        resolvedPerStyle { traitCollection in
+            let screen = UIColor.systemBackground.resolvedColor(with: traitCollection)
+            let away: UIColor = traitCollection.userInterfaceStyle == .dark ? .white : .black
+            var bubble = conversationColor
+            for _ in 0..<50 where bubble.contrastRatio(with: screen) < 1.2 {
+                bubble = bubble.mixed(with: away, fraction: 0.04)
+            }
+            return bubble
         }
     }
 
