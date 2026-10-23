@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85659939_01473985",
+        "filename": "Ring/Ring/Resources/Colors.xcassets/conversationSecondaryText.colorset/Contents.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-23T14:40:35Z",
+      "side": 1,
+      "message": "[error] Line 12: 🔴 The `srgb` component values are encoded as `\"60\"`, `\"67\"`, `\"235\"`, etc., but color-set JSON expects normalized channel values in `[0,1]` (or valid hex component syntax). These values can compile to unintended/clamped colors and break the new contrast-based styling. Convert each channel to normalized decimals (e.g. `60/255 \u003d 0.2353`, `235/255 \u003d 0.9216`) consistently in both appearances.",
+      "revId": "fc067ea7d64a7d48f481dc95df9c6dcc716f55c7",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ade7770_9cf1a2c4",
+        "filename": "Ring/Ring/Resources/Colors.xcassets/messageTextDark.colorset/Contents.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-23T14:40:35Z",
+      "side": 1,
+      "message": "[error] Line 12: 🔴 Same encoding issue here: `\"28\"` channel values in `srgb` should be normalized values (e.g. `0.1098`) or valid hex format for asset catalogs. As-is, `messageTextDark` may resolve incorrectly, undermining `messageTextSent(for:)` contrast selection and producing unreadable sent text/links in some themes.",
+      "revId": "fc067ea7d64a7d48f481dc95df9c6dcc716f55c7",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
