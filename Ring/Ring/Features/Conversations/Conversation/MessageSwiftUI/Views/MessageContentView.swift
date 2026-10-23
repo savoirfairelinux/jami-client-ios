@@ -130,7 +130,7 @@ struct MessageTextStyle: ViewModifier {
             .padding(.leading, model.textInset)
             .padding(.trailing, model.textInset)
             .foregroundColor(model.styling.textColor)
-            .background(model.backgroundColor)
+            .background(MessageBubbleFill(model: model))
             .if(model.hasBorder) { view in
                 view.overlay(
                     CornerRadiusShape(radius: model.cornerRadius, corners: model.corners)
@@ -198,6 +198,39 @@ extension View {
         onTap: ((_ frame: CGRect, _ frameProvider: @escaping () -> CGRect) -> Void)? = nil
     ) -> some View {
         modifier(MessageGestureHandler(onLongPress: onLongPress, onTap: onTap))
+    }
+}
+
+struct MessageBubbleFill: View {
+    @ObservedObject var model: MessageContentVM
+
+    var body: some View {
+        if model.hasBubbleBackground {
+            ZStack {
+                if model.isIncoming {
+                    Color(UIColor.messageBubbleReceived(tintedWith: model.preferencesColor))
+                } else {
+                    model.backgroundColor
+                }
+                MessageBubbleEdge(model: model)
+            }
+        }
+    }
+}
+
+struct MessageBubbleEdge: View {
+    @ObservedObject var model: MessageContentVM
+
+    private let edgeWidth: CGFloat = 2
+
+    var body: some View {
+        CornerRadiusShape(radius: model.cornerRadius, corners: model.corners)
+            .stroke(LinearGradient(stops: [.init(color: .messageBubbleHighlight, location: 0),
+                                           .init(color: .clear, location: 0.45),
+                                           .init(color: .messageBubbleShade, location: 1)],
+                                   startPoint: .topLeading,
+                                   endPoint: .bottomTrailing),
+                    lineWidth: edgeWidth)
     }
 }
 

@@ -288,7 +288,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
         UIColor.adaptiveMessageLinkColor(on: linkBackgroundUIColor)
     }
 
-    private var hasBubbleBackground: Bool {
+    var hasBubbleBackground: Bool {
         !type.isContact && !isEmojiOnly
     }
 
@@ -636,7 +636,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
         let textColor = styling.textColor
         if isIncoming {
             let secondary = Color(UIColor.secondaryLabel)
-            return AudioMessageColors(background: backgroundColor,
+            return AudioMessageColors(background: Color(UIColor.messageBubbleReceived(tintedWith: preferencesColor)),
                                       text: secondary,
                                       control: textColor.opacity(0.12),
                                       controlIcon: secondary,

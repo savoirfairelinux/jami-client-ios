@@ -87,7 +87,7 @@ struct MessageBubbleView: View {
             .padding(.vertical, model.textVerticalInset)
             .foregroundColor(model.styling.textColor)
             .lineLimit(nil)
-            .background(model.backgroundColor)
+            .background(MessageBubbleFill(model: model))
             .font(model.styling.textFont)
             .modifier(MessageCornerRadius(model: model))
             .marksMessageBubbleBottom()

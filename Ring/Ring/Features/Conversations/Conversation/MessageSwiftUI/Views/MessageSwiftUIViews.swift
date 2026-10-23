@@ -45,6 +45,11 @@ struct PlayerSwiftUI: View {
                        messageTime: messageTime)
                 .frame(height: model.playerHeight * ratio)
                 .frame(width: model.playerWidth * ratio)
+                .overlay {
+                    if customCornerRadius == 0 && !player.hasVideo.value {
+                        MessageBubbleEdge(model: model)
+                    }
+                }
                 .conditionalModifier(MessageCornerRadius(model: model), apply: customCornerRadius == 0)
                 .conditionalCornerRadius(customCornerRadius, apply: customCornerRadius != 0)
         }

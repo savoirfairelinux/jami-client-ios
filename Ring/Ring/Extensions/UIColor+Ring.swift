@@ -59,6 +59,49 @@ extension UIColor {
         return UIColor(hue: rotated < 0 ? rotated + 1 : rotated, saturation: saturation, brightness: brightness, alpha: alpha)
     }
 
+    private struct Oklab {
+        var lightness: CGFloat
+        var greenRed: CGFloat
+        var blueYellow: CGFloat
+    }
+
+    private var oklab: Oklab? {
+        var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
+        guard getRed(&red, green: &green, blue: &blue, alpha: &alpha) else { return nil }
+        func linear(_ value: CGFloat) -> CGFloat {
+            value <= 0.04045 ? value / 12.92 : pow((value + 0.055) / 1.055, 2.4)
+        }
+        let (r, g, b) = (linear(red), linear(green), linear(blue))
+        let l = cbrt(0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b)
+        let m = cbrt(0.2119034982 * r + 0.6806995451 * g + 0.1073969566 * b)
+        let s = cbrt(0.0883024619 * r + 0.2817188376 * g + 0.6299787005 * b)
+        return Oklab(lightness: 0.2104542553 * l + 0.7936177850 * m - 0.0040720468 * s,
+                     greenRed: 1.9779984951 * l - 2.4285922050 * m + 0.4505937099 * s,
+                     blueYellow: 0.0259040371 * l + 0.7827717662 * m - 0.8086757660 * s)
+    }
+
+    private convenience init(oklab: Oklab, alpha: CGFloat) {
+        let l = pow(oklab.lightness + 0.3963377774 * oklab.greenRed + 0.2158037573 * oklab.blueYellow, 3)
+        let m = pow(oklab.lightness - 0.1055613458 * oklab.greenRed - 0.0638541728 * oklab.blueYellow, 3)
+        let s = pow(oklab.lightness - 0.0894841775 * oklab.greenRed - 1.2914855480 * oklab.blueYellow, 3)
+        func gamma(_ value: CGFloat) -> CGFloat {
+            let clamped = min(max(value, 0), 1)
+            return clamped <= 0.0031308 ? clamped * 12.92 : 1.055 * pow(clamped, 1 / 2.4) - 0.055
+        }
+        self.init(red: gamma(4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s),
+                  green: gamma(-1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s),
+                  blue: gamma(-0.0041960863 * l - 0.7034186147 * m + 1.7076147010 * s),
+                  alpha: alpha)
+    }
+
+    func withLightness(of reference: UIColor, chromaScale: CGFloat, alpha: CGFloat) -> UIColor {
+        guard let tint = oklab, let target = reference.oklab else { return reference.withAlphaComponent(alpha) }
+        return UIColor(oklab: Oklab(lightness: target.lightness,
+                                    greenRed: tint.greenRed * chromaScale,
+                                    blueYellow: tint.blueYellow * chromaScale),
+                       alpha: alpha)
+    }
+
     public convenience init?(hexString: String) {
         let hexString: String = hexString.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         let scanner = Scanner(string: hexString)
@@ -125,7 +168,20 @@ extension UIColor {
     }
 
     static let jamiMessageCellReceivedText = UIColor(red: 48, green: 48, blue: 48, alpha: 1.0)
+    static let messageBubbleReceivedBase = UIColor(named: "messageBubbleReceivedBase")!
+    static let messageBubbleHighlight = UIColor(named: "messageBubbleHighlight")!
+    static let messageBubbleShade = UIColor(named: "messageBubbleShade")!
     static let jamiMessageCellTimeText = UIColor(red: 128, green: 128, blue: 128, alpha: 1.0)
+
+    static func messageBubbleReceived(tintedWith conversationColor: UIColor) -> UIColor {
+        UIColor { traitCollection in
+            let isDark = traitCollection.userInterfaceStyle == .dark
+            return conversationColor.withLightness(of: messageBubbleReceivedBase.resolvedColor(with: traitCollection),
+                                                   chromaScale: isDark ? 0.3 : 0.35,
+                                                   alpha: isDark ? 0.36 : 0.24)
+        }
+    }
+
     static var jamiMessageBackground: UIColor {
         return UIColor(named: "messageBackgroundColor") ?? UIColor(red: 252, green: 252, blue: 252, alpha: 1.0)
     }
