@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23d5b79f_f41ad024",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-23T18:01:03Z",
+      "side": 1,
+      "message": "[error] Line 397: 🔴 `takeReplyId()` is consumed before any selected item is actually sent (`PHPicker` path). If all `itemProvider` loads fail (or decode returns nil), the reply strip is cleared with no outgoing message. Defer consumption until the first successful send call, e.g. use a local lazy helper that calls `takeReplyId()` only immediately before `sendAndSaveFile`/`sendFile` executes and reuses that id for the rest of the batch.",
+      "revId": "30f125528ad296b92b50db16da9e541306bcdfde",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03a81e5c_1394a18d",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-23T18:01:03Z",
+      "side": 1,
+      "message": "[error] Line 446: 🔴 Same premature-consumption pattern in `UIImagePickerControllerDelegate`: `takeReplyId()` is called before media extraction/encoding guards. Any early return (`phAsset` missing, JPEG conversion failure, AVURLAsset/data read failure) drops reply context without sending. Move reply-id consumption to the exact send point(s), after payload creation succeeds.",
+      "revId": "30f125528ad296b92b50db16da9e541306bcdfde",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
