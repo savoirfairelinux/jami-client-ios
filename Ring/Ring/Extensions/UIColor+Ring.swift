@@ -65,6 +65,21 @@ extension UIColor {
         return (max(first, second) + 0.05) / (min(first, second) + 0.05)
     }
 
+    private var screenLuminance: CGFloat? {
+        var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
+        guard getRed(&red, green: &green, blue: &blue, alpha: &alpha) else { return nil }
+        let luminance = 0.2126729 * pow(max(red, 0), 2.4) + 0.7151522 * pow(max(green, 0), 2.4) + 0.0721750 * pow(max(blue, 0), 2.4)
+        return luminance < 0.022 ? luminance + pow(0.022 - luminance, 1.414) : luminance
+    }
+
+    private func lightnessContrast(ofText text: UIColor) -> CGFloat {
+        guard let background = screenLuminance, let foreground = text.screenLuminance else { return 0 }
+        let contrast = background > foreground
+            ? pow(background, 0.56) - pow(foreground, 0.57)
+            : pow(background, 0.65) - pow(foreground, 0.62)
+        return abs(contrast) * 1.14
+    }
+
     func mixed(with other: UIColor, fraction: CGFloat) -> UIColor {
         var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
         var otherRed: CGFloat = 0, otherGreen: CGFloat = 0, otherBlue: CGFloat = 0, otherAlpha: CGFloat = 0
@@ -74,6 +89,29 @@ extension UIColor {
                        green: green + (otherGreen - green) * fraction,
                        blue: blue + (otherBlue - blue) * fraction,
                        alpha: alpha + (otherAlpha - alpha) * fraction)
+    }
+
+    private func composited(over background: UIColor) -> UIColor {
+        UIColor.resolvedPerStyle { traitCollection in
+            self.resolvedColor(with: traitCollection).blended(over: background.resolvedColor(with: traitCollection))
+        }
+    }
+
+    private func blended(over background: UIColor) -> UIColor {
+        var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
+        var backRed: CGFloat = 0, backGreen: CGFloat = 0, backBlue: CGFloat = 0, backAlpha: CGFloat = 0
+        guard getRed(&red, green: &green, blue: &blue, alpha: &alpha),
+              background.getRed(&backRed, green: &backGreen, blue: &backBlue, alpha: &backAlpha) else { return self }
+        let outAlpha = alpha + backAlpha * (1 - alpha)
+        guard outAlpha > 0 else { return .clear }
+        func blend(_ front: CGFloat, _ back: CGFloat) -> CGFloat {
+            (front * alpha + back * backAlpha * (1 - alpha)) / outAlpha
+        }
+        return UIColor(red: blend(red, backRed), green: blend(green, backGreen), blue: blend(blue, backBlue), alpha: outAlpha)
+    }
+
+    private var chroma: CGFloat {
+        OklabColor(self)?.chroma ?? 0
     }
 
     func rotatingHue(by degrees: CGFloat) -> UIColor {
@@ -155,9 +193,11 @@ extension UIColor {
 
     static let jamiMessageCellReceivedText = UIColor(red: 48, green: 48, blue: 48, alpha: 1.0)
     static let messageBubbleReceivedBase = UIColor(named: "messageBubbleReceivedBase")!
+    static let conversationSecondaryText = UIColor(named: "conversationSecondaryText")!
+    static let messageTextDark = UIColor(named: "messageTextDark")!
     static let jamiMessageCellTimeText = UIColor(red: 128, green: 128, blue: 128, alpha: 1.0)
 
-    static func messageBubbleReceived(tintedWith conversationColor: UIColor) -> UIColor {
+    private static func messageBubbleReceived(tintedWith conversationColor: UIColor) -> UIColor {
         resolvedPerStyle { traitCollection in
             conversationColor.withLightness(of: messageBubbleReceivedBase.resolvedColor(with: traitCollection),
                                             chromaScale: traitCollection.userInterfaceStyle == .dark ? 0.3 : 0.35)
@@ -172,7 +212,7 @@ extension UIColor {
         }
     }
 
-    static func messageBubbleSent(for conversationColor: UIColor) -> UIColor {
+    private static func messageBubbleSent(for conversationColor: UIColor) -> UIColor {
         resolvedPerStyle { traitCollection in
             let screen = UIColor.systemBackground.resolvedColor(with: traitCollection)
             let away: UIColor = traitCollection.userInterfaceStyle == .dark ? .white : .black
@@ -181,6 +221,78 @@ extension UIColor {
                 bubble = bubble.mixed(with: away, fraction: 0.04)
             }
             return bubble
+        }
+    }
+
+    private static let darkTextMinimumLead: CGFloat = 0.08
+
+    private static func messageTextSent(on sentBubble: UIColor) -> UIColor {
+        resolvedPerStyle { traitCollection in
+            let bubble = sentBubble.resolvedColor(with: traitCollection)
+            let dark = messageTextDark.resolvedColor(with: traitCollection)
+            let whiteContrast = bubble.lightnessContrast(ofText: .white)
+            let darkContrast = bubble.lightnessContrast(ofText: dark)
+            return darkContrast >= whiteContrast + darkTextMinimumLead ? dark : .white
+        }
+    }
+
+    private static let tintableMinimumChroma: CGFloat = 0.03
+    private static let tintableMinimumContrast: CGFloat = 1.5
+
+    private static func isTintable(_ conversationColor: UIColor, with traitCollection: UITraitCollection) -> Bool {
+        let screen = UIColor.systemBackground.resolvedColor(with: traitCollection)
+        return conversationColor.chroma >= tintableMinimumChroma && conversationColor.contrastRatio(with: screen) >= tintableMinimumContrast
+    }
+
+    private static func messagePlaybackTint(for conversationColor: UIColor) -> UIColor {
+        resolvedPerStyle { traitCollection in
+            isTintable(conversationColor, with: traitCollection) ? conversationColor : UIColor.label.resolvedColor(with: traitCollection)
+        }
+    }
+
+    private static let darkControlContrast: CGFloat = 4.5
+    private static let untintedControlOpacity: CGFloat = 0.7
+    private static let controlShadeStep: CGFloat = 0.04
+    private static let controlShadeMaximumSteps = 50
+
+    private static func messageControl(matching text: UIColor, conversationColor: UIColor, on bubble: UIColor) -> UIColor {
+        resolvedPerStyle { traitCollection in
+            let resolvedText = text.resolvedColor(with: traitCollection)
+            guard !(resolvedText.isLight(threshold: 0.5) ?? false) else { return resolvedText }
+            guard isTintable(conversationColor, with: traitCollection) else {
+                return resolvedText.withAlphaComponent(untintedControlOpacity)
+            }
+            let background = bubble.resolvedColor(with: traitCollection)
+            var shade = conversationColor
+            for _ in 0..<controlShadeMaximumSteps where shade.contrastRatio(with: background) < darkControlContrast {
+                shade = shade.mixed(with: .black, fraction: controlShadeStep)
+            }
+            return shade
+        }
+    }
+
+    private static let lightTextProgressOpacity: CGFloat = 0.3
+    private static let darkTextProgressOpacity: CGFloat = 0.12
+
+    private static func messagePlaybackProgressSent(matching text: UIColor) -> UIColor {
+        resolvedPerStyle { traitCollection in
+            let resolvedText = text.resolvedColor(with: traitCollection)
+            let isLightText = resolvedText.isLight(threshold: 0.5) ?? false
+            return resolvedText.withAlphaComponent(isLightText ? lightTextProgressOpacity : darkTextProgressOpacity)
+        }
+    }
+
+    private func withAlphaComponent(_ alpha: CGFloat, dark darkAlpha: CGFloat) -> UIColor {
+        UIColor.resolvedPerStyle { traitCollection in
+            self.resolvedColor(with: traitCollection)
+                .withAlphaComponent(traitCollection.userInterfaceStyle == .dark ? darkAlpha : alpha)
+        }
+    }
+
+    private func multiplyingAlpha(by factor: CGFloat) -> UIColor {
+        UIColor.resolvedPerStyle { traitCollection in
+            let resolved = self.resolvedColor(with: traitCollection)
+            return resolved.withAlphaComponent(resolved.cgColor.alpha * factor)
         }
     }
 
@@ -211,6 +323,55 @@ extension UIColor {
     // MARK: - Presence
     static let availablePresence = UIColor(hexString: "#E59028")!
     static let onlinePresence = UIColor(hexString: "#0B8271")!
+}
+
+extension UIColor {
+    final class MessageBubblePalette {
+        let receivedBackground: UIColor
+        let receivedContrastBackground: UIColor
+        let receivedControl: UIColor
+        let receivedPlaybackControl: UIColor
+        let receivedPlaybackProgress: UIColor
+        let sentBackground: UIColor
+        let sentText: UIColor
+        let sentControl: UIColor
+        let sentPlaybackControl: UIColor
+        let sentPlaybackProgress: UIColor
+        let sentTime: UIColor
+
+        private static let receivedPlaybackControlOpacity: (light: CGFloat, dark: CGFloat) = (0.22, 0.32)
+        private static let receivedPlaybackProgressOpacity: (light: CGFloat, dark: CGFloat) = (0.16, 0.24)
+        private static let sentPlaybackControlOpacity: CGFloat = 0.15
+        private static let sentTimeOpacity: CGFloat = 0.7
+
+        private static let cache = NSCache<UIColor, MessageBubblePalette>()
+
+        static func palette(for conversationColor: UIColor) -> MessageBubblePalette {
+            if let palette = cache.object(forKey: conversationColor) {
+                return palette
+            }
+            let palette = MessageBubblePalette(conversationColor: conversationColor)
+            cache.setObject(palette, forKey: conversationColor)
+            return palette
+        }
+
+        private init(conversationColor: UIColor) {
+            let playbackTint = UIColor.messagePlaybackTint(for: conversationColor)
+            receivedBackground = .messageBubbleReceived(tintedWith: conversationColor)
+            receivedContrastBackground = receivedBackground.composited(over: .systemBackground)
+            receivedControl = .messageControl(matching: .label, conversationColor: conversationColor, on: receivedContrastBackground)
+            receivedPlaybackControl = playbackTint.withAlphaComponent(Self.receivedPlaybackControlOpacity.light,
+                                                                      dark: Self.receivedPlaybackControlOpacity.dark)
+            receivedPlaybackProgress = playbackTint.withAlphaComponent(Self.receivedPlaybackProgressOpacity.light,
+                                                                       dark: Self.receivedPlaybackProgressOpacity.dark)
+            sentBackground = .messageBubbleSent(for: conversationColor)
+            sentText = .messageTextSent(on: sentBackground)
+            sentControl = .messageControl(matching: sentText, conversationColor: conversationColor, on: sentBackground)
+            sentPlaybackControl = sentControl.multiplyingAlpha(by: Self.sentPlaybackControlOpacity)
+            sentPlaybackProgress = .messagePlaybackProgressSent(matching: sentText)
+            sentTime = sentText.multiplyingAlpha(by: Self.sentTimeOpacity)
+        }
+    }
 }
 
 struct OklabColor {
