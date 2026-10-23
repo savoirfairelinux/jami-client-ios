@@ -36,6 +36,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b8e5037_9ffbb644",
+        "filename": "Ring/Ring/Features/Conversations/Preview/MediaPreviewView.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-23T17:10:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ea77e7a_3902085c",
+      "revId": "ac52d5cdfd1fb9ebe6705f161065364e3c010bac",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6768ad77_b19d1c8c",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "The image can\u0027t change under a live view",
       "parentUuid": "6768ad77_b19d1c8c",
+      "revId": "ac52d5cdfd1fb9ebe6705f161065364e3c010bac",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b3b4552_e773de40",
+        "filename": "Ring/Ring/Features/Conversations/Preview/MediaPreviewView.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-23T17:10:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "82e288e6_f1023095",
       "revId": "ac52d5cdfd1fb9ebe6705f161065364e3c010bac",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
