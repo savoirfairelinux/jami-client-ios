@@ -401,8 +401,8 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
             self.contrastBackgroundUIColor = .jamiMessageCellReceived
             self.backgroundColor = Color(UIColor.messageBubbleReceived(tintedWith: preferencesColor))
         } else {
-            self.contrastBackgroundUIColor = preferencesColor
-            self.backgroundColor = Color(preferencesColor)
+            self.contrastBackgroundUIColor = UIColor.messageBubbleSent(for: preferencesColor)
+            self.backgroundColor = Color(self.contrastBackgroundUIColor)
         }
     }
 
