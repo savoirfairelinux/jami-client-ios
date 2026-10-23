@@ -44,7 +44,7 @@ struct ReplyHistory: View {
             if let target = model.target {
                 Text(model.inReplyTo)
                     .font(model.styling.secondaryFont)
-                    .foregroundColor(model.styling.secondaryTextColor)
+                    .foregroundColor(.conversationSecondaryText)
                     .onAppear {
                         target.onAppear()
                     }

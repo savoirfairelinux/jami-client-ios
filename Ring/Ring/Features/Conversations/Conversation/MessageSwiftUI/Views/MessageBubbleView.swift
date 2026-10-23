@@ -101,7 +101,7 @@ struct MessageBubbleView: View {
                         .modifier(MessageCornerRadius(model: model))
                         .messageGesture(onLongPress: receivedLongPress())
                         .marksMessageBubbleBottom()
-                    MessageTimeView(text: model.timeText, color: model.styling.secondaryTextColor)
+                    MessageTimeView(text: model.timeText, color: .conversationSecondaryText)
                 }
             } else if model.isFullURL, let url = model.getURL() {
                 MessageBubbleWithTimeWrapper(model: model) {
