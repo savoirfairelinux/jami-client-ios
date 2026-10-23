@@ -204,6 +204,8 @@ extension View {
 struct MessageBubbleFill: View {
     @ObservedObject var model: MessageContentVM
 
+    private let topLift = Color.white.opacity(0.08)
+
     var body: some View {
         if model.hasBubbleBackground {
             ZStack {
@@ -211,6 +213,7 @@ struct MessageBubbleFill: View {
                     Color(UIColor.messageBubbleReceived(tintedWith: model.preferencesColor))
                 } else {
                     model.backgroundColor
+                    LinearGradient(colors: [topLift, .clear], startPoint: .top, endPoint: .bottom)
                 }
                 MessageBubbleEdge(model: model)
             }

@@ -296,7 +296,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
         if !hasBubbleBackground {
             return .clear
         }
-        return isIncoming ? UIColor.jamiMessageCellReceived : preferencesColor
+        return isIncoming ? UIColor.jamiMessageCellReceived : UIColor.messageBubbleSent(for: preferencesColor)
     }
 
     /// Plain-text preview for list and reply strip.
@@ -406,7 +406,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
         if !self.hasBubbleBackground {
             self.backgroundColor = .clear
         } else {
-            self.backgroundColor = isIncoming ? Color.jamiMessageCellReceived : Color(preferencesColor)
+            self.backgroundColor = isIncoming ? Color.jamiMessageCellReceived : Color(UIColor.messageBubbleSent(for: preferencesColor))
         }
     }
 
