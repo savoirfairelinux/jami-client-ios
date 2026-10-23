@@ -121,6 +121,7 @@ extension Color {
     static let jamiMessageCellReceivedText = Color(UIColor.jamiMessageCellReceivedText)
     static let messageBubbleHighlight = Color(UIColor.messageBubbleHighlight)
     static let messageBubbleShade = Color(UIColor.messageBubbleShade)
+    static let conversationSecondaryText = Color(UIColor.conversationSecondaryText)
     static let jamiMessageCellTimeText = Color(UIColor.jamiMessageCellTimeText)
     static let jamiMessageBackground = Color(UIColor.jamiMessageBackground)
     static let jamiMessageTextFieldBorder = Color(UIColor.jamiMessageTextFieldBorder)

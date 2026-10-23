@@ -285,7 +285,10 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     }
 
     var linkColor: UIColor {
-        UIColor.adaptiveMessageLinkColor(on: linkBackgroundUIColor)
+        if !isIncoming && hasBubbleBackground {
+            return UIColor.messageTextSent(for: preferencesColor)
+        }
+        return UIColor.adaptiveMessageLinkColor(on: linkBackgroundUIColor)
     }
 
     var hasBubbleBackground: Bool {
@@ -378,17 +381,17 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
         self.updateTextColor()
         self.updateTextFont()
         self.updateInset()
-        self.editionColor = self.isIncoming ? styling.secondaryTextColor : Color(red: 0.95, green: 0.95, blue: 0.95)
-        self.timeColor = self.hasBubbleBackground ? self.editionColor : Color(UIColor.tertiaryLabel)
+        self.editionColor = self.isIncoming ? styling.secondaryTextColor : styling.textColor.opacity(0.8)
+        self.timeColor = self.hasBubbleBackground ? self.editionColor : .conversationSecondaryText
         invalidateTextPresentationCache()
     }
 
     private func updateTextColor() {
-        if self.isLink() {
+        if !self.isIncoming && self.hasBubbleBackground {
+            self.styling.textColor = Color(UIColor.messageTextSent(for: preferencesColor))
+        } else if self.isLink() {
             let backgroundIsLightColor: Bool = self.backgroundColor.isLight(threshold: 0.8) ?? true
             self.styling.textColor = backgroundIsLightColor ? .blue : .white
-        } else if !self.isIncoming && !self.type.isContact {
-            self.styling.textColor = Color.white
         } else {
             self.styling.textColor = self.styling.defaultTextColor
         }
@@ -635,22 +638,21 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     var audioPlayerColors: AudioMessageColors {
         let textColor = styling.textColor
         if isIncoming {
-            let secondary = Color(UIColor.secondaryLabel)
             return AudioMessageColors(background: Color(UIColor.messageBubbleReceived(tintedWith: preferencesColor)),
-                                      text: secondary,
-                                      control: textColor.opacity(0.12),
-                                      controlIcon: secondary,
+                                      text: textColor,
+                                      control: Color(UIColor.messagePlayControlReceived(tintedWith: preferencesColor)),
+                                      controlIcon: textColor,
                                       progress: textColor.opacity(0.1),
-                                      time: secondary,
-                                      timeBackground: textColor.opacity(0.05))
+                                      time: .conversationSecondaryText,
+                                      timeBackground: .clear)
         }
         return AudioMessageColors(background: backgroundColor,
-                                  text: textColor.opacity(0.85),
-                                  control: textColor,
-                                  controlIcon: backgroundColor,
+                                  text: textColor,
+                                  control: textColor.opacity(0.15),
+                                  controlIcon: textColor,
                                   progress: textColor.opacity(0.22),
-                                  time: textColor.opacity(0.8),
-                                  timeBackground: textColor.opacity(0.14))
+                                  time: textColor.opacity(0.7),
+                                  timeBackground: .clear)
     }
 
     func updatePlayer(player: PlayerViewModel?) {
@@ -679,8 +681,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.preferencesColor = color
-            self.updateBackgroundColor()
-            self.invalidateTextPresentationCache()
+            self.updateMessageStyle()
         }
     }
 

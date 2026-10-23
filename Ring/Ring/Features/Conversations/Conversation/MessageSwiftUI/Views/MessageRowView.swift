@@ -184,7 +184,7 @@ struct MessageRowView: View {
     private func daySeparator(_ text: String) -> some View {
         Text(text)
             .font(.caption.weight(.semibold))
-            .foregroundColor(model.styling.secondaryTextColor)
+            .foregroundColor(.conversationSecondaryText)
             .padding(.horizontal, Layout.daySeparatorHorizontalPadding)
             .padding(.vertical, Layout.daySeparatorVerticalPadding)
             .background(Capsule().fill(Color(UIColor.tertiarySystemFill)))

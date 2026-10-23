@@ -196,6 +196,8 @@ extension UIColor {
     static let messageBubbleReceivedBase = UIColor(named: "messageBubbleReceivedBase")!
     static let messageBubbleHighlight = UIColor(named: "messageBubbleHighlight")!
     static let messageBubbleShade = UIColor(named: "messageBubbleShade")!
+    static let conversationSecondaryText = UIColor(named: "conversationSecondaryText")!
+    static let messageTextDark = UIColor(named: "messageTextDark")!
     static let jamiMessageCellTimeText = UIColor(red: 128, green: 128, blue: 128, alpha: 1.0)
 
     static func messageBubbleReceived(tintedWith conversationColor: UIColor) -> UIColor {
@@ -216,6 +218,21 @@ extension UIColor {
                 bubble = bubble.mixed(with: away, fraction: 0.04)
             }
             return bubble
+        }
+    }
+
+    static func messageTextSent(for conversationColor: UIColor) -> UIColor {
+        UIColor { traitCollection in
+            let bubble = messageBubbleSent(for: conversationColor).resolvedColor(with: traitCollection)
+            let dark = messageTextDark.resolvedColor(with: traitCollection)
+            return bubble.contrastRatio(with: .white) >= bubble.contrastRatio(with: dark) ? .white : dark
+        }
+    }
+
+    static func messagePlayControlReceived(tintedWith conversationColor: UIColor) -> UIColor {
+        UIColor { traitCollection in
+            conversationColor.mixed(with: UIColor.label.resolvedColor(with: traitCollection), fraction: 0.2)
+                .withAlphaComponent(0.3)
         }
     }
 
