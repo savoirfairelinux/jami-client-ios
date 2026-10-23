@@ -90,11 +90,12 @@ struct MessageRowView: View {
                         if let factory = avatarFactory {
                             AvatarSwiftUIView(source: factory.provider(for: readIds[index],
                                                                        size: Constants.AvatarSize.conversation20))
-                                .overlay(Circle().stroke(model.readBorderColor, lineWidth: 2))
+                                .overlay(Circle().stroke(lineWidth: 2).blendMode(.destinationOut))
                                 .zIndex(Double(readIds.count - index))
                         }
                     }
                 }
+                .compositingGroup()
                 .offset(x: 1)
                 .padding(.top, Layout.readReceiptsSpacing)
                 .accessibilityHidden(true)

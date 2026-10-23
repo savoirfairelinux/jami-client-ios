@@ -49,6 +49,53 @@ extension UIColor {
         return (brightness > threshold)
     }
 
+    private static func linearized(_ component: CGFloat) -> CGFloat {
+        component <= 0.04045 ? component / 12.92 : pow((component + 0.055) / 1.055, 2.4)
+    }
+
+    private struct Oklab {
+        var lightness: CGFloat
+        var greenRed: CGFloat
+        var blueYellow: CGFloat
+    }
+
+    private var oklab: Oklab? {
+        var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
+        guard getRed(&red, green: &green, blue: &blue, alpha: &alpha) else { return nil }
+        let (r, g, b) = (Self.linearized(red), Self.linearized(green), Self.linearized(blue))
+        let l = cbrt(0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b)
+        let m = cbrt(0.2119034982 * r + 0.6806995451 * g + 0.1073969566 * b)
+        let s = cbrt(0.0883024619 * r + 0.2817188376 * g + 0.6299787005 * b)
+        return Oklab(lightness: 0.2104542553 * l + 0.7936177850 * m - 0.0040720468 * s,
+                     greenRed: 1.9779984951 * l - 2.4285922050 * m + 0.4505937099 * s,
+                     blueYellow: 0.0259040371 * l + 0.7827717662 * m - 0.8086757660 * s)
+    }
+
+    private convenience init(oklab: Oklab, alpha: CGFloat) {
+        let l = pow(oklab.lightness + 0.3963377774 * oklab.greenRed + 0.2158037573 * oklab.blueYellow, 3)
+        let m = pow(oklab.lightness - 0.1055613458 * oklab.greenRed - 0.0638541728 * oklab.blueYellow, 3)
+        let s = pow(oklab.lightness - 0.0894841775 * oklab.greenRed - 1.2914855480 * oklab.blueYellow, 3)
+        func gamma(_ value: CGFloat) -> CGFloat {
+            let clamped = min(max(value, 0), 1)
+            return clamped <= 0.0031308 ? clamped * 12.92 : 1.055 * pow(clamped, 1 / 2.4) - 0.055
+        }
+        self.init(red: gamma(4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s),
+                  green: gamma(-1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s),
+                  blue: gamma(-0.0041960863 * l - 0.7034186147 * m + 1.7076147010 * s),
+                  alpha: alpha)
+    }
+
+    func rotatingHue(by degrees: CGFloat) -> UIColor {
+        guard let lab = oklab else { return self }
+        var alpha: CGFloat = 0
+        getRed(nil, green: nil, blue: nil, alpha: &alpha)
+        let angle = degrees * .pi / 180
+        return UIColor(oklab: Oklab(lightness: lab.lightness,
+                                    greenRed: lab.greenRed * cos(angle) - lab.blueYellow * sin(angle),
+                                    blueYellow: lab.greenRed * sin(angle) + lab.blueYellow * cos(angle)),
+                       alpha: alpha)
+    }
+
     public convenience init?(hexString: String) {
         let hexString: String = hexString.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         let scanner = Scanner(string: hexString)

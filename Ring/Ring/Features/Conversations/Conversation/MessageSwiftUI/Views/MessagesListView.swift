@@ -109,6 +109,7 @@ struct MessagesListView: View {
                 endedConversationView()
             }
         }
+        .background(ConversationColorBackground(color: model.swarmColor))
         .environment(\.avatarProviderFactory, model.makeAvatarFactory() as AvatarProviderFactory?)
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
             isApplicationActive = true
@@ -381,6 +382,54 @@ struct MessagesListView: View {
 }
 
 // MARK: - Extracted Subviews
+
+private struct ConversationColorBackground: View {
+    let color: UIColor
+
+    @Environment(\.colorScheme)
+    private var colorScheme
+
+    private let neighborHueShift: CGFloat = 60
+
+    private var hasGlow: Bool {
+        var hue: CGFloat = 0
+        var saturation: CGFloat = 0
+        var brightness: CGFloat = 0
+        var alpha: CGFloat = 0
+        guard color.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha),
+              saturation < 0.15 else { return true }
+        return colorScheme == .dark ? brightness < 0.85 : brightness > 0.35
+    }
+
+    var body: some View {
+        GeometryReader { proxy in
+            let extent = max(proxy.size.width, proxy.size.height)
+            ZStack {
+                Color(UIColor.systemBackground)
+                if hasGlow {
+                    glow(color, opacity: 0.1, center: UnitPoint(x: 0.15, y: 0.08), radius: extent * 0.85)
+                    glow(color.rotatingHue(by: neighborHueShift), opacity: 0.08, center: UnitPoint(x: 0.92, y: 0.35), radius: extent * 0.77)
+                    glow(color.rotatingHue(by: -neighborHueShift), opacity: 0.07, center: UnitPoint(x: 0.25, y: 0.92), radius: extent * 0.85)
+                }
+            }
+        }
+        .ignoresSafeArea()
+        .allowsHitTesting(false)
+        .accessibilityHidden(true)
+    }
+
+    private static let falloffLocations: [Double] = [0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875, 1]
+
+    private func glow(_ color: UIColor, opacity: Double, center: UnitPoint, radius: CGFloat) -> some View {
+        RadialGradient(stops: Self.falloffLocations.map { location in
+                           Gradient.Stop(color: Color(color).opacity(opacity * pow(1 - location * location, 2)),
+                                         location: CGFloat(location))
+                       },
+                       center: center,
+                       startRadius: 0,
+                       endRadius: radius)
+    }
+}
 
 private struct TypingIndicatorView: View {
     private static let animationInterval: TimeInterval = 0.5
