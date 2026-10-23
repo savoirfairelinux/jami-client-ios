@@ -30,7 +30,7 @@ struct MessageStackView: View {
             if model.shouldDisplayName {
                 Text(model.username)
                     .font(.caption)
-                    .foregroundColor(model.styling.secondaryTextColor)
+                    .foregroundColor(.conversationSecondaryText)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 Spacer()
                     .frame(height: 4)

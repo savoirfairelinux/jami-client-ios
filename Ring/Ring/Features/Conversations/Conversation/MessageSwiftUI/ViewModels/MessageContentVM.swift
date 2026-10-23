@@ -287,7 +287,10 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     }
 
     var linkColor: UIColor {
-        UIColor.adaptiveMessageLinkColor(on: contrastBackgroundUIColor)
+        if !isIncoming && hasBubbleBackground {
+            return UIColor.messageTextSent(on: contrastBackgroundUIColor)
+        }
+        return UIColor.adaptiveMessageLinkColor(on: contrastBackgroundUIColor)
     }
 
     var hasBubbleBackground: Bool {
@@ -295,6 +298,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     }
 
     private var contrastBackgroundUIColor: UIColor = .clear
+    private var controlUIColor: UIColor = .clear
 
     /// Plain-text preview for list and reply strip.
     var displayContent: String {
@@ -369,17 +373,17 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
         self.updateTextColor()
         self.updateTextFont()
         self.updateInset()
-        self.editionColor = self.isIncoming ? styling.secondaryTextColor : Color(red: 0.95, green: 0.95, blue: 0.95)
-        self.timeColor = self.hasBubbleBackground ? self.editionColor : Color(UIColor.tertiaryLabel)
+        self.editionColor = self.isIncoming ? styling.secondaryTextColor : styling.textColor.opacity(0.8)
+        self.timeColor = self.hasBubbleBackground ? self.editionColor : .conversationSecondaryText
         invalidateTextPresentationCache()
     }
 
     private func updateTextColor() {
-        if self.isLink() {
+        if !self.isIncoming && self.hasBubbleBackground {
+            self.styling.textColor = Color(UIColor.messageTextSent(on: contrastBackgroundUIColor))
+        } else if self.isLink() {
             let backgroundIsLightColor: Bool = Color(self.contrastBackgroundUIColor).isLight(threshold: 0.8) ?? true
             self.styling.textColor = backgroundIsLightColor ? .blue : .white
-        } else if !self.isIncoming && !self.type.isContact {
-            self.styling.textColor = Color.white
         } else {
             self.styling.textColor = self.styling.defaultTextColor
         }
@@ -399,9 +403,13 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
             self.backgroundColor = .clear
         } else if self.isIncoming {
             self.contrastBackgroundUIColor = .jamiMessageCellReceived
+            self.controlUIColor = UIColor.messageControl(matching: .label, conversationColor: preferencesColor, on: self.contrastBackgroundUIColor)
             self.backgroundColor = Color(UIColor.messageBubbleReceived(tintedWith: preferencesColor))
         } else {
             self.contrastBackgroundUIColor = UIColor.messageBubbleSent(for: preferencesColor)
+            self.controlUIColor = UIColor.messageControl(matching: UIColor.messageTextSent(on: self.contrastBackgroundUIColor),
+                                                         conversationColor: preferencesColor,
+                                                         on: self.contrastBackgroundUIColor)
             self.backgroundColor = Color(self.contrastBackgroundUIColor)
         }
     }
@@ -623,22 +631,22 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     var audioPlayerColors: AudioMessageColors {
         let textColor = styling.textColor
         if isIncoming {
-            let secondary = Color(UIColor.secondaryLabel)
+            let playbackTint = UIColor.messagePlaybackTint(for: preferencesColor)
             return AudioMessageColors(background: backgroundColor,
-                                      text: secondary,
-                                      control: textColor.opacity(0.12),
-                                      controlIcon: secondary,
-                                      progress: textColor.opacity(0.1),
-                                      time: secondary,
-                                      timeBackground: textColor.opacity(0.05))
+                                      text: textColor,
+                                      control: Color(playbackTint.withAlphaComponent(0.22, dark: 0.32)),
+                                      controlIcon: Color(controlUIColor),
+                                      progress: Color(playbackTint.withAlphaComponent(0.16, dark: 0.24)),
+                                      time: .conversationSecondaryText,
+                                      timeBackground: .clear)
         }
         return AudioMessageColors(background: backgroundColor,
-                                  text: textColor.opacity(0.85),
-                                  control: textColor,
-                                  controlIcon: backgroundColor,
-                                  progress: textColor.opacity(0.22),
-                                  time: textColor.opacity(0.8),
-                                  timeBackground: textColor.opacity(0.14))
+                                  text: textColor,
+                                  control: Color(controlUIColor).opacity(0.15),
+                                  controlIcon: Color(controlUIColor),
+                                  progress: Color(UIColor.messagePlaybackProgressSent(on: contrastBackgroundUIColor)),
+                                  time: textColor.opacity(0.7),
+                                  timeBackground: .clear)
     }
 
     func updatePlayer(player: PlayerViewModel?) {
@@ -662,8 +670,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
 
     func swarmColorUpdated(color: UIColor) {
         self.preferencesColor = color
-        self.updateBackgroundColor()
-        self.invalidateTextPresentationCache()
+        self.updateMessageStyle()
     }
 
     func updateMessageEditions() {

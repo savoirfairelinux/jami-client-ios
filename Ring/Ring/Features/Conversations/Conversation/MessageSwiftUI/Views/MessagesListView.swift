@@ -443,7 +443,7 @@ private struct TypingIndicatorView: View {
             HStack {
                 Text("\(text)\(String(repeating: ".", count: dotCount))")
                     .font(.footnote)
-                    .foregroundColor(Color(UIColor.secondaryLabel))
+                    .foregroundColor(.conversationSecondaryText)
                 Spacer()
             }
         }
