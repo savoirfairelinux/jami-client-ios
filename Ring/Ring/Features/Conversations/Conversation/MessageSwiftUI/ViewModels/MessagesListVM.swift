@@ -652,6 +652,8 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
             return container
         }
 
+        newMessages.forEach { self.targetReplyReceived(target: $0) }
+
         if fromHistory {
             self.messagesModels.append(contentsOf: newContainers)
         } else {
