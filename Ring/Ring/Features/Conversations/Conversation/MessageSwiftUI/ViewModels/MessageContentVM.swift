@@ -299,6 +299,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
 
     private var contrastBackgroundUIColor: UIColor = .clear
     private var controlUIColor: UIColor = .clear
+    private(set) var replyQuoteAccentColor: Color = .clear
 
     /// Plain-text preview for list and reply strip.
     var displayContent: String {
@@ -412,6 +413,16 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
                                                          on: self.contrastBackgroundUIColor)
             self.backgroundColor = Color(self.contrastBackgroundUIColor)
         }
+        self.updateReplyQuoteAccentColor()
+    }
+
+    private func updateReplyQuoteAccentColor() {
+        guard self.isHistory else { return }
+        let text: UIColor = self.hasBubbleBackground && !self.isIncoming
+            ? UIColor.messageTextSent(on: self.contrastBackgroundUIColor)
+            : .label
+        let bubble: UIColor = self.hasBubbleBackground ? self.contrastBackgroundUIColor : .systemBackground
+        self.replyQuoteAccentColor = Color(UIColor.messageAccent(matching: text, conversationColor: preferencesColor, on: bubble))
     }
 
     private func updateInset() {
@@ -793,6 +804,12 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
             loadThumbnailIfNeeded()
         }
         updateMenuitems()
+    }
+
+    func onQuoteAppear() {
+        guard self.type == .fileTransfer, self.fileSymbolName == "photo" else { return }
+        self.transferState.onNext(TransferState.getURL(viewModel: self))
+        loadThumbnailIfNeeded()
     }
 
     func transferAction(action: TransferAction) {

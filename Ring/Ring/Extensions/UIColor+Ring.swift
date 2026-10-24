@@ -269,19 +269,31 @@ extension UIColor {
         }
     }
 
-    private static let darkControlContrast: CGFloat = 4.5
+    private static let accentContrast: CGFloat = 4.5
+
+    private func shifted(toward target: UIColor, untilReadableOn background: UIColor) -> UIColor {
+        var shade = self
+        for _ in 0..<50 where shade.contrastRatio(with: background) < UIColor.accentContrast {
+            shade = shade.mixed(with: target, fraction: 0.04)
+        }
+        return shade
+    }
 
     static func messageControl(matching text: UIColor, conversationColor: UIColor, on bubble: UIColor) -> UIColor {
         resolvedPerStyle { traitCollection in
             let resolvedText = text.resolvedColor(with: traitCollection)
             guard !(resolvedText.isLight(threshold: 0.5) ?? false) else { return resolvedText }
             guard isTintable(conversationColor, with: traitCollection) else { return resolvedText.withAlphaComponent(0.7) }
-            let background = bubble.resolvedColor(with: traitCollection)
-            var shade = conversationColor
-            for _ in 0..<50 where shade.contrastRatio(with: background) < darkControlContrast {
-                shade = shade.mixed(with: .black, fraction: 0.04)
-            }
-            return shade
+            return conversationColor.shifted(toward: .black, untilReadableOn: bubble.resolvedColor(with: traitCollection))
+        }
+    }
+
+    static func messageAccent(matching text: UIColor, conversationColor: UIColor, on bubble: UIColor) -> UIColor {
+        resolvedPerStyle { traitCollection in
+            let resolvedText = text.resolvedColor(with: traitCollection)
+            guard isTintable(conversationColor, with: traitCollection) else { return resolvedText }
+            let target: UIColor = (resolvedText.isLight(threshold: 0.5) ?? false) ? .white : .black
+            return conversationColor.shifted(toward: target, untilReadableOn: bubble.resolvedColor(with: traitCollection))
         }
     }
 

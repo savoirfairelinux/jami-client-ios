@@ -192,7 +192,8 @@
 "conversation.syncingTitle" = "Syncing conversation";
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "In reply to";
-"conversation.repliedTo" = "%@ replied to %@";
+"conversation.replyQuotePhoto" = "Photo";
+"conversation.replyQuoteAudio" = "Audio";
 "conversation.yourself" = "You";
 "conversation.edited" = "Edited";
 "conversation.deletedMessage" = "%@ deleted a message";
@@ -682,6 +683,7 @@
 "accessibility.textEmpty" = "Empty text message received. This might not have been sent correctly.";
 "accessibility.fileTransferUnnamed" = "File received, name not available";
 "accessibility.inReply" = "In reply to message";
+"accessibility.showReplyTarget" = "Show original message";
 "accessibility.text.received" = "%@, message received";
 "accessibility.text.sent" = "%@, message sent";
 "accessibility.fileTransfer.received" = "File: %@, received";

@@ -66,7 +66,9 @@ struct MessageBubbleView: View {
             }
         )
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(Text(model.accessibilityLabelValue))
+        .modifier(ReplyQuoteAccessibility(reply: messageModel.replyTarget,
+                                          messageLabel: model.accessibilityLabelValue,
+                                          showsReplyQuote: model.isHistory && !model.messageDeleted))
         .accessibilityCustomContent(Text(model.accessibilityDateLabel), Text(model.fullDateText))
         .conditionalModifier(AccessibilityActionModifier(actionName: ContextualMenuItem.preview.toString(), action: { model.contextMenuSelect(item: .preview) }), apply: model.menuItems.contains(.preview))
         .conditionalModifier(AccessibilityActionModifier(actionName: ContextualMenuItem.forward.toString(), action: { model.contextMenuSelect(item: .forward) }), apply: model.menuItems.contains(.forward))
@@ -78,6 +80,22 @@ struct MessageBubbleView: View {
         .conditionalModifier(AccessibilityActionModifier(actionName: ContextualMenuItem.deleteFile.toString(), action: { model.contextMenuSelect(item: .deleteFile) }), apply: model.menuItems.contains(.deleteFile))
         .conditionalModifier(AccessibilityActionModifier(actionName: ContextualMenuItem.edit.toString(), action: { model.contextMenuSelect(item: .edit) }), apply: model.menuItems.contains(.edit))
         .accessibilityAddTraits(.isButton)
+    }
+
+    @ViewBuilder
+    private func withReplyQuote<Content: View>(@ViewBuilder _ content: () -> Content) -> some View {
+        if model.isHistory {
+            VStack(alignment: model.hasBubbleBackground || model.isIncoming ? .leading : .trailing, spacing: 4) {
+                ReplyQuote(reply: messageModel.replyTarget, message: model, onLongPress: receivedLongPress())
+                content()
+            }
+        } else {
+            content()
+        }
+    }
+
+    private var replyMediaCornerRadius: CGFloat {
+        model.cornerRadius - ReplyBubbleLayout.media.contentInset
     }
 
     private func renderCallMessage() -> some View {
@@ -97,22 +115,34 @@ struct MessageBubbleView: View {
         Group {
             if let metadata = model.metadata {
                 VStack(alignment: .trailing, spacing: TimeLayout.outsideSpacing) {
-                    URLPreview(metadata: metadata, maxDimension: model.maxDimension)
-                        .modifier(MessageCornerRadius(model: model))
-                        .messageGesture(onLongPress: receivedLongPress())
-                        .marksMessageBubbleBottom()
+                    Group {
+                        if model.isHistory {
+                            ReplyBubbleContainer(model: model, reply: messageModel.replyTarget, layout: .media, onLongPress: receivedLongPress()) {
+                                URLPreview(metadata: metadata, maxDimension: model.maxDimension)
+                                    .cornerRadius(replyMediaCornerRadius)
+                                    .messageGesture(onLongPress: receivedLongPress())
+                            }
+                        } else {
+                            URLPreview(metadata: metadata, maxDimension: model.maxDimension)
+                                .modifier(MessageCornerRadius(model: model))
+                                .messageGesture(onLongPress: receivedLongPress())
+                        }
+                    }
+                    .marksMessageBubbleBottom()
                     MessageTimeView(text: model.timeText, color: .conversationSecondaryText)
                 }
             } else if model.isFullURL, let url = model.getURL() {
                 MessageBubbleWithTimeWrapper(model: model) {
-                    Text(model.content)
-                        .font(model.styling.textFont)
-                        .underline()
-                        .withInlineTime(model.inlineTimeText(in: layoutDirection), color: model.timeColor)
-                        .onTapGesture {
-                            openURL(url)
-                        }
-                        .messageGesture(onLongPress: receivedLongPress())
+                    withReplyQuote {
+                        Text(model.content)
+                            .font(model.styling.textFont)
+                            .underline()
+                            .withInlineTime(model.inlineTimeText(in: layoutDirection), color: model.timeColor)
+                            .onTapGesture {
+                                openURL(url)
+                            }
+                            .messageGesture(onLongPress: receivedLongPress())
+                    }
                 }
             } else {
                 renderBubbleTextBody()
@@ -123,20 +153,42 @@ struct MessageBubbleView: View {
     @ViewBuilder
     private func renderBubbleTextBody() -> some View {
         MessageBubbleWithTimeWrapper(model: model) {
-            MessageBubbleTextRenderer(textBody: model.bubbleTextBody,
-                                      font: model.styling.textFont,
-                                      inlineTime: model.inlineTimeText(in: layoutDirection),
-                                      timeColor: model.timeColor)
-                .lineLimit(nil)
-                .messageGesture(onLongPress: receivedLongPress())
+            withReplyQuote {
+                MessageBubbleTextRenderer(textBody: model.bubbleTextBody,
+                                          font: model.styling.textFont,
+                                          inlineTime: model.inlineTimeText(in: layoutDirection),
+                                          timeColor: model.timeColor)
+                    .lineLimit(nil)
+                    .messageGesture(onLongPress: receivedLongPress())
+            }
         }
     }
 
-    @ViewBuilder
     private func renderFileTransfer() -> some View {
-        let media = MediaView(message: model, onLongGesture: receivedLongPress(), minHeight: 50, maxHeight: 300, withPlayerControls: true, cornerRadius: 0, messageTime: model.timeText)
-            .marksMessageBubbleBottom()
-        if model.player == nil, model.finalImage != nil || model.thumbnailSize != nil {
+        Group {
+            if model.isHistory {
+                ReplyBubbleContainer(model: model, reply: messageModel.replyTarget, layout: hasVisualMedia ? .media : .inset, onLongPress: receivedLongPress()) {
+                    fileTransferMedia(cornerRadius: hasVisualMedia ? replyMediaCornerRadius : 0)
+                }
+            } else {
+                fileTransferMedia(cornerRadius: 0)
+            }
+        }
+        .marksMessageBubbleBottom()
+    }
+
+    private var hasImage: Bool {
+        model.player == nil && (model.finalImage != nil || model.thumbnailSize != nil)
+    }
+
+    private var hasVisualMedia: Bool {
+        hasImage || model.player?.hasVideo.value == true
+    }
+
+    @ViewBuilder
+    private func fileTransferMedia(cornerRadius: CGFloat) -> some View {
+        let media = MediaView(message: model, onLongGesture: receivedLongPress(), minHeight: 50, maxHeight: 300, withPlayerControls: true, cornerRadius: cornerRadius, messageTime: model.timeText)
+        if hasImage {
             media
                 .overlay(alignment: .bottomTrailing) {
                     MessageTimeCapsule(text: model.timeText)
