@@ -145,6 +145,8 @@ internal enum L10n {
     internal static let profilePicturePicker = L10n.tr("Localizable", "accessibility.profilePicturePicker", fallback: "Profile picture")
     /// Double-tap to take a picture or select a picture from the library
     internal static let profilePicturePickerHint = L10n.tr("Localizable", "accessibility.profilePicturePickerHint", fallback: "Double-tap to take a picture or select a picture from the library")
+    /// Show original message
+    internal static let showReplyTarget = L10n.tr("Localizable", "accessibility.showReplyTarget", fallback: "Show original message")
     /// Add account
     internal static let smartListAddAccount = L10n.tr("Localizable", "accessibility.smartListAddAccount", fallback: "Add account")
     /// The current account is %@
@@ -999,10 +1001,12 @@ internal enum L10n {
     internal static func receivedRequest(_ p1: Any) -> String {
       return L10n.tr("Localizable", "conversation.receivedRequest", String(describing: p1), fallback: "%@ sent you a conversation invitation.")
     }
-    /// %@ replied to %@
-    internal static func repliedTo(_ p1: Any, _ p2: Any) -> String {
-      return L10n.tr("Localizable", "conversation.repliedTo", String(describing: p1), String(describing: p2), fallback: "%@ replied to %@")
-    }
+    /// Audio
+    internal static let replyQuoteAudio = L10n.tr("Localizable", "conversation.replyQuoteAudio", fallback: "Audio")
+    /// Photo
+    internal static let replyQuotePhoto = L10n.tr("Localizable", "conversation.replyQuotePhoto", fallback: "Photo")
+    /// Message not loaded
+    internal static let replyQuoteUnavailable = L10n.tr("Localizable", "conversation.replyQuoteUnavailable", fallback: "Message not loaded")
     /// Hello,
     /// Do you want to join the conversation?
     internal static let requestMessage = L10n.tr("Localizable", "conversation.requestMessage", fallback: "Hello,\nDo you want to join the conversation?")

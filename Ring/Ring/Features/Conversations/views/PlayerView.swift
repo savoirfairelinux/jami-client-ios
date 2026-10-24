@@ -56,6 +56,11 @@ struct AudioMessageColors {
     let progress: Color
     let time: Color
     let timeBackground: Color
+
+    func withoutBackground() -> AudioMessageColors {
+        AudioMessageColors(background: .clear, text: text, control: control, controlIcon: controlIcon,
+                           progress: progress, time: time, timeBackground: timeBackground)
+    }
 }
 
 // MARK: - Player State Coordinator

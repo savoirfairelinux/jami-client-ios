@@ -344,6 +344,10 @@ private struct ContextMenuActiveKey: EnvironmentKey {
     static let defaultValue: Bool = false
 }
 
+private struct DrawsMessageBubbleKey: EnvironmentKey {
+    static let defaultValue: Bool = true
+}
+
 extension EnvironmentValues {
     var suppressLongPress: Bool {
         get { self[SuppressLongPressKey.self] }
@@ -353,6 +357,11 @@ extension EnvironmentValues {
     var contextMenuActive: Bool {
         get { self[ContextMenuActiveKey.self] }
         set { self[ContextMenuActiveKey.self] = newValue }
+    }
+
+    var drawsMessageBubble: Bool {
+        get { self[DrawsMessageBubbleKey.self] }
+        set { self[DrawsMessageBubbleKey.self] = newValue }
     }
 }
 

@@ -29,6 +29,8 @@ struct PlayerSwiftUI: View {
     var messageTime: String?
     @Environment(\.colorScheme)
     var colorScheme
+    @Environment(\.drawsMessageBubble)
+    private var drawsMessageBubble
 
     var body: some View {
         ZStack(alignment: .center) {
@@ -41,7 +43,7 @@ struct PlayerSwiftUI: View {
             PlayerView(viewModel: player, sizeMode: .inConversationMessage, withControls: withControls,
                        onVideoTap: { frame, frameProvider in model.presentMediaPreview(sourceFrame: frame, sourceFrameProvider: frameProvider) },
                        onVideoLongPress: onLongGesture,
-                       audioColors: model.audioPlayerColors,
+                       audioColors: drawsMessageBubble ? model.audioPlayerColors : model.audioPlayerColors.withoutBackground(),
                        messageTime: messageTime)
                 .frame(height: model.playerHeight * ratio)
                 .frame(width: model.playerWidth * ratio)

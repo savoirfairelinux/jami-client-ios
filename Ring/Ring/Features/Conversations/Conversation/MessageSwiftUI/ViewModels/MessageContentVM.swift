@@ -298,11 +298,12 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
             : .conversationSecondaryText
     }
 
-    private var hasBubbleBackground: Bool {
+    var hasBubbleBackground: Bool {
         !type.isContact && !isEmojiOnly
     }
 
     private var contrastBackgroundUIColor: UIColor = .clear
+    private(set) var replyQuoteAccentColor: Color = .clear
 
     private var palette: UIColor.MessageBubblePalette {
         .palette(for: preferencesColor)
@@ -415,6 +416,20 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
             self.contrastBackgroundUIColor = palette.sentBackground
             self.backgroundColor = Color(palette.sentBackground)
         }
+        self.updateReplyQuoteAccentColor()
+    }
+
+    private func updateReplyQuoteAccentColor() {
+        guard self.isHistory else { return }
+        let accent: UIColor
+        if !self.hasBubbleBackground {
+            accent = palette.unbubbledReplyQuoteAccent
+        } else if self.isIncoming {
+            accent = palette.receivedReplyQuoteAccent
+        } else {
+            accent = palette.sentReplyQuoteAccent
+        }
+        self.replyQuoteAccentColor = Color(accent)
     }
 
     private func updateInset() {
@@ -796,6 +811,12 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
             loadThumbnailIfNeeded()
         }
         updateMenuitems()
+    }
+
+    func onQuoteAppear() {
+        guard self.type == .fileTransfer, self.fileSymbolName == "photo" else { return }
+        self.transferState.onNext(TransferState.getURL(viewModel: self))
+        loadThumbnailIfNeeded()
     }
 
     func transferAction(action: TransferAction) {

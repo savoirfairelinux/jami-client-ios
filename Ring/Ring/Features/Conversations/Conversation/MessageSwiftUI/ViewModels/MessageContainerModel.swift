@@ -104,7 +104,7 @@ class MessageContainerModel: Identifiable, Equatable {
         self.contactViewModel = ContactMessageVM(message: message)
         self.collabDocViewModel = message.type == .collabDocument
             ? CollabDocMessageVM(message: message, contextMenuState: contextMenuState) : nil
-        self.replyTarget = MessageReplyTargetVM(contextMenuState: contextMenuState, localJamiId: localJamiId, replyAuthorJamiId: message.authorId, isIncoming: message.incoming)
+        self.replyTarget = MessageReplyTargetVM(contextMenuState: contextMenuState, localJamiId: localJamiId, isIncoming: message.incoming)
         self.reactionsModel = ReactionsContainerModel(message: message)
     }
 
@@ -113,7 +113,6 @@ class MessageContainerModel: Identifiable, Equatable {
         self.messageContent.setInfoState(state: self.infoSubject)
         self.messageRow.setInfoState(state: self.infoSubject)
         self.contactViewModel.setInfoState(state: self.infoSubject)
-        self.replyTarget.setInfoState(state: self.infoSubject)
         self.reactionsModel.setInfoState(state: self.infoSubject)
     }
 

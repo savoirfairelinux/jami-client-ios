@@ -81,7 +81,7 @@ struct DefaultTransferView: View {
             }
         }
         .padding(model.textInset)
-        .background(model.backgroundColor)
+        .background(MessageBubbleFill(model: model))
         .messageGesture(onLongPress: onLongGesture)
     }
 }

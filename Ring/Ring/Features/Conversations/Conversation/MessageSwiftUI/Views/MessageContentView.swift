@@ -130,7 +130,7 @@ struct MessageTextStyle: ViewModifier {
             .padding(.leading, model.textInset)
             .padding(.trailing, model.textInset)
             .foregroundColor(model.styling.textColor)
-            .background(model.backgroundColor)
+            .background(MessageBubbleFill(model: model))
             .if(model.hasBorder) { view in
                 view.overlay(
                     CornerRadiusShape(radius: model.cornerRadius, corners: model.corners)
@@ -201,6 +201,18 @@ extension View {
     }
 }
 
+struct MessageBubbleFill: View {
+    @ObservedObject var model: MessageContentVM
+    @Environment(\.drawsMessageBubble)
+    private var drawsMessageBubble
+
+    var body: some View {
+        if model.hasBubbleBackground && drawsMessageBubble {
+            model.backgroundColor
+        }
+    }
+}
+
 struct MessageCornerRadius: ViewModifier {
     @ObservedObject var model: MessageContentVM
 
@@ -218,7 +230,6 @@ struct MessageContentView: View {
     @ObservedObject var model: MessageContentVM
     @ObservedObject var reactionsModel: ReactionsContainerModel
     var onLongPress: (_ frame: CGRect, _ message: MessageBubbleView) -> Void
-    let padding: CGFloat = 12
     var showReactionsView: (_ message: ReactionsContainerModel?) -> Void
     @SwiftUI.State private var messageWidth: CGFloat = 0
     @SwiftUI.State private var reactionsHeight: CGFloat = 20
@@ -259,14 +270,10 @@ struct MessageContentView: View {
     var body: some View {
         ZStack(alignment: emojiAlignment) {
             VStack(alignment: messageModel.replyTarget.alignment) {
-                if messageModel.messageContent.isHistory {
-                    renderReplyHistory()
-                }
                 MessageBubbleView(messageModel: messageModel, model: model, onLongPress: onLongPress)
                     .onAppear {
                         self.model.onAppear()
                     }
-                    .offset(y: messageModel.messageContent.isHistory ? -padding : 0)
                     .background(GeometryReader { preferences in
                         Color.clear.onAppear {
                             if preferences.size.width == 0 || preferences.size.height == 0 { return }
@@ -285,7 +292,6 @@ struct MessageContentView: View {
             self.reactionsWidth = preferences.width
             self.updateAlignment()
         }
-        .offset(y: messageModel.messageContent.isHistory ? padding : 0)
         .scaleEffect(model.scale)
         .suppressLongPress(suppressLongPress)
         .background(
@@ -423,18 +429,6 @@ struct MessageContentView: View {
             emojiAlignment = Alignment.bottomLeading
         } else {
             emojiAlignment = Alignment.bottomTrailing
-        }
-    }
-
-    private func renderReplyHistory() -> some View {
-        HStack {
-            if messageModel.replyTarget.alignment == .leading {
-                Spacer().frame(width: padding)
-            }
-            ReplyHistory(model: messageModel.replyTarget)
-            if messageModel.replyTarget.alignment == .trailing {
-                Spacer().frame(width: padding)
-            }
         }
     }
 

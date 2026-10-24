@@ -250,10 +250,18 @@ extension UIColor {
         }
     }
 
-    private static let darkControlContrast: CGFloat = 4.5
+    private static let accentContrast: CGFloat = 4.5
     private static let untintedControlOpacity: CGFloat = 0.7
-    private static let controlShadeStep: CGFloat = 0.04
-    private static let controlShadeMaximumSteps = 50
+    private static let accentShadeStep: CGFloat = 0.04
+    private static let accentShadeMaximumSteps = 50
+
+    private func shifted(toward target: UIColor, untilReadableOn background: UIColor) -> UIColor {
+        var shade = self
+        for _ in 0..<UIColor.accentShadeMaximumSteps where shade.contrastRatio(with: background) < UIColor.accentContrast {
+            shade = shade.mixed(with: target, fraction: UIColor.accentShadeStep)
+        }
+        return shade
+    }
 
     private static func messageControl(matching text: UIColor, conversationColor: UIColor, on bubble: UIColor) -> UIColor {
         resolvedPerStyle { traitCollection in
@@ -262,12 +270,16 @@ extension UIColor {
             guard isTintable(conversationColor, with: traitCollection) else {
                 return resolvedText.withAlphaComponent(untintedControlOpacity)
             }
-            let background = bubble.resolvedColor(with: traitCollection)
-            var shade = conversationColor
-            for _ in 0..<controlShadeMaximumSteps where shade.contrastRatio(with: background) < darkControlContrast {
-                shade = shade.mixed(with: .black, fraction: controlShadeStep)
-            }
-            return shade
+            return conversationColor.shifted(toward: .black, untilReadableOn: bubble.resolvedColor(with: traitCollection))
+        }
+    }
+
+    private static func messageAccent(matching text: UIColor, conversationColor: UIColor, on bubble: UIColor) -> UIColor {
+        resolvedPerStyle { traitCollection in
+            let resolvedText = text.resolvedColor(with: traitCollection)
+            guard isTintable(conversationColor, with: traitCollection) else { return resolvedText }
+            let target: UIColor = (resolvedText.isLight(threshold: 0.5) ?? false) ? .white : .black
+            return conversationColor.shifted(toward: target, untilReadableOn: bubble.resolvedColor(with: traitCollection))
         }
     }
 
@@ -332,12 +344,15 @@ extension UIColor {
         let receivedControl: UIColor
         let receivedPlaybackControl: UIColor
         let receivedPlaybackProgress: UIColor
+        let receivedReplyQuoteAccent: UIColor
         let sentBackground: UIColor
         let sentText: UIColor
         let sentControl: UIColor
         let sentPlaybackControl: UIColor
         let sentPlaybackProgress: UIColor
         let sentTime: UIColor
+        let sentReplyQuoteAccent: UIColor
+        let unbubbledReplyQuoteAccent: UIColor
 
         private static let receivedPlaybackControlOpacity: (light: CGFloat, dark: CGFloat) = (0.22, 0.32)
         private static let receivedPlaybackProgressOpacity: (light: CGFloat, dark: CGFloat) = (0.16, 0.24)
@@ -364,12 +379,15 @@ extension UIColor {
                                                                       dark: Self.receivedPlaybackControlOpacity.dark)
             receivedPlaybackProgress = playbackTint.withAlphaComponent(Self.receivedPlaybackProgressOpacity.light,
                                                                        dark: Self.receivedPlaybackProgressOpacity.dark)
+            receivedReplyQuoteAccent = .messageAccent(matching: .label, conversationColor: conversationColor, on: receivedContrastBackground)
             sentBackground = .messageBubbleSent(for: conversationColor)
             sentText = .messageTextSent(on: sentBackground)
             sentControl = .messageControl(matching: sentText, conversationColor: conversationColor, on: sentBackground)
             sentPlaybackControl = sentControl.multiplyingAlpha(by: Self.sentPlaybackControlOpacity)
             sentPlaybackProgress = .messagePlaybackProgressSent(matching: sentText)
             sentTime = sentText.multiplyingAlpha(by: Self.sentTimeOpacity)
+            sentReplyQuoteAccent = .messageAccent(matching: sentText, conversationColor: conversationColor, on: sentBackground)
+            unbubbledReplyQuoteAccent = .messageAccent(matching: .label, conversationColor: conversationColor, on: .systemBackground)
         }
     }
 }

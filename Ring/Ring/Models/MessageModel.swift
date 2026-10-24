@@ -479,11 +479,6 @@ struct MessageData {
             return
         }
 
-        // TODO: add reply target
-        if self.isReply() {
-            self.accessibilityLabelValue += ". " + L10n.Accessibility.inReply
-        }
-
         updateReadStatusAccessibilityLabel()
         updateEditedStatusAccessibilityLabel()
         updateDeletedStatusAccessibilityLabel()
