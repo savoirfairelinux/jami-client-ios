@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9a6aacc_c0187612",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagePanelVM.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-24T00:11:46Z",
+      "side": 1,
+      "message": "[error] Line 145: 🔴 `send(_:)` calls `cancelReply()` before emitting `MessagePanelState.send(...)`. In PS6, `cancelReply()` now calls `discardDraftAttachments()`, which removes `.file` payloads from disk (`discardFile`) before `ConversationViewModel.send(_:)` consumes them. For reply drafts containing document/video attachments, this can dispatch paths to already-deleted files and cause send failure. Keep reply-state reset separate from attachment destruction on successful send: either (a) avoid `discardDraftAttachments()` in `cancelReply()` during send flow, or (b) emit/send first and only delete local temp files after transfer initiation succeeds.",
+      "revId": "7e8b292c2779476288d98f9eede9dd9942e3fb70",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
