@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac7a4752_6f013ae1",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessageContentVM.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-24T01:34:21Z",
+      "side": 1,
+      "message": "[warning] Line 345: 🟡 The initializer no longer applies the `isHistory` size cap (`maxImageSize \u003d 100`), so history-loaded media now defaults to `300`, which increases thumbnail decode/render cost and can noticeably regress memory/scroll performance in long conversations. Restore the history-specific cap in init (or remove `isHistory` entirely and apply an equivalent policy at creation sites) to keep prior behavior.",
+      "revId": "3b1ff76d2b4363f58671f1889c5620a55223160d",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
