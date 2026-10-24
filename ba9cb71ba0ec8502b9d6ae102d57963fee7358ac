@@ -16,6 +16,24 @@
       "message": "[error] Line 151: 🔴 `takeReplyId()` is consumed before `afterFileIsWritten` executes the actual send callback. If file finalization/callback execution fails or is aborted, reply state is cleared even though no message is sent. Move `takeReplyId()` into the callback immediately before `dataTransferService.sendFile(...)` so reply context is consumed only when send is actually attempted.",
       "revId": "ba9cb71ba0ec8502b9d6ae102d57963fee7358ac",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e1e35f6_e3a9ef1e",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/VoiceRecordingVM.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-24T00:41:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1a6bb43_37547bc3",
+      "revId": "ba9cb71ba0ec8502b9d6ae102d57963fee7358ac",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }

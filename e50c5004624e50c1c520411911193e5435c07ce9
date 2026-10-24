@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "21707c13_d14b5ee4",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 559,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-24T00:41:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a2fefcf_28429f79",
+      "revId": "e50c5004624e50c1c520411911193e5435c07ce9",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "58550483_5d29910c",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-10-23T23:17:08Z",
       "side": 1,
       "message": "[warning] Line 150: 🟡 In the non-reply path, attachment load failures are silently dropped (`guard let data \u003d data else { return }`) with no state update or user feedback. Please surface the failure consistently (e.g., emit a failed draft state/toast/announcement) so users understand why tapping an attachment source produced no outgoing message.",
+      "revId": "e50c5004624e50c1c520411911193e5435c07ce9",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82df7cfc_1f611442",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagePanelVM.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-24T00:41:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58550483_5d29910c",
       "revId": "e50c5004624e50c1c520411911193e5435c07ce9",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }

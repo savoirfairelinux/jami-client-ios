@@ -16,6 +16,24 @@
       "message": "[warning] Line 123: 🟡 `sendDraft` clears `attachments` before confirming there is anything sendable. When the draft only contains failed attachments (no text), `contents` is empty, `attachments.removeAll()` drops the failed chips, and `send(_:)` returns early with no feedback. This silently discards user-visible failure state. Keep failed attachments until a successful send payload exists, or emit `attachmentFailed` before clearing so the user understands why nothing was sent.",
       "revId": "449a467ed68f34e58e0c96aec2ec9e43ce5f26a3",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5762cc6_c0a844ba",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagePanelVM.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-24T00:41:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71d5d857_e12fdb1e",
+      "revId": "449a467ed68f34e58e0c96aec2ec9e43ce5f26a3",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }

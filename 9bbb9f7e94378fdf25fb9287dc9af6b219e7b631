@@ -16,6 +16,24 @@
       "message": "[error] Line 311: 🔴 `takeReplyId()` is consumed when opening the video recorder (`recordVideoFile`), not when a file message is actually sent. If the user cancels recording (or sending fails before transfer starts), the pending reply context is lost even though no message was posted. Consume/clear the reply target only at send time (e.g., in `MediaRecordViewModel.sendFile` after transfer initiation succeeds), and pass a non-consuming value while presenting the recorder.",
       "revId": "9bbb9f7e94378fdf25fb9287dc9af6b219e7b631",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6212ea8_470534bf",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2026-10-24T00:41:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "33ef0e4b_d03c9c27",
+      "revId": "9bbb9f7e94378fdf25fb9287dc9af6b219e7b631",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
