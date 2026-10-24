@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aee1e540_7964d57e",
+        "filename": "Ring/CommonHelpers.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-24T15:30:21Z",
+      "side": 1,
+      "message": "[warning] Line 377: 🟡 `kCGImagePropertyOrientation` is commonly bridged as `NSNumber`/`Int`; `as? UInt32` can fail and silently default to `1`, producing incorrect placeholder dimensions for rotated images. Read as `NSNumber`/`Int` and map to `CGImagePropertyOrientation` before deciding whether to swap width/height.",
+      "revId": "204fc3114accd5f5dfcb31ffd73558fed60ba91e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9e10193_0d58e4b1",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessageContentVM.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 654,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-24T15:30:21Z",
+      "side": 1,
+      "message": "[error] Line 654: 🔴 `@Published` state is now mutated without main-thread confinement (`playerHeight`, `playerWidth`, `player`, `borderColor`, and also `thumbnailSize`/`didRequestThumbnail` in `loadThumbnailIfNeeded`). These paths can be reached from transfer/background callbacks, which can trigger “Publishing changes from background threads” crashes/warnings. Constrain the view model to `@MainActor` (preferred) or dispatch every published write to the main queue.",
+      "revId": "204fc3114accd5f5dfcb31ffd73558fed60ba91e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "533bca60_026930ed",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessageContentVM.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 743,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-24T15:30:21Z",
+      "side": 1,
+      "message": "[error] Line 743: 🔴 `didRequestThumbnail` is set to `true` before decode and never reset when decode returns `nil`. A transient read/decode failure then permanently suppresses later thumbnail attempts for that message. Reset the flag on failure (or only set it after a successful decode kickoff that can retry) so loading can recover.",
+      "revId": "204fc3114accd5f5dfcb31ffd73558fed60ba91e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
