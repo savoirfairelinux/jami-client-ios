@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfada1a3_ce3f248c",
+        "filename": "Ring/Ring/Extensions/UIColor+Ring.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-26T16:05:21Z",
+      "side": 1,
+      "message": "[error] Line 188: 🔴 `sRGBToLinear`/`linearToSRGB` are typed as `Double`, but call sites pass and consume `CGFloat` (`getRed` outputs `CGFloat`, `UIColor(red:green:blue:alpha:)` expects `CGFloat`). Swift does not implicitly convert between these types, so this change is a compile blocker. Convert explicitly (`Double(red)` / `CGFloat(...)`) or keep the conversion helpers in `CGFloat` to match UIKit APIs.",
+      "revId": "052f5d62577f27cf009f474f6c249198cce17a3d",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
