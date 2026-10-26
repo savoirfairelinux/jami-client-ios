@@ -42,10 +42,12 @@ final class MessageGroupingTests: XCTestCase {
         XCTAssertEqual(result.map(\.sequencing), [.firstOfSequence, .middleOfSequence, .lastOfSequence])
     }
 
-    func testIntervalGapSplitsSequence() {
-        let result = groupings([message(0), message(10)])
+    func testTimeGapsKeepSameAuthorMessagesInOneSequence() {
+        let result = groupings([message(0), message(10), message(180)], isGroupConversation: true)
 
-        XCTAssertEqual(result.map(\.sequencing), [.singleMessage, .singleMessage])
+        XCTAssertEqual(result.map(\.sequencing), [.firstOfSequence, .middleOfSequence, .lastOfSequence])
+        XCTAssertEqual(result.map(\.displaysName), [true, false, false])
+        XCTAssertEqual(result.map(\.displaysAvatar), [false, false, true])
     }
 
     func testDifferentAuthorsSplitSequence() {
@@ -77,6 +79,13 @@ final class MessageGroupingTests: XCTestCase {
 
     func testEmojiRunEndsOnLastEmojiFromSameAuthor() {
         let result = groupings([message(0, content: "😀"), message(1, content: "😀"), message(2)])
+
+        XCTAssertEqual(result.map(\.endsEmojiRun), [false, true, true])
+    }
+
+    func testEmojiRunSplitsWithinIntervalFromFirstEmoji() {
+        let result = groupings([message(0, content: "😀"), message(6, content: "😀"),
+                                message(12, content: "😀")])
 
         XCTAssertEqual(result.map(\.endsEmojiRun), [false, true, true])
     }

@@ -58,16 +58,18 @@ struct MessageGrouping {
         var boundaries = [Boundary]()
         boundaries.reserveCapacity(messages.count)
         var previousMessage: MessageModel?
-        var memberEventsStart: Date?
+        var runStart: Date?
         for current in messages.reversed() {
             let startsNewDay = isFirstOfDay(current, after: previousMessage)
             let continuesMemberEvents = current.type.isContact && previousMessage?.type.isContact == true
-            let groupStart = continuesMemberEvents ? memberEventsStart : previousMessage?.receivedDate
-            let startsNewGroup = startsNewDay || exceedsGroupingInterval(current.receivedDate, since: groupStart)
+            let continuesEmojiRun = current.isEmojiOnly() && previousMessage?.isEmojiOnly() == true
+                && previousMessage?.authorId == current.authorId
+            let continuesRun = continuesMemberEvents || continuesEmojiRun
+            let startsNewGroup = startsNewDay
+                || (continuesRun && exceedsGroupingInterval(current.receivedDate, since: runStart))
             boundaries.append(Boundary(startsNewDay: startsNewDay, startsNewGroup: startsNewGroup))
-            let extendsMemberEventGroup = continuesMemberEvents && !startsNewGroup
-            if current.type.isContact && !extendsMemberEventGroup {
-                memberEventsStart = current.receivedDate
+            if !continuesRun || startsNewGroup {
+                runStart = current.receivedDate
             }
             previousMessage = current
         }
