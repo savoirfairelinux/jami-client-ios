@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc1be240_315f6ef9",
+        "filename": "Ring/Ring/Resources/Colors.xcassets/messageBubbleReceivedBase.colorset/Contents.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-26T15:36:36Z",
+      "side": 1,
+      "message": "[warning] Line 11: 🟡 The sRGB channel values are encoded as `\"118\"`/`\"128\"`, but asset color components should be normalized (0...1) or hex-formatted component strings. As written, this can produce clamped/incorrect rendering and shift the lightness reference used by the tint algorithm. Store these as normalized values (e.g. `0.462745` and `0.501961`) or `0x76`/`0x80` style components.",
+      "revId": "6eb2ed7bca32335fc6b9f92318685472e7b21d8d",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
