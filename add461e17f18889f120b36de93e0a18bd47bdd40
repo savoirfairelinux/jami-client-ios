@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aac1854b_8af60886",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessageContentVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 807,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-26T15:38:16Z",
+      "side": 1,
+      "message": "[warning] Line 807: 🟡 `onQuoteAppear()` always dispatches `TransferState.getURL` whenever a quoted photo row appears. In long conversations this can repeatedly re-trigger transfer URL resolution while scrolling, causing avoidable work. Add a guard so this only fires when URL/thumbnail data is not already available (or track a one-shot flag in the VM).",
+      "revId": "add461e17f18889f120b36de93e0a18bd47bdd40",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55a19875_f74cee76",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ReplyHistory.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-26T15:38:16Z",
+      "side": 1,
+      "message": "[warning] Line 219: 🟡 `ReplyQuoteAccessibility.label` only appends the “in reply” hint when `accessibilitySummary \u003d\u003d nil`, which is the opposite of the stable state. That can regress discoverability for screen-reader users if custom content is not announced in their current interaction mode. Keep the base label explicitly indicating reply context whenever `showsReplyQuote` is true, and still provide `accessibilityCustomContent` for details.",
+      "revId": "add461e17f18889f120b36de93e0a18bd47bdd40",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
