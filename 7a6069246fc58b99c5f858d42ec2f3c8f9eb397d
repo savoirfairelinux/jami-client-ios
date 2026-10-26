@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81b2d4be_38ce3d01",
+        "filename": "Ring/Ring/Extensions/UIColor+Ring.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-26T15:41:27Z",
+      "side": 1,
+      "message": "[error] Line 252: 🔴 `messageTextSent(on:)` currently biases toward dark text: it returns white only when `whiteContrast \u003e\u003d darkContrast + whiteTextMinimumLead`, which is the inverse of the stated behavior (\u0027white unless near-black is clearly better\u0027). This can flip many sent bubbles to dark text and reduce consistency/readability. Invert the decision so white is the default and dark is chosen only when `darkContrast \u003e\u003d whiteContrast + whiteTextMinimumLead`.",
+      "revId": "7a6069246fc58b99c5f858d42ec2f3c8f9eb397d",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
