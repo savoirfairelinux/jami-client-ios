@@ -60,6 +60,10 @@ protocol NameObserver: AnyObject {
 
 extension NameObserver {
     func subscribeToNameObservable(_ nameObservable: BehaviorRelay<String>) {
+        bindName(to: nameObservable)
+    }
+
+    func bindName(to nameObservable: BehaviorRelay<String>) {
         nameObservable
             .startWith(nameObservable.value)
             .distinctUntilChanged()

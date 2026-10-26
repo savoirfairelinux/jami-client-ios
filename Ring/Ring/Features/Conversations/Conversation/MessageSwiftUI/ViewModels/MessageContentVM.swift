@@ -19,6 +19,7 @@
 import Foundation
 import SwiftUI
 import RxSwift
+import RxRelay
 import UniformTypeIdentifiers
 
 enum TransferAction: Identifiable {
@@ -341,6 +342,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     var contextMenuState: PublishSubject<State>
     var transferState: PublishSubject<State>
     var infoState: PublishSubject<State>?
+    private var isNameBound = false
     weak var actionHandler: MessageActionHandler?
     var preferencesColor: UIColor
 
@@ -702,14 +704,19 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
 
         if self.message.isMessageDeleted() {
             self.messageDeletedText = L10n.Conversation.deletedMessage(self.username)
-            self.requestName(jamiId: self.message.authorId)
+            self.updateUserName()
         }
     }
 
     func updateUserName() {
-        if !self.message.authorId.isEmpty {
-            self.requestName(jamiId: self.message.authorId)
-        }
+        guard !isNameBound else { return }
+        self.requestName(jamiId: self.message.authorId)
+    }
+
+    func subscribeToNameObservable(_ nameObservable: BehaviorRelay<String>) {
+        guard !isNameBound else { return }
+        isNameBound = true
+        bindName(to: nameObservable)
     }
 
     func updateUsername(name: String, jamiId: String) {

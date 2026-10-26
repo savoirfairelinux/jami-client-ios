@@ -17,6 +17,7 @@
  */
 
 import XCTest
+import RxSwift
 @testable import Ring
 
 /// Putting the pictures back into an exported document.
@@ -28,6 +29,29 @@ import XCTest
 class CollabExportTests: XCTestCase {
     private var injectionBag: InjectionBag!
     private var viewModel: CollabEditorViewModel!
+
+    func testHistoryResolvesLocalAccountProfileAndRegisteredNameFallback() throws {
+        let account = AccountModel(withAccountId: "account")
+        account.username = "local-author"
+        account.registeredName = "alice"
+        injectionBag.accountService.accounts = [account]
+        let profile = ReplaySubject<Profile>.create(bufferSize: 1)
+        injectionBag.profileService.accountProfiles["account"] = profile
+        let version = try XCTUnwrap(CollaborativeVersion(fromNative: ["id": "commit", "author": account.jamiId]))
+        let bag = DisposeBag()
+        for (alias, expected) in [("Alice", "Alice"), ("", "alice")] {
+            profile.onNext(Profile(uri: account.jamiId, alias: alias, photo: nil, type: ProfileType.ring.rawValue))
+            let resolved = expectation(description: "Resolved \(expected)")
+            viewModel.names(for: [version, version]).subscribe(onSuccess: { names in
+                XCTAssertEqual(names, [account.jamiId: expected.withYourselfSuffix()])
+                resolved.fulfill()
+            }, onFailure: { error in
+                XCTFail("\(error)")
+                resolved.fulfill()
+            }).disposed(by: bag)
+            wait(for: [resolved], timeout: 2)
+        }
+    }
 
     /// What the page draws afresh for every export.
     private let scheme = "jami-attachment-0123456789abcdef0123456789abcdef:"
