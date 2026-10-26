@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "932b3b6d_8eecd27c",
+        "filename": "Ring/Ring/Extensions/UIColor+Ring.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-26T15:40:13Z",
+      "side": 1,
+      "message": "[warning] Line 219: 🟡 `conversationColor` is used directly in the contrast loop; if it is a dynamic `UIColor`, `getRed` can fail, which makes `contrastRatio` fall back to `1` and `mixed` return `self`, so the 1.2:1 target may never actually be enforced. Resolve first with the target traits (`var bubble \u003d conversationColor.resolvedColor(with: traitCollection)`) before computing luminance/mixing.",
+      "revId": "b4bf4999f03eda205f514f05e36aa0da081ea508",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
