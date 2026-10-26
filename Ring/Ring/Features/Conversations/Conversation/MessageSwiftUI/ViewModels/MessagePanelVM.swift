@@ -19,6 +19,7 @@
 
 import Foundation
 import RxSwift
+import Combine
 
 struct OutgoingMessage {
     enum Content {
@@ -79,6 +80,7 @@ class MessagePanelVM: ObservableObject, MessageAppearanceProtocol {
     var styling: MessageStyling = MessageStyling()
 
     private let messagePanelState: PublishSubject<State>
+    private var replyNameSubscription: AnyCancellable?
 
     let disposeBag = DisposeBag()
 
@@ -251,6 +253,13 @@ class MessagePanelVM: ObservableObject, MessageAppearanceProtocol {
             inReplyTo = ""
         }
         messageToReply = message
+        replyNameSubscription = message.$username
+            .removeDuplicates()
+            .sink { [weak self] name in
+                guard let self = self, self.inReplyTo != name else { return }
+                self.inReplyTo = name
+            }
+        message.updateUserName()
         isEdit = true
     }
 
@@ -266,6 +275,8 @@ class MessagePanelVM: ObservableObject, MessageAppearanceProtocol {
     }
 
     private func endReply() {
+        replyNameSubscription = nil
+        inReplyTo = ""
         messageToReply = nil
         isEdit = false
     }
@@ -287,13 +298,6 @@ class MessagePanelVM: ObservableObject, MessageAppearanceProtocol {
             messagePanelState.onNext(MessagePanelState.registerTypingIndicator(typingStatus: true))
         } else {
             messagePanelState.onNext(MessagePanelState.registerTypingIndicator(typingStatus: false))
-        }
-    }
-
-    func updateUsername(name: String, jamiId: String) {
-        guard let message = messageToReply, !name.isEmpty else { return }
-        if message.message.authorId == jamiId {
-            inReplyTo = name
         }
     }
 }

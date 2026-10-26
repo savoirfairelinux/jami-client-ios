@@ -70,7 +70,8 @@ class MessageReplyTargetVM: ObservableObject {
     private func updateQuote() {
         guard let target = target else { return }
         let authorId = target.message.authorId
-        authorName = authorId == localJamiId || authorId.isEmpty ? L10n.Account.me : target.username
+        let name = authorId == localJamiId || authorId.isEmpty ? target.username.withYourselfSuffix() : target.username
+        if authorName != name { authorName = name }
         thumbnail = Self.thumbnail(for: target)
         line = Self.quoteLine(for: target, hasThumbnail: thumbnail != nil)
     }

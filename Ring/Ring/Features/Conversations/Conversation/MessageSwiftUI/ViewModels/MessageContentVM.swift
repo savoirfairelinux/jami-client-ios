@@ -341,6 +341,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     var contextMenuState: PublishSubject<State>
     var transferState: PublishSubject<State>
     var infoState: PublishSubject<State>?
+    private var didRequestUsername = false
     weak var actionHandler: MessageActionHandler?
     var preferencesColor: UIColor
 
@@ -702,14 +703,14 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
 
         if self.message.isMessageDeleted() {
             self.messageDeletedText = L10n.Conversation.deletedMessage(self.username)
-            self.requestName(jamiId: self.message.authorId)
+            self.updateUserName()
         }
     }
 
     func updateUserName() {
-        if !self.message.authorId.isEmpty {
-            self.requestName(jamiId: self.message.authorId)
-        }
+        guard !didRequestUsername, infoState?.hasObservers == true else { return }
+        didRequestUsername = true
+        self.requestName(jamiId: self.message.authorId)
     }
 
     func updateUsername(name: String, jamiId: String) {

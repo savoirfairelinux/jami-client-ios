@@ -296,23 +296,26 @@ class CollabEditorViewModel {
      A profile that does not arrive must not hold the list back: the identifier
      is a poor label but a timely one.
      */
-    private func names(for versions: [CollaborativeVersion]) -> Single<[String: String]> {
+    func names(for versions: [CollaborativeVersion]) -> Single<[String: String]> {
         let authors = Array(Set(versions.map { $0.author }.filter { !$0.isEmpty }))
         guard !authors.isEmpty else { return Single.just([:]) }
-        let mine = self.accountsService.getAccount(fromAccountId: self.accountId)?.jamiId
+        let account = self.accountsService.getAccount(fromAccountId: self.accountId)
         let lookups: [Observable<(String, String)>] = authors.map { author in
-            if author == mine {
-                return Observable.just((author, L10n.Account.me))
-            }
-            return self.profileService
-                .getProfile(uri: author, accountId: self.accountId)
+            let isLocal = author == account?.jamiId
+            let profile = isLocal
+                ? self.profileService.getAccountProfile(accountId: self.accountId)
+                : self.profileService.getProfile(uri: author, accountId: self.accountId)
+            return profile
                 .map { profile in profile.alias ?? "" }
                 .take(1)
                 .timeout(.seconds(CollabEditorViewModel.profileWait),
                          other: Observable.just(""),
                          scheduler: MainScheduler.instance)
                 .map { name in
-                    (author, name.isEmpty ? CollabEditorViewModel.shortId(author) : name)
+                    let resolved = ContactsUtils.getFinalNameFrom(
+                        registeredName: isLocal ? (account?.registeredName ?? "") : "",
+                        profileName: name, hash: CollabEditorViewModel.shortId(author))
+                    return (author, isLocal ? resolved.withYourselfSuffix() : resolved)
                 }
         }
         return Observable.zip(lookups)

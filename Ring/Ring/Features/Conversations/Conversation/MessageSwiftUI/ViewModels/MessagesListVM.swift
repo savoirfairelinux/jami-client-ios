@@ -453,6 +453,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
 
     func subscribeUserAvatarForLocationSharing() {
         profileService.getAccountProfile(accountId: self.conversation.accountId)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] profile in
                 guard let self = self else { return }
                 let account = self.accountService.getAccount(fromAccountId: self.conversation.accountId)
@@ -465,6 +466,10 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
                     self.currentAccountAvatar = defaultAvatar
                 }
                 self.accountProfileName = profile.alias ?? ""
+                if let account = account {
+                    let name = self.accountProfileName.isEmpty ? self.resolveAccountName(from: account) : self.accountProfileName
+                    self.updateName(name: name.withYourselfSuffix(), jamiId: account.jamiId)
+                }
                 self.updateCoordinatesList()
             })
             .disposed(by: self.disposeBag)
@@ -952,7 +957,6 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
 
     func configureReply(message: MessageContentVM) {
         self.messagePanel.configureReplyTo(message: message)
-        self.updateUsernameForReply(message: message)
         let name = self.messagePanel.inReplyTo
         UIAccessibility.post(notification: .announcement, argument: name.isEmpty ? L10n.Conversation.inReplyTo : L10n.Conversation.inReplyTo + " " + name)
     }
@@ -984,20 +988,6 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             self?.conversationService.editSwarmMessage(conversationId: conversationId, accountId: accountId,
                                                        message: "", parentId: messageId)
-        }
-    }
-
-    func updateUsernameForReply(message: MessageContentVM) {
-        guard let localJamiId = self.accountService.getAccount(fromAccountId: self.conversation.accountId)?.jamiId else {
-            return
-        }
-        let jamiId = message.message.authorId
-        if localJamiId == jamiId || jamiId.isEmpty {
-            self.messagePanel.updateUsername(name: L10n.Conversation.yourself, jamiId: jamiId)
-            return
-        }
-        if let name = self.names[jamiId] {
-            self.messagePanel.updateUsername(name: name.value, jamiId: jamiId)
         }
     }
 
@@ -1068,7 +1058,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     // MARK: participant information
 
     private func updateName(name: String, jamiId: String) {
-        if let nameObservable = self.names[jamiId] {
+        if let nameObservable = self.names[jamiId], nameObservable.value != name {
             nameObservable.accept(name)
         }
     }
@@ -1126,10 +1116,12 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     }
 
     private func getName(jamiId: String, message: NameObserver, messageId: String) {
-        let isOwnAccount = accountService.getAccount(fromAccountId: conversation.accountId)?.jamiId == jamiId
+        let account = accountService.getAccount(fromAccountId: conversation.accountId)
+        // Legacy outgoing messages have no author ID; share the local account's relay.
+        let jamiId = jamiId.isEmpty ? (account?.jamiId ?? jamiId) : jamiId
+        let isOwnAccount = account?.jamiId == jamiId
         let (relay, inserted) = names.getOrInsert(key: jamiId) {
-            if isOwnAccount,
-               let account = accountService.getAccount(fromAccountId: conversation.accountId) {
+            if isOwnAccount, let account = account {
                 let bestName = accountProfileName.isEmpty ? resolveAccountName(from: account) : accountProfileName
                 return BehaviorRelay(value: bestName.withYourselfSuffix())
             }
