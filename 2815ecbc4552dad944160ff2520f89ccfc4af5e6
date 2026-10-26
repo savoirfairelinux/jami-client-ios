@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76d2bd30_4a1b242b",
+        "filename": "Ring/Ring/Resources/ar.lproj/Localizable.strings",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-26T07:25:21Z",
+      "side": 1,
+      "message": "[warning] Line 176: 🟡 Newly introduced keys are still English in this non-English locale (e.g. `conversation.voiceMessageUnavailableInCall`, `dataTransfer.retake`, and multiple `accessibility.*` additions), and the same pattern appears across many updated `.lproj` files. This causes a visible/audible localization regression (especially for VoiceOver strings). Please provide localized values before merge, or keep these locales untouched until translations are available to avoid mixing Arabic UI with English accessibility text.",
+      "revId": "2815ecbc4552dad944160ff2520f89ccfc4af5e6",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
