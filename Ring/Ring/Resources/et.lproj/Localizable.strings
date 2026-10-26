@@ -24,7 +24,7 @@
 "global.registerAUsername" = "Registreeri kasutajanimi";
 "global.enterPassword" = "Sisesta salasõna";
 "global.enterUsername" = "Sisesta kasutjanimi";
-"global.cancel" = "Tühista";
+"global.cancel" = "Katkesta";
 "global.blockContact" = "Blokeeri kontakt";
 "global.removeAccount" = "Eemalda kasutajakonto";
 "global.incomingCall" = "Sissetulev kõne";
@@ -143,7 +143,6 @@
 "contactPicker.contacts" = "Kontaktid";
 
 // Smartlist
-"smartlist.yesterday" = "Eile";
 "smartlist.results" = "Jami otsing";
 "smartlist.jamsResults" = "Organisatsiooni otsing";
 "smartlist.conversations" = "Vestlused";
@@ -179,6 +178,7 @@
 "conversation.addToContactsLabel" = "Kas lisame kontaktina?";
 "conversation.notContactLabel" = "%@ pole sinu kontaktide loendis";
 "conversation.messagePlaceholder" = "Kirjuta kasutajale";
+"conversation.voiceMessageUnavailableInCall" = "Voice messages are unavailable during a call";
 "conversation.imageSaved" = "Salvestatud";
 "conversation.errorSavingImage" = "Pildi salvestamine ei õnnestunud";
 "conversation.errorSavingImageMessage" = "Pildi salvestamisel fotode kogusse tekkis viga.";
@@ -559,8 +559,8 @@
 "notifications.locationSharingStopped" = "Lõppes teise osapoole asukoha jagamine";
 "dataTransfer.readableStatusDecline" = "Keeldu";
 "dataTransfer.readableStatusAccept" = "Võta vastu";
-"dataTransfer.infoMessage" = "Salvestamise alustamiseks klõpsi";
 "dataTransfer.sendMessage" = "Saada";
+"dataTransfer.retake" = "Retake";
 
 
 // Generated Message
@@ -647,6 +647,20 @@
 "accessibility.conversationCameraHint" = "Kaamera avamiseks topeltklõpsi";
 "accessibility.audioPlayerPlay" = "Esita";
 "accessibility.audioPlayerPause" = "Peata";
+"accessibility.audioPlayerMute" = "Mute";
+"accessibility.audioPlayerUnmute" = "Unmute";
+"accessibility.audioPlayerSeek" = "Seek";
+"accessibility.audioPlayerElapsedTime" = "Elapsed time";
+"accessibility.audioPlayerDuration" = "Duration";
+"accessibility.audioPlayerUnavailable" = "Audio unavailable";
+"accessibility.voiceMessageRecording" = "Salvestan";
+"accessibility.voiceMessageStop" = "Stop recording";
+"accessibility.voiceMessageDeleted" = "Recording deleted";
+"accessibility.voiceMessageSend" = "Send voice message";
+"accessibility.conversationMessageSent" = "Message sent";
+"accessibility.draftAttachmentLoading" = "%@, loading";
+"accessibility.draftAttachmentFailed" = "%@, unable to load";
+"accessibility.draftAttachmentsDiscarded" = "Attachments removed";
 "accessibility.conversationRowUnreadCount" = "%@ lugemata sõnumit.";
 "accessibility.conversationRowBlocked" = "Vestlus on blokeeritud";
 "accessibility.conversationRowSyncing" = "Sünkroniseerimine on pooleli";
@@ -663,13 +677,15 @@
 "accessibility.messageBubbleEdited" = "Muudetud";
 "accessibility.messageBubbleRead" = "Loetud";
 "accessibility.messageBubbleUnread" = "Lugemata";
-"accessibility.textNotAvailable" = "Tühi tekstisõnum vastuvõetud %@. Võib-olla saatmine polnud korrektne.";
-"accessibility.fileTransferNoName" = "Fail on vastu võetud %@, aga sisu pole saadaval";
+"accessibility.messageReceivedDate" = "Saadud";
+"accessibility.messageSentDate" = "Saadetud";
+"accessibility.textEmpty" = "Tühi tekstisõnum on vastuvõetud. Võib-olla saatmine polnud korrektne.";
+"accessibility.fileTransferUnnamed" = "Fail on vastuvõetud, aga nimi pole saadaval";
 "accessibility.inReply" = "Vastuseks sõnumile";
-"accessibility.text.receivedOn" = "%1@, sõnum vastuvõetud %2@";
-"accessibility.text.sentOn" = "%1@, sõnum saadetud %2@";
-"accessibility.fileTransfer.receivedOn" = "Fail: %1@, vastuvõetud %2@";
-"accessibility.fileTransfer.sentOn" = "Fail: %1@, saadetud %2@";
+"accessibility.text.received" = "%@, sõnum vastuvõetud";
+"accessibility.text.sent" = "%@, sõnum saadetud";
+"accessibility.fileTransfer.received" = "Fail: %@, vastuvõetud";
+"accessibility.fileTransfer.sent" = "Fail: %@, saadetud";
 "accessibility.call.lasted" = "Kestus: %@";
 "accessibility.calls.default.toggleAudio" = "Summuta mikrofon";
 "accessibility.calls.default.toggleVideo" = "Käivita kaamera";
@@ -805,7 +821,7 @@
 "collab.italic" = "Kaldkiri";
 "collab.underline" = "Allajoonitud kiri";
 "collab.strikethrough" = "Läbikriipsutus";
-"collab.textFormat" = "Text format";
+"collab.textFormat" = "Tekstivorming";
 "collab.heading" = "Pealkiri %d";
 "collab.bulletList" = "Nummerdamata loend";
 "collab.orderedList" = "Nummerdatud loend";
@@ -817,13 +833,13 @@
 "collab.clearFormat" = "Eemalda vormindus";
 "collab.undo" = "Pööra toiming tagasi";
 "collab.redo" = "Korda toimingut";
-"collab.paragraphStyle" = "Style";
-"collab.normalText" = "Normal text";
-"collab.font" = "Font";
-"collab.defaultFont" = "Default font";
-"collab.unavailableFont" = "Unavailable font";
-"collab.fontSize" = "Size";
-"collab.defaultSize" = "Default size";
+"collab.paragraphStyle" = "Stiil";
+"collab.normalText" = "Tavatekst";
+"collab.font" = "Kirjatüüp";
+"collab.defaultFont" = "Vaikimisi kirjatüüp";
+"collab.unavailableFont" = "Kirjatüüp ei ole saadaval";
+"collab.fontSize" = "Suurus";
+"collab.defaultSize" = "Vaikimisi suurus";
 "collab.alignment" = "Lõigu joondumine";
 "collab.remove" = "Eemalda";
 "collab.open" = "Avatud";
@@ -846,3 +862,4 @@
 "collab.documentRemovedMessage" = "„%@“ on autori poolt eemaldatud.";
 "collab.documentRemovedLocally" = "Dokument on sellest seadmest eemaldatud.";
 "collab.documentRemovedLocallyMessage" = "„%@“ dokumenti enam ei leidu selles seadmes. Tema uuesti avamisel laaditakse ta uuesti alla.";
+"collab.documentShared" = "Uus dokument: %@";

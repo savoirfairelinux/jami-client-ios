@@ -143,7 +143,6 @@
 "contactPicker.contacts" = "연락처";
 
 // Smartlist
-"smartlist.yesterday" = "어제";
 "smartlist.results" = "Jami search";
 "smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "대화";
@@ -179,6 +178,7 @@
 "conversation.addToContactsLabel" = "연락처를 추가할 수 있을까요?";
 "conversation.notContactLabel" = "%@님은 연락처 목록에 없습니다";
 "conversation.messagePlaceholder" = "작성하기";
+"conversation.voiceMessageUnavailableInCall" = "Voice messages are unavailable during a call";
 "conversation.imageSaved" = "저장됨";
 "conversation.errorSavingImage" = "이미지를 저장할 수 없습니다";
 "conversation.errorSavingImageMessage" = "사진 보관함에 이미지를 저장하는 중 오류가 발생했습니다.";
@@ -559,8 +559,8 @@
 "notifications.locationSharingStopped" = "유입 위치 공유가 중단";
 "dataTransfer.readableStatusDecline" = "감소";
 "dataTransfer.readableStatusAccept" = "수락";
-"dataTransfer.infoMessage" = "탭하여 녹음 시작";
 "dataTransfer.sendMessage" = "보내";
+"dataTransfer.retake" = "Retake";
 
 
 // Generated Message
@@ -647,6 +647,20 @@
 "accessibility.conversationCameraHint" = "두 번 탭하여 카메라를 여세요";
 "accessibility.audioPlayerPlay" = "재생";
 "accessibility.audioPlayerPause" = "멈춤";
+"accessibility.audioPlayerMute" = "무음";
+"accessibility.audioPlayerUnmute" = "Unmute";
+"accessibility.audioPlayerSeek" = "Seek";
+"accessibility.audioPlayerElapsedTime" = "Elapsed time";
+"accessibility.audioPlayerDuration" = "Duration";
+"accessibility.audioPlayerUnavailable" = "Audio unavailable";
+"accessibility.voiceMessageRecording" = "Recording";
+"accessibility.voiceMessageStop" = "녹음을 중단";
+"accessibility.voiceMessageDeleted" = "Recording deleted";
+"accessibility.voiceMessageSend" = "Send voice message";
+"accessibility.conversationMessageSent" = "Message sent";
+"accessibility.draftAttachmentLoading" = "%@, loading";
+"accessibility.draftAttachmentFailed" = "%@, unable to load";
+"accessibility.draftAttachmentsDiscarded" = "Attachments removed";
 "accessibility.conversationRowUnreadCount" = "읽지 않은 메시지 %@개.";
 "accessibility.conversationRowBlocked" = "대화 차단됨";
 "accessibility.conversationRowSyncing" = "동기화 진행 중";
@@ -663,13 +677,15 @@
 "accessibility.messageBubbleEdited" = "편집";
 "accessibility.messageBubbleRead" = "읽음";
 "accessibility.messageBubbleUnread" = "읽지 않음";
-"accessibility.textNotAvailable" = "%@에 빈 텍스트 메시지가 수신되었습니다. 올바르게 전송되지 않았을 수 있습니다.";
-"accessibility.fileTransferNoName" = "%@에 파일 수신됨, 이름을 사용할 수 없음";
+"accessibility.messageReceivedDate" = "수신";
+"accessibility.messageSentDate" = "보내";
+"accessibility.textEmpty" = "Empty text message received. This might not have been sent correctly.";
+"accessibility.fileTransferUnnamed" = "File received, name not available";
 "accessibility.inReply" = "메시지에 대한 답장";
-"accessibility.text.receivedOn" = "%1@, %2@에 메시지 수신됨";
-"accessibility.text.sentOn" = "%1@, %2@에 메시지 전송됨";
-"accessibility.fileTransfer.receivedOn" = "파일: %1@, %2@에 수신됨";
-"accessibility.fileTransfer.sentOn" = "파일: %1@, %2@에 전송됨";
+"accessibility.text.received" = "%@, message received";
+"accessibility.text.sent" = "%@, message sent";
+"accessibility.fileTransfer.received" = "File: %@, received";
+"accessibility.fileTransfer.sent" = "File: %@, sent";
 "accessibility.call.lasted" = "%@ 동안 지속됨";
 "accessibility.calls.default.toggleAudio" = "무음 마이크";
 "accessibility.calls.default.toggleVideo" = "카메라 시작";
@@ -846,3 +862,4 @@
 "collab.documentRemovedMessage" = "\"%@\" was removed by its author.";
 "collab.documentRemovedLocally" = "Document removed from this device";
 "collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";
+"collab.documentShared" = "New document: %@";

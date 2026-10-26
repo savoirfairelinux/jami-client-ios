@@ -143,7 +143,6 @@
 "contactPicker.contacts" = "Контакти";
 
 // Smartlist
-"smartlist.yesterday" = "Јуче";
 "smartlist.results" = "Jami search";
 "smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "Разговори";
@@ -179,6 +178,7 @@
 "conversation.addToContactsLabel" = "Додај у контакте?";
 "conversation.notContactLabel" = "%@ није на листи контаката";
 "conversation.messagePlaceholder" = "Пишите";
+"conversation.voiceMessageUnavailableInCall" = "Voice messages are unavailable during a call";
 "conversation.imageSaved" = "Сачувано";
 "conversation.errorSavingImage" = "Није могуће сачувати слику";
 "conversation.errorSavingImageMessage" = "Дошло је до грешке приликом чувања слике у библиотеку фотографија.";
@@ -559,8 +559,8 @@
 "notifications.locationSharingStopped" = "Улазну локацију подељено је заустављено";
 "dataTransfer.readableStatusDecline" = "Одбиј";
 "dataTransfer.readableStatusAccept" = "Prihvati";
-"dataTransfer.infoMessage" = "Додирните да бисте започели снимање";
 "dataTransfer.sendMessage" = "Pošalji";
+"dataTransfer.retake" = "Retake";
 
 
 // Generated Message
@@ -647,6 +647,20 @@
 "accessibility.conversationCameraHint" = "Двапут додирните да бисте отворили камеру";
 "accessibility.audioPlayerPlay" = "Пусти";
 "accessibility.audioPlayerPause" = "Паузирај";
+"accessibility.audioPlayerMute" = "Искључи звук";
+"accessibility.audioPlayerUnmute" = "Укључи звук";
+"accessibility.audioPlayerSeek" = "Seek";
+"accessibility.audioPlayerElapsedTime" = "Elapsed time";
+"accessibility.audioPlayerDuration" = "Duration";
+"accessibility.audioPlayerUnavailable" = "Audio unavailable";
+"accessibility.voiceMessageRecording" = "Recording";
+"accessibility.voiceMessageStop" = "Престани са снимањем";
+"accessibility.voiceMessageDeleted" = "Recording deleted";
+"accessibility.voiceMessageSend" = "Send voice message";
+"accessibility.conversationMessageSent" = "Message sent";
+"accessibility.draftAttachmentLoading" = "%@, loading";
+"accessibility.draftAttachmentFailed" = "%@, unable to load";
+"accessibility.draftAttachmentsDiscarded" = "Attachments removed";
 "accessibility.conversationRowUnreadCount" = "%@ непрочитаних порука.";
 "accessibility.conversationRowBlocked" = "Разговор је блокиран";
 "accessibility.conversationRowSyncing" = "Синхронизација у току";
@@ -663,13 +677,15 @@
 "accessibility.messageBubbleEdited" = "Редактирана";
 "accessibility.messageBubbleRead" = "Прочитано";
 "accessibility.messageBubbleUnread" = "Непрочитано";
-"accessibility.textNotAvailable" = "Празна текстуална порука примљена %@. Можда није исправно послата.";
-"accessibility.fileTransferNoName" = "Датотека примљена %@, име није доступно";
+"accessibility.messageReceivedDate" = "Примљено";
+"accessibility.messageSentDate" = "Послато";
+"accessibility.textEmpty" = "Empty text message received. This might not have been sent correctly.";
+"accessibility.fileTransferUnnamed" = "File received, name not available";
 "accessibility.inReply" = "Као одговор на поруку";
-"accessibility.text.receivedOn" = "%1@, порука примљена %2@";
-"accessibility.text.sentOn" = "%1@, порука послата %2@";
-"accessibility.fileTransfer.receivedOn" = "Датотека: %1@ , примљена %2@";
-"accessibility.fileTransfer.sentOn" = "Датотека: %1@, послата %2@";
+"accessibility.text.received" = "%@, message received";
+"accessibility.text.sent" = "%@, message sent";
+"accessibility.fileTransfer.received" = "File: %@, received";
+"accessibility.fileTransfer.sent" = "File: %@, sent";
 "accessibility.call.lasted" = "Trajalo %@";
 "accessibility.calls.default.toggleAudio" = "Искључи микрофон";
 "accessibility.calls.default.toggleVideo" = "Укључи камеру";
@@ -846,3 +862,4 @@
 "collab.documentRemovedMessage" = "\"%@\" was removed by its author.";
 "collab.documentRemovedLocally" = "Document removed from this device";
 "collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";
+"collab.documentShared" = "New document: %@";

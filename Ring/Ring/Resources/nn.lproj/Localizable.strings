@@ -143,7 +143,6 @@
 "contactPicker.contacts" = "Kontakt";
 
 // Smartlist
-"smartlist.yesterday" = "I går";
 "smartlist.results" = "Jami search";
 "smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "Samtal";
@@ -179,6 +178,7 @@
 "conversation.addToContactsLabel" = "Legg til kontakt?";
 "conversation.notContactLabel" = "%@ er ikkje i kontaktlista";
 "conversation.messagePlaceholder" = "Skriv til";
+"conversation.voiceMessageUnavailableInCall" = "Voice messages are unavailable during a call";
 "conversation.imageSaved" = "Lagra";
 "conversation.errorSavingImage" = "Kunne ikkje lagre biletet";
 "conversation.errorSavingImageMessage" = "Det oppstod ein feil under lagring av biletet i biletbiblioteket.";
@@ -559,8 +559,8 @@
 "notifications.locationSharingStopped" = "Inkommande plassering delt opp";
 "dataTransfer.readableStatusDecline" = "Ikkje godta";
 "dataTransfer.readableStatusAccept" = "Ta imot";
-"dataTransfer.infoMessage" = "Trykk for å starte opptak";
 "dataTransfer.sendMessage" = "Send inn";
+"dataTransfer.retake" = "Retake";
 
 
 // Generated Message
@@ -647,6 +647,20 @@
 "accessibility.conversationCameraHint" = "Dobbeltrykk for å opne kameraet";
 "accessibility.audioPlayerPlay" = "Spelar";
 "accessibility.audioPlayerPause" = "Pause";
+"accessibility.audioPlayerMute" = "Stum";
+"accessibility.audioPlayerUnmute" = "Ustemmeleg";
+"accessibility.audioPlayerSeek" = "Seek";
+"accessibility.audioPlayerElapsedTime" = "Elapsed time";
+"accessibility.audioPlayerDuration" = "Duration";
+"accessibility.audioPlayerUnavailable" = "Audio unavailable";
+"accessibility.voiceMessageRecording" = "Recording";
+"accessibility.voiceMessageStop" = "Sluta å opptre";
+"accessibility.voiceMessageDeleted" = "Recording deleted";
+"accessibility.voiceMessageSend" = "Send voice message";
+"accessibility.conversationMessageSent" = "Message sent";
+"accessibility.draftAttachmentLoading" = "%@, loading";
+"accessibility.draftAttachmentFailed" = "%@, unable to load";
+"accessibility.draftAttachmentsDiscarded" = "Attachments removed";
 "accessibility.conversationRowUnreadCount" = "%@ ulesne meldingar.";
 "accessibility.conversationRowBlocked" = "Samtale blokkert";
 "accessibility.conversationRowSyncing" = "Synkronisering pågår";
@@ -663,13 +677,15 @@
 "accessibility.messageBubbleEdited" = "Redigert";
 "accessibility.messageBubbleRead" = "Lese";
 "accessibility.messageBubbleUnread" = "Ikkje lese";
-"accessibility.textNotAvailable" = "Tom tekstmelding motteken %@. Denne vart kanskje ikkje sendt rett.";
-"accessibility.fileTransferNoName" = "Fil motteken %@, namn ikkje tilgjengeleg";
+"accessibility.messageReceivedDate" = "Motteke";
+"accessibility.messageSentDate" = "Sending";
+"accessibility.textEmpty" = "Empty text message received. This might not have been sent correctly.";
+"accessibility.fileTransferUnnamed" = "File received, name not available";
 "accessibility.inReply" = "Som svar på melding";
-"accessibility.text.receivedOn" = "%1@, melding motteken %2@";
-"accessibility.text.sentOn" = "%1@, melding sendt %2@";
-"accessibility.fileTransfer.receivedOn" = "Fil: %1@ , motteken %2@";
-"accessibility.fileTransfer.sentOn" = "Fil: %1@, sendt %2@";
+"accessibility.text.received" = "%@, message received";
+"accessibility.text.sent" = "%@, message sent";
+"accessibility.fileTransfer.received" = "File: %@, received";
+"accessibility.fileTransfer.sent" = "File: %@, sent";
 "accessibility.call.lasted" = "Varte %@";
 "accessibility.calls.default.toggleAudio" = "Døyva mikrofon";
 "accessibility.calls.default.toggleVideo" = "Start kamera";
@@ -846,3 +862,4 @@
 "collab.documentRemovedMessage" = "\"%@\" was removed by its author.";
 "collab.documentRemovedLocally" = "Document removed from this device";
 "collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";
+"collab.documentShared" = "New document: %@";

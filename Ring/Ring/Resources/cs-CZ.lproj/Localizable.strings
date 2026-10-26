@@ -143,7 +143,6 @@
 "contactPicker.contacts" = "Kontakty";
 
 // Smartlist
-"smartlist.yesterday" = "Včera";
 "smartlist.results" = "Jami search";
 "smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "Konverzace";
@@ -179,6 +178,7 @@
 "conversation.addToContactsLabel" = "Přidat do kontaktů?";
 "conversation.notContactLabel" = "%@ není v seznamu kontaktů";
 "conversation.messagePlaceholder" = "Napsat";
+"conversation.voiceMessageUnavailableInCall" = "Voice messages are unavailable during a call";
 "conversation.imageSaved" = "Uloženo";
 "conversation.errorSavingImage" = "Obrázek se nepodařilo uložit";
 "conversation.errorSavingImageMessage" = "Při ukládání obrázku do knihovny fotografií došlo k chybě.";
@@ -559,8 +559,8 @@
 "notifications.locationSharingStopped" = "Přestalo příchozí sdílení polohy.";
 "dataTransfer.readableStatusDecline" = "Nepřijmout";
 "dataTransfer.readableStatusAccept" = "Přijmout";
-"dataTransfer.infoMessage" = "Klepnutím zahájíte nahrávání";
 "dataTransfer.sendMessage" = "Odeslat";
+"dataTransfer.retake" = "Retake";
 
 
 // Generated Message
@@ -647,6 +647,20 @@
 "accessibility.conversationCameraHint" = "Dvojitým klepnutím otevřete kameru";
 "accessibility.audioPlayerPlay" = "Přehrát";
 "accessibility.audioPlayerPause" = "Pozastavit";
+"accessibility.audioPlayerMute" = "Mute";
+"accessibility.audioPlayerUnmute" = "Unmute";
+"accessibility.audioPlayerSeek" = "Seek";
+"accessibility.audioPlayerElapsedTime" = "Elapsed time";
+"accessibility.audioPlayerDuration" = "Duration";
+"accessibility.audioPlayerUnavailable" = "Audio unavailable";
+"accessibility.voiceMessageRecording" = "Recording";
+"accessibility.voiceMessageStop" = "Stop recording";
+"accessibility.voiceMessageDeleted" = "Recording deleted";
+"accessibility.voiceMessageSend" = "Send voice message";
+"accessibility.conversationMessageSent" = "Message sent";
+"accessibility.draftAttachmentLoading" = "%@, loading";
+"accessibility.draftAttachmentFailed" = "%@, unable to load";
+"accessibility.draftAttachmentsDiscarded" = "Attachments removed";
 "accessibility.conversationRowUnreadCount" = "%@ nepřečtených zpráv.";
 "accessibility.conversationRowBlocked" = "Konverzace blokována";
 "accessibility.conversationRowSyncing" = "Probíhá synchronizace";
@@ -663,13 +677,15 @@
 "accessibility.messageBubbleEdited" = "Upraveno";
 "accessibility.messageBubbleRead" = "Přečteno";
 "accessibility.messageBubbleUnread" = "Nepřečteno";
-"accessibility.textNotAvailable" = "Prázdná textová zpráva přijata %@. Možná nebyla odeslána správně.";
-"accessibility.fileTransferNoName" = "Soubor přijat %@, název není k dispozici";
+"accessibility.messageReceivedDate" = "Přijato";
+"accessibility.messageSentDate" = "Posláno";
+"accessibility.textEmpty" = "Empty text message received. This might not have been sent correctly.";
+"accessibility.fileTransferUnnamed" = "File received, name not available";
 "accessibility.inReply" = "Jako odpověď na zprávu";
-"accessibility.text.receivedOn" = "%1@, zpráva přijata %2@";
-"accessibility.text.sentOn" = "%1@, zpráva odeslána %2@";
-"accessibility.fileTransfer.receivedOn" = "Soubor: %1@ , přijat %2@";
-"accessibility.fileTransfer.sentOn" = "Soubor: %1@, odeslán %2@";
+"accessibility.text.received" = "%@, message received";
+"accessibility.text.sent" = "%@, message sent";
+"accessibility.fileTransfer.received" = "File: %@, received";
+"accessibility.fileTransfer.sent" = "File: %@, sent";
 "accessibility.call.lasted" = "Trvalo %@";
 "accessibility.calls.default.toggleAudio" = "Ztlumit mikrofon";
 "accessibility.calls.default.toggleVideo" = "Spustit kameru";
@@ -846,3 +862,4 @@
 "collab.documentRemovedMessage" = "\"%@\" was removed by its author.";
 "collab.documentRemovedLocally" = "Document removed from this device";
 "collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";
+"collab.documentShared" = "New document: %@";

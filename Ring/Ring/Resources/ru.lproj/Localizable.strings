@@ -143,7 +143,6 @@
 "contactPicker.contacts" = "Контакты";
 
 // Smartlist
-"smartlist.yesterday" = "Вчера";
 "smartlist.results" = "Jami search";
 "smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "Разговоры";
@@ -179,6 +178,7 @@
 "conversation.addToContactsLabel" = "Добавить в контакты?";
 "conversation.notContactLabel" = "%@нет в списке контактов";
 "conversation.messagePlaceholder" = "Написать сообщение";
+"conversation.voiceMessageUnavailableInCall" = "Voice messages are unavailable during a call";
 "conversation.imageSaved" = "Сохранено";
 "conversation.errorSavingImage" = "Не удалось сохранить изображение";
 "conversation.errorSavingImageMessage" = "Произошла ошибка при сохранении изображения в фотобиблиотеку.";
@@ -559,8 +559,8 @@
 "notifications.locationSharingStopped" = "Входящий обмен местоположением остановился";
 "dataTransfer.readableStatusDecline" = "Отклонить";
 "dataTransfer.readableStatusAccept" = "Принять";
-"dataTransfer.infoMessage" = "Коснитесь, чтобы начать запись";
 "dataTransfer.sendMessage" = "Отправить";
+"dataTransfer.retake" = "Retake";
 
 
 // Generated Message
@@ -647,6 +647,20 @@
 "accessibility.conversationCameraHint" = "Коснитесь дважды, чтобы открыть камеру";
 "accessibility.audioPlayerPlay" = "Проиграть";
 "accessibility.audioPlayerPause" = "Пауза";
+"accessibility.audioPlayerMute" = "Беззвучно ";
+"accessibility.audioPlayerUnmute" = "Включить звук";
+"accessibility.audioPlayerSeek" = "Seek";
+"accessibility.audioPlayerElapsedTime" = "Elapsed time";
+"accessibility.audioPlayerDuration" = "Длительность";
+"accessibility.audioPlayerUnavailable" = "Audio unavailable";
+"accessibility.voiceMessageRecording" = "Запись";
+"accessibility.voiceMessageStop" = "Остановить запись";
+"accessibility.voiceMessageDeleted" = "Recording deleted";
+"accessibility.voiceMessageSend" = "Send voice message";
+"accessibility.conversationMessageSent" = "Message sent";
+"accessibility.draftAttachmentLoading" = "%@, loading";
+"accessibility.draftAttachmentFailed" = "%@, unable to load";
+"accessibility.draftAttachmentsDiscarded" = "Attachments removed";
 "accessibility.conversationRowUnreadCount" = "%@непрочитанных сообщений.";
 "accessibility.conversationRowBlocked" = "Беседа заблокирована";
 "accessibility.conversationRowSyncing" = "Выполняется синхронизация";
@@ -663,13 +677,15 @@
 "accessibility.messageBubbleEdited" = "Отредактировано";
 "accessibility.messageBubbleRead" = "Прочитано";
 "accessibility.messageBubbleUnread" = "Непрочитано";
-"accessibility.textNotAvailable" = "Получено пустое текстовое сообщение на %@ . Возможно, оно было отправлено неправильно.";
-"accessibility.fileTransferNoName" = "Файл получен на %@, имя недоступно";
+"accessibility.messageReceivedDate" = "Получено";
+"accessibility.messageSentDate" = "Отправлено";
+"accessibility.textEmpty" = "Empty text message received. This might not have been sent correctly.";
+"accessibility.fileTransferUnnamed" = "File received, name not available";
 "accessibility.inReply" = "В ответ на сообщение";
-"accessibility.text.receivedOn" = "%1@, сообщение получено на %2@";
-"accessibility.text.sentOn" = "%1@ , сообщение отправлено на  %2@";
-"accessibility.fileTransfer.receivedOn" = "Файл: %1@, получено на %2@";
-"accessibility.fileTransfer.sentOn" = "Файл: %1@, отправлен на %2@";
+"accessibility.text.received" = "%@, message received";
+"accessibility.text.sent" = "%@, message sent";
+"accessibility.fileTransfer.received" = "File: %@, received";
+"accessibility.fileTransfer.sent" = "File: %@, sent";
 "accessibility.call.lasted" = "Длилось %@";
 "accessibility.calls.default.toggleAudio" = "Выключить микрофон";
 "accessibility.calls.default.toggleVideo" = "Включить камеру";
@@ -846,3 +862,4 @@
 "collab.documentRemovedMessage" = "\"%@\" was removed by its author.";
 "collab.documentRemovedLocally" = "Document removed from this device";
 "collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";
+"collab.documentShared" = "New document: %@";

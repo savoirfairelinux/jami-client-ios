@@ -143,7 +143,6 @@
 "contactPicker.contacts" = "ಸಂಪರ್ಕಗಳು";
 
 // Smartlist
-"smartlist.yesterday" = "ನಿನ್ನೆ";
 "smartlist.results" = "Jami search";
 "smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "ಸಂಭಾಷಣೆ";
@@ -179,6 +178,7 @@
 "conversation.addToContactsLabel" = "ಸಂಪರ್ಕಗಳಿಗೆ ಸೇರಿಸುವುದೇ?";
 "conversation.notContactLabel" = "%@ is not in the contact list";
 "conversation.messagePlaceholder" = "Write to";
+"conversation.voiceMessageUnavailableInCall" = "Voice messages are unavailable during a call";
 "conversation.imageSaved" = "Saved";
 "conversation.errorSavingImage" = "Could not save image";
 "conversation.errorSavingImageMessage" = "An error occurred while saving the image to the photo library.";
@@ -559,8 +559,8 @@
 "notifications.locationSharingStopped" = "ಒಳಬರುವ ಸ್ಥಳ ಹಂಚಿಕೆ ನಿಲ್ಲಿಸಲಾಗಿದೆ";
 "dataTransfer.readableStatusDecline" = "ಕುಸಿತ";
 "dataTransfer.readableStatusAccept" = "ಒಪ್ಪಿಕೊಳ್ಳು";
-"dataTransfer.infoMessage" = "Tap to start recording";
 "dataTransfer.sendMessage" = "ಕಳುಹಿಸು";
+"dataTransfer.retake" = "Retake";
 
 
 // Generated Message
@@ -647,6 +647,20 @@
 "accessibility.conversationCameraHint" = "Double-tap to open camera";
 "accessibility.audioPlayerPlay" = "ಆಟವಾಡಿ";
 "accessibility.audioPlayerPause" = "ವಿರಾಮ";
+"accessibility.audioPlayerMute" = "ಮೂಕ";
+"accessibility.audioPlayerUnmute" = "Unmute";
+"accessibility.audioPlayerSeek" = "Seek";
+"accessibility.audioPlayerElapsedTime" = "Elapsed time";
+"accessibility.audioPlayerDuration" = "Duration";
+"accessibility.audioPlayerUnavailable" = "Audio unavailable";
+"accessibility.voiceMessageRecording" = "Recording";
+"accessibility.voiceMessageStop" = "ರೆಕಾರ್ಡಿಂಗ್ ನಿಲ್ಲಿಸಿ";
+"accessibility.voiceMessageDeleted" = "Recording deleted";
+"accessibility.voiceMessageSend" = "Send voice message";
+"accessibility.conversationMessageSent" = "Message sent";
+"accessibility.draftAttachmentLoading" = "%@, loading";
+"accessibility.draftAttachmentFailed" = "%@, unable to load";
+"accessibility.draftAttachmentsDiscarded" = "Attachments removed";
 "accessibility.conversationRowUnreadCount" = "%@ unread messages.";
 "accessibility.conversationRowBlocked" = "Conversation blocked";
 "accessibility.conversationRowSyncing" = "Synchronization in progress";
@@ -663,13 +677,15 @@
 "accessibility.messageBubbleEdited" = "ಸಂಪಾದನೆ";
 "accessibility.messageBubbleRead" = "Read";
 "accessibility.messageBubbleUnread" = "Unread";
-"accessibility.textNotAvailable" = "Empty text message received on %@. This might not have been sent correctly.";
-"accessibility.fileTransferNoName" = "File received on %@, name not available";
+"accessibility.messageReceivedDate" = "ಸ್ವೀಕರಿಸಿದ";
+"accessibility.messageSentDate" = "ಕಳುಹಿಸಲಾಗಿದೆ";
+"accessibility.textEmpty" = "Empty text message received. This might not have been sent correctly.";
+"accessibility.fileTransferUnnamed" = "File received, name not available";
 "accessibility.inReply" = "In reply to message";
-"accessibility.text.receivedOn" = "%1@, message received on %2@";
-"accessibility.text.sentOn" = "%1@, message sent on %2@";
-"accessibility.fileTransfer.receivedOn" = "File: %1@ , received on %2@";
-"accessibility.fileTransfer.sentOn" = "File: %1@, sent on %2@";
+"accessibility.text.received" = "%@, message received";
+"accessibility.text.sent" = "%@, message sent";
+"accessibility.fileTransfer.received" = "File: %@, received";
+"accessibility.fileTransfer.sent" = "File: %@, sent";
 "accessibility.call.lasted" = "Lasted %@";
 "accessibility.calls.default.toggleAudio" = "ಮೂಕ ಮೈಕ್ರೊಫೋನ್";
 "accessibility.calls.default.toggleVideo" = "ಕ್ಯಾಮೆರಾ ಪ್ರಾರಂಭಿಸಿ";
@@ -846,3 +862,4 @@
 "collab.documentRemovedMessage" = "\"%@\" was removed by its author.";
 "collab.documentRemovedLocally" = "Document removed from this device";
 "collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";
+"collab.documentShared" = "New document: %@";

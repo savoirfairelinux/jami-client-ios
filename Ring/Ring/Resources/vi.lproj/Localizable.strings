@@ -143,7 +143,6 @@
 "contactPicker.contacts" = "Danh bạ";
 
 // Smartlist
-"smartlist.yesterday" = "Hôm qua";
 "smartlist.results" = "Jami search";
 "smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "Các cuộc trò chuyện";
@@ -179,6 +178,7 @@
 "conversation.addToContactsLabel" = "Thêm vào danh bạ?";
 "conversation.notContactLabel" = "%@ không có trong danh sách liên hệ";
 "conversation.messagePlaceholder" = "Viết cho";
+"conversation.voiceMessageUnavailableInCall" = "Voice messages are unavailable during a call";
 "conversation.imageSaved" = "Đã lưu";
 "conversation.errorSavingImage" = "Không thể lưu hình ảnh";
 "conversation.errorSavingImageMessage" = "Đã xảy ra lỗi khi lưu hình ảnh vào thư viện ảnh.";
@@ -559,8 +559,8 @@
 "notifications.locationSharingStopped" = "Chia sẻ địa điểm tiếp nhận đã dừng lại";
 "dataTransfer.readableStatusDecline" = "Sự suy giảm";
 "dataTransfer.readableStatusAccept" = "Chấp nhận";
-"dataTransfer.infoMessage" = "Chạm để bắt đầu ghi";
 "dataTransfer.sendMessage" = "Gửi đi";
+"dataTransfer.retake" = "Retake";
 
 
 // Generated Message
@@ -647,6 +647,20 @@
 "accessibility.conversationCameraHint" = "Chạm hai lần để mở máy ảnh";
 "accessibility.audioPlayerPlay" = "Phát";
 "accessibility.audioPlayerPause" = "Tạm dừng";
+"accessibility.audioPlayerMute" = "Tắt tiếng";
+"accessibility.audioPlayerUnmute" = "Bỏ tắt tiếng";
+"accessibility.audioPlayerSeek" = "Seek";
+"accessibility.audioPlayerElapsedTime" = "Elapsed time";
+"accessibility.audioPlayerDuration" = "Duration";
+"accessibility.audioPlayerUnavailable" = "Audio unavailable";
+"accessibility.voiceMessageRecording" = "Recording";
+"accessibility.voiceMessageStop" = "Ngừng ghi lại";
+"accessibility.voiceMessageDeleted" = "Recording deleted";
+"accessibility.voiceMessageSend" = "Send voice message";
+"accessibility.conversationMessageSent" = "Message sent";
+"accessibility.draftAttachmentLoading" = "%@, loading";
+"accessibility.draftAttachmentFailed" = "%@, unable to load";
+"accessibility.draftAttachmentsDiscarded" = "Attachments removed";
 "accessibility.conversationRowUnreadCount" = "%@ tin nhắn chưa đọc.";
 "accessibility.conversationRowBlocked" = "Cuộc trò chuyện đã bị chặn";
 "accessibility.conversationRowSyncing" = "Đang đồng bộ";
@@ -663,13 +677,15 @@
 "accessibility.messageBubbleEdited" = "Được biên tập";
 "accessibility.messageBubbleRead" = "Đã đọc";
 "accessibility.messageBubbleUnread" = "Chưa đọc";
-"accessibility.textNotAvailable" = "Đã nhận tin nhắn văn bản trống lúc %@. Tin nhắn này có thể đã không được gửi đúng cách.";
-"accessibility.fileTransferNoName" = "Đã nhận tệp lúc %@, không có tên";
+"accessibility.messageReceivedDate" = "Đã nhận";
+"accessibility.messageSentDate" = "Đã gửi";
+"accessibility.textEmpty" = "Empty text message received. This might not have been sent correctly.";
+"accessibility.fileTransferUnnamed" = "File received, name not available";
 "accessibility.inReply" = "Trả lời tin nhắn";
-"accessibility.text.receivedOn" = "%1@, tin nhắn nhận lúc %2@";
-"accessibility.text.sentOn" = "%1@, tin nhắn gửi lúc %2@";
-"accessibility.fileTransfer.receivedOn" = "Tệp: %1@, nhận lúc %2@";
-"accessibility.fileTransfer.sentOn" = "Tệp: %1@, gửi lúc %2@";
+"accessibility.text.received" = "%@, message received";
+"accessibility.text.sent" = "%@, message sent";
+"accessibility.fileTransfer.received" = "File: %@, received";
+"accessibility.fileTransfer.sent" = "File: %@, sent";
 "accessibility.call.lasted" = "Đã gọi %@";
 "accessibility.calls.default.toggleAudio" = "Tắt tiếng micrô";
 "accessibility.calls.default.toggleVideo" = "Bật camera";
@@ -846,3 +862,4 @@
 "collab.documentRemovedMessage" = "\"%@\" was removed by its author.";
 "collab.documentRemovedLocally" = "Document removed from this device";
 "collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";
+"collab.documentShared" = "New document: %@";

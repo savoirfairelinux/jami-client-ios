@@ -143,7 +143,6 @@
 "contactPicker.contacts" = "संपर्क";
 
 // Smartlist
-"smartlist.yesterday" = "कल";
 "smartlist.results" = "Jami search";
 "smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "वार्तालाप";
@@ -179,6 +178,7 @@
 "conversation.addToContactsLabel" = "संपर्क जोड़ें?";
 "conversation.notContactLabel" = "%@ संपर्क सूची में नहीं है";
 "conversation.messagePlaceholder" = "लिखें";
+"conversation.voiceMessageUnavailableInCall" = "Voice messages are unavailable during a call";
 "conversation.imageSaved" = "सहेजा गया";
 "conversation.errorSavingImage" = "छवि सहेजी नहीं जा सकी";
 "conversation.errorSavingImageMessage" = "छवि को फ़ोटो लाइब्रेरी में सहेजते समय एक त्रुटि हुई।";
@@ -559,8 +559,8 @@
 "notifications.locationSharingStopped" = "आने वाली स्थान साझाकरण बंद कर दिया गया";
 "dataTransfer.readableStatusDecline" = "गिरावट";
 "dataTransfer.readableStatusAccept" = "स्वीकार करें";
-"dataTransfer.infoMessage" = "रिकॉर्डिंग शुरू करने के लिए टैप करें";
 "dataTransfer.sendMessage" = "भेजें";
+"dataTransfer.retake" = "Retake";
 
 
 // Generated Message
@@ -647,6 +647,20 @@
 "accessibility.conversationCameraHint" = "कैमरा खोलने के लिए डबल-टैप करें";
 "accessibility.audioPlayerPlay" = "शुरू करें";
 "accessibility.audioPlayerPause" = "विराम";
+"accessibility.audioPlayerMute" = "आवाज़ बंद करें";
+"accessibility.audioPlayerUnmute" = "Unmute";
+"accessibility.audioPlayerSeek" = "Seek";
+"accessibility.audioPlayerElapsedTime" = "Elapsed time";
+"accessibility.audioPlayerDuration" = "Duration";
+"accessibility.audioPlayerUnavailable" = "Audio unavailable";
+"accessibility.voiceMessageRecording" = "Recording";
+"accessibility.voiceMessageStop" = "रिकॉर्डिंग बंद करें";
+"accessibility.voiceMessageDeleted" = "Recording deleted";
+"accessibility.voiceMessageSend" = "Send voice message";
+"accessibility.conversationMessageSent" = "Message sent";
+"accessibility.draftAttachmentLoading" = "%@, loading";
+"accessibility.draftAttachmentFailed" = "%@, unable to load";
+"accessibility.draftAttachmentsDiscarded" = "Attachments removed";
 "accessibility.conversationRowUnreadCount" = "%@ अपठित संदेश।";
 "accessibility.conversationRowBlocked" = "बातचीत अवरुद्ध";
 "accessibility.conversationRowSyncing" = "सिंक्रनाइज़ेशन प्रगति पर";
@@ -663,13 +677,15 @@
 "accessibility.messageBubbleEdited" = "सम्पादित";
 "accessibility.messageBubbleRead" = "पढ़ा गया";
 "accessibility.messageBubbleUnread" = "अपठित";
-"accessibility.textNotAvailable" = "%@ पर खाली टेक्स्ट संदेश प्राप्त हुआ। यह सही ढंग से नहीं भेजा गया हो सकता है।";
-"accessibility.fileTransferNoName" = "%@ पर फ़ाइल प्राप्त हुई, नाम उपलब्ध नहीं";
+"accessibility.messageReceivedDate" = "प्राप्त किया गया";
+"accessibility.messageSentDate" = "भेजा गया";
+"accessibility.textEmpty" = "Empty text message received. This might not have been sent correctly.";
+"accessibility.fileTransferUnnamed" = "File received, name not available";
 "accessibility.inReply" = "संदेश के उत्तर में";
-"accessibility.text.receivedOn" = "%1@, संदेश %2@ पर प्राप्त हुआ";
-"accessibility.text.sentOn" = "%1@, संदेश %2@ पर भेजा गया";
-"accessibility.fileTransfer.receivedOn" = "फ़ाइल: %1@, %2@ पर प्राप्त हुई";
-"accessibility.fileTransfer.sentOn" = "फ़ाइल: %1@, %2@ पर भेजी गई";
+"accessibility.text.received" = "%@, message received";
+"accessibility.text.sent" = "%@, message sent";
+"accessibility.fileTransfer.received" = "File: %@, received";
+"accessibility.fileTransfer.sent" = "File: %@, sent";
 "accessibility.call.lasted" = "%@ तक चली";
 "accessibility.calls.default.toggleAudio" = "मूक माइक्रोफोन";
 "accessibility.calls.default.toggleVideo" = "कैमरा शुरू करें";
@@ -846,3 +862,4 @@
 "collab.documentRemovedMessage" = "\"%@\" was removed by its author.";
 "collab.documentRemovedLocally" = "Document removed from this device";
 "collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";
+"collab.documentShared" = "New document: %@";

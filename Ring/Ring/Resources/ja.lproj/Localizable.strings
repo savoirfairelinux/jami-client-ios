@@ -143,7 +143,6 @@
 "contactPicker.contacts" = "連絡先";
 
 // Smartlist
-"smartlist.yesterday" = "昨日";
 "smartlist.results" = "Jami search";
 "smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "会話";
@@ -179,6 +178,7 @@
 "conversation.addToContactsLabel" = "連絡先を追加しますか？";
 "conversation.notContactLabel" = "%@ は連絡先リストにありません";
 "conversation.messagePlaceholder" = "メッセージを書く";
+"conversation.voiceMessageUnavailableInCall" = "Voice messages are unavailable during a call";
 "conversation.imageSaved" = "保存しました";
 "conversation.errorSavingImage" = "画像を保存できませんでした";
 "conversation.errorSavingImageMessage" = "画像をフォトライブラリに保存中にエラーが発生しました。";
@@ -559,8 +559,8 @@
 "notifications.locationSharingStopped" = "到着する場所共有停止";
 "dataTransfer.readableStatusDecline" = "辞退";
 "dataTransfer.readableStatusAccept" = "受け入れ";
-"dataTransfer.infoMessage" = "タップして録音を開始";
 "dataTransfer.sendMessage" = "送信";
+"dataTransfer.retake" = "Retake";
 
 
 // Generated Message
@@ -647,6 +647,20 @@
 "accessibility.conversationCameraHint" = "ダブルタップしてカメラを開く";
 "accessibility.audioPlayerPlay" = "再生";
 "accessibility.audioPlayerPause" = "一時停止";
+"accessibility.audioPlayerMute" = "消音";
+"accessibility.audioPlayerUnmute" = "Unmute";
+"accessibility.audioPlayerSeek" = "Seek";
+"accessibility.audioPlayerElapsedTime" = "Elapsed time";
+"accessibility.audioPlayerDuration" = "間隔";
+"accessibility.audioPlayerUnavailable" = "Audio unavailable";
+"accessibility.voiceMessageRecording" = "記録中";
+"accessibility.voiceMessageStop" = "録音を停止";
+"accessibility.voiceMessageDeleted" = "Recording deleted";
+"accessibility.voiceMessageSend" = "Send voice message";
+"accessibility.conversationMessageSent" = "Message sent";
+"accessibility.draftAttachmentLoading" = "%@, loading";
+"accessibility.draftAttachmentFailed" = "%@, unable to load";
+"accessibility.draftAttachmentsDiscarded" = "Attachments removed";
 "accessibility.conversationRowUnreadCount" = "未読メッセージ %@ 件。";
 "accessibility.conversationRowBlocked" = "会話がブロックされています";
 "accessibility.conversationRowSyncing" = "同期中";
@@ -663,13 +677,15 @@
 "accessibility.messageBubbleEdited" = "編集";
 "accessibility.messageBubbleRead" = "既読";
 "accessibility.messageBubbleUnread" = "未読";
-"accessibility.textNotAvailable" = "%@ に空のテキストメッセージを受信しました。正しく送信されなかった可能性があります。";
-"accessibility.fileTransferNoName" = "%@ にファイルを受信、名前は利用できません";
+"accessibility.messageReceivedDate" = "受信";
+"accessibility.messageSentDate" = "送信";
+"accessibility.textEmpty" = "Empty text message received. This might not have been sent correctly.";
+"accessibility.fileTransferUnnamed" = "File received, name not available";
 "accessibility.inReply" = "メッセージへの返信";
-"accessibility.text.receivedOn" = "%1@、%2@ にメッセージを受信";
-"accessibility.text.sentOn" = "%1@、%2@ にメッセージを送信";
-"accessibility.fileTransfer.receivedOn" = "ファイル: %1@、%2@ に受信";
-"accessibility.fileTransfer.sentOn" = "ファイル: %1@、%2@ に送信";
+"accessibility.text.received" = "%@, message received";
+"accessibility.text.sent" = "%@, message sent";
+"accessibility.fileTransfer.received" = "File: %@, received";
+"accessibility.fileTransfer.sent" = "File: %@, sent";
 "accessibility.call.lasted" = "通話時間 %@";
 "accessibility.calls.default.toggleAudio" = "マイクをミュート";
 "accessibility.calls.default.toggleVideo" = "カメラを開始";
@@ -846,3 +862,4 @@
 "collab.documentRemovedMessage" = "\"%@\" was removed by its author.";
 "collab.documentRemovedLocally" = "Document removed from this device";
 "collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";
+"collab.documentShared" = "New document: %@";

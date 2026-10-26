@@ -143,7 +143,6 @@
 "contactPicker.contacts" = "Contatos";
 
 // Smartlist
-"smartlist.yesterday" = "Ontem";
 "smartlist.results" = "Jami search";
 "smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "Conversas";
@@ -179,6 +178,7 @@
 "conversation.addToContactsLabel" = "Adicionar aos contatos?";
 "conversation.notContactLabel" = "%@ não está na lista de contactos";
 "conversation.messagePlaceholder" = "Escrever para";
+"conversation.voiceMessageUnavailableInCall" = "Voice messages are unavailable during a call";
 "conversation.imageSaved" = "Guardado";
 "conversation.errorSavingImage" = "Não foi possível guardar a imagem";
 "conversation.errorSavingImageMessage" = "Ocorreu um erro ao guardar a imagem na biblioteca de fotografias.";
@@ -559,8 +559,8 @@
 "notifications.locationSharingStopped" = "Recebimento do compartilhamento de local terminado";
 "dataTransfer.readableStatusDecline" = "Rejeitar";
 "dataTransfer.readableStatusAccept" = "Aceitar";
-"dataTransfer.infoMessage" = "Toque para começar a gravar";
 "dataTransfer.sendMessage" = "Enviar";
+"dataTransfer.retake" = "Retake";
 
 
 // Generated Message
@@ -647,6 +647,20 @@
 "accessibility.conversationCameraHint" = "Toque duas vezes para abrir a câmara";
 "accessibility.audioPlayerPlay" = "Reproduzir";
 "accessibility.audioPlayerPause" = "Pausar";
+"accessibility.audioPlayerMute" = "Mudo";
+"accessibility.audioPlayerUnmute" = "Não silenciar";
+"accessibility.audioPlayerSeek" = "Seek";
+"accessibility.audioPlayerElapsedTime" = "Elapsed time";
+"accessibility.audioPlayerDuration" = "Duração";
+"accessibility.audioPlayerUnavailable" = "Audio unavailable";
+"accessibility.voiceMessageRecording" = "Gravando";
+"accessibility.voiceMessageStop" = "Pare de gravar";
+"accessibility.voiceMessageDeleted" = "Recording deleted";
+"accessibility.voiceMessageSend" = "Send voice message";
+"accessibility.conversationMessageSent" = "Message sent";
+"accessibility.draftAttachmentLoading" = "%@, loading";
+"accessibility.draftAttachmentFailed" = "%@, unable to load";
+"accessibility.draftAttachmentsDiscarded" = "Attachments removed";
 "accessibility.conversationRowUnreadCount" = "%@ mensagens não lidas.";
 "accessibility.conversationRowBlocked" = "Conversa bloqueada";
 "accessibility.conversationRowSyncing" = "Sincronização em curso";
@@ -663,13 +677,15 @@
 "accessibility.messageBubbleEdited" = "Editado";
 "accessibility.messageBubbleRead" = "Lida";
 "accessibility.messageBubbleUnread" = "Não lida";
-"accessibility.textNotAvailable" = "Mensagem de texto vazia recebida em %@. Pode não ter sido enviada corretamente.";
-"accessibility.fileTransferNoName" = "Ficheiro recebido em %@, nome não disponível";
+"accessibility.messageReceivedDate" = "Recebido";
+"accessibility.messageSentDate" = "Enviado";
+"accessibility.textEmpty" = "Empty text message received. This might not have been sent correctly.";
+"accessibility.fileTransferUnnamed" = "File received, name not available";
 "accessibility.inReply" = "Em resposta à mensagem";
-"accessibility.text.receivedOn" = "%1@, mensagem recebida em %2@";
-"accessibility.text.sentOn" = "%1@, mensagem enviada em %2@";
-"accessibility.fileTransfer.receivedOn" = "Ficheiro: %1@, recebido em %2@";
-"accessibility.fileTransfer.sentOn" = "Ficheiro: %1@, enviado em %2@";
+"accessibility.text.received" = "%@, message received";
+"accessibility.text.sent" = "%@, message sent";
+"accessibility.fileTransfer.received" = "File: %@, received";
+"accessibility.fileTransfer.sent" = "File: %@, sent";
 "accessibility.call.lasted" = "Durou %@";
 "accessibility.calls.default.toggleAudio" = "Desativar microfone";
 "accessibility.calls.default.toggleVideo" = "Iniciar câmara";
@@ -846,3 +862,4 @@
 "collab.documentRemovedMessage" = "\"%@\" was removed by its author.";
 "collab.documentRemovedLocally" = "Document removed from this device";
 "collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";
+"collab.documentShared" = "New document: %@";

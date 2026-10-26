@@ -143,7 +143,6 @@
 "contactPicker.contacts" = "聯絡人";
 
 // Smartlist
-"smartlist.yesterday" = "昨天";
 "smartlist.results" = "Jami搜索";
 "smartlist.jamsResults" = "机构搜索";
 "smartlist.conversations" = "對話";
@@ -179,6 +178,7 @@
 "conversation.addToContactsLabel" = "添加至通讯录吗？";
 "conversation.notContactLabel" = "%@ 不在联系人列表中";
 "conversation.messagePlaceholder" = "写消息至";
+"conversation.voiceMessageUnavailableInCall" = "Voice messages are unavailable during a call";
 "conversation.imageSaved" = "已保存";
 "conversation.errorSavingImage" = "无法保存图像";
 "conversation.errorSavingImageMessage" = "将图像保存到照片库时出错。";
@@ -559,8 +559,8 @@
 "notifications.locationSharingStopped" = "传入位置分享已停止";
 "dataTransfer.readableStatusDecline" = "拒接";
 "dataTransfer.readableStatusAccept" = "接受";
-"dataTransfer.infoMessage" = "按下以開始錄製";
 "dataTransfer.sendMessage" = "发送";
+"dataTransfer.retake" = "Retake";
 
 
 // Generated Message
@@ -647,6 +647,20 @@
 "accessibility.conversationCameraHint" = "雙擊以開啟相機";
 "accessibility.audioPlayerPlay" = "播放";
 "accessibility.audioPlayerPause" = "暫停";
+"accessibility.audioPlayerMute" = "静音";
+"accessibility.audioPlayerUnmute" = "取消静音";
+"accessibility.audioPlayerSeek" = "Seek";
+"accessibility.audioPlayerElapsedTime" = "Elapsed time";
+"accessibility.audioPlayerDuration" = "持續時間";
+"accessibility.audioPlayerUnavailable" = "Audio unavailable";
+"accessibility.voiceMessageRecording" = "記錄";
+"accessibility.voiceMessageStop" = "停止錄製";
+"accessibility.voiceMessageDeleted" = "Recording deleted";
+"accessibility.voiceMessageSend" = "Send voice message";
+"accessibility.conversationMessageSent" = "Message sent";
+"accessibility.draftAttachmentLoading" = "%@, loading";
+"accessibility.draftAttachmentFailed" = "%@, unable to load";
+"accessibility.draftAttachmentsDiscarded" = "Attachments removed";
 "accessibility.conversationRowUnreadCount" = "%@ 個未讀訊息";
 "accessibility.conversationRowBlocked" = "已封鎖對話";
 "accessibility.conversationRowSyncing" = "同步進行中";
@@ -663,13 +677,15 @@
 "accessibility.messageBubbleEdited" = "已编辑";
 "accessibility.messageBubbleRead" = "已閱讀";
 "accessibility.messageBubbleUnread" = "未讀<br>";
-"accessibility.textNotAvailable" = "在 %@ 收到空白文字訊息。訊息寄送或者出現了問題。";
-"accessibility.fileTransferNoName" = "在 %@ 收到檔案，檔案名不可用";
+"accessibility.messageReceivedDate" = "已接收";
+"accessibility.messageSentDate" = "已发送";
+"accessibility.textEmpty" = "收到空文本消息。此消息可能未正确发送。";
+"accessibility.fileTransferUnnamed" = "已收到文件，但名称不可用";
 "accessibility.inReply" = "在回覆中";
-"accessibility.text.receivedOn" = "在 %2@ 收到訊息： %1@";
-"accessibility.text.sentOn" = "在 %2@ 發出訊息： %1@";
-"accessibility.fileTransfer.receivedOn" = "在 %2@ 收到檔案： %1@";
-"accessibility.fileTransfer.sentOn" = "在 %2@ 發送檔案： %1@";
+"accessibility.text.received" = "%@，已收到消息";
+"accessibility.text.sent" = "%@, 已收到消息";
+"accessibility.fileTransfer.received" = "文件：%@，已接收";
+"accessibility.fileTransfer.sent" = "文件：%@，已发送";
 "accessibility.call.lasted" = "持续%@";
 "accessibility.calls.default.toggleAudio" = "关闭麦克风";
 "accessibility.calls.default.toggleVideo" = "启动摄像头";
@@ -805,7 +821,7 @@
 "collab.italic" = "斜體";
 "collab.underline" = "下划线";
 "collab.strikethrough" = "刪除線";
-"collab.textFormat" = "Text format";
+"collab.textFormat" = "‌文本格式";
 "collab.heading" = "标题%d";
 "collab.bulletList" = "项目符号列表";
 "collab.orderedList" = "编号列表";
@@ -817,13 +833,13 @@
 "collab.clearFormat" = "清除格式";
 "collab.undo" = "復原";
 "collab.redo" = "取消復原";
-"collab.paragraphStyle" = "Style";
-"collab.normalText" = "Normal text";
-"collab.font" = "Font";
-"collab.defaultFont" = "Default font";
-"collab.unavailableFont" = "Unavailable font";
+"collab.paragraphStyle" = "‌样式";
+"collab.normalText" = "‌正文";
+"collab.font" = "字体";
+"collab.defaultFont" = "‌默认字体";
+"collab.unavailableFont" = "‌字体不可用";
 "collab.fontSize" = "大小";
-"collab.defaultSize" = "Default size";
+"collab.defaultSize" = "‌默认大小";
 "collab.alignment" = "段落对齐";
 "collab.remove" = "删除";
 "collab.open" = "開啟";
@@ -846,3 +862,4 @@
 "collab.documentRemovedMessage" = "\"%@\"已由发布者撤回";
 "collab.documentRemovedLocally" = "文档已从此设备移除";
 "collab.documentRemovedLocallyMessage" = "\"%@\"已不在当前设备中，重新打开即可再次下载";
+"collab.documentShared" = "新文档: %@";

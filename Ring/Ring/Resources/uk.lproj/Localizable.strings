@@ -143,7 +143,6 @@
 "contactPicker.contacts" = "Контакти";
 
 // Smartlist
-"smartlist.yesterday" = "Учора";
 "smartlist.results" = "Jami search";
 "smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "Групові чати";
@@ -179,6 +178,7 @@
 "conversation.addToContactsLabel" = "Додати до контактів?";
 "conversation.notContactLabel" = "%@ немає у списку контактів";
 "conversation.messagePlaceholder" = "Написати";
+"conversation.voiceMessageUnavailableInCall" = "Voice messages are unavailable during a call";
 "conversation.imageSaved" = "Збережено";
 "conversation.errorSavingImage" = "Не вдалося зберегти зображення";
 "conversation.errorSavingImageMessage" = "Під час збереження зображення до фотоальбому сталася помилка.";
@@ -559,8 +559,8 @@
 "notifications.locationSharingStopped" = "Дохідний обмін місцем розташування припинено";
 "dataTransfer.readableStatusDecline" = "Відхилити";
 "dataTransfer.readableStatusAccept" = "Прийняти";
-"dataTransfer.infoMessage" = "Торкніться, щоб розпочати запис";
 "dataTransfer.sendMessage" = "Відправити";
+"dataTransfer.retake" = "Retake";
 
 
 // Generated Message
@@ -647,6 +647,20 @@
 "accessibility.conversationCameraHint" = "Двічі торкніться, щоб відкрити камеру";
 "accessibility.audioPlayerPlay" = "Програти";
 "accessibility.audioPlayerPause" = "Пауза";
+"accessibility.audioPlayerMute" = "Без звуку";
+"accessibility.audioPlayerUnmute" = "Увімкнути звук";
+"accessibility.audioPlayerSeek" = "Seek";
+"accessibility.audioPlayerElapsedTime" = "Elapsed time";
+"accessibility.audioPlayerDuration" = "Тривалість";
+"accessibility.audioPlayerUnavailable" = "Audio unavailable";
+"accessibility.voiceMessageRecording" = "Записування";
+"accessibility.voiceMessageStop" = "Зупинити запис";
+"accessibility.voiceMessageDeleted" = "Recording deleted";
+"accessibility.voiceMessageSend" = "Send voice message";
+"accessibility.conversationMessageSent" = "Message sent";
+"accessibility.draftAttachmentLoading" = "%@, loading";
+"accessibility.draftAttachmentFailed" = "%@, unable to load";
+"accessibility.draftAttachmentsDiscarded" = "Attachments removed";
 "accessibility.conversationRowUnreadCount" = "%@ непрочитаних повідомлень.";
 "accessibility.conversationRowBlocked" = "Розмову заблоковано";
 "accessibility.conversationRowSyncing" = "Триває синхронізація";
@@ -663,13 +677,15 @@
 "accessibility.messageBubbleEdited" = "Редагування";
 "accessibility.messageBubbleRead" = "Прочитано";
 "accessibility.messageBubbleUnread" = "Непрочитано";
-"accessibility.textNotAvailable" = "На %@ отримано порожнє текстове повідомлення. Можливо, його було надіслано неправильно.";
-"accessibility.fileTransferNoName" = "Файл отримано %@, ім'я недоступне";
+"accessibility.messageReceivedDate" = "Вхідний";
+"accessibility.messageSentDate" = "Вихідний";
+"accessibility.textEmpty" = "Empty text message received. This might not have been sent correctly.";
+"accessibility.fileTransferUnnamed" = "File received, name not available";
 "accessibility.inReply" = "У відповідь на повідомлення";
-"accessibility.text.receivedOn" = "%1@, повідомлення отримано %2@";
-"accessibility.text.sentOn" = "%1@, повідомлення надіслано %2@";
-"accessibility.fileTransfer.receivedOn" = "Файл: %1@, отримано %2@";
-"accessibility.fileTransfer.sentOn" = "Файл: %1@, надіслано %2@";
+"accessibility.text.received" = "%@, message received";
+"accessibility.text.sent" = "%@, message sent";
+"accessibility.fileTransfer.received" = "File: %@, received";
+"accessibility.fileTransfer.sent" = "File: %@, sent";
 "accessibility.call.lasted" = "Тривав %@";
 "accessibility.calls.default.toggleAudio" = "Відключити мікрофон";
 "accessibility.calls.default.toggleVideo" = "Запустити камеру";
@@ -846,3 +862,4 @@
 "collab.documentRemovedMessage" = "\"%@\" was removed by its author.";
 "collab.documentRemovedLocally" = "Document removed from this device";
 "collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";
+"collab.documentShared" = "New document: %@";

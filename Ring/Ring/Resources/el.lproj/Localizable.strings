@@ -143,7 +143,6 @@
 "contactPicker.contacts" = "Επαφές";
 
 // Smartlist
-"smartlist.yesterday" = "Χθες";
 "smartlist.results" = "Jami search";
 "smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "Συνομιλίες";
@@ -179,6 +178,7 @@
 "conversation.addToContactsLabel" = "Προσθήκη στις επαφές;";
 "conversation.notContactLabel" = "Ο/Η %@ δεν είναι στη λίστα επαφών";
 "conversation.messagePlaceholder" = "Γράψτε προς";
+"conversation.voiceMessageUnavailableInCall" = "Voice messages are unavailable during a call";
 "conversation.imageSaved" = "Αποθηκεύτηκε";
 "conversation.errorSavingImage" = "Δεν ήταν δυνατή η αποθήκευση της εικόνας";
 "conversation.errorSavingImageMessage" = "Παρουσιάστηκε σφάλμα κατά την αποθήκευση της εικόνας στη βιβλιοθήκη φωτογραφιών.";
@@ -559,8 +559,8 @@
 "notifications.locationSharingStopped" = "Η συμμετοχή των εισερχόμενων τοποθεσιών σταμάτησε";
 "dataTransfer.readableStatusDecline" = "Απόρριψη κλήσης";
 "dataTransfer.readableStatusAccept" = "Αποδοχή";
-"dataTransfer.infoMessage" = "Πατήστε για να ξεκινήσει η εγγραφή";
 "dataTransfer.sendMessage" = "Αποστολή";
+"dataTransfer.retake" = "Retake";
 
 
 // Generated Message
@@ -647,6 +647,20 @@
 "accessibility.conversationCameraHint" = "Πατήστε δύο φορές για άνοιγμα της κάμερας";
 "accessibility.audioPlayerPlay" = "Αναπαραγωγή";
 "accessibility.audioPlayerPause" = "Παύση";
+"accessibility.audioPlayerMute" = "Mute";
+"accessibility.audioPlayerUnmute" = "Unmute";
+"accessibility.audioPlayerSeek" = "Seek";
+"accessibility.audioPlayerElapsedTime" = "Elapsed time";
+"accessibility.audioPlayerDuration" = "Duration";
+"accessibility.audioPlayerUnavailable" = "Audio unavailable";
+"accessibility.voiceMessageRecording" = "Recording";
+"accessibility.voiceMessageStop" = "Stop recording";
+"accessibility.voiceMessageDeleted" = "Recording deleted";
+"accessibility.voiceMessageSend" = "Send voice message";
+"accessibility.conversationMessageSent" = "Message sent";
+"accessibility.draftAttachmentLoading" = "%@, loading";
+"accessibility.draftAttachmentFailed" = "%@, unable to load";
+"accessibility.draftAttachmentsDiscarded" = "Attachments removed";
 "accessibility.conversationRowUnreadCount" = "%@ μη αναγνωσμένα μηνύματα.";
 "accessibility.conversationRowBlocked" = "Η συνομιλία αποκλείστηκε";
 "accessibility.conversationRowSyncing" = "Συγχρονισμός σε εξέλιξη";
@@ -663,13 +677,15 @@
 "accessibility.messageBubbleEdited" = "Επορθωμένο";
 "accessibility.messageBubbleRead" = "Αναγνωσμένο";
 "accessibility.messageBubbleUnread" = "Μη αναγνωσμένο";
-"accessibility.textNotAvailable" = "Ελήφθη κενό μήνυμα κειμένου στις %@. Ενδέχεται να μην στάλθηκε σωστά.";
-"accessibility.fileTransferNoName" = "Το αρχείο ελήφθη στις %@, το όνομα δεν είναι διαθέσιμο";
+"accessibility.messageReceivedDate" = "Παραλήφθηκε";
+"accessibility.messageSentDate" = "Αποστολή";
+"accessibility.textEmpty" = "Empty text message received. This might not have been sent correctly.";
+"accessibility.fileTransferUnnamed" = "File received, name not available";
 "accessibility.inReply" = "Σε απάντηση στο μήνυμα";
-"accessibility.text.receivedOn" = "%1@, μήνυμα που ελήφθη στις %2@";
-"accessibility.text.sentOn" = "%1@, μήνυμα που στάλθηκε στις %2@";
-"accessibility.fileTransfer.receivedOn" = "Αρχείο: %1@, ελήφθη στις %2@";
-"accessibility.fileTransfer.sentOn" = "Αρχείο: %1@, στάλθηκε στις %2@";
+"accessibility.text.received" = "%@, message received";
+"accessibility.text.sent" = "%@, message sent";
+"accessibility.fileTransfer.received" = "File: %@, received";
+"accessibility.fileTransfer.sent" = "File: %@, sent";
 "accessibility.call.lasted" = "Διήρκεσε %@";
 "accessibility.calls.default.toggleAudio" = "Σίγαση μικροφώνου";
 "accessibility.calls.default.toggleVideo" = "Έναρξη κάμερας";
@@ -846,3 +862,4 @@
 "collab.documentRemovedMessage" = "\"%@\" was removed by its author.";
 "collab.documentRemovedLocally" = "Document removed from this device";
 "collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";
+"collab.documentShared" = "New document: %@";

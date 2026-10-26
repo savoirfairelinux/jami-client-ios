@@ -143,7 +143,6 @@
 "contactPicker.contacts" = "Kapcsolattartók";
 
 // Smartlist
-"smartlist.yesterday" = "Tegnap";
 "smartlist.results" = "Jami search";
 "smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "Beszélgetések";
@@ -179,6 +178,7 @@
 "conversation.addToContactsLabel" = "Hozzáadás a kapcsolattartók közé?";
 "conversation.notContactLabel" = "%@ nem szerepel a kapcsolattartólistáján";
 "conversation.messagePlaceholder" = "Írás a következő(k)nek:";
+"conversation.voiceMessageUnavailableInCall" = "Voice messages are unavailable during a call";
 "conversation.imageSaved" = "Mentve";
 "conversation.errorSavingImage" = "A kép nem menthető";
 "conversation.errorSavingImageMessage" = "Hiba történt a kép fényképtárba mentése közben.";
@@ -559,8 +559,8 @@
 "notifications.locationSharingStopped" = "Bejövő tartózkodási hely megosztása leállítva";
 "dataTransfer.readableStatusDecline" = "Elutasítás";
 "dataTransfer.readableStatusAccept" = "Elfogadás";
-"dataTransfer.infoMessage" = "Koppintson a felvétel elindításához";
 "dataTransfer.sendMessage" = "Küldés";
+"dataTransfer.retake" = "Retake";
 
 
 // Generated Message
@@ -647,6 +647,20 @@
 "accessibility.conversationCameraHint" = "Koppintson duplán a fényképezőgép megnyitásához";
 "accessibility.audioPlayerPlay" = "Lejátszás";
 "accessibility.audioPlayerPause" = "Megállítás";
+"accessibility.audioPlayerMute" = "Elnémítás";
+"accessibility.audioPlayerUnmute" = "Unmute";
+"accessibility.audioPlayerSeek" = "Seek";
+"accessibility.audioPlayerElapsedTime" = "Elapsed time";
+"accessibility.audioPlayerDuration" = "Időtartam";
+"accessibility.audioPlayerUnavailable" = "Audio unavailable";
+"accessibility.voiceMessageRecording" = "Felvétel";
+"accessibility.voiceMessageStop" = "Felvétel leállítása";
+"accessibility.voiceMessageDeleted" = "Recording deleted";
+"accessibility.voiceMessageSend" = "Send voice message";
+"accessibility.conversationMessageSent" = "Message sent";
+"accessibility.draftAttachmentLoading" = "%@, loading";
+"accessibility.draftAttachmentFailed" = "%@, unable to load";
+"accessibility.draftAttachmentsDiscarded" = "Attachments removed";
 "accessibility.conversationRowUnreadCount" = "%@ olvasatlan üzenet.";
 "accessibility.conversationRowBlocked" = "Beszélgetés letiltva";
 "accessibility.conversationRowSyncing" = "Összehangolás folyamatban";
@@ -663,13 +677,15 @@
 "accessibility.messageBubbleEdited" = "Szerkesztve";
 "accessibility.messageBubbleRead" = "Olvasott";
 "accessibility.messageBubbleUnread" = "Olvasatlan";
-"accessibility.textNotAvailable" = "Üres szöveges üzenet érkezésének ideje: %@. Lehet, hogy az üzenetet nem küldték el megfelelően.";
-"accessibility.fileTransferNoName" = "Fájl érkezésének ideje: %@, nincs elérhető név";
+"accessibility.messageReceivedDate" = "Érkezett";
+"accessibility.messageSentDate" = "Elküldve";
+"accessibility.textEmpty" = "Empty text message received. This might not have been sent correctly.";
+"accessibility.fileTransferUnnamed" = "File received, name not available";
 "accessibility.inReply" = "Válasz az üzenetre";
-"accessibility.text.receivedOn" = "%1@, az üzenet érkezésének ideje: %2@";
-"accessibility.text.sentOn" = "%1@, az üzenet küldésének ideje: %2@";
-"accessibility.fileTransfer.receivedOn" = "A(z) %1@ fájl érkezésének ideje: %2@";
-"accessibility.fileTransfer.sentOn" = "A(z) %1@ fájl küldésének ideje: %2@";
+"accessibility.text.received" = "%@, message received";
+"accessibility.text.sent" = "%@, message sent";
+"accessibility.fileTransfer.received" = "File: %@, received";
+"accessibility.fileTransfer.sent" = "File: %@, sent";
 "accessibility.call.lasted" = "%@ tartott";
 "accessibility.calls.default.toggleAudio" = "Mikrofon elnémítása";
 "accessibility.calls.default.toggleVideo" = "Fényképezőgép indítása";
@@ -846,3 +862,4 @@
 "collab.documentRemovedMessage" = "\"%@\" was removed by its author.";
 "collab.documentRemovedLocally" = "Document removed from this device";
 "collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";
+"collab.documentShared" = "New document: %@";
