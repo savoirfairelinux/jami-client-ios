@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ce39b32_f81c3867",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessageBubbleView.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-26T18:16:14Z",
+      "side": 1,
+      "message": "[warning] Line 104: 🟡 This hardcodes URL-preview time text to `.conversationSecondaryText`, which bypasses `model.timeColor` and can reduce contrast for outgoing bubbles (where `timeColor` is now derived from `palette.sentTime`). Use `model.timeColor` here to keep outgoing/incoming timestamp contrast consistent with the rest of message rendering.",
+      "revId": "c0658feac4d42fade49b89f639b2e92c38d6b281",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
