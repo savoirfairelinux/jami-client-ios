@@ -555,6 +555,7 @@
 		9F5F2102C5C96402A066ADA0 /* GroupAvatarRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE00A4B452D77EC0CA26ED4 /* GroupAvatarRenderer.swift */; };
 		A1D0C0DE0000000000000B02 /* CallsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D0C0DE0000000000000B01 /* CallsManager.swift */; };
 		A7MG00102F20000300000004 /* MessageGroupingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7MG00102F20000300000003 /* MessageGroupingTests.swift */; };
+		A7MG00102F20000300000006 /* ReactionsContainerModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7MG00102F20000300000005 /* ReactionsContainerModelTests.swift */; };
 		A1D0C0DE0000000000000C11 /* ConversationEventOrderingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D0C0DE0000000000000C12 /* ConversationEventOrderingTests.swift */; };
 		A1D0C0DE0000000000000C13 /* ObjCMockConversationsAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D0C0DE0000000000000C14 /* ObjCMockConversationsAdapter.m */; };
 		A7F100010000000000000001 /* GifHelpersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F100020000000000000002 /* GifHelpersTests.swift */; };
@@ -1796,6 +1797,7 @@
 		66F295DD2166A5930044ED6F /* Devices+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Devices+Helpers.swift"; sourceTree = "<group>"; };
 		A1D0C0DE0000000000000B01 /* CallsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallsManager.swift; sourceTree = "<group>"; };
 		A7MG00102F20000300000003 /* MessageGroupingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageGroupingTests.swift; sourceTree = "<group>"; };
+		A7MG00102F20000300000005 /* ReactionsContainerModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionsContainerModelTests.swift; sourceTree = "<group>"; };
 		A1D0C0DE0000000000000C12 /* ConversationEventOrderingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationEventOrderingTests.swift; sourceTree = "<group>"; };
 		A1D0C0DE0000000000000C14 /* ObjCMockConversationsAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjCMockConversationsAdapter.m; sourceTree = "<group>"; };
 		A1D0C0DE0000000000000C15 /* ObjCMockConversationsAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjCMockConversationsAdapter.h; sourceTree = "<group>"; };
@@ -3327,6 +3329,7 @@
 			isa = PBXGroup;
 			children = (
 				A7MG00102F20000300000003 /* MessageGroupingTests.swift */,
+				A7MG00102F20000300000005 /* ReactionsContainerModelTests.swift */,
 				A1D0C0DE0000000000000C12 /* ConversationEventOrderingTests.swift */,
 				260AE62629B8E89300D66D5E /* JamiSearchViewModelTests.swift */,
 				260AE62E29BA3B6900D66D5E /* ConversationModelTests.swift */,
@@ -4574,6 +4577,7 @@
 				A7F100010000000000000001 /* GifHelpersTests.swift in Sources */,
 				260AE63329BA5DF600D66D5E /* SwarmInfoTests.swift in Sources */,
 				A7MG00102F20000300000004 /* MessageGroupingTests.swift in Sources */,
+				A7MG00102F20000300000006 /* ReactionsContainerModelTests.swift in Sources */,
 				A1D0C0DE0000000000000C11 /* ConversationEventOrderingTests.swift in Sources */,
 				A1D0C0DE0000000000000C13 /* ObjCMockConversationsAdapter.m in Sources */,
 				26AVATAR0129BA000000000001 /* AvatarProviderTests.swift in Sources */,

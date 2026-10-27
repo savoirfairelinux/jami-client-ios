@@ -57,10 +57,6 @@ extension View {
             .contentShape(Rectangle())
     }
 
-    func measureSize() -> some View {
-        self.modifier(MeasureSizeModifier())
-    }
-
     func shadowForConversation() -> some View {
         self.shadow(color: Color(UIColor.quaternaryLabel), radius: 2, x: 1, y: 2)
     }
@@ -348,6 +344,14 @@ private struct DrawsMessageBubbleKey: EnvironmentKey {
     static let defaultValue: Bool = true
 }
 
+private struct MessageListWidthKey: EnvironmentKey {
+    static let defaultValue: CGFloat = 0
+}
+
+private struct MessageReactionsMaxWidthKey: EnvironmentKey {
+    static let defaultValue: CGFloat = 0
+}
+
 extension EnvironmentValues {
     var suppressLongPress: Bool {
         get { self[SuppressLongPressKey.self] }
@@ -362,6 +366,16 @@ extension EnvironmentValues {
     var drawsMessageBubble: Bool {
         get { self[DrawsMessageBubbleKey.self] }
         set { self[DrawsMessageBubbleKey.self] = newValue }
+    }
+
+    var messageListWidth: CGFloat {
+        get { self[MessageListWidthKey.self] }
+        set { self[MessageListWidthKey.self] = newValue }
+    }
+
+    var messageReactionsMaxWidth: CGFloat {
+        get { self[MessageReactionsMaxWidthKey.self] }
+        set { self[MessageReactionsMaxWidthKey.self] = newValue }
     }
 }
 

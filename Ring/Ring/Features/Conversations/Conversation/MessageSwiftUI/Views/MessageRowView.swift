@@ -70,6 +70,8 @@ struct MessageRowView: View {
     @ObservedObject var model: MessageRowVM
     @Environment(\.avatarProviderFactory)
     var avatarFactory: AvatarProviderFactory?
+    @Environment(\.messageListWidth)
+    private var messageListWidth
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             if let daySeparatorText = model.daySeparatorText {
@@ -102,7 +104,7 @@ struct MessageRowView: View {
             }
         }
         .padding(.bottom, model.bottomSpace)
-        .padding(.horizontal, 5)
+        .padding(.horizontal, Layout.rowHorizontalPadding)
     }
 
     private func bubbleRow() -> some View {
@@ -112,6 +114,7 @@ struct MessageRowView: View {
                     .padding(.horizontal, Layout.avatarHorizontalPadding)
             }
             MessageStackView(messageModel: messageModel, model: messageModel.stackViewModel, onLongPress: onLongPress, showReactionsView: showReactionsView)
+                .environment(\.messageReactionsMaxWidth, reactionsMaxWidth)
             if !model.incoming {
                 sentStatus()
                     .padding(.leading, Layout.sentStatusSpacing)
@@ -128,19 +131,32 @@ struct MessageRowView: View {
         return model.reservesAvatarSlot ? 0 : Layout.oneToOneLeadingSpace
     }
 
+    private var reactionsMaxWidth: CGFloat {
+        guard messageListWidth > 0 else { return 0 }
+        let anchoredSideInset: CGFloat
+        if !model.incoming {
+            anchoredSideInset = Layout.sentStatusSpacing + Layout.sentStatusSize
+        } else if model.reservesAvatarSlot {
+            anchoredSideInset = Constants.AvatarSize.conversation30.rawValue + 2 * Layout.avatarHorizontalPadding
+        } else {
+            anchoredSideInset = Layout.oneToOneLeadingSpace
+        }
+        return max(1, messageListWidth - 2 * Layout.rowHorizontalPadding - anchoredSideInset)
+    }
+
     @ViewBuilder
     private func sentStatus() -> some View {
         if model.showReciveIndicator {
             Image("messageSentIndicator")
                 .resizable()
-                .frame(width: 13, height: 13)
+                .frame(width: Layout.sentStatusSize, height: Layout.sentStatusSize)
         } else if model.showSentIndicator {
             Circle()
                 .strokeBorder(Color.gray, lineWidth: 1)
                 .frame(width: 12, height: 12)
         } else {
             Color.clear
-                .frame(width: 13, height: 13)
+                .frame(width: Layout.sentStatusSize, height: Layout.sentStatusSize)
         }
     }
 
@@ -199,6 +215,8 @@ struct MessageRowView: View {
         static let avatarHorizontalPadding: CGFloat = 10
         static let oppositeSideInset: CGFloat = 50
         static let sentStatusSpacing: CGFloat = 2
+        static let sentStatusSize: CGFloat = 13
+        static let rowHorizontalPadding: CGFloat = 5
         static let centeredMessageMargin: CGFloat = 30
         static let daySeparatorHorizontalPadding: CGFloat = 10
         static let daySeparatorVerticalPadding: CGFloat = 4

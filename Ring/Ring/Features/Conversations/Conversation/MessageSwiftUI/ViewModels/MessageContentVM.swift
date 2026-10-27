@@ -157,6 +157,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     @Published var editionColor = Color.secondary
     @Published private(set) var isEmojiOnly = false
     @Published private(set) var endsEmojiRun = true
+    @Published private(set) var hasReactions = false
     @Published var scale: CGFloat = 1
     var url: URL?
     var fileSize: Int64 = 0
@@ -307,6 +308,10 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
         !type.isContact && !isEmojiOnly
     }
 
+    var reactionTint: Color {
+        Color(palette.receivedBackground)
+    }
+
     private var contrastBackgroundUIColor: UIColor = .clear
     private(set) var replyQuoteAccentColor: Color = .clear
 
@@ -450,6 +455,20 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
 
     func setEndsEmojiRun(_ endsEmojiRun: Bool) {
         self.endsEmojiRun = endsEmojiRun
+    }
+
+    func setHasReactions(_ hasReactions: Bool) {
+        if self.hasReactions != hasReactions {
+            self.hasReactions = hasReactions
+        }
+    }
+
+    var showsTimeBelowEmoji: Bool {
+        endsEmojiRun && !hasReactions
+    }
+
+    var showsTimeBelowReactions: Bool {
+        isEmojiOnly && endsEmojiRun && hasReactions
     }
 
     func setSequencing(sequencing: MessageSequencing) {
