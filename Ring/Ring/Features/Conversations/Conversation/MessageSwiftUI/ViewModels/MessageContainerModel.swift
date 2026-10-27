@@ -87,8 +87,13 @@ class MessageContainerModel: Identifiable, Equatable {
 
     var sequencing: MessageSequencing = .unknown {
         didSet {
-            self.messageContent.setSequencing(sequencing: sequencing)
             self.messageRow.setSequencing(sequencing: sequencing)
+        }
+    }
+
+    var bubbleSequencing: MessageSequencing = .unknown {
+        didSet {
+            self.messageContent.setSequencing(sequencing: bubbleSequencing)
         }
     }
 
@@ -105,7 +110,8 @@ class MessageContainerModel: Identifiable, Equatable {
         self.collabDocViewModel = message.type == .collabDocument
             ? CollabDocMessageVM(message: message, contextMenuState: contextMenuState) : nil
         self.replyTarget = MessageReplyTargetVM(contextMenuState: contextMenuState, localJamiId: localJamiId, isIncoming: message.incoming)
-        self.reactionsModel = ReactionsContainerModel(message: message)
+        self.reactionsModel = ReactionsContainerModel(message: message, localJamiId: localJamiId)
+        self.messageContent.setHasReactions(!message.reactions.isEmpty)
     }
 
     func listenerForInfoStateAdded() {
@@ -159,6 +165,7 @@ class MessageContainerModel: Identifiable, Equatable {
         self.contactViewModel.message = message
         self.collabDocViewModel?.message = message
         self.reactionsModel.message = message
+        self.messageContent.setHasReactions(!message.reactions.isEmpty)
     }
 
     func displayLastSent(state: Bool) {

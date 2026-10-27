@@ -21,6 +21,7 @@ import Foundation
 struct MessageGrouping {
     let startsNewDay: Bool
     let sequencing: MessageSequencing
+    let bubbleSequencing: MessageSequencing
     let endsEmojiRun: Bool
     let displaysName: Bool
     let displaysAvatar: Bool
@@ -42,6 +43,7 @@ struct MessageGrouping {
             let showsContactInfo = isGroupConversation && message.incoming
             return MessageGrouping(startsNewDay: boundaries[index].startsNewDay,
                                    sequencing: sequencing,
+                                   bubbleSequencing: bubbleSequencing(sequencing, at: index, in: messages),
                                    endsEmojiRun: endsEmojiRun(at: index, in: messages, boundaries: boundaries),
                                    displaysName: showsContactInfo && isFirst && !message.isReply(),
                                    displaysAvatar: showsContactInfo && isLast)
@@ -94,6 +96,17 @@ struct MessageGrouping {
         let endsSequence = index > 0
             ? boundaries[index - 1].startsNewGroup || isBreakingSequence(older: message, newer: messages[index - 1])
             : true
+        return sequencing(startsSequence: startsSequence, endsSequence: endsSequence)
+    }
+
+    private static func bubbleSequencing(_ sequencing: MessageSequencing, at index: Int, in messages: [MessageModel]) -> MessageSequencing {
+        let olderHasReactions = index + 1 < messages.count && !messages[index + 1].reactions.isEmpty
+        let startsSequence = sequencing == .singleMessage || sequencing == .firstOfSequence || olderHasReactions
+        let endsSequence = sequencing == .singleMessage || sequencing == .lastOfSequence || !messages[index].reactions.isEmpty
+        return self.sequencing(startsSequence: startsSequence, endsSequence: endsSequence)
+    }
+
+    private static func sequencing(startsSequence: Bool, endsSequence: Bool) -> MessageSequencing {
         switch (startsSequence, endsSequence) {
         case (true, true):
             return .singleMessage

@@ -50,16 +50,35 @@ class ReactionsRowViewModel: Identifiable, ObservableObject, NameObserver {
     }
 }
 
+struct ReactionSegment: Identifiable, Equatable {
+    let emoji: String
+    let count: Int
+    let includesLocalAccount: Bool
+
+    var id: String { emoji }
+}
+
+struct ReactionColors {
+    let background: Color
+    let text: Color
+}
+
 class ReactionsContainerModel: ObservableObject {
     @Published var reactionsRow = [ReactionsRowViewModel]()
-    @Published var displayValue: String = ""
+    @Published private(set) var segments = [ReactionSegment]()
+    @Published private(set) var hiddenSegmentsCount = 0
+    @Published private(set) var accessibilityValue = ""
     var message: MessageModel
+    private let localJamiId: String
     private var infoState: PublishSubject<State>?
     var reactionsRowCreated = false
 
-    init(message: MessageModel) {
+    private static let maxVisibleSegments = 4
+
+    init(message: MessageModel, localJamiId: String) {
         self.message = message
-        self.updateDisplayValue()
+        self.localJamiId = localJamiId
+        self.updateSegments()
     }
 
     func setInfoState(state: PublishSubject<State>) {
@@ -78,15 +97,51 @@ class ReactionsContainerModel: ObservableObject {
     func reactionsUpdated() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            self.updateDisplayValue()
+            self.updateSegments()
             if self.reactionsRowCreated {
                 self.update()
             }
         }
     }
 
-    private func updateDisplayValue() {
-        self.displayValue = self.toString()
+    private func updateSegments() {
+        let reactionsByEmoji: [String: [MessageAction]] = Dictionary(grouping: message.reactions, by: \.content)
+        let all: [ReactionSegment] = reactionsByEmoji
+            .map { makeSegment(emoji: $0.key, reactions: $0.value) }
+            .sorted(by: Self.isOrderedBefore)
+        let visible = Self.visibleSegments(from: all)
+        segments = visible
+        hiddenSegmentsCount = all.count - visible.count
+        accessibilityValue = Self.accessibilityValue(for: visible, hiddenCount: hiddenSegmentsCount)
+    }
+
+    private func makeSegment(emoji: String, reactions: [MessageAction]) -> ReactionSegment {
+        let includesLocalAccount = reactions.contains { $0.author == localJamiId }
+        return ReactionSegment(emoji: emoji, count: reactions.count, includesLocalAccount: includesLocalAccount)
+    }
+
+    private static func isOrderedBefore(_ lhs: ReactionSegment, _ rhs: ReactionSegment) -> Bool {
+        if lhs.count != rhs.count {
+            return lhs.count > rhs.count
+        }
+        return lhs.emoji < rhs.emoji
+    }
+
+    private static func visibleSegments(from sorted: [ReactionSegment]) -> [ReactionSegment] {
+        let top = Array(sorted.prefix(maxVisibleSegments))
+        guard let own = sorted.first(where: { $0.includesLocalAccount }), !top.contains(own) else { return top }
+        return Array(sorted.prefix(maxVisibleSegments - 1)) + [own]
+    }
+
+    private static func accessibilityValue(for segments: [ReactionSegment], hiddenCount: Int) -> String {
+        var parts: [String] = segments.map { segment in
+            let summary = "\(segment.emoji) \(segment.count)"
+            return segment.includesLocalAccount ? L10n.Accessibility.messageReactionIncludingYou(summary) : summary
+        }
+        if hiddenCount > 0 {
+            parts.append(L10n.Accessibility.messageReactionsMore(hiddenCount))
+        }
+        return parts.joined(separator: ", ")
     }
 
     private func updateReaction(reaction: MessageAction) {
@@ -116,24 +171,5 @@ class ReactionsContainerModel: ObservableObject {
         return self.reactionsRow.filter({ reaction in
             reaction.jamiId == jamiId
         }).first
-    }
-
-    private func toString() -> String {
-        let reactions = self.message.reactions.map { reaction in
-            reaction.content
-        }
-
-        return constructString(from: reactions, spaceBetweenCharacters: "  ", spaceBetweenCharAndCount: "")
-    }
-
-    private func constructString(from strings: [String], spaceBetweenCharacters: String, spaceBetweenCharAndCount: String) -> String {
-        let charCounts = Dictionary(strings.map { ($0, 1) }, uniquingKeysWith: +)
-        let result = charCounts
-            .map { (str, count) in
-                count > 1 ? "\(str)\(spaceBetweenCharAndCount)\(count)" : str
-            }
-            .joined(separator: spaceBetweenCharacters)
-
-        return result
     }
 }

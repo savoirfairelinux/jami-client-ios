@@ -19,12 +19,27 @@
 import SwiftUI
 import Combine
 
+struct ConversationContentMaterialModifier<S: Shape>: ViewModifier {
+    let tint: Color
+    let shape: S
+
+    private let tintOpacity: Double = 0.7
+
+    func body(content: Content) -> some View {
+        content.background(shape.fill(tint.opacity(tintOpacity)).background(shape.fill(.regularMaterial)))
+    }
+}
+
 enum NavBarIcon {
     static let glyphSize: CGFloat = 20
     static let tapTarget: CGFloat = 44
 }
 
 extension View {
+    func conversationContentMaterial<S: Shape>(tint: Color, in shape: S) -> some View {
+        modifier(ConversationContentMaterialModifier(tint: tint, shape: shape))
+    }
+
     func placeholder<Content: View>(
         when shouldShow: Bool,
         alignment: Alignment = .center,
@@ -55,10 +70,6 @@ extension View {
             .foregroundColor(.jami)
             .frame(width: NavBarIcon.tapTarget, height: NavBarIcon.tapTarget)
             .contentShape(Rectangle())
-    }
-
-    func measureSize() -> some View {
-        self.modifier(MeasureSizeModifier())
     }
 
     func shadowForConversation() -> some View {
