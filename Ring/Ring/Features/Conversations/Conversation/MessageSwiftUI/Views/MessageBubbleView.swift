@@ -225,7 +225,7 @@ struct MessageBubbleWithTimeWrapper<Content: View>: View {
             VStack(alignment: model.isIncoming ? .leading : .trailing, spacing: 0) {
                 content
                     .applyMessageStyle(model: model)
-                if model.endsEmojiRun {
+                if model.showsTimeBelowEmoji {
                     MessageTimeView(text: model.timeText, color: model.timeColor)
                 }
             }

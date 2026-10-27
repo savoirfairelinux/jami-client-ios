@@ -231,10 +231,8 @@ struct MessageContentView: View {
     @ObservedObject var reactionsModel: ReactionsContainerModel
     var onLongPress: (_ frame: CGRect, _ message: MessageBubbleView) -> Void
     var showReactionsView: (_ message: ReactionsContainerModel?) -> Void
-    @SwiftUI.State private var messageWidth: CGFloat = 0
-    @SwiftUI.State private var reactionsHeight: CGFloat = 20
-    @SwiftUI.State private var reactionsWidth: CGFloat = 0
-    @SwiftUI.State private var emojiAlignment: Alignment = Alignment.bottomTrailing
+    @ScaledMetric(relativeTo: .subheadline)
+    private var reactionsCapsuleHeight = MessageReactionsCapsule.defaultHeight
 
     // swipe to reply
 
@@ -268,29 +266,27 @@ struct MessageContentView: View {
     private let lockThreshold: CGFloat = 12
 
     var body: some View {
-        ZStack(alignment: emojiAlignment) {
+        VStack(alignment: model.isIncoming ? .leading : .trailing, spacing: 0) {
             VStack(alignment: messageModel.replyTarget.alignment) {
                 MessageBubbleView(messageModel: messageModel, model: model, onLongPress: onLongPress)
                     .onAppear {
                         self.model.onAppear()
                     }
-                    .background(GeometryReader { preferences in
-                        Color.clear.onAppear {
-                            if preferences.size.width == 0 || preferences.size.height == 0 { return }
-                            self.messageWidth = preferences.size.width
-                            self.updateAlignment()
-                        }
-                    })
             }
-            .padding(.bottom, !messageModel.hasReactions() ? 0 : reactionsHeight - 6)
-            if messageModel.hasReactions() {
-                renderReactions()
+            .if(model.hasReactions && reactionsOverlapContent) { view in
+                view.mask {
+                    reactionsCutout()
+                }
             }
-        }
-        .onPreferenceChange(SizePreferenceKey.self) { preferences in
-            self.reactionsHeight = preferences.height
-            self.reactionsWidth = preferences.width
-            self.updateAlignment()
+            .overlay(alignment: reactionsAlignment) {
+                if model.hasReactions {
+                    reactions()
+                }
+            }
+            .padding(.bottom, model.hasReactions ? reactionsSpaceBelow : 0)
+            if model.showsTimeBelowReactions {
+                MessageTimeView(text: model.timeText, color: model.timeColor)
+            }
         }
         .scaleEffect(model.scale)
         .suppressLongPress(suppressLongPress)
@@ -334,7 +330,7 @@ struct MessageContentView: View {
         let startIsTrailing = replyStartIsTrailing()
         let iconName = startIsTrailing ? "arrowshape.turn.up.right" : "arrowshape.turn.up.left"
         let edgeSign: CGFloat = startIsTrailing ? 1 : -1
-        let width = max(bubbleWidth, messageWidth)
+        let width = bubbleWidth
         let offsetX = edgeSign * (width / 2 + replyArrowGap) + outwardSign() * dragX
         let screenScale = UIScreen.main.scale
         let alignedOffsetX = (offsetX * screenScale).rounded() / screenScale
@@ -424,38 +420,192 @@ struct MessageContentView: View {
         return location.y > viewHeight - sliderZoneHeight
     }
 
-    private func updateAlignment() {
-        if self.messageWidth < self.reactionsWidth && model.message.incoming {
-            emojiAlignment = Alignment.bottomLeading
-        } else {
-            emojiAlignment = Alignment.bottomTrailing
-        }
+    private var reactionsAlignment: Alignment {
+        model.message.incoming ? .bottomLeading : .bottomTrailing
     }
 
-    private func renderReactions() -> some View {
-        Text(reactionsModel.displayValue)
-            .font(.callout)
-            .fontWeight(.regular)
-            .lineLimit(nil)
-            .lineSpacing(5)
-            .padding(5)
-            .background(Color(UIColor.systemBackground))
-            .cornerRadius(10)
-            .overlay(
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(model.backgroundColor, lineWidth: 0.8)
-            )
-            .padding(.trailing, 10)
-            .padding(.leading, 30)
-            .shadowForConversation()
-            .measureSize()
-            .onLongPressGesture(minimumDuration: 0.5) {
-                self.showReactionsView(reactionsModel)
-            }
+    private func reactions() -> some View {
+        reactionsRow(isCutout: false)
             .onAppear {
                 self.messageModel.reactionsModel.onAppear()
             }
-            .padding(.bottom, 2)
+    }
+
+    private var reactionsSpaceBelow: CGFloat {
+        MessageReactionsCapsule.spaceBelow(height: reactionsCapsuleHeight, overlapsContent: reactionsOverlapContent)
+    }
+
+    private var reactionsOverlapContent: Bool {
+        model.hasBubbleBackground || model.isEmojiOnly
+    }
+
+    private func reactionsCutout() -> some View {
+        ZStack {
+            Rectangle()
+                .padding(-MessageReactionsCapsule.cutoutMaskOverflow)
+            Color.clear
+                .overlay(alignment: reactionsAlignment) {
+                    reactionsRow(isCutout: true)
+                        .blendMode(.destinationOut)
+                }
+        }
+        .compositingGroup()
+    }
+
+    private func reactionsRow(isCutout: Bool) -> some View {
+        HStack(spacing: 0) {
+            Spacer(minLength: 0)
+            MessageReactionsCapsule(model: reactionsModel,
+                                    colors: model.reactionColors,
+                                    height: reactionsCapsuleHeight,
+                                    insetsFromBubbleEdges: model.hasBubbleBackground,
+                                    isCutout: isCutout) {
+                self.showReactionsView(reactionsModel)
+            }
+        }
+        .offset(y: reactionsSpaceBelow)
+    }
+}
+
+private struct MessageReactionsCapsule: View {
+    static let defaultHeight: CGFloat = 24
+    private static let fillOverlap: CGFloat = 6
+    private static let ringWidth: CGFloat = 2
+    private static let bubbleOverlap: CGFloat = fillOverlap + ringWidth
+    private static let contentGap: CGFloat = 2
+    static let cutoutMaskOverflow: CGFloat = 100
+
+    static func spaceBelow(height: CGFloat, overlapsContent: Bool) -> CGFloat {
+        height + 2 * ringWidth + (overlapsContent ? -bubbleOverlap : contentGap)
+    }
+
+    @ObservedObject var model: ReactionsContainerModel
+    let colors: ReactionColors
+    let height: CGFloat
+    let insetsFromBubbleEdges: Bool
+    let isCutout: Bool
+    let onSelect: () -> Void
+
+    private let bubbleLeadingInset: CGFloat = 30
+    private let bubbleTrailingInset: CGFloat = 10
+    private let segmentSpacing: CGFloat = 2
+    private let segmentPadding: CGFloat = 6
+    private let contentSpacing: CGFloat = 3
+    private let hitExtension: CGFloat = 16
+    private let hitHorizontalExtension: CGFloat = 6
+
+    @Environment(\.messageReactionsMaxWidth)
+    private var maxWidth
+    @Environment(\.sizeCategory)
+    private var sizeCategory
+
+    var body: some View {
+        let fonts = ReactionsCapsuleFonts(sizeCategory: sizeCategory)
+        let summary = model.summary(fitting: maxWidth) { width(of: $0, fonts: fonts) }
+        HStack(spacing: segmentSpacing) {
+            ForEach(summary.segments) { reaction in
+                segment(reaction)
+            }
+            if summary.hiddenCount > 0 {
+                overflowSegment(hiddenCount: summary.hiddenCount)
+            }
+        }
+        .fixedSize(horizontal: true, vertical: false)
+        .frame(height: height)
+        .if(isCutout) { view in
+            view.background(Capsule().fill(Color.black))
+        }
+        .if(!isCutout) { view in
+            view.conversationContentMaterial(tint: colors.background, in: Capsule())
+        }
+        .padding(Self.ringWidth)
+        .background(Capsule().fill(isCutout ? Color.black : Color.clear))
+        .padding(.top, hitExtension)
+        .padding(.horizontal, hitHorizontalExtension)
+        .contentShape(Rectangle())
+        .padding(.top, -hitExtension)
+        .padding(.horizontal, -hitHorizontalExtension)
+        .padding(.leading, insetsFromBubbleEdges ? bubbleLeadingInset - Self.ringWidth : 0)
+        .padding(.trailing, insetsFromBubbleEdges ? bubbleTrailingInset - Self.ringWidth : 0)
+        .onTapGesture {
+            onSelect()
+        }
+        .onLongPressGesture {
+            onSelect()
+        }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(L10n.Accessibility.messageReactions)
+        .accessibilityValue(summary.accessibilityValue)
+        .accessibilityHint(L10n.Accessibility.messageReactionsHint)
+        .accessibilityAddTraits(.isButton)
+        .accessibilityHidden(isCutout)
+    }
+
+    private func segment(_ reaction: ReactionSegment) -> some View {
+        HStack(spacing: contentSpacing) {
+            Text(reaction.emoji)
+                .font(.subheadline)
+            if reaction.count > 1 {
+                countText(String(reaction.count))
+                    .foregroundColor(colors.text)
+            }
+        }
+        .padding(.horizontal, segmentPadding)
+        .frame(maxHeight: .infinity)
+    }
+
+    /// Mirrors the layout of `body`, which never wraps, so the row can be fitted before it is drawn.
+    private func width(of summary: ReactionsSummary, fonts: ReactionsCapsuleFonts) -> CGFloat {
+        var segmentWidths = summary.segments.map { reaction -> CGFloat in
+            var width = fonts.emojiWidth(reaction.emoji) + 2 * segmentPadding
+            if reaction.count > 1 {
+                width += contentSpacing + fonts.countWidth(String(reaction.count))
+            }
+            return width
+        }
+        if summary.hiddenCount > 0 {
+            segmentWidths.append(fonts.countWidth("+" + String(summary.hiddenCount)) + 2 * segmentPadding)
+        }
+        let spacing = segmentSpacing * CGFloat(max(0, segmentWidths.count - 1))
+        let insets = insetsFromBubbleEdges ? bubbleLeadingInset + bubbleTrailingInset - 2 * Self.ringWidth : 0
+        return segmentWidths.reduce(0, +) + spacing + 2 * Self.ringWidth + insets
+    }
+
+    private func overflowSegment(hiddenCount: Int) -> some View {
+        countText("+" + String(hiddenCount))
+            .foregroundColor(.conversationSecondaryText)
+            .padding(.horizontal, segmentPadding)
+            .frame(maxHeight: .infinity)
+    }
+
+    private func countText(_ value: String) -> Text {
+        Text(verbatim: value)
+            .font(Font.footnote.weight(.semibold).monospacedDigit())
+    }
+}
+
+/// UIKit equivalents of the capsule's text styles, for measuring text before layout.
+private struct ReactionsCapsuleFonts {
+    private let emojiFont: UIFont
+    private let countFont: UIFont
+
+    init(sizeCategory: ContentSizeCategory) {
+        let traits = UITraitCollection(preferredContentSizeCategory: UIContentSizeCategory(sizeCategory))
+        emojiFont = UIFont.preferredFont(forTextStyle: .subheadline, compatibleWith: traits)
+        let countSize = UIFont.preferredFont(forTextStyle: .footnote, compatibleWith: traits).pointSize
+        countFont = UIFont.monospacedDigitSystemFont(ofSize: countSize, weight: .semibold)
+    }
+
+    func emojiWidth(_ text: String) -> CGFloat {
+        width(of: text, font: emojiFont)
+    }
+
+    func countWidth(_ text: String) -> CGFloat {
+        width(of: text, font: countFont)
+    }
+
+    private func width(of text: String, font: UIFont) -> CGFloat {
+        ceil((text as NSString).size(withAttributes: [.font: font]).width)
     }
 }
 

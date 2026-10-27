@@ -595,7 +595,11 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
 
     func reactionsUpdated(_ message: MessageModel) {
         guard let container = self.getMessage(messageId: message.id) else { return }
+        let hadReactions = container.hasReactions()
         container.reactionsUpdated(message)
+        if container.hasReactions() != hadReactions {
+            self.computeSequencing()
+        }
     }
 
     func scrolledToTargetReply() {
@@ -1050,6 +1054,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
         for (model, grouping) in zip(self.messagesModels, groupings) {
             model.startsNewDay = grouping.startsNewDay
             model.sequencing = grouping.sequencing
+            model.bubbleSequencing = grouping.bubbleSequencing
             model.endsEmojiRun = grouping.endsEmojiRun
             model.shouldDisplayName = grouping.displaysName
             model.shouldDisplayAvatar = grouping.displaysAvatar
