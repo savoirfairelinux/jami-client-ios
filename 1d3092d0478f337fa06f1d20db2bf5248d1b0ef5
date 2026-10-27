@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "296a7cef_54611ae3",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessageContentView.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-27T17:09:02Z",
+      "side": 1,
+      "message": "[error] Line 468: 🔴 `reactionsRow` always inserts a leading `Spacer`, which pushes chips to the trailing edge even when `reactionsAlignment` is `.bottomLeading` for incoming messages. That defeats the new incoming/outgoing alignment logic and can place incoming reaction chips on the wrong side. Remove the unconditional spacer (or make it conditional on direction) and let the overlay alignment control placement.",
+      "revId": "1d3092d0478f337fa06f1d20db2bf5248d1b0ef5",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
