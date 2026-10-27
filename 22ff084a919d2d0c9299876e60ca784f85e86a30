@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "393a48db_0f7a5e34",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessageReplyTargetVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-27T14:15:08Z",
+      "side": 1,
+      "message": "[warning] Line 94: 🟡 `linkThumbnail`/`requestedLinkMetadata` are only reset when `target` changes, not when the same target’s `metadata` changes (or becomes `nil`). This can leave a stale thumbnail visible for a different/no link. Also, setting `requestedLinkMetadata` before `loadObject` and never clearing it on failure prevents retries for the same metadata object. Reset cached thumbnail state when metadata identity changes, and clear `requestedLinkMetadata` on load failure so later updates can retry.",
+      "revId": "22ff084a919d2d0c9299876e60ca784f85e86a30",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
