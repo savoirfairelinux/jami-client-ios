@@ -956,7 +956,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     }
 
     func configureReply(message: MessageContentVM) {
-        self.messagePanel.configureReplyTo(message: message)
+        self.messagePanel.configureReplyTo(message: message, quote: makeQuote(for: message))
         let name = self.messagePanel.inReplyTo
         UIAccessibility.post(notification: .announcement, argument: name.isEmpty ? L10n.Conversation.inReplyTo : L10n.Conversation.inReplyTo + " " + name)
     }
@@ -976,7 +976,14 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     }
 
     func configureEdit(message: MessageContentVM) {
-        self.messagePanel.configureEdit(message: message)
+        self.messagePanel.configureEdit(message: message, quote: makeQuote(for: message))
+    }
+
+    private func makeQuote(for message: MessageContentVM) -> MessageReplyTargetVM {
+        let localJamiId = self.accountService.getAccount(fromAccountId: self.conversation.accountId)?.jamiId ?? ""
+        let quote = MessageReplyTargetVM(contextMenuState: self.contextStateSubject, localJamiId: localJamiId, isIncoming: message.isIncoming)
+        quote.target = message
+        return quote
     }
 
     func deleteMessage(message: MessageContentVM) {

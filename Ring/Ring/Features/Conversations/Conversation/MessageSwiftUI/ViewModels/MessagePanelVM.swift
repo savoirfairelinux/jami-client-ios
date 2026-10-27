@@ -18,6 +18,7 @@
  */
 
 import Foundation
+import SwiftUI
 import RxSwift
 import Combine
 
@@ -73,6 +74,8 @@ class MessagePanelVM: ObservableObject, MessageAppearanceProtocol {
     @Published var isEdit: Bool = false
     @Published var avatarImage: UIImage?
     @Published var inReplyTo = ""
+    @Published private(set) var quote: MessageReplyTargetVM?
+    @Published private(set) var quoteAccent: Color = .clear
     @Published private(set) var attachments: [DraftAttachment] = []
     /// A collaborative document is a commit in the conversation's repository,
     /// so it can only be started where there is one.
@@ -246,7 +249,7 @@ class MessagePanelVM: ObservableObject, MessageAppearanceProtocol {
         messagePanelState.onNext(MessagePanelState.newCollabDocument)
     }
 
-    func configureReplyTo(message: MessageContentVM) {
+    func configureReplyTo(message: MessageContentVM, quote: MessageReplyTargetVM) {
         cancelEdit()
         if messageToReply?.message.id != message.message.id {
             discardDraftAttachments()
@@ -260,13 +263,20 @@ class MessagePanelVM: ObservableObject, MessageAppearanceProtocol {
                 self.inReplyTo = name
             }
         message.updateUserName()
+        show(quote: quote, of: message)
         isEdit = true
     }
 
-    func configureEdit(message: MessageContentVM) {
+    func configureEdit(message: MessageContentVM, quote: MessageReplyTargetVM) {
         cancelReply()
         messageToEdit = message
+        show(quote: quote, of: message)
         isEdit = true
+    }
+
+    private func show(quote: MessageReplyTargetVM, of message: MessageContentVM) {
+        quoteAccent = Color(UIColor.MessageBubblePalette.palette(for: message.preferencesColor).unbubbledReplyQuoteAccent)
+        self.quote = quote
     }
 
     func cancelReply() {
@@ -278,6 +288,7 @@ class MessagePanelVM: ObservableObject, MessageAppearanceProtocol {
         replyNameSubscription = nil
         inReplyTo = ""
         messageToReply = nil
+        quote = nil
         isEdit = false
     }
 
@@ -290,6 +301,7 @@ class MessagePanelVM: ObservableObject, MessageAppearanceProtocol {
 
     func cancelEdit() {
         messageToEdit = nil
+        quote = nil
         isEdit = false
     }
 

@@ -20,6 +20,7 @@ import Foundation
 import SwiftUI
 import RxSwift
 import Combine
+import LinkPresentation
 
 struct ReplyQuoteLine {
     let text: String
@@ -37,8 +38,11 @@ class MessageReplyTargetVM: ObservableObject {
 
     var target: MessageContentVM? {
         didSet {
+            linkThumbnail = nil
+            requestedLinkMetadata = nil
             guard let target = target else { return }
-            targetSubscription = Publishers.CombineLatest4(target.$username, target.$messageDeleted, target.$content, target.$finalImage)
+            targetSubscription = Publishers.CombineLatest(Publishers.CombineLatest4(target.$username, target.$messageDeleted, target.$content, target.$finalImage),
+                                                          target.$metadata)
                 .dropFirst()
                 .receive(on: DispatchQueue.main)
                 .sink { [weak self] _ in
@@ -49,6 +53,9 @@ class MessageReplyTargetVM: ObservableObject {
         }
     }
     private var targetSubscription: AnyCancellable?
+    private var linkThumbnail: UIImage?
+    private var requestedLinkMetadata: LPLinkMetadata?
+    private static let linkThumbnailSize = CGSize(width: 240, height: 240)
 
     private let localJamiId: String
     private let contextMenuState: PublishSubject<State>
@@ -72,8 +79,24 @@ class MessageReplyTargetVM: ObservableObject {
         let authorId = target.message.authorId
         let name = authorId == localJamiId || authorId.isEmpty ? target.username.withYourselfSuffix() : target.username
         if authorName != name { authorName = name }
-        thumbnail = Self.thumbnail(for: target)
+        thumbnail = Self.thumbnail(for: target) ?? (target.messageDeleted ? nil : linkThumbnail)
         line = Self.quoteLine(for: target, hasThumbnail: thumbnail != nil)
+        loadLinkThumbnailIfNeeded(for: target)
+    }
+
+    private func loadLinkThumbnailIfNeeded(for target: MessageContentVM) {
+        guard linkThumbnail == nil, !target.messageDeleted,
+              let metadata = target.metadata, metadata !== requestedLinkMetadata,
+              let provider = metadata.imageProvider else { return }
+        requestedLinkMetadata = metadata
+        provider.loadObject(ofClass: UIImage.self) { [weak self] image, _ in
+            let thumbnail = (image as? UIImage)?.resizeIntoRectangle(of: MessageReplyTargetVM.linkThumbnailSize)
+            DispatchQueue.main.async {
+                guard let self = self, self.requestedLinkMetadata === metadata, let thumbnail = thumbnail else { return }
+                self.linkThumbnail = thumbnail
+                self.updateQuote()
+            }
+        }
     }
 
     private static func quoteLine(for target: MessageContentVM, hasThumbnail: Bool) -> ReplyQuoteLine {
