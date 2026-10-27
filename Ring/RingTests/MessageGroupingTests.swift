@@ -31,6 +31,10 @@ final class MessageGroupingTests: XCTestCase {
             .updating(change)
     }
 
+    private let reacted: (inout MessageData) -> Void = {
+        $0.reactions.insert(MessageAction(withInfo: ["id": UUID().uuidString, "body": "👍", "author": "author2"]))
+    }
+
     private func groupings(_ oldestFirst: [MessageModel], isGroupConversation: Bool = false) -> [MessageGrouping] {
         return MessageGrouping.groupings(newestFirst: oldestFirst.reversed(),
                                          isGroupConversation: isGroupConversation).reversed()
@@ -88,6 +92,31 @@ final class MessageGroupingTests: XCTestCase {
                                 message(12, content: "😀")])
 
         XCTAssertEqual(result.map(\.endsEmojiRun), [false, true, true])
+    }
+
+    func testBubbleSequencingMatchesSequencingWithoutReactions() {
+        let result = groupings([message(0), message(1), message(2)])
+
+        XCTAssertEqual(result.map(\.bubbleSequencing), result.map(\.sequencing))
+    }
+
+    func testReactionsSplitBubbleSequenceAroundReactedMessage() {
+        let result = groupings([message(0), message(1, reacted), message(2), message(3)])
+
+        XCTAssertEqual(result.map(\.sequencing), [.firstOfSequence, .middleOfSequence, .middleOfSequence, .lastOfSequence])
+        XCTAssertEqual(result.map(\.bubbleSequencing), [.firstOfSequence, .lastOfSequence, .firstOfSequence, .lastOfSequence])
+    }
+
+    func testReactionsOnLastMessageKeepBubbleSequencing() {
+        let result = groupings([message(0), message(1, reacted)])
+
+        XCTAssertEqual(result.map(\.bubbleSequencing), [.firstOfSequence, .lastOfSequence])
+    }
+
+    func testReactionsOnBothNeighborsMakeMiddleMessageSingle() {
+        let result = groupings([message(0, reacted), message(1, reacted), message(2)])
+
+        XCTAssertEqual(result.map(\.bubbleSequencing), [.singleMessage, .singleMessage, .singleMessage])
     }
 
     func testGroupConversationShowsNameOnFirstAndAvatarOnLast() {

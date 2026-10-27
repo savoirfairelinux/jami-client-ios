@@ -87,8 +87,13 @@ class MessageContainerModel: Identifiable, Equatable {
 
     var sequencing: MessageSequencing = .unknown {
         didSet {
-            self.messageContent.setSequencing(sequencing: sequencing)
             self.messageRow.setSequencing(sequencing: sequencing)
+        }
+    }
+
+    var bubbleSequencing: MessageSequencing = .unknown {
+        didSet {
+            self.messageContent.setSequencing(sequencing: bubbleSequencing)
         }
     }
 
@@ -105,7 +110,8 @@ class MessageContainerModel: Identifiable, Equatable {
         self.collabDocViewModel = message.type == .collabDocument
             ? CollabDocMessageVM(message: message, contextMenuState: contextMenuState) : nil
         self.replyTarget = MessageReplyTargetVM(contextMenuState: contextMenuState, localJamiId: localJamiId, isIncoming: message.incoming)
-        self.reactionsModel = ReactionsContainerModel(message: message)
+        self.reactionsModel = ReactionsContainerModel(message: message, localJamiId: localJamiId)
+        self.messageContent.setHasReactions(!message.reactions.isEmpty)
     }
 
     func listenerForInfoStateAdded() {
@@ -133,7 +139,6 @@ class MessageContainerModel: Identifiable, Equatable {
 
     func reactionsUpdated(_ message: MessageModel) {
         self.apply(message)
-        self.reactionsModel.reactionsUpdated()
     }
 
     func messageUpdated(_ message: MessageModel) {
@@ -152,6 +157,7 @@ class MessageContainerModel: Identifiable, Equatable {
     }
 
     private func apply(_ message: MessageModel) {
+        let reactionsChanged = self.message.reactions != message.reactions
         self.message = message
         self.stackViewModel.message = message
         self.messageContent.message = message
@@ -159,6 +165,10 @@ class MessageContainerModel: Identifiable, Equatable {
         self.contactViewModel.message = message
         self.collabDocViewModel?.message = message
         self.reactionsModel.message = message
+        if reactionsChanged {
+            self.reactionsModel.reactionsUpdated()
+        }
+        self.messageContent.setHasReactions(!message.reactions.isEmpty)
     }
 
     func displayLastSent(state: Bool) {

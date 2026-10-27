@@ -63,6 +63,7 @@ struct MessagesListView: View {
     @SwiftUI.State private var presentingMessage: MessageBubbleView?
     @SwiftUI.State private var messageFrame: CGRect?
     @SwiftUI.State private var screenHeight: CGFloat = 0
+    @SwiftUI.State private var messageListWidth: CGFloat = 0
     @SwiftUI.State var isMessageBarFocused: Bool = false
     @SwiftUI.State var keyboardHeight: CGFloat = 0
     @SwiftUI.State private var keyboardWasActiveBeforeMenu: Bool = false
@@ -139,6 +140,14 @@ struct MessagesListView: View {
                     createMessagesStackView()
                         .flipped()
                         .contextMenuActive(contextMenuPresentingState != .none)
+                        .environment(\.messageListWidth, messageListWidth)
+                        .background(
+                            GeometryReader { proxy in
+                                Color.clear
+                                    .onAppear { messageListWidth = proxy.size.width }
+                                    .onChange(of: proxy.size.width) { messageListWidth = $0 }
+                            }
+                        )
                     if !model.atTheBottom {
                         createScrollToBottmView()
                     }

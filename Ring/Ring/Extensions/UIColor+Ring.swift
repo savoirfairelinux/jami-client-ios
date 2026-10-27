@@ -353,6 +353,7 @@ extension UIColor {
         let sentTime: UIColor
         let sentReplyQuoteAccent: UIColor
         let unbubbledReplyQuoteAccent: UIColor
+        let reactionBackground: UIColor
 
         private static let receivedPlaybackControlOpacity: (light: CGFloat, dark: CGFloat) = (0.22, 0.32)
         private static let receivedPlaybackProgressOpacity: (light: CGFloat, dark: CGFloat) = (0.16, 0.24)
@@ -388,6 +389,7 @@ extension UIColor {
             sentTime = sentText.multiplyingAlpha(by: Self.sentTimeOpacity)
             sentReplyQuoteAccent = .messageAccent(matching: sentText, conversationColor: conversationColor, on: sentBackground)
             unbubbledReplyQuoteAccent = .messageAccent(matching: .label, conversationColor: conversationColor, on: .systemBackground)
+            reactionBackground = receivedBackground
         }
     }
 }

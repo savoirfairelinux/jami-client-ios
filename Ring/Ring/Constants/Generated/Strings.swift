@@ -121,6 +121,22 @@ internal enum L10n {
     internal static let messageBubbleRead = L10n.tr("Localizable", "accessibility.messageBubbleRead", fallback: "Read")
     /// Unread
     internal static let messageBubbleUnread = L10n.tr("Localizable", "accessibility.messageBubbleUnread", fallback: "Unread")
+    /// %1$@ %2$d
+    internal static func messageReactionCount(_ p1: Any, _ p2: Int) -> String {
+      return L10n.tr("Localizable", "accessibility.messageReactionCount", String(describing: p1), p2, fallback: "%1$@ %2$d")
+    }
+    /// %@, including you
+    internal static func messageReactionIncludingYou(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "accessibility.messageReactionIncludingYou", String(describing: p1), fallback: "%@, including you")
+    }
+    /// Reactions
+    internal static let messageReactions = L10n.tr("Localizable", "accessibility.messageReactions", fallback: "Reactions")
+    /// Shows who reacted
+    internal static let messageReactionsHint = L10n.tr("Localizable", "accessibility.messageReactionsHint", fallback: "Shows who reacted")
+    /// %d more
+    internal static func messageReactionsMore(_ p1: Int) -> String {
+      return L10n.tr("Localizable", "accessibility.messageReactionsMore", p1, fallback: "%d more")
+    }
     /// Received
     internal static let messageReceivedDate = L10n.tr("Localizable", "accessibility.messageReceivedDate", fallback: "Received")
     /// Sent
