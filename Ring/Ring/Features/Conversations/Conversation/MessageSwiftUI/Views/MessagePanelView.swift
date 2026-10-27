@@ -20,80 +20,58 @@
 
 import SwiftUI
 
-struct MessageTopBaseView<Content>: View where Content: View {
-    var model: MessagePanelVM
-    let padding: CGFloat = 10
-    let content: Content
-    let closeAction: () -> Void
+struct ComposerQuoteView: View {
+    @ObservedObject var quote: MessageReplyTargetVM
+    let title: String?
+    let accent: Color
+    let textColor: Color
+    let containerCornerRadius: CGFloat
+    let cancel: () -> Void
 
-    init(model: MessagePanelVM, closeAction: @escaping () -> Void, @ViewBuilder content: () -> Content) {
-        self.closeAction = closeAction
-        self.content = content()
-        self.model = model
-    }
-
-    var body: some View {
-        Rectangle()
-            .frame(height: 1)
-            .foregroundColor(model.styling.secondaryTextColor)
-            .padding(.horizontal, padding * 0.5)
-        HStack(alignment: .center) {
-            Spacer().frame(width: padding)
-            content
-            Spacer()
-            Button(action: closeAction, label: {
-                Image(systemName: "xmark.circle")
-                    .resizable()
-                    .font(Font.title.weight(.light))
-                    .imageScale(.small)
-                    .scaledToFit()
-                    .padding(9)
-                    .frame(width: 40, height: 40)
-                    .foregroundColor(model.styling.secondaryTextColor)
-            })
-        }
-        .padding(.vertical, padding)
-        .padding(.horizontal, 0)
-        .background(Color(UIColor.systemBackground))
-        .cornerRadius(10)
-    }
-}
-
-struct ReplyViewInMessagePanel: View {
-    var messageToReply: MessageContentVM
-    @ObservedObject var model: MessagePanelVM
-    let padding: CGFloat = 10
+    private let containerInset: CGFloat = 6
+    private let cardInset = EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8)
+    private let closeIconSize: CGFloat = 26
+    private let closeTargetSize: CGFloat = 44
 
     var body: some View {
-        MessageTopBaseView(model: model, closeAction: model.cancelReply) {
-            VStack(alignment: .leading, spacing: 6) {
-                (Text(L10n.Conversation.inReplyTo) +
-                    Text(" \(model.inReplyTo)").bold())
-                    .font(model.styling.secondaryFont)
-                    .lineLimit(1)
-                    .truncationMode(.tail)
-                    .foregroundColor(model.styling.textColor)
-                Text(messageToReply.displayContent)
-                    .font(model.styling.secondaryFont)
-                    .lineLimit(1)
-                    .truncationMode(.middle)
-                    .foregroundColor(model.styling.secondaryTextColor)
-            }
-            Spacer()
-                .frame(width: padding)
-            if messageToReply.type == .fileTransfer {
-                if let player = messageToReply.player, player.hasVideo.value {
-                    PlayerSwiftUI(model: messageToReply, player: player, onLongGesture: {}, ratio: 0.4, withControls: false, customCornerRadius: 10)
-                } else if let image = messageToReply.finalImage {
-                    ImageOrGifView(message: messageToReply, image: image, onLongGesture: {}, minHeight: 20, maxHeight: 50, customCornerRadius: 10)
+        if let line = quote.line {
+            HStack(spacing: 0) {
+                ReplyQuoteFrame(accent: accent, isHighlighted: false) {
+                    ReplyQuoteLabel(title: title ?? quote.authorName, line: line, thumbnail: quote.thumbnail, accent: accent, textColor: textColor)
                 }
-            } else if messageToReply.type == .text,
-                      let metadata = messageToReply.metadata {
-                URLPreview(metadata: metadata, maxDimension: 50, fixedSize: 50)
-                    .frame(width: 50, height: 50)
-                    .cornerRadius(messageToReply.cornerRadius)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(cardInset)
+                .background(RoundedRectangle(cornerRadius: containerCornerRadius - containerInset, style: .continuous)
+                                .fill(Color(UIColor.tertiarySystemFill)))
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel(accessibilityLabel(line: line))
+                closeButton
+            }
+            .padding(.top, containerInset)
+            .padding(.leading, containerInset)
+            .onAppear {
+                quote.onQuoteAppear()
             }
         }
+    }
+
+    private var closeButton: some View {
+        Button(action: cancel, label: {
+            Image(systemName: "xmark")
+                .font(.footnote.weight(.semibold))
+                .foregroundColor(Color(UIColor.secondaryLabel))
+                .frame(width: closeIconSize, height: closeIconSize)
+                .background(Circle().fill(Color(UIColor.tertiarySystemFill)))
+                .frame(width: closeTargetSize, height: closeTargetSize)
+                .contentShape(Rectangle())
+        })
+        .buttonStyle(.plain)
+        .accessibilityLabel(L10n.Global.cancel)
+    }
+
+    private func accessibilityLabel(line: ReplyQuoteLine) -> String {
+        let heading = title ?? L10n.Conversation.inReplyTo + " " + quote.authorName
+        return heading + ": " + line.text
     }
 }
 
@@ -194,31 +172,6 @@ struct DraftAttachmentsView: View {
     }
 }
 
-struct EditMessagePanel: View {
-    var messageToEdit: MessageContentVM
-    @ObservedObject var model: MessagePanelVM
-    @Binding var text: String
-    let padding: CGFloat = 10
-
-    var body: some View {
-        MessageTopBaseView(model: model, closeAction: {
-            model.cancelEdit()
-            text = ""
-        }) {
-            Text(L10n.Global.editing)
-                .font(model.styling.secondaryFont)
-                .foregroundColor(Color(UIColor.systemBlue))
-            Spacer()
-                .frame(width: 5)
-            Text(messageToEdit.message.content)
-                .font(model.styling.secondaryFont)
-                .lineLimit(1)
-                .truncationMode(.middle)
-                .foregroundColor(model.styling.secondaryTextColor)
-        }
-    }
-}
-
 struct MessagePanelView: View {
     @ObservedObject var model: MessagePanelVM
     @ObservedObject var voiceRecording: VoiceRecordingVM
@@ -269,11 +222,49 @@ struct MessagePanelView: View {
         })
         .accessibilityLabel(L10n.Accessibility.conversationShareMedia)
         .accessibilityRemoveTraits(.isButton)
-        .disabled(model.messageToEdit != nil)
+        .disabled(model.messageToEdit != nil || voiceRecording.state != .idle)
     }
 
     @ViewBuilder
-    private func messageTextField() -> some View {
+    private func composerField() -> some View {
+        VStack(spacing: 0) {
+            composerQuote()
+            if !model.attachments.isEmpty {
+                DraftAttachmentsView(model: model)
+                    .padding(.leading, textContainerLeadingInset)
+            }
+            if voiceRecording.state == .idle {
+                messageTextRow()
+            } else {
+                VoiceRecordingControls(model: voiceRecording)
+            }
+        }
+        .messagePanelGlass(in: RoundedRectangle(cornerRadius: defaultControlSize / 2))
+    }
+
+    @ViewBuilder
+    private func composerQuote() -> some View {
+        if let quote = model.quote {
+            ComposerQuoteView(quote: quote,
+                              title: model.messageToEdit == nil ? nil : L10n.Global.editMessage,
+                              accent: model.quoteAccent,
+                              textColor: model.styling.textColor,
+                              containerCornerRadius: defaultControlSize / 2,
+                              cancel: cancelQuote)
+                .id(ObjectIdentifier(quote))
+        }
+    }
+
+    private func cancelQuote() {
+        if model.messageToEdit != nil {
+            model.cancelEdit()
+        } else {
+            model.cancelReply()
+        }
+    }
+
+    @ViewBuilder
+    private func messageTextRow() -> some View {
         HStack(alignment: .center, spacing: 0) {
             UITextViewWrapper(
                 withBackground: true,
@@ -293,7 +284,6 @@ struct MessagePanelView: View {
             sendEmojiButton()
                 .padding(.trailing, compactTextInputInset)
         }
-        .messagePanelGlass(in: RoundedRectangle(cornerRadius: defaultControlSize / 2))
     }
 
     @ViewBuilder
@@ -324,29 +314,16 @@ struct MessagePanelView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            if let message = model.messageToReply {
-                ReplyViewInMessagePanel(messageToReply: message, model: model)
-            } else if let editMesage = model.messageToEdit {
-                EditMessagePanel(messageToEdit: editMesage, model: model, text: $text)
-                    .onAppear {
-                        text = editMesage.content
-                    }
-            }
-
-            if !model.attachments.isEmpty {
-                DraftAttachmentsView(model: model)
-            }
-
             if let hint = voiceRecording.hint {
                 VoiceRecordingHint(text: hint)
                     .padding(.top, padding)
             }
 
             Group {
-                if voiceRecording.state == .idle {
+                if voiceRecording.state == .idle || model.quote != nil {
                     HStack(alignment: .bottom, spacing: textContainerLeadingInset) {
                         moreActionsButton()
-                        messageTextField()
+                        composerField()
                     }
                 } else {
                     VoiceRecordingPanel(model: voiceRecording)
@@ -358,10 +335,8 @@ struct MessagePanelView: View {
         .onChange(of: model.isEdit) { _ in
             isFocused = model.isEdit
         }
-        .onChange(of: model.messageToEdit?.message.id) { editedId in
-            if editedId == nil {
-                text = ""
-            }
+        .onChange(of: model.messageToEdit?.message.id) { _ in
+            text = model.messageToEdit?.content ?? ""
         }
         .padding(.horizontal, paddingGorizontal)
     }

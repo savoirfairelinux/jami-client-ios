@@ -125,6 +125,10 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     }
     @Published var accessibilityLabelValue = ""
     @Published var metadata: LPLinkMetadata?
+    @Published private(set) var linkThumbnail: UIImage?
+    private var wantsLinkThumbnail = false
+    private var linkThumbnailRequested = false
+    private static let linkThumbnailSize = CGSize(width: 240, height: 240)
 
     // file transfer
     @Published var fileName: String = ""
@@ -488,6 +492,19 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
                     return
                 }
                 self.metadata = metaDataObj
+                self.loadLinkThumbnailIfNeeded()
+            }
+        }
+    }
+
+    private func loadLinkThumbnailIfNeeded() {
+        guard wantsLinkThumbnail, !linkThumbnailRequested,
+              let provider = metadata?.imageProvider else { return }
+        linkThumbnailRequested = true
+        provider.loadObject(ofClass: UIImage.self) { [weak self] image, _ in
+            let thumbnail = (image as? UIImage)?.resizeIntoRectangle(of: MessageContentVM.linkThumbnailSize)
+            DispatchQueue.main.async {
+                self?.linkThumbnail = thumbnail
             }
         }
     }
@@ -821,6 +838,11 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     }
 
     func onQuoteAppear() {
+        if self.type == .text {
+            wantsLinkThumbnail = true
+            loadLinkThumbnailIfNeeded()
+            return
+        }
         guard self.type == .fileTransfer, self.fileSymbolName == "photo" else { return }
         self.transferState.onNext(TransferState.getURL(viewModel: self))
         loadThumbnailIfNeeded()

@@ -68,12 +68,12 @@ final class MessageModelTests: XCTestCase {
     func testReplyComposerTracksResolvedNameAndReleasesPreviousTarget() {
         let panel = MessagePanelVM(messagePanelState: PublishSubject<State>())
         let first = replyMessage(author: jamiId1, name: "Alice".withYourselfSuffix())
-        panel.configureReplyTo(message: first)
+        panel.configureReplyTo(message: first, quote: MessageReplyTargetVM(contextMenuState: PublishSubject<State>(), localJamiId: jamiId1, isIncoming: true))
         XCTAssertEqual(panel.inReplyTo, first.username)
         first.username = "Alicia".withYourselfSuffix()
         XCTAssertEqual(panel.inReplyTo, first.username)
         let second = replyMessage(author: jamiId2, name: "Bob")
-        panel.configureReplyTo(message: second)
+        panel.configureReplyTo(message: second, quote: MessageReplyTargetVM(contextMenuState: PublishSubject<State>(), localJamiId: jamiId1, isIncoming: true))
         first.username = "Changed"
         XCTAssertEqual(panel.inReplyTo, "Bob")
         panel.cancelReply()

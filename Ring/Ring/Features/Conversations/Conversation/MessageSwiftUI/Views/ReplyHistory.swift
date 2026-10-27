@@ -76,34 +76,11 @@ private struct ReplyQuoteContent: View {
 
     @SwiftUI.State private var isHighlighted = false
 
-    private let thumbnailSize: CGFloat = 34
-    private let thumbnailCornerRadius: CGFloat = 6
     private let highlightDuration: TimeInterval = 0.25
 
     var body: some View {
         ReplyQuoteFrame(accent: accent, isHighlighted: isHighlighted) {
-            if let image = thumbnail {
-                Image(uiImage: image)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: thumbnailSize, height: thumbnailSize)
-                    .clipShape(RoundedRectangle(cornerRadius: thumbnailCornerRadius, style: .continuous))
-            }
-            VStack(alignment: .leading, spacing: 1) {
-                Text(authorName)
-                    .font(.footnote.weight(.semibold))
-                    .foregroundColor(accent)
-                HStack(spacing: 4) {
-                    if let symbolName = line.symbolName {
-                        Image(systemName: symbolName)
-                    }
-                    (line.isDeleted ? Text(line.text).italic() : Text(line.text))
-                        .truncationMode(line.truncation)
-                }
-                .font(.footnote)
-                .foregroundColor(textColor)
-            }
-            .lineLimit(1)
+            ReplyQuoteLabel(title: authorName, line: line, thumbnail: thumbnail, accent: accent, textColor: textColor)
         }
         .onAppear {
             reply.onQuoteAppear()
@@ -120,7 +97,43 @@ private struct ReplyQuoteContent: View {
     }
 }
 
-private struct ReplyQuoteFrame<Content: View>: View {
+struct ReplyQuoteLabel: View {
+    let title: String
+    let line: ReplyQuoteLine
+    let thumbnail: UIImage?
+    let accent: Color
+    let textColor: Color
+
+    private let thumbnailSize: CGFloat = 34
+    private let thumbnailCornerRadius: CGFloat = 6
+
+    var body: some View {
+        if let image = thumbnail {
+            Image(uiImage: image)
+                .resizable()
+                .scaledToFill()
+                .frame(width: thumbnailSize, height: thumbnailSize)
+                .clipShape(RoundedRectangle(cornerRadius: thumbnailCornerRadius, style: .continuous))
+        }
+        VStack(alignment: .leading, spacing: 1) {
+            Text(title)
+                .font(.footnote.weight(.semibold))
+                .foregroundColor(accent)
+            HStack(spacing: 4) {
+                if let symbolName = line.symbolName {
+                    Image(systemName: symbolName)
+                }
+                (line.isDeleted ? Text(line.text).italic() : Text(line.text))
+                    .truncationMode(line.truncation)
+            }
+            .font(.footnote)
+            .foregroundColor(textColor)
+        }
+        .lineLimit(1)
+    }
+}
+
+struct ReplyQuoteFrame<Content: View>: View {
     let accent: Color
     let isHighlighted: Bool
     @ViewBuilder let content: Content

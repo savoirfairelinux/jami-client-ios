@@ -158,7 +158,6 @@ extension UIImage {
         let newSize = CGSize(width: newWidth, height: newHeight)
         guard let cgImage = self.cgImage else { return self.resizeImageWith(newSize: newSize) }
         let bitsPerComponent = cgImage.bitsPerComponent
-        let bytesPerRow = cgImage.bytesPerRow
         guard let colorSpace = cgImage.colorSpace else { return self.resizeImageWith(newSize: newSize) }
         let bitmapInfo = cgImage.bitmapInfo
 
@@ -166,7 +165,7 @@ extension UIImage {
                                       width: Int(newWidth),
                                       height: Int(newHeight),
                                       bitsPerComponent: bitsPerComponent,
-                                      bytesPerRow: bytesPerRow,
+                                      bytesPerRow: 0,
                                       space: colorSpace,
                                       bitmapInfo: bitmapInfo.rawValue) else { return self.resizeImageWith(newSize: newSize) }
 

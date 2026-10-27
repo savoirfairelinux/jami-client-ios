@@ -38,7 +38,8 @@ class MessageReplyTargetVM: ObservableObject {
     var target: MessageContentVM? {
         didSet {
             guard let target = target else { return }
-            targetSubscription = Publishers.CombineLatest4(target.$username, target.$messageDeleted, target.$content, target.$finalImage)
+            targetSubscription = Publishers.CombineLatest(Publishers.CombineLatest4(target.$username, target.$messageDeleted, target.$content, target.$finalImage),
+                                                          target.$linkThumbnail)
                 .dropFirst()
                 .receive(on: DispatchQueue.main)
                 .sink { [weak self] _ in
@@ -97,8 +98,11 @@ class MessageReplyTargetVM: ObservableObject {
     }
 
     private static func thumbnail(for target: MessageContentVM) -> UIImage? {
-        guard !target.messageDeleted, target.type == .fileTransfer,
-              target.fileSymbolName == "photo" else { return nil }
+        guard !target.messageDeleted else { return nil }
+        if target.type == .text {
+            return target.linkThumbnail
+        }
+        guard target.type == .fileTransfer, target.fileSymbolName == "photo" else { return nil }
         return target.finalImage
     }
 

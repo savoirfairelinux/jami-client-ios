@@ -30,6 +30,15 @@ struct VoiceRecordingPanel: View {
     @ObservedObject var model: VoiceRecordingVM
 
     var body: some View {
+        VoiceRecordingControls(model: model)
+            .messagePanelGlass(in: RoundedRectangle(cornerRadius: VoiceRecordingLayout.cornerRadius, style: .continuous))
+    }
+}
+
+struct VoiceRecordingControls: View {
+    @ObservedObject var model: VoiceRecordingVM
+
+    var body: some View {
         VStack(spacing: 12) {
             Group {
                 if model.state == .recording {
@@ -47,7 +56,6 @@ struct VoiceRecordingPanel: View {
             }
         }
         .padding(14)
-        .messagePanelGlass(in: RoundedRectangle(cornerRadius: VoiceRecordingLayout.cornerRadius, style: .continuous))
     }
 
     private var recordingRow: some View {
