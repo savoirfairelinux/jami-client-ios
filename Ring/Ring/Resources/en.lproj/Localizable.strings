@@ -679,6 +679,10 @@
 "accessibility.messageBubbleEdited" = "Edited";
 "accessibility.messageBubbleRead" = "Read";
 "accessibility.messageBubbleUnread" = "Unread";
+"accessibility.messageReactions" = "Reactions";
+"accessibility.messageReactionsHint" = "Shows who reacted";
+"accessibility.messageReactionIncludingYou" = "%@, including you";
+"accessibility.messageReactionsMore" = "%d more";
 "accessibility.messageReceivedDate" = "Received";
 "accessibility.messageSentDate" = "Sent";
 "accessibility.textEmpty" = "Empty text message received. This might not have been sent correctly.";

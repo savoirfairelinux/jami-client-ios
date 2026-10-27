@@ -193,6 +193,7 @@ extension UIColor {
 
     static let jamiMessageCellReceivedText = UIColor(red: 48, green: 48, blue: 48, alpha: 1.0)
     static let messageBubbleReceivedBase = UIColor(named: "messageBubbleReceivedBase")!
+    static let messageReactionUntinted = UIColor(named: "messageReactionUntinted")!
     static let conversationSecondaryText = UIColor(named: "conversationSecondaryText")!
     static let messageTextDark = UIColor(named: "messageTextDark")!
     static let jamiMessageCellTimeText = UIColor(red: 128, green: 128, blue: 128, alpha: 1.0)
@@ -283,6 +284,17 @@ extension UIColor {
         }
     }
 
+    private static func messageReaction(tintedWith conversationColor: UIColor,
+                                        strength: (light: CGFloat, dark: CGFloat),
+                                        untinted: UIColor) -> UIColor {
+        resolvedPerStyle { traitCollection in
+            guard isTintable(conversationColor, with: traitCollection) else { return untinted.resolvedColor(with: traitCollection) }
+            let screen = UIColor.systemBackground.resolvedColor(with: traitCollection)
+            let fraction = traitCollection.userInterfaceStyle == .dark ? strength.dark : strength.light
+            return screen.mixed(with: conversationColor, fraction: fraction)
+        }
+    }
+
     private static let lightTextProgressOpacity: CGFloat = 0.3
     private static let darkTextProgressOpacity: CGFloat = 0.12
 
@@ -353,11 +365,16 @@ extension UIColor {
         let sentTime: UIColor
         let sentReplyQuoteAccent: UIColor
         let unbubbledReplyQuoteAccent: UIColor
+        let reactionBackground: UIColor
+        let ownReactionBackground: UIColor
+        let ownReactionText: UIColor
 
         private static let receivedPlaybackControlOpacity: (light: CGFloat, dark: CGFloat) = (0.22, 0.32)
         private static let receivedPlaybackProgressOpacity: (light: CGFloat, dark: CGFloat) = (0.16, 0.24)
         private static let sentPlaybackControlOpacity: CGFloat = 0.15
         private static let sentTimeOpacity: CGFloat = 0.7
+        private static let reactionTint: (light: CGFloat, dark: CGFloat) = (0.12, 0.27)
+        private static let ownReactionTint: (light: CGFloat, dark: CGFloat) = (0.42, 0.78)
 
         private static let cache = NSCache<UIColor, MessageBubblePalette>()
 
@@ -388,6 +405,9 @@ extension UIColor {
             sentTime = sentText.multiplyingAlpha(by: Self.sentTimeOpacity)
             sentReplyQuoteAccent = .messageAccent(matching: sentText, conversationColor: conversationColor, on: sentBackground)
             unbubbledReplyQuoteAccent = .messageAccent(matching: .label, conversationColor: conversationColor, on: .systemBackground)
+            reactionBackground = .messageReaction(tintedWith: conversationColor, strength: Self.reactionTint, untinted: .messageReactionUntinted)
+            ownReactionBackground = .messageReaction(tintedWith: conversationColor, strength: Self.ownReactionTint, untinted: .systemGray2)
+            ownReactionText = .messageTextSent(on: ownReactionBackground)
         }
     }
 }

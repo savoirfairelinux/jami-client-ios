@@ -105,7 +105,7 @@ class MessageContainerModel: Identifiable, Equatable {
         self.collabDocViewModel = message.type == .collabDocument
             ? CollabDocMessageVM(message: message, contextMenuState: contextMenuState) : nil
         self.replyTarget = MessageReplyTargetVM(contextMenuState: contextMenuState, localJamiId: localJamiId, isIncoming: message.incoming)
-        self.reactionsModel = ReactionsContainerModel(message: message)
+        self.reactionsModel = ReactionsContainerModel(message: message, localJamiId: localJamiId)
     }
 
     func listenerForInfoStateAdded() {

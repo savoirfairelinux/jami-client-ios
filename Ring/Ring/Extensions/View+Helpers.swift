@@ -57,10 +57,6 @@ extension View {
             .contentShape(Rectangle())
     }
 
-    func measureSize() -> some View {
-        self.modifier(MeasureSizeModifier())
-    }
-
     func shadowForConversation() -> some View {
         self.shadow(color: Color(UIColor.quaternaryLabel), radius: 2, x: 1, y: 2)
     }

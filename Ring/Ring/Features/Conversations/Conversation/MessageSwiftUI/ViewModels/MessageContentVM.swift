@@ -307,6 +307,13 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
         !type.isContact && !isEmojiOnly
     }
 
+    var reactionChipColors: ReactionChipColors {
+        ReactionChipColors(background: Color(palette.reactionBackground),
+                           text: Color(UIColor.label),
+                           ownBackground: Color(palette.ownReactionBackground),
+                           ownText: Color(palette.ownReactionText))
+    }
+
     private var contrastBackgroundUIColor: UIColor = .clear
     private(set) var replyQuoteAccentColor: Color = .clear
 
