@@ -308,7 +308,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
         !type.isContact && !isEmojiOnly
     }
 
-    var reactionTint: Color {
+    var receivedBubbleColor: Color {
         Color(palette.receivedBackground)
     }
 
