@@ -405,8 +405,9 @@ private struct MessagePanelGlass<S: Shape>: ViewModifier {
                 .glassEffect(in: shape)
         } else {
             content
-                .background(VisualEffect(style: .systemUltraThinMaterial, withVibrancy: false))
+                .background(VisualEffect(style: .systemThinMaterial, withVibrancy: false))
                 .clipShape(shape)
+                .overlay(shape.stroke(Color(UIColor.separator), lineWidth: 0.5))
                 .shadow(color: Color.black.opacity(0.05), radius: 4, x: 0, y: 1)
         }
     }
