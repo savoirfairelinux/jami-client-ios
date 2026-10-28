@@ -500,7 +500,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     func configureContextMenu(with message: MessageBubbleView, frame: CGRect) {
         self.contextMenuModel.messageFrame = frame
         let localJamiId = self.accountService.getAccount(fromAccountId: self.conversation.accountId)?.jamiId
-        self.contextMenuModel.configure(with: message, localJamiId: localJamiId)
+        self.contextMenuModel.configure(with: message, localJamiId: localJamiId, avatarFactory: makeAvatarFactory())
     }
 
     func subscribeContextMenu() {

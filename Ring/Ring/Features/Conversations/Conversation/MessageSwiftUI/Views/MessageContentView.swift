@@ -306,7 +306,6 @@ struct MessageContentView: View {
     @ObservedObject var model: MessageContentVM
     @ObservedObject var reactionsModel: ReactionsContainerModel
     var onLongPress: (_ frame: CGRect, _ message: MessageBubbleView) -> Void
-    var showReactionsView: (_ message: ReactionsContainerModel?) -> Void
     @ScaledMetric(relativeTo: .subheadline)
     private var reactionsCapsuleHeight = MessageReactionsCapsule.defaultHeight
 
@@ -528,7 +527,7 @@ struct MessageContentView: View {
                                     height: reactionsCapsuleHeight,
                                     insetsFromBubbleEdges: model.hasBubbleBackground,
                                     isCutout: isCutout) {
-                self.showReactionsView(reactionsModel)
+                model.requestReactionsMenu()
             }
         }
         .offset(y: reactionsSpaceBelow)
@@ -595,9 +594,6 @@ private struct MessageReactionsCapsule: View {
         .padding(.leading, insetsFromBubbleEdges ? bubbleLeadingInset - Self.ringWidth : 0)
         .padding(.trailing, insetsFromBubbleEdges ? bubbleTrailingInset - Self.ringWidth : 0)
         .onTapGesture {
-            onSelect()
-        }
-        .onLongPressGesture {
             onSelect()
         }
         .accessibilityElement(children: .ignore)

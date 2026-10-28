@@ -203,7 +203,7 @@ extension String {
         return String(repeating: "•", count: self.count)
     }
 
-    private static var yourselfSuffix: String {
+    static var yourselfSuffix: String {
         return " (\(L10n.Conversation.yourself))"
     }
 
@@ -214,5 +214,10 @@ extension String {
 
     var hasYourselfSuffix: Bool {
         return self.hasSuffix(Self.yourselfSuffix)
+    }
+
+    var withoutYourselfSuffix: String {
+        guard hasYourselfSuffix else { return self }
+        return String(self.dropLast(Self.yourselfSuffix.count))
     }
 }

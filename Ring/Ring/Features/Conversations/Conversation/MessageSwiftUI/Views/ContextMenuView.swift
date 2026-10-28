@@ -90,7 +90,7 @@ struct ContextMenuView: View {
 
                         ZStack {
                             // actions (reply, fwd, etc.)
-                            makeWithSpacers(elementForAlignment: makeActions()
+                            makeWithSpacers(elementForAlignment: makeMenuPanel()
                                                 .opacity(actionsOpacity)
                                                 .scaleEffect(actionsScale, anchor: model.actionsAnchor)
                                                 .frame(width: model.menuSize.width)
@@ -116,9 +116,7 @@ struct ContextMenuView: View {
         }
         .onAppear(perform: {
             scrollViewHeight = model.messageFrame.height
-            let impactMed = UIImpactFeedbackGenerator(style: .medium)
-            impactMed.prepare()
-            impactMed.impactOccurred()
+            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
 
             withAnimation(.spring(response: 0.18, dampingFraction: 0.6, blendDuration: 0)) {
                 messageScale = model.scaleMessageUp ? model.maxScaleFactor : 1.02
@@ -198,6 +196,30 @@ struct ContextMenuView: View {
             Color.jami.opacity(progress * 0.1)
         }
         .edgesIgnoringSafeArea(.all)
+    }
+
+    @ViewBuilder
+    func makeMenuPanel() -> some View {
+        switch model.mode {
+        case .actions:
+            makeActions()
+        case .reactions:
+            makeReactions()
+        }
+    }
+
+    @ViewBuilder
+    func makeReactions() -> some View {
+        if let reactions = model.containerModel?.reactionsModel {
+            ReactionsView(model: reactions, localJamiId: model.currentJamiAccountId) { reactionId in
+                model.removeReaction(id: reactionId)
+                playReactionHaptic()
+                animateDismiss(state: .willDismissWithAction, delay: 0.1)
+            }
+            .frame(height: model.menuSize.height)
+            .environment(\.avatarProviderFactory, model.avatarFactory)
+            .modifier(GlassModifier(shape: RoundedRectangle(cornerRadius: ReactionsView.cornerRadius, style: .continuous)))
+        }
     }
 
     func makeActions() -> some View {
@@ -315,6 +337,7 @@ struct EmojiBarView: View {
         .onChange(of: cxModel.selectedEmoji) { newValue in
             if !newValue.isEmpty {
                 cxModel.handleUpdatedReaction()
+                playReactionHaptic()
                 cxModel.isEmojiPickerPresented = false
                 presentingState = .willDismissWithAction
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -357,7 +380,7 @@ struct EmojiBarView: View {
         }
         .frame(width: cxModel.emojiBarMaxWidth, height: cxModel.emojiBarHeight)
         .padding(.vertical, 1)
-        .padding(.horizontal, 8)
+        .padding(.horizontal, cxModel.emojiBarHorizontalInset)
         .modifier(GlassModifier(shape: Capsule(), interactive: true))
         .shadow(color: Color(cxModel.shadowColor), radius: messageShadow)
         .onAppear(perform: {
@@ -431,6 +454,10 @@ struct EmojiBarItemView: View {
         }
     }
 
+}
+
+private func playReactionHaptic() {
+    UIImpactFeedbackGenerator(style: .light).impactOccurred()
 }
 
 // MARK: - scroll disable compatibility
