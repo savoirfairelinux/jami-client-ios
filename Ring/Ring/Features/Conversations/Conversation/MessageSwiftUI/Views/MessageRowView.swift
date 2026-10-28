@@ -66,7 +66,6 @@ extension View {
 struct MessageRowView: View {
     let messageModel: MessageContainerModel
     var onLongPress: (_ frame: CGRect, _ message: MessageBubbleView) -> Void
-    var showReactionsView: (_ message: ReactionsContainerModel?) -> Void
     @ObservedObject var model: MessageRowVM
     @Environment(\.avatarProviderFactory)
     var avatarFactory: AvatarProviderFactory?
@@ -111,7 +110,7 @@ struct MessageRowView: View {
                 avatarSlot()
                     .padding(.horizontal, Layout.avatarHorizontalPadding)
             }
-            MessageStackView(messageModel: messageModel, model: messageModel.stackViewModel, onLongPress: onLongPress, showReactionsView: showReactionsView)
+            MessageStackView(messageModel: messageModel, model: messageModel.stackViewModel, onLongPress: onLongPress)
             if !model.incoming {
                 sentStatus()
                     .padding(.leading, Layout.sentStatusSpacing)

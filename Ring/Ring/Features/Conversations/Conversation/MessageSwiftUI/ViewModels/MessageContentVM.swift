@@ -142,6 +142,8 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     @Published var player: PlayerViewModel?
     @Published var corners: UIRectCorner = [.allCorners]
     @Published var menuItems = [ContextualMenuItem]()
+    @Published private(set) var reactionsMenuRequested = false
+    private(set) var contextMenuMode: ContextMenuMode = .actions
     @Published var backgroundColor: Color = Color.jamiMessageCellReceived
     @Published var finalImage: UIImage?
     @Published private(set) var thumbnailSize: CGSize?
@@ -877,6 +879,19 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
         case .cancel:
             self.transferState.onNext(TransferState.cancel(viewModel: self))
         }
+    }
+
+    func prepareActionsMenu() {
+        contextMenuMode = .actions
+    }
+
+    func requestReactionsMenu() {
+        contextMenuMode = .reactions
+        reactionsMenuRequested = true
+    }
+
+    func reactionsMenuRequestHandled() {
+        reactionsMenuRequested = false
     }
 
     func contextMenuSelect(item: ContextualMenuItem) {

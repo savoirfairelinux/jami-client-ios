@@ -161,6 +161,10 @@ internal enum L10n {
     internal static let profilePicturePicker = L10n.tr("Localizable", "accessibility.profilePicturePicker", fallback: "Profile picture")
     /// Double-tap to take a picture or select a picture from the library
     internal static let profilePicturePickerHint = L10n.tr("Localizable", "accessibility.profilePicturePickerHint", fallback: "Double-tap to take a picture or select a picture from the library")
+    /// Remove %@
+    internal static func removeReaction(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "accessibility.removeReaction", String(describing: p1), fallback: "Remove %@")
+    }
     /// Scroll to latest message
     internal static let scrollToLatestMessage = L10n.tr("Localizable", "accessibility.scrollToLatestMessage", fallback: "Scroll to latest message")
     /// Show original message

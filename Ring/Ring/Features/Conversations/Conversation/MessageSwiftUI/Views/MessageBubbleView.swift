@@ -66,6 +66,11 @@ struct MessageBubbleView: View {
                     })
             }
         )
+        .onChange(of: model.reactionsMenuRequested) { requested in
+            guard requested else { return }
+            model.reactionsMenuRequestHandled()
+            presentMenu = true
+        }
         .accessibilityElement(children: .ignore)
         .modifier(ReplyQuoteAccessibility(reply: messageModel.replyTarget,
                                           messageLabel: model.accessibilityLabelValue,
@@ -213,6 +218,7 @@ struct MessageBubbleView: View {
         return {
             if model.menuItems.isEmpty { return }
             if suppressLongPress { return }
+            model.prepareActionsMenu()
             presentMenu = true
         }
     }

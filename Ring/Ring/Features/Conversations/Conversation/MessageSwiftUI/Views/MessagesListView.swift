@@ -70,10 +70,6 @@ struct MessagesListView: View {
 
     @ObservedObject private var dimensionsManager = ScreenDimensionsManager.shared
 
-    // reactions
-    @SwiftUI.State private var reactionsForMessage: ReactionsContainerModel?
-    @SwiftUI.State private var showReactionsView = false
-
     @SwiftUI.State private var envAppeared = false
     @SwiftUI.State private var isApplicationActive = UIApplication.shared.applicationState == .active
 
@@ -93,15 +89,6 @@ struct MessagesListView: View {
     var body: some View {
         ZStack {
             conversationContentView()
-            if showReactionsView {
-                if let reactions = reactionsForMessage {
-                    ReactionsView(model: reactions)
-                        .onTapGesture {
-                            self.showReactionsView = false
-                            reactionsForMessage = nil
-                        }
-                }
-            }
             if model.isTemporary {
                 temporaryConversationView()
             }
@@ -124,8 +111,6 @@ struct MessagesListView: View {
              Instead, we are using UITapGestureRecognizer from UIView.
              */
             if model.screenTapped {
-                showReactionsView = false
-                reactionsForMessage = nil
                 hideKeyboard()
                 // reset to inital state
                 model.screenTapped = false
@@ -283,9 +268,6 @@ struct MessagesListView: View {
                     }
                 }
             }
-        }, showReactionsView: {message in
-            reactionsForMessage = message
-            showReactionsView.toggle()
         }, model: message.messageRow)
     }
 

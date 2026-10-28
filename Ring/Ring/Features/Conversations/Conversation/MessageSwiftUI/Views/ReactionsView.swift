@@ -19,30 +19,39 @@
 import SwiftUI
 
 struct ReactionsView: View {
+    static let verticalPadding: CGFloat = 6
+
+    static var cornerRadius: CGFloat {
+        verticalPadding + ReactionRowView.verticalPadding + ReactionRowView.avatarSize.points / 2
+    }
+
     @ObservedObject var model: ReactionsContainerModel
-    @SwiftUI.State private var contentHeight: CGFloat = 100
-    let defailtSize: CGFloat = 300
+    let localJamiId: String?
+    let onRemove: (String) -> Void
 
     var body: some View {
-        ScrollView {
-            VStack {
-                ForEach(model.reactionsRow) { reaction in
-                    ReactionRowView(reaction: reaction)
+        ScrollView(showsIndicators: false) {
+            VStack(spacing: 0) {
+                let rows = sortedRows
+                ForEach(rows) { row in
+                    if row.id != rows.first?.id {
+                        Divider()
+                            .padding(.leading, ReactionRowView.separatorInset)
+                    }
+                    ReactionRowView(reaction: row, isLocal: row.jamiId == localJamiId, onRemove: onRemove)
                 }
             }
-            .padding(.vertical)
-            .background(
-                GeometryReader { proxy -> Color in
-                    DispatchQueue.main.async {
-                        self.contentHeight = proxy.size.height
-                    }
-                    return Color.clear
-                }
-            )
+            .padding(.vertical, Self.verticalPadding)
         }
-        .background(Color(UIColor.systemBackground))
-        .cornerRadius(15)
-        .shadowForConversation()
-        .frame(maxWidth: defailtSize, maxHeight: min(contentHeight, defailtSize), alignment: .center)
+    }
+
+    private var sortedRows: [ReactionsRowViewModel] {
+        model.reactionsRow.sorted { lhs, rhs in
+            let lhsIsLocal = lhs.jamiId == localJamiId
+            if lhsIsLocal != (rhs.jamiId == localJamiId) {
+                return lhsIsLocal
+            }
+            return lhs.jamiId < rhs.jamiId
+        }
     }
 }

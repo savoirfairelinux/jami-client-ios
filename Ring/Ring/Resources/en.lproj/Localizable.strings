@@ -683,6 +683,7 @@
 "accessibility.messageReactionsHint" = "Shows who reacted";
 "accessibility.messageReactionIncludingYou" = "%@, including you";
 "accessibility.messageReactionsMore" = "%d more";
+"accessibility.removeReaction" = "Remove %@";
 "accessibility.scrollToLatestMessage" = "Scroll to latest message";
 "accessibility.newMessagesCount" = "%d new messages";
 "accessibility.messageReceivedDate" = "Received";
