@@ -169,8 +169,8 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     var borderColor: Color = .clear
     var hasBorder: Bool = false
     let cornerRadius: CGFloat = 15
-    var textInset: CGFloat = 15
-    var textVerticalInset: CGFloat = 10
+    var textInset: CGFloat = 12
+    var textVerticalInset: CGFloat = 7
     var styling: MessageStyling = MessageStyling()
 
     var message: MessageModel
@@ -448,8 +448,8 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
             self.textInset = 0
             self.textVerticalInset = 2
         } else {
-            self.textInset = 15
-            self.textVerticalInset = 10
+            self.textInset = 12
+            self.textVerticalInset = 7
         }
     }
 
