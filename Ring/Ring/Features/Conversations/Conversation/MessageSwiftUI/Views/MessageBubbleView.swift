@@ -23,14 +23,14 @@ struct MessageBubbleView: View {
     let messageModel: MessageContainerModel
     @ObservedObject var model: MessageContentVM
     @SwiftUI.State private var frame: CGRect = .zero
-    @SwiftUI.State private var presentMenu = false
     @Environment(\.openURL)
     var openURL
     @Environment(\.suppressLongPress)
     private var suppressLongPress
     @Environment(\.layoutDirection)
     private var layoutDirection
-    var onLongPress: (_ frame: CGRect, _ message: MessageBubbleView) -> Void
+    @Binding var menuRequest: ContextMenuMode?
+    var onLongPress: (_ frame: CGRect, _ message: MessageBubbleView, _ mode: ContextMenuMode) -> Void
     let padding: CGFloat = 12
 
     var body: some View {
@@ -55,13 +55,11 @@ struct MessageBubbleView: View {
         .background(
             GeometryReader { proxy in
                 Rectangle().fill(Color.clear)
-                    .onChange(of: presentMenu, perform: { _ in
-                        if !presentMenu {
-                            return
-                        }
+                    .onChange(of: menuRequest, perform: { mode in
+                        guard let mode = mode else { return }
                         let frame = proxy.frame(in: .global)
-                        presentMenu = false
-                        onLongPress(frame, self)
+                        menuRequest = nil
+                        onLongPress(frame, self, mode)
                     })
             }
         )
@@ -209,7 +207,7 @@ struct MessageBubbleView: View {
         return {
             if model.menuItems.isEmpty { return }
             if suppressLongPress { return }
-            presentMenu = true
+            menuRequest = .actions
         }
     }
 }

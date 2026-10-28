@@ -19,6 +19,11 @@
 import SwiftUI
 import RxSwift
 
+struct AuthoredReaction: Identifiable {
+    let id: String
+    let emoji: String
+}
+
 class ReactionsRowViewModel: Identifiable, ObservableObject, NameObserver {
     let jamiId: String
     let messageId: String
@@ -40,8 +45,10 @@ class ReactionsRowViewModel: Identifiable, ObservableObject, NameObserver {
         self.content[reaction.id] = reaction.content
     }
 
-    func toString() -> String {
-        return content.values.joined(separator: " ")
+    var reactions: [AuthoredReaction] {
+        content
+            .map { AuthoredReaction(id: $0.key, emoji: $0.value) }
+            .sorted { $0.emoji != $1.emoji ? $0.emoji < $1.emoji : $0.id < $1.id }
     }
 
     func setInfoState(state: PublishSubject<State>) {

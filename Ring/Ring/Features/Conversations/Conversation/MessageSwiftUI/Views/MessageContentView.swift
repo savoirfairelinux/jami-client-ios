@@ -305,8 +305,7 @@ struct MessageContentView: View {
     let messageModel: MessageContainerModel
     @ObservedObject var model: MessageContentVM
     @ObservedObject var reactionsModel: ReactionsContainerModel
-    var onLongPress: (_ frame: CGRect, _ message: MessageBubbleView) -> Void
-    var showReactionsView: (_ message: ReactionsContainerModel?) -> Void
+    var onLongPress: (_ frame: CGRect, _ message: MessageBubbleView, _ mode: ContextMenuMode) -> Void
     @ScaledMetric(relativeTo: .subheadline)
     private var reactionsCapsuleHeight = MessageReactionsCapsule.defaultHeight
 
@@ -315,6 +314,7 @@ struct MessageContentView: View {
     @Environment(\.layoutDirection)
     var layoutDirection
     @SwiftUI.State private var bubbleWidth: CGFloat = 0
+    @SwiftUI.State private var menuRequest: ContextMenuMode?
     @SwiftUI.State private var audioSeekArea: CGRect = .null
     @SwiftUI.State private var bubbleDragOffset: CGFloat = 0
     @SwiftUI.State private var dragHapticFired: Bool = false
@@ -344,7 +344,7 @@ struct MessageContentView: View {
     var body: some View {
         VStack(alignment: model.isIncoming ? .leading : .trailing, spacing: 0) {
             VStack(alignment: messageModel.replyTarget.alignment) {
-                MessageBubbleView(messageModel: messageModel, model: model, onLongPress: onLongPress)
+                MessageBubbleView(messageModel: messageModel, model: model, menuRequest: $menuRequest, onLongPress: onLongPress)
                     .onAppear {
                         self.model.onAppear()
                     }
@@ -528,7 +528,7 @@ struct MessageContentView: View {
                                     height: reactionsCapsuleHeight,
                                     insetsFromBubbleEdges: model.hasBubbleBackground,
                                     isCutout: isCutout) {
-                self.showReactionsView(reactionsModel)
+                menuRequest = .reactions
             }
         }
         .offset(y: reactionsSpaceBelow)
@@ -595,9 +595,6 @@ private struct MessageReactionsCapsule: View {
         .padding(.leading, insetsFromBubbleEdges ? bubbleLeadingInset - Self.ringWidth : 0)
         .padding(.trailing, insetsFromBubbleEdges ? bubbleTrailingInset - Self.ringWidth : 0)
         .onTapGesture {
-            onSelect()
-        }
-        .onLongPressGesture {
             onSelect()
         }
         .accessibilityElement(children: .ignore)
