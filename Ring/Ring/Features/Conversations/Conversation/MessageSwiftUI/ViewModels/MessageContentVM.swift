@@ -167,7 +167,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     // view parameters
     var borderColor: Color = .clear
     var hasBorder: Bool = false
-    static let bubbleCornerRadius: CGFloat = 15
+    static let bubbleCornerRadius: CGFloat = 12
     let cornerRadius = MessageContentVM.bubbleCornerRadius
     static let bubbleTextInset: CGFloat = 12
     var textInset: CGFloat = MessageContentVM.bubbleTextInset

@@ -297,7 +297,7 @@ struct MessageCornerRadius: ViewModifier {
             .if(!model.hasBorder) { view in
                 view.cornerRadius(radius: model.cornerRadius, corners: model.corners)
             }
-            .cornerRadius(3)
+            .cornerRadius(5)
     }
 }
 
