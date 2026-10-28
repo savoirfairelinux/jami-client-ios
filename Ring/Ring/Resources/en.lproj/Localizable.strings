@@ -732,6 +732,12 @@
 "accessibility.conference.microphoneMuted" = "Microphone muted";
 "accessibility.conference.cameraOff" = "Camera off";
 "accessibility.account.tokenQRcode" = "Token QR code";
+"accessibility.attachmentSheetPhoto" = "Photo";
+"accessibility.attachmentSheetVideo" = "Video, %@";
+"accessibility.attachmentSheetSelected" = "Selected, number %d";
+"accessibility.attachmentSheetSend" = "Send, %d selected";
+"accessibility.attachmentSheetPhotos" = "Photos: %d";
+"accessibility.attachmentSheetVideos" = "Videos: %d";
 
 // Swarm Colors
 "swarmColors.vibrantPink" = "Vibrant pink";
@@ -866,3 +872,20 @@
 "collab.documentRemovedLocally" = "Document removed from this device";
 "collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";
 "collab.documentShared" = "New document: %@";
+
+// Attachment sheet
+"attachmentSheet.title" = "Gallery";
+"attachmentSheet.selected" = "%d selected";
+"attachmentSheet.camera" = "Camera";
+"attachmentSheet.file" = "File";
+"attachmentSheet.location" = "Location";
+"attachmentSheet.gif" = "GIF";
+"attachmentSheet.empty" = "No photos or videos";
+"attachmentSheet.limitedAccess" = "Jami can only see the photos you selected.";
+"attachmentSheet.manage" = "Manage";
+"attachmentSheet.noAccessTitle" = "Send photos faster";
+"attachmentSheet.noAccessMessage" = "Allow access to your photos to pick them right here, or browse them without giving access.";
+"attachmentSheet.browsePhotos" = "Browse photos";
+"attachmentSheet.clear" = "Clear";
+"attachmentSheet.replyTo" = "Reply to %@";
+"attachmentSheet.captionPlaceholder" = "Add a caption";

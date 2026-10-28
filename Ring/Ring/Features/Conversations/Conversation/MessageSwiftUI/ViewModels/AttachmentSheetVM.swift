@@ -1,0 +1,142 @@
+/*
+ *  Copyright (C) 2026-2026 Savoir-faire Linux Inc.
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ */
+
+import Foundation
+import RxSwift
+import UIKit
+
+final class AttachmentSheetVM: ObservableObject {
+    enum Action {
+        case close
+        case takePhoto
+        case pickFile
+        case shareLocation
+        case browseAllPhotos
+        case manageLimitedAccess
+        case openSettings
+        case send(items: [GalleryItem], caption: String)
+    }
+
+    @Published private(set) var access: MediaLibraryAccess
+    @Published private(set) var items: GalleryItemList = [GalleryItem]()
+    @Published private(set) var selection: [GalleryItem] = []
+    @Published var caption = ""
+    let replyName: String?
+
+    let actions = PublishSubject<Action>()
+    let disposeBag = DisposeBag()
+    private let library: MediaLibrary
+
+    init(library: MediaLibrary, replyName: String? = nil) {
+        self.library = library
+        self.replyName = replyName
+        access = library.access
+        library.onChange = { [weak self] in
+            self?.reload()
+        }
+    }
+
+    var title: String {
+        selection.isEmpty ? L10n.AttachmentSheet.title : L10n.AttachmentSheet.selected(selection.count)
+    }
+
+    var canBrowseLibrary: Bool {
+        access == .full || access == .limited
+    }
+
+    var photoCount: Int {
+        selection.filter { $0.kind != .video }.count
+    }
+
+    var videoCount: Int {
+        selection.count - photoCount
+    }
+
+    func onAppear() {
+        guard access == .notDetermined else {
+            reload()
+            return
+        }
+        library.requestAccess { [weak self] _ in
+            self?.reload()
+        }
+    }
+
+    private func reload() {
+        access = library.access
+        guard canBrowseLibrary else {
+            items = [GalleryItem]()
+            selection.removeAll()
+            return
+        }
+        let items = library.recentItems()
+        selection.removeAll { !items.contains($0.id) }
+        self.items = items
+    }
+
+    func selectionNumber(of item: GalleryItem) -> Int? {
+        selection.firstIndex(where: { $0.id == item.id }).map { $0 + 1 }
+    }
+
+    func toggle(_ item: GalleryItem) {
+        if let index = selection.firstIndex(where: { $0.id == item.id }) {
+            selection.remove(at: index)
+        } else {
+            selection.append(item)
+        }
+    }
+
+    func clearSelection() {
+        selection.removeAll()
+    }
+
+    func send() {
+        guard !selection.isEmpty else { return }
+        actions.onNext(.send(items: selection, caption: caption))
+    }
+
+    func perform(_ action: Action) {
+        actions.onNext(action)
+    }
+
+    func thumbnail(for item: GalleryItem, pixelSize: CGSize, completion: @escaping (UIImage?) -> Void) -> () -> Void {
+        library.thumbnail(for: item, pixelSize: pixelSize, completion: completion)
+    }
+
+    func accessibilityLabel(for item: GalleryItem) -> String {
+        switch item.kind {
+        case .image:
+            return L10n.Accessibility.attachmentSheetPhoto
+        case .gif:
+            return L10n.AttachmentSheet.gif
+        case .video:
+            return L10n.Accessibility.attachmentSheetVideo(Self.durationText(item.duration))
+        }
+    }
+
+    static func durationText(_ duration: TimeInterval) -> String {
+        let total = Int(duration.rounded())
+        let seconds = total % 60
+        let minutes = (total / 60) % 60
+        let hours = total / 3600
+        if hours > 0 {
+            return String(format: "%d:%02d:%02d", hours, minutes, seconds)
+        }
+        return String(format: "%d:%02d", minutes, seconds)
+    }
+}

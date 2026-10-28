@@ -188,7 +188,7 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
                 case .editMessage(content: let content, messageId: let messageId):
                     self.viewModel.editMessage(content: content, messageId: messageId)
                 case .openGalery:
-                    self.selectItemsFromPhotoLibrary()
+                    self.presentAttachmentSheet()
                 case .shareLocation:
                     self.startLocationSharing()
                 case .recordVido:
@@ -322,6 +322,70 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
             viewModel.recordVideoFile()
         } else {
             presentBackgroundRecordingAlert()
+        }
+    }
+
+    private func presentAttachmentSheet() {
+        view.endEditing(true)
+        let library = PhotoKitMediaLibrary()
+        let panel = viewModel.swiftUIModel.messagePanel
+        let replyName = panel.messageToReply == nil || panel.inReplyTo.isEmpty ? nil : panel.inReplyTo
+        let model = AttachmentSheetVM(library: library, replyName: replyName)
+        let sheet = UIHostingController(rootView: AttachmentSheetView(model: model))
+        if let presentation = sheet.sheetPresentationController {
+            presentation.detents = [.medium(), .large()]
+            presentation.prefersGrabberVisible = true
+            presentation.prefersEdgeAttachedInCompactHeight = true
+        }
+        model.actions
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self, weak sheet] action in
+                guard let self = self, let sheet = sheet else { return }
+                self.handle(action, from: sheet, library: library)
+            })
+            .disposed(by: model.disposeBag)
+        present(sheet, animated: true, completion: nil)
+    }
+
+    private func handle(_ action: AttachmentSheetVM.Action, from sheet: UIViewController, library: MediaLibrary) {
+        let panel = viewModel.swiftUIModel.messagePanel
+        switch action {
+        case .manageLimitedAccess:
+            PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: sheet)
+        case .openSettings:
+            guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+            UIApplication.shared.open(url, completionHandler: nil)
+        case .close:
+            sheet.dismiss(animated: true, completion: nil)
+        case .takePhoto:
+            sheet.dismiss(animated: true) { panel.sendPhoto() }
+        case .pickFile:
+            sheet.dismiss(animated: true) { panel.sendFile() }
+        case .shareLocation:
+            sheet.dismiss(animated: true) { panel.shareLocation() }
+        case .browseAllPhotos:
+            sheet.dismiss(animated: true) { [weak self] in self?.selectItemsFromPhotoLibrary() }
+        case .send(let items, let caption):
+            sheet.dismiss(animated: true, completion: nil)
+            panel.send(media: items.map { mediaLoader(for: $0, library: library) }, caption: caption)
+        }
+    }
+
+    private func mediaLoader(for item: GalleryItem, library: MediaLibrary) -> MessagePanelVM.ContentLoader {
+        let viewModel: ConversationViewModel = self.viewModel
+        return { completion in
+            library.export(item) { exported in
+                switch exported {
+                case .data(let displayName, let data):
+                    completion(.data(displayName: displayName, data: data))
+                case .file(let url, let displayName):
+                    let content = viewModel.fileContent(copying: url, displayName: displayName)
+                    try? FileManager.default.removeItem(at: url)
+                    completion(content)
+                case nil:
+                    completion(nil)
+                }
+            }
         }
     }
 
