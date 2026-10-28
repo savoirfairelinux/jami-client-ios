@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7427f370_3c04acfb",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessagesListView.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 744,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-28T15:34:51Z",
+      "side": 1,
+      "message": "[warning] Line 744: 🟡 `accessibilityValue` is set to an empty string when there are no unread messages. Use `nil` instead so VoiceOver has no value to announce, rather than an empty value placeholder, which improves announcement clarity.",
+      "revId": "bc68ae047a93c09119570a734310afab1f041e9c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23cb06f1_dd1dce0d",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 1
+      },
+      "lineNbr": 687,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-28T15:34:51Z",
+      "side": 1,
+      "message": "[warning] Line 687: 🟡 `\"accessibility.newMessagesCount\" \u003d \"%d new messages\";` is not plural-safe (e.g., VoiceOver will announce \"1 new messages\"). Replace this with ICU pluralization via a `.stringsdict` entry (or equivalent existing pluralization helper) so singular/plural forms are localized correctly.",
+      "revId": "bc68ae047a93c09119570a734310afab1f041e9c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
