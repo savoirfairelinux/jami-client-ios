@@ -47,6 +47,16 @@ internal enum L10n {
     internal static let accountSummaryQrCode = L10n.tr("Localizable", "accessibility.accountSummaryQrCode", fallback: "QR Code")
     /// Double-tap to view the account QR code
     internal static let accountSummaryQrCodeHint = L10n.tr("Localizable", "accessibility.accountSummaryQrCodeHint", fallback: "Double-tap to view the account QR code")
+    /// Photo
+    internal static let attachmentSheetPhoto = L10n.tr("Localizable", "accessibility.attachmentSheetPhoto", fallback: "Photo")
+    /// %1$d of %2$d
+    internal static func attachmentSheetPosition(_ p1: Int, _ p2: Int) -> String {
+      return L10n.tr("Localizable", "accessibility.attachmentSheetPosition", p1, p2, fallback: "%1$d of %2$d")
+    }
+    /// Video, %@
+    internal static func attachmentSheetVideo(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "accessibility.attachmentSheetVideo", String(describing: p1), fallback: "Video, %@")
+    }
     /// Duration
     internal static let audioPlayerDuration = L10n.tr("Localizable", "accessibility.audioPlayerDuration", fallback: "Duration")
     /// Elapsed time
@@ -681,6 +691,52 @@ internal enum L10n {
     internal static let uploadFile = L10n.tr("Localizable", "alerts.uploadFile", fallback: "Send file")
     /// Open gallery
     internal static let uploadPhoto = L10n.tr("Localizable", "alerts.uploadPhoto", fallback: "Open gallery")
+  }
+  internal enum AttachmentSheet {
+    /// Add more photos
+    internal static let addMore = L10n.tr("Localizable", "attachmentSheet.addMore", fallback: "Add more photos")
+    /// Browse photos
+    internal static let browsePhotos = L10n.tr("Localizable", "attachmentSheet.browsePhotos", fallback: "Browse photos")
+    /// Camera
+    internal static let camera = L10n.tr("Localizable", "attachmentSheet.camera", fallback: "Camera")
+    /// No photos or videos
+    internal static let empty = L10n.tr("Localizable", "attachmentSheet.empty", fallback: "No photos or videos")
+    /// GIF
+    internal static let gif = L10n.tr("Localizable", "attachmentSheet.gif", fallback: "GIF")
+    /// Jami can only see the photos you selected.
+    internal static let limitedAccess = L10n.tr("Localizable", "attachmentSheet.limitedAccess", fallback: "Jami can only see the photos you selected.")
+    /// Manage
+    internal static let manage = L10n.tr("Localizable", "attachmentSheet.manage", fallback: "Manage")
+    /// Photo access is off. You can still browse your photos and choose some to send.
+    internal static let noAccessMessage = L10n.tr("Localizable", "attachmentSheet.noAccessMessage", fallback: "Photo access is off. You can still browse your photos and choose some to send.")
+    /// Send photos faster
+    internal static let noAccessTitle = L10n.tr("Localizable", "attachmentSheet.noAccessTitle", fallback: "Send photos faster")
+    /// 1 photo
+    internal static let onePhoto = L10n.tr("Localizable", "attachmentSheet.onePhoto", fallback: "1 photo")
+    /// 1 video
+    internal static let oneVideo = L10n.tr("Localizable", "attachmentSheet.oneVideo", fallback: "1 video")
+    /// %d photos
+    internal static func photos(_ p1: Int) -> String {
+      return L10n.tr("Localizable", "attachmentSheet.photos", p1, fallback: "%d photos")
+    }
+    /// %d selected
+    internal static func selected(_ p1: Int) -> String {
+      return L10n.tr("Localizable", "attachmentSheet.selected", p1, fallback: "%d selected")
+    }
+    /// Send %d
+    internal static func send(_ p1: Int) -> String {
+      return L10n.tr("Localizable", "attachmentSheet.send", p1, fallback: "Send %d")
+    }
+    /// Show all photos
+    internal static let showAll = L10n.tr("Localizable", "attachmentSheet.showAll", fallback: "Show all photos")
+    /// Show selected
+    internal static let showSelected = L10n.tr("Localizable", "attachmentSheet.showSelected", fallback: "Show selected")
+    /// Gallery
+    internal static let title = L10n.tr("Localizable", "attachmentSheet.title", fallback: "Gallery")
+    /// %d videos
+    internal static func videos(_ p1: Int) -> String {
+      return L10n.tr("Localizable", "attachmentSheet.videos", p1, fallback: "%d videos")
+    }
   }
   internal enum BackupAccount {
     /// Select a name for the archive.

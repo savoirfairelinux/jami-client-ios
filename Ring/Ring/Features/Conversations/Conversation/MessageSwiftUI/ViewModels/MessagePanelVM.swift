@@ -150,6 +150,47 @@ class MessagePanelVM: ObservableObject, MessageAppearanceProtocol {
         if messageToReply != nil {
             endReply()
         }
+        emit(contents, parentId: parentId)
+    }
+
+    typealias ContentLoader = (@escaping (OutgoingMessage.Content?) -> Void) -> Void
+
+    /// Sends the loaded media in the order given.
+    func send(media loaders: [ContentLoader]) {
+        guard !loaders.isEmpty else { return }
+        let parentId = messageToReply?.message.id ?? ""
+        var loaded = [OutgoingMessage.Content??](repeating: nil, count: loaders.count)
+        var nextIndex = 0
+        var reportedFailure = false
+        for (index, load) in loaders.enumerated() {
+            load { content in
+                DispatchQueue.main.async { [weak self] in
+                    loaded[index] = .some(content)
+                    guard let self = self else {
+                        content.map(Self.discardFile)
+                        return
+                    }
+                    var ready = [OutgoingMessage.Content]()
+                    while nextIndex < loaded.count, let result = loaded[nextIndex] {
+                        nextIndex += 1
+                        if let content = result {
+                            ready.append(content)
+                        } else if !reportedFailure {
+                            reportedFailure = true
+                            self.messagePanelState.onNext(MessagePanelState.attachmentFailed)
+                        }
+                    }
+                    guard !ready.isEmpty else { return }
+                    if !parentId.isEmpty && self.messageToReply?.message.id == parentId && self.attachments.isEmpty {
+                        self.endReply()
+                    }
+                    self.emit(ready, parentId: parentId)
+                }
+            }
+        }
+    }
+
+    private func emit(_ contents: [OutgoingMessage.Content], parentId: String) {
         messagePanelState.onNext(MessagePanelState.send(messages: contents.map { OutgoingMessage(content: $0, parentId: parentId) }))
         UIAccessibility.post(notification: .announcement, argument: L10n.Accessibility.conversationMessageSent)
     }

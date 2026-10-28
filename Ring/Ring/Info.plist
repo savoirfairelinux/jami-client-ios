@@ -43,6 +43,8 @@
 	<string>Jami uses the local network to improve direct connections with your contacts for calls and messages.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Used to save selected images</string>
+	<key>PHPhotoLibraryPreventAutomaticLimitedAccessAlert</key>
+	<true/>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Used to select a profile picture and share photos with contacts</string>
 	<key>NSUbiquitousContainers</key>
