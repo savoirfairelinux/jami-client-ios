@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "870ffec8_97189f74",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessagePanelView.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-28T20:08:08Z",
+      "side": 1,
+      "message": "[warning] Line 329: 🟡 `bottomSafeAreaInset` starts at `0`, so the new condition applies bottom padding on first render even on devices with a non-zero inset, then removes it after `onAppear` updates state. This can cause a visible one-frame layout jump. Compute bottom inset synchronously from geometry in the same layout pass (e.g., derive padding directly from `GeometryReader`/safe-area-aware container) or gate with an optional/initialized flag so padding is not decided from a placeholder value.",
+      "revId": "174b13cabdde5417d96f69d2a80f8cc005f78c16",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
