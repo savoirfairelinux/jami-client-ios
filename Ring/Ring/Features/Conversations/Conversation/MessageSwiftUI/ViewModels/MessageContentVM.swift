@@ -168,7 +168,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     // view parameters
     var borderColor: Color = .clear
     var hasBorder: Bool = false
-    let cornerRadius: CGFloat = 15
+    let cornerRadius: CGFloat = 12
     var textInset: CGFloat = 12
     var textVerticalInset: CGFloat = 7
     var styling: MessageStyling = MessageStyling()
