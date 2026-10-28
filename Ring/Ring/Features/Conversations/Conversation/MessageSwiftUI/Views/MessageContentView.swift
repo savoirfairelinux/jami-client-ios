@@ -456,7 +456,7 @@ struct MessageContentView: View {
         HStack(spacing: 0) {
             Spacer(minLength: 0)
             MessageReactionsCapsule(model: reactionsModel,
-                                    tint: model.reactionTint,
+                                    tint: model.receivedBubbleColor,
                                     height: reactionsCapsuleHeight,
                                     insetsFromBubbleEdges: model.hasBubbleBackground,
                                     isCutout: isCutout) {
@@ -486,7 +486,6 @@ private struct MessageReactionsCapsule: View {
     let isCutout: Bool
     let onSelect: () -> Void
 
-    private let tintOpacity: Double = 0.7
     private let bubbleLeadingInset: CGFloat = 30
     private let bubbleTrailingInset: CGFloat = 10
     private let segmentSpacing: CGFloat = 2
@@ -514,7 +513,7 @@ private struct MessageReactionsCapsule: View {
         .fixedSize(horizontal: true, vertical: false)
         .frame(height: height)
         .if(!isCutout) { view in
-            view.background(Capsule().fill(tint.opacity(tintOpacity)).background(Capsule().fill(.regularMaterial)))
+            view.conversationContentMaterial(tint: tint, in: Capsule())
         }
         .padding(Self.ringWidth)
         .if(isCutout) { view in
