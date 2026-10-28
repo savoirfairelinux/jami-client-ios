@@ -90,10 +90,11 @@ struct ContextMenuView: View {
 
                         ZStack {
                             // actions (reply, fwd, etc.)
-                            makeWithSpacers(elementForAlignment: makeActions()
+                            makeWithSpacers(elementForAlignment: makeMenuPanel()
                                                 .opacity(actionsOpacity)
                                                 .scaleEffect(actionsScale, anchor: model.actionsAnchor)
                                                 .frame(width: model.menuSize.width)
+                                                .animation(.spring(response: 0.35, dampingFraction: 0.8), value: model.menuSize)
                             )
                             .frame(width: model.screenWidth, alignment: model.isOurMsg ? .trailing : .leading)
                         }
@@ -114,11 +115,21 @@ struct ContextMenuView: View {
         .onTapGesture {
             animateDismiss(state: .willDismissWithoutAction)
         }
+        .onChange(of: model.menuSize) { _ in
+            guard presentingState == .shouldPresent else { return }
+            withAnimation(.spring(response: 0.35, dampingFraction: 0.8)) {
+                scrollViewHeight = model.messageHeight
+                messageOffsetDiff = model.bottomOffset
+            }
+        }
+        .onChange(of: model.reactionsEmptied) { emptied in
+            if emptied {
+                animateDismiss(state: .willDismissWithAction)
+            }
+        }
         .onAppear(perform: {
             scrollViewHeight = model.messageFrame.height
-            let impactMed = UIImpactFeedbackGenerator(style: .medium)
-            impactMed.prepare()
-            impactMed.impactOccurred()
+            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
 
             withAnimation(.spring(response: 0.18, dampingFraction: 0.6, blendDuration: 0)) {
                 messageScale = model.scaleMessageUp ? model.maxScaleFactor : 1.02
@@ -200,6 +211,32 @@ struct ContextMenuView: View {
         .edgesIgnoringSafeArea(.all)
     }
 
+    @ViewBuilder
+    func makeMenuPanel() -> some View {
+        switch model.mode {
+        case .actions:
+            makeActions()
+        case .reactions:
+            makeReactions()
+        }
+    }
+
+    @ViewBuilder
+    func makeReactions() -> some View {
+        if let reactions = model.containerModel?.reactionsModel {
+            ReactionsView(model: reactions,
+                          localJamiId: model.currentJamiAccountId,
+                          pendingRemovals: model.pendingReactionRemovals) { reactionId in
+                model.removeReaction(id: reactionId)
+                playReactionHaptic()
+            }
+            .frame(height: model.menuSize.height)
+            .enableNestedScrolling()
+            .environment(\.avatarProviderFactory, model.avatarFactory)
+            .modifier(GlassModifier(shape: RoundedRectangle(cornerRadius: ReactionsView.cornerRadius, style: .continuous)))
+        }
+    }
+
     func makeActions() -> some View {
         VStack(spacing: 0) {
             Text(model.messageDateText)
@@ -264,6 +301,7 @@ struct ContextMenuView: View {
     private func animateDismiss(state: ContextMenuPresentingState, delay: Double = 0.25) {
         presentingState = state
         model.isEmojiPickerPresented = false
+        model.stopObservingReactions()
         scrollEnabled = false
         withAnimation(Animation.easeOut(duration: 0.2)) {
             scrollViewHeight = model.messageFrame.height
@@ -315,6 +353,7 @@ struct EmojiBarView: View {
         .onChange(of: cxModel.selectedEmoji) { newValue in
             if !newValue.isEmpty {
                 cxModel.handleUpdatedReaction()
+                playReactionHaptic()
                 cxModel.isEmojiPickerPresented = false
                 presentingState = .willDismissWithAction
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -334,6 +373,7 @@ struct EmojiBarView: View {
                     EmojiBarItemView(
                         cxModel: cxModel,
                         emoji: cxModel.preferredUserReactions[index],
+                        isActive: cxModel.localUserAuthoredReaction(emoji: cxModel.preferredUserReactions[index]),
                         presentingState: $presentingState,
                         initialOpacity: 1.0,
                         delayIn: min(2.0, 0.03 * Double(index)),
@@ -345,6 +385,7 @@ struct EmojiBarView: View {
                     EmojiBarItemView(
                         cxModel: cxModel,
                         emoji: cxModel.uniqueAuthoredReactions[index],
+                        isActive: cxModel.localUserAuthoredReaction(emoji: cxModel.uniqueAuthoredReactions[index]),
                         presentingState: $presentingState,
                         initialOpacity: 1.0,
                         delayIn: min(2.0, 0.03 * Double(index)),
@@ -357,7 +398,7 @@ struct EmojiBarView: View {
         }
         .frame(width: cxModel.emojiBarMaxWidth, height: cxModel.emojiBarHeight)
         .padding(.vertical, 1)
-        .padding(.horizontal, 8)
+        .padding(.horizontal, cxModel.emojiBarHorizontalInset)
         .modifier(GlassModifier(shape: Capsule(), interactive: true))
         .shadow(color: Color(cxModel.shadowColor), radius: messageShadow)
         .onAppear(perform: {
@@ -371,6 +412,7 @@ struct EmojiBarView: View {
 struct EmojiBarItemView: View {
     let cxModel: ContextMenuVM
     let emoji: String
+    let isActive: Bool
     @Binding var presentingState: ContextMenuPresentingState
     let initialOpacity: CGFloat
     let delayIn: Double
@@ -382,7 +424,6 @@ struct EmojiBarItemView: View {
     @SwiftUI.State private var fontSize: CGFloat = 0.0
 
     var body: some View {
-        let emojiActive = cxModel.localUserAuthoredReaction(emoji: emoji)
         VStack(alignment: .center) {
             Rectangle()
                 .fill(Color.clear)
@@ -407,7 +448,7 @@ struct EmojiBarItemView: View {
                 )
             Rectangle()
                 .fill(Color(cxModel.preferencesColor))
-                .opacity(emojiActive ? elementOpacity : 0)
+                .opacity(isActive ? elementOpacity : 0)
                 .frame(width: enabledNotifierLength, height: enabledNotifierHeight, alignment: .center)
                 .cornerRadius(8)
         }
@@ -433,6 +474,10 @@ struct EmojiBarItemView: View {
 
 }
 
+private func playReactionHaptic() {
+    UIImpactFeedbackGenerator(style: .light).impactOccurred()
+}
+
 // MARK: - scroll disable compatibility
 
 private extension View {
@@ -440,6 +485,15 @@ private extension View {
     func applyScrollDisabled(_ disabled: Bool) -> some View {
         if #available(iOS 16.0, *) {
             self.scrollDisabled(disabled)
+        } else {
+            self
+        }
+    }
+
+    @ViewBuilder
+    func enableNestedScrolling() -> some View {
+        if #available(iOS 16.0, *) {
+            self.environment(\.isScrollEnabled, true)
         } else {
             self
         }

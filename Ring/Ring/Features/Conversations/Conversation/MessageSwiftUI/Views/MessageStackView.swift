@@ -23,8 +23,7 @@ import SwiftUI
 struct MessageStackView: View {
     let messageModel: MessageContainerModel
     @ObservedObject var model: MessageStackVM
-    var onLongPress: (_ frame: CGRect, _ message: MessageBubbleView) -> Void
-    var showReactionsView: (_ message: ReactionsContainerModel?) -> Void
+    var onLongPress: (_ frame: CGRect, _ message: MessageBubbleView, _ mode: ContextMenuMode) -> Void
     var body: some View {
         VStack(alignment: model.horizontalAllignment) {
             if model.shouldDisplayName {
@@ -38,8 +37,7 @@ struct MessageStackView: View {
             MessageContentView(messageModel: messageModel,
                                model: messageModel.messageContent,
                                reactionsModel: messageModel.reactionsModel,
-                               onLongPress: onLongPress,
-                               showReactionsView: showReactionsView)
+                               onLongPress: onLongPress)
                 .frame(maxWidth: .infinity, alignment: model.alignment)
         }
     }

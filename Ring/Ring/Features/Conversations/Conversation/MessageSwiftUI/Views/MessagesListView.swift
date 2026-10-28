@@ -71,10 +71,6 @@ struct MessagesListView: View {
 
     @ObservedObject private var dimensionsManager = ScreenDimensionsManager.shared
 
-    // reactions
-    @SwiftUI.State private var reactionsForMessage: ReactionsContainerModel?
-    @SwiftUI.State private var showReactionsView = false
-
     @SwiftUI.State private var envAppeared = false
     @SwiftUI.State private var isApplicationActive = UIApplication.shared.applicationState == .active
 
@@ -94,15 +90,6 @@ struct MessagesListView: View {
     var body: some View {
         ZStack {
             conversationContentView()
-            if showReactionsView {
-                if let reactions = reactionsForMessage {
-                    ReactionsView(model: reactions)
-                        .onTapGesture {
-                            self.showReactionsView = false
-                            reactionsForMessage = nil
-                        }
-                }
-            }
             if model.isTemporary {
                 temporaryConversationView()
             }
@@ -125,8 +112,6 @@ struct MessagesListView: View {
              Instead, we are using UITapGestureRecognizer from UIView.
              */
             if model.screenTapped {
-                showReactionsView = false
-                reactionsForMessage = nil
                 hideKeyboard()
                 // reset to inital state
                 model.screenTapped = false
@@ -274,12 +259,12 @@ struct MessagesListView: View {
     }
 
     private func createMessageRowView(for message: MessageContainerModel) -> some View {
-        MessageRowView(messageModel: message, onLongPress: {(frame, message) in
+        MessageRowView(messageModel: message, onLongPress: {(frame, message, mode) in
             if contextMenuPresentingState != .dismissed && contextMenuPresentingState != .none {
                 return
             }
             guard let snapshot = captureKeyWindowSnapshot(erasingRect: frame) else { return }
-            model.configureContextMenu(with: message, frame: frame)
+            model.configureContextMenu(with: message, frame: frame, mode: mode)
             currentSnapshot = snapshot
             contextMenuPresentingState = .shouldPresent
 
@@ -292,9 +277,6 @@ struct MessagesListView: View {
                     }
                 }
             }
-        }, showReactionsView: {message in
-            reactionsForMessage = message
-            showReactionsView.toggle()
         }, model: message.messageRow)
     }
 

@@ -18,10 +18,16 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
+import Combine
 import Foundation
 import SwiftUI
 import RxRelay
 import SwiftyBeaver
+
+enum ContextMenuMode {
+    case actions
+    case reactions
+}
 
 class ContextMenuVM: ObservableObject {
 
@@ -34,12 +40,25 @@ class ContextMenuVM: ObservableObject {
     var sendEmojiUpdate = BehaviorRelay(value: [String: String]())
     @Published private(set) var menuItems = [ContextualMenuItem]()
     @Published private(set) var messageDateText = ""
+    @Published private(set) var mode: ContextMenuMode = .actions
+    @Published private(set) var reactionsEmptied = false
+    @Published private(set) var pendingReactionRemovals = Set<String>()
+    private(set) var avatarFactory: AvatarProviderFactory?
+    private var reactionsSubscription: AnyCancellable?
 
-    func configure(with message: MessageBubbleView, localJamiId: String?) {
+    func configure(with message: MessageBubbleView, mode: ContextMenuMode, localJamiId: String?, avatarFactory: AvatarProviderFactory) {
         self.currentJamiAccountId = localJamiId
         self.presentingMessageView = message
         self.contentVM = message.model
         self.containerModel = message.messageModel
+        self.avatarFactory = avatarFactory
+        self.mode = mode
+        reactionsEmptied = false
+        pendingReactionRemovals = []
+        reactionsSubscription = nil
+        if mode == .reactions {
+            observeReactions(message.messageModel.reactionsModel)
+        }
 
         let incoming = message.model.message.incoming
         menuItems = message.model.menuItems
@@ -97,6 +116,12 @@ class ContextMenuVM: ObservableObject {
     private var minMenuWidth: CGFloat {
         Self.bodyMetrics.scaledValue(for: 220)
     }
+    private var maxReactionsListHeight: CGFloat {
+        Self.bodyMetrics.scaledValue(for: 330)
+    }
+    private var minReactionsListWidth: CGFloat {
+        Self.bodyMetrics.scaledValue(for: 200)
+    }
     private let screenPadding: CGFloat = 100
     private let menuBottomPadding: CGFloat = 80
     private let emojiBarHorizontalPadding: CGFloat = 20
@@ -122,6 +147,7 @@ class ContextMenuVM: ObservableObject {
     var emojiBarMaxWidth: CGFloat {
         return max(0, min(screenWidth - emojiBarHorizontalPadding, emojiColumnWidth * maxEmojiColumns))
     }
+    let emojiBarHorizontalInset: CGFloat = 8
 
     private(set) var isShortMsg: Bool = true
     private(set) var incomingMessageMarginSize: CGFloat = 58
@@ -157,6 +183,10 @@ class ContextMenuVM: ObservableObject {
     // MARK: - Size calculations
 
     private func updateContextMenuSize() {
+        if mode == .reactions {
+            updateReactionsListSize()
+            return
+        }
         let fontAttributes = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .body)]
         let messageDateAttributes = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .footnote)]
         let messageDate = messageDateText as NSString
@@ -176,6 +206,51 @@ class ContextMenuVM: ObservableObject {
         let height = CGFloat(menuItems.count) * itemHeight + menuPadding * 2 + ceil(messageDateHeight) + messageDateVerticalPadding * 2
         let newHeight = min(height, screenHeight - screenPadding)
         menuSize = CGSize(width: newWidth, height: newHeight)
+    }
+
+    private func updateReactionsListSize() {
+        let usesAccessibilitySize = UIApplication.shared.preferredContentSizeCategory.isAccessibilityCategory
+        let rows = containerModel?.reactionsModel.reactionsRow ?? []
+        var rowsHeight: CGFloat = 0
+        var rowsWidth: CGFloat = 0
+        for row in rows {
+            let isLocal = row.jamiId == currentJamiAccountId
+            let emojis = row.reactions.map(\.emoji)
+            rowsHeight += ReactionRowView.height(count: emojis.count,
+                                                 isLocal: isLocal,
+                                                 usesAccessibilitySize: usesAccessibilitySize)
+            rowsWidth = max(rowsWidth, ReactionRowView.idealWidth(name: isLocal ? row.username.withYourselfSuffix() : row.username,
+                                                                  emojis: emojis,
+                                                                  isLocal: isLocal,
+                                                                  usesAccessibilitySize: usesAccessibilitySize))
+        }
+        let placementInset = isOurMsg ? max(10, screenWidth - messageFrame.maxX) : messageFrame.minX
+        let availableWidth = screenWidth - placementInset - emojiBarHorizontalPadding
+        let maxWidth = min(emojiBarMaxWidth + emojiBarHorizontalInset * 2, availableWidth)
+        let separatorsHeight = CGFloat(max(0, rows.count - 1)) / UIScreen.main.scale
+        let height = min(rowsHeight + separatorsHeight, maxReactionsListHeight) + ReactionsView.verticalPadding * 2
+        menuSize = CGSize(width: min(maxWidth, max(minReactionsListWidth, rowsWidth)),
+                          height: min(height, screenHeight - screenPadding))
+    }
+
+    func observeReactions(_ reactions: ReactionsContainerModel) {
+        // Rows are rebuilt one by one, so read the final state on the next main-queue pass.
+        reactionsSubscription = reactions.$reactionsRow
+            .dropFirst()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self, weak reactions] _ in
+                guard let self = self, let reactions = reactions else { return }
+                if reactions.reactionsRow.isEmpty {
+                    self.reactionsEmptied = true
+                } else {
+                    self.objectWillChange.send()
+                    self.updateReactionsListSize()
+                }
+            }
+    }
+
+    func stopObservingReactions() {
+        reactionsSubscription = nil
     }
 
     private let minMessageDisplayHeight: CGFloat = 400
@@ -237,6 +312,11 @@ class ContextMenuVM: ObservableObject {
         ])
     }
 
+    func removeReaction(id: String) {
+        guard pendingReactionRemovals.insert(id).inserted else { return }
+        sendEmojiUpdate.accept(["reactionId": id, "action": ReactionCommand.revoke.toString()])
+    }
+
     func handleUpdatedReaction() {
         guard let container = containerModel, let author = currentJamiAccountId else {
             log.error("[ContextMenu] Failed to update reaction on invalid presented message or Jami Id.")
@@ -244,7 +324,7 @@ class ContextMenuVM: ObservableObject {
         }
         if let reactionMsg = getAuthoredReaction(withValue: selectedEmoji) {
             log.debug("[ContextMenu] Revoking reaction \(reactionMsg.content) for \(reactionMsg.author)")
-            sendEmojiUpdate.accept(["reactionId": reactionMsg.id, "action": ReactionCommand.revoke.toString()])
+            removeReaction(id: reactionMsg.id)
         } else {
             log.debug("[ContextMenu] Applying reaction \(selectedEmoji) for \(author)")
             sendEmojiUpdate.accept([
@@ -261,7 +341,9 @@ class ContextMenuVM: ObservableObject {
             log.error("[ContextMenu] Jami account ID invalid while attempting to read message reactions.")
             return false
         }
-        return container.message.reactions.contains { $0.author == sender && $0.content == emoji }
+        return container.message.reactions.contains {
+            $0.author == sender && $0.content == emoji && !pendingReactionRemovals.contains($0.id)
+        }
     }
 
     private func getAuthoredReaction(withValue: String) -> MessageAction? {
@@ -269,7 +351,9 @@ class ContextMenuVM: ObservableObject {
             log.error("[ContextMenu] Jami account ID invalid while attempting to read message reactions.")
             return nil
         }
-        return container.message.reactions.first { $0.author == sender && $0.content == withValue }
+        return container.message.reactions.first {
+            $0.author == sender && $0.content == withValue && !pendingReactionRemovals.contains($0.id)
+        }
     }
 }
 
