@@ -159,18 +159,13 @@ struct MessageGestureHandler: ViewModifier {
     @Environment(\.contextMenuActive)
     private var contextMenuActive
 
-    private var longPressGesture: some Gesture {
-        LongPressGesture(minimumDuration: longPressDuration)
-            .onEnded { _ in
-                guard !suppressLongPress else { return }
-                onLongPress()
-            }
-    }
-
     func body(content: Content) -> some View {
         content
             .overlay(tapOverlay)
-            .simultaneousGesture(longPressGesture)
+            .scrollableLongPress(minimumDuration: longPressDuration) {
+                guard !suppressLongPress else { return }
+                onLongPress()
+            }
     }
 
     @ViewBuilder
@@ -183,7 +178,6 @@ struct MessageGestureHandler: ViewModifier {
                         guard !contextMenuActive else { return }
                         onTap(proxy.frame(in: .global), { proxy.frame(in: .global) })
                     }
-                    .simultaneousGesture(longPressGesture)
                     .accessibilityAction(named: L10n.Global.preview) {
                         onTap(proxy.frame(in: .global), { proxy.frame(in: .global) })
                     }
@@ -192,7 +186,89 @@ struct MessageGestureHandler: ViewModifier {
     }
 }
 
+private struct ScrollableLongPress: ViewModifier {
+    let minimumDuration: TimeInterval
+    let action: () -> Void
+
+    @ViewBuilder
+    func body(content: Content) -> some View {
+        if #available(iOS 18.0, *) {
+            content
+                .simultaneousGesture(LongPressGesture(minimumDuration: minimumDuration).onEnded { _ in action() })
+        } else {
+            // Before iOS 18 a SwiftUI long press keeps the enclosing ScrollView
+            // from scrolling when the drag starts on the view.
+            content
+                .overlay(LongPressTouchArea(minimumDuration: minimumDuration, action: action)
+                            .allowsHitTesting(false))
+        }
+    }
+}
+
+/// A UIKit long press attached to the enclosing scroll view that only accepts
+/// touches inside this view's bounds.
+private struct LongPressTouchArea: UIViewRepresentable {
+    let minimumDuration: TimeInterval
+    let action: () -> Void
+
+    func makeUIView(context: Context) -> TouchAreaView {
+        let view = TouchAreaView()
+        view.isUserInteractionEnabled = false
+        return view
+    }
+
+    func updateUIView(_ view: TouchAreaView, context: Context) {
+        view.recognizer.minimumPressDuration = minimumDuration
+        view.action = action
+    }
+
+    final class TouchAreaView: UIView, UIGestureRecognizerDelegate {
+        let recognizer = UILongPressGestureRecognizer()
+        var action: (() -> Void)?
+
+        override init(frame: CGRect) {
+            super.init(frame: frame)
+            recognizer.addTarget(self, action: #selector(handleLongPress))
+            recognizer.delegate = self
+        }
+
+        required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+
+        override func didMoveToWindow() {
+            super.didMoveToWindow()
+            recognizer.view?.removeGestureRecognizer(recognizer)
+            guard window != nil else { return }
+            var ancestor = superview
+            while let view = ancestor, !(view is UIScrollView) {
+                ancestor = view.superview
+            }
+            (ancestor ?? superview)?.addGestureRecognizer(recognizer)
+        }
+
+        @objc
+        private func handleLongPress() {
+            guard recognizer.state == .began else { return }
+            action?()
+        }
+
+        func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+            bounds.contains(touch.location(in: self))
+        }
+
+        func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
+                               shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+            true
+        }
+    }
+}
+
 extension View {
+    func scrollableLongPress(minimumDuration: TimeInterval, perform action: @escaping () -> Void) -> some View {
+        modifier(ScrollableLongPress(minimumDuration: minimumDuration, action: action))
+    }
+
     func messageGesture(
         onLongPress: @escaping () -> Void,
         onTap: ((_ frame: CGRect, _ frameProvider: @escaping () -> CGRect) -> Void)? = nil
