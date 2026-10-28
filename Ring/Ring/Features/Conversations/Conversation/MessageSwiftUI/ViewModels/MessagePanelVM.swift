@@ -150,6 +150,45 @@ class MessagePanelVM: ObservableObject, MessageAppearanceProtocol {
         if messageToReply != nil {
             endReply()
         }
+        emit(contents, parentId: parentId)
+    }
+
+    typealias ContentLoader = (@escaping (OutgoingMessage.Content?) -> Void) -> Void
+
+    /// Sends the loaded media in the order given.
+    func send(media loaders: [ContentLoader]) {
+        guard !loaders.isEmpty else { return }
+        let parentId = messageToReply?.message.id ?? ""
+        var loaded = [OutgoingMessage.Content?](repeating: nil, count: loaders.count)
+        let group = DispatchGroup()
+        for (index, load) in loaders.enumerated() {
+            group.enter()
+            load { content in
+                DispatchQueue.main.async {
+                    loaded[index] = content
+                    group.leave()
+                }
+            }
+        }
+        group.notify(queue: .main) { [weak self] in
+            let files = loaded.compactMap { $0 }
+            guard let self = self else {
+                files.forEach(Self.discardFile)
+                return
+            }
+            if files.count < loaded.count {
+                self.messagePanelState.onNext(MessagePanelState.attachmentFailed)
+            }
+            guard !files.isEmpty else { return }
+            // Queued drafts still belong to the reply, so it stays until they are sent.
+            if !parentId.isEmpty && self.messageToReply?.message.id == parentId && self.attachments.isEmpty {
+                self.endReply()
+            }
+            self.emit(files, parentId: parentId)
+        }
+    }
+
+    private func emit(_ contents: [OutgoingMessage.Content], parentId: String) {
         messagePanelState.onNext(MessagePanelState.send(messages: contents.map { OutgoingMessage(content: $0, parentId: parentId) }))
         UIAccessibility.post(notification: .announcement, argument: L10n.Accessibility.conversationMessageSent)
     }
