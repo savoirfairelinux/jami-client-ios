@@ -181,6 +181,7 @@ struct MessagePanelView: View {
     @Binding var isFocused: Bool
     @SwiftUI.State private var text: String = ""
     @SwiftUI.State private var textHeight: CGFloat = 42
+    @SwiftUI.State private var bottomSafeAreaInset: CGFloat = ScreenDimensionsManager.shared.safeAreaInsets.bottom
     let defaultControlSize: CGFloat = 42
     let textContainerLeadingInset: CGFloat = 14
     let sendIconSize: CGFloat = 25
@@ -331,8 +332,15 @@ struct MessagePanelView: View {
                 }
             }
             .padding(.top, Self.verticalInset)
-            .padding(.bottom, isFocused ? Self.verticalInset : 0)
+            .padding(.bottom, isFocused || bottomSafeAreaInset == 0 ? Self.verticalInset : 0)
         }
+        .background(
+            GeometryReader { proxy in
+                Color.clear
+                    .onAppear { bottomSafeAreaInset = proxy.safeAreaInsets.bottom }
+                    .onChange(of: proxy.safeAreaInsets.bottom) { bottomSafeAreaInset = $0 }
+            }
+        )
         .onChange(of: model.isEdit) { _ in
             isFocused = model.isEdit
         }
