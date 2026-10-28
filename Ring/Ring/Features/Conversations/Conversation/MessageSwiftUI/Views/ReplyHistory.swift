@@ -23,6 +23,7 @@ import SwiftUI
 struct ReplyQuote: View {
     @ObservedObject var reply: MessageReplyTargetVM
     @ObservedObject var message: MessageContentVM
+    var minCardWidth: CGFloat?
     let onLongPress: () -> Void
 
     private let cardInset = EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8)
@@ -38,6 +39,14 @@ struct ReplyQuote: View {
             }
     }
 
+    private var isTinted: Bool {
+        message.hasBubbleBackground
+    }
+
+    private var tintedCardMinWidth: CGFloat? {
+        isTinted ? minCardWidth : nil
+    }
+
     @ViewBuilder private var quote: some View {
         if let line = reply.line {
             ReplyQuoteContent(reply: reply,
@@ -46,9 +55,12 @@ struct ReplyQuote: View {
                               thumbnail: reply.thumbnail,
                               accent: message.replyQuoteAccentColor,
                               textColor: message.styling.textColor,
+                              isTinted: isTinted,
+                              minCardWidth: tintedCardMinWidth,
                               onLongPress: onLongPress)
         } else {
-            ReplyQuoteFrame(accent: message.replyQuoteAccentColor.opacity(0.4), isHighlighted: false) {
+            ReplyQuoteFrame(accent: message.replyQuoteAccentColor.opacity(0.4), isHighlighted: false,
+                            isTinted: isTinted, minWidth: tintedCardMinWidth) {
                 VStack(alignment: .leading, spacing: 1) {
                     Label(L10n.Global.reply, systemImage: "arrowshape.turn.up.left")
                         .font(.footnote.weight(.semibold))
@@ -72,6 +84,8 @@ private struct ReplyQuoteContent: View {
     let thumbnail: UIImage?
     let accent: Color
     let textColor: Color
+    let isTinted: Bool
+    let minCardWidth: CGFloat?
     let onLongPress: () -> Void
 
     @SwiftUI.State private var isHighlighted = false
@@ -79,7 +93,7 @@ private struct ReplyQuoteContent: View {
     private let highlightDuration: TimeInterval = 0.25
 
     var body: some View {
-        ReplyQuoteFrame(accent: accent, isHighlighted: isHighlighted) {
+        ReplyQuoteFrame(accent: accent, isHighlighted: isHighlighted, isTinted: isTinted, minWidth: minCardWidth) {
             ReplyQuoteLabel(title: authorName, line: line, thumbnail: thumbnail, accent: accent, textColor: textColor)
         }
         .onAppear {
@@ -136,6 +150,8 @@ struct ReplyQuoteLabel: View {
 struct ReplyQuoteFrame<Content: View>: View {
     let accent: Color
     let isHighlighted: Bool
+    var isTinted = false
+    var minWidth: CGFloat?
     @ViewBuilder let content: Content
 
     @ScaledMetric(relativeTo: .footnote)
@@ -144,11 +160,20 @@ struct ReplyQuoteFrame<Content: View>: View {
     private let barWidth: CGFloat = 3
     private let spacing: CGFloat = 7
     private let cornerRadius: CGFloat = 6
+    private let tintedOpacity: Double = 0.12
+    private let tintedHighlightOpacity: Double = 0.22
     private let highlightOpacity: Double = 0.15
+
+    private var fillOpacity: Double {
+        if isHighlighted {
+            return isTinted ? tintedHighlightOpacity : highlightOpacity
+        }
+        return isTinted ? tintedOpacity : 0
+    }
 
     var body: some View {
         HStack(spacing: spacing) {
-            RoundedRectangle(cornerRadius: barWidth / 2)
+            RoundedRectangle(cornerRadius: isTinted ? 0 : barWidth / 2)
                 .fill(accent)
                 .frame(width: barWidth)
                 .frame(maxHeight: .infinity)
@@ -158,8 +183,12 @@ struct ReplyQuoteFrame<Content: View>: View {
         .frame(height: quoteHeight)
         .padding(.vertical, 2)
         .padding(.trailing, spacing)
+        .frame(minWidth: minWidth, alignment: .leading)
         .background(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
-                        .fill(accent.opacity(isHighlighted ? highlightOpacity : 0)))
+                        .fill(accent.opacity(fillOpacity)))
+        .if(isTinted) { view in
+            view.clipShape(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
+        }
     }
 }
 
@@ -193,7 +222,7 @@ struct ReplyBubbleContainer<Content: View>: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: layout.contentInset) {
-            ReplyQuote(reply: reply, message: model, onLongPress: onLongPress)
+            ReplyQuote(reply: reply, message: model, minCardWidth: quoteMaxWidth, onLongPress: onLongPress)
                 .frame(maxWidth: quoteMaxWidth, alignment: .leading)
                 .padding(layout.quoteInsets)
             content
@@ -216,7 +245,7 @@ struct ReplyBubbleContainer<Content: View>: View {
     }
 }
 
-private struct ReplyContentWidthKey: PreferenceKey {
+struct ReplyContentWidthKey: PreferenceKey {
     static var defaultValue: CGFloat = 0
 
     static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {

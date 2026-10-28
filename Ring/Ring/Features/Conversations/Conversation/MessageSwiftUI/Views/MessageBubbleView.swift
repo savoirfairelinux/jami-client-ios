@@ -24,6 +24,7 @@ struct MessageBubbleView: View {
     @ObservedObject var model: MessageContentVM
     @SwiftUI.State private var frame: CGRect = .zero
     @SwiftUI.State private var presentMenu = false
+    @SwiftUI.State private var replyContentWidth: CGFloat = 0
     @Environment(\.openURL)
     var openURL
     @Environment(\.suppressLongPress)
@@ -86,8 +87,17 @@ struct MessageBubbleView: View {
     private func withReplyQuote<Content: View>(@ViewBuilder _ content: () -> Content) -> some View {
         if model.isHistory {
             VStack(alignment: model.hasBubbleBackground || model.isIncoming ? .leading : .trailing, spacing: 4) {
-                ReplyQuote(reply: messageModel.replyTarget, message: model, onLongPress: receivedLongPress())
+                ReplyQuote(reply: messageModel.replyTarget,
+                           message: model,
+                           minCardWidth: replyContentWidth > 0 ? replyContentWidth : nil,
+                           onLongPress: receivedLongPress())
                 content()
+                    .background(GeometryReader { proxy in
+                        Color.clear.preference(key: ReplyContentWidthKey.self, value: proxy.size.width)
+                    })
+            }
+            .onPreferenceChange(ReplyContentWidthKey.self) { width in
+                replyContentWidth = width
             }
         } else {
             content()
