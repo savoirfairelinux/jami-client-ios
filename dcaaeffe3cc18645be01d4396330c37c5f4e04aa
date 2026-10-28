@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12bd05ba_4604eb4e",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagePanelVM.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-28T17:24:14Z",
+      "side": 1,
+      "message": "[warning] Line 153: 🟡 Media send no longer supports attaching text/caption to the same message batch (`send(media:)` replaced `send(media:caption:)`), and related caption tests were removed. This is a user-visible behavior regression from the prior flow where users could send media with accompanying text in one action. Consider preserving caption support (e.g., pass composer text/caption through and append non-empty `.text(...)` after media) to avoid loss of functionality.",
+      "revId": "dcaaeffe3cc18645be01d4396330c37c5f4e04aa",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9da4092_b435ddd2",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/AttachmentSheetView.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-28T17:24:14Z",
+      "side": 1,
+      "message": "[warning] Line 221: 🟡 Multi-selection accessibility regressed: selected media cells now expose only `.isSelected` but no announced selection index/order. Since send order is tap order, VoiceOver users can no longer discover that order before sending. Restore an accessibility value such as “Selected, number N” (or equivalent localized phrasing) so non-visual users can verify ordering.",
+      "revId": "dcaaeffe3cc18645be01d4396330c37c5f4e04aa",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
