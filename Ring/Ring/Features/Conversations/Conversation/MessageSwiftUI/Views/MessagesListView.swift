@@ -56,6 +56,7 @@ struct MessagesListView: View {
     @SwiftUI.State var showScrollToLatestButton = false
     let scrollReserved = ScreenDimensionsManager.shared.adaptiveHeight * 1.5
     private let messagesUnderPanelOverlap: CGFloat = -30
+    private let scrollButtonGap: CGFloat = 8
 
     // context menu
     @SwiftUI.State var contextMenuPresentingState: ContextMenuPresentingState = .none
@@ -298,46 +299,12 @@ struct MessagesListView: View {
     }
 
     func createScrollToBottmView() -> some View {
-        return VStack(alignment: .trailing, spacing: -10) {
-            if model.numberOfNewMessages > 0 {
-                Text("\(model.numberOfNewMessages)")
-                    .font(.system(size: 12))
-                    .padding(.trailing, 6.0)
-                    .padding(.leading, 6.0)
-                    .padding(.top, 1.0)
-                    .padding(.bottom, 1.0)
-                    .background(Color(model.swarmColor))
-                    .cornerRadius(9)
-                    .foregroundColor(Color.white)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 9)
-                            .stroke(Color.white, lineWidth: 1)
-                    )
-                    .zIndex(1)
-            }
-            Button(action: {
-                model.scrollToTheBottom()
-            }, label: {
-                Image(systemName: "arrow.down")
-                    .font(.system(size: 16))
-                    .frame(width: 35, height: 35)
-                    .overlay(
-                        Circle()
-                            .stroke(Color(model.swarmColor), lineWidth: 1)
-                    )
-                    .background( VisualEffect(style: .regular, withVibrancy: false))
-                    .clipShape(Circle())
-                    .foregroundColor(Color(model.swarmColor))
-                    .frame(width: 45, height: 45)
-                    .zIndex(0)
-            })
+        ScrollToLatestButton(newMessagesCount: model.numberOfNewMessages, conversationColor: model.swarmColor) {
+            model.scrollToTheBottom()
         }
-        .padding(.trailing, 5.0)
-        .padding(.leading, 15.0)
-        .padding(.top, 0.0)
-        .padding(.bottom, 35)
-        .ignoresSafeArea(.container, edges: [])
-        .shadowForConversation()
+        .padding(.trailing, MessagePanelView.horizontalInset - ScrollToLatestButton.visualInset)
+        .padding(.bottom, -messagesUnderPanelOverlap - MessagePanelView.verticalInset + scrollButtonGap - ScrollToLatestButton.visualInset)
+        .transition(.asymmetric(insertion: .opacity, removal: .identity))
     }
 
     private func temporaryConversationView() -> some View {
@@ -697,4 +664,53 @@ func topVC() -> UIViewController? {
     }
 
     return nil
+}
+
+struct ScrollToLatestButton: View {
+    static let tapTargetSize: CGFloat = 44
+    private static let circleSize: CGFloat = 40
+    static let visualInset: CGFloat = (tapTargetSize - circleSize) / 2
+
+    let newMessagesCount: Int
+    let conversationColor: UIColor
+    let action: () -> Void
+
+    private let chevronSize: CGFloat = 17
+    private let badgeOffset: CGFloat = 6
+    private let badgeMinSize: CGFloat = 18
+    private let badgeHorizontalPadding: CGFloat = 5
+
+    private var palette: UIColor.MessageBubblePalette {
+        .palette(for: conversationColor)
+    }
+
+    var body: some View {
+        Button(action: action) {
+            Image(systemName: "chevron.down")
+                .font(.system(size: chevronSize, weight: .medium))
+                .foregroundColor(Color(palette.receivedControl))
+                .frame(width: Self.circleSize, height: Self.circleSize)
+                .conversationControlGlass(in: Circle())
+                .overlay(alignment: .topTrailing) {
+                    if newMessagesCount > 0 {
+                        badge
+                            .offset(x: badgeOffset, y: -badgeOffset)
+                    }
+                }
+                .frame(width: Self.tapTargetSize, height: Self.tapTargetSize)
+                .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(L10n.Accessibility.scrollToLatestMessage)
+        .accessibilityValue(newMessagesCount > 0 ? L10n.Accessibility.newMessagesCount(newMessagesCount) : "")
+    }
+
+    private var badge: some View {
+        Text(verbatim: String(newMessagesCount))
+            .font(Font.caption2.weight(.semibold).monospacedDigit())
+            .foregroundColor(Color(palette.sentText))
+            .padding(.horizontal, badgeHorizontalPadding)
+            .frame(minWidth: badgeMinSize, minHeight: badgeMinSize)
+            .background(Capsule().fill(Color(palette.sentBackground)))
+    }
 }

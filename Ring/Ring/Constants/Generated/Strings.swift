@@ -141,6 +141,10 @@ internal enum L10n {
     internal static let messageReceivedDate = L10n.tr("Localizable", "accessibility.messageReceivedDate", fallback: "Received")
     /// Sent
     internal static let messageSentDate = L10n.tr("Localizable", "accessibility.messageSentDate", fallback: "Sent")
+    /// %d new messages
+    internal static func newMessagesCount(_ p1: Int) -> String {
+      return L10n.tr("Localizable", "accessibility.newMessagesCount", p1, fallback: "%d new messages")
+    }
     /// Accept invitation
     internal static let pendingRequestsListAcceptInvitation = L10n.tr("Localizable", "accessibility.pendingRequestsListAcceptInvitation", fallback: "Accept invitation")
     /// Block invitation sender
@@ -161,6 +165,8 @@ internal enum L10n {
     internal static let profilePicturePicker = L10n.tr("Localizable", "accessibility.profilePicturePicker", fallback: "Profile picture")
     /// Double-tap to take a picture or select a picture from the library
     internal static let profilePicturePickerHint = L10n.tr("Localizable", "accessibility.profilePicturePickerHint", fallback: "Double-tap to take a picture or select a picture from the library")
+    /// Scroll to latest message
+    internal static let scrollToLatestMessage = L10n.tr("Localizable", "accessibility.scrollToLatestMessage", fallback: "Scroll to latest message")
     /// Show original message
     internal static let showReplyTarget = L10n.tr("Localizable", "accessibility.showReplyTarget", fallback: "Show original message")
     /// Add account

@@ -173,14 +173,15 @@ struct DraftAttachmentsView: View {
 }
 
 struct MessagePanelView: View {
+    static let horizontalInset: CGFloat = 20
+    static let verticalInset: CGFloat = 10
+
     @ObservedObject var model: MessagePanelVM
     @ObservedObject var voiceRecording: VoiceRecordingVM
     @Binding var isFocused: Bool
     @SwiftUI.State private var text: String = ""
     @SwiftUI.State private var textHeight: CGFloat = 42
-    let padding: CGFloat = 10
     let defaultControlSize: CGFloat = 42
-    let paddingGorizontal: CGFloat = 20
     let textContainerLeadingInset: CGFloat = 14
     let sendIconSize: CGFloat = 25
 
@@ -316,7 +317,7 @@ struct MessagePanelView: View {
         VStack(spacing: 0) {
             if let hint = voiceRecording.hint {
                 VoiceRecordingHint(text: hint)
-                    .padding(.top, padding)
+                    .padding(.top, Self.verticalInset)
             }
 
             Group {
@@ -329,8 +330,8 @@ struct MessagePanelView: View {
                     VoiceRecordingPanel(model: voiceRecording)
                 }
             }
-            .padding(.top, padding)
-            .padding(.bottom, isFocused ? padding : 0)
+            .padding(.top, Self.verticalInset)
+            .padding(.bottom, isFocused ? Self.verticalInset : 0)
         }
         .onChange(of: model.isEdit) { _ in
             isFocused = model.isEdit
@@ -338,7 +339,7 @@ struct MessagePanelView: View {
         .onChange(of: model.messageToEdit?.message.id) { _ in
             text = model.messageToEdit?.content ?? ""
         }
-        .padding(.horizontal, paddingGorizontal)
+        .padding(.horizontal, Self.horizontalInset)
     }
 
     private func menuContent() -> some View {
