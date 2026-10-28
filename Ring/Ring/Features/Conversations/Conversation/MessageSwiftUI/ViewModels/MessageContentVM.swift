@@ -698,16 +698,14 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
                                       control: Color(palette.receivedPlaybackControl),
                                       controlIcon: Color(palette.receivedControl),
                                       progress: Color(palette.receivedPlaybackProgress),
-                                      time: .conversationSecondaryText,
-                                      timeBackground: .clear)
+                                      time: .conversationSecondaryText)
         }
         return AudioMessageColors(background: backgroundColor,
                                   text: textColor,
                                   control: Color(palette.sentPlaybackControl),
                                   controlIcon: Color(palette.sentControl),
                                   progress: Color(palette.sentPlaybackProgress),
-                                  time: Color(palette.sentTime),
-                                  timeBackground: .clear)
+                                  time: Color(palette.sentTime))
     }
 
     func updatePlayer(player: PlayerViewModel?) {
