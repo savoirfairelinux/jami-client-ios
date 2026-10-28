@@ -30,6 +30,21 @@ struct ConversationContentMaterialModifier<S: Shape>: ViewModifier {
     }
 }
 
+struct ConversationControlGlassModifier<S: Shape>: ViewModifier {
+    let shape: S
+
+    @ViewBuilder
+    func body(content: Content) -> some View {
+        if #available(iOS 26.0, *) {
+            content
+                .glassEffect(.regular, in: shape)
+                .glassEffectTransition(.identity)
+        } else {
+            content.background(shape.fill(.regularMaterial))
+        }
+    }
+}
+
 enum NavBarIcon {
     static let glyphSize: CGFloat = 20
     static let tapTarget: CGFloat = 44
@@ -38,6 +53,10 @@ enum NavBarIcon {
 extension View {
     func conversationContentMaterial<S: Shape>(tint: Color, in shape: S) -> some View {
         modifier(ConversationContentMaterialModifier(tint: tint, shape: shape))
+    }
+
+    func conversationControlGlass<S: Shape>(in shape: S) -> some View {
+        modifier(ConversationControlGlassModifier(shape: shape))
     }
 
     func placeholder<Content: View>(
