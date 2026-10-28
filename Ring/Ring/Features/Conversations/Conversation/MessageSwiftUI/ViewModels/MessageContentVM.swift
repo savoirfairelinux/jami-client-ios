@@ -138,7 +138,6 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     @Published var showProgress: Bool = true
     @Published var playerHeight: CGFloat = 80
     @Published var playerWidth: CGFloat = 250
-    private let audioPlayerHeight: CGFloat = 48
     @Published var player: PlayerViewModel?
     @Published var corners: UIRectCorner = [.allCorners]
     @Published var menuItems = [ContextualMenuItem]()
@@ -169,7 +168,8 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     var borderColor: Color = .clear
     var hasBorder: Bool = false
     let cornerRadius: CGFloat = 15
-    var textInset: CGFloat = 15
+    static let bubbleTextInset: CGFloat = 15
+    var textInset: CGFloat = MessageContentVM.bubbleTextInset
     var textVerticalInset: CGFloat = 10
     var styling: MessageStyling = MessageStyling()
 
@@ -448,7 +448,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
             self.textInset = 0
             self.textVerticalInset = 2
         } else {
-            self.textInset = 15
+            self.textInset = Self.bubbleTextInset
             self.textVerticalInset = 10
         }
     }
@@ -679,7 +679,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
 
     func playerDidBecomeReady() {
         if player?.hasVideo.value == false {
-            playerHeight = audioPlayerHeight
+            playerHeight = AudioMessageLayout.height
         }
         updateMenuitems()
     }
@@ -693,16 +693,14 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
                                       control: Color(palette.receivedPlaybackControl),
                                       controlIcon: Color(palette.receivedControl),
                                       progress: Color(palette.receivedPlaybackProgress),
-                                      time: .conversationSecondaryText,
-                                      timeBackground: .clear)
+                                      time: .conversationSecondaryText)
         }
         return AudioMessageColors(background: backgroundColor,
                                   text: textColor,
                                   control: Color(palette.sentPlaybackControl),
                                   controlIcon: Color(palette.sentControl),
                                   progress: Color(palette.sentPlaybackProgress),
-                                  time: Color(palette.sentTime),
-                                  timeBackground: .clear)
+                                  time: Color(palette.sentTime))
     }
 
     func updatePlayer(player: PlayerViewModel?) {
@@ -715,7 +713,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
             playerHeight = frameSize.height
             playerWidth = frameSize.width
         } else if !player.hasVideo.value {
-            playerSize.height = audioPlayerHeight
+            playerSize.height = AudioMessageLayout.height
         }
         self.playerHeight = playerSize.height
         self.playerWidth = playerSize.width

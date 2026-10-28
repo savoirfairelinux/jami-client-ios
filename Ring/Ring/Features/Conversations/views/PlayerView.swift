@@ -55,11 +55,27 @@ struct AudioMessageColors {
     let controlIcon: Color
     let progress: Color
     let time: Color
-    let timeBackground: Color
 
     func withoutBackground() -> AudioMessageColors {
         AudioMessageColors(background: .clear, text: text, control: control, controlIcon: controlIcon,
-                           progress: progress, time: time, timeBackground: timeBackground)
+                           progress: progress, time: time)
+    }
+}
+
+enum AudioMessageLayout {
+    static let height: CGFloat = 48
+    static let controlSize: CGFloat = 34
+    static let controlTapSize: CGFloat = 44
+    static let progressGap: CGFloat = 5
+    static let progressTextInset: CGFloat = 3
+    static let trailingInset = MessageContentVM.bubbleTextInset
+
+    static var edgeInset: CGFloat {
+        (height - controlSize) / 2
+    }
+
+    static var controlTapSlack: CGFloat {
+        (controlTapSize - controlSize) / 2
     }
 }
 
@@ -310,8 +326,7 @@ struct PlayerView: View {
                                          control: .white,
                                          controlIcon: Color(UIColor.placeholderText),
                                          progress: Color.white.opacity(0.22),
-                                         time: Color.white.opacity(0.8),
-                                         timeBackground: Color.white.opacity(0.14))
+                                         time: Color.white.opacity(0.8))
     var messageTime: String?
 
     @StateObject private var coordinator = PlayerCoordinator()
@@ -573,16 +588,15 @@ extension PlayerView {
             }
             HStack(spacing: 0) {
                 audioPlayPauseButton
-                    .padding(.leading, 2)
+                    .padding(.leading, AudioMessageLayout.edgeInset - AudioMessageLayout.controlTapSlack)
                 audioSeekArea
+                    .padding(.leading, AudioMessageLayout.progressGap - AudioMessageLayout.controlTapSlack)
                 if let messageTime = messageTime {
-                    MessageTimeCapsule(text: messageTime,
-                                       color: audioColors.time,
-                                       background: audioColors.timeBackground)
-                        .padding(.leading, 8)
+                    MessageTimeView(text: messageTime, color: audioColors.time)
+                        .padding(.leading, AudioMessageLayout.progressGap)
                 }
             }
-            .padding(.trailing, 10)
+            .padding(.trailing, AudioMessageLayout.trailingInset)
         }
     }
 
@@ -602,7 +616,7 @@ extension PlayerView {
                 .foregroundColor(audioColors.text)
                 .lineLimit(1)
                 .dynamicTypeSize(...DynamicTypeSize.xxxLarge)
-                .padding(.leading, 8)
+                .padding(.leading, AudioMessageLayout.progressTextInset)
                 .allowsHitTesting(false)
         }
         .frame(maxHeight: .infinity)
@@ -616,9 +630,9 @@ extension PlayerView {
         Image(systemName: audioButtonIcon)
             .font(.system(size: 14, weight: .semibold))
             .foregroundColor(audioColors.controlIcon)
-            .frame(width: 34, height: 34)
+            .frame(width: AudioMessageLayout.controlSize, height: AudioMessageLayout.controlSize)
             .background(Circle().fill(audioColors.control))
-            .frame(width: 44, height: 44)
+            .frame(width: AudioMessageLayout.controlTapSize, height: AudioMessageLayout.controlTapSize)
             .contentShape(Circle())
             .onTapGesture {
                 guard !coordinator.playbackFailed else { return }
