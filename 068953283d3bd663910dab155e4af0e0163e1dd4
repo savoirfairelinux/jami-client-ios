@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b819e88a_b2308cdb",
+        "filename": "Ring/Ring/Info.plist",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-28T15:39:22Z",
+      "side": 1,
+      "message": "[warning] Line 45: 🟡 `PHPhotoLibraryPreventAutomaticLimitedAccessAlert` is now enabled globally, which disables iOS’s built-in limited-library management prompt for the whole app. Since only the new attachment sheet adds a custom “Manage” path, other photo entry points can become harder to recover from limited access. Either keep the automatic alert enabled, or ensure all photo-related flows expose an equivalent manual management action.",
+      "revId": "068953283d3bd663910dab155e4af0e0163e1dd4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f734a6bb_18b9bf28",
+        "filename": "Ring/Ring/Services/Conversations/MediaLibrary.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-28T15:39:22Z",
+      "side": 1,
+      "message": "[warning] Line 156: 🟡 Every non-GIF image is recompressed to JPEG at quality 0.5 before sending. This is a behavior regression for PNG/HEIC assets (loss of transparency/metadata and potentially worse size-quality tradeoff). Prefer preserving original bytes by default and only recompress when explicitly needed (e.g., user-selected compression mode or size threshold).",
+      "revId": "068953283d3bd663910dab155e4af0e0163e1dd4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
