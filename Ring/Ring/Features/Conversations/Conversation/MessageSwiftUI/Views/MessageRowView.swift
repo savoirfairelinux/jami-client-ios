@@ -188,7 +188,7 @@ struct MessageRowView: View {
             .foregroundColor(.conversationSecondaryText)
             .padding(.horizontal, Layout.daySeparatorHorizontalPadding)
             .padding(.vertical, Layout.daySeparatorVerticalPadding)
-            .background(Capsule().fill(Color(UIColor.tertiarySystemFill)))
+            .conversationContentMaterial(tint: messageModel.messageContent.receivedBubbleColor, in: Capsule())
             .frame(maxWidth: .infinity, alignment: .center)
             .padding(.vertical, Layout.daySeparatorOuterPadding)
             .accessibilityAddTraits(.isHeader)
