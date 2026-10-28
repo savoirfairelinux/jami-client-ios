@@ -169,9 +169,10 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     var hasBorder: Bool = false
     static let bubbleCornerRadius: CGFloat = 15
     let cornerRadius = MessageContentVM.bubbleCornerRadius
-    static let bubbleTextInset: CGFloat = 15
+    static let bubbleTextInset: CGFloat = 12
     var textInset: CGFloat = MessageContentVM.bubbleTextInset
-    var textVerticalInset: CGFloat = 10
+    static let bubbleTextVerticalInset: CGFloat = 7
+    var textVerticalInset: CGFloat = MessageContentVM.bubbleTextVerticalInset
     var styling: MessageStyling = MessageStyling()
 
     var message: MessageModel
@@ -450,7 +451,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
             self.textVerticalInset = 2
         } else {
             self.textInset = Self.bubbleTextInset
-            self.textVerticalInset = 10
+            self.textVerticalInset = Self.bubbleTextVerticalInset
         }
     }
 
