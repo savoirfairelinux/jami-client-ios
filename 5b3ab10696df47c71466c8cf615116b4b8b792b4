@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17857b0d_e592c6db",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/ReactionsContainerModel.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-28T16:23:50Z",
+      "side": 1,
+      "message": "[error] Line 101: 🔴 `reactionsUpdated()` removed the main-thread hop and now only uses `assert(Thread.isMainThread)`. In release builds, `assert` is stripped, so any off-main caller will mutate `@Published` state from a background thread, which can cause SwiftUI/Combine threading violations and flaky UI updates. Make main-thread execution guaranteed (e.g., mark the type/method `@MainActor` or explicitly dispatch to main when needed) instead of debug-only enforcement.",
+      "revId": "5b3ab10696df47c71466c8cf615116b4b8b792b4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
