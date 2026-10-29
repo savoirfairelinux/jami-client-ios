@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "502334d6_1f0c45fc",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/ContextMenuVM.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-29T18:19:40Z",
+      "side": 1,
+      "message": "[warning] Line 312: 🟡 `pendingReactionRemovals` only ever grows (`insert`) and is never reconciled against the latest model state. If a revoke fails or is dropped, that reaction stays locally treated as removed (`localUserAuthoredReaction`/`getAuthoredReaction` filter it out), so the user cannot retry while the menu is open. Reconcile this set on each reactions update (e.g., keep only IDs still pending by intersecting with current reaction IDs, and clear entries on confirmed/failed revoke) so UI state cannot get stuck.",
+      "revId": "46bfe0119cdd5d742549105b324411c3394447e2",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
