@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f23749c_ed1bd895",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessageContentVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-29T13:43:04Z",
+      "side": 1,
+      "message": "[warning] Line 170: 🟡 The bubble inset values are duplicated in two places (`textInset/textVerticalInset` defaults and `updateInset()`), which can drift over time and create inconsistent UI spacing. Extract these to shared constants (e.g., `defaultTextInset`, `defaultTextVerticalInset`) and reference them in both locations.",
+      "revId": "e48245f27904e7b4012eb2200f3043e1c1720dec",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
