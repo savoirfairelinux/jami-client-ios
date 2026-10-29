@@ -177,7 +177,7 @@ enum ReplyBubbleLayout {
     var quoteInsets: EdgeInsets {
         switch self {
         case .media: return EdgeInsets(top: 4, leading: 8, bottom: 0, trailing: 8)
-        case .inset: return EdgeInsets(top: 9, leading: 12, bottom: 0, trailing: 12)
+        case .inset: return EdgeInsets(top: 9, leading: MessageContentVM.bubbleTextInset, bottom: 0, trailing: MessageContentVM.bubbleTextInset)
         }
     }
 }
@@ -198,12 +198,7 @@ struct ReplyBubbleContainer<Content: View>: View {
                 .padding(layout.quoteInsets)
             content
                 .environment(\.drawsMessageBubble, false)
-                .background(GeometryReader { proxy in
-                    Color.clear.preference(key: ReplyContentWidthKey.self, value: proxy.size.width)
-                })
-        }
-        .onPreferenceChange(ReplyContentWidthKey.self) { width in
-            contentWidth = width
+                .measuringWidth(ReplyContentWidthKey.self, into: $contentWidth)
         }
         .padding(layout.contentInset)
         .background(MessageBubbleFill(model: model))
@@ -216,13 +211,7 @@ struct ReplyBubbleContainer<Content: View>: View {
     }
 }
 
-private struct ReplyContentWidthKey: PreferenceKey {
-    static var defaultValue: CGFloat = 0
-
-    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
-        value = max(value, nextValue())
-    }
-}
+private struct ReplyContentWidthKey: MeasuredWidthKey {}
 
 struct ReplyQuoteAccessibility: ViewModifier {
     @ObservedObject var reply: MessageReplyTargetVM

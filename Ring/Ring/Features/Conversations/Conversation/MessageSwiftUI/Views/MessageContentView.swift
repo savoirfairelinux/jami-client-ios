@@ -366,15 +366,7 @@ struct MessageContentView: View {
         }
         .scaleEffect(model.scale)
         .suppressLongPress(suppressLongPress)
-        .background(
-            GeometryReader { proxy in
-                Color.clear
-                    .preference(key: BubbleWidthKey.self, value: proxy.size.width)
-            }
-        )
-        .onPreferenceChange(BubbleWidthKey.self) { width in
-            if width > 0 { self.bubbleWidth = width }
-        }
+        .measuringWidth(BubbleWidthKey.self, into: $bubbleWidth)
         .coordinateSpace(name: AudioSeekAreaKey.coordinateSpace)
         .onPreferenceChange(AudioSeekAreaKey.self) { area in
             audioSeekArea = area
@@ -682,10 +674,4 @@ private struct ReactionsCapsuleFonts {
     }
 }
 
-private struct BubbleWidthKey: PreferenceKey {
-    static var defaultValue: CGFloat = 0
-
-    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
-        value = max(value, nextValue())
-    }
-}
+private struct BubbleWidthKey: MeasuredWidthKey {}

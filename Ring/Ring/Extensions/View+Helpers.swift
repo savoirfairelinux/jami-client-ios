@@ -19,6 +19,27 @@
 import SwiftUI
 import Combine
 
+protocol MeasuredWidthKey: PreferenceKey where Value == CGFloat {}
+
+extension MeasuredWidthKey {
+    static var defaultValue: CGFloat { 0 }
+
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = max(value, nextValue())
+    }
+}
+
+extension View {
+    func measuringWidth<Key: MeasuredWidthKey>(_ key: Key.Type, into width: Binding<CGFloat>) -> some View {
+        background(GeometryReader { proxy in
+            Color.clear.preference(key: key, value: proxy.size.width)
+        })
+        .onPreferenceChange(key) { measured in
+            if measured > 0, width.wrappedValue != measured { width.wrappedValue = measured }
+        }
+    }
+}
+
 struct ConversationContentMaterialModifier<S: Shape>: ViewModifier {
     let tint: Color
     let shape: S

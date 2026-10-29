@@ -24,6 +24,7 @@ struct MessageBubbleView: View {
     @ObservedObject var model: MessageContentVM
     @SwiftUI.State private var frame: CGRect = .zero
     @SwiftUI.State private var presentMenu = false
+    @SwiftUI.State private var replyQuoteWidth: CGFloat = 0
     @Environment(\.openURL)
     var openURL
     @Environment(\.suppressLongPress)
@@ -87,11 +88,16 @@ struct MessageBubbleView: View {
         if model.isHistory {
             VStack(alignment: model.hasBubbleBackground || model.isIncoming ? .leading : .trailing, spacing: 4) {
                 ReplyQuote(reply: messageModel.replyTarget, message: model, onLongPress: receivedLongPress())
+                    .measuringWidth(ReplyQuoteWidthKey.self, into: $replyQuoteWidth)
                 content()
             }
         } else {
             content()
         }
+    }
+
+    private var replyTextMinWidth: CGFloat? {
+        model.isHistory && model.hasBubbleBackground && replyQuoteWidth > 0 ? replyQuoteWidth : nil
     }
 
     private var replyMediaCornerRadius: CGFloat {
@@ -137,7 +143,7 @@ struct MessageBubbleView: View {
                         Text(model.content)
                             .font(model.styling.textFont)
                             .underline()
-                            .withInlineTime(model.inlineTimeText(in: layoutDirection), color: model.timeColor)
+                            .withInlineTime(model.inlineTimeText(in: layoutDirection), color: model.timeColor, minWidth: replyTextMinWidth)
                             .onTapGesture {
                                 openURL(url)
                             }
@@ -157,7 +163,8 @@ struct MessageBubbleView: View {
                 MessageBubbleTextRenderer(textBody: model.bubbleTextBody,
                                           font: model.styling.textFont,
                                           inlineTime: model.inlineTimeText(in: layoutDirection),
-                                          timeColor: model.timeColor)
+                                          timeColor: model.timeColor,
+                                          minWidth: replyTextMinWidth)
                     .lineLimit(nil)
                     .messageGesture(onLongPress: receivedLongPress())
             }
@@ -279,6 +286,8 @@ extension View {
         alignmentGuide(.messageBubbleBottom) { $0[.bottom] }
     }
 }
+
+private struct ReplyQuoteWidthKey: MeasuredWidthKey {}
 
 private enum TimeLayout {
     static let outsideSpacing: CGFloat = 2
