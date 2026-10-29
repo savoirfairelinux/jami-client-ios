@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00ef48c0_37a4e246",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/ReactionsContainerModel.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-29T17:43:50Z",
+      "side": 1,
+      "message": "[warning] Line 103: 🟡 `reactionsUpdated()` now mutates `@Published` state synchronously after replacing the previous `DispatchQueue.main.async` hop. If this method is called from non-main callbacks (common in Rx/data-layer update paths), SwiftUI state may be published off-main, causing runtime warnings or UI race behavior. Make main-thread ownership explicit (`@MainActor` on the model/method) and ensure callers hop to main before invoking it, or restore an explicit main dispatch at the boundary.",
+      "revId": "636540e9079f590493007204f8f5f32d1623f64c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
