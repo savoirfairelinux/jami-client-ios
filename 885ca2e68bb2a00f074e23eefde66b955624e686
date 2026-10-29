@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c92af444_9f0a966e",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagePanelVM.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-29T14:36:50Z",
+      "side": 1,
+      "message": "[warning] Line 170: 🟡 In the `[weak self]` nil branch, only the current callback’s `content` is cleaned up via `discardFile`, but previously loaded items stored in `loaded` are never discarded. If the panel is deallocated mid-load, temporary exported files from earlier callbacks can leak. When `self` is nil, also drain/cleanup any already-buffered `OutgoingMessage.Content` values from `loaded` (or centralize cleanup in a single completion path).",
+      "revId": "885ca2e68bb2a00f074e23eefde66b955624e686",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e66a809a_44711f3d",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagePanelVM.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-29T14:36:50Z",
+      "side": 1,
+      "message": "[error] Line 173: 🔴 `send(media:)` can emit multiple `.send` states for a single user action when loaders complete out of order (e.g. item 0 ready, item 1 pending, item 2 ready \u003d\u003e first emit `[0]`, later emit `[1,2]`). This makes delivery batching nondeterministic and can duplicate side effects (notably multiple \"message sent\" accessibility announcements). Accumulate all loader results and emit once after all indices are resolved, while still preserving order and failure reporting.",
+      "revId": "885ca2e68bb2a00f074e23eefde66b955624e686",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
