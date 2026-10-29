@@ -220,19 +220,34 @@ extension UIColor {
             for _ in 0..<50 where bubble.contrastRatio(with: screen) < 1.2 {
                 bubble = bubble.mixed(with: away, fraction: 0.04)
             }
-            return bubble
+            return shadedSentBubble(bubble, with: traitCollection)
         }
+    }
+
+    private static let sentShadeDepth: (light: CGFloat, dark: CGFloat) = (0.07, 0.03)
+    private static let sentShadeMinimumLightness: CGFloat = 0.55
+    private static let sentShadeExcludedHues: ClosedRange<CGFloat> = 60...135
+
+    private static func shadedSentBubble(_ bubble: UIColor, with traitCollection: UITraitCollection) -> UIColor {
+        guard let color = OklabColor(bubble),
+              color.lightness >= sentShadeMinimumLightness,
+              !sentShadeExcludedHues.contains(color.hue),
+              !prefersDarkText(on: bubble, with: traitCollection) else { return bubble }
+        let depth = traitCollection.userInterfaceStyle == .dark ? sentShadeDepth.dark : sentShadeDepth.light
+        return color.deepened(by: depth).uiColor
     }
 
     private static let darkTextMinimumLead: CGFloat = 0.08
 
+    private static func prefersDarkText(on bubble: UIColor, with traitCollection: UITraitCollection) -> Bool {
+        let dark = messageTextDark.resolvedColor(with: traitCollection)
+        return bubble.lightnessContrast(ofText: dark) >= bubble.lightnessContrast(ofText: .white) + darkTextMinimumLead
+    }
+
     private static func messageTextSent(on sentBubble: UIColor) -> UIColor {
         resolvedPerStyle { traitCollection in
             let bubble = sentBubble.resolvedColor(with: traitCollection)
-            let dark = messageTextDark.resolvedColor(with: traitCollection)
-            let whiteContrast = bubble.lightnessContrast(ofText: .white)
-            let darkContrast = bubble.lightnessContrast(ofText: dark)
-            return darkContrast >= whiteContrast + darkTextMinimumLead ? dark : .white
+            return prefersDarkText(on: bubble, with: traitCollection) ? messageTextDark.resolvedColor(with: traitCollection) : .white
         }
     }
 
@@ -422,8 +437,15 @@ struct OklabColor {
         simd_double3(-0.0041960863, -0.7034186147, 1.7076147010)
     ])
 
+    private static let gamutSearchSteps = 20
+    private static let gamutTolerance = 1e-6
+
     var chroma: CGFloat {
         hypot(greenRed, blueYellow)
+    }
+
+    var hue: CGFloat {
+        atan2(blueYellow, greenRed) * 180 / .pi
     }
 
     init(lightness: CGFloat, greenRed: CGFloat, blueYellow: CGFloat, alpha: CGFloat) {
@@ -443,12 +465,41 @@ struct OklabColor {
     }
 
     var uiColor: UIColor {
-        let lmsRoot = Self.oklabToLMS * simd_double3(lightness, greenRed, blueYellow)
-        let linearRGB = Self.lmsToLinearSRGB * (lmsRoot * lmsRoot * lmsRoot)
+        let linearRGB = self.linearRGB
         return UIColor(red: Self.linearToSRGB(linearRGB.x),
                        green: Self.linearToSRGB(linearRGB.y),
                        blue: Self.linearToSRGB(linearRGB.z),
                        alpha: alpha)
+    }
+
+    func deepened(by amount: CGFloat) -> OklabColor {
+        let target = OklabColor(lightness: lightness - amount, greenRed: greenRed, blueYellow: blueYellow, alpha: alpha)
+        guard !target.isInSRGBGamut else { return target }
+        var inside: CGFloat = 0
+        var outside: CGFloat = 1
+        for _ in 0..<Self.gamutSearchSteps {
+            let scale = (inside + outside) / 2
+            if target.scalingChroma(by: scale).isInSRGBGamut {
+                inside = scale
+            } else {
+                outside = scale
+            }
+        }
+        return target.scalingChroma(by: inside)
+    }
+
+    private var linearRGB: simd_double3 {
+        let lmsRoot = Self.oklabToLMS * simd_double3(lightness, greenRed, blueYellow)
+        return Self.lmsToLinearSRGB * (lmsRoot * lmsRoot * lmsRoot)
+    }
+
+    private var isInSRGBGamut: Bool {
+        let linearRGB = self.linearRGB
+        return [linearRGB.x, linearRGB.y, linearRGB.z].allSatisfy { (-Self.gamutTolerance...(1 + Self.gamutTolerance)).contains($0) }
+    }
+
+    private func scalingChroma(by scale: CGFloat) -> OklabColor {
+        OklabColor(lightness: lightness, greenRed: greenRed * scale, blueYellow: blueYellow * scale, alpha: alpha)
     }
 
     func rotatingHue(by degrees: CGFloat) -> OklabColor {
