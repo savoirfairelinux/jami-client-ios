@@ -177,7 +177,7 @@ enum ReplyBubbleLayout {
     var quoteInsets: EdgeInsets {
         switch self {
         case .media: return EdgeInsets(top: 4, leading: 8, bottom: 0, trailing: 8)
-        case .inset: return EdgeInsets(top: 9, leading: 12, bottom: 0, trailing: 12)
+        case .inset: return EdgeInsets(top: 9, leading: MessageContentVM.bubbleTextInset, bottom: 0, trailing: MessageContentVM.bubbleTextInset)
         }
     }
 }

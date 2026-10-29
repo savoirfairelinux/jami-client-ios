@@ -52,8 +52,9 @@ struct MessageTimeCapsule: View {
 }
 
 extension Text {
-    func withInlineTime(_ time: String?, color: Color) -> some View {
+    func withInlineTime(_ time: String?, color: Color, minWidth: CGFloat? = nil) -> some View {
         (self + Self.reservedSpace(for: time))
+            .frame(minWidth: minWidth, alignment: .leading)
             .overlay(alignment: Alignment(horizontal: .trailing, vertical: .lastTextBaseline)) {
                 if let time = time {
                     MessageTimeView(text: time, color: color)

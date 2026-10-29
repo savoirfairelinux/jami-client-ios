@@ -23,17 +23,18 @@ struct MessageBubbleTextRenderer: View {
     let font: Font
     var inlineTime: String?
     var timeColor: Color = .secondary
+    var minWidth: CGFloat?
 
     var body: some View {
         switch textBody {
         case .plain(let text):
             Text(text)
                 .font(font)
-                .withInlineTime(inlineTime, color: timeColor)
+                .withInlineTime(inlineTime, color: timeColor, minWidth: minWidth)
         case .rich(let attributed):
             Text(attributed)
                 .font(font)
-                .withInlineTime(inlineTime, color: timeColor)
+                .withInlineTime(inlineTime, color: timeColor, minWidth: minWidth)
         }
     }
 }
