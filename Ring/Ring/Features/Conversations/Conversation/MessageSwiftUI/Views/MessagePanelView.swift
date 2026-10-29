@@ -36,7 +36,7 @@ struct ComposerQuoteView: View {
     var body: some View {
         if let line = quote.line {
             HStack(spacing: 0) {
-                ReplyQuoteFrame(accent: accent, isHighlighted: false) {
+                ReplyQuoteFrame(accent: accent, isHighlighted: false, isTinted: false) {
                     ReplyQuoteLabel(title: title ?? quote.authorName, line: line, thumbnail: quote.thumbnail, accent: accent, textColor: textColor)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)

@@ -24,7 +24,6 @@ struct MessageBubbleView: View {
     @ObservedObject var model: MessageContentVM
     @SwiftUI.State private var frame: CGRect = .zero
     @SwiftUI.State private var presentMenu = false
-    @SwiftUI.State private var replyQuoteWidth: CGFloat = 0
     @Environment(\.openURL)
     var openURL
     @Environment(\.suppressLongPress)
@@ -84,20 +83,25 @@ struct MessageBubbleView: View {
     }
 
     @ViewBuilder
-    private func withReplyQuote<Content: View>(@ViewBuilder _ content: () -> Content) -> some View {
-        if model.isHistory {
-            VStack(alignment: model.hasBubbleBackground || model.isIncoming ? .leading : .trailing, spacing: 4) {
-                ReplyQuote(reply: messageModel.replyTarget, message: model, onLongPress: receivedLongPress())
-                    .measuringWidth(ReplyQuoteWidthKey.self, into: $replyQuoteWidth)
-                content()
+    private func textBubble<Content: View>(@ViewBuilder _ text: @escaping (_ minWidth: CGFloat?) -> Content) -> some View {
+        if model.isHistory && model.hasBubbleBackground {
+            ReplyBubbleContainer(model: model, reply: messageModel.replyTarget, layout: .text, onLongPress: receivedLongPress()) { minBubbleWidth in
+                MessageBubbleWithTimeWrapper(model: model) {
+                    text(minBubbleWidth.map { max(0, $0 - 2 * model.textInset) })
+                }
             }
         } else {
-            content()
+            MessageBubbleWithTimeWrapper(model: model) {
+                if model.isHistory {
+                    VStack(alignment: model.isIncoming ? .leading : .trailing, spacing: 4) {
+                        ReplyQuote(reply: messageModel.replyTarget, message: model, onLongPress: receivedLongPress())
+                        text(nil)
+                    }
+                } else {
+                    text(nil)
+                }
+            }
         }
-    }
-
-    private var replyTextMinWidth: CGFloat? {
-        model.isHistory && model.hasBubbleBackground && replyQuoteWidth > 0 ? replyQuoteWidth : nil
     }
 
     private var replyMediaCornerRadius: CGFloat {
@@ -123,7 +127,7 @@ struct MessageBubbleView: View {
                 VStack(alignment: .trailing, spacing: TimeLayout.outsideSpacing) {
                     Group {
                         if model.isHistory {
-                            ReplyBubbleContainer(model: model, reply: messageModel.replyTarget, layout: .media, onLongPress: receivedLongPress()) {
+                            ReplyBubbleContainer(model: model, reply: messageModel.replyTarget, layout: .media, onLongPress: receivedLongPress()) { _ in
                                 URLPreview(metadata: metadata, maxDimension: model.maxDimension)
                                     .cornerRadius(replyMediaCornerRadius)
                                     .messageGesture(onLongPress: receivedLongPress())
@@ -138,17 +142,15 @@ struct MessageBubbleView: View {
                     MessageTimeView(text: model.timeText, color: model.timeColor)
                 }
             } else if model.isFullURL, let url = model.getURL() {
-                MessageBubbleWithTimeWrapper(model: model) {
-                    withReplyQuote {
-                        Text(model.content)
-                            .font(model.styling.textFont)
-                            .underline()
-                            .withInlineTime(model.inlineTimeText(in: layoutDirection), color: model.timeColor, minWidth: replyTextMinWidth)
-                            .onTapGesture {
-                                openURL(url)
-                            }
-                            .messageGesture(onLongPress: receivedLongPress())
-                    }
+                textBubble { minWidth in
+                    Text(model.content)
+                        .font(model.styling.textFont)
+                        .underline()
+                        .withInlineTime(model.inlineTimeText(in: layoutDirection), color: model.timeColor, minWidth: minWidth)
+                        .onTapGesture {
+                            openURL(url)
+                        }
+                        .messageGesture(onLongPress: receivedLongPress())
                 }
             } else {
                 renderBubbleTextBody()
@@ -156,25 +158,22 @@ struct MessageBubbleView: View {
         }
     }
 
-    @ViewBuilder
     private func renderBubbleTextBody() -> some View {
-        MessageBubbleWithTimeWrapper(model: model) {
-            withReplyQuote {
-                MessageBubbleTextRenderer(textBody: model.bubbleTextBody,
-                                          font: model.styling.textFont,
-                                          inlineTime: model.inlineTimeText(in: layoutDirection),
-                                          timeColor: model.timeColor,
-                                          minWidth: replyTextMinWidth)
-                    .lineLimit(nil)
-                    .messageGesture(onLongPress: receivedLongPress())
-            }
+        textBubble { minWidth in
+            MessageBubbleTextRenderer(textBody: model.bubbleTextBody,
+                                      font: model.styling.textFont,
+                                      inlineTime: model.inlineTimeText(in: layoutDirection),
+                                      timeColor: model.timeColor,
+                                      minWidth: minWidth)
+                .lineLimit(nil)
+                .messageGesture(onLongPress: receivedLongPress())
         }
     }
 
     private func renderFileTransfer() -> some View {
         Group {
             if model.isHistory {
-                ReplyBubbleContainer(model: model, reply: messageModel.replyTarget, layout: hasVisualMedia ? .media : .inset, onLongPress: receivedLongPress()) {
+                ReplyBubbleContainer(model: model, reply: messageModel.replyTarget, layout: hasVisualMedia ? .media : .inset, onLongPress: receivedLongPress()) { _ in
                     fileTransferMedia(cornerRadius: hasVisualMedia ? replyMediaCornerRadius : 0)
                 }
             } else {
@@ -286,8 +285,6 @@ extension View {
         alignmentGuide(.messageBubbleBottom) { $0[.bottom] }
     }
 }
-
-private struct ReplyQuoteWidthKey: MeasuredWidthKey {}
 
 private enum TimeLayout {
     static let outsideSpacing: CGFloat = 2

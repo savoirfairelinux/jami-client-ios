@@ -31,10 +31,18 @@ extension MeasuredWidthKey {
 
 extension View {
     func measuringWidth<Key: MeasuredWidthKey>(_ key: Key.Type, into width: Binding<CGFloat>) -> some View {
+        reportingWidth(key)
+            .onMeasuredWidthChange(key, into: width)
+    }
+
+    func reportingWidth<Key: MeasuredWidthKey>(_ key: Key.Type) -> some View {
         background(GeometryReader { proxy in
             Color.clear.preference(key: key, value: proxy.size.width)
         })
-        .onPreferenceChange(key) { measured in
+    }
+
+    func onMeasuredWidthChange<Key: MeasuredWidthKey>(_ key: Key.Type, into width: Binding<CGFloat>) -> some View {
+        onPreferenceChange(key) { measured in
             if measured > 0, width.wrappedValue != measured { width.wrappedValue = measured }
         }
     }
