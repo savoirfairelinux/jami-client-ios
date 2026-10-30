@@ -127,11 +127,9 @@ struct MessageGrouping {
         let differentUri = older.uri != newer.uri
         let messageTypeCheck = older.type.isCentered || newer.type.isCentered
         let differentAuthor = older.authorId != newer.authorId
-        let startsWithReply = newer.isReply()
         let isEmojiOnlyMessage = older.isEmojiOnly() || newer.isEmojiOnly()
 
-        return differentUri || messageTypeCheck || differentAuthor ||
-            startsWithReply || isEmojiOnlyMessage
+        return differentUri || messageTypeCheck || differentAuthor || isEmojiOnlyMessage
     }
 
     private static func endsEmojiRun(at index: Int, in messages: [MessageModel], boundaries: [Boundary]) -> Bool {

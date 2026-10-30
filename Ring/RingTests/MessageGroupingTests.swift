@@ -67,11 +67,11 @@ final class MessageGroupingTests: XCTestCase {
         XCTAssertEqual(result.map(\.sequencing), [.singleMessage, .singleMessage])
     }
 
-    func testReplyStartsSequenceAndShowsName() {
+    func testReplyContinuesSequence() {
         let result = groupings([message(0), message(1) { $0.reply = "parent" }], isGroupConversation: true)
 
-        XCTAssertEqual(result.map(\.sequencing), [.singleMessage, .singleMessage])
-        XCTAssertEqual(result.map(\.displaysName), [true, true])
+        XCTAssertEqual(result.map(\.sequencing), [.firstOfSequence, .lastOfSequence])
+        XCTAssertEqual(result.map(\.displaysName), [true, false])
     }
 
     func testReplyStartedSequenceShowsNameOnReplyOnly() {
