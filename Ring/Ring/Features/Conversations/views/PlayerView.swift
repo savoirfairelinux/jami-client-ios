@@ -81,21 +81,160 @@ enum AudioMessageLayout {
 
 // MARK: - Player State Coordinator
 
-/// Manages the AVSampleBufferDisplayLayer and RxSwift subscriptions.
-class PlayerCoordinator: ObservableObject {
+final class PlayerCoordinator: ObservableObject {
     let displayLayer = AVSampleBufferDisplayLayer()
-    private var disposeBag = DisposeBag()
-    private weak var boundViewModel: PlayerViewModel?
-    weak var pendingViewModel: PlayerViewModel?
 
-    @Published var isPaused: Bool = true
-    @Published var isMuted: Bool = true
-    @Published var duration: Float = 0
-    @Published var hasVideo: Bool = true
-    @Published var controlsVisible: Bool = true
-    @Published var playbackFailed: Bool = false
+    @Published private(set) var isActive = false
+    @Published private(set) var isPaused = true
+    @Published private(set) var isMuted = true
+    @Published private(set) var duration: Float = 0
+    @Published private(set) var hasVideo = true
+    @Published private(set) var playbackFailed = false
+    @Published var controlsVisible = true
+    @Published private(set) var elapsedTimeString = "00:00"
 
+    private(set) var progress: Float = 0
+    private(set) var isSeeking = false
+    var sliderUpdate: ((Float) -> Void)?
+
+    private var item: PlaybackItem?
+    private weak var playback: ConversationPlayback?
+    private weak var session: PlayerViewModel?
+    private var activeDisposeBag = DisposeBag()
+    private var sessionDisposeBag = DisposeBag()
+    private var frameSubscription: FrameSubscription?
+    private var lastBuffer: CMSampleBuffer?
     private var autoHideTask: DispatchWorkItem?
+
+    init() {
+        displayLayer.videoGravity = .resizeAspect
+        displayLayer.isOpaque = true
+    }
+
+    func configureForFullScreen() {
+        displayLayer.videoGravity = .resizeAspectFill
+    }
+
+    // MARK: Binding
+
+    func bind(to media: MessageMedia) {
+        guard item != media.item || playback !== media.playback else { return }
+        item = media.item
+        playback = media.playback
+        activeDisposeBag = DisposeBag()
+        attach(nil)
+        let itemId = media.item.id
+        media.playback?.active
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] active in
+                self?.attach(active?.itemId == itemId ? active?.player : nil)
+            })
+            .disposed(by: activeDisposeBag)
+    }
+
+    private func attach(_ player: PlayerViewModel?) {
+        if let player = player, player === session { return }
+        session = player
+        sessionDisposeBag = DisposeBag()
+        frameSubscription = nil
+        guard let player = player else {
+            showPreview()
+            return
+        }
+        isActive = true
+        hasVideo = player.hasVideo
+
+        player.frameSource
+            .subscribe(onNext: { [weak self] source in
+                self?.frameSubscription = source?.subscribe { frame in
+                    guard let buffer = frame.sampleBuffer else { return }
+                    DispatchQueue.main.async { self?.enqueueBuffer(buffer) }
+                }
+            })
+            .disposed(by: sessionDisposeBag)
+
+        player.playerPosition
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] position in
+                guard let self = self, !self.isSeeking else { return }
+                self.updateProgress(position)
+            })
+            .disposed(by: sessionDisposeBag)
+
+        player.playerDuration
+            .observe(on: MainScheduler.asyncInstance)
+            .subscribe(onNext: { [weak self] value in
+                self?.duration = value
+                self?.updateElapsedTime()
+            })
+            .disposed(by: sessionDisposeBag)
+
+        player.isPaused
+            .observe(on: MainScheduler.asyncInstance)
+            .subscribe(onNext: { [weak self] value in
+                self?.isPaused = value
+            })
+            .disposed(by: sessionDisposeBag)
+
+        player.audioMuted
+            .observe(on: MainScheduler.asyncInstance)
+            .subscribe(onNext: { [weak self] value in
+                self?.isMuted = value
+            })
+            .disposed(by: sessionDisposeBag)
+
+        player.playbackFailed
+            .observe(on: MainScheduler.asyncInstance)
+            .subscribe(onNext: { [weak self] value in
+                self?.playbackFailed = value
+            })
+            .disposed(by: sessionDisposeBag)
+    }
+
+    private func showPreview() {
+        isActive = false
+        isSeeking = false
+        lastBuffer = nil
+        displayLayer.flushAndRemoveImage()
+        let preview = item?.preview
+        hasVideo = preview?.hasVideo ?? true
+        duration = Float(preview?.durationMicroseconds ?? 0)
+        playbackFailed = !(preview?.isPlayable ?? true)
+        isPaused = true
+        isMuted = hasVideo
+        updateProgress(0)
+    }
+
+    // MARK: Actions
+
+    func togglePlay() {
+        guard let item = item, !playbackFailed else { return }
+        playback?.togglePlay(item)
+    }
+
+    func toggleMute() {
+        session?.toggleMute()
+    }
+
+    func beginSeek() {
+        guard let session = session else { return }
+        isSeeking = true
+        session.beginSeek()
+    }
+
+    func changeSeek(to newValue: Float) {
+        guard isSeeking else { return }
+        progress = newValue
+        updateElapsedTime()
+    }
+
+    func endSeek() {
+        guard isSeeking else { return }
+        isSeeking = false
+        session?.endSeek(at: progress)
+    }
+
+    // MARK: Auto-hide
 
     func scheduleAutoHide() {
         autoHideTask?.cancel()
@@ -114,40 +253,11 @@ class PlayerCoordinator: ObservableObject {
         autoHideTask = nil
     }
 
-    var progress: Float = 0
-    @Published var elapsedTimeString: String = "00:00"
-    var sliderUpdate: ((Float) -> Void)?
-
-    private var lastBuffer: CMSampleBuffer?
-    var isSeeking: Bool = false
-
-    init() {
-        displayLayer.videoGravity = .resizeAspect
-        displayLayer.isOpaque = true
-    }
-
-    func configureForFullScreen() {
-        displayLayer.videoGravity = .resizeAspectFill
-    }
-
-    func updateElapsedTime() {
-        let newString = Float.elapsedString(progress: progress, duration: duration)
-        if newString != elapsedTimeString {
-            elapsedTimeString = newString
-        }
-    }
+    // MARK: Display
 
     var audioTimeString: String {
         guard duration > 0 else { return "--:--" }
         return isPaused && progress == 0 ? duration.durationString : elapsedTimeString
-    }
-
-    func enqueueBuffer(_ buffer: CMSampleBuffer) {
-        lastBuffer = buffer
-        if displayLayer.status == .failed {
-            displayLayer.flush()
-        }
-        displayLayer.enqueue(buffer)
     }
 
     func redisplayLastBuffer() {
@@ -156,88 +266,26 @@ class PlayerCoordinator: ObservableObject {
         displayLayer.enqueue(buffer)
     }
 
-    func bindIfNeeded() {
-        guard let viewModel = pendingViewModel else { return }
-        bind(to: viewModel)
+    private func enqueueBuffer(_ buffer: CMSampleBuffer) {
+        guard isActive else { return }
+        lastBuffer = buffer
+        if displayLayer.status == .failed {
+            displayLayer.flush()
+        }
+        displayLayer.enqueue(buffer)
     }
 
-    func bind(to viewModel: PlayerViewModel) {
-        if boundViewModel === viewModel {
-            viewModel.createPlayer()
-            return
+    private func updateProgress(_ value: Float) {
+        progress = value
+        sliderUpdate?(value)
+        updateElapsedTime()
+    }
+
+    private func updateElapsedTime() {
+        let newString = Float.elapsedString(progress: progress, duration: duration)
+        if newString != elapsedTimeString {
+            elapsedTimeString = newString
         }
-
-        disposeBag = DisposeBag()
-        boundViewModel = viewModel
-
-        // Seed coordinator state from the view model's current values
-        // so the UI shows the correct layout immediately.
-        hasVideo = viewModel.hasVideo.value
-        isPaused = viewModel.pause.value
-        isMuted = viewModel.audioMuted.value
-        playbackFailed = viewModel.playbackFailed.value
-
-        viewModel.playBackFrame
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] buffer in
-                guard let self = self, let buffer = buffer else { return }
-                self.enqueueBuffer(buffer)
-            })
-            .disposed(by: disposeBag)
-
-        viewModel.playerPosition
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] position in
-                guard let self = self else { return }
-                if !self.isSeeking {
-                    self.progress = position
-                    self.sliderUpdate?(position)
-                    self.updateElapsedTime()
-                }
-            })
-            .disposed(by: disposeBag)
-
-        viewModel.playerDuration
-            .asObservable()
-            .observe(on: MainScheduler.asyncInstance)
-            .subscribe(onNext: { [weak self] value in
-                self?.duration = value
-            })
-            .disposed(by: disposeBag)
-
-        viewModel.pause
-            .asObservable()
-            .observe(on: MainScheduler.asyncInstance)
-            .subscribe(onNext: { [weak self] value in
-                self?.isPaused = value
-            })
-            .disposed(by: disposeBag)
-
-        viewModel.audioMuted
-            .asObservable()
-            .observe(on: MainScheduler.asyncInstance)
-            .subscribe(onNext: { [weak self] value in
-                self?.isMuted = value
-            })
-            .disposed(by: disposeBag)
-
-        viewModel.hasVideo
-            .asObservable()
-            .observe(on: MainScheduler.asyncInstance)
-            .subscribe(onNext: { [weak self] value in
-                self?.hasVideo = value
-            })
-            .disposed(by: disposeBag)
-
-        viewModel.playbackFailed
-            .asObservable()
-            .observe(on: MainScheduler.asyncInstance)
-            .subscribe(onNext: { [weak self] value in
-                self?.playbackFailed = value
-            })
-            .disposed(by: disposeBag)
-
-        viewModel.createPlayer()
     }
 }
 
@@ -264,8 +312,8 @@ struct VideoLayerView: UIViewRepresentable {
     }
 }
 
-/// UIView subclass that detects when layout completes and when the view
-/// enters a window, so the coordinator can bind and display the first frame.
+/// UIView subclass that detects when layout completes, so the coordinator
+/// can redisplay the last frame.
 final class VideoLayerUIView: UIView {
     private let displayLayer: AVSampleBufferDisplayLayer
     private weak var coordinator: PlayerCoordinator?
@@ -279,13 +327,6 @@ final class VideoLayerUIView: UIView {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    override func didMoveToWindow() {
-        super.didMoveToWindow()
-        if window != nil {
-            coordinator?.bindIfNeeded()
-        }
     }
 
     override func layoutSubviews() {
@@ -314,7 +355,8 @@ struct AudioSeekAreaKey: PreferenceKey {
 }
 
 struct PlayerView: View {
-    var viewModel: PlayerViewModel
+    var media: MessageMedia
+    var poster: UIImage?
     var sizeMode: PlayerMode
     var withControls: Bool
     var externalControlsVisible: Binding<Bool>?
@@ -356,8 +398,11 @@ struct PlayerView: View {
                 .ignoresSafeArea(edges: sizeMode == .fullScreen ? .all : [])
 
             if coordinator.hasVideo {
-                VideoLayerView(displayLayer: coordinator.displayLayer, coordinator: coordinator)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                posterView
+                if coordinator.isActive {
+                    VideoLayerView(displayLayer: coordinator.displayLayer, coordinator: coordinator)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                }
             }
 
             videoTapLayer
@@ -378,8 +423,7 @@ struct PlayerView: View {
             if sizeMode == .fullScreen {
                 coordinator.configureForFullScreen()
             }
-            coordinator.pendingViewModel = viewModel
-            coordinator.bind(to: viewModel)
+            coordinator.bind(to: media)
             if sizeMode == .fullScreen && externalControlsVisible == nil {
                 coordinator.scheduleAutoHide()
             }
@@ -390,6 +434,19 @@ struct PlayerView: View {
         .onChange(of: externalControlsVisible?.wrappedValue) { newValue in
             guard let newValue else { return }
             coordinator.controlsVisible = newValue
+        }
+    }
+
+    @ViewBuilder private var posterView: some View {
+        if let poster = poster {
+            Color.clear
+                .overlay(
+                    Image(uiImage: poster)
+                        .resizable()
+                        .aspectRatio(contentMode: sizeMode == .fullScreen ? .fill : .fit)
+                )
+                .clipped()
+                .accessibilityHidden(true)
         }
     }
 
@@ -447,7 +504,7 @@ struct PlayerView: View {
 
     private func playPauseButton(_ style: PlayButtonStyle) -> some View {
         glassPlayPauseButton(isPaused: coordinator.isPaused, iconSize: style.iconSize, size: style.buttonSize) {
-            viewModel.togglePause()
+            coordinator.togglePlay()
             if style.autoHide { coordinator.scheduleAutoHide() }
         }
     }
@@ -470,7 +527,7 @@ struct PlayerView: View {
 
     private var fullScreenMuteButton: some View {
         glassIconButton(systemName: muteIcon, accessibilityLabel: muteAccessibilityLabel) {
-            viewModel.muteAudio()
+            coordinator.toggleMute()
             coordinator.scheduleAutoHide()
         }
     }
@@ -484,6 +541,7 @@ struct PlayerView: View {
 
     private func seekSlider() -> some View {
         MediaSeekSlider(
+            isEnabled: coordinator.isActive,
             onRegister: { sink in coordinator.sliderUpdate = sink },
             onSeekStart: { beginSeek(autoHide: true) },
             onSeekChange: { newValue in changeSeek(to: newValue) },
@@ -493,23 +551,15 @@ struct PlayerView: View {
 
     private func beginSeek(autoHide: Bool) {
         if autoHide { coordinator.cancelAutoHide() }
-        coordinator.isSeeking = true
-        viewModel.userStartSeeking()
-        viewModel.seekTimeVariable.accept(coordinator.progress)
+        coordinator.beginSeek()
     }
 
     private func changeSeek(to newValue: Float) {
-        coordinator.progress = newValue
-        coordinator.updateElapsedTime()
-        if coordinator.isSeeking {
-            viewModel.seekTimeVariable.accept(newValue)
-        }
+        coordinator.changeSeek(to: newValue)
     }
 
     private func endSeek(autoHide: Bool) {
-        coordinator.isSeeking = false
-        viewModel.seekTimeVariable.accept(coordinator.progress)
-        viewModel.userStopSeeking()
+        coordinator.endSeek()
         if autoHide { coordinator.scheduleAutoHide() }
     }
 
@@ -604,7 +654,7 @@ extension PlayerView {
         ZStack(alignment: .leading) {
             MediaSeekFill(color: audioColors.progress,
                           cornerRadius: 8,
-                          isEnabled: !coordinator.playbackFailed,
+                          isEnabled: coordinator.isActive && !coordinator.playbackFailed,
                           onRegister: { sink in coordinator.sliderUpdate = sink },
                           onSeekStart: { beginSeek(autoHide: false) },
                           onSeekChange: { newValue in changeSeek(to: newValue) },
@@ -635,8 +685,7 @@ extension PlayerView {
             .frame(width: AudioMessageLayout.controlTapSize, height: AudioMessageLayout.controlTapSize)
             .contentShape(Circle())
             .onTapGesture {
-                guard !coordinator.playbackFailed else { return }
-                viewModel.togglePause()
+                coordinator.togglePlay()
             }
     }
 

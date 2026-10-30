@@ -160,6 +160,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     var requestsService: RequestsService
     var presenceService: PresenceService
     var transferHelper: TransferHelper
+    let playback: ConversationPlayback
     var messagePanel: MessagePanelVM
     let voiceRecording: VoiceRecordingVM
     var currentlyTypingUsers: Set<String> = []
@@ -277,10 +278,11 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
         self.nameService = injectionBag.nameService
         self.presenceService = injectionBag.presenceService
         self.transferHelper = transferHelper
+        self.playback = ConversationPlayback(videoService: injectionBag.videoService)
         self.locationSharingService = injectionBag.locationSharingService
         self.messagePanel = MessagePanelVM(messagePanelState: self.messagePanelStateSubject)
         self.voiceRecording = VoiceRecordingVM(injectionBag: injectionBag,
-                                               transferHelper: transferHelper,
+                                               playback: self.playback,
                                                messagePanelState: self.messagePanelStateSubject)
         self.callBannerViewModel = CallBannerViewModel(injectionBag: injectionBag, conversation: self.conversation, state: self.messagePanelStateSubject)
 
@@ -859,9 +861,8 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
                 if viewModel.url != nil { return }
                 let url = self.transferHelper.getFileURL(conversation: self.conversation, message: viewModel.message)
                 viewModel.updateFileURL(url: url)
-            case .getPlayer(let viewModel):
-                if viewModel.player != nil { return }
-                viewModel.updatePlayer(player: self.transferHelper.getPlayer(conversation: self.conversation, message: viewModel.message))
+            case .getMedia(let viewModel):
+                self.loadMedia(for: viewModel)
             }
         } onError: { _ in
         }
@@ -869,6 +870,20 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
         container.listenerForInfoStateAdded()
     }
     // swiftlint:enable cyclomatic_complexity
+
+    private func loadMedia(for viewModel: MessageContentVM) {
+        guard let url = transferHelper.getFileURL(conversation: conversation, message: viewModel.message),
+              url.pathExtension.isMediaExtension() else { return }
+        let scope = MediaPreviewScope(accountId: conversation.accountId, conversationId: conversation.id)
+        let itemId = viewModel.message.id
+        injectionBag.videoService.mediaPreview(for: url, in: scope)
+            .subscribe(onSuccess: { [weak self, weak viewModel] preview in
+                guard let self = self, let viewModel = viewModel else { return }
+                viewModel.updateMedia(MessageMedia(item: PlaybackItem(id: itemId, url: url, preview: preview),
+                                                   playback: self.playback))
+            })
+            .disposed(by: viewModel.disposeBag)
+    }
 
     private func subscribeSwarmPreferences() {
         self.conversationService

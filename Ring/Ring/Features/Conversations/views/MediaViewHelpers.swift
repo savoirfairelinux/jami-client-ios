@@ -59,6 +59,7 @@ struct MediaSeekSlider: UIViewRepresentable {
     var trackColor: Color = .white.opacity(0.35)
     var fillColor: Color = .white.opacity(0.7)
     var activeFillColor: Color = .white
+    var isEnabled = true
     var onRegister: (@escaping (Float) -> Void) -> Void
     var onSeekStart: () -> Void
     var onSeekChange: (Float) -> Void
@@ -84,6 +85,7 @@ struct MediaSeekSlider: UIViewRepresentable {
         }
 
         applyColors(to: slider, coordinator: coordinator)
+        slider.isEnabled = isEnabled
         slider.accessibilityLabel = L10n.Accessibility.audioPlayerSeek
         slider.addTarget(coordinator, action: #selector(Coordinator.touchDown(_:)), for: .touchDown)
         slider.addTarget(coordinator, action: #selector(Coordinator.valueChanged(_:)), for: .valueChanged)
@@ -98,6 +100,7 @@ struct MediaSeekSlider: UIViewRepresentable {
         coordinator.onSeekChange = onSeekChange
         coordinator.onSeekEnd = onSeekEnd
         applyColors(to: slider, coordinator: coordinator)
+        slider.isEnabled = isEnabled
     }
 
     private func applyColors(to slider: ScrubberSlider, coordinator: Coordinator) {
@@ -545,8 +548,8 @@ final class MessageActionHandler {
     func handleMediaPreview(for message: MessageContentVM, sourceFrame: CGRect, sourceFrameProvider: (() -> CGRect)?) {
         guard let url = message.url else { return }
         let allowDelete = !message.isIncoming
-        if let player = message.player, player.hasVideo.value {
-            let content = MediaPreviewContent.player(player)
+        if let media = message.media, media.item.preview.hasVideo {
+            let content = MediaPreviewContent.video(media, poster: message.posterImage)
             let model = makePreviewModel(content: content, fileURL: url, canDelete: allowDelete, delegate: message)
             presentMediaPreview?(model, sourceFrame, sourceFrameProvider)
         } else if url.pathExtension.isImageExtension() {

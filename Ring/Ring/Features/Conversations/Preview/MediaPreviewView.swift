@@ -184,8 +184,8 @@ private struct MediaPreviewContentView: View {
     @ViewBuilder
     private func mediaContent() -> some View {
         switch model.content {
-        case .player(let viewModel):
-            PlayerView(viewModel: viewModel, sizeMode: .fullScreen, withControls: true,
+        case .video(let media, let poster):
+            PlayerView(media: media, poster: poster, sizeMode: .fullScreen, withControls: true,
                        externalControlsVisible: $controlsVisible,
                        fullScreenActions: AnyView(MediaPreviewVideoActions(model: model, onDelete: { [self] in
                            presentDeleteAlert()

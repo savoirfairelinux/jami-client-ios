@@ -53,7 +53,7 @@ final class VoiceRecordingVM: ObservableObject {
     private let videoService: VideoService
     private let dataTransferService: DataTransferService
     private let callService: CallService
-    private let transferHelper: TransferHelper
+    private let playback: ConversationPlayback
     private let messagePanelState: PublishSubject<State>
     private var recordingPath: String?
     private var recordingStart: Date?
@@ -65,12 +65,12 @@ final class VoiceRecordingVM: ObservableObject {
     private var previewDisposeBag = DisposeBag()
     private let disposeBag = DisposeBag()
 
-    init(injectionBag: InjectionBag, transferHelper: TransferHelper, messagePanelState: PublishSubject<State>) {
+    init(injectionBag: InjectionBag, playback: ConversationPlayback, messagePanelState: PublishSubject<State>) {
         self.injectionBag = injectionBag
         self.videoService = injectionBag.videoService
         self.dataTransferService = injectionBag.dataTransferService
         self.callService = injectionBag.callService
-        self.transferHelper = transferHelper
+        self.playback = playback
         self.messagePanelState = messagePanelState
 
         NotificationCenter.default.rx.notification(UIApplication.didEnterBackgroundNotification)
@@ -80,7 +80,7 @@ final class VoiceRecordingVM: ObservableObject {
             })
             .disposed(by: disposeBag)
 
-        transferHelper.playbackStarted
+        playback.playbackStarted
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
                 self?.interrupt()
@@ -120,7 +120,7 @@ final class VoiceRecordingVM: ObservableObject {
         state = .preview
         afterFileIsWritten { [weak self] in
             guard let self = self, self.state == .preview, self.recordingPath == path else { return }
-            self.bindPreview(PlayerViewModel(injectionBag: self.injectionBag, path: path))
+            self.loadPreview(path: path)
         }
     }
 
@@ -147,7 +147,7 @@ final class VoiceRecordingVM: ObservableObject {
             discardRecording()
             return
         }
-        previewPlayer?.closePlayer()
+        previewPlayer?.close()
         reset()
         onSend(.file(path: path,
                      displayName: URL(fileURLWithPath: path).lastPathComponent,
@@ -161,16 +161,15 @@ final class VoiceRecordingVM: ObservableObject {
     }
 
     func beginPreviewSeek() {
-        previewPlayer?.userStartSeeking()
+        previewPlayer?.beginSeek()
     }
 
     func seekPreview(to progress: Float) {
-        previewPlayer?.seekTimeVariable.accept(progress)
         updatePreviewPosition(progress)
     }
 
     func endPreviewSeek() {
-        previewPlayer?.userStopSeeking()
+        previewPlayer?.endSeek(at: previewProgress)
     }
 
     func registerPreviewSlider(_ update: @escaping (Float) -> Void) {
@@ -187,10 +186,19 @@ final class VoiceRecordingVM: ObservableObject {
         }
     }
 
+    private func loadPreview(path: String) {
+        previewDisposeBag = DisposeBag()
+        videoService.mediaPreview(for: URL(fileURLWithPath: path), in: nil)
+            .subscribe(onSuccess: { [weak self] preview in
+                guard let self = self, self.state == .preview, self.recordingPath == path else { return }
+                self.bindPreview(PlayerViewModel(path: path, preview: preview, videoService: self.videoService))
+            })
+            .disposed(by: previewDisposeBag)
+    }
+
     private func bindPreview(_ player: PlayerViewModel) {
         previewPlayer = player
-        previewDisposeBag = DisposeBag()
-        player.pause
+        player.isPaused
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] paused in
                 self?.isPreviewPlaying = !paused
@@ -210,7 +218,7 @@ final class VoiceRecordingVM: ObservableObject {
                 self?.updatePreviewPosition(progress)
             })
             .disposed(by: previewDisposeBag)
-        player.createPlayer()
+        player.prepare()
     }
 
     // MARK: - Recording
@@ -225,7 +233,7 @@ final class VoiceRecordingVM: ObservableObject {
             return
         }
         guard let basePath = makeBasePath() else { return }
-        transferHelper.releaseAllPlayers()
+        playback.stop()
         guard let path = videoService.startLocalRecorder(audioOnly: true, path: basePath) else { return }
         recordingPath = path
         recordingStart = Date()
@@ -243,7 +251,7 @@ final class VoiceRecordingVM: ObservableObject {
         if let path = recordingPath {
             videoService.stopLocalRecorder(path: path)
         }
-        transferHelper.releaseAllPlayers()
+        playback.stop()
         recordingStart = nil
         return duration
     }
@@ -277,7 +285,7 @@ final class VoiceRecordingVM: ObservableObject {
         if recordingStart != nil {
             stopRecorder()
         }
-        previewPlayer?.closePlayer()
+        previewPlayer?.close()
         if let path = recordingPath {
             afterFileIsWritten {
                 try? FileManager.default.removeItem(atPath: path)
@@ -341,7 +349,7 @@ final class VoiceRecordingVM: ObservableObject {
     deinit {
         elapsedTimer?.invalidate()
         pendingHintReset?.cancel()
-        previewPlayer?.closePlayer()
+        previewPlayer?.close()
         if let path = recordingPath {
             if recordingStart != nil {
                 videoService.stopLocalRecorder(path: path)

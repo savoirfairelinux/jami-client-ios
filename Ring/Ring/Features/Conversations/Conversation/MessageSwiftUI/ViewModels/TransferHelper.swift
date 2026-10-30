@@ -30,48 +30,12 @@ enum TransferState: State {
     case getProgress(viewModel: MessageContentVM)
     case getSize(viewModel: MessageContentVM)
     case getURL(viewModel: MessageContentVM)
-    case getPlayer(viewModel: MessageContentVM)
+    case getMedia(viewModel: MessageContentVM)
 }
 
 class TransferHelper {
     let injectionBag: InjectionBag
     let dataTransferService: DataTransferService
-
-    private var players = [String: PlayerViewModel]()
-    private var playbackDisposeBag = DisposeBag()
-    let playbackStarted = PublishSubject<Void>()
-
-    func getPlayer(messageID: String) -> PlayerViewModel? {
-        return players[messageID]
-    }
-
-    func setPlayer(messageID: String, player: PlayerViewModel) {
-        players[messageID] = player
-        player.pause
-            .filter { !$0 }
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self, weak player] _ in
-                self?.pauseOtherPlayers(than: player)
-                self?.playbackStarted.onNext(())
-            })
-            .disposed(by: playbackDisposeBag)
-    }
-
-    func closeAllPlayers() {
-        players.values.forEach { $0.closePlayer() }
-        players.removeAll()
-        playbackDisposeBag = DisposeBag()
-    }
-
-    func releaseAllPlayers() {
-        players.values.forEach { $0.closePlayer() }
-    }
-
-    private func pauseOtherPlayers(than player: PlayerViewModel?) {
-        players.values
-            .filter { $0 !== player }
-            .forEach { $0.pauseIfPlaying() }
-    }
 
     init (injectionBag: InjectionBag) {
         self.dataTransferService = injectionBag.dataTransferService
@@ -127,62 +91,6 @@ class TransferHelper {
                                 inFolder: Directories.downloads.rawValue,
                                 accountID: conversation.accountId,
                                 conversationID: conversation.id)
-    }
-
-    func getPlayer(conversation: ConversationModel, message: MessageModel) -> PlayerViewModel? {
-        if message.transferStatus != .success {
-            return nil
-        }
-
-        if let playerModel = self.getPlayer(messageID: String(message.id)) {
-            return playerModel
-        }
-        let transferInfo = self.getTransferFileData(content: message.content)
-        let name = conversation.isSwarm() ? message.daemonId : transferInfo.fileName
-        guard let fileExtension = NSURL(fileURLWithPath: name).pathExtension else {
-            return nil
-        }
-        if fileExtension.isMediaExtension() {
-            if conversation.isSwarm() {
-                let path = self.dataTransferService
-                    .getFileUrlForSwarm(fileName: message.daemonId,
-                                        accountID: conversation.accountId,
-                                        conversationID: conversation.id)
-                let pathString = path?.path ?? ""
-                if pathString.isEmpty {
-                    return nil
-                }
-                let model = PlayerViewModel(injectionBag: self.injectionBag, path: pathString)
-                self.setPlayer(messageID: String(message.id), player: model)
-                return model
-            }
-            // first search for incoming video in downloads folder and for outgoing in recorded
-            let folderName = message.incoming ? Directories.downloads.rawValue : Directories.recorded.rawValue
-            var path = self.dataTransferService
-                .getFileUrlNonSwarm(fileName: name,
-                                    inFolder: folderName,
-                                    accountID: conversation.accountId,
-                                    conversationID: conversation.id)
-            var pathString = path?.path ?? ""
-            if pathString.isEmpty && message.incoming {
-                return nil
-            } else if pathString.isEmpty {
-                // try to search outgoing video in downloads folder
-                path = self.dataTransferService
-                    .getFileUrlNonSwarm(fileName: name,
-                                        inFolder: Directories.downloads.rawValue,
-                                        accountID: conversation.accountId,
-                                        conversationID: conversation.id)
-                pathString = path?.path ?? ""
-                if pathString.isEmpty {
-                    return nil
-                }
-            }
-            let model = PlayerViewModel(injectionBag: self.injectionBag, path: pathString)
-            self.setPlayer(messageID: String(message.id), player: model)
-            return model
-        }
-        return nil
     }
 
     typealias TransferParsingTuple = (fileName: String, fileSize: String?, identifier: String?)

@@ -71,6 +71,7 @@ class MediaRecordViewModel: ObservableObject, Stateable, ViewModel {
     private var cameraStarted = false
     private var cameraDisposeBag = DisposeBag()
     private var playerDisposeBag = DisposeBag()
+    private var frameSubscription: FrameSubscription?
     private var recordingTimer: Timer?
     private var recordingSeconds: Int = 0
 
@@ -115,7 +116,7 @@ class MediaRecordViewModel: ObservableObject, Stateable, ViewModel {
     }
 
     func startRecording() {
-        player?.closePlayer()
+        player?.close()
         player = nil
 
         guard let url = fileTransferService.newRecordingURL(for: conversation) else { return }
@@ -152,7 +153,7 @@ class MediaRecordViewModel: ObservableObject, Stateable, ViewModel {
     func sendFile() {
         guard !fileName.isEmpty else { return }
         let name = URL(fileURLWithPath: fileName).lastPathComponent
-        player?.closePlayer()
+        player?.close()
         player = nil
         onSend(.file(path: fileName, displayName: name))
         videoService.videRecordingFinished()
@@ -167,7 +168,7 @@ class MediaRecordViewModel: ObservableObject, Stateable, ViewModel {
     }
 
     private func discardRecording() {
-        player?.closePlayer()
+        player?.close()
         player = nil
         if !fileName.isEmpty {
             try? FileManager.default.removeItem(atPath: fileName)
@@ -184,23 +185,20 @@ class MediaRecordViewModel: ObservableObject, Stateable, ViewModel {
     // MARK: - Playback controls
 
     func togglePause() { player?.togglePause() }
-    func muteAudio() { player?.muteAudio() }
+    func muteAudio() { player?.toggleMute() }
 
     func userStartSeeking() {
         isSeeking = true
-        player?.userStartSeeking()
-        player?.seekTimeVariable.accept(previewProgress)
+        player?.beginSeek()
     }
 
     func seek(to value: Float) {
         updatePreviewPosition(value)
-        player?.seekTimeVariable.accept(value)
     }
 
     func userStopSeeking() {
         isSeeking = false
-        player?.seekTimeVariable.accept(previewProgress)
-        player?.userStopSeeking()
+        player?.endSeek(at: previewProgress)
     }
 
     func registerPreviewSlider(_ update: @escaping (Float) -> Void) {
@@ -278,53 +276,64 @@ class MediaRecordViewModel: ObservableObject, Stateable, ViewModel {
     // MARK: - Player
 
     private func createPlayer() {
-        // Stop camera frames and drop any previous player subscription before binding to the new player.
         cameraDisposeBag = DisposeBag()
         playerDisposeBag = DisposeBag()
+        let recordedFile = fileName
+        videoService.mediaPreview(for: URL(fileURLWithPath: recordedFile), in: nil)
+            .subscribe(onSuccess: { [weak self] preview in
+                guard let self = self, self.fileName == recordedFile else { return }
+                if let thumbnail = preview.thumbnailURL, let image = UIImage(contentsOfFile: thumbnail.path) {
+                    self.previewImage = image
+                }
+                self.bindPlayer(PlayerViewModel(path: recordedFile, preview: preview, videoService: self.videoService))
+            })
+            .disposed(by: playerDisposeBag)
+    }
 
-        let newPlayer = PlayerViewModel(injectionBag: injectionBag, path: fileName)
-        newPlayer.createPlayer()
+    private func bindPlayer(_ newPlayer: PlayerViewModel) {
         player = newPlayer
 
-        // Pipe player frames into the shared frame subject for the background layer.
-        newPlayer.playBackFrame.asObservable()
-            .subscribe(onNext: { [weak self] buffer in
-                guard let self = self,
-                      let buffer = buffer,
-                      let image = UIImage.createFrom(sampleBuffer: buffer) else { return }
-                DispatchQueue.main.async { self.previewImage = image }
+        newPlayer.frameSource
+            .subscribe(onNext: { [weak self] source in
+                self?.frameSubscription = source?.subscribe { frame in
+                    guard let buffer = frame.sampleBuffer,
+                          let image = UIImage.createFrom(sampleBuffer: buffer) else { return }
+                    DispatchQueue.main.async { self?.previewImage = image }
+                }
             })
             .disposed(by: playerDisposeBag)
 
-        newPlayer.pause.asObservable()
+        newPlayer.isPaused
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] paused in
-                DispatchQueue.main.async { self?.isPaused = paused }
+                self?.isPaused = paused
             })
             .disposed(by: playerDisposeBag)
 
-        newPlayer.audioMuted.asObservable()
+        newPlayer.audioMuted
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] muted in
-                DispatchQueue.main.async { self?.isAudioMuted = muted }
+                self?.isAudioMuted = muted
             })
             .disposed(by: playerDisposeBag)
 
-        newPlayer.playerDuration.asObservable()
+        newPlayer.playerDuration
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] duration in
-                DispatchQueue.main.async {
-                    guard let self = self else { return }
-                    self.playerDuration = duration
-                    self.updatePreviewPosition(self.previewProgress)
-                }
+                guard let self = self else { return }
+                self.playerDuration = duration
+                self.updatePreviewPosition(self.previewProgress)
             })
             .disposed(by: playerDisposeBag)
 
-        newPlayer.playerPosition.asObservable()
+        newPlayer.playerPosition
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] position in
-                DispatchQueue.main.async {
-                    guard let self = self, !self.isSeeking else { return }
-                    self.updatePreviewPosition(position)
-                }
+                guard let self = self, !self.isSeeking else { return }
+                self.updatePreviewPosition(position)
             })
             .disposed(by: playerDisposeBag)
+
+        newPlayer.prepare()
     }
 }

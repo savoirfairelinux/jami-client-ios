@@ -114,11 +114,11 @@ class ConversationViewModel: Stateable, ObservableObject {
     }
 
     deinit {
-        self.closeAllPlayers()
+        self.stopPlayback()
     }
 
-    func closeAllPlayers() {
-        self.swiftUIModel.transferHelper.closeAllPlayers()
+    func stopPlayback() {
+        self.swiftUIModel.playback.stop()
     }
 
     private func bindRow() {
@@ -221,7 +221,7 @@ class ConversationViewModel: Stateable, ObservableObject {
     func startCall() {
         guard let uri = callService.outgoingCallURI(for: conversation) else { return }
         let name = getContactNameForCall()
-        self.closeAllPlayers()
+        self.stopPlayback()
         self.swiftUIModel.voiceRecording.interrupt()
         self.stateSubject.onNext(ConversationState.startCall(contactRingId: uri, userName: name))
     }
@@ -229,7 +229,7 @@ class ConversationViewModel: Stateable, ObservableObject {
     func startAudioCall() {
         guard let uri = callService.outgoingCallURI(for: conversation) else { return }
         let name = getContactNameForCall()
-        self.closeAllPlayers()
+        self.stopPlayback()
         self.swiftUIModel.voiceRecording.interrupt()
         self.stateSubject.onNext(ConversationState.startAudioCall(contactRingId: uri, userName: name))
     }
@@ -295,7 +295,7 @@ class ConversationViewModel: Stateable, ObservableObject {
         if self.swiftUIModel.isTemporary {
             return
         }
-        self.closeAllPlayers()
+        self.stopPlayback()
         if conversation.isSwarm() {
             if let swarmInfo = row.swarmInfo {
                 self.stateSubject.onNext(ConversationState.presentSwarmInfo(swarmInfo: swarmInfo))
@@ -306,7 +306,7 @@ class ConversationViewModel: Stateable, ObservableObject {
     }
 
     func recordVideoFile() {
-        closeAllPlayers()
+        stopPlayback()
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             let messagePanel = self.swiftUIModel.messagePanel
