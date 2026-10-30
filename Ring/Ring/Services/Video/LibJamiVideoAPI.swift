@@ -18,6 +18,13 @@
 
 import Foundation
 import CoreVideo
+import ImageIO
+
+struct LibJamiMediaPreview {
+    let info: [String: String]
+    let pixelBuffer: CVPixelBuffer?
+    let orientation: CGImagePropertyOrientation
+}
 
 protocol LibJamiVideoAPI: AnyObject {
     // Sinks (incoming decoded video)
@@ -51,6 +58,7 @@ protocol LibJamiVideoAPI: AnyObject {
     func mutePlayerAudio(playerId: String, mute: Bool)
     func playerSeek(to time: Int, playerId: String)
     func playerPosition(playerId: String) -> Int64
+    func mediaPreview(path: String) -> LibJamiMediaPreview
 }
 
 final class LibJamiVideoClient: LibJamiVideoAPI {
@@ -153,5 +161,14 @@ final class LibJamiVideoClient: LibJamiVideoAPI {
 
     func playerPosition(playerId: String) -> Int64 {
         return adapter.getPlayerPosition(playerId)
+    }
+
+    func mediaPreview(path: String) -> LibJamiMediaPreview {
+        guard let preview = adapter.mediaPreview(path) else {
+            return LibJamiMediaPreview(info: [:], pixelBuffer: nil, orientation: .up)
+        }
+        return LibJamiMediaPreview(info: preview.info,
+                                   pixelBuffer: preview.pixelBuffer,
+                                   orientation: preview.orientation)
     }
 }

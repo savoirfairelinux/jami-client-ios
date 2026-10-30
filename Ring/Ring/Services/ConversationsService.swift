@@ -471,6 +471,7 @@ class ConversationsService {
             .appendingPathComponent(accountId)
             .appendingPathComponent(conversationId)
         try? FileManager.default.removeItem(atPath: recordedURL.path)
+        MediaPreviewCache.standard?.remove(accountId: accountId, conversationId: conversationId)
     }
 
     // MARK: helpers
