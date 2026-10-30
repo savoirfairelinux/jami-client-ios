@@ -72,7 +72,7 @@ extern "C" {
     PixelBufferInfo info;
     info.rotation = 0;
 
-    if ((CVPixelBufferRef)frame->data[3]) {
+    if (frame->format == AV_PIX_FMT_VIDEOTOOLBOX && frame->data[3]) {
         info.pixelBuffer = (CVPixelBufferRef)frame->data[3];
         info.ownsMemory = false;
     } else {
