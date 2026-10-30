@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bfcc6a8_404f274a",
+        "filename": "Ring/Ring/Features/Conversations/views/PlayerView.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-30T16:42:04Z",
+      "side": 1,
+      "message": "[error] Line 199: 🔴 `videoScaling` is never reset when (re)binding media, so after a user switches to fill, subsequent full-screen openings in the same coordinator lifecycle can start in fill instead of fit. That contradicts the change contract (\u0027opens fitted\u0027). Reset `videoScaling` to `.aspectFit` in the coordinator’s bind/open path (e.g., when binding a new media item or when entering full-screen).",
+      "revId": "a9c341ad4aac933968388b6e8a2102755b4ca586",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ebb812e_e2bcde20",
+        "filename": "Ring/Ring/Features/Conversations/views/PlayerView.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-30T16:42:04Z",
+      "side": 1,
+      "message": "[warning] Line 481: 🟡 `showsScalingToggle` computes fit-vs-fill difference from `media.item.preview.size` only, ignoring video transform/orientation metadata. For rotated streams (e.g., landscape buffer displayed portrait), this can incorrectly hide/show the toggle. Reuse the same orientation-aware inputs used by `VideoScaling.shouldShowWholeFrame` (size + transform) or an equivalent normalized displayed aspect ratio source.",
+      "revId": "a9c341ad4aac933968388b6e8a2102755b4ca586",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
