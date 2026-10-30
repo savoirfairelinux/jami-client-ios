@@ -82,9 +82,8 @@ enum AudioMessageLayout {
 // MARK: - Player State Coordinator
 
 final class PlayerCoordinator: ObservableObject {
-    let displayLayer = AVSampleBufferDisplayLayer()
-
     @Published private(set) var isActive = false
+    @Published private(set) var frameSource: FrameDistributor?
     @Published private(set) var isPaused = true
     @Published private(set) var isMuted = true
     @Published private(set) var duration: Float = 0
@@ -102,18 +101,7 @@ final class PlayerCoordinator: ObservableObject {
     private weak var session: PlayerViewModel?
     private var activeDisposeBag = DisposeBag()
     private var sessionDisposeBag = DisposeBag()
-    private var frameSubscription: FrameSubscription?
-    private var lastBuffer: CMSampleBuffer?
     private var autoHideTask: DispatchWorkItem?
-
-    init() {
-        displayLayer.videoGravity = .resizeAspect
-        displayLayer.isOpaque = true
-    }
-
-    func configureForFullScreen() {
-        displayLayer.videoGravity = .resizeAspectFill
-    }
 
     // MARK: Binding
 
@@ -136,7 +124,6 @@ final class PlayerCoordinator: ObservableObject {
         if let player = player, player === session { return }
         session = player
         sessionDisposeBag = DisposeBag()
-        frameSubscription = nil
         guard let player = player else {
             showPreview()
             return
@@ -145,11 +132,9 @@ final class PlayerCoordinator: ObservableObject {
         hasVideo = player.hasVideo
 
         player.frameSource
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] source in
-                self?.frameSubscription = source?.subscribe { frame in
-                    guard let buffer = frame.sampleBuffer else { return }
-                    DispatchQueue.main.async { self?.enqueueBuffer(buffer) }
-                }
+                self?.frameSource = source
             })
             .disposed(by: sessionDisposeBag)
 
@@ -194,8 +179,7 @@ final class PlayerCoordinator: ObservableObject {
     private func showPreview() {
         isActive = false
         isSeeking = false
-        lastBuffer = nil
-        displayLayer.flushAndRemoveImage()
+        frameSource = nil
         let preview = item?.preview
         hasVideo = preview?.hasVideo ?? true
         duration = Float(preview?.durationMicroseconds ?? 0)
@@ -260,21 +244,6 @@ final class PlayerCoordinator: ObservableObject {
         return isPaused && progress == 0 ? duration.durationString : elapsedTimeString
     }
 
-    func redisplayLastBuffer() {
-        guard let buffer = lastBuffer else { return }
-        displayLayer.flush()
-        displayLayer.enqueue(buffer)
-    }
-
-    private func enqueueBuffer(_ buffer: CMSampleBuffer) {
-        guard isActive else { return }
-        lastBuffer = buffer
-        if displayLayer.status == .failed {
-            displayLayer.flush()
-        }
-        displayLayer.enqueue(buffer)
-    }
-
     private func updateProgress(_ value: Float) {
         progress = value
         sliderUpdate?(value)
@@ -289,56 +258,30 @@ final class PlayerCoordinator: ObservableObject {
     }
 }
 
-// MARK: - Video Layer View
+// MARK: - Video Renderer View
 
-/// Renders video frames via AVSampleBufferDisplayLayer.
-struct VideoLayerView: UIViewRepresentable {
-    let displayLayer: AVSampleBufferDisplayLayer
-    let coordinator: PlayerCoordinator
+struct VideoRendererView: UIViewRepresentable {
+    let frameSource: FrameDistributor
+    let scaling: VideoScalingPolicy
 
-    func makeUIView(context: Context) -> UIView {
-        let view = VideoLayerUIView(displayLayer: displayLayer, coordinator: coordinator)
-        view.backgroundColor = .clear
+    func makeUIView(context: Context) -> RendererLayerView {
+        let view = RendererLayerView()
         view.isUserInteractionEnabled = false
-        view.layer.addSublayer(displayLayer)
+        view.scalingPolicy = scaling
+        view.attach(to: frameSource)
         return view
     }
 
-    func updateUIView(_ uiView: UIView, context: Context) {
-        CATransaction.begin()
-        CATransaction.setDisableActions(true)
-        displayLayer.frame = uiView.bounds
-        CATransaction.commit()
-    }
-}
-
-/// UIView subclass that detects when layout completes, so the coordinator
-/// can redisplay the last frame.
-final class VideoLayerUIView: UIView {
-    private let displayLayer: AVSampleBufferDisplayLayer
-    private weak var coordinator: PlayerCoordinator?
-    private var didRedisplay = false
-
-    init(displayLayer: AVSampleBufferDisplayLayer, coordinator: PlayerCoordinator) {
-        self.displayLayer = displayLayer
-        self.coordinator = coordinator
-        super.init(frame: .zero)
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        CATransaction.begin()
-        CATransaction.setDisableActions(true)
-        displayLayer.frame = bounds
-        CATransaction.commit()
-        if !didRedisplay && bounds.width > 0 && bounds.height > 0 {
-            didRedisplay = true
-            coordinator?.redisplayLastBuffer()
+    func updateUIView(_ view: RendererLayerView, context: Context) {
+        view.attach(to: frameSource)
+        guard view.scalingPolicy != scaling else { return }
+        UIView.animate(withDuration: 0.25) {
+            view.scalingPolicy = scaling
         }
+    }
+
+    static func dismantleUIView(_ view: RendererLayerView, coordinator: ()) {
+        view.attach(to: nil)
     }
 }
 
@@ -399,8 +342,8 @@ struct PlayerView: View {
 
             if coordinator.hasVideo {
                 posterView
-                if coordinator.isActive {
-                    VideoLayerView(displayLayer: coordinator.displayLayer, coordinator: coordinator)
+                if let frameSource = coordinator.frameSource {
+                    VideoRendererView(frameSource: frameSource, scaling: sizeMode == .fullScreen ? .aspectFill : .aspectFit)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
             }
@@ -420,9 +363,6 @@ struct PlayerView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .onAppear {
-            if sizeMode == .fullScreen {
-                coordinator.configureForFullScreen()
-            }
             coordinator.bind(to: media)
             if sizeMode == .fullScreen && externalControlsVisible == nil {
                 coordinator.scheduleAutoHide()
