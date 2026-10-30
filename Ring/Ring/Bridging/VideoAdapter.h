@@ -21,9 +21,18 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVCaptureOutput.h>
 #import <AVFoundation/AVFoundation.h>
+#import <ImageIO/ImageIO.h>
 
 @protocol VideoAdapterDelegate;
 @protocol DecodingAdapterDelegate;
+
+@interface MediaFilePreview : NSObject
+
+@property (nonatomic, strong, readonly) NSDictionary<NSString*, NSString*>* info;
+@property (nonatomic, readonly) CVPixelBufferRef pixelBuffer;
+@property (nonatomic, readonly) CGImagePropertyOrientation orientation;
+
+@end
 
 @interface VideoAdapter : NSObject
 
@@ -56,6 +65,7 @@
 - (bool)mutePlayerAudio:(NSString*)playerId mute:(BOOL)mute;
 - (bool)playerSeekToTime:(int)time playerId:(NSString*)playerId;
 - (int64_t)getPlayerPosition:(NSString*)playerId;
+- (MediaFilePreview*)mediaPreview:(NSString*)path;
 -(CGSize)getRenderSize:(NSString* )sinkId;
 - (void)setHasListeners:(BOOL)hasListeners forSinkId:(NSString*)sinkId;
 

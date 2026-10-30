@@ -92,6 +92,35 @@ private:
     std::atomic_bool hasListeners_;
 };
 
+@interface MediaFilePreview ()
+
+- (instancetype)initWithInfo:(NSDictionary<NSString*, NSString*>*)info
+                 pixelBuffer:(CVPixelBufferRef)pixelBuffer
+                 orientation:(CGImagePropertyOrientation)orientation;
+
+@end
+
+@implementation MediaFilePreview
+
+- (instancetype)initWithInfo:(NSDictionary<NSString*, NSString*>*)info
+                 pixelBuffer:(CVPixelBufferRef)pixelBuffer
+                 orientation:(CGImagePropertyOrientation)orientation {
+    if (self = [super init]) {
+        _info = info;
+        _pixelBuffer = pixelBuffer;
+        _orientation = orientation;
+    }
+    return self;
+}
+
+- (void)dealloc {
+    if (_pixelBuffer) {
+        CVPixelBufferRelease(_pixelBuffer);
+    }
+}
+
+@end
+
 @interface VideoAdapter ()
 
 - (std::shared_ptr<Renderer>)findRenderer:(const std::string&)rendererId;
@@ -320,6 +349,23 @@ static __weak id<DecodingAdapterDelegate> _decodingDelegate;
 
 -(int64_t)getPlayerPosition:(NSString*)playerId {
     return getPlayerPosition(std::string([playerId UTF8String]));
+}
+
+- (MediaFilePreview*)mediaPreview:(NSString*)path {
+    auto preview = getMediaPreview(std::string([path UTF8String]));
+    CVPixelBufferRef pixelBuffer = NULL;
+    CGImagePropertyOrientation orientation = kCGImagePropertyOrientationUp;
+    if (preview.frame) {
+        PixelBufferInfo frameInfo = [MediaUtils getCVPixelBufferFromAVFrame:preview.frame.get()];
+        pixelBuffer = frameInfo.pixelBuffer;
+        if (pixelBuffer && !frameInfo.ownsMemory) {
+            CVPixelBufferRetain(pixelBuffer);
+        }
+        orientation = [MediaUtils ciimageOrientationFromRotation:frameInfo.rotation];
+    }
+    return [[MediaFilePreview alloc] initWithInfo:[Utils mapToDictionary:preview.info]
+                                      pixelBuffer:pixelBuffer
+                                      orientation:orientation];
 }
 
 - (void)openVideoInput:(NSString*)path {

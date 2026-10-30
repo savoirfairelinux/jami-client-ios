@@ -253,10 +253,29 @@ final class TestLibJamiVideoAPI: LibJamiVideoAPI {
     }
 
     func stopLocalRecording(path: String) {}
+
+    var previewResult = LibJamiMediaPreview(info: [:], pixelBuffer: nil, orientation: .up)
+    var onMediaPreview: (() -> Void)?
+    private let stateLock = NSLock()
+    private var requests: [String] = []
+
+    var previewRequests: [String] { locked { requests } }
     func createMediaPlayer(path: String) -> String? { nil }
     func pausePlayer(playerId: String, pause: Bool) {}
     func closePlayer(playerId: String) {}
     func mutePlayerAudio(playerId: String, mute: Bool) {}
     func playerSeek(to time: Int, playerId: String) {}
     func playerPosition(playerId: String) -> Int64 { -1 }
+
+    func mediaPreview(path: String) -> LibJamiMediaPreview {
+        locked { requests.append(path) }
+        onMediaPreview?()
+        return previewResult
+    }
+
+    private func locked<T>(_ body: () -> T) -> T {
+        stateLock.lock()
+        defer { stateLock.unlock() }
+        return body()
+    }
 }

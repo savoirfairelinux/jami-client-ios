@@ -253,6 +253,10 @@ final class VideoPipeline: NSObject {
     func playerPosition(playerId: String) -> Int64 {
         return video.playerPosition(playerId: playerId)
     }
+
+    func mediaPreview(path: String) -> LibJamiMediaPreview {
+        return video.mediaPreview(path: path)
+    }
 }
 
 // MARK: - VideoAdapterDelegate (libjami → capture control)

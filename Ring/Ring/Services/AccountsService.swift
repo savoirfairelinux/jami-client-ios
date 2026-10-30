@@ -496,6 +496,7 @@ class AccountsService: AccountAdapterDelegate {
             let recordingsURL = documentsURL.appendingPathComponent(Directories.recorded.rawValue)
                 .appendingPathComponent(id)
             try? FileManager.default.removeItem(atPath: recordingsURL.path)
+            MediaPreviewCache.standard?.remove(accountId: id)
         }
     }
 

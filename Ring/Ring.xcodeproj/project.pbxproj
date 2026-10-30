@@ -63,6 +63,7 @@
 		0E72374A20460320006B0C7D /* ProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E72374920460320006B0C7D /* ProfileHeaderView.xib */; };
 		0E8E9A0520483E1200DA8E8B /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8E9A0420483E1200DA8E8B /* TitleView.swift */; };
 		0E983E6E1FC77C3E0082103E /* ConversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E983E6D1FC77C3E0082103E /* ConversationModel.swift */; };
+		CF1FA7028B97E257C4C05A6F /* MediaPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487A10D218E40140FA4E7448 /* MediaPreview.swift */; };
 		0E99F1A022417A0400CF8BD6 /* JamiURI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E99F19F22417A0400CF8BD6 /* JamiURI.swift */; };
 		0EABD3852303600B00DE7ACF /* default.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0EABD3842303600B00DE7ACF /* default.wav */; };
 		0EBB72A92034F44200D88F46 /* ProfilesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB72A82034F44200D88F46 /* ProfilesService.swift */; };
@@ -572,6 +573,10 @@
 		AA0001020000000000000001 /* PhotoLibrarySaving.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0001010000000000000001 /* PhotoLibrarySaving.swift */; };
 		AA0002020000000000000002 /* MockPhotoLibrarySaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0002010000000000000002 /* MockPhotoLibrarySaver.swift */; };
 		AA0003020000000000000003 /* MediaPreviewModelSaveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0003010000000000000003 /* MediaPreviewModelSaveTests.swift */; };
+		EDE6352DC25711AAC234888F /* VideoServiceMediaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D716C8A21DEC0472EFDB5B /* VideoServiceMediaTests.swift */; };
+		0B05E637D2F353B697905F65 /* MediaPreviewCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A6BADE5F3C6D61E1FD93AE /* MediaPreviewCacheTests.swift */; };
+		7AC61ABE8046563EE64D3A03 /* MediaPreviewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0BCA0F5C5974D09345C83A /* MediaPreviewTests.swift */; };
+		F6BADC5187A2546D21D9E9AC /* MediaPlaybackTestFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AD99BB0CEF1F1B676B785 /* MediaPlaybackTestFixtures.swift */; };
 		AA01CAFE000000000000FF02 /* IncomingCallFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA01CAFE000000000000FF01 /* IncomingCallFilter.swift */; };
 		AA01CAFE000000000000FF03 /* IncomingCallFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA01CAFE000000000000FF01 /* IncomingCallFilter.swift */; };
 		AA01CAFE000000000000FF05 /* IncomingCallFilterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA01CAFE000000000000FF04 /* IncomingCallFilterTests.swift */; };
@@ -763,6 +768,7 @@
 		0E72374920460320006B0C7D /* ProfileHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileHeaderView.xib; sourceTree = "<group>"; };
 		0E8E9A0420483E1200DA8E8B /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		0E983E6D1FC77C3E0082103E /* ConversationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationModel.swift; sourceTree = "<group>"; };
+		487A10D218E40140FA4E7448 /* MediaPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPreview.swift; sourceTree = "<group>"; };
 		0E99F19F22417A0400CF8BD6 /* JamiURI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JamiURI.swift; sourceTree = "<group>"; };
 		0EABD3842303600B00DE7ACF /* default.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = default.wav; sourceTree = "<group>"; };
 		0EB12451224AB1030025F8CA /* ContactsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ContactsUI.framework; path = System/Library/Frameworks/ContactsUI.framework; sourceTree = SDKROOT; };
@@ -1813,6 +1819,10 @@
 		AA0001010000000000000001 /* PhotoLibrarySaving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibrarySaving.swift; sourceTree = "<group>"; };
 		AA0002010000000000000002 /* MockPhotoLibrarySaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPhotoLibrarySaver.swift; sourceTree = "<group>"; };
 		AA0003010000000000000003 /* MediaPreviewModelSaveTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPreviewModelSaveTests.swift; sourceTree = "<group>"; };
+		33D716C8A21DEC0472EFDB5B /* VideoServiceMediaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoServiceMediaTests.swift; sourceTree = "<group>"; };
+		F0A6BADE5F3C6D61E1FD93AE /* MediaPreviewCacheTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPreviewCacheTests.swift; sourceTree = "<group>"; };
+		5C0BCA0F5C5974D09345C83A /* MediaPreviewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPreviewTests.swift; sourceTree = "<group>"; };
+		7E1AD99BB0CEF1F1B676B785 /* MediaPlaybackTestFixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPlaybackTestFixtures.swift; sourceTree = "<group>"; };
 		AA01CAFE000000000000FF01 /* IncomingCallFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingCallFilter.swift; sourceTree = "<group>"; };
 		AA01CAFE000000000000FF04 /* IncomingCallFilterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingCallFilterTests.swift; sourceTree = "<group>"; };
 		AA02D0C5000000000000FF01 /* CollabDocumentAnnouncement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollabDocumentAnnouncement.swift; sourceTree = "<group>"; };
@@ -3034,6 +3044,10 @@
 				04399A121D1C2D9D00E99CD9 /* Info.plist */,
 				260AE64129C266B300D66D5E /* CallsTests */,
 				AA0003010000000000000003 /* MediaPreviewModelSaveTests.swift */,
+				33D716C8A21DEC0472EFDB5B /* VideoServiceMediaTests.swift */,
+				F0A6BADE5F3C6D61E1FD93AE /* MediaPreviewCacheTests.swift */,
+				5C0BCA0F5C5974D09345C83A /* MediaPreviewTests.swift */,
+				7E1AD99BB0CEF1F1B676B785 /* MediaPlaybackTestFixtures.swift */,
 				26F1D8EF2FC76A78002AA754 /* PeerSharingServiceTests.swift */,
 				C40000000000000000000001 /* CollaborationServiceTests.swift */,
 				26F1D9A02FC76A78002AA754 /* PeerSharingViewModelTests.swift */,
@@ -3273,6 +3287,7 @@
 				1A2D18BD1F29180700B2C785 /* ContactModel.swift */,
 				1A2D18BF1F29180700B2C785 /* DeviceModel.swift */,
 				0E983E6D1FC77C3E0082103E /* ConversationModel.swift */,
+				487A10D218E40140FA4E7448 /* MediaPreview.swift */,
 				0701DF66E84019629D7EFF42 /* Calls */,
 			);
 			path = Models;
@@ -4357,6 +4372,7 @@
 				1A20418B1F1EA58A00C08435 /* ViewModelBased.swift in Sources */,
 				1A5DC01E1F355DA70075E8EF /* ContactsAdapterDelegate.swift in Sources */,
 				0E983E6E1FC77C3E0082103E /* ConversationModel.swift in Sources */,
+				CF1FA7028B97E257C4C05A6F /* MediaPreview.swift in Sources */,
 				0EDA00020000000000001002 /* ConversationDestructiveAction.swift in Sources */,
 				26EF35EB28E38DA200D97E14 /* MessageContentVM.swift in Sources */,
 				26B37342263C4B3700E2EE28 /* CustomSearchBar.swift in Sources */,
@@ -4626,6 +4642,10 @@
 				263C16782D9702F2008E102C /* ObjCMockCallsAdapter.m in Sources */,
 				AA0002020000000000000002 /* MockPhotoLibrarySaver.swift in Sources */,
 				AA0003020000000000000003 /* MediaPreviewModelSaveTests.swift in Sources */,
+				EDE6352DC25711AAC234888F /* VideoServiceMediaTests.swift in Sources */,
+				0B05E637D2F353B697905F65 /* MediaPreviewCacheTests.swift in Sources */,
+				7AC61ABE8046563EE64D3A03 /* MediaPreviewTests.swift in Sources */,
+				F6BADC5187A2546D21D9E9AC /* MediaPlaybackTestFixtures.swift in Sources */,
 				26A1B2C3D4E5F60A00AABB02 /* ThreadSafeDictionaryTests.swift in Sources */,
 				26A1B2C3D4E5F60A00AABB10 /* NameServiceAddressLookupTests.swift in Sources */,
 			);

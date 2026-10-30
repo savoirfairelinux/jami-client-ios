@@ -47,19 +47,27 @@ class FrameStream {
 /// player and settings are all consumers.
 final class VideoService {
 
+    static let thumbnailMaxPixelSize = 1024
+    static let temporaryThumbnailDirectory = FileManager.default.temporaryDirectory
+        .appendingPathComponent("media_previews")
+
     private let pipeline: VideoPipeline
 
     private var localSubscription: FrameSubscription?
     private var playerSinkSubscriptions: [String: FrameSubscription] = [:]
+    private let previewQueue = DispatchQueue(label: "com.savoirfairelinux.jami.mediaPreview")
+    private let previewCache: MediaPreviewCache?
+    private lazy var thumbnailContext = CIContext()
 
     convenience init(videoAdapter: VideoAdapter = VideoAdapter()) {
         self.init(video: LibJamiVideoClient(adapter: videoAdapter))
         attachToAdapter()
     }
 
-    init(video: LibJamiVideoAPI) {
+    init(video: LibJamiVideoAPI, previewCache: MediaPreviewCache? = MediaPreviewCache.standard) {
         let pipeline = VideoPipeline(video: video)
         self.pipeline = pipeline
+        self.previewCache = previewCache
 
         pipeline.onFileOpened = { [weak self] playerId, info in
             self?.playerInfo.onNext(Player(
@@ -67,6 +75,9 @@ final class VideoService {
                                         duration: info["duration"] ?? "0",
                                         hasAudio: (info["audio_stream"].flatMap(Int.init) ?? -1) >= 0,
                                         hasVideo: (info["video_stream"].flatMap(Int.init) ?? -1) >= 0))
+        }
+        previewQueue.async {
+            try? FileManager.default.removeItem(at: Self.temporaryThumbnailDirectory)
         }
     }
 
@@ -223,5 +234,65 @@ final class VideoService {
 
     func getPlayerPosition(playerId: String) -> Int64 {
         return pipeline.playerPosition(playerId: playerId)
+    }
+
+    // MARK: - Media preview
+
+    func mediaPreview(for fileURL: URL, in scope: MediaPreviewScope?) -> Single<MediaPreview> {
+        return Single.create { [weak self] observer in
+            let request = BooleanDisposable()
+            self?.previewQueue.async {
+                guard !request.isDisposed, let preview = self?.resolvePreview(for: fileURL, in: scope) else { return }
+                DispatchQueue.main.async { observer(.success(preview)) }
+            }
+            return request
+        }
+    }
+
+    private func resolvePreview(for fileURL: URL, in scope: MediaPreviewScope?) -> MediaPreview {
+        if let scope = scope, let stored = previewCache?.load(for: fileURL, in: scope) {
+            return stored
+        }
+        let result = pipeline.mediaPreview(path: fileURL.path)
+        guard let pixelBuffer = result.pixelBuffer else {
+            return store(MediaPreview(libJamiInfo: result.info), for: fileURL, in: scope)
+        }
+        let image = CIImage(cvPixelBuffer: pixelBuffer).oriented(result.orientation)
+        let size = image.extent.size
+        let thumbnail = jpegThumbnail(of: image).flatMap { data in
+            scope.flatMap { previewCache?.storeThumbnail(data, for: fileURL, in: $0) }
+                ?? temporaryThumbnail(data)
+        }
+        return store(MediaPreview(libJamiInfo: result.info, size: size, thumbnailURL: thumbnail),
+                     for: fileURL, in: scope)
+    }
+
+    private func store(_ preview: MediaPreview, for fileURL: URL, in scope: MediaPreviewScope?) -> MediaPreview {
+        if let scope = scope {
+            previewCache?.store(preview, for: fileURL, in: scope)
+        }
+        return preview
+    }
+
+    private func jpegThumbnail(of image: CIImage) -> Data? {
+        let longest = max(image.extent.width, image.extent.height)
+        guard longest > 0 else { return nil }
+        let scale = min(1, CGFloat(Self.thumbnailMaxPixelSize) / longest)
+        let scaled = image.transformed(by: CGAffineTransform(scaleX: scale, y: scale))
+        guard let colorSpace = CGColorSpace(name: CGColorSpace.sRGB) else { return nil }
+        return thumbnailContext.jpegRepresentation(of: scaled, colorSpace: colorSpace,
+                                                   options: [kCGImageDestinationLossyCompressionQuality as CIImageRepresentationOption: 0.8])
+    }
+
+    private func temporaryThumbnail(_ data: Data) -> URL? {
+        let directory = Self.temporaryThumbnailDirectory
+        let url = directory.appendingPathComponent(UUID().uuidString + ".jpg")
+        do {
+            try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+            try data.write(to: url, options: .atomic)
+            return url
+        } catch {
+            return nil
+        }
     }
 }
