@@ -84,6 +84,7 @@ enum AudioMessageLayout {
 final class PlayerCoordinator: ObservableObject {
     @Published private(set) var isActive = false
     @Published private(set) var frameSource: FrameDistributor?
+    @Published private(set) var videoScaling = VideoScalingPolicy.aspectFit
     @Published private(set) var isPaused = true
     @Published private(set) var isMuted = true
     @Published private(set) var duration: Float = 0
@@ -198,6 +199,10 @@ final class PlayerCoordinator: ObservableObject {
 
     func toggleMute() {
         session?.toggleMute()
+    }
+
+    func toggleVideoScaling() {
+        videoScaling = videoScaling == .aspectFill ? .aspectFit : .aspectFill
     }
 
     func beginSeek() {
@@ -315,6 +320,7 @@ struct PlayerView: View {
     var messageTime: String?
 
     @StateObject private var coordinator = PlayerCoordinator()
+    @SwiftUI.State private var containerSize: CGSize = .zero
 
     private var controlsVisible: Bool {
         externalControlsVisible?.wrappedValue ?? coordinator.controlsVisible
@@ -343,7 +349,7 @@ struct PlayerView: View {
             if coordinator.hasVideo {
                 posterView
                 if let frameSource = coordinator.frameSource {
-                    VideoRendererView(frameSource: frameSource, scaling: sizeMode == .fullScreen ? .aspectFill : .aspectFit)
+                    VideoRendererView(frameSource: frameSource, scaling: coordinator.videoScaling)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
             }
@@ -362,6 +368,11 @@ struct PlayerView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(GeometryReader { proxy in
+            Color.clear
+                .onAppear { containerSize = proxy.size }
+                .onChange(of: proxy.size) { containerSize = $0 }
+        })
         .onAppear {
             coordinator.bind(to: media)
             if sizeMode == .fullScreen && externalControlsVisible == nil {
@@ -383,7 +394,7 @@ struct PlayerView: View {
                 .overlay(
                     Image(uiImage: poster)
                         .resizable()
-                        .aspectRatio(contentMode: sizeMode == .fullScreen ? .fill : .fit)
+                        .aspectRatio(contentMode: coordinator.videoScaling == .aspectFill ? .fill : .fit)
                 )
                 .clipped()
                 .accessibilityHidden(true)
@@ -429,6 +440,9 @@ struct PlayerView: View {
                     if let actions = fullScreenActions {
                         actions
                     }
+                    if showsScalingToggle {
+                        scalingToggleButton
+                    }
                     fullScreenMuteButton
                 }
                 .padding(.top, insets.top)
@@ -463,6 +477,22 @@ struct PlayerView: View {
 
     private var centerPlayButton: some View {
         playPauseButton(.fullScreen)
+    }
+
+    private var showsScalingToggle: Bool {
+        guard coordinator.hasVideo, let size = media.item.preview.size else { return coordinator.hasVideo }
+        return VideoScaling.fillDiffersFromFit(contentSize: size, containerSize: containerSize)
+    }
+
+    private var scalingToggleButton: some View {
+        let fills = coordinator.videoScaling == .aspectFill
+        return glassIconButton(systemName: fills ? "arrow.down.right.and.arrow.up.left" : "arrow.up.left.and.arrow.down.right",
+                               accessibilityLabel: fills ? L10n.Accessibility.videoFitScreen : L10n.Accessibility.videoFillScreen) {
+            withAnimation(.easeInOut(duration: 0.25)) {
+                coordinator.toggleVideoScaling()
+            }
+            coordinator.scheduleAutoHide()
+        }
     }
 
     private var fullScreenMuteButton: some View {

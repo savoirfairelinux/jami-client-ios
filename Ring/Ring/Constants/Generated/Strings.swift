@@ -191,6 +191,10 @@ internal enum L10n {
     internal static let userPresenceAvailable = L10n.tr("Localizable", "accessibility.userPresenceAvailable", fallback: "Available")
     /// Online
     internal static let userPresenceOnline = L10n.tr("Localizable", "accessibility.userPresenceOnline", fallback: "Online")
+    /// Fill screen
+    internal static let videoFillScreen = L10n.tr("Localizable", "accessibility.videoFillScreen", fallback: "Fill screen")
+    /// Fit to screen
+    internal static let videoFitScreen = L10n.tr("Localizable", "accessibility.videoFitScreen", fallback: "Fit to screen")
     /// Recording deleted
     internal static let voiceMessageDeleted = L10n.tr("Localizable", "accessibility.voiceMessageDeleted", fallback: "Recording deleted")
     /// Recording

@@ -92,4 +92,23 @@ final class VideoScalingTests: XCTestCase {
                         policy: .automatic),
                        "the camera buffer is landscape but the preview shows it upright")
     }
+
+    func testFillAndFitMatchWhenTheVideoHasTheScreenShape() {
+        XCTAssertFalse(VideoScaling.fillDiffersFromFit(contentSize: CGSize(width: 1179, height: 2556),
+                                                       containerSize: CGSize(width: 393, height: 852)))
+    }
+
+    func testFillAndFitDifferForAPortraitVideoOnATallerScreen() {
+        XCTAssertTrue(VideoScaling.fillDiffersFromFit(contentSize: CGSize(width: 1080, height: 1920),
+                                                      containerSize: CGSize(width: 393, height: 852)))
+    }
+
+    func testFillAndFitDifferForALandscapeVideoOnAPortraitScreen() {
+        XCTAssertTrue(VideoScaling.fillDiffersFromFit(contentSize: CGSize(width: 1920, height: 1080),
+                                                      containerSize: CGSize(width: 393, height: 852)))
+    }
+
+    func testUnknownContainerShowsTheToggle() {
+        XCTAssertTrue(VideoScaling.fillDiffersFromFit(contentSize: CGSize(width: 1920, height: 1080), containerSize: .zero))
+    }
 }
