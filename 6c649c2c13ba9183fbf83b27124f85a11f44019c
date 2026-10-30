@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aaba7efc_31834c23",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessageContentVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 710,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-30T16:40:18Z",
+      "side": 1,
+      "message": "[error] Line 710: 🔴 `requestMediaIfNeeded()` sets `didRequestMedia \u003d true` before confirming media was actually resolved, so a transient miss (URL not ready yet, preview fetch failure, or `loadMedia` early-return) permanently prevents retries for that message. This can leave playable media stuck without controls/poster until the view model is recreated. Set `didRequestMedia` only after `updateMedia(...)` succeeds, or reset it on failure/early-return and trigger retry when URL becomes available.",
+      "revId": "6c649c2c13ba9183fbf83b27124f85a11f44019c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
