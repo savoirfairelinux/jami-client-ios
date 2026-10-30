@@ -27,6 +27,16 @@ enum VideoScalingPolicy: Equatable {
 enum VideoScaling {
 
     private static let aspectRatioMismatchThreshold: CGFloat = 1.3
+    private static let fillFitDifferenceThreshold: CGFloat = 1.05
+
+    static func fillDiffersFromFit(contentSize: CGSize, containerSize: CGSize) -> Bool {
+        guard let mismatchFactor = aspectRatioMismatchFactor(
+            videoSize: contentSize, transform: .identity, tileSize: containerSize
+        ) else {
+            return true
+        }
+        return mismatchFactor > Self.fillFitDifferenceThreshold
+    }
 
     static func shouldShowWholeFrame(
         videoSize: CGSize,

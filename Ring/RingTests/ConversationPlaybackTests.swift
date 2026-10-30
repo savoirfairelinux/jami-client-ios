@@ -181,6 +181,16 @@ final class PlayerCoordinatorTests: XCTestCase {
         XCTAssertEqual(coordinator.progress, 0)
     }
 
+    func testVideoStartsFittedAndTogglesBetweenFitAndFill() {
+        let coordinator = boundCoordinator(item)
+
+        XCTAssertEqual(coordinator.videoScaling, .aspectFit)
+        coordinator.toggleVideoScaling()
+        XCTAssertEqual(coordinator.videoScaling, .aspectFill)
+        coordinator.toggleVideoScaling()
+        XCTAssertEqual(coordinator.videoScaling, .aspectFit)
+    }
+
     func testUnplayablePreviewShowsFailureAndDoesNotOpen() {
         let broken = MediaPlaybackHarness.item("broken", preview: MediaPlaybackHarness.preview(durationMicroseconds: 0))
         let coordinator = boundCoordinator(broken)
