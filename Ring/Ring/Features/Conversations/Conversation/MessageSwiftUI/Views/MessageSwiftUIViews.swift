@@ -21,7 +21,7 @@ import RxSwift
 
 struct PlayerSwiftUI: View {
     @ObservedObject var model: MessageContentVM
-    var player: PlayerViewModel
+    var media: MessageMedia
     let onLongGesture: () -> Void
     var ratio: CGFloat = 1
     var withControls: Bool
@@ -34,13 +34,13 @@ struct PlayerSwiftUI: View {
 
     var body: some View {
         ZStack(alignment: .center) {
-            if colorScheme == .dark && player.hasVideo.value {
+            if colorScheme == .dark && media.item.preview.hasVideo {
                 model.borderColor
                     .frame(width: model.playerWidth * ratio + 2, height: model.playerHeight * ratio + 2)
                     .conditionalModifier(MessageCornerRadius(model: model), apply: customCornerRadius == 0)
                     .conditionalCornerRadius(customCornerRadius, apply: customCornerRadius != 0)
             }
-            PlayerView(viewModel: player, sizeMode: .inConversationMessage, withControls: withControls,
+            PlayerView(media: media, poster: model.posterImage, sizeMode: .inConversationMessage, withControls: withControls,
                        onVideoTap: { frame, frameProvider in model.presentMediaPreview(sourceFrame: frame, sourceFrameProvider: frameProvider) },
                        onVideoLongPress: onLongGesture,
                        audioColors: drawsMessageBubble ? model.audioPlayerColors : model.audioPlayerColors.withoutBackground(),
@@ -51,16 +51,25 @@ struct PlayerSwiftUI: View {
                 .conditionalCornerRadius(customCornerRadius, apply: customCornerRadius != 0)
         }
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(player.pause.value ? L10n.Accessibility.audioPlayerPlay : L10n.Accessibility.audioPlayerPause)
+        .accessibilityLabel(isPlaying ? L10n.Accessibility.audioPlayerPause : L10n.Accessibility.audioPlayerPlay)
         .accessibilityAddTraits(.isButton)
         .conditionalModifier(AccessibilityGestureModifier(action: togglePauseWithVoiceOver), apply: UIAccessibility.isVoiceOverRunning)
     }
 
+    private var activePlayer: PlayerViewModel? {
+        media.playback?.player(for: media.item.id)
+    }
+
+    private var isPlaying: Bool {
+        activePlayer.map { !$0.isPaused.value } ?? false
+    }
+
     private func togglePauseWithVoiceOver() {
-        if player.playbackFailed.value {
+        guard media.item.preview.isPlayable, activePlayer?.playbackFailed.value != true else {
             UIAccessibility.post(notification: .announcement, argument: L10n.Accessibility.audioPlayerUnavailable)
+            return
         }
-        player.togglePause()
+        media.playback?.togglePlay(media.item)
     }
 }
 
@@ -107,8 +116,8 @@ struct MediaView: View {
     let cornerRadius: CGFloat
     var messageTime: String?
     var body: some View {
-        if let player = self.message.player {
-            PlayerSwiftUI(model: message, player: player, onLongGesture: onLongGesture, withControls: withPlayerControls, customCornerRadius: cornerRadius, messageTime: messageTime)
+        if let media = self.message.media {
+            PlayerSwiftUI(model: message, media: media, onLongGesture: onLongGesture, withControls: withPlayerControls, customCornerRadius: cornerRadius, messageTime: messageTime)
         } else if let image = message.finalImage {
             ImageOrGifView(message: message, image: image, onLongGesture: onLongGesture, minHeight: minHeight, maxHeight: maxHeight, customCornerRadius: cornerRadius)
 

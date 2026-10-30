@@ -58,4 +58,36 @@ final class MediaPreviewTests: XCTestCase {
         XCTAssertFalse(garbled.isPlayable)
         XCTAssertFalse(empty.isPlayable)
     }
+
+    func testFileOpenedUsesTheSameParser() {
+        let harness = MediaPlaybackHarness()
+        var opened: OpenedMediaFile?
+        let subscription = harness.service.fileOpened.subscribe(onNext: { opened = $0 })
+
+        harness.service.pipeline.fileOpened(for: "/media/a.mp4",
+                                            fileInfo: MediaPlaybackHarness.info(hasVideo: false))
+        subscription.dispose()
+
+        XCTAssertEqual(opened?.path, "/media/a.mp4")
+        XCTAssertEqual(opened?.preview, MediaPreview(libJamiInfo: MediaPlaybackHarness.info(hasVideo: false)))
+    }
+
+    func testVideoBubbleKeepsTheVideoAspectWithinTheMaximum() {
+        let landscape = MessageContentVM.mediaFrameSize(for: MediaPlaybackHarness.preview(), maxDimension: 250)
+        let portrait = MessageContentVM.mediaFrameSize(
+            for: MediaPreview(durationMicroseconds: 1, hasAudio: true, hasVideo: true,
+                              size: CGSize(width: 360, height: 640), thumbnailURL: nil),
+            maxDimension: 250)
+
+        XCTAssertEqual(landscape.width, 250)
+        XCTAssertEqual(landscape.height, 250 * 360 / 640, accuracy: 0.001)
+        XCTAssertEqual(portrait.height, 250)
+        XCTAssertEqual(portrait.width, 250 * 360 / 640, accuracy: 0.001)
+    }
+
+    func testAudioBubbleUsesTheAudioRowHeight() {
+        let size = MessageContentVM.mediaFrameSize(for: MediaPlaybackHarness.preview(hasVideo: false), maxDimension: 250)
+
+        XCTAssertEqual(size.height, AudioMessageLayout.height)
+    }
 }

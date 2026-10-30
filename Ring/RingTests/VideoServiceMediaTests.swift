@@ -180,3 +180,53 @@ final class VideoServicePreviewTests: XCTestCase {
         XCTAssertFalse(result.hasVideo)
     }
 }
+
+final class VideoServicePlayerOrderingTests: XCTestCase {
+
+    private var harness: MediaPlaybackHarness!
+    private let disposeBag = DisposeBag()
+
+    override func setUp() {
+        harness = MediaPlaybackHarness()
+    }
+
+    private func open(_ path: String) {
+        harness.service.openPlayer(path: path)
+            .subscribe()
+            .disposed(by: disposeBag)
+    }
+
+    func testReopeningAClosedFileLeavesItOpen() {
+        let path = "file:///media/a.mp4"
+        open(path)
+        harness.service.closePlayer(playerId: path)
+        open(path)
+        harness.settle(in: self)
+
+        XCTAssertEqual(harness.video.playerOperations, ["create:\(path)", "close:\(path)", "create:\(path)"])
+        XCTAssertEqual(harness.video.openPlayerIds, [path])
+    }
+
+    func testCommandsIssuedAfterOpenRunAfterTheCreate() {
+        let path = "file:///media/a.mp4"
+        open(path)
+        harness.service.pausePlayer(playerId: path, pause: false)
+        harness.service.seekPlayer(playerId: path, to: 5)
+        harness.service.mutePlayerAudio(playerId: path, mute: true)
+        harness.settle(in: self)
+
+        XCTAssertEqual(harness.video.playerOperations, ["create:\(path)", "pause:\(path):false",
+                                                        "seek:\(path):5", "mute:\(path):true"])
+    }
+
+    func testPlayerCommandsDoNotRunOnTheMainThread() {
+        let path = "file:///media/a.mp4"
+        open(path)
+        harness.service.pausePlayer(playerId: path, pause: true)
+        harness.service.closePlayer(playerId: path)
+        harness.settle(in: self)
+
+        XCTAssertEqual(harness.video.playerOperations.count, 3)
+        XCTAssertEqual(harness.video.playerCommandsOnMainThread, 0)
+    }
+}

@@ -22,24 +22,13 @@ import RxRelay
 import AVFoundation
 import UIKit
 
-/// A frame decoded by libjami for a given sink (media player).
-struct VideoFrameInfo {
-    let sampleBuffer: CMSampleBuffer?
-    let rotation: Int
-    let sinkId: String
+struct OpenedMediaFile {
+    let path: String
+    let preview: MediaPreview
 }
 
-/// libjami media-player metadata.
-struct Player {
-    var playerId: String
-    var duration: String
-    var hasAudio: Bool
-    var hasVideo: Bool
-}
-
-/// Incoming-frame stream holder for the media player.
-class FrameStream {
-    var frameSubject = PublishSubject<VideoFrameInfo>()
+enum MediaPlayerError: Error {
+    case unavailable
 }
 
 /// Camera, media-player and recorder surface over libjami's video API.
@@ -51,10 +40,10 @@ final class VideoService {
     static let temporaryThumbnailDirectory = FileManager.default.temporaryDirectory
         .appendingPathComponent("media_previews")
 
-    private let pipeline: VideoPipeline
+    let pipeline: VideoPipeline
 
     private var localSubscription: FrameSubscription?
-    private var playerSinkSubscriptions: [String: FrameSubscription] = [:]
+    private let playerQueue: DispatchQueue
     private let previewQueue = DispatchQueue(label: "com.savoirfairelinux.jami.mediaPreview")
     private let previewCache: MediaPreviewCache?
     private lazy var thumbnailContext = CIContext()
@@ -64,17 +53,16 @@ final class VideoService {
         attachToAdapter()
     }
 
-    init(video: LibJamiVideoAPI, previewCache: MediaPreviewCache? = MediaPreviewCache.standard) {
+    init(video: LibJamiVideoAPI,
+         playerQueue: DispatchQueue = DispatchQueue(label: "com.savoirfairelinux.jami.mediaPlayer", qos: .userInitiated),
+         previewCache: MediaPreviewCache? = MediaPreviewCache.standard) {
         let pipeline = VideoPipeline(video: video)
         self.pipeline = pipeline
+        self.playerQueue = playerQueue
         self.previewCache = previewCache
 
-        pipeline.onFileOpened = { [weak self] playerId, info in
-            self?.playerInfo.onNext(Player(
-                                        playerId: playerId,
-                                        duration: info["duration"] ?? "0",
-                                        hasAudio: (info["audio_stream"].flatMap(Int.init) ?? -1) >= 0,
-                                        hasVideo: (info["video_stream"].flatMap(Int.init) ?? -1) >= 0))
+        pipeline.onFileOpened = { [weak self] path, info in
+            self?.fileOpened.onNext(OpenedMediaFile(path: path, preview: MediaPreview(libJamiInfo: info)))
         }
         previewQueue.async {
             try? FileManager.default.removeItem(at: Self.temporaryThumbnailDirectory)
@@ -83,9 +71,8 @@ final class VideoService {
 
     // MARK: - Streams
 
-    let videoInputManager = FrameStream()
     let capturedVideoFrame = PublishSubject<LocalFrameInfo?>()
-    let playerInfo = PublishSubject<Player>()
+    let fileOpened = PublishSubject<OpenedMediaFile>()
 
     // MARK: - libjami wiring
 
@@ -197,39 +184,47 @@ final class VideoService {
 
     // MARK: - Media player
 
-    func createPlayer(path: String) -> String {
-        guard let playerId = pipeline.createPlayer(path: path) else { return "" }
-        // Player video arrives as a decoding sink whose id is the playerId.
-        let sink = SinkId(raw: playerId)
-        playerSinkSubscriptions[playerId] = pipeline.sinkRegistry
-            .distributor(for: sink)
-            .subscribe { [weak self] frame in
-                self?.videoInputManager.frameSubject.onNext(VideoFrameInfo(
-                                                                sampleBuffer: frame.sampleBuffer,
-                                                                rotation: frame.rotation,
-                                                                sinkId: playerId))
-            }
-        return playerId
-    }
-
-    func pausePlayer(playerId: String, pause: Bool) {
-        pipeline.pausePlayer(playerId: playerId, pause: pause)
-    }
-
-    func closePlayer(playerId: String) {
-        playerSinkSubscriptions[playerId] = nil
+    func openPlayer(path: String) -> Single<String> {
         let pipeline = self.pipeline
-        DispatchQueue.global(qos: .utility).async {
-            pipeline.closePlayer(playerId: playerId)
+        let queue = playerQueue
+        return Single.create { observer in
+            queue.async {
+                let playerId = pipeline.createPlayer(path: path)
+                DispatchQueue.main.async {
+                    if let playerId = playerId {
+                        observer(.success(playerId))
+                    } else {
+                        observer(.failure(MediaPlayerError.unavailable))
+                    }
+                }
+            }
+            return Disposables.create()
         }
     }
 
-    func mutePlayerAudio(playerId: String, mute: Bool) {
-        pipeline.mutePlayerAudio(playerId: playerId, mute: mute)
+    func playerFrames(playerId: String) -> FrameDistributor {
+        return pipeline.sinkRegistry.distributor(for: SinkId(raw: playerId))
     }
 
-    func seekToTime(time: Int, playerId: String) {
-        pipeline.seekPlayer(to: time, playerId: playerId)
+    func pausePlayer(playerId: String, pause: Bool) {
+        let pipeline = self.pipeline
+        playerQueue.async { pipeline.pausePlayer(playerId: playerId, pause: pause) }
+    }
+
+    func closePlayer(playerId: String) {
+        playerFrames(playerId: playerId).clearCachedFrame()
+        let pipeline = self.pipeline
+        playerQueue.async { pipeline.closePlayer(playerId: playerId) }
+    }
+
+    func mutePlayerAudio(playerId: String, mute: Bool) {
+        let pipeline = self.pipeline
+        playerQueue.async { pipeline.mutePlayerAudio(playerId: playerId, mute: mute) }
+    }
+
+    func seekPlayer(playerId: String, to time: Int64) {
+        let pipeline = self.pipeline
+        playerQueue.async { pipeline.seekPlayer(to: Int(time), playerId: playerId) }
     }
 
     func getPlayerPosition(playerId: String) -> Int64 {

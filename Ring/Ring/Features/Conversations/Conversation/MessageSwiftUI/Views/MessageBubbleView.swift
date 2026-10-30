@@ -182,11 +182,11 @@ struct MessageBubbleView: View {
     }
 
     private var hasImage: Bool {
-        model.player == nil && (model.finalImage != nil || model.thumbnailSize != nil)
+        model.media == nil && (model.finalImage != nil || model.thumbnailSize != nil)
     }
 
     private var hasVisualMedia: Bool {
-        hasImage || model.player?.hasVideo.value == true
+        hasImage || model.media?.item.preview.hasVideo == true
     }
 
     @ViewBuilder

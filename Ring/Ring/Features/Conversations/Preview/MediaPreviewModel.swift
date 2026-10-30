@@ -39,7 +39,7 @@ enum MediaPreviewSheet: Identifiable {
 // MARK: - Content
 
 enum MediaPreviewContent {
-    case player(PlayerViewModel)
+    case video(MessageMedia, poster: UIImage?)
     case image(UIImage)
 }
 

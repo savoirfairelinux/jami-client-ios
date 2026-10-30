@@ -256,21 +256,60 @@ final class TestLibJamiVideoAPI: LibJamiVideoAPI {
 
     var previewResult = LibJamiMediaPreview(info: [:], pixelBuffer: nil, orientation: .up)
     var onMediaPreview: (() -> Void)?
+    var position: Int64 = -1
     private let stateLock = NSLock()
+    private var openPlayers: Set<String> = []
+    private var operations: [String] = []
     private var requests: [String] = []
+    private var maxOpen = 0
+    private var mainThreadCommands = 0
 
+    var playerOperations: [String] { locked { operations } }
+    var openPlayerIds: Set<String> { locked { openPlayers } }
+    var maxConcurrentPlayers: Int { locked { maxOpen } }
+    var playerCommandsOnMainThread: Int { locked { mainThreadCommands } }
     var previewRequests: [String] { locked { requests } }
-    func createMediaPlayer(path: String) -> String? { nil }
-    func pausePlayer(playerId: String, pause: Bool) {}
-    func closePlayer(playerId: String) {}
-    func mutePlayerAudio(playerId: String, mute: Bool) {}
-    func playerSeek(to time: Int, playerId: String) {}
-    func playerPosition(playerId: String) -> Int64 { -1 }
+
+    func createMediaPlayer(path: String) -> String? {
+        recordPlayerCommand("create:\(path)") {
+            openPlayers.insert(path)
+            maxOpen = max(maxOpen, openPlayers.count)
+        }
+        return path
+    }
+
+    func pausePlayer(playerId: String, pause: Bool) {
+        recordPlayerCommand("pause:\(playerId):\(pause)") {}
+    }
+
+    func closePlayer(playerId: String) {
+        recordPlayerCommand("close:\(playerId)") { openPlayers.remove(playerId) }
+    }
+
+    func mutePlayerAudio(playerId: String, mute: Bool) {
+        recordPlayerCommand("mute:\(playerId):\(mute)") {}
+    }
+
+    func playerSeek(to time: Int, playerId: String) {
+        recordPlayerCommand("seek:\(playerId):\(time)") {}
+    }
+
+    func playerPosition(playerId: String) -> Int64 { position }
 
     func mediaPreview(path: String) -> LibJamiMediaPreview {
         locked { requests.append(path) }
         onMediaPreview?()
         return previewResult
+    }
+
+    private func recordPlayerCommand(_ operation: String, _ body: () -> Void) {
+        locked {
+            operations.append(operation)
+            if Thread.isMainThread {
+                mainThreadCommands += 1
+            }
+            body()
+        }
     }
 
     private func locked<T>(_ body: () -> T) -> T {

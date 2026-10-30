@@ -477,9 +477,10 @@ struct MessageContentView: View {
     }
 
     private func isInSeekZone(_ location: CGPoint) -> Bool {
-        model.player?.hasVideo.value == false
-            ? audioSeekArea.contains(location)
-            : isInVideoSeekZone(location)
+        guard let media = model.media, media.playback?.player(for: media.item.id) != nil else { return false }
+        return media.item.preview.hasVideo
+            ? isInVideoSeekZone(location)
+            : audioSeekArea.contains(location)
     }
 
     private func isInVideoSeekZone(_ location: CGPoint) -> Bool {

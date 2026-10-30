@@ -115,7 +115,7 @@ enum MessageTimePlacement {
 }
 
 // swiftlint:disable type_body_length
-class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProtocol, NameObserver {
+class MessageContentVM: ObservableObject, MessageAppearanceProtocol, NameObserver {
 
     @Published var content = "" {
         didSet {
@@ -138,7 +138,9 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     @Published var showProgress: Bool = true
     @Published var playerHeight: CGFloat = 80
     @Published var playerWidth: CGFloat = 250
-    @Published var player: PlayerViewModel?
+    @Published private(set) var media: MessageMedia?
+    @Published private(set) var posterImage: UIImage?
+    private var didRequestMedia = false
     @Published var corners: UIRectCorner = [.allCorners]
     @Published var menuItems = [ContextualMenuItem]()
     @Published var backgroundColor: Color = Color.jamiMessageCellReceived
@@ -557,7 +559,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     }
 
     private func fileTransferMenuItems() -> [ContextualMenuItem] {
-        let isAudioOnly = player?.hasVideo.value == false
+        let isAudioOnly = media?.item.preview.hasVideo == false
         var items: [ContextualMenuItem]
         if url != nil {
             items = isAudioOnly ? [.reply, .save, .forward, .share] : [.reply, .save, .forward, .preview, .share]
@@ -587,9 +589,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
         if self.transferStatus != .success {
             return
         }
-        if self.player == nil {
-            self.transferState.onNext(TransferState.getPlayer(viewModel: self))
-        }
+        self.requestMediaIfNeeded()
         if self.url == nil {
             self.transferState.onNext(TransferState.getURL(viewModel: self))
         }
@@ -665,27 +665,6 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
         self.transferState.onNext(TransferState.getProgress(viewModel: self))
     }
 
-    func extractedVideoFrame(with height: CGFloat) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            if let player = self.player, let firstImage = player.firstFrame,
-               let image = UIImage.createFrom(sampleBuffer: firstImage),
-               let frameSize = image.getNewSize(of: CGSize(width: self.maxDimension, height: self.maxDimension)) {
-                self.playerHeight = frameSize.height
-                self.playerWidth = frameSize.width
-            } else {
-                self.playerHeight = height
-            }
-        }
-    }
-
-    func playerDidBecomeReady() {
-        if player?.hasVideo.value == false {
-            playerHeight = AudioMessageLayout.height
-        }
-        updateMenuitems()
-    }
-
     var audioPlayerColors: AudioMessageColors {
         let textColor = styling.textColor
         let palette = self.palette
@@ -705,23 +684,46 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
                                   time: Color(palette.sentTime))
     }
 
-    func updatePlayer(player: PlayerViewModel?) {
-        guard let player = player else { return }
-        var playerSize = CGSize(width: playerWidth, height: playerHeight)
-        if let firstImage = player.firstFrame,
-           let image = UIImage.createFrom(sampleBuffer: firstImage),
-           let frameSize = image.getNewSize(of: CGSize(width: maxDimension, height: maxDimension)) {
-            playerSize = frameSize
-            playerHeight = frameSize.height
-            playerWidth = frameSize.width
-        } else if !player.hasVideo.value {
-            playerSize.height = AudioMessageLayout.height
+    func updateMedia(_ media: MessageMedia) {
+        let preview = media.item.preview
+        let frameSize = Self.mediaFrameSize(for: preview, maxDimension: maxDimension)
+        playerWidth = frameSize.width
+        playerHeight = frameSize.height
+        self.media = media
+        borderColor = Color(UIColor.tertiaryLabel)
+        updateMenuitems()
+        loadPosterIfNeeded(preview: preview)
+    }
+
+    static func mediaFrameSize(for preview: MediaPreview, maxDimension: CGFloat) -> CGSize {
+        guard preview.hasVideo else {
+            return CGSize(width: maxDimension, height: AudioMessageLayout.height)
         }
-        self.playerHeight = playerSize.height
-        self.playerWidth = playerSize.width
-        self.player = player
-        player.delegate = self
-        self.borderColor = Color(UIColor.tertiaryLabel)
+        guard let size = preview.size, size.width > 0, size.height > 0 else {
+            return CGSize(width: maxDimension, height: maxDimension * 9 / 16)
+        }
+        let ratio = size.width / size.height
+        if ratio > 1 {
+            return CGSize(width: maxDimension, height: maxDimension / ratio)
+        }
+        return CGSize(width: maxDimension * ratio, height: maxDimension)
+    }
+
+    private func requestMediaIfNeeded() {
+        guard media == nil, !didRequestMedia, transferStatus == .success else { return }
+        didRequestMedia = true
+        transferState.onNext(TransferState.getMedia(viewModel: self))
+    }
+
+    private func loadPosterIfNeeded(preview: MediaPreview) {
+        guard posterImage == nil, let thumbnail = preview.thumbnailURL else { return }
+        let maxSize = imageSize
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            let image = UIImage.getImagefromURL(fileURL: thumbnail, maxSize: maxSize)
+            DispatchQueue.main.async {
+                self?.posterImage = image
+            }
+        }
     }
 
     func swarmColorUpdated(color: UIColor) {
@@ -809,11 +811,12 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
 
     func loadThumbnailIfNeeded() {
         guard self.type == .fileTransfer, self.finalImage == nil,
-              !self.didRequestThumbnail, let url = self.url else { return }
+              !self.didRequestThumbnail, let url = self.url,
+              !url.pathExtension.isMediaExtension() else { return }
         self.didRequestThumbnail = true
         let maxSize = self.imageSize
         let isGif = self.isGifImage()
-        if self.player == nil, !isGif {
+        if !isGif {
             self.thumbnailSize = UIImage.thumbnailSize(url: url, maxPixelSize: maxSize)
         }
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
@@ -849,7 +852,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
 
     func onAppear() {
         if self.type == .fileTransfer {
-            self.transferState.onNext(TransferState.getPlayer(viewModel: self))
+            self.requestMediaIfNeeded()
             self.transferState.onNext(TransferState.getURL(viewModel: self))
             loadThumbnailIfNeeded()
         }
@@ -904,7 +907,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     /// fall back to UIDocumentInteractionController via contextMenuState.
     func presentMediaPreview(sourceFrame: CGRect = .zero, sourceFrameProvider: (() -> CGRect)? = nil) {
         guard let url = self.url, let handler = actionHandler else { return }
-        let isVideo = player?.hasVideo.value == true
+        let isVideo = media?.item.preview.hasVideo == true
         let isImage = url.pathExtension.isImageExtension()
         if isVideo || isImage {
             handler.handleMediaPreview(for: self, sourceFrame: sourceFrame, sourceFrameProvider: sourceFrameProvider)
