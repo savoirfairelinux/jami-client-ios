@@ -30,6 +30,8 @@ struct MessageStackView: View {
                 Text(model.username)
                     .font(.caption)
                     .foregroundColor(.conversationSecondaryText)
+                    .lineLimit(1)
+                    .truncationMode(.middle)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 Spacer()
                     .frame(height: 4)

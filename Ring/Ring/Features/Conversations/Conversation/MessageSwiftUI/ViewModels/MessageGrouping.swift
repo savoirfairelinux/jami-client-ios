@@ -45,7 +45,7 @@ struct MessageGrouping {
                                    sequencing: sequencing,
                                    bubbleSequencing: bubbleSequencing(sequencing, at: index, in: messages),
                                    endsEmojiRun: endsEmojiRun(at: index, in: messages, boundaries: boundaries),
-                                   displaysName: showsContactInfo && isFirst && !message.isReply(),
+                                   displaysName: showsContactInfo && isFirst,
                                    displaysAvatar: showsContactInfo && isLast)
         }
     }
