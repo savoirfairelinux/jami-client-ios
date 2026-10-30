@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4d8d4d2_e1d8acb1",
+        "filename": "Ring/Ring/Services/Video/MediaPreviewCache.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-30T16:38:57Z",
+      "side": 1,
+      "message": "[error] Line 55: 🔴 Cache keys are derived from `source.lastPathComponent` (`thumbnailURL` and `sidecarURL`), so different source files with the same filename in one conversation overwrite each other and can return the wrong preview metadata/thumbnail. Use a collision-resistant key (for example, hash of full canonical source path, or hash(path+size+mtime)) for both JSON and JPEG filenames.",
+      "revId": "42963c6dba639b5d86799317274152a6d53599b7",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46888226_44df4aaf",
+        "filename": "Ring/Ring/Services/Video/MediaPreviewCache.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-10-30T16:38:57Z",
+      "side": 1,
+      "message": "[warning] Line 109: 🟡 `accountId`/`conversationId` are written directly into filesystem paths. If either ever contains separators or dot-segments, cache writes/removals can target unintended directories. Normalize/sanitize these identifiers (e.g., encode to a safe filename alphabet or hash them) before using `appendingPathComponent`.",
+      "revId": "42963c6dba639b5d86799317274152a6d53599b7",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
