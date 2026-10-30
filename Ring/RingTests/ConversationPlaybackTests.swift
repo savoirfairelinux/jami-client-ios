@@ -138,6 +138,7 @@ final class PlayerCoordinatorTests: XCTestCase {
         harness.settle(in: self)
 
         XCTAssertFalse(coordinator.isActive)
+        XCTAssertNil(coordinator.frameSource)
         XCTAssertTrue(coordinator.isPaused)
         XCTAssertEqual(coordinator.duration, Float(MediaPlaybackHarness.durationMicroseconds))
         XCTAssertEqual(coordinator.progress, 0)
@@ -153,6 +154,8 @@ final class PlayerCoordinatorTests: XCTestCase {
 
         XCTAssertTrue(coordinator.isActive)
         XCTAssertFalse(coordinator.isPaused)
+        XCTAssertTrue(coordinator.frameSource === playback.player(for: item.id)?.frameSource.value)
+        XCTAssertNotNil(coordinator.frameSource)
 
         coordinator.beginSeek()
         coordinator.changeSeek(to: 0.5)
@@ -173,6 +176,7 @@ final class PlayerCoordinatorTests: XCTestCase {
         waitForMainScheduler()
 
         XCTAssertFalse(coordinator.isActive)
+        XCTAssertNil(coordinator.frameSource)
         XCTAssertTrue(coordinator.isPaused)
         XCTAssertEqual(coordinator.progress, 0)
     }
