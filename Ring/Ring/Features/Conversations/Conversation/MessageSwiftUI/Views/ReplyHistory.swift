@@ -132,6 +132,8 @@ struct ReplyQuoteFrame<Content: View>: View {
 
     @ScaledMetric(relativeTo: .footnote)
     var quoteHeight: CGFloat = 40
+    @Environment(\.layoutDirection)
+    private var layoutDirection
 
     private let barWidth: CGFloat = 3
     private let spacing: CGFloat = 7
@@ -149,18 +151,29 @@ struct ReplyQuoteFrame<Content: View>: View {
         .padding(.trailing, spacing)
         .reportingWidth(ReplyQuoteWidthKey.self)
         .frame(minWidth: fillWidth, alignment: .leading)
-        .background(accent.opacity(fillOpacity))
-        .overlay(alignment: .leading) {
-            Rectangle()
-                .fill(accent)
-                .frame(width: barWidth)
-        }
-        .clipShape(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
+        .background(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous).fill(accent.opacity(fillOpacity)))
+        .overlay(ReplyQuoteBar(cornerRadius: cornerRadius, width: barWidth, layoutDirection: layoutDirection).fill(accent))
     }
 
     private var fillOpacity: Double {
         if isHighlighted { return highlightOpacity }
         return isTinted ? tintOpacity : 0
+    }
+}
+
+private struct ReplyQuoteBar: Shape {
+    let cornerRadius: CGFloat
+    let width: CGFloat
+    let layoutDirection: LayoutDirection
+
+    func path(in rect: CGRect) -> Path {
+        let x = layoutDirection == .rightToLeft ? rect.maxX - width : rect.minX
+        let bar = CGRect(x: x, y: rect.minY, width: width, height: rect.height)
+        if #available(iOS 16.0, *) {
+            let frame = RoundedRectangle(cornerRadius: cornerRadius, style: .continuous).path(in: rect).cgPath
+            return Path(frame.intersection(CGPath(rect: bar, transform: nil)))
+        }
+        return Path(bar)
     }
 }
 
