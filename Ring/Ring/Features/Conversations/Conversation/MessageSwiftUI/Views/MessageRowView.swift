@@ -71,6 +71,8 @@ struct MessageRowView: View {
     var avatarFactory: AvatarProviderFactory?
     @Environment(\.messageListWidth)
     private var messageListWidth
+    @Environment(\.layoutDirection)
+    private var layoutDirection
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             if let daySeparatorText = model.daySeparatorText {
@@ -85,18 +87,19 @@ struct MessageRowView: View {
             }
             .padding(.top, model.topSpace)
             if let readIds = model.readIds, !readIds.isEmpty {
-                HStack(alignment: .top, spacing: -3) {
+                HStack(alignment: .top, spacing: -Layout.readReceiptsOverlap) {
                     Spacer()
                     ForEach(readIds.indices, id: \.self) { index in
                         if let factory = avatarFactory {
                             AvatarSwiftUIView(source: factory.provider(for: readIds[index],
                                                                        size: Constants.AvatarSize.conversation20))
-                                .overlay(Circle().stroke(lineWidth: 2).blendMode(.destinationOut))
+                                .clipShape(ReadReceiptAvatarShape(overlap: Layout.readReceiptsOverlap,
+                                                                  coveredByLeadingNeighbor: index > 0,
+                                                                  layoutDirection: layoutDirection))
                                 .zIndex(Double(readIds.count - index))
                         }
                     }
                 }
-                .compositingGroup()
                 .offset(x: 1)
                 .padding(.top, Layout.readReceiptsSpacing)
                 .accessibilityHidden(true)
@@ -222,5 +225,22 @@ struct MessageRowView: View {
         static let daySeparatorOuterPadding: CGFloat = 10
         static let eventTimeSpacing: CGFloat = 6
         static let readReceiptsSpacing: CGFloat = 4
+        static let readReceiptsOverlap: CGFloat = 3
+    }
+}
+
+private struct ReadReceiptAvatarShape: Shape {
+    static let gap: CGFloat = 1
+
+    let overlap: CGFloat
+    let coveredByLeadingNeighbor: Bool
+    let layoutDirection: LayoutDirection
+
+    func path(in rect: CGRect) -> Path {
+        let avatar = CGPath(ellipseIn: rect.insetBy(dx: Self.gap, dy: Self.gap), transform: nil)
+        guard coveredByLeadingNeighbor, #available(iOS 16.0, *) else { return Path(avatar) }
+        let shift = rect.width - overlap
+        let neighbor = rect.offsetBy(dx: layoutDirection == .rightToLeft ? shift : -shift, dy: 0)
+        return Path(avatar.subtracting(CGPath(ellipseIn: neighbor.insetBy(dx: -Self.gap, dy: -Self.gap), transform: nil)))
     }
 }
