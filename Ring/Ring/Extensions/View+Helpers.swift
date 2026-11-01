@@ -396,6 +396,10 @@ private struct MessageReactionsMaxWidthKey: EnvironmentKey {
     static let defaultValue: CGFloat = 0
 }
 
+private struct MessageBubbleNotchEnvironmentKey: EnvironmentKey {
+    static let defaultValue: CGRect? = nil
+}
+
 extension EnvironmentValues {
     var suppressLongPress: Bool {
         get { self[SuppressLongPressKey.self] }
@@ -420,6 +424,11 @@ extension EnvironmentValues {
     var messageReactionsMaxWidth: CGFloat {
         get { self[MessageReactionsMaxWidthKey.self] }
         set { self[MessageReactionsMaxWidthKey.self] = newValue }
+    }
+
+    var messageBubbleNotch: CGRect? {
+        get { self[MessageBubbleNotchEnvironmentKey.self] }
+        set { self[MessageBubbleNotchEnvironmentKey.self] = newValue }
     }
 }
 

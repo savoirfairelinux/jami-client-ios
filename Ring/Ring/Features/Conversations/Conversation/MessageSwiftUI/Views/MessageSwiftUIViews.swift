@@ -26,6 +26,9 @@ struct PlayerSwiftUI: View {
     var ratio: CGFloat = 1
     var withControls: Bool
     var customCornerRadius: CGFloat = 0
+    private var mediaCornerRadius: CGFloat? {
+        customCornerRadius == 0 ? nil : customCornerRadius
+    }
     var messageTime: String?
     @Environment(\.colorScheme)
     var colorScheme
@@ -37,8 +40,7 @@ struct PlayerSwiftUI: View {
             if colorScheme == .dark && player.hasVideo.value {
                 model.borderColor
                     .frame(width: model.playerWidth * ratio + 2, height: model.playerHeight * ratio + 2)
-                    .conditionalModifier(MessageCornerRadius(model: model), apply: customCornerRadius == 0)
-                    .conditionalCornerRadius(customCornerRadius, apply: customCornerRadius != 0)
+                    .modifier(MessageCornerRadius(model: model, radius: mediaCornerRadius))
             }
             PlayerView(viewModel: player, sizeMode: .inConversationMessage, withControls: withControls,
                        onVideoTap: { frame, frameProvider in model.presentMediaPreview(sourceFrame: frame, sourceFrameProvider: frameProvider) },
@@ -47,8 +49,7 @@ struct PlayerSwiftUI: View {
                        messageTime: messageTime)
                 .frame(height: model.playerHeight * ratio)
                 .frame(width: model.playerWidth * ratio)
-                .conditionalModifier(MessageCornerRadius(model: model), apply: customCornerRadius == 0)
-                .conditionalCornerRadius(customCornerRadius, apply: customCornerRadius != 0)
+                .modifier(MessageCornerRadius(model: model, radius: mediaCornerRadius))
         }
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(player.pause.value ? L10n.Accessibility.audioPlayerPlay : L10n.Accessibility.audioPlayerPause)
@@ -72,11 +73,13 @@ struct ImageOrGifView: View {
     let minHeight: CGFloat
     let maxHeight: CGFloat
     var customCornerRadius: CGFloat = 0
+    private var mediaCornerRadius: CGFloat? {
+        customCornerRadius == 0 ? nil : customCornerRadius
+    }
 
     var body: some View {
         mediaContent
-            .conditionalModifier(MessageCornerRadius(model: message), apply: customCornerRadius == 0)
-            .conditionalCornerRadius(customCornerRadius, apply: customCornerRadius != 0)
+            .modifier(MessageCornerRadius(model: message, radius: mediaCornerRadius))
             .messageGesture(
                 onLongPress: onLongGesture,
                 onTap: { frame, frameProvider in message.presentMediaPreview(sourceFrame: frame, sourceFrameProvider: frameProvider) }
@@ -117,7 +120,7 @@ struct MediaView: View {
                 .frame(idealWidth: thumbnailSize.width, idealHeight: thumbnailSize.height)
                 .aspectRatio(thumbnailSize, contentMode: .fit)
                 .frame(minHeight: minHeight, maxHeight: maxHeight)
-                .conditionalCornerRadius(cornerRadius, apply: cornerRadius != 0)
+                .if(cornerRadius != 0) { $0.modifier(MessageCornerRadius(model: message, radius: cornerRadius)) }
                 .messageGesture(onLongPress: onLongGesture)
         } else {
             DefaultTransferView(model: message, time: messageTime, onLongGesture: onLongGesture)
