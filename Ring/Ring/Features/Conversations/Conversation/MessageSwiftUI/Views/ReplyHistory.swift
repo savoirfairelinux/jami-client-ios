@@ -221,6 +221,7 @@ struct ReplyBubbleContainer<Content: View>: View {
                 .padding(layout.quoteInsets)
             content(minBubbleWidth)
                 .environment(\.drawsMessageBubble, false)
+                .environment(\.messageBubbleNotch, nil)
                 .measuringWidth(ReplyContentWidthKey.self, into: $contentWidth)
         }
         .padding(layout.contentInset)
