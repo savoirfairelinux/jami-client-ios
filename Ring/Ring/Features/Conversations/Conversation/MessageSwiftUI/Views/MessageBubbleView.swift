@@ -129,7 +129,7 @@ struct MessageBubbleView: View {
                         if model.isHistory {
                             ReplyBubbleContainer(model: model, reply: messageModel.replyTarget, layout: .media, onLongPress: receivedLongPress()) { _ in
                                 URLPreview(metadata: metadata, maxDimension: model.maxDimension)
-                                    .cornerRadius(replyMediaCornerRadius)
+                                    .modifier(MessageCornerRadius(model: model, radius: replyMediaCornerRadius))
                                     .messageGesture(onLongPress: receivedLongPress())
                             }
                         } else {

@@ -275,12 +275,48 @@ struct MessageBubbleFill: View {
     @ObservedObject var model: MessageContentVM
     @Environment(\.drawsMessageBubble)
     private var drawsMessageBubble
+    @Environment(\.messageBubbleNotch)
+    private var notch
 
     var body: some View {
         if model.hasBubbleBackground && drawsMessageBubble {
-            MessageBubbleShape(radius: model.cornerRadius, corners: model.corners)
-                .fill(model.backgroundColor)
+            if let notch = notch {
+                GeometryReader { proxy in
+                    MessageBubbleShape(radius: model.cornerRadius, corners: model.corners,
+                                       notch: MessageBubbleNotch.local(notch, in: proxy))
+                        .fill(model.backgroundColor)
+                }
+            } else {
+                MessageBubbleShape(radius: model.cornerRadius, corners: model.corners)
+                    .fill(model.backgroundColor)
+            }
         }
+    }
+}
+
+enum MessageBubbleNotch {
+    static let coordinateSpace = "messageBubbleNotch"
+
+    static func local(_ notch: CGRect, in proxy: GeometryProxy) -> CGRect {
+        let origin = proxy.frame(in: .named(coordinateSpace)).origin
+        return notch.offsetBy(dx: -origin.x, dy: -origin.y)
+    }
+
+    static func cut(_ notch: CGRect?, from path: CGPath) -> CGPath {
+        guard let notch = notch else { return path }
+        if #available(iOS 16.0, *) {
+            let radius = min(notch.width, notch.height) / 2
+            return path.subtracting(CGPath(roundedRect: notch, cornerWidth: radius, cornerHeight: radius, transform: nil))
+        }
+        return path
+    }
+}
+
+struct MessageBubbleNotchKey: PreferenceKey {
+    static var defaultValue: CGRect?
+
+    static func reduce(value: inout CGRect?, nextValue: () -> CGRect?) {
+        value = value ?? nextValue()
     }
 }
 
@@ -289,6 +325,7 @@ struct MessageBubbleShape: Shape {
 
     var radius: CGFloat
     var corners: UIRectCorner
+    var notch: CGRect?
 
     func path(in rect: CGRect) -> Path {
         var outline = UIBezierPath(roundedRect: rect, byRoundingCorners: corners,
@@ -298,15 +335,47 @@ struct MessageBubbleShape: Shape {
                                  cornerHeight: Self.minimumCornerRadius, transform: nil)
             outline = outline.intersection(minimum)
         }
-        return Path(outline)
+        return Path(MessageBubbleNotch.cut(notch, from: outline))
+    }
+}
+
+private struct NotchedArea: Shape {
+    static let overflow: CGFloat = 100
+
+    var notch: CGRect?
+
+    func path(in rect: CGRect) -> Path {
+        Path(MessageBubbleNotch.cut(notch, from: CGPath(rect: rect.insetBy(dx: -Self.overflow, dy: -Self.overflow), transform: nil)))
     }
 }
 
 struct MessageCornerRadius: ViewModifier {
     @ObservedObject var model: MessageContentVM
+    var radius: CGFloat?
+    @Environment(\.messageBubbleNotch)
+    private var notch
+    @SwiftUI.State private var notchOrigin: CGPoint?
 
     func body(content: Content) -> some View {
-        content.clipShape(MessageBubbleShape(radius: model.cornerRadius, corners: model.corners))
+        content
+            .clipShape(MessageBubbleShape(radius: radius ?? model.cornerRadius,
+                                          corners: radius == nil ? model.corners : .allCorners,
+                                          notch: localNotch))
+            .background {
+                if notch != nil {
+                    GeometryReader { proxy in
+                        let origin = proxy.frame(in: .named(MessageBubbleNotch.coordinateSpace)).origin
+                        Color.clear
+                            .onAppear { notchOrigin = origin }
+                            .onChange(of: origin) { notchOrigin = $0 }
+                    }
+                }
+            }
+    }
+
+    private var localNotch: CGRect? {
+        guard let notch = notch, let origin = notchOrigin else { return nil }
+        return notch.offsetBy(dx: -origin.x, dy: -origin.y)
     }
 }
 
@@ -334,6 +403,7 @@ struct MessageContentView: View {
     @SwiftUI.State private var lockedAxis: SwipeAxis?
     @SwiftUI.State private var suppressLongPress: Bool = false
     @SwiftUI.State private var ringProgress: CGFloat = 0
+    @SwiftUI.State private var reactionsNotch: CGRect?
     private let replyActivationDistance: CGFloat = 70
     private let minSwipeDistance: CGFloat = 30
 
@@ -358,16 +428,19 @@ struct MessageContentView: View {
                         self.model.onAppear()
                     }
             }
-            .if(model.hasReactions && reactionsOverlapContent) { view in
-                view.mask {
-                    reactionsCutout()
-                }
+            .if(model.isEmojiOnly && model.hasReactions) { view in
+                view.clipShape(NotchedArea(notch: reactionsNotch))
             }
             .overlay(alignment: reactionsAlignment) {
                 if model.hasReactions {
                     reactions()
                 }
             }
+            .coordinateSpace(name: MessageBubbleNotch.coordinateSpace)
+            .onPreferenceChange(MessageBubbleNotchKey.self) { notch in
+                reactionsNotch = notch
+            }
+            .environment(\.messageBubbleNotch, model.hasReactions && reactionsOverlapContent ? reactionsNotch : nil)
             .padding(.bottom, model.hasReactions ? reactionsSpaceBelow : 0)
             if model.showsTimeBelowReactions {
                 MessageTimeView(text: model.timeText, color: model.timeColor)
@@ -502,7 +575,7 @@ struct MessageContentView: View {
     }
 
     private func reactions() -> some View {
-        reactionsRow(isCutout: false)
+        reactionsRow()
             .onAppear {
                 self.messageModel.reactionsModel.onAppear()
             }
@@ -516,27 +589,14 @@ struct MessageContentView: View {
         model.hasBubbleBackground || model.isEmojiOnly
     }
 
-    private func reactionsCutout() -> some View {
-        ZStack {
-            Rectangle()
-                .padding(-MessageReactionsCapsule.cutoutMaskOverflow)
-            Color.clear
-                .overlay(alignment: reactionsAlignment) {
-                    reactionsRow(isCutout: true)
-                        .blendMode(.destinationOut)
-                }
-        }
-        .compositingGroup()
-    }
-
-    private func reactionsRow(isCutout: Bool) -> some View {
+    private func reactionsRow() -> some View {
         HStack(spacing: 0) {
             Spacer(minLength: 0)
             MessageReactionsCapsule(model: reactionsModel,
                                     tint: model.receivedBubbleColor,
                                     height: reactionsCapsuleHeight,
                                     insetsFromBubbleEdges: model.hasBubbleBackground,
-                                    isCutout: isCutout) {
+                                    cutsNotch: reactionsOverlapContent) {
                 menuRequest = .reactions
             }
         }
@@ -550,7 +610,6 @@ private struct MessageReactionsCapsule: View {
     private static let ringWidth: CGFloat = 2
     private static let bubbleOverlap: CGFloat = fillOverlap + ringWidth
     private static let contentGap: CGFloat = 2
-    static let cutoutMaskOverflow: CGFloat = 100
 
     static func spaceBelow(height: CGFloat, overlapsContent: Bool) -> CGFloat {
         height + 2 * ringWidth + (overlapsContent ? -bubbleOverlap : contentGap)
@@ -560,7 +619,7 @@ private struct MessageReactionsCapsule: View {
     let tint: Color
     let height: CGFloat
     let insetsFromBubbleEdges: Bool
-    let isCutout: Bool
+    let cutsNotch: Bool
     let onSelect: () -> Void
 
     private let bubbleLeadingInset: CGFloat = 30
@@ -589,12 +648,13 @@ private struct MessageReactionsCapsule: View {
         }
         .fixedSize(horizontal: true, vertical: false)
         .frame(height: height)
-        .if(!isCutout) { view in
-            view.conversationContentMaterial(tint: tint, in: Capsule())
-        }
+        .conversationContentMaterial(tint: tint, in: Capsule())
         .padding(Self.ringWidth)
-        .if(isCutout) { view in
-            view.background(Capsule().fill(Color.black))
+        .if(cutsNotch) { view in
+            view.background(GeometryReader { proxy in
+                Color.clear.preference(key: MessageBubbleNotchKey.self,
+                                       value: proxy.frame(in: .named(MessageBubbleNotch.coordinateSpace)))
+            })
         }
         .padding(.top, hitExtension)
         .padding(.horizontal, hitHorizontalExtension)
@@ -611,7 +671,6 @@ private struct MessageReactionsCapsule: View {
         .accessibilityValue(summary.accessibilityValue)
         .accessibilityHint(L10n.Accessibility.messageReactionsHint)
         .accessibilityAddTraits(.isButton)
-        .accessibilityHidden(isCutout)
     }
 
     private func segment(_ reaction: ReactionSegment) -> some View {
