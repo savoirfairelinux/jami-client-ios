@@ -118,7 +118,6 @@ struct MessageBubbleView: View {
             .lineLimit(nil)
             .background(MessageBubbleFill(model: model))
             .font(model.styling.textFont)
-            .modifier(MessageCornerRadius(model: model))
             .marksMessageBubbleBottom()
     }
 

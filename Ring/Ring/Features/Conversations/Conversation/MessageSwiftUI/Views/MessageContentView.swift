@@ -135,8 +135,8 @@ struct MessageTextStyle: ViewModifier {
                 view.overlay(
                     CornerRadiusShape(radius: model.cornerRadius, corners: model.corners)
                         .stroke(model.borderColor, lineWidth: 2))
+                    .modifier(MessageCornerRadius(model: model))
             }
-            .modifier(MessageCornerRadius(model: model))
     }
 }
 
@@ -284,20 +284,40 @@ struct MessageBubbleFill: View {
 
     var body: some View {
         if model.hasBubbleBackground && drawsMessageBubble {
-            model.backgroundColor
+            MessageBubbleShape(radius: model.cornerRadius, corners: model.corners)
+                .fill(model.backgroundColor)
         }
+    }
+}
+
+struct MessageBubbleShape: Shape {
+    static let minimumCornerRadius: CGFloat = 5
+
+    var radius: CGFloat
+    var corners: UIRectCorner
+
+    func path(in rect: CGRect) -> Path {
+        var outline = UIBezierPath(roundedRect: rect, byRoundingCorners: corners,
+                                   cornerRadii: CGSize(width: radius, height: radius)).cgPath
+        if corners != .allCorners, #available(iOS 16.0, *) {
+            let minimum = CGPath(roundedRect: rect, cornerWidth: Self.minimumCornerRadius,
+                                 cornerHeight: Self.minimumCornerRadius, transform: nil)
+            outline = outline.intersection(minimum)
+        }
+        return Path(outline)
     }
 }
 
 struct MessageCornerRadius: ViewModifier {
     @ObservedObject var model: MessageContentVM
 
+    @ViewBuilder
     func body(content: Content) -> some View {
-        content
-            .if(!model.hasBorder) { view in
-                view.cornerRadius(radius: model.cornerRadius, corners: model.corners)
-            }
-            .cornerRadius(5)
+        if model.hasBorder {
+            content.cornerRadius(MessageBubbleShape.minimumCornerRadius)
+        } else {
+            content.clipShape(MessageBubbleShape(radius: model.cornerRadius, corners: model.corners))
+        }
     }
 }
 
