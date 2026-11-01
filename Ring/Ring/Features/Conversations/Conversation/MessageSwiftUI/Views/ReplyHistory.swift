@@ -167,8 +167,8 @@ private struct ReplyQuoteBar: Shape {
     let layoutDirection: LayoutDirection
 
     func path(in rect: CGRect) -> Path {
-        let x = layoutDirection == .rightToLeft ? rect.maxX - width : rect.minX
-        let bar = CGRect(x: x, y: rect.minY, width: width, height: rect.height)
+        let barMinX = layoutDirection == .rightToLeft ? rect.maxX - width : rect.minX
+        let bar = CGRect(x: barMinX, y: rect.minY, width: width, height: rect.height)
         if #available(iOS 16.0, *) {
             let frame = RoundedRectangle(cornerRadius: cornerRadius, style: .continuous).path(in: rect).cgPath
             return Path(frame.intersection(CGPath(rect: bar, transform: nil)))
