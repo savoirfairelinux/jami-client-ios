@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcf8a5d1_3c8cc80e",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 1
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-02T20:17:48Z",
+      "side": 1,
+      "message": "[warning] Line 581: 🟡 New user-facing keys were added only in `en.lproj`; unless localization sync is handled separately in this change flow, non-English locales will fall back to English for these new call outcomes. Please add corresponding keys across supported `.lproj` files (or confirm the localization pipeline will populate them before release) to avoid mixed-language conversation history.",
+      "revId": "2542d205b48d482ec2fadda96ee5d7b261cacf97",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
