@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1a45083_cdb9e450",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessageStackVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-02T15:58:53Z",
+      "side": 1,
+      "message": "[warning] Line 31: 🟡 `isEmojiOnly` is now cached and only refreshed when `message` is reassigned (`didSet`). If `MessageModel` is a reference type that gets mutated in place (e.g., message edits/updates), this value can become stale and the spacing logic in `MessageStackView` will desync from actual content. Prefer a computed property (`var isEmojiOnly: Bool { message.isEmojiOnly() }`) or refresh `isEmojiOnly` from the same callback/path that updates mutable message content.",
+      "revId": "9e2aa66720e6a2cb3a977c6ff49902c82937d01f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
