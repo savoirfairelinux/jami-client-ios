@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db772a96_69db43fd",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessageSwiftUIViews.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-02T17:34:53Z",
+      "side": 1,
+      "message": "[error] Line 123: 🔴 For thumbnail placeholders with `cornerRadius \u003d\u003d 0`, the new path skips `MessageCornerRadius`, so the reaction notch is never applied while the thumbnail is loading. This creates a visible overlap regression compared to image/video states where the notch is cut. Apply `MessageCornerRadius(model: message)` for the zero-radius branch as well, or pass the environment notch into `MessageBubbleShape` in `thumbnailPlaceholder` so placeholder clipping matches other media states.",
+      "revId": "17f724d30ff1e0d34bc9d999480f3a66638a9bb3",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
