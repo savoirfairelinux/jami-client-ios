@@ -24,8 +24,9 @@ struct MessageStackView: View {
     let messageModel: MessageContainerModel
     @ObservedObject var model: MessageStackVM
     var onLongPress: (_ frame: CGRect, _ message: MessageBubbleView, _ mode: ContextMenuMode) -> Void
+
     var body: some View {
-        VStack(alignment: model.horizontalAllignment) {
+        VStack(alignment: model.horizontalAllignment, spacing: model.isEmojiOnly ? 2 : nil) {
             if model.shouldDisplayName {
                 Text(model.username)
                     .font(.caption)
@@ -33,8 +34,10 @@ struct MessageStackView: View {
                     .lineLimit(1)
                     .truncationMode(.middle)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                Spacer()
-                    .frame(height: 4)
+                if !model.isEmojiOnly {
+                    Spacer()
+                        .frame(height: 4)
+                }
             }
             MessageContentView(messageModel: messageModel,
                                model: messageModel.messageContent,

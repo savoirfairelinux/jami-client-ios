@@ -30,7 +30,16 @@ class MessageStackVM: ObservableObject, MessageAppearanceProtocol, NameObserver 
     var alignment: Alignment {
         self.message.incoming ? Alignment.leading : Alignment.trailing
     }
-    var message: MessageModel
+    @Published private(set) var isEmojiOnly: Bool
+
+    var message: MessageModel {
+        didSet {
+            let isEmojiOnly = message.isEmojiOnly()
+            if self.isEmojiOnly != isEmojiOnly {
+                self.isEmojiOnly = isEmojiOnly
+            }
+        }
+    }
 
     var infoState: PublishSubject<State>?
 
@@ -51,6 +60,7 @@ class MessageStackVM: ObservableObject, MessageAppearanceProtocol, NameObserver 
 
     init(message: MessageModel) {
         self.message = message
+        self.isEmojiOnly = message.isEmojiOnly()
     }
 
     func setInfoState(state: PublishSubject<State>) {
