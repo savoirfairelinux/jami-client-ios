@@ -143,7 +143,6 @@
 "contactPicker.contacts" = "Kişiler";
 
 // Smartlist
-"smartlist.yesterday" = "Dün";
 "smartlist.results" = "Jami search";
 "smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "Görüşmeler";
@@ -179,6 +178,7 @@
 "conversation.addToContactsLabel" = "Kişilere eklensin mi?";
 "conversation.notContactLabel" = "%@ kişi listesinde değil";
 "conversation.messagePlaceholder" = "Şuna yaz:";
+"conversation.voiceMessageUnavailableInCall" = "Voice messages are unavailable during a call";
 "conversation.imageSaved" = "Kaydedildi";
 "conversation.errorSavingImage" = "Görüntü kaydedilemedi";
 "conversation.errorSavingImageMessage" = "Görüntü fotoğraf kitaplığına kaydedilirken bir hata oluştu.";
@@ -192,9 +192,15 @@
 "conversation.syncingTitle" = "Görüşme eşitleniyor";
 "conversation.synchronizationMessage" = "Görüşmeyi eşitlemek için %@ bağlantısı bekleniyor…";
 "conversation.inReplyTo" = "Cevap olarak";
-"conversation.repliedTo" = "%@, %@ yanıtladı";
+"conversation.replyQuotePhoto" = "Photo";
+"conversation.replyQuoteAudio" = "Ses";
+"conversation.replyQuoteUnavailable" = "Message not loaded";
 "conversation.yourself" = "Siz";
 "conversation.edited" = "Düzenlendi";
+"conversation.editHistory" = "Edit history";
+"conversation.editHistoryCurrent" = "Current";
+"conversation.editHistoryEdit" = "Edit %d";
+"conversation.editHistoryOriginal" = "Original";
 "conversation.deletedMessage" = "%@ iletiyi sildi";
 "conversation.contactBlocked" = "Kişi engellendi";
 // An ellipsis is not directly shown in the following typing indicator strings.
@@ -559,8 +565,8 @@
 "notifications.locationSharingStopped" = "Gelen konum paylaşımı durduruldu";
 "dataTransfer.readableStatusDecline" = "Reddet";
 "dataTransfer.readableStatusAccept" = "Kabul et";
-"dataTransfer.infoMessage" = "Kaydı başlatmak için dokunun";
 "dataTransfer.sendMessage" = "Gönder";
+"dataTransfer.retake" = "Retake";
 
 
 // Generated Message
@@ -647,6 +653,20 @@
 "accessibility.conversationCameraHint" = "Kamerayı açmak için çift dokunun";
 "accessibility.audioPlayerPlay" = "Oynat";
 "accessibility.audioPlayerPause" = "Duraklat";
+"accessibility.audioPlayerMute" = "Sessiz";
+"accessibility.audioPlayerUnmute" = "Sesi aç";
+"accessibility.audioPlayerSeek" = "Seek";
+"accessibility.audioPlayerElapsedTime" = "Elapsed time";
+"accessibility.audioPlayerDuration" = "Süre";
+"accessibility.audioPlayerUnavailable" = "Audio unavailable";
+"accessibility.voiceMessageRecording" = "Kayıt";
+"accessibility.voiceMessageStop" = "Kaydı durdur";
+"accessibility.voiceMessageDeleted" = "Recording deleted";
+"accessibility.voiceMessageSend" = "Send voice message";
+"accessibility.conversationMessageSent" = "Message sent";
+"accessibility.draftAttachmentLoading" = "%@, loading";
+"accessibility.draftAttachmentFailed" = "%@, unable to load";
+"accessibility.draftAttachmentsDiscarded" = "Attachments removed";
 "accessibility.conversationRowUnreadCount" = "%@ okunmamış ileti";
 "accessibility.conversationRowBlocked" = "Görüşme engellendi";
 "accessibility.conversationRowSyncing" = "Eşitleme sürüyor";
@@ -663,13 +683,28 @@
 "accessibility.messageBubbleEdited" = "Düzenlendi";
 "accessibility.messageBubbleRead" = "Okundu";
 "accessibility.messageBubbleUnread" = "Okunmadı";
-"accessibility.textNotAvailable" = "%@ tarihinde boş bir metin mesajı alındı. Doğru gönderilmemiş olabilir.";
-"accessibility.fileTransferNoName" = "%@ tarihinde dosya alındı, ad mevcut değil";
+"accessibility.messageReactionCount" = "%1$@ %2$d";
+"accessibility.messageReactions" = "Reactions";
+"accessibility.messageReactionsHint" = "Shows who reacted";
+"accessibility.messageReactionIncludingYou" = "%@, including you";
+"accessibility.messageReactionsMore" = "%d more";
+"accessibility.removeReaction" = "Remove %@";
+"accessibility.editHistoryAdded" = "Added: %@";
+"accessibility.editHistoryCopied" = "Copied";
+"accessibility.editHistoryRemoved" = "Removed: %@";
+"accessibility.scrollToLatestMessage" = "Scroll to latest message";
+"accessibility.newMessagesCount" = "%d new messages";
+"accessibility.oneNewMessage" = "1 new message";
+"accessibility.messageReceivedDate" = "Alındı";
+"accessibility.messageSentDate" = "Gönderildi";
+"accessibility.textEmpty" = "Empty text message received. This might not have been sent correctly.";
+"accessibility.fileTransferUnnamed" = "File received, name not available";
 "accessibility.inReply" = "İletiye yanıt olarak";
-"accessibility.text.receivedOn" = "%1@, mesaj %2@ önce alındı";
-"accessibility.text.sentOn" = "%1@, mesaj %2@ önce gönderildi";
-"accessibility.fileTransfer.receivedOn" = "Dosya: %1@, %2@ tarihinde alındı";
-"accessibility.fileTransfer.sentOn" = "Dosya: %1@, %2@ tarihinde gönderildi";
+"accessibility.showReplyTarget" = "Show original message";
+"accessibility.text.received" = "%@, message received";
+"accessibility.text.sent" = "%@, message sent";
+"accessibility.fileTransfer.received" = "File: %@, received";
+"accessibility.fileTransfer.sent" = "File: %@, sent";
 "accessibility.call.lasted" = "%@ sürdü";
 "accessibility.calls.default.toggleAudio" = "Mikrofon sessiz";
 "accessibility.calls.default.toggleVideo" = "Kamerayı başlat";
@@ -846,3 +881,4 @@
 "collab.documentRemovedMessage" = "\"%@\" was removed by its author.";
 "collab.documentRemovedLocally" = "Document removed from this device";
 "collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";
+"collab.documentShared" = "New document: %@";

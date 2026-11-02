@@ -143,7 +143,6 @@
 "contactPicker.contacts" = "جهات الاتصال";
 
 // Smartlist
-"smartlist.yesterday" = "البارحة";
 "smartlist.results" = "Jami search";
 "smartlist.jamsResults" = "Organization search";
 "smartlist.conversations" = "محادثات";
@@ -179,6 +178,7 @@
 "conversation.addToContactsLabel" = "إضافة إلى جهات الإتصال؟";
 "conversation.notContactLabel" = "%@ ليس في قائمة جهات الاتصال";
 "conversation.messagePlaceholder" = "اكتب إلى";
+"conversation.voiceMessageUnavailableInCall" = "Voice messages are unavailable during a call";
 "conversation.imageSaved" = "تم الحفظ";
 "conversation.errorSavingImage" = "تعذّر حفظ الصورة";
 "conversation.errorSavingImageMessage" = "حدث خطأ أثناء حفظ الصورة في مكتبة الصور.";
@@ -192,9 +192,15 @@
 "conversation.syncingTitle" = "جارٍ مزامنة المحادثة";
 "conversation.synchronizationMessage" = "بانتظار اتصال %@ لمزامنة المحادثة…";
 "conversation.inReplyTo" = "في جواب";
-"conversation.repliedTo" = "ردّ %@ على %@";
+"conversation.replyQuotePhoto" = "Photo";
+"conversation.replyQuoteAudio" = "Audio";
+"conversation.replyQuoteUnavailable" = "Message not loaded";
 "conversation.yourself" = "أنت";
 "conversation.edited" = "تحرير";
+"conversation.editHistory" = "Edit history";
+"conversation.editHistoryCurrent" = "Current";
+"conversation.editHistoryEdit" = "Edit %d";
+"conversation.editHistoryOriginal" = "Original";
 "conversation.deletedMessage" = "حذف %@ رسالة";
 "conversation.contactBlocked" = "تم حظر جهة الاتصال";
 // An ellipsis is not directly shown in the following typing indicator strings.
@@ -559,8 +565,8 @@
 "notifications.locationSharingStopped" = "توقف مشاركة الموقع المقبل";
 "dataTransfer.readableStatusDecline" = "رفض";
 "dataTransfer.readableStatusAccept" = "اقبل";
-"dataTransfer.infoMessage" = "انقر لبدء التسجيل";
 "dataTransfer.sendMessage" = "إرسال";
+"dataTransfer.retake" = "Retake";
 
 
 // Generated Message
@@ -647,6 +653,20 @@
 "accessibility.conversationCameraHint" = "انقر نقرًا مزدوجًا لفتح الكاميرا";
 "accessibility.audioPlayerPlay" = "تشغيل";
 "accessibility.audioPlayerPause" = "إيقاف مؤقت";
+"accessibility.audioPlayerMute" = "كتم الصوت";
+"accessibility.audioPlayerUnmute" = "إعادة الصوت";
+"accessibility.audioPlayerSeek" = "Seek";
+"accessibility.audioPlayerElapsedTime" = "Elapsed time";
+"accessibility.audioPlayerDuration" = "المدة الزمنية";
+"accessibility.audioPlayerUnavailable" = "Audio unavailable";
+"accessibility.voiceMessageRecording" = "تسجيل";
+"accessibility.voiceMessageStop" = "إيقاف التسجيل";
+"accessibility.voiceMessageDeleted" = "Recording deleted";
+"accessibility.voiceMessageSend" = "Send voice message";
+"accessibility.conversationMessageSent" = "Message sent";
+"accessibility.draftAttachmentLoading" = "%@, loading";
+"accessibility.draftAttachmentFailed" = "%@, unable to load";
+"accessibility.draftAttachmentsDiscarded" = "Attachments removed";
 "accessibility.conversationRowUnreadCount" = "%@ رسائل غير مقروءة.";
 "accessibility.conversationRowBlocked" = "المحادثة محظورة";
 "accessibility.conversationRowSyncing" = "المزامنة جارية";
@@ -663,13 +683,28 @@
 "accessibility.messageBubbleEdited" = "تحرير";
 "accessibility.messageBubbleRead" = "مقروءة";
 "accessibility.messageBubbleUnread" = "غير مقروءة";
-"accessibility.textNotAvailable" = "تم استلام رسالة نصية فارغة في %@. قد لا تكون قد أُرسلت بشكل صحيح.";
-"accessibility.fileTransferNoName" = "تم استلام ملف في %@، الاسم غير متوفر";
+"accessibility.messageReactionCount" = "%1$@ %2$d";
+"accessibility.messageReactions" = "Reactions";
+"accessibility.messageReactionsHint" = "Shows who reacted";
+"accessibility.messageReactionIncludingYou" = "%@, including you";
+"accessibility.messageReactionsMore" = "%d more";
+"accessibility.removeReaction" = "Remove %@";
+"accessibility.editHistoryAdded" = "Added: %@";
+"accessibility.editHistoryCopied" = "Copied";
+"accessibility.editHistoryRemoved" = "Removed: %@";
+"accessibility.scrollToLatestMessage" = "Scroll to latest message";
+"accessibility.newMessagesCount" = "%d new messages";
+"accessibility.oneNewMessage" = "1 new message";
+"accessibility.messageReceivedDate" = "تلقيت";
+"accessibility.messageSentDate" = "أرسلت";
+"accessibility.textEmpty" = "Empty text message received. This might not have been sent correctly.";
+"accessibility.fileTransferUnnamed" = "File received, name not available";
 "accessibility.inReply" = "ردًا على رسالة";
-"accessibility.text.receivedOn" = "%1@، تم استلام الرسالة في %2@";
-"accessibility.text.sentOn" = "%1@، تم إرسال الرسالة في %2@";
-"accessibility.fileTransfer.receivedOn" = "ملف: %1@، تم استلامه في %2@";
-"accessibility.fileTransfer.sentOn" = "ملف: %1@، تم إرساله في %2@";
+"accessibility.showReplyTarget" = "Show original message";
+"accessibility.text.received" = "%@, message received";
+"accessibility.text.sent" = "%@, message sent";
+"accessibility.fileTransfer.received" = "File: %@, received";
+"accessibility.fileTransfer.sent" = "File: %@, sent";
 "accessibility.call.lasted" = "استمرت %@";
 "accessibility.calls.default.toggleAudio" = "كتم ميكروفون";
 "accessibility.calls.default.toggleVideo" = "بدء الكاميرا";
@@ -822,7 +857,7 @@
 "collab.font" = "Font";
 "collab.defaultFont" = "Default font";
 "collab.unavailableFont" = "Unavailable font";
-"collab.fontSize" = "Size";
+"collab.fontSize" = "حجم";
 "collab.defaultSize" = "Default size";
 "collab.alignment" = "Paragraph alignment";
 "collab.remove" = "احذف";
@@ -846,3 +881,4 @@
 "collab.documentRemovedMessage" = "\"%@\" was removed by its author.";
 "collab.documentRemovedLocally" = "Document removed from this device";
 "collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";
+"collab.documentShared" = "New document: %@";

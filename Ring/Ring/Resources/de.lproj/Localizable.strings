@@ -143,9 +143,8 @@
 "contactPicker.contacts" = "Kontakte";
 
 // Smartlist
-"smartlist.yesterday" = "Gestern";
-"smartlist.results" = "Jami search";
-"smartlist.jamsResults" = "Organization search";
+"smartlist.results" = "Jami-Suche";
+"smartlist.jamsResults" = "Organisationssuche";
 "smartlist.conversations" = "Unterhaltungen";
 "smartlist.conversationsSearchHint" = "Sie haben noch keine Unterhaltungen.";
 "smartlist.publicDirectoryHint" = "Personen auf Jami außerhalb Ihrer Kontakte.";
@@ -154,7 +153,7 @@
 "smartlist.noConversationsFound" = "Keine Unterhaltungen entsprechen der Suche.";
 "smartlist.newContact" = "Neuer Kontakt";
 "smartlist.newGroup" = "Neue Gruppe";
-"smartlist.accounts" = "Your accounts";
+"smartlist.accounts" = "Ihre Konten";
 "smartlist.invitationReceived" = "Einladungen erhalten";
 "smartlist.noResults" = "Keine Ergebnisse";
 "smartlist.noConversation" = "Keine Unterhaltungen";
@@ -179,6 +178,7 @@
 "conversation.addToContactsLabel" = "Zu Kontakten hinzufügen?";
 "conversation.notContactLabel" = "%@ ist nicht in der Kontaktliste";
 "conversation.messagePlaceholder" = "Schreiben an";
+"conversation.voiceMessageUnavailableInCall" = "Sprachnachrichten sind während eines Anrufs nicht verfügbar.";
 "conversation.imageSaved" = "Gespeichert";
 "conversation.errorSavingImage" = "Bild konnte nicht gespeichert werden";
 "conversation.errorSavingImageMessage" = "Beim Speichern des Bildes in die Fotomediathek ist ein Fehler aufgetreten.";
@@ -192,9 +192,15 @@
 "conversation.syncingTitle" = "Unterhaltung wird synchronisiert";
 "conversation.synchronizationMessage" = "Auf Verbindung von %@ zur Synchronisierung der Unterhaltung wird gewartet…";
 "conversation.inReplyTo" = "Als Antwort an";
-"conversation.repliedTo" = "%@antwortete an %@";
+"conversation.replyQuotePhoto" = "Photo";
+"conversation.replyQuoteAudio" = "Audio";
+"conversation.replyQuoteUnavailable" = "Message not loaded";
 "conversation.yourself" = "Sie";
 "conversation.edited" = "Bearbeitet";
+"conversation.editHistory" = "Edit history";
+"conversation.editHistoryCurrent" = "Current";
+"conversation.editHistoryEdit" = "Edit %d";
+"conversation.editHistoryOriginal" = "Original";
 "conversation.deletedMessage" = "%@ hat eine Nachricht gelöscht";
 "conversation.contactBlocked" = "Kontakt blockiert";
 // An ellipsis is not directly shown in the following typing indicator strings.
@@ -559,8 +565,8 @@
 "notifications.locationSharingStopped" = "Eingehende Standortfreigabe gestoppt";
 "dataTransfer.readableStatusDecline" = "Ablehnen";
 "dataTransfer.readableStatusAccept" = "Annehmen";
-"dataTransfer.infoMessage" = "Tippen, um die Aufnahme zu starten";
 "dataTransfer.sendMessage" = "Senden";
+"dataTransfer.retake" = "Erneut aufnehmen";
 
 
 // Generated Message
@@ -585,7 +591,7 @@
 "generalSettings.fileTransfer" = "Dateiübertragung";
 "generalSettings.locationSharing" = "Standortfreigabe";
 "generalSettings.automaticAcceptIncomingFiles" = "Eingehende Dateien automatisch annehmen";
-"generalSettings.acceptTransferLimit" = "Maximum automatic download size";
+"generalSettings.acceptTransferLimit" = "Maximale Größe für automatische Downloads";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unbegrenzt)";
 "generalSettings.limitLocationSharingDuration" = "Dauer der Standortfreigabe begrenzen";
 "generalSettings.locationSharingDuration" = "Dauer der Positionsfreigabe";
@@ -647,6 +653,20 @@
 "accessibility.conversationCameraHint" = "Doppeltippen, um die Kamera zu öffnen";
 "accessibility.audioPlayerPlay" = "Abspielen";
 "accessibility.audioPlayerPause" = "Pause";
+"accessibility.audioPlayerMute" = "Stummschalten";
+"accessibility.audioPlayerUnmute" = "Stummschaltung aufheben";
+"accessibility.audioPlayerSeek" = "Positionieren";
+"accessibility.audioPlayerElapsedTime" = "Verstrichene Zeit";
+"accessibility.audioPlayerDuration" = "Dauer";
+"accessibility.audioPlayerUnavailable" = "Audio nicht verfügbar";
+"accessibility.voiceMessageRecording" = "Aufzeichnung";
+"accessibility.voiceMessageStop" = "Aufnahme stoppen";
+"accessibility.voiceMessageDeleted" = "Aufnahme gelöscht";
+"accessibility.voiceMessageSend" = "Sprachnachricht senden";
+"accessibility.conversationMessageSent" = "Nachricht gesendet";
+"accessibility.draftAttachmentLoading" = "%@, wird geladen";
+"accessibility.draftAttachmentFailed" = "%@ konnte nicht geladen werden ";
+"accessibility.draftAttachmentsDiscarded" = "Anhänge entfernt";
 "accessibility.conversationRowUnreadCount" = "%@ ungelesene Nachrichten.";
 "accessibility.conversationRowBlocked" = "Unterhaltung blockiert";
 "accessibility.conversationRowSyncing" = "Synchronisierung im Gange";
@@ -663,13 +683,28 @@
 "accessibility.messageBubbleEdited" = "Bearbeitet";
 "accessibility.messageBubbleRead" = "Gelesen";
 "accessibility.messageBubbleUnread" = "Ungelesen";
-"accessibility.textNotAvailable" = "Leere Textnachricht auf %@ erhalten. Diese wurde möglicherweise nicht korrekt gesendet.";
-"accessibility.fileTransferNoName" = "Datei empfangen am %@, Name nicht verfügbar";
+"accessibility.messageReactionCount" = "%1$@ %2$d";
+"accessibility.messageReactions" = "Reactions";
+"accessibility.messageReactionsHint" = "Shows who reacted";
+"accessibility.messageReactionIncludingYou" = "%@, including you";
+"accessibility.messageReactionsMore" = "%d more";
+"accessibility.removeReaction" = "Remove %@";
+"accessibility.editHistoryAdded" = "Added: %@";
+"accessibility.editHistoryCopied" = "Copied";
+"accessibility.editHistoryRemoved" = "Removed: %@";
+"accessibility.scrollToLatestMessage" = "Scroll to latest message";
+"accessibility.newMessagesCount" = "%d new messages";
+"accessibility.oneNewMessage" = "1 new message";
+"accessibility.messageReceivedDate" = "Empfangen";
+"accessibility.messageSentDate" = "Gesendet";
+"accessibility.textEmpty" = "Leere Textnachricht empfangen. Möglicherweise wurde diese nicht korrekt gesendet.";
+"accessibility.fileTransferUnnamed" = "Datei empfangen, Name nicht verfügbar";
 "accessibility.inReply" = "Als Antwort auf die Nachricht";
-"accessibility.text.receivedOn" = "%1@, Nachricht erhalten am %2@";
-"accessibility.text.sentOn" = "%1@, Nachricht gesendet am %2@";
-"accessibility.fileTransfer.receivedOn" = "Datei: %1@ , empfangen am %2@";
-"accessibility.fileTransfer.sentOn" = "Datei: %1@, gesendet am %2@";
+"accessibility.showReplyTarget" = "Show original message";
+"accessibility.text.received" = "%@, Nachricht empfangen";
+"accessibility.text.sent" = "%@, Nachricht gesendet";
+"accessibility.fileTransfer.received" = "Datei: %@, empfangen";
+"accessibility.fileTransfer.sent" = "Datei: %@, gesendet";
 "accessibility.call.lasted" = "Dauerte %@";
 "accessibility.calls.default.toggleAudio" = "Mikrofon stummschalten";
 "accessibility.calls.default.toggleVideo" = "Kamera starten";
@@ -805,7 +840,7 @@
 "collab.italic" = "Kursiv";
 "collab.underline" = "Unterstreichen";
 "collab.strikethrough" = "Durchgestrichen";
-"collab.textFormat" = "Text format";
+"collab.textFormat" = "Textformat";
 "collab.heading" = "Überschrift %d";
 "collab.bulletList" = "Aufzählungsliste";
 "collab.orderedList" = "Nummerierte Liste";
@@ -817,13 +852,13 @@
 "collab.clearFormat" = "Formatierung löschen";
 "collab.undo" = "Rückgängig";
 "collab.redo" = "Rückgängig";
-"collab.paragraphStyle" = "Style";
-"collab.normalText" = "Normal text";
-"collab.font" = "Font";
-"collab.defaultFont" = "Default font";
-"collab.unavailableFont" = "Unavailable font";
+"collab.paragraphStyle" = "Stil";
+"collab.normalText" = "Normaler Text";
+"collab.font" = "Schrift";
+"collab.defaultFont" = "Standardschrift";
+"collab.unavailableFont" = "Nicht verfügbare Schrift";
 "collab.fontSize" = "Größe";
-"collab.defaultSize" = "Default size";
+"collab.defaultSize" = "Standardgröße";
 "collab.alignment" = "Absatzausrichtung";
 "collab.remove" = "Entfernen";
 "collab.open" = "Öffnen";
@@ -846,3 +881,4 @@
 "collab.documentRemovedMessage" = "\"%@\" wurde von seinem Autor entfernt.";
 "collab.documentRemovedLocally" = "Dokument von diesem Gerät entfernt";
 "collab.documentRemovedLocallyMessage" = "\"%@\" ist nicht mehr auf diesem Gerät. Beim erneuten Öffnen wird es wieder heruntergeladen.";
+"collab.documentShared" = "Neues Dokument: %@";
