@@ -76,7 +76,8 @@ class MessageRowVM: ObservableObject, MessageAppearanceProtocol, MessageReadObse
     }
 
     private func refreshEventGroupTime() {
-        let closesEventGroup = message.type.isCentered
+        // A document card shows its own time inside it.
+        let closesEventGroup = message.type.isCentered && message.type != .collabDocument
             && (sequencing == .singleMessage || sequencing == .lastOfSequence)
         let timeText = closesEventGroup ? message.receivedDate.messageTimeString() : nil
         let accessibilityText = closesEventGroup ? message.receivedDate.messageFullDateString() : nil
