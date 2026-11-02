@@ -23,6 +23,48 @@ import Combine
 @testable import Ring
 
 final class MessageModelTests: XCTestCase {
+    func testCallFailureReasonsOverrideGenericCallText() {
+        let outcomes = [
+            ("busy", "generatedMessage.callBusy", "Busy"),
+            ("declined", "generatedMessage.callDeclined", "Call declined"),
+            ("no_device", "generatedMessage.callUnreachable", "Unreachable peer")
+        ]
+        for author in [jamiId1, jamiId2] {
+            for (reason, key, fallback) in outcomes {
+                for duration: String? in [nil, "0", "-1", "65000"] {
+                    var info = ["type": "application/call-history+json", "author": author,
+                                "reason": reason]
+                    info["duration"] = duration
+                    let message = MessageModel(withInfo: info, localJamiId: jamiId1)
+                    let expected = NSLocalizedString(key, bundle: Bundle(for: MessageModel.self),
+                                                     value: fallback, comment: "")
+                    XCTAssertEqual(message.content, expected, "reason \(reason), duration \(String(describing: duration))")
+                    XCTAssertEqual(message.accessibilityLabelValue, expected)
+                }
+            }
+        }
+    }
+
+    func testCallWithoutRecognizedReasonPreservesExistingText() {
+        for author in [jamiId1, jamiId2] {
+            let incoming = author != jamiId1
+            let label = incoming ? L10n.Global.incomingCall : L10n.GeneratedMessage.outgoingCall
+            let missed = incoming ? L10n.GeneratedMessage.missedIncomingCall : L10n.GeneratedMessage.missedOutgoingCall
+            let cases: [(String?, String)] = [(nil, missed), ("invalid", missed),
+                                              ("-1", label), ("0", label + " - 00:00"),
+                                              ("65000", label + " - 01:05")]
+            for reason: String? in [nil, "", "unknown"] {
+                for (duration, expected) in cases {
+                    var info = ["type": "application/call-history+json", "author": author]
+                    info["reason"] = reason
+                    info["duration"] = duration
+                    let message = MessageModel(withInfo: info, localJamiId: jamiId1)
+                    XCTAssertEqual(message.content, expected)
+                }
+            }
+        }
+    }
+
     private func replyMessage(author: String, name: String) -> MessageContentVM {
         let message = MessageModel(withId: UUID().uuidString, receivedDate: Date(),
                                    content: "Hello", authorURI: author, incoming: false)

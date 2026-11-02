@@ -580,6 +580,9 @@
 "generatedMessage.outgoingCall" = "Outgoing call";
 "generatedMessage.missedOutgoingCall" = "Missed outgoing call";
 "generatedMessage.missedIncomingCall" = "Missed incoming call";
+"generatedMessage.callBusy" = "Busy";
+"generatedMessage.callDeclined" = "Call declined";
+"generatedMessage.callUnreachable" = "Unreachable peer";
 "generatedMessage.liveLocationSharing" = "Live location sharing";
 "generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
 "generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";

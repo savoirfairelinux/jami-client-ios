@@ -34,6 +34,7 @@ enum MessageAttributes: String {
     case parent = "linearizedParent"
     case action = "action"
     case duration = "duration"
+    case reason = "reason"
     case reply = "reply-to"
     case react = "react-to"
     case totalSize = "totalSize"
@@ -294,17 +295,26 @@ struct MessageData {
                 self.content = content
             }
         case .call:
-            if let duration = info[MessageAttributes.duration.rawValue],
-               let durationDouble = Double(duration) {
-                if durationDouble < 0 {
-                    self.content = self.incoming ? L10n.Global.incomingCall : L10n.GeneratedMessage.outgoingCall
+            switch info[MessageAttributes.reason.rawValue] {
+            case "busy":
+                self.content = L10n.GeneratedMessage.callBusy
+            case "declined":
+                self.content = L10n.GeneratedMessage.callDeclined
+            case "no_device":
+                self.content = L10n.GeneratedMessage.callUnreachable
+            default:
+                if let duration = info[MessageAttributes.duration.rawValue],
+                   let durationDouble = Double(duration) {
+                    if durationDouble < 0 {
+                        self.content = self.incoming ? L10n.Global.incomingCall : L10n.GeneratedMessage.outgoingCall
+                    } else {
+                        let durationSeconds = durationDouble * 0.001
+                        let time = String.durationFormatted(seconds: Int(durationSeconds))
+                        self.content = self.incoming ? L10n.Global.incomingCall + " - " + time : L10n.GeneratedMessage.outgoingCall + " - " + time
+                    }
                 } else {
-                    let durationSeconds = durationDouble * 0.001
-                    let time = String.durationFormatted(seconds: Int(durationSeconds))
-                    self.content = self.incoming ? L10n.Global.incomingCall + " - " + time : L10n.GeneratedMessage.outgoingCall + " - " + time
+                    self.content = self.incoming ? L10n.GeneratedMessage.missedIncomingCall : L10n.GeneratedMessage.missedOutgoingCall
                 }
-            } else {
-                self.content = self.incoming ? L10n.GeneratedMessage.missedIncomingCall : L10n.GeneratedMessage.missedOutgoingCall
             }
         case .contact:
             if let action = info[MessageAttributes.action.rawValue],

@@ -1198,6 +1198,12 @@ internal enum L10n {
     internal static let videoSettings = L10n.tr("Localizable", "generalSettings.videoSettings", fallback: "Video settings")
   }
   internal enum GeneratedMessage {
+    /// Busy
+    internal static let callBusy = L10n.tr("Localizable", "generatedMessage.callBusy", fallback: "Busy")
+    /// Call declined
+    internal static let callDeclined = L10n.tr("Localizable", "generatedMessage.callDeclined", fallback: "Call declined")
+    /// Unreachable peer
+    internal static let callUnreachable = L10n.tr("Localizable", "generatedMessage.callUnreachable", fallback: "Unreachable peer")
     /// Invitation received
     internal static let contactAdded = L10n.tr("Localizable", "generatedMessage.contactAdded", fallback: "Invitation received")
     /// %@ was blocked from the conversation.
