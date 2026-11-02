@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0c37eb8_248ed09f",
+        "filename": "Ring/Ring/Resources/cmn.lproj/Localizable.strings",
+        "patchSetId": 1
+      },
+      "lineNbr": 843,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-02T08:25:29Z",
+      "side": 1,
+      "message": "[warning] Line 843: 🟡 Several newly added Chinese `collab.*` values start with an invisible U+200C character (e.g. `\"‌文本格式\"`, and similarly at `collab.paragraphStyle`, `collab.normalText`, `collab.defaultFont`, `collab.unavailableFont`, `collab.defaultSize`; same pattern appears in other Chinese locale files in this patch). This can introduce hard-to-diagnose UI/search/accessibility inconsistencies. Remove the leading U+200C from these strings in all affected locale files.",
+      "revId": "c4df4e726d0ec57f89a5a0128f3d462320de0205",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
