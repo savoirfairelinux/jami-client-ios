@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64f6c7ff_cdfb8ea9",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessageContentView.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-02T15:06:19Z",
+      "side": 1,
+      "message": "[warning] Line 289: 🟡 This shape rewrite changes rendering rules across multiple message types but adds no regression coverage. Add snapshot/UI tests for iOS 15 and iOS 16 covering incoming/outgoing, bordered/non-bordered, and reply/call/text bubbles so future shape changes don’t silently reintroduce clipping or corner regressions.",
+      "revId": "31b69c09a8403af4f534da15e6bc042d7de2e319",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "320bee99_3664387d",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessageContentView.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-02T15:06:19Z",
+      "side": 1,
+      "message": "[error] Line 294: 🔴 On iOS 15 (still within the app’s minimum supported range), the `#available(iOS 16.0, *)` guard skips the path intersection, so the 5pt rounding for non-bubble corners is lost. That creates a visible geometry regression for supported devices. Please add an iOS 15 fallback that preserves the previous shape result (for example, keep the old dual-clip behavior on iOS 15 or compute an equivalent path manually).",
+      "revId": "31b69c09a8403af4f534da15e6bc042d7de2e319",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
