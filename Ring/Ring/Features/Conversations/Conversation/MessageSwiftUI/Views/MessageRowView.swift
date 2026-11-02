@@ -219,7 +219,7 @@ struct MessageRowView: View {
         static let centeredMessageMargin: CGFloat = 30
         static let daySeparatorHorizontalPadding: CGFloat = 10
         static let daySeparatorVerticalPadding: CGFloat = 4
-        static let daySeparatorOuterPadding: CGFloat = 10
+        static let daySeparatorOuterPadding: CGFloat = 14
         static let eventTimeSpacing: CGFloat = 6
         static let readReceiptsSpacing: CGFloat = 4
     }
