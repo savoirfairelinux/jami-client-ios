@@ -131,11 +131,6 @@ struct MessageTextStyle: ViewModifier {
             .padding(.trailing, model.textInset)
             .foregroundColor(model.styling.textColor)
             .background(MessageBubbleFill(model: model))
-            .if(model.hasBorder) { view in
-                view.overlay(
-                    CornerRadiusShape(radius: model.cornerRadius, corners: model.corners)
-                        .stroke(model.borderColor, lineWidth: 2))
-            }
             .modifier(MessageCornerRadius(model: model))
     }
 }
@@ -294,9 +289,7 @@ struct MessageCornerRadius: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .if(!model.hasBorder) { view in
-                view.cornerRadius(radius: model.cornerRadius, corners: model.corners)
-            }
+            .cornerRadius(radius: model.cornerRadius, corners: model.corners)
             .cornerRadius(5)
     }
 }
