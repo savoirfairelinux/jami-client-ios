@@ -47,8 +47,11 @@ class ContactMessageVM: ObservableObject, MessageAppearanceProtocol, NameObserve
     init(message: MessageModel) {
         self.message = message
         self.inset = message.type == .initial ? 0 : 7
-        self.content = message.content
-        self.observableContent.accept(message.content)
+        // Local events never request a name, and incoming names may arrive later.
+        // Generate their text immediately instead of using the empty member body.
+        let jamiId = message.uri.isEmpty ? message.authorId : message.uri
+        self.content = message.getContactInteractionString(name: jamiId) ?? message.content
+        self.observableContent.accept(self.content)
         if message.type != .initial {
             self.styling.textFont = self.styling.secondaryFont
             self.styling.textColor = self.styling.defaultSecondaryTextColor

@@ -110,6 +110,57 @@ final class MessageModelTests: XCTestCase {
         }
     }
 
+    func testLocalContactEventsHaveTextWithoutNameLookup() {
+        for action in [ContactAction.add, .join, .remove, .ban, .unban] {
+            let message = MessageModel(withInfo: ["type": "member", "action": action.rawValue,
+                                                 "uri": jamiId1, "author": jamiId1],
+                                       localJamiId: jamiId1)
+            let model = ContactMessageVM(message: message)
+            model.setInfoState(state: PublishSubject<State>())
+
+            XCTAssertEqual(model.content, action.getInteractionString(name: jamiId1, isIncomig: false))
+            XCTAssertFalse(model.content.isEmpty, "action \(action)")
+            XCTAssertEqual(model.observableContent.value, model.content)
+        }
+    }
+
+    func testIncomingContactEventsHaveTextBeforeNameLookup() {
+        for uri in [jamiId2, ""] {
+            for action in [ContactAction.add, .join, .remove, .ban, .unban] {
+                let message = MessageModel(withInfo: ["type": "member", "action": action.rawValue,
+                                                     "uri": uri, "author": jamiId2],
+                                           localJamiId: jamiId1)
+                let model = ContactMessageVM(message: message)
+
+                XCTAssertEqual(model.content, action.getInteractionString(name: jamiId2, isIncomig: true))
+                XCTAssertFalse(model.content.isEmpty, "action \(action)")
+                XCTAssertEqual(model.observableContent.value, model.content)
+            }
+        }
+    }
+
+    func testContactEventTextUsesResolvedNameAndFallsBackToMemberURI() {
+        let message = MessageModel(withInfo: ["type": "member", "action": "join",
+                                             "uri": jamiId2, "author": jamiId1],
+                                   localJamiId: jamiId1)
+        let model = ContactMessageVM(message: message)
+        model.username = "Alice"
+        XCTAssertEqual(model.content, L10n.GeneratedMessage.invitationAccepted("Alice"))
+        XCTAssertEqual(model.observableContent.value, model.content)
+
+        model.username = ""
+        XCTAssertEqual(model.content, L10n.GeneratedMessage.invitationAccepted(jamiId2))
+        XCTAssertEqual(model.observableContent.value, model.content)
+    }
+
+    func testInitialConversationEventPreservesItsText() {
+        let message = MessageModel(withInfo: ["type": "initial", "author": jamiId1],
+                                   localJamiId: jamiId1)
+        let model = ContactMessageVM(message: message)
+        XCTAssertEqual(model.content, L10n.GeneratedMessage.swarmCreated)
+        XCTAssertEqual(model.observableContent.value, model.content)
+    }
+
     private func memberEventAction(_ action: String) -> ContactAction? {
         let info = [MessageAttributes.type.rawValue: "member",
                     MessageAttributes.action.rawValue: action,
