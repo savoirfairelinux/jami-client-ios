@@ -23,6 +23,7 @@ import SwiftUI
 struct CollabDocMessageView: View {
 
     @ObservedObject var model: CollabDocMessageVM
+    @ObservedObject var content: MessageContentVM
 
     var body: some View {
         Button(action: model.open) {
@@ -41,6 +42,7 @@ struct CollabDocMessageView: View {
                     Text(detail)
                         .font(.caption)
                         .foregroundColor(.secondary)
+                        .withInlineTime(content.timeText, color: .conversationSecondaryText)
                 }
             }
             .padding(.horizontal, Layout.padding)
@@ -48,7 +50,7 @@ struct CollabDocMessageView: View {
             .frame(minHeight: Layout.minHeight)
             .background(
                 RoundedRectangle(cornerRadius: Layout.corner)
-                    .fill(Color(UIColor.secondarySystemBackground))
+                    .fill(content.receivedBubbleColor)
             )
         }
         // A retired announcement opens nothing, so it stops answering taps
@@ -57,6 +59,7 @@ struct CollabDocMessageView: View {
         .accessibilityElement(children: .combine)
         .accessibilityHint(detail)
         .accessibilityValue(hasUnreadChanges ? L10n.Accessibility.messageBubbleUnread : "")
+        .accessibilityCustomContent(Text(content.accessibilityDateLabel), Text(content.fullDateText))
         .padding(.vertical, Layout.textSpacing)
     }
 

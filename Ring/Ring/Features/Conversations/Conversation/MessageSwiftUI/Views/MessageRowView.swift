@@ -180,7 +180,7 @@ struct MessageRowView: View {
                 if let collabDoc = messageModel.collabDocViewModel {
                     HStack(spacing: 0) {
                         Spacer(minLength: Layout.centeredMessageMargin)
-                        CollabDocMessageView(model: collabDoc)
+                        CollabDocMessageView(model: collabDoc, content: messageModel.messageContent)
                             .layoutPriority(1)
                         Spacer(minLength: Layout.centeredMessageMargin)
                     }
