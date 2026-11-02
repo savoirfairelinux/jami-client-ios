@@ -113,17 +113,23 @@ struct MediaView: View {
             ImageOrGifView(message: message, image: image, onLongGesture: onLongGesture, minHeight: minHeight, maxHeight: maxHeight, customCornerRadius: cornerRadius)
 
         } else if let thumbnailSize = message.thumbnailSize {
-            Color(UIColor.secondarySystemFill)
+            thumbnailPlaceholder
                 .frame(idealWidth: thumbnailSize.width, idealHeight: thumbnailSize.height)
                 .aspectRatio(thumbnailSize, contentMode: .fit)
                 .frame(minHeight: minHeight, maxHeight: maxHeight)
-                .conditionalModifier(MessageCornerRadius(model: message), apply: cornerRadius == 0)
                 .conditionalCornerRadius(cornerRadius, apply: cornerRadius != 0)
                 .messageGesture(onLongPress: onLongGesture)
         } else {
             DefaultTransferView(model: message, time: messageTime, onLongGesture: onLongGesture)
-                .conditionalModifier(MessageCornerRadius(model: message), apply: cornerRadius == 0)
-                .conditionalCornerRadius(cornerRadius, apply: cornerRadius != 0)
+        }
+    }
+
+    @ViewBuilder private var thumbnailPlaceholder: some View {
+        let fill = Color(UIColor.secondarySystemFill)
+        if cornerRadius == 0 {
+            MessageBubbleShape(radius: message.cornerRadius, corners: message.corners).fill(fill)
+        } else {
+            fill
         }
     }
 }

@@ -212,7 +212,6 @@ struct ReplyBubbleContainer<Content: View>: View {
         }
         .padding(layout.contentInset)
         .background(MessageBubbleFill(model: model))
-        .modifier(MessageCornerRadius(model: model))
     }
 
     private var quoteHorizontalInsets: CGFloat {
