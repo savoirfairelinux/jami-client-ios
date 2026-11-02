@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e44826b_5087423a",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessageContentView.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-02T15:08:24Z",
+      "side": 1,
+      "message": "[error] Line 318: 🔴 On iOS 15, `MessageBubbleNotch.cut` always returns the original path, so the reaction notch is never applied even though iOS 15 is a supported deployment target. This is a user-visible regression for bubble/media overlap. Please add an iOS 15 fallback notch path (e.g., keep the previous mask/destinationOut approach behind `#unavailable(iOS 16)` or construct an equivalent even-odd path subtraction) so the notch behavior stays consistent across supported OS versions.",
+      "revId": "675761b1e30b3ba8fb6211a21982b2bbbb2b9c99",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b5e1a8a_bb3bb825",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessageContentView.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-02T15:08:24Z",
+      "side": 1,
+      "message": "[warning] Line 589: 🟡 This patch changes the clipping strategy for several message types (bubble fill, media clip, emoji-only clip) but does not include regression tests for notch placement and overlap behavior. Add UI/snapshot coverage for incoming/outgoing + emoji-only/media text cases on iOS 15 and iOS 16+ to prevent future geometry regressions.",
+      "revId": "675761b1e30b3ba8fb6211a21982b2bbbb2b9c99",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
