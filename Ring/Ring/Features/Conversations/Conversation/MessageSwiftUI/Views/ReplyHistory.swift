@@ -225,6 +225,8 @@ struct ReplyBubbleContainer<Content: View>: View {
         }
         .padding(layout.contentInset)
         .background(MessageBubbleFill(model: model))
+        .animation(nil, value: quoteWidth)
+        .animation(nil, value: contentWidth)
     }
 
     private var quoteHorizontalInsets: CGFloat {
