@@ -543,13 +543,18 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     private func updateMenuitems() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
+            let items: [ContextualMenuItem]
             switch self.type {
             case .text:
-                self.menuItems = self.textMenuItems()
+                items = self.textMenuItems()
             case .fileTransfer:
-                self.menuItems = self.fileTransferMenuItems()
+                items = self.fileTransferMenuItems()
             default:
-                break
+                return
+            }
+            // Runs on every row appearance; an unchanged assignment would still invalidate the row.
+            if items != self.menuItems {
+                self.menuItems = items
             }
         }
     }

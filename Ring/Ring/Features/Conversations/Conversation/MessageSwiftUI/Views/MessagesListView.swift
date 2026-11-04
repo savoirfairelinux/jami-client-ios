@@ -34,10 +34,10 @@ extension View {
     }
 }
 
-struct ScrollViewOffsetPreferenceKey: PreferenceKey {
-    static var defaultValue: CGFloat?
+struct ScrolledToBottomPreferenceKey: PreferenceKey {
+    static var defaultValue: Bool?
 
-    static func reduce(value: inout CGFloat?, nextValue: () -> CGFloat?) {
+    static func reduce(value: inout Bool?, nextValue: () -> Bool?) {
         value = value ?? nextValue()
     }
 }
@@ -239,10 +239,10 @@ struct MessagesListView: View {
     private func createMessagesStackView() -> some View {
         ScrollViewReader { scrollView in
             ScrollView(showsIndicators: false) {
-                // update scroll offset
+                // A Bool, so the preference only changes when crossing the threshold, not on every scrolled frame.
                 GeometryReader { proxy in
                     let offset = proxy.frame(in: .named("scroll")).minY
-                    Color.clear.preference(key: ScrollViewOffsetPreferenceKey.self, value: offset)
+                    Color.clear.preference(key: ScrolledToBottomPreferenceKey.self, value: offset < scrollReserved)
                 }
                 LazyVStack(spacing: 0) {
                     // scroll to the bottom
@@ -288,10 +288,9 @@ struct MessagesListView: View {
                     }
                 })
             }
-            .onPreferenceChange(ScrollViewOffsetPreferenceKey.self) { value in
+            .onPreferenceChange(ScrolledToBottomPreferenceKey.self) { value in
                 DispatchQueue.main.async {
-                    let scrollOffset = value ?? 0
-                    let atTheBottom = scrollOffset < scrollReserved
+                    let atTheBottom = value ?? true
                     if atTheBottom != model.atTheBottom {
                         withAnimation {
                             model.atTheBottom = atTheBottom
