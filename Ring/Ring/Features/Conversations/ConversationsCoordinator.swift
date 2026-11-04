@@ -28,7 +28,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
     var presentingVC = [String: Bool]()
 
     var rootViewController: UIViewController {
-        return self.splitNavigator.splitViewController
+        return self.splitNavigator.rootViewController
     }
 
     var stackNavigationController: UINavigationController? {
@@ -55,10 +55,9 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
     init(injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
         let listNavigation = UINavigationController()
-        let placeholder = UIHostingController(rootView: NoConversationSelectedView())
         self.navigationController = listNavigation
         self.splitNavigator = ConversationSplitNavigator(listNavigationController: listNavigation,
-                                                         placeholder: placeholder)
+                                                         makePlaceholder: { UIHostingController(rootView: NoConversationSelectedView()) })
 
         self.callService = injectionBag.callService
         self.accountService = injectionBag.accountService
@@ -118,7 +117,6 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         self.subscribeToActiveCalls()
         self.subscribeToDetailChanges()
         self.navigationController.navigationBar.tintColor = UIColor.jami
-        self.splitNavigator.detailNavigationController.navigationBar.tintColor = UIColor.jami
     }
 
     func start() {
@@ -234,12 +232,12 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         presentingVC[VCType.conversation.rawValue] = false
     }
 
-    func prepareToShowConversation(_ conversation: ConversationModel) -> Bool {
-        if splitNavigator.isExpanded, popToExistingConversation(conversation) {
-            return false
-        }
-        splitNavigator.prepareToShowConversation()
-        return true
+    func showDetail(_ viewController: UIViewController, animated: Bool) {
+        splitNavigator.showDetail(viewController, animated: animated)
+    }
+
+    func revealConversationIfShown(_ conversation: ConversationModel) -> Bool {
+        return splitNavigator.isExpanded && popToExistingConversation(conversation)
     }
 }
 // swiftlint:enable cyclomatic_complexity
@@ -289,7 +287,7 @@ extension ConversationsCoordinator {
                                         profileService: injectionBag.profileService,
                                         onCompletion: completion)
         let viewController = createHostingVC(view)
-        self.present(viewController: viewController, withStyle: .show, withAnimation: true, withStateable: view.stateEmitter)
+        self.present(viewController: viewController, withStyle: .showDetail, withAnimation: true, withStateable: view.stateEmitter)
     }
 
     func createNewAccount() {
@@ -336,7 +334,7 @@ extension ConversationsCoordinator {
 
     func openAboutJami() {
         let aboutJamiController = AboutViewController.instantiate()
-        self.present(viewController: aboutJamiController, withStyle: .show, withAnimation: true, disposeBag: self.disposeBag)
+        self.present(viewController: aboutJamiController, withStyle: .showDetail, withAnimation: true, disposeBag: self.disposeBag)
     }
 }
 

@@ -18,159 +18,137 @@
 
 import UIKit
 
-/// Detail column of the conversations split view. Shows a placeholder
-/// whenever nothing else is on its stack.
-final class DetailNavigationController: UINavigationController {
-    let placeholder: UIViewController
-
-    init(placeholder: UIViewController) {
-        self.placeholder = placeholder
-        super.init(nibName: nil, bundle: nil)
-        setViewControllers([placeholder], animated: false)
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    var isShowingPlaceholder: Bool {
-        return viewControllers.isEmpty || viewControllers == [placeholder]
-    }
-
-    /// The stack without the placeholder.
-    var contentControllers: [UIViewController] {
-        return viewControllers.filter { $0 !== placeholder }
-    }
-
-    func showPlaceholder() {
-        guard !isShowingPlaceholder else { return }
-        setViewControllers([placeholder], animated: false)
-    }
-
-    override func pushViewController(_ viewController: UIViewController, animated: Bool) {
-        if isShowingPlaceholder {
-            setViewControllers([viewController], animated: false)
-        } else {
-            super.pushViewController(viewController, animated: animated)
-        }
-    }
-
-    override func show(_ vc: UIViewController, sender: Any?) {
-        pushViewController(vc, animated: true)
-    }
-
-    override func popViewController(animated: Bool) -> UIViewController? {
-        guard viewControllers.count == 1, !isShowingPlaceholder else {
-            return super.popViewController(animated: animated)
-        }
-        let popped = viewControllers.first
-        showPlaceholder()
-        return popped
-    }
-}
-
 /// Lays out the smart list and the open conversation side by side when the
-/// window is wide enough. In compact width the split view collapses and
-/// everything is stacked on the list's navigation controller, as on iPhone.
-final class ConversationSplitNavigator: NSObject, UISplitViewControllerDelegate, UINavigationControllerDelegate {
-    let splitViewController = UISplitViewController()
+/// window is wide enough. When the split view collapses, UIKit stacks the
+/// detail column's screens onto the list's navigation controller, and moves
+/// them back when it expands. iPhone has no split view: everything is pushed
+/// onto the list's navigation controller.
+final class ConversationSplitNavigator: NSObject, UISplitViewControllerDelegate {
+    let splitViewController = UISplitViewController(style: .doubleColumn)
     let listNavigationController: UINavigationController
-    let detailNavigationController: DetailNavigationController
+    let usesSplitView: Bool
+    private let makePlaceholder: () -> UIViewController
     private let isExpandedOverride: (() -> Bool)?
+    private weak var placeholder: UIViewController?
 
     /// Called when the screen at the root of the detail column may have changed.
     var onDetailChange: (() -> Void)?
 
     init(listNavigationController: UINavigationController,
-         placeholder: UIViewController,
+         makePlaceholder: @escaping () -> UIViewController,
+         usesSplitView: Bool = UIDevice.current.userInterfaceIdiom == .pad,
          isExpanded: (() -> Bool)? = nil) {
         self.listNavigationController = listNavigationController
-        self.detailNavigationController = DetailNavigationController(placeholder: placeholder)
+        self.makePlaceholder = makePlaceholder
+        self.usesSplitView = usesSplitView
         self.isExpandedOverride = isExpanded
         super.init()
-        splitViewController.viewControllers = [listNavigationController, detailNavigationController]
-        splitViewController.preferredDisplayMode = .oneBesideSecondary
-        splitViewController.presentsWithGesture = false
+        guard usesSplitView else { return }
         splitViewController.delegate = self
-        detailNavigationController.delegate = self
+        splitViewController.preferredDisplayMode = .oneBesideSecondary
+        splitViewController.preferredSplitBehavior = .tile
+        splitViewController.presentsWithGesture = false
+        splitViewController.displayModeButtonVisibility = .never
+        splitViewController.setViewController(listNavigationController, for: .primary)
+        showPlaceholder()
+    }
+
+    /// The view controller to install: the split view, or the list stack on iPhone.
+    var rootViewController: UIViewController {
+        return usesSplitView ? splitViewController : listNavigationController
     }
 
     /// Whether the list and the detail column are on screen side by side.
     var isExpanded: Bool {
+        guard usesSplitView else { return false }
         if let isExpandedOverride = isExpandedOverride {
             return isExpandedOverride()
         }
-        return UIDevice.current.userInterfaceIdiom == .pad && !splitViewController.isCollapsed
+        return !splitViewController.isCollapsed
     }
 
-    /// The stack that screens opened from the list go onto.
+    var detailNavigationController: UINavigationController? {
+        guard usesSplitView else { return nil }
+        return splitViewController.viewController(for: .secondary) as? UINavigationController
+    }
+
+    var isShowingPlaceholder: Bool {
+        guard let placeholder = placeholder else { return false }
+        return detailNavigationController?.viewControllers.first === placeholder
+    }
+
+    /// The stack holding the open detail screen: the detail column when
+    /// expanded, the list stack it was merged onto otherwise.
     var contentNavigationController: UINavigationController {
-        return isExpanded ? detailNavigationController : listNavigationController
-    }
-
-    /// The screens opened from the list, without the list itself.
-    var contentControllers: [UIViewController] {
-        if isExpanded {
-            return detailNavigationController.contentControllers
+        if isExpanded, let detail = detailNavigationController {
+            return detail
         }
-        return Array(listNavigationController.viewControllers.dropFirst())
+        return listNavigationController
     }
 
     /// The screen at the root of the detail column, while it is on screen.
     var selectedController: UIViewController? {
-        guard isExpanded else { return nil }
-        return detailNavigationController.contentControllers.first
+        guard isExpanded, !isShowingPlaceholder else { return nil }
+        return detailNavigationController?.viewControllers.first
     }
 
-    /// A conversation replaces whatever the detail column shows, so the
-    /// next push onto the content stack takes the whole column.
-    func prepareToShowConversation() {
-        if isExpanded {
-            detailNavigationController.showPlaceholder()
+    /// Replaces the detail column with `controller`. Collapsed, UIKit pushes
+    /// it onto the list stack instead.
+    func showDetail(_ controller: UIViewController, animated: Bool) {
+        guard usesSplitView else {
+            listNavigationController.pushViewController(controller, animated: animated)
+            onDetailChange?()
+            return
         }
+        let navigation = makeDetailNavigationController(root: controller)
+        if animated {
+            splitViewController.showDetailViewController(navigation, sender: nil)
+        } else {
+            UIView.performWithoutAnimation {
+                splitViewController.showDetailViewController(navigation, sender: nil)
+            }
+        }
+        onDetailChange?()
     }
 
     func popToList(animated: Bool) {
         listNavigationController.popToRootViewController(animated: animated)
         if isExpanded {
-            detailNavigationController.showPlaceholder()
+            showPlaceholder()
         }
+        onDetailChange?()
+    }
+
+    private func showPlaceholder() {
+        let placeholder = makePlaceholder()
+        self.placeholder = placeholder
+        splitViewController.setViewController(makeDetailNavigationController(root: placeholder),
+                                              for: .secondary)
+    }
+
+    private func makeDetailNavigationController(root: UIViewController) -> UINavigationController {
+        let navigation = UINavigationController(rootViewController: root)
+        navigation.navigationBar.tintColor = UIColor.jami
+        return navigation
     }
 
     // MARK: - UISplitViewControllerDelegate
 
-    func splitViewController(_ splitViewController: UISplitViewController,
-                             collapseSecondary secondaryViewController: UIViewController,
-                             onto primaryViewController: UIViewController) -> Bool {
-        let moved = detailNavigationController.contentControllers
-        detailNavigationController.showPlaceholder()
-        if !moved.isEmpty {
-            listNavigationController.setViewControllers(listNavigationController.viewControllers + moved,
-                                                        animated: false)
-        }
-        onDetailChange?()
-        return true
+    func splitViewController(_ svc: UISplitViewController,
+                             topColumnForCollapsingToProposedTopColumn proposedTopColumn: UISplitViewController.Column)
+    -> UISplitViewController.Column {
+        return isShowingPlaceholder ? .primary : proposedTopColumn
     }
 
-    func splitViewController(_ splitViewController: UISplitViewController,
-                             separateSecondaryFrom primaryViewController: UIViewController) -> UIViewController? {
-        let stack = listNavigationController.viewControllers
-        let moved = Array(stack.dropFirst())
-        if moved.isEmpty {
-            detailNavigationController.showPlaceholder()
-        } else {
-            listNavigationController.setViewControllers(Array(stack.prefix(1)), animated: false)
-            detailNavigationController.setViewControllers(moved, animated: false)
-        }
+    func splitViewControllerDidCollapse(_ svc: UISplitViewController) {
         onDetailChange?()
-        return detailNavigationController
     }
 
-    // MARK: - UINavigationControllerDelegate
-
-    func navigationController(_ navigationController: UINavigationController,
-                              didShow viewController: UIViewController,
-                              animated: Bool) {
+    func splitViewControllerDidExpand(_ svc: UISplitViewController) {
+        // Closing the detail screen while collapsed leaves the column empty.
+        if detailNavigationController?.viewControllers.isEmpty ?? true {
+            showPlaceholder()
+        }
         onDetailChange?()
     }
 }

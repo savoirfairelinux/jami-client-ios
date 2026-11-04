@@ -61,8 +61,9 @@ protocol ConversationNavigation: AnyObject {
 
     func addLockFlags()
 
-    /// Returns false when the conversation is already on screen.
-    func prepareToShowConversation(_ conversation: ConversationModel) -> Bool
+    /// Brings the conversation forward if it is already on screen; returns
+    /// whether it was.
+    func revealConversationIfShown(_ conversation: ConversationModel) -> Bool
 }
 
 extension ConversationNavigation where Self: Coordinator, Self: StateableResponsive {
@@ -130,7 +131,7 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
         let swarmCreationViewController = SwarmCreationViewController.instantiate(with: self.injectionBag)
         swarmCreationViewController.onSwarmCreated = onCreated
         self.present(viewController: swarmCreationViewController,
-                     withStyle: .show,
+                     withStyle: .showDetail,
                      withAnimation: true,
                      withStateable: swarmCreationViewController.viewModel)
     }
@@ -153,12 +154,12 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
         if let flag = self.presentingVC[VCType.conversation.rawValue], flag {
             return
         }
-        guard self.prepareToShowConversation(row.conversation) else { return }
+        if self.revealConversationIfShown(row.conversation) { return }
         self.presentingVC[VCType.conversation.rawValue] = true
         let conversationViewModel = ConversationViewModel(with: self.injectionBag, row: row)
         let conversationHostingVC = ConversationViewController(viewModel: conversationViewModel)
         self.present(viewController: conversationHostingVC,
-                     withStyle: .push,
+                     withStyle: .showDetail,
                      withAnimation: withAnimation,
                      withStateable: conversationViewModel,
                      lockWhilePresenting: VCType.conversation.rawValue)

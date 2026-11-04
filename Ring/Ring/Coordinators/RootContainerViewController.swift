@@ -19,7 +19,7 @@
 import UIKit
 
 /// Window root that hosts one full-screen child at a time, so the app can
-/// switch between its navigation stack and the conversations split view.
+/// switch between its navigation stack and the conversations screen.
 final class RootContainerViewController: UIViewController {
     private(set) var content: UIViewController?
 
@@ -31,11 +31,6 @@ final class RootContainerViewController: UIViewController {
         controller.view.frame = view.bounds
         controller.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(controller.view)
-        if UIDevice.current.userInterfaceIdiom == .phone {
-            // Large iPhones are regular width in landscape; keep them on one stack.
-            setOverrideTraitCollection(UITraitCollection(horizontalSizeClass: .compact),
-                                       forChild: controller)
-        }
         controller.didMove(toParent: self)
         previous?.view.removeFromSuperview()
         previous?.removeFromParent()
