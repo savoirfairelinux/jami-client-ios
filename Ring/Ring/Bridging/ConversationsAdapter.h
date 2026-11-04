@@ -51,6 +51,8 @@
 
 - (NSArray<NSDictionary<NSString*,NSString*>*>*)getConversationMembers:(NSString*)accountId conversationId:(NSString*)conversationId;
 
+- (NSArray<NSString*>*)getConversationPermissions:(NSString*)accountId conversationId:(NSString*)conversationId;
+
 - (void)addConversationMemberFor:(NSString*)accountId conversationId:(NSString*)conversationId memberId:(NSString*)memberId;
 
 - (void)removeConversationMemberFor:(NSString*)accountId conversationId:(NSString*)conversationId memberId:(NSString*)memberId;

@@ -37,6 +37,11 @@
     return self.members;
 }
 
+- (NSArray<NSString *> *)getConversationPermissions:(NSString *)accountId
+                                     conversationId:(NSString *)conversationId {
+    return @[];
+}
+
 - (uint32_t)loadConversationMessages:(NSString *)accountId conversationId:(NSString *)conversationId
                                from:(NSString *)fromMessage size:(NSInteger)size {
     return 0;
