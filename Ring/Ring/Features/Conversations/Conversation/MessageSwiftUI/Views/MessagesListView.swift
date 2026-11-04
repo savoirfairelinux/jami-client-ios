@@ -224,7 +224,7 @@ struct MessagesListView: View {
                 handleKeyboardHeightChange(height)
             }
             if model.shouldShowMap {
-                LocationSharingView(model: model)
+                LocationSharingView(model: model, containerWidth: messageListWidth)
             }
 
             if model.isSyncing {
