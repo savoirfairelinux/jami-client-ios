@@ -137,4 +137,92 @@ final class ConversationSplitNavigatorTests: XCTestCase {
         XCTAssertNil(popped)
         XCTAssertEqual(navigator.detailNavigationController.viewControllers, [placeholder])
     }
+
+    func testExpandedSelectedControllerIsDetailRoot() {
+        isExpanded = true
+        let conversation = UIViewController()
+        showConversation(conversation)
+        navigator.contentNavigationController.pushViewController(UIViewController(), animated: false)
+
+        XCTAssertTrue(navigator.selectedController === conversation)
+    }
+
+    func testSelectedControllerIsNilWithPlaceholderOrCollapsed() {
+        isExpanded = true
+        XCTAssertNil(navigator.selectedController)
+
+        isExpanded = false
+        showConversation(UIViewController())
+        XCTAssertNil(navigator.selectedController)
+    }
+
+    // MARK: - Collapse and expand
+
+    func testCollapseMovesDetailStackOntoList() {
+        isExpanded = true
+        let conversation = UIViewController()
+        let info = UIViewController()
+        showConversation(conversation)
+        navigator.contentNavigationController.pushViewController(info, animated: false)
+
+        isExpanded = false
+        let handled = collapse()
+
+        XCTAssertTrue(handled)
+        XCTAssertEqual(listNavigation.viewControllers, [list, conversation, info])
+        XCTAssertEqual(navigator.detailNavigationController.viewControllers, [placeholder])
+    }
+
+    func testCollapseWithPlaceholderKeepsList() {
+        isExpanded = true
+
+        isExpanded = false
+        _ = collapse()
+
+        XCTAssertEqual(listNavigation.viewControllers, [list])
+    }
+
+    func testSeparateMovesListStackToDetail() {
+        let conversation = UIViewController()
+        let info = UIViewController()
+        showConversation(conversation)
+        listNavigation.pushViewController(info, animated: false)
+
+        isExpanded = true
+        let secondary = separate()
+
+        XCTAssertTrue(secondary === navigator.detailNavigationController)
+        XCTAssertEqual(listNavigation.viewControllers, [list])
+        XCTAssertEqual(navigator.detailNavigationController.viewControllers, [conversation, info])
+    }
+
+    func testSeparateWithOnlyListShowsPlaceholder() {
+        isExpanded = true
+
+        _ = separate()
+
+        XCTAssertEqual(listNavigation.viewControllers, [list])
+        XCTAssertEqual(navigator.detailNavigationController.viewControllers, [placeholder])
+    }
+
+    func testCollapseAndSeparateNotifyDetailChange() {
+        var changes = 0
+        navigator.onDetailChange = { changes += 1 }
+
+        _ = collapse()
+        _ = separate()
+
+        XCTAssertEqual(changes, 2)
+    }
+
+    private func collapse() -> Bool {
+        return navigator.splitViewController(navigator.splitViewController,
+                                             collapseSecondary: navigator.detailNavigationController,
+                                             onto: listNavigation)
+    }
+
+    private func separate() -> UIViewController? {
+        return navigator.splitViewController(navigator.splitViewController,
+                                             separateSecondaryFrom: listNavigation)
+    }
 }

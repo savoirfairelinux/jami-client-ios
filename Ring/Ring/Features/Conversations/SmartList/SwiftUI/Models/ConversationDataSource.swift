@@ -24,6 +24,8 @@ import RxRelay
 class ConversationDataSource: ObservableObject {
     @Published var rows = [ConversationRowVM]()
     @Published private(set) var loadedAccountId: String?
+    /// Conversation shown beside the list, highlighted in it.
+    @Published var selectedConversationId: String?
     var blockedRows = [ConversationRowVM]()
     let conversationsService: ConversationsService
     let contactsService: ContactsService

@@ -116,6 +116,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         // Incoming-call presentation is owned by CallScreenPresenter.
         self.callbackPlaceCall()
         self.subscribeToActiveCalls()
+        self.subscribeToDetailChanges()
         self.navigationController.navigationBar.tintColor = UIColor.jami
         self.splitNavigator.detailNavigationController.navigationBar.tintColor = UIColor.jami
     }
@@ -182,6 +183,42 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                                               style: .overFullScreen,
                                               animation: false,
                                               stateable: activeCallsViewModel)
+            })
+            .disposed(by: self.disposeBag)
+    }
+
+    private var detailConversation: ConversationModel? {
+        return (splitNavigator.selectedController as? ConversationViewController)?.viewModel.conversation
+    }
+
+    private func subscribeToDetailChanges() {
+        let detailSelection = SerialDisposable()
+        detailSelection.disposed(by: self.disposeBag)
+        splitNavigator.onDetailChange = { [weak self] in
+            guard let self = self else { return }
+            guard let row = (self.splitNavigator.selectedController as? ConversationViewController)?.viewModel.row else {
+                detailSelection.disposable = Disposables.create()
+                self.conversationsSource.selectedConversationId = nil
+                return
+            }
+            // A new conversation gets its id when its first message is sent.
+            detailSelection.disposable = row.conversationChanges
+                .compactMap { $0?.id }
+                .distinctUntilChanged()
+                .observe(on: MainScheduler.instance)
+                .subscribe(onNext: { [weak self] id in
+                    self?.conversationsSource.selectedConversationId = id
+                })
+        }
+
+        // The detail column must not keep showing another account's conversation.
+        self.accountService.currentAccountChanged
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] account in
+                guard let self = self,
+                      let conversation = self.detailConversation,
+                      conversation.accountId != account?.id else { return }
+                self.popToSmartList()
             })
             .disposed(by: self.disposeBag)
     }
