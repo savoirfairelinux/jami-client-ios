@@ -50,6 +50,9 @@ public enum PresentationStyle {
 
     /// Replaces the current navigation stack with a new stack containing the specified view controller.
     case replaceNavigationStack
+
+    /// Shows a view controller as the detail of a split view, or pushes it when there is none.
+    case showDetail
 }
 
 /// A Coordinator drives the navigation of a whole part of the application
@@ -60,6 +63,8 @@ protocol Coordinator: AnyObject {
 
     /// The navigation stack that `.push`, `.show` and stack replacement go onto
     var stackNavigationController: UINavigationController? { get }
+
+    func showDetail(_ viewController: UIViewController, animated: Bool)
 
     /// The array containing any child Coordinators
     var childCoordinators: [Coordinator] { get set }
@@ -83,6 +88,10 @@ extension Coordinator {
 
     var stackNavigationController: UINavigationController? {
         return rootViewController as? UINavigationController
+    }
+
+    func showDetail(_ viewController: UIViewController, animated: Bool) {
+        stackNavigationController?.pushViewController(viewController, animated: animated)
     }
 
     /// Adds a child coordinator so that there is a reference to it
@@ -154,6 +163,8 @@ extension Coordinator {
             if let contoller = self.stackNavigationController {
                 contoller.setViewControllers([viewController], animated: animation)
             }
+        case .showDetail:
+            self.showDetail(viewController, animated: animation)
 
         }
 
