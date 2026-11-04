@@ -50,6 +50,30 @@ struct MessagePanelTopPreferenceKey: PreferenceKey {
     }
 }
 
+private struct ComposerDepthPreferenceKey: PreferenceKey {
+    static var defaultValue: CGFloat?
+
+    static func reduce(value: inout CGFloat?, nextValue: () -> CGFloat?) {
+        value = value ?? nextValue()
+    }
+}
+
+// Kept out of MessagesListView's own state so keyboard and composer changes
+// only update the views that read them, not the whole conversation.
+private final class ComposerLayout: ObservableObject {
+    @Published var depth: CGFloat = 0
+    var keyboardHeight: CGFloat = 0
+}
+
+private struct ComposerDepthReader<Content: View>: View {
+    @ObservedObject var layout: ComposerLayout
+    let content: (CGFloat) -> Content
+
+    var body: some View {
+        content(layout.depth)
+    }
+}
+
 struct MessagesListView: View {
     @ObservedObject var model: MessagesListVM
     @ObservedObject var callBannerViewModel: CallBannerViewModel
@@ -65,8 +89,8 @@ struct MessagesListView: View {
     @SwiftUI.State private var messageFrame: CGRect?
     @SwiftUI.State private var screenHeight: CGFloat = 0
     @SwiftUI.State private var messageListWidth: CGFloat = 0
+    @SwiftUI.State private var composerLayout = ComposerLayout()
     @SwiftUI.State var isMessageBarFocused: Bool = false
-    @SwiftUI.State var keyboardHeight: CGFloat = 0
     @SwiftUI.State private var keyboardWasActiveBeforeMenu: Bool = false
 
     @ObservedObject private var dimensionsManager = ScreenDimensionsManager.shared
@@ -80,6 +104,21 @@ struct MessagesListView: View {
     private let emptyStateSpacing: CGFloat = 16
     private var textHorizontalPadding: CGFloat {
         sizeCategory.isAccessibilityCategory ? 16 : 48
+    }
+
+    private func listDepthBelowPanelOverlap(_ composerDepth: CGFloat) -> CGFloat {
+        model.isBlocked ? 0 : max(0, composerDepth + messagesUnderPanelOverlap)
+    }
+
+    // The fade runs from just inside the composer's top edge to the bottom of the list,
+    // which is the keyboard's top when it is shown.
+    private func bottomFadeMask(composerDepth: CGFloat) -> some View {
+        VStack(spacing: 0) {
+            Color.clear
+            LinearGradient(colors: [.clear, .black], startPoint: .top, endPoint: .bottom)
+                .frame(height: max(0, composerDepth - MessagePanelView.verticalInset))
+        }
+        .ignoresSafeArea(.container, edges: .bottom)
     }
 
     init(model: MessagesListVM) {
@@ -121,33 +160,10 @@ struct MessagesListView: View {
 
     private func conversationContentView() -> some View {
         ZStack(alignment: .top) {
-            VStack(spacing: messagesUnderPanelOverlap) {
-                ZStack(alignment: .bottomTrailing) {
-                    createMessagesStackView()
-                        .flipped()
-                        .contextMenuActive(contextMenuPresentingState != .none)
-                        .environment(\.messageListWidth, messageListWidth)
-                        .background(
-                            GeometryReader { proxy in
-                                Color.clear
-                                    .onAppear { messageListWidth = proxy.size.width }
-                                    .onChange(of: proxy.size.width) { messageListWidth = $0 }
-                            }
-                        )
-                    if !model.atTheBottom {
-                        createScrollToLatestView()
-                    }
-                }
+            ZStack(alignment: .bottom) {
+                messagesLayerView()
                 if !model.isBlocked {
-                    MessagePanelView(model: model.messagePanel, voiceRecording: model.voiceRecording, isFocused: $isMessageBarFocused)
-                        .background(
-                            GeometryReader { proxy in
-                                Color.clear.preference(
-                                    key: MessagePanelTopPreferenceKey.self,
-                                    value: proxy.frame(in: .global).minY
-                                )
-                            }
-                        )
+                    composerView()
                 }
             }
             .background(
@@ -193,6 +209,59 @@ struct MessagesListView: View {
         }
     }
 
+    private func composerView() -> some View {
+        MessagePanelView(model: model.messagePanel, voiceRecording: model.voiceRecording, isFocused: $isMessageBarFocused)
+            .background(
+                GeometryReader { proxy in
+                    Color.clear.preference(
+                        key: MessagePanelTopPreferenceKey.self,
+                        value: proxy.frame(in: .global).minY
+                    )
+                }
+            )
+            .background(
+                // Spans from the composer's top to the list's bottom.
+                GeometryReader { proxy in
+                    Color.clear
+                        .contentShape(Rectangle())
+                        .preference(key: ComposerDepthPreferenceKey.self, value: proxy.size.height)
+                }
+                .ignoresSafeArea(.container, edges: .bottom)
+            )
+            .onPreferenceChange(ComposerDepthPreferenceKey.self) { depth in
+                if let depth = depth, depth != composerLayout.depth {
+                    composerLayout.depth = depth
+                }
+            }
+    }
+
+    private func messagesLayerView() -> some View {
+        ZStack(alignment: .bottomTrailing) {
+            createMessagesStackView()
+                .flipped()
+                .contextMenuActive(contextMenuPresentingState != .none)
+                .environment(\.messageListWidth, messageListWidth)
+                .background(
+                    GeometryReader { proxy in
+                        Color.clear
+                            .onAppear { messageListWidth = proxy.size.width }
+                            .onChange(of: proxy.size.width) { messageListWidth = $0 }
+                    }
+                )
+            if !model.isBlocked {
+                ComposerDepthReader(layout: composerLayout) { depth in
+                    ConversationColorBackground(color: model.swarmColor)
+                        .mask(bottomFadeMask(composerDepth: depth))
+                        .allowsHitTesting(false)
+                }
+            }
+            if !model.atTheBottom {
+                createScrollToLatestView()
+            }
+        }
+        .ignoresSafeArea(.container, edges: model.isBlocked ? [] : .bottom)
+    }
+
     private func createMessagesStackView() -> some View {
         ScrollViewReader { scrollView in
             ScrollView(showsIndicators: false) {
@@ -203,8 +272,11 @@ struct MessagesListView: View {
                 }
                 LazyVStack(spacing: 0) {
                     // scroll to the bottom
-                    Text("")
-                        .id("lastMessage")
+                    ComposerDepthReader(layout: composerLayout) { depth in
+                        Text("")
+                            .padding(.top, listDepthBelowPanelOverlap(depth))
+                    }
+                    .id("lastMessage")
                     if !model.typingIndicatorText.isEmpty {
                         TypingIndicatorView(
                             text: model.typingIndicatorText,
@@ -267,7 +339,7 @@ struct MessagesListView: View {
             currentSnapshot = snapshot
             contextMenuPresentingState = .shouldPresent
 
-            if keyboardHeight > 0 {
+            if composerLayout.keyboardHeight > 0 {
                 keyboardWasActiveBeforeMenu = true
                 isMessageBarFocused = false
                 DispatchQueue.main.async {
@@ -280,11 +352,13 @@ struct MessagesListView: View {
     }
 
     func createScrollToLatestView() -> some View {
-        ScrollToLatestButton(newMessagesCount: model.numberOfNewMessages, conversationColor: model.swarmColor) {
-            model.scrollToTheBottom()
+        ComposerDepthReader(layout: composerLayout) { depth in
+            ScrollToLatestButton(newMessagesCount: model.numberOfNewMessages, conversationColor: model.swarmColor) {
+                model.scrollToTheBottom()
+            }
+            .padding(.trailing, MessagePanelView.horizontalInset - ScrollToLatestButton.visualInset)
+            .padding(.bottom, listDepthBelowPanelOverlap(depth) - messagesUnderPanelOverlap - MessagePanelView.verticalInset + scrollButtonGap - ScrollToLatestButton.visualInset)
         }
-        .padding(.trailing, MessagePanelView.horizontalInset - ScrollToLatestButton.visualInset)
-        .padding(.bottom, -messagesUnderPanelOverlap - MessagePanelView.verticalInset + scrollButtonGap - ScrollToLatestButton.visualInset)
         .transition(.asymmetric(insertion: .opacity, removal: .identity))
     }
 
@@ -305,9 +379,7 @@ struct MessagesListView: View {
     }
 
     private func handleKeyboardHeightChange(_ height: CGFloat) {
-        DispatchQueue.main.async {
-            keyboardHeight = height
-        }
+        composerLayout.keyboardHeight = height
     }
 
     private func contextMenuPresentingStateChanged(_ state: ContextMenuPresentingState) {
