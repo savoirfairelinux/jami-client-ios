@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69487b89_6cb3cea4",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessageContentVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-04T18:07:12Z",
+      "side": 1,
+      "message": "[warning] Line 191: 🟡 `lazy var screenScale` relies on a convention (“first use on main thread”) but does not enforce it, and Swift `lazy` initialization is not thread-safe. With history models now built off-main, accidental first access from background can race and touch `UIScreen` off-main. Initialize this value on main deterministically (e.g., injected/captured on main) or guard main-thread access explicitly.",
+      "revId": "e705aa61334f47fa2599d4e96e63b7887de60f70",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ccad411_4299d440",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 680,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-04T18:07:12Z",
+      "side": 1,
+      "message": "[error] Line 680: 🔴 Pending reaction updates are replayed through `messagesUpdated(...)` via `applyPendingUpdates()`, which calls `messageUpdated` instead of `reactionsUpdated`. If a reaction update arrives while a history row is still pending, reaction-specific update logic is skipped and UI/state can diverge. Track pending update kind (message vs reaction) and replay each through the matching handler.",
+      "revId": "e705aa61334f47fa2599d4e96e63b7887de60f70",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
