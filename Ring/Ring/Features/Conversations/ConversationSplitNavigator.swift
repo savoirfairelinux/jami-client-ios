@@ -46,6 +46,27 @@ final class DetailNavigationController: UINavigationController {
         guard !isShowingPlaceholder else { return }
         setViewControllers([placeholder], animated: false)
     }
+
+    override func pushViewController(_ viewController: UIViewController, animated: Bool) {
+        if isShowingPlaceholder {
+            setViewControllers([viewController], animated: false)
+        } else {
+            super.pushViewController(viewController, animated: animated)
+        }
+    }
+
+    override func show(_ vc: UIViewController, sender: Any?) {
+        pushViewController(vc, animated: true)
+    }
+
+    override func popViewController(animated: Bool) -> UIViewController? {
+        guard viewControllers.count == 1, !isShowingPlaceholder else {
+            return super.popViewController(animated: animated)
+        }
+        let popped = viewControllers.first
+        showPlaceholder()
+        return popped
+    }
 }
 
 /// Lays out the smart list and the open conversation side by side when the
@@ -55,16 +76,55 @@ final class ConversationSplitNavigator: NSObject, UISplitViewControllerDelegate 
     let splitViewController = UISplitViewController()
     let listNavigationController: UINavigationController
     let detailNavigationController: DetailNavigationController
+    private let isExpandedOverride: (() -> Bool)?
 
     init(listNavigationController: UINavigationController,
-         placeholder: UIViewController) {
+         placeholder: UIViewController,
+         isExpanded: (() -> Bool)? = nil) {
         self.listNavigationController = listNavigationController
         self.detailNavigationController = DetailNavigationController(placeholder: placeholder)
+        self.isExpandedOverride = isExpanded
         super.init()
         splitViewController.viewControllers = [listNavigationController, detailNavigationController]
         splitViewController.preferredDisplayMode = .oneBesideSecondary
         splitViewController.presentsWithGesture = false
         splitViewController.delegate = self
+    }
+
+    /// Whether the list and the detail column are on screen side by side.
+    var isExpanded: Bool {
+        if let isExpandedOverride = isExpandedOverride {
+            return isExpandedOverride()
+        }
+        return UIDevice.current.userInterfaceIdiom == .pad && !splitViewController.isCollapsed
+    }
+
+    /// The stack that screens opened from the list go onto.
+    var contentNavigationController: UINavigationController {
+        return isExpanded ? detailNavigationController : listNavigationController
+    }
+
+    /// The screens opened from the list, without the list itself.
+    var contentControllers: [UIViewController] {
+        if isExpanded {
+            return detailNavigationController.contentControllers
+        }
+        return Array(listNavigationController.viewControllers.dropFirst())
+    }
+
+    /// A conversation replaces whatever the detail column shows, so the
+    /// next push onto the content stack takes the whole column.
+    func prepareToShowConversation() {
+        if isExpanded {
+            detailNavigationController.showPlaceholder()
+        }
+    }
+
+    func popToList(animated: Bool) {
+        listNavigationController.popToRootViewController(animated: animated)
+        if isExpanded {
+            detailNavigationController.showPlaceholder()
+        }
     }
 
     // MARK: - UISplitViewControllerDelegate

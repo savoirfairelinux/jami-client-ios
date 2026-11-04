@@ -32,12 +32,11 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
     }
 
     var stackNavigationController: UINavigationController? {
-        return self.navigationController
+        return self.splitNavigator.contentNavigationController
     }
 
     var childCoordinators = [Coordinator]()
     var parentCoordinator: Coordinator?
-    var smartListViewController = UIViewController()
 
     let navigationController: UINavigationController
     let splitNavigator: ConversationSplitNavigator
@@ -125,8 +124,12 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         let view = SmartListView(injectionBag: self.injectionBag, source: self.conversationsSource)
         let viewController = createHostingVC(view)
         viewController.navigationItem.backButtonDisplayMode = .minimal
-        self.smartListViewController = viewController
-        self.present(viewController: viewController, withStyle: .replaceNavigationStack, withAnimation: false, withStateable: view.stateEmitter)
+        self.navigationController.setViewControllers([viewController], animated: false)
+        view.stateEmitter.state.take(until: viewController.rx.deallocated)
+            .subscribe(onNext: { [weak self] state in
+                self?.stateSubject.onNext(state)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func subscribeToActiveCalls() {
@@ -193,6 +196,14 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         presentingVC[VCType.contact.rawValue] = false
         presentingVC[VCType.conversation.rawValue] = false
     }
+
+    func prepareToShowConversation(_ conversation: ConversationModel) -> Bool {
+        if splitNavigator.isExpanded, popToExistingConversation(conversation) {
+            return false
+        }
+        splitNavigator.prepareToShowConversation()
+        return true
+    }
 }
 // swiftlint:enable cyclomatic_complexity
 
@@ -201,10 +212,12 @@ extension ConversationsCoordinator {
 
     func presentSwarmInfo(swarmInfo: SwarmInfoProtocol) {
         let swiftUIVM = SwarmInfoVM(with: self.injectionBag, swarmInfo: swarmInfo)
-        let view = SwarmInfoView(viewModel: swiftUIVM) { [weak self] expanded in
-            self?.navigationController.navigationBar.tintColor = expanded ? .white : .jami
+        weak var presented: UIViewController?
+        let view = SwarmInfoView(viewModel: swiftUIVM) { expanded in
+            presented?.navigationController?.navigationBar.tintColor = expanded ? .white : .jami
         }
         let viewController = createHostingVC(view)
+        presented = viewController
         let transparentBar = UINavigationBarAppearance()
         transparentBar.configureWithTransparentBackground()
         viewController.navigationItem.standardAppearance = transparentBar
@@ -224,10 +237,7 @@ extension ConversationsCoordinator {
     }
 
     func popToSmartList() {
-        let viewControllers = navigationController.viewControllers
-        if viewControllers.contains(smartListViewController) {
-            navigationController.popToViewController(smartListViewController, animated: false)
-        }
+        splitNavigator.popToList(animated: false)
     }
 
     func needToOnboard() {
@@ -334,7 +344,7 @@ extension ConversationsCoordinator {
         if let model = getRowForId(conversationId: conversationId) {
             self.showConversation(withRow: model, withAnimation: withAnimation)
         }
-        if !shouldOpenSmarList {
+        if !shouldOpenSmarList, let navigationController = self.stackNavigationController {
             let viewControllers = navigationController.viewControllers
             if let index = viewControllers.firstIndex(where: { $0 is SwarmCreationViewController }) {
                 navigationController.viewControllers.remove(at: index)
