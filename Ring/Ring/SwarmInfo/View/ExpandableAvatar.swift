@@ -32,14 +32,15 @@ struct ExpandableAvatar<BottomOverlay: View>: View {
 
     let isExpanded: Bool
     let isGroup: Bool
+    let expandedWidth: CGFloat
     let onToggle: () -> Void
     @ViewBuilder let bottomOverlay: BottomOverlay
 
     private var collapsedSide: CGFloat { provider.size.points }
 
     private var expandedSize: CGSize {
-        CGSize(width: screen.adaptiveWidth,
-               height: min(screen.adaptiveWidth,
+        CGSize(width: expandedWidth,
+               height: min(expandedWidth,
                            screen.adaptiveHeight * ExpandableAvatarLayout.expandedHeightFraction))
     }
 
