@@ -25,7 +25,7 @@ final class CallScreenPresenter {
 
     private let callService: CallService
     private let injectionBag: InjectionBag
-    private weak var navigationController: UINavigationController?
+    private weak var rootViewController: UIViewController?
     private let disposeBag = DisposeBag()
 
     var onOpenConversation: ((CallConversationRoute) -> Void)?
@@ -38,11 +38,11 @@ final class CallScreenPresenter {
     private var pendingRestore: PiPRestoreCompletion?
     private var inCallDeviceStateActive = false
 
-    init(callService: CallService, navigationController: UINavigationController,
+    init(callService: CallService, rootViewController: UIViewController,
          injectionBag: InjectionBag) {
         self.callService = callService
         self.injectionBag = injectionBag
-        self.navigationController = navigationController
+        self.rootViewController = rootViewController
         subscribeToPresentation()
     }
 
@@ -266,7 +266,7 @@ final class CallScreenPresenter {
 
     @MainActor
     private func topController() -> UIViewController? {
-        guard let root = navigationController else { return nil }
+        guard let root = rootViewController else { return nil }
         var controller: UIViewController = root
         while let presented = controller.presentedViewController, !presented.isBeingDismissed {
             controller = presented
