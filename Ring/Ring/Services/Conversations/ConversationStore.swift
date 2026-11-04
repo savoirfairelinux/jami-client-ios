@@ -397,12 +397,14 @@ final class ConversationStore {
         if let info = self.adapter.getConversationInfo(forAccount: accountId, conversationId: conversationId) as? [String: String],
            let participantsInfo = self.adapter.getConversationMembers(accountId, conversationId: conversationId) {
             let prefsInfo = self.getConversationPreferences(accountId: accountId, conversationId: conversationId)
+            let permissions = self.getConversationPermissions(accountId: accountId, conversationId: conversationId)
             self.update(record) { conversationInfo in
                 conversationInfo.updateInfo(info: info)
                 if let prefsInfo = prefsInfo {
                     conversationInfo.updatePreferences(preferences: prefsInfo)
                 }
                 conversationInfo.setParticipants(from: participantsInfo, accountURI: accountURI)
+                conversationInfo.permissions = permissions
             }
             self.scheduleUnreadCount(for: record.conversation, accountId: accountId)
             self.loadMessages(conversationId: conversationId, accountId: accountId, from: "", size: 2)
@@ -431,7 +433,11 @@ final class ConversationStore {
         dispatchPrecondition(condition: .onQueue(queue))
         guard let record = self.record(id: conversationId, accountId: accountId),
               let members = adapter.getConversationMembers(accountId, conversationId: conversationId) else { return }
-        self.update(record) { $0.setParticipants(from: members, accountURI: accountURI) }
+        let permissions = getConversationPermissions(accountId: accountId, conversationId: conversationId)
+        self.update(record) {
+            $0.setParticipants(from: members, accountURI: accountURI)
+            $0.permissions = permissions
+        }
         var serviceEvent = ServiceEvent(withEventType: .conversationMemberEvent)
         serviceEvent.addEventInput(.conversationId, value: conversationId)
         serviceEvent.addEventInput(.accountId, value: accountId)
@@ -601,6 +607,12 @@ final class ConversationStore {
             conversationInfo.updatePreferences(preferences: prefsInfo)
         }
         conversationInfo.setParticipants(from: participantsInfo, accountURI: accountURI)
+        conversationInfo.permissions = getConversationPermissions(accountId: accountId, conversationId: conversationId)
+    }
+
+    private func getConversationPermissions(accountId: String, conversationId: String) -> ConversationPermissions {
+        let names = adapter.getConversationPermissions(accountId, conversationId: conversationId) ?? []
+        return ConversationPermissions(names: names)
     }
 
     private func makeRecord(id: String, accountId: String, info: ConversationInfo,

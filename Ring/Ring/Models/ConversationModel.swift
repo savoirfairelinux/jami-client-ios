@@ -28,6 +28,7 @@ enum ConversationType: Int {
     case adminInvitesOnly = 1
     case invitesOnly = 2
     case publicChat = 3
+    case feed = 5
     case sip = 101
 
     init?(daemonMode: String) {
@@ -88,6 +89,50 @@ enum ConversationMemberAttributes: String {
     case uri
     case role
     case lastDisplayed
+}
+
+enum ConversationPermission: String {
+    case text
+    case textReply
+    case file
+    case fileReply
+    case reaction
+    case call
+    case hostConference
+    case edit
+    case delete
+    case deleteFile
+    case createDocument
+    case deleteDocument
+    case updateDocument
+    case addDocumentAttachment
+    case join
+    case leave
+    case addMember
+    case banUnbanMember
+    case updateProfile
+}
+
+struct ConversationPermissions: Equatable {
+    private let granted: Set<ConversationPermission>?
+
+    static let unrestricted = ConversationPermissions(granted: nil)
+
+    init(names: [String]) {
+        self.granted = Set(names.compactMap(ConversationPermission.init(rawValue:)))
+    }
+
+    private init(granted: Set<ConversationPermission>?) {
+        self.granted = granted
+    }
+
+    func allows(_ permission: ConversationPermission) -> Bool {
+        return granted?.contains(permission) ?? true
+    }
+
+    var allowsCalls: Bool {
+        return allows(.call) || allows(.hostConference)
+    }
 }
 
 struct ConversationPreferences {
@@ -165,6 +210,7 @@ struct ConversationInfo {
     var description = ""
     var preferences = ConversationPreferences()
     var participants = [ConversationParticipant]()
+    var permissions = ConversationPermissions.unrestricted
     var isSynchronizing = false
 
     init(type: ConversationType) {
@@ -302,6 +348,10 @@ class ConversationModel: Equatable {
 
     var preferences: ConversationPreferences {
         return info.preferences
+    }
+
+    var permissions: ConversationPermissions {
+        return info.permissions
     }
 
     var isSynchronizing: Bool {

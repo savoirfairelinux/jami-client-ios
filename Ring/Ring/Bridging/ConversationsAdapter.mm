@@ -109,7 +109,7 @@ static id <MessagesAdapterDelegate> _messagesDelegate;
         }
     }));
 
-    confHandlers.insert(exportable_callback<ConversationSignal::SwarmLoaded>([&](uint32_t id, const std::string& accountId, const std::string& conversationId, std::vector<libjami::SwarmMessage> messages) {
+    confHandlers.insert(exportable_callback<ConversationSignal::SwarmLoaded>([&](uint32_t id, const std::string& accountId, const std::string& conversationId, std::vector<libjami::SwarmMessage> messages, const std::vector<std::string>&) {
         if (ConversationsAdapter.messagesDelegate) {
             NSString* convId =  [NSString stringWithUTF8String:conversationId.c_str()];
             NSString* account =  [NSString stringWithUTF8String:accountId.c_str()];
@@ -289,6 +289,10 @@ static id <MessagesAdapterDelegate> _messagesDelegate;
 
 - (NSArray<NSDictionary<NSString*,NSString*>*>*)getConversationMembers:(NSString*) accountId conversationId:(NSString*) conversationId {
     return [Utils vectorOfMapsToArray: getConversationMembers(std::string([accountId UTF8String]), std::string([conversationId UTF8String]))];
+}
+
+- (NSArray<NSString*>*)getConversationPermissions:(NSString*)accountId conversationId:(NSString*)conversationId {
+    return [Utils vectorToArray: getConversationPermissions(std::string([accountId UTF8String]), std::string([conversationId UTF8String]))];
 }
 
 - (void)addConversationMemberFor:(NSString*)accountId conversationId:(NSString*)conversationId memberId:(NSString*)memberId {
