@@ -1059,7 +1059,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
         guard let lastSeenMessage = self.lastMessageBeforeScroll else { return }
         if let index = self.messagesModels.firstIndex(where: { messageModel in
             messageModel.id == lastSeenMessage
-        }) {
+        }), index != self.numberOfNewMessages {
             withAnimation { [weak self] in
                 guard let self = self else { return }
                 self.numberOfNewMessages = index
