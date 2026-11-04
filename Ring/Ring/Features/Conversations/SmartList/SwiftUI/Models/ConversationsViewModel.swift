@@ -44,6 +44,13 @@ class ConversationStatePublisher: StatePublisher<ConversationState> {
     }
 }
 
+/// Smart list bar actions that change state owned by the smart list view.
+enum SmartListBarAction {
+    case toggleAccounts
+    case compose
+    case contacts
+}
+
 // swiftlint:disable type_body_length
 class ConversationsViewModel: ObservableObject {
     struct SearchFlowState: Equatable {
@@ -91,7 +98,6 @@ class ConversationsViewModel: ObservableObject {
     let networkService: NetworkService
     let injectionBag: InjectionBag
     private let destructiveActionExecutor: ConversationDestructiveActionExecutor
-    let jamiImage = UIImage(asset: Asset.jamiIcon)!.resizeImageWith(newSize: CGSize(width: 20, height: 20), opaque: false)!
 
     lazy var accountsModel: AccountsViewModel = {
         return AccountsViewModel(
@@ -115,6 +121,7 @@ class ConversationsViewModel: ObservableObject {
     }()
 
     let stateEmitter: ConversationStatePublisher
+    let barActions = PassthroughSubject<SmartListBarAction, Never>()
 
     required init(with injectionBag: InjectionBag, conversationsSource: ConversationDataSource, stateEmitter: ConversationStatePublisher) {
         self.injectionBag = injectionBag

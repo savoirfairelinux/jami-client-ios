@@ -37,12 +37,9 @@ struct SmartListView: View, StateEmittingView {
     let maxCoverBackgroundOpacity: CGFloat = 0.09
     let minCoverBackgroundOpacity: CGFloat = 0
 
-    init(injectionBag: InjectionBag, source: ConversationDataSource) {
-        let emitter = ConversationStatePublisher()
-        self.stateEmitter = emitter
-        _model = StateObject(wrappedValue:
-                                ConversationsViewModel(with: injectionBag, conversationsSource: source,
-                                                       stateEmitter: emitter))
+    init(model: ConversationsViewModel) {
+        self.stateEmitter = model.stateEmitter
+        _model = StateObject(wrappedValue: model)
     }
 
     var body: some View {
@@ -59,7 +56,17 @@ struct SmartListView: View, StateEmittingView {
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarTitle("", displayMode: .inline)
-        .navigationBarItems(leading: leadingBarItems, trailing: trailingBarItems)
+        .navigationBarItems(leading: SmartListLeadingBarItem(model: model))
+        .onReceive(model.barActions) { action in
+            switch action {
+            case .toggleAccounts:
+                toggleAccountList()
+            case .compose:
+                activateSearch = true
+            case .contacts:
+                showingPicker.toggle()
+            }
+        }
         .sheet(isPresented: $showingPicker) {
             ContactPicker { [weak model] contact in
                 guard let model = model else { return }
@@ -72,15 +79,6 @@ struct SmartListView: View, StateEmittingView {
         .onChange(of: model.searchFlow.isActive) { _ in
             showAccountList = false
         }
-    }
-
-    private var leadingBarItems: some View {
-        Button(action: {
-            toggleAccountList()
-        }, label: {
-            CurrentAccountButton(model: model.accountsModel)
-        })
-        .accessibility(identifier: SmartListAccessibilityIdentifiers.openAccountsButton)
     }
 
     @ViewBuilder
@@ -135,33 +133,6 @@ struct SmartListView: View, StateEmittingView {
         }
     }
 
-    private var trailingBarItems: some View {
-        HStack(spacing: 0) {
-            if model.isSipAccount() {
-                menuButton
-                bookButton
-            } else {
-                menuButton
-                composeButton
-            }
-        }
-        .fixedSize(horizontal: true, vertical: false)
-    }
-
-    private var bookButton: some View {
-        Button(action: {
-            showingPicker.toggle()
-        }, label: {
-            if let uiImage = UIImage(asset: Asset.phoneBook) {
-                Image(uiImage: uiImage)
-                    .resizable()
-                    .frame(width: NavBarIcon.glyphSize, height: NavBarIcon.glyphSize)
-                    .navBarIconStyle()
-            }
-        })
-        .accessibility(identifier: SmartListAccessibilityIdentifiers.bookButton)
-    }
-
     private var diapladButton: some View {
         Button(action: { [weak stateEmitter] in
             guard let stateEmitter = stateEmitter else { return }
@@ -171,19 +142,74 @@ struct SmartListView: View, StateEmittingView {
                 .foregroundColor(Color.jami)
         })
     }
+}
+
+struct SmartListLeadingBarItem: View {
+    @ObservedObject var model: ConversationsViewModel
+
+    var body: some View {
+        Button(action: {
+            model.barActions.send(.toggleAccounts)
+        }, label: {
+            CurrentAccountButton(model: model.accountsModel)
+        })
+        .accessibility(identifier: SmartListAccessibilityIdentifiers.openAccountsButton)
+    }
+}
+
+/// Trailing smart list bar buttons. Installed as a UIKit bar item so that
+/// they keep their own spacing and fold into a flat overflow menu.
+struct SmartListTrailingBarItems: View {
+    @ObservedObject var model: ConversationsViewModel
+    let perform: (SmartListMenuAction) -> Void
+
+    // Same layout the bar gave these buttons when SwiftUI installed them.
+    private static let buttonSpacing: CGFloat = 4
+    private static let horizontalPadding: CGFloat = 2
+
+    var body: some View {
+        HStack(spacing: Self.buttonSpacing) {
+            menuButton
+            if model.isSipAccount() {
+                bookButton
+            } else {
+                composeButton
+            }
+        }
+        .padding(.horizontal, Self.horizontalPadding)
+        .imageScale(.large)
+        .fixedSize(horizontal: true, vertical: false)
+    }
+
+    private var bookButton: some View {
+        Button(action: {
+            perform(.contacts)
+        }, label: {
+            if let uiImage = SmartListMenuAction.contacts.image {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .frame(width: NavBarIcon.glyphSize, height: NavBarIcon.glyphSize)
+                    .navBarIconStyle()
+            }
+        })
+        .accessibility(identifier: SmartListAccessibilityIdentifiers.bookButton)
+    }
 
     private var menuButton: some View {
         Menu {
-            if !model.isSipAccount() {
-                createSwarmButton
-                if #available(iOS 16.0, *) {
-                    shareLinkButton
-                }
+            ForEach(SmartListMenuAction.menu(isSip: model.isSipAccount()), id: \.self) { action in
+                Button(action: {
+                    perform(action)
+                }, label: {
+                    Label {
+                        Text(action.title)
+                    } icon: {
+                        if let image = action.image {
+                            Image(uiImage: image)
+                        }
+                    }
+                })
             }
-            accountsButton
-            settingsButton
-            aboutJamiButton
-            supportButton
         } label: {
             Image(systemName: "ellipsis.circle")
                 .navBarIconStyle()
@@ -193,72 +219,12 @@ struct SmartListView: View, StateEmittingView {
 
     private var composeButton: some View {
         Button(action: {
-            activateSearch = true
+            perform(.compose)
         }, label: {
             Image(systemName: "square.and.pencil")
                 .navBarIconStyle()
         })
         .accessibility(identifier: SmartListAccessibilityIdentifiers.composeButton)
-    }
-
-    private var createSwarmButton: some View {
-        Button(action: { [weak stateEmitter] in
-            guard let stateEmitter = stateEmitter else { return }
-            stateEmitter.createSwarm()
-        }, label: {
-            Label(L10n.Swarm.newGroup, systemImage: "person.2")
-        })
-    }
-
-    @available(iOS 16.0, *)
-    private var shareLinkButton: some View {
-        ShareLink(item: model.accountInfoToShare) {
-            Label(L10n.Smartlist.inviteFriends, systemImage: "envelope.open")
-                .padding()
-                .background(Color.blue)
-                .foregroundColor(.white)
-                .cornerRadius(8)
-        }
-    }
-
-    private var accountsButton: some View {
-        Button(action: {
-            toggleAccountList()
-        }, label: {
-            Label(L10n.Smartlist.accounts, systemImage: "list.bullet")
-        })
-    }
-
-    private var settingsButton: some View {
-        Button(action: {[weak model, weak stateEmitter] in
-            guard let model = model,
-                  let stateEmitter = stateEmitter else { return }
-            model.showAccount(publisher: stateEmitter)
-        }, label: {
-            Label(L10n.AccountPage.settingsHeader, systemImage: "person.circle")
-        })
-    }
-
-    private var supportButton: some View {
-        Button(action: {[weak model] in
-            guard let model = model else { return }
-            model.donate()
-        }, label: {
-            Label(L10n.Global.supportJami, systemImage: "heart")
-        })
-    }
-
-    private var aboutJamiButton: some View {
-        Button(action: {[weak stateEmitter] in
-            guard let stateEmitter = stateEmitter else { return }
-            stateEmitter.openAboutJami()
-        }, label: {
-            Label {
-                Text(L10n.Smartlist.aboutJami)
-            } icon: {
-                Image(uiImage: model.jamiImage)
-            }
-        })
     }
 }
 
