@@ -277,7 +277,7 @@ extension ConversationsCoordinator {
     }
 
     func showContactPicker(callId: String, contactSelectedCB: ((_ contact: [ConferencableItem]) -> Void)? = nil, conversationSelectedCB: ((_ conversationIds: [String]) -> Void)? = nil) {
-        guard let conversationVC = self.navigationController.visibleViewController else { return }
+        guard let conversationVC = self.stackNavigationController?.visibleViewController else { return }
 
         let viewModel = ContactPickerViewModel(with: self.injectionBag)
         viewModel.type = callId.isEmpty ? .forConversation : .forCall
