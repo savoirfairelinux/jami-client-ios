@@ -147,7 +147,11 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     @Published var corners: UIRectCorner = [.allCorners]
     @Published var menuItems = [ContextualMenuItem]()
     @Published var backgroundColor: Color = Color.jamiMessageCellReceived
-    @Published var finalImage: UIImage?
+    @Published var finalImage: UIImage? {
+        didSet { if finalImage !== oldValue { self.roundedImageKey = nil; self.roundedImage = nil } }
+    }
+    @Published private(set) var roundedImage: UIImage?
+    private var roundedImageKey: RoundedImageKey?
     @Published private(set) var thumbnailSize: CGSize?
     @Published var messageDeleted = false
     @Published var messageEdited = false
@@ -820,6 +824,44 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
             return "photo"
         }
         return "doc"
+    }
+
+    struct RoundedImageKey: Equatable {
+        let size: CGSize
+        let radius: CGFloat
+        let corners: UInt
+    }
+
+    func preRoundedImage(size: CGSize, radius: CGFloat, corners: UIRectCorner) -> UIImage? {
+        roundedImageKey == RoundedImageKey(size: size, radius: radius, corners: corners.rawValue) ? roundedImage : nil
+    }
+
+    // Rounds the decoded image once for its display size, so scrolling shows a plain
+    // bitmap instead of masking the image on every frame.
+    func prepareRoundedImage(size: CGSize, radius: CGFloat, corners: UIRectCorner) {
+        guard let image = finalImage, !isGifImage(), size.width > 0, size.height > 0,
+              image.size.width > 0, image.size.height > 0 else { return }
+        let imageAspect = image.size.width / image.size.height
+        guard abs(size.width / size.height - imageAspect) < 0.01 else { return }
+        let key = RoundedImageKey(size: size, radius: radius, corners: corners.rawValue)
+        guard key != roundedImageKey else { return }
+        roundedImageKey = key
+        roundedImage = nil
+        let scale = UIScreen.main.scale
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            let format = UIGraphicsImageRendererFormat()
+            format.scale = scale
+            let rect = CGRect(origin: .zero, size: size)
+            let rendered = UIGraphicsImageRenderer(size: size, format: format).image { _ in
+                let shape = MessageBubbleShape(radius: radius, corners: corners)
+                UIBezierPath(cgPath: shape.path(in: rect).cgPath).addClip()
+                image.draw(in: rect)
+            }
+            DispatchQueue.main.async {
+                guard let self = self, self.roundedImageKey == key, self.finalImage === image else { return }
+                self.roundedImage = rendered
+            }
+        }
     }
 
     func loadThumbnailIfNeeded() {

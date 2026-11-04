@@ -77,17 +77,46 @@ struct ImageOrGifView: View {
         customCornerRadius == 0 ? nil : customCornerRadius
     }
 
+    @Environment(\.messageBubbleNotch)
+    private var notch
+    @SwiftUI.State private var displaySize: CGSize = .zero
+
+    private var cornerRadius: CGFloat { mediaCornerRadius ?? message.cornerRadius }
+    private var corners: UIRectCorner { mediaCornerRadius == nil ? message.corners : .allCorners }
+
+    private var preRounded: UIImage? {
+        guard notch == nil else { return nil }
+        return message.preRoundedImage(size: displaySize, radius: cornerRadius, corners: corners)
+    }
+
     var body: some View {
-        mediaContent
-            .modifier(MessageCornerRadius(model: message, radius: mediaCornerRadius))
+        let rounded = preRounded
+        mediaContent(image: rounded ?? image)
+            .background(GeometryReader { proxy in
+                Color.clear
+                    .onAppear { updateDisplaySize(proxy.size) }
+                    .onChange(of: proxy.size) { updateDisplaySize($0) }
+            })
+            .conditionalModifier(MessageCornerRadius(model: message, radius: mediaCornerRadius), apply: rounded == nil)
             .messageGesture(
                 onLongPress: onLongGesture,
                 onTap: { frame, frameProvider in message.presentMediaPreview(sourceFrame: frame, sourceFrameProvider: frameProvider) }
             )
+            .onChange(of: message.corners) { _ in prepareRoundedImage() }
+    }
+
+    private func updateDisplaySize(_ size: CGSize) {
+        displaySize = size
+        prepareRoundedImage()
+    }
+
+    private func prepareRoundedImage() {
+        guard notch == nil else { return }
+        message.prepareRoundedImage(size: displaySize, radius: cornerRadius, corners: corners)
     }
 
     @ViewBuilder
-    private var mediaContent: some View {
+    private func mediaContent(image: UIImage) -> some View {
         if !message.isGifImage() {
             Image(uiImage: image)
                 .resizable()
