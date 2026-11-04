@@ -24,10 +24,14 @@ import SwiftUI
 
 // swiftlint:disable cyclomatic_complexity
 /// This Coordinator drives the conversation navigation (Smartlist / Conversation detail)
-class ConversationsCoordinator: RootCoordinator, StateableResponsive, ConversationNavigation {
+class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNavigation {
     var presentingVC = [String: Bool]()
 
     var rootViewController: UIViewController {
+        return self.splitNavigator.splitViewController
+    }
+
+    var stackNavigationController: UINavigationController? {
         return self.navigationController
     }
 
@@ -35,7 +39,8 @@ class ConversationsCoordinator: RootCoordinator, StateableResponsive, Conversati
     var parentCoordinator: Coordinator?
     var smartListViewController = UIViewController()
 
-    var navigationController = UINavigationController()
+    let navigationController: UINavigationController
+    let splitNavigator: ConversationSplitNavigator
     let injectionBag: InjectionBag
     var disposeBag = DisposeBag()
 
@@ -48,10 +53,13 @@ class ConversationsCoordinator: RootCoordinator, StateableResponsive, Conversati
     let conversationsSource: ConversationDataSource
     private weak var activeCallsController: UIViewController?
 
-    required init(navigationController: UINavigationController, injectionBag: InjectionBag) {
-        // we get navigationController from app coordinator, as it main view for the application
-        self.navigationController = navigationController
+    init(injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
+        let listNavigation = UINavigationController()
+        let placeholder = UIHostingController(rootView: NoConversationSelectedView())
+        self.navigationController = listNavigation
+        self.splitNavigator = ConversationSplitNavigator(listNavigationController: listNavigation,
+                                                         placeholder: placeholder)
 
         self.callService = injectionBag.callService
         self.accountService = injectionBag.accountService
@@ -110,6 +118,7 @@ class ConversationsCoordinator: RootCoordinator, StateableResponsive, Conversati
         self.callbackPlaceCall()
         self.subscribeToActiveCalls()
         self.navigationController.navigationBar.tintColor = UIColor.jami
+        self.splitNavigator.detailNavigationController.navigationBar.tintColor = UIColor.jami
     }
 
     func start() {
@@ -145,7 +154,7 @@ class ConversationsCoordinator: RootCoordinator, StateableResponsive, Conversati
                 if accountCalls.count == 1 {
                     if accountCalls.first?.value.incomingNotAcceptedNotIgnoredCalls().count == 1,
                        let conversationId = accountCalls.first?.value.incomingNotAcceptedNotIgnoredCalls().first?.conversationId,
-                       let navigationController = self.rootViewController as? UINavigationController,
+                       let navigationController = self.stackNavigationController,
                        let row = self.getRowForId(conversationId: conversationId),
                        let conversationController = navigationController.topViewController as? ConversationViewController,
                        conversationController.viewModel.conversation == row.conversation {
@@ -364,7 +373,7 @@ extension ConversationsCoordinator {
     }
 
     private func popToExistingConversation(_ conversationModel: ConversationModel) -> Bool {
-        guard let navigationController = self.rootViewController as? UINavigationController else {
+        guard let navigationController = self.stackNavigationController else {
             return false
         }
         let controllers = navigationController.children
@@ -380,7 +389,6 @@ extension ConversationsCoordinator {
     }
 
     func openConversationFromCall(conversationModel: ConversationModel) {
-        guard self.rootViewController is UINavigationController else { return }
         if popToExistingConversation(conversationModel) { return }
         self.openConversation(conversationId: conversationModel.id, accountId: conversationModel.accountId, shouldOpenSmarList: true, withAnimation: true)
     }

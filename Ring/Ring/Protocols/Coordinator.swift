@@ -58,6 +58,9 @@ protocol Coordinator: AnyObject {
     /// the root View Controller to display
     var rootViewController: UIViewController { get }
 
+    /// The navigation stack that `.push`, `.show` and stack replacement go onto
+    var stackNavigationController: UINavigationController? { get }
+
     /// The array containing any child Coordinators
     var childCoordinators: [Coordinator] { get set }
 
@@ -77,6 +80,10 @@ protocol Coordinator: AnyObject {
 }
 
 extension Coordinator {
+
+    var stackNavigationController: UINavigationController? {
+        return rootViewController as? UINavigationController
+    }
 
     /// Adds a child coordinator so that there is a reference to it
     ///
@@ -121,7 +128,11 @@ extension Coordinator {
                                             animated: animation,
                                             completion: nil)
         case .show:
-            self.rootViewController.show(viewController, sender: nil)
+            if let controller = self.stackNavigationController {
+                controller.show(viewController, sender: nil)
+            } else {
+                self.rootViewController.show(viewController, sender: nil)
+            }
         case .fadeInOverFullScreen:
             viewController.modalPresentationStyle = .overFullScreen
             viewController.modalTransitionStyle = .crossDissolve
@@ -129,18 +140,18 @@ extension Coordinator {
                                             animated: animation,
                                             completion: nil)
         case .popToRootAndPush:
-            if let contoller: UINavigationController = self.rootViewController as? UINavigationController {
+            if let contoller = self.stackNavigationController {
                 // ensure we on the root view controller
                 contoller.popViewController(animated: false)
                 contoller.pushViewController(viewController, animated: false)
             }
 
         case .push:
-            if let contoller: UINavigationController = self.rootViewController as? UINavigationController {
+            if let contoller = self.stackNavigationController {
                 contoller.pushViewController(viewController, animated: animation)
             }
         case .replaceNavigationStack:
-            if let contoller: UINavigationController = self.rootViewController as? UINavigationController {
+            if let contoller = self.stackNavigationController {
                 contoller.setViewControllers([viewController], animated: animation)
             }
 
@@ -202,15 +213,4 @@ extension Coordinator {
             viewController.dismiss(animated: animated, completion: nil)
         }
     }
-}
-
-/// The `RootCoordinator` protocol is designed for the root coordinator that manages
-/// the primary `UINavigationController` of the application.
-///
-/// Unlike other coordinators, which create and manage their own navigation controllers
-/// internally, the `RootCoordinator` requires a navigation controller to be passed in
-/// from `AppCoordinator`.
-protocol RootCoordinator: Coordinator {
-    var navigationController: UINavigationController { get }
-    init(navigationController: UINavigationController, injectionBag: InjectionBag)
 }
