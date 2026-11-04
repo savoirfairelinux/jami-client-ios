@@ -91,9 +91,10 @@ struct ConversationsView: View {
                         .contentShape(Rectangle())
                 })
                 .buttonStyle(.plain)
+                .accessibilityAddTraits(model.isSelected(conversation) ? .isSelected : [])
                 .conditionalSmartListSwipeActions(conversation: conversation, model: model)
                 .listRowInsets(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15))
-                .listRowBackground(Color.clear)
+                .listRowBackground(model.isSelected(conversation) ? Color.smartListSelectedRow : Color.clear)
                 .conversationRowSeparator(isFirstRow: conversation.id == model.filteredConversations.first?.id)
             }
         }

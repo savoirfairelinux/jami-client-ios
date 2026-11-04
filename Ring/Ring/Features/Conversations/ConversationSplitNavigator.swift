@@ -72,11 +72,14 @@ final class DetailNavigationController: UINavigationController {
 /// Lays out the smart list and the open conversation side by side when the
 /// window is wide enough. In compact width the split view collapses and
 /// everything is stacked on the list's navigation controller, as on iPhone.
-final class ConversationSplitNavigator: NSObject, UISplitViewControllerDelegate {
+final class ConversationSplitNavigator: NSObject, UISplitViewControllerDelegate, UINavigationControllerDelegate {
     let splitViewController = UISplitViewController()
     let listNavigationController: UINavigationController
     let detailNavigationController: DetailNavigationController
     private let isExpandedOverride: (() -> Bool)?
+
+    /// Called when the screen at the root of the detail column may have changed.
+    var onDetailChange: (() -> Void)?
 
     init(listNavigationController: UINavigationController,
          placeholder: UIViewController,
@@ -89,6 +92,7 @@ final class ConversationSplitNavigator: NSObject, UISplitViewControllerDelegate 
         splitViewController.preferredDisplayMode = .oneBesideSecondary
         splitViewController.presentsWithGesture = false
         splitViewController.delegate = self
+        detailNavigationController.delegate = self
     }
 
     /// Whether the list and the detail column are on screen side by side.
@@ -112,6 +116,12 @@ final class ConversationSplitNavigator: NSObject, UISplitViewControllerDelegate 
         return Array(listNavigationController.viewControllers.dropFirst())
     }
 
+    /// The screen at the root of the detail column, while it is on screen.
+    var selectedController: UIViewController? {
+        guard isExpanded else { return nil }
+        return detailNavigationController.contentControllers.first
+    }
+
     /// A conversation replaces whatever the detail column shows, so the
     /// next push onto the content stack takes the whole column.
     func prepareToShowConversation() {
@@ -132,12 +142,35 @@ final class ConversationSplitNavigator: NSObject, UISplitViewControllerDelegate 
     func splitViewController(_ splitViewController: UISplitViewController,
                              collapseSecondary secondaryViewController: UIViewController,
                              onto primaryViewController: UIViewController) -> Bool {
+        let moved = detailNavigationController.contentControllers
+        detailNavigationController.showPlaceholder()
+        if !moved.isEmpty {
+            listNavigationController.setViewControllers(listNavigationController.viewControllers + moved,
+                                                        animated: false)
+        }
+        onDetailChange?()
         return true
     }
 
     func splitViewController(_ splitViewController: UISplitViewController,
                              separateSecondaryFrom primaryViewController: UIViewController) -> UIViewController? {
-        detailNavigationController.showPlaceholder()
+        let stack = listNavigationController.viewControllers
+        let moved = Array(stack.dropFirst())
+        if moved.isEmpty {
+            detailNavigationController.showPlaceholder()
+        } else {
+            listNavigationController.setViewControllers(Array(stack.prefix(1)), animated: false)
+            detailNavigationController.setViewControllers(moved, animated: false)
+        }
+        onDetailChange?()
         return detailNavigationController
+    }
+
+    // MARK: - UINavigationControllerDelegate
+
+    func navigationController(_ navigationController: UINavigationController,
+                              didShow viewController: UIViewController,
+                              animated: Bool) {
+        onDetailChange?()
     }
 }
