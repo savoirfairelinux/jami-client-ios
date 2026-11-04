@@ -31,7 +31,7 @@ class SwarmInfoVM: ObservableObject {
 
     @Published var finalColor: String = UIColor.defaultSwarmColorHex
     @Published private(set) var selectedColor: String = String()
-    @Published private(set) var isAdmin = false
+    @Published private(set) var permissions = ConversationPermissions.unrestricted
     @Published private(set) var members = [ParticipantInfo]()
 
     let swarmInfo: SwarmInfoProtocol
@@ -64,21 +64,29 @@ class SwarmInfoVM: ObservableObject {
 
     static func profileEditingAllowed(isCoreDialog: Bool,
                                       hasRemoteParticipant: Bool,
-                                      isAdmin: Bool) -> Bool {
+                                      canUpdateProfile: Bool) -> Bool {
         if isCoreDialog {
             return hasRemoteParticipant
         }
-        return isAdmin
+        return canUpdateProfile
     }
 
     var canEditProfile: Bool {
         return Self.profileEditingAllowed(isCoreDialog: conversation.isCoredialog(),
                                           hasRemoteParticipant: !conversation.isOnlyLocalParticipant(),
-                                          isAdmin: isAdmin)
+                                          canUpdateProfile: permissions.allows(.updateProfile))
     }
 
     var canAddParticipants: Bool {
-        return !conversation.isCoredialog()
+        return !conversation.isCoredialog() && permissions.allows(.addMember)
+    }
+
+    var canCreateDocuments: Bool {
+        return permissions.allows(.createDocument)
+    }
+
+    var canRemoveMembers: Bool {
+        return !conversation.isCoredialog() && permissions.allows(.banUnbanMember)
     }
 
     var isGroupProfile: Bool {
@@ -96,7 +104,8 @@ class SwarmInfoVM: ObservableObject {
     }
 
     var callTarget: CallTarget? {
-        guard let uri = callService.outgoingCallURI(for: conversation) else { return nil }
+        guard conversation.permissions.allowsCalls,
+              let uri = callService.outgoingCallURI(for: conversation) else { return nil }
         return (uri: uri, displayName: conversation.isCoredialog() ? title : "")
     }
 
@@ -144,7 +153,7 @@ class SwarmInfoVM: ObservableObject {
             size: .conversationInfo120,
             supportsExpansion: true
         )
-        self.isAdmin = currentUserIsAdmin(in: swarmInfo.participants.value)
+        self.permissions = swarmInfo.conversation.permissions
         self.members = swarmInfo.participants.value
 
         setupBindings()
@@ -160,14 +169,12 @@ class SwarmInfoVM: ObservableObject {
             })
             .disposed(by: disposeBag)
 
-        swarmInfo.participants
-            .map { [weak self] participants in
-                self?.currentUserIsAdmin(in: participants) ?? false
-            }
+        conversation.infoChanges
+            .map { $0.permissions }
             .distinctUntilChanged()
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] isAdmin in
-                self?.isAdmin = isAdmin
+            .subscribe(onNext: { [weak self] permissions in
+                self?.permissions = permissions
             })
             .disposed(by: disposeBag)
 
@@ -199,13 +206,6 @@ class SwarmInfoVM: ObservableObject {
 
     var localJamiId: String? {
         accountService.getAccount(fromAccountId: conversation.accountId)?.jamiId
-    }
-
-    private func currentUserIsAdmin(in participants: [ParticipantInfo]) -> Bool {
-        guard !conversation.isCoredialog(), let jamiId = localJamiId else {
-            return false
-        }
-        return participants.contains { $0.role == .admin && $0.jamiId == jamiId }
     }
 
     // MARK: - Contact Information Methods
@@ -271,7 +271,7 @@ class SwarmInfoVM: ObservableObject {
     }
 
     func removeMember(indexOffset: IndexSet) {
-        guard isAdmin else { return }
+        guard canRemoveMembers else { return }
         let idsToDelete = indexOffset.map { members[$0].jamiId }
 
         for memberId in idsToDelete {

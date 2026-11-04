@@ -236,7 +236,9 @@ struct MessagePanelView: View {
                     .padding(.leading, textContainerLeadingInset)
             }
             if voiceRecording.state == .idle {
-                messageTextRow()
+                if model.canSendText || model.messageToEdit != nil {
+                    messageTextRow()
+                }
             } else {
                 VoiceRecordingControls(model: voiceRecording)
             }
@@ -321,18 +323,22 @@ struct MessagePanelView: View {
                     .padding(.top, Self.verticalInset)
             }
 
-            Group {
-                if voiceRecording.state == .idle || model.quote != nil {
-                    HStack(alignment: .bottom, spacing: textContainerLeadingInset) {
-                        moreActionsButton()
-                        composerField()
+            if model.isComposerAvailable {
+                Group {
+                    if voiceRecording.state == .idle || model.quote != nil {
+                        HStack(alignment: .bottom, spacing: textContainerLeadingInset) {
+                            if model.hasMoreActions {
+                                moreActionsButton()
+                            }
+                            composerField()
+                        }
+                    } else {
+                        VoiceRecordingPanel(model: voiceRecording)
                     }
-                } else {
-                    VoiceRecordingPanel(model: voiceRecording)
                 }
+                .padding(.top, Self.verticalInset)
+                .padding(.bottom, isFocused || bottomSafeAreaInset == 0 ? Self.verticalInset : 0)
             }
-            .padding(.top, Self.verticalInset)
-            .padding(.bottom, isFocused || bottomSafeAreaInset == 0 ? Self.verticalInset : 0)
         }
         .background(
             GeometryReader { proxy in
@@ -352,39 +358,41 @@ struct MessagePanelView: View {
 
     private func menuContent() -> some View {
         Group {
-            Button(action: {
-                voiceRecording.start()
-            }, label: {
-                Label(L10n.Alerts.recordAudioMessage, systemImage: "mic")
-            })
-            Button(action: {
-                model.recordVideo()
-            }, label: {
-                Label(MessagePanelState.recordVido.toString(), systemImage: MessagePanelState.recordVido.imageName())
-            })
-            Button(action: {
-                model.shareLocation()
-            }, label: {
-                Label(MessagePanelState.shareLocation.toString(), systemImage: MessagePanelState.shareLocation.imageName())
-            })
-            Button(action: {
-                model.sendFile()
-            }, label: {
-                Label(MessagePanelState.sendFile.toString(), systemImage: MessagePanelState.sendFile.imageName())
-            })
-            Button(action: {
-                model.openGalery()
-            }, label: {
-                Label(MessagePanelState.openGalery.toString(), systemImage: MessagePanelState.openGalery.imageName())
-            })
-            Button(action: {
-                self.model.sendPhoto()
-            }, label: {
-                Label(MessagePanelState.sendPhoto.toString(), systemImage: MessagePanelState.sendPhoto.imageName())
-            })
-            .accessibilityHint(L10n.Accessibility.conversationCameraHint)
+            if model.canSendFiles {
+                Button(action: {
+                    voiceRecording.start()
+                }, label: {
+                    Label(L10n.Alerts.recordAudioMessage, systemImage: "mic")
+                })
+                Button(action: {
+                    model.recordVideo()
+                }, label: {
+                    Label(MessagePanelState.recordVido.toString(), systemImage: MessagePanelState.recordVido.imageName())
+                })
+                Button(action: {
+                    model.shareLocation()
+                }, label: {
+                    Label(MessagePanelState.shareLocation.toString(), systemImage: MessagePanelState.shareLocation.imageName())
+                })
+                Button(action: {
+                    model.sendFile()
+                }, label: {
+                    Label(MessagePanelState.sendFile.toString(), systemImage: MessagePanelState.sendFile.imageName())
+                })
+                Button(action: {
+                    model.openGalery()
+                }, label: {
+                    Label(MessagePanelState.openGalery.toString(), systemImage: MessagePanelState.openGalery.imageName())
+                })
+                Button(action: {
+                    self.model.sendPhoto()
+                }, label: {
+                    Label(MessagePanelState.sendPhoto.toString(), systemImage: MessagePanelState.sendPhoto.imageName())
+                })
+                .accessibilityHint(L10n.Accessibility.conversationCameraHint)
+            }
 
-            if model.canWriteDocuments {
+            if model.canCreateDocuments {
                 Button(action: {
                     model.newCollabDocument()
                 }, label: {
