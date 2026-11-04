@@ -323,9 +323,11 @@ struct MessagePanelView: View {
 
             Group {
                 if voiceRecording.state == .idle || model.quote != nil {
-                    HStack(alignment: .bottom, spacing: textContainerLeadingInset) {
-                        moreActionsButton()
-                        composerField()
+                    MessagePanelGlassGroup {
+                        HStack(alignment: .bottom, spacing: textContainerLeadingInset) {
+                            moreActionsButton()
+                            composerField()
+                        }
                     }
                 } else {
                     VoiceRecordingPanel(model: voiceRecording)
@@ -392,6 +394,21 @@ struct MessagePanelView: View {
                           systemImage: MessagePanelState.newCollabDocument.imageName())
                 })
             }
+        }
+    }
+}
+
+// Lets the composer's glass shapes render together instead of one backdrop pass each.
+private struct MessagePanelGlassGroup<Content: View>: View {
+    @ViewBuilder let content: Content
+
+    var body: some View {
+        if #available(iOS 26.0, *) {
+            GlassEffectContainer(spacing: 0) {
+                content
+            }
+        } else {
+            content
         }
     }
 }
