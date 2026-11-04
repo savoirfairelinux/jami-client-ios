@@ -120,9 +120,13 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
     }
 
     func start() {
-        let view = SmartListView(injectionBag: self.injectionBag, source: self.conversationsSource)
+        let model = ConversationsViewModel(with: self.injectionBag,
+                                           conversationsSource: self.conversationsSource,
+                                           stateEmitter: ConversationStatePublisher())
+        let view = SmartListView(model: model)
         let viewController = createHostingVC(view)
         viewController.navigationItem.backButtonDisplayMode = .minimal
+        SmartListNavigationItems.install(on: viewController, model: model)
         self.navigationController.setViewControllers([viewController], animated: false)
         view.stateEmitter.state.take(until: viewController.rx.deallocated)
             .subscribe(onNext: { [weak self] state in
