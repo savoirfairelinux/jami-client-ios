@@ -570,6 +570,7 @@
 		A7MD00102F20000300000004 /* MessageTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7MD00102F20000300000003 /* MessageTimeView.swift */; };
 		A7MG00102F20000300000002 /* MessageGrouping.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7MG00102F20000300000001 /* MessageGrouping.swift */; };
 		A7MG00102F20000300000004 /* MessageGroupingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7MG00102F20000300000003 /* MessageGroupingTests.swift */; };
+		A7ML00102F20000300000004 /* MessagesListHistoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7ML00102F20000300000003 /* MessagesListHistoryTests.swift */; };
 		A7MG00102F20000300000006 /* ReactionsContainerModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7MG00102F20000300000005 /* ReactionsContainerModelTests.swift */; };
 		A7MM00102F20000200000001 /* MessageModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7MM00102F20000100000001 /* MessageModelTests.swift */; };
 		AA0001020000000000000001 /* PhotoLibrarySaving.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0001010000000000000001 /* PhotoLibrarySaving.swift */; };
@@ -1813,6 +1814,7 @@
 		A7MD00102F20000300000003 /* MessageTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTimeView.swift; sourceTree = "<group>"; };
 		A7MG00102F20000300000001 /* MessageGrouping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageGrouping.swift; sourceTree = "<group>"; };
 		A7MG00102F20000300000003 /* MessageGroupingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageGroupingTests.swift; sourceTree = "<group>"; };
+		A7ML00102F20000300000003 /* MessagesListHistoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesListHistoryTests.swift; sourceTree = "<group>"; };
 		A7MG00102F20000300000005 /* ReactionsContainerModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionsContainerModelTests.swift; sourceTree = "<group>"; };
 		A7MM00102F20000100000001 /* MessageModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModelTests.swift; sourceTree = "<group>"; };
 		AA0001010000000000000001 /* PhotoLibrarySaving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibrarySaving.swift; sourceTree = "<group>"; };
@@ -3333,6 +3335,7 @@
 			isa = PBXGroup;
 			children = (
 				A7MG00102F20000300000003 /* MessageGroupingTests.swift */,
+				A7ML00102F20000300000003 /* MessagesListHistoryTests.swift */,
 				A7MG00102F20000300000005 /* ReactionsContainerModelTests.swift */,
 				A1D0C0DE0000000000000C12 /* ConversationEventOrderingTests.swift */,
 				260AE62629B8E89300D66D5E /* JamiSearchViewModelTests.swift */,
@@ -4585,6 +4588,7 @@
 				A7F100010000000000000001 /* GifHelpersTests.swift in Sources */,
 				260AE63329BA5DF600D66D5E /* SwarmInfoTests.swift in Sources */,
 				A7MG00102F20000300000004 /* MessageGroupingTests.swift in Sources */,
+				A7ML00102F20000300000004 /* MessagesListHistoryTests.swift in Sources */,
 				A7MG00102F20000300000006 /* ReactionsContainerModelTests.swift in Sources */,
 				A1D0C0DE0000000000000C11 /* ConversationEventOrderingTests.swift in Sources */,
 				A1D0C0DE0000000000000C13 /* ObjCMockConversationsAdapter.m in Sources */,

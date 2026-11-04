@@ -188,7 +188,8 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     var isHistory: Bool
     var type: MessageType = .text
     var maxImageSize: CGFloat = 300
-    let screenScale: CGFloat = UIScreen.main.scale
+    // Read on first use (main thread); history rows are created on a background queue.
+    lazy var screenScale: CGFloat = UIScreen.main.scale
     var imageSize: CGFloat {
         return maxImageSize * screenScale
     }

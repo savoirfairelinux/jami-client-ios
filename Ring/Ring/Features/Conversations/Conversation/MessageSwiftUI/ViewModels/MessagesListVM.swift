@@ -190,6 +190,10 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     var lastMessageBeforeScroll: String?
 
     var loading = true // to avoid a new loading while previous one still executing
+    private let containerQueue = DispatchQueue(label: "com.savoirfairelinux.jami.messageContainers", qos: .userInitiated)
+    private var containerGeneration = 0
+    private var pendingContainerIds = Set<String>()
+    private var pendingMessageUpdates = [String: MessageModel]()
     private let cacheLock = NSLock()
     var avatars: ThreadSafeDictionary<String, BehaviorRelay<Data?>>
     var names: ThreadSafeDictionary<String, BehaviorRelay<String>>
@@ -538,6 +542,9 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     }
 
     func subscribeForNewMessages(conversation: ConversationModel, snapshot: [MessageModel]) {
+        self.containerGeneration += 1
+        self.pendingContainerIds.removeAll()
+        self.pendingMessageUpdates.removeAll()
         let snapshotMessages = LoadedMessages(messages: snapshot, fromHistory: true, reset: snapshot.isEmpty)
         conversation.newMessages.share()
             .map { (messages: $0, isSnapshot: false) }
@@ -550,28 +557,19 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
                     self.loading = false
                 }
                 if messages.reset {
+                    self.containerGeneration += 1
+                    self.pendingContainerIds.removeAll()
+                    self.pendingMessageUpdates.removeAll()
                     self.messagesModels = [MessageContainerModel]()
+                    return
+                }
+                if messages.fromHistory && !batch.isSnapshot {
+                    self.insertHistoryInBackground(messages: messages.messages)
                     return
                 }
                 let insertionCount: Int = self.insert(messages: messages.messages,
                                                       fromHistory: messages.fromHistory)
-                if insertionCount == 0 {
-                    return
-                }
-                self.computeSequencing()
-                self.updateNumberOfNewMessages()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-                    guard let self = self else {return }
-                    if !batch.isSnapshot {
-                        self.loading = false
-                    }
-                    // check if we have reply target to scroll to.
-                    if let tempTarget = self.temporaryReplyTarget,
-                       self.getMessage(messageId: tempTarget) != nil {
-                        self.scrollToReplyTarget = tempTarget
-                        self.temporaryReplyTarget = nil
-                    }
-                }
+                self.didInsert(count: insertionCount, isSnapshot: batch.isSnapshot)
             } onError: { _ in
 
             }
@@ -582,7 +580,12 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
         assert(Thread.isMainThread)
         var groupingChanged = false
         for message in messages {
-            guard let container = self.getMessage(messageId: message.id) else { continue }
+            guard let container = self.getMessage(messageId: message.id) else {
+                if self.pendingContainerIds.contains(message.id) {
+                    self.pendingMessageUpdates[message.id] = message
+                }
+                continue
+            }
             groupingChanged = groupingChanged || MessageGrouping.changesGrouping(from: container.message, to: message)
             container.messageUpdated(message)
             self.updateLastRead(message: container)
@@ -594,7 +597,12 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     }
 
     func reactionsUpdated(_ message: MessageModel) {
-        guard let container = self.getMessage(messageId: message.id) else { return }
+        guard let container = self.getMessage(messageId: message.id) else {
+            if self.pendingContainerIds.contains(message.id) {
+                self.pendingMessageUpdates[message.id] = message
+            }
+            return
+        }
         let groupingChanged = MessageGrouping.changesGrouping(from: container.message, to: message)
         container.reactionsUpdated(message)
         if groupingChanged {
@@ -626,29 +634,105 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
         }
     }
 
+    private func didInsert(count insertedCount: Int, isSnapshot: Bool) {
+        guard insertedCount > 0 else { return }
+        self.computeSequencing()
+        self.updateNumberOfNewMessages()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+            guard let self = self else {return }
+            if !isSnapshot {
+                self.loading = false
+            }
+            // check if we have reply target to scroll to.
+            if let tempTarget = self.temporaryReplyTarget,
+               self.getMessage(messageId: tempTarget) != nil {
+                self.scrollToReplyTarget = tempTarget
+                self.temporaryReplyTarget = nil
+            }
+        }
+    }
+
+    // Building row models for an older page is the expensive part of loading history,
+    // so it runs off the main thread; wiring and insertion stay on main.
+    private func insertHistoryInBackground(messages: [MessageModel]) {
+        assert(Thread.isMainThread)
+        guard let localJamiId = self.accountService.getAccount(fromAccountId: self.conversation.accountId)?.jamiId else {
+            return
+        }
+        let newMessages = Self.uniqueMessages(messages, excluding: self.existingMessageIds())
+        guard !newMessages.isEmpty else { return }
+        let generation = self.containerGeneration
+        let contextMenuState = self.contextStateSubject
+        let preferencesColor = self.conversation.preferences.getColor()
+        newMessages.forEach { self.pendingContainerIds.insert($0.id) }
+        self.containerQueue.async { [weak self] in
+            let containers = Self.makeContainers(for: newMessages, contextMenuState: contextMenuState,
+                                                 localJamiId: localJamiId, preferencesColor: preferencesColor)
+            DispatchQueue.main.async {
+                guard let self = self, generation == self.containerGeneration else { return }
+                newMessages.forEach { self.pendingContainerIds.remove($0.id) }
+                let count = self.insert(messages: messages, prebuilt: containers, fromHistory: true)
+                self.applyPendingUpdates()
+                self.didInsert(count: count, isSnapshot: false)
+            }
+        }
+    }
+
+    private func applyPendingUpdates() {
+        guard !self.pendingMessageUpdates.isEmpty else { return }
+        let updates = self.pendingMessageUpdates.filter { !self.pendingContainerIds.contains($0.key) }
+        updates.keys.forEach { self.pendingMessageUpdates.removeValue(forKey: $0) }
+        self.messagesUpdated(Array(updates.values))
+    }
+
+    private func existingMessageIds() -> Set<String> {
+        Set(self.messagesModels.map { $0.message.id })
+    }
+
+    static func uniqueMessages(_ messages: [MessageModel], excluding existingIds: Set<String>) -> [MessageModel] {
+        var seen = existingIds
+        return messages.filter { seen.insert($0.id).inserted }
+    }
+
+    private static func makeContainers(for messages: [MessageModel], contextMenuState: PublishSubject<State>,
+                                       localJamiId: String, preferencesColor: UIColor) -> [MessageContainerModel] {
+        messages.map { message in
+            MessageContainerModel(
+                message: message,
+                contextMenuState: contextMenuState,
+                isHistory: message.isReply(),
+                localJamiId: localJamiId,
+                preferencesColor: preferencesColor
+            )
+        }
+    }
+
     private func insert(messages: [MessageModel], fromHistory: Bool) -> Int {
+        assert(Thread.isMainThread)
+        return self.insert(messages: messages, prebuilt: nil, fromHistory: fromHistory)
+    }
+
+    private func insert(messages: [MessageModel], prebuilt: [MessageContainerModel]?, fromHistory: Bool) -> Int {
         assert(Thread.isMainThread)
         guard let localJamiId = self.accountService.getAccount(fromAccountId: self.conversation.accountId)?.jamiId else {
             return 0
         }
 
-        // Filter out messages that already exist in messagesModels to avoid duplicates
-        let newMessages = messages.filter { newMessage in
-            !self.messagesModels.contains(where: { messageModel in
-                messageModel.message.id == newMessage.id
-            })
+        let existingIds = self.existingMessageIds()
+        let newContainers: [MessageContainerModel]
+        if let prebuilt = prebuilt {
+            var seen = existingIds
+            newContainers = prebuilt.filter { seen.insert($0.message.id).inserted }
+        } else {
+            newContainers = Self.makeContainers(for: Self.uniqueMessages(messages, excluding: existingIds),
+                                                contextMenuState: self.contextStateSubject,
+                                                localJamiId: localJamiId,
+                                                preferencesColor: self.conversation.preferences.getColor())
         }
+        let newMessages = newContainers.map { $0.message }
 
-        let newContainers = newMessages.map { newMessage -> MessageContainerModel in
-
-            let isHistory = newMessage.isReply()
-            let container = MessageContainerModel(
-                message: newMessage,
-                contextMenuState: self.contextStateSubject,
-                isHistory: isHistory,
-                localJamiId: localJamiId,
-                preferencesColor: self.conversation.preferences.getColor()
-            )
+        for container in newContainers {
+            let newMessage = container.message
             container.messageContent.actionHandler = self.actionHandler
             container.collabDocViewModel?.follow(accountId: self.conversation.accountId,
                                                  conversationId: self.conversation.id,
@@ -661,8 +745,6 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
             if newMessage.isReply() {
                 self.receiveReply(newMessage: container, fromHistory: fromHistory, batch: messages)
             }
-
-            return container
         }
 
         newMessages.forEach { self.targetReplyReceived(target: $0) }
