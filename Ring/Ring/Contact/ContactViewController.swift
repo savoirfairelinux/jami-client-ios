@@ -44,6 +44,11 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
         navigationItem.titleView = titleView
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        updateHeaderLabelWidths(maxWidth: view.bounds.width)
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.layer.shadowColor = UIColor.clear.cgColor
@@ -51,6 +56,16 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.navigationBar.layer.shadowColor = UIColor.jamiNavigationBarShadow.cgColor
+    }
+
+    /// Sized to this screen, which beside the smart list is narrower than the window.
+    private func updateHeaderLabelWidths(maxWidth: CGFloat) {
+        guard let header = stretchyHeader else { return }
+        let maxLabelWidth = maxWidth * 0.90
+        guard header.jamiID.preferredMaxLayoutWidth != maxLabelWidth else { return }
+        header.jamiID.preferredMaxLayoutWidth = maxLabelWidth
+        header.userName.preferredMaxLayoutWidth = maxLabelWidth
+        header.displayName.preferredMaxLayoutWidth = maxLabelWidth
     }
 
     private func addHeaderView() {
@@ -99,10 +114,7 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
         })
         .disposed(by: self.disposeBag)
 
-        let maxLabelWidth = ScreenDimensionsManager.shared.adaptiveWidth * 0.90
-        self.stretchyHeader.jamiID.preferredMaxLayoutWidth = maxLabelWidth
-        self.stretchyHeader.userName.preferredMaxLayoutWidth = maxLabelWidth
-        self.stretchyHeader.displayName.preferredMaxLayoutWidth = maxLabelWidth
+        updateHeaderLabelWidths(maxWidth: ScreenDimensionsManager.shared.adaptiveWidth)
 
         self.viewModel.displayName.asDriver()
             .drive(self.stretchyHeader.displayName.rx.text)
