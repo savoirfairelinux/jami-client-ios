@@ -45,11 +45,11 @@ enum ConversationNavBarLayout {
 
     static func titleMaxWidth(barContentWidth: CGFloat,
                               trailingButtonCount: Int,
-                              isPad: Bool) -> CGFloat {
+                              reservesWindowControls: Bool) -> CGFloat {
         let itemSpacings = backButtonSpacing + titleToTrailingSpacing
         let avatarBlock = avatarSize + avatarSpacing * 2
         let available = barContentWidth
-            - (isPad ? windowControlsInset : 0)
+            - (reservesWindowControls ? windowControlsInset : 0)
             - NavBarIcon.tapTarget
             - itemSpacings
             - avatarBlock
@@ -133,6 +133,13 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
         let width = navigationBar.bounds.width - margins.left - margins.right
         if viewModel.navBarContentWidth != width {
             viewModel.navBarContentWidth = width
+        }
+        // iPad window controls sit at the window's top-left corner, over the
+        // smart list when it is shown beside the conversation.
+        let reservesWindowControls = traitCollection.userInterfaceIdiom == .pad
+            && navigationBar.convert(CGPoint.zero, to: nil).x < 1
+        if viewModel.navBarReservesWindowControls != reservesWindowControls {
+            viewModel.navBarReservesWindowControls = reservesWindowControls
         }
     }
 

@@ -37,6 +37,7 @@ class ConversationViewModel: Stateable, ObservableObject {
     @Published private(set) var navUserName: String = ""
     @Published private(set) var isBlocked: Bool = false
     @Published var navBarContentWidth: CGFloat = 0
+    @Published var navBarReservesWindowControls = false
     @Published private(set) var navBarAvatarProvider: AvatarProvider
 
     let row: ConversationRowVM

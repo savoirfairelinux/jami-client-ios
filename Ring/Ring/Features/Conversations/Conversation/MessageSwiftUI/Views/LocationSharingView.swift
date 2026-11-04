@@ -24,13 +24,15 @@ import SwiftUI
 struct LocationSharingView: View {
 
     @ObservedObject var model: MessagesListVM
+    /// Width of the conversation, narrower than the window beside the smart list.
+    var containerWidth: CGFloat = 0
     @SwiftUI.State private var forceUpdate = false
     @SwiftUI.State private var showCopyrightAlert = false
     var viewCornerRadius: CGFloat = 15
     @Namespace private var animationNamespace
 
     private var windowBounds: CGRect {
-        let width = ScreenDimensionsManager.shared.adaptiveWidth
+        let width = containerWidth > 0 ? containerWidth : ScreenDimensionsManager.shared.adaptiveWidth
         let height = ScreenDimensionsManager.shared.adaptiveHeight
         return CGRect(x: 0, y: 0, width: width, height: height)
     }
