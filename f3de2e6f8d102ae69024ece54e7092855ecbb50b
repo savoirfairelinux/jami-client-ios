@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9bcb13f_a0ed4343",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessageContentVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 833,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-04T18:09:11Z",
+      "side": 1,
+      "message": "[warning] Line 833: 🟡 `RoundedImageKey` compares raw `CGSize`/`CGFloat` values. Minor sub-pixel layout jitter can miss the cache and repeatedly launch expensive background renders. Normalize key inputs to pixel-aligned values (using `UIScreen.main.scale`) before storing/comparing.",
+      "revId": "f3de2e6f8d102ae69024ece54e7092855ecbb50b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be6d23bb_32e578ab",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessageSwiftUIViews.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-04T18:09:11Z",
+      "side": 1,
+      "message": "[error] Line 107: 🔴 `prepareRoundedImage()` is only triggered by size/corner changes, so when the decoded image arrives later (common for async thumbnail/image loading), pre-rounding is never started and the view keeps per-frame clipping. Add an image-change trigger (for example observing `message.finalImage` or another published image token) to call `prepareRoundedImage()` when the source bitmap changes.",
+      "revId": "f3de2e6f8d102ae69024ece54e7092855ecbb50b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
