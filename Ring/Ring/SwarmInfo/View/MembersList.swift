@@ -33,7 +33,7 @@ struct MemberList: View {
                 )
                 .deleteDisabled(participant.role == .admin)
             }
-            .onDelete(perform: viewModel.isAdmin ? delete : nil)
+            .onDelete(perform: viewModel.canRemoveMembers ? delete : nil)
         }
         .environment(\.editMode, $editMode)
         .onChange(of: viewModel.members) { _ in

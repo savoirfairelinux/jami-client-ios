@@ -103,6 +103,15 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
             }
         }
     }
+    private var permissions = ConversationPermissions.unrestricted {
+        didSet {
+            guard oldValue != permissions else { return }
+            self.messagePanel.permissions = permissions
+            self.messagesModels.forEach { message in
+                message.messageContent.permissions = permissions
+            }
+        }
+    }
     @Published var atTheBottom = true {
         didSet {
             lastMessageBeforeScroll = atTheBottom ? nil : self.messagesModels.first?.message.id
@@ -223,6 +232,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
             self.updateLastDisplayed()
             self.callBannerViewModel = CallBannerViewModel(injectionBag: self.injectionBag, conversation: self.conversation, state: self.messagePanelStateSubject)
             self.messagePanel.canWriteDocuments = self.conversation.isSwarm()
+            self.permissions = self.conversation.permissions
             self.voiceRecording.conversation = self.conversation
         }
     }
@@ -256,6 +266,18 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
         self.subscribeForNewMessages(conversation: conversation, snapshot: snapshot)
         self.subscribeMessageUpdates(conversation: conversation)
         self.subscribeReactions(conversation: conversation)
+        self.subscribePermissions(conversation: conversation)
+    }
+
+    private func subscribePermissions(conversation: ConversationModel) {
+        conversation.infoChanges
+            .map { $0.permissions }
+            .distinctUntilChanged()
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] permissions in
+                self?.permissions = permissions
+            })
+            .disposed(by: self.conversationDisposeBag)
     }
 
     @Published var typingIndicatorText = ""
@@ -650,6 +672,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
                 preferencesColor: self.conversation.preferences.getColor()
             )
             container.messageContent.actionHandler = self.actionHandler
+            container.messageContent.permissions = self.permissions
             container.collabDocViewModel?.follow(accountId: self.conversation.accountId,
                                                  conversationId: self.conversation.id,
                                                  service: self.injectionBag.collaborationService)

@@ -133,6 +133,18 @@ struct ConversationPermissions: Equatable {
     var allowsCalls: Bool {
         return allows(.call) || allows(.hostConference)
     }
+
+    var allowsReplies: Bool {
+        return allows(.textReply) || allows(.fileReply)
+    }
+
+    func allowsText(replying: Bool) -> Bool {
+        return allows(replying ? .textReply : .text)
+    }
+
+    func allowsFiles(replying: Bool) -> Bool {
+        return allows(replying ? .fileReply : .file)
+    }
 }
 
 struct ConversationPreferences {

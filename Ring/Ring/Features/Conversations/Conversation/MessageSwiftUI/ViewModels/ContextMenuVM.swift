@@ -56,6 +56,7 @@ class ContextMenuVM: ObservableObject {
         self.containerModel = message.messageModel
         self.avatarFactory = avatarFactory
         self.mode = mode
+        canReact = message.model.permissions.allows(.reaction)
         listEmptied = false
         pendingReactionRemovals = []
         reactionsSubscription = nil
@@ -157,8 +158,10 @@ class ContextMenuVM: ObservableObject {
     }
     let emojiBarHorizontalInset: CGFloat = 8
 
+    private var canReact = true
+
     var showsEmojiBar: Bool {
-        mode != .editHistory
+        mode != .editHistory && canReact
     }
 
     private(set) var isShortMsg: Bool = true
