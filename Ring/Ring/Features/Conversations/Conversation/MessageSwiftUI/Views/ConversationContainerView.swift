@@ -35,6 +35,7 @@ struct ConversationContainerView: View {
         guard !viewModel.isBlocked else { return [] }
         var buttons: [TrailingButton] = []
         if peerSharing.hasPeerSharing { buttons.append(.peerSharing) }
+        guard viewModel.canStartCalls else { return buttons }
         buttons.append(.audioCall)
         if !viewModel.isAccountSip { buttons.append(.videoCall) }
         return buttons

@@ -238,25 +238,25 @@ final class SwarmInfoTests: XCTestCase {
     func testProfileEditingIsAvailableForOneToOneContact() {
         XCTAssertTrue(SwarmInfoVM.profileEditingAllowed(isCoreDialog: true,
                                                         hasRemoteParticipant: true,
-                                                        isAdmin: false))
+                                                        canUpdateProfile: false))
     }
 
     func testProfileEditingIsUnavailableForConversationWithYourself() {
         XCTAssertFalse(SwarmInfoVM.profileEditingAllowed(isCoreDialog: true,
                                                          hasRemoteParticipant: false,
-                                                         isAdmin: false))
+                                                         canUpdateProfile: false))
     }
 
     func testProfileEditingIsAvailableForSwarmAdmin() {
         XCTAssertTrue(SwarmInfoVM.profileEditingAllowed(isCoreDialog: false,
                                                         hasRemoteParticipant: true,
-                                                        isAdmin: true))
+                                                        canUpdateProfile: true))
     }
 
     func testProfileEditingIsUnavailableForSwarmMember() {
         XCTAssertFalse(SwarmInfoVM.profileEditingAllowed(isCoreDialog: false,
                                                          hasRemoteParticipant: true,
-                                                         isAdmin: false))
+                                                         canUpdateProfile: false))
     }
 
     func testOneToOneProfileEditorEditsTheLocalContactProfile() {

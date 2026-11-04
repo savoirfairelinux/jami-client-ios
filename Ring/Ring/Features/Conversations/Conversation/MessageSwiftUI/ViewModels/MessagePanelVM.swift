@@ -80,12 +80,33 @@ class MessagePanelVM: ObservableObject, MessageAppearanceProtocol {
     /// A collaborative document is a commit in the conversation's repository,
     /// so it can only be started where there is one.
     @Published var canWriteDocuments = false
+    @Published var permissions = ConversationPermissions.unrestricted
     var styling: MessageStyling = MessageStyling()
 
     private let messagePanelState: PublishSubject<State>
     private var replyNameSubscription: AnyCancellable?
 
     let disposeBag = DisposeBag()
+
+    var canSendText: Bool {
+        permissions.allowsText(replying: messageToReply != nil)
+    }
+
+    var canSendFiles: Bool {
+        permissions.allowsFiles(replying: messageToReply != nil)
+    }
+
+    var canCreateDocuments: Bool {
+        canWriteDocuments && permissions.allows(.createDocument)
+    }
+
+    var hasMoreActions: Bool {
+        canSendFiles || canCreateDocuments
+    }
+
+    var isComposerAvailable: Bool {
+        canSendText || hasMoreActions || messageToEdit != nil
+    }
 
     var isLoadingAttachments: Bool {
         attachments.contains(where: { $0.isLoading })

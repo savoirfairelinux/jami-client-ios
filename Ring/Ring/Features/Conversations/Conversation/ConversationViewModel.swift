@@ -36,6 +36,7 @@ class ConversationViewModel: Stateable, ObservableObject {
     @Published private(set) var name: String = ""
     @Published private(set) var navUserName: String = ""
     @Published private(set) var isBlocked: Bool = false
+    @Published private(set) var canStartCalls: Bool = true
     @Published var navBarContentWidth: CGFloat = 0
     @Published private(set) var navBarAvatarProvider: AvatarProvider
 
@@ -65,6 +66,7 @@ class ConversationViewModel: Stateable, ObservableObject {
 
     private let disposeBag = DisposeBag()
     private var swarmInfoDisposeBag = DisposeBag()
+    private var permissionsDisposeBag = DisposeBag()
     private var cancellables = Set<AnyCancellable>()
 
     private let stateSubject = PublishSubject<State>()
@@ -193,8 +195,22 @@ class ConversationViewModel: Stateable, ObservableObject {
     private func attach(to conversation: ConversationModel) {
         self.conversation = conversation
         swiftUIModel.conversation = conversation
+        subscribePermissions(of: conversation)
         guard !row.isAccountSip else { return }
         peerSharing.track(conversation, isBlocked: row.isConversationForBlockedContact())
+    }
+
+    private func subscribePermissions(of conversation: ConversationModel) {
+        permissionsDisposeBag = DisposeBag()
+        canStartCalls = conversation.permissions.allowsCalls
+        conversation.infoChanges
+            .map { $0.permissions.allowsCalls }
+            .distinctUntilChanged()
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] canStartCalls in
+                self?.canStartCalls = canStartCalls
+            })
+            .disposed(by: permissionsDisposeBag)
     }
 
     func editMessage(content: String, messageId: String) {

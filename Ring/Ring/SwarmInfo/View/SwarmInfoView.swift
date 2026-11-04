@@ -408,13 +408,13 @@ public struct SwarmInfoView: View, StateEmittingView {
     }
 
     @ViewBuilder private var floatingActionButton: some View {
-        if let documents = documentsInView {
+        if let documents = documentsInView, viewModel.canCreateDocuments {
             CollabNewDocumentButton(viewModel: documents)
         }
     }
 
     @ViewBuilder private var floatingButtonClearance: some View {
-        if documentsInView != nil {
+        if documentsInView != nil, viewModel.canCreateDocuments {
             Color.clear
                 .frame(height: Layout.floatingButtonClearance)
                 .accessibilityHidden(true)
