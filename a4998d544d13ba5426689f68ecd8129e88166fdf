@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b31bdf9_a133acc3",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-04T18:15:04Z",
+      "side": 1,
+      "message": "[warning] Line 199: 🟡 `canStartCalls` is initialized to `true` and only updated from `infoChanges`, but no initial permission value is applied on attach. If `infoChanges` does not emit immediately, call buttons can be shown despite denied call permission. Initialize `canStartCalls` from `conversation.permissions.allowsCalls` in `attach` (or use `startWith`) to avoid an authorization/UI race.",
+      "revId": "a4998d544d13ba5426689f68ecd8129e88166fdf",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6601b35f_9236fa59",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessageContentVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-04T18:15:04Z",
+      "side": 1,
+      "message": "[error] Line 569: 🔴 `.reply` permission check is too broad: `textReply || fileReply` allows replying to file messages when only text-reply permission is granted (and vice versa). This weakens the permission boundary for message actions. Gate reply by both the menu item and message type (e.g., text menu requires `.textReply`, file-transfer menu requires `.fileReply`) so each capability is enforced independently.",
+      "revId": "a4998d544d13ba5426689f68ecd8129e88166fdf",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
