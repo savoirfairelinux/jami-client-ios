@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1e226a2_0f0104cc",
+        "filename": "Ring/Ring/Services/Conversations/ConversationStore.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-04T18:14:07Z",
+      "side": 1,
+      "message": "[error] Line 611: 🔴 `adapter.getConversationPermissions(...) ?? []` collapses \"permissions unavailable\" into \"no permissions\". Because `ConversationPermissions(names: [])` denies everything, a transient daemon error (or compatibility gap) can lock users out of text/call actions. Preserve the optional: return `.unrestricted` when the adapter returns `nil`, and only create a restricted permission set when names are actually provided.",
+      "revId": "9c163bc308f9b0b86f5c91713fb87251407fec4d",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0550f188_3977a3e0",
+        "filename": "Ring/RingTests/TestableModels/ObjCMockConversationsAdapter.m",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-04T18:14:07Z",
+      "side": 1,
+      "message": "[warning] Line 41: 🟡 The mock currently always returns an empty permission list, which now models \"deny all\" and diverges from the app’s default-unrestricted behavior for non-daemon-loaded conversations. Make this mock configurable per test, and default to `nil`/unrestricted semantics so tests don’t accidentally encode over-restrictive behavior.",
+      "revId": "9c163bc308f9b0b86f5c91713fb87251407fec4d",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
