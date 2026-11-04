@@ -65,6 +65,8 @@ struct MessagesListView: View {
     @SwiftUI.State private var messageFrame: CGRect?
     @SwiftUI.State private var screenHeight: CGFloat = 0
     @SwiftUI.State private var messageListWidth: CGFloat = 0
+    @SwiftUI.State private var messageListBottom: CGFloat = 0
+    @SwiftUI.State private var messagePanelFrame: CGRect?
     @SwiftUI.State var isMessageBarFocused: Bool = false
     @SwiftUI.State var keyboardHeight: CGFloat = 0
     @SwiftUI.State private var keyboardWasActiveBeforeMenu: Bool = false
@@ -80,6 +82,31 @@ struct MessagesListView: View {
     private let emptyStateSpacing: CGFloat = 16
     private var textHorizontalPadding: CGFloat {
         sizeCategory.isAccessibilityCategory ? 16 : 48
+    }
+
+    /// How much deeper the list reaches under the panel than the `messagesUnderPanelOverlap` the layout is designed around.
+    private var listDepthBelowPanelOverlap: CGFloat {
+        guard !model.isBlocked, let panel = messagePanelFrame else { return 0 }
+        return max(0, messageListBottom - panel.minY + messagesUnderPanelOverlap)
+    }
+
+    private func bottomFadeMask() -> some View {
+        GeometryReader { proxy in
+            let frame = proxy.frame(in: .global)
+            let location = { (globalY: CGFloat) -> CGFloat in
+                frame.height > 0 ? min(max((globalY - frame.minY) / frame.height, 0), 1) : 0
+            }
+            let bottomFadeStart: CGFloat = {
+                guard !model.isBlocked, let panel = messagePanelFrame else { return 1 }
+                return location(panel.minY + MessagePanelView.verticalInset)
+            }()
+            let bottomFadeEnd = model.isBlocked ? 1 : max(bottomFadeStart, location(messageListBottom))
+            LinearGradient(stops: [
+                Gradient.Stop(color: .clear, location: bottomFadeStart),
+                Gradient.Stop(color: .black, location: bottomFadeEnd)
+            ], startPoint: .top, endPoint: .bottom)
+        }
+        .ignoresSafeArea()
     }
 
     init(model: MessagesListVM) {
@@ -121,7 +148,9 @@ struct MessagesListView: View {
 
     private func conversationContentView() -> some View {
         ZStack(alignment: .top) {
-            VStack(spacing: messagesUnderPanelOverlap) {
+            // The list runs under the whole panel, down to the screen edge (or the keyboard), so messages stay
+            // visible through the panel's glass; the extra depth becomes padding below the newest message.
+            ZStack(alignment: .bottom) {
                 ZStack(alignment: .bottomTrailing) {
                     createMessagesStackView()
                         .flipped()
@@ -130,22 +159,36 @@ struct MessagesListView: View {
                         .background(
                             GeometryReader { proxy in
                                 Color.clear
-                                    .onAppear { messageListWidth = proxy.size.width }
+                                    .onAppear {
+                                        messageListWidth = proxy.size.width
+                                        messageListBottom = proxy.frame(in: .global).maxY
+                                    }
                                     .onChange(of: proxy.size.width) { messageListWidth = $0 }
+                                    .onChange(of: proxy.frame(in: .global).maxY) { messageListBottom = $0 }
                             }
                         )
+                    // Messages fade into the background behind the panel. A copy of the background is masked
+                    // instead of the list, so only a few static layers render offscreen.
+                    // The system scroll edge effect can't do this for the flipped list.
+                    ConversationColorBackground(color: model.swarmColor)
+                        .mask(bottomFadeMask())
+                        .allowsHitTesting(false)
                     if !model.atTheBottom {
                         createScrollToLatestView()
                     }
                 }
+                .ignoresSafeArea(.container, edges: model.isBlocked ? [] : .bottom)
                 if !model.isBlocked {
                     MessagePanelView(model: model.messagePanel, voiceRecording: model.voiceRecording, isFocused: $isMessageBarFocused)
                         .background(
                             GeometryReader { proxy in
-                                Color.clear.preference(
-                                    key: MessagePanelTopPreferenceKey.self,
-                                    value: proxy.frame(in: .global).minY
-                                )
+                                Color.clear
+                                    .preference(
+                                        key: MessagePanelTopPreferenceKey.self,
+                                        value: proxy.frame(in: .global).minY
+                                    )
+                                    .onAppear { messagePanelFrame = proxy.frame(in: .global) }
+                                    .onChange(of: proxy.frame(in: .global)) { messagePanelFrame = $0 }
                             }
                         )
                 }
@@ -204,6 +247,7 @@ struct MessagesListView: View {
                 LazyVStack(spacing: 0) {
                     // scroll to the bottom
                     Text("")
+                        .padding(.top, listDepthBelowPanelOverlap)
                         .id("lastMessage")
                     if !model.typingIndicatorText.isEmpty {
                         TypingIndicatorView(
@@ -285,7 +329,7 @@ struct MessagesListView: View {
             model.scrollToTheBottom()
         }
         .padding(.trailing, MessagePanelView.horizontalInset - ScrollToLatestButton.visualInset)
-        .padding(.bottom, -messagesUnderPanelOverlap - MessagePanelView.verticalInset + scrollButtonGap - ScrollToLatestButton.visualInset)
+        .padding(.bottom, listDepthBelowPanelOverlap - messagesUnderPanelOverlap - MessagePanelView.verticalInset + scrollButtonGap - ScrollToLatestButton.visualInset)
         .transition(.asymmetric(insertion: .opacity, removal: .identity))
     }
 
