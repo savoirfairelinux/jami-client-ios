@@ -236,7 +236,9 @@ struct MessagePanelView: View {
                     .padding(.leading, textContainerLeadingInset)
             }
             if voiceRecording.state == .idle {
-                messageTextRow()
+                if model.canSendText || model.messageToEdit != nil {
+                    messageTextRow()
+                }
             } else {
                 VoiceRecordingControls(model: voiceRecording)
             }
@@ -321,18 +323,22 @@ struct MessagePanelView: View {
                     .padding(.top, Self.verticalInset)
             }
 
-            Group {
-                if voiceRecording.state == .idle || model.quote != nil {
-                    HStack(alignment: .bottom, spacing: textContainerLeadingInset) {
-                        moreActionsButton()
-                        composerField()
+            if model.isComposerAvailable {
+                Group {
+                    if voiceRecording.state == .idle || model.quote != nil {
+                        HStack(alignment: .bottom, spacing: textContainerLeadingInset) {
+                            if model.canSendFiles {
+                                moreActionsButton()
+                            }
+                            composerField()
+                        }
+                    } else {
+                        VoiceRecordingPanel(model: voiceRecording)
                     }
-                } else {
-                    VoiceRecordingPanel(model: voiceRecording)
                 }
+                .padding(.top, Self.verticalInset)
+                .padding(.bottom, isFocused || bottomSafeAreaInset == 0 ? Self.verticalInset : 0)
             }
-            .padding(.top, Self.verticalInset)
-            .padding(.bottom, isFocused || bottomSafeAreaInset == 0 ? Self.verticalInset : 0)
         }
         .background(
             GeometryReader { proxy in
@@ -384,7 +390,7 @@ struct MessagePanelView: View {
             })
             .accessibilityHint(L10n.Accessibility.conversationCameraHint)
 
-            if model.canWriteDocuments {
+            if model.canCreateDocuments {
                 Button(action: {
                     model.newCollabDocument()
                 }, label: {

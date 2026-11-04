@@ -361,6 +361,12 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     private var isNameBound = false
     weak var actionHandler: MessageActionHandler?
     var preferencesColor: UIColor
+    var permissions = ConversationPermissions.unrestricted {
+        didSet {
+            guard oldValue != permissions else { return }
+            updateMenuitems()
+        }
+    }
 
     required init(message: MessageModel, contextMenuState: PublishSubject<State>, transferState: PublishSubject<State>, isHistory: Bool, preferencesColor: UIColor) {
         self.contextMenuState = contextMenuState
@@ -540,9 +546,9 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
             guard let self = self else { return }
             switch self.type {
             case .text:
-                self.menuItems = self.textMenuItems()
+                self.menuItems = self.textMenuItems().filter(self.isPermitted)
             case .fileTransfer:
-                self.menuItems = self.fileTransferMenuItems()
+                self.menuItems = self.fileTransferMenuItems().filter(self.isPermitted)
             default:
                 break
             }
@@ -559,6 +565,21 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
         }
         items += [.copy, .forward, .deleteMessage]
         return items + editHistoryMenuItems()
+    }
+
+    private func isPermitted(_ item: ContextualMenuItem) -> Bool {
+        switch item {
+        case .reply:
+            return permissions.allows(.textReply) || permissions.allows(.fileReply)
+        case .edit:
+            return permissions.allows(.edit)
+        case .deleteMessage:
+            return permissions.allows(.delete)
+        case .deleteFile:
+            return permissions.allows(.deleteFile)
+        case .preview, .forward, .share, .save, .copy, .editHistory:
+            return true
+        }
     }
 
     private func editHistoryMenuItems() -> [ContextualMenuItem] {
