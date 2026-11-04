@@ -39,6 +39,7 @@ class ConversationViewModel: Stateable, ObservableObject {
     @Published private(set) var canStartCalls: Bool = true
     @Published var navBarContentWidth: CGFloat = 0
     @Published var navBarReservesWindowControls = false
+    @Published var navBarHasBackButton = true
     @Published private(set) var navBarAvatarProvider: AvatarProvider
 
     let row: ConversationRowVM
