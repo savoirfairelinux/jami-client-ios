@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be3d4f42_3a69dce0",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessagesListView.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-04T18:10:23Z",
+      "side": 1,
+      "message": "[error] Line 91: 🔴 The depth delta math is inverted: `listDepthBelowPanelOverlap` is documented as the amount deeper than `messagesUnderPanelOverlap`, but it currently adds that constant (`... + messagesUnderPanelOverlap`). That overestimates depth and pushes both the newest-message spacer and scroll-to-latest button too far. Compute the delta as `max(0, (messageListBottom - panel.minY) - messagesUnderPanelOverlap)` so only extra depth is applied.",
+      "revId": "3ee5caf899763a1de4ef17ed7cb13636369e564a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
