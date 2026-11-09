@@ -171,6 +171,11 @@
 "smartlist.disableDonation" = "Ọbụghị ugbu a";
 "smartlist.donationExplanation" = "Ọ bụrụ na ị na-enwe mmasị iji Jami ma kwenye na ebumnobi anyị, ị chọrọ inye onyinye?";
 "smartlist.inSynchronization" = "Syncing…";
+"smartlist.noConversations" = "No conversations yet";
+"smartlist.noConversationsSubtitle" = "Find someone to start a conversation, or share your Jami ID.";
+"smartlist.noConversationsSubtitleSip" = "Find a number to start a conversation.";
+"smartlist.addContact" = "Add contact";
+"smartlist.shareJamiId" = "Share your Jami ID";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
@@ -193,7 +198,7 @@
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "Na nzaghachi";
 "conversation.replyQuotePhoto" = "Photo";
-"conversation.replyQuoteAudio" = "Audio";
+"conversation.replyQuoteAudio" = "Ihe a na-anụ";
 "conversation.replyQuoteUnavailable" = "Message not loaded";
 "conversation.yourself" = "You";
 "conversation.edited" = "E Deziiri Ya";

@@ -171,6 +171,11 @@
 "smartlist.disableDonation" = "अभी नहीं";
 "smartlist.donationExplanation" = "यदि आप Jami का उपयोग करने का आनंद लेते हैं और हमारे मिशन में विश्वास करते हैं, तो क्या आप दान करना चाहते हैं?";
 "smartlist.inSynchronization" = "सिंक हो रहा है…";
+"smartlist.noConversations" = "No conversations yet";
+"smartlist.noConversationsSubtitle" = "Find someone to start a conversation, or share your Jami ID.";
+"smartlist.noConversationsSubtitleSip" = "Find a number to start a conversation.";
+"smartlist.addContact" = "Add contact";
+"smartlist.shareJamiId" = "Share your Jami ID";
 
 // Conversation
 "conversation.addToContactsButton" = "संपर्कों में जोड़ें";
@@ -193,7 +198,7 @@
 "conversation.synchronizationMessage" = "बातचीत सिंक करने के लिए %@ के कनेक्ट होने की प्रतीक्षा है…";
 "conversation.inReplyTo" = "उत्तर में";
 "conversation.replyQuotePhoto" = "Photo";
-"conversation.replyQuoteAudio" = "Audio";
+"conversation.replyQuoteAudio" = "आॅडियो";
 "conversation.replyQuoteUnavailable" = "Message not loaded";
 "conversation.yourself" = "तुम";
 "conversation.edited" = "सम्पादित";

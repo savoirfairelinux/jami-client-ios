@@ -171,6 +171,11 @@
 "smartlist.disableDonation" = "Ahora no";
 "smartlist.donationExplanation" = "Si disfrutas usando Jami y crees en nuestra misión, ¿quieres hacer una donación?";
 "smartlist.inSynchronization" = "Sincronizando…";
+"smartlist.noConversations" = "No conversations yet";
+"smartlist.noConversationsSubtitle" = "Find someone to start a conversation, or share your Jami ID.";
+"smartlist.noConversationsSubtitleSip" = "Find a number to start a conversation.";
+"smartlist.addContact" = "Add contact";
+"smartlist.shareJamiId" = "Share your Jami ID";
 
 // Conversation
 "conversation.addToContactsButton" = "Añadir a contactos";
@@ -192,14 +197,14 @@
 "conversation.syncingTitle" = "Sincronizar conversación";
 "conversation.synchronizationMessage" = "Esperando a que %@ se conecte para sincronizar la conversación…";
 "conversation.inReplyTo" = "En respuesta a";
-"conversation.replyQuotePhoto" = "Photo";
+"conversation.replyQuotePhoto" = "Foto";
 "conversation.replyQuoteAudio" = "Audio";
-"conversation.replyQuoteUnavailable" = "Message not loaded";
+"conversation.replyQuoteUnavailable" = "Mensaje no cargado";
 "conversation.yourself" = "Vos";
 "conversation.edited" = "Editado";
-"conversation.editHistory" = "Edit history";
-"conversation.editHistoryCurrent" = "Current";
-"conversation.editHistoryEdit" = "Edit %d";
+"conversation.editHistory" = "Editar historial";
+"conversation.editHistoryCurrent" = "Corriente";
+"conversation.editHistoryEdit" = "Editar %d";
 "conversation.editHistoryOriginal" = "Original";
 "conversation.deletedMessage" = "%@ Eliminar mensaje";
 "conversation.contactBlocked" = "Contacto bloqueado";
@@ -684,8 +689,8 @@
 "accessibility.messageBubbleRead" = "Leer";
 "accessibility.messageBubbleUnread" = "Sin leer";
 "accessibility.messageReactionCount" = "%1$@ %2$d";
-"accessibility.messageReactions" = "Reactions";
-"accessibility.messageReactionsHint" = "Shows who reacted";
+"accessibility.messageReactions" = "Reacciones";
+"accessibility.messageReactionsHint" = "Muestra quién reaccionó";
 "accessibility.messageReactionIncludingYou" = "%@, including you";
 "accessibility.messageReactionsMore" = "%d more";
 "accessibility.removeReaction" = "Remove %@";

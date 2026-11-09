@@ -171,6 +171,11 @@
 "smartlist.disableDonation" = "나중에";
 "smartlist.donationExplanation" = "Jami를 잘 사용 중이고 우리의 사명을 응원한다면 후원해 주시겠습니까?";
 "smartlist.inSynchronization" = "동기화 중…";
+"smartlist.noConversations" = "No conversations yet";
+"smartlist.noConversationsSubtitle" = "Find someone to start a conversation, or share your Jami ID.";
+"smartlist.noConversationsSubtitleSip" = "Find a number to start a conversation.";
+"smartlist.addContact" = "Add contact";
+"smartlist.shareJamiId" = "Share your Jami ID";
 
 // Conversation
 "conversation.addToContactsButton" = "연락처에 추가";
@@ -193,7 +198,7 @@
 "conversation.synchronizationMessage" = "대화를 동기화하기 위해 %@님의 연결을 기다리는 중…";
 "conversation.inReplyTo" = "이에 대한 답변";
 "conversation.replyQuotePhoto" = "Photo";
-"conversation.replyQuoteAudio" = "Audio";
+"conversation.replyQuoteAudio" = "음향";
 "conversation.replyQuoteUnavailable" = "Message not loaded";
 "conversation.yourself" = "- 네";
 "conversation.edited" = "편집";

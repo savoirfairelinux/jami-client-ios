@@ -171,6 +171,11 @@
 "smartlist.disableDonation" = "Máskor";
 "smartlist.donationExplanation" = "Ha értékeli a Jami használatát, és hisz a küldetésünkben, szeretne adományozni?";
 "smartlist.inSynchronization" = "Szinkronizálás…";
+"smartlist.noConversations" = "No conversations yet";
+"smartlist.noConversationsSubtitle" = "Find someone to start a conversation, or share your Jami ID.";
+"smartlist.noConversationsSubtitleSip" = "Find a number to start a conversation.";
+"smartlist.addContact" = "Add contact";
+"smartlist.shareJamiId" = "Share your Jami ID";
 
 // Conversation
 "conversation.addToContactsButton" = "Hozzáadás a kapcsolattartók közé";
@@ -193,7 +198,7 @@
 "conversation.synchronizationMessage" = "Várakozás a(z) %@ csatlakozásra a beszélgetés összehangolásához…";
 "conversation.inReplyTo" = "Válaszul erre:";
 "conversation.replyQuotePhoto" = "Photo";
-"conversation.replyQuoteAudio" = "Audio";
+"conversation.replyQuoteAudio" = "Hang";
 "conversation.replyQuoteUnavailable" = "Message not loaded";
 "conversation.yourself" = "Ön";
 "conversation.edited" = "Szerkesztve";

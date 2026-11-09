@@ -171,6 +171,11 @@
 "smartlist.disableDonation" = "Mačči tura";
 "smartlist.donationExplanation" = "Ma tḥemmleḍ ad tesqedceḍ Jami yerna ad tamneḍ s tuɣdaḍt-nneɣ, tebɣiḍ ad tmuddeḍ tawsa?";
 "smartlist.inSynchronization" = "Syncing…";
+"smartlist.noConversations" = "No conversations yet";
+"smartlist.noConversationsSubtitle" = "Find someone to start a conversation, or share your Jami ID.";
+"smartlist.noConversationsSubtitleSip" = "Find a number to start a conversation.";
+"smartlist.addContact" = "Add contact";
+"smartlist.shareJamiId" = "Share your Jami ID";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
@@ -193,7 +198,7 @@
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "Di tririt i ";
 "conversation.replyQuotePhoto" = "Photo";
-"conversation.replyQuoteAudio" = "Audio";
+"conversation.replyQuoteAudio" = "Ameslaw";
 "conversation.replyQuoteUnavailable" = "Message not loaded";
 "conversation.yourself" = "Kečč";
 "conversation.edited" = "Edited";

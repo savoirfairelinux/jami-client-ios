@@ -171,6 +171,11 @@
 "smartlist.disableDonation" = "Orain ez";
 "smartlist.donationExplanation" = "Jami erabiltzea gustatzen bazaizu eta gure misioan sinesten baduzu, dohaintza bat egin nahi duzu?";
 "smartlist.inSynchronization" = "Syncing…";
+"smartlist.noConversations" = "No conversations yet";
+"smartlist.noConversationsSubtitle" = "Find someone to start a conversation, or share your Jami ID.";
+"smartlist.noConversationsSubtitleSip" = "Find a number to start a conversation.";
+"smartlist.addContact" = "Add contact";
+"smartlist.shareJamiId" = "Share your Jami ID";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
@@ -193,7 +198,7 @@
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "Erantzun";
 "conversation.replyQuotePhoto" = "Photo";
-"conversation.replyQuoteAudio" = "Audio";
+"conversation.replyQuoteAudio" = "Audioa";
 "conversation.replyQuoteUnavailable" = "Message not loaded";
 "conversation.yourself" = "Zuk";
 "conversation.edited" = "Eusko Jaurlaritzaren laguntzarekin egindako azpitituluak";

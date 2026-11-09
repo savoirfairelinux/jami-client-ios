@@ -171,6 +171,11 @@
 "smartlist.disableDonation" = "Tidak sekarang";
 "smartlist.donationExplanation" = "Jika Anda menikmati penggunaan Jami dan percaya pada misi kami, apakah Anda ingin berdonasi?";
 "smartlist.inSynchronization" = "Syncing…";
+"smartlist.noConversations" = "No conversations yet";
+"smartlist.noConversationsSubtitle" = "Find someone to start a conversation, or share your Jami ID.";
+"smartlist.noConversationsSubtitleSip" = "Find a number to start a conversation.";
+"smartlist.addContact" = "Add contact";
+"smartlist.shareJamiId" = "Share your Jami ID";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
@@ -193,7 +198,7 @@
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "Sebagai balasan";
 "conversation.replyQuotePhoto" = "Photo";
-"conversation.replyQuoteAudio" = "Audio";
+"conversation.replyQuoteAudio" = "Suara";
 "conversation.replyQuoteUnavailable" = "Message not loaded";
 "conversation.yourself" = "Anda";
 "conversation.edited" = "Diedit";

@@ -171,6 +171,11 @@
 "smartlist.disableDonation" = "Ne dabar";
 "smartlist.donationExplanation" = "Jei jums patinka naudotis Jami ir tikite mūsų misija, ar norėtumėte paaukoti?";
 "smartlist.inSynchronization" = "Sinchronizuojama…";
+"smartlist.noConversations" = "No conversations yet";
+"smartlist.noConversationsSubtitle" = "Find someone to start a conversation, or share your Jami ID.";
+"smartlist.noConversationsSubtitleSip" = "Find a number to start a conversation.";
+"smartlist.addContact" = "Add contact";
+"smartlist.shareJamiId" = "Share your Jami ID";
 
 // Conversation
 "conversation.addToContactsButton" = "Pridėti prie adresatų";
@@ -193,7 +198,7 @@
 "conversation.synchronizationMessage" = "Laukiama, kol prisijungs %@, kad būtų sinchronizuotas pokalbis…";
 "conversation.inReplyTo" = "Atsakant į";
 "conversation.replyQuotePhoto" = "Photo";
-"conversation.replyQuoteAudio" = "Audio";
+"conversation.replyQuoteAudio" = "Garsas";
 "conversation.replyQuoteUnavailable" = "Message not loaded";
 "conversation.yourself" = "Jūs";
 "conversation.edited" = "Redaguota";

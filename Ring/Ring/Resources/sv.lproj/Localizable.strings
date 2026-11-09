@@ -171,6 +171,11 @@
 "smartlist.disableDonation" = "Inte nu";
 "smartlist.donationExplanation" = "Om du tycker om att använda Jami och tror på vår mission, vill du göra en donation?";
 "smartlist.inSynchronization" = "Synkroniserar…";
+"smartlist.noConversations" = "No conversations yet";
+"smartlist.noConversationsSubtitle" = "Find someone to start a conversation, or share your Jami ID.";
+"smartlist.noConversationsSubtitleSip" = "Find a number to start a conversation.";
+"smartlist.addContact" = "Add contact";
+"smartlist.shareJamiId" = "Share your Jami ID";
 
 // Conversation
 "conversation.addToContactsButton" = "Lägg till i kontakter";

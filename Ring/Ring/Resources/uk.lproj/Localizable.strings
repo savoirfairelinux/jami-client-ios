@@ -171,6 +171,11 @@
 "smartlist.disableDonation" = "Не зараз";
 "smartlist.donationExplanation" = "Якщо вам подобається користуватися Jami і ви вірите в нашу місію, чи хочете зробити пожертву?";
 "smartlist.inSynchronization" = "Синхронізація…";
+"smartlist.noConversations" = "No conversations yet";
+"smartlist.noConversationsSubtitle" = "Find someone to start a conversation, or share your Jami ID.";
+"smartlist.noConversationsSubtitleSip" = "Find a number to start a conversation.";
+"smartlist.addContact" = "Add contact";
+"smartlist.shareJamiId" = "Share your Jami ID";
 
 // Conversation
 "conversation.addToContactsButton" = "Додати до контактів";

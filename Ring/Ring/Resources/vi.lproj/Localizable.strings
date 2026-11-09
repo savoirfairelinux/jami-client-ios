@@ -171,6 +171,11 @@
 "smartlist.disableDonation" = "Lúc khác";
 "smartlist.donationExplanation" = "Nếu bạn thích sử dụng Jami và tin vào sứ mệnh của chúng tôi, bạn có muốn quyên góp không?";
 "smartlist.inSynchronization" = "Đang đồng bộ…";
+"smartlist.noConversations" = "No conversations yet";
+"smartlist.noConversationsSubtitle" = "Find someone to start a conversation, or share your Jami ID.";
+"smartlist.noConversationsSubtitleSip" = "Find a number to start a conversation.";
+"smartlist.addContact" = "Add contact";
+"smartlist.shareJamiId" = "Share your Jami ID";
 
 // Conversation
 "conversation.addToContactsButton" = "Thêm vào danh bạ";

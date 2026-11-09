@@ -171,6 +171,11 @@
 "smartlist.disableDonation" = "Ikke nu";
 "smartlist.donationExplanation" = "Hvis du nyder at bruge Jami og tror på vores mission, vil du så give en donation?";
 "smartlist.inSynchronization" = "Synkroniserer…";
+"smartlist.noConversations" = "No conversations yet";
+"smartlist.noConversationsSubtitle" = "Find someone to start a conversation, or share your Jami ID.";
+"smartlist.noConversationsSubtitleSip" = "Find a number to start a conversation.";
+"smartlist.addContact" = "Add contact";
+"smartlist.shareJamiId" = "Share your Jami ID";
 
 // Conversation
 "conversation.addToContactsButton" = "Tilføj til kontakter";
@@ -193,7 +198,7 @@
 "conversation.synchronizationMessage" = "Venter på, at %@ opretter forbindelse for at synkronisere samtalen…";
 "conversation.inReplyTo" = "I svar på";
 "conversation.replyQuotePhoto" = "Photo";
-"conversation.replyQuoteAudio" = "Audio";
+"conversation.replyQuoteAudio" = "Lyd";
 "conversation.replyQuoteUnavailable" = "Message not loaded";
 "conversation.yourself" = "- Du er...";
 "conversation.edited" = "Udfærdiget";

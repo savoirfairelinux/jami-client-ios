@@ -171,6 +171,11 @@
 "smartlist.disableDonation" = "Teraz nie";
 "smartlist.donationExplanation" = "Ak vás baví používať Jami a veríte v naše poslanie, chcete prispieť?";
 "smartlist.inSynchronization" = "Synchronizuje sa…";
+"smartlist.noConversations" = "No conversations yet";
+"smartlist.noConversationsSubtitle" = "Find someone to start a conversation, or share your Jami ID.";
+"smartlist.noConversationsSubtitleSip" = "Find a number to start a conversation.";
+"smartlist.addContact" = "Add contact";
+"smartlist.shareJamiId" = "Share your Jami ID";
 
 // Conversation
 "conversation.addToContactsButton" = "Pridať do kontaktov";

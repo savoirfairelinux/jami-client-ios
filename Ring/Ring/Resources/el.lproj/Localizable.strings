@@ -171,6 +171,11 @@
 "smartlist.disableDonation" = "Όχι τώρα";
 "smartlist.donationExplanation" = "Εάν σας αρέσει να χρησιμοποιείτε το Jami και πιστεύετε στην αποστολή μας, θέλετε να κάνετε μια δωρεά;";
 "smartlist.inSynchronization" = "Συγχρονισμός…";
+"smartlist.noConversations" = "No conversations yet";
+"smartlist.noConversationsSubtitle" = "Find someone to start a conversation, or share your Jami ID.";
+"smartlist.noConversationsSubtitleSip" = "Find a number to start a conversation.";
+"smartlist.addContact" = "Add contact";
+"smartlist.shareJamiId" = "Share your Jami ID";
 
 // Conversation
 "conversation.addToContactsButton" = "Προσθήκη στις επαφές";
@@ -193,7 +198,7 @@
 "conversation.synchronizationMessage" = "Αναμονή σύνδεσης του/της %@ για συγχρονισμό της συνομιλίας…";
 "conversation.inReplyTo" = "Απαντώντας";
 "conversation.replyQuotePhoto" = "Photo";
-"conversation.replyQuoteAudio" = "Audio";
+"conversation.replyQuoteAudio" = "Ήχος";
 "conversation.replyQuoteUnavailable" = "Message not loaded";
 "conversation.yourself" = "Εσύ";
 "conversation.edited" = "Επορθωμένο";

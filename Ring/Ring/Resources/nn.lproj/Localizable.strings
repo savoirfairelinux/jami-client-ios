@@ -171,6 +171,11 @@
 "smartlist.disableDonation" = "Ikkje no";
 "smartlist.donationExplanation" = "Dersom du likar å bruka Jami og trur på saka vår, har du lyst til å donera?";
 "smartlist.inSynchronization" = "Synkroniserer …";
+"smartlist.noConversations" = "No conversations yet";
+"smartlist.noConversationsSubtitle" = "Find someone to start a conversation, or share your Jami ID.";
+"smartlist.noConversationsSubtitleSip" = "Find a number to start a conversation.";
+"smartlist.addContact" = "Add contact";
+"smartlist.shareJamiId" = "Share your Jami ID";
 
 // Conversation
 "conversation.addToContactsButton" = "Legg til i kontaktar";

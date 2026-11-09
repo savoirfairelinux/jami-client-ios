@@ -171,6 +171,11 @@
 "smartlist.disableDonation" = "後で";
 "smartlist.donationExplanation" = "Jami の使用を楽しみ、私たちのミッションに共感していただけるなら、寄付をしませんか？";
 "smartlist.inSynchronization" = "同期中…";
+"smartlist.noConversations" = "No conversations yet";
+"smartlist.noConversationsSubtitle" = "Find someone to start a conversation, or share your Jami ID.";
+"smartlist.noConversationsSubtitleSip" = "Find a number to start a conversation.";
+"smartlist.addContact" = "Add contact";
+"smartlist.shareJamiId" = "Share your Jami ID";
 
 // Conversation
 "conversation.addToContactsButton" = "連絡先に追加";
@@ -193,7 +198,7 @@
 "conversation.synchronizationMessage" = "会話を同期するために %@ の接続を待っています…";
 "conversation.inReplyTo" = "メッセージへの返信";
 "conversation.replyQuotePhoto" = "Photo";
-"conversation.replyQuoteAudio" = "Audio";
+"conversation.replyQuoteAudio" = "音声";
 "conversation.replyQuoteUnavailable" = "Message not loaded";
 "conversation.yourself" = "自分";
 "conversation.edited" = "編集";
