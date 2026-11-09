@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "411df157_30247e8a",
+        "filename": "Ring/Ring/Features/InitialLoading/InitialLoadingViewController.storyboard",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-09T16:41:23Z",
+      "side": 1,
+      "message": "[warning] Line 52: 🟡 Same ratio shift as LaunchScreen. Please keep the initial loading screen’s background scaling behavior aligned with LaunchScreen (explicit fill mode and clipping), otherwise users may see a jump in framing between launch and first app screen on some devices.",
+      "revId": "f8b5a030f644f80e40a95a0f017f4f82ba215423",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab543013_3275b56f",
+        "filename": "Ring/Ring/Resources/LaunchScreen.storyboard",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-09T16:41:23Z",
+      "side": 1,
+      "message": "[warning] Line 52: 🟡 The background asset aspect ratio changed from portrait (786×1704) to landscape-like (1600×1000). On tall iPhone screens this can cause aggressive vertical cropping or letterboxing if the image view isn’t explicitly `scaleAspectFill` with clipping. Please ensure launch/login background image views are explicitly configured for fill+clip to avoid visual regressions across device classes.",
+      "revId": "f8b5a030f644f80e40a95a0f017f4f82ba215423",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
