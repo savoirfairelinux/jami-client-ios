@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20aad049_74a4d587",
+        "filename": "Ring/Ring/Features/Conversations/ConversationSplitNavigator.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-09T16:19:41Z",
+      "side": 1,
+      "message": "[error] Line 74: 🔴 `isShowingPlaceholder` is true whenever the placeholder is merely the first controller, even if another screen is currently pushed (e.g. stack `[placeholder, vc]`). `topColumnForCollapsing...` then treats the detail as empty and collapses to `.primary`, which can hide/drop the currently visible detail screen during collapse. Treat placeholder as shown only when it is the **only** controller (e.g. `viewControllers \u003d\u003d [placeholder]`) or equivalent count+identity check.",
+      "revId": "35aaddc256b656b956ad2f33297f9c2e2b411a24",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
