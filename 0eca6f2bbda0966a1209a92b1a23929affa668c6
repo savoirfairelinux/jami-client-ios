@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22124df1_cf298966",
+        "filename": "daemon",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-09T18:44:40Z",
+      "side": 1,
+      "message": "[warning] Line 1: 🟡 This submodule SHA bump is opaque without context on what changed in `jami-daemon` (notable fixes, behavior changes, security-impacting commits). Please include a short summary and link/reference to the daemon commit range (`4719d044..8e1637a`) in the change description so reviewers can validate risk and test scope.",
+      "revId": "0eca6f2bbda0966a1209a92b1a23929affa668c6",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
