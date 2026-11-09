@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afee0c50_6dcbf306",
+        "filename": "Ring/Ring/Features/Conversations/ConversationsCoordinator.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-09T16:16:54Z",
+      "side": 1,
+      "message": "[warning] Line 208: 🟡 `selectedConversationId` is only updated from `row.conversationChanges`; if that stream does not replay the current conversation immediately, the smart-list highlight can stay unset until a later mutation. Seed the selection synchronously (e.g., assign `row.conversation?.id` before subscribing) and keep the stream for subsequent id changes.",
+      "revId": "913d96280554da7368e63a716071d6fef90037eb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
