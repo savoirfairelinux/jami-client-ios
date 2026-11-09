@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7fef998_c1231e89",
+        "filename": "Ring/Ring/Resources/ar.lproj/Localizable.strings",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-09T08:24:41Z",
+      "side": 1,
+      "message": "[warning] Line 172: 🟡 Newly added `smartlist.*` keys are left in English (`\"No conversations yet\"`, `\"Add contact\"`, etc.). The same pattern appears across many non-English locale files in this patch, which degrades localization quality and user consistency. Either provide localized values per locale now, or omit untranslated keys so fallback behavior is explicit and can be tracked centrally.",
+      "revId": "7ed0ec9aad25eabb276276aabc93930ee52e6c28",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e419c2b5_2cf6a7ee",
+        "filename": "Ring/Ring/Resources/zh-Hans.lproj/Localizable.strings",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-09T08:24:41Z",
+      "side": 1,
+      "message": "[error] Line 20: 🔴 The `zh-Hans` (Simplified Chinese) locale has been broadly rewritten with Traditional Chinese strings (for example, `\"账户设置\"` -\u003e `\"帳號設定\"`, `\"关闭\"` -\u003e `\"關閉\"`). This is a locale regression that will display the wrong script for Simplified users. Revert this file to Simplified Chinese for existing keys (or restore from previous `zh-Hans` and only apply intended key additions).",
+      "revId": "7ed0ec9aad25eabb276276aabc93930ee52e6c28",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
