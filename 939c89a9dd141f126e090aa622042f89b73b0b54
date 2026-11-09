@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6460558_9422d65a",
+        "filename": "Ring/Ring/Features/Conversations/ConversationsCoordinator.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-09T16:15:13Z",
+      "side": 1,
+      "message": "[warning] Line 280: 🟡 This fix changes presenter selection in a navigation edge case, but there is no regression test covering expanded (iPad/detail-column) forwarding. Please add a focused unit/integration test that exercises `showContactPicker` when a conversation is in the detail stack to prevent future regressions to list-stack presentation.",
+      "revId": "939c89a9dd141f126e090aa622042f89b73b0b54",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
