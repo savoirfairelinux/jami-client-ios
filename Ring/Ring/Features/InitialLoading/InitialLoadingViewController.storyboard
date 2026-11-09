@@ -47,7 +47,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="backgroundLogin" width="786" height="1704"/>
+        <image name="backgroundLogin" width="1600" height="1000"/>
         <image name="jamiIcon" width="66.666664123535156" height="63.333332061767578"/>
     </resources>
 </document>
