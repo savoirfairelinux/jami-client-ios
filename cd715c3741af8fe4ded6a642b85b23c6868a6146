@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8157738_29cfdf77",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessagePanelView.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-09T18:29:42Z",
+      "side": 1,
+      "message": "[error] Line 327: 🔴 `moreActionsButton()` is currently shown only when `canSendFiles` is true, but that same menu is also the entry point for collaborative document creation. With this logic, a user who is allowed to create documents (`.createDocument`) but not allowed to send files loses access to document creation entirely. Show the button when `canSendFiles || canCreateDocuments`, then gate menu entries separately (camera/photo behind `canSendFiles`, document behind `canCreateDocuments`).",
+      "revId": "cd715c3741af8fe4ded6a642b85b23c6868a6146",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
