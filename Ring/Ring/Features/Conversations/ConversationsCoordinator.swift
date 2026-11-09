@@ -223,6 +223,25 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                 self.popToSmartList()
             })
             .disposed(by: self.disposeBag)
+
+        // Removed from the list beside it, from another device or by its peer.
+        self.conversationService.sharedResponseStream
+            .filter { $0.eventType == .conversationRemoved }
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] event in
+                guard let self = self,
+                      Self.isRemoval(event, of: self.detailConversation) else { return }
+                self.popToSmartList()
+            })
+            .disposed(by: self.disposeBag)
+    }
+
+    static func isRemoval(_ event: ServiceEvent, of conversation: ConversationModel?) -> Bool {
+        guard event.eventType == .conversationRemoved,
+              let conversation = conversation,
+              let conversationId: String = event.getEventInput(.conversationId),
+              let accountId: String = event.getEventInput(.accountId) else { return false }
+        return conversation.id == conversationId && conversation.accountId == accountId
     }
 
     private func dismissActiveCalls() {
