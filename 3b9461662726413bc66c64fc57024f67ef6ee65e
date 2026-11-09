@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08f8bc23_0a4b8d32",
+        "filename": "Ring/Ring/Coordinators/AppCoordinator.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-09T16:13:59Z",
+      "side": 1,
+      "message": "[warning] Line 53: 🟡 `stackNavigationController` always points to `navigationController`, even after the root is switched to the split view container content. Any future `.show`/`.push` calls issued by `AppCoordinator` while conversations are displayed will target an off-screen stack. Prefer deriving this from the currently displayed container content (or returning `nil` when the active root is not stack-driven) to avoid invisible navigation actions.",
+      "revId": "3b9461662726413bc66c64fc57024f67ef6ee65e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfb2365e_a670b162",
+        "filename": "Ring/Ring/Features/Conversations/ConversationSplitNavigator.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-09T16:13:59Z",
+      "side": 1,
+      "message": "[warning] Line 73: 🟡 `collapseSecondary` unconditionally returns `true`, which always discards the secondary stack during collapse. If the detail column ever contains non-placeholder content (even transiently), rotating to compact width will drop user context. Consider returning `false` when `detailNavigationController` has real content, or explicitly merging `contentControllers` into the primary stack before collapsing.",
+      "revId": "3b9461662726413bc66c64fc57024f67ef6ee65e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
