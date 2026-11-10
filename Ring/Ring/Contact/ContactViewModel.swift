@@ -188,9 +188,8 @@ class ContactViewModel: ViewModel, Stateable {
     }
 
     func blockContact() {
-        destructiveActionExecutor.perform(.blockContact,
-                                          on: conversation,
-                                          completion: { [weak self] in self?.emitConversationRemoved() })
+        destructiveActionExecutor.perform(.blockContact, on: conversation)
+        emitConversationRemoved()
     }
 
     private func emitConversationRemoved() {
