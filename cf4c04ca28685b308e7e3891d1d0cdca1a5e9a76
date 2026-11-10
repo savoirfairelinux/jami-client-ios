@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f8b9357_2032e40b",
+        "filename": "Ring/Ring/Features/Conversations/ConversationsCoordinator.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-10T19:39:22Z",
+      "side": 1,
+      "message": "[warning] Line 219: 🟡 The new behavior is only unit-tested through `isRemoval`, so the coordinator wiring itself (`currentAccountChanged`/`sharedResponseStream` subscriptions calling `popToSmartList()`) can still regress silently. Please add coordinator-level tests with mocked services/split navigator that assert detail is actually closed on matching account switches/removals and remains open for non-matching events.",
+      "revId": "cf4c04ca28685b308e7e3891d1d0cdca1a5e9a76",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
