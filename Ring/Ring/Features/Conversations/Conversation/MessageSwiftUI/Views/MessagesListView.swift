@@ -270,13 +270,13 @@ struct MessagesListView: View {
                     let offset = proxy.frame(in: .named("scroll")).minY
                     Color.clear.preference(key: ScrolledToBottomPreferenceKey.self, value: offset < scrollReserved)
                 }
+                // The start of the content, so scrolling back lands where the conversation opened.
+                .id("lastMessage")
                 LazyVStack(spacing: 0) {
-                    // scroll to the bottom
                     ComposerDepthReader(layout: composerLayout) { depth in
                         Text("")
                             .padding(.top, listDepthBelowPanelOverlap(depth))
                     }
-                    .id("lastMessage")
                     if !model.typingIndicatorText.isEmpty {
                         TypingIndicatorView(
                             text: model.typingIndicatorText,
@@ -303,7 +303,7 @@ struct MessagesListView: View {
                 .listRowBackground(Color.clear)
                 .onReceive(model.$scrollToId, perform: { (scrollToId) in
                     guard scrollToId != nil else { return }
-                    scrollView.scrollTo("lastMessage")
+                    scrollView.scrollTo("lastMessage", anchor: .top)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                         model.scrollToId = nil
                     }
