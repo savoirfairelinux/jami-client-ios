@@ -1647,6 +1647,8 @@ internal enum L10n {
     internal static let noConversation = L10n.tr("Localizable", "smartlist.noConversation", fallback: "No conversations")
     /// No conversations yet
     internal static let noConversations = L10n.tr("Localizable", "smartlist.noConversations", fallback: "No conversations yet")
+    /// No conversation selected
+    internal static let noConversationSelected = L10n.tr("Localizable", "smartlist.noConversationSelected", fallback: "No conversation selected")
     /// No conversations match the search.
     internal static let noConversationsFound = L10n.tr("Localizable", "smartlist.noConversationsFound", fallback: "No conversations match the search.")
     /// Find someone to start a conversation, or share your Jami ID.

@@ -28,14 +28,13 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
     var presentingVC = [String: Bool]()
 
     var rootViewController: UIViewController {
-        return self.navigationController
+        return self.splitNavigator.rootViewController
     }
 
     var childCoordinators = [Coordinator]()
     var parentCoordinator: Coordinator?
-    var smartListViewController = UIViewController()
 
-    let navigationController = UINavigationController()
+    let splitNavigator: ConversationSplitNavigator
     let injectionBag: InjectionBag
     var disposeBag = DisposeBag()
 
@@ -50,6 +49,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
 
     init(injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
+        self.splitNavigator = ConversationSplitNavigator(makePlaceholder: { UIHostingController(rootView: NoConversationSelectedView()) })
 
         self.callService = injectionBag.callService
         self.accountService = injectionBag.accountService
@@ -72,7 +72,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                     self.openAboutJami()
                 case .showContactPicker(let callID, let contactCallBack, let conversationCallBack):
                     self.showContactPicker(callId: callID, contactSelectedCB: contactCallBack, conversationSelectedCB: conversationCallBack)
-                case .conversationRemoved:
+                case .conversationRemoved, .swarmCreationCancelled:
                     self.popToSmartList()
                 case .needToOnboard:
                     self.needToOnboard()
@@ -107,15 +107,18 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         // Incoming-call presentation is owned by CallScreenPresenter.
         self.callbackPlaceCall()
         self.subscribeToActiveCalls()
-        self.navigationController.navigationBar.tintColor = UIColor.jami
     }
 
     func start() {
         let view = SmartListView(injectionBag: self.injectionBag, source: self.conversationsSource)
         let viewController = createHostingVC(view)
         viewController.navigationItem.backButtonDisplayMode = .minimal
-        self.smartListViewController = viewController
-        self.present(viewController: viewController, withStyle: .replaceNavigationStack, withAnimation: false, withStateable: view.stateEmitter)
+        self.splitNavigator.setListRoot(viewController)
+        view.stateEmitter.state.take(until: viewController.rx.deallocated)
+            .subscribe(onNext: { [weak self] state in
+                self?.stateSubject.onNext(state)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func subscribeToActiveCalls() {
@@ -143,9 +146,9 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                 if accountCalls.count == 1 {
                     if accountCalls.first?.value.incomingNotAcceptedNotIgnoredCalls().count == 1,
                        let conversationId = accountCalls.first?.value.incomingNotAcceptedNotIgnoredCalls().first?.conversationId,
-                       let navigationController = self.rootViewController as? UINavigationController,
                        let row = self.getRowForId(conversationId: conversationId),
-                       let conversationController = navigationController.topViewController as? ConversationViewController,
+                       let conversationController = self.shownConversationController,
+                       conversationController.navigationController?.topViewController === conversationController,
                        conversationController.viewModel.conversation == row.conversation {
                         return
                     }
@@ -182,6 +185,22 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         presentingVC[VCType.contact.rawValue] = false
         presentingVC[VCType.conversation.rawValue] = false
     }
+
+    private var shownConversationController: ConversationViewController? {
+        return splitNavigator.shownDetail as? ConversationViewController
+    }
+
+    func showInDetail(_ viewController: UIViewController, animated: Bool) {
+        splitNavigator.showInDetail(viewController, animated: animated)
+    }
+
+    func pushOntoDetail(_ viewController: UIViewController, animated: Bool) {
+        splitNavigator.pushOntoDetail(viewController, animated: animated)
+    }
+
+    func revealConversationIfShown(_ conversation: ConversationModel) -> Bool {
+        return popToExistingConversation(conversation)
+    }
 }
 // swiftlint:enable cyclomatic_complexity
 
@@ -190,16 +209,18 @@ extension ConversationsCoordinator {
 
     func presentSwarmInfo(swarmInfo: SwarmInfoProtocol) {
         let swiftUIVM = SwarmInfoVM(with: self.injectionBag, swarmInfo: swarmInfo)
-        let view = SwarmInfoView(viewModel: swiftUIVM) { [weak self] expanded in
-            self?.navigationController.navigationBar.tintColor = expanded ? .white : .jami
+        weak var presented: UIViewController?
+        let view = SwarmInfoView(viewModel: swiftUIVM) { expanded in
+            presented?.navigationController?.navigationBar.tintColor = expanded ? .white : .jami
         }
         let viewController = createHostingVC(view)
+        presented = viewController
         let transparentBar = UINavigationBarAppearance()
         transparentBar.configureWithTransparentBackground()
         viewController.navigationItem.standardAppearance = transparentBar
         viewController.navigationItem.compactAppearance = transparentBar
         viewController.navigationItem.scrollEdgeAppearance = transparentBar
-        self.present(viewController: viewController, withStyle: .show, withAnimation: true, withStateable: view.stateEmitter)
+        self.navigate(to: viewController, in: .detailStack, animated: true, stateable: view.stateEmitter)
     }
 
     func presentConversationProfileEditor(conversation: ConversationModel) {
@@ -213,10 +234,7 @@ extension ConversationsCoordinator {
     }
 
     func popToSmartList() {
-        let viewControllers = navigationController.viewControllers
-        if viewControllers.contains(smartListViewController) {
-            navigationController.popToViewController(smartListViewController, animated: false)
-        }
+        splitNavigator.popToList(animated: false)
     }
 
     func needToOnboard() {
@@ -229,9 +247,13 @@ extension ConversationsCoordinator {
         let view = AccountMigrationView(accountId: accountId,
                                         accountService: injectionBag.accountService,
                                         profileService: injectionBag.profileService,
-                                        onCompletion: completion)
+                                        dismissesItself: false,
+                                        onCompletion: { [weak self] migrated in
+                                            self?.popToSmartList()
+                                            completion?(migrated)
+                                        })
         let viewController = createHostingVC(view)
-        self.present(viewController: viewController, withStyle: .show, withAnimation: true, withStateable: view.stateEmitter)
+        self.navigate(to: viewController, in: .detail, animated: true, stateable: view.stateEmitter)
     }
 
     func createNewAccount() {
@@ -256,7 +278,7 @@ extension ConversationsCoordinator {
     }
 
     func showContactPicker(callId: String, contactSelectedCB: ((_ contact: [ConferencableItem]) -> Void)? = nil, conversationSelectedCB: ((_ conversationIds: [String]) -> Void)? = nil) {
-        guard let conversationVC = self.navigationController.visibleViewController else { return }
+        guard let conversationVC = self.splitNavigator.detailStack.visibleViewController else { return }
 
         let viewModel = ContactPickerViewModel(with: self.injectionBag)
         viewModel.type = callId.isEmpty ? .forConversation : .forCall
@@ -278,7 +300,7 @@ extension ConversationsCoordinator {
 
     func openAboutJami() {
         let aboutJamiController = AboutViewController.instantiate()
-        self.present(viewController: aboutJamiController, withStyle: .show, withAnimation: true, disposeBag: self.disposeBag)
+        self.navigate(to: aboutJamiController, in: .detail, animated: true)
     }
 }
 
@@ -324,10 +346,7 @@ extension ConversationsCoordinator {
             self.showConversation(withRow: model, withAnimation: withAnimation)
         }
         if !shouldOpenSmarList {
-            let viewControllers = navigationController.viewControllers
-            if let index = viewControllers.firstIndex(where: { $0 is SwarmCreationViewController }) {
-                navigationController.viewControllers.remove(at: index)
-            }
+            splitNavigator.removeFromList(where: ConversationsCoordinator.isSwarmCreation)
         }
     }
 
@@ -361,24 +380,24 @@ extension ConversationsCoordinator {
         return JamiURI(from: uri).hash ?? uri.filterOutHost()
     }
 
+    private static func isSwarmCreation(_ controller: UIViewController) -> Bool {
+        if let navigation = controller as? UINavigationController {
+            return navigation.viewControllers.first is SwarmCreationViewController
+        }
+        return controller is SwarmCreationViewController
+    }
+
     private func popToExistingConversation(_ conversationModel: ConversationModel) -> Bool {
-        guard let navigationController = self.rootViewController as? UINavigationController else {
+        guard let conversationController = self.shownConversationController,
+              conversationController.viewModel.conversation == conversationModel,
+              self.splitNavigator.reveal(conversationController, animated: true) else {
             return false
         }
-        let controllers = navigationController.children
-        for controller in controllers
-        where controller.isKind(of: (ConversationViewController).self) {
-            if let conversationController = controller as? ConversationViewController, conversationController.viewModel.conversation == conversationModel {
-                navigationController.popToViewController(conversationController, animated: true)
-                conversationController.becomeFirstResponder()
-                return true
-            }
-        }
-        return false
+        conversationController.becomeFirstResponder()
+        return true
     }
 
     func openConversationFromCall(conversationModel: ConversationModel) {
-        guard self.rootViewController is UINavigationController else { return }
         if popToExistingConversation(conversationModel) { return }
         self.openConversation(conversationId: conversationModel.id, accountId: conversationModel.accountId, shouldOpenSmarList: true, withAnimation: true)
     }

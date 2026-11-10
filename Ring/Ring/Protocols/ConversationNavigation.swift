@@ -29,6 +29,7 @@ enum ConversationState: State {
     case contactDetail(conversationViewModel: ConversationModel)
     case qrCode
     case createSwarm(onCreated: ((_ conversationId: String) -> Void)?)
+    case swarmCreationCancelled
     case createNewAccount
     case showDialpad(inCall: Bool)
     case recordFile(conversation: ConversationModel, replyingTo: String?, onSend: (OutgoingMessage.Content) -> Void)
@@ -55,14 +56,58 @@ enum ConversationState: State {
                             name: String?)
 }
 
+enum ConversationDestination {
+    case detail
+    case detailStack
+}
+
 protocol ConversationNavigation: AnyObject {
 
     var injectionBag: InjectionBag { get }
 
     func addLockFlags()
+
+    func showInDetail(_ viewController: UIViewController, animated: Bool)
+
+    func pushOntoDetail(_ viewController: UIViewController, animated: Bool)
+
+    func revealConversationIfShown(_ conversation: ConversationModel) -> Bool
 }
 
 extension ConversationNavigation where Self: Coordinator, Self: StateableResponsive {
+
+    func navigate(to viewController: UIViewController,
+                  in destination: ConversationDestination,
+                  animated: Bool,
+                  stateable: Stateable? = nil,
+                  lockWhilePresenting lockKey: String? = nil) {
+        switch destination {
+        case .detail:
+            self.showInDetail(viewController, animated: animated)
+        case .detailStack:
+            self.pushOntoDetail(viewController, animated: animated)
+        }
+        if let lockKey = lockKey {
+            viewController.rx.viewDidLoad
+                .subscribe(onNext: { [weak self] _ in
+                    self?.presentingVC[lockKey] = false
+                }, onError: { [weak self] _ in
+                    self?.presentingVC[lockKey] = false
+                }, onCompleted: { [weak self] in
+                    self?.presentingVC[lockKey] = false
+                }, onDisposed: { [weak self] in
+                    self?.presentingVC[lockKey] = false
+                })
+                .disposed(by: self.disposeBag)
+        }
+        if let stateable = stateable {
+            stateable.state.take(until: viewController.rx.deallocated)
+                .subscribe(onNext: { [weak self] state in
+                    self?.stateSubject.onNext(state)
+                })
+                .disposed(by: self.disposeBag)
+        }
+    }
 
     func callbackPlaceCall() {
         self.stateSubject
@@ -126,10 +171,10 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
     func createSwarm(onCreated: ((_ conversationId: String) -> Void)? = nil) {
         let swarmCreationViewController = SwarmCreationViewController.instantiate(with: self.injectionBag)
         swarmCreationViewController.onSwarmCreated = onCreated
-        self.present(viewController: swarmCreationViewController,
-                     withStyle: .show,
-                     withAnimation: true,
-                     withStateable: swarmCreationViewController.viewModel)
+        self.navigate(to: swarmCreationViewController,
+                      in: .detail,
+                      animated: true,
+                      stateable: swarmCreationViewController.viewModel)
     }
 
     func presentContactInfo(conversation: ConversationModel) {
@@ -139,25 +184,26 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
         self.presentingVC[VCType.contact.rawValue] = true
         let contactViewController = ContactViewController.instantiate(with: self.injectionBag)
         contactViewController.viewModel.conversation = conversation
-        self.present(viewController: contactViewController,
-                     withStyle: .show,
-                     withAnimation: true,
-                     withStateable: contactViewController.viewModel,
-                     lockWhilePresenting: VCType.contact.rawValue)
+        self.navigate(to: contactViewController,
+                      in: .detailStack,
+                      animated: true,
+                      stateable: contactViewController.viewModel,
+                      lockWhilePresenting: VCType.contact.rawValue)
     }
 
     func showConversation (withRow row: ConversationRowVM, withAnimation: Bool = true) {
         if let flag = self.presentingVC[VCType.conversation.rawValue], flag {
             return
         }
+        if self.revealConversationIfShown(row.conversation) { return }
         self.presentingVC[VCType.conversation.rawValue] = true
         let conversationViewModel = ConversationViewModel(with: self.injectionBag, row: row)
         let conversationHostingVC = ConversationViewController(viewModel: conversationViewModel)
-        self.present(viewController: conversationHostingVC,
-                     withStyle: .push,
-                     withAnimation: withAnimation,
-                     withStateable: conversationViewModel,
-                     lockWhilePresenting: VCType.conversation.rawValue)
+        self.navigate(to: conversationHostingVC,
+                      in: .detail,
+                      animated: withAnimation,
+                      stateable: conversationViewModel,
+                      lockWhilePresenting: VCType.conversation.rawValue)
     }
 
     /**

@@ -42,11 +42,11 @@ class SwarmCreationViewController: UIViewController, ViewModelBased, StoryboardB
 
     override func viewDidLoad() {
         self.navigationItem.title = L10n.Swarm.selectContacts
-        let backButton = UIBarButtonItem(title: L10n.Global.cancel, style: .plain, target: self, action: #selector(backButtonTapped))
+        let cancelButton = UIBarButtonItem(title: L10n.Global.cancel, style: .plain, target: self, action: #selector(cancelTapped))
 
-        self.navigationItem.leftBarButtonItem = backButton
+        self.navigationItem.leftBarButtonItem = cancelButton
 
-        let continueButton = UIBarButtonItem(title: L10n.Global.create, style: .plain, target: self, action: #selector(backButtonTapped))
+        let continueButton = UIBarButtonItem(title: L10n.Global.create, style: .plain, target: nil, action: nil)
 
         self.navigationItem.rightBarButtonItem = continueButton
         super.viewDidLoad()
@@ -118,9 +118,7 @@ class SwarmCreationViewController: UIViewController, ViewModelBased, StoryboardB
     }
 
     @objc
-    func backButtonTapped() {
-        // Handle the back action
-        // For instance, pop the current view controller from the navigation stack
-        self.navigationController?.popViewController(animated: true)
+    func cancelTapped() {
+        self.viewModel.cancel()
     }
 }

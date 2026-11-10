@@ -140,7 +140,7 @@ private struct NavigationSearchControllerHost<Results: View>: UIViewControllerRe
             super.init()
 
             searchController.searchResultsUpdater = self
-            searchController.hidesNavigationBarDuringPresentation = true
+            searchController.hidesNavigationBarDuringPresentation = UIDevice.current.userInterfaceIdiom != .pad
             searchController.obscuresBackgroundDuringPresentation = false
             // Show the results controller as soon as the search is active (even with an
             // empty query) so the compose shortcuts are visible and tappable immediately.

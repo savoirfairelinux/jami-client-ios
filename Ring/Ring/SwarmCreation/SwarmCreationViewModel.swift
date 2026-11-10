@@ -44,4 +44,8 @@ class SwarmCreationViewModel: ViewModel, Stateable {
             self.stateSubject.onNext(ConversationState.openConversationForConversationId(conversationId: conversationId, accountId: accountId, shouldOpenSmarList: false, withAnimation: false))
         }
     }
+
+    func cancel() {
+        self.stateSubject.onNext(ConversationState.swarmCreationCancelled)
+    }
 }
