@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12fe96be_413687b5",
+        "filename": "Ring/Ring/Contact/ContactViewModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-10T19:37:04Z",
+      "side": 1,
+      "message": "[warning] Line 192: 🟡 `emitConversationRemoved()` is now fired unconditionally right after `perform(.blockContact, ...)`, which decouples navigation from action completion. If contact removal/blocking becomes asynchronous (or starts reporting failures), UI will still navigate away as if removal succeeded. Prefer restoring the completion callback (`perform(..., completion: { [weak self] in self?.emitConversationRemoved() })`) so state transition happens only after the destructive action finishes.",
+      "revId": "842ceca9a853cd3075768dfe0c0c11fae1cbfe89",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
