@@ -203,14 +203,3 @@ extension Coordinator {
         }
     }
 }
-
-/// The `RootCoordinator` protocol is designed for the root coordinator that manages
-/// the primary `UINavigationController` of the application.
-///
-/// Unlike other coordinators, which create and manage their own navigation controllers
-/// internally, the `RootCoordinator` requires a navigation controller to be passed in
-/// from `AppCoordinator`.
-protocol RootCoordinator: Coordinator {
-    var navigationController: UINavigationController { get }
-    init(navigationController: UINavigationController, injectionBag: InjectionBag)
-}
