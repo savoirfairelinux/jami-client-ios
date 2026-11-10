@@ -96,6 +96,9 @@ public final class DataTransferService: DataTransferAdapterDelegate {
     private let dataTransferAdapter: DataTransferAdapter
     private let outgoingFileQueue = DispatchQueue(label: "com.savoirfairelinux.ring.outgoingFiles")
 
+    private let receiptQueue = DispatchQueue(label: "com.jami.fileSendReceipts")
+    private let sendReceipts = PublishSubject<(String, String, String, NSDataTransferEventCode)>()
+
     private let disposeBag = DisposeBag()
     private let responseStream = PublishSubject<ServiceEvent>()
     var sharedResponseStream: Observable<ServiceEvent>
@@ -157,21 +160,52 @@ public final class DataTransferService: DataTransferAdapterDelegate {
                                                parent: replyTo)
     }
 
+    func sendFileConfirmed(conversation: ConversationModel, filePath: String, displayName: String,
+                           replyTo: String) -> Single<Void> {
+        guard FileManager.default.isReadableFile(atPath: filePath),
+              let size = try? FileManager.default.attributesOfItem(atPath: filePath)[.size] as? NSNumber,
+              size.int64Value > 0 else { return .error(MessageSendError.failed) }
+        let receipts = sendReceipts.filter { account, conversationId, path, event in
+            account == conversation.accountId && conversationId == conversation.id && path == filePath
+                && (event == .created || event == .invalid || event == .invalid_pathname)
+        }.map { $0.3 == .created }
+        // Large files are hashed before creation; allow more time than text.
+        return SwarmSendConfirmation.wait(receipts: receipts, timeout: .seconds(120)) { [dataTransferAdapter] in
+            dataTransferAdapter.sendSwarmFile(withName: displayName, accountId: conversation.accountId,
+                                              conversationId: conversation.id, withFilePath: filePath, parent: replyTo)
+        }
+    }
+
+    func sendAndSaveFileConfirmed(displayName: String, conversation: ConversationModel,
+                                 data: Data, replyTo: String) -> Single<Void> {
+        Single.deferred { [self] in
+            guard let path = saveFileForSending(displayName: displayName, conversation: conversation, data: data) else {
+                return .error(MessageSendError.failed)
+            }
+            return sendFileConfirmed(conversation: conversation, filePath: path.path,
+                                     displayName: displayName, replyTo: replyTo)
+        }.subscribe(on: ConcurrentDispatchQueueScheduler(qos: .userInitiated))
+    }
+
     func sendAndSaveFile(displayName: String,
                          conversation: ConversationModel,
                          imageData: Data,
                          replyTo: String = "") {
-        let imagePath: URL? = outgoingFileQueue.sync {
-            guard let imagePath = self.fileUrlForSending(displayName: displayName, conversation: conversation) else { return nil }
-            do {
-                try imageData.write(to: URL(fileURLWithPath: imagePath.path), options: .atomic)
-            } catch {
-                self.log.error("Unable to copy image to cache")
-            }
-            return imagePath
-        }
-        guard let imagePath = imagePath else { return }
+        guard let imagePath = saveFileForSending(displayName: displayName, conversation: conversation, data: imageData) else { return }
         self.sendFile(conversation: conversation, filePath: imagePath.path, displayName: displayName, replyTo: replyTo)
+    }
+
+    private func saveFileForSending(displayName: String, conversation: ConversationModel, data: Data) -> URL? {
+        outgoingFileQueue.sync {
+            guard let path = fileUrlForSending(displayName: displayName, conversation: conversation) else { return nil }
+            do {
+                try data.write(to: path, options: .atomic)
+                return path
+            } catch {
+                log.error("Unable to copy image to cache")
+                return nil
+            }
+        }
     }
 
     func copyFileForSending(from url: URL, displayName: String, conversation: ConversationModel) -> URL? {
@@ -319,6 +353,9 @@ public final class DataTransferService: DataTransferAdapterDelegate {
             return
         }
 
+        receiptQueue.async { [self] in
+            sendReceipts.onNext((accountId, conversationId, transferId, event))
+        }
         self.log.info("DataTransferService: event: \(stringFromEventCode(with: event))")
         if event == .created {
             return

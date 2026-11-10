@@ -21,6 +21,49 @@ import RxSwift
 @testable import Ring
 
 final class ConversationEventOrderingTests: XCTestCase {
+    func testConversationErrorKeepsAccountAndConversationScope() {
+        let service = makeService(adapter: ObjCMockConversationsAdapter())
+        let received = expectation(description: "Daemon error forwarded")
+        let subscription = service.conversationErrors.subscribe(onNext: { failure in
+            XCTAssertEqual(failure.accountId, accountId1)
+            XCTAssertEqual(failure.conversationId, conversationId1)
+            XCTAssertEqual(failure.code, 3)
+            XCTAssertEqual(failure.message, "Denied")
+            received.fulfill()
+        })
+        defer { subscription.dispose() }
+        service.eventSource.conversationError(conversationId: conversationId1, accountId: accountId1,
+                                              code: 3, message: "Denied")
+        wait(for: [received], timeout: 2)
+    }
+
+    func testSendConfirmationObservesAnImmediateReceipt() {
+        let receipts = PublishSubject<Bool>()
+        var accepted = false
+        let subscription = SwarmSendConfirmation.wait(receipts: receipts, dispatch: {
+            receipts.onNext(true)
+            return true
+        }).subscribe(onSuccess: { accepted = true })
+        defer { subscription.dispose() }
+        XCTAssertTrue(accepted)
+    }
+
+    func testDispatchIsNotConfirmationAndDenialFinishesImmediately() {
+        let receipts = PublishSubject<Bool>()
+        var accepted = false
+        let pending = SwarmSendConfirmation.wait(receipts: receipts, dispatch: { true })
+            .subscribe(onSuccess: { accepted = true })
+        XCTAssertFalse(accepted)
+        receipts.onNext(true)
+        XCTAssertTrue(accepted)
+        pending.dispose()
+
+        var failure: MessageSendError?
+        let rejected = SwarmSendConfirmation.wait(receipts: PublishSubject<Bool>(), dispatch: { false })
+            .subscribe(onFailure: { failure = $0 as? MessageSendError })
+        XCTAssertEqual(failure, .permissionDenied)
+        rejected.dispose()
+    }
     func testDaemonCallbackReturnsWhileEventHandlingIsBusy() {
         let service = makeService(adapter: ObjCMockConversationsAdapter())
         let release = DispatchSemaphore(value: 0)

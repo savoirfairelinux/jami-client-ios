@@ -104,6 +104,12 @@ struct ShareView: View {
                     dismissButton: .default(Text(L10n.Global.ok), action: closeAction)
                 )
             }
+            .alert(L10n.ShareExtension.sendFailed, isPresented: Binding(
+                get: { viewModel.sendFailure != nil },
+                set: { if !$0 { viewModel.sendFailure = nil } }
+            )) {
+                Button(L10n.Global.ok) { isSending = false }
+            }
             .onAppear {
                 handleOnAppear()
             }

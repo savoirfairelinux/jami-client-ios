@@ -19,6 +19,7 @@
 import Foundation
 
 enum ConversationStateEvent: @unchecked Sendable {
+    case conversationError(accountId: String, conversationId: String, code: Int, message: String)
     case composingStatusChanged(accountId: String, conversationId: String, from: String, status: Int)
     case reactionAdded(accountId: String, conversationId: String, messageId: String,
                        reaction: [String: String])
@@ -72,6 +73,10 @@ final class ConversationEventSource: NSObject {
 }
 
 extension ConversationEventSource: MessagesAdapterDelegate {
+
+    func conversationError(conversationId: String, accountId: String, code: Int, message: String) {
+        onStateEvent(.conversationError(accountId: accountId, conversationId: conversationId, code: code, message: message))
+    }
 
     func didReceiveMessage(_ message: [String: String], from senderAccount: String,
                            messageId: String, to receiverAccountId: String) {

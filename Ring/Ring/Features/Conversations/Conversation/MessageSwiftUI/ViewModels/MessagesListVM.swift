@@ -29,8 +29,8 @@ enum MessageInfo: State {
 }
 
 enum MessagePanelState: State {
-    case send(messages: [OutgoingMessage])
-    case editMessage(content: String, messageId: String)
+    case send(messages: [OutgoingMessage], completion: (Int, MessageSendError?) -> Void)
+    case editMessage(content: String, messageId: String, completion: (MessageSendError?) -> Void)
     case registerTypingIndicator(typingStatus: Bool)
     case sendPhoto
     case openGalery
