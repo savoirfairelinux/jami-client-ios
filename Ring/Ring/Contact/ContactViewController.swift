@@ -195,7 +195,6 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
         let alert = UIAlertController(title: L10n.Global.blockContact, message: L10n.Alerts.confirmBlockContact, preferredStyle: .alert)
         let blockAction = UIAlertAction(title: L10n.Global.block, style: .destructive) { [weak self] (_: UIAlertAction!) in
             self?.viewModel.blockContact()
-            _ = self?.navigationController?.popToRootViewController(animated: false)
         }
         let cancelAction = UIAlertAction(title: L10n.Global.cancel, style: .default) { (_: UIAlertAction!) in }
         alert.addAction(blockAction)
