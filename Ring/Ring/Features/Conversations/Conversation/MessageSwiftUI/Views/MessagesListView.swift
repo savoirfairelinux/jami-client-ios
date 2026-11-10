@@ -34,6 +34,36 @@ extension View {
     }
 }
 
+/// Stops an in-flight scroll, which would otherwise override a programmatic one.
+private final class ScrollHalt {
+    weak var anchor: UIView?
+
+    func halt() {
+        var ancestor = anchor?.superview
+        while let view = ancestor, !(view is UIScrollView) {
+            ancestor = view.superview
+        }
+        guard let scrollView = ancestor as? UIScrollView,
+              scrollView.isDragging || scrollView.isDecelerating else { return }
+        scrollView.panGestureRecognizer.isEnabled = false
+        scrollView.panGestureRecognizer.isEnabled = true
+        scrollView.setContentOffset(scrollView.contentOffset, animated: false)
+    }
+}
+
+private struct ScrollHaltAnchor: UIViewRepresentable {
+    let halt: ScrollHalt
+
+    func makeUIView(context: Context) -> UIView {
+        let view = UIView()
+        view.isUserInteractionEnabled = false
+        halt.anchor = view
+        return view
+    }
+
+    func updateUIView(_ view: UIView, context: Context) {}
+}
+
 struct ScrolledToBottomPreferenceKey: PreferenceKey {
     static var defaultValue: Bool?
 
@@ -90,6 +120,7 @@ struct MessagesListView: View {
     @SwiftUI.State private var screenHeight: CGFloat = 0
     @SwiftUI.State private var messageListWidth: CGFloat = 0
     @SwiftUI.State private var composerLayout = ComposerLayout()
+    @SwiftUI.State private var scrollHalt = ScrollHalt()
     @SwiftUI.State var isMessageBarFocused: Bool = false
     @SwiftUI.State private var keyboardWasActiveBeforeMenu: Bool = false
 
@@ -272,6 +303,7 @@ struct MessagesListView: View {
                 }
                 // The start of the content, so scrolling back lands where the conversation opened.
                 .id("lastMessage")
+                .background(ScrollHaltAnchor(halt: scrollHalt))
                 LazyVStack(spacing: 0) {
                     ComposerDepthReader(layout: composerLayout) { depth in
                         Text("")
@@ -303,6 +335,7 @@ struct MessagesListView: View {
                 .listRowBackground(Color.clear)
                 .onReceive(model.$scrollToId, perform: { (scrollToId) in
                     guard scrollToId != nil else { return }
+                    scrollHalt.halt()
                     scrollView.scrollTo("lastMessage", anchor: .top)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                         model.scrollToId = nil
