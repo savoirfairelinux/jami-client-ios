@@ -97,33 +97,16 @@ class AccountSummaryVM: AvatarProvider, AccountProfileObserver {
 
         accountService.removeAccount(id: account.id)
 
-        // Determine the new state and selected account
-        let (newSelectedAccountID, newState) = determinePostRemovalState()
-
-        if let sharedDefaults = UserDefaults(suiteName: Constants.appGroupIdentifier) {
-            sharedDefaults.set(newSelectedAccountID, forKey: Constants.selectedAccountID)
+        let newState: SettingsState
+        switch accountService.selectAccount(afterRemoving: account.id) {
+        case .noAccountLeft:
+            newState = .needToOnboard
+        case .ready:
+            newState = .accountRemoved
+        case .needsMigration(let accountId):
+            newState = .needAccountMigration(accountId: accountId)
         }
         statePublisher.emmitState(newState: newState)
-    }
-
-    // Determines the new selected account ID and the resulting state after account removal.
-    private func determinePostRemovalState() -> (String, SettingsState) {
-        let remainingAccounts = accountService.accounts.filter { $0.id != account.id }
-
-        if remainingAccounts.isEmpty {
-            // No accounts left; onboarding is required
-            return ("", .needToOnboard)
-        }
-
-        // Attempt to find a suitable next account that doesn't require migration
-        if let nextAccount = remainingAccounts.first(where: { !accountService.needAccountMigration(accountId: $0.id) }) {
-            accountService.currentAccount = nextAccount
-            return (nextAccount.id, .accountRemoved)
-        } else {
-            // Take any account and notify that migration is required
-            let accountId: String = remainingAccounts.first?.id ?? ""
-            return ("", .needAccountMigration(accountId: accountId))
-        }
     }
 }
 

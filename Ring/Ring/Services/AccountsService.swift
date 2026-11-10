@@ -45,6 +45,12 @@ enum MigrationState: String {
     case UNKOWN
 }
 
+enum AccountSelectionAfterRemoval {
+    case noAccountLeft
+    case ready
+    case needsMigration(accountId: String)
+}
+
 enum AuthState: Int32 {
     case initializing = 0
     case tokenAvailable = 1
@@ -497,6 +503,22 @@ class AccountsService: AccountAdapterDelegate {
                 .appendingPathComponent(id)
             try? FileManager.default.removeItem(atPath: recordingsURL.path)
         }
+    }
+
+    func selectAccount(afterRemoving removedAccountId: String) -> AccountSelectionAfterRemoval {
+        let sharedDefaults = UserDefaults(suiteName: Constants.appGroupIdentifier)
+        let remainingAccounts = accounts.filter { $0.id != removedAccountId }
+        guard let nextAccount = remainingAccounts.first(where: { !needAccountMigration(accountId: $0.id) })
+                ?? remainingAccounts.first else {
+            sharedDefaults?.set("", forKey: Constants.selectedAccountID)
+            return .noAccountLeft
+        }
+        currentAccount = nextAccount
+        sharedDefaults?.set(nextAccount.id, forKey: Constants.selectedAccountID)
+        if needAccountMigration(accountId: nextAccount.id) {
+            return .needsMigration(accountId: nextAccount.id)
+        }
+        return .ready
     }
 
     func removeAccountAndWaitForCompletion(id: String) -> Observable<Bool> {
