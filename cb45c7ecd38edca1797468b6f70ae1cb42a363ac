@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa64c650_b4ad7713",
+        "filename": "Ring/Ring/Coordinators/AppCoordinator.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-10T19:40:50Z",
+      "side": 1,
+      "message": "[error] Line 151: 🔴 `showNextScreen()` is executed immediately when `migration.isBeingDismissed` is true. That can start the next coordinator transition while modal dismissal is still in flight, which can lead to dropped/failed presentations (\"view is not in window hierarchy\") and inconsistent navigation state. Ensure the next state transition runs only after dismissal completes (e.g., always dismiss `migration` and call `showNextScreen` in the dismissal/transition completion).",
+      "revId": "cb45c7ecd38edca1797468b6f70ae1cb42a363ac",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
