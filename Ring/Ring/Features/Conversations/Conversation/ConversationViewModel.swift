@@ -316,7 +316,7 @@ class ConversationViewModel: Stateable, ObservableObject {
             return
         }
         /// send swarm message
-        self.conversationsService.sendSwarmMessage(conversationId: conversation.id, accountId: conversation.accountId, message: content, parentId: parentId)
+        self.conversationsService.sendSwarmMessage(conversation: conversation, message: content, parentId: parentId)
     }
 
     func setMessagesAsRead() {

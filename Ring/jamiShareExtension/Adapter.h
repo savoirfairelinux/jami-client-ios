@@ -60,4 +60,5 @@
 
 - (void)pushNotificationReceived:(NSString *) from message:(NSDictionary*) data;
 
+- (NSArray<NSString *> *)getConversationPermissions:(NSString *)accountId conversationId:(NSString *)conversationId;
 @end

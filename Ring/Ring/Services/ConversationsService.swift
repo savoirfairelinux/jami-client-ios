@@ -248,8 +248,9 @@ class ConversationsService {
         self.conversationsAdapter.sendSwarmMessage(accountId, conversationId: conversationId, message: message, parentId: parentId, flag: 2)
     }
 
-    func sendSwarmMessage(conversationId: String, accountId: String, message: String, parentId: String) {
-        self.conversationsAdapter.sendSwarmMessage(accountId, conversationId: conversationId, message: message, parentId: parentId, flag: 0)
+    func sendSwarmMessage(conversation: ConversationModel, message: String, parentId: String) {
+        guard conversation.permissions.allowsText(replying: !parentId.isEmpty) else { return }
+        self.conversationsAdapter.sendSwarmMessage(conversation.accountId, conversationId: conversation.id, message: message, parentId: parentId, flag: 0)
     }
 
     func getConversationInfo(conversationId: String, accountId: String) -> [String: String] {

@@ -23,6 +23,22 @@ import XCTest
 
 final class ConversationModelTests: XCTestCase {
 
+    func testFeedMemberCanReplyButCannotPublishOrForward() {
+        let permissions = ConversationPermissions(names: ["textReply", "fileReply", "reaction"])
+        XCTAssertFalse(permissions.allowsText(replying: false))
+        XCTAssertFalse(permissions.allowsFiles(replying: false))
+        XCTAssertTrue(permissions.allowsText(replying: true))
+        XCTAssertTrue(permissions.allowsFiles(replying: true))
+        XCTAssertFalse(permissions.allowsPublishing)
+    }
+
+    func testMissingOrUnknownGrantsDoNotAllowSharing() {
+        XCTAssertFalse(ConversationPermissions(names: []).allowsPublishing)
+        XCTAssertFalse(ConversationPermissions(names: ["futurePermission"]).allowsFiles(replying: true))
+        XCTAssertTrue(ConversationPermissions(names: ["text"]).allowsPublishing)
+        XCTAssertTrue(ConversationPermissions(names: ["file"]).allowsPublishing)
+    }
+
     func createConversation(conversationId: String, jamiId: String, type: ConversationType, accountId: String) -> ConversationModel {
         let uri = JamiURI.init(schema: URIType.ring, infoHash: jamiId)
         var info = ConversationInfo(type: type)
