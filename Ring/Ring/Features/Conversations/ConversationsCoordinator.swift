@@ -109,6 +109,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         self.callbackPlaceCall()
         self.subscribeToActiveCalls()
         self.subscribeToShownDetail()
+        self.subscribeToShownConversationClosing()
     }
 
     func start() {
@@ -197,6 +198,10 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         return splitNavigator.shownDetail as? ConversationViewController
     }
 
+    private var shownConversation: ConversationModel? {
+        return shownConversationController?.viewModel.conversation
+    }
+
     private func subscribeToShownDetail() {
         splitNavigator.shownDetailChanged
             .map { [weak self] _ -> ConversationRowVM? in
@@ -213,6 +218,36 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                 self?.conversationsModel?.selectedConversationId = conversationId
             })
             .disposed(by: self.disposeBag)
+    }
+
+    private func subscribeToShownConversationClosing() {
+        self.accountService.currentAccountChanged
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] account in
+                guard let self = self,
+                      let conversation = self.shownConversation,
+                      conversation.accountId != account?.id else { return }
+                self.popToSmartList()
+            })
+            .disposed(by: self.disposeBag)
+
+        self.conversationService.sharedResponseStream
+            .filter { $0.eventType == .conversationRemoved }
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] event in
+                guard let self = self,
+                      Self.isRemoval(event, of: self.shownConversation) else { return }
+                self.popToSmartList()
+            })
+            .disposed(by: self.disposeBag)
+    }
+
+    private static func isRemoval(_ event: ServiceEvent, of conversation: ConversationModel?) -> Bool {
+        guard event.eventType == .conversationRemoved,
+              let conversation = conversation,
+              let conversationId: String = event.getEventInput(.conversationId),
+              let accountId: String = event.getEventInput(.accountId) else { return false }
+        return conversation.id == conversationId && conversation.accountId == accountId
     }
 
     func showInDetail(_ viewController: UIViewController, animated: Bool) {
