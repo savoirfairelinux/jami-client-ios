@@ -91,13 +91,23 @@ struct ConversationsView: View {
                         .contentShape(Rectangle())
                 })
                 .buttonStyle(.plain)
+                .accessibilityAddTraits(model.isSelected(conversation) ? .isSelected : [])
                 .conditionalSmartListSwipeActions(conversation: conversation, model: model)
                 .listRowInsets(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15))
-                .listRowBackground(Color.clear)
+                .listRowBackground(rowBackground(isSelected: model.isSelected(conversation)))
                 .conversationRowSeparator(isFirstRow: conversation.id == model.filteredConversations.first?.id)
             }
         }
         .navigationBarBackButtonHidden(true)
+    }
+
+    @ViewBuilder
+    private func rowBackground(isSelected: Bool) -> some View {
+        if isSelected {
+            SelectedRowPlate()
+        } else {
+            Color.clear
+        }
     }
 }
 

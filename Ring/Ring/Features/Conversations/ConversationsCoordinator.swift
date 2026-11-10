@@ -46,6 +46,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
     let requestsService: RequestsService
     let conversationsSource: ConversationDataSource
     private weak var activeCallsController: UIViewController?
+    private weak var conversationsModel: ConversationsViewModel?
 
     init(injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
@@ -107,10 +108,15 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         // Incoming-call presentation is owned by CallScreenPresenter.
         self.callbackPlaceCall()
         self.subscribeToActiveCalls()
+        self.subscribeToShownDetail()
     }
 
     func start() {
-        let view = SmartListView(injectionBag: self.injectionBag, source: self.conversationsSource)
+        let model = ConversationsViewModel(with: self.injectionBag,
+                                           conversationsSource: self.conversationsSource,
+                                           stateEmitter: ConversationStatePublisher())
+        self.conversationsModel = model
+        let view = SmartListView(model: model)
         let viewController = createHostingVC(view)
         viewController.navigationItem.backButtonDisplayMode = .minimal
         self.splitNavigator.setListRoot(viewController)
@@ -188,6 +194,24 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
 
     private var shownConversationController: ConversationViewController? {
         return splitNavigator.shownDetail as? ConversationViewController
+    }
+
+    private func subscribeToShownDetail() {
+        splitNavigator.shownDetailChanged
+            .map { [weak self] _ -> ConversationRowVM? in
+                guard let self = self, self.splitNavigator.isExpanded else { return nil }
+                return self.shownConversationController?.viewModel.row
+            }
+            .flatMapLatest { row -> Observable<String?> in
+                guard let row = row else { return .just(nil) }
+                return row.conversationChanges.map { $0?.id }
+            }
+            .distinctUntilChanged()
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] conversationId in
+                self?.conversationsModel?.selectedConversationId = conversationId
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func showInDetail(_ viewController: UIViewController, animated: Bool) {

@@ -31,20 +31,38 @@ extension View {
     }
 }
 
+struct SelectedRowPlate: View {
+    private static let cornerRadius: CGFloat = 14
+    private static let horizontalInset: CGFloat = 8
+    private static let verticalInset: CGFloat = 2
+
+    var body: some View {
+        RoundedRectangle(cornerRadius: Self.cornerRadius, style: .continuous)
+            .fill(Color(UIColor.tertiarySystemFill))
+            .padding(.horizontal, Self.horizontalInset)
+            .padding(.vertical, Self.verticalInset)
+    }
+}
+
 private struct ConversationRowSeparatorModifier: ViewModifier {
     let isFirstRow: Bool
+
+    private var showsSeparators: Bool {
+        UIDevice.current.userInterfaceIdiom != .pad
+    }
 
     func body(content: Content) -> some View {
         if #available(iOS 16.0, *) {
             content
-                .listRowSeparator(.visible, edges: .bottom)
+                .listRowSeparator(showsSeparators ? .visible : .hidden, edges: .bottom)
                 // Hide the top separator the plain List draws above the first row.
-                .listRowSeparator(isFirstRow ? .hidden : .automatic, edges: .top)
+                .listRowSeparator(isFirstRow || !showsSeparators ? .hidden : .automatic, edges: .top)
                 .alignmentGuide(.listRowSeparatorLeading) { _ in
                     Constants.defaultAvatarSize
                 }
         } else {
             content
+                .listRowSeparator(showsSeparators ? .automatic : .hidden)
         }
     }
 }
