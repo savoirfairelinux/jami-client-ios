@@ -136,6 +136,7 @@ public struct SwarmInfoView: View, StateEmittingView {
     @SwiftUI.State private var isAvatarExpanded = false
     @SwiftUI.State private var isInvitingParticipants = false
     @SwiftUI.State private var pendingDocumentRemoval: PendingDocumentRemoval?
+    @SwiftUI.State private var contentWidth: CGFloat = 0
 
     init(viewModel: SwarmInfoVM,
          onAvatarExpansionChanged: @escaping (Bool) -> Void = { _ in }) {
@@ -157,6 +158,20 @@ public struct SwarmInfoView: View, StateEmittingView {
             views.append(.documents)
         }
         return views
+    }
+
+    private let isPhone = UIDevice.current.userInterfaceIdiom == .phone
+
+    private var availableWidth: CGFloat {
+        contentWidth > 0 ? contentWidth : screen.adaptiveWidth
+    }
+
+    private var ignoredSafeAreaEdges: Edge.Set {
+        isPhone ? [.top, .leading, .trailing] : .top
+    }
+
+    private var backgroundIgnoredSafeAreaEdges: Edge.Set {
+        isPhone ? [] : .all
     }
 
     private var collapsedTopInset: CGFloat {
@@ -191,6 +206,7 @@ public struct SwarmInfoView: View, StateEmittingView {
     public var body: some View {
         ZStack(alignment: .bottomTrailing) {
             Color(UIColor.systemGroupedBackground)
+                .ignoresSafeArea(edges: backgroundIgnoredSafeAreaEdges)
             mainContent
             floatingActionButton
             documentNamePrompt
@@ -214,7 +230,14 @@ public struct SwarmInfoView: View, StateEmittingView {
             setAvatarExpanded(canExpand, providesFeedback: false)
         }
         .onDisappear(perform: releaseExpandedAvatar)
-        .ignoresSafeArea(edges: [.top, .leading, .trailing])
+        .ignoresSafeArea(edges: ignoredSafeAreaEdges)
+        .background(
+            GeometryReader { proxy in
+                Color.clear
+                    .onAppear { contentWidth = proxy.size.width }
+                    .onChange(of: proxy.size.width) { contentWidth = $0 }
+            }
+        )
     }
 
     // MARK: - Main Content Components
@@ -228,7 +251,7 @@ public struct SwarmInfoView: View, StateEmittingView {
         .adaptiveInsetGroupedListStyle()
         .optionalListSectionSpacing(Layout.sectionSpacing)
         .hidingTopScrollEdgeEffect()
-        .ignoresSafeArea(edges: [.top, .leading, .trailing])
+        .ignoresSafeArea(edges: ignoredSafeAreaEdges)
         .safeAreaInset(edge: .bottom) {
             floatingButtonClearance
         }
@@ -307,6 +330,7 @@ public struct SwarmInfoView: View, StateEmittingView {
             provider: viewModel.provider,
             isExpanded: isAvatarExpanded,
             isGroup: viewModel.isGroupProfile,
+            expandedWidth: availableWidth,
             onToggle: { setAvatarExpanded(!isAvatarExpanded) },
             bottomOverlay: { scrimmedInfo }
         )
@@ -520,7 +544,7 @@ private extension SwarmInfoView {
                 startPoint: .top,
                 endPoint: .bottom
             )
-            .frame(width: screen.adaptiveWidth, height: height)
+            .frame(width: availableWidth, height: height)
             .ignoresSafeArea(edges: .top)
             .allowsHitTesting(false)
             .accessibilityHidden(true)

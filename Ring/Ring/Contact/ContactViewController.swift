@@ -44,6 +44,11 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
         navigationItem.titleView = titleView
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        updateHeaderLabelWidths()
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.layer.shadowColor = UIColor.clear.cgColor
@@ -51,6 +56,15 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.navigationBar.layer.shadowColor = UIColor.jamiNavigationBarShadow.cgColor
+    }
+
+    private func updateHeaderLabelWidths() {
+        guard let header = stretchyHeader else { return }
+        let maxLabelWidth = view.bounds.inset(by: view.safeAreaInsets).width * 0.90
+        guard header.jamiID.preferredMaxLayoutWidth != maxLabelWidth else { return }
+        header.jamiID.preferredMaxLayoutWidth = maxLabelWidth
+        header.userName.preferredMaxLayoutWidth = maxLabelWidth
+        header.displayName.preferredMaxLayoutWidth = maxLabelWidth
     }
 
     private func addHeaderView() {
@@ -98,11 +112,6 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
             return
         })
         .disposed(by: self.disposeBag)
-
-        let maxLabelWidth = ScreenDimensionsManager.shared.adaptiveWidth * 0.90
-        self.stretchyHeader.jamiID.preferredMaxLayoutWidth = maxLabelWidth
-        self.stretchyHeader.userName.preferredMaxLayoutWidth = maxLabelWidth
-        self.stretchyHeader.displayName.preferredMaxLayoutWidth = maxLabelWidth
 
         self.viewModel.displayName.asDriver()
             .drive(self.stretchyHeader.displayName.rx.text)
