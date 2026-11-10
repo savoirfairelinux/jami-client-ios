@@ -121,6 +121,9 @@ extension Coordinator {
                                             animated: animation,
                                             completion: nil)
         case .show:
+            if !(self.rootViewController is UINavigationController) {
+                assertionFailure("\(style) needs a navigation controller root")
+            }
             self.rootViewController.show(viewController, sender: nil)
         case .fadeInOverFullScreen:
             viewController.modalPresentationStyle = .overFullScreen
@@ -133,15 +136,21 @@ extension Coordinator {
                 // ensure we on the root view controller
                 contoller.popViewController(animated: false)
                 contoller.pushViewController(viewController, animated: false)
+            } else {
+                assertionFailure("\(style) needs a navigation controller root")
             }
 
         case .push:
             if let contoller: UINavigationController = self.rootViewController as? UINavigationController {
                 contoller.pushViewController(viewController, animated: animation)
+            } else {
+                assertionFailure("\(style) needs a navigation controller root")
             }
         case .replaceNavigationStack:
             if let contoller: UINavigationController = self.rootViewController as? UINavigationController {
                 contoller.setViewControllers([viewController], animated: animation)
+            } else {
+                assertionFailure("\(style) needs a navigation controller root")
             }
 
         }
