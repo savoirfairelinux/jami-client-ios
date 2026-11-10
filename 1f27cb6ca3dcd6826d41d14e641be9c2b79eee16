@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df97f32a_06257606",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-10T19:47:02Z",
+      "side": 1,
+      "message": "[warning] Line 115: 🟡 `conversationErrors` unconditionally sets `messagePanel.sendFailure` for any conversation-scoped daemon error, even when no send/edit is pending. This can display a send-failure alert unrelated to the user’s current composer action. Gate this to an active send attempt (or classify errors so only send-related failures surface in the composer).",
+      "revId": "1f27cb6ca3dcd6826d41d14e641be9c2b79eee16",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43b15dcc_3aa52938",
+        "filename": "Ring/Ring/Services/DataTransferService.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-10T19:47:02Z",
+      "side": 1,
+      "message": "[error] Line 166: 🔴 `sendFileConfirmed` correlates receipt events using `path \u003d\u003d filePath`, but `sendReceipts` is fed with `transferId` from `dataTransferEvent` (not the original file path). This mismatch prevents positive matches, so successful sends can time out as `unconfirmed` and drafts are retained incorrectly. Correlate with the actual transfer identifier emitted by the adapter (or store a dispatch-time mapping) before filtering.",
+      "revId": "1f27cb6ca3dcd6826d41d14e641be9c2b79eee16",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
