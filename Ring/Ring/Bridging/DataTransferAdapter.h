@@ -28,7 +28,7 @@
 @property (class, nonatomic, weak) id <DataTransferAdapterDelegate> delegate;
 
 ///swarm conversations
-- (void)sendSwarmFileWithName:(NSString*)displayName
+- (BOOL)sendSwarmFileWithName:(NSString*)displayName
                     accountId:(NSString*)accountId
                conversationId:(NSString*)conversationId
                  withFilePath:(NSString*)filePath
@@ -48,4 +48,5 @@
 - (NSDataTransferError)cancelDataTransferWithId:(NSString*)fileId
                                       accountId:(NSString*)accountId
                                  conversationId:(NSString*)conversationId;
+- (NSArray<NSString *> *)getConversationPermissions:(NSString *)accountId conversationId:(NSString *)conversationId;
 @end

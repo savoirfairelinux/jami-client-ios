@@ -17,6 +17,7 @@
  */
 
 #import "ConversationsAdapter.h"
+#import "DataTransferAdapter.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -24,6 +25,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSDictionary<NSString *, NSString *> *info;
 @property (nonatomic, copy) NSDictionary<NSString *, NSString *> *preferences;
 @property (nonatomic, copy) NSArray<NSDictionary<NSString *, NSString *> *> *members;
+@property (nonatomic, copy) NSArray<NSString *> *permissions;
+@end
+
+@interface ObjCMockSendFileAdapter : DataTransferAdapter
+@property (nonatomic, copy) NSArray<NSString *> *permissions;
 @end
 
 NS_ASSUME_NONNULL_END
