@@ -229,4 +229,212 @@ final class ConversationSplitNavigatorTests: XCTestCase {
 
         XCTAssertEqual(topColumnForCollapsing(), .secondary)
     }
+
+    // MARK: - Expand
+
+    private func expand() {
+        isExpanded = true
+        _ = navigator.splitViewController(navigator.splitViewController,
+                                          displayModeForExpandingToProposedDisplayMode: .oneBesideSecondary)
+        navigator.splitViewControllerDidExpand(navigator.splitViewController)
+    }
+
+    func testExpandingMovesListDetailToDetailColumn() {
+        let conversation = UIViewController()
+        let info = UIViewController()
+        navigator.showInDetail(conversation, animated: false)
+        navigator.pushOntoDetail(info, animated: false)
+
+        expand()
+
+        XCTAssertEqual(listNavigation.viewControllers, [list])
+        XCTAssertEqual(detailControllers, [conversation, info])
+        XCTAssertTrue(navigator.shownDetail === conversation)
+    }
+
+    func testListShownDuringExpansionKeepsShownDetail() {
+        let conversation = UIViewController()
+        navigator.showInDetail(conversation, animated: false)
+
+        _ = navigator.splitViewController(navigator.splitViewController,
+                                          displayModeForExpandingToProposedDisplayMode: .oneBesideSecondary)
+        navigator.navigationController(listNavigation, didShow: list, animated: false)
+        isExpanded = true
+        navigator.splitViewControllerDidExpand(navigator.splitViewController)
+
+        XCTAssertTrue(navigator.shownDetail === conversation)
+        XCTAssertEqual(detailControllers, [conversation])
+    }
+
+    func testExpandingAfterReturningToListShowsPlaceholder() {
+        navigator.showInDetail(UIViewController(), animated: false)
+        returnToList()
+
+        expand()
+
+        XCTAssertTrue(navigator.isShowingPlaceholder)
+        XCTAssertNil(navigator.shownDetail)
+    }
+
+    func testExpandingWithEmptyDetailShowsPlaceholder() {
+        navigator.detailNavigationController?.setViewControllers([], animated: false)
+
+        expand()
+
+        XCTAssertTrue(navigator.isShowingPlaceholder)
+    }
+}
+
+private final class SizeClassHost: UIViewController {
+    func setCompact(_ compact: Bool, for child: UIViewController) {
+        setOverrideTraitCollection(UITraitCollection(horizontalSizeClass: compact ? .compact : .regular),
+                                   forChildViewController: child)
+    }
+}
+
+final class ConversationSplitNavigatorTransitionTests: XCTestCase {
+    private var window: UIWindow!
+    private var host: SizeClassHost!
+    private var list: UIViewController!
+    private var listNavigation: UINavigationController!
+    private var navigator: ConversationSplitNavigator!
+
+    override func setUp() {
+        super.setUp()
+        let scene = UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }.first!
+        window = UIWindow(windowScene: scene)
+        window.frame = scene.coordinateSpace.bounds
+        host = SizeClassHost()
+        window.rootViewController = host
+        window.makeKeyAndVisible()
+        list = UIViewController()
+        listNavigation = UINavigationController(rootViewController: list)
+        navigator = ConversationSplitNavigator(listNavigationController: listNavigation,
+                                               makePlaceholder: { UIViewController() },
+                                               usesSplitView: true)
+        let split = navigator.splitViewController
+        host.addChildViewController(split)
+        split.view.frame = host.view.bounds
+        split.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        host.view.addSubview(split.view)
+        split.didMove(toParentViewController: host)
+        setCompact(false)
+    }
+
+    override func tearDown() {
+        window.isHidden = true
+        window = nil
+        host = nil
+        navigator = nil
+        listNavigation = nil
+        list = nil
+        super.tearDown()
+    }
+
+    private func settle() {
+        RunLoop.current.run(until: Date().addingTimeInterval(0.8))
+    }
+
+    private func setCompact(_ compact: Bool) {
+        host.setCompact(compact, for: navigator.splitViewController)
+        settle()
+    }
+
+    private var detailControllers: [UIViewController] {
+        return navigator.detailNavigationController?.viewControllers ?? []
+    }
+
+    func testDetailSurvivesNarrowingAndWidening() {
+        let conversation = UIViewController()
+        let info = UIViewController()
+        navigator.showInDetail(conversation, animated: false)
+        navigator.pushOntoDetail(info, animated: false)
+        settle()
+
+        setCompact(true)
+        XCTAssertTrue(navigator.shownDetail === conversation)
+        setCompact(false)
+
+        XCTAssertEqual(listNavigation.viewControllers, [list])
+        XCTAssertEqual(detailControllers, [conversation, info])
+        XCTAssertTrue(navigator.shownDetail === conversation)
+    }
+
+    func testScreensOpenedWhileNarrowMoveToDetailOnWidening() {
+        setCompact(true)
+        let conversation = UIViewController()
+        let info = UIViewController()
+        navigator.showInDetail(conversation, animated: false)
+        navigator.pushOntoDetail(info, animated: false)
+        settle()
+
+        setCompact(false)
+
+        XCTAssertEqual(listNavigation.viewControllers, [list])
+        XCTAssertEqual(detailControllers, [conversation, info])
+        XCTAssertTrue(navigator.shownDetail === conversation)
+    }
+
+    func testBackToListWhileNarrowShowsPlaceholderOnWidening() {
+        navigator.showInDetail(UIViewController(), animated: false)
+        settle()
+        setCompact(true)
+
+        listNavigation.popToRootViewController(animated: false)
+        settle()
+        XCTAssertNil(navigator.shownDetail)
+        setCompact(false)
+
+        XCTAssertTrue(navigator.isShowingPlaceholder)
+        XCTAssertEqual(listNavigation.viewControllers, [list])
+    }
+
+    func testNarrowingWithPlaceholderShowsOnlyList() {
+        setCompact(true)
+
+        XCTAssertEqual(listNavigation.viewControllers, [list])
+        XCTAssertNil(navigator.shownDetail)
+    }
+
+    func testRevealWhileNarrow() {
+        let conversation = UIViewController()
+        navigator.showInDetail(conversation, animated: false)
+        navigator.pushOntoDetail(UIViewController(), animated: false)
+        settle()
+        setCompact(true)
+
+        XCTAssertTrue(navigator.reveal(conversation, animated: false))
+        settle()
+
+        XCTAssertTrue(conversation.navigationController?.topViewController === conversation)
+    }
+
+    func testPopToListWhileNarrowShowsPlaceholderOnWidening() {
+        navigator.showInDetail(UIViewController(), animated: false)
+        settle()
+        setCompact(true)
+
+        navigator.popToList(animated: false)
+        settle()
+        setCompact(false)
+
+        XCTAssertTrue(navigator.isShowingPlaceholder)
+        XCTAssertNil(navigator.shownDetail)
+        XCTAssertEqual(listNavigation.viewControllers, [list])
+    }
+
+    func testRepeatedResizesKeepDetail() {
+        let conversation = UIViewController()
+        navigator.showInDetail(conversation, animated: false)
+        settle()
+
+        for _ in 1...3 {
+            setCompact(true)
+            setCompact(false)
+        }
+
+        XCTAssertEqual(listNavigation.viewControllers, [list])
+        XCTAssertEqual(detailControllers, [conversation])
+        XCTAssertTrue(navigator.shownDetail === conversation)
+    }
 }

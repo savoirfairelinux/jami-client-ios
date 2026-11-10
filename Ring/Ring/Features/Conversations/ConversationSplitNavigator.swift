@@ -31,6 +31,7 @@ final class ConversationSplitNavigator: NSObject, UISplitViewControllerDelegate,
     private let makePlaceholder: () -> UIViewController
     private let isExpandedOverride: (() -> Bool)?
     private weak var placeholder: UIViewController?
+    private var isExpanding = false
 
     init(listNavigationController: UINavigationController = UINavigationController(),
          makePlaceholder: @escaping () -> UIViewController,
@@ -171,6 +172,39 @@ final class ConversationSplitNavigator: NSObject, UISplitViewControllerDelegate,
         return shownDetail == nil ? .primary : proposedTopColumn
     }
 
+    func splitViewControllerDidCollapse(_ svc: UISplitViewController) {
+        isExpanding = false
+        shownDetailChanged.accept(())
+    }
+
+    func splitViewController(_ svc: UISplitViewController,
+                             displayModeForExpandingToProposedDisplayMode proposedDisplayMode: UISplitViewController.DisplayMode)
+    -> UISplitViewController.DisplayMode {
+        isExpanding = true
+        moveListDetailToDetailColumn()
+        return proposedDisplayMode
+    }
+
+    func splitViewControllerDidExpand(_ svc: UISplitViewController) {
+        isExpanding = false
+        let detail = detailNavigationController?.viewControllers ?? []
+        let showsShownDetail = shownDetail.map { detail.contains($0) } ?? false
+        if !showsShownDetail && !isShowingPlaceholder {
+            showPlaceholder()
+            shownDetail = nil
+        }
+        shownDetailChanged.accept(())
+    }
+
+    private func moveListDetailToDetailColumn() {
+        let stack = listNavigationController.viewControllers
+        guard let list = stack.first, stack.count > 1,
+              let detail = detailNavigationController,
+              !stack.contains(where: { $0 === detail }) else { return }
+        listNavigationController.setViewControllers([list], animated: false)
+        detail.setViewControllers(Array(stack.dropFirst()), animated: false)
+    }
+
     // MARK: - UINavigationControllerDelegate
 
     func navigationController(_ navigationController: UINavigationController,
@@ -179,6 +213,7 @@ final class ConversationSplitNavigator: NSObject, UISplitViewControllerDelegate,
         guard navigationController === listNavigationController,
               viewController === listNavigationController.viewControllers.first,
               !isExpanded,
+              !isExpanding,
               shownDetail != nil else { return }
         popToList(animated: false)
     }
