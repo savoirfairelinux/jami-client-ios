@@ -48,7 +48,7 @@ final class AppCoordinator: Coordinator, StateableResponsive {
 
     // MARK: Coordinator
     var rootViewController: UIViewController {
-        return self.navigationController
+        return self.containerViewController
     }
     var parentCoordinator: Coordinator?
 
@@ -63,6 +63,7 @@ final class AppCoordinator: Coordinator, StateableResponsive {
 
     // MARK: Private members
     private let navigationController = UINavigationController()
+    private let containerViewController = RootContainerViewController()
     private weak var migrationController: UIViewController?
     let injectionBag: InjectionBag
 
@@ -77,6 +78,7 @@ final class AppCoordinator: Coordinator, StateableResponsive {
 
     init(injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
+        self.containerViewController.display(self.navigationController)
         self.stateSubject
             .subscribe(onNext: { [weak self] (state) in
                 guard let self = self, let state = state as? AppState else { return }
@@ -99,7 +101,7 @@ final class AppCoordinator: Coordinator, StateableResponsive {
     func start () {
         if callScreenPresenter == nil {
             let presenter = CallScreenPresenter(callService: injectionBag.callService,
-                                                navigationController: navigationController,
+                                                rootViewController: containerViewController,
                                                 injectionBag: injectionBag)
             presenter.onOpenConversation = { [weak self] route in
                 self?.conversationsCoordinator?
@@ -211,6 +213,7 @@ final class AppCoordinator: Coordinator, StateableResponsive {
     func showInitialLoading () {
         let initialLoading = InitialLoadingViewController.instantiate()
         self.navigationController.setViewControllers([initialLoading], animated: false)
+        self.containerViewController.display(self.navigationController)
     }
 
     func showDatabaseError() {
@@ -250,10 +253,12 @@ final class AppCoordinator: Coordinator, StateableResponsive {
         if self.isConversationsPresented() {
             return
         }
-        let conversationsCoordinator = ConversationsCoordinator(navigationController: self.navigationController, injectionBag: self.injectionBag)
+        let conversationsCoordinator = ConversationsCoordinator(injectionBag: self.injectionBag)
         conversationsCoordinator.parentCoordinator = self
         self.addChildCoordinator(childCoordinator: conversationsCoordinator)
         conversationsCoordinator.start()
+        self.containerViewController.display(conversationsCoordinator.rootViewController)
+        self.navigationController.setViewControllers([], animated: false)
     }
 
     private func isConversationsPresented() -> Bool {
