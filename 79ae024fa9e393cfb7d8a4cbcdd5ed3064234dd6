@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b30ba5a_8d470bb5",
+        "filename": "Ring/Ring/Features/Conversations/ConversationsCoordinator.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-10T19:35:11Z",
+      "side": 1,
+      "message": "[warning] Line 385: 🟡 `popToExistingConversation` now checks only `shownDetail`, so it misses conversations that are already in the navigation stack but not currently tracked as `shownDetail` (for example after opening another detail screen, or when another conversation is on top in compact mode). In those cases it returns `false` and pushes a duplicate conversation controller. Restore a stack-wide lookup (in list/detail navigation stacks) and reveal/pop to the existing `ConversationViewController` before creating a new one.",
+      "revId": "79ae024fa9e393cfb7d8a4cbcdd5ed3064234dd6",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
