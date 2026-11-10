@@ -62,6 +62,8 @@ struct ConversationContentMaterialModifier<S: Shape>: ViewModifier {
 enum NavBarIcon {
     static let glyphSize: CGFloat = 20
     static let tapTarget: CGFloat = 44
+    static let groupSpacing: CGFloat = 4
+    static let groupPadding: CGFloat = 2
 }
 
 extension View {

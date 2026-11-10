@@ -40,6 +40,7 @@ class ConversationViewModel: Stateable, ObservableObject {
     @Published var navBarContentWidth: CGFloat = 0
     @Published var navBarReservesWindowControls = false
     @Published var navBarHasBackButton = true
+    @Published var peerSharingSheet: PeerSharingViewModel?
     @Published private(set) var navBarAvatarProvider: AvatarProvider
 
     let row: ConversationRowVM

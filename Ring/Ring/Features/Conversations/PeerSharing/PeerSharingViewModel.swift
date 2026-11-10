@@ -25,7 +25,7 @@ struct PresentedPeerService: Identifiable {
     var id: String { service.id }
 }
 
-class PeerSharingViewModel: ObservableObject {
+class PeerSharingViewModel: ObservableObject, Identifiable {
 
     @Published var isLoading = false
     @Published var services = [PeerServiceInfo]()
