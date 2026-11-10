@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfbc4f9c_8d34b903",
+        "filename": "Ring/Ring/Protocols/Coordinator.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-10T19:42:29Z",
+      "side": 1,
+      "message": "[warning] Line 124: 🟡 The `.show` assertion is stricter than UIKit’s `show` contract and can fire on valid setups where `rootViewController` is embedded in a navigation stack (`rootViewController.navigationController !\u003d nil`) but is not itself a `UINavigationController`. This can crash debug builds even though navigation would succeed. Prefer asserting on effective navigation availability (e.g., `root as? UINavigationController ?? root.navigationController`) or drop the `.show` nav-root assertion and keep strict checks only for true push-only styles.",
+      "revId": "1483572bd9e5c6840b7773ce233605f2398fb4fa",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
