@@ -175,11 +175,8 @@ class MediaPreviewPresenter: ObservableObject {
     private static func computeNavBarBottomY(in scene: UIWindowScene) -> CGFloat {
         for window in scene.windows where window.windowLevel == .normal {
             guard let rootVC = window.rootViewController else { continue }
-            var candidate: UINavigationController?
+            var candidate = firstNavigationController(in: rootVC)
             var current: UIViewController = rootVC
-            if let nav = current as? UINavigationController {
-                candidate = nav
-            }
             while let presented = current.presentedViewController {
                 if let nav = presented as? UINavigationController {
                     candidate = nav
@@ -195,6 +192,18 @@ class MediaPreviewPresenter: ObservableObject {
             }
         }
         return UIWindow.currentSafeAreaInsets.top
+    }
+
+    private static func firstNavigationController(in controller: UIViewController) -> UINavigationController? {
+        if let nav = controller as? UINavigationController {
+            return nav
+        }
+        for child in controller.children {
+            if let nav = firstNavigationController(in: child) {
+                return nav
+            }
+        }
+        return nil
     }
 }
 

@@ -86,6 +86,7 @@
 		1A2D189A1F2642C000B2C785 /* NotificationCenter+Ring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2D18991F2642C000B2C785 /* NotificationCenter+Ring.swift */; };
 		1A2D189C1F264AD900B2C785 /* UIViewController+Ring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2D189B1F264AD900B2C785 /* UIViewController+Ring.swift */; };
 		1A2D18A41F27EF5200B2C785 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2D18A31F27EF5200B2C785 /* AppCoordinator.swift */; };
+		5D11A0000000000000000002 /* RootContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D11A0000000000000000001 /* RootContainerViewController.swift */; };
 		1A2D18A61F27F7A400B2C785 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2D18A51F27F7A400B2C785 /* UIViewController+Rx.swift */; };
 		1A2D18AA1F29131900B2C785 /* ConversationsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2D18A91F29131900B2C785 /* ConversationsCoordinator.swift */; };
 		1A2D18C11F29180700B2C785 /* AccountConfigModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2D18B91F29180700B2C785 /* AccountConfigModel.swift */; };
@@ -793,6 +794,7 @@
 		1A2D18991F2642C000B2C785 /* NotificationCenter+Ring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NotificationCenter+Ring.swift"; sourceTree = "<group>"; };
 		1A2D189B1F264AD900B2C785 /* UIViewController+Ring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ring.swift"; sourceTree = "<group>"; };
 		1A2D18A31F27EF5200B2C785 /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		5D11A0000000000000000001 /* RootContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootContainerViewController.swift; sourceTree = "<group>"; };
 		1A2D18A51F27F7A400B2C785 /* UIViewController+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
 		1A2D18A91F29131900B2C785 /* ConversationsCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationsCoordinator.swift; sourceTree = "<group>"; };
 		1A2D18B91F29180700B2C785 /* AccountConfigModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountConfigModel.swift; sourceTree = "<group>"; };
@@ -3203,6 +3205,7 @@
 			children = (
 				1A0C4EE21F1D673600550433 /* InjectionBag.swift */,
 				1A2D18A31F27EF5200B2C785 /* AppCoordinator.swift */,
+				5D11A0000000000000000001 /* RootContainerViewController.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -4549,6 +4552,7 @@
 				267B95F92C2B5FB000353B01 /* LinkDeviceView.swift in Sources */,
 				0273C2FF1E0C438F00CF00BA /* AccountAdapterDelegate.swift in Sources */,
 				1A2D18A41F27EF5200B2C785 /* AppCoordinator.swift in Sources */,
+				5D11A0000000000000000002 /* RootContainerViewController.swift in Sources */,
 				26F1D8E22FC73C39002AA754 /* PeerServicesAdapterDelegate.swift in Sources */,
 				26F1D8E32FC73C39002AA754 /* PeerSharingService.swift in Sources */,
 				A7C3E1F52F80A10100C0FFEE /* PeerSharingTracker.swift in Sources */,
