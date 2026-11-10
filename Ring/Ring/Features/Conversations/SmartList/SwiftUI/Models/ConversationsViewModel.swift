@@ -77,6 +77,7 @@ class ConversationsViewModel: ObservableObject {
 
     @Published var filteredConversations: [ConversationRowVM] = []
     @Published private(set) var conversationsLoaded = false
+    @Published var selectedConversationId: String?
 
     /// Identity of the conversations `List`. Changing this (on account switch)
     /// forces SwiftUI to discard and rebuild the entire list, releasing the
@@ -331,6 +332,11 @@ class ConversationsViewModel: ObservableObject {
         let state = ConversationState
             .conversationDetail(row: newConversation)
         publisher.emitState(state)
+    }
+
+    func isSelected(_ row: ConversationRowVM) -> Bool {
+        guard let id = row.conversation?.id, !id.isEmpty else { return false }
+        return id == selectedConversationId
     }
 
     func performDestructiveAction(_ action: ConversationDestructiveAction, row: ConversationRowVM) {
