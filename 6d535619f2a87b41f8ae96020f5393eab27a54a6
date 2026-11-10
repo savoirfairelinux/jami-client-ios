@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0ef32ce_7e37e7af",
+        "filename": "Ring/Ring/Coordinators/RootContainerViewController.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-10T21:50:19Z",
+      "side": 1,
+      "message": "[warning] Line 26: 🟡 `display(_:)` swaps child controllers with manual `addChild/removeFromParent`, but it does not run a containment transition (`transition(from:to:...)` or explicit `begin/endAppearanceTransition`). When the root container is already visible, this can skip child appearance callbacks (`viewWillAppear/viewDidAppear` and disappearance counterparts), which can break setup/teardown logic in hosted screens. Use `transition(from:to:duration:options:animations:completion:)` (or explicit appearance transition calls) for the swap so lifecycle delivery stays correct.",
+      "revId": "6d535619f2a87b41f8ae96020f5393eab27a54a6",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
