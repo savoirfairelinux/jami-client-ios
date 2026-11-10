@@ -63,6 +63,7 @@ final class AppCoordinator: Coordinator, StateableResponsive {
 
     // MARK: Private members
     private let navigationController = UINavigationController()
+    private weak var migrationController: UIViewController?
     let injectionBag: InjectionBag
 
     private enum InitialState {
@@ -119,12 +120,57 @@ final class AppCoordinator: Coordinator, StateableResponsive {
     }
 
     func migrateAccount(accountId: String) {
+        guard self.migrationController == nil, self.getTopController() != nil else { return }
         let view = AccountMigrationView(accountId: accountId,
                                         accountService: injectionBag.accountService,
                                         profileService: injectionBag.profileService,
-                                        onCompletion: nil)
-        let viewController = createHostingVC(view)
-        self.present(viewController: viewController, withStyle: .replaceNavigationStack, withAnimation: false, withStateable: view.stateEmitter)
+                                        dismissesItself: false,
+                                        onCompletion: { [weak self] migrated in
+                                            self?.finishMigration(accountId: accountId, migrated: migrated)
+                                        })
+        let migration = UINavigationController(rootViewController: createHostingVC(view))
+        self.migrationController = migration
+        self.presentFromTopController(viewController: migration,
+                                      style: .fullScreen,
+                                      animation: false,
+                                      stateable: view.stateEmitter)
+    }
+
+    private func finishMigration(accountId: String, migrated: Bool) {
+        let migration = self.migrationController
+        self.migrationController = nil
+        let showNextScreen = { [weak self] in
+            guard let self = self else { return }
+            if migrated {
+                self.stateSubject.onNext(AppState.allSet)
+            } else {
+                self.showScreenAfterRemoving(accountId: accountId)
+            }
+        }
+        guard let migration = migration, let presenting = migration.presentingViewController else {
+            showNextScreen()
+            return
+        }
+        presenting.dismiss(animated: true, completion: showNextScreen)
+    }
+
+    private func showScreenAfterRemoving(accountId: String) {
+        let accountService = injectionBag.accountService
+        let sharedDefaults = UserDefaults(suiteName: Constants.appGroupIdentifier)
+        let remainingAccounts = accountService.accounts.filter { $0.id != accountId }
+        guard !remainingAccounts.isEmpty else {
+            sharedDefaults?.set("", forKey: Constants.selectedAccountID)
+            self.stateSubject.onNext(AppState.needToOnboard(animated: true, isFirstAccount: true))
+            return
+        }
+        if let nextAccount = remainingAccounts.first(where: { !accountService.needAccountMigration(accountId: $0.id) }) {
+            accountService.currentAccount = nextAccount
+            sharedDefaults?.set(nextAccount.id, forKey: Constants.selectedAccountID)
+            self.stateSubject.onNext(AppState.allSet)
+        } else if let nextAccount = remainingAccounts.first {
+            sharedDefaults?.set("", forKey: Constants.selectedAccountID)
+            self.stateSubject.onNext(AppState.needAccountMigration(accountId: nextAccount.id))
+        }
     }
 
     func initialLoadingCompleted() {

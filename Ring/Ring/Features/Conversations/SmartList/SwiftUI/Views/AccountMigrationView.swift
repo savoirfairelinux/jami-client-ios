@@ -24,11 +24,17 @@ struct AccountMigrationView: View {
     @Environment(\.presentationMode) private var presentationMode
     let stateEmitter = ConversationStatePublisher()
     let onCompletion: ((Bool) -> Void)?
+    private let dismissesItself: Bool
 
-    init(accountId: String, accountService: AccountsService, profileService: ProfilesService, onCompletion: ((Bool) -> Void)?) {
+    init(accountId: String,
+         accountService: AccountsService,
+         profileService: ProfilesService,
+         dismissesItself: Bool = true,
+         onCompletion: ((Bool) -> Void)?) {
         _model = StateObject(wrappedValue: AccountMigrationModel(accountId: accountId,
                                                                  accountService: accountService,
                                                                  profileService: profileService))
+        self.dismissesItself = dismissesItself
         self.onCompletion = onCompletion
     }
 
@@ -151,7 +157,7 @@ struct AccountMigrationView: View {
     private var removeButton: some View {
         Button(action: {
             model.removeAccount()
-            presentationMode.wrappedValue.dismiss()
+            dismissIfOwned()
             onCompletion?(false)
         }, label: {
             Text(L10n.Global.removeAccount)
@@ -179,9 +185,15 @@ struct AccountMigrationView: View {
 
     private func handleMigrationCompletion() {
         if model.migrationCompleted {
-            presentationMode.wrappedValue.dismiss()
+            dismissIfOwned()
             onCompletion?(true)
             model.migrationCompleted = false
+        }
+    }
+
+    private func dismissIfOwned() {
+        if dismissesItself {
+            presentationMode.wrappedValue.dismiss()
         }
     }
 }
