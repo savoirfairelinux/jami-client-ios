@@ -74,15 +74,17 @@ class SettingsCoordinator: Coordinator, StateableResponsive {
 
     func needToOnboard() {
         if let parent = self.parentCoordinator as? ConversationsCoordinator {
-            parent.stateSubject.onNext(ConversationState.needToOnboard)
-            self.finish()
+            self.finish {
+                parent.stateSubject.onNext(ConversationState.needToOnboard)
+            }
         }
     }
 
     func migrateAccount(accountId: String) {
         if let parent = self.parentCoordinator as? ConversationsCoordinator {
-            parent.stateSubject.onNext(ConversationState.needAccountMigration(accountId: accountId))
-            self.finish()
+            self.finish {
+                parent.stateSubject.onNext(ConversationState.needAccountMigration(accountId: accountId))
+            }
         }
     }
 
@@ -90,8 +92,12 @@ class SettingsCoordinator: Coordinator, StateableResponsive {
 
     }
 
-    func finish() {
+    func finish(completion: (() -> Void)? = nil) {
         self.navigationController.setViewControllers([], animated: false)
-        self.rootViewController.dismiss(animated: false)
+        guard self.rootViewController.presentingViewController != nil else {
+            completion?()
+            return
+        }
+        self.rootViewController.dismiss(animated: false, completion: completion)
     }
 }
