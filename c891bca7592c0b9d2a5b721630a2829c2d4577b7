@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d890618_2cae0d06",
+        "filename": "Ring/Ring/Coordinators/AppCoordinator.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-10T20:33:09Z",
+      "side": 1,
+      "message": "[error] Line 175: 🔴 `showScreenAfterRemoving` still leaves `accountService.currentAccount` inconsistent in two paths: when `remainingAccounts.isEmpty` and when all remaining accounts require migration. In both cases, `currentAccount` can continue pointing to the removed account (or remain stale), while navigation proceeds to onboarding/migration. Set `currentAccount \u003d nil` in the empty branch and set it to `nextAccount` before emitting `.needAccountMigration` in the migration-required branch to keep in-memory account state aligned with persisted selection and avoid downstream logic using a deleted account.",
+      "revId": "c891bca7592c0b9d2a5b721630a2829c2d4577b7",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
