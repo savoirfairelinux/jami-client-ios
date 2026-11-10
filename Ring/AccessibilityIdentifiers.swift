@@ -59,4 +59,7 @@ struct SmartListAccessibilityIdentifiers {
 
 struct ConversationAccessibilityIdentifiers {
     static let sendInvitationButton = "sendInvitationButton"
+    static let peerServicesButton = "peerServicesButton"
+    static let audioCallButton = "audioCallButton"
+    static let videoCallButton = "videoCallButton"
 }

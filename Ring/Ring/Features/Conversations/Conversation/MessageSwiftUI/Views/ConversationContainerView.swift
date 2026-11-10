@@ -22,32 +22,25 @@ struct ConversationContainerView: View {
     @ObservedObject var viewModel: ConversationViewModel
     @ObservedObject var peerSharing: PeerSharingTracker
     @StateObject private var mediaPreviewPresenter = MediaPreviewPresenter()
-    @SwiftUI.State private var showPeerServices = false
-    @SwiftUI.State private var peerSharingVM: PeerSharingViewModel?
-
-    private enum TrailingButton: Hashable {
-        case peerSharing
-        case audioCall
-        case videoCall
-    }
-
-    private var visibleTrailingButtons: [TrailingButton] {
-        guard !viewModel.isBlocked else { return [] }
-        var buttons: [TrailingButton] = []
-        if peerSharing.hasPeerSharing { buttons.append(.peerSharing) }
-        guard viewModel.canStartCalls else { return buttons }
-        buttons.append(.audioCall)
-        if !viewModel.isAccountSip { buttons.append(.videoCall) }
-        return buttons
-    }
 
     private var titleMaxWidth: CGFloat {
         ConversationNavBarLayout.titleMaxWidth(
             barContentWidth: viewModel.navBarContentWidth,
-            trailingButtonCount: visibleTrailingButtons.count,
+            trailingButtonCount: ConversationTrailingButton.visible(viewModel: viewModel,
+                                                                    peerSharing: peerSharing).count,
             reservesWindowControls: viewModel.navBarReservesWindowControls,
             hasBackButton: viewModel.navBarHasBackButton
         )
+    }
+
+    private var peerSharingSheet: Binding<PeerSharingViewModel?> {
+        Binding(get: { viewModel.peerSharingSheet },
+                set: { presented in
+                    if presented == nil {
+                        viewModel.peerSharingSheet?.closePeerSession()
+                    }
+                    viewModel.peerSharingSheet = presented
+                })
     }
 
     var body: some View {
@@ -65,15 +58,10 @@ struct ConversationContainerView: View {
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
-            .navigationBarItems(leading: conversationTitleView, trailing: trailingButtons)
-            .sheet(isPresented: $showPeerServices, onDismiss: {
-                peerSharingVM?.closePeerSession()
-                peerSharingVM = nil
-            }, content: {
-                if let peerVM = peerSharingVM {
-                    PeerSharingSheet(viewModel: peerVM)
-                }
-            })
+            .navigationBarItems(leading: conversationTitleView)
+            .sheet(item: peerSharingSheet) { peerVM in
+                PeerSharingSheet(viewModel: peerVM)
+            }
     }
 
     // MARK: - Title View
@@ -111,50 +99,61 @@ struct ConversationContainerView: View {
             .frame(maxWidth: titleMaxWidth, alignment: .leading)
         }
     }
+}
 
-    // MARK: - Trailing Buttons
+enum ConversationTrailingButton: Hashable {
+    case peerSharing
+    case audioCall
+    case videoCall
 
-    @ViewBuilder private var trailingButtons: some View {
-        let buttons = visibleTrailingButtons
-        HStack(spacing: 0) {
+    static func visible(isBlocked: Bool,
+                        canStartCalls: Bool,
+                        hasPeerSharing: Bool,
+                        isAccountSip: Bool) -> [ConversationTrailingButton] {
+        guard !isBlocked else { return [] }
+        var buttons: [ConversationTrailingButton] = []
+        if hasPeerSharing { buttons.append(.peerSharing) }
+        guard canStartCalls else { return buttons }
+        buttons.append(.audioCall)
+        if !isAccountSip { buttons.append(.videoCall) }
+        return buttons
+    }
+
+    static func visible(viewModel: ConversationViewModel,
+                        peerSharing: PeerSharingTracker) -> [ConversationTrailingButton] {
+        return visible(isBlocked: viewModel.isBlocked,
+                       canStartCalls: viewModel.canStartCalls,
+                       hasPeerSharing: peerSharing.hasPeerSharing,
+                       isAccountSip: viewModel.isAccountSip)
+    }
+}
+
+struct ConversationTrailingBarItems: View {
+    @ObservedObject var viewModel: ConversationViewModel
+    @ObservedObject var peerSharing: PeerSharingTracker
+
+    var body: some View {
+        let buttons = ConversationTrailingButton.visible(viewModel: viewModel, peerSharing: peerSharing)
+        NavBarButtonGroup {
             if buttons.contains(.peerSharing) {
-                peerServicesButton
+                NavBarIconButton(systemName: "network",
+                                 accessibilityLabel: L10n.PeerServices.title,
+                                 accessibilityIdentifier: ConversationAccessibilityIdentifiers.peerServicesButton) {
+                    viewModel.peerSharingSheet = peerSharing.makePeerSharingViewModel()
+                }
             }
             if buttons.contains(.audioCall) {
-                audioCallButton
+                NavBarIconButton(systemName: "phone",
+                                 accessibilityLabel: L10n.Accessibility.conversationStartVoiceCall(viewModel.name),
+                                 accessibilityIdentifier: ConversationAccessibilityIdentifiers.audioCallButton,
+                                 action: viewModel.startAudioCall)
             }
             if buttons.contains(.videoCall) {
-                videoCallButton
+                NavBarIconButton(systemName: "video",
+                                 accessibilityLabel: L10n.Accessibility.conversationStartVideoCall(viewModel.name),
+                                 accessibilityIdentifier: ConversationAccessibilityIdentifiers.videoCallButton,
+                                 action: viewModel.startCall)
             }
         }
-        .fixedSize(horizontal: true, vertical: false)
-    }
-
-    private var peerServicesButton: some View {
-        Button(action: {
-            guard let peerVM = peerSharing.makePeerSharingViewModel() else { return }
-            peerSharingVM = peerVM
-            showPeerServices = true
-        }, label: {
-            Image(systemName: "network")
-                .navBarIconStyle()
-        })
-        .accessibilityLabel(L10n.PeerServices.title)
-    }
-
-    private var audioCallButton: some View {
-        Button(action: viewModel.startAudioCall, label: {
-            Image(systemName: "phone")
-                .navBarIconStyle()
-        })
-        .accessibilityLabel(L10n.Accessibility.conversationStartVoiceCall(viewModel.name))
-    }
-
-    private var videoCallButton: some View {
-        Button(action: viewModel.startCall, label: {
-            Image(systemName: "video")
-                .navBarIconStyle()
-        })
-        .accessibilityLabel(L10n.Accessibility.conversationStartVideoCall(viewModel.name))
     }
 }
