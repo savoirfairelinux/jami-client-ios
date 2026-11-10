@@ -133,15 +133,21 @@ extension Coordinator {
                 // ensure we on the root view controller
                 contoller.popViewController(animated: false)
                 contoller.pushViewController(viewController, animated: false)
+            } else {
+                assertionFailure("\(style) needs a navigation controller root")
             }
 
         case .push:
             if let contoller: UINavigationController = self.rootViewController as? UINavigationController {
                 contoller.pushViewController(viewController, animated: animation)
+            } else {
+                assertionFailure("\(style) needs a navigation controller root")
             }
         case .replaceNavigationStack:
             if let contoller: UINavigationController = self.rootViewController as? UINavigationController {
                 contoller.setViewControllers([viewController], animated: animation)
+            } else {
+                assertionFailure("\(style) needs a navigation controller root")
             }
 
         }
