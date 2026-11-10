@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3208dc96_09d383fb",
+        "filename": "Ring/Ring/Calls/CallScreenPresenter.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-10T19:26:17Z",
+      "side": 1,
+      "message": "[error] Line 268: 🔴 `topController()` now starts from the root container and only walks `presentedViewController`, so it misses modals presented by the active child navigation stack. In that state, call UI can be presented from the wrong controller and trigger presentation conflicts. Start from the currently visible child controller (or recursively descend to the active leaf) before walking presented controllers.",
+      "revId": "4a58ced39e12c122b7a28576c15bd5770e768208",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be834877_2df5b904",
+        "filename": "Ring/Ring/Coordinators/AppCoordinator.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-10T19:26:17Z",
+      "side": 1,
+      "message": "[error] Line 142: 🔴 `migrateAccount` is guarded by `migrationController \u003d\u003d nil`, but `finishMigration` never clears `migrationController`. After one migration flow, future migration requests are permanently ignored. Reset `migrationController` to `nil` in every completion path of `finishMigration` (including the early-return branch) before/while advancing to the next screen.",
+      "revId": "4a58ced39e12c122b7a28576c15bd5770e768208",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
