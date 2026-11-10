@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6384d40a_5a0903c8",
+        "filename": "Ring/Ring/Features/Conversations/ConversationsCoordinator.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-10T19:44:14Z",
+      "side": 1,
+      "message": "[warning] Line 199: 🟡 **Selection can become stale across split-view mode changes.** `selectedConversationId` is recomputed only when `shownDetailChanged` emits; collapsing/expanding the split view without changing detail can leave a row highlighted when there is no detail column context. Also observe split expansion-state changes (or clear `selectedConversationId` from responsive-state callbacks) so highlight strictly tracks detail-column visibility.",
+      "revId": "aa484a293f5eb68c60b3d09870d0a023646de494",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "473f44d1_a52364ce",
+        "filename": "Ring/Ring/Features/Conversations/SmartList/SwiftUI/Views/SmartListContainer.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-10T19:44:14Z",
+      "side": 1,
+      "message": "[warning] Line 35: 🟡 **Public initializer contract changed; migrate all call sites across targets.** Replacing `init(injectionBag:source:)` with `init(model:)` is fine functionally, but any previews/tests/alternate entry points still using the old initializer will break compilation. Please update those call sites in all build targets (CI currently reports a failing build).",
+      "revId": "aa484a293f5eb68c60b3d09870d0a023646de494",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
