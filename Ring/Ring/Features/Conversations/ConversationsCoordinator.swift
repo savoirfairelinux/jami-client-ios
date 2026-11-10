@@ -24,7 +24,7 @@ import SwiftUI
 
 // swiftlint:disable cyclomatic_complexity
 /// This Coordinator drives the conversation navigation (Smartlist / Conversation detail)
-class ConversationsCoordinator: RootCoordinator, StateableResponsive, ConversationNavigation {
+class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNavigation {
     var presentingVC = [String: Bool]()
 
     var rootViewController: UIViewController {
@@ -35,7 +35,7 @@ class ConversationsCoordinator: RootCoordinator, StateableResponsive, Conversati
     var parentCoordinator: Coordinator?
     var smartListViewController = UIViewController()
 
-    var navigationController = UINavigationController()
+    let navigationController = UINavigationController()
     let injectionBag: InjectionBag
     var disposeBag = DisposeBag()
 
@@ -48,9 +48,7 @@ class ConversationsCoordinator: RootCoordinator, StateableResponsive, Conversati
     let conversationsSource: ConversationDataSource
     private weak var activeCallsController: UIViewController?
 
-    required init(navigationController: UINavigationController, injectionBag: InjectionBag) {
-        // we get navigationController from app coordinator, as it main view for the application
-        self.navigationController = navigationController
+    init(injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
 
         self.callService = injectionBag.callService
