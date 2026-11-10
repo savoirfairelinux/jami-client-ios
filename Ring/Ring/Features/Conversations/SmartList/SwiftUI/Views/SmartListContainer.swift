@@ -37,12 +37,9 @@ struct SmartListView: View, StateEmittingView {
     let maxCoverBackgroundOpacity: CGFloat = 0.09
     let minCoverBackgroundOpacity: CGFloat = 0
 
-    init(injectionBag: InjectionBag, source: ConversationDataSource) {
-        let emitter = ConversationStatePublisher()
-        self.stateEmitter = emitter
-        _model = StateObject(wrappedValue:
-                                ConversationsViewModel(with: injectionBag, conversationsSource: source,
-                                                       stateEmitter: emitter))
+    init(model: ConversationsViewModel) {
+        self.stateEmitter = model.stateEmitter
+        _model = StateObject(wrappedValue: model)
     }
 
     var body: some View {

@@ -130,6 +130,8 @@ extension Color {
     static let requestsBadgeForeground = Color(UIColor.requestsBadgeForeground)
     static let requestsBadgeBackground = Color(UIColor.requestsBadgeBackground)
 
+    static let smartListSelectedRow = Color(UIColor.smartListSelectedRow)
+
     static let networkAlertBackground = Color(UIColor.networkAlertBackground)
 
     static let jamiNavigationBarShadow = Color(UIColor.jamiNavigationBarShadow)

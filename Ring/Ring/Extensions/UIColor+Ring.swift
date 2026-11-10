@@ -335,6 +335,9 @@ extension UIColor {
     static let requestsBadgeForeground = UIColor(named: "requestsBadgeForeground")!
     static let requestsBadgeBackground = UIColor(named: "requestsBadgeBackground")!
 
+    // MARK: - Smart list
+    static let smartListSelectedRow = UIColor(named: "smartListSelectedRow")!
+
     // MARK: - Alerts
     static let networkAlertBackground = UIColor(red: 245, green: 110, blue: 88, alpha: 1)
 
