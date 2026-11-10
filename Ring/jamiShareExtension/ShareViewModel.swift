@@ -21,6 +21,7 @@ import RxSwift
 
 class ShareViewModel: ObservableObject {
     private let disposeBag = DisposeBag()
+    private let sendQueue = DispatchQueue(label: "com.jami.share.send", qos: .userInitiated)
     private var adapter: Adapter
     private var adapterService: AdapterService
     private var ongoingTransfersByAccount: [String: Set<String>] = [:]
@@ -29,6 +30,7 @@ class ShareViewModel: ObservableObject {
 
     @Published var accountList: [AccountViewModel] = []
     @Published var conversationsByAccount: [String: [ConversationViewModel]] = [:]
+    @Published var sendFailure: String?
     @Published var transmissionSummary: String = ""
     @Published var shouldCloseExtension: Bool = false
     @Published var isLoading: Bool = true
@@ -37,6 +39,15 @@ class ShareViewModel: ObservableObject {
     init() {
         self.adapter = Adapter()
         self.adapterService = AdapterService(withAdapter: adapter)
+
+        adapterService.conversationErrorSubject
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] failure in
+                guard let self = self, self.transmissionStatus.values.contains(where: {
+                    $0.accountid == failure.accountId && $0.convid == failure.conversationId && $0.itemstatus == .ongoing
+                }) else { return }
+                self.sendFailure = L10n.ShareExtension.sendFailed
+            }).disposed(by: disposeBag)
 
         // Check if daemon can be started (waits up to 10 seconds for notification extension)
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
@@ -71,8 +82,11 @@ class ShareViewModel: ObservableObject {
                 guard let self = self else { return }
 
                 let interaction = event
+                guard self.adapterService.isLocalAuthor(accountId: interaction.accountId,
+                                                       author: interaction.body["author"] as? String) else { return }
 
                 for (key, indicator) in self.transmissionStatus {
+                    guard indicator.accountid == interaction.accountId, indicator.convid == interaction.conversationId else { continue }
                     var messageIdToAssign: String?
                     var transferIdToAssign: String?
 
@@ -220,8 +234,16 @@ class ShareViewModel: ObservableObject {
     }
 
     func sendMessage(accountId: String, conversationId: String, message: String, parentId: String? = nil) {
+        guard Thread.isMainThread else {
+            DispatchQueue.main.async { [self] in self.sendMessage(accountId: accountId, conversationId: conversationId, message: message, parentId: parentId) }
+            return
+        }
+
         let key = NewStatusIndicator.makeKey(accountId: accountId, convid: conversationId, itemIdentifier: message)
 
+        // Retrying a failed share must not resend items already delivered.
+        guard transmissionStatus[key]?.itemstatus != .sent else { return }
+        didSetTransmissionSummary = false
         transmissionStatus[key] = NewStatusIndicator(
             type: .text,
             itemIdentifier: message,
@@ -231,21 +253,28 @@ class ShareViewModel: ObservableObject {
             lastUpdate: Date()
         )
 
-        let dispatched = adapterService.sendSwarmMessage(
+        dispatchShare(key: key) { [adapterService] in
+            adapterService.sendSwarmMessage(
             accountId: accountId,
             conversationId: conversationId,
             message: message,
             parentId: parentId ?? ""
         )
-        if !dispatched {
-            transmissionStatus[key]?.itemstatus = .failed
-            checkAllItemsSent()
         }
+
     }
 
     func sendFile(accountId: String, conversationId: String, filePath: URL? = nil, fileData: Data? = nil, fileName: String, parentId: String? = nil) {
+        guard Thread.isMainThread else {
+            DispatchQueue.main.async { [self] in self.sendFile(accountId: accountId, conversationId: conversationId, filePath: filePath, fileData: fileData, fileName: fileName, parentId: parentId) }
+            return
+        }
+
         let key = NewStatusIndicator.makeKey(accountId: accountId, convid: conversationId, itemIdentifier: fileName)
 
+        // Retrying a failed share must not resend items already delivered.
+        guard transmissionStatus[key]?.itemstatus != .sent else { return }
+        didSetTransmissionSummary = false
         transmissionStatus[key] = NewStatusIndicator(
             type: .file,
             itemIdentifier: fileName,
@@ -255,7 +284,8 @@ class ShareViewModel: ObservableObject {
             lastUpdate: Date()
         )
 
-        let dispatched = adapterService.sendSwarmFile(
+        dispatchShare(key: key) { [adapterService] in
+            adapterService.sendSwarmFile(
             accountId: accountId,
             conversationId: conversationId,
             filePath: filePath,
@@ -263,9 +293,19 @@ class ShareViewModel: ObservableObject {
             fileName: fileName,
             parentId: parentId ?? ""
         )
-        if !dispatched {
-            transmissionStatus[key]?.itemstatus = .failed
-            checkAllItemsSent()
+        }
+
+    }
+
+    private func dispatchShare(key: String, send: @escaping () -> Bool) {
+        sendQueue.async { [weak self] in
+            let dispatched = send()
+            DispatchQueue.main.async {
+                guard let self = self, !dispatched else { return }
+                self.transmissionStatus[key]?.itemstatus = .failed
+                self.sendFailure = L10n.ShareExtension.sendFailed
+                self.checkAllItemsSent()
+            }
         }
     }
 
@@ -282,6 +322,11 @@ class ShareViewModel: ObservableObject {
             let sentCount = indicators.filter { $0.itemstatus == .sent }.count
             let failedCount = indicators.filter { $0.itemstatus == .failed }.count
             let stalledCount = indicators.filter { $0.itemstatus == .stalled }.count
+
+            if failedCount > 0 || stalledCount > 0 {
+                sendFailure = L10n.ShareExtension.sendFailed
+                return
+            }
 
             transmissionSummary = """
             ✅ All items finalized. Summary:

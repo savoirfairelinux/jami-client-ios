@@ -305,6 +305,12 @@ public final class AdapterService: AdapterDelegate {
         fileTransferStatusSubject.onNext(status)
     }
 
+    let conversationErrorSubject = PublishSubject<(accountId: String, conversationId: String)>()
+
+    func conversationError(conversationId: String, accountId: String, code: Int, message: String) {
+        conversationErrorSubject.onNext((accountId, conversationId))
+    }
+
     let newInteractionSubject = ReplaySubject<NewInteraction>.create(bufferSize: 1)
     var newInteractionStream: Observable<NewInteraction> {
         return newInteractionSubject.asObservable()
@@ -409,6 +415,12 @@ public final class AdapterService: AdapterDelegate {
         default:
             return nil
         }
+    }
+
+    func isLocalAuthor(accountId: String, author: String?) -> Bool {
+        guard let author = author,
+              let username = adapter?.getAccountDetails(accountId)["Account.username"] as? String else { return false }
+        return ProfilePathHelper.jamiHash(from: username) == ProfilePathHelper.jamiHash(from: author)
     }
 
     func resolveLocalAccountName(from accountId: String) -> Single<(value: String, avatarType: AvatarType)> {

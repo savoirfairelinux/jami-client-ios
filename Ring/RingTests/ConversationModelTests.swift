@@ -19,9 +19,63 @@
  */
 
 import XCTest
+import RxSwift
 @testable import Ring
 
 final class ConversationModelTests: XCTestCase {
+    func testDraftAndReplyRemainUntilLocalAcceptance() {
+        let states = PublishSubject<State>()
+        let panel = MessagePanelVM(messagePanelState: states)
+        let message = MessageModel(withId: "post", receivedDate: Date(), content: "Post", authorURI: jamiId2, incoming: true)
+        panel.messageToReply = MessageContentVM(message: message, contextMenuState: states,
+                                               transferState: states, isHistory: false, preferencesColor: .black)
+        var complete: ((Int, MessageSendError?) -> Void)?
+        let subscription = states.subscribe(onNext: { state in
+            if case let .send(messages, completion) = state as? MessagePanelState {
+                XCTAssertEqual(messages.first?.parentId, "post")
+                complete = completion
+            }
+        })
+        defer { subscription.dispose() }
+        panel.sendDraft(text: "Reply")
+        XCTAssertEqual(panel.draftText, "Reply")
+        XCTAssertEqual(panel.messageToReply?.message.id, "post")
+        XCTAssertTrue(panel.isSending)
+        complete?(0, .permissionDenied)
+        XCTAssertEqual(panel.draftText, "Reply")
+        XCTAssertEqual(panel.messageToReply?.message.id, "post")
+        XCTAssertFalse(panel.isSending)
+        panel.sendDraft(text: panel.draftText)
+        complete?(1, nil)
+        XCTAssertEqual(panel.draftText, "")
+        XCTAssertNil(panel.messageToReply)
+    }
+
+    func testFailedAttachmentIsRetainedAndPartialRetryDoesNotDuplicateIt() {
+        let states = PublishSubject<State>()
+        let panel = MessagePanelVM(messagePanelState: states)
+        var complete: ((Int, MessageSendError?) -> Void)?
+        var sent: [OutgoingMessage] = []
+        let subscription = states.subscribe(onNext: { state in
+            if case let .send(messages, completion) = state as? MessagePanelState {
+                sent = messages
+                complete = completion
+            }
+        })
+        defer { subscription.dispose() }
+        panel.send(.data(displayName: "photo.jpg", data: Data([1, 2])))
+        complete?(0, .failed)
+        XCTAssertEqual(panel.attachments.count, 1)
+        panel.sendDraft(text: "Caption")
+        XCTAssertEqual(sent.count, 2)
+        complete?(1, .failed)
+        XCTAssertTrue(panel.attachments.isEmpty)
+        XCTAssertEqual(panel.draftText, "Caption")
+        panel.sendDraft(text: panel.draftText)
+        XCTAssertEqual(sent.count, 1)
+        complete?(0, .unconfirmed)
+        XCTAssertEqual(panel.draftText, "Caption")
+    }
 
     func testFeedMemberCanReplyButCannotPublishOrForward() {
         let grants = ["textReply", "fileReply", "reaction"]

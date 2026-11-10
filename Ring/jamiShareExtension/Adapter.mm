@@ -84,6 +84,11 @@ std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
             }
         }));
 
+    confHandlers.insert(exportable_callback<ConversationSignal::OnConversationError>([](const std::string& accountId, const std::string& conversationId, int code, const std::string& what) {
+        [Adapter.delegate conversationErrorWithConversationId:@(conversationId.c_str()) accountId:@(accountId.c_str())
+                                                         code:code message:@(what.c_str())];
+    }));
+
     confHandlers.insert(exportable_callback<ConversationSignal::SwarmMessageReceived>([weakDelegate = Adapter.delegate](const std::string& accountId, const std::string& conversationId, libjami::SwarmMessage message) {
         if (weakDelegate) {
             NSString* convId =  [NSString stringWithUTF8String:conversationId.c_str()];

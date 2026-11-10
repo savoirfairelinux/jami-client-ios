@@ -108,6 +108,16 @@ class ConversationViewModel: Stateable, ObservableObject {
             }
             .store(in: &cancellables)
 
+        conversationsService.conversationErrors
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] failure in
+                guard let self = self, failure.accountId == self.conversation.accountId,
+                      failure.conversationId == self.conversation.id else { return }
+                // This signal identifies a conversation, not an individual send.
+                // Show it without clearing or falsely rejecting a pending draft.
+                self.swiftUIModel.messagePanel.sendFailure = L10n.Conversation.operationFailed
+            }).disposed(by: disposeBag)
+
         bindRow()
         row.conversationChanges
             .compactMap { $0 }
@@ -214,10 +224,6 @@ class ConversationViewModel: Stateable, ObservableObject {
                 self?.canStartCalls = canStartCalls
             })
             .disposed(by: permissionsDisposeBag)
-    }
-
-    func editMessage(content: String, messageId: String) {
-        self.conversationsService.editSwarmMessage(conversationId: conversation.id, accountId: conversation.accountId, message: content, parentId: messageId)
     }
 
     func setIsComposingMsg(isComposing: Bool) {
@@ -368,29 +374,18 @@ extension ConversationViewModel {
     }
 
     private func shareMessage(message: MessageContentVM, to conversationModel: ConversationModel, fileURL: URL?, fileName: String) {
-        if message.type != .fileTransfer {
-            self.sendMessage(withContent: message.content, conversationModel: conversationModel)
-            return
-        }
-        if let url = fileURL {
-            let content = message.content
-            let dataTransferService = self.dataTransferService
-            self.conversationsService.readMessages(of: conversationModel) { [weak self] messages in
-                let alreadyShared = messages.contains(where: { $0.content == content })
-                if alreadyShared {
-                    DispatchQueue.main.async {
-                        self?.dataTransferService.sendFile(conversation: conversationModel, filePath: url.path, displayName: fileName)
-                    }
-                    return
-                }
-                DispatchQueue.global(qos: .userInitiated).async {
-                    guard let data = FileManager.default.contents(atPath: url.path) else { return }
-                    dataTransferService.sendAndSaveFile(displayName: fileName,
-                                                        conversation: conversationModel,
-                                                        imageData: data)
-                }
+        let content: OutgoingMessage.Content
+        if message.type == .fileTransfer {
+            guard let url = fileURL else {
+                swiftUIModel.messagePanel.sendFailure = MessageSendError.failed.localizedMessage
+                return
             }
-            return
+            content = .file(path: url.path, displayName: fileName)
+        } else {
+            content = .text(message.content)
+        }
+        sendNext([OutgoingMessage(content: content, parentId: "")], to: conversationModel, index: 0) { [weak self] _, failure in
+            if let failure = failure { self?.swiftUIModel.messagePanel.sendFailure = failure.localizedMessage }
         }
     }
 
@@ -464,22 +459,61 @@ extension ConversationViewModel {
         return .file(path: copy.path, displayName: displayName)
     }
 
-    func send(_ messages: [OutgoingMessage]) {
-        let dataTransferService = self.dataTransferService
-        let conversation = self.conversation
-        for message in messages {
-            switch message.content {
-            case .text(let text):
-                self.sendMessage(withContent: text, parentId: message.parentId)
-            case .data(let displayName, let data):
-                DispatchQueue.global(qos: .userInitiated).async {
-                    dataTransferService.sendAndSaveFile(displayName: displayName, conversation: conversation, imageData: data, replyTo: message.parentId)
-                }
-            case .file(let path, let displayName, let readyAfter):
-                DispatchQueue.main.asyncAfter(deadline: .now() + readyAfter) {
-                    dataTransferService.sendFile(conversation: conversation, filePath: path, displayName: displayName, replyTo: message.parentId)
-                }
-            }
+    func send(_ messages: [OutgoingMessage], completion: @escaping (Int, MessageSendError?) -> Void) {
+        sendNext(messages, to: conversation, index: 0, completion: completion)
+    }
+
+    private func sendNext(_ messages: [OutgoingMessage], to target: ConversationModel, index: Int,
+                          completion: @escaping (Int, MessageSendError?) -> Void) {
+        guard index < messages.count else {
+            completion(index, nil)
+            return
         }
+        let message = messages[index]
+        let operation: Single<Void>
+        switch message.content {
+        case .text(let text):
+            if target.isSwarm() {
+                guard let account = accountService.getAccount(fromAccountId: target.accountId),
+                      let author = AccountModelHelper(withAccount: account).ringId else {
+                    completion(index, .failed)
+                    return
+                }
+                operation = conversationsService.sendConfirmed(conversationId: target.id, accountId: target.accountId,
+                                                                author: author, message: text, parentId: message.parentId)
+            } else {
+                // Legacy/SIP messages do not produce swarm commits.
+                sendMessage(withContent: text, conversationModel: target)
+                operation = .just(())
+            }
+        case .data(let displayName, let data):
+            operation = dataTransferService.sendAndSaveFileConfirmed(displayName: displayName, conversation: target,
+                                                                     data: data, replyTo: message.parentId)
+        case .file(let path, let displayName, let readyAfter):
+            operation = Single.deferred { [dataTransferService] in
+                dataTransferService.sendFileConfirmed(conversation: target, filePath: path,
+                                                       displayName: displayName, replyTo: message.parentId)
+            }.delaySubscription(.milliseconds(Int(readyAfter * 1000)), scheduler: MainScheduler.instance)
+        }
+        operation.observe(on: MainScheduler.instance)
+            .subscribe(onSuccess: { [weak self] in
+                guard let self = self else { return }
+                self.sendNext(messages, to: target, index: index + 1, completion: completion)
+            }, onFailure: { error in
+                completion(index, error as? MessageSendError ?? .failed)
+            }).disposed(by: disposeBag)
+    }
+
+    func editConfirmed(content: String, messageId: String, completion: @escaping (MessageSendError?) -> Void) {
+        guard let account = accountService.getAccount(fromAccountId: conversation.accountId),
+              let author = AccountModelHelper(withAccount: account).ringId else {
+            completion(.failed)
+            return
+        }
+        conversationsService.sendConfirmed(conversationId: conversation.id, accountId: conversation.accountId,
+                                            author: author, message: content, parentId: messageId, editing: true)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onSuccess: { completion(nil) }, onFailure: { completion($0 as? MessageSendError ?? .failed) })
+            .disposed(by: disposeBag)
     }
 }

@@ -49,6 +49,10 @@ class ConversationsService {
     private let textPlainMIMEType = "text/plain"
     private let geoLocationMIMEType = "application/geo"
 
+    private let failures = PublishSubject<ConversationFailure>()
+    var conversationErrors: Observable<ConversationFailure> { failures.asObservable() }
+    private let localCommits = PublishSubject<(String, String, SwarmMessageWrap, Bool)>()
+
     private let responseStream = PublishSubject<ServiceEvent>()
     var sharedResponseStream: Observable<ServiceEvent>
 
@@ -91,6 +95,13 @@ class ConversationsService {
                 return
             }
             self.serialOperationQueue.async {
+                switch event {
+                case let .swarmMessageReceived(accountId, conversationId, message):
+                    self.localCommits.onNext((accountId, conversationId, message, false))
+                case let .swarmMessageUpdated(accountId, conversationId, message):
+                    self.localCommits.onNext((accountId, conversationId, message, true))
+                default: break
+                }
                 self.onEvent?(event)
             }
         })
@@ -128,6 +139,9 @@ class ConversationsService {
 
     private func apply(_ event: ConversationStateEvent, to store: ConversationStore) {
         switch event {
+        case let .conversationError(accountId, conversationId, code, message):
+            failures.onNext(ConversationFailure(accountId: accountId, conversationId: conversationId,
+                                                code: code, message: message))
         case let .composingStatusChanged(accountId, conversationId, from, status):
             store.composingStatusChanged(accountId: accountId, conversationId: conversationId,
                                          from: from, status: status)
@@ -250,6 +264,27 @@ class ConversationsService {
 
     func sendSwarmMessage(conversationId: String, accountId: String, message: String, parentId: String) {
         self.conversationsAdapter.sendSwarmMessage(accountId, conversationId: conversationId, message: message, parentId: parentId, flag: 0)
+    }
+
+    func sendConfirmed(conversationId: String, accountId: String, author: String,
+                       message: String, parentId: String, editing: Bool = false) -> Single<Void> {
+        let receipts = localCommits.filter { account, conversation, commit, updated in
+            guard account == accountId, conversation == conversationId, updated == editing,
+                  commit.type == "text/plain", commit.body["author"] == author,
+                  commit.body["body"] == message else { return false }
+            if editing { return commit.id == parentId }
+            return (commit.body["reply-to"] ?? "") == parentId
+                && (commit.body["react-to"] ?? "").isEmpty
+                && (commit.body["edit"] ?? "").isEmpty
+        }.map { _ in true }
+        return SwarmSendConfirmation.wait(receipts: receipts) { [conversationsAdapter] in
+            if editing {
+                let grants = conversationsAdapter.getConversationPermissions(accountId, conversationId: conversationId) ?? []
+                guard grants.contains("edit") else { return false }
+            }
+            return conversationsAdapter.sendSwarmMessage(accountId, conversationId: conversationId,
+                                                          message: message, parentId: parentId, flag: editing ? 1 : 0)
+        }
     }
 
     func getConversationInfo(conversationId: String, accountId: String) -> [String: String] {

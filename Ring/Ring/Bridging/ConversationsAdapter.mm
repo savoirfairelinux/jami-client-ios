@@ -188,8 +188,9 @@ static id <MessagesAdapterDelegate> _messagesDelegate;
     }));
 
     confHandlers.insert(exportable_callback<ConversationSignal::OnConversationError>([&](const std::string& accountId, const std::string& conversationId, int code, const std::string& what) {
-        if (ConversationsAdapter.messagesDelegate) {
-        }
+        [ConversationsAdapter.messagesDelegate conversationErrorWithConversationId:@(conversationId.c_str())
+                                                                          accountId:@(accountId.c_str())
+                                                                               code:code message:@(what.c_str())];
     }));
 
     confHandlers.insert(exportable_callback<ConversationSignal::ConversationProfileUpdated>([&](const std::string& accountId, const std::string& conversationId, std::map<std::string, std::string> profile) {
