@@ -245,6 +245,10 @@ std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
     sendMessage(std::string([accountId UTF8String]), std::string([conversationId UTF8String]), std::string([message UTF8String]), std::string([parentId UTF8String]), flag);
 }
 
+- (NSArray<NSString *> *)getConversationPermissions:(NSString *)accountId conversationId:(NSString *)conversationId {
+    return [Utils vectorToArray:libjami::getConversationPermissions(std::string([accountId UTF8String]), std::string([conversationId UTF8String]))];
+}
+
 - (void)sendSwarmFileWithName:(NSString*)displayName
                     accountId:(NSString*)accountId
                conversationId:(NSString*)conversationId

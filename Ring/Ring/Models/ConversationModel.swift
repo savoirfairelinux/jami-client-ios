@@ -145,6 +145,10 @@ struct ConversationPermissions: Equatable {
     func allowsFiles(replying: Bool) -> Bool {
         return allows(replying ? .fileReply : .file)
     }
+
+    var allowsPublishing: Bool {
+        return allowsText(replying: false) || allowsFiles(replying: false)
+    }
 }
 
 struct ConversationPreferences {

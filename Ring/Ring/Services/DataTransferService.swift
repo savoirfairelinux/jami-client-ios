@@ -150,6 +150,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
     }
 
     func sendFile(conversation: ConversationModel, filePath: String, displayName: String, replyTo: String = "") {
+        guard conversation.permissions.allowsFiles(replying: !replyTo.isEmpty) else { return }
         self.dataTransferAdapter.sendSwarmFile(withName: displayName,
                                                accountId: conversation.accountId,
                                                conversationId: conversation.id,
@@ -161,6 +162,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
                          conversation: ConversationModel,
                          imageData: Data,
                          replyTo: String = "") {
+        guard conversation.permissions.allowsFiles(replying: !replyTo.isEmpty) else { return }
         let imagePath: URL? = outgoingFileQueue.sync {
             guard let imagePath = self.fileUrlForSending(displayName: displayName, conversation: conversation) else { return nil }
             do {
