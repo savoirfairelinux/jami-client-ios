@@ -21,6 +21,7 @@
 #import "DataTransferAdapter.h"
 #import "Utils.h"
 #import "jami/datatransfer_interface.h"
+#import "jami/conversation_interface.h"
 #import "Ring-Swift.h"
 
 @implementation NSDataTransferInfo
@@ -80,12 +81,21 @@ static id <DataTransferAdapterDelegate> _delegate;
 #pragma mark API calls
 
 ///swarm conversations
-- (void)sendSwarmFileWithName:(NSString*)displayName
+- (NSArray<NSString *> *)getConversationPermissions:(NSString *)accountId conversationId:(NSString *)conversationId {
+    return [Utils vectorToArray:libjami::getConversationPermissions(std::string([accountId UTF8String]), std::string([conversationId UTF8String]))];
+}
+
+- (BOOL)sendSwarmFileWithName:(NSString*)displayName
                     accountId:(NSString*)accountId
                conversationId:(NSString*)conversationId
                  withFilePath:(NSString*)filePath
                        parent:(NSString*)parent {
+    if (![SwarmSendPolicy allows:[self getConversationPermissions:accountId conversationId:conversationId]
+                           file:YES parentId:parent]) {
+        return NO;
+    }
     sendFile(std::string([accountId UTF8String]), std::string([conversationId UTF8String]), std::string([filePath UTF8String]), std::string([displayName UTF8String]), std::string([parent UTF8String]));
+    return YES;
 }
 
 - (NSDataTransferError)dataTransferInfoWithId:(NSString*)fileId
