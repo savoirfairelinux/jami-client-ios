@@ -139,11 +139,20 @@ struct ConversationPermissions: Equatable {
     }
 
     func allowsText(replying: Bool) -> Bool {
-        return allows(replying ? .textReply : .text)
+        return allowsSend(file: false, replying: replying)
     }
 
     func allowsFiles(replying: Bool) -> Bool {
-        return allows(replying ? .fileReply : .file)
+        return allowsSend(file: true, replying: replying)
+    }
+
+    var allowsPublishing: Bool {
+        return allowsText(replying: false) || allowsFiles(replying: false)
+    }
+
+    private func allowsSend(file: Bool, replying: Bool) -> Bool {
+        guard let granted = granted else { return true }
+        return SwarmSendPolicy.allows(granted.map(\.rawValue), file: file, replying: replying)
     }
 }
 

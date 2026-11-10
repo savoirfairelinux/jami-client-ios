@@ -231,12 +231,18 @@ class ShareViewModel: ObservableObject {
             lastUpdate: Date()
         )
 
-        adapterService.sendSwarmMessage(
+        let dispatched = adapterService.sendSwarmMessage(
             accountId: accountId,
             conversationId: conversationId,
             message: message,
             parentId: parentId ?? ""
         )
+        if !dispatched {
+            DispatchQueue.main.async { [weak self] in
+                self?.transmissionStatus[key]?.itemstatus = .failed
+                self?.checkAllItemsSent()
+            }
+        }
     }
 
     func sendFile(accountId: String, conversationId: String, filePath: URL? = nil, fileData: Data? = nil, fileName: String, parentId: String? = nil) {
@@ -251,7 +257,7 @@ class ShareViewModel: ObservableObject {
             lastUpdate: Date()
         )
 
-        adapterService.sendSwarmFile(
+        let dispatched = adapterService.sendSwarmFile(
             accountId: accountId,
             conversationId: conversationId,
             filePath: filePath,
@@ -259,6 +265,12 @@ class ShareViewModel: ObservableObject {
             fileName: fileName,
             parentId: parentId ?? ""
         )
+        if !dispatched {
+            DispatchQueue.main.async { [weak self] in
+                self?.transmissionStatus[key]?.itemstatus = .failed
+                self?.checkAllItemsSent()
+            }
+        }
     }
 
     private func checkAllItemsSent() {

@@ -23,6 +23,36 @@ import XCTest
 
 final class ConversationModelTests: XCTestCase {
 
+    func testFeedMemberCanReplyButCannotPublishOrForward() {
+        let grants = ["textReply", "fileReply", "reaction"]
+        XCTAssertFalse(SwarmSendPolicy.allows(grants, file: false, replying: false))
+        XCTAssertFalse(SwarmSendPolicy.allows(grants, file: true, replying: false))
+        XCTAssertTrue(SwarmSendPolicy.allows(grants, file: false, replying: true))
+        XCTAssertTrue(SwarmSendPolicy.allows(grants, file: true, replying: true))
+    }
+
+    func testMissingOrUnknownGrantsDoNotAllowSharing() {
+        XCTAssertFalse(SwarmSendPolicy.allows(nil, file: false, replying: false))
+        XCTAssertFalse(SwarmSendPolicy.allows(["futurePermission"], file: true, replying: true))
+        XCTAssertFalse(SwarmSendPolicy.canPublish(["textReply", "fileReply"]))
+        XCTAssertTrue(SwarmSendPolicy.canPublish(["text"]))
+        XCTAssertTrue(SwarmSendPolicy.canPublish(["file"]))
+    }
+
+    func testMessageBridgeRefusesPublishWithReplyOnlyGrants() {
+        let adapter = ObjCMockConversationsAdapter()
+        adapter.permissions = ["textReply", "fileReply"]
+        XCTAssertFalse(adapter.sendSwarmMessage(accountId1, conversationId: conversationId1,
+                                                message: "Forwarded", parentId: "", flag: 0))
+    }
+
+    func testFileBridgeRefusesPublishWithReplyOnlyGrant() {
+        let adapter = ObjCMockSendFileAdapter()
+        adapter.permissions = ["fileReply"]
+        XCTAssertFalse(adapter.sendSwarmFile(withName: "photo.jpg", accountId: accountId1,
+                                             conversationId: conversationId1, withFilePath: "/unused", parent: ""))
+    }
+
     func createConversation(conversationId: String, jamiId: String, type: ConversationType, accountId: String) -> ConversationModel {
         let uri = JamiURI.init(schema: URIType.ring, infoHash: jamiId)
         var info = ConversationInfo(type: type)

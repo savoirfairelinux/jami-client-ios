@@ -188,13 +188,14 @@ public final class AdapterService: AdapterDelegate {
         return isReady
     }
 
-    func sendSwarmMessage(accountId: String, conversationId: String, message: String, parentId: String) {
-        if waitForAccountReady(accountId: accountId) {
+    func sendSwarmMessage(accountId: String, conversationId: String, message: String, parentId: String) -> Bool {
+        guard waitForAccountReady(accountId: accountId) else { return false }
+        let dispatched = adapter?.sendSwarmMessage(accountId, conversationId: conversationId,
+                                                    message: message, parentId: parentId, flag: 0) == true
+        if dispatched {
             CommonHelpers.setUpdatedConversations(accountId: accountId, conversationId: conversationId)
-            adapter?.sendSwarmMessage(accountId, conversationId: conversationId, message: message, parentId: parentId, flag: 0)
-        } else {
-            NSLog("[ShareExtension] Failed to send swarm message - account \(accountId) not ready")
         }
+        return dispatched
     }
 
     private func setAccountActive(_ accountId: String, newValue: Bool) {
@@ -227,9 +228,11 @@ public final class AdapterService: AdapterDelegate {
         self.adapter?.pushNotificationReceived("", message: notificationData)
     }
 
-    func sendSwarmFile(accountId: String, conversationId: String, filePath: URL?, fileData: Data?, fileName: String, parentId: String) {
-        guard let destinationURL = CommonHelpers.createFileUrlForSwarm(fileName: fileName, accountId: accountId, conversationId: conversationId) else {
-            return
+    func sendSwarmFile(accountId: String, conversationId: String, filePath: URL?, fileData: Data?, fileName: String, parentId: String) -> Bool {
+        guard SwarmSendPolicy.allows(adapter?.getConversationPermissions(accountId, conversationId: conversationId),
+                                     file: true, replying: !parentId.isEmpty),
+              let destinationURL = CommonHelpers.createFileUrlForSwarm(fileName: fileName, accountId: accountId, conversationId: conversationId) else {
+            return false
         }
 
         do {
@@ -238,36 +241,31 @@ public final class AdapterService: AdapterDelegate {
                 try fileData.write(to: destinationURL, options: .atomic)
             } else if let filePath = filePath {
                 guard filePath.startAccessingSecurityScopedResource() else {
-                    return
+                    return false
                 }
                 defer {
                     filePath.stopAccessingSecurityScopedResource()
                 }
                 try FileManager.default.copyItem(at: filePath, to: destinationURL)
             } else {
-                return
+                return false
             }
-
-            CommonHelpers.setUpdatedConversations(accountId: accountId, conversationId: conversationId)
-
-            guard waitForAccountReady(accountId: accountId) else {
-                NSLog("[ShareExtension] Failed to send swarm file - account \(accountId) not ready")
-                return
-            }
-
-            NSLog("[ShareExtension] Account \(accountId) is ready, sending swarm file")
-            self.adapter?.sendSwarmFile(
-                withName: fileName,
-                accountId: accountId,
-                conversationId: conversationId,
-                withFilePath: destinationURL.path,
-                parent: parentId
-            )
-
         } catch {
             NSLog("[ShareExtension] sendSwarmFile failed with error: \(error.localizedDescription)")
-            return
+            return false
         }
+
+        // The bridge rechecks grants, which may change while waiting for the account.
+        let dispatched = waitForAccountReady(accountId: accountId)
+            && adapter?.sendSwarmFile(withName: fileName, accountId: accountId, conversationId: conversationId,
+                                      withFilePath: destinationURL.path, parent: parentId) == true
+        if dispatched {
+            CommonHelpers.setUpdatedConversations(accountId: accountId, conversationId: conversationId)
+        } else {
+            NSLog("[ShareExtension] Failed to send swarm file to \(conversationId)")
+            try? FileManager.default.removeItem(at: destinationURL)
+        }
+        return dispatched
     }
 
     func getAccountList() -> [String] {
@@ -279,7 +277,9 @@ public final class AdapterService: AdapterDelegate {
         for account in getAccountList() {
             let conversations = adapter?.getSwarmConversations(forAccount: account) as? [String] ?? []
 
-            result[account] = conversations
+            result[account] = conversations.filter { conversationId in
+                SwarmSendPolicy.canPublish(adapter?.getConversationPermissions(account, conversationId: conversationId))
+            }
         }
         return result
     }

@@ -38,8 +38,8 @@
                   active:(bool)active;
 
 - (NSArray*)getSwarmConversationsForAccount:(NSString*) accountId;
-- (void)sendSwarmMessage:(NSString*)accountId conversationId:(NSString*)conversationId message:(NSString*)message parentId:(NSString*)parentId flag:(int32_t)flag;
-- (void)sendSwarmFileWithName:(NSString*)displayName
+- (BOOL)sendSwarmMessage:(NSString*)accountId conversationId:(NSString*)conversationId message:(NSString*)message parentId:(NSString*)parentId flag:(int32_t)flag;
+- (BOOL)sendSwarmFileWithName:(NSString*)displayName
                     accountId:(NSString*)accountId
                conversationId:(NSString*)conversationId
                  withFilePath:(NSString*)filePath
@@ -60,4 +60,5 @@
 
 - (void)pushNotificationReceived:(NSString *) from message:(NSDictionary*) data;
 
+- (NSArray<NSString *> *)getConversationPermissions:(NSString *)accountId conversationId:(NSString *)conversationId;
 @end
