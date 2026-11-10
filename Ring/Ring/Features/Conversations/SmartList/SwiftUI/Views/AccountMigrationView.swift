@@ -173,12 +173,13 @@ struct AccountMigrationView: View {
     private var loadingOverlay: some View {
         Group {
             if model.isLoading {
-                Color.black.opacity(0.4)
-                    .ignoresSafeArea()
-                    .overlay(
-                        ProgressView()
-                            .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                    )
+                ZStack {
+                    Color.black.opacity(0.4)
+                        .ignoresSafeArea()
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                }
+                .ignoresSafeArea(edges: .vertical)
             }
         }
     }
