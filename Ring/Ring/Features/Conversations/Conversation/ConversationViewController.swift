@@ -19,6 +19,7 @@
 import UIKit
 import PhotosUI
 import RxSwift
+import Combine
 import SwiftyBeaver
 import Photos
 import MobileCoreServices
@@ -32,7 +33,6 @@ enum ConversationNavBarLayout {
     static let avatarSize: CGFloat = 30
     static let avatarSpacing: CGFloat = 8
 
-    private static let trailingSpacing: CGFloat = 8
     private static let backButtonSpacing: CGFloat = 20
     private static let titleToTrailingSpacing: CGFloat = 40
     static let windowControlsInset: CGFloat = 120
@@ -40,7 +40,8 @@ enum ConversationNavBarLayout {
     static func trailingButtonsWidth(buttonCount: Int) -> CGFloat {
         guard buttonCount > 0 else { return 0 }
         return CGFloat(buttonCount) * NavBarIcon.tapTarget
-            + trailingSpacing * CGFloat(buttonCount - 1)
+            + NavBarIcon.groupSpacing * CGFloat(buttonCount - 1)
+            + NavBarIcon.groupPadding * 2
     }
 
     static func titleMaxWidth(barContentWidth: CGFloat,
@@ -102,7 +103,7 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
     }
 
     convenience init(viewModel: ConversationViewModel) {
-        let containerView = ConversationContainerView(viewModel: viewModel, peerSharing: viewModel.peerSharing)
+        let containerView = ConversationContainerView(viewModel: viewModel)
         self.init(rootView: containerView)
         self.viewModel = viewModel
     }
@@ -111,6 +112,7 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
         super.viewDidLoad()
         setupScreenTap()
         setupBindings()
+        installTrailingBarItems()
         subscribeMessagePanelState()
         subscribeContextMenuState()
         subscribeLastMessage()
@@ -125,6 +127,11 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         updateNavBarContentWidth()
+    }
+
+    private func installTrailingBarItems() {
+        installTrailingBarItem(HostingBarButtonItem(ConversationTrailingBarItems(viewModel: viewModel)),
+                               isVisible: viewModel.$trailingButtons.map { !$0.isEmpty }.eraseToAnyPublisher())
     }
 
     private func updateNavBarContentWidth() {

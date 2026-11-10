@@ -40,6 +40,8 @@ class ConversationViewModel: Stateable, ObservableObject {
     @Published var navBarContentWidth: CGFloat = 0
     @Published var navBarReservesWindowControls = false
     @Published var navBarHasBackButton = true
+    @Published private(set) var peerSharingSheet: PeerSharingViewModel?
+    @Published private(set) var trailingButtons: [ConversationTrailingButton] = []
     @Published private(set) var navBarAvatarProvider: AvatarProvider
 
     let row: ConversationRowVM
@@ -108,6 +110,7 @@ class ConversationViewModel: Stateable, ObservableObject {
             .store(in: &cancellables)
 
         bindRow()
+        subscribeTrailingButtons()
         row.conversationChanges
             .compactMap { $0 }
             .distinctUntilChanged { $0 === $1 }
@@ -200,6 +203,31 @@ class ConversationViewModel: Stateable, ObservableObject {
         subscribePermissions(of: conversation)
         guard !row.isAccountSip else { return }
         peerSharing.track(conversation, isBlocked: row.isConversationForBlockedContact())
+    }
+
+    func openPeerSharing() {
+        peerSharingSheet = peerSharing.makePeerSharingViewModel()
+    }
+
+    func dismissPeerSharing() {
+        peerSharingSheet?.closePeerSession()
+        peerSharingSheet = nil
+    }
+
+    private func subscribeTrailingButtons() {
+        let isAccountSip = self.isAccountSip
+        Publishers.CombineLatest3($isBlocked, $canStartCalls, peerSharing.$hasPeerSharing)
+            .map { isBlocked, canStartCalls, hasPeerSharing in
+                ConversationTrailingButton.visible(isBlocked: isBlocked,
+                                                   canStartCalls: canStartCalls,
+                                                   hasPeerSharing: hasPeerSharing,
+                                                   isAccountSip: isAccountSip)
+            }
+            .removeDuplicates()
+            .sink { [weak self] buttons in
+                onMain { self?.trailingButtons = buttons }
+            }
+            .store(in: &cancellables)
     }
 
     private func subscribePermissions(of conversation: ConversationModel) {
@@ -480,5 +508,24 @@ extension ConversationViewModel {
                 }
             }
         }
+    }
+}
+
+enum ConversationTrailingButton: Hashable {
+    case peerSharing
+    case audioCall
+    case videoCall
+
+    static func visible(isBlocked: Bool,
+                        canStartCalls: Bool,
+                        hasPeerSharing: Bool,
+                        isAccountSip: Bool) -> [ConversationTrailingButton] {
+        guard !isBlocked else { return [] }
+        var buttons: [ConversationTrailingButton] = []
+        if hasPeerSharing { buttons.append(.peerSharing) }
+        guard canStartCalls else { return buttons }
+        buttons.append(.audioCall)
+        if !isAccountSip { buttons.append(.videoCall) }
+        return buttons
     }
 }
