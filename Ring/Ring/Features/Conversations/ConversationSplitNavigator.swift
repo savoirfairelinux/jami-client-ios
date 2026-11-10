@@ -171,6 +171,36 @@ final class ConversationSplitNavigator: NSObject, UISplitViewControllerDelegate,
         return shownDetail == nil ? .primary : proposedTopColumn
     }
 
+    func splitViewControllerDidCollapse(_ svc: UISplitViewController) {
+        shownDetailChanged.accept(())
+    }
+
+    func splitViewController(_ svc: UISplitViewController,
+                             displayModeForExpandingToProposedDisplayMode proposedDisplayMode: UISplitViewController.DisplayMode)
+    -> UISplitViewController.DisplayMode {
+        moveListDetailToDetailColumn()
+        return proposedDisplayMode
+    }
+
+    func splitViewControllerDidExpand(_ svc: UISplitViewController) {
+        let detail = detailNavigationController?.viewControllers ?? []
+        let showsShownDetail = shownDetail.map { detail.contains($0) } ?? false
+        if !showsShownDetail && !isShowingPlaceholder {
+            showPlaceholder()
+            shownDetail = nil
+        }
+        shownDetailChanged.accept(())
+    }
+
+    private func moveListDetailToDetailColumn() {
+        let stack = listNavigationController.viewControllers
+        guard let list = stack.first, stack.count > 1,
+              let detail = detailNavigationController,
+              !stack.contains(where: { $0 === detail }) else { return }
+        listNavigationController.setViewControllers([list], animated: false)
+        detail.setViewControllers(Array(stack.dropFirst()), animated: false)
+    }
+
     // MARK: - UINavigationControllerDelegate
 
     func navigationController(_ navigationController: UINavigationController,
