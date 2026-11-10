@@ -241,16 +241,30 @@ std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
     return [Utils vectorToArray: getConversations(std::string([accountId UTF8String]))];
 }
 
-- (void)sendSwarmMessage:(NSString*)accountId conversationId:(NSString*)conversationId message:(NSString*)message parentId:(NSString*)parentId flag:(int32_t)flag {
+- (BOOL)sendSwarmMessage:(NSString*)accountId conversationId:(NSString*)conversationId message:(NSString*)message parentId:(NSString*)parentId flag:(int32_t)flag {
+    if (flag == 0 && ![SwarmSendPolicy allows:[self getConversationPermissions:accountId conversationId:conversationId]
+                                       file:NO parentId:parentId]) {
+        return NO;
+    }
     sendMessage(std::string([accountId UTF8String]), std::string([conversationId UTF8String]), std::string([message UTF8String]), std::string([parentId UTF8String]), flag);
+    return YES;
 }
 
-- (void)sendSwarmFileWithName:(NSString*)displayName
+- (NSArray<NSString *> *)getConversationPermissions:(NSString *)accountId conversationId:(NSString *)conversationId {
+    return [Utils vectorToArray:libjami::getConversationPermissions(std::string([accountId UTF8String]), std::string([conversationId UTF8String]))];
+}
+
+- (BOOL)sendSwarmFileWithName:(NSString*)displayName
                     accountId:(NSString*)accountId
                conversationId:(NSString*)conversationId
                  withFilePath:(NSString*)filePath
                        parent:(NSString*)parent {
+    if (![SwarmSendPolicy allows:[self getConversationPermissions:accountId conversationId:conversationId]
+                           file:YES parentId:parent]) {
+        return NO;
+    }
     sendFile(std::string([accountId UTF8String]), std::string([conversationId UTF8String]), std::string([filePath UTF8String]), std::string([displayName UTF8String]), std::string([parent UTF8String]));
+    return YES;
 }
 
 - (NSDataTransferError)dataTransferInfoWithId:(NSString*)fileId

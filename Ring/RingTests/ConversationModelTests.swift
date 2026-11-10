@@ -23,6 +23,42 @@ import XCTest
 
 final class ConversationModelTests: XCTestCase {
 
+    func testFeedMemberCanReplyButCannotPublishOrForward() {
+        let grants = ["textReply", "fileReply", "reaction"]
+        XCTAssertFalse(SwarmSendPolicy.allows(grants, file: false, parentId: ""))
+        XCTAssertFalse(SwarmSendPolicy.allows(grants, file: true, parentId: ""))
+        XCTAssertTrue(SwarmSendPolicy.allows(grants, file: false, parentId: "post"))
+        XCTAssertTrue(SwarmSendPolicy.allows(grants, file: true, parentId: "post"))
+    }
+
+    func testMissingOrUnknownGrantsDoNotAllowSharing() {
+        XCTAssertFalse(SwarmSendPolicy.allows(nil, file: false, parentId: ""))
+        XCTAssertFalse(SwarmSendPolicy.allows(["futurePermission"], file: true, parentId: "post"))
+        XCTAssertFalse(SwarmSendPolicy.canPublish(["textReply", "fileReply"]))
+        XCTAssertTrue(SwarmSendPolicy.canPublish(["text"]))
+        XCTAssertTrue(SwarmSendPolicy.canPublish(["file"]))
+    }
+
+    func testBridgeRechecksGrantsWhenForwardingAfterSelection() {
+        let adapter = ObjCMockConversationsAdapter()
+        adapter.permissions = ["text", "file"]
+        XCTAssertTrue(SwarmSendPolicy.canPublish(adapter.getConversationPermissions(accountId1, conversationId: conversationId1)))
+        // The destination was selectable, but the local role changed before dispatch.
+        adapter.permissions = ["textReply", "fileReply"]
+        XCTAssertFalse(adapter.sendSwarmMessage(accountId1, conversationId: conversationId1,
+                                               message: "Forwarded", parentId: "", flag: 0))
+    }
+
+    func testFileBridgeRejectsPublishingWithOnlyReplyPermission() {
+        let adapter = ObjCMockSendFileAdapter()
+        adapter.permissions = ["fileReply"]
+        XCTAssertFalse(adapter.sendSwarmFile(withName: "photo.jpg", accountId: accountId1,
+                                            conversationId: conversationId1, withFilePath: "/unused", parent: ""))
+        adapter.permissions = []
+        XCTAssertFalse(adapter.sendSwarmFile(withName: "photo.jpg", accountId: accountId1,
+                                            conversationId: conversationId1, withFilePath: "/unused", parent: "post"))
+    }
+
     func createConversation(conversationId: String, jamiId: String, type: ConversationType, accountId: String) -> ConversationModel {
         let uri = JamiURI.init(schema: URIType.ring, infoHash: jamiId)
         var info = ConversationInfo(type: type)

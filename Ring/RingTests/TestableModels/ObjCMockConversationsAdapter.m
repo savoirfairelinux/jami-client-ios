@@ -39,7 +39,7 @@
 
 - (NSArray<NSString *> *)getConversationPermissions:(NSString *)accountId
                                      conversationId:(NSString *)conversationId {
-    return @[];
+    return self.permissions ?: @[];
 }
 
 - (uint32_t)loadConversationMessages:(NSString *)accountId conversationId:(NSString *)conversationId
@@ -52,4 +52,11 @@
     return 0;
 }
 
+@end
+
+@implementation ObjCMockSendFileAdapter
+- (void)registerDataTransferHandlers {}
+- (NSArray<NSString *> *)getConversationPermissions:(NSString *)accountId conversationId:(NSString *)conversationId {
+    return self.permissions ?: @[];
+}
 @end

@@ -188,13 +188,14 @@ public final class AdapterService: AdapterDelegate {
         return isReady
     }
 
-    func sendSwarmMessage(accountId: String, conversationId: String, message: String, parentId: String) {
-        if waitForAccountReady(accountId: accountId) {
+    func sendSwarmMessage(accountId: String, conversationId: String, message: String, parentId: String) -> Bool {
+        guard waitForAccountReady(accountId: accountId) else { return false }
+        let dispatched = adapter?.sendSwarmMessage(accountId, conversationId: conversationId,
+                                                    message: message, parentId: parentId, flag: 0) == true
+        if dispatched {
             CommonHelpers.setUpdatedConversations(accountId: accountId, conversationId: conversationId)
-            adapter?.sendSwarmMessage(accountId, conversationId: conversationId, message: message, parentId: parentId, flag: 0)
-        } else {
-            NSLog("[ShareExtension] Failed to send swarm message - account \(accountId) not ready")
         }
+        return dispatched
     }
 
     private func setAccountActive(_ accountId: String, newValue: Bool) {
@@ -227,9 +228,9 @@ public final class AdapterService: AdapterDelegate {
         self.adapter?.pushNotificationReceived("", message: notificationData)
     }
 
-    func sendSwarmFile(accountId: String, conversationId: String, filePath: URL?, fileData: Data?, fileName: String, parentId: String) {
+    func sendSwarmFile(accountId: String, conversationId: String, filePath: URL?, fileData: Data?, fileName: String, parentId: String) -> Bool {
         guard let destinationURL = CommonHelpers.createFileUrlForSwarm(fileName: fileName, accountId: accountId, conversationId: conversationId) else {
-            return
+            return false
         }
 
         do {
@@ -238,35 +239,35 @@ public final class AdapterService: AdapterDelegate {
                 try fileData.write(to: destinationURL, options: .atomic)
             } else if let filePath = filePath {
                 guard filePath.startAccessingSecurityScopedResource() else {
-                    return
+                    return false
                 }
                 defer {
                     filePath.stopAccessingSecurityScopedResource()
                 }
                 try FileManager.default.copyItem(at: filePath, to: destinationURL)
             } else {
-                return
+                return false
             }
 
             CommonHelpers.setUpdatedConversations(accountId: accountId, conversationId: conversationId)
 
             guard waitForAccountReady(accountId: accountId) else {
                 NSLog("[ShareExtension] Failed to send swarm file - account \(accountId) not ready")
-                return
+                return false
             }
 
             NSLog("[ShareExtension] Account \(accountId) is ready, sending swarm file")
-            self.adapter?.sendSwarmFile(
+            return self.adapter?.sendSwarmFile(
                 withName: fileName,
                 accountId: accountId,
                 conversationId: conversationId,
                 withFilePath: destinationURL.path,
                 parent: parentId
-            )
+            ) == true
 
         } catch {
             NSLog("[ShareExtension] sendSwarmFile failed with error: \(error.localizedDescription)")
-            return
+            return false
         }
     }
 
@@ -279,7 +280,9 @@ public final class AdapterService: AdapterDelegate {
         for account in getAccountList() {
             let conversations = adapter?.getSwarmConversations(forAccount: account) as? [String] ?? []
 
-            result[account] = conversations
+            result[account] = conversations.filter { conversationId in
+                SwarmSendPolicy.canPublish(adapter?.getConversationPermissions(account, conversationId: conversationId))
+            }
         }
         return result
     }

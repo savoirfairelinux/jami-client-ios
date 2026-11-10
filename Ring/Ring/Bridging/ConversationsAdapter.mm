@@ -257,8 +257,13 @@ static id <MessagesAdapterDelegate> _messagesDelegate;
     return loadSwarmUntil(std::string([accountId UTF8String]), std::string([conversationId UTF8String]), std::string([fromMessage UTF8String]), std::string([toMessage UTF8String]));
 }
 
-- (void)sendSwarmMessage:(NSString*)accountId conversationId:(NSString*)conversationId message:(NSString*)message parentId:(NSString*)parentId flag:(int32_t)flag {
+- (BOOL)sendSwarmMessage:(NSString*)accountId conversationId:(NSString*)conversationId message:(NSString*)message parentId:(NSString*)parentId flag:(int32_t)flag {
+    if (flag == 0 && ![SwarmSendPolicy allows:[self getConversationPermissions:accountId conversationId:conversationId]
+                                       file:NO parentId:parentId]) {
+        return NO;
+    }
     sendMessage(std::string([accountId UTF8String]), std::string([conversationId UTF8String]), std::string([message UTF8String]), std::string([parentId UTF8String]), flag);
+    return YES;
 }
 
 - (uint32_t)countInteractions:(NSString*)accountId conversationId:(NSString*)conversationId from:(NSString*)messageFrom to:(NSString*)messsageTo authorUri:(NSString*)authorUri  {
