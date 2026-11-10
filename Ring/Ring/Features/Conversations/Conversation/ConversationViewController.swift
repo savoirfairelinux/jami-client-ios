@@ -35,7 +35,7 @@ enum ConversationNavBarLayout {
     private static let trailingSpacing: CGFloat = 8
     private static let backButtonSpacing: CGFloat = 20
     private static let titleToTrailingSpacing: CGFloat = 40
-    private static let windowControlsInset: CGFloat = 120
+    static let windowControlsInset: CGFloat = 120
 
     static func trailingButtonsWidth(buttonCount: Int) -> CGFloat {
         guard buttonCount > 0 else { return 0 }
@@ -45,13 +45,13 @@ enum ConversationNavBarLayout {
 
     static func titleMaxWidth(barContentWidth: CGFloat,
                               trailingButtonCount: Int,
-                              isPad: Bool) -> CGFloat {
-        let itemSpacings = backButtonSpacing + titleToTrailingSpacing
+                              reservesWindowControls: Bool,
+                              hasBackButton: Bool) -> CGFloat {
         let avatarBlock = avatarSize + avatarSpacing * 2
         let available = barContentWidth
-            - (isPad ? windowControlsInset : 0)
-            - NavBarIcon.tapTarget
-            - itemSpacings
+            - (reservesWindowControls ? windowControlsInset : 0)
+            - (hasBackButton ? NavBarIcon.tapTarget + backButtonSpacing : 0)
+            - titleToTrailingSpacing
             - avatarBlock
             - trailingButtonsWidth(buttonCount: trailingButtonCount)
         return max(0, available)
@@ -128,11 +128,22 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
     }
 
     private func updateNavBarContentWidth() {
-        guard let navigationBar = navigationController?.navigationBar else { return }
+        guard let navigation = navigationController?.navigationController ?? navigationController else { return }
+        let navigationBar = navigation.navigationBar
         let margins = navigationBar.layoutMargins
         let width = navigationBar.bounds.width - margins.left - margins.right
         if viewModel.navBarContentWidth != width {
             viewModel.navBarContentWidth = width
+        }
+        let contentMinX = navigationBar.convert(CGPoint(x: margins.left, y: 0), to: nil).x
+        let reservesWindowControls = traitCollection.userInterfaceIdiom == .pad
+            && contentMinX < ConversationNavBarLayout.windowControlsInset
+        if viewModel.navBarReservesWindowControls != reservesWindowControls {
+            viewModel.navBarReservesWindowControls = reservesWindowControls
+        }
+        let hasBackButton = navigation.viewControllers.first !== self
+        if viewModel.navBarHasBackButton != hasBackButton {
+            viewModel.navBarHasBackButton = hasBackButton
         }
     }
 

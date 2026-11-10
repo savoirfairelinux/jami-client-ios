@@ -45,7 +45,8 @@ struct ConversationContainerView: View {
         ConversationNavBarLayout.titleMaxWidth(
             barContentWidth: viewModel.navBarContentWidth,
             trailingButtonCount: visibleTrailingButtons.count,
-            isPad: UIDevice.current.userInterfaceIdiom == .pad
+            reservesWindowControls: viewModel.navBarReservesWindowControls,
+            hasBackButton: viewModel.navBarHasBackButton
         )
     }
 

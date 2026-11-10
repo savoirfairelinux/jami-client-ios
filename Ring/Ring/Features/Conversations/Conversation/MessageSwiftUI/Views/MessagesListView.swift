@@ -119,6 +119,7 @@ struct MessagesListView: View {
     @SwiftUI.State private var messageFrame: CGRect?
     @SwiftUI.State private var screenHeight: CGFloat = 0
     @SwiftUI.State private var messageListWidth: CGFloat = 0
+    @SwiftUI.State private var fullBleedWidth: CGFloat = 0
     @SwiftUI.State private var composerLayout = ComposerLayout()
     @SwiftUI.State private var scrollHalt = ScrollHalt()
     @SwiftUI.State var isMessageBarFocused: Bool = false
@@ -224,7 +225,7 @@ struct MessagesListView: View {
                 handleKeyboardHeightChange(height)
             }
             if model.shouldShowMap {
-                LocationSharingView(model: model)
+                LocationSharingView(model: model, containerWidth: fullBleedWidth)
             }
 
             if model.isSyncing {
@@ -266,6 +267,11 @@ struct MessagesListView: View {
             }
     }
 
+    private static func fullBleedWidth(of proxy: GeometryProxy) -> CGFloat {
+        let windowInsets = UIWindow.currentSafeAreaInsets
+        return proxy.size.width + windowInsets.left + windowInsets.right
+    }
+
     private func messagesLayerView() -> some View {
         ZStack(alignment: .bottomTrailing) {
             createMessagesStackView()
@@ -275,8 +281,12 @@ struct MessagesListView: View {
                 .background(
                     GeometryReader { proxy in
                         Color.clear
-                            .onAppear { messageListWidth = proxy.size.width }
+                            .onAppear {
+                                messageListWidth = proxy.size.width
+                                fullBleedWidth = Self.fullBleedWidth(of: proxy)
+                            }
                             .onChange(of: proxy.size.width) { messageListWidth = $0 }
+                            .onChange(of: Self.fullBleedWidth(of: proxy)) { fullBleedWidth = $0 }
                     }
                 )
             if !model.isBlocked {
