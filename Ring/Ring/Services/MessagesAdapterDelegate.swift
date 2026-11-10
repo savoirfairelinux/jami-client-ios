@@ -20,6 +20,8 @@
 
 @objc protocol MessagesAdapterDelegate {
 
+    func conversationError(conversationId: String, accountId: String, code: Int, message: String)
+
     func didReceiveMessage(_ message: [String: String],
                            from senderAccount: String,
                            messageId: String,

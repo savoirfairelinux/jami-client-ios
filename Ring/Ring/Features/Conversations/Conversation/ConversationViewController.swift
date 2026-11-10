@@ -215,12 +215,12 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
             .subscribe(onNext: { [weak self] (state) in
                 guard let self = self, let state = state as? MessagePanelState else { return }
                 switch state {
-                case .send(let messages):
-                    self.viewModel.send(messages)
+                case .send(let messages, let completion):
+                    self.viewModel.send(messages, completion: completion)
                 case .sendPhoto:
                     self.takePicture()
-                case .editMessage(content: let content, messageId: let messageId):
-                    self.viewModel.editMessage(content: content, messageId: messageId)
+                case .editMessage(content: let content, messageId: let messageId, completion: let completion):
+                    self.viewModel.editConfirmed(content: content, messageId: messageId, completion: completion)
                 case .openGalery:
                     self.selectItemsFromPhotoLibrary()
                 case .shareLocation:

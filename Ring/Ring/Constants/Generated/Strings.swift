@@ -1043,6 +1043,8 @@ internal enum L10n {
     internal static func notContactLabel(_ p1: Any) -> String {
       return L10n.tr("Localizable", "conversation.notContactLabel", String(describing: p1), fallback: "%@ is not in the contact list")
     }
+    /// The conversation operation could not be completed. Please try again.
+    internal static let operationFailed = L10n.tr("Localizable", "conversation.operationFailed", fallback: "The conversation operation could not be completed. Please try again.")
     /// Jami needs access to your photo library to save images. You can enable this in Settings.
     internal static let photoAccessRequiredMessage = L10n.tr("Localizable", "conversation.photoAccessRequiredMessage", fallback: "Jami needs access to your photo library to save images. You can enable this in Settings.")
     /// %@ sent you a conversation invitation.
@@ -1058,12 +1060,18 @@ internal enum L10n {
     /// Hello,
     /// Do you want to join the conversation?
     internal static let requestMessage = L10n.tr("Localizable", "conversation.requestMessage", fallback: "Hello,\nDo you want to join the conversation?")
+    /// The message could not be sent. Your draft has been kept.
+    internal static let sendFailed = L10n.tr("Localizable", "conversation.sendFailed", fallback: "The message could not be sent. Your draft has been kept.")
     /// Send Invitation
     internal static let sendInvitationButton = L10n.tr("Localizable", "conversation.sendInvitationButton", fallback: "Send Invitation")
+    /// Sending failures retain the user's draft.
+    internal static let sendPermissionDenied = L10n.tr("Localizable", "conversation.sendPermissionDenied", fallback: "You do not have permission to send this message here.")
     /// Send them an invitation to be able converse.
     internal static let sendRequest = L10n.tr("Localizable", "conversation.sendRequest", fallback: "Send them an invitation to be able converse.")
     /// Send conversation invitation
     internal static let sendRequestTitle = L10n.tr("Localizable", "conversation.sendRequestTitle", fallback: "Send conversation invitation")
+    /// Sending could not be confirmed. Your draft has been kept. Check the conversation before trying again.
+    internal static let sendUnconfirmed = L10n.tr("Localizable", "conversation.sendUnconfirmed", fallback: "Sending could not be confirmed. Your draft has been kept. Check the conversation before trying again.")
     /// Waiting for %@ to connect to synchronize the conversation…
     internal static func synchronizationMessage(_ p1: Any) -> String {
       return L10n.tr("Localizable", "conversation.synchronizationMessage", String(describing: p1), fallback: "Waiting for %@ to connect to synchronize the conversation…")
@@ -1579,6 +1587,8 @@ internal enum L10n {
     internal static let searchConversations = L10n.tr("Localizable", "shareExtension.searchConversations", fallback: "Search conversations")
     /// Select account
     internal static let selectAccountTitle = L10n.tr("Localizable", "shareExtension.selectAccountTitle", fallback: "Select account")
+    /// Some items could not be sent. Your shared items are still available. Check the conversations before trying again.
+    internal static let sendFailed = L10n.tr("Localizable", "shareExtension.sendFailed", fallback: "Some items could not be sent. Your shared items are still available. Check the conversations before trying again.")
     /// Sending…
     internal static let sending = L10n.tr("Localizable", "shareExtension.sending", fallback: "Sending…")
     /// Send to %d conversation

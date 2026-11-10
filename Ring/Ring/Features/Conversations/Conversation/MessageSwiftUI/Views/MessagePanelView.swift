@@ -179,7 +179,6 @@ struct MessagePanelView: View {
     @ObservedObject var model: MessagePanelVM
     @ObservedObject var voiceRecording: VoiceRecordingVM
     @Binding var isFocused: Bool
-    @SwiftUI.State private var text: String = ""
     @SwiftUI.State private var textHeight: CGFloat = 42
     @SwiftUI.State private var bottomSafeAreaInset: CGFloat = ScreenDimensionsManager.shared.safeAreaInsets.bottom
     let defaultControlSize: CGFloat = 42
@@ -275,14 +274,14 @@ struct MessagePanelView: View {
                 placeholder: model.placeholder,
                 leadingInset: textContainerLeadingInset,
                 trailingInset: compactTextInputInset,
-                text: $text,
+                text: $model.draftText,
                 isFocused: $isFocused,
                 dynamicHeight: $textHeight
             )
             .frame(minHeight: textHeight, maxHeight: textHeight)
             .accessibilityLabel(L10n.Accessibility.conversationComposeMessage)
-            .onChange(of: text) { _ in
-                model.handleTyping(message: text)
+            .onChange(of: model.draftText) { _ in
+                model.handleTyping(message: model.draftText)
             }
 
             sendEmojiButton()
@@ -293,11 +292,10 @@ struct MessagePanelView: View {
     @ViewBuilder
     private func sendEmojiButton() -> some View {
         Button(action: {
-            self.model.sendDraft(text: text)
-            text = ""
+            self.model.sendDraft(text: model.draftText)
         }, label: {
             ZStack {
-                if model.isDraftEmpty(text: text) {
+                if model.isDraftEmpty(text: model.draftText) {
                     Text(model.defaultEmoji)
                         .font(.system(size: 26))
                         .bold()
@@ -313,7 +311,7 @@ struct MessagePanelView: View {
         })
         .buttonStyle(.plain)
         .disabled(model.isLoadingAttachments)
-        .animation(.spring(response: 0.3, dampingFraction: 0.7), value: text.isEmpty)
+        .animation(.spring(response: 0.3, dampingFraction: 0.7), value: model.draftText.isEmpty)
     }
 
     var body: some View {
@@ -340,6 +338,10 @@ struct MessagePanelView: View {
                 .padding(.bottom, isFocused || bottomSafeAreaInset == 0 ? Self.verticalInset : 0)
             }
         }
+        .disabled(model.isSending)
+        .alert(isPresented: Binding(get: { model.sendFailure != nil }, set: { if !$0 { model.sendFailure = nil } })) {
+            Alert(title: Text(model.sendFailure ?? L10n.Conversation.sendFailed))
+        }
         .background(
             GeometryReader { proxy in
                 Color.clear
@@ -351,7 +353,7 @@ struct MessagePanelView: View {
             isFocused = model.isEdit
         }
         .onChange(of: model.messageToEdit?.message.id) { _ in
-            text = model.messageToEdit?.content ?? ""
+            model.draftText = model.messageToEdit?.content ?? ""
         }
         .padding(.horizontal, Self.horizontalInset)
     }

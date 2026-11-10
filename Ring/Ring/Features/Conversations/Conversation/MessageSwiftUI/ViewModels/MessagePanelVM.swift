@@ -23,7 +23,7 @@ import RxSwift
 import Combine
 
 struct OutgoingMessage {
-    enum Content {
+    enum Content: Equatable {
         case text(String)
         case data(displayName: String, data: Data)
         case file(path: String, displayName: String, readyAfter: TimeInterval = 0)
@@ -66,6 +66,11 @@ struct DraftAttachment: Identifiable {
 }
 
 class MessagePanelVM: ObservableObject, MessageAppearanceProtocol {
+
+    @Published var draftText = ""
+    @Published var sendFailure: String?
+    @Published private(set) var isSending = false
+    private var sendAttempt: UUID?
 
     @Published var placeholder = L10n.Conversation.messagePlaceholder
     @Published var defaultEmoji = "👍"
@@ -142,13 +147,14 @@ class MessagePanelVM: ObservableObject, MessageAppearanceProtocol {
     }
 
     func sendDraft(text: String) {
+        guard !isSending else { return }
+        draftText = text
         if messageToEdit != nil {
             editMessage(text: text)
             return
         }
         guard !isLoadingAttachments else { return }
         let contents = draftContents(text: text)
-        attachments.removeAll()
         send(contents)
     }
 
@@ -162,25 +168,79 @@ class MessagePanelVM: ObservableObject, MessageAppearanceProtocol {
     }
 
     func send(_ content: OutgoingMessage.Content) {
+        guard !isSending else {
+            retainFailed(content)
+            return
+        }
         send([content])
     }
 
     private func send(_ contents: [OutgoingMessage.Content]) {
-        guard !contents.isEmpty else { return }
+        guard !contents.isEmpty, !isSending else { return }
+        let attempt = UUID()
+        sendAttempt = attempt
+        isSending = true
+        sendFailure = nil
         let parentId = messageToReply?.message.id ?? ""
-        if messageToReply != nil {
-            endReply()
+        let messages = contents.map { OutgoingMessage(content: $0, parentId: parentId) }
+        messagePanelState.onNext(MessagePanelState.send(messages: messages, completion: { [weak self] count, failure in
+            guard let self = self, self.sendAttempt == attempt else { return }
+            self.sendAttempt = nil
+            self.isSending = false
+            for content in contents.prefix(count) {
+                if case .text = content {
+                    self.draftText = ""
+                } else if let index = self.attachments.firstIndex(where: { $0.readyContent == content }) {
+                    self.attachments.remove(at: index)
+                }
+            }
+            if let failure = failure {
+                // Immediate media sends have no attachment chip yet. Retain
+                // them too, so an error never destroys the user's recording/file.
+                for content in contents.dropFirst(count) {
+                    self.retainFailed(content)
+                }
+                self.sendFailure = failure.localizedMessage
+            } else {
+                self.endReply()
+                UIAccessibility.post(notification: .announcement, argument: L10n.Accessibility.conversationMessageSent)
+            }
+        }))
+    }
+
+    private func retainFailed(_ content: OutgoingMessage.Content) {
+        if case .text(let text) = content {
+            if draftText.isEmpty { draftText = text }
+            return
         }
-        messagePanelState.onNext(MessagePanelState.send(messages: contents.map { OutgoingMessage(content: $0, parentId: parentId) }))
-        UIAccessibility.post(notification: .announcement, argument: L10n.Accessibility.conversationMessageSent)
+        guard !attachments.contains(where: { $0.readyContent == content }) else { return }
+        let name: String
+        switch content {
+        case .data(let displayName, _), .file(_, let displayName, _): name = displayName
+        case .text: return
+        }
+        var attachment = DraftAttachment(displayName: name, kind: .document)
+        attachment.status = .ready(content)
+        attachments.append(attachment)
     }
 
     func editMessage(text: String) {
+        guard !isSending, let message = messageToEdit else { return }
         let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
-        if !trimmed.isEmpty, let message = messageToEdit {
-            messagePanelState.onNext(MessagePanelState.editMessage(content: trimmed, messageId: message.message.id))
-        }
-        cancelEdit()
+        guard !trimmed.isEmpty else { return }
+        draftText = text
+        isSending = true
+        messagePanelState.onNext(MessagePanelState.editMessage(content: trimmed, messageId: message.message.id,
+                                                               completion: { [weak self] failure in
+            guard let self = self else { return }
+            self.isSending = false
+            if let failure = failure {
+                self.sendFailure = failure.localizedMessage
+            } else {
+                self.draftText = ""
+                self.cancelEdit()
+            }
+        }))
     }
 
     func attach(displayName: String, kind: DraftAttachment.Kind, load: (@escaping (OutgoingMessage.Content?) -> Void) -> Void) {
@@ -195,7 +255,7 @@ class MessagePanelVM: ObservableObject, MessageAppearanceProtocol {
                         self.messagePanelState.onNext(MessagePanelState.attachmentFailed)
                         return
                     }
-                    self.messagePanelState.onNext(MessagePanelState.send(messages: [OutgoingMessage(content: content, parentId: "")]))
+                    self.send(content)
                 }
             }
             return
@@ -223,6 +283,7 @@ class MessagePanelVM: ObservableObject, MessageAppearanceProtocol {
     }
 
     func removeAttachment(_ attachment: DraftAttachment) {
+        guard !isSending else { return }
         guard let index = attachments.firstIndex(where: { $0.id == attachment.id }) else { return }
         attachments.remove(at: index).readyContent.map(Self.discardFile)
     }
@@ -273,6 +334,7 @@ class MessagePanelVM: ObservableObject, MessageAppearanceProtocol {
     }
 
     func configureReplyTo(message: MessageContentVM, quote: MessageReplyTargetVM) {
+        guard !isSending else { return }
         cancelEdit()
         if messageToReply?.message.id != message.message.id {
             discardDraftAttachments()
@@ -291,6 +353,7 @@ class MessagePanelVM: ObservableObject, MessageAppearanceProtocol {
     }
 
     func configureEdit(message: MessageContentVM, quote: MessageReplyTargetVM) {
+        guard !isSending else { return }
         cancelReply()
         messageToEdit = message
         show(quote: quote, of: message)
@@ -303,6 +366,7 @@ class MessagePanelVM: ObservableObject, MessageAppearanceProtocol {
     }
 
     func cancelReply() {
+        guard !isSending else { return }
         discardDraftAttachments()
         endReply()
     }
@@ -323,6 +387,7 @@ class MessagePanelVM: ObservableObject, MessageAppearanceProtocol {
     }
 
     func cancelEdit() {
+        guard !isSending else { return }
         messageToEdit = nil
         quote = nil
         isEdit = false

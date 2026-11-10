@@ -889,3 +889,10 @@
 "collab.documentRemovedLocally" = "Document removed from this device";
 "collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";
 "collab.documentShared" = "New document: %@";
+
+/* Sending failures retain the user's draft. */
+"conversation.sendPermissionDenied" = "You do not have permission to send this message here.";
+"conversation.sendFailed" = "The message could not be sent. Your draft has been kept.";
+"conversation.sendUnconfirmed" = "Sending could not be confirmed. Your draft has been kept. Check the conversation before trying again.";
+"conversation.operationFailed" = "The conversation operation could not be completed. Please try again.";
+"shareExtension.sendFailed" = "Some items could not be sent. Your shared items are still available. Check the conversations before trying again.";

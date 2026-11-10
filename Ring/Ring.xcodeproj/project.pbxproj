@@ -418,9 +418,7 @@
 		5D11A0000000000000000011 /* NavigationBarItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D11A0000000000000000010 /* NavigationBarItems.swift */; };
 		26EFD7E32E2E944100B63F74 /* CommonHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EFD7E22E2E943500B63F74 /* CommonHelpers.swift */; };
 		26EFD7E42E2E944100B63F74 /* CommonHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EFD7E22E2E943500B63F74 /* CommonHelpers.swift */; };
-		A1D0C0DE0000000000000D11 /* SwarmSendPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D0C0DE0000000000000D10 /* SwarmSendPolicy.swift */; };
 		26EFD7E52E2E944100B63F74 /* CommonHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EFD7E22E2E943500B63F74 /* CommonHelpers.swift */; };
-		A1D0C0DE0000000000000D12 /* SwarmSendPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D0C0DE0000000000000D10 /* SwarmSendPolicy.swift */; };
 		26EFD7E62E2E9F6B00B63F74 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ECEE9A2220D1935000E1CF4 /* VideoToolbox.framework */; };
 		26EFD7F92E2EB38300B63F74 /* VideoUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26EFD7F82E2EB38300B63F74 /* VideoUtils.mm */; };
 		26EFD7FB2E2EBA4500B63F74 /* Utils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04399AAB1D1C304300E99CD9 /* Utils.mm */; };
@@ -566,6 +564,8 @@
 		A1D0C0DE0000000000000B02 /* CallsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D0C0DE0000000000000B01 /* CallsManager.swift */; };
 		A1D0C0DE0000000000000C11 /* ConversationEventOrderingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D0C0DE0000000000000C12 /* ConversationEventOrderingTests.swift */; };
 		A1D0C0DE0000000000000C13 /* ObjCMockConversationsAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D0C0DE0000000000000C14 /* ObjCMockConversationsAdapter.m */; };
+		A1D0C0DE0000000000000D11 /* SwarmSendPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D0C0DE0000000000000D10 /* SwarmSendPolicy.swift */; };
+		A1D0C0DE0000000000000D12 /* SwarmSendPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D0C0DE0000000000000D10 /* SwarmSendPolicy.swift */; };
 		A7C3E1F52F80A10100C0FFEE /* PeerSharingTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C3E1F42F80A10100C0FFEE /* PeerSharingTracker.swift */; };
 		A7C3E1F72F80A10100C0FFEE /* MessageEditHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C3E1F62F80A10100C0FFEE /* MessageEditHistoryView.swift */; };
 		A7EH00102F20000300000002 /* MessageEditHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EH00102F20000300000001 /* MessageEditHistory.swift */; };
@@ -1117,7 +1117,6 @@
 		26EFD7B32E2D59B600B63F74 /* ScreenDimensionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenDimensionsManager.swift; sourceTree = "<group>"; };
 		5D11A0000000000000000010 /* NavigationBarItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarItems.swift; sourceTree = "<group>"; };
 		26EFD7E22E2E943500B63F74 /* CommonHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonHelpers.swift; sourceTree = "<group>"; };
-		A1D0C0DE0000000000000D10 /* SwarmSendPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwarmSendPolicy.swift; sourceTree = "<group>"; };
 		26EFD7F72E2EB35200B63F74 /* MediaUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MediaUtils.h; sourceTree = "<group>"; };
 		26EFD7F82E2EB38300B63F74 /* VideoUtils.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = VideoUtils.mm; sourceTree = "<group>"; };
 		26EFD8012E2ED72400B63F74 /* ObjcTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjcTypes.h; sourceTree = "<group>"; };
@@ -1821,6 +1820,7 @@
 		A1D0C0DE0000000000000C12 /* ConversationEventOrderingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationEventOrderingTests.swift; sourceTree = "<group>"; };
 		A1D0C0DE0000000000000C14 /* ObjCMockConversationsAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjCMockConversationsAdapter.m; sourceTree = "<group>"; };
 		A1D0C0DE0000000000000C15 /* ObjCMockConversationsAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjCMockConversationsAdapter.h; sourceTree = "<group>"; };
+		A1D0C0DE0000000000000D10 /* SwarmSendPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwarmSendPolicy.swift; sourceTree = "<group>"; };
 		A7C3E1F42F80A10100C0FFEE /* PeerSharingTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerSharingTracker.swift; sourceTree = "<group>"; };
 		A7C3E1F62F80A10100C0FFEE /* MessageEditHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageEditHistoryView.swift; sourceTree = "<group>"; };
 		A7EH00102F20000300000001 /* MessageEditHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageEditHistory.swift; sourceTree = "<group>"; };
