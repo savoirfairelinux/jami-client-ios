@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "334367ca_dfcadf65",
+        "filename": "Ring/Ring/Coordinators/AppCoordinator.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-10T20:21:58Z",
+      "side": 1,
+      "message": "[error] Line 176: 🔴 When all remaining accounts still require migration, this branch emits `.needAccountMigration` without updating persisted selection (`Constants.selectedAccountID`) or `currentAccount`. After the removed account was the selected one, defaults can still point to a non-existent ID, and a restart can leave `currentAccount` nil while accounts exist. Align this path with existing post-removal handling (e.g. `AccountSummaryVM.determinePostRemovalState`) by clearing or updating selected account state before navigation (and likewise clear it in the `remainingAccounts.isEmpty` branch).",
+      "revId": "18a021ff0597d0a35a07e01d41687a7c58d51865",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
