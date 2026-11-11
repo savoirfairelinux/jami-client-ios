@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee42c93b_28175121",
+        "filename": "Ring/Ring/Models/ConversationModel.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-11T19:05:02Z",
+      "side": 1,
+      "message": "[warning] Line 149: 🟡 `allowsSend` treats missing grants as allowed (`guard let granted \u003d granted else { return true }`), which undermines the stricter policy introduced elsewhere (`SwarmSendPolicy` says missing grants must not allow sends). Because `allowsPublishing` is now used to filter forwarding targets, conversations with unavailable/unknown grants can still appear selectable and then fail at dispatch time. Align this path with the policy by default-denying when grants are missing for publishing checks (or by using `SwarmSendPolicy.canPublish` directly in picker filtering).",
+      "revId": "01236bc1a09933e18859674cdfa8c50fff1f574b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
