@@ -390,6 +390,31 @@ final class SwarmInfoTests: XCTestCase {
         XCTAssertFalse(swarmInfo.finalTitle.value.isEmpty)
     }
 
+    func testOneToOneEndsWhenPeerLeft() {
+        let swarmInfo = makeSwarmInfo(type: .oneToOne, members: [(jamiId1, "admin"), (jamiId2, "left")])
+
+        XCTAssertTrue(swarmInfo.conversationEnded.value)
+    }
+
+    func testConversationWithYourselfIsNotEnded() {
+        let swarmInfo = makeSwarmInfo(type: .oneToOne, members: [(jamiId1, "admin")])
+
+        XCTAssertFalse(swarmInfo.conversationEnded.value)
+    }
+
+    func testGroupIsNotEndedForRemainingAdmin() {
+        let swarmInfo = makeSwarmInfo(type: .invitesOnly, members: [(jamiId1, "admin")])
+
+        XCTAssertFalse(swarmInfo.conversationEnded.value)
+    }
+
+    private func makeSwarmInfo(type: ConversationType, members: [(uri: String, role: String)]) -> SwarmInfo {
+        var info = ConversationInfo(type: type)
+        info.setParticipants(from: members.map { ["uri": $0.uri, "role": $0.role] }, accountURI: jamiId1)
+        let conversation = ConversationModel(id: conversationId1, accountId: accountId1, info: info)
+        return SwarmInfo(injectionBag: injectionBag, conversation: conversation)
+    }
+
     private func makeSwarmInfoViewModel(conversation: ConversationModel,
                                         title: String) -> SwarmInfoVM {
         let testableSwarmInfo = TestableSwarmInfo(participants: [],
