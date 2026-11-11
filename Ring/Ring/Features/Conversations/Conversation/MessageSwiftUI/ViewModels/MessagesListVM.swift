@@ -129,7 +129,14 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     @Published var coordinates = [LocationSharingAnnotation]()
     @Published var locationSharingiewModel: LocationSharingViewModel = LocationSharingViewModel()
     @Published var isTemporary: Bool = false
-    @Published var isConversationEnded: Bool = false
+    @Published var isConversationEnded: Bool = false {
+        didSet {
+            guard oldValue != isConversationEnded else { return }
+            self.messagesModels.forEach { message in
+                message.messageContent.isConversationEnded = isConversationEnded
+            }
+        }
+    }
     @Published var name: String = "" {
         didSet {
             updateSyncMessageIfNeeded()
@@ -337,6 +344,24 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
                 self.screenTapped = event
             })
             .disposed(by: self.disposeBag)
+    }
+
+    private lazy var destructiveActionExecutor = ConversationDestructiveActionExecutor(injectionBag: injectionBag)
+
+    var removeConversationTitle: String {
+        ConversationDestructiveAction.removeConversation.title(for: conversation)
+    }
+
+    var removeConversationConfirmation: String {
+        ConversationDestructiveAction.removeConversation.confirmationMessage(for: conversation)
+    }
+
+    var removeConversationButtonTitle: String {
+        ConversationDestructiveAction.removeConversation.confirmationButtonTitle(for: conversation)
+    }
+
+    func removeConversation() {
+        destructiveActionExecutor.perform(.removeConversation, on: conversation)
     }
 
     func unblock() {
@@ -673,6 +698,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
             )
             container.messageContent.actionHandler = self.actionHandler
             container.messageContent.permissions = self.permissions
+            container.messageContent.isConversationEnded = self.isConversationEnded
             container.collabDocViewModel?.follow(accountId: self.conversation.accountId,
                                                  conversationId: self.conversation.id,
                                                  service: self.injectionBag.collaborationService)

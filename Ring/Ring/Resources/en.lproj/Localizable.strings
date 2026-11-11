@@ -97,6 +97,7 @@
 "swarm.removeContact" = "Remove contact";
 "swarm.restartConversation" = "Restart conversation";
 "swarm.conversationEnded" = "Conversation ended";
+"swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
 "swarm.chooseColor" = "Conversation color";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Identifier";
