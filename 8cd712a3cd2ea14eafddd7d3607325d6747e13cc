@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77e9cfd9_10d446a1",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessagesListView.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-11T16:18:00Z",
+      "side": 1,
+      "message": "[warning] Line 269: 🟡 `fullBleedWidth` reads `UIWindow.currentSafeAreaInsets`, which is a global window lookup and can point to the wrong scene/window in iPad multi-window setups, yielding incorrect map width. Use local geometry/window data (`proxy.safeAreaInsets` or the hosting view’s own window insets) so sizing remains tied to the active conversation column.",
+      "revId": "8cd712a3cd2ea14eafddd7d3607325d6747e13cc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
