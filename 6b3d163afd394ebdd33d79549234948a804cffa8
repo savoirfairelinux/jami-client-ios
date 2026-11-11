@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7898434c_5eb9c81a",
+        "filename": "Ring/Ring/Features/Conversations/SmartList/SwiftUI/Views/SearchBar.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-11T13:09:25Z",
+      "side": 1,
+      "message": "[warning] Line 141: 🟡 `hidesNavigationBarDuringPresentation` is keyed on `UIDevice.current.userInterfaceIdiom`, so iPad in compact width (Split View/Slide Over) still keeps the navigation bar visible. That makes behavior depend on hardware instead of the active size class. Drive this from trait collection (compact vs regular) and update on trait changes so search presentation stays correct across multitasking/resizing.",
+      "revId": "6b3d163afd394ebdd33d79549234948a804cffa8",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
