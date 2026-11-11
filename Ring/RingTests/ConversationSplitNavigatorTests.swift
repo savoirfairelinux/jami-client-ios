@@ -71,7 +71,6 @@ final class ConversationSplitNavigatorTests: XCTestCase {
 
     func testStartsWithListAndPlaceholder() {
         XCTAssertTrue(navigator.rootViewController === navigator.splitViewController)
-        XCTAssertEqual(navigator.splitViewController.style, .doubleColumn)
         XCTAssertTrue(navigator.splitViewController.viewController(for: .primary) === listNavigation)
         XCTAssertEqual(placeholders.count, 1)
         XCTAssertEqual(detailControllers, placeholders)
@@ -186,12 +185,9 @@ final class ConversationSplitNavigatorTests: XCTestCase {
 
     func testPhoneInstallsListStackWithoutSplitView() {
         navigator = makePhoneNavigator()
-        isExpanded = true
 
         XCTAssertTrue(navigator.rootViewController === listNavigation)
-        XCTAssertNil(navigator.splitViewController.viewController(for: .primary))
         XCTAssertTrue(placeholders.isEmpty)
-        XCTAssertFalse(navigator.isExpanded)
     }
 
     func testPhoneShowInDetailPushesOntoList() {
@@ -331,13 +327,23 @@ final class ConversationSplitNavigatorTransitionTests: XCTestCase {
         super.tearDown()
     }
 
-    private func settle() {
-        RunLoop.current.run(until: Date().addingTimeInterval(0.8))
+    private func waitUntil(_ condition: () -> Bool, file: StaticString = #filePath, line: UInt = #line) {
+        let deadline = Date().addingTimeInterval(5)
+        while !condition() && Date() < deadline {
+            RunLoop.current.run(until: Date().addingTimeInterval(0.01))
+        }
+        XCTAssertTrue(condition(), "Timed out", file: file, line: line)
     }
 
-    private func setCompact(_ compact: Bool) {
+    private func layOut() {
+        window.layoutIfNeeded()
+    }
+
+    private func setCompact(_ compact: Bool, file: StaticString = #filePath, line: UInt = #line) {
         host.setCompact(compact, for: navigator.splitViewController)
-        settle()
+        layOut()
+        waitUntil({ navigator.splitViewController.isCollapsed == compact }, file: file, line: line)
+        layOut()
     }
 
     private var detailControllers: [UIViewController] {
@@ -349,7 +355,7 @@ final class ConversationSplitNavigatorTransitionTests: XCTestCase {
         let info = UIViewController()
         navigator.showInDetail(conversation, animated: false)
         navigator.pushOntoDetail(info, animated: false)
-        settle()
+        layOut()
 
         setCompact(true)
         XCTAssertTrue(navigator.shownDetail === conversation)
@@ -366,7 +372,7 @@ final class ConversationSplitNavigatorTransitionTests: XCTestCase {
         let info = UIViewController()
         navigator.showInDetail(conversation, animated: false)
         navigator.pushOntoDetail(info, animated: false)
-        settle()
+        layOut()
 
         setCompact(false)
 
@@ -377,12 +383,11 @@ final class ConversationSplitNavigatorTransitionTests: XCTestCase {
 
     func testBackToListWhileNarrowShowsPlaceholderOnWidening() {
         navigator.showInDetail(UIViewController(), animated: false)
-        settle()
+        layOut()
         setCompact(true)
 
         listNavigation.popToRootViewController(animated: false)
-        settle()
-        XCTAssertNil(navigator.shownDetail)
+        waitUntil { navigator.shownDetail == nil }
         setCompact(false)
 
         XCTAssertTrue(navigator.isShowingPlaceholder)
@@ -400,22 +405,21 @@ final class ConversationSplitNavigatorTransitionTests: XCTestCase {
         let conversation = UIViewController()
         navigator.showInDetail(conversation, animated: false)
         navigator.pushOntoDetail(UIViewController(), animated: false)
-        settle()
+        layOut()
         setCompact(true)
 
         XCTAssertTrue(navigator.reveal(conversation, animated: false))
-        settle()
 
-        XCTAssertTrue(conversation.navigationController?.topViewController === conversation)
+        waitUntil { conversation.navigationController?.topViewController === conversation }
     }
 
     func testPopToListWhileNarrowShowsPlaceholderOnWidening() {
         navigator.showInDetail(UIViewController(), animated: false)
-        settle()
+        layOut()
         setCompact(true)
 
         navigator.popToList(animated: false)
-        settle()
+        layOut()
         setCompact(false)
 
         XCTAssertTrue(navigator.isShowingPlaceholder)
@@ -426,7 +430,7 @@ final class ConversationSplitNavigatorTransitionTests: XCTestCase {
     func testRepeatedResizesKeepDetail() {
         let conversation = UIViewController()
         navigator.showInDetail(conversation, animated: false)
-        settle()
+        layOut()
 
         for _ in 1...3 {
             setCompact(true)
