@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc75e12e_05c273bd",
+        "filename": "Ring/Ring/Services/ConversationsService.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-11T20:36:06Z",
+      "side": 1,
+      "message": "[error] Line 250: 🔴 **Authorization check now relies on cached model state, not a fresh daemon grant.** `conversation.permissions` can be stale between permission updates and send, and bridge-level checks were removed in this patchset; that reintroduces a TOCTOU gap for publish/reply authorization. Re-check current grants from the daemon (or centralize a single authoritative send gate that does) immediately before dispatch for text/file sends.",
+      "revId": "27e7c382c88a91eff4b5cc2749e7820fd7e5bb30",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36115d2b_cf18c6c7",
+        "filename": "Ring/jamiShareExtension/AdapterService.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-11T20:36:06Z",
+      "side": 1,
+      "message": "[warning] Line 190: 🟡 **Grant check runs before readiness wait and is not revalidated at dispatch time.** In both `sendSwarmMessage` and `sendSwarmFile`, grants are checked, then `waitForAccountReady` may block, then send occurs without a second grant read. Since adapter-level checks were removed, permission changes during the wait window can invalidate the original decision. Keep the pre-copy early reject, but re-fetch grants after readiness and before `sendSwarm*`.",
+      "revId": "27e7c382c88a91eff4b5cc2749e7820fd7e5bb30",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
