@@ -381,6 +381,12 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
             updateMenuitems()
         }
     }
+    var isConversationEnded = false {
+        didSet {
+            guard oldValue != isConversationEnded else { return }
+            updateMenuitems()
+        }
+    }
 
     required init(message: MessageModel, contextMenuState: PublishSubject<State>, transferState: PublishSubject<State>, isHistory: Bool, preferencesColor: UIColor) {
         self.contextMenuState = contextMenuState
@@ -561,9 +567,9 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
             let items: [ContextualMenuItem]
             switch self.type {
             case .text:
-                items = self.textMenuItems().filter(self.isPermitted)
+                items = self.textMenuItems().filter { self.isPermitted($0) && self.isAvailable($0) }
             case .fileTransfer:
-                items = self.fileTransferMenuItems().filter(self.isPermitted)
+                items = self.fileTransferMenuItems().filter { self.isPermitted($0) && self.isAvailable($0) }
             default:
                 return
             }
@@ -597,6 +603,15 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
         case .deleteFile:
             return permissions.allows(.deleteFile)
         case .preview, .forward, .share, .save, .copy, .editHistory:
+            return true
+        }
+    }
+
+    private func isAvailable(_ item: ContextualMenuItem) -> Bool {
+        switch item {
+        case .reply, .edit:
+            return !isConversationEnded
+        case .deleteMessage, .deleteFile, .preview, .forward, .share, .save, .copy, .editHistory:
             return true
         }
     }

@@ -164,10 +164,6 @@ struct MessagesListView: View {
             if model.isTemporary {
                 temporaryConversationView()
             }
-
-            if model.isConversationEnded {
-                endedConversationView()
-            }
         }
         .background(ConversationColorBackground(color: model.swarmColor))
         .environment(\.avatarProviderFactory, model.makeAvatarFactory() as AvatarProviderFactory?)
@@ -195,7 +191,13 @@ struct MessagesListView: View {
             ZStack(alignment: .bottom) {
                 messagesLayerView()
                 if !model.isBlocked {
-                    composerView()
+                    if model.isConversationEnded {
+                        EndedConversationView(model: model)
+                            .reportsPanelTop()
+                            .reportsComposerDepth(composerLayout)
+                    } else {
+                        composerView()
+                    }
                 }
             }
             .background(
@@ -243,28 +245,8 @@ struct MessagesListView: View {
 
     private func composerView() -> some View {
         MessagePanelView(model: model.messagePanel, voiceRecording: model.voiceRecording, isFocused: $isMessageBarFocused)
-            .background(
-                GeometryReader { proxy in
-                    Color.clear.preference(
-                        key: MessagePanelTopPreferenceKey.self,
-                        value: proxy.frame(in: .global).minY
-                    )
-                }
-            )
-            .background(
-                // Spans from the composer's top to the list's bottom.
-                GeometryReader { proxy in
-                    Color.clear
-                        .contentShape(Rectangle())
-                        .preference(key: ComposerDepthPreferenceKey.self, value: proxy.size.height)
-                }
-                .ignoresSafeArea(.container, edges: .bottom)
-            )
-            .onPreferenceChange(ComposerDepthPreferenceKey.self) { depth in
-                if let depth = depth, depth != composerLayout.depth {
-                    composerLayout.depth = depth
-                }
-            }
+            .reportsPanelTop()
+            .reportsComposerDepth(composerLayout)
     }
 
     private static func fullBleedWidth(of proxy: GeometryProxy) -> CGFloat {
@@ -407,10 +389,6 @@ struct MessagesListView: View {
 
     private func temporaryConversationView() -> some View {
         TemporaryConversationView(model: model, envAppeared: $envAppeared)
-    }
-
-    func endedConversationView() -> some View {
-        EndedConversationView()
     }
 
     private func syncingConversationView() -> some View {
@@ -624,16 +602,77 @@ private struct TemporaryConversationView: View {
 }
 
 private struct EndedConversationView: View {
+    @ObservedObject var model: MessagesListVM
+    @SwiftUI.State private var isConfirmingRemoval = false
+
     var body: some View {
-        VStack {
-            VStack {
+        VStack(spacing: 4) {
+            VStack(spacing: 4) {
                 Text(L10n.Swarm.conversationEnded)
-                    .frame(maxWidth: .infinity)
-                    .multilineTextAlignment(.center)
+                    .font(.subheadline.weight(.semibold))
+                Text(L10n.Swarm.conversationEndedMessage)
+                    .font(.footnote)
+                    .foregroundColor(Color(UIColor.secondaryLabel))
             }
-            .padding()
-            .background(Color(UIColor.secondarySystemBackground))
-            Spacer()
+            .accessibilityElement(children: .combine)
+            .accessibilityAddTraits(.isHeader)
+            Button(action: {
+                isConfirmingRemoval = true
+            }, label: {
+                Text(model.removeConversationTitle)
+                    .font(.callout)
+                    .foregroundColor(Color(UIColor.label))
+                    .padding(.horizontal)
+                    .padding(.vertical, 10)
+                    .frame(minHeight: 44)
+                    .background(Color.jamiTertiaryControl)
+                    .cornerRadius(12)
+            })
+            .padding(.top, 12)
+        }
+        .multilineTextAlignment(.center)
+        .frame(maxWidth: .infinity)
+        .padding()
+        .messagePanelGlass(in: RoundedRectangle(cornerRadius: 24, style: .continuous))
+        .padding(.horizontal, MessagePanelView.horizontalInset)
+        .padding(.vertical, MessagePanelView.verticalInset)
+        .alert(isPresented: $isConfirmingRemoval) {
+            Alert(title: Text(model.removeConversationTitle),
+                  message: Text(model.removeConversationConfirmation),
+                  primaryButton: .destructive(Text(model.removeConversationButtonTitle)) {
+                      model.removeConversation()
+                  },
+                  secondaryButton: .cancel())
+        }
+    }
+}
+
+private extension View {
+    func reportsPanelTop() -> some View {
+        background(
+            GeometryReader { proxy in
+                Color.clear.preference(
+                    key: MessagePanelTopPreferenceKey.self,
+                    value: proxy.frame(in: .global).minY
+                )
+            }
+        )
+    }
+
+    func reportsComposerDepth(_ layout: ComposerLayout) -> some View {
+        background(
+            // Spans from the panel's top to the list's bottom.
+            GeometryReader { proxy in
+                Color.clear
+                    .contentShape(Rectangle())
+                    .preference(key: ComposerDepthPreferenceKey.self, value: proxy.size.height)
+            }
+            .ignoresSafeArea(.container, edges: .bottom)
+        )
+        .onPreferenceChange(ComposerDepthPreferenceKey.self) { depth in
+            if let depth = depth, depth != layout.depth {
+                layout.depth = depth
+            }
         }
     }
 }

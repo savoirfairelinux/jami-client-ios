@@ -81,6 +81,25 @@ final class MessageModelTests: XCTestCase {
         XCTAssertEqual(panel.inReplyTo, "")
     }
 
+    func testEndedConversationHidesReplyAndEdit() {
+        let message = replyMessage(author: jamiId1, name: "Alice")
+        let updated = expectation(description: "Menu items update")
+        var items = [ContextualMenuItem]()
+        let subscription = message.$menuItems
+            .dropFirst()
+            .prefix(1)
+            .sink {
+                items = $0
+                updated.fulfill()
+            }
+        message.isConversationEnded = true
+        wait(for: [updated], timeout: 2)
+        withExtendedLifetime(subscription) {}
+        XCTAssertFalse(items.contains(.reply))
+        XCTAssertFalse(items.contains(.edit))
+        XCTAssertTrue(items.contains(.deleteMessage))
+    }
+
     func testRepeatedNameRequestsShareOneSubscriptionIncludingEmptyAuthor() {
         let message = replyMessage(author: "", name: "")
         let state = PublishSubject<State>()
