@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90f94f3d_f5beb078",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessagesListView.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-11T20:41:11Z",
+      "side": 1,
+      "message": "[warning] Line 198: 🟡 `reportsComposerDepth(composerLayout)` is now applied both here and on the outer conversation panel container. This creates two independent preference publishers mutating the same `ComposerLayout`, which can lead to redundant updates and brittle layout behavior if preference resolution order changes. Keep a single source of truth (the outer `.reportsComposerDepth(composerLayout)`), and remove this inner modifier.",
+      "revId": "c3b83f87894e68cc85f3d0ce7ef9b584687f3f2d",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
