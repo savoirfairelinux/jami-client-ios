@@ -21,10 +21,12 @@ import XCTest
 
 final class ConversationTrailingButtonTests: XCTestCase {
     private func visible(isBlocked: Bool = false,
+                         isConversationEnded: Bool = false,
                          canStartCalls: Bool = true,
                          hasPeerSharing: Bool = false,
                          isAccountSip: Bool = false) -> [ConversationTrailingButton] {
         return ConversationTrailingButton.visible(isBlocked: isBlocked,
+                                                  isConversationEnded: isConversationEnded,
                                                   canStartCalls: canStartCalls,
                                                   hasPeerSharing: hasPeerSharing,
                                                   isAccountSip: isAccountSip)
@@ -49,5 +51,9 @@ final class ConversationTrailingButtonTests: XCTestCase {
 
     func testBlockedConversationShowsNothing() {
         XCTAssertEqual(visible(isBlocked: true, hasPeerSharing: true), [])
+    }
+
+    func testEndedConversationShowsNothing() {
+        XCTAssertEqual(visible(isConversationEnded: true, hasPeerSharing: true), [])
     }
 }
