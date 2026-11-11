@@ -339,6 +339,24 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
             .disposed(by: self.disposeBag)
     }
 
+    private lazy var destructiveActionExecutor = ConversationDestructiveActionExecutor(injectionBag: injectionBag)
+
+    var removeConversationTitle: String {
+        ConversationDestructiveAction.removeConversation.title(for: conversation)
+    }
+
+    var removeConversationConfirmation: String {
+        ConversationDestructiveAction.removeConversation.confirmationMessage(for: conversation)
+    }
+
+    var removeConversationButtonTitle: String {
+        ConversationDestructiveAction.removeConversation.confirmationButtonTitle(for: conversation)
+    }
+
+    func removeConversation() {
+        destructiveActionExecutor.perform(.removeConversation, on: conversation)
+    }
+
     func unblock() {
         guard let account = accountService.getAccount(fromAccountId: conversation.accountId),
               conversation.isCoredialog(),
