@@ -36,6 +36,7 @@ class ConversationViewModel: Stateable, ObservableObject {
     @Published private(set) var name: String = ""
     @Published private(set) var navUserName: String = ""
     @Published private(set) var isBlocked: Bool = false
+    @Published private(set) var isConversationEnded: Bool = false
     @Published private(set) var canStartCalls: Bool = true
     @Published var navBarContentWidth: CGFloat = 0
     @Published var navBarReservesWindowControls = false
@@ -177,6 +178,7 @@ class ConversationViewModel: Stateable, ObservableObject {
         swarmInfo?.conversationEnded
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] isEnded in
+                self?.isConversationEnded = isEnded
                 self?.swiftUIModel.isConversationEnded = isEnded
             })
             .disposed(by: swarmInfoDisposeBag)
@@ -216,9 +218,10 @@ class ConversationViewModel: Stateable, ObservableObject {
 
     private func subscribeTrailingButtons() {
         let isAccountSip = self.isAccountSip
-        Publishers.CombineLatest3($isBlocked, $canStartCalls, peerSharing.$hasPeerSharing)
-            .map { isBlocked, canStartCalls, hasPeerSharing in
+        Publishers.CombineLatest4($isBlocked, $isConversationEnded, $canStartCalls, peerSharing.$hasPeerSharing)
+            .map { isBlocked, isConversationEnded, canStartCalls, hasPeerSharing in
                 ConversationTrailingButton.visible(isBlocked: isBlocked,
+                                                   isConversationEnded: isConversationEnded,
                                                    canStartCalls: canStartCalls,
                                                    hasPeerSharing: hasPeerSharing,
                                                    isAccountSip: isAccountSip)
@@ -517,10 +520,11 @@ enum ConversationTrailingButton: Hashable {
     case videoCall
 
     static func visible(isBlocked: Bool,
+                        isConversationEnded: Bool,
                         canStartCalls: Bool,
                         hasPeerSharing: Bool,
                         isAccountSip: Bool) -> [ConversationTrailingButton] {
-        guard !isBlocked else { return [] }
+        guard !isBlocked, !isConversationEnded else { return [] }
         var buttons: [ConversationTrailingButton] = []
         if hasPeerSharing { buttons.append(.peerSharing) }
         guard canStartCalls else { return buttons }
