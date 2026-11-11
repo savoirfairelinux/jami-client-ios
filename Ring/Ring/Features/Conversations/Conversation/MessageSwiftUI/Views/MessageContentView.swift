@@ -88,38 +88,6 @@ struct URLPreview: UIViewRepresentable {
     func updateUIView(_ uiView: UIView, context: Context) {}
 }
 
-class ScaledImageView: UIImageView {
-    var maxHeight: CGFloat = 300
-    var maxWidth: CGFloat = 250
-    override var intrinsicContentSize: CGSize {
-        if let imageSize = self.image?.size {
-            if imageSize.width < maxWidth && imageSize.height < maxHeight {
-                return imageSize
-            }
-            let widthRatio = maxWidth / imageSize.width
-            let heightRatio = maxHeight / imageSize.height
-            let ratio = min(widthRatio, heightRatio)
-            return CGSize(width: imageSize.width * ratio, height: imageSize.height * ratio)
-        }
-        return CGSize(width: -1, height: -1)
-    }
-}
-
-struct ScaledImageViewWrapper: UIViewRepresentable {
-    let imageToShow: UIImage
-    var maxHeight: CGFloat
-    var maxWidth: CGFloat
-
-    func makeUIView(context: Context) -> ScaledImageView {
-        let imageView = ScaledImageView()
-        imageView.maxHeight = maxHeight
-        imageView.maxWidth = maxWidth
-        imageView.image = imageToShow
-        return imageView
-    }
-    func updateUIView(_ uiView: UIViewType, context: Context) {}
-}
-
 struct MessageTextStyle: ViewModifier {
     @ObservedObject var model: MessageContentVM
 

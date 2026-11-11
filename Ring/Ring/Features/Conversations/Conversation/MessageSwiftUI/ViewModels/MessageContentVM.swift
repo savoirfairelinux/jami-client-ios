@@ -178,6 +178,14 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     var textInset: CGFloat = MessageContentVM.bubbleTextInset
     static let bubbleTextVerticalInset: CGFloat = 7
     var textVerticalInset: CGFloat = MessageContentVM.bubbleTextVerticalInset
+    private static let minMediaAspectRatio: CGFloat = 0.35
+
+    /// Very thin or wide images are cropped to this range so they stay visible and tappable.
+    static func mediaAspectRatio(of size: CGSize) -> CGFloat {
+        guard size.width > 0, size.height > 0 else { return 1 }
+        return min(max(size.width / size.height, minMediaAspectRatio), 1 / minMediaAspectRatio)
+    }
+
     var styling: MessageStyling = MessageStyling()
 
     var message: MessageModel

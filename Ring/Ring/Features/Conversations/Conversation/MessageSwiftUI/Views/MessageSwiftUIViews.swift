@@ -78,7 +78,10 @@ struct ImageOrGifView: View {
     }
 
     var body: some View {
-        mediaContent
+        Color.clear
+            .aspectRatio(MessageContentVM.mediaAspectRatio(of: image.size), contentMode: .fit)
+            .frame(minHeight: minHeight, maxHeight: maxHeight)
+            .overlay(mediaContent.allowsHitTesting(false))
             .modifier(MessageCornerRadius(model: message, radius: mediaCornerRadius))
             .messageGesture(
                 onLongPress: onLongGesture,
@@ -88,15 +91,33 @@ struct ImageOrGifView: View {
 
     @ViewBuilder
     private var mediaContent: some View {
-        if !message.isGifImage() {
+        if message.isGifImage() {
+            AnimatedImageView(image: image)
+        } else {
             Image(uiImage: image)
                 .resizable()
-                .scaledToFit()
-                .frame(minHeight: minHeight, maxHeight: maxHeight)
-        } else {
-            ScaledImageViewWrapper(imageToShow: image, maxHeight: maxHeight, maxWidth: maxHeight)
-                .scaledToFit()
-                .frame(maxHeight: maxHeight)
+                .scaledToFill()
+        }
+    }
+}
+
+private struct AnimatedImageView: UIViewRepresentable {
+    let image: UIImage
+
+    func makeUIView(context: Context) -> UIImageView {
+        let view = UIImageView()
+        view.contentMode = .scaleAspectFill
+        view.clipsToBounds = true
+        for axis in [NSLayoutConstraint.Axis.horizontal, .vertical] {
+            view.setContentHuggingPriority(.defaultLow, for: axis)
+            view.setContentCompressionResistancePriority(.defaultLow, for: axis)
+        }
+        return view
+    }
+
+    func updateUIView(_ view: UIImageView, context: Context) {
+        if view.image !== image {
+            view.image = image
         }
     }
 }
@@ -119,10 +140,10 @@ struct MediaView: View {
             ImageOrGifView(message: message, image: image, onLongGesture: onLongGesture, minHeight: minHeight, maxHeight: maxHeight, customCornerRadius: cornerRadius)
 
         } else if let thumbnailSize = message.thumbnailSize {
-            thumbnailPlaceholder
-                .frame(idealWidth: thumbnailSize.width, idealHeight: thumbnailSize.height)
-                .aspectRatio(thumbnailSize, contentMode: .fit)
+            Color.clear
+                .aspectRatio(MessageContentVM.mediaAspectRatio(of: thumbnailSize), contentMode: .fit)
                 .frame(minHeight: minHeight, maxHeight: maxHeight)
+                .background(thumbnailPlaceholder)
                 .if(cornerRadius != 0) { $0.modifier(MessageCornerRadius(model: message, radius: cornerRadius)) }
                 .messageGesture(onLongPress: onLongGesture)
         } else {
