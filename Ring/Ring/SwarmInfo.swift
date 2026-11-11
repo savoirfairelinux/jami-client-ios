@@ -235,12 +235,11 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
 
         let localParticipant = info.participants.first { $0.isLocal }
         if info.isCoredialog {
-            // check if conversation with self
-            if let participant = localParticipant {
-                return participant.role == .left
+            if info.participants.contains(where: { !$0.isLocal }) {
+                return true
             }
-
-            return true
+            // conversation with self
+            return localParticipant?.role == .left
         }
 
         return localParticipant?.role != .admin
