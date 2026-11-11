@@ -205,6 +205,8 @@ private struct MediaPreviewContentView: View {
         case .image(let image):
             ZoomableImageView(
                 image: image,
+                collapsedSize: overlayState.hasSourceFrame ? overlayState.sourceFrame.size : nil,
+                expandedSize: geometry.size,
                 isZoomed: $isImageZoomed,
                 onSingleTap: { toggleControls() },
                 onPanBegan: { controlsVisible = false }
@@ -282,6 +284,8 @@ private struct MediaPreviewContentView: View {
 
 private struct ZoomableImageView: UIViewRepresentable {
     let image: UIImage
+    let collapsedSize: CGSize?
+    let expandedSize: CGSize
     @Binding var isZoomed: Bool
     let onSingleTap: () -> Void
     let onPanBegan: () -> Void
@@ -307,6 +311,7 @@ private struct ZoomableImageView: UIViewRepresentable {
     func updateUIView(_ scrollView: ZoomableImageScrollView, context: Context) {
         context.coordinator.parent = self
         scrollView.setImage(image)
+        scrollView.setTransitionSizes(collapsed: collapsedSize, expanded: expandedSize)
         if !isZoomed && scrollView.zoomScale > scrollView.minimumZoomScale {
             scrollView.setZoomScale(scrollView.minimumZoomScale, animated: false)
         }
@@ -362,6 +367,8 @@ private struct ZoomableImageView: UIViewRepresentable {
 private final class ZoomableImageScrollView: UIScrollView {
     let imageView = UIImageView()
     private var fittedBoundsSize: CGSize = .zero
+    private var collapsedSize: CGSize?
+    private var expandedSize: CGSize = .zero
 
     init() {
         super.init(frame: .zero)
@@ -388,6 +395,25 @@ private final class ZoomableImageScrollView: UIScrollView {
         setNeedsLayout()
     }
 
+    func setTransitionSizes(collapsed: CGSize?, expanded: CGSize) {
+        guard collapsed != collapsedSize || expanded != expandedSize else { return }
+        collapsedSize = collapsed
+        expandedSize = expanded
+        fittedBoundsSize = .zero
+        setNeedsLayout()
+    }
+
+    /// 1 at the message frame, where the thumbnail is cropped, down to 0 (whole image) when expanded.
+    private var fillAmount: CGFloat {
+        guard let collapsed = collapsedSize else { return 0 }
+        let widthSpan = expandedSize.width - collapsed.width
+        let heightSpan = expandedSize.height - collapsed.height
+        let progress = widthSpan >= heightSpan
+            ? (expandedSize.width - bounds.width) / max(widthSpan, 1)
+            : (expandedSize.height - bounds.height) / max(heightSpan, 1)
+        return min(max(progress, 0), 1)
+    }
+
     override func layoutSubviews() {
         super.layoutSubviews()
         if bounds.size != fittedBoundsSize && zoomScale == minimumZoomScale {
@@ -401,10 +427,22 @@ private final class ZoomableImageScrollView: UIScrollView {
         guard let imageSize = imageView.image?.size,
               imageSize.width > 0, imageSize.height > 0,
               bounds.width > 0, bounds.height > 0 else { return }
-        let scale = min(bounds.width / imageSize.width, bounds.height / imageSize.height)
+        let widthScale = bounds.width / imageSize.width
+        let heightScale = bounds.height / imageSize.height
+        let fitScale = min(widthScale, heightScale)
+        let fill = fillAmount
+        let scale = fitScale + (max(widthScale, heightScale) - fitScale) * fill
         let fittedSize = CGSize(width: imageSize.width * scale, height: imageSize.height * scale)
-        imageView.frame = CGRect(origin: .zero, size: fittedSize)
-        contentSize = fittedSize
+        guard fill > 0 else {
+            imageView.frame = CGRect(origin: .zero, size: fittedSize)
+            contentSize = fittedSize
+            return
+        }
+        // Overflow is centered and clipped by the preview's frame.
+        imageView.frame = CGRect(x: min(0, (bounds.width - fittedSize.width) / 2),
+                                 y: min(0, (bounds.height - fittedSize.height) / 2),
+                                 width: fittedSize.width, height: fittedSize.height)
+        contentSize = CGSize(width: min(fittedSize.width, bounds.width), height: min(fittedSize.height, bounds.height))
     }
 
     func centerImage() {
