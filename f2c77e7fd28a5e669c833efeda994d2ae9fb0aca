@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4410c3e1_36db49d2",
+        "filename": "Ring/Ring/Features/Conversations/ConversationSplitNavigator.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-11T13:29:51Z",
+      "side": 1,
+      "message": "[warning] Line 174: 🟡 `isExpanding` is set to `true` in `displayModeForExpanding...` and only cleared in `splitViewControllerDidExpand`. If expansion is interrupted (e.g., rapid size-class flip) and `didExpand` is skipped, the flag can stay `true` in compact mode and suppress `didShow` cleanup, leaving stale `shownDetail` state. Clear `isExpanding` in `splitViewControllerDidCollapse` as well (or use a `defer`/state-reset path that covers both expand and collapse completions).",
+      "revId": "f2c77e7fd28a5e669c833efeda994d2ae9fb0aca",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
