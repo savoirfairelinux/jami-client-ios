@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "587b9fd8_52c417f2",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessageContentVM.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 869,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-11T21:12:49Z",
+      "side": 1,
+      "message": "[warning] Line 869: 🟡 `UIImage.thumbnailSize(url:maxPixelSize:)` is called with `.greatestFiniteMagnitude` to infer source dimensions. If that helper decodes via `kCGImageSourceThumbnailMaxPixelSize`, this can force an unnecessary full-size decode for very large media and increase memory pressure. Prefer reading pixel dimensions from image metadata (or cap the probe size) so sizing stays O(1)-ish and decoding remains bounded.",
+      "revId": "d680066b44b9b9f3bc3f9f951c22eeb1973ce110",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db8957c2_548e5817",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessageSwiftUIViews.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-11T21:12:49Z",
+      "side": 1,
+      "message": "[warning] Line 100: 🟡 The still-image branch uses `.scaledToFill()` without an explicit clip on that branch. Cropping currently relies on outer modifiers; when `customCornerRadius \u003d\u003d 0`, overflow can escape the intended media frame. Add `.clipped()` (or equivalent masking) in the branch so aspect-ratio clamping always crops to bounds.",
+      "revId": "d680066b44b9b9f3bc3f9f951c22eeb1973ce110",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
