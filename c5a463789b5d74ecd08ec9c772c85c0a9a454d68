@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "876128f7_317f3c09",
+        "filename": "Ring/Ring/SwarmInfo.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-11T20:40:08Z",
+      "side": 1,
+      "message": "[error] Line 238: 🔴 This condition marks every one-to-one conversation with any remote participant as ended, regardless of that participant’s role. As written, an active 1:1 chat (peer still admin/member) will incorrectly show the ended banner. Restrict this to the peer-left state, e.g. check for a non-local participant whose role is `.left` (or equivalent explicit ended predicate) instead of just `!isLocal`.",
+      "revId": "c5a463789b5d74ecd08ec9c772c85c0a9a454d68",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83a304cf_baa4d149",
+        "filename": "Ring/RingTests/SwarmInfoTests.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-11T20:40:08Z",
+      "side": 1,
+      "message": "[warning] Line 394: 🟡 Add a regression test for an active one-to-one conversation (local admin + peer admin/member) asserting `conversationEnded \u003d\u003d false`. Current tests cover peer-left and self-chat, but not the normal active 1:1 path that this change regresses.",
+      "revId": "c5a463789b5d74ecd08ec9c772c85c0a9a454d68",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
