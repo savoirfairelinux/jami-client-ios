@@ -178,6 +178,20 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     var textInset: CGFloat = MessageContentVM.bubbleTextInset
     static let bubbleTextVerticalInset: CGFloat = 7
     var textVerticalInset: CGFloat = MessageContentVM.bubbleTextVerticalInset
+    private static let minMediaAspectRatio: CGFloat = 0.35
+
+    /// Very thin or wide images are cropped to this range so they stay visible and tappable.
+    static func mediaAspectRatio(of size: CGSize) -> CGFloat {
+        guard size.width > 0, size.height > 0 else { return 1 }
+        return min(max(size.width / size.height, minMediaAspectRatio), 1 / minMediaAspectRatio)
+    }
+
+    static func mediaDecodePixelSize(of size: CGSize, fitting maxPixelSize: CGFloat) -> CGFloat {
+        guard size.width > 0, size.height > 0 else { return maxPixelSize }
+        let elongation = max(size.width, size.height) / min(size.width, size.height)
+        return maxPixelSize * min(max(elongation * minMediaAspectRatio, 1), 1 / minMediaAspectRatio)
+    }
+
     var styling: MessageStyling = MessageStyling()
 
     var message: MessageModel
@@ -851,11 +865,13 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
         guard self.type == .fileTransfer, self.finalImage == nil,
               !self.didRequestThumbnail, let url = self.url else { return }
         self.didRequestThumbnail = true
-        let maxSize = self.imageSize
         let isGif = self.isGifImage()
+        var sourceSize: CGSize?
         if self.player == nil, !isGif {
-            self.thumbnailSize = UIImage.thumbnailSize(url: url, maxPixelSize: maxSize)
+            sourceSize = UIImage.thumbnailSize(url: url, maxPixelSize: .greatestFiniteMagnitude)
+            self.thumbnailSize = sourceSize
         }
+        let maxSize = sourceSize.map { MessageContentVM.mediaDecodePixelSize(of: $0, fitting: self.imageSize) } ?? self.imageSize
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             let image = isGif
                 ? UIImage.gifImageWithUrl(url, maxSize: maxSize)
