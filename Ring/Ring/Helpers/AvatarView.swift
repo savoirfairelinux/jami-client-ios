@@ -390,7 +390,7 @@ protocol AvatarRelayProviding: AnyObject {
 }
 
 final class AvatarProviderFactory {
-    private let relayProvider: AvatarRelayProviding
+    private weak var relayProvider: AvatarRelayProviding?
     private let profileService: ProfilesService
     private var cache: [String: AvatarProvider] = [:] // key: "<jamiId>|<Int(size)>"
 
@@ -405,8 +405,8 @@ final class AvatarProviderFactory {
         let provider = AvatarProvider(
             profileService: profileService,
             size: size,
-            avatar: relayProvider.avatarRelay(for: jamiId).asObservable(),
-            displayName: relayProvider.nameRelay(for: jamiId).asObservable(),
+            avatar: relayProvider?.avatarRelay(for: jamiId).asObservable() ?? .just(nil),
+            displayName: relayProvider?.nameRelay(for: jamiId).asObservable() ?? .just(""),
             isGroup: false
         )
         cache[key] = provider
