@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce2c8b24_2bfa2efd",
+        "filename": "Ring/Ring/Helpers/AvatarView.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-12T16:26:49Z",
+      "side": 1,
+      "message": "[warning] Line 409: 🟡 The `?? .just(...)` fallback silently turns a missing `relayProvider` into a permanently static avatar/name source, and this provider is then cached. That can mask lifecycle bugs and make stale placeholders persist longer than intended. Prefer `guard let relayProvider` with `assertionFailure` in debug, and avoid caching providers created from fallback values (or return a non-cached placeholder) so nil-provider states don’t get memoized.",
+      "revId": "e87e65f64d60b05aca987b1f72714e43d0f9e96d",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
