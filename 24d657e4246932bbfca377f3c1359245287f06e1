@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3c147b0_2bcf687d",
+        "filename": "Ring/Ring/Resources/ar.lproj/Localizable.strings",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-12T16:36:34Z",
+      "side": 1,
+      "message": "[warning] Line 98: 🟡 Newly introduced user-facing keys are still English in localized files (for example `swarm.conversationEndedMessage`, and similarly `smartlist.newConversation` / `smartlist.noConversationSelected` in many locales). This creates mixed-language UI. Either provide locale translations now or omit these entries so runtime falls back consistently from base localization until translated.",
+      "revId": "24d657e4246932bbfca377f3c1359245287f06e1",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2a0ee21_afcd9cdb",
+        "filename": "Ring/Ring/Resources/zh-Hans.lproj/Localizable.strings",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-12T16:36:34Z",
+      "side": 1,
+      "message": "[error] Line 22: 🔴 `zh-Hans` (Simplified Chinese) was broadly rewritten with Traditional Chinese strings (e.g., `账户设置` → `帳號設定`) across the file. This is a locale regression: Simplified users will receive the wrong script in most UI surfaces. Revert this file to Simplified Chinese and re-apply only intended key additions for this patchset.",
+      "revId": "24d657e4246932bbfca377f3c1359245287f06e1",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
