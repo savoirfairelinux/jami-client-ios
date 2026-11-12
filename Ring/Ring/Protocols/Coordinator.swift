@@ -191,6 +191,17 @@ extension Coordinator {
         return hostingController
     }
 
+    func presentAboutJami() {
+        weak var navigation: UINavigationController?
+        let about = AboutViewController(onClose: {
+            navigation?.dismiss(animated: true)
+        })
+        let aboutNavigation = UINavigationController(rootViewController: about)
+        aboutNavigation.navigationBar.tintColor = UIColor.jami
+        navigation = aboutNavigation
+        self.present(viewController: aboutNavigation, withStyle: .formModal, withAnimation: true, disposeBag: self.disposeBag)
+    }
+
     func getTopController() -> UIViewController? {
         guard var topController = UIApplication.shared.windows.first?.rootViewController else {
             return nil

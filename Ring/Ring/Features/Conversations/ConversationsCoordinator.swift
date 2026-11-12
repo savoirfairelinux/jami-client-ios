@@ -70,7 +70,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                 case .showDialpad(let inCall):
                     self.showDialpad(inCall: inCall)
                 case .openAboutJami:
-                    self.openAboutJami()
+                    self.presentAboutJami()
                 case .showContactPicker(let callID, let contactCallBack, let conversationCallBack):
                     self.showContactPicker(callId: callID, contactSelectedCB: contactCallBack, conversationSelectedCB: conversationCallBack)
                 case .conversationRemoved, .swarmCreationCancelled:
@@ -356,11 +356,6 @@ extension ConversationsCoordinator {
         let pickerVC = createHostingVC(pickerView)
         pickerVC.modalPresentationStyle = .pageSheet
         conversationVC.present(pickerVC, animated: true)
-    }
-
-    func openAboutJami() {
-        let aboutJamiController = AboutViewController.instantiate()
-        self.navigate(to: aboutJamiController, in: .detail, animated: true)
     }
 }
 

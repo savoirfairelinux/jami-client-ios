@@ -275,7 +275,6 @@
 		2640BA9A2B974E4B006D189A /* MessageProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2640BA992B974E4B006D189A /* MessageProtocols.swift */; };
 		26454F7C2B7E770900CFF06C /* TestEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26454F7B2B7E770900CFF06C /* TestEnvironment.swift */; };
 		26454FB72B7FDCB200CFF06C /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26454FB62B7FDCB200CFF06C /* AboutViewController.swift */; };
-		26454FB92B7FDCE400CFF06C /* AboutViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26454FB82B7FDCE400CFF06C /* AboutViewController.storyboard */; };
 		26454FBD2B7FDED400CFF06C /* AboutSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26454FBC2B7FDED400CFF06C /* AboutSwiftUIView.swift */; };
 		26454FBF2B7FDEE900CFF06C /* AboutSwiftUIVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26454FBE2B7FDEE900CFF06C /* AboutSwiftUIVM.swift */; };
 		26455C222C061F070000BA3F /* SmartListViewPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26455C212C061F070000BA3F /* SmartListViewPage.swift */; };
@@ -929,7 +928,6 @@
 		2640BA992B974E4B006D189A /* MessageProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageProtocols.swift; sourceTree = "<group>"; };
 		26454F7B2B7E770900CFF06C /* TestEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestEnvironment.swift; sourceTree = "<group>"; };
 		26454FB62B7FDCB200CFF06C /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
-		26454FB82B7FDCE400CFF06C /* AboutViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AboutViewController.storyboard; sourceTree = "<group>"; };
 		26454FBC2B7FDED400CFF06C /* AboutSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSwiftUIView.swift; sourceTree = "<group>"; };
 		26454FBE2B7FDEE900CFF06C /* AboutSwiftUIVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSwiftUIVM.swift; sourceTree = "<group>"; };
 		26455C212C061F070000BA3F /* SmartListViewPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartListViewPage.swift; sourceTree = "<group>"; };
@@ -3428,7 +3426,6 @@
 			isa = PBXGroup;
 			children = (
 				26454FB62B7FDCB200CFF06C /* AboutViewController.swift */,
-				26454FB82B7FDCE400CFF06C /* AboutViewController.storyboard */,
 				26454FBC2B7FDED400CFF06C /* AboutSwiftUIView.swift */,
 				26454FBE2B7FDEE900CFF06C /* AboutSwiftUIVM.swift */,
 			);
@@ -4184,7 +4181,6 @@
 				6613A612214AFF4700B497D1 /* ScanViewController.storyboard in Resources */,
 				1ABE07DF1F0D91A800D36361 /* LaunchScreen.storyboard in Resources */,
 				5CE66F751FBF769B00EE9291 /* InitialLoadingViewController.storyboard in Resources */,
-				26454FB92B7FDCE400CFF06C /* AboutViewController.storyboard in Resources */,
 				0E72374A20460320006B0C7D /* ProfileHeaderView.xib in Resources */,
 				BB0AB9932A8FC4340033061F /* Colors.xcassets in Resources */,
 				1DE93594291B119900E426CF /* SwarmCreationViewController.storyboard in Resources */,

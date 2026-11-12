@@ -18,7 +18,6 @@ import SwiftUI
 
 struct AboutSwiftUIView: View {
     let model = AboutSwiftUIVM()
-    let dismissHandler = DismissHandler()
     let padding: CGFloat = 20
 
     private var aboutContentScrollView: some View {
@@ -94,24 +93,11 @@ struct AboutSwiftUIView: View {
 
     var body: some View {
         VStack(spacing: padding) {
-            ZStack {
-                HStack {
-                    Spacer() // Push the close button to the right
-                    CloseButton(
-                        action: { [weak dismissHandler] in
-                            dismissHandler?.dismissView()
-                        },
-                        accessibilityIdentifier: SmartListAccessibilityIdentifiers.closeAboutView
-                    )
-                }
-
-                Image("jamiGnupackage")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(height: 30)
-                    .accessibilityLabel(L10n.Accessibility.aboutJamiTitle)
-                    .frame(maxWidth: .infinity, alignment: .center) // This will center the image horizontally
-            }
+            Image("jamiGnupackage")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(height: 30)
+                .accessibilityLabel(L10n.Accessibility.aboutJamiTitle)
 
             aboutContentScrollView
             HStack {

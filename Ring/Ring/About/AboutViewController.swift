@@ -18,24 +18,39 @@
 
 import UIKit
 import SwiftUI
-import Reusable
 
-class AboutViewController: UIViewController, StoryboardBased {
+class AboutViewController: UIViewController {
+    private let onClose: () -> Void
+
+    init(onClose: @escaping () -> Void) {
+        self.onClose = onClose
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = L10n.Smartlist.aboutJami
-        self.configureNavigationBar()
-        let swiftUIView = AboutSwiftUIView()
-        let contentView = UIHostingController(rootView: swiftUIView)
+        view.backgroundColor = .systemBackground
+        navigationItem.title = L10n.Smartlist.aboutJami
+        let closeButton = UIBarButtonItem(systemItem: .close, primaryAction: UIAction { [weak self] _ in
+            self?.onClose()
+        })
+        closeButton.accessibilityIdentifier = SmartListAccessibilityIdentifiers.closeAboutView
+        navigationItem.rightBarButtonItem = closeButton
+
+        let contentView = UIHostingController(rootView: AboutSwiftUIView())
         addChild(contentView)
-        contentView.view.frame = self.view.frame
-        self.view.addSubview(contentView.view)
+        view.addSubview(contentView.view)
         contentView.view.translatesAutoresizingMaskIntoConstraints = false
-        contentView.view.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
-        contentView.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
-        contentView.view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
-        contentView.view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
+        NSLayoutConstraint.activate([
+            contentView.view.topAnchor.constraint(equalTo: view.topAnchor),
+            contentView.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            contentView.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            contentView.view.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
         contentView.didMove(toParent: self)
     }
 }
