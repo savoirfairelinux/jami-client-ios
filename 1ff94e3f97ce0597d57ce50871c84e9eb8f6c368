@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1afaf9a4_da7fa956",
+        "filename": "Ring/Ring/Features/Walkthrough/WalkthroughCoordinator.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-12T20:46:29Z",
+      "side": 1,
+      "message": "[warning] Line 73: 🟡 The walkthrough entry point now uses `presentAboutJami()`, but this flow is not covered by UI tests in this patch (only SmartList is). Add a walkthrough/welcome-screen UI test that opens About and closes it via the nav-bar close button to prevent regressions in the second launch path this change explicitly targets.",
+      "revId": "1ff94e3f97ce0597d57ce50871c84e9eb8f6c368",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
