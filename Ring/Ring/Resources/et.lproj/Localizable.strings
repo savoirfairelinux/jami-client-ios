@@ -97,6 +97,7 @@
 "swarm.removeContact" = "Eemalda kontakt";
 "swarm.restartConversation" = "Alusta vestlust uuesti";
 "swarm.conversationEnded" = "Vestlus on lõppenud";
+"swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
 "swarm.chooseColor" = "Vestluse värv";
 "swarm.typeOfSwarm" = "Vestluse tüüp";
 "swarm.identifier" = "Tunnus";
@@ -153,6 +154,7 @@
 "smartlist.noConversationsFound" = "Ühtegi vestlust ei vasta sinu otsingule.";
 "smartlist.newContact" = "Uus kontakt";
 "smartlist.newGroup" = "Uus grupp";
+"smartlist.newConversation" = "New conversation";
 "smartlist.accounts" = "Sinu kasutajakontod";
 "smartlist.invitationReceived" = "Sulle on kutseid";
 "smartlist.noResults" = "Pole tulemusi";
@@ -171,6 +173,12 @@
 "smartlist.disableDonation" = "Mitte praegu";
 "smartlist.donationExplanation" = "Kui sulle Jami meeldib ja sa usud meie visiooni, siis kas sa oleksid nõus meid rahaliselt toetama?";
 "smartlist.inSynchronization" = "Sünkroonin andmeid...";
+"smartlist.noConversations" = "Ühtegi vestlust veel pole";
+"smartlist.noConversationSelected" = "No conversation selected";
+"smartlist.noConversationsSubtitle" = "Vestluse alustamiseks otsi teist osapoolt või jaga oma Jami tunnust.";
+"smartlist.noConversationsSubtitleSip" = "Vestluse alustamiseks otsi numbrit.";
+"smartlist.addContact" = "Lisa kontakt";
+"smartlist.shareJamiId" = "Jaga oma Jami tunnust";
 
 // Conversation
 "conversation.addToContactsButton" = "Lisa kontaktitele";
@@ -192,15 +200,15 @@
 "conversation.syncingTitle" = "Sünkroonin vestlust";
 "conversation.synchronizationMessage" = "Vestluse sünkroniseerimiseks ootame kasutaja %@ ühendust.";
 "conversation.inReplyTo" = "Vastuseks kasutajale";
-"conversation.replyQuotePhoto" = "Photo";
+"conversation.replyQuotePhoto" = "Foto";
 "conversation.replyQuoteAudio" = "Audio";
-"conversation.replyQuoteUnavailable" = "Message not loaded";
+"conversation.replyQuoteUnavailable" = "Sõnum pole laaditud";
 "conversation.yourself" = "Sina";
 "conversation.edited" = "Muudetud";
-"conversation.editHistory" = "Edit history";
-"conversation.editHistoryCurrent" = "Current";
-"conversation.editHistoryEdit" = "Edit %d";
-"conversation.editHistoryOriginal" = "Original";
+"conversation.editHistory" = "Muutmiste ajalugu";
+"conversation.editHistoryCurrent" = "Praegune";
+"conversation.editHistoryEdit" = "Muuda: %d";
+"conversation.editHistoryOriginal" = "Algne";
 "conversation.deletedMessage" = "%@ kustutas sõnumi.";
 "conversation.contactBlocked" = "Kontakt on blokeeritud";
 // An ellipsis is not directly shown in the following typing indicator strings.
@@ -684,23 +692,23 @@
 "accessibility.messageBubbleRead" = "Loetud";
 "accessibility.messageBubbleUnread" = "Lugemata";
 "accessibility.messageReactionCount" = "%1$@ %2$d";
-"accessibility.messageReactions" = "Reactions";
-"accessibility.messageReactionsHint" = "Shows who reacted";
-"accessibility.messageReactionIncludingYou" = "%@, including you";
-"accessibility.messageReactionsMore" = "%d more";
-"accessibility.removeReaction" = "Remove %@";
-"accessibility.editHistoryAdded" = "Added: %@";
-"accessibility.editHistoryCopied" = "Copied";
-"accessibility.editHistoryRemoved" = "Removed: %@";
-"accessibility.scrollToLatestMessage" = "Scroll to latest message";
-"accessibility.newMessagesCount" = "%d new messages";
-"accessibility.oneNewMessage" = "1 new message";
+"accessibility.messageReactions" = "Reaktsioonid";
+"accessibility.messageReactionsHint" = "Näitab reageerijaid";
+"accessibility.messageReactionIncludingYou" = "%@, sealhulgas  sina";
+"accessibility.messageReactionsMore" = "veel %d";
+"accessibility.removeReaction" = "Eemalda %@";
+"accessibility.editHistoryAdded" = "Lisatud: %@";
+"accessibility.editHistoryCopied" = "Kopeeritud";
+"accessibility.editHistoryRemoved" = "Eemaldatud: %@";
+"accessibility.scrollToLatestMessage" = "Keri viimase sõnumini";
+"accessibility.newMessagesCount" = "%d uut sõnumit";
+"accessibility.oneNewMessage" = "1 uus sõnum";
 "accessibility.messageReceivedDate" = "Saadud";
 "accessibility.messageSentDate" = "Saadetud";
 "accessibility.textEmpty" = "Tühi tekstisõnum on vastuvõetud. Võib-olla saatmine polnud korrektne.";
 "accessibility.fileTransferUnnamed" = "Fail on vastuvõetud, aga nimi pole saadaval";
 "accessibility.inReply" = "Vastuseks sõnumile";
-"accessibility.showReplyTarget" = "Show original message";
+"accessibility.showReplyTarget" = "Näita algset sõnumit";
 "accessibility.text.received" = "%@, sõnum vastuvõetud";
 "accessibility.text.sent" = "%@, sõnum saadetud";
 "accessibility.fileTransfer.received" = "Fail: %@, vastuvõetud";

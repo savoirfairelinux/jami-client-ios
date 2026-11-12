@@ -97,6 +97,7 @@
 "swarm.removeContact" = "Wepụ njikọ";
 "swarm.restartConversation" = "Restart conversation";
 "swarm.conversationEnded" = "Conversation ended";
+"swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
 "swarm.chooseColor" = "Conversation color";
 "swarm.typeOfSwarm" = "Ụdị nkata";
 "swarm.identifier" = "Ihe Nkọwapụta";
@@ -153,6 +154,7 @@
 "smartlist.noConversationsFound" = "No conversations match the search.";
 "smartlist.newContact" = "New contact";
 "smartlist.newGroup" = "New group";
+"smartlist.newConversation" = "New conversation";
 "smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Enweghị nsonaazụ";
@@ -171,6 +173,12 @@
 "smartlist.disableDonation" = "Ọbụghị ugbu a";
 "smartlist.donationExplanation" = "Ọ bụrụ na ị na-enwe mmasị iji Jami ma kwenye na ebumnobi anyị, ị chọrọ inye onyinye?";
 "smartlist.inSynchronization" = "Syncing…";
+"smartlist.noConversations" = "No conversations yet";
+"smartlist.noConversationSelected" = "No conversation selected";
+"smartlist.noConversationsSubtitle" = "Find someone to start a conversation, or share your Jami ID.";
+"smartlist.noConversationsSubtitleSip" = "Find a number to start a conversation.";
+"smartlist.addContact" = "Tinye kọntaktị";
+"smartlist.shareJamiId" = "Share your Jami ID";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
@@ -193,7 +201,7 @@
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "Na nzaghachi";
 "conversation.replyQuotePhoto" = "Photo";
-"conversation.replyQuoteAudio" = "Audio";
+"conversation.replyQuoteAudio" = "Ihe a na-anụ";
 "conversation.replyQuoteUnavailable" = "Message not loaded";
 "conversation.yourself" = "You";
 "conversation.edited" = "E Deziiri Ya";

@@ -97,6 +97,7 @@
 "swarm.removeContact" = "Увајте контакт";
 "swarm.restartConversation" = "Ponovo pokreni razgovor";
 "swarm.conversationEnded" = "Razgovor je završen";
+"swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
 "swarm.chooseColor" = "Boja razgovora";
 "swarm.typeOfSwarm" = "Vrsta razgovora";
 "swarm.identifier" = "Identifikator";
@@ -153,6 +154,7 @@
 "smartlist.noConversationsFound" = "Ниједна преписка не одговара претрази.";
 "smartlist.newContact" = "Novi kontakt";
 "smartlist.newGroup" = "Nova grupa";
+"smartlist.newConversation" = "New conversation";
 "smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Primljene pozivnice";
 "smartlist.noResults" = "Nema rezultata";
@@ -171,6 +173,12 @@
 "smartlist.disableDonation" = "Ne sada";
 "smartlist.donationExplanation" = "Ако уживате у коришћењу Јами-ја и верујете у нашу мисију, да ли желите да дате донацију?";
 "smartlist.inSynchronization" = "Sinhronizacija…";
+"smartlist.noConversations" = "No conversations yet";
+"smartlist.noConversationSelected" = "No conversation selected";
+"smartlist.noConversationsSubtitle" = "Find someone to start a conversation, or share your Jami ID.";
+"smartlist.noConversationsSubtitleSip" = "Find a number to start a conversation.";
+"smartlist.addContact" = "Dodaj kontakt";
+"smartlist.shareJamiId" = "Share your Jami ID";
 
 // Conversation
 "conversation.addToContactsButton" = "Dodaj u kontakte";

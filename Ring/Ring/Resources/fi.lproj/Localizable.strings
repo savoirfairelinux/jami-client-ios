@@ -97,6 +97,7 @@
 "swarm.removeContact" = "Poista yhteystieto";
 "swarm.restartConversation" = "Aloita keskustelu uudelleen";
 "swarm.conversationEnded" = "Keskustelu päättyi";
+"swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
 "swarm.chooseColor" = "Keskustelun väri";
 "swarm.typeOfSwarm" = "Keskustelun tyyppi";
 "swarm.identifier" = "Tunniste";
@@ -153,6 +154,7 @@
 "smartlist.noConversationsFound" = "Hakua vastaavaa keskustelua ei löytynyt.";
 "smartlist.newContact" = "Uusi henkilö";
 "smartlist.newGroup" = "Uusi ryhmä";
+"smartlist.newConversation" = "New conversation";
 "smartlist.accounts" = "Sinun tilit";
 "smartlist.invitationReceived" = "Kutsut vastaanotettu";
 "smartlist.noResults" = "Ei tuloksia";
@@ -171,6 +173,12 @@
 "smartlist.disableDonation" = "Ei nyt";
 "smartlist.donationExplanation" = "Jos pidät Jamista ja uskot tehtäväämme, Haluatko tehdä lahjoituksen?";
 "smartlist.inSynchronization" = "Synkronoidaan...";
+"smartlist.noConversations" = "No conversations yet";
+"smartlist.noConversationSelected" = "No conversation selected";
+"smartlist.noConversationsSubtitle" = "Find someone to start a conversation, or share your Jami ID.";
+"smartlist.noConversationsSubtitleSip" = "Find a number to start a conversation.";
+"smartlist.addContact" = "Lisää henkilö";
+"smartlist.shareJamiId" = "Share your Jami ID";
 
 // Conversation
 "conversation.addToContactsButton" = "Lisää yhteystietoihin";
@@ -192,7 +200,7 @@
 "conversation.syncingTitle" = "Keskustelun synkronointi";
 "conversation.synchronizationMessage" = "Odotetaan, että %@ synkronoi keskustelun…";
 "conversation.inReplyTo" = "Vastauksena";
-"conversation.replyQuotePhoto" = "Photo";
+"conversation.replyQuotePhoto" = "Valokuva";
 "conversation.replyQuoteAudio" = "Audio";
 "conversation.replyQuoteUnavailable" = "Message not loaded";
 "conversation.yourself" = "Sinä";

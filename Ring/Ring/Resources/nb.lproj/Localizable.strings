@@ -97,6 +97,7 @@
 "swarm.removeContact" = "Fjern kontakt";
 "swarm.restartConversation" = "Start samtalen på nytt";
 "swarm.conversationEnded" = "Samtalen er avsluttet";
+"swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
 "swarm.chooseColor" = "Samtalefarge";
 "swarm.typeOfSwarm" = "Samtaletype";
 "swarm.identifier" = "Identifikator";
@@ -153,6 +154,7 @@
 "smartlist.noConversationsFound" = "Ingen samtaler samsvarer med søket.";
 "smartlist.newContact" = "Ny kontakt";
 "smartlist.newGroup" = "Ny gruppe";
+"smartlist.newConversation" = "New conversation";
 "smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Invitasjoner mottatt";
 "smartlist.noResults" = "Ingen resultater";
@@ -171,6 +173,12 @@
 "smartlist.disableDonation" = "Ikke nå";
 "smartlist.donationExplanation" = "Hvis du liker å bruke Jami og tror på oppdraget vårt, vil du gi en donasjon?";
 "smartlist.inSynchronization" = "Synkroniserer…";
+"smartlist.noConversations" = "No conversations yet";
+"smartlist.noConversationSelected" = "No conversation selected";
+"smartlist.noConversationsSubtitle" = "Find someone to start a conversation, or share your Jami ID.";
+"smartlist.noConversationsSubtitleSip" = "Find a number to start a conversation.";
+"smartlist.addContact" = "Legg til kontakt";
+"smartlist.shareJamiId" = "Share your Jami ID";
 
 // Conversation
 "conversation.addToContactsButton" = "Legg til kontakter";
@@ -193,7 +201,7 @@
 "conversation.synchronizationMessage" = "Venter på at %@ skal koble til for å synkronisere samtalen…";
 "conversation.inReplyTo" = "I svar til";
 "conversation.replyQuotePhoto" = "Photo";
-"conversation.replyQuoteAudio" = "Audio";
+"conversation.replyQuoteAudio" = "Lyd";
 "conversation.replyQuoteUnavailable" = "Message not loaded";
 "conversation.yourself" = "Deg";
 "conversation.edited" = "Redigert";

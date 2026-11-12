@@ -97,6 +97,7 @@
 "swarm.removeContact" = "Հեռացնել շփումը";
 "swarm.restartConversation" = "Restart conversation";
 "swarm.conversationEnded" = "Conversation ended";
+"swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
 "swarm.chooseColor" = "Զրույցի գույնը";
 "swarm.typeOfSwarm" = "Զրույցի տեսակ";
 "swarm.identifier" = "Հնազեկիչ";
@@ -153,6 +154,7 @@
 "smartlist.noConversationsFound" = "No conversations match the search.";
 "smartlist.newContact" = "New contact";
 "smartlist.newGroup" = "New group";
+"smartlist.newConversation" = "New conversation";
 "smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Ոչ մի արդյունք";
@@ -171,6 +173,12 @@
 "smartlist.disableDonation" = "Ոչ հիմա";
 "smartlist.donationExplanation" = "Եթե ձեզ դուր է գալիս օգտագործել Jami-ն և հավատում եք մեր առաքելությանը, ցանկանո՞ւմ եք նվիրատվություն կատարել։";
 "smartlist.inSynchronization" = "Syncing…";
+"smartlist.noConversations" = "No conversations yet";
+"smartlist.noConversationSelected" = "No conversation selected";
+"smartlist.noConversationsSubtitle" = "Find someone to start a conversation, or share your Jami ID.";
+"smartlist.noConversationsSubtitleSip" = "Find a number to start a conversation.";
+"smartlist.addContact" = "Բարձրացնել շփումը";
+"smartlist.shareJamiId" = "Share your Jami ID";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
@@ -193,7 +201,7 @@
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "Պատասխանելով";
 "conversation.replyQuotePhoto" = "Photo";
-"conversation.replyQuoteAudio" = "Audio";
+"conversation.replyQuoteAudio" = "Ձայնային ձայն";
 "conversation.replyQuoteUnavailable" = "Message not loaded";
 "conversation.yourself" = "Դուք";
 "conversation.edited" = "Կարգավորվել";

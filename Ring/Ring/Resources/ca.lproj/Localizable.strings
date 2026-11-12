@@ -97,6 +97,7 @@
 "swarm.removeContact" = "Elimina el contacte";
 "swarm.restartConversation" = "Reinicia la conversa";
 "swarm.conversationEnded" = "La conversa ha finalitzat";
+"swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
 "swarm.chooseColor" = "Color de conversa";
 "swarm.typeOfSwarm" = "Tipus de conversa";
 "swarm.identifier" = "Identificador";
@@ -153,6 +154,7 @@
 "smartlist.noConversationsFound" = "No hi ha cap conversa que coincideixi amb la cerca.";
 "smartlist.newContact" = "Contacte nou";
 "smartlist.newGroup" = "Grup nou";
+"smartlist.newConversation" = "New conversation";
 "smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Invitacions rebudes";
 "smartlist.noResults" = "Sense resultats";
@@ -171,6 +173,12 @@
 "smartlist.disableDonation" = "Ara no";
 "smartlist.donationExplanation" = "Si gaudiu utilitzant Jami i creieu en la nostra missió, voleu fer un donatiu?";
 "smartlist.inSynchronization" = "S'està sincronitzant…";
+"smartlist.noConversations" = "No conversations yet";
+"smartlist.noConversationSelected" = "No conversation selected";
+"smartlist.noConversationsSubtitle" = "Find someone to start a conversation, or share your Jami ID.";
+"smartlist.noConversationsSubtitleSip" = "Find a number to start a conversation.";
+"smartlist.addContact" = "Afegeix un contacte";
+"smartlist.shareJamiId" = "Share your Jami ID";
 
 // Conversation
 "conversation.addToContactsButton" = "Afegeix als contactes";
@@ -193,7 +201,7 @@
 "conversation.synchronizationMessage" = "S'està esperant que %@ es connecti per sincronitzar la conversa…";
 "conversation.inReplyTo" = "En resposta a";
 "conversation.replyQuotePhoto" = "Photo";
-"conversation.replyQuoteAudio" = "Audio";
+"conversation.replyQuoteAudio" = "Àudio";
 "conversation.replyQuoteUnavailable" = "Message not loaded";
 "conversation.yourself" = "Tu";
 "conversation.edited" = "Edicions";

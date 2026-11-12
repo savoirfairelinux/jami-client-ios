@@ -97,6 +97,7 @@
 "swarm.removeContact" = "Șterge contactul";
 "swarm.restartConversation" = "Reîncepe conversația";
 "swarm.conversationEnded" = "Conversație terminată";
+"swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
 "swarm.chooseColor" = "Culoarea conversației";
 "swarm.typeOfSwarm" = "Tipul conversației";
 "swarm.identifier" = "Identificator";
@@ -153,6 +154,7 @@
 "smartlist.noConversationsFound" = "Nicio conversație nu corespunde căutării.";
 "smartlist.newContact" = "Contact nou";
 "smartlist.newGroup" = "Grup nou";
+"smartlist.newConversation" = "New conversation";
 "smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Invitații primite";
 "smartlist.noResults" = "Niciun rezultat";
@@ -171,6 +173,12 @@
 "smartlist.disableDonation" = "Nu acum";
 "smartlist.donationExplanation" = "Dacă îți place să folosești Jami și crezi că misiunea noastră este importantă, vrei să faci o donație?";
 "smartlist.inSynchronization" = "Sincronizare…";
+"smartlist.noConversations" = "No conversations yet";
+"smartlist.noConversationSelected" = "No conversation selected";
+"smartlist.noConversationsSubtitle" = "Find someone to start a conversation, or share your Jami ID.";
+"smartlist.noConversationsSubtitleSip" = "Find a number to start a conversation.";
+"smartlist.addContact" = "Adaugă contactul";
+"smartlist.shareJamiId" = "Share your Jami ID";
 
 // Conversation
 "conversation.addToContactsButton" = "Adaugă la contacte";

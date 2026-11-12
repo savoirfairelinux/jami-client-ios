@@ -97,6 +97,7 @@
 "swarm.removeContact" = "移除聯絡人";
 "swarm.restartConversation" = "重新開始對話";
 "swarm.conversationEnded" = "對話已終止";
+"swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
 "swarm.chooseColor" = "会话颜色";
 "swarm.typeOfSwarm" = "对话类型";
 "swarm.identifier" = "标识符";
@@ -153,6 +154,7 @@
 "smartlist.noConversationsFound" = "无匹配的对话。";
 "smartlist.newContact" = "新联系人";
 "smartlist.newGroup" = "新群组";
+"smartlist.newConversation" = "New conversation";
 "smartlist.accounts" = "你的账户";
 "smartlist.invitationReceived" = "邀请已发送";
 "smartlist.noResults" = "无结果";
@@ -171,6 +173,12 @@
 "smartlist.disableDonation" = "现在不要";
 "smartlist.donationExplanation" = "如果您喜欢使用 Jami 并相信我们的使命，您愿意捐款吗？";
 "smartlist.inSynchronization" = "同步中…";
+"smartlist.noConversations" = "暂无对话";
+"smartlist.noConversationSelected" = "No conversation selected";
+"smartlist.noConversationsSubtitle" = "寻找联系人开始对话，或分享你的 Jami ID.";
+"smartlist.noConversationsSubtitleSip" = "输入号码开始对话。";
+"smartlist.addContact" = "添加联系人";
+"smartlist.shareJamiId" = "分享你的 Jami ID";
 
 // Conversation
 "conversation.addToContactsButton" = "添加到联系人";
@@ -192,15 +200,15 @@
 "conversation.syncingTitle" = "同步对话";
 "conversation.synchronizationMessage" = "正等待 1%@ 连接以同步对话…";
 "conversation.inReplyTo" = "在回复中";
-"conversation.replyQuotePhoto" = "Photo";
+"conversation.replyQuotePhoto" = "照片";
 "conversation.replyQuoteAudio" = "語音";
-"conversation.replyQuoteUnavailable" = "Message not loaded";
+"conversation.replyQuoteUnavailable" = "消息未加载";
 "conversation.yourself" = "您";
 "conversation.edited" = "已编辑";
-"conversation.editHistory" = "Edit history";
-"conversation.editHistoryCurrent" = "Current";
-"conversation.editHistoryEdit" = "Edit %d";
-"conversation.editHistoryOriginal" = "Original";
+"conversation.editHistory" = "编辑历史";
+"conversation.editHistoryCurrent" = "当前";
+"conversation.editHistoryEdit" = "编辑%d";
+"conversation.editHistoryOriginal" = "原文";
 "conversation.deletedMessage" = "%@刪除了一條消息";
 "conversation.contactBlocked" = "联系人被封锁";
 // An ellipsis is not directly shown in the following typing indicator strings.
@@ -684,23 +692,23 @@
 "accessibility.messageBubbleRead" = "已閱讀";
 "accessibility.messageBubbleUnread" = "未讀<br>";
 "accessibility.messageReactionCount" = "%1$@ %2$d";
-"accessibility.messageReactions" = "Reactions";
-"accessibility.messageReactionsHint" = "Shows who reacted";
-"accessibility.messageReactionIncludingYou" = "%@, including you";
-"accessibility.messageReactionsMore" = "%d more";
-"accessibility.removeReaction" = "Remove %@";
-"accessibility.editHistoryAdded" = "Added: %@";
-"accessibility.editHistoryCopied" = "Copied";
-"accessibility.editHistoryRemoved" = "Removed: %@";
-"accessibility.scrollToLatestMessage" = "Scroll to latest message";
-"accessibility.newMessagesCount" = "%d new messages";
-"accessibility.oneNewMessage" = "1 new message";
+"accessibility.messageReactions" = "回应";
+"accessibility.messageReactionsHint" = "显示回应的人";
+"accessibility.messageReactionIncludingYou" = "%@, 包括你";
+"accessibility.messageReactionsMore" = "另有%d";
+"accessibility.removeReaction" = "移除%@";
+"accessibility.editHistoryAdded" = "已添加: %@";
+"accessibility.editHistoryCopied" = "复制";
+"accessibility.editHistoryRemoved" = "已移除: %@";
+"accessibility.scrollToLatestMessage" = "滚动到最新消息";
+"accessibility.newMessagesCount" = "%d条新消息";
+"accessibility.oneNewMessage" = "1 条新消息";
 "accessibility.messageReceivedDate" = "已接收";
 "accessibility.messageSentDate" = "已发送";
 "accessibility.textEmpty" = "收到空文本消息。此消息可能未正确发送。";
 "accessibility.fileTransferUnnamed" = "已收到文件，但名称不可用";
 "accessibility.inReply" = "在回覆中";
-"accessibility.showReplyTarget" = "Show original message";
+"accessibility.showReplyTarget" = "显示原消息";
 "accessibility.text.received" = "%@，已收到消息";
 "accessibility.text.sent" = "%@, 已收到消息";
 "accessibility.fileTransfer.received" = "文件：%@，已接收";
