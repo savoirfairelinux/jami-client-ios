@@ -36,7 +36,7 @@ struct ContextMenuSnapshotWindowCoordinator: UIViewRepresentable {
     func updateUIView(_ uiView: UIView, context: Context) {
         let shouldShow = snapshot != nil
             && presentingState == .shouldPresent
-            && model.presentingMessageView != nil
+            && model.contentVM != nil
 
         if shouldShow {
             showOverlayWindow(containerView: uiView, coordinator: context.coordinator)

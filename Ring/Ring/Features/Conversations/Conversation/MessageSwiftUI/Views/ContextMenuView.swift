@@ -173,10 +173,17 @@ struct ContextMenuView: View {
         }
     }
 
+    @ViewBuilder
+    private var presentedMessage: some View {
+        if let container = model.containerModel, let content = model.contentVM {
+            MessageBubbleView(messageModel: container, model: content, menuRequest: .constant(nil), onLongPress: { _, _, _ in })
+        }
+    }
+
     func tappableMessageBody() -> some View {
         ZStack {
             ScrollView {
-                model.presentingMessageView
+                presentedMessage
                     .frame(
                         width: model.messageFrame.width,
                         height: model.messageFrame.height

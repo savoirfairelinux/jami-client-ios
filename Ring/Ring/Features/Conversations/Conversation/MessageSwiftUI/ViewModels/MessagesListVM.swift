@@ -544,10 +544,10 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
             .disposed(by: self.conversationDisposeBag)
     }
 
-    func configureContextMenu(with message: MessageBubbleView, frame: CGRect, mode: ContextMenuMode) {
+    func configureContextMenu(content: MessageContentVM, container: MessageContainerModel, frame: CGRect, mode: ContextMenuMode) {
         self.contextMenuModel.messageFrame = frame
         let localJamiId = self.accountService.getAccount(fromAccountId: self.conversation.accountId)?.jamiId
-        self.contextMenuModel.configure(with: message, mode: mode, localJamiId: localJamiId, avatarFactory: makeAvatarFactory())
+        self.contextMenuModel.configure(content: content, container: container, mode: mode, localJamiId: localJamiId, avatarFactory: makeAvatarFactory())
     }
 
     func subscribeContextMenu() {

@@ -34,7 +34,6 @@ class ContextMenuVM: ObservableObject {
 
     private let log = SwiftyBeaver.self
 
-    private(set) var presentingMessageView: MessageBubbleView?
     private(set) var contentVM: MessageContentVM?
     private(set) var containerModel: MessageContainerModel?
 
@@ -49,37 +48,36 @@ class ContextMenuVM: ObservableObject {
     private var reactionsSubscription: AnyCancellable?
     private var editHistorySubscription: AnyCancellable?
 
-    func configure(with message: MessageBubbleView, mode: ContextMenuMode, localJamiId: String?, avatarFactory: AvatarProviderFactory) {
+    func configure(content: MessageContentVM, container: MessageContainerModel, mode: ContextMenuMode, localJamiId: String?, avatarFactory: AvatarProviderFactory) {
         self.currentJamiAccountId = localJamiId
-        self.presentingMessageView = message
-        self.contentVM = message.model
-        self.containerModel = message.messageModel
+        self.contentVM = content
+        self.containerModel = container
         self.avatarFactory = avatarFactory
         self.mode = mode
-        canReact = message.model.permissions.allows(.reaction)
+        canReact = content.permissions.allows(.reaction)
         listEmptied = false
         pendingReactionRemovals = []
         reactionsSubscription = nil
         editHistorySubscription = nil
         if mode == .reactions {
-            observeReactions(message.messageModel.reactionsModel)
+            observeReactions(container.reactionsModel)
         }
         editHistory = []
         if mode == .editHistory {
-            observeEditHistory(message.model)
+            observeEditHistory(content)
         }
 
-        let incoming = message.model.message.incoming
-        menuItems = message.model.menuItems
-        messageDateText = message.model.fullDateText
+        let incoming = content.message.incoming
+        menuItems = content.menuItems
+        messageDateText = content.fullDateText
         actionsAnchor = incoming ? .topLeading : .topTrailing
         messsageAnchor = incoming ? .bottomLeading : .bottomTrailing
         isOurMsg = !incoming
-        preferencesColor = message.model.preferencesColor
+        preferencesColor = content.preferencesColor
 
         updateContextMenuSize()
 
-        if let sender = currentJamiAccountId, let container = containerModel {
+        if let sender = currentJamiAccountId {
             myAuthoredReactionIds = container.message.reactionsMessageIdsBySender(jamiId: sender)
             let authoredContents = Set(
                 container.reactionsModel.message.reactions
