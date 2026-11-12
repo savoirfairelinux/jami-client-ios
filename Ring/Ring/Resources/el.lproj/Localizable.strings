@@ -97,6 +97,7 @@
 "swarm.removeContact" = "Αποσύρουμε την επαφή";
 "swarm.restartConversation" = "Επανεκκίνηση συνομιλίας";
 "swarm.conversationEnded" = "Η συνομιλία έληξε";
+"swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
 "swarm.chooseColor" = "Χρώμα συνομιλίας";
 "swarm.typeOfSwarm" = "Τύπος συνομιλίας";
 "swarm.identifier" = "Ταυτοποιητής";
@@ -153,6 +154,7 @@
 "smartlist.noConversationsFound" = "Καμία συνομιλία δεν ταιριάζει με την αναζήτηση.";
 "smartlist.newContact" = "Νέα επαφή";
 "smartlist.newGroup" = "Νέα ομάδα";
+"smartlist.newConversation" = "New conversation";
 "smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Ληφθείσες προσκλήσεις";
 "smartlist.noResults" = "Χωρίς αποτελέσματα";
@@ -171,6 +173,12 @@
 "smartlist.disableDonation" = "Όχι τώρα";
 "smartlist.donationExplanation" = "Εάν σας αρέσει να χρησιμοποιείτε το Jami και πιστεύετε στην αποστολή μας, θέλετε να κάνετε μια δωρεά;";
 "smartlist.inSynchronization" = "Συγχρονισμός…";
+"smartlist.noConversations" = "No conversations yet";
+"smartlist.noConversationSelected" = "No conversation selected";
+"smartlist.noConversationsSubtitle" = "Find someone to start a conversation, or share your Jami ID.";
+"smartlist.noConversationsSubtitleSip" = "Find a number to start a conversation.";
+"smartlist.addContact" = "Προσθήκη επαφής";
+"smartlist.shareJamiId" = "Share your Jami ID";
 
 // Conversation
 "conversation.addToContactsButton" = "Προσθήκη στις επαφές";
@@ -193,7 +201,7 @@
 "conversation.synchronizationMessage" = "Αναμονή σύνδεσης του/της %@ για συγχρονισμό της συνομιλίας…";
 "conversation.inReplyTo" = "Απαντώντας";
 "conversation.replyQuotePhoto" = "Photo";
-"conversation.replyQuoteAudio" = "Audio";
+"conversation.replyQuoteAudio" = "Ήχος";
 "conversation.replyQuoteUnavailable" = "Message not loaded";
 "conversation.yourself" = "Εσύ";
 "conversation.edited" = "Επορθωμένο";

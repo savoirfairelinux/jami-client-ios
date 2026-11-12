@@ -97,6 +97,7 @@
 "swarm.removeContact" = "Байланысты алып тастау";
 "swarm.restartConversation" = "Restart conversation";
 "swarm.conversationEnded" = "Conversation ended";
+"swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
 "swarm.chooseColor" = "Әңгімелеудің түсі";
 "swarm.typeOfSwarm" = "Әңгіме түрі";
 "swarm.identifier" = "Тұлғаны анықтау";
@@ -153,6 +154,7 @@
 "smartlist.noConversationsFound" = "No conversations match the search.";
 "smartlist.newContact" = "New contact";
 "smartlist.newGroup" = "New group";
+"smartlist.newConversation" = "New conversation";
 "smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Нәтиже жоқ";
@@ -171,6 +173,12 @@
 "smartlist.disableDonation" = "Қазір емес";
 "smartlist.donationExplanation" = "Егер сізге Jami-ді пайдалану ұнаса және біздің миссияға сенсеңіз, қайырымдылық жасағыңыз келе ме?";
 "smartlist.inSynchronization" = "Syncing…";
+"smartlist.noConversations" = "No conversations yet";
+"smartlist.noConversationSelected" = "No conversation selected";
+"smartlist.noConversationsSubtitle" = "Find someone to start a conversation, or share your Jami ID.";
+"smartlist.noConversationsSubtitleSip" = "Find a number to start a conversation.";
+"smartlist.addContact" = "Байланыс қосу";
+"smartlist.shareJamiId" = "Share your Jami ID";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
@@ -193,7 +201,7 @@
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "Жауап ретінде";
 "conversation.replyQuotePhoto" = "Photo";
-"conversation.replyQuoteAudio" = "Audio";
+"conversation.replyQuoteAudio" = "Аудио";
 "conversation.replyQuoteUnavailable" = "Message not loaded";
 "conversation.yourself" = "Сендер";
 "conversation.edited" = "Жазу";

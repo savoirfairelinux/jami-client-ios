@@ -97,6 +97,7 @@
 "swarm.removeContact" = "Удалить контакт";
 "swarm.restartConversation" = "Перезапустить разговор";
 "swarm.conversationEnded" = "Разговор завершён";
+"swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
 "swarm.chooseColor" = "Цвет беседы";
 "swarm.typeOfSwarm" = "Тип беседы";
 "swarm.identifier" = "Идентификатор";
@@ -153,6 +154,7 @@
 "smartlist.noConversationsFound" = "Нет бесед, соответствующих запросу.";
 "smartlist.newContact" = "Новый контакт";
 "smartlist.newGroup" = "Новая группа";
+"smartlist.newConversation" = "New conversation";
 "smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Приглашения получены";
 "smartlist.noResults" = "Нет результатов";
@@ -171,6 +173,12 @@
 "smartlist.disableDonation" = "Не сейчас";
 "smartlist.donationExplanation" = "Если вам нравится использовать Jami и вы верите в нашу миссию, не хотите ли сделать пожертвование?";
 "smartlist.inSynchronization" = "Синхронизация…";
+"smartlist.noConversations" = "No conversations yet";
+"smartlist.noConversationSelected" = "No conversation selected";
+"smartlist.noConversationsSubtitle" = "Find someone to start a conversation, or share your Jami ID.";
+"smartlist.noConversationsSubtitleSip" = "Find a number to start a conversation.";
+"smartlist.addContact" = "Добавить контакт";
+"smartlist.shareJamiId" = "Share your Jami ID";
 
 // Conversation
 "conversation.addToContactsButton" = "Добавить в контакты";

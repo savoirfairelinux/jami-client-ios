@@ -97,6 +97,7 @@
 "swarm.removeContact" = "Xóa liên lạc";
 "swarm.restartConversation" = "Khởi động lại cuộc trò chuyện";
 "swarm.conversationEnded" = "Cuộc trò chuyện đã kết thúc";
+"swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
 "swarm.chooseColor" = "Màu hội thoại";
 "swarm.typeOfSwarm" = "Loại hội thoại";
 "swarm.identifier" = "Định dạng";
@@ -153,6 +154,7 @@
 "smartlist.noConversationsFound" = "Không có cuộc trò chuyện nào khớp với tìm kiếm.";
 "smartlist.newContact" = "Liên hệ mới";
 "smartlist.newGroup" = "Nhóm mới";
+"smartlist.newConversation" = "New conversation";
 "smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Lời mời nhận được";
 "smartlist.noResults" = "Không có kết quả";
@@ -171,6 +173,12 @@
 "smartlist.disableDonation" = "Lúc khác";
 "smartlist.donationExplanation" = "Nếu bạn thích sử dụng Jami và tin vào sứ mệnh của chúng tôi, bạn có muốn quyên góp không?";
 "smartlist.inSynchronization" = "Đang đồng bộ…";
+"smartlist.noConversations" = "No conversations yet";
+"smartlist.noConversationSelected" = "No conversation selected";
+"smartlist.noConversationsSubtitle" = "Find someone to start a conversation, or share your Jami ID.";
+"smartlist.noConversationsSubtitleSip" = "Find a number to start a conversation.";
+"smartlist.addContact" = "Thêm liên hệ";
+"smartlist.shareJamiId" = "Share your Jami ID";
 
 // Conversation
 "conversation.addToContactsButton" = "Thêm vào danh bạ";

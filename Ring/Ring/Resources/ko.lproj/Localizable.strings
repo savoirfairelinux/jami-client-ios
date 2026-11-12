@@ -97,6 +97,7 @@
 "swarm.removeContact" = "접촉을 제거";
 "swarm.restartConversation" = "대화 재시작";
 "swarm.conversationEnded" = "대화 종료됨";
+"swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
 "swarm.chooseColor" = "대화 색상";
 "swarm.typeOfSwarm" = "대화 유형";
 "swarm.identifier" = "식별자";
@@ -153,6 +154,7 @@
 "smartlist.noConversationsFound" = "검색과 일치하는 대화가 없습니다.";
 "smartlist.newContact" = "새 연락처";
 "smartlist.newGroup" = "새 모임";
+"smartlist.newConversation" = "New conversation";
 "smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "초대 받음";
 "smartlist.noResults" = "결과도 없습니다";
@@ -171,6 +173,12 @@
 "smartlist.disableDonation" = "나중에";
 "smartlist.donationExplanation" = "Jami를 잘 사용 중이고 우리의 사명을 응원한다면 후원해 주시겠습니까?";
 "smartlist.inSynchronization" = "동기화 중…";
+"smartlist.noConversations" = "No conversations yet";
+"smartlist.noConversationSelected" = "No conversation selected";
+"smartlist.noConversationsSubtitle" = "Find someone to start a conversation, or share your Jami ID.";
+"smartlist.noConversationsSubtitleSip" = "Find a number to start a conversation.";
+"smartlist.addContact" = "연락처 추가";
+"smartlist.shareJamiId" = "Share your Jami ID";
 
 // Conversation
 "conversation.addToContactsButton" = "연락처에 추가";
@@ -193,7 +201,7 @@
 "conversation.synchronizationMessage" = "대화를 동기화하기 위해 %@님의 연결을 기다리는 중…";
 "conversation.inReplyTo" = "이에 대한 답변";
 "conversation.replyQuotePhoto" = "Photo";
-"conversation.replyQuoteAudio" = "Audio";
+"conversation.replyQuoteAudio" = "음향";
 "conversation.replyQuoteUnavailable" = "Message not loaded";
 "conversation.yourself" = "- 네";
 "conversation.edited" = "편집";

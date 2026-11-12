@@ -97,6 +97,7 @@
 "swarm.removeContact" = "Buang kontak";
 "swarm.restartConversation" = "Restart conversation";
 "swarm.conversationEnded" = "Conversation ended";
+"swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
 "swarm.chooseColor" = "Warna percakapan";
 "swarm.typeOfSwarm" = "Jenis percakapan";
 "swarm.identifier" = "Pengidentifikasi";
@@ -153,6 +154,7 @@
 "smartlist.noConversationsFound" = "No conversations match the search.";
 "smartlist.newContact" = "New contact";
 "smartlist.newGroup" = "New group";
+"smartlist.newConversation" = "New conversation";
 "smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Tidak ketemu";
@@ -171,6 +173,12 @@
 "smartlist.disableDonation" = "Tidak sekarang";
 "smartlist.donationExplanation" = "Jika Anda menikmati penggunaan Jami dan percaya pada misi kami, apakah Anda ingin berdonasi?";
 "smartlist.inSynchronization" = "Syncing…";
+"smartlist.noConversations" = "No conversations yet";
+"smartlist.noConversationSelected" = "No conversation selected";
+"smartlist.noConversationsSubtitle" = "Find someone to start a conversation, or share your Jami ID.";
+"smartlist.noConversationsSubtitleSip" = "Find a number to start a conversation.";
+"smartlist.addContact" = "Tambah kontak";
+"smartlist.shareJamiId" = "Share your Jami ID";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
@@ -193,7 +201,7 @@
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "Sebagai balasan";
 "conversation.replyQuotePhoto" = "Photo";
-"conversation.replyQuoteAudio" = "Audio";
+"conversation.replyQuoteAudio" = "Suara";
 "conversation.replyQuoteUnavailable" = "Message not loaded";
 "conversation.yourself" = "Anda";
 "conversation.edited" = "Diedit";

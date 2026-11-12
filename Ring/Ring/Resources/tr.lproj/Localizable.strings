@@ -97,6 +97,7 @@
 "swarm.removeContact" = "Kişiyi kaldır";
 "swarm.restartConversation" = "Görüşmeyi yeniden başlat";
 "swarm.conversationEnded" = "Görüşme sona erdi";
+"swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
 "swarm.chooseColor" = "Görüşme rengi";
 "swarm.typeOfSwarm" = "Görüşme tipi";
 "swarm.identifier" = "Tanımlayıcı";
@@ -153,6 +154,7 @@
 "smartlist.noConversationsFound" = "Aramayla eşleşen görüşme yok.";
 "smartlist.newContact" = "Yeni kişi";
 "smartlist.newGroup" = "Yeni grup";
+"smartlist.newConversation" = "New conversation";
 "smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Alınan davetler";
 "smartlist.noResults" = "Sonuç yok";
@@ -171,6 +173,12 @@
 "smartlist.disableDonation" = "Şimdi değil";
 "smartlist.donationExplanation" = "Jami'yi kullanmaktan hoşlanıyor ve misyonumuza güveniyorsan bağış yapmak ister misin?";
 "smartlist.inSynchronization" = "Eşitleniyor…";
+"smartlist.noConversations" = "No conversations yet";
+"smartlist.noConversationSelected" = "No conversation selected";
+"smartlist.noConversationsSubtitle" = "Find someone to start a conversation, or share your Jami ID.";
+"smartlist.noConversationsSubtitleSip" = "Find a number to start a conversation.";
+"smartlist.addContact" = "Kişi ekle";
+"smartlist.shareJamiId" = "Share your Jami ID";
 
 // Conversation
 "conversation.addToContactsButton" = "Kişilere ekle";

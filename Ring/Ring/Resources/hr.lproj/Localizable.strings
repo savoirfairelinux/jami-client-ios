@@ -97,6 +97,7 @@
 "swarm.removeContact" = "Uklonite kontakt";
 "swarm.restartConversation" = "Restart conversation";
 "swarm.conversationEnded" = "Conversation ended";
+"swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
 "swarm.chooseColor" = "Boja razgovora";
 "swarm.typeOfSwarm" = "Vrsta konverzacije";
 "swarm.identifier" = "Identifikacija";
@@ -153,6 +154,7 @@
 "smartlist.noConversationsFound" = "No conversations match the search.";
 "smartlist.newContact" = "New contact";
 "smartlist.newGroup" = "New group";
+"smartlist.newConversation" = "New conversation";
 "smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Nema rezultata";
@@ -171,6 +173,12 @@
 "smartlist.disableDonation" = "Ne sada";
 "smartlist.donationExplanation" = "Ako uživate u korištenju Jamija i vjerujete u našu misiju, želite li donirati?";
 "smartlist.inSynchronization" = "Syncing…";
+"smartlist.noConversations" = "No conversations yet";
+"smartlist.noConversationSelected" = "No conversation selected";
+"smartlist.noConversationsSubtitle" = "Find someone to start a conversation, or share your Jami ID.";
+"smartlist.noConversationsSubtitleSip" = "Find a number to start a conversation.";
+"smartlist.addContact" = "Dodajte kontakt";
+"smartlist.shareJamiId" = "Share your Jami ID";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
@@ -193,7 +201,7 @@
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "U odgovor na";
 "conversation.replyQuotePhoto" = "Photo";
-"conversation.replyQuoteAudio" = "Audio";
+"conversation.replyQuoteAudio" = "Zvuk";
 "conversation.replyQuoteUnavailable" = "Message not loaded";
 "conversation.yourself" = "Ti si";
 "conversation.edited" = "U redigiranju";

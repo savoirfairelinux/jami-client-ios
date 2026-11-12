@@ -97,6 +97,7 @@
 "swarm.removeContact" = "Odstrániť kontakt";
 "swarm.restartConversation" = "Reštartovať konverzáciu";
 "swarm.conversationEnded" = "Konverzácia skončila";
+"swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
 "swarm.chooseColor" = "Farba konverzácie";
 "swarm.typeOfSwarm" = "Typ konverzácie";
 "swarm.identifier" = "Identifikátor";
@@ -153,6 +154,7 @@
 "smartlist.noConversationsFound" = "Žiadne konverzácie nezodpovedajú vyhľadávaniu.";
 "smartlist.newContact" = "Nový kontakt";
 "smartlist.newGroup" = "Nová skupina";
+"smartlist.newConversation" = "New conversation";
 "smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Prijaté pozvania";
 "smartlist.noResults" = "Žiadne výsledky";
@@ -171,6 +173,12 @@
 "smartlist.disableDonation" = "Teraz nie";
 "smartlist.donationExplanation" = "Ak vás baví používať Jami a veríte v naše poslanie, chcete prispieť?";
 "smartlist.inSynchronization" = "Synchronizuje sa…";
+"smartlist.noConversations" = "No conversations yet";
+"smartlist.noConversationSelected" = "No conversation selected";
+"smartlist.noConversationsSubtitle" = "Find someone to start a conversation, or share your Jami ID.";
+"smartlist.noConversationsSubtitleSip" = "Find a number to start a conversation.";
+"smartlist.addContact" = "Pridať kontakt";
+"smartlist.shareJamiId" = "Share your Jami ID";
 
 // Conversation
 "conversation.addToContactsButton" = "Pridať do kontaktov";

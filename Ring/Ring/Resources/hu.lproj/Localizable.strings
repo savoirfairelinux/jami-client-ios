@@ -97,6 +97,7 @@
 "swarm.removeContact" = "Kapcsolat eltávolítása";
 "swarm.restartConversation" = "Beszélgetés újraindítása";
 "swarm.conversationEnded" = "Beszélgetés véget ért";
+"swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
 "swarm.chooseColor" = "Beszélgetés színe";
 "swarm.typeOfSwarm" = "Beszélgetés típusa";
 "swarm.identifier" = "Azonosító";
@@ -153,6 +154,7 @@
 "smartlist.noConversationsFound" = "Nincsenek a keresési feltételeknek megfelelő beszélgetések.";
 "smartlist.newContact" = "Új kapcsolattartó";
 "smartlist.newGroup" = "Új csoport";
+"smartlist.newConversation" = "New conversation";
 "smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Meghívások megérkeztek";
 "smartlist.noResults" = "Nincs eredmény";
@@ -171,6 +173,12 @@
 "smartlist.disableDonation" = "Máskor";
 "smartlist.donationExplanation" = "Ha értékeli a Jami használatát, és hisz a küldetésünkben, szeretne adományozni?";
 "smartlist.inSynchronization" = "Szinkronizálás…";
+"smartlist.noConversations" = "No conversations yet";
+"smartlist.noConversationSelected" = "No conversation selected";
+"smartlist.noConversationsSubtitle" = "Find someone to start a conversation, or share your Jami ID.";
+"smartlist.noConversationsSubtitleSip" = "Find a number to start a conversation.";
+"smartlist.addContact" = "Kapcsolattartó hozzáadása";
+"smartlist.shareJamiId" = "Share your Jami ID";
 
 // Conversation
 "conversation.addToContactsButton" = "Hozzáadás a kapcsolattartók közé";
@@ -193,7 +201,7 @@
 "conversation.synchronizationMessage" = "Várakozás a(z) %@ csatlakozásra a beszélgetés összehangolásához…";
 "conversation.inReplyTo" = "Válaszul erre:";
 "conversation.replyQuotePhoto" = "Photo";
-"conversation.replyQuoteAudio" = "Audio";
+"conversation.replyQuoteAudio" = "Hang";
 "conversation.replyQuoteUnavailable" = "Message not loaded";
 "conversation.yourself" = "Ön";
 "conversation.edited" = "Szerkesztve";

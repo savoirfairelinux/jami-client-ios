@@ -97,6 +97,7 @@
 "swarm.removeContact" = "Criosadh Contacte";
 "swarm.restartConversation" = "Restart conversation";
 "swarm.conversationEnded" = "Conversation ended";
+"swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
 "swarm.chooseColor" = "Conversation color";
 "swarm.typeOfSwarm" = "Cineál comhrá";
 "swarm.identifier" = "Cluiche";
@@ -153,6 +154,7 @@
 "smartlist.noConversationsFound" = "No conversations match the search.";
 "smartlist.newContact" = "New contact";
 "smartlist.newGroup" = "New group";
+"smartlist.newConversation" = "New conversation";
 "smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Ní raibh aon torthaí";
@@ -171,6 +173,12 @@
 "smartlist.disableDonation" = "Níos déanaí";
 "smartlist.donationExplanation" = "Má bhaineann tú taitneamh as Jami a úsáid agus má chreideann tú inár misean, ar mhaith leat síntiús a thabhairt?";
 "smartlist.inSynchronization" = "Syncing…";
+"smartlist.noConversations" = "No conversations yet";
+"smartlist.noConversationSelected" = "No conversation selected";
+"smartlist.noConversationsSubtitle" = "Find someone to start a conversation, or share your Jami ID.";
+"smartlist.noConversationsSubtitleSip" = "Find a number to start a conversation.";
+"smartlist.addContact" = "Cuir teagmháil";
+"smartlist.shareJamiId" = "Share your Jami ID";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";

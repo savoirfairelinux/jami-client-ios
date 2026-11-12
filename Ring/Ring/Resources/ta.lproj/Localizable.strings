@@ -97,6 +97,7 @@
 "swarm.removeContact" = "தொடர்புகளை அகற்றவும்";
 "swarm.restartConversation" = "Restart conversation";
 "swarm.conversationEnded" = "Conversation ended";
+"swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
 "swarm.chooseColor" = "உரையாடல் நிறம்";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "அடையாளங்காட்டி";
@@ -153,6 +154,7 @@
 "smartlist.noConversationsFound" = "No conversations match the search.";
 "smartlist.newContact" = "New contact";
 "smartlist.newGroup" = "New group";
+"smartlist.newConversation" = "New conversation";
 "smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "அழைப்புகள் பெறப்பட்டன";
 "smartlist.noResults" = "முடிவுகள் இல்லை";
@@ -171,6 +173,12 @@
 "smartlist.disableDonation" = "இப்போது வேண்டாம்";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, do you want to make a donation?";
 "smartlist.inSynchronization" = "Syncing…";
+"smartlist.noConversations" = "No conversations yet";
+"smartlist.noConversationSelected" = "No conversation selected";
+"smartlist.noConversationsSubtitle" = "Find someone to start a conversation, or share your Jami ID.";
+"smartlist.noConversationsSubtitleSip" = "Find a number to start a conversation.";
+"smartlist.addContact" = "தொடர்பு சேர்க்கவும்";
+"smartlist.shareJamiId" = "Share your Jami ID";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";

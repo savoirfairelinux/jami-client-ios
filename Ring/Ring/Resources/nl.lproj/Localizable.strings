@@ -97,6 +97,7 @@
 "swarm.removeContact" = "Contact verwijderen";
 "swarm.restartConversation" = "Gesprek opnieuw starten";
 "swarm.conversationEnded" = "Gesprek beëindigd";
+"swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
 "swarm.chooseColor" = "Kleur van het gesprek";
 "swarm.typeOfSwarm" = "Gesprekstype";
 "swarm.identifier" = "Identificatie";
@@ -153,6 +154,7 @@
 "smartlist.noConversationsFound" = "Geen gesprekken komen overeen met de zoekopdracht.";
 "smartlist.newContact" = "Nieuw contact";
 "smartlist.newGroup" = "Nieuwe groep";
+"smartlist.newConversation" = "New conversation";
 "smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Uitnodigingen ontvangen";
 "smartlist.noResults" = "Geen resultaten";
@@ -171,6 +173,12 @@
 "smartlist.disableDonation" = "Niet nu";
 "smartlist.donationExplanation" = "Als u Jami graag gebruikt en in onze missie gelooft, wilt u dan een donatie doen?";
 "smartlist.inSynchronization" = "Synchroniseren…";
+"smartlist.noConversations" = "No conversations yet";
+"smartlist.noConversationSelected" = "No conversation selected";
+"smartlist.noConversationsSubtitle" = "Find someone to start a conversation, or share your Jami ID.";
+"smartlist.noConversationsSubtitleSip" = "Find a number to start a conversation.";
+"smartlist.addContact" = "Voeg contact toe";
+"smartlist.shareJamiId" = "Share your Jami ID";
 
 // Conversation
 "conversation.addToContactsButton" = "Aan contacten toevoegen";
@@ -193,7 +201,7 @@
 "conversation.synchronizationMessage" = "Wachten tot %@ verbinding maakt om het gesprek te synchroniseren…";
 "conversation.inReplyTo" = "In antwoord op";
 "conversation.replyQuotePhoto" = "Photo";
-"conversation.replyQuoteAudio" = "Audio";
+"conversation.replyQuoteAudio" = "Geluid";
 "conversation.replyQuoteUnavailable" = "Message not loaded";
 "conversation.yourself" = "Jij?";
 "conversation.edited" = "Gecorrigeerd";

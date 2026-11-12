@@ -97,6 +97,7 @@
 "swarm.removeContact" = "যোগাযোগ অপসারণ";
 "swarm.restartConversation" = "Restart conversation";
 "swarm.conversationEnded" = "Conversation ended";
+"swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
 "swarm.chooseColor" = "কথোপকথনের রঙ";
 "swarm.typeOfSwarm" = "কথোপকথনের ধরন";
 "swarm.identifier" = "সনাক্তকরণ";
@@ -153,6 +154,7 @@
 "smartlist.noConversationsFound" = "No conversations match the search.";
 "smartlist.newContact" = "New contact";
 "smartlist.newGroup" = "New group";
+"smartlist.newConversation" = "New conversation";
 "smartlist.accounts" = "Your accounts";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "কোন ফলাফল নেই";
@@ -171,6 +173,12 @@
 "smartlist.disableDonation" = "এখন না";
 "smartlist.donationExplanation" = "আপনি যদি Jami ব্যবহার করতে উপভোগ করেন এবং আমাদের লক্ষ্যে বিশ্বাস করেন, আপনি কি একটি দান করতে চান?";
 "smartlist.inSynchronization" = "Syncing…";
+"smartlist.noConversations" = "No conversations yet";
+"smartlist.noConversationSelected" = "No conversation selected";
+"smartlist.noConversationsSubtitle" = "Find someone to start a conversation, or share your Jami ID.";
+"smartlist.noConversationsSubtitleSip" = "Find a number to start a conversation.";
+"smartlist.addContact" = "যোগাযোগ যোগ করুন";
+"smartlist.shareJamiId" = "Share your Jami ID";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
@@ -193,7 +201,7 @@
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "উত্তর";
 "conversation.replyQuotePhoto" = "Photo";
-"conversation.replyQuoteAudio" = "Audio";
+"conversation.replyQuoteAudio" = "অডিও";
 "conversation.replyQuoteUnavailable" = "Message not loaded";
 "conversation.yourself" = "তুমি";
 "conversation.edited" = "সম্পাদনা";
