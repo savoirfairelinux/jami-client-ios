@@ -72,7 +72,7 @@ class WalkthroughCoordinator: Coordinator, StateableResponsive {
                 case .connectSIP(connectAction: let connectAction):
                     showConnectSIP(connectAction: connectAction)
                 case .aboutJami:
-                    showAboutJami()
+                    presentAboutJami()
                 }
             })
             .disposed(by: self.disposeBag)
@@ -106,12 +106,6 @@ class WalkthroughCoordinator: Coordinator, StateableResponsive {
     func showConnectSIP(connectAction: @escaping (_ username: String, _ password: String, _ server: String) -> Void) {
         let accountView = SIPConfigurationView(injectionBag: self.injectionBag, connectAction: connectAction)
         let viewController = createDismissableVC(accountView, dismissible: accountView.dismissHandler)
-        self.present(viewController: viewController, withStyle: .formModal, withAnimation: true, disposeBag: self.disposeBag)
-    }
-
-    func showAboutJami() {
-        let aboutView = AboutSwiftUIView()
-        let viewController = createDismissableVC(aboutView, dismissible: aboutView.dismissHandler)
         self.present(viewController: viewController, withStyle: .formModal, withAnimation: true, disposeBag: self.disposeBag)
     }
 

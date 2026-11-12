@@ -68,6 +68,25 @@ final class SmartListViewTests: JamiBaseOneAccountUITest {
         waitForElementToDisappear(settings)
     }
 
+    func testAboutOpensAsSheetAndCloses() throws {
+        waitForElementToAppear(smartListViewPage.conversationView)
+        tapWhenReady(smartListViewPage.menuButton)
+        let about = app.collectionViews.buttons[L10n.Smartlist.aboutJami]
+        waitForElementToAppear(about)
+        about.tap()
+
+        let aboutBar = app.navigationBars[L10n.Smartlist.aboutJami]
+        let close = aboutBar.buttons[SmartListAccessibilityIdentifiers.closeAboutView]
+        waitForElementToAppear(close, timeout: 10)
+        close.tap()
+
+        waitForElementToDisappear(aboutBar, timeout: 10)
+        XCTAssertTrue(smartListViewPage.conversationView.exists)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            XCTAssertTrue(app.staticTexts[L10n.Smartlist.noConversationSelected].exists)
+        }
+    }
+
     func testBackgroundCoverTap() throws {
         XCTAssertTrue(smartListViewPage.conversationView.exists)
         smartListViewPage.openAccountsButton.tap()

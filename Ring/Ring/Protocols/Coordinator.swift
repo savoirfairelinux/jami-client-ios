@@ -191,6 +191,19 @@ extension Coordinator {
         return hostingController
     }
 
+    func presentAboutJami() {
+        let about = createHostingVC(AboutSwiftUIView())
+        about.navigationItem.title = L10n.Smartlist.aboutJami
+        let close = UIBarButtonItem(systemItem: .close, primaryAction: UIAction { [weak about] _ in
+            about?.dismiss(animated: true)
+        })
+        close.accessibilityIdentifier = SmartListAccessibilityIdentifiers.closeAboutView
+        about.navigationItem.rightBarButtonItem = close
+        let navigation = UINavigationController(rootViewController: about)
+        navigation.navigationBar.tintColor = UIColor.jami
+        self.present(viewController: navigation, withStyle: .formModal, withAnimation: true, disposeBag: self.disposeBag)
+    }
+
     func getTopController() -> UIViewController? {
         guard var topController = UIApplication.shared.windows.first?.rootViewController else {
             return nil
