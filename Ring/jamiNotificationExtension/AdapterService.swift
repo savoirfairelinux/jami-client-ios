@@ -76,14 +76,19 @@ class AdapterService {
         case activeCall
         case documentShared
         case documentReplicated
+        case fileUploadStarted
+        case fileUploadEnded
     }
 
     enum PeerConnectionRequestType {
         case call(peerId: String, isVideo: Bool)
         case gitMessage(convId: String)
+        case fileRequest(convId: String)
         case clone
         case unknown
     }
+
+    private static let fileRequestPrefix = "application/file-request/"
 
     private let maxSizeForAutoaccept = 20 * 1024 * 1024
 
@@ -127,6 +132,11 @@ class AdapterService {
                 return PeerConnectionRequestType.gitMessage(convId: last)
             }
             return .unknown
+        }
+        // A peer asks to download a file this device sent: "application/file-request/conversationId".
+        if type.hasPrefix(Self.fileRequestPrefix) {
+            let convId = String(type.dropFirst(Self.fileRequestPrefix.count))
+            return convId.isEmpty || convId.contains("/") ? .unknown : .fileRequest(convId: convId)
         }
         switch type {
         case "videoCall":
@@ -284,6 +294,19 @@ extension AdapterService: AdapterDelegate {
             return
         }
         handler(.documentReplicated, EventData(accountId: accountId, conversationId: conversationId, documentId: documentId))
+    }
+
+    func outgoingFileTransferEvent(accountId: String, conversationId: String, eventCode: Int) {
+        guard let handler = self.eventHandler,
+              let code = DataTransferEvent(rawValue: UInt32(eventCode)) else {
+            return
+        }
+        let data = EventData(accountId: accountId, conversationId: conversationId)
+        if code == .ongoing {
+            handler(.fileUploadStarted, data)
+        } else if code.isCompleted() {
+            handler(.fileUploadEnded, data)
+        }
     }
 
     func activeCallsChanged(conversationId: String, accountId: String, calls: [[String: String]]) {

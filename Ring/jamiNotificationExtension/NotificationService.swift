@@ -50,6 +50,8 @@ import Atomics
  *  - If the data is a file, the backend is started (if not already active) and events are parsed until the file is
  *    downloaded and the notification is enqueued for presentation
  *  - If the data is a clone request, the backend is started and events are parsed until the clone is completed
+ *  - If the data is a peer's request to download a file this device sent, the backend is started and kept running
+ *    until the upload ends, without presenting anything
  *
  * Backend event handling is kept alive using a simple reference counting mechanism `itemsToPresent` and `syncCompleted`
  * which are incremented and decremented as events are processed and completed. When all events are processed and the
@@ -248,6 +250,7 @@ private enum ProcessMapExit: String {
     case callRejected
     case gitMessage
     case gitMessageAll
+    case fileRequest
     case clone
     case unknown
 }
@@ -293,6 +296,7 @@ class NotificationService: UNNotificationServiceExtension {
     // finishes are presented after the daemon stops.
     private var documentDownloads = CollabDocumentDownloads()
     private var documentNotifications = [PendingDocumentNotification]()
+    private var fileUploads = FileUploadHold()
 
     // A queue of pending message and active-call notifications waiting for a name lookup.
     private let notificationQueue = DispatchQueue(label: Constants.appIdentifier + ".Notification.queue")
@@ -474,6 +478,10 @@ class NotificationService: UNNotificationServiceExtension {
         case .gitMessage(let convId):
             logProcessMapExit(convId.isEmpty ? .gitMessageAll : .gitMessage)
             self.handleGitMessage(convId: convId, loadAll: convId.isEmpty) // async
+        case .fileRequest(let convId):
+            logProcessMapExit(.fileRequest)
+            self.taskPropertyQueue.sync { self.fileUploads.requested() }
+            self.handleGitMessage(convId: convId, loadAll: false) // async
         case .clone:
             logProcessMapExit(.clone)
             // Should start daemon and wait until clone completed
@@ -588,6 +596,11 @@ class NotificationService: UNNotificationServiceExtension {
                 self.configureAndPresentCallNotification(config: notifConfig, calls: calls, accountId: eventData.accountId)
             case .documentShared, .documentReplicated:
                 self.handleDocumentEvent(event, eventData: eventData, accountJamiId: accountJamiId)
+            case .fileUploadStarted:
+                self.taskPropertyQueue.sync { self.fileUploads.started() }
+            case .fileUploadEnded:
+                self.taskPropertyQueue.sync { self.fileUploads.ended() }
+                self.verifyTasksStatus()
             }
         }
     }
@@ -602,9 +615,11 @@ class NotificationService: UNNotificationServiceExtension {
         self.taskPropertyQueue.sync {
             // We could finish in two cases:
             // 1. we did not start account we are not waiting for the signals from the daemon
-            // 2. conversation synchronization completed, all files downloaded and all documents replicated
+            // 2. conversation synchronization completed, all files downloaded, all documents replicated
+            //    and all requested files uploaded
             if !self.accountIsActive.load(ordering: .relaxed) ||
-                (self.syncCompleted && self.itemsToPresent == 0 && !self.waitForCloning && !self.documentDownloads.isAwaiting) {
+                (self.syncCompleted && self.itemsToPresent == 0 && !self.waitForCloning && !self.documentDownloads.isAwaiting &&
+                    !self.fileUploads.isHolding) {
                 self.autoDispatchGroup.leave(id: jamiTaskId)
             }
         }
