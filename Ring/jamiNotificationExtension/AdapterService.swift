@@ -76,13 +76,24 @@ class AdapterService {
         case activeCall
         case documentShared
         case documentReplicated
+        case fileUploadStarted
+        case fileUploadEnded
     }
 
     enum PeerConnectionRequestType {
         case call(peerId: String, isVideo: Bool)
         case gitMessage(convId: String)
+        case fileRequest(convId: String)
         case clone
         case unknown
+    }
+
+    private enum ConnectionType: String {
+        case gitMessage = "application/im-gitmessage-id"
+        case fileRequest = "application/file-request"
+        case clone = "application/clone"
+        case videoCall
+        case audioCall
     }
 
     private let maxSizeForAutoaccept = 20 * 1024 * 1024
@@ -117,24 +128,21 @@ class AdapterService {
         guard let peerId = result?.keys.first,
               let type = result?.values.first else {
             return .unknown}
-        /*
-         Extracts the conversation ID from type formatted as "application/im-gitmessage-id/conversationId".
-         This type is used for connections requests for messages.
-         */
-        if type.contains("application/im-gitmessage-id") {
-            let components = type.components(separatedBy: "/")
-            if let last = components.last, components.count > 2 {
-                return PeerConnectionRequestType.gitMessage(convId: last)
-            }
-            return .unknown
-        }
-        switch type {
-        case "videoCall":
-            return PeerConnectionRequestType.call(peerId: peerId, isVideo: true)
-        case "audioCall":
-            return PeerConnectionRequestType.call(peerId: peerId, isVideo: false)
-        case "application/clone":
-            return PeerConnectionRequestType.clone
+        let components = type.components(separatedBy: "/")
+        let hasConversation = components.count == 3
+        let kind = hasConversation ? components.prefix(2).joined(separator: "/") : type
+        let convId = hasConversation ? components[2] : ""
+        switch (ConnectionType(rawValue: kind), hasConversation) {
+        case (.gitMessage, true):
+            return .gitMessage(convId: convId)
+        case (.fileRequest, true):
+            return convId.isEmpty ? .unknown : .fileRequest(convId: convId)
+        case (.clone, false):
+            return .clone
+        case (.videoCall, false):
+            return .call(peerId: peerId, isVideo: true)
+        case (.audioCall, false):
+            return .call(peerId: peerId, isVideo: false)
         default:
             return .unknown
         }
@@ -284,6 +292,16 @@ extension AdapterService: AdapterDelegate {
             return
         }
         handler(.documentReplicated, EventData(accountId: accountId, conversationId: conversationId, documentId: documentId))
+    }
+
+    func outgoingFileTransferEvent(accountId: String, conversationId: String, eventCode: Int) {
+        guard let handler = self.eventHandler else { return }
+        let data = EventData(accountId: accountId, conversationId: conversationId)
+        if eventCode == Int(DataTransferEvent.ongoing.rawValue) {
+            handler(.fileUploadStarted, data)
+        } else {
+            handler(.fileUploadEnded, data)
+        }
     }
 
     func activeCallsChanged(conversationId: String, accountId: String, calls: [[String: String]]) {
