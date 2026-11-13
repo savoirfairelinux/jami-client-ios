@@ -1,0 +1,8 @@
+Code-Review+1: Virtual Reviewer <virtual-reviewer@jami.net>
+Verified+1: Jenkins CI <jenkins@ring-packaging.cx>
+Code-Review+2: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+Submitted-by: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+Submitted-at: Fri, 13 Nov 2026 12:30:20 -0500
+Reviewed-on: https://review.jami.net/c/jami-client-ios/+/37142
+Project: jami-client-ios
+Branch: refs/heads/master
