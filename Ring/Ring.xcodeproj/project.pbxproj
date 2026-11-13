@@ -598,6 +598,9 @@
 		AA02D0C5000000000000FF07 /* CollabDocumentDownloads.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA02D0C5000000000000FF06 /* CollabDocumentDownloads.swift */; };
 		AA02D0C5000000000000FF08 /* CollabDocumentDownloads.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA02D0C5000000000000FF06 /* CollabDocumentDownloads.swift */; };
 		AA02D0C5000000000000FF0A /* CollabDocumentDownloadsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA02D0C5000000000000FF09 /* CollabDocumentDownloadsTests.swift */; };
+		AA02D0C6000000000000FF02 /* FileUploadHold.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA02D0C6000000000000FF01 /* FileUploadHold.swift */; };
+		AA02D0C6000000000000FF03 /* FileUploadHold.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA02D0C6000000000000FF01 /* FileUploadHold.swift */; };
+		AA02D0C6000000000000FF05 /* FileUploadHoldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA02D0C6000000000000FF04 /* FileUploadHoldTests.swift */; };
 		AA11BB22CC33DD44EE550002 /* AccountSettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11BB22CC33DD44EE550001 /* AccountSettingsTests.swift */; };
 		AB7E00010000000000000001 /* RecentReactions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7E00010000000000000002 /* RecentReactions.swift */; };
 		AB7E00010000000000000003 /* RecentReactionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7E00010000000000000004 /* RecentReactionsTests.swift */; };
@@ -1853,6 +1856,8 @@
 		AA02D0C5000000000000FF04 /* CollabDocumentAnnouncementTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollabDocumentAnnouncementTests.swift; sourceTree = "<group>"; };
 		AA02D0C5000000000000FF06 /* CollabDocumentDownloads.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollabDocumentDownloads.swift; sourceTree = "<group>"; };
 		AA02D0C5000000000000FF09 /* CollabDocumentDownloadsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollabDocumentDownloadsTests.swift; sourceTree = "<group>"; };
+		AA02D0C6000000000000FF01 /* FileUploadHold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUploadHold.swift; sourceTree = "<group>"; };
+		AA02D0C6000000000000FF04 /* FileUploadHoldTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUploadHoldTests.swift; sourceTree = "<group>"; };
 		AA11BB22CC33DD44EE550001 /* AccountSettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsTests.swift; sourceTree = "<group>"; };
 		AB7E00010000000000000002 /* RecentReactions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentReactions.swift; sourceTree = "<group>"; };
 		AB7E00010000000000000004 /* RecentReactionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentReactionsTests.swift; sourceTree = "<group>"; };
@@ -3438,6 +3443,7 @@
 				AA01CAFE000000000000FF04 /* IncomingCallFilterTests.swift */,
 				AA02D0C5000000000000FF04 /* CollabDocumentAnnouncementTests.swift */,
 				AA02D0C5000000000000FF09 /* CollabDocumentDownloadsTests.swift */,
+				AA02D0C6000000000000FF04 /* FileUploadHoldTests.swift */,
 				AA01CAFE000000000000FF43 /* ContactsFileFormatTests.swift */,
 				63CC8DA55AF00F04FF329D3D /* LinkDeviceVMTests.swift */,
 				63CC8DA55AF00F04FF329D3E /* LinkToAccountVMTests.swift */,
@@ -3646,6 +3652,7 @@
 				AA01CAFE000000000000FF01 /* IncomingCallFilter.swift */,
 				AA02D0C5000000000000FF01 /* CollabDocumentAnnouncement.swift */,
 				AA02D0C5000000000000FF06 /* CollabDocumentDownloads.swift */,
+				AA02D0C6000000000000FF01 /* FileUploadHold.swift */,
 				BB91FAA9292EA26900BB41C1 /* EventData.swift */,
 				26C92D2626F6AA1100DEEF75 /* NotificationPrefixHeader.pch */,
 			);
@@ -4657,6 +4664,8 @@
 				AA02D0C5000000000000FF05 /* CollabDocumentAnnouncementTests.swift in Sources */,
 				AA02D0C5000000000000FF08 /* CollabDocumentDownloads.swift in Sources */,
 				AA02D0C5000000000000FF0A /* CollabDocumentDownloadsTests.swift in Sources */,
+				AA02D0C6000000000000FF03 /* FileUploadHold.swift in Sources */,
+				AA02D0C6000000000000FF05 /* FileUploadHoldTests.swift in Sources */,
 				AA01CAFE000000000000FF13 /* PendingPostCallSyncTests.swift in Sources */,
 				AA01CAFE000000000000FF44 /* ContactsFileFormatTests.swift in Sources */,
 				2E95DB7F67AC7C0D12E4014B /* LinkDeviceVMTests.swift in Sources */,
@@ -4730,6 +4739,7 @@
 				AA01CAFE000000000000FF02 /* IncomingCallFilter.swift in Sources */,
 				AA02D0C5000000000000FF02 /* CollabDocumentAnnouncement.swift in Sources */,
 				AA02D0C5000000000000FF07 /* CollabDocumentDownloads.swift in Sources */,
+				AA02D0C6000000000000FF02 /* FileUploadHold.swift in Sources */,
 				AA01CAFE000000000000FF45 /* ContactsFileReader.mm in Sources */,
 				267CC6FD29D5B6D100505E56 /* VCardUtils.swift in Sources */,
 				BB91FAAD292EA36200BB41C1 /* EventData.swift in Sources */,
