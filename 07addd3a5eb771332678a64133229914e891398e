@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aebc379b_0667fbde",
+        "filename": "Ring/Ring.xcodeproj/project.pbxproj",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-13T17:32:07Z",
+      "side": 1,
+      "message": "[warning] 🟡 This patch is scoped as a build-number bump, but it also includes broad reordering/moves of many `PBXBuildFile` and `PBXFileReference` entries. That extra churn is functionally unnecessary and increases merge-conflict risk in `project.pbxproj`; please keep this change minimal to only the `CURRENT_PROJECT_VERSION` updates (or split structural project-file reordering into a separate change).",
+      "revId": "07addd3a5eb771332678a64133229914e891398e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
