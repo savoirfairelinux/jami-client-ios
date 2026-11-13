@@ -41,10 +41,9 @@ class SharedActionsPresenter {
         let activityViewController = UIActivityViewController(activityItems: content,
                                                               applicationActivities: nil)
         activityViewController.setValue(title, forKey: "Subject")
-        activityViewController.modalPresentationStyle = .overFullScreen
         if let popoverController = activityViewController.popoverPresentationController {
             popoverController.sourceView = sourceView
-            popoverController.permittedArrowDirections = []
+            popoverController.sourceRect = sourceView.bounds
         }
         viewController.present(activityViewController, animated: true, completion: nil)
     }

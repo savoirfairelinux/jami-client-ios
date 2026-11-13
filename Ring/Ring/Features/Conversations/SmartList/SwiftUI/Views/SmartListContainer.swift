@@ -159,6 +159,7 @@ struct SmartListLeadingBarItem: View {
 
 struct SmartListTrailingBarItems: View {
     @ObservedObject var model: ConversationsViewModel
+    let menuAnchor: PopoverAnchor
     let perform: (SmartListMenuAction) -> Void
 
     var body: some View {
@@ -206,6 +207,7 @@ struct SmartListTrailingBarItems: View {
         } label: {
             Image(systemName: "ellipsis.circle")
                 .navBarIconStyle()
+                .popoverAnchor(menuAnchor)
                 .accessibility(identifier: SmartListAccessibilityIdentifiers.openMenuInSmartList)
         }
     }

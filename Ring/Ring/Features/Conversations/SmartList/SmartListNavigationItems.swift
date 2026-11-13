@@ -70,11 +70,14 @@ enum SmartListMenuAction: Hashable {
 
 enum SmartListNavigationItems {
     static func install(on controller: UIViewController, model: ConversationsViewModel) {
+        let menuAnchor = PopoverAnchor()
         let perform: (SmartListMenuAction) -> Void = { [weak model, weak controller] action in
             guard let model = model, let controller = controller else { return }
-            Self.perform(action, model: model, presenter: controller)
+            Self.perform(action, model: model, presenter: controller, menuAnchor: menuAnchor)
         }
-        let trailing = HostingBarButtonItem(SmartListTrailingBarItems(model: model, perform: perform))
+        let trailing = HostingBarButtonItem(SmartListTrailingBarItems(model: model,
+                                                                      menuAnchor: menuAnchor,
+                                                                      perform: perform))
         controller.installTrailingBarItem(trailing, menuRepresentation: overflowMenu(model: model, perform: perform))
     }
 
@@ -102,7 +105,8 @@ enum SmartListNavigationItems {
 
     private static func perform(_ action: SmartListMenuAction,
                                 model: ConversationsViewModel,
-                                presenter: UIViewController) {
+                                presenter: UIViewController,
+                                menuAnchor: PopoverAnchor) {
         switch action {
         case .compose:
             model.barActions.send(.compose)
@@ -112,7 +116,9 @@ enum SmartListNavigationItems {
             model.stateEmitter.createSwarm()
         case .inviteFriends:
             SharedActionsPresenter.shareAccountInfo(onViewController: presenter,
-                                                    sourceView: presenter.view,
+                                                    sourceView: menuAnchor.visibleView
+                                                        ?? presenter.navigationController?.navigationBar
+                                                        ?? presenter.view,
                                                     content: [model.accountInfoToShare])
         case .accounts:
             model.barActions.send(.toggleAccounts)

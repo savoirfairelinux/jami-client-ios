@@ -167,3 +167,33 @@ extension UIViewController {
         }
     }
 }
+
+final class PopoverAnchor {
+    fileprivate(set) weak var view: UIView?
+
+    var visibleView: UIView? {
+        guard let view = view, view.window != nil else { return nil }
+        return view
+    }
+}
+
+private struct PopoverAnchorView: UIViewRepresentable {
+    let anchor: PopoverAnchor
+
+    func makeUIView(context: Context) -> UIView {
+        let view = UIView()
+        view.isUserInteractionEnabled = false
+        anchor.view = view
+        return view
+    }
+
+    func updateUIView(_ uiView: UIView, context: Context) {
+        anchor.view = uiView
+    }
+}
+
+extension View {
+    func popoverAnchor(_ anchor: PopoverAnchor) -> some View {
+        background(PopoverAnchorView(anchor: anchor).accessibilityHidden(true))
+    }
+}
