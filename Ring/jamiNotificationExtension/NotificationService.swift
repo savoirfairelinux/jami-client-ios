@@ -248,6 +248,7 @@ private enum ProcessMapExit: String {
     case callRejected
     case gitMessage
     case gitMessageAll
+    case fileRequest
     case clone
     case unknown
 }
@@ -293,6 +294,7 @@ class NotificationService: UNNotificationServiceExtension {
     // finishes are presented after the daemon stops.
     private var documentDownloads = CollabDocumentDownloads()
     private var documentNotifications = [PendingDocumentNotification]()
+    private var fileUploads = FileUploadHold()
 
     // A queue of pending message and active-call notifications waiting for a name lookup.
     private let notificationQueue = DispatchQueue(label: Constants.appIdentifier + ".Notification.queue")
@@ -474,6 +476,13 @@ class NotificationService: UNNotificationServiceExtension {
         case .gitMessage(let convId):
             logProcessMapExit(convId.isEmpty ? .gitMessageAll : .gitMessage)
             self.handleGitMessage(convId: convId, loadAll: convId.isEmpty) // async
+        case .fileRequest(let convId):
+            logProcessMapExit(.fileRequest)
+            self.taskPropertyQueue.sync { self.fileUploads.requested(conversationId: convId, at: ProcessInfo.processInfo.systemUptime) }
+            DispatchQueue.global().asyncAfter(deadline: .now() + FileUploadHold.requestTimeout) { [weak self] in
+                self?.verifyTasksStatus()
+            }
+            self.handleGitMessage(convId: convId, loadAll: false) // async
         case .clone:
             logProcessMapExit(.clone)
             // Should start daemon and wait until clone completed
@@ -588,6 +597,11 @@ class NotificationService: UNNotificationServiceExtension {
                 self.configureAndPresentCallNotification(config: notifConfig, calls: calls, accountId: eventData.accountId)
             case .documentShared, .documentReplicated:
                 self.handleDocumentEvent(event, eventData: eventData, accountJamiId: accountJamiId)
+            case .fileUploadStarted:
+                self.taskPropertyQueue.sync { self.fileUploads.started(conversationId: eventData.conversationId) }
+            case .fileUploadEnded:
+                self.taskPropertyQueue.sync { self.fileUploads.ended() }
+                self.verifyTasksStatus()
             }
         }
     }
@@ -604,7 +618,8 @@ class NotificationService: UNNotificationServiceExtension {
             // 1. we did not start account we are not waiting for the signals from the daemon
             // 2. conversation synchronization completed, all files downloaded and all documents replicated
             if !self.accountIsActive.load(ordering: .relaxed) ||
-                (self.syncCompleted && self.itemsToPresent == 0 && !self.waitForCloning && !self.documentDownloads.isAwaiting) {
+                (self.syncCompleted && self.itemsToPresent == 0 && !self.waitForCloning && !self.documentDownloads.isAwaiting &&
+                    !self.fileUploads.isHolding(at: ProcessInfo.processInfo.systemUptime)) {
                 self.autoDispatchGroup.leave(id: jamiTaskId)
             }
         }
