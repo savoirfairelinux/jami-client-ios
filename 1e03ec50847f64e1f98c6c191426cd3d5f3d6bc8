@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61ecc4c1_bf3b4a2a",
+        "filename": "Ring/jamiNotificationExtension/AdapterService.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-13T18:45:07Z",
+      "side": 1,
+      "message": "[error] Line 300: 🔴 `UInt32(eventCode)` can trap on negative/out-of-range values from the ObjC++ callback before `DataTransferEvent(rawValue:)` is checked, which can crash the notification extension. Use `UInt32(exactly: eventCode)` (or validate range first) and return early when conversion fails.",
+      "revId": "1e03ec50847f64e1f98c6c191426cd3d5f3d6bc8",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8eceddf1_3f7bd5ca",
+        "filename": "Ring/jamiNotificationExtension/NotificationService.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-13T18:45:07Z",
+      "side": 1,
+      "message": "[error] Line 596: 🔴 `fileUploads.started()/ended()` are applied to every outgoing transfer event, but the hold was requested for a specific `convId` in the file-request path. Because `started()` also decrements `pending`, an unrelated transfer can consume the pending request and let the extension exit before the requested upload actually starts/ends. Track holds per conversation (or per transfer id) and ignore unrelated events.",
+      "revId": "1e03ec50847f64e1f98c6c191426cd3d5f3d6bc8",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
