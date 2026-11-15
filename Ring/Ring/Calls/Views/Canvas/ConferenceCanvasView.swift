@@ -31,6 +31,12 @@ struct ConferenceCanvasView: UIViewRepresentable {
         canvas.onTileLongPressed = { [weak model] id in
             model?.tileTapped(id)
         }
+        canvas.onVideoScalingChosen = { [weak model] policy, id in
+            model?.videoScalingChosen(policy, forTileId: id)
+        }
+        canvas.onPrimaryVideoChanged = { [weak model] video in
+            DispatchQueue.main.async { model?.primaryVideoChanged(video) }
+        }
         return canvas
     }
 

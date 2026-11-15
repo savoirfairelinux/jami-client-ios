@@ -28,6 +28,8 @@ enum CallControlIntent: Hashable {
     case startPictureInPicture
     case showDialpad
     case toggleRaiseHand
+    case addParticipant
+    case toggleFullVideo
 }
 
 struct CallControlsModel: Equatable {
@@ -92,17 +94,20 @@ struct ControlAction: Identifiable, Equatable {
     let intent: CallControlIntent
     let systemImage: String
     let accessibilityLabel: String
+    let isOn: Bool?
     let style: Style
     let isEnabled: Bool
 
     init(intent: CallControlIntent,
          systemImage: String,
          accessibilityLabel: String,
+         isOn: Bool? = nil,
          style: Style = .normal,
          isEnabled: Bool = true) {
         self.intent = intent
         self.systemImage = systemImage
         self.accessibilityLabel = accessibilityLabel
+        self.isOn = isOn
         self.style = style
         self.isEnabled = isEnabled
     }
@@ -116,12 +121,14 @@ enum CallControlsLayout {
         let model: CallControlsModel
         let speakerActive: Bool
         let canStartPictureInPicture: Bool
+        let canAddParticipant: Bool
         let isHandRaised: Bool
+        let showsFullVideo: Bool?
     }
 
     struct Plan: Equatable {
         let primary: [ControlAction]
-        let supplemental: [ControlAction]
+        let more: [ControlAction]
         let pictureInPicture: ControlAction?
         let raiseHand: ControlAction?
     }
@@ -148,11 +155,9 @@ enum CallControlsLayout {
 
         let audioOutput = ControlAction(
             intent: .toggleAudioOutput,
-            systemImage: context.speakerActive ? "speaker.wave.3.fill" : "speaker.wave.2.fill",
-            accessibilityLabel: context.speakerActive
-                ? L10n.Accessibility.Calls.Alter.toggleSpeaker
-                : L10n.Accessibility.Calls.Default.toggleSpeaker,
-            style: context.speakerActive ? .active : .normal)
+            systemImage: "speaker.wave.2.fill",
+            accessibilityLabel: L10n.Calls.speaker,
+            isOn: context.speakerActive)
 
         let hangUp = ControlAction(
             intent: .hangUp,
@@ -166,25 +171,37 @@ enum CallControlsLayout {
                             accessibilityLabel: L10n.Calls.startPictureInPicture)
             : nil
 
+        let fullVideo: ControlAction? = context.showsFullVideo.map { showsFullVideo in
+            ControlAction(intent: .toggleFullVideo,
+                          systemImage: "aspectratio",
+                          accessibilityLabel: L10n.Calls.showFullVideo,
+                          isOn: showsFullVideo)
+        }
+
         let raiseHand: ControlAction? = model.showsRaiseHand
             ? raiseHandAction(isRaised: context.isHandRaised)
             : nil
 
-        let supplemental: [ControlAction]
+        let addParticipant: ControlAction? = context.canAddParticipant
+            ? ControlAction(intent: .addParticipant,
+                            systemImage: "person.fill.badge.plus",
+                            accessibilityLabel: L10n.Accessibility.Calls.Default.addParticipant)
+            : nil
+
+        var sip: [ControlAction] = []
         if model.showsDialpad {
             let dialpad = ControlAction(
                 intent: .showDialpad,
                 systemImage: "circle.grid.3x3.fill",
-                accessibilityLabel: L10n.Accessibility.Calls.Default.showDialpad)
-            supplemental = [holdAction(model), dialpad]
-        } else {
-            supplemental = []
+                accessibilityLabel: L10n.Smartlist.dialpad)
+            sip = [holdAction(model), dialpad]
         }
 
-        let primary = [audioOutput, mic, camera,
+        let more = [audioOutput] + [fullVideo, addParticipant].compactMap { $0 } + sip
+        let primary = [mic, camera,
                        flipCameraAction(isEnabled: model.canToggleMedia
                                             && model.canSwitchCamera), hangUp]
-        return Plan(primary: primary, supplemental: supplemental,
+        return Plan(primary: primary, more: more,
                     pictureInPicture: pictureInPicture, raiseHand: raiseHand)
     }
 
@@ -208,10 +225,9 @@ enum CallControlsLayout {
     private static func holdAction(_ model: CallControlsModel) -> ControlAction {
         ControlAction(
             intent: .toggleHold,
-            systemImage: model.canResume ? "play.fill" : "pause.fill",
-            accessibilityLabel: model.canResume
-                ? L10n.Accessibility.Calls.Alter.pauseCall
-                : L10n.Accessibility.Calls.Default.pauseCall,
+            systemImage: "pause.fill",
+            accessibilityLabel: L10n.Calls.hold,
+            isOn: model.canResume,
             isEnabled: model.canHold || model.canResume)
     }
 }

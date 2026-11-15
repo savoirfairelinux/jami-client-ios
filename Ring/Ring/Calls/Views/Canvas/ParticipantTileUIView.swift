@@ -54,6 +54,7 @@ final class ParticipantTileUIView: UIView {
 
     var foreignGestureGate: ((UIGestureRecognizer) -> Bool)?
     var onVideoScalingToggleRequested: (() -> Void)?
+    var onWholeFrameDisplayChanged: (() -> Void)?
     var onPreviewHideRequested: (() -> Void)? {
         didSet { syncAccessibilityActions() }
     }
@@ -129,6 +130,7 @@ final class ParticipantTileUIView: UIView {
         }
         videoView.onWholeFrameDisplayChanged = { [weak self] _ in
             self?.syncAccessibilityActions()
+            self?.onWholeFrameDisplayChanged?()
         }
         addSubview(videoView)
 

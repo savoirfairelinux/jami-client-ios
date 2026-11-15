@@ -92,6 +92,11 @@ struct CallScreenView: View {
             InCallDialpadView(model: model)
                 .preferredColorScheme(.dark)
         }
+        .sheet(isPresented: $model.showsMoreActions,
+               onDismiss: model.moreActionsDismissed) {
+            CallMoreActionsView(model: model)
+                .preferredColorScheme(.dark)
+        }
         .sheet(isPresented: $model.showsParticipants,
                onDismiss: model.participantsDismissed) {
             ConferenceParticipantsView(model: model)
