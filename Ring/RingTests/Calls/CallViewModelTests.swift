@@ -587,6 +587,21 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
                        "the hosted conference camera is muted even if its member leg is not")
     }
 
+    func testSheetKeepsTheCallControlsUntilItCloses() async {
+        let harness = await Harness(callHasVideo: true)
+        let model = harness.makeModel(localJamiId: jamiId1, autoHideDelay: 0.05)
+        model.screenTapped()
+        XCTAssertFalse(model.chromeVisible, "precondition: video call chrome can hide")
+
+        model.showsMoreActions = true
+        XCTAssertTrue(model.chromeVisible)
+        try? await Task.sleep(nanoseconds: 200_000_000)
+        XCTAssertTrue(model.chromeVisible, "controls stay while the sheet is open")
+
+        model.showsMoreActions = false
+        await Harness.wait { !model.chromeVisible }
+    }
+
     func testHostedConferenceVideoMuteHidesLocalCameraAndRevealsChrome() async {
         let harness = await Harness(callHasVideo: true)
         let model = harness.makeModel(localJamiId: jamiId1)
@@ -869,7 +884,8 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
         func makeModel(localJamiId: String = "",
                        pipController: PiPControlling = PiPController(),
                        nameService: NameService = NameService(
-                        withNameRegistrationAdapter: NameRegistrationAdapter()))
+                        withNameRegistrationAdapter: NameRegistrationAdapter()),
+                       autoHideDelay: TimeInterval = 4)
         -> CallViewModel {
             return CallViewModel(
                 call: call,
@@ -880,7 +896,8 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
                 nameService: nameService,
                 localJamiId: localJamiId,
                 localDeviceId: deviceId1,
-                pipController: pipController)
+                pipController: pipController,
+                autoHideDelay: autoHideDelay)
         }
 
         @MainActor
