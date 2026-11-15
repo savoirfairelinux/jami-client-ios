@@ -67,13 +67,19 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
     var canvasMode: CanvasLayoutMode { canvas.mode }
     @Published private(set) var statusLine = ""
     @Published private(set) var shouldDismiss = false
-    @Published var showsDialpad = false
+    @Published var showsDialpad = false {
+        didSet { if showsDialpad != oldValue { sheetVisibilityChanged() } }
+    }
     @Published private(set) var canStartPictureInPicture = false
-    @Published var showsParticipants = false
+    @Published var showsParticipants = false {
+        didSet { if showsParticipants != oldValue { sheetVisibilityChanged() } }
+    }
     @Published private(set) var participantRows: [ConferenceParticipantRow] = []
     @Published private(set) var pendingRows: [PendingParticipantRow] = []
     @Published private(set) var canAddParticipant = false
-    @Published var showsMoreActions = false
+    @Published var showsMoreActions = false {
+        didSet { if showsMoreActions != oldValue { sheetVisibilityChanged() } }
+    }
     private var pendingMoreAction: CallControlIntent?
     @Published private(set) var speakerActive = false
     @Published private(set) var chromeVisible = true
@@ -254,9 +260,18 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
         wasAutoHideable = canHide
     }
 
+    private var showsSheet: Bool {
+        showsMoreActions || showsParticipants || showsDialpad
+    }
+
+    private func sheetVisibilityChanged() {
+        guard chromeCanAutoHide else { return }
+        revealChrome()
+    }
+
     private func scheduleAutoHide() {
         cancelAutoHide()
-        guard chromeCanAutoHide else { return }
+        guard chromeCanAutoHide, !showsSheet else { return }
         let work = DispatchWorkItem { [weak self] in self?.chromeVisible = false }
         autoHideWork = work
         DispatchQueue.main.asyncAfter(deadline: .now() + Self.autoHideDelay, execute: work)
