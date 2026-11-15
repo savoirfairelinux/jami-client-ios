@@ -67,7 +67,7 @@ struct CallControlsModel: Equatable {
             self.canResume = canHoldCall && call.status.allows(.resume)
         }
         self.showsDialpad = isSipAccount
-        self.showsRaiseHand = !isSipAccount && conference != nil
+        self.showsRaiseHand = !isSipAccount && (conference?.participants.count ?? 0) > 1
     }
 
     init(isAudioMuted: Bool, isVideoMuted: Bool, canToggleMedia: Bool,
