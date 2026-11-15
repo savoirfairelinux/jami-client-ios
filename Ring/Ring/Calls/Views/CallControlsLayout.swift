@@ -171,7 +171,7 @@ enum CallControlsLayout {
 
         let pictureInPicture: ControlAction? = context.canStartPictureInPicture
             ? ControlAction(intent: .startPictureInPicture,
-                            systemImage: "pip.enter",
+                            systemImage: "arrow.down.right.and.arrow.up.left",
                             accessibilityLabel: L10n.Calls.startPictureInPicture)
             : nil
 
