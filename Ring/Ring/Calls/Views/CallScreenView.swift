@@ -28,7 +28,6 @@ extension MeasuredHeightKey {
     }
 }
 
-private struct TopActionsHeightKey: MeasuredHeightKey {}
 private struct BottomControlsHeightKey: MeasuredHeightKey {}
 
 private extension View {
@@ -51,11 +50,12 @@ struct CallScreenView: View {
 
     private enum Metrics {
         static let previewChromeGap: CGFloat = 8
+        static let headerPreviewGap: CGFloat = 12
+        static let topScrimHeight: CGFloat = 190
         static let bottomScrimHeight: CGFloat = 280
     }
 
     @ObservedObject var model: CallViewModel
-    @SwiftUI.State private var topActionsHeight: CGFloat = 0
     @SwiftUI.State private var bottomControlsHeight: CGFloat = 0
 
     private var chromeAnimation: Animation {
@@ -64,7 +64,7 @@ struct CallScreenView: View {
     private var previewControlInsets: UIEdgeInsets {
         guard model.showsChrome else { return .zero }
         return UIEdgeInsets(
-            top: clearance(for: topActionsHeight),
+            top: 0,
             left: 0,
             bottom: clearance(for: bottomControlsHeight),
             right: 0)
@@ -82,7 +82,9 @@ struct CallScreenView: View {
                 .ignoresSafeArea()
 
             ConferenceCanvasView(model: model,
-                                 previewControlInsets: previewControlInsets)
+                                 previewControlInsets: previewControlInsets,
+                                 previewHeaderClearance: CallHeaderView.Metrics.height
+                                    + Metrics.previewChromeGap)
                 .ignoresSafeArea()
                 .opacity(model.contentHidden ? 0 : 1)
                 .allowsHitTesting(!model.contentHidden)
@@ -114,9 +116,21 @@ struct CallScreenView: View {
         GeometryReader { geometry in
             VStack {
                 if model.showsChrome {
-                    CallTopActionsView(model: model, availableWidth: geometry.size.width)
-                        .measuringHeight(TopActionsHeightKey.self,
-                                         into: $topActionsHeight)
+                    HStack(spacing: CallHeaderView.Metrics.spacing) {
+                        if let minimize = model.controlsPlan?.pictureInPicture {
+                            CallMinimizeButton(action: minimize) {
+                                model.perform(minimize.intent)
+                            }
+                        }
+                        CallHeaderView(model: model)
+                        if let raiseHand = model.controlsPlan?.raiseHand {
+                            CallRaiseHandButton(action: raiseHand) {
+                                model.perform(raiseHand.intent)
+                            }
+                        }
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.trailing, headerTrailingInset(in: geometry.size))
                         .transition(.move(edge: .top).combined(with: .opacity))
                 }
                 Spacer(minLength: 0)
@@ -133,10 +147,26 @@ struct CallScreenView: View {
         .animation(chromeAnimation, value: model.showsChrome)
     }
 
+    private func headerTrailingInset(in size: CGSize) -> CGFloat {
+        guard model.canvas.showsFloatingPreview else { return 0 }
+        return Metrics.headerPreviewGap
+            + CanvasLayout.previewSize(for: size).width * CanvasLayout.previewCompactScale
+    }
+
     private var scrims: some View {
         VStack(spacing: 0) {
-            Spacer(minLength: 0)
             if model.showsChrome {
+                LinearGradient(
+                    gradient: Gradient(stops: [
+                        .init(color: .black.opacity(0.42), location: 0),
+                        .init(color: .black.opacity(0.18), location: 0.55),
+                        .init(color: .clear, location: 1)
+                    ]),
+                    startPoint: .top,
+                    endPoint: .bottom)
+                    .frame(height: Metrics.topScrimHeight)
+                    .transition(.opacity)
+                Spacer(minLength: 0)
                 LinearGradient(
                     gradient: Gradient(stops: [
                         .init(color: .clear, location: 0),
@@ -147,6 +177,8 @@ struct CallScreenView: View {
                     endPoint: .bottom)
                     .frame(height: Metrics.bottomScrimHeight)
                     .transition(.opacity)
+            } else {
+                Spacer(minLength: 0)
             }
         }
         .ignoresSafeArea()

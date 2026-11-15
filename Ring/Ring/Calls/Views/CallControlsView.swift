@@ -49,6 +49,7 @@ struct CallControlIcon: View {
     let style: ControlAction.Style
     let isEnabled: Bool
     let metrics: BarMetrics
+    var restingFill: Color = .jamiCallControl
 
     var body: some View {
         Image(systemName: systemImage)
@@ -67,11 +68,11 @@ struct CallControlIcon: View {
     }
 
     private var background: Color {
-        guard isEnabled else { return .jamiCallControl }
+        guard isEnabled else { return restingFill }
         switch style {
         case .destructive: return .red
         case .active: return .white.opacity(0.92)
-        case .normal: return .jamiCallControl
+        case .normal: return restingFill
         }
     }
 }
@@ -98,7 +99,8 @@ private struct MoreActionsButton: View {
     var body: some View {
         Button(action: onTap) {
             CallControlIcon(systemImage: "ellipsis", style: .normal, isEnabled: true,
-                            metrics: metrics)
+                            metrics: metrics, restingFill: .clear)
+                .callGlass(Circle())
         }
         .accessibilityLabel(L10n.Calls.moreOptions)
     }

@@ -20,18 +20,21 @@ import SwiftUI
 
 struct CallHeaderView: View {
 
-    private enum Metrics {
-        static let minimumHeight: CGFloat = 46
-        static let verticalPadding: CGFloat = 8
-        static let lineSpacing: CGFloat = 4
+    enum Metrics {
+        static let height: CGFloat = 48
+        static let leadingPadding: CGFloat = 20
+        static let trailingPadding: CGFloat = 16
         static let spacing: CGFloat = 8
+        static let recordingSpacing: CGFloat = 6
+        static let chevronSize = CGSize(width: 4, height: 14)
+        static let chevronLineWidth: CGFloat = 1.6
+        static let chevronOpacity: Double = 0.5
         static let avatar: CGFloat = 22
         static let avatarOverlap: CGFloat = -7
         static let avatarBorder: CGFloat = 1
     }
 
     @ObservedObject var model: CallViewModel
-    let horizontalInset: CGFloat
 
     private var header: CallHeaderModel { model.header }
 
@@ -52,13 +55,10 @@ struct CallHeaderView: View {
     }
 
     private var content: some View {
-        VStack(spacing: Metrics.lineSpacing) {
+        VStack(alignment: .leading, spacing: 0) {
             HStack(spacing: Metrics.spacing) {
                 if !header.avatars.isEmpty {
                     avatars
-                }
-                if header.isRecording {
-                    RecordingIndicator()
                 }
                 Text(header.title)
                     .font(.headline)
@@ -66,22 +66,33 @@ struct CallHeaderView: View {
                     .lineLimit(1)
                     .truncationMode(header.titleIsIdentifier ? .middle : .tail)
                     .layoutPriority(1)
-                if header.showsRoster {
-                    Image(systemName: "chevron.down")
-                        .font(.caption2.weight(.semibold))
-                        .foregroundColor(.white.opacity(0.8))
+                if isTappable {
+                    DisclosureChevron()
+                        .stroke(Color.white.opacity(Metrics.chevronOpacity),
+                                style: StrokeStyle(lineWidth: Metrics.chevronLineWidth,
+                                                   lineCap: .round, lineJoin: .round))
+                        .frame(width: Metrics.chevronSize.width,
+                               height: Metrics.chevronSize.height)
+                        .flipsForRightToLeftLayoutDirection(true)
                         .accessibilityHidden(true)
                 }
             }
-            Text(model.statusLine)
-                .font(.footnote.monospacedDigit())
-                .foregroundColor(.white.opacity(0.9))
-                .lineLimit(1)
+            HStack(spacing: Metrics.recordingSpacing) {
+                Text(model.statusLine)
+                    .font(.caption.monospacedDigit())
+                    .foregroundColor(.white.opacity(0.85))
+                    .lineLimit(1)
+                if header.isRecording {
+                    RecordingIndicator()
+                }
+            }
         }
-        .padding(.horizontal, horizontalInset)
-        .padding(.vertical, Metrics.verticalPadding)
-        .frame(minHeight: Metrics.minimumHeight)
-        .contentShape(Rectangle())
+        .dynamicTypeSize(...DynamicTypeSize.xxLarge)
+        .padding(.leading, Metrics.leadingPadding)
+        .padding(.trailing, Metrics.trailingPadding)
+        .frame(height: Metrics.height)
+        .callGlass(Capsule())
+        .contentShape(Capsule())
         .accessibilityElement(children: .combine)
         .accessibilityValue(header.isInviting ? L10n.Calls.inviting : "")
     }
@@ -113,6 +124,55 @@ struct CallHeaderView: View {
         Circle().strokeBorder(color, lineWidth: Metrics.avatarBorder)
     }
 
+}
+
+struct CallMinimizeButton: View {
+    let action: ControlAction
+    let onTap: () -> Void
+
+    var body: some View {
+        Button(action: onTap) {
+            Image(systemName: action.systemImage)
+                .font(.system(size: 17, weight: .semibold))
+                .foregroundColor(.white)
+                .frame(width: CallHeaderView.Metrics.height, height: CallHeaderView.Metrics.height)
+                .callGlass(Circle())
+        }
+        .accessibilityLabel(action.accessibilityLabel)
+    }
+}
+
+struct CallRaiseHandButton: View {
+    let action: ControlAction
+    let onTap: () -> Void
+
+    private var isRaised: Bool { action.isOn == true }
+
+    var body: some View {
+        Button(action: onTap) {
+            Image(systemName: action.systemImage)
+                .font(.system(size: 17, weight: .semibold))
+                .foregroundColor(isRaised ? Color(white: 0.09) : .white)
+                .frame(width: CallHeaderView.Metrics.height, height: CallHeaderView.Metrics.height)
+                .background(Group {
+                    if isRaised {
+                        Circle().fill(Color.white.opacity(0.92))
+                    }
+                })
+                .callGlass(Circle())
+        }
+        .accessibilityLabel(action.accessibilityLabel)
+    }
+}
+
+private struct DisclosureChevron: Shape {
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        path.move(to: CGPoint(x: rect.minX, y: rect.minY))
+        path.addLine(to: CGPoint(x: rect.maxX, y: rect.midY))
+        path.addLine(to: CGPoint(x: rect.minX, y: rect.maxY))
+        return path
+    }
 }
 
 private struct RecordingIndicator: View {

@@ -41,6 +41,11 @@ struct CanvasState: Equatable {
         self.style = style
         self.scalingOverrides = scalingOverrides
     }
+
+    var showsFloatingPreview: Bool {
+        tiles.contains { $0.participant.isLocalPreview }
+            && tiles.contains { !$0.participant.isLocalPreview }
+    }
 }
 
 struct PrimaryVideo: Equatable {

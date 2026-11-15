@@ -73,6 +73,7 @@ final class ParticipantCanvas: UIView {
     private var mode = CanvasLayoutMode.grid
     private var style = CanvasTileStyle.plain
     private var previewCorner = PreviewCorner.topTrailing
+    var previewHeaderClearance: CGFloat = 0
     private var lastLayoutSize = CGSize.zero
     private var layoutAnimator: UIViewPropertyAnimator?
     var hasActiveLayoutAnimation: Bool { layoutAnimator?.state == .active }
@@ -465,7 +466,16 @@ final class ParticipantCanvas: UIView {
             previewCorner: previewCorner,
             stripOffset: stripDriver.contentOffset.x,
             style: style,
-            previewControlInsets: previewWalls.current)
+            previewControlInsets: previewInsets(for: previewCorner))
+    }
+
+    private func previewInsets(for corner: PreviewCorner) -> UIEdgeInsets {
+        var insets = previewWalls.current
+        let headerIsOnLeft = effectiveUserInterfaceLayoutDirection == .leftToRight
+        if corner.isTop, corner.isLeading == headerIsOnLeft {
+            insets.top += previewHeaderClearance * previewWalls.chromePresence
+        }
+        return insets
     }
 
     private func updateVideoAttachments(frames: [String: CGRect],
@@ -1008,7 +1018,7 @@ final class ParticipantCanvas: UIView {
             for: previewCorner,
             in: CGRect(origin: .zero, size: bounds.size),
             safeAreaInsets: safeAreaInsets,
-            controlInsets: previewWalls.current)
+            controlInsets: previewInsets(for: previewCorner))
     }
 
     private func previewTravelBounds() -> CGRect {
