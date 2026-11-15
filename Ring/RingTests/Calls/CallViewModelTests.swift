@@ -930,7 +930,7 @@ private final class TestPiPController: PiPControlling {
         startCallCount += 1
     }
 
-    func update(distributor: FrameDistributor?) {}
+    func update(distributor: FrameDistributor?, fixedTransform: CGAffineTransform?) {}
 
     func stop() {}
 }

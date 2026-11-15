@@ -30,7 +30,7 @@ protocol PiPControlling: AnyObject {
     var isSupported: Bool { get }
 
     func start()
-    func update(distributor: FrameDistributor?)
+    func update(distributor: FrameDistributor?, fixedTransform: CGAffineTransform?)
     func stop()
 }
 
@@ -61,7 +61,9 @@ final class PiPController: NSObject, PiPControlling {
         controller.startPictureInPicture()
     }
 
-    func update(distributor nextDistributor: FrameDistributor?) {
+    func update(distributor nextDistributor: FrameDistributor?,
+                fixedTransform: CGAffineTransform?) {
+        sourceView.fixedTransform = fixedTransform
         guard let nextDistributor = nextDistributor else {
             clearSource()
             stop()

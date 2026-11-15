@@ -127,7 +127,18 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
     private var observedPeerURI: String?
     private var peerNameCancellable: AnyCancellable?
     private var chromeCancellable: AnyCancellable?
-    private var pipSource: PiPSourceSelector.Selection?
+
+    private enum PiPFeed: Equatable {
+        case participant(PiPSourceSelector.Selection)
+        case localCamera(CGAffineTransform)
+
+        var participant: PiPSourceSelector.Selection? {
+            if case .participant(let selection) = self { return selection }
+            return nil
+        }
+    }
+
+    private var pipFeed: PiPFeed?
     private var scalingOverrides: [String: VideoScalingPolicy] = [:]
 
     private enum PiPState {
@@ -534,6 +545,7 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
             guard let self = self else { return }
             await self.videoService.switchCamera()
             self.rebuildTiles()
+            self.updatePiPSource()
         }
     }
 
@@ -542,6 +554,7 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
             guard let self = self,
                   self.videoService.setCameraOrientation(input) else { return }
             self.rebuildTiles()
+            self.updatePiPSource()
         }
     }
 
@@ -722,17 +735,35 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
     var pipSourceView: UIView { pip.sourceView }
 
     private func updatePiPSource() {
-        let selection = PiPSourceSelector.select(call: call, conference: conference,
-                                                 localJamiId: localJamiId,
-                                                 localDeviceId: localDeviceId,
-                                                 current: pipSource)
-        guard selection != pipSource else { return }
-        let hadSource = pipSource != nil
-        pipSource = selection
-        pip.update(distributor: selection.map { videoService.distributor(for: $0.sinkId) })
-        canStartPictureInPicture = selection != nil && pip.isSupported
-        guard hadSource, selection == nil, call?.status.isTerminal == false else { return }
+        let feed = nextPiPFeed()
+        guard feed != pipFeed else { return }
+        let hadSource = pipFeed != nil
+        pipFeed = feed
+        switch feed {
+        case .participant(let selection):
+            pip.update(distributor: videoService.distributor(for: selection.sinkId),
+                       fixedTransform: nil)
+        case .localCamera(let transform):
+            pip.update(distributor: videoService.localFrames, fixedTransform: transform)
+        case nil:
+            pip.update(distributor: nil, fixedTransform: nil)
+        }
+        canStartPictureInPicture = feed != nil && pip.isSupported
+        guard hadSource, feed == nil, call?.status.isTerminal == false else { return }
         requestRestore()
+    }
+
+    private func nextPiPFeed() -> PiPFeed? {
+        if let selection = PiPSourceSelector.select(call: call, conference: conference,
+                                                    localJamiId: localJamiId,
+                                                    localDeviceId: localDeviceId,
+                                                    current: pipFeed?.participant) {
+            return .participant(selection)
+        }
+        guard PiPSourceSelector.showsLocalCamera(call: call, conference: conference) else {
+            return nil
+        }
+        return .localCamera(videoService.localLayerTransform)
     }
 
     private func requestRestore(then completion: PiPRestoreCompletion? = nil) {
