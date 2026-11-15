@@ -637,7 +637,8 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
             return
         }
         controls = CallControlsModel(call: call, conference: conference,
-                                     isSipAccount: isSipAccount)
+                                     isSipAccount: isSipAccount,
+                                     localJamiId: localJamiId, localDeviceId: localDeviceId)
         canAddParticipant = call.status.isOngoing && !isSipAccount
             && (conference == nil || canModerateConference)
     }

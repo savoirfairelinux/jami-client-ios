@@ -31,7 +31,8 @@ final class CallControlsModelTests: XCTestCase {
         state.pendingMediaRequest = pending
         state.conferenceId = conference?.id
         return CallControlsModel(call: state, conference: conference,
-                                 isSipAccount: isSip)
+                                 isSipAccount: isSip,
+                                 localJamiId: jamiId1, localDeviceId: deviceId1)
     }
 
     private func hostedConference(lifecycle: ConferenceLifecycle,
@@ -40,9 +41,16 @@ final class CallControlsModelTests: XCTestCase {
         CallTestFixtures.conference(media: media, isHost: true, lifecycle: lifecycle)
     }
 
-    func testRaiseHandIsOfferedOnlyForJamiConferences() {
-        let conference = CallTestFixtures.conference(lifecycle: .activeAttached)
+    func testRaiseHandIsOfferedOnlyForJamiConferencesWithOthers() {
+        let local = CallTestFixtures.participant(uri: jamiId1)
+        let peer = CallTestFixtures.participant(uri: CallTestFixtures.secondaryPeerUri,
+                                                device: CallTestFixtures.secondaryPeerUri)
+        let conference = CallTestFixtures.conference(participants: [local, peer],
+                                                     lifecycle: .activeAttached)
+        let alone = CallTestFixtures.conference(participants: [local],
+                                                lifecycle: .activeAttached)
         XCTAssertTrue(call(conference: conference).showsRaiseHand)
+        XCTAssertFalse(call(conference: alone).showsRaiseHand)
         XCTAssertFalse(call(conference: nil).showsRaiseHand)
         XCTAssertFalse(call(isSip: true, conference: conference).showsRaiseHand)
     }

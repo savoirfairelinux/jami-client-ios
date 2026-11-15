@@ -44,7 +44,8 @@ struct CallControlsModel: Equatable {
     let showsDialpad: Bool
     let showsRaiseHand: Bool
 
-    init(call: CallState, conference: ConferenceState? = nil, isSipAccount: Bool) {
+    init(call: CallState, conference: ConferenceState? = nil, isSipAccount: Bool,
+         localJamiId: String, localDeviceId: String) {
         let hostedConference = call.mediaOwningHostedConference(in: conference)
         let media = hostedConference?.media ?? call.media
         let pendingMediaRequest = hostedConference == nil
@@ -69,7 +70,10 @@ struct CallControlsModel: Equatable {
             self.canResume = canHoldCall && call.status.allows(.resume)
         }
         self.showsDialpad = isSipAccount
-        self.showsRaiseHand = !isSipAccount && conference != nil
+        self.showsRaiseHand = !isSipAccount && (conference?.participants.contains {
+            !$0.isLocalDevice(localJamiId: localJamiId, localDeviceId: localDeviceId,
+                              isHostedLocally: conference?.isHost == true)
+        } ?? false)
     }
 
     init(isAudioMuted: Bool, isVideoMuted: Bool, canToggleMedia: Bool,
