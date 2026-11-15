@@ -435,11 +435,7 @@ extension EnvironmentValues {
 }
 
 extension View {
-    func onVideoGlass<S: Shape>(_ shape: S, tint: Color = .jamiOnVideoGlass) -> some View {
-        background(
-            VisualEffect(style: .systemMaterialDark)
-                .overlay(tint)
-        )
-        .clipShape(shape)
+    func onVideoFill<S: Shape>(_ shape: S, color: Color) -> some View {
+        background(color).clipShape(shape)
     }
 }

@@ -24,13 +24,13 @@ struct CallTopActionsView: View {
 
     var body: some View {
         let plan = model.controlsPlan
-        let metrics = BarMetrics(availableWidth: availableWidth, plan: plan)
+        let metrics = BarMetrics(availableWidth: availableWidth)
         let hasSideAction = plan?.pictureInPicture != nil || plan?.raiseHand != nil
         let sideLane = hasSideAction ? metrics.button + metrics.gap : 0
         let identityWidth = max(0, availableWidth - 2 * sideLane)
 
         ZStack(alignment: .top) {
-            CallHeaderView(model: model, horizontalInset: metrics.contentInset)
+            CallHeaderView(model: model, horizontalInset: (metrics.button - metrics.icon) / 2)
                 .shadow(color: .black.opacity(0.85), radius: 1.5, y: 0.5)
                 .shadow(color: .black.opacity(0.45), radius: 7)
                 .frame(maxWidth: identityWidth)
