@@ -29,6 +29,12 @@ final class PiPSourceLayerView: UIView {
     private var currentTransform = CGAffineTransform.identity
     private var lockedFixedTransform: CGAffineTransform?
     private var videoSize: CGSize?
+    private var rendersUpright = false
+    private var lastFrame: VideoFrame?
+    private var pendingUpright: (buffer: CMSampleBuffer, transform: CGAffineTransform)?
+    private var uprightScheduled = false
+    private let uprightQueue = DispatchQueue(label: "com.savoirfairelinux.jami.pip.upright")
+    private lazy var uprightRenderer = UprightFrameRenderer()
 
     var videoTileId: String?
     var videoFrameProvider: ((String) -> CGRect?)?
@@ -66,6 +72,7 @@ final class PiPSourceLayerView: UIView {
     func attach(to distributor: FrameDistributor?) {
         guard distributor !== attachedDistributor else { return }
         attachedDistributor = distributor
+        dropCachedFrames()
         guard let distributor = distributor else {
             subscription = nil
             return
@@ -76,6 +83,7 @@ final class PiPSourceLayerView: UIView {
     }
 
     func clear() {
+        dropCachedFrames()
         displayLayer.flushAndRemoveImage()
     }
 
@@ -83,17 +91,44 @@ final class PiPSourceLayerView: UIView {
         syncGeometry()
     }
 
+    func setRendersUpright(_ upright: Bool) {
+        let catchUp: Bool = locked {
+            guard rendersUpright != upright else { return false }
+            rendersUpright = upright
+            guard upright, let buffer = lastFrame?.sampleBuffer,
+                  !currentTransform.isIdentity else { return false }
+            pendingUpright = (buffer, currentTransform)
+            return true
+        }
+        syncGeometry()
+        if catchUp {
+            uprightQueue.sync { drainUpright() }
+        }
+    }
+
+    private func dropCachedFrames() {
+        locked {
+            lastFrame = nil
+            pendingUpright = nil
+        }
+    }
+
     private func render(_ frame: VideoFrame) {
         guard let sampleBuffer = frame.sampleBuffer else {
+            dropCachedFrames()
             DispatchQueue.main.async { [weak self] in
                 self?.displayLayer.flushAndRemoveImage()
             }
             return
         }
         let size = Self.videoSize(of: sampleBuffer)
+        var transform = CGAffineTransform.identity
+        var upright = false
         let changed: Bool = locked {
-            let transform = lockedFixedTransform
+            lastFrame = frame
+            transform = lockedFixedTransform
                 ?? CGAffineTransform.rotation(degrees: frame.rotation)
+            upright = rendersUpright
             guard transform != currentTransform || size != videoSize else { return false }
             currentTransform = transform
             videoSize = size
@@ -104,18 +139,52 @@ final class PiPSourceLayerView: UIView {
                 self?.syncGeometry()
             }
         }
+        if upright && !transform.isIdentity {
+            scheduleUpright(sampleBuffer, transform: transform)
+        } else {
+            enqueue(sampleBuffer)
+        }
+    }
+
+    private func scheduleUpright(_ buffer: CMSampleBuffer, transform: CGAffineTransform) {
+        let schedules: Bool = locked {
+            pendingUpright = (buffer, transform)
+            guard !uprightScheduled else { return false }
+            uprightScheduled = true
+            return true
+        }
+        guard schedules else { return }
+        uprightQueue.async { [weak self] in
+            self?.drainUpright()
+        }
+    }
+
+    private func drainUpright() {
+        let next = locked { () -> (buffer: CMSampleBuffer, transform: CGAffineTransform)? in
+            let next = pendingUpright
+            pendingUpright = nil
+            uprightScheduled = false
+            return next
+        }
+        guard let next = next else { return }
+        enqueue(uprightRenderer.render(next.buffer, transform: next.transform) ?? next.buffer)
+    }
+
+    private func enqueue(_ buffer: CMSampleBuffer) {
         if displayLayer.status == .failed {
             displayLayer.flush()
         }
-        displayLayer.enqueue(sampleBuffer)
+        displayLayer.enqueue(buffer)
     }
 
     private func syncGeometry() {
         var transform = CGAffineTransform.identity
         var decoded: CGSize?
+        var upright = false
         locked {
             transform = currentTransform
             decoded = videoSize
+            upright = rendersUpright
         }
         let source = decoded ?? bounds.size
         guard source.width > 0, source.height > 0,
@@ -127,13 +196,14 @@ final class PiPSourceLayerView: UIView {
                                                              footprint: footprint,
                                                              transform: transform)
         let scale = target.width / footprint.width
+        let layerSize = upright ? footprint : source
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         displayLayer.bounds = CGRect(origin: .zero,
-                                     size: CGSize(width: source.width * scale,
-                                                  height: source.height * scale))
+                                     size: CGSize(width: layerSize.width * scale,
+                                                  height: layerSize.height * scale))
         displayLayer.position = CGPoint(x: target.midX, y: target.midY)
-        displayLayer.setAffineTransform(transform)
+        displayLayer.setAffineTransform(upright ? .identity : transform)
         CATransaction.commit()
     }
 
