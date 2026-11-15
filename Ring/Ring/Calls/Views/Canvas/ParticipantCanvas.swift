@@ -122,19 +122,21 @@ final class ParticipantCanvas: UIView {
             let arriving = previewControlInsets.top + previewControlInsets.bottom
                 > oldValue.top + oldValue.bottom
             previewSpring = arriving ? PreviewMotion.push : PreviewMotion.settle
+            let walls = CanvasLayout.previewWalls(for: previewControlInsets,
+                                                  canvasSize: bounds.size)
             if case .docked = previewPresentation, previewFloats {
-                previewWalls = .settled(previewControlInsets)
+                previewWalls = .settled(walls)
                 layoutDockedPreview()
                 return
             }
             guard previewBody != nil, !isReduceMotionEnabled() else {
-                previewWalls = .settled(previewControlInsets)
+                previewWalls = .settled(walls)
                 snapPreviewToRest()
                 return
             }
             previewWalls = PreviewMotion.WallTravel(
                 from: previewWalls.current,
-                destination: previewControlInsets,
+                destination: walls,
                 duration: CallScreenView.Motion.chromeFadeDuration)
             startPreviewMotion()
         }
@@ -357,6 +359,7 @@ final class ParticipantCanvas: UIView {
             guard let tile = tiles[id], let frame = layout.frames[id] else { continue }
             tile.frame = frame
             tile.layer.cornerRadius = cornerRadius(for: id, in: layout)
+            applyEdge(to: tile, id: id)
             tile.contentInsets = contentInsets(for: id, in: layout)
             tile.layoutIfNeeded()
             if animated { tile.alpha = 0 }
@@ -376,6 +379,7 @@ final class ParticipantCanvas: UIView {
                     tile.frame = frame
                 }
                 tile.layer.cornerRadius = cornerRadius(for: id, in: layout)
+                applyEdge(to: tile, id: id)
                 tile.contentInsets = contentInsets(for: id, in: layout)
             }
         }
@@ -480,9 +484,15 @@ final class ParticipantCanvas: UIView {
         id == layout.edgeToEdgeTileId ? safeAreaInsets : .zero
     }
 
+    private func applyEdge(to tile: UIView, id: String) {
+        let floats = previewFloats && id == previewId
+        tile.layer.borderWidth = floats ? 0.75 : 0
+        tile.layer.borderColor = UIColor.jamiCallHairline.cgColor
+    }
+
     private func cornerRadius(for id: String, in layout: CanvasLayout.Plan) -> CGFloat {
         if models[id]?.participant.isLocalPreview == true {
-            return models.count > 1 ? CanvasLayout.tileCornerRadius : 0
+            return models.count > 1 ? CanvasLayout.previewCornerRadius : 0
         }
         guard style == .cards, id != layout.edgeToEdgeTileId else { return 0 }
         return CanvasLayout.tileCornerRadius
