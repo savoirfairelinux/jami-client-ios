@@ -325,6 +325,9 @@ final class ParticipantCanvas: UIView {
                 guard let tile = tiles[id] else { continue }
                 if id == held {
                     tile.bounds.size = frame.size
+                } else if id == previewId {
+                    tile.bounds.size = frame.size
+                    movePreview(tile, to: frame.origin)
                 } else {
                     tile.frame = frame
                 }
