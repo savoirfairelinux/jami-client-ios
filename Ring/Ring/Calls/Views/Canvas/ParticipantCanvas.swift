@@ -104,6 +104,9 @@ final class ParticipantCanvas: UIView {
             let arriving = previewControlInsets.top + previewControlInsets.bottom
                 > oldValue.top + oldValue.bottom
             previewSpring = arriving ? PreviewMotion.push : PreviewMotion.settle
+            UIView.animate(withDuration: CallScreenView.Motion.chromeFadeDuration) {
+                self.refreshNameClearances()
+            }
             let walls = CanvasLayout.previewWalls(for: previewControlInsets,
                                                   canvasSize: bounds.size)
             if case .docked = previewPresentation, previewFloats {
@@ -445,12 +448,33 @@ final class ParticipantCanvas: UIView {
         for (id, frame) in layout.frames
         where id != focusId && id != previewId && !layout.offstage.contains(id) {
             tiles[id]?.frame = frame
+            tiles[id]?.contentInsets = contentInsets(for: id, in: layout)
         }
         updateVideoAttachments(frames: layout.frames, offstage: layout.offstage)
     }
 
     private func contentInsets(for id: String, in layout: CanvasLayout.Plan) -> UIEdgeInsets {
-        id == layout.edgeToEdgeTileId ? safeAreaInsets : .zero
+        var insets = id == layout.edgeToEdgeTileId ? safeAreaInsets : .zero
+        if id != previewId, let tile = tiles[id] {
+            insets.bottom = max(insets.bottom, chromeClearance(for: tile))
+        }
+        return insets
+    }
+
+    private func chromeClearance(for tile: UIView) -> CGFloat {
+        guard previewControlInsets.bottom > 0, let container = tile.superview else { return 0 }
+        let chromeTop = bounds.maxY - safeAreaInsets.bottom - CanvasLayout.previewPadding
+            - previewControlInsets.bottom
+        let tileFrame = container.convert(tile.frame, to: self)
+        return min(tileFrame.height / 2, max(0, tileFrame.maxY - chromeTop))
+    }
+
+    private func refreshNameClearances() {
+        let layout = CanvasLayout.plan(currentInput())
+        for (id, tile) in tiles where id != previewId {
+            tile.contentInsets = contentInsets(for: id, in: layout)
+            tile.layoutIfNeeded()
+        }
     }
 
     private func applyEdge(to tile: UIView, id: String) {
@@ -1161,6 +1185,7 @@ extension ParticipantCanvas: UIScrollViewDelegate {
             applyStripOffset()
         } else {
             updateCurrentVideoAttachments()
+            refreshNameClearances()
         }
     }
 }
