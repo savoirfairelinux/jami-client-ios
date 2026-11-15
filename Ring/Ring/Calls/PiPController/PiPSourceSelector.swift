@@ -39,6 +39,11 @@ enum PiPSourceSelector {
         return Selection(uri: call.peerUri, sinkId: SinkId(raw: call.id.raw))
     }
 
+    static func showsLocalCamera(call: CallState?, conference: ConferenceState?) -> Bool {
+        guard let call = call, !call.status.isTerminal else { return false }
+        return call.effectiveMedia(in: conference).hasVideo
+    }
+
     private static func selectInConference(_ conference: ConferenceState,
                                            localJamiId: String,
                                            localDeviceId: String,
