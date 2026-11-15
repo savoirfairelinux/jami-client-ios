@@ -109,8 +109,8 @@ extension Color {
     static let jamiCallPulse = Color(UIColor.jamiCallPulse)
     static let jamiDefaultAvatar = Color(UIColor.jamiDefaultAvatar)
     static let jamiOnVideoScrim = Color(UIColor.jamiOnVideoScrim)
-    static let jamiOnVideoGlass = Color(UIColor.jamiOnVideoGlass)
     static let jamiCallBackdrop = Color(UIColor.jamiCallBackdrop)
+    static let jamiCallControl = Color(UIColor.jamiCallControl)
 
     static let jamiSuccess = Color(UIColor.jamiSuccess)
     static let jamiFailure = Color(UIColor.jamiFailure)

@@ -169,6 +169,7 @@ extension UIColor {
     static let jamiOnVideoScrim = UIColor(named: "jamiOnVideoScrim")!
     static let jamiOnVideoGlass = UIColor(named: "jamiOnVideoGlass")!
     static let jamiCallBackdrop = UIColor(named: "jamiCallBackdrop")!
+    static let jamiCallControl = UIColor(named: "jamiCallControl")!
     static let jamiCallCanvas = UIColor(named: "jamiCallCanvas")!
 
     // MARK: - Status

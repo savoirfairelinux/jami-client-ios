@@ -71,6 +71,11 @@ final class CallControlsModelTests: XCTestCase {
         XCTAssertFalse(call(media: [.audio(), .video(muted: true)]).canSwitchCamera)
     }
 
+    func testNegotiatedVideoSurvivesTurningTheCameraOff() {
+        XCTAssertTrue(call(media: [.audio(), .video(muted: true)]).hasNegotiatedVideo)
+        XCTAssertFalse(call(media: [.audio()]).hasNegotiatedVideo)
+    }
+
     func testDialpadOnlyForSipAccounts() {
         XCTAssertTrue(call(isSip: true).showsDialpad)
         XCTAssertFalse(call(isSip: false).showsDialpad)
