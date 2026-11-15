@@ -325,6 +325,9 @@ final class ParticipantCanvas: UIView {
                 guard let tile = tiles[id] else { continue }
                 if id == held {
                     tile.bounds.size = frame.size
+                } else if id == previewId, previewFloats {
+                    tile.bounds.size = frame.size
+                    movePreview(tile, to: frame.origin)
                 } else {
                     tile.frame = frame
                 }
@@ -970,7 +973,7 @@ final class ParticipantCanvas: UIView {
 
     private func seedPreviewBody() {
         guard previewFloats, let id = previewId, let tile = tiles[id] else { return }
-        previewBody = PreviewMotion.Body(position: tile.frame.origin)
+        previewBody = PreviewMotion.Body(position: previewOrigin(of: tile))
     }
 
     private func snapPreviewToRest() {
