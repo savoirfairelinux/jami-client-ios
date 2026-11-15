@@ -68,7 +68,7 @@ struct BarMetrics {
 
     init(availableWidth: CGFloat, plan: CallControlsLayout.Plan?) {
         self.init(availableWidth: availableWidth,
-                  slots: plan.map { CGFloat($0.primary.count) }
+                  slots: plan.map { CGFloat($0.primary.count + 1) }
                     ?? BarMetrics.compactSlotCount)
     }
 
@@ -78,11 +78,13 @@ struct BarMetrics {
 }
 
 struct CallControlIcon: View {
-    let action: ControlAction
+    let systemImage: String
+    let style: ControlAction.Style
+    let isEnabled: Bool
     let metrics: BarMetrics
 
     var body: some View {
-        Image(systemName: action.systemImage)
+        Image(systemName: systemImage)
             .font(.system(size: metrics.icon, weight: .medium))
             .foregroundColor(foreground)
             .frame(width: metrics.button, height: metrics.button)
@@ -90,16 +92,16 @@ struct CallControlIcon: View {
     }
 
     private var foreground: Color {
-        guard action.isEnabled else { return .white.opacity(0.46) }
-        switch action.style {
+        guard isEnabled else { return .white.opacity(0.46) }
+        switch style {
         case .active: return Color(white: 0.09)
         case .destructive, .normal: return .white
         }
     }
 
     private var background: Color {
-        guard action.isEnabled else { return Color.jamiOnVideoGlass.opacity(0.75) }
-        switch action.style {
+        guard isEnabled else { return Color.jamiOnVideoGlass.opacity(0.75) }
+        switch style {
         case .destructive: return .red
         case .active: return .white.opacity(0.92)
         case .normal: return Color.jamiOnVideoGlass
@@ -114,10 +116,24 @@ private struct ControlButton: View {
 
     var body: some View {
         Button(action: onTap) {
-            CallControlIcon(action: action, metrics: metrics)
+            CallControlIcon(systemImage: action.systemImage, style: action.style,
+                            isEnabled: action.isEnabled, metrics: metrics)
         }
         .disabled(!action.isEnabled)
         .accessibilityLabel(action.accessibilityLabel)
+    }
+}
+
+private struct MoreActionsButton: View {
+    let metrics: BarMetrics
+    let onTap: () -> Void
+
+    var body: some View {
+        Button(action: onTap) {
+            CallControlIcon(systemImage: "ellipsis", style: .normal, isEnabled: true,
+                            metrics: metrics)
+        }
+        .accessibilityLabel(L10n.Calls.moreOptions)
     }
 }
 
@@ -131,26 +147,19 @@ struct CallControlsView: View {
         let metrics = BarMetrics(availableWidth: availableWidth, plan: plan)
         Group {
             if let plan = plan {
-                VStack(spacing: metrics.gap) {
-                    if !plan.supplemental.isEmpty {
-                        controlBar(plan.supplemental, metrics: metrics)
+                HStack(spacing: metrics.gap) {
+                    MoreActionsButton(metrics: metrics) {
+                        model.showsMoreActions = true
                     }
-                    controlBar(plan.primary, metrics: metrics)
+                    ForEach(plan.primary) { action in
+                        ControlButton(action: action, metrics: metrics) {
+                            model.perform(action.intent)
+                        }
+                    }
                 }
+                .padding(.horizontal, metrics.horizontalPadding)
             }
         }
         .frame(maxWidth: .infinity)
-    }
-
-    private func controlBar(_ actions: [ControlAction],
-                            metrics: BarMetrics) -> some View {
-        HStack(spacing: metrics.gap) {
-            ForEach(actions) { action in
-                ControlButton(action: action, metrics: metrics) {
-                    model.perform(action.intent)
-                }
-            }
-        }
-        .padding(.horizontal, metrics.horizontalPadding)
     }
 }

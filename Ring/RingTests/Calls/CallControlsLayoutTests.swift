@@ -35,16 +35,19 @@ final class CallControlsLayoutTests: XCTestCase {
     private func plan(_ model: CallControlsModel? = nil,
                       speaker: Bool = false,
                       canPiP: Bool = true,
+                      canAddParticipant: Bool = true,
                       handRaised: Bool = false) -> CallControlsLayout.Plan {
         CallControlsLayout.plan(.init(model: model ?? self.model(),
                                       speakerActive: speaker,
                                       canStartPictureInPicture: canPiP,
-                                      isHandRaised: handRaised))
+                                      canAddParticipant: canAddParticipant,
+                                      isHandRaised: handRaised,
+                                      showsFullVideo: nil))
     }
 
     private func action(_ intent: CallControlIntent,
                         in plan: CallControlsLayout.Plan) -> ControlAction? {
-        (plan.primary + plan.supplemental + [plan.pictureInPicture].compactMap { $0 })
+        ([plan.pictureInPicture, plan.raiseHand].compactMap { $0 } + plan.more + plan.primary)
             .first { $0.intent == intent }
     }
 
@@ -54,14 +57,16 @@ final class CallControlsLayoutTests: XCTestCase {
     }
 
     func testRaiseHandTracksTheCurrentState() {
-        XCTAssertNil(plan(model(showsRaiseHand: false)).raiseHand)
+        XCTAssertNil(action(.toggleRaiseHand, in: plan(model(showsRaiseHand: false))))
 
-        let lowered = plan(model(showsRaiseHand: true), handRaised: false).raiseHand
+        let lowered = action(.toggleRaiseHand,
+                             in: plan(model(showsRaiseHand: true), handRaised: false))
         XCTAssertEqual(lowered?.accessibilityLabel,
                        L10n.Accessibility.Calls.Default.raiseHand)
         XCTAssertEqual(lowered?.style, .normal)
 
-        let raised = plan(model(showsRaiseHand: true), handRaised: true).raiseHand
+        let raised = action(.toggleRaiseHand,
+                            in: plan(model(showsRaiseHand: true), handRaised: true))
         XCTAssertEqual(raised?.accessibilityLabel,
                        L10n.Accessibility.Calls.Alter.raiseHand)
         XCTAssertEqual(raised?.style, .active)
@@ -97,9 +102,8 @@ final class CallControlsLayoutTests: XCTestCase {
         let unavailable = plan(model(canSwitchCamera: false)).primary.map(\.intent)
         XCTAssertEqual(unavailable, available)
 
-        let sipAvailable = plan(model(canHold: true, showsDialpad: true))
-            .supplemental.map(\.intent)
-        let sipUnavailable = plan(model(showsDialpad: true)).supplemental.map(\.intent)
+        let sipAvailable = plan(model(canHold: true, showsDialpad: true)).more.map(\.intent)
+        let sipUnavailable = plan(model(showsDialpad: true)).more.map(\.intent)
         XCTAssertEqual(sipUnavailable, sipAvailable)
     }
 
@@ -108,7 +112,7 @@ final class CallControlsLayoutTests: XCTestCase {
         let regular = plan(model(canSwitchCamera: false))
 
         XCTAssertEqual(sip.primary.map(\.intent), regular.primary.map(\.intent))
-        XCTAssertEqual(sip.supplemental.map(\.intent), [.toggleHold, .showDialpad])
+        XCTAssertEqual(Array(sip.more.map(\.intent).suffix(2)), [.toggleHold, .showDialpad])
     }
 
     func testSipHoldRemainsVisibleWhenUnavailable() {
@@ -133,7 +137,7 @@ final class CallControlsLayoutTests: XCTestCase {
 
     func testSpeakerAnnouncesTheActionItWillPerform() {
         let active = action(.toggleAudioOutput, in: plan(speaker: true))
-        XCTAssertEqual(active?.style, .active)
+        XCTAssertEqual(active?.style, .normal)
         XCTAssertEqual(active?.accessibilityLabel,
                        L10n.Accessibility.Calls.Alter.toggleSpeaker,
                        "a speaker that is on offers to turn itself off")

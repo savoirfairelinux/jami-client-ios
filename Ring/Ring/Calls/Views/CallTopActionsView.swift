@@ -25,8 +25,7 @@ struct CallTopActionsView: View {
     var body: some View {
         let plan = model.controlsPlan
         let metrics = BarMetrics(availableWidth: availableWidth, plan: plan)
-        let hasSideAction = plan?.pictureInPicture != nil || model.canAddParticipant
-            || plan?.raiseHand != nil
+        let hasSideAction = plan?.pictureInPicture != nil || plan?.raiseHand != nil
         let sideLane = hasSideAction ? metrics.button + metrics.gap : 0
         let identityWidth = max(0, availableWidth - 2 * sideLane)
 
@@ -42,13 +41,8 @@ struct CallTopActionsView: View {
                     topButton(action, metrics: metrics)
                 }
                 Spacer(minLength: 0)
-                VStack(spacing: metrics.gap) {
-                    if model.canAddParticipant {
-                        addParticipantButton(metrics: metrics)
-                    }
-                    if let action = plan?.raiseHand {
-                        topButton(action, metrics: metrics)
-                    }
+                if let action = plan?.raiseHand {
+                    topButton(action, metrics: metrics)
                 }
             }
         }
@@ -59,21 +53,10 @@ struct CallTopActionsView: View {
         Button {
             model.perform(action.intent)
         } label: {
-            CallControlIcon(action: action, metrics: metrics)
+            CallControlIcon(systemImage: action.systemImage, style: action.style,
+                            isEnabled: action.isEnabled, metrics: metrics)
         }
         .disabled(!action.isEnabled)
         .accessibilityLabel(action.accessibilityLabel)
-    }
-
-    private func addParticipantButton(metrics: BarMetrics) -> some View {
-        Button(action: model.addParticipantTapped) {
-            Label(L10n.Accessibility.Calls.Default.addParticipant,
-                  systemImage: "person.badge.plus")
-                .labelStyle(IconOnlyLabelStyle())
-                .font(.system(size: metrics.icon, weight: .medium))
-                .foregroundColor(.white)
-                .frame(width: metrics.button, height: metrics.button)
-                .onVideoGlass(Circle())
-        }
     }
 }

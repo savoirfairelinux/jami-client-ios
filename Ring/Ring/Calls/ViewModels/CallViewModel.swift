@@ -30,14 +30,22 @@ struct CanvasState: Equatable {
     let tiles: [CanvasTileModel]
     let mode: CanvasLayoutMode
     let style: CanvasTileStyle
+    let scalingOverrides: [String: VideoScalingPolicy]
 
     init(tiles: [CanvasTileModel] = [],
          mode: CanvasLayoutMode = .grid,
-         style: CanvasTileStyle = .plain) {
+         style: CanvasTileStyle = .plain,
+         scalingOverrides: [String: VideoScalingPolicy] = [:]) {
         self.tiles = tiles
         self.mode = mode
         self.style = style
+        self.scalingOverrides = scalingOverrides
     }
+}
+
+struct PrimaryVideo: Equatable {
+    let tileId: String
+    let showsWholeFrame: Bool
 }
 
 @MainActor
@@ -60,9 +68,12 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
     @Published private(set) var participantRows: [ConferenceParticipantRow] = []
     @Published private(set) var pendingRows: [PendingParticipantRow] = []
     @Published private(set) var canAddParticipant = false
+    @Published var showsMoreActions = false
+    private var pendingMoreAction: CallControlIntent?
     @Published private(set) var speakerActive = false
     @Published private(set) var chromeVisible = true
     @Published private(set) var contentHidden = false
+    @Published private(set) var primaryVideo: PrimaryVideo?
 
     var showsChrome: Bool { chromeVisible && !contentHidden }
 
@@ -72,7 +83,9 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
                 .init(model: controls,
                       speakerActive: speakerActive,
                       canStartPictureInPicture: canStartPictureInPicture,
-                      isHandRaised: localHandRaised))
+                      canAddParticipant: canAddParticipant,
+                      isHandRaised: localHandRaised,
+                      showsFullVideo: primaryVideo?.showsWholeFrame))
         }
     }
 
@@ -110,6 +123,7 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
     private var peerNameCancellable: AnyCancellable?
     private var chromeCancellable: AnyCancellable?
     private var pipSource: PiPSourceSelector.Selection?
+    private var scalingOverrides: [String: VideoScalingPolicy] = [:]
 
     private enum PiPState {
         case inactive
@@ -395,10 +409,13 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
         let composition = tileComposer.compose(
             call: call, conference: conference, avatars: avatars,
             frozenForRecomposition: frozenForRecomposition)
+        let tileIds = Set(composition.tiles.map(\.participant.id))
+        scalingOverrides = scalingOverrides.filter { tileIds.contains($0.key) }
         let state = CanvasState(
             tiles: composition.tiles,
             mode: mode,
-            style: composition.style)
+            style: composition.style,
+            scalingOverrides: scalingOverrides)
         if state != canvas {
             canvas = state
         }
@@ -440,7 +457,25 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
         case .startPictureInPicture: minimizeToPictureInPicture()
         case .showDialpad: showsDialpad = true
         case .toggleRaiseHand: toggleRaiseHand()
+        case .addParticipant: addParticipantTapped()
+        case .toggleFullVideo: toggleFullVideo()
         }
+    }
+
+    func primaryVideoChanged(_ video: PrimaryVideo?) {
+        guard video != primaryVideo else { return }
+        primaryVideo = video
+    }
+
+    func videoScalingChosen(_ policy: VideoScalingPolicy, forTileId id: String) {
+        scalingOverrides[id] = policy
+        rebuildTiles()
+    }
+
+    private func toggleFullVideo() {
+        guard let video = primaryVideo else { return }
+        videoScalingChosen(video.showsWholeFrame ? .aspectFill : .aspectFit,
+                           forTileId: video.tileId)
     }
 
     func accept(withVideo: Bool) {
@@ -656,6 +691,17 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
         if !addParticipantAfterRosterDismissal {
             onAddParticipant?()
         }
+    }
+
+    func selectMoreAction(_ intent: CallControlIntent) {
+        pendingMoreAction = intent
+        showsMoreActions = false
+    }
+
+    func moreActionsDismissed() {
+        guard let intent = pendingMoreAction else { return }
+        pendingMoreAction = nil
+        perform(intent)
     }
 
     func participantsDismissed() {
