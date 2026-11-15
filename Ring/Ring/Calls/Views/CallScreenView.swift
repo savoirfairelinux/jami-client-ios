@@ -28,7 +28,6 @@ extension MeasuredHeightKey {
     }
 }
 
-private struct TopActionsHeightKey: MeasuredHeightKey {}
 private struct BottomControlsHeightKey: MeasuredHeightKey {}
 
 private extension View {
@@ -51,17 +50,10 @@ struct CallScreenView: View {
 
     private enum Metrics {
         static let previewChromeGap: CGFloat = 8
-        static let scrimOpacity: Double = 0.35
-        static let scrimRamp: [Double] = [0, 0.16, 0.5, 0.84, 1]
+        static let headerPreviewGap: CGFloat = 12
     }
 
-    private static let scrimGradient = Gradient(stops: Metrics.scrimRamp.enumerated().map { index, level in
-        .init(color: .black.opacity(Metrics.scrimOpacity * level),
-              location: CGFloat(index) / CGFloat(Metrics.scrimRamp.count - 1))
-    })
-
     @ObservedObject var model: CallViewModel
-    @SwiftUI.State private var topActionsHeight: CGFloat = 0
     @SwiftUI.State private var bottomControlsHeight: CGFloat = 0
 
     private var chromeAnimation: Animation {
@@ -70,7 +62,7 @@ struct CallScreenView: View {
     private var previewControlInsets: UIEdgeInsets {
         guard model.showsChrome else { return .zero }
         return UIEdgeInsets(
-            top: clearance(for: topActionsHeight),
+            top: 0,
             left: 0,
             bottom: clearance(for: bottomControlsHeight),
             right: 0)
@@ -78,6 +70,10 @@ struct CallScreenView: View {
 
     private func clearance(for measuredHeight: CGFloat) -> CGFloat {
         measuredHeight > 0 ? measuredHeight + Metrics.previewChromeGap : 0
+    }
+
+    private var headerClearance: CGFloat {
+        CallHeaderView.Metrics.height + Metrics.previewChromeGap
     }
 
     var body: some View {
@@ -88,12 +84,15 @@ struct CallScreenView: View {
                 .ignoresSafeArea()
 
             ConferenceCanvasView(model: model,
-                                 previewControlInsets: previewControlInsets)
+                                 previewControlInsets: previewControlInsets,
+                                 previewHeaderClearance: headerClearance,
+                                 scrimClearance: UIEdgeInsets(
+                                    top: headerClearance, left: 0,
+                                    bottom: clearance(for: bottomControlsHeight), right: 0),
+                                 showsScrims: model.showsChrome)
                 .ignoresSafeArea()
                 .opacity(model.contentHidden ? 0 : 1)
                 .allowsHitTesting(!model.contentHidden)
-
-            scrims
         }
         .overlay(chrome)
         .statusBar(hidden: true)
@@ -120,9 +119,21 @@ struct CallScreenView: View {
         GeometryReader { geometry in
             VStack {
                 if model.showsChrome {
-                    CallTopActionsView(model: model, availableWidth: geometry.size.width)
-                        .measuringHeight(TopActionsHeightKey.self,
-                                         into: $topActionsHeight)
+                    HStack(spacing: CallHeaderView.Metrics.spacing) {
+                        if let minimize = model.controlsPlan?.pictureInPicture {
+                            CallMinimizeButton(action: minimize) {
+                                model.perform(minimize.intent)
+                            }
+                        }
+                        CallHeaderView(model: model)
+                        if let raiseHand = model.controlsPlan?.raiseHand {
+                            CallRaiseHandButton(action: raiseHand) {
+                                model.perform(raiseHand.intent)
+                            }
+                        }
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.trailing, headerTrailingInset(in: geometry.size))
                         .transition(.move(edge: .top).combined(with: .opacity))
                 }
                 Spacer(minLength: 0)
@@ -139,22 +150,10 @@ struct CallScreenView: View {
         .animation(chromeAnimation, value: model.showsChrome)
     }
 
-    private var scrims: some View {
-        GeometryReader { geometry in
-            VStack(spacing: 0) {
-                Spacer(minLength: 0)
-                if model.showsChrome {
-                    let fade = bottomControlsHeight
-                    LinearGradient(gradient: Self.scrimGradient, startPoint: .top, endPoint: .bottom)
-                        .frame(height: geometry.safeAreaInsets.bottom + CanvasLayout.previewPadding
-                                + clearance(for: bottomControlsHeight) + fade)
-                        .transition(.opacity)
-                }
-            }
-            .ignoresSafeArea()
-        }
-        .allowsHitTesting(false)
-        .animation(chromeAnimation, value: model.showsChrome)
+    private func headerTrailingInset(in size: CGSize) -> CGFloat {
+        guard model.canvas.showsFloatingPreview else { return 0 }
+        return Metrics.headerPreviewGap
+            + CanvasLayout.previewSize(for: size).width * CanvasLayout.previewCompactScale
     }
 }
 

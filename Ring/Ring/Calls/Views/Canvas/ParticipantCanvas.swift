@@ -73,6 +73,25 @@ final class ParticipantCanvas: UIView {
     private var mode = CanvasLayoutMode.grid
     private var style = CanvasTileStyle.plain
     private var previewCorner = PreviewCorner.topTrailing
+    var previewHeaderClearance: CGFloat = 0
+    private let scrimView = CanvasScrimView()
+    var scrimClearance: UIEdgeInsets {
+        get { scrimView.clearance }
+        set { scrimView.clearance = newValue }
+    }
+    var showsScrims = false {
+        didSet {
+            guard showsScrims != oldValue else { return }
+            let alpha: CGFloat = showsScrims ? 1 : 0
+            guard window != nil else {
+                scrimView.alpha = alpha
+                return
+            }
+            UIView.animate(withDuration: CallScreenView.Motion.chromeFadeDuration, delay: 0,
+                           options: [.beginFromCurrentState, .curveEaseInOut],
+                           animations: { self.scrimView.alpha = alpha })
+        }
+    }
     private var lastLayoutSize = CGSize.zero
     private var layoutAnimator: UIViewPropertyAnimator?
     var hasActiveLayoutAnimation: Bool { layoutAnimator?.state == .active }
@@ -129,6 +148,10 @@ final class ParticipantCanvas: UIView {
         scrollView.contentInsetAdjustmentBehavior = .never
         scrollView.delegate = self
         addSubview(scrollView)
+        scrimView.frame = bounds
+        scrimView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        scrimView.alpha = 0
+        addSubview(scrimView)
         scrollView.addGestureRecognizer(
             UITapGestureRecognizer(target: self, action: #selector(canvasTapped)))
         addGestureRecognizer(
@@ -284,6 +307,14 @@ final class ParticipantCanvas: UIView {
         }
     }
 
+    private func restackScrims() {
+        if previewFloats, let id = previewId, let preview = tiles[id] {
+            insertSubview(scrimView, belowSubview: preview)
+        } else {
+            bringSubviewToFront(scrimView)
+        }
+    }
+
     override func layoutSubviews() {
         super.layoutSubviews()
         guard bounds.size != lastLayoutSize else { return }
@@ -317,6 +348,7 @@ final class ParticipantCanvas: UIView {
                 tile.superview?.bringSubviewToFront(tile)
             }
         }
+        restackScrims()
         if !previewDockHandle.isHidden {
             bringSubviewToFront(previewDockHandle)
         }
@@ -465,7 +497,16 @@ final class ParticipantCanvas: UIView {
             previewCorner: previewCorner,
             stripOffset: stripDriver.contentOffset.x,
             style: style,
-            previewControlInsets: previewWalls.current)
+            previewControlInsets: previewInsets(for: previewCorner))
+    }
+
+    private func previewInsets(for corner: PreviewCorner) -> UIEdgeInsets {
+        var insets = previewWalls.current
+        let headerIsOnLeft = effectiveUserInterfaceLayoutDirection == .leftToRight
+        if corner.isTop, corner.isLeading == headerIsOnLeft {
+            insets.top += previewHeaderClearance * previewWalls.chromePresence
+        }
+        return insets
     }
 
     private func updateVideoAttachments(frames: [String: CGRect],
@@ -1008,7 +1049,7 @@ final class ParticipantCanvas: UIView {
             for: previewCorner,
             in: CGRect(origin: .zero, size: bounds.size),
             safeAreaInsets: safeAreaInsets,
-            controlInsets: previewWalls.current)
+            controlInsets: previewInsets(for: previewCorner))
     }
 
     private func previewTravelBounds() -> CGRect {

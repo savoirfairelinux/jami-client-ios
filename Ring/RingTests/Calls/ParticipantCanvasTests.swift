@@ -92,6 +92,28 @@ final class ParticipantCanvasTests: XCTestCase {
         XCTAssertEqual(card.frame.origin, .zero)
     }
 
+    func testScrimsStayUnderTheFloatingSelfViewOnly() throws {
+        let canvas = makeCanvas()
+        let selfModel = CanvasTileModel(
+            participant: CanvasParticipant(id: CanvasParticipant.localId, isLocalPreview: true),
+            tileState: ParticipantTileState(showsVideo: true),
+            distributor: nil,
+            fixedTransform: nil)
+
+        canvas.apply(CanvasState(tiles: [selfModel], mode: .grid, style: .plain), animated: false)
+        let scrims: CanvasScrimView = try XCTUnwrap(Self.firstDescendant(in: canvas))
+        let selfView = try XCTUnwrap(tile(CanvasParticipant.localId, in: canvas))
+        XCTAssertGreaterThan(canvas.subviews.firstIndex(of: scrims) ?? -1,
+                             canvas.subviews.firstIndex(of: selfView) ?? -1,
+                             "while the camera fills the canvas, the chrome sits on it")
+
+        canvas.apply(CanvasState(tiles: [selfModel] + models(1), mode: .grid, style: .plain),
+                     animated: false)
+        XCTAssertLessThan(canvas.subviews.firstIndex(of: scrims) ?? -1,
+                          canvas.subviews.firstIndex(of: selfView) ?? -1,
+                          "the floating self-view must not be shaded")
+    }
+
     func testFirstCanvasPopulationDoesNotStartLayoutAnimation() {
         let canvas = makeCanvas()
 

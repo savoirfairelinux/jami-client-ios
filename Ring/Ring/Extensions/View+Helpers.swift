@@ -438,4 +438,23 @@ extension View {
     func onVideoFill<S: Shape>(_ shape: S, color: Color) -> some View {
         background(color).clipShape(shape)
     }
+
+    func callGlass<S: Shape>(_ shape: S) -> some View {
+        modifier(CallGlass(shape: shape))
+    }
+}
+
+private struct CallGlass<S: Shape>: ViewModifier {
+    let shape: S
+
+    @ViewBuilder
+    func body(content: Content) -> some View {
+        if #available(iOS 26.0, *) {
+            content.background(Color.clear.glassEffect(.clear, in: shape))
+        } else {
+            content
+                .background(VisualEffect(style: .systemMaterialDark))
+                .clipShape(shape)
+        }
+    }
 }

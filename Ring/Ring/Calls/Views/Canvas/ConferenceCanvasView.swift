@@ -22,6 +22,9 @@ struct ConferenceCanvasView: UIViewRepresentable {
 
     @ObservedObject var model: CallViewModel
     let previewControlInsets: UIEdgeInsets
+    let previewHeaderClearance: CGFloat
+    let scrimClearance: UIEdgeInsets
+    let showsScrims: Bool
 
     func makeUIView(context: Context) -> ParticipantCanvas {
         let canvas = ParticipantCanvas()
@@ -41,6 +44,9 @@ struct ConferenceCanvasView: UIViewRepresentable {
     }
 
     func updateUIView(_ canvas: ParticipantCanvas, context: Context) {
+        canvas.previewHeaderClearance = previewHeaderClearance
+        canvas.scrimClearance = scrimClearance
+        canvas.showsScrims = showsScrims
         canvas.previewControlInsets = previewControlInsets
         canvas.apply(model.canvas)
     }
