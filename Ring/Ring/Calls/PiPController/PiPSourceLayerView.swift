@@ -27,7 +27,21 @@ final class PiPSourceLayerView: UIView {
     private weak var attachedDistributor: FrameDistributor?
     private let transformLock = NSLock()
     private var currentTransform = CGAffineTransform.identity
+    private var lockedFixedTransform: CGAffineTransform?
     private var videoSize: CGSize?
+
+    var fixedTransform: CGAffineTransform? {
+        get { locked { lockedFixedTransform } }
+        set {
+            let changed: Bool = locked {
+                guard lockedFixedTransform != newValue else { return false }
+                lockedFixedTransform = newValue
+                if let transform = newValue { currentTransform = transform }
+                return true
+            }
+            if changed { syncGeometry() }
+        }
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -69,9 +83,10 @@ final class PiPSourceLayerView: UIView {
             }
             return
         }
-        let transform = CGAffineTransform.rotation(degrees: frame.rotation)
         let size = Self.videoSize(of: sampleBuffer)
         let changed: Bool = locked {
+            let transform = lockedFixedTransform
+                ?? CGAffineTransform.rotation(degrees: frame.rotation)
             guard transform != currentTransform || size != videoSize else { return false }
             currentTransform = transform
             videoSize = size
