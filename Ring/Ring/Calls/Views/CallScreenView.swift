@@ -145,7 +145,7 @@ struct CallScreenView: View {
                 }
             }
         }
-        .padding()
+        .padding(CanvasLayout.previewPadding)
         .allowsHitTesting(model.showsChrome)
         .animation(chromeAnimation, value: model.showsChrome)
     }
