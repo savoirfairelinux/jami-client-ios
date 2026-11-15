@@ -587,6 +587,17 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
                        "the hosted conference camera is muted even if its member leg is not")
     }
 
+    func testOpeningASheetRevealsTheCallControls() async {
+        let harness = await Harness(callHasVideo: true)
+        let model = harness.makeModel(localJamiId: jamiId1)
+        model.screenTapped()
+        XCTAssertFalse(model.chromeVisible, "precondition: video call chrome can hide")
+
+        model.showsMoreActions = true
+
+        XCTAssertTrue(model.chromeVisible)
+    }
+
     func testHostedConferenceVideoMuteHidesLocalCameraAndRevealsChrome() async {
         let harness = await Harness(callHasVideo: true)
         let model = harness.makeModel(localJamiId: jamiId1)

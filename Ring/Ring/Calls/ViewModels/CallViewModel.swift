@@ -127,6 +127,9 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
     private var observedPeerURI: String?
     private var peerNameCancellable: AnyCancellable?
     private var chromeCancellable: AnyCancellable?
+    private var chromePinCancellable: AnyCancellable?
+    /// A sheet is open over the call, so the controls stay until it closes.
+    private var chromePinned = false
 
     private enum PiPFeed: Equatable {
         case participant(PiPSourceSelector.Selection)
@@ -208,6 +211,12 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
         chromeCancellable = $chromeVisible
             .removeDuplicates()
             .sink { [weak self] visible in self?.setDurationTicking(visible) }
+        chromePinCancellable = Publishers.CombineLatest3($showsMoreActions, $showsParticipants,
+                                                         $showsDialpad)
+            .map { $0 || $1 || $2 }
+            .removeDuplicates()
+            .dropFirst()
+            .sink { [weak self] pinned in self?.chromePinChanged(pinned) }
     }
 
     deinit {
@@ -255,9 +264,15 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
         wasAutoHideable = canHide
     }
 
+    private func chromePinChanged(_ pinned: Bool) {
+        chromePinned = pinned
+        guard chromeCanAutoHide else { return }
+        revealChrome()
+    }
+
     private func scheduleAutoHide() {
         cancelAutoHide()
-        guard chromeCanAutoHide else { return }
+        guard chromeCanAutoHide, !chromePinned else { return }
         let work = DispatchWorkItem { [weak self] in self?.chromeVisible = false }
         autoHideWork = work
         DispatchQueue.main.asyncAfter(deadline: .now() + Self.autoHideDelay, execute: work)
