@@ -51,6 +51,7 @@ struct CallScreenView: View {
 
     private enum Metrics {
         static let previewChromeGap: CGFloat = 8
+        static let bottomScrimHeight: CGFloat = 280
     }
 
     @ObservedObject var model: CallViewModel
@@ -85,6 +86,8 @@ struct CallScreenView: View {
                 .ignoresSafeArea()
                 .opacity(model.contentHidden ? 0 : 1)
                 .allowsHitTesting(!model.contentHidden)
+
+            scrims
         }
         .overlay(chrome)
         .statusBar(hidden: true)
@@ -127,6 +130,27 @@ struct CallScreenView: View {
         }
         .padding()
         .allowsHitTesting(model.showsChrome)
+        .animation(chromeAnimation, value: model.showsChrome)
+    }
+
+    private var scrims: some View {
+        VStack(spacing: 0) {
+            Spacer(minLength: 0)
+            if model.showsChrome {
+                LinearGradient(
+                    gradient: Gradient(stops: [
+                        .init(color: .clear, location: 0),
+                        .init(color: .black.opacity(0.16), location: 0.4),
+                        .init(color: .black.opacity(0.35), location: 1)
+                    ]),
+                    startPoint: .top,
+                    endPoint: .bottom)
+                    .frame(height: Metrics.bottomScrimHeight)
+                    .transition(.opacity)
+            }
+        }
+        .ignoresSafeArea()
+        .allowsHitTesting(false)
         .animation(chromeAnimation, value: model.showsChrome)
     }
 }

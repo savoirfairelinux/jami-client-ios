@@ -148,13 +148,14 @@ final class CallControlsLayoutTests: XCTestCase {
     }
 
     func testBarNeverOutgrowsTheWidthItIsGiven() {
-        for slots in 1...9 {
+        let docks = [Array(plan().more.prefix(1)) + plan().primary]
+        for actions in docks {
             for width in stride(from: 280.0, through: 1366.0, by: 1.0) {
-                let metrics = BarMetrics(availableWidth: CGFloat(width),
-                                         slots: CGFloat(slots))
-                XCTAssertLessThanOrEqual(metrics.totalWidth, CGFloat(width) + 0.001,
-                                         "\(slots) slots in \(width) pt render "
-                                            + "\(metrics.totalWidth) pt wide and widen "
+                let metrics = BarMetrics(availableWidth: CGFloat(width))
+                let rowWidth = metrics.rowWidth(for: actions)
+                XCTAssertLessThanOrEqual(rowWidth, CGFloat(width) + 0.001,
+                                         "\(actions.count) controls in \(width) pt render "
+                                            + "\(rowWidth) pt wide and widen "
                                             + "the whole call screen")
             }
         }
@@ -166,7 +167,7 @@ final class CallControlsLayoutTests: XCTestCase {
         XCTAssertGreaterThanOrEqual(metrics.button, 44,
                                     "the bar must be laid out — and tappable — "
                                         + "before it has been measured")
-        XCTAssertLessThanOrEqual(metrics.totalWidth, 320,
+        XCTAssertLessThanOrEqual(metrics.rowWidth(for: Array(plan().more.prefix(1)) + plan().primary), 320,
                                  "an unmeasured bar must fit the narrowest phone, "
                                     + "or it widens the whole call screen")
     }

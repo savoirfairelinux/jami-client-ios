@@ -147,13 +147,14 @@ enum CallControlsLayout {
             style: model.isAudioMuted ? .active : .normal,
             isEnabled: model.canToggleMedia)
 
+        let cameraTurnedOff = model.isVideoMuted && model.canSwitchCamera
         let camera = ControlAction(
             intent: .toggleCamera,
-            systemImage: model.isVideoMuted ? "video.slash.fill" : "video.fill",
+            systemImage: cameraTurnedOff ? "video.slash.fill" : "video.fill",
             accessibilityLabel: model.isVideoMuted
                 ? L10n.Accessibility.Calls.Default.toggleVideo
                 : L10n.Accessibility.Calls.Alter.toggleVideo,
-            style: model.isVideoMuted ? .active : .normal,
+            style: cameraTurnedOff ? .active : .normal,
             isEnabled: model.canToggleMedia)
 
         let audioOutput = ControlAction(
@@ -226,7 +227,7 @@ enum CallControlsLayout {
 
     private static func flipCameraAction(isEnabled: Bool) -> ControlAction {
         ControlAction(intent: .flipCamera,
-                      systemImage: "arrow.triangle.2.circlepath.camera",
+                      systemImage: "arrow.triangle.2.circlepath",
                       accessibilityLabel: L10n.Accessibility.Calls.Default.switchCamera,
                       isEnabled: isEnabled)
     }
