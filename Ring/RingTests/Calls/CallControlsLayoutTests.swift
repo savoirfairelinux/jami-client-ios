@@ -23,11 +23,13 @@ final class CallControlsLayoutTests: XCTestCase {
 
     private func model(mute: Bool = false, videoMute: Bool = false,
                        canToggleMedia: Bool = true, canSwitchCamera: Bool = true,
+                       hasNegotiatedVideo: Bool = true,
                        canHold: Bool = false, canResume: Bool = false,
                        showsDialpad: Bool = false,
                        showsRaiseHand: Bool = false) -> CallControlsModel {
         CallControlsModel(isAudioMuted: mute, isVideoMuted: videoMute,
                           canToggleMedia: canToggleMedia, canSwitchCamera: canSwitchCamera,
+                          hasNegotiatedVideo: hasNegotiatedVideo,
                           canHold: canHold, canResume: canResume, showsDialpad: showsDialpad,
                           showsRaiseHand: showsRaiseHand)
     }
@@ -47,6 +49,19 @@ final class CallControlsLayoutTests: XCTestCase {
                         in plan: CallControlsLayout.Plan) -> ControlAction? {
         (plan.primary + plan.more + [plan.pictureInPicture].compactMap { $0 })
             .first { $0.intent == intent }
+    }
+
+    func testCameraIsHighlightedOnlyWhenVideoWasTurnedOff() {
+        let turnedOff = action(.toggleCamera,
+                               in: plan(model(videoMute: true, canSwitchCamera: false)))
+        XCTAssertEqual(turnedOff?.style, .active)
+        XCTAssertEqual(turnedOff?.systemImage, "video.slash.fill")
+
+        let audioOnly = action(.toggleCamera,
+                               in: plan(model(videoMute: true, canSwitchCamera: false,
+                                              hasNegotiatedVideo: false)))
+        XCTAssertEqual(audioOnly?.style, .normal)
+        XCTAssertEqual(audioOnly?.systemImage, "video.fill")
     }
 
     func testDialpadOnlyForSip() {
@@ -132,13 +147,14 @@ final class CallControlsLayoutTests: XCTestCase {
     }
 
     func testBarNeverOutgrowsTheWidthItIsGiven() {
-        for slots in 1...9 {
+        let docks = [Array(plan().more.prefix(1)) + plan().primary]
+        for actions in docks {
             for width in stride(from: 280.0, through: 1366.0, by: 1.0) {
-                let metrics = BarMetrics(availableWidth: CGFloat(width),
-                                         slots: CGFloat(slots))
-                XCTAssertLessThanOrEqual(metrics.totalWidth, CGFloat(width) + 0.001,
-                                         "\(slots) slots in \(width) pt render "
-                                            + "\(metrics.totalWidth) pt wide and widen "
+                let metrics = BarMetrics(availableWidth: CGFloat(width))
+                let rowWidth = metrics.rowWidth(for: actions)
+                XCTAssertLessThanOrEqual(rowWidth, CGFloat(width) + 0.001,
+                                         "\(actions.count) controls in \(width) pt render "
+                                            + "\(rowWidth) pt wide and widen "
                                             + "the whole call screen")
             }
         }
@@ -150,7 +166,7 @@ final class CallControlsLayoutTests: XCTestCase {
         XCTAssertGreaterThanOrEqual(metrics.button, 44,
                                     "the bar must be laid out — and tappable — "
                                         + "before it has been measured")
-        XCTAssertLessThanOrEqual(metrics.totalWidth, 320,
+        XCTAssertLessThanOrEqual(metrics.rowWidth(for: Array(plan().more.prefix(1)) + plan().primary), 320,
                                  "an unmeasured bar must fit the narrowest phone, "
                                     + "or it widens the whole call screen")
     }

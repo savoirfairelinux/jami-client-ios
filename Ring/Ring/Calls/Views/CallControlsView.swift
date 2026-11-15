@@ -22,58 +22,25 @@ struct BarMetrics {
     let button: CGFloat
     let icon: CGFloat
     let gap: CGFloat
-    let horizontalPadding: CGFloat
-    private let slotCount: CGFloat
-    var contentInset: CGFloat { (button - icon) / 2 }
 
-    static let compactSlotCount: CGFloat = 5
-    static let minimumButton: CGFloat = 46
-    static let maximumButton: CGFloat = 54
-    static let minimumGap: CGFloat = 7
-    static let maximumGap: CGFloat = 12
-    static let iconRatio: CGFloat = 0.38
+    static let minimumButton: CGFloat = 44
+    static let maximumButton: CGFloat = 64
+    static let widthRatio: CGFloat = 0.142
+    static let gapRatio: CGFloat = 0.26
+    static let iconRatio: CGFloat = 0.35
 
-    init(availableWidth: CGFloat, slots: CGFloat = BarMetrics.compactSlotCount) {
-        let slots = max(1, slots)
-        self.slotCount = slots
-        guard availableWidth > 0 else {
-            let icon = (Self.minimumButton * Self.iconRatio).rounded()
-            self.button = Self.minimumButton
-            self.gap = Self.minimumGap
-            self.icon = icon
-            self.horizontalPadding = (Self.minimumButton - icon) / 2
-            return
-        }
-        let interButtonSlots = max(0, slots - 1)
-        let reservedGaps = interButtonSlots * Self.minimumGap
-        let outerInsetShare = 1 - Self.iconRatio
-        let fittingButton = (availableWidth - reservedGaps) / (slots + outerInsetShare)
-        let preferred = max(
-            Self.minimumButton,
-            min(Self.maximumButton, fittingButton))
-        let button = min(preferred, availableWidth / slots)
+    init(availableWidth: CGFloat) {
+        let button = availableWidth > 0
+            ? min(Self.maximumButton,
+                  max(Self.minimumButton, (availableWidth * Self.widthRatio).rounded(.down)))
+            : Self.minimumButton
         self.button = button
-        let icon = (button * Self.iconRatio).rounded()
-        self.icon = icon
-        let desiredHorizontalPadding = (button - icon) / 2
-        let availableHorizontalPadding = max(0, (availableWidth - slots * button) / 2)
-        let horizontalPadding = min(desiredHorizontalPadding, availableHorizontalPadding)
-        self.horizontalPadding = horizontalPadding
-        let availableGap = interButtonSlots > 0
-            ? max(0, (availableWidth - slots * button - 2 * horizontalPadding)
-                    / interButtonSlots)
-            : 0
-        self.gap = min(Self.maximumGap, availableGap)
+        self.gap = (button * Self.gapRatio).rounded()
+        self.icon = (button * Self.iconRatio).rounded()
     }
 
-    init(availableWidth: CGFloat, plan: CallControlsLayout.Plan?) {
-        self.init(availableWidth: availableWidth,
-                  slots: plan.map { CGFloat($0.primary.count + 1) }
-                    ?? BarMetrics.compactSlotCount)
-    }
-
-    var totalWidth: CGFloat {
-        slotCount * button + max(0, slotCount - 1) * gap + 2 * horizontalPadding
+    func rowWidth(for actions: [ControlAction]) -> CGFloat {
+        CGFloat(actions.count) * button + CGFloat(max(0, actions.count - 1)) * gap
     }
 }
 
@@ -88,7 +55,7 @@ struct CallControlIcon: View {
             .font(.system(size: metrics.icon, weight: .medium))
             .foregroundColor(foreground)
             .frame(width: metrics.button, height: metrics.button)
-            .onVideoGlass(Circle(), tint: background)
+            .onVideoFill(Circle(), color: background)
     }
 
     private var foreground: Color {
@@ -100,11 +67,11 @@ struct CallControlIcon: View {
     }
 
     private var background: Color {
-        guard isEnabled else { return Color.jamiOnVideoGlass.opacity(0.75) }
+        guard isEnabled else { return .jamiCallControl }
         switch style {
         case .destructive: return .red
         case .active: return .white.opacity(0.92)
-        case .normal: return Color.jamiOnVideoGlass
+        case .normal: return .jamiCallControl
         }
     }
 }
@@ -143,10 +110,9 @@ struct CallControlsView: View {
     let availableWidth: CGFloat
 
     var body: some View {
-        let plan = model.controlsPlan
-        let metrics = BarMetrics(availableWidth: availableWidth, plan: plan)
+        let metrics = BarMetrics(availableWidth: availableWidth)
         Group {
-            if let plan = plan {
+            if let plan = model.controlsPlan {
                 HStack(spacing: metrics.gap) {
                     MoreActionsButton(metrics: metrics) {
                         model.showsMoreActions = true
@@ -157,7 +123,6 @@ struct CallControlsView: View {
                         }
                     }
                 }
-                .padding(.horizontal, metrics.horizontalPadding)
             }
         }
         .frame(maxWidth: .infinity)

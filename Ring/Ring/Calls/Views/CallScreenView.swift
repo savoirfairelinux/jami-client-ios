@@ -51,7 +51,14 @@ struct CallScreenView: View {
 
     private enum Metrics {
         static let previewChromeGap: CGFloat = 8
+        static let scrimOpacity: Double = 0.35
+        static let scrimRamp: [Double] = [0, 0.16, 0.5, 0.84, 1]
     }
+
+    private static let scrimGradient = Gradient(stops: Metrics.scrimRamp.enumerated().map { index, level in
+        .init(color: .black.opacity(Metrics.scrimOpacity * level),
+              location: CGFloat(index) / CGFloat(Metrics.scrimRamp.count - 1))
+    })
 
     @ObservedObject var model: CallViewModel
     @SwiftUI.State private var topActionsHeight: CGFloat = 0
@@ -85,6 +92,8 @@ struct CallScreenView: View {
                 .ignoresSafeArea()
                 .opacity(model.contentHidden ? 0 : 1)
                 .allowsHitTesting(!model.contentHidden)
+
+            scrims
         }
         .overlay(chrome)
         .statusBar(hidden: true)
@@ -127,6 +136,24 @@ struct CallScreenView: View {
         }
         .padding()
         .allowsHitTesting(model.showsChrome)
+        .animation(chromeAnimation, value: model.showsChrome)
+    }
+
+    private var scrims: some View {
+        GeometryReader { geometry in
+            VStack(spacing: 0) {
+                Spacer(minLength: 0)
+                if model.showsChrome {
+                    let fade = bottomControlsHeight
+                    LinearGradient(gradient: Self.scrimGradient, startPoint: .top, endPoint: .bottom)
+                        .frame(height: geometry.safeAreaInsets.bottom + CanvasLayout.previewPadding
+                                + clearance(for: bottomControlsHeight) + fade)
+                        .transition(.opacity)
+                }
+            }
+            .ignoresSafeArea()
+        }
+        .allowsHitTesting(false)
         .animation(chromeAnimation, value: model.showsChrome)
     }
 }
