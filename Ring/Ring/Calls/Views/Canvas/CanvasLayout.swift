@@ -120,6 +120,7 @@ enum CanvasLayout {
     static let previewCompactScale: CGFloat = 0.89
     static let previewPadding: CGFloat = 16
     static let tileCornerRadius: CGFloat = 14
+    static let previewCornerRadius: CGFloat = 18
     static let tileMargin: CGFloat = 8
     static let tileSpacing: CGFloat = 8
     static let stripPadding: CGFloat = 12
@@ -338,12 +339,25 @@ enum CanvasLayout {
             : basePreviewSize
     }
 
+    static func previewWalls(for controlInsets: UIEdgeInsets,
+                             canvasSize: CGSize) -> UIEdgeInsets {
+        guard controlInsets.top + controlInsets.bottom > 0 else { return controlInsets }
+        let size = previewSize(for: canvasSize)
+        let horizontalShrink = size.width * (1 - previewCompactScale) / 2
+        let verticalShrink = size.height * (1 - previewCompactScale) / 2
+        return UIEdgeInsets(top: controlInsets.top - verticalShrink,
+                            left: controlInsets.left - horizontalShrink,
+                            bottom: controlInsets.bottom - verticalShrink,
+                            right: controlInsets.right - horizontalShrink)
+    }
+
     static func previewOriginBounds(in bounds: CGRect,
                                     safeAreaInsets: UIEdgeInsets,
                                     controlInsets: UIEdgeInsets = .zero) -> CGRect {
         let size = previewSize(for: bounds.size)
-        let minX = bounds.minX + safeAreaInsets.left + previewPadding
+        let minX = bounds.minX + safeAreaInsets.left + previewPadding + controlInsets.left
         let maxX = bounds.maxX - size.width - previewPadding - safeAreaInsets.right
+            - controlInsets.right
         let minY = bounds.minY + safeAreaInsets.top + previewPadding + controlInsets.top
         let maxY = bounds.maxY - size.height - previewPadding
             - safeAreaInsets.bottom - controlInsets.bottom
