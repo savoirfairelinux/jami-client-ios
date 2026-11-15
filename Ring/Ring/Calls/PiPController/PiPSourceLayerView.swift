@@ -30,6 +30,9 @@ final class PiPSourceLayerView: UIView {
     private var lockedFixedTransform: CGAffineTransform?
     private var videoSize: CGSize?
 
+    var videoTileId: String?
+    var videoFrameProvider: ((String) -> CGRect?)?
+
     var fixedTransform: CGAffineTransform? {
         get { locked { lockedFixedTransform } }
         set {
@@ -76,6 +79,10 @@ final class PiPSourceLayerView: UIView {
         displayLayer.flushAndRemoveImage()
     }
 
+    func alignToVideo() {
+        syncGeometry()
+    }
+
     private func render(_ frame: VideoFrame) {
         guard let sampleBuffer = frame.sampleBuffer else {
             DispatchQueue.main.async { [weak self] in
@@ -116,15 +123,38 @@ final class PiPSourceLayerView: UIView {
         let footprint = transform.isQuarterTurn
             ? CGSize(width: source.height, height: source.width)
             : source
-        let scale = min(bounds.width / footprint.width, bounds.height / footprint.height)
+        let target = drawnVideoFrame() ?? fallbackVideoFrame(source: source,
+                                                             footprint: footprint,
+                                                             transform: transform)
+        let scale = target.width / footprint.width
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         displayLayer.bounds = CGRect(origin: .zero,
                                      size: CGSize(width: source.width * scale,
                                                   height: source.height * scale))
-        displayLayer.position = CGPoint(x: bounds.midX, y: bounds.midY)
+        displayLayer.position = CGPoint(x: target.midX, y: target.midY)
         displayLayer.setAffineTransform(transform)
         CATransaction.commit()
+    }
+
+    private func drawnVideoFrame() -> CGRect? {
+        guard window != nil, let id = videoTileId,
+              let frame = videoFrameProvider?(id), !frame.isEmpty else { return nil }
+        return convert(frame, from: nil)
+    }
+
+    private func fallbackVideoFrame(source: CGSize, footprint: CGSize,
+                                    transform: CGAffineTransform) -> CGRect {
+        let showsWholeFrame = VideoScaling.shouldShowWholeFrame(
+            videoSize: source, transform: transform,
+            tileSize: bounds.size, policy: .automatic)
+        let widthScale = bounds.width / footprint.width
+        let heightScale = bounds.height / footprint.height
+        let scale = showsWholeFrame
+            ? min(widthScale, heightScale) : max(widthScale, heightScale)
+        let size = CGSize(width: footprint.width * scale, height: footprint.height * scale)
+        return CGRect(x: bounds.midX - size.width / 2, y: bounds.midY - size.height / 2,
+                      width: size.width, height: size.height)
     }
 
     private static func videoSize(of sampleBuffer: CMSampleBuffer) -> CGSize? {

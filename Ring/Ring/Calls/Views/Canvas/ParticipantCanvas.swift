@@ -545,6 +545,14 @@ final class ParticipantCanvas: UIView {
         reportPrimaryVideo()
     }
 
+    func videoFrame(forTileId id: String) -> CGRect? {
+        guard let window = window, let videoView = tiles[id]?.videoView,
+              models[id]?.tileState.showsVideo == true,
+              videoView.hasVideoContent else { return nil }
+        let frame = videoView.convert(videoView.renderedVideoRect, to: nil)
+        return frame.intersects(window.bounds) ? frame : nil
+    }
+
     private func reportPrimaryVideo() {
         var video: PrimaryVideo?
         if let id = primaryTileId, id != previewId, let tile = tiles[id],

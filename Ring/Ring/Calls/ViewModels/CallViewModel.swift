@@ -139,6 +139,7 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
     }
 
     private var pipFeed: PiPFeed?
+    private weak var pipDistributor: FrameDistributor?
     private var scalingOverrides: [String: VideoScalingPolicy] = [:]
 
     private enum PiPState {
@@ -434,6 +435,7 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
             scalingOverrides: scalingOverrides)
         if state != canvas {
             canvas = state
+            syncPiPVideoTile()
         }
     }
 
@@ -732,6 +734,16 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
 
     var pipSourceView: UIView { pip.sourceView }
 
+    func setPiPVideoFrameProvider(_ provider: @escaping (String) -> CGRect?) {
+        pip.sourceView.videoFrameProvider = provider
+    }
+
+    private func syncPiPVideoTile() {
+        pip.sourceView.videoTileId = pipDistributor.flatMap { distributor in
+            canvas.tiles.first { $0.distributor === distributor }?.participant.id
+        }
+    }
+
     private func updatePiPSource() {
         let feed = nextPiPFeed()
         guard feed != pipFeed else { return }
@@ -739,13 +751,17 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
         pipFeed = feed
         switch feed {
         case .participant(let selection):
-            pip.update(distributor: videoService.distributor(for: selection.sinkId),
-                       fixedTransform: nil)
+            let distributor = videoService.distributor(for: selection.sinkId)
+            pipDistributor = distributor
+            pip.update(distributor: distributor, fixedTransform: nil)
         case .localCamera(let transform):
+            pipDistributor = videoService.localFrames
             pip.update(distributor: videoService.localFrames, fixedTransform: transform)
         case nil:
+            pipDistributor = nil
             pip.update(distributor: nil, fixedTransform: nil)
         }
+        syncPiPVideoTile()
         canStartPictureInPicture = feed != nil && pip.isSupported
         guard hadSource, feed == nil, call?.status.isTerminal == false else { return }
         requestRestore()

@@ -35,6 +35,9 @@ struct ConferenceCanvasView: UIViewRepresentable {
         canvas.onVideoScalingChosen = { [weak model] policy, id in
             model?.videoScalingChosen(policy, forTileId: id)
         }
+        model.setPiPVideoFrameProvider { [weak canvas] id in
+            canvas?.videoFrame(forTileId: id)
+        }
         canvas.onPrimaryVideoChanged = { [weak model] video in
             DispatchQueue.main.async { model?.primaryVideoChanged(video) }
         }
