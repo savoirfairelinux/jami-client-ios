@@ -89,7 +89,8 @@ final class CallControlsLayoutTests: XCTestCase {
         let mediaChangeUnavailable = action(
             .flipCamera,
             in: plan(model(canToggleMedia: false, canSwitchCamera: true)))
-        XCTAssertEqual(mediaChangeUnavailable?.isEnabled, false)
+        XCTAssertEqual(mediaChangeUnavailable?.isEnabled, true,
+                       "switching cameras is local and needs no media negotiation")
 
         let available = action(.flipCamera, in: plan(model(canSwitchCamera: true)))
         XCTAssertEqual(available?.isEnabled, true)

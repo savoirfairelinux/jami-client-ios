@@ -207,8 +207,7 @@ enum CallControlsLayout {
 
         let more = [audioOutput] + [fullVideo, addParticipant].compactMap { $0 } + sip
         let primary = [mic, camera,
-                       flipCameraAction(isEnabled: model.canToggleMedia
-                                            && model.canSwitchCamera), hangUp]
+                       flipCameraAction(isEnabled: model.canSwitchCamera), hangUp]
         return Plan(pictureInPicture: pictureInPicture, raiseHand: raiseHand,
                     more: more, primary: primary)
     }
