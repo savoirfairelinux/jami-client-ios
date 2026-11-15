@@ -122,19 +122,21 @@ final class ParticipantCanvas: UIView {
             let arriving = previewControlInsets.top + previewControlInsets.bottom
                 > oldValue.top + oldValue.bottom
             previewSpring = arriving ? PreviewMotion.push : PreviewMotion.settle
+            let walls = CanvasLayout.previewWalls(for: previewControlInsets,
+                                                  canvasSize: bounds.size)
             if case .docked = previewPresentation, previewFloats {
-                previewWalls = .settled(previewControlInsets)
+                previewWalls = .settled(walls)
                 layoutDockedPreview()
                 return
             }
             guard previewBody != nil, !isReduceMotionEnabled() else {
-                previewWalls = .settled(previewControlInsets)
+                previewWalls = .settled(walls)
                 snapPreviewToRest()
                 return
             }
             previewWalls = PreviewMotion.WallTravel(
                 from: previewWalls.current,
-                destination: previewControlInsets,
+                destination: walls,
                 duration: CallScreenView.Motion.chromeFadeDuration)
             startPreviewMotion()
         }
@@ -482,7 +484,7 @@ final class ParticipantCanvas: UIView {
 
     private func cornerRadius(for id: String, in layout: CanvasLayout.Plan) -> CGFloat {
         if models[id]?.participant.isLocalPreview == true {
-            return models.count > 1 ? CanvasLayout.tileCornerRadius : 0
+            return models.count > 1 ? CanvasLayout.previewCornerRadius : 0
         }
         guard style == .cards, id != layout.edgeToEdgeTileId else { return 0 }
         return CanvasLayout.tileCornerRadius
