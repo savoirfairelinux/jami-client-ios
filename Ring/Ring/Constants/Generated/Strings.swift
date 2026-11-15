@@ -749,6 +749,8 @@ internal enum L10n {
     internal static let currentCallWith = L10n.tr("Localizable", "calls.currentCallWith", fallback: "Call with ")
     /// Grid view
     internal static let gridLayout = L10n.tr("Localizable", "calls.gridLayout", fallback: "Grid view")
+    /// Hold
+    internal static let hold = L10n.tr("Localizable", "calls.hold", fallback: "Hold")
     /// In this call (%@)
     internal static func inThisCall(_ p1: Any) -> String {
       return L10n.tr("Localizable", "calls.inThisCall", String(describing: p1), fallback: "In this call (%@)")
@@ -761,6 +763,8 @@ internal enum L10n {
     internal static let maximize = L10n.tr("Localizable", "calls.maximize", fallback: "Maximize")
     /// Minimize
     internal static let minimize = L10n.tr("Localizable", "calls.minimize", fallback: "Minimize")
+    /// More options
+    internal static let moreOptions = L10n.tr("Localizable", "calls.moreOptions", fallback: "More options")
     /// Mute microphone
     internal static let muteAudio = L10n.tr("Localizable", "calls.muteAudio", fallback: "Mute microphone")
     /// Options for %@
@@ -781,6 +785,10 @@ internal enum L10n {
     internal static let ringing = L10n.tr("Localizable", "calls.ringing", fallback: "Ringing…")
     /// Set moderator
     internal static let setModerator = L10n.tr("Localizable", "calls.setModerator", fallback: "Set moderator")
+    /// Show full video
+    internal static let showFullVideo = L10n.tr("Localizable", "calls.showFullVideo", fallback: "Show full video")
+    /// Speaker
+    internal static let speaker = L10n.tr("Localizable", "calls.speaker", fallback: "Speaker")
     /// Start Picture in Picture
     internal static let startPictureInPicture = L10n.tr("Localizable", "calls.startPictureInPicture", fallback: "Start Picture in Picture")
     /// Stop calling %@

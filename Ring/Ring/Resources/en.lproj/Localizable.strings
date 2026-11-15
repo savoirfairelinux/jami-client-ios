@@ -358,6 +358,10 @@
 "calls.muteAudio" = "Mute microphone";
 "calls.unmuteAudio" = "Unmute microphone";
 "calls.raiseHand" = "Raise hand";
+"calls.moreOptions" = "More options";
+"calls.speaker" = "Speaker";
+"calls.hold" = "Hold";
+"calls.showFullVideo" = "Show full video";
 "calls.lowerHand" = "Lower hand";
 "calls.inThisCall" = "In this call (%@)";
 "calls.participantsInCall" = "%@ in call";

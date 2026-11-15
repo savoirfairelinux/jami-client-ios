@@ -57,6 +57,8 @@ final class ParticipantCanvas: UIView {
 
     var onCanvasTapped: (() -> Void)?
     var onTileLongPressed: ((String) -> Void)?
+    var onVideoScalingChosen: ((VideoScalingPolicy, String) -> Void)?
+    var onPrimaryVideoChanged: ((PrimaryVideo?) -> Void)?
 
     static let modeSwitchDuration: TimeInterval = 0.35
     static let answerTransitionDuration: TimeInterval = 0.5
@@ -86,7 +88,9 @@ final class ParticipantCanvas: UIView {
     private var previewWalls = PreviewMotion.WallTravel.settled(.zero)
     private var previewMotionLink: CADisplayLink?
     private var previewMotionTimestamp: CFTimeInterval = 0
-    private var videoScalingPolicyOverrides: [String: VideoScalingPolicy] = [:]
+    private var scalingOverrides: [String: VideoScalingPolicy] = [:]
+    private var primaryTileId: String?
+    private var reportedPrimaryVideo: PrimaryVideo?
     var isReduceMotionEnabled: () -> Bool = { UIAccessibility.isReduceMotionEnabled }
     private var previewId: String? {
         models.first { $0.value.participant.isLocalPreview }?.key
@@ -175,7 +179,13 @@ final class ParticipantCanvas: UIView {
     // MARK: - Updates
 
     func apply(_ state: CanvasState, animated: Bool = true) {
+        let overridesChanged = state.scalingOverrides != scalingOverrides
+        scalingOverrides = state.scalingOverrides
         apply(models: state.tiles, mode: state.mode, style: state.style, animated: animated)
+        if overridesChanged, bounds.width > 0, bounds.height > 0 {
+            applyVideoScalingPolicies(
+                primaryTileId: CanvasLayout.plan(currentInput()).primaryTileId)
+        }
     }
 
     private func apply(models newModels: [CanvasTileModel], mode newMode: CanvasLayoutMode,
@@ -198,7 +208,6 @@ final class ParticipantCanvas: UIView {
         for (id, tile) in tiles where !newIds.contains(id) {
             tiles[id] = nil
             models[id] = nil
-            videoScalingPolicyOverrides[id] = nil
             if shouldAnimate {
                 UIView.animate(withDuration: Self.tileFadeDuration,
                                animations: { tile.alpha = 0 },
@@ -227,6 +236,9 @@ final class ParticipantCanvas: UIView {
                                             target: self, action: #selector(tileLongPressed(_:))))
                 tile.onVideoScalingToggleRequested = { [weak self] in
                     self?.toggleVideoScalingPolicy(forTileId: id)
+                }
+                tile.onWholeFrameDisplayChanged = { [weak self] in
+                    self?.reportPrimaryVideo()
                 }
                 if model.participant.isLocalPreview {
                     tile.addGestureRecognizer(UITapGestureRecognizer(
@@ -479,20 +491,30 @@ final class ParticipantCanvas: UIView {
     // MARK: - Video scaling
 
     private func applyVideoScalingPolicies(primaryTileId: String?) {
+        self.primaryTileId = primaryTileId
         for (id, tile) in tiles {
             let isPrimary = id == primaryTileId
-            tile.videoView.scalingPolicy = videoScalingPolicyOverrides[id]
+            tile.videoView.scalingPolicy = scalingOverrides[id]
                 ?? (isPrimary ? .automatic : .aspectFill)
             tile.canToggleVideoScaling = models[id]?.tileState.showsVideo == true
         }
+        reportPrimaryVideo()
+    }
+
+    private func reportPrimaryVideo() {
+        var video: PrimaryVideo?
+        if let id = primaryTileId, id != previewId, let tile = tiles[id],
+           tile.canToggleVideoScaling {
+            video = PrimaryVideo(tileId: id, showsWholeFrame: tile.videoView.showsWholeFrame)
+        }
+        guard video != reportedPrimaryVideo else { return }
+        reportedPrimaryVideo = video
+        onPrimaryVideoChanged?(video)
     }
 
     private func toggleVideoScalingPolicy(forTileId id: String) {
         guard let tile = tiles[id] else { return }
-        videoScalingPolicyOverrides[id] = tile.videoView.showsWholeFrame
-            ? .aspectFill : .aspectFit
-        applyVideoScalingPolicies(
-            primaryTileId: CanvasLayout.plan(currentInput()).primaryTileId)
+        onVideoScalingChosen?(tile.videoView.showsWholeFrame ? .aspectFill : .aspectFit, id)
     }
 
     // MARK: - Gestures
@@ -508,14 +530,10 @@ final class ParticipantCanvas: UIView {
               let id = tileId(at: recognizer.location(in: self)),
               models[id]?.tileState.showsVideo == true else { return }
         if recognizer.scale > 1.15 {
-            videoScalingPolicyOverrides[id] = .aspectFill
+            onVideoScalingChosen?(.aspectFill, id)
         } else if recognizer.scale < 0.87 {
-            videoScalingPolicyOverrides[id] = .aspectFit
-        } else {
-            return
+            onVideoScalingChosen?(.aspectFit, id)
         }
-        applyVideoScalingPolicies(
-            primaryTileId: CanvasLayout.plan(currentInput()).primaryTileId)
     }
 
     private func tileId(at point: CGPoint) -> String? {

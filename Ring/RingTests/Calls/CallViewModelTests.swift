@@ -214,6 +214,7 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
                               pipController: pipController)
         model.showsDialpad = true
         model.showsParticipants = true
+        model.showsMoreActions = true
         var restoreCompletion: PiPRestoreCompletion?
         model.onRestore = { restoreCompletion = $0 }
         var restored: Bool?
@@ -222,6 +223,7 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
 
         XCTAssertFalse(model.showsDialpad)
         XCTAssertFalse(model.showsParticipants)
+        XCTAssertFalse(model.showsMoreActions)
         XCTAssertNil(restored, "AVKit completion must wait for the call screen presentation")
 
         restoreCompletion?(true)

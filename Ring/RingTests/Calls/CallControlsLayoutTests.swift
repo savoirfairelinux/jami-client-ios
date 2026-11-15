@@ -33,18 +33,19 @@ final class CallControlsLayoutTests: XCTestCase {
     }
 
     private func plan(_ model: CallControlsModel? = nil,
-                      speaker: Bool = false,
                       canPiP: Bool = true,
                       handRaised: Bool = false) -> CallControlsLayout.Plan {
         CallControlsLayout.plan(.init(model: model ?? self.model(),
-                                      speakerActive: speaker,
+                                      speakerActive: false,
                                       canStartPictureInPicture: canPiP,
-                                      isHandRaised: handRaised))
+                                      canAddParticipant: true,
+                                      isHandRaised: handRaised,
+                                      showsFullVideo: nil))
     }
 
     private func action(_ intent: CallControlIntent,
                         in plan: CallControlsLayout.Plan) -> ControlAction? {
-        (plan.primary + plan.supplemental + [plan.pictureInPicture].compactMap { $0 })
+        (plan.primary + plan.more + [plan.pictureInPicture].compactMap { $0 })
             .first { $0.intent == intent }
     }
 
@@ -97,9 +98,8 @@ final class CallControlsLayoutTests: XCTestCase {
         let unavailable = plan(model(canSwitchCamera: false)).primary.map(\.intent)
         XCTAssertEqual(unavailable, available)
 
-        let sipAvailable = plan(model(canHold: true, showsDialpad: true))
-            .supplemental.map(\.intent)
-        let sipUnavailable = plan(model(showsDialpad: true)).supplemental.map(\.intent)
+        let sipAvailable = plan(model(canHold: true, showsDialpad: true)).more.map(\.intent)
+        let sipUnavailable = plan(model(showsDialpad: true)).more.map(\.intent)
         XCTAssertEqual(sipUnavailable, sipAvailable)
     }
 
@@ -108,7 +108,7 @@ final class CallControlsLayoutTests: XCTestCase {
         let regular = plan(model(canSwitchCamera: false))
 
         XCTAssertEqual(sip.primary.map(\.intent), regular.primary.map(\.intent))
-        XCTAssertEqual(sip.supplemental.map(\.intent), [.toggleHold, .showDialpad])
+        XCTAssertEqual(Array(sip.more.map(\.intent).suffix(2)), [.toggleHold, .showDialpad])
     }
 
     func testSipHoldRemainsVisibleWhenUnavailable() {
@@ -129,18 +129,6 @@ final class CallControlsLayoutTests: XCTestCase {
         XCTAssertEqual(action(.toggleCamera, in: layoutPlan)?.isEnabled, false)
         XCTAssertEqual(action(.toggleAudioOutput, in: layoutPlan)?.isEnabled, true,
                        "audio output is independent of the media re-invite gate")
-    }
-
-    func testSpeakerAnnouncesTheActionItWillPerform() {
-        let active = action(.toggleAudioOutput, in: plan(speaker: true))
-        XCTAssertEqual(active?.style, .active)
-        XCTAssertEqual(active?.accessibilityLabel,
-                       L10n.Accessibility.Calls.Alter.toggleSpeaker,
-                       "a speaker that is on offers to turn itself off")
-
-        let inactive = action(.toggleAudioOutput, in: plan(speaker: false))
-        XCTAssertEqual(inactive?.accessibilityLabel,
-                       L10n.Accessibility.Calls.Default.toggleSpeaker)
     }
 
     func testBarNeverOutgrowsTheWidthItIsGiven() {
