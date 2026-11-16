@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3030e135_04bc5393",
+        "filename": "Ring/Ring/Calls/PiPController/PiPSourceLayerView.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-16T20:38:26Z",
+      "side": 1,
+      "message": "[warning] Line 46: 🟡 Clearing `fixedTransform` now forces `currentTransform` to `.identity`. If `fixedTransform` is removed while the stream is paused/low-FPS, `syncGeometry()` immediately applies identity and PiP can show the video with the wrong orientation until a new frame arrives and recomputes transform in `render(_:)`. Keep the previous `currentTransform` when `newValue \u003d\u003d nil`, or recompute from `lastFrame` before calling `syncGeometry()` so orientation stays stable between frames.",
+      "revId": "6df5ac1376606166e703998c9c6af7d9207b82ed",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
