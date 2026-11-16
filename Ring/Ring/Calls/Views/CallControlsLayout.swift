@@ -25,7 +25,7 @@ enum CallControlIntent: Hashable {
     case hangUp
     case flipCamera
     case toggleHold
-    case startPictureInPicture
+    case minimize
     case showDialpad
     case toggleRaiseHand
     case addParticipant
@@ -127,7 +127,7 @@ enum CallControlsLayout {
     struct Context {
         let model: CallControlsModel
         let speakerActive: Bool
-        let canStartPictureInPicture: Bool
+        let canMinimize: Bool
         let canAddParticipant: Bool
         let isHandRaised: Bool
         let showsFullVideo: Bool?
@@ -136,7 +136,7 @@ enum CallControlsLayout {
     struct Plan: Equatable {
         let primary: [ControlAction]
         let more: [ControlAction]
-        let pictureInPicture: ControlAction?
+        let minimize: ControlAction?
         let raiseHand: ControlAction?
     }
 
@@ -173,10 +173,10 @@ enum CallControlsLayout {
             accessibilityLabel: L10n.Accessibility.Calls.Default.endCall,
             style: .destructive)
 
-        let pictureInPicture: ControlAction? = context.canStartPictureInPicture
-            ? ControlAction(intent: .startPictureInPicture,
+        let minimize: ControlAction? = context.canMinimize
+            ? ControlAction(intent: .minimize,
                             systemImage: "arrow.down.right.and.arrow.up.left",
-                            accessibilityLabel: L10n.Calls.startPictureInPicture)
+                            accessibilityLabel: L10n.Calls.minimize)
             : nil
 
         let fullVideo: ControlAction? = context.showsFullVideo.map { showsFullVideo in
@@ -209,7 +209,7 @@ enum CallControlsLayout {
         let primary = [mic, camera,
                        flipCameraAction(isEnabled: model.canSwitchCamera), hangUp]
         return Plan(primary: primary, more: more,
-                    pictureInPicture: pictureInPicture, raiseHand: raiseHand)
+                    minimize: minimize, raiseHand: raiseHand)
     }
 
     private static func raiseHandAction(isRaised: Bool) -> ControlAction {

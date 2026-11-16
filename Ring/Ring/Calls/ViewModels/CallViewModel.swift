@@ -69,6 +69,7 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
     @Published private(set) var shouldDismiss = false
     @Published var showsDialpad = false
     @Published private(set) var canStartPictureInPicture = false
+    @Published private(set) var showsReturnCapsule = false
     @Published var showsParticipants = false
     @Published private(set) var participantRows: [ConferenceParticipantRow] = []
     @Published private(set) var pendingRows: [PendingParticipantRow] = []
@@ -87,7 +88,7 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
             CallControlsLayout.plan(
                 .init(model: controls,
                       speakerActive: speakerActive,
-                      canStartPictureInPicture: canStartPictureInPicture,
+                      canMinimize: call?.status.isTerminal == false,
                       canAddParticipant: canAddParticipant,
                       isHandRaised: localHandRaised,
                       showsFullVideo: primaryVideo?.showsWholeFrame))
@@ -187,9 +188,7 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
                 self?.speakerActive = active
             }
         pip.onDidFailToStart = { [weak self] in
-            guard let self = self, self.pipState == .minimized else { return }
-            self.pipState = .inactive
-            self.requestRestore()
+            self?.fallBackToReturnCapsule()
         }
         pip.onDidStop = { [weak self] in
             self?.revealContent()
@@ -491,7 +490,7 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
         case .hangUp: hangUp()
         case .flipCamera: switchCamera()
         case .toggleHold: toggleHold()
-        case .startPictureInPicture: minimizeToPictureInPicture()
+        case .minimize: minimize()
         case .showDialpad: showsDialpad = true
         case .toggleRaiseHand: toggleRaiseHand()
         case .addParticipant: addParticipantTapped()
@@ -584,6 +583,24 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
 
     func playDTMF(_ code: String) {
         callService.playDTMF(code: code)
+    }
+
+    func minimize() {
+        guard canStartPictureInPicture else {
+            minimizeToReturnCapsule()
+            return
+        }
+        minimizeToPictureInPicture()
+    }
+
+    func returnToCall() {
+        requestRestore()
+    }
+
+    private func minimizeToReturnCapsule() {
+        guard let route = CallConversationRoute(call: call, conference: conference) else { return }
+        showsReturnCapsule = true
+        onMinimize?(route)
     }
 
     func minimizeToPictureInPicture() {
@@ -784,7 +801,13 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
         syncPiPVideoTile()
         canStartPictureInPicture = feed != nil && pip.isSupported
         guard hadSource, feed == nil, call?.status.isTerminal == false else { return }
-        requestRestore()
+        fallBackToReturnCapsule()
+    }
+
+    private func fallBackToReturnCapsule() {
+        guard pipState == .minimized else { return }
+        pipState = .inactive
+        showsReturnCapsule = true
     }
 
     private func nextPiPFeed() -> PiPFeed? {
@@ -809,6 +832,7 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
         onRestore { [weak self] restored in
             if restored {
                 self?.pipState = .inactive
+                self?.showsReturnCapsule = false
             } else {
                 self?.revealContent()
             }

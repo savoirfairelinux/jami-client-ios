@@ -33,6 +33,8 @@ final class CallScreenPresenter {
     private var callController: UIViewController?
     private var model: CallViewModel?
     private var dismissCancellable: AnyCancellable?
+    private var returnCapsuleCancellable: AnyCancellable?
+    private var returnWindow: CallReturnWindow?
     private var isMinimized = false
     private var pendingDismissal = false
     private var pendingRestore: PiPRestoreCompletion?
@@ -116,6 +118,7 @@ final class CallScreenPresenter {
                 .sink { [weak self, weak controller] _ in
                     Task { @MainActor in self?.dismissCallScreen(controller) }
                 }
+            self.observeReturnCapsule(of: model)
             self.setInCallDeviceState(active: true)
         }
 
@@ -223,10 +226,46 @@ final class CallScreenPresenter {
     private func clearCallScreenState(_ controller: UIViewController) {
         guard controller === callController else { return }
         setInCallDeviceState(active: false)
+        hideReturnCapsule()
         callController = nil
         model = nil
         dismissCancellable = nil
+        returnCapsuleCancellable = nil
         isMinimized = false
+    }
+
+    // MARK: - Return to call
+
+    @MainActor
+    private func observeReturnCapsule(of model: CallViewModel) {
+        hideReturnCapsule()
+        returnCapsuleCancellable = model.$showsReturnCapsule
+            .removeDuplicates()
+            .sink { [weak self, weak model] shows in
+                Task { @MainActor in
+                    guard let self = self, let model = model else { return }
+                    if shows {
+                        self.showReturnCapsule(for: model)
+                    } else {
+                        self.hideReturnCapsule()
+                    }
+                }
+            }
+    }
+
+    @MainActor
+    private func showReturnCapsule(for model: CallViewModel) {
+        guard returnWindow == nil,
+              let scene = rootViewController?.view.window?.windowScene else { return }
+        let window = CallReturnWindow(windowScene: scene, model: model)
+        window.isHidden = false
+        returnWindow = window
+    }
+
+    @MainActor
+    private func hideReturnCapsule() {
+        returnWindow?.isHidden = true
+        returnWindow = nil
     }
 
     // MARK: - Add participant
