@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71739afa_51225b93",
+        "filename": "Ring/Ring/Calls/ViewModels/CallViewModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-16T13:57:34Z",
+      "side": 1,
+      "message": "[error] Line 586: 🔴 `returnToCall()` currently calls `requestRestore()`, but `requestRestore()` bails out unless `pipState \u003d\u003d .minimized`. In both fallback paths (`minimizeToReturnCapsule()` and `fallBackToReturnCapsule()`), `pipState` is left/set to `.inactive`, so tapping the return capsule becomes a no-op and users can be stranded outside the call UI. Fix by making capsule restore independent of PiP state (e.g., call `onRestore` directly from `returnToCall()`), or keep a dedicated minimized-via-capsule state that passes the restore guard.",
+      "revId": "d92c7b7bed6a748022a1d755ddb3433e7e6cda1c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
