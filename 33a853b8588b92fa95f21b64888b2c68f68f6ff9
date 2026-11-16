@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "081591ee_fe8560c1",
+        "filename": "Ring/Ring/Calls/Views/Canvas/ParticipantCanvas.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 1185,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-16T13:49:18Z",
+      "side": 1,
+      "message": "[warning] Line 1185: 🟡 `scrollViewDidScroll` now calls `refreshNameClearances()` on every scroll tick. That method recomputes `CanvasLayout.plan(currentInput())` and forces `layoutIfNeeded()` for each tile, which is likely to cause avoidable layout churn and scroll jank on lower-end devices or larger calls. Consider computing clearance directly from current tile frames (without replanning) and only updating tiles whose inset actually changed.",
+      "revId": "33a853b8588b92fa95f21b64888b2c68f68f6ff9",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
