@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d55c1662_3981f240",
+        "filename": "Ring/Ring/Calls/Views/CallControlsLayout.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-16T13:56:22Z",
+      "side": 1,
+      "message": "[warning] Line 68: 🟡 `participants.count \u003e 1` is only a proxy for “someone besides the local user is present” and can misclassify edge states (e.g., if local participant data is missing/transient, or participant entries are not 1:1 with users). Prefer checking for at least one participant whose identity differs from the local user ID, so the UI behavior matches the requirement directly.",
+      "revId": "00e964234f6b4b493ae9be2e8a390d0448415a77",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
