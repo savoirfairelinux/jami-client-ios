@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ad977bf_9e90dbf3",
+        "filename": "Ring/RingTests/Calls/CallViewModelTests.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-16T21:06:32Z",
+      "side": 1,
+      "message": "[warning] Line 588: 🟡 The new regression test only checks that opening a sheet reveals controls, but it does not verify the second half of the requirement: auto-hide must restart after the sheet closes. Add an assertion that after toggling `showsMoreActions` back to `false`, chrome hides again after `autoHideDelay` (or via existing test scheduler hooks) to prevent regressions in timer restart behavior.",
+      "revId": "e18b4da6616f46cbdefe2625a98e3f67a34e3fa7",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
