@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d143a33_c466a538",
+        "filename": "Ring/Ring/Calls/CallScreenPresenter.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-16T21:44:22Z",
+      "side": 1,
+      "message": "[error] Line 233: 🔴 `clearCallScreenState` clears `model` and hides the capsule, but leaves `returnCapsuleCancellable` active. That subscription can keep observing the old `CallViewModel` after teardown and may re-show a stale capsule (or keep the old model alive longer than intended). Set `returnCapsuleCancellable \u003d nil` when clearing call-screen state (and before re-binding) to fully detach lifecycle-bound observers.",
+      "revId": "bff594779b0b032fd37b6efefda31bec814fd1f5",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
