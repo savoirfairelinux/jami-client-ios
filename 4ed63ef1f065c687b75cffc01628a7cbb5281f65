@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afc9bd40_60f42e39",
+        "filename": "Ring/Ring/Calls/Views/Canvas/ParticipantCanvas.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-16T18:37:01Z",
+      "side": 1,
+      "message": "[warning] Line 477: 🟡 `applyStripOffset()` computes a fresh `layout`, but `contentInsets(for:)` now reads `edgeToEdgeTileId` from cached state rather than that fresh plan. Because `edgeToEdgeTileId` is only updated in `relayout()`, strip-driven updates can apply safe-area/chrome clearance to the wrong tile when the edge-to-edge participant changes. Set `edgeToEdgeTileId \u003d layout.edgeToEdgeTileId` inside `applyStripOffset()` (before assigning insets), or pass the local `layout` back into `contentInsets` for this path.",
+      "revId": "4ed63ef1f065c687b75cffc01628a7cbb5281f65",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
