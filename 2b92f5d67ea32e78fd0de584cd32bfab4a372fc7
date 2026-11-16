@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9705b03_25cf15ab",
+        "filename": "Ring/Ring/Calls/PiPController/PiPSourceLayerView.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-16T19:08:22Z",
+      "side": 1,
+      "message": "[warning] Line 35: 🟡 When `fixedTransform` is cleared (`newValue \u003d\u003d nil`), `currentTransform` is left unchanged, but `syncGeometry()` still runs immediately. After switching from local-camera PiP to participant PiP, this can keep the old local-camera transform (mirror/rotation) applied until a new remote frame arrives, causing visibly wrong orientation. Reset `currentTransform` when clearing `fixedTransform` (or defer geometry sync until first frame of the new distributor) so the stale transform is never rendered.",
+      "revId": "2b92f5d67ea32e78fd0de584cd32bfab4a372fc7",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
