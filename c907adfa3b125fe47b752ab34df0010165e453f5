@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0967d1d8_d3b63b02",
+        "filename": "Ring/Ring/Calls/Views/CallHeaderView.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-16T13:46:55Z",
+      "side": 1,
+      "message": "[warning] Line 133: 🟡 The new `CallMinimizeButton`/`CallRaiseHandButton` ignore `action.isEnabled` and always remain tappable, unlike the previous `CallTopActionsView` behavior. This regresses control-state semantics and can dispatch intents while unavailable. Pass `isEnabled` through, apply `.disabled(!action.isEnabled)`, and reflect disabled visuals/accessibility consistently.",
+      "revId": "c907adfa3b125fe47b752ab34df0010165e453f5",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4858fee3_2047e1d9",
+        "filename": "Ring/Ring/Calls/Views/Canvas/ParticipantCanvas.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-16T13:46:55Z",
+      "side": 1,
+      "message": "[error] Line 474: 🔴 The side-collision check mixes semantic (`corner.isLeading`) and physical (`headerIsOnLeft`) directions, so in RTL the preview clearance is applied on the wrong side and can overlap the header on the actual title side. Compare semantic sides directly (e.g., header side is leading in this layout), or convert both values to the same coordinate system before comparing.",
+      "revId": "c907adfa3b125fe47b752ab34df0010165e453f5",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
