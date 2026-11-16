@@ -120,7 +120,7 @@ struct CallScreenView: View {
             VStack {
                 if model.showsChrome {
                     HStack(spacing: CallHeaderView.Metrics.spacing) {
-                        if let minimize = model.controlsPlan?.pictureInPicture {
+                        if let minimize = model.controlsPlan?.minimize {
                             CallMinimizeButton(action: minimize) {
                                 model.perform(minimize.intent)
                             }
