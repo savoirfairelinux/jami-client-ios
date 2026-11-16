@@ -56,8 +56,11 @@ final class PiPController: NSObject, PiPControlling {
     }
 
     func start() {
-        guard let controller = pipController,
-              !controller.isPictureInPictureActive else { return }
+        guard let controller = pipController, controller.isPictureInPicturePossible else {
+            onDidFailToStart?()
+            return
+        }
+        guard !controller.isPictureInPictureActive else { return }
         sourceView.setRendersUpright(true)
         sourceView.alignToVideo()
         controller.startPictureInPicture()
@@ -134,6 +137,10 @@ extension PiPController: AVPictureInPictureControllerDelegate {
         _ pictureInPictureController: AVPictureInPictureController,
         restoreUserInterfaceForPictureInPictureStopWithCompletionHandler
             completionHandler: @escaping (Bool) -> Void) {
+        guard stopCause != .sourceRetired else {
+            completionHandler(false)
+            return
+        }
         stopCause = .restore
         guard let onRestoreRequested = onRestoreRequested else {
             completionHandler(false)

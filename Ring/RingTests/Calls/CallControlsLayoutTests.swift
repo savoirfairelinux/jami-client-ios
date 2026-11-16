@@ -35,11 +35,11 @@ final class CallControlsLayoutTests: XCTestCase {
     }
 
     private func plan(_ model: CallControlsModel? = nil,
-                      canPiP: Bool = true,
+                      canMinimize: Bool = true,
                       handRaised: Bool = false) -> CallControlsLayout.Plan {
         CallControlsLayout.plan(.init(model: model ?? self.model(),
                                       speakerActive: false,
-                                      canStartPictureInPicture: canPiP,
+                                      canMinimize: canMinimize,
                                       canAddParticipant: true,
                                       isHandRaised: handRaised,
                                       showsFullVideo: nil))
@@ -47,7 +47,7 @@ final class CallControlsLayoutTests: XCTestCase {
 
     private func action(_ intent: CallControlIntent,
                         in plan: CallControlsLayout.Plan) -> ControlAction? {
-        (plan.primary + plan.more + [plan.pictureInPicture].compactMap { $0 })
+        (plan.primary + plan.more + [plan.minimize].compactMap { $0 })
             .first { $0.intent == intent }
     }
 
@@ -83,11 +83,10 @@ final class CallControlsLayoutTests: XCTestCase {
         XCTAssertEqual(raised?.style, .active)
     }
 
-    func testPictureInPictureGatedByAvailability() {
-        XCTAssertNil(action(.startPictureInPicture, in: plan(canPiP: false)))
-        let pictureInPicture = action(.startPictureInPicture, in: plan(canPiP: true))
-        XCTAssertEqual(pictureInPicture?.accessibilityLabel,
-                       L10n.Calls.startPictureInPicture)
+    func testMinimizeGatedByAvailability() {
+        XCTAssertNil(action(.minimize, in: plan(canMinimize: false)))
+        let minimize = action(.minimize, in: plan(canMinimize: true))
+        XCTAssertEqual(minimize?.accessibilityLabel, L10n.Calls.minimize)
     }
 
     func testFlipCameraRemainsVisibleWhenUnavailable() {

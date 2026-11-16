@@ -781,6 +781,8 @@ internal enum L10n {
     internal static let raiseHand = L10n.tr("Localizable", "calls.raiseHand", fallback: "Raise hand")
     /// Unset moderator
     internal static let removeModerator = L10n.tr("Localizable", "calls.removeModerator", fallback: "Unset moderator")
+    /// Return to call
+    internal static let returnToCall = L10n.tr("Localizable", "calls.returnToCall", fallback: "Return to call")
     /// Ringing…
     internal static let ringing = L10n.tr("Localizable", "calls.ringing", fallback: "Ringing…")
     /// Set moderator
