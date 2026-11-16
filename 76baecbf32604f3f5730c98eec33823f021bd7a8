@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9983c3f3_abfa56fe",
+        "filename": "Ring/RingTests/Calls/CallViewModelTests.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-16T13:51:37Z",
+      "side": 1,
+      "message": "[warning] 🟡 The patch adds new PiP feed-selection behavior (fallback to local camera and transform updates), but tests only update the test double signature. Add focused tests that assert: (1) local camera is selected when no participant source is available, (2) selection switches to participant when one becomes available, and (3) local-camera transform changes (orientation/camera switch) trigger PiP updates. Without this, regressions in the new state transitions are easy to miss.",
+      "revId": "76baecbf32604f3f5730c98eec33823f021bd7a8",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
