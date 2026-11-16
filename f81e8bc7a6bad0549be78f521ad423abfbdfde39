@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22d0fbe3_46a58e88",
+        "filename": "Ring/Ring/Calls/Views/Canvas/ParticipantCanvas.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-16T13:48:08Z",
+      "side": 1,
+      "message": "[warning] Line 457: 🟡 `borderWidth \u003d 0.75` is a fixed point value, so the stroke renders at different physical pixel thickness across screen scales (e.g., 2.25 px on @3x), which is noticeably heavier than a true hairline. Compute it from display scale (for example `1.0 / window?.screen.scale` with a safe fallback) so the outline stays visually consistent.",
+      "revId": "f81e8bc7a6bad0549be78f521ad423abfbdfde39",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
