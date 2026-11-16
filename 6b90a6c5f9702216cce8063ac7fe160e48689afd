@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8de65ee6_17497c9d",
+        "filename": "Ring/Ring/Calls/PiPController/PiPSourceLayerView.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-16T13:54:23Z",
+      "side": 1,
+      "message": "[warning] Line 86: 🟡 When switching `rendersUpright` to `false`, pending upright work is not cleared (`pendingUpright`/`uprightScheduled`). A previously queued transformed frame can still be enqueued after PiP stop/failure, causing stale orientation output and unnecessary work. Clear pending state when disabling upright mode (and ensure in-flight drain observes the disabled state).",
+      "revId": "6b90a6c5f9702216cce8063ac7fe160e48689afd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20028556_d8cd9047",
+        "filename": "Ring/Ring/Calls/PiPController/PiPSourceLayerView.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-16T13:54:23Z",
+      "side": 1,
+      "message": "[warning] Line 95: 🟡 `setRendersUpright(true)` performs `uprightQueue.sync { drainUpright() }`, which can synchronously run CoreImage rendering on the caller thread (including the PiP start path on main thread). This risks UI hitching or delayed PiP start under load. Prefer fully async catch-up (queue `drainUpright` and let the latest frame render in background), or guard against main-thread blocking with a non-blocking handoff.",
+      "revId": "6b90a6c5f9702216cce8063ac7fe160e48689afd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
