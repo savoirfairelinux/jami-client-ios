@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efcf5fb6_ceb6f59d",
+        "filename": "Ring/Ring/Calls/Views/CallControlsLayout.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-16T13:45:39Z",
+      "side": 1,
+      "message": "[warning] Line 148: 🟡 `cameraTurnedOff` is gated by `canSwitchCamera`, which is a different capability than toggling local video. This can suppress the active-muted camera state in valid cases where video can be toggled but camera switching is unavailable. Prefer deriving this from video-toggle capability (or an explicit `hasLocalVideo`/`isVideoAvailable` signal) so the highlight reflects \u0027user turned video off\u0027 rather than \u0027camera can be switched\u0027.",
+      "revId": "1178664f8adce02e6517e919bb03a7cadb39763f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bdecb08_64880bdb",
+        "filename": "Ring/RingTests/Calls/CallControlsLayoutTests.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-16T13:45:39Z",
+      "side": 1,
+      "message": "[warning] Line 149: 🟡 The width-fit regression test was narrowed from multiple slot counts to a single dock shape, which weakens protection against future layout changes that alter action count. Keep the new row-based assertion, but reintroduce multiple representative action counts (e.g., 1...N) so overflow regressions are caught early.",
+      "revId": "1178664f8adce02e6517e919bb03a7cadb39763f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
