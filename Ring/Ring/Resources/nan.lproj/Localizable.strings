@@ -97,7 +97,7 @@
 "swarm.removeContact" = "移除聯絡人";
 "swarm.restartConversation" = "重新開始對話";
 "swarm.conversationEnded" = "對話已終止";
-"swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
+"swarm.conversationEndedMessage" = "此对话中你已无法再发送消息。";
 "swarm.chooseColor" = "对话框颜色";
 "swarm.typeOfSwarm" = "对话类型";
 "swarm.identifier" = "标识符";
@@ -154,7 +154,7 @@
 "smartlist.noConversationsFound" = "无匹配的对话。";
 "smartlist.newContact" = "新联系人";
 "smartlist.newGroup" = "新群组";
-"smartlist.newConversation" = "New conversation";
+"smartlist.newConversation" = "新建对话";
 "smartlist.accounts" = "你的账户";
 "smartlist.invitationReceived" = "邀请已发送";
 "smartlist.noResults" = "无结果";
@@ -174,7 +174,7 @@
 "smartlist.donationExplanation" = "如果您喜欢使用 Jami 并相信我们的使命，您愿意捐款吗？";
 "smartlist.inSynchronization" = "同步中…";
 "smartlist.noConversations" = "暂无对话";
-"smartlist.noConversationSelected" = "No conversation selected";
+"smartlist.noConversationSelected" = "未选择对话";
 "smartlist.noConversationsSubtitle" = "寻找联系人开始对话，或分享你的 Jami ID.";
 "smartlist.noConversationsSubtitleSip" = "输入号码开始对话。";
 "smartlist.addContact" = "添加联系人";

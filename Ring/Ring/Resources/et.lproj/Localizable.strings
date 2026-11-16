@@ -97,7 +97,7 @@
 "swarm.removeContact" = "Eemalda kontakt";
 "swarm.restartConversation" = "Alusta vestlust uuesti";
 "swarm.conversationEnded" = "Vestlus on lõppenud";
-"swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
+"swarm.conversationEndedMessage" = "Sa ei saa enam saata sõnumeid siia vestlusesse.";
 "swarm.chooseColor" = "Vestluse värv";
 "swarm.typeOfSwarm" = "Vestluse tüüp";
 "swarm.identifier" = "Tunnus";
@@ -154,7 +154,7 @@
 "smartlist.noConversationsFound" = "Ühtegi vestlust ei vasta sinu otsingule.";
 "smartlist.newContact" = "Uus kontakt";
 "smartlist.newGroup" = "Uus grupp";
-"smartlist.newConversation" = "New conversation";
+"smartlist.newConversation" = "Uus vestlus";
 "smartlist.accounts" = "Sinu kasutajakontod";
 "smartlist.invitationReceived" = "Sulle on kutseid";
 "smartlist.noResults" = "Pole tulemusi";
@@ -174,7 +174,7 @@
 "smartlist.donationExplanation" = "Kui sulle Jami meeldib ja sa usud meie visiooni, siis kas sa oleksid nõus meid rahaliselt toetama?";
 "smartlist.inSynchronization" = "Sünkroonin andmeid...";
 "smartlist.noConversations" = "Ühtegi vestlust veel pole";
-"smartlist.noConversationSelected" = "No conversation selected";
+"smartlist.noConversationSelected" = "Ühtegi vestlust pole valitud";
 "smartlist.noConversationsSubtitle" = "Vestluse alustamiseks otsi teist osapoolt või jaga oma Jami tunnust.";
 "smartlist.noConversationsSubtitleSip" = "Vestluse alustamiseks otsi numbrit.";
 "smartlist.addContact" = "Lisa kontakt";

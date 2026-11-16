@@ -97,7 +97,7 @@
 "swarm.removeContact" = "Eliminar contacto";
 "swarm.restartConversation" = "Reiniciar conversación";
 "swarm.conversationEnded" = "Conversación finalizada";
-"swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
+"swarm.conversationEndedMessage" = "Ya no puedes enviar mensajes en esta conversación.";
 "swarm.chooseColor" = "Color de la conversación";
 "swarm.typeOfSwarm" = "Tipo de conversación";
 "swarm.identifier" = "Identificador";
@@ -154,7 +154,7 @@
 "smartlist.noConversationsFound" = "Ninguna conversación coincide con la búsqueda.";
 "smartlist.newContact" = "Nuevo contacto";
 "smartlist.newGroup" = "Nuevo grupo";
-"smartlist.newConversation" = "New conversation";
+"smartlist.newConversation" = "Nueva conversación";
 "smartlist.accounts" = "Tus cuentas";
 "smartlist.invitationReceived" = "Invitaciones recibidas";
 "smartlist.noResults" = "Sin resultados";
@@ -174,7 +174,7 @@
 "smartlist.donationExplanation" = "Si disfrutas usando Jami y crees en nuestra misión, ¿quieres hacer una donación?";
 "smartlist.inSynchronization" = "Sincronizando…";
 "smartlist.noConversations" = "Aún no hay conversaciones";
-"smartlist.noConversationSelected" = "No conversation selected";
+"smartlist.noConversationSelected" = "Sin conversación seleccionada";
 "smartlist.noConversationsSubtitle" = "Encuentra a alguien para iniciar una conversación, o compartir tu identidad de Jami.";
 "smartlist.noConversationsSubtitleSip" = "Busca un número para iniciar una conversación.";
 "smartlist.addContact" = "Añadir contacto";
