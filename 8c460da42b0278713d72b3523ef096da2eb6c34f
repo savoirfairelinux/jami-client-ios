@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f78a2b5c_a098d1df",
+        "filename": "Ring/Ring/Resources/zh-Hant.lproj/Localizable.strings",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-16T08:24:26Z",
+      "side": 1,
+      "message": "[error] Line 98: 🔴 This patch inserts Simplified Chinese text into a Traditional Chinese locale (e.g., `此对话中你已无法再发送消息。`). In `zh-Hant`, localized strings must use Traditional script to avoid a visible script mismatch in UI. Please replace the three updated values (`swarm.conversationEndedMessage`, `smartlist.newConversation`, `smartlist.noConversationSelected`) with Traditional Chinese equivalents (e.g., `此對話中你已無法再傳送訊息。`, `新建對話`, `未選擇對話`).",
+      "revId": "8c460da42b0278713d72b3523ef096da2eb6c34f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
