@@ -132,7 +132,7 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
                        "the call screen must leave while AVKit shrinks it into the PiP window")
     }
 
-    func testFailedPictureInPictureStartBringsTheCallScreenBack() {
+    func testFailedPictureInPictureStartShowsTheReturnCapsule() {
         let call = makeCall()
         let callService = CallService(callClient: TestLibJamiCallAPI(),
                                       callEvents: AsyncStream { _ in })
@@ -149,8 +149,9 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
         model.minimizeToPictureInPicture()
         pipController.onDidFailToStart?()
 
-        XCTAssertEqual(restoreCount, 1,
-                       "a PiP that never started must not leave the user without call UI")
+        XCTAssertEqual(restoreCount, 0)
+        XCTAssertTrue(model.showsReturnCapsule,
+                      "a PiP that never started must leave a way back to the call")
     }
 
     func testRestoringFromAMinimizedCallHidesTheScreenUntilTheWindowFinishesGrowing() {
@@ -229,7 +230,7 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
         XCTAssertEqual(restored, true)
     }
 
-    func testLosingThePictureInPictureSubjectBringsTheCallScreenBack() async {
+    func testLosingThePictureInPictureSubjectShowsTheReturnCapsule() async {
         let harness = await Harness(callHasVideo: true)
         let pipController = TestPiPController()
         let model = harness.makeModel(pipController: pipController)
@@ -238,15 +239,18 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
             restoreCount += 1
             completion(true)
         }
+        model.onMinimize = { _ in }
         XCTAssertTrue(model.canStartPictureInPicture,
                       "an ongoing video call must have a picture-in-picture subject")
+        model.minimizeToPictureInPicture()
 
         harness.send(.mediaNegotiationStatus(callId: harness.callId.raw,
                                              event: .success, media: [.audio()]))
         await Harness.wait { !model.canStartPictureInPicture }
 
-        XCTAssertEqual(restoreCount, 1,
-                       "a running call must never be left without a window")
+        XCTAssertEqual(restoreCount, 0)
+        XCTAssertTrue(model.showsReturnCapsule,
+                      "a minimized call must keep a way back once its video is gone")
     }
 
     func testCallEndingDoesNotAskForARestore() async {

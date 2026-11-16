@@ -34,12 +34,12 @@ final class CallControlsLayoutTests: XCTestCase {
 
     private func plan(_ model: CallControlsModel? = nil,
                       speaker: Bool = false,
-                      canPiP: Bool = true,
+                      canMinimize: Bool = true,
                       canAddParticipant: Bool = true,
                       handRaised: Bool = false) -> CallControlsLayout.Plan {
         CallControlsLayout.plan(.init(model: model ?? self.model(),
                                       speakerActive: speaker,
-                                      canStartPictureInPicture: canPiP,
+                                      canMinimize: canMinimize,
                                       canAddParticipant: canAddParticipant,
                                       isHandRaised: handRaised,
                                       showsFullVideo: nil))
@@ -47,7 +47,7 @@ final class CallControlsLayoutTests: XCTestCase {
 
     private func action(_ intent: CallControlIntent,
                         in plan: CallControlsLayout.Plan) -> ControlAction? {
-        ([plan.pictureInPicture, plan.raiseHand].compactMap { $0 } + plan.more + plan.primary)
+        ([plan.minimize, plan.raiseHand].compactMap { $0 } + plan.more + plan.primary)
             .first { $0.intent == intent }
     }
 
@@ -72,11 +72,10 @@ final class CallControlsLayoutTests: XCTestCase {
         XCTAssertEqual(raised?.style, .active)
     }
 
-    func testPictureInPictureGatedByAvailability() {
-        XCTAssertNil(action(.startPictureInPicture, in: plan(canPiP: false)))
-        let pictureInPicture = action(.startPictureInPicture, in: plan(canPiP: true))
-        XCTAssertEqual(pictureInPicture?.accessibilityLabel,
-                       L10n.Calls.startPictureInPicture)
+    func testMinimizeGatedByAvailability() {
+        XCTAssertNil(action(.minimize, in: plan(canMinimize: false)))
+        let minimize = action(.minimize, in: plan(canMinimize: true))
+        XCTAssertEqual(minimize?.accessibilityLabel, L10n.Calls.minimize)
     }
 
     func testFlipCameraRemainsVisibleWhenUnavailable() {
