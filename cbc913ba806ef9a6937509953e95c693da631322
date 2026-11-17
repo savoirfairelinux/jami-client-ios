@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0092d76e_9b936485",
+        "filename": "Ring/Ring/Features/Conversations/Preview/MediaPreviewModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-17T21:29:09Z",
+      "side": 1,
+      "message": "[warning] Line 58: 🟡 `message` is held as `weak`, which can drop to `nil` while the preview is still visible if `messagesModels` is rebuilt (e.g., on list refresh/new events). That makes `canReact`, `reactions`, and `react(_:)` silently stop working mid-session. Keep a strong reference to the preview target (or persist a stable message id + lookup path) for the lifetime of `MediaPreviewModel`.",
+      "revId": "cbc913ba806ef9a6937509953e95c693da631322",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "202eddb9_73a2b1e5",
+        "filename": "Ring/Ring/Features/Conversations/Preview/MediaPreviewModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-17T21:29:09Z",
+      "side": 1,
+      "message": "[warning] Line 89: 🟡 `MediaPreviewModel` now depends on `ContextMenuVM.preferredReactions`, creating cross-feature coupling between preview and context-menu view models. Extract this list into a shared domain constant/helper (e.g., reactions config) so both UIs depend on a neutral source and can evolve independently.",
+      "revId": "cbc913ba806ef9a6937509953e95c693da631322",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
