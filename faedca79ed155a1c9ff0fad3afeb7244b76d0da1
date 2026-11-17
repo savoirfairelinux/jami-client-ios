@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae428bca_32e3cd34",
+        "filename": "Ring/Ring/Features/Conversations/Preview/MediaPreviewModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-17T21:27:54Z",
+      "side": 1,
+      "message": "[warning] Line 113: 🟡 `copy()` reads the entire file into memory with `Data(contentsOf:)` before placing it on the pasteboard. Large images/GIFs can cause avoidable memory spikes. Prefer type-specific copy paths (for image preview, copy `UIImage` directly) or stream/provider-based pasteboard APIs to reduce peak memory usage.",
+      "revId": "faedca79ed155a1c9ff0fad3afeb7244b76d0da1",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82d0b81e_60e72a9a",
+        "filename": "Ring/Ring/Features/Conversations/Preview/MediaPreviewView.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-17T21:27:54Z",
+      "side": 1,
+      "message": "[warning] Line 82: 🟡 `dynamicTypeSize(...DynamicTypeSize.xxxLarge)` hard-caps accessibility text sizes in the full-screen preview chrome. Users on larger accessibility categories (AX sizes) will not get their configured font scaling. Consider removing the cap or using a looser upper bound so controls/text remain accessible per Apple Dynamic Type guidance.",
+      "revId": "faedca79ed155a1c9ff0fad3afeb7244b76d0da1",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
