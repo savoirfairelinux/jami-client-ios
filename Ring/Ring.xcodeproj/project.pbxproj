@@ -315,6 +315,9 @@
 		2681AC712F893D8E00550A4F /* ObjCMockVideoAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2681AC702F893D8E00550A4F /* ObjCMockVideoAdapter.m */; };
 		268309682F6ADAB800B1AA8A /* MediaPreviewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268309672F6ADAB800B1AA8A /* MediaPreviewState.swift */; };
 		2683096A2F6ADADE00B1AA8A /* MediaPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268309692F6ADADE00B1AA8A /* MediaPreviewView.swift */; };
+		26C0DE25279A950B38511CD0 /* MediaPreviewChrome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C0DE50A64F221F87E09B77 /* MediaPreviewChrome.swift */; };
+		26C0DEE8BE684DA86207050F /* ImagePreviewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C0DEF97A3F5702DF681541 /* ImagePreviewScreen.swift */; };
+		26C0DEF574CFC13072AC2B04 /* VideoPreviewContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C0DEDDBB06EC6C0C6E030F /* VideoPreviewContent.swift */; };
 		268AA5C12472D42700B654A0 /* ConfirmationAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268AA5C02472D42700B654A0 /* ConfirmationAlert.swift */; };
 		268C87E42C1793E300593D7C /* NameRegistrationVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268C87E32C1793E300593D7C /* NameRegistrationVM.swift */; };
 		268C87E62C17945C00593D7C /* NameRegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268C87E52C17945C00593D7C /* NameRegistrationView.swift */; };
@@ -969,6 +972,9 @@
 		2681AC702F893D8E00550A4F /* ObjCMockVideoAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjCMockVideoAdapter.m; sourceTree = "<group>"; };
 		268309672F6ADAB800B1AA8A /* MediaPreviewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPreviewState.swift; sourceTree = "<group>"; };
 		268309692F6ADADE00B1AA8A /* MediaPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPreviewView.swift; sourceTree = "<group>"; };
+		26C0DE50A64F221F87E09B77 /* MediaPreviewChrome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPreviewChrome.swift; sourceTree = "<group>"; };
+		26C0DEF97A3F5702DF681541 /* ImagePreviewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewScreen.swift; sourceTree = "<group>"; };
+		26C0DEDDBB06EC6C0C6E030F /* VideoPreviewContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPreviewContent.swift; sourceTree = "<group>"; };
 		268AA5C02472D42700B654A0 /* ConfirmationAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationAlert.swift; sourceTree = "<group>"; };
 		268C87E32C1793E300593D7C /* NameRegistrationVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameRegistrationVM.swift; sourceTree = "<group>"; };
 		268C87E52C17945C00593D7C /* NameRegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameRegistrationView.swift; sourceTree = "<group>"; };
@@ -3345,6 +3351,9 @@
 				26074FDA24F7FFC100374570 /* MediaPreviewModel.swift */,
 				268309672F6ADAB800B1AA8A /* MediaPreviewState.swift */,
 				268309692F6ADADE00B1AA8A /* MediaPreviewView.swift */,
+				26C0DE50A64F221F87E09B77 /* MediaPreviewChrome.swift */,
+				26C0DEF97A3F5702DF681541 /* ImagePreviewScreen.swift */,
+				26C0DEDDBB06EC6C0C6E030F /* VideoPreviewContent.swift */,
 			);
 			path = Preview;
 			sourceTree = "<group>";
@@ -4379,6 +4388,9 @@
 				26A34ED52C6E83D500A41DD4 /* ImportFromArchiveView.swift in Sources */,
 				BB3B0A412971AEE30083CAD8 /* LocationSharingView.swift in Sources */,
 				2683096A2F6ADADE00B1AA8A /* MediaPreviewView.swift in Sources */,
+				26C0DE25279A950B38511CD0 /* MediaPreviewChrome.swift in Sources */,
+				26C0DEE8BE684DA86207050F /* ImagePreviewScreen.swift in Sources */,
+				26C0DEF574CFC13072AC2B04 /* VideoPreviewContent.swift in Sources */,
 				262F1CFA2C88BBBC002BF597 /* LinkToAccountVM.swift in Sources */,
 				268C87EC2C1BA28A00593D7C /* ManageAccountView.swift in Sources */,
 				267B956E2C233E2600353B01 /* GeneralSettingsViews.swift in Sources */,

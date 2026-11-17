@@ -20,34 +20,6 @@ import SwiftUI
 import RxSwift
 import AVFoundation
 
-enum PlayerMode {
-    case fullScreen
-    case inConversationMessage
-}
-
-enum PlayButtonStyle {
-    case fullScreen
-    case videoMessage
-
-    var iconSize: CGFloat {
-        switch self {
-        case .fullScreen: return 34
-        case .videoMessage: return 21
-        }
-    }
-
-    var buttonSize: CGFloat {
-        switch self {
-        case .fullScreen: return 84
-        case .videoMessage: return 52
-        }
-    }
-
-    var autoHide: Bool {
-        self == .fullScreen
-    }
-}
-
 struct AudioMessageColors {
     let background: Color
     let text: Color
@@ -92,27 +64,7 @@ class PlayerCoordinator: ObservableObject {
     @Published var isMuted: Bool = true
     @Published var duration: Float = 0
     @Published var hasVideo: Bool = true
-    @Published var controlsVisible: Bool = true
     @Published var playbackFailed: Bool = false
-
-    private var autoHideTask: DispatchWorkItem?
-
-    func scheduleAutoHide() {
-        autoHideTask?.cancel()
-        let task = DispatchWorkItem { [weak self] in
-            guard let self = self else { return }
-            withAnimation(.easeInOut(duration: 0.3)) {
-                self.controlsVisible = false
-            }
-        }
-        autoHideTask = task
-        DispatchQueue.main.asyncAfter(deadline: .now() + 4, execute: task)
-    }
-
-    func cancelAutoHide() {
-        autoHideTask?.cancel()
-        autoHideTask = nil
-    }
 
     var progress: Float = 0
     @Published var elapsedTimeString: String = "00:00"
@@ -126,15 +78,31 @@ class PlayerCoordinator: ObservableObject {
         displayLayer.isOpaque = true
     }
 
-    func configureForFullScreen() {
-        displayLayer.videoGravity = .resizeAspectFill
-    }
-
     func updateElapsedTime() {
         let newString = Float.elapsedString(progress: progress, duration: duration)
         if newString != elapsedTimeString {
             elapsedTimeString = newString
         }
+    }
+
+    func beginSeek(_ player: PlayerViewModel) {
+        isSeeking = true
+        player.userStartSeeking()
+        player.seekTimeVariable.accept(progress)
+    }
+
+    func changeSeek(to newValue: Float, player: PlayerViewModel) {
+        progress = newValue
+        updateElapsedTime()
+        if isSeeking {
+            player.seekTimeVariable.accept(newValue)
+        }
+    }
+
+    func endSeek(_ player: PlayerViewModel) {
+        isSeeking = false
+        player.seekTimeVariable.accept(progress)
+        player.userStopSeeking()
     }
 
     var audioTimeString: String {
@@ -314,11 +282,11 @@ struct AudioSeekAreaKey: PreferenceKey {
 }
 
 struct PlayerView: View {
+    private let playIconSize: CGFloat = 21
+    private let playButtonSize: CGFloat = 52
+
     var viewModel: PlayerViewModel
-    var sizeMode: PlayerMode
     var withControls: Bool
-    var externalControlsVisible: Binding<Bool>?
-    var fullScreenActions: AnyView?
     var onVideoTap: ((_ frame: CGRect, _ frameProvider: @escaping () -> CGRect) -> Void)?
     var onVideoLongPress: (() -> Void)?
     var audioColors = AudioMessageColors(background: Color(UIColor.placeholderText),
@@ -331,29 +299,9 @@ struct PlayerView: View {
 
     @StateObject private var coordinator = PlayerCoordinator()
 
-    private var controlsVisible: Bool {
-        externalControlsVisible?.wrappedValue ?? coordinator.controlsVisible
-    }
-
-    private func toggleControls() {
-        if let binding = externalControlsVisible {
-            withAnimation(.spring(response: 0.35, dampingFraction: 0.8)) {
-                binding.wrappedValue.toggle()
-            }
-        } else {
-            withAnimation(.easeInOut(duration: 0.25)) {
-                coordinator.controlsVisible.toggle()
-            }
-            if coordinator.controlsVisible {
-                coordinator.scheduleAutoHide()
-            }
-        }
-    }
-
     var body: some View {
         ZStack {
             backgroundColor
-                .ignoresSafeArea(edges: sizeMode == .fullScreen ? .all : [])
 
             if coordinator.hasVideo {
                 VideoLayerView(displayLayer: coordinator.displayLayer, coordinator: coordinator)
@@ -362,40 +310,19 @@ struct PlayerView: View {
 
             videoTapLayer
 
-            // Full-screen tap layer sits below the controls so buttons remain tappable.
-            if sizeMode == .fullScreen {
-                Color.clear
-                    .contentShape(Rectangle())
-                    .onTapGesture { toggleControls() }
-            }
-
             if withControls {
-                controlsOverlay
+                messageControls
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .onAppear {
-            if sizeMode == .fullScreen {
-                coordinator.configureForFullScreen()
-            }
             coordinator.pendingViewModel = viewModel
             coordinator.bind(to: viewModel)
-            if sizeMode == .fullScreen && externalControlsVisible == nil {
-                coordinator.scheduleAutoHide()
-            }
-        }
-        .onDisappear {
-            coordinator.cancelAutoHide()
-        }
-        .onChange(of: externalControlsVisible?.wrappedValue) { newValue in
-            guard let newValue else { return }
-            coordinator.controlsVisible = newValue
         }
     }
 
     private var backgroundColor: Color {
-        if sizeMode == .fullScreen { return .black }
-        return coordinator.hasVideo ? Color(UIColor.placeholderText) : audioColors.background
+        coordinator.hasVideo ? Color(UIColor.placeholderText) : audioColors.background
     }
 
     @ViewBuilder private var videoTapLayer: some View {
@@ -409,46 +336,11 @@ struct PlayerView: View {
         }
     }
 
-    // MARK: - Controls Overlay
-
-    @ViewBuilder private var controlsOverlay: some View {
-        if sizeMode == .fullScreen {
-            fullScreenControls
-                .opacity(controlsVisible ? 1 : 0)
-                .allowsHitTesting(controlsVisible)
-                .animation(.easeInOut(duration: 0.3), value: controlsVisible)
-        } else {
-            messageControls
-        }
-    }
-
-    private var fullScreenControls: some View {
-        let insets = UIWindow.currentSafeAreaInsets
-        return ZStack {
-            centerPlayButton
-            VStack(spacing: 0) {
-                HStack(spacing: 8) {
-                    Spacer()
-                    if let actions = fullScreenActions {
-                        actions
-                    }
-                    fullScreenMuteButton
-                }
-                .padding(.top, insets.top)
-                Spacer()
-                fullScreenTray
-                    .padding(.bottom, insets.bottom + 16)
-            }
-            .padding(.horizontal, 16)
-        }
-    }
-
     // MARK: - Unified Play/Pause Button
 
-    private func playPauseButton(_ style: PlayButtonStyle) -> some View {
-        glassPlayPauseButton(isPaused: coordinator.isPaused, iconSize: style.iconSize, size: style.buttonSize) {
+    private func playPauseButton() -> some View {
+        glassPlayPauseButton(isPaused: coordinator.isPaused, iconSize: playIconSize, size: playButtonSize) {
             viewModel.togglePause()
-            if style.autoHide { coordinator.scheduleAutoHide() }
         }
     }
 
@@ -456,63 +348,14 @@ struct PlayerView: View {
         coordinator.isPaused ? "play.fill" : "pause.fill"
     }
 
-    private var muteIcon: String {
-        coordinator.isMuted ? "speaker.slash.fill" : "speaker.wave.2.fill"
-    }
-
-    private var muteAccessibilityLabel: String {
-        coordinator.isMuted ? L10n.Accessibility.audioPlayerUnmute : L10n.Accessibility.audioPlayerMute
-    }
-
-    private var centerPlayButton: some View {
-        playPauseButton(.fullScreen)
-    }
-
-    private var fullScreenMuteButton: some View {
-        glassIconButton(systemName: muteIcon, accessibilityLabel: muteAccessibilityLabel) {
-            viewModel.muteAudio()
-            coordinator.scheduleAutoHide()
-        }
-    }
-
-    private var fullScreenTray: some View {
-        MediaScrubberRow(elapsed: coordinator.elapsedTimeString, duration: coordinator.duration.durationString) {
-            seekSlider()
-        }
-        .mediaTrayStyle()
-    }
-
     private func seekSlider() -> some View {
         MediaSeekSlider(
             onRegister: { sink in coordinator.sliderUpdate = sink },
-            onSeekStart: { beginSeek(autoHide: true) },
-            onSeekChange: { newValue in changeSeek(to: newValue) },
-            onSeekEnd: { endSeek(autoHide: true) }
+            onSeekStart: { coordinator.beginSeek(viewModel) },
+            onSeekChange: { coordinator.changeSeek(to: $0, player: viewModel) },
+            onSeekEnd: { coordinator.endSeek(viewModel) }
         )
     }
-
-    private func beginSeek(autoHide: Bool) {
-        if autoHide { coordinator.cancelAutoHide() }
-        coordinator.isSeeking = true
-        viewModel.userStartSeeking()
-        viewModel.seekTimeVariable.accept(coordinator.progress)
-    }
-
-    private func changeSeek(to newValue: Float) {
-        coordinator.progress = newValue
-        coordinator.updateElapsedTime()
-        if coordinator.isSeeking {
-            viewModel.seekTimeVariable.accept(newValue)
-        }
-    }
-
-    private func endSeek(autoHide: Bool) {
-        coordinator.isSeeking = false
-        viewModel.seekTimeVariable.accept(coordinator.progress)
-        viewModel.userStopSeeking()
-        if autoHide { coordinator.scheduleAutoHide() }
-    }
-
 }
 
 // MARK: - In-Message Controls
@@ -531,7 +374,7 @@ extension PlayerView {
     private var videoMessageControls: some View {
         ZStack {
             videoMessageGradient
-            videoMessagePlayButton
+            playPauseButton()
             videoMessageChrome
         }
     }
@@ -552,10 +395,6 @@ extension PlayerView {
             )
         }
         .allowsHitTesting(false)
-    }
-
-    private var videoMessagePlayButton: some View {
-        playPauseButton(.videoMessage)
     }
 
     private var videoMessageChrome: some View {
@@ -606,9 +445,9 @@ extension PlayerView {
                           cornerRadius: 8,
                           isEnabled: !coordinator.playbackFailed,
                           onRegister: { sink in coordinator.sliderUpdate = sink },
-                          onSeekStart: { beginSeek(autoHide: false) },
-                          onSeekChange: { newValue in changeSeek(to: newValue) },
-                          onSeekEnd: { endSeek(autoHide: false) },
+                          onSeekStart: { coordinator.beginSeek(viewModel) },
+                          onSeekChange: { coordinator.changeSeek(to: $0, player: viewModel) },
+                          onSeekEnd: { coordinator.endSeek(viewModel) },
                           onLongPress: onVideoLongPress)
             Text(coordinator.audioTimeString)
                 .font(.footnote.monospacedDigit())

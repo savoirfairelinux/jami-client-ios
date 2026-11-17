@@ -39,8 +39,6 @@ class MediaPreviewPresenter: ObservableObject {
     @Published var isDismissing: Bool = false
     @Published var model: MediaPreviewModel?
 
-    /// Vertical drag offset during an interactive dismiss gesture.
-    @Published var dragOffset: CGFloat = 0
     @Published var backgroundAlpha: Double = 0
 
     // MARK: - Non-Published State (read by view body, mutated by presenter)
@@ -50,24 +48,6 @@ class MediaPreviewPresenter: ObservableObject {
     var navBarBottomY: CGFloat = 0
     var messagePanelTopY: CGFloat = 0
     var sourceFrameProvider: (() -> CGRect)?
-    var isDragging: Bool { dragOffset != 0 }
-
-    // MARK: - Auto-Hide Timer
-
-    private var autoHideTask: Task<Void, Never>?
-
-    func scheduleAutoHide(after seconds: UInt64 = 5, action: @escaping () -> Void) {
-        autoHideTask?.cancel()
-        autoHideTask = Task {
-            try? await Task.sleep(nanoseconds: seconds * 1_000_000_000)
-            guard !Task.isCancelled else { return }
-            action()
-        }
-    }
-
-    func cancelAutoHide() {
-        autoHideTask?.cancel()
-    }
 
     // MARK: - Window Lifecycle
 
@@ -105,6 +85,7 @@ class MediaPreviewPresenter: ObservableObject {
 
         let window = PassthroughWindow(windowScene: scene)
         window.windowLevel = .normal + 1
+        window.overrideUserInterfaceStyle = .dark
         let hostingController = UIHostingController(rootView: overlayView)
         hostingController.view.backgroundColor = .clear
         window.rootViewController = hostingController
@@ -125,7 +106,6 @@ class MediaPreviewPresenter: ObservableObject {
 
     func dismiss() {
         guard !isDismissing else { return }
-        cancelAutoHide()
         if let scene = overlayWindow?.windowScene {
             navBarBottomY = Self.computeNavBarBottomY(in: scene)
         }
@@ -136,7 +116,6 @@ class MediaPreviewPresenter: ObservableObject {
             }
         }
         isDismissing = true
-        dragOffset = 0
 
         dismissGeneration += 1
         let currentGeneration = dismissGeneration
@@ -160,14 +139,12 @@ class MediaPreviewPresenter: ObservableObject {
     }
 
     private func tearDown() {
-        autoHideTask?.cancel()
         overlayWindow?.isPresenting = false
         overlayWindow?.isHidden = true
         overlayWindow = nil
         isDismissing = false
         model = nil
         sourceFrameProvider = nil
-        dragOffset = 0
         backgroundAlpha = 0
     }
 
