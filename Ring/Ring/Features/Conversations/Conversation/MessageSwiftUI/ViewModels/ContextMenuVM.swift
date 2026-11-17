@@ -47,6 +47,11 @@ class ContextMenuVM: ObservableObject {
     private(set) var avatarFactory: AvatarProviderFactory?
     private var reactionsSubscription: AnyCancellable?
     private var editHistorySubscription: AnyCancellable?
+    private let recentReactions: RecentReactions
+
+    init(recentReactions: RecentReactions = RecentReactions()) {
+        self.recentReactions = recentReactions
+    }
 
     func configure(content: MessageContentVM, container: MessageContainerModel, mode: ContextMenuMode, localJamiId: String?, avatarFactory: AvatarProviderFactory) {
         self.currentJamiAccountId = localJamiId
@@ -77,6 +82,7 @@ class ContextMenuVM: ObservableObject {
 
         updateContextMenuSize()
 
+        preferredUserReactions = recentReactions.reactions
         if let sender = currentJamiAccountId {
             myAuthoredReactionIds = container.message.reactionsMessageIdsBySender(jamiId: sender)
             let authoredContents = Set(
@@ -185,9 +191,7 @@ class ContextMenuVM: ObservableObject {
         return ScreenDimensionsManager.shared.adaptiveHeight
     }
 
-    let preferredUserReactions: [String] = [
-        0x1F44D, 0x1F44E, 0x1F606, 0x1F923, 0x1F615
-    ].map { String(UnicodeScalar($0)!) }
+    private(set) var preferredUserReactions = RecentReactions.defaults
 
     private(set) var uniqueAuthoredReactions: [String] = []
     @Published var selectedEmoji: String = ""
@@ -368,16 +372,6 @@ class ContextMenuVM: ObservableObject {
 
     // MARK: - Reaction handling
 
-    func sendReaction(value: String) {
-        guard let container = containerModel else { return }
-        sendEmojiUpdate.accept([
-            "messageId": container.id,
-            "author": container.message.authorId,
-            "data": value,
-            "action": ReactionCommand.apply.toString()
-        ])
-    }
-
     func removeReaction(id: String) {
         guard pendingReactionRemovals.insert(id).inserted else { return }
         sendEmojiUpdate.accept(["reactionId": id, "action": ReactionCommand.revoke.toString()])
@@ -393,6 +387,7 @@ class ContextMenuVM: ObservableObject {
             removeReaction(id: reactionMsg.id)
         } else {
             log.debug("[ContextMenu] Applying reaction \(selectedEmoji) for \(author)")
+            recentReactions.record(selectedEmoji)
             sendEmojiUpdate.accept([
                 "parentMessageId": container.id,
                 "author": author,

@@ -395,11 +395,11 @@ struct EmojiBarView: View {
                 // add the emojipalette button with a plus sign
                 emojipalette
                 // then add defaults/favorites
-                ForEach(cxModel.preferredUserReactions.indices, id: \.self) { index in
+                ForEach(Array(cxModel.preferredUserReactions.enumerated()), id: \.element) { index, emoji in
                     EmojiBarItemView(
                         cxModel: cxModel,
-                        emoji: cxModel.preferredUserReactions[index],
-                        isActive: cxModel.localUserAuthoredReaction(emoji: cxModel.preferredUserReactions[index]),
+                        emoji: emoji,
+                        isActive: cxModel.localUserAuthoredReaction(emoji: emoji),
                         presentingState: $presentingState,
                         initialOpacity: 1.0,
                         delayIn: min(2.0, 0.03 * Double(index)),
@@ -407,11 +407,11 @@ struct EmojiBarView: View {
                     )
                 }
                 // then add scrollable revokes not in the defaults
-                ForEach(cxModel.uniqueAuthoredReactions.indices, id: \.self) { index in
+                ForEach(Array(cxModel.uniqueAuthoredReactions.enumerated()), id: \.element) { index, emoji in
                     EmojiBarItemView(
                         cxModel: cxModel,
-                        emoji: cxModel.uniqueAuthoredReactions[index],
-                        isActive: cxModel.localUserAuthoredReaction(emoji: cxModel.uniqueAuthoredReactions[index]),
+                        emoji: emoji,
+                        isActive: cxModel.localUserAuthoredReaction(emoji: emoji),
                         presentingState: $presentingState,
                         initialOpacity: 1.0,
                         delayIn: min(2.0, 0.03 * Double(index)),
