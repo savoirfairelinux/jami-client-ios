@@ -27,6 +27,7 @@ class TestableSwarmInfo: SwarmInfoProtocol {
     var avatarData: BehaviorRelay<Data?> = BehaviorRelay(value: nil)
     var title = BehaviorRelay(value: "")
     var color = BehaviorRelay<String>(value: "")
+    var symbol = BehaviorRelay<String>(value: ConversationPreferences.defaultSymbol)
     var type = BehaviorRelay(value: ConversationType.oneToOne)
     var description = BehaviorRelay(value: "")
     var participantsNames: BehaviorRelay<[String]> = BehaviorRelay(value: [""])

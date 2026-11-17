@@ -1769,6 +1769,8 @@ internal enum L10n {
     internal static let others = L10n.tr("Localizable", "swarm.others", fallback: "Others")
     /// Public group
     internal static let publicChat = L10n.tr("Localizable", "swarm.publicChat", fallback: "Public group")
+    /// Quick send emoji
+    internal static let quickSendEmoji = L10n.tr("Localizable", "swarm.quickSendEmoji", fallback: "Quick send emoji")
     /// Remove contact
     internal static let removeContact = L10n.tr("Localizable", "swarm.removeContact", fallback: "Remove contact")
     /// Remove conversation

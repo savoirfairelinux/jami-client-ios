@@ -31,6 +31,7 @@ class SwarmInfoVM: ObservableObject {
 
     @Published var finalColor: String = UIColor.defaultSwarmColorHex
     @Published private(set) var selectedColor: String = String()
+    @Published private(set) var symbol = ConversationPreferences.defaultSymbol
     @Published private(set) var permissions = ConversationPermissions.unrestricted
     @Published private(set) var members = [ParticipantInfo]()
 
@@ -202,6 +203,13 @@ class SwarmInfoVM: ObservableObject {
             }
         })
         .disposed(by: disposeBag)
+
+        swarmInfo.symbol
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] symbol in
+                self?.symbol = symbol
+            })
+            .disposed(by: disposeBag)
     }
 
     var localJamiId: String? {
@@ -232,6 +240,14 @@ class SwarmInfoVM: ObservableObject {
         self.selectedColor = selectedColor
 
         prefsInfo[ConversationPreferenceAttributes.color.rawValue] = selectedColor
+        self.conversationService.updateConversationPrefs(accountId: conversation.accountId, conversationId: conversation.id, prefs: prefsInfo)
+    }
+
+    func updateSymbol(_ symbol: String) {
+        guard symbol.isSingleEmojiCharacter, symbol != self.symbol,
+              var prefsInfo = conversationService.getConversationPreferences(accountId: conversation.accountId, conversationId: conversation.id) else { return }
+        self.symbol = symbol
+        prefsInfo[ConversationPreferenceAttributes.symbol.rawValue] = symbol
         self.conversationService.updateConversationPrefs(accountId: conversation.accountId, conversationId: conversation.id, prefs: prefsInfo)
     }
 

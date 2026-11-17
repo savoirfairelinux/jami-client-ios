@@ -99,6 +99,7 @@
 "swarm.conversationEnded" = "Conversation ended";
 "swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
 "swarm.chooseColor" = "Conversation color";
+"swarm.quickSendEmoji" = "Quick send emoji";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Identifier";
 "swarm.conversationId" = "Conversation ID";

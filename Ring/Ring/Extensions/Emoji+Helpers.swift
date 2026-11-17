@@ -52,6 +52,11 @@ extension String {
         return unicodeScalars.contains { $0.isEmoji }
     }
 
+    var isSingleEmojiCharacter: Bool {
+        guard count == 1, let first = unicodeScalars.first, first.properties.isEmoji else { return false }
+        return first.properties.isEmojiPresentation || unicodeScalars.count > 1
+    }
+
     var containsOnlyEmoji: Bool {
 
         return !isEmpty

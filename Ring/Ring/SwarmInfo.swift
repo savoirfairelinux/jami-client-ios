@@ -24,6 +24,7 @@ protocol SwarmInfoProtocol {
     var avatarData: BehaviorRelay<Data?> { get }
     var title: BehaviorRelay<String> { get }
     var color: BehaviorRelay<String> { get }
+    var symbol: BehaviorRelay<String> { get }
     var type: BehaviorRelay<ConversationType> { get }
     var description: BehaviorRelay<String> { get }
     var participantsNames: BehaviorRelay<[String]> { get }
@@ -136,6 +137,7 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
     let avatarData: BehaviorRelay<Data?> = BehaviorRelay(value: nil)
     let title = BehaviorRelay(value: "")
     let color = BehaviorRelay<String>(value: "")
+    let symbol = BehaviorRelay<String>(value: ConversationPreferences.defaultSymbol)
     let type = BehaviorRelay(value: ConversationType.oneToOne)
     let description = BehaviorRelay(value: "")
     let participantsNames: BehaviorRelay<[String]> = BehaviorRelay(value: [""])
@@ -327,6 +329,7 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
             Self.accept(info.description, to: self.description)
         }
         Self.accept(info.preferences.color, to: self.color)
+        Self.accept(info.preferences.symbol, to: self.symbol)
         let members = Set(info.participants.map { ParticipantData(jamiId: $0.jamiId, role: $0.role) })
         if members != self.members {
             self.members = members

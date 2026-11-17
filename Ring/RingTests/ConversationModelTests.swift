@@ -23,6 +23,22 @@ import XCTest
 
 final class ConversationModelTests: XCTestCase {
 
+    func testSymbolPreferenceAcceptsOnlyEmoji() {
+        var preferences = ConversationPreferences()
+        XCTAssertEqual(preferences.symbol, ConversationPreferences.defaultSymbol)
+
+        for emoji in ["❤️", "⭐", "1️⃣", "👍🏽", "🇺🇦"] {
+            preferences.update(info: ["symbol": emoji])
+            XCTAssertEqual(preferences.symbol, emoji)
+        }
+
+        for invalid in ["hi", "1", "👍👍"] {
+            preferences.update(info: ["symbol": "❤️"])
+            preferences.update(info: ["symbol": invalid])
+            XCTAssertEqual(preferences.symbol, ConversationPreferences.defaultSymbol)
+        }
+    }
+
     func testFeedMemberCanReplyButCannotPublishOrForward() {
         let permissions = ConversationPermissions(names: ["textReply", "fileReply", "reaction"])
         XCTAssertFalse(permissions.allowsText(replying: false))
