@@ -97,6 +97,7 @@ struct MediaPreviewShell<Media: View, Controls: View>: View {
         .accessibilityAddTraits(.isModal)
         .animation(MediaPreviewLayout.chromeAnimation, value: showsHeader)
         .animation(MediaPreviewLayout.chromeAnimation, value: showsBottomChrome)
+        .animation(.spring(response: 0.3, dampingFraction: 0.82), value: model.isReacting)
         .overlay(savedToast)
         .onChange(of: model.saveSuccess, perform: savedStateChanged)
         .animation(.spring(response: 0.35, dampingFraction: 0.8), value: model.saveSuccess)
@@ -183,6 +184,7 @@ struct MediaPreviewShell<Media: View, Controls: View>: View {
     private var bottomChrome: some View {
         VStack(spacing: MediaPreviewLayout.bottomStackSpacing) {
             controls()
+            reactionsArea
             MediaPreviewActionCapsule(model: model)
         }
         .padding(.horizontal, MediaPreviewLayout.sideInset)
@@ -192,6 +194,19 @@ struct MediaPreviewShell<Media: View, Controls: View>: View {
                                    value: size.height - proxy.frame(in: .global).minY)
         })
         .onPreferenceChange(MediaPreviewBottomChromeHeightKey.self) { bottomChromeHeight = $0 }
+    }
+
+    @ViewBuilder private var reactionsArea: some View {
+        if model.isReacting {
+            MediaPreviewReactionPicker(emojis: model.reactionChoices,
+                                       activeEmojis: model.ownReactions,
+                                       maxWidth: size.width - 2 * MediaPreviewLayout.sideInset,
+                                       onPick: model.react)
+                .transition(.scale(scale: 0.9).combined(with: .opacity))
+        } else if let reactions = model.reactions {
+            MediaPreviewReactionsSummary(reactions: reactions)
+                .transition(.opacity)
+        }
     }
 
     // MARK: - Interaction
@@ -208,6 +223,10 @@ struct MediaPreviewShell<Media: View, Controls: View>: View {
     }
 
     func handleTap() {
+        if model.isReacting {
+            model.isReacting = false
+            return
+        }
         chromeVisible.toggle()
     }
 

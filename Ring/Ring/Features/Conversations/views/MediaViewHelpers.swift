@@ -535,6 +535,7 @@ final class MessageActionHandler {
     var presentMediaPreview: ((MediaPreviewModel, CGRect, (() -> CGRect)?) -> Void)?
     let injectionBag: InjectionBag
     var forwardMessage: ((MessageContentVM, [String]) -> Void)?
+    weak var conversationActions: MediaPreviewConversationActions?
 
     init(injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
@@ -570,6 +571,8 @@ final class MessageActionHandler {
     private func makePreviewModel(content: MediaPreviewContent, fileURL: URL, canDelete: Bool, message: MessageContentVM) -> MediaPreviewModel {
         let model = MediaPreviewModel(content: content, delegate: message, fileURL: fileURL, canDelete: canDelete)
         model.injectionBag = injectionBag
+        model.message = message
+        model.conversationActions = conversationActions
         let isIncoming = message.isIncoming
         message.$username
             .map { isIncoming ? $0 : $0.withYourselfSuffix() }

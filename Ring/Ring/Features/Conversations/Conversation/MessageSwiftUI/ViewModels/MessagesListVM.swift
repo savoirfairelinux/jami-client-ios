@@ -315,6 +315,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
 
         self.voiceRecording.onSend = self.messagePanel.send
         self.voiceRecording.onStart = self.messagePanel.discardDraftAttachments
+        self.actionHandler.conversationActions = self
         self.subscribeLocationEvents()
         self.subscribeSwarmPreferences()
         self.subscribeUserAvatarForLocationSharing()
@@ -1304,3 +1305,19 @@ extension MessagesListVM {
     }
 }
 // swiftlint:enable type_body_length
+
+extension MessagesListVM: MediaPreviewConversationActions {
+    func react(to message: MessageContentVM, with emoji: String) {
+        let localJamiId = accountService.getAccount(fromAccountId: conversation.accountId)?.jamiId
+        let reactions = messagesModels.first { $0.messageContent === message }?.message.reactions ?? message.message.reactions
+        if let own = reactions.first(where: { $0.author == localJamiId && $0.content == emoji }) {
+            conversationService.editSwarmMessage(conversationId: conversation.id, accountId: conversation.accountId, message: "", parentId: own.id)
+        } else {
+            conversationService.sendEmojiReactionMessage(conversationId: conversation.id, accountId: conversation.accountId, message: emoji, parentId: message.message.id)
+        }
+    }
+
+    func reactions(of message: MessageContentVM) -> ReactionsContainerModel? {
+        messagesModels.first { $0.messageContent === message }?.reactionsModel
+    }
+}

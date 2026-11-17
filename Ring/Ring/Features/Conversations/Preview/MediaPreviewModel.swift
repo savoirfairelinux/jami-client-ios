@@ -24,6 +24,11 @@ protocol MediaPreviewActionsDelegate: AnyObject {
     func deleteMessage()
 }
 
+protocol MediaPreviewConversationActions: AnyObject {
+    func react(to message: MessageContentVM, with emoji: String)
+    func reactions(of message: MessageContentVM) -> ReactionsContainerModel?
+}
+
 enum MediaPreviewSheet: Identifiable {
     case share(url: URL)
     case forward(injectionBag: InjectionBag, callback: ([String]) -> Void)
@@ -52,11 +57,14 @@ class MediaPreviewModel: ObservableObject {
     var forwardCallback: (([String]) -> Void)?
     @Published var title = ""
     var subtitle = ""
+    weak var message: MessageContentVM?
+    weak var conversationActions: MediaPreviewConversationActions?
 
     @Published var activeSheet: MediaPreviewSheet?
     @Published var saveError: String?
     @Published var saveSuccess: Bool = false
     @Published var needsPhotoPermission: Bool = false
+    @Published var isReacting = false
 
     var isImagePreview: Bool {
         if case .image = content { return true }
@@ -65,6 +73,24 @@ class MediaPreviewModel: ObservableObject {
 
     var canSave: Bool {
         fileURL?.pathExtension.isImageExtension() == true
+    }
+
+    var canReact: Bool {
+        message != nil && conversationActions != nil
+    }
+
+    var reactions: ReactionsContainerModel? {
+        guard let message = message else { return nil }
+        return conversationActions?.reactions(of: message)
+    }
+
+    var ownReactions: Set<String> {
+        Set(reactions?.segments.filter(\.includesLocalAccount).map(\.emoji) ?? [])
+    }
+
+    var reactionChoices: [String] {
+        let preferred = ContextMenuVM.preferredReactions
+        return preferred + ownReactions.subtracting(preferred).sorted()
     }
 
     init(content: MediaPreviewContent, delegate: MediaPreviewActionsDelegate, fileURL: URL? = nil, canDelete: Bool = false, photoSaver: PhotoLibrarySaving = SystemPhotoLibrarySaver()) {
@@ -124,4 +150,13 @@ class MediaPreviewModel: ObservableObject {
 
     func delete() { delegate?.deleteMessage() }
 
+    func toggleReacting() {
+        isReacting.toggle()
+    }
+
+    func react(_ emoji: String) {
+        isReacting = false
+        guard let message = message else { return }
+        conversationActions?.react(to: message, with: emoji)
+    }
 }
