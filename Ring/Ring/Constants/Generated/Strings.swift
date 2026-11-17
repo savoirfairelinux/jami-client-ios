@@ -1481,6 +1481,10 @@ internal enum L10n {
     }
     /// More
     internal static let moreActions = L10n.tr("Localizable", "mediaPreview.moreActions", fallback: "More")
+    /// More emoji
+    internal static let moreEmoji = L10n.tr("Localizable", "mediaPreview.moreEmoji", fallback: "More emoji")
+    /// React
+    internal static let react = L10n.tr("Localizable", "mediaPreview.react", fallback: "React")
   }
   internal enum MigrateAccount {
     /// An error occurred while migrating the account. Retry or delete the account.

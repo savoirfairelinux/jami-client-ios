@@ -95,6 +95,7 @@ struct MediaPreviewShell<Media: View, Controls: View>: View {
         .accessibilityElement(children: .contain)
         .accessibilityAddTraits(.isModal)
         .animation(MediaPreviewLayout.chromeAnimation, value: showsChrome)
+        .animation(.spring(response: 0.3, dampingFraction: 0.82), value: model.isReacting)
         .overlay(savedToast)
         .onChange(of: model.saveSuccess, perform: savedStateChanged)
         .animation(.spring(response: 0.35, dampingFraction: 0.8), value: model.saveSuccess)
@@ -181,6 +182,7 @@ struct MediaPreviewShell<Media: View, Controls: View>: View {
     private var bottomChrome: some View {
         VStack(spacing: MediaPreviewLayout.bottomStackSpacing) {
             controls()
+            reactionsArea
             MediaPreviewActionCapsule(model: model)
         }
         .padding(.horizontal, MediaPreviewLayout.sideInset)
@@ -190,6 +192,22 @@ struct MediaPreviewShell<Media: View, Controls: View>: View {
                                    value: size.height - proxy.frame(in: .global).minY)
         })
         .onPreferenceChange(MediaPreviewBottomChromeHeightKey.self) { bottomChromeHeight = $0 }
+    }
+
+    @ViewBuilder private var reactionsArea: some View {
+        if model.isReacting, let choices = model.reactionChoices {
+            MediaPreviewReactionPicker(choices: choices,
+                                       maxWidth: size.width - 2 * MediaPreviewLayout.sideInset,
+                                       onPick: { emoji in
+                                           playReactionHaptic()
+                                           model.react(emoji)
+                                       })
+                .transition(.scale(scale: 0.9).combined(with: .opacity))
+        } else if let reactions = model.reactions {
+            MediaPreviewReactionsSummary(reactions: reactions,
+                                         maxWidth: size.width - 2 * MediaPreviewLayout.sideInset)
+                .transition(.opacity)
+        }
     }
 
     // MARK: - Interaction
@@ -206,6 +224,10 @@ struct MediaPreviewShell<Media: View, Controls: View>: View {
     }
 
     func handleTap() {
+        if model.isReacting {
+            model.isReacting = false
+            return
+        }
         chromeVisible.toggle()
     }
 

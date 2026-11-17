@@ -108,9 +108,10 @@ class ReactionsContainerModel: ObservableObject {
         }
     }
 
-    func summary(fitting availableWidth: CGFloat, width: (ReactionsSummary) -> CGFloat) -> ReactionsSummary {
-        guard availableWidth > 0 else { return summary(maxVisible: Self.maxVisibleSegments) }
-        for limit in stride(from: Self.maxVisibleSegments, to: 1, by: -1) {
+    func summary(fitting availableWidth: CGFloat, maxVisible: Int? = nil, width: (ReactionsSummary) -> CGFloat) -> ReactionsSummary {
+        let maxVisible = maxVisible ?? Self.maxVisibleSegments
+        guard availableWidth > 0 else { return summary(maxVisible: maxVisible) }
+        for limit in stride(from: maxVisible, to: 1, by: -1) {
             let candidate = summary(maxVisible: limit)
             if width(candidate) <= availableWidth {
                 return candidate

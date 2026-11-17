@@ -90,7 +90,8 @@ enum MessagePanelState: State {
 // swiftlint:disable file_length
 class MessagesListVM: ObservableObject, AvatarRelayProviding {
     // view properties
-    var contextMenuModel = ContextMenuVM()
+    let contextMenuModel: ContextMenuVM
+    private let reactionActions: ReactionActions
     @Published var messagesModels = [MessageContainerModel]()
     @Published var scrollToId: String?
     @Published var scrollToReplyTarget: String? // message id of a reply target that we should scroll
@@ -241,6 +242,8 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
             self.messagePanel.canWriteDocuments = self.conversation.isSwarm()
             self.permissions = self.conversation.permissions
             self.voiceRecording.conversation = self.conversation
+            let localJamiId = self.accountService.getAccount(fromAccountId: self.conversation.accountId)?.jamiId
+            self.reactionActions.configure(conversation: self.conversation, localJamiId: localJamiId)
         }
     }
 
@@ -302,6 +305,8 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
         self.profileService = injectionBag.profileService
         self.dataTransferService = injectionBag.dataTransferService
         self.conversationService = injectionBag.conversationsService
+        self.reactionActions = ReactionActions(conversationService: injectionBag.conversationsService)
+        self.contextMenuModel = ContextMenuVM(reactionActions: self.reactionActions)
         self.contactsService = injectionBag.contactsService
         self.nameService = injectionBag.nameService
         self.presenceService = injectionBag.presenceService
@@ -315,12 +320,12 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
 
         self.voiceRecording.onSend = self.messagePanel.send
         self.voiceRecording.onStart = self.messagePanel.discardDraftAttachments
+        self.actionHandler.conversationActions = self
         self.subscribeLocationEvents()
         self.subscribeSwarmPreferences()
         self.subscribeUserAvatarForLocationSharing()
         self.subscribeReplyTarget()
         self.subscribeMessagesActions()
-        self.subscribeContextMenu()
         self.subscribeToTypingStatus()
         self.subscribeTimeChanges()
     }
@@ -546,32 +551,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
 
     func configureContextMenu(content: MessageContentVM, container: MessageContainerModel, frame: CGRect, mode: ContextMenuMode) {
         self.contextMenuModel.messageFrame = frame
-        let localJamiId = self.accountService.getAccount(fromAccountId: self.conversation.accountId)?.jamiId
-        self.contextMenuModel.configure(content: content, container: container, mode: mode, localJamiId: localJamiId, avatarFactory: makeAvatarFactory())
-    }
-
-    func subscribeContextMenu() {
-        self.contextMenuModel.sendEmojiUpdate
-            .subscribe(onNext: { [weak self] event in
-                if let self = self, !event.isEmpty {
-                    switch event["action"] {
-                    case ReactionCommand.apply.toString():
-                        if let dat = event["data"], let mId = event["parentMessageId"] {
-                            self.conversationService.sendEmojiReactionMessage(conversationId: self.conversation.id, accountId: self.conversation.accountId, message: dat, parentId: mId)
-                        } else {
-                            self.log.error("[MessagesListVM] Invalid data provided while attempting to add a reaction a message.")
-                        }
-                    case ReactionCommand.revoke.toString():
-                        if let rId = event["reactionId"] {
-                            self.conversationService.editSwarmMessage(conversationId: self.conversation.id, accountId: self.conversation.accountId, message: "", parentId: rId)
-                        } else {
-                            self.log.error("[MessagesListVM] Invalid message ID provided while attempting to revoke a reaction from a message.")
-                        }
-                    default: break
-                    }
-                }
-            })
-            .disposed(by: self.disposeBag)
+        self.contextMenuModel.configure(content: content, container: container, mode: mode, avatarFactory: makeAvatarFactory())
     }
 
     func subscribeMessageUpdates(conversation: ConversationModel) {
@@ -641,6 +621,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     }
 
     func reactionsUpdated(_ message: MessageModel) {
+        reactionActions.reactionsUpdated(message)
         guard let container = self.getMessage(messageId: message.id) else { return }
         let groupingChanged = MessageGrouping.changesGrouping(from: container.message, to: message)
         container.reactionsUpdated(message)
@@ -1308,3 +1289,23 @@ extension MessagesListVM {
     }
 }
 // swiftlint:enable type_body_length
+
+extension MessagesListVM: MediaPreviewConversationActions {
+    func canReact(toMessage messageId: String) -> Bool {
+        getMessage(messageId: messageId)?.messageContent.canReact == true
+    }
+
+    func reactions(ofMessage messageId: String) -> ReactionsContainerModel? {
+        getMessage(messageId: messageId)?.reactionsModel
+    }
+
+    func reactionChoices(forMessage messageId: String) -> ReactionChoices? {
+        guard let message = getMessage(messageId: messageId)?.message else { return nil }
+        return reactionActions.choices(on: message)
+    }
+
+    func react(toMessage messageId: String, with emoji: String) {
+        guard let message = getMessage(messageId: messageId)?.message else { return }
+        reactionActions.toggle(emoji, on: message)
+    }
+}

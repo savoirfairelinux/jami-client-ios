@@ -21,8 +21,6 @@
 import Combine
 import Foundation
 import SwiftUI
-import RxRelay
-import SwiftyBeaver
 
 enum ContextMenuMode {
     case actions
@@ -32,12 +30,9 @@ enum ContextMenuMode {
 
 class ContextMenuVM: ObservableObject {
 
-    private let log = SwiftyBeaver.self
-
     private(set) var contentVM: MessageContentVM?
     private(set) var containerModel: MessageContainerModel?
 
-    var sendEmojiUpdate = BehaviorRelay(value: [String: String]())
     @Published private(set) var menuItems = [ContextualMenuItem]()
     @Published private(set) var messageDateText = ""
     @Published private(set) var mode: ContextMenuMode = .actions
@@ -47,21 +42,20 @@ class ContextMenuVM: ObservableObject {
     private(set) var avatarFactory: AvatarProviderFactory?
     private var reactionsSubscription: AnyCancellable?
     private var editHistorySubscription: AnyCancellable?
-    private let recentReactions: RecentReactions
+    private let reactionActions: ReactionActions
 
-    init(recentReactions: RecentReactions = RecentReactions()) {
-        self.recentReactions = recentReactions
+    init(reactionActions: ReactionActions) {
+        self.reactionActions = reactionActions
+        reactionActions.$pendingRemovals.map { Set($0.keys) }.assign(to: &$pendingReactionRemovals)
     }
 
-    func configure(content: MessageContentVM, container: MessageContainerModel, mode: ContextMenuMode, localJamiId: String?, avatarFactory: AvatarProviderFactory) {
-        self.currentJamiAccountId = localJamiId
+    func configure(content: MessageContentVM, container: MessageContainerModel, mode: ContextMenuMode, avatarFactory: AvatarProviderFactory) {
         self.contentVM = content
         self.containerModel = container
         self.avatarFactory = avatarFactory
         self.mode = mode
-        canReact = content.permissions.allows(.reaction)
+        canReact = content.canReact
         listEmptied = false
-        pendingReactionRemovals = []
         reactionsSubscription = nil
         editHistorySubscription = nil
         if mode == .reactions {
@@ -82,16 +76,9 @@ class ContextMenuVM: ObservableObject {
 
         updateContextMenuSize()
 
-        preferredUserReactions = recentReactions.reactions
-        if let sender = currentJamiAccountId {
-            myAuthoredReactionIds = container.message.reactionsMessageIdsBySender(jamiId: sender)
-            let authoredContents = Set(
-                container.reactionsModel.message.reactions
-                    .filter { myAuthoredReactionIds.contains($0.id) }
-                    .map(\.content)
-            )
-            uniqueAuthoredReactions = Array(authoredContents.subtracting(preferredUserReactions))
-        }
+        let choices = reactionActions.choices(on: container.message)
+        preferredUserReactions = choices.preferred
+        uniqueAuthoredReactions = choices.others
     }
 
     var messageFrame: CGRect = .zero {
@@ -180,8 +167,9 @@ class ContextMenuVM: ObservableObject {
             : UIColor.black.withAlphaComponent(0.8)
     }
 
-    private(set) var currentJamiAccountId: String?
-    private var myAuthoredReactionIds: [String] = []
+    var currentJamiAccountId: String? {
+        reactionActions.localJamiId
+    }
 
     var screenWidth: CGFloat {
         return ScreenDimensionsManager.shared.adaptiveWidth
@@ -373,61 +361,17 @@ class ContextMenuVM: ObservableObject {
     // MARK: - Reaction handling
 
     func removeReaction(id: String) {
-        guard pendingReactionRemovals.insert(id).inserted else { return }
-        sendEmojiUpdate.accept(["reactionId": id, "action": ReactionCommand.revoke.toString()])
+        guard let container = containerModel else { return }
+        reactionActions.remove(reactionId: id, from: container.message)
     }
 
     func handleUpdatedReaction() {
-        guard let container = containerModel, let author = currentJamiAccountId else {
-            log.error("[ContextMenu] Failed to update reaction on invalid presented message or Jami Id.")
-            return
-        }
-        if let reactionMsg = getAuthoredReaction(withValue: selectedEmoji) {
-            log.debug("[ContextMenu] Revoking reaction \(reactionMsg.content) for \(reactionMsg.author)")
-            removeReaction(id: reactionMsg.id)
-        } else {
-            log.debug("[ContextMenu] Applying reaction \(selectedEmoji) for \(author)")
-            recentReactions.record(selectedEmoji)
-            sendEmojiUpdate.accept([
-                "parentMessageId": container.id,
-                "author": author,
-                "data": selectedEmoji,
-                "action": ReactionCommand.apply.toString()
-            ])
-        }
+        guard let container = containerModel else { return }
+        reactionActions.toggle(selectedEmoji, on: container.message)
     }
 
     func localUserAuthoredReaction(emoji: String) -> Bool {
-        guard let sender = currentJamiAccountId, let container = containerModel else {
-            log.error("[ContextMenu] Jami account ID invalid while attempting to read message reactions.")
-            return false
-        }
-        return container.message.reactions.contains {
-            $0.author == sender && $0.content == emoji && !pendingReactionRemovals.contains($0.id)
-        }
-    }
-
-    private func getAuthoredReaction(withValue: String) -> MessageAction? {
-        guard let sender = currentJamiAccountId, let container = containerModel else {
-            log.error("[ContextMenu] Jami account ID invalid while attempting to read message reactions.")
-            return nil
-        }
-        return container.message.reactions.first {
-            $0.author == sender && $0.content == withValue && !pendingReactionRemovals.contains($0.id)
-        }
-    }
-}
-
-enum ReactionCommand {
-    case apply
-    case revoke
-
-    func toString() -> String {
-        switch self {
-        case .apply:
-            return "apply"
-        case .revoke:
-            return "revoke"
-        }
+        guard let container = containerModel else { return false }
+        return reactionActions.ownEmojis(on: container.message).contains(emoji)
     }
 }

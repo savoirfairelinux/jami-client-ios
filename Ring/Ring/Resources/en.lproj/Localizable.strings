@@ -899,4 +899,6 @@
 
 // Media preview
 "mediaPreview.dateTime" = "%1$@, %2$@";
+"mediaPreview.react" = "React";
 "mediaPreview.moreActions" = "More";
+"mediaPreview.moreEmoji" = "More emoji";
