@@ -547,7 +547,7 @@ final class MessageActionHandler {
         let allowDelete = !message.isIncoming
         if let player = message.player, player.hasVideo.value {
             let content = MediaPreviewContent.player(player)
-            let model = makePreviewModel(content: content, fileURL: url, canDelete: allowDelete, delegate: message)
+            let model = makePreviewModel(content: content, fileURL: url, canDelete: allowDelete, message: message)
             presentMediaPreview?(model, sourceFrame, sourceFrameProvider)
         } else if url.pathExtension.isImageExtension() {
             let isGif = message.isGifImage()
@@ -560,20 +560,28 @@ final class MessageActionHandler {
                     guard let self = self, let message = message else { return }
                     let currentFrame = sourceFrameProvider?() ?? sourceFrame
                     let content = MediaPreviewContent.image(image)
-                    let model = self.makePreviewModel(content: content, fileURL: url, canDelete: allowDelete, delegate: message)
+                    let model = self.makePreviewModel(content: content, fileURL: url, canDelete: allowDelete, message: message)
                     self.presentMediaPreview?(model, currentFrame, sourceFrameProvider)
                 }
             }
         }
     }
 
-    private func makePreviewModel(content: MediaPreviewContent, fileURL: URL, canDelete: Bool, delegate: MediaPreviewActionsDelegate) -> MediaPreviewModel {
-        let model = MediaPreviewModel(content: content, delegate: delegate, fileURL: fileURL, canDelete: canDelete)
+    private func makePreviewModel(content: MediaPreviewContent, fileURL: URL, canDelete: Bool, message: MessageContentVM) -> MediaPreviewModel {
+        let model = MediaPreviewModel(content: content, delegate: message, fileURL: fileURL, canDelete: canDelete)
         model.injectionBag = injectionBag
+        let isIncoming = message.isIncoming
+        message.$username
+            .map { isIncoming ? $0 : $0.withYourselfSuffix() }
+            .receive(on: DispatchQueue.main)
+            .assign(to: &model.$title)
+        message.updateUserName()
+        let date = message.message.receivedDate
+        model.subtitle = L10n.MediaPreview.dateTime(date.conversationDayLabel(), date.messageTimeString())
         if let forwardMessage = forwardMessage {
-            model.forwardCallback = { [weak delegate] conversations in
-                guard let delegate = delegate as? MessageContentVM else { return }
-                forwardMessage(delegate, conversations)
+            model.forwardCallback = { [weak message] conversations in
+                guard let message = message else { return }
+                forwardMessage(message, conversations)
             }
         }
         return model

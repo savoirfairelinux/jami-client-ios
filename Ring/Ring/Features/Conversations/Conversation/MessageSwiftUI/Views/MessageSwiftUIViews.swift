@@ -42,7 +42,7 @@ struct PlayerSwiftUI: View {
                     .frame(width: model.playerWidth * ratio + 2, height: model.playerHeight * ratio + 2)
                     .modifier(MessageCornerRadius(model: model, radius: mediaCornerRadius))
             }
-            PlayerView(viewModel: player, sizeMode: .inConversationMessage, withControls: withControls,
+            PlayerView(viewModel: player, withControls: withControls,
                        onVideoTap: { frame, frameProvider in model.presentMediaPreview(sourceFrame: frame, sourceFrameProvider: frameProvider) },
                        onVideoLongPress: onLongGesture,
                        audioColors: drawsMessageBubble ? model.audioPlayerColors : model.audioPlayerColors.withoutBackground(),
