@@ -53,6 +53,9 @@ struct ConversationContainerView: View {
                 viewModel.swiftUIModel.actionHandler.presentMediaPreview = { [weak presenter] model, frame, provider in
                     presenter?.present(model: model, sourceFrame: frame, sourceFrameProvider: provider)
                 }
+                viewModel.swiftUIModel.actionHandler.mediaPreviewPresentationHost = { [weak presenter] in
+                    presenter?.presentationHost
+                }
             }
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(leading: conversationTitleView)

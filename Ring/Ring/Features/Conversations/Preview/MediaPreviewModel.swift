@@ -25,8 +25,13 @@ protocol MediaPreviewActionsDelegate: AnyObject {
 }
 
 protocol MediaPreviewConversationActions: AnyObject {
+    var replyPanel: MessagePanelVM { get }
+    var replyVoiceRecording: VoiceRecordingVM { get }
+
+    func beginReply(to message: MessageContentVM)
     func react(to message: MessageContentVM, with emoji: String)
     func reactions(of message: MessageContentVM) -> ReactionsContainerModel?
+    func showLatestMessage()
 }
 
 enum MediaPreviewSheet: Identifiable {
@@ -64,6 +69,7 @@ class MediaPreviewModel: ObservableObject {
     @Published var saveError: String?
     @Published var saveSuccess: Bool = false
     @Published var needsPhotoPermission: Bool = false
+    @Published var isReplying = false
     @Published var isReacting = false
 
     var isImagePreview: Bool {
@@ -73,6 +79,11 @@ class MediaPreviewModel: ObservableObject {
 
     var canSave: Bool {
         fileURL?.pathExtension.isImageExtension() == true
+    }
+
+    var canReply: Bool {
+        guard message != nil, let actions = conversationActions else { return false }
+        return actions.replyPanel.isComposerAvailable
     }
 
     var canReact: Bool {
@@ -158,5 +169,26 @@ class MediaPreviewModel: ObservableObject {
         isReacting = false
         guard let message = message else { return }
         conversationActions?.react(to: message, with: emoji)
+    }
+
+    func beginReply() {
+        guard let message = message, let actions = conversationActions else { return }
+        isReacting = false
+        actions.beginReply(to: message)
+        isReplying = true
+    }
+
+    func cancelReply() {
+        isReplying = false
+        conversationActions?.replyVoiceRecording.cancel()
+        conversationActions?.replyPanel.cancelReply()
+    }
+
+    func finishReply() {
+        isReplying = false
+    }
+
+    func showLatestMessage() {
+        conversationActions?.showLatestMessage()
     }
 }

@@ -899,3 +899,9 @@
 "mediaPreview.react" = "React";
 "mediaPreview.moreActions" = "More";
 "mediaPreview.moreEmoji" = "More emoji";
+"mediaPreview.replyTo" = "Reply to %@";
+"mediaPreview.voice" = "Voice";
+"mediaPreview.video" = "Video";
+"mediaPreview.photos" = "Photos";
+"mediaPreview.file" = "File";
+"mediaPreview.message" = "Message";
