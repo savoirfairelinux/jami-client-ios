@@ -18,12 +18,12 @@
 
 import SwiftUI
 import Photos
+import UniformTypeIdentifiers
 
 protocol MediaPreviewActionsDelegate: AnyObject {
     func deleteMessage()
 }
 
-/// Identifies which sheet to present from MediaPreviewView.
 enum MediaPreviewSheet: Identifiable {
     case share(url: URL)
     case forward(injectionBag: InjectionBag, callback: ([String]) -> Void)
@@ -36,14 +36,10 @@ enum MediaPreviewSheet: Identifiable {
     }
 }
 
-// MARK: - Content
-
 enum MediaPreviewContent {
     case player(PlayerViewModel)
     case image(UIImage)
 }
-
-// MARK: - Model
 
 class MediaPreviewModel: ObservableObject {
     let content: MediaPreviewContent
@@ -54,6 +50,8 @@ class MediaPreviewModel: ObservableObject {
 
     var injectionBag: InjectionBag?
     var forwardCallback: (([String]) -> Void)?
+    @Published var title = ""
+    var subtitle = ""
 
     @Published var activeSheet: MediaPreviewSheet?
     @Published var saveError: String?
@@ -63,6 +61,10 @@ class MediaPreviewModel: ObservableObject {
     var isImagePreview: Bool {
         if case .image = content { return true }
         return false
+    }
+
+    var canSave: Bool {
+        fileURL?.pathExtension.isImageExtension() == true
     }
 
     init(content: MediaPreviewContent, delegate: MediaPreviewActionsDelegate, fileURL: URL? = nil, canDelete: Bool = false, photoSaver: PhotoLibrarySaving = SystemPhotoLibrarySaver()) {
@@ -108,5 +110,18 @@ class MediaPreviewModel: ObservableObject {
         }
     }
 
+    func copy() {
+        guard let url = fileURL,
+              let type = UTType(filenameExtension: url.pathExtension) else { return }
+        DispatchQueue.global(qos: .userInitiated).async {
+            guard let data = try? Data(contentsOf: url) else { return }
+            DispatchQueue.main.async {
+                UIPasteboard.general.setData(data, forPasteboardType: type.identifier)
+                UINotificationFeedbackGenerator().notificationOccurred(.success)
+            }
+        }
+    }
+
     func delete() { delegate?.deleteMessage() }
+
 }

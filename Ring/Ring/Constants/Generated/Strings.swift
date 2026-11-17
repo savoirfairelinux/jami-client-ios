@@ -1472,6 +1472,10 @@ internal enum L10n {
     /// Diagnostics
     internal static let title = L10n.tr("Localizable", "logView.title", fallback: "Diagnostics")
   }
+  internal enum MediaPreview {
+    /// More
+    internal static let moreActions = L10n.tr("Localizable", "mediaPreview.moreActions", fallback: "More")
+  }
   internal enum MigrateAccount {
     /// An error occurred while migrating the account. Retry or delete the account.
     internal static let error = L10n.tr("Localizable", "migrateAccount.error", fallback: "An error occurred while migrating the account. Retry or delete the account.")
