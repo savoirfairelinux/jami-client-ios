@@ -47,6 +47,12 @@ class ContextMenuVM: ObservableObject {
     private(set) var avatarFactory: AvatarProviderFactory?
     private var reactionsSubscription: AnyCancellable?
     private var editHistorySubscription: AnyCancellable?
+    private let recentReactions: RecentReactions
+
+    init(recentReactions: RecentReactions = RecentReactions()) {
+        self.recentReactions = recentReactions
+        preferredUserReactions = recentReactions.reactions
+    }
 
     func configure(content: MessageContentVM, container: MessageContainerModel, mode: ContextMenuMode, localJamiId: String?, avatarFactory: AvatarProviderFactory) {
         self.currentJamiAccountId = localJamiId
@@ -77,6 +83,7 @@ class ContextMenuVM: ObservableObject {
 
         updateContextMenuSize()
 
+        preferredUserReactions = recentReactions.reactions
         if let sender = currentJamiAccountId {
             myAuthoredReactionIds = container.message.reactionsMessageIdsBySender(jamiId: sender)
             let authoredContents = Set(
@@ -185,9 +192,8 @@ class ContextMenuVM: ObservableObject {
         return ScreenDimensionsManager.shared.adaptiveHeight
     }
 
-    let preferredUserReactions: [String] = [
-        0x1F44D, 0x1F44E, 0x1F606, 0x1F923, 0x1F615
-    ].map { String(UnicodeScalar($0)!) }
+    // Read once per opening so the bar never reorders while it is visible.
+    private(set) var preferredUserReactions: [String]
 
     private(set) var uniqueAuthoredReactions: [String] = []
     @Published var selectedEmoji: String = ""
@@ -393,6 +399,7 @@ class ContextMenuVM: ObservableObject {
             removeReaction(id: reactionMsg.id)
         } else {
             log.debug("[ContextMenu] Applying reaction \(selectedEmoji) for \(author)")
+            recentReactions.record(selectedEmoji)
             sendEmojiUpdate.accept([
                 "parentMessageId": container.id,
                 "author": author,
