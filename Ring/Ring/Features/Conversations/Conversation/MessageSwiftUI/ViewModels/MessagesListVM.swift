@@ -235,7 +235,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
             conversationService.readMessages(of: conversation) { [weak self] snapshot in
                 self?.invalidateAndSetupConversationSubscriptions(conversation: conversation, snapshot: snapshot)
             }
-            self.updateColorPreference()
+            self.updatePreferences()
             self.updateLastDisplayed()
             self.callBannerViewModel = CallBannerViewModel(injectionBag: self.injectionBag, conversation: self.conversation, state: self.messagePanelStateSubject)
             self.messagePanel.canWriteDocuments = self.conversation.isSwarm()
@@ -928,7 +928,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
                     event.getEventInput(ServiceEventInput.conversationId) == self?.conversation.id
             })
             .subscribe(onNext: { [weak self] _ in
-                self?.updateColorPreference()
+                self?.updatePreferences()
             })
             .disposed(by: self.disposeBag)
     }
@@ -1001,10 +1001,14 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
         }
     }
 
-    private func updateColorPreference() {
-        guard let color = UIColor(hexString: self.conversation.preferences.color) else { return }
+    private func updatePreferences() {
+        let preferences = self.conversation.preferences
+        let color = UIColor(hexString: preferences.color)
         DispatchQueue.main.async { [weak self] in
-            self?.swarmColor = color
+            if let color = color {
+                self?.swarmColor = color
+            }
+            self?.messagePanel.defaultEmoji = preferences.symbol
         }
     }
 

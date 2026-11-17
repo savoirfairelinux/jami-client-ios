@@ -83,6 +83,7 @@ enum ConversationAttributes: String {
 enum ConversationPreferenceAttributes: String {
     case color
     case ignoreNotifications
+    case symbol
 }
 
 enum ConversationMemberAttributes: String {
@@ -152,8 +153,11 @@ struct ConversationPermissions: Equatable {
 }
 
 struct ConversationPreferences {
+    static let defaultSymbol = "👍"
+
     var color: String = UIColor.defaultSwarmColorHex
     var ignoreNotifications: Bool = false
+    var symbol: String = ConversationPreferences.defaultSymbol
 
     mutating func update(info: [String: String]) {
         if let color = info[ConversationPreferenceAttributes.color.rawValue] {
@@ -161,6 +165,9 @@ struct ConversationPreferences {
         }
         if let ignoreNotifications = info[ConversationPreferenceAttributes.ignoreNotifications.rawValue] {
             self.ignoreNotifications = (ignoreNotifications as NSString).boolValue
+        }
+        if let symbol = info[ConversationPreferenceAttributes.symbol.rawValue] {
+            self.symbol = symbol.containsOnlyEmoji ? symbol : Self.defaultSymbol
         }
     }
 

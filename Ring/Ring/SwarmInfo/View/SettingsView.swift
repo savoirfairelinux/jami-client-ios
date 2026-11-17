@@ -17,6 +17,7 @@
  */
 
 import SwiftUI
+import MCEmojiPicker
 
 struct SettingsView: View {
     // MARK: - Properties
@@ -46,6 +47,7 @@ struct SettingsView: View {
     @SwiftUI.State private var showQRcode = false
     @SwiftUI.State private var presentingAlert: PresentingAlert?
     @SwiftUI.State private var showColorPicker = false
+    @SwiftUI.State private var showEmojiPicker = false
 
     // MARK: - Body
     var body: some View {
@@ -130,6 +132,7 @@ struct SettingsView: View {
             identifierView(label: L10n.Swarm.conversationId, value: viewmodel.swarmInfo.id)
             swarmTypeView
             colorPickerView
+            emojiPickerView
             removeConversationButton
                 .alert(item: $presentingAlert) { alert in
                     createAlert(for: alert)
@@ -177,6 +180,29 @@ struct SettingsView: View {
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(L10n.Swarm.chooseColor)
         .accessibilityValue(viewmodel.finalColor)
+    }
+
+    private var emojiPickerView: some View {
+        Button(action: {
+            showEmojiPicker = true
+        }, label: {
+            HStack {
+                Text(L10n.Swarm.quickSendEmoji)
+                Spacer()
+                Text(viewmodel.symbol)
+                    .font(.title2)
+                    .emojiPicker(isPresented: $showEmojiPicker,
+                                 selectedEmoji: Binding(get: { viewmodel.symbol },
+                                                        set: { viewmodel.updateSymbol($0) }),
+                                 arrowDirection: .down)
+            }
+            .contentShape(Rectangle())
+        })
+        .buttonStyle(PlainButtonStyle())
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(L10n.Swarm.quickSendEmoji)
+        .accessibilityValue(viewmodel.symbol)
+        .accessibilityAddTraits(.isButton)
     }
 
     private var removeConversationButton: some View {
