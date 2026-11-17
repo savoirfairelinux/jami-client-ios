@@ -683,7 +683,7 @@ private struct MessageReactionsCapsule: View {
     }
 }
 
-private struct ReactionsCapsuleFonts {
+struct ReactionsCapsuleFonts {
     private let emojiFont: UIFont
     private let countFont: UIFont
 

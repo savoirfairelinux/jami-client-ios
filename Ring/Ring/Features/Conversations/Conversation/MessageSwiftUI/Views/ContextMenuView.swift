@@ -500,7 +500,7 @@ struct EmojiBarItemView: View {
 
 }
 
-private func playReactionHaptic() {
+func playReactionHaptic() {
     UIImpactFeedbackGenerator(style: .light).impactOccurred()
 }
 

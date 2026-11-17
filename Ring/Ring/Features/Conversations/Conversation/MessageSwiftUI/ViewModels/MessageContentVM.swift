@@ -375,6 +375,10 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     private var isNameBound = false
     weak var actionHandler: MessageActionHandler?
     var preferencesColor: UIColor
+    var canReact: Bool {
+        permissions.allows(.reaction)
+    }
+
     var permissions = ConversationPermissions.unrestricted {
         didSet {
             guard oldValue != permissions else { return }

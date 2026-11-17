@@ -24,6 +24,13 @@ protocol MediaPreviewActionsDelegate: AnyObject {
     func deleteMessage()
 }
 
+protocol MediaPreviewConversationActions: AnyObject {
+    func canReact(toMessage messageId: String) -> Bool
+    func reactions(ofMessage messageId: String) -> ReactionsContainerModel?
+    func reactionChoices(forMessage messageId: String) -> ReactionChoices?
+    func react(toMessage messageId: String, with emoji: String)
+}
+
 /// Identifies which sheet to present from MediaPreviewView.
 enum MediaPreviewSheet: Identifiable {
     case share(url: URL)
@@ -57,11 +64,17 @@ class MediaPreviewModel: ObservableObject {
     var forwardCallback: (([String]) -> Void)?
     @Published var title = ""
     var subtitle = ""
+    private var messageId: String?
+    private weak var conversationActions: MediaPreviewConversationActions?
+    private(set) var canReact = false
+    private(set) var reactions: ReactionsContainerModel?
+    private(set) var reactionChoices: ReactionChoices?
 
     @Published var activeSheet: MediaPreviewSheet?
     @Published var saveError: String?
     @Published var saveSuccess: Bool = false
     @Published var needsPhotoPermission: Bool = false
+    @Published var isReacting = false
 
     var isImagePreview: Bool {
         if case .image = content { return true }
@@ -82,11 +95,13 @@ class MediaPreviewModel: ObservableObject {
 
     func share() {
         guard let url = fileURL else { return }
+        isReacting = false
         activeSheet = .share(url: url)
     }
 
     func forward() {
         guard let bag = injectionBag, let callback = forwardCallback else { return }
+        isReacting = false
         activeSheet = .forward(injectionBag: bag, callback: callback)
     }
 
@@ -129,4 +144,28 @@ class MediaPreviewModel: ObservableObject {
     }
 
     func delete() { delegate?.deleteMessage() }
+
+    func enableReactions(messageId: String, actions: MediaPreviewConversationActions) {
+        self.messageId = messageId
+        conversationActions = actions
+        canReact = actions.canReact(toMessage: messageId)
+        reactions = actions.reactions(ofMessage: messageId)
+    }
+
+    func toggleReacting() {
+        if isReacting {
+            isReacting = false
+            return
+        }
+        guard let messageId = messageId,
+              let choices = conversationActions?.reactionChoices(forMessage: messageId) else { return }
+        reactionChoices = choices
+        isReacting = true
+    }
+
+    func react(_ emoji: String) {
+        isReacting = false
+        guard let messageId = messageId else { return }
+        conversationActions?.react(toMessage: messageId, with: emoji)
+    }
 }
