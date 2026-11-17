@@ -68,7 +68,7 @@ struct DraftAttachment: Identifiable {
 class MessagePanelVM: ObservableObject, MessageAppearanceProtocol {
 
     @Published var placeholder = L10n.Conversation.messagePlaceholder
-    @Published var defaultEmoji = "👍"
+    @Published var defaultEmoji = ConversationPreferences.defaultSymbol
     @Published var messageToReply: MessageContentVM?
     @Published var messageToEdit: MessageContentVM?
     @Published var isEdit: Bool = false
