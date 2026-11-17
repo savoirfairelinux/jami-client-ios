@@ -25,10 +25,15 @@ protocol MediaPreviewActionsDelegate: AnyObject {
 }
 
 protocol MediaPreviewConversationActions: AnyObject {
+    var replyPanel: MessagePanelVM { get }
+    var replyVoiceRecording: VoiceRecordingVM { get }
+
+    func beginReply(toMessage messageId: String) -> Bool
     func canReact(toMessage messageId: String) -> Bool
     func reactions(ofMessage messageId: String) -> ReactionsContainerModel?
     func reactionChoices(forMessage messageId: String) -> ReactionChoices?
     func react(toMessage messageId: String, with emoji: String)
+    func showLatestMessage()
 }
 
 /// Identifies which sheet to present from MediaPreviewView.
@@ -65,7 +70,7 @@ class MediaPreviewModel: ObservableObject {
     @Published var title = ""
     var subtitle = ""
     private var messageId: String?
-    private weak var conversationActions: MediaPreviewConversationActions?
+    private(set) weak var conversationActions: MediaPreviewConversationActions?
     private(set) var canReact = false
     private(set) var reactions: ReactionsContainerModel?
     private(set) var reactionChoices: ReactionChoices?
@@ -74,6 +79,7 @@ class MediaPreviewModel: ObservableObject {
     @Published var saveError: String?
     @Published var saveSuccess: Bool = false
     @Published var needsPhotoPermission: Bool = false
+    @Published var isReplying = false
     @Published var isReacting = false
 
     var isImagePreview: Bool {
@@ -83,6 +89,11 @@ class MediaPreviewModel: ObservableObject {
 
     var canSave: Bool {
         fileURL?.pathExtension.isImageExtension() == true
+    }
+
+    var canReply: Bool {
+        guard messageId != nil, let actions = conversationActions else { return false }
+        return actions.replyPanel.isComposerAvailable
     }
 
     init(content: MediaPreviewContent, delegate: MediaPreviewActionsDelegate, fileURL: URL? = nil, canDelete: Bool = false, photoSaver: PhotoLibrarySaving = SystemPhotoLibrarySaver()) {
@@ -167,5 +178,27 @@ class MediaPreviewModel: ObservableObject {
         isReacting = false
         guard let messageId = messageId else { return }
         conversationActions?.react(toMessage: messageId, with: emoji)
+    }
+
+    func beginReply() {
+        guard let messageId = messageId, let actions = conversationActions,
+              actions.beginReply(toMessage: messageId) else { return }
+        isReacting = false
+        isReplying = true
+    }
+
+    func cancelReply() {
+        isReplying = false
+        conversationActions?.replyVoiceRecording.cancel()
+        conversationActions?.replyPanel.handleTyping(message: "")
+        conversationActions?.replyPanel.cancelReply()
+    }
+
+    func finishReply() {
+        isReplying = false
+    }
+
+    func showLatestMessage() {
+        conversationActions?.showLatestMessage()
     }
 }

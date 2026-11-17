@@ -29,7 +29,7 @@ struct VideoPreviewScreen: View {
     @SwiftUI.State private var chromeVisible = false
 
     private var showsControls: Bool {
-        chromeVisible && overlayState.isExpanded && !overlayState.isDismissing
+        chromeVisible && overlayState.isExpanded && !overlayState.isDismissing && !model.isReplying
     }
 
     var body: some View {
@@ -53,6 +53,11 @@ struct VideoPreviewScreen: View {
                 coordinator.displayLayer.videoGravity = .resizeAspectFill
                 coordinator.pendingViewModel = player
                 coordinator.bind(to: player)
+            }
+            .onChange(of: model.isReplying) { replying in
+                if replying && !coordinator.isPaused {
+                    player.togglePause()
+                }
             }
     }
 }

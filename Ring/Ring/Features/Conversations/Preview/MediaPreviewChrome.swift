@@ -27,9 +27,10 @@ enum MediaPreviewLayout {
     static let reactionsHeight: CGFloat = 30
     static let reactionRowHeight: CGFloat = 50
     static let bottomStackSpacing: CGFloat = 12
-    static let scrimFade: CGFloat = 56
-    static let scrimOpacity: Double = 0.2
-    static let scrimRamp: [Double] = [0, 0.16, 0.5, 0.84, 1]
+    static let scrimFade: CGFloat = 24
+    static let scrimOpacity: Double = 0.16
+    static let scrimStops = 12
+    static let glassTint: Double = 0.2
     static let chromeAnimation = Animation.easeInOut(duration: 0.25)
 }
 
@@ -42,7 +43,8 @@ struct MediaPreviewGlass<S: Shape>: ViewModifier {
     @ViewBuilder
     func body(content: Content) -> some View {
         if #available(iOS 26.0, *) {
-            content.glassEffect(interactive ? .clear.interactive() : .clear, in: shape)
+            let glass = Glass.clear.tint(.black.opacity(MediaPreviewLayout.glassTint))
+            content.glassEffect(interactive ? glass.interactive() : glass, in: shape)
         } else {
             content.background(VisualEffect(style: .systemUltraThinMaterialDark).clipShape(shape))
         }
@@ -87,13 +89,13 @@ struct MediaPreviewScrim: View {
     private var height: CGFloat { chromeHeight + MediaPreviewLayout.scrimFade }
 
     private var gradient: Gradient {
-        let ramp = MediaPreviewLayout.scrimRamp
-        let fadeStart = chromeHeight / max(height, 1)
-        let fade = ramp.reversed().enumerated().map { index, level in
-            Gradient.Stop(color: .black.opacity(MediaPreviewLayout.scrimOpacity * level),
-                          location: fadeStart + (1 - fadeStart) * CGFloat(index) / CGFloat(ramp.count - 1))
-        }
-        return Gradient(stops: [Gradient.Stop(color: .black.opacity(MediaPreviewLayout.scrimOpacity), location: 0)] + fade)
+        let count = MediaPreviewLayout.scrimStops
+        return Gradient(stops: (0...count).map { index in
+            let location = Double(index) / Double(count)
+            let level = (1 + cos(location * .pi)) / 2
+            return Gradient.Stop(color: .black.opacity(MediaPreviewLayout.scrimOpacity * level),
+                                 location: location)
+        })
     }
 
     var body: some View {
@@ -196,6 +198,28 @@ struct MediaPreviewActionCapsule: View {
 
     var body: some View {
         HStack(spacing: 0) {
+            if model.canReply {
+                Button(action: model.beginReply) {
+                    HStack(spacing: 7) {
+                        Image(systemName: "arrowshape.turn.up.backward")
+                            .font(.system(size: NavBarIcon.glyphSize))
+                        Text(L10n.Global.reply)
+                            .font(.body.weight(.semibold))
+                    }
+                    .foregroundColor(.white)
+                    .padding(.horizontal, 12)
+                    .frame(height: MediaPreviewLayout.control)
+                    .contentShape(Rectangle())
+                }
+                .buttonStyle(ScaleButtonStyle())
+                .accessibilityShowsLargeContentViewer()
+                .opacity(othersOpacity)
+                Rectangle()
+                    .fill(Color.white.opacity(0.22))
+                    .frame(width: 1, height: 24)
+                    .padding(.horizontal, 6)
+                    .accessibilityHidden(true)
+            }
             if model.canReact {
                 iconButton("face.smiling", label: L10n.MediaPreview.react, isSelected: model.isReacting, action: model.toggleReacting)
             }

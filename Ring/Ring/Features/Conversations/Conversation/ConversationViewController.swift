@@ -108,6 +108,14 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
         self.viewModel = viewModel
     }
 
+    override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
+        if let host = viewModel?.swiftUIModel.actionHandler.mediaPreviewPresentationHost?() {
+            host.present(viewControllerToPresent, animated: flag, completion: completion)
+        } else {
+            super.present(viewControllerToPresent, animated: flag, completion: completion)
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupScreenTap()

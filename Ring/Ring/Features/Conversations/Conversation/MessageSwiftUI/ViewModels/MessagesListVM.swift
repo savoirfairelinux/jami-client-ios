@@ -1291,6 +1291,15 @@ extension MessagesListVM {
 // swiftlint:enable type_body_length
 
 extension MessagesListVM: MediaPreviewConversationActions {
+    var replyPanel: MessagePanelVM { messagePanel }
+    var replyVoiceRecording: VoiceRecordingVM { voiceRecording }
+
+    func beginReply(toMessage messageId: String) -> Bool {
+        guard let message = getMessage(messageId: messageId)?.messageContent else { return false }
+        configureReply(message: message)
+        return true
+    }
+
     func canReact(toMessage messageId: String) -> Bool {
         getMessage(messageId: messageId)?.messageContent.canReact == true
     }
@@ -1307,5 +1316,9 @@ extension MessagesListVM: MediaPreviewConversationActions {
     func react(toMessage messageId: String, with emoji: String) {
         guard let message = getMessage(messageId: messageId)?.message else { return }
         reactionActions.toggle(emoji, on: message)
+    }
+
+    func showLatestMessage() {
+        scrollToTheBottom()
     }
 }

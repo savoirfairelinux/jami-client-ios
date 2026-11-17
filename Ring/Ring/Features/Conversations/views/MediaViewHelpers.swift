@@ -533,6 +533,7 @@ extension Float {
 
 final class MessageActionHandler {
     var presentMediaPreview: ((MediaPreviewModel, CGRect, (() -> CGRect)?) -> Void)?
+    var mediaPreviewPresentationHost: (() -> UIViewController?)?
     let injectionBag: InjectionBag
     var forwardMessage: ((MessageContentVM, [String]) -> Void)?
     weak var conversationActions: MediaPreviewConversationActions?

@@ -360,8 +360,10 @@ class ConversationViewModel: Stateable, ObservableObject {
             guard let self = self else { return }
             let messagePanel = self.swiftUIModel.messagePanel
             let replyingTo = messagePanel.messageToReply == nil ? nil : messagePanel.inReplyTo
+            let presenter = self.swiftUIModel.actionHandler.mediaPreviewPresentationHost?()
             self.stateSubject.onNext(ConversationState.recordFile(conversation: self.conversation,
                                                                   replyingTo: replyingTo,
+                                                                  presenter: presenter,
                                                                   onSend: messagePanel.send))
         }
     }

@@ -46,6 +46,7 @@ struct MediaPreviewShell<Media: View, Controls: View>: View {
     @ViewBuilder let media: (_ onTap: @escaping () -> Void) -> Media
     @ViewBuilder let controls: () -> Controls
 
+    @StateObject private var keyboard = KeyboardFrameObserver()
     @SwiftUI.State private var bottomChromeHeight: CGFloat = 0
 
     private let thumbnailCornerRadius: CGFloat = 15
@@ -57,7 +58,13 @@ struct MediaPreviewShell<Media: View, Controls: View>: View {
         overlayState.isExpanded && !overlayState.isDismissing
     }
 
-    private var showsChrome: Bool { isSettled && chromeVisible }
+    private var showsReply: Bool { model.isReplying && isSettled }
+    private var showsHeader: Bool { isSettled && (chromeVisible || model.isReplying) }
+    private var showsBottomChrome: Bool { isSettled && chromeVisible && !model.isReplying }
+
+    private var replyPanelBottom: CGFloat {
+        max(overlayState.keyboardOverlap(for: keyboard.frame), safeArea.bottom) + 6
+    }
 
     var body: some View {
         let usesFade = !overlayState.hasSourceFrame
@@ -71,14 +78,14 @@ struct MediaPreviewShell<Media: View, Controls: View>: View {
             Color.black.opacity(overlayState.backgroundAlpha)
                 .contentShape(Rectangle())
                 .onTapGesture(perform: handleTap)
-                .gesture(allowsDismissDrag ? dismissDrag : nil)
+                .gesture(allowsDismissDrag && !model.isReplying ? dismissDrag : nil)
 
             media(handleTap)
                 .frame(width: targetRect.width, height: targetRect.height)
                 .clipShape(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
                 .opacity(contentOpacity)
                 .position(x: targetRect.midX, y: targetRect.midY)
-                .gesture(allowsDismissDrag ? dismissDrag : nil)
+                .gesture(allowsDismissDrag && !model.isReplying ? dismissDrag : nil)
                 .if(!usesFade) { view in
                     view.mask(
                         VStack(spacing: 0) {
@@ -89,12 +96,25 @@ struct MediaPreviewShell<Media: View, Controls: View>: View {
                     )
                 }
 
+            if showsReply {
+                Color.black.opacity(0.35)
+                    .contentShape(Rectangle())
+                    .onTapGesture(perform: handleTap)
+                    .transition(.opacity)
+            }
+
             chrome
                 .dynamicTypeSize(...DynamicTypeSize.xxxLarge)
+
+            if showsReply, let actions = model.conversationActions {
+                replyPanel(actions: actions)
+            }
         }
         .accessibilityElement(children: .contain)
         .accessibilityAddTraits(.isModal)
-        .animation(MediaPreviewLayout.chromeAnimation, value: showsChrome)
+        .animation(MediaPreviewLayout.chromeAnimation, value: showsHeader)
+        .animation(MediaPreviewLayout.chromeAnimation, value: showsBottomChrome)
+        .animation(.spring(response: 0.35, dampingFraction: 0.86), value: model.isReplying)
         .animation(.spring(response: 0.3, dampingFraction: 0.82), value: model.isReacting)
         .overlay(savedToast)
         .onChange(of: model.saveSuccess, perform: savedStateChanged)
@@ -132,6 +152,9 @@ struct MediaPreviewShell<Media: View, Controls: View>: View {
                 chromeVisible = true
             }
         }
+        .onChange(of: model.isReplying) { replying in
+            overlayState.setAcceptsKeyboard(replying)
+        }
         .onChange(of: model.activeSheet?.id) { sheetID in
             if sheetID != nil {
                 var transaction = Transaction()
@@ -150,18 +173,18 @@ struct MediaPreviewShell<Media: View, Controls: View>: View {
     @ViewBuilder private var chrome: some View {
         ZStack {
             VStack(spacing: 0) {
-                if showsChrome {
+                if showsHeader {
                     MediaPreviewScrim(edge: .top, chromeHeight: safeArea.top + MediaPreviewLayout.control)
                         .transition(.opacity)
                 }
                 Spacer(minLength: 0)
-                if showsChrome {
+                if showsBottomChrome {
                     MediaPreviewScrim(edge: .bottom, chromeHeight: bottomChromeHeight)
                         .transition(.opacity)
                 }
             }
             VStack(spacing: 0) {
-                if showsChrome {
+                if showsHeader {
                     MediaPreviewHeader(title: model.title,
                                        subtitle: model.subtitle,
                                        menuActions: menuActions,
@@ -170,7 +193,7 @@ struct MediaPreviewShell<Media: View, Controls: View>: View {
                         .transition(.opacity)
                 }
                 Spacer(minLength: 0)
-                if showsChrome {
+                if showsBottomChrome {
                     bottomChrome
                         .transition(.opacity)
                 }
@@ -210,6 +233,30 @@ struct MediaPreviewShell<Media: View, Controls: View>: View {
         }
     }
 
+    // MARK: - Reply
+
+    private func replyPanel(actions: MediaPreviewConversationActions) -> some View {
+        VStack(spacing: 0) {
+            Spacer(minLength: 0)
+            MediaReplyPanel(model: model,
+                            panel: actions.replyPanel,
+                            voiceRecording: actions.replyVoiceRecording,
+                            onSent: replySent)
+                .padding(.horizontal, 6)
+                .padding(.bottom, replyPanelBottom)
+        }
+        .frame(maxWidth: 600)
+        .frame(width: size.width, height: size.height)
+        .animation(.easeOut(duration: keyboard.animationDuration), value: keyboard.frame)
+        .transition(.move(edge: .bottom))
+    }
+
+    private func replySent() {
+        let model = self.model
+        model.finishReply()
+        overlayState.closeImmediately(then: model.showLatestMessage)
+    }
+
     // MARK: - Interaction
 
     private var dismissDrag: some Gesture {
@@ -224,6 +271,11 @@ struct MediaPreviewShell<Media: View, Controls: View>: View {
     }
 
     func handleTap() {
+        if model.isReplying {
+            hideKeyboard()
+            model.cancelReply()
+            return
+        }
         if model.isReacting {
             model.isReacting = false
             return
@@ -309,6 +361,35 @@ private struct MediaPreviewBottomChromeHeightKey: PreferenceKey {
 
     static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
         value = max(value, nextValue())
+    }
+}
+
+// MARK: - Keyboard
+
+final class KeyboardFrameObserver: ObservableObject {
+    @Published private(set) var frame: CGRect = .zero
+    private(set) var animationDuration: Double = 0.25
+    private var observer: NSObjectProtocol?
+
+    init() {
+        observer = NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillChangeFrameNotification,
+                                                          object: nil, queue: .main) { [weak self] notification in
+            self?.update(with: notification)
+        }
+    }
+
+    deinit {
+        if let observer = observer {
+            NotificationCenter.default.removeObserver(observer)
+        }
+    }
+
+    private func update(with notification: Notification) {
+        guard let frame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+        if let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double, duration > 0 {
+            animationDuration = duration
+        }
+        self.frame = frame
     }
 }
 
