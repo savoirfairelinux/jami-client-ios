@@ -185,9 +185,11 @@ class ContextMenuVM: ObservableObject {
         return ScreenDimensionsManager.shared.adaptiveHeight
     }
 
-    let preferredUserReactions: [String] = [
+    static let preferredReactions: [String] = [
         0x1F44D, 0x1F44E, 0x1F606, 0x1F923, 0x1F615
     ].map { String(UnicodeScalar($0)!) }
+
+    let preferredUserReactions = ContextMenuVM.preferredReactions
 
     private(set) var uniqueAuthoredReactions: [String] = []
     @Published var selectedEmoji: String = ""

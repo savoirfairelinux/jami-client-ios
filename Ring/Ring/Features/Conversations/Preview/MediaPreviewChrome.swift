@@ -17,12 +17,15 @@
  */
 
 import SwiftUI
+import MCEmojiPicker
 
 enum MediaPreviewLayout {
     static let control: CGFloat = 44
     static let sideInset: CGFloat = 16
     static let capsuleHeight: CGFloat = 54
     static let capsuleBottomOffset: CGFloat = -4
+    static let reactionsHeight: CGFloat = 30
+    static let reactionRowHeight: CGFloat = 50
     static let bottomStackSpacing: CGFloat = 12
     static let scrimFade: CGFloat = 56
     static let scrimOpacity: Double = 0.2
@@ -187,17 +190,28 @@ struct MediaPreviewMenuButton: UIViewRepresentable {
 struct MediaPreviewActionCapsule: View {
     @ObservedObject var model: MediaPreviewModel
 
+    private let dimmedOpacity = 0.45
+
+    private var othersOpacity: Double { model.isReacting ? dimmedOpacity : 1 }
+
     var body: some View {
         HStack(spacing: 0) {
-            iconButton("arrowshape.turn.up.forward", label: L10n.Global.forward, action: model.forward)
-            iconButton("square.and.arrow.up", label: L10n.Global.share, action: model.share)
+            if model.canReact {
+                iconButton("face.smiling", label: L10n.MediaPreview.react, isSelected: model.isReacting, action: model.toggleReacting)
+            }
+            Group {
+                iconButton("arrowshape.turn.up.forward", label: L10n.Global.forward, action: model.forward)
+                iconButton("square.and.arrow.up", label: L10n.Global.share, action: model.share)
+            }
+            .opacity(othersOpacity)
         }
+        .animation(MediaPreviewLayout.chromeAnimation, value: model.isReacting)
         .padding(.horizontal, 5)
         .frame(height: MediaPreviewLayout.capsuleHeight)
         .mediaPreviewGlass(in: Capsule())
     }
 
-    private func iconButton(_ systemName: String, label: String, action: @escaping () -> Void) -> some View {
+    private func iconButton(_ systemName: String, label: String, isSelected: Bool = false, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             Image(systemName: systemName)
                 .font(.system(size: NavBarIcon.glyphSize))
@@ -208,5 +222,106 @@ struct MediaPreviewActionCapsule: View {
         .buttonStyle(ScaleButtonStyle())
         .accessibilityLabel(label)
         .accessibilityShowsLargeContentViewer { Label(label, systemImage: systemName) }
+        .accessibilityAddTraits(isSelected ? .isSelected : [])
+    }
+}
+
+// MARK: - Reactions
+
+struct MediaPreviewReactionsSummary: View {
+    @ObservedObject var reactions: ReactionsContainerModel
+
+    var body: some View {
+        if !reactions.segments.isEmpty {
+            HStack(spacing: 8) {
+                ForEach(reactions.segments) { segment in
+                    HStack(spacing: 3) {
+                        Text(segment.emoji)
+                            .font(.subheadline)
+                        if segment.count > 1 {
+                            Text("\(segment.count)")
+                                .font(.footnote.weight(.semibold).monospacedDigit())
+                                .foregroundColor(.white)
+                        }
+                    }
+                }
+            }
+            .padding(.horizontal, 12)
+            .frame(height: MediaPreviewLayout.reactionsHeight)
+            .mediaPreviewGlass(in: Capsule())
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(L10n.Accessibility.messageReactions)
+            .accessibilityValue(reactions.summary(maxVisible: reactions.segments.count).accessibilityValue)
+        }
+    }
+}
+
+struct MediaPreviewReactionPicker: View {
+    let emojis: [String]
+    let activeEmojis: Set<String>
+    let maxWidth: CGFloat
+    let onPick: (String) -> Void
+
+    private let spacing: CGFloat = 2
+    private let inset: CGFloat = 6
+
+    private var contentWidth: CGFloat {
+        let items = CGFloat(emojis.count + 1)
+        return items * MediaPreviewLayout.control + (items - 1) * spacing + 2 * inset
+    }
+
+    var body: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: spacing) {
+                MediaPreviewEmojiPickerButton(onPick: onPick)
+                ForEach(emojis, id: \.self) { emoji in
+                    emojiButton(emoji, isActive: activeEmojis.contains(emoji))
+                }
+            }
+            .padding(.horizontal, inset)
+            .frame(height: MediaPreviewLayout.reactionRowHeight)
+        }
+        .frame(width: min(contentWidth, maxWidth), height: MediaPreviewLayout.reactionRowHeight)
+        .mediaPreviewGlass(in: Capsule())
+    }
+
+    private func emojiButton(_ emoji: String, isActive: Bool) -> some View {
+        Button(action: { onPick(emoji) }, label: {
+            Text(emoji)
+                .font(.system(size: 26))
+                .frame(width: MediaPreviewLayout.control, height: MediaPreviewLayout.control)
+                .background(Circle().fill(Color.white.opacity(isActive ? 0.22 : 0)))
+                .contentShape(Rectangle())
+        })
+        .buttonStyle(ScaleButtonStyle())
+        .accessibilityLabel(isActive ? L10n.Accessibility.removeReaction(emoji) : emoji)
+        .accessibilityShowsLargeContentViewer()
+    }
+}
+
+struct MediaPreviewEmojiPickerButton: View {
+    let onPick: (String) -> Void
+
+    @SwiftUI.State private var isPresented = false
+    @SwiftUI.State private var selectedEmoji = ""
+
+    var body: some View {
+        Button(action: { isPresented = true }, label: {
+            Image(systemName: "plus")
+                .font(.system(size: NavBarIcon.glyphSize))
+                .foregroundColor(.white)
+                .frame(width: MediaPreviewLayout.control, height: MediaPreviewLayout.control)
+                .contentShape(Rectangle())
+        })
+        .buttonStyle(ScaleButtonStyle())
+        .accessibilityLabel(L10n.MediaPreview.moreEmoji)
+        .accessibilityShowsLargeContentViewer { Label(L10n.MediaPreview.moreEmoji, systemImage: "plus") }
+        .emojiPicker(isPresented: $isPresented, selectedEmoji: $selectedEmoji, arrowDirection: .down)
+        .onChange(of: selectedEmoji) { emoji in
+            guard !emoji.isEmpty else { return }
+            isPresented = false
+            selectedEmoji = ""
+            onPick(emoji)
+        }
     }
 }

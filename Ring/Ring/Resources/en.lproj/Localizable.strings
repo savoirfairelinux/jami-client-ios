@@ -896,4 +896,6 @@
 "collab.documentShared" = "New document: %@";
 
 // Media preview
+"mediaPreview.react" = "React";
 "mediaPreview.moreActions" = "More";
+"mediaPreview.moreEmoji" = "More emoji";
