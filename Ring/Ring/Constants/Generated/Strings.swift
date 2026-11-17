@@ -1473,12 +1473,26 @@ internal enum L10n {
     internal static let title = L10n.tr("Localizable", "logView.title", fallback: "Diagnostics")
   }
   internal enum MediaPreview {
+    /// File
+    internal static let file = L10n.tr("Localizable", "mediaPreview.file", fallback: "File")
+    /// Message
+    internal static let message = L10n.tr("Localizable", "mediaPreview.message", fallback: "Message")
     /// More
     internal static let moreActions = L10n.tr("Localizable", "mediaPreview.moreActions", fallback: "More")
     /// More emoji
     internal static let moreEmoji = L10n.tr("Localizable", "mediaPreview.moreEmoji", fallback: "More emoji")
+    /// Photos
+    internal static let photos = L10n.tr("Localizable", "mediaPreview.photos", fallback: "Photos")
     /// React
     internal static let react = L10n.tr("Localizable", "mediaPreview.react", fallback: "React")
+    /// Reply to %@
+    internal static func replyTo(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "mediaPreview.replyTo", String(describing: p1), fallback: "Reply to %@")
+    }
+    /// Video
+    internal static let video = L10n.tr("Localizable", "mediaPreview.video", fallback: "Video")
+    /// Voice
+    internal static let voice = L10n.tr("Localizable", "mediaPreview.voice", fallback: "Voice")
   }
   internal enum MigrateAccount {
     /// An error occurred while migrating the account. Retry or delete the account.

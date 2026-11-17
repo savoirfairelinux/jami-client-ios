@@ -1307,6 +1307,13 @@ extension MessagesListVM {
 // swiftlint:enable type_body_length
 
 extension MessagesListVM: MediaPreviewConversationActions {
+    var replyPanel: MessagePanelVM { messagePanel }
+    var replyVoiceRecording: VoiceRecordingVM { voiceRecording }
+
+    func beginReply(to message: MessageContentVM) {
+        configureReply(message: message)
+    }
+
     func react(to message: MessageContentVM, with emoji: String) {
         let localJamiId = accountService.getAccount(fromAccountId: conversation.accountId)?.jamiId
         let reactions = messagesModels.first { $0.messageContent === message }?.message.reactions ?? message.message.reactions
@@ -1319,5 +1326,9 @@ extension MessagesListVM: MediaPreviewConversationActions {
 
     func reactions(of message: MessageContentVM) -> ReactionsContainerModel? {
         messagesModels.first { $0.messageContent === message }?.reactionsModel
+    }
+
+    func showLatestMessage() {
+        scrollToTheBottom()
     }
 }

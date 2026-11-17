@@ -196,6 +196,28 @@ struct MediaPreviewActionCapsule: View {
 
     var body: some View {
         HStack(spacing: 0) {
+            if model.canReply {
+                Button(action: model.beginReply) {
+                    HStack(spacing: 7) {
+                        Image(systemName: "arrowshape.turn.up.backward")
+                            .font(.system(size: NavBarIcon.glyphSize))
+                        Text(L10n.Global.reply)
+                            .font(.body.weight(.semibold))
+                    }
+                    .foregroundColor(.white)
+                    .padding(.horizontal, 12)
+                    .frame(height: MediaPreviewLayout.control)
+                    .contentShape(Rectangle())
+                }
+                .buttonStyle(ScaleButtonStyle())
+                .accessibilityShowsLargeContentViewer()
+                .opacity(othersOpacity)
+                Rectangle()
+                    .fill(Color.white.opacity(0.22))
+                    .frame(width: 1, height: 24)
+                    .padding(.horizontal, 6)
+                    .accessibilityHidden(true)
+            }
             if model.canReact {
                 iconButton("face.smiling", label: L10n.MediaPreview.react, isSelected: model.isReacting, action: model.toggleReacting)
             }

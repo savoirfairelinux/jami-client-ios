@@ -22,9 +22,10 @@ import SwiftUI
 /// so the overlay does not steal first-responder or input focus.
 private final class PassthroughWindow: UIWindow {
     var isPresenting = false
+    var acceptsKeyboard = false
 
     override var canBecomeKey: Bool {
-        isPresenting && UIAccessibility.isVoiceOverRunning
+        isPresenting && (acceptsKeyboard || UIAccessibility.isVoiceOverRunning)
     }
 }
 
@@ -53,7 +54,44 @@ class MediaPreviewPresenter: ObservableObject {
 
     private let dismissAnimationDuration: TimeInterval = 0.35
     private var overlayWindow: PassthroughWindow?
+    private weak var previousKeyWindow: UIWindow?
     private var dismissGeneration: UInt = 0
+    private var dismissCompletion: (() -> Void)?
+
+    var presentationHost: UIViewController? {
+        guard let window = overlayWindow, window.isPresenting, !isDismissing,
+              var top = window.rootViewController else { return nil }
+        while let presented = top.presentedViewController, !presented.isBeingDismissed {
+            top = presented
+        }
+        return top
+    }
+
+    func dismissPresentedContent(then completion: @escaping () -> Void) {
+        guard let presented = overlayWindow?.rootViewController?.presentedViewController,
+              !presented.isBeingDismissed else {
+            completion()
+            return
+        }
+        presented.dismiss(animated: true, completion: completion)
+    }
+
+    func setAcceptsKeyboard(_ accepts: Bool) {
+        guard let window = overlayWindow, window.acceptsKeyboard != accepts else { return }
+        window.acceptsKeyboard = accepts
+        if accepts {
+            previousKeyWindow = UIWindow.currentKeyWindow
+            window.makeKey()
+        } else {
+            restoreKeyWindow()
+        }
+    }
+
+    private func restoreKeyWindow() {
+        guard let previous = previousKeyWindow, !previous.isHidden else { return }
+        previous.makeKey()
+        previousKeyWindow = nil
+    }
 
     func present(model: MediaPreviewModel, sourceFrame: CGRect = .zero, sourceFrameProvider: (() -> CGRect)? = nil) {
         // If currently dismissing, tear down immediately to allow re-presentation.
@@ -104,8 +142,9 @@ class MediaPreviewPresenter: ObservableObject {
         }
     }
 
-    func dismiss() {
+    func dismiss(completion: (() -> Void)? = nil) {
         guard !isDismissing else { return }
+        dismissCompletion = completion
         if let scene = overlayWindow?.windowScene {
             navBarBottomY = Self.computeNavBarBottomY(in: scene)
         }
@@ -139,6 +178,10 @@ class MediaPreviewPresenter: ObservableObject {
     }
 
     private func tearDown() {
+        if overlayWindow?.acceptsKeyboard == true {
+            overlayWindow?.acceptsKeyboard = false
+            restoreKeyWindow()
+        }
         overlayWindow?.isPresenting = false
         overlayWindow?.isHidden = true
         overlayWindow = nil
@@ -146,6 +189,9 @@ class MediaPreviewPresenter: ObservableObject {
         model = nil
         sourceFrameProvider = nil
         backgroundAlpha = 0
+        let completion = dismissCompletion
+        dismissCompletion = nil
+        completion?()
     }
 
     /// Computes the bottom Y of the navigation bar in global coordinates.

@@ -32,7 +32,7 @@ enum ConversationState: State {
     case swarmCreationCancelled
     case createNewAccount
     case showDialpad(inCall: Bool)
-    case recordFile(conversation: ConversationModel, replyingTo: String?, onSend: (OutgoingMessage.Content) -> Void)
+    case recordFile(conversation: ConversationModel, replyingTo: String?, presenter: UIViewController?, onSend: (OutgoingMessage.Content) -> Void)
     case showContactPicker(callID: String, contactSelectedCB: ((_ contact: [ConferencableItem]) -> Void)?, conversationSelectedCB: ((_ conversaionIds: [String]?) -> Void)?)
     case openConversationFromCall(conversation: ConversationModel)
     case needAccountMigration(accountId: String)
@@ -122,8 +122,8 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                     self.openQRCode()
                 case .createSwarm(let onCreated):
                     self.createSwarm(onCreated: onCreated)
-                case .recordFile(let conversation, let replyingTo, let onSend):
-                    self.openRecordFile(conversation: conversation, replyingTo: replyingTo, onSend: onSend)
+                case .recordFile(let conversation, let replyingTo, let presenter, let onSend):
+                    self.openRecordFile(conversation: conversation, replyingTo: replyingTo, presenter: presenter, onSend: onSend)
                 case .needAccountMigration(let accountId):
                     self.migrateAccount(accountId: accountId)
                 case .showAccountSettings(let account):
@@ -146,7 +146,7 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
         }
     }
 
-    func openRecordFile(conversation: ConversationModel, replyingTo: String?, onSend: @escaping (OutgoingMessage.Content) -> Void) {
+    func openRecordFile(conversation: ConversationModel, replyingTo: String?, presenter: UIViewController?, onSend: @escaping (OutgoingMessage.Content) -> Void) {
         let viewModel = MediaRecordViewModel(with: self.injectionBag)
         viewModel.conversation = conversation
         viewModel.replyingTo = replyingTo
@@ -154,6 +154,11 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
         viewModel.setup()
         let hostingController = createDismissableVC(MediaRecordView(viewModel: viewModel),
                                                     dismissible: viewModel.dismissHandler)
+        if let presenter = presenter {
+            hostingController.modalPresentationStyle = .overFullScreen
+            presenter.present(hostingController, animated: true)
+            return
+        }
         self.present(viewController: hostingController,
                      withStyle: .overCurrentContext,
                      withAnimation: true,
