@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94a4798d_182833de",
+        "filename": "Ring/Ring/Features/Conversations/Preview/MediaPreviewView.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-17T21:30:41Z",
+      "side": 1,
+      "message": "[warning] Line 400: 🟡 `KeyboardHeightObserver` computes keyboard overlap using `UIScreen.main.bounds.height`, which is incorrect in multi-window/split-view or external-display scenarios. This can place the reply panel at the wrong vertical offset. Compute overlap against the active window/scene coordinate space (or convert keyboard frame into the hosting view’s space) instead.",
+      "revId": "52dcb056c078941b586f5c1d896b4b853ae31f3d",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e908b0bf_1608540d",
+        "filename": "Ring/Ring/Protocols/ConversationNavigation.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-17T21:30:41Z",
+      "side": 1,
+      "message": "[warning] Line 161: 🟡 The new `presenter.present(...)` path bypasses the existing coordinator `present(..., withStateable:)` flow, which can skip coordinator/stateable lifecycle wiring used elsewhere. This may cause inconsistent dismissal/state propagation for `MediaRecordViewModel`. Keep the same lifecycle path (or explicitly replicate its wiring) when presenting from a custom presenter.",
+      "revId": "52dcb056c078941b586f5c1d896b4b853ae31f3d",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
