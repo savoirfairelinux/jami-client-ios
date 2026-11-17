@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5e54b8c_8d7ff0b3",
+        "filename": "Ring/Ring/Features/Conversations/Preview/MediaPreviewModel.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-17T22:11:51Z",
+      "side": 1,
+      "message": "[error] Line 74: 🔴 `canReact` currently returns `true` whenever `message` and `conversationActions` are set, but it does not verify whether the target message/conversation is actually reaction-eligible. This can surface the React affordance in unsupported states and then route to failing/no-op reaction calls in `react(_:)`. Compute `canReact` from the same eligibility rule used in the message context-menu flow (or extract a shared helper on `MessageContentVM`) so preview and context menu stay behaviorally consistent.",
+      "revId": "d6415f292b9f2cdf31ca41d426e3a022d9ccbd20",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
