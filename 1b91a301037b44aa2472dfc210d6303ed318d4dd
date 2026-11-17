@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d1da9dd_db84d88d",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/RecentReactions.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-17T23:26:46Z",
+      "side": 1,
+      "message": "[warning] Line 28: 🟡 The persistence key is a generic global string (`\"recentReactions\"`). This can collide with other modules/tests and makes future schema migration harder. Prefer a namespaced key (for example, including app/module prefix) and keep it centralized as a typed constant for safer evolution.",
+      "revId": "1b91a301037b44aa2472dfc210d6303ed318d4dd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52989f19_8add6152",
+        "filename": "Ring/RingTests/RecentReactionsTests.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-17T23:26:46Z",
+      "side": 1,
+      "message": "[warning] Line 22: 🟡 Tests share a fixed `UserDefaults` suite name (`RecentReactionsTests`). Under parallel test execution this can cause cross-test interference and flakes. Use a per-test unique suite name (e.g., UUID in `setUp`) to isolate persistence state reliably.",
+      "revId": "1b91a301037b44aa2472dfc210d6303ed318d4dd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
