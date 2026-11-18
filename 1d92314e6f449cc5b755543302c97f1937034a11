@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe24af13_d0f227cb",
+        "filename": "Ring/Ring/SwarmInfo/View/MembersList.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-18T14:18:48Z",
+      "side": 1,
+      "message": "[warning] Line 36: 🟡 `isFirstRow` is derived via `participant \u003d\u003d viewModel.members.first`, which relies on full-model equality semantics and can hide separators on multiple rows when two entries compare equal. Compare stable identity instead (e.g. `participant.id \u003d\u003d viewModel.members.first?.id` or `participant.jamiId \u003d\u003d ...`) to make first-row detection deterministic and aligned with other updated lists.",
+      "revId": "1d92314e6f449cc5b755543302c97f1937034a11",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
