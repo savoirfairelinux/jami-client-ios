@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d63b82f_0b42ab9b",
+        "filename": "Ring/Ring/SwarmInfo.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-18T14:24:05Z",
+      "side": 1,
+      "message": "[warning] Line 364: 🟡 `bannedParticipants` is accepted without sorting, so banned-member ordering depends on backend payload order and can jump between refreshes. Sort `bannedParticipants` with a stable comparator (e.g., by display name, same convention as active members) before publishing to keep UI behavior deterministic.",
+      "revId": "33c975fa6b737dbfc4dbfff273200f53a979d2ea",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e71dd02_13b4e38b",
+        "filename": "Ring/RingTests/SwarmInfoTests.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-18T14:24:05Z",
+      "side": 1,
+      "message": "[warning] 🟡 The new behavior is only partially covered: there is no test for banned-member ordering and no test for unban-driven refresh/member-count behavior in `SwarmInfoVM`. Add targeted tests for these paths to prevent regressions in the new unblock flow.",
+      "revId": "33c975fa6b737dbfc4dbfff273200f53a979d2ea",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
