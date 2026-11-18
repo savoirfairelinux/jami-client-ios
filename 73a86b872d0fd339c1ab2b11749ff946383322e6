@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6805c191_b75d5a3a",
+        "filename": "Ring/Ring/SwarmInfo/View/MembersList.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-18T16:39:53Z",
+      "side": 1,
+      "message": "[warning] Line 35: 🟡 Replacing `.conversationRowSeparator(...)` with only `.contactRowSeparatorLeading()` drops smart-list separator behavior (first-row top separator suppression and accessibility-category separator hiding). This creates inconsistent row chrome versus smart list and can reduce readability in accessibility text sizes. Use `.conversationRowSeparator(isFirstRow: participant.id \u003d\u003d viewModel.members.first?.id)` here (it already applies `contactRowSeparatorLeading()` internally), or reintroduce equivalent conditions locally.",
+      "revId": "73a86b872d0fd339c1ab2b11749ff946383322e6",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
