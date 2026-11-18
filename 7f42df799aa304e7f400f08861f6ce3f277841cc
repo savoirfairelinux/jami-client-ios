@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d72df43_8b86e43a",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/ReactionActions.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-18T13:29:24Z",
+      "side": 1,
+      "message": "[warning] Line 57: 🟡 When a local reaction is pending removal, `toggle` can immediately re-add the same emoji instead of waiting for removal completion. This happens because `ownReactions` filters out pending removals, so a second tap before backend confirmation falls into `add(...)`. That contradicts the intended \"skip removal already sent until gone\" behavior and can create remove/add races with non-deterministic end state. Keep pending removals visible to `toggle` (or explicitly short-circuit when the tapped emoji has a pending removal for this message) so repeated taps are ignored until `reactionsUpdated` clears the pending entry.",
+      "revId": "7f42df799aa304e7f400f08861f6ce3f277841cc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
