@@ -77,4 +77,16 @@ final class SwarmInviteCandidatesTests: XCTestCase {
 
         XCTAssertEqual(candidateIds(), [jamiId2])
     }
+
+    func testMembersWhoLeftCanBeInvitedAgain() {
+        let profileService = injectionBag.profileService
+        let members = [
+            ParticipantInfo(jamiId: jamiId2, role: .left, profileService: profileService),
+            ParticipantInfo(jamiId: jamiId3, role: .banned, profileService: profileService),
+            ParticipantInfo(jamiId: jamiId4, role: .member, profileService: profileService)
+        ]
+        injectionBag.contactsService.contacts.accept([contact(jamiId2), contact(jamiId3), contact(jamiId4)])
+
+        XCTAssertEqual(candidateIds(members: members), [jamiId2])
+    }
 }

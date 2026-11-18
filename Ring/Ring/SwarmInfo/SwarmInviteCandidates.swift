@@ -34,7 +34,7 @@ class SwarmInviteCandidates {
 
         injectionBag.contactsService.contacts
             .withLatestFrom(members) { contacts, members in
-                (contacts, Set(members.map(\.jamiId)))
+                (contacts, Set(members.filter { $0.role != .left }.map(\.jamiId)))
             }
             .subscribe(onNext: { [weak self] contacts, memberIds in
                 guard let self = self else { return }
