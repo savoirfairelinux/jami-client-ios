@@ -48,6 +48,9 @@ final class ConversationSplitNavigator: NSObject, UISplitViewControllerDelegate,
         splitViewController.delegate = self
         splitViewController.preferredDisplayMode = .oneBesideSecondary
         splitViewController.preferredSplitBehavior = .tile
+        splitViewController.preferredPrimaryColumnWidthFraction = 0.32
+        splitViewController.minimumPrimaryColumnWidth = 340
+        splitViewController.maximumPrimaryColumnWidth = 400
         splitViewController.presentsWithGesture = false
         splitViewController.displayModeButtonVisibility = .never
         splitViewController.setViewController(listNavigationController, for: .primary)
