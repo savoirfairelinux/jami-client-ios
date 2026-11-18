@@ -408,6 +408,14 @@ final class SwarmInfoTests: XCTestCase {
         XCTAssertFalse(swarmInfo.conversationEnded.value)
     }
 
+    func testBannedMembersAreKeptApartFromParticipants() {
+        let swarmInfo = makeSwarmInfo(type: .invitesOnly,
+                                      members: [(jamiId1, "admin"), (jamiId2, "member"), (jamiId3, "banned")])
+
+        XCTAssertEqual(Set(swarmInfo.participants.value.map(\.jamiId)), [jamiId1, jamiId2])
+        XCTAssertEqual(swarmInfo.bannedParticipants.value.map(\.jamiId), [jamiId3])
+    }
+
     private func makeSwarmInfo(type: ConversationType, members: [(uri: String, role: String)]) -> SwarmInfo {
         var info = ConversationInfo(type: type)
         info.setParticipants(from: members.map { ["uri": $0.uri, "role": $0.role] }, accountURI: jamiId1)

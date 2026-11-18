@@ -31,7 +31,10 @@ struct MemberList: View {
                     isInvited: participant.role == .invited,
                     isLocalParticipant: participant.jamiId == localJamiId
                 )
-                .deleteDisabled(participant.role == .admin)
+                .deleteDisabled(participant.role == .admin || participant.role == .banned)
+                .reinstateAction(isBanned: participant.role == .banned) {
+                    viewModel.reinstateMember(jamiId: participant.jamiId)
+                }
                 .listRowInsets(ContactRowLayout.insets)
                 .listRowBackground(Color(UIColor.systemBackground))
                 .conversationRowSeparator(isFirstRow: participant == viewModel.members.first)
@@ -50,6 +53,20 @@ struct MemberList: View {
     // MARK: - Methods
     private func delete(at indexSet: IndexSet) {
         viewModel.removeMember(indexOffset: indexSet)
+    }
+}
+
+private extension View {
+    @ViewBuilder
+    func reinstateAction(isBanned: Bool, action: @escaping () -> Void) -> some View {
+        if isBanned {
+            swipeActions(edge: .trailing) {
+                Button(L10n.AccountPage.unblockContact, action: action)
+                    .tint(.jami)
+            }
+        } else {
+            self
+        }
     }
 }
 

@@ -41,6 +41,7 @@ class TestableSwarmInfo: SwarmInfoProtocol {
     var finalTitle = BehaviorRelay(value: "")
     var finalAvatarData: Observable<Data?> = Observable.just(Data())
     var participants = BehaviorRelay(value: [ParticipantInfo]())
+    var bannedParticipants = BehaviorRelay(value: [ParticipantInfo]())
     var conversation = ConversationModel(type: .invitesOnly)
     var conversationEnded = BehaviorRelay<Bool>(value: false)
 
