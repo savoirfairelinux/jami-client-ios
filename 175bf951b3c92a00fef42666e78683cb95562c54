@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccbb09e1_0a651fdd",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-18T17:55:37Z",
+      "side": 1,
+      "message": "[warning] Line 109: 🟡 `present(...)` is now globally overridden to redirect **all** modal presentations to the media-preview host when that overlay exists. That broad hook can alter presentation context/lifecycle for unrelated flows (alerts/sheets/file pickers) and can fail if the overlay host is already presenting. Scope this redirect to the specific media-preview-originated flow (e.g., only the recorder path via explicit presenter injection) and keep `super.present(...)` for other calls.",
+      "revId": "175bf951b3c92a00fef42666e78683cb95562c54",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
