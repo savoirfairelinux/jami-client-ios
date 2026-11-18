@@ -232,6 +232,7 @@
 		260AE62B29B8F97300D66D5E /* TestableSwarmInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260AE62A29B8F97300D66D5E /* TestableSwarmInfo.swift */; };
 		260AE62F29BA3B6900D66D5E /* ConversationModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260AE62E29BA3B6900D66D5E /* ConversationModelTests.swift */; };
 		260AE63329BA5DF600D66D5E /* SwarmInfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260AE63229BA5DF600D66D5E /* SwarmInfoTests.swift */; };
+		C1A0DE5E0000000000000B02 /* SwarmInviteCandidatesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A0DE5E0000000000000F02 /* SwarmInviteCandidatesTests.swift */; };
 		C1A0DE5E0000000000000B01 /* SwarmCreationUIModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A0DE5E0000000000000F01 /* SwarmCreationUIModelTests.swift */; };
 		260AE63529BE00F100D66D5E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260AE63429BE00F100D66D5E /* Constants.swift */; };
 		260AE63729BE177000D66D5E /* ContactUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260AE63629BE177000D66D5E /* ContactUtilsTests.swift */; };
@@ -897,6 +898,7 @@
 		260AE62A29B8F97300D66D5E /* TestableSwarmInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestableSwarmInfo.swift; sourceTree = "<group>"; };
 		260AE62E29BA3B6900D66D5E /* ConversationModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationModelTests.swift; sourceTree = "<group>"; };
 		260AE63229BA5DF600D66D5E /* SwarmInfoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwarmInfoTests.swift; sourceTree = "<group>"; };
+		C1A0DE5E0000000000000F02 /* SwarmInviteCandidatesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwarmInviteCandidatesTests.swift; sourceTree = "<group>"; };
 		C1A0DE5E0000000000000F01 /* SwarmCreationUIModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwarmCreationUIModelTests.swift; sourceTree = "<group>"; };
 		260AE63429BE00F100D66D5E /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		260AE63629BE177000D66D5E /* ContactUtilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUtilsTests.swift; sourceTree = "<group>"; };
@@ -3380,6 +3382,7 @@
 				0EDA00050000000000001005 /* ConversationDestructiveActionTests.swift */,
 				DB0100010000000000000001 /* DBManagerConversationDeletionTests.swift */,
 				260AE63229BA5DF600D66D5E /* SwarmInfoTests.swift */,
+				C1A0DE5E0000000000000F02 /* SwarmInviteCandidatesTests.swift */,
 				C1A0DE5E0000000000000F01 /* SwarmCreationUIModelTests.swift */,
 				26AVATAR0029BA000000000001 /* AvatarProviderTests.swift */,
 				26GRPAVT0029BA000000000001 /* GroupAvatarRendererTests.swift */,
@@ -4635,6 +4638,7 @@
 			files = (
 				A7F100010000000000000001 /* GifHelpersTests.swift in Sources */,
 				260AE63329BA5DF600D66D5E /* SwarmInfoTests.swift in Sources */,
+				C1A0DE5E0000000000000B02 /* SwarmInviteCandidatesTests.swift in Sources */,
 				C1A0DE5E0000000000000B01 /* SwarmCreationUIModelTests.swift in Sources */,
 				A7MG00102F20000300000004 /* MessageGroupingTests.swift in Sources */,
 				A7MG00102F20000300000006 /* ReactionsContainerModelTests.swift in Sources */,

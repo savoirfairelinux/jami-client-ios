@@ -47,7 +47,7 @@ class SwarmInviteCandidates {
         let requests = requestsService.requests.value
         return contacts.compactMap { contact in
             let hasPendingRequest = requests.contains { request in
-                request.participants.contains { $0.jamiId == contact.hash }
+                request.isCoredialog() && request.participants.contains { $0.jamiId == contact.hash }
             }
             if contact.banned || hasPendingRequest || memberIds.contains(contact.hash) {
                 return nil
