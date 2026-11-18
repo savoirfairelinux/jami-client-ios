@@ -18,10 +18,16 @@
 
 import SwiftUI
 
+enum ContactRowLayout {
+    static let insets = EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15)
+    static let avatarSpacing: CGFloat = 12
+    static let verticalPadding: CGFloat = 8
+}
+
 extension View {
     func smartListRowStyle() -> some View {
         self
-            .listRowInsets(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15))
+            .listRowInsets(ContactRowLayout.insets)
             .listRowBackground(Color.clear)
             .hideRowSeparator()
     }
