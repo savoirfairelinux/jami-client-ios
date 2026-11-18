@@ -44,12 +44,20 @@ struct InviteParticipantsSheet: View {
                     }
                 }
                 .listStyle(PlainListStyle())
+                .overlay {
+                    if viewModel.showsNoInviteResults {
+                        noResults
+                    }
+                }
 
                 if !viewModel.selections.isEmpty {
                     addMember()
                         .padding()
                 }
             }
+            .searchable(text: $viewModel.inviteSearchText,
+                        prompt: L10n.Smartlist.searchBarPlaceholder)
+            .autocorrectionDisabled()
             .navigationTitle(L10n.Swarm.inviteMembers)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -68,10 +76,20 @@ struct InviteParticipantsSheet: View {
             dismiss()
             viewModel.addMember()
         }, label: {
-            Text(L10n.Swarm.inviteMembers)
+            Text(viewModel.inviteButtonTitle)
                 .swarmButtonTextStyle()
         })
         .swarmButtonStyle()
-        .accessibilityLabel(L10n.Swarm.inviteSelectedMembers)
+    }
+
+    private var noResults: some View {
+        VStack(spacing: 16) {
+            Image(systemName: "magnifyingglass")
+                .font(.system(size: 48, weight: .light))
+            Text(L10n.Smartlist.noResults)
+                .fontWeight(.semibold)
+        }
+        .foregroundColor(.secondary)
+        .accessibilityElement(children: .combine)
     }
 }

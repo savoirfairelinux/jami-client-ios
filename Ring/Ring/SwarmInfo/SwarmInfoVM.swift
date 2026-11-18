@@ -25,6 +25,9 @@ class SwarmInfoVM: ObservableObject {
     // MARK: - Public Properties
 
     @Published var participantsRows = [ParticipantRow]()
+    @Published var inviteSearchText = "" {
+        didSet { applyInviteSearch() }
+    }
     @Published var selections: [String] = []
     @Published var title: String = ""
     @Published var description: String = ""
@@ -54,6 +57,7 @@ class SwarmInfoVM: ObservableObject {
     private let disposeBag = DisposeBag()
     private var contactsSubscriptionsDisposeBag = DisposeBag()
     private var inviteCandidates: SwarmInviteCandidates?
+    private var allInviteRows = [ParticipantRow]()
     private var bannedMembers = [ParticipantInfo]()
 
     private let accountService: AccountsService
@@ -263,6 +267,7 @@ class SwarmInfoVM: ObservableObject {
 
     func updateContactList() {
         self.contactsSubscriptionsDisposeBag = DisposeBag()
+        self.inviteSearchText = ""
         let inviteCandidates = SwarmInviteCandidates(injectionBag: injectionBag,
                                                      accountId: conversation.accountId,
                                                      members: Observable.combineLatest(
@@ -279,9 +284,27 @@ class SwarmInfoVM: ObservableObject {
 
         contactUpdates
             .subscribe(onNext: { [weak self] rows in
-                self?.participantsRows = rows
+                guard let self = self else { return }
+                self.allInviteRows = rows
+                let candidateIds = Set(rows.map(\.id))
+                self.selections.removeAll { !candidateIds.contains($0) }
+                self.applyInviteSearch()
             })
             .disposed(by: self.contactsSubscriptionsDisposeBag)
+    }
+
+    var inviteButtonTitle: String {
+        selections.count == 1 ? L10n.Swarm.inviteOneMember : L10n.Swarm.inviteMemberCount(selections.count)
+    }
+
+    var showsNoInviteResults: Bool {
+        !inviteSearchText.isEmpty && participantsRows.isEmpty
+    }
+
+    private func applyInviteSearch() {
+        participantsRows = inviteSearchText.isEmpty
+            ? allInviteRows
+            : allInviteRows.filter { $0.match(string: inviteSearchText) }
     }
 
     func removeExistingSubscription() {

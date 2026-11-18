@@ -439,6 +439,39 @@ final class SwarmInfoTests: XCTestCase {
         }
     }
 
+    func testInviteSearchSurvivesContactUpdateAndDropsStaleSelection() {
+        let contacts = injectionBag.contactsService.contacts
+        contacts.accept([ContactModel(withDictionary: ["id": jamiId2]),
+                         ContactModel(withDictionary: ["id": jamiId3])])
+        let viewModel = makeSwarmInfoViewModel(conversation: makeGroupConversation(), title: "")
+        viewModel.updateContactList()
+        waitUntil { viewModel.participantsRows.count == 2 }
+        viewModel.selections = [jamiId2, jamiId3]
+        viewModel.inviteSearchText = jamiId3
+
+        contacts.accept([ContactModel(withDictionary: ["id": jamiId3]),
+                         ContactModel(withDictionary: ["id": jamiId4])])
+        waitUntil { viewModel.selections == [jamiId3] }
+
+        XCTAssertEqual(viewModel.participantsRows.map(\.id), [jamiId3])
+    }
+
+    func testInviteSheetCountsSelectionsAndReportsEmptySearch() {
+        injectionBag.contactsService.contacts.accept([ContactModel(withDictionary: ["id": jamiId2])])
+        let viewModel = makeSwarmInfoViewModel(conversation: makeGroupConversation(), title: "")
+        viewModel.updateContactList()
+        waitUntil { viewModel.participantsRows.count == 1 }
+
+        viewModel.selections = [jamiId2]
+        XCTAssertEqual(viewModel.inviteButtonTitle, L10n.Swarm.inviteOneMember)
+        viewModel.selections = [jamiId2, jamiId3]
+        XCTAssertEqual(viewModel.inviteButtonTitle, L10n.Swarm.inviteMemberCount(2))
+
+        XCTAssertFalse(viewModel.showsNoInviteResults)
+        viewModel.inviteSearchText = "no such contact"
+        XCTAssertTrue(viewModel.showsNoInviteResults)
+    }
+
     private func makeSwarmInfo(type: ConversationType, members: [(uri: String, role: String)]) -> SwarmInfo {
         var info = ConversationInfo(type: type)
         info.setParticipants(from: members.map { ["uri": $0.uri, "role": $0.role] }, accountURI: jamiId1)

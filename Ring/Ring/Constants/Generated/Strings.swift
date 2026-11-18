@@ -1755,12 +1755,18 @@ internal enum L10n {
     internal static let invite = L10n.tr("Localizable", "swarm.invite", fallback: "Invite")
     /// Invited
     internal static let invited = L10n.tr("Localizable", "swarm.invited", fallback: "Invited")
+    /// Invite %d members
+    internal static func inviteMemberCount(_ p1: Int) -> String {
+      return L10n.tr("Localizable", "swarm.inviteMemberCount", p1, fallback: "Invite %d members")
+    }
     /// Invite members
     internal static let inviteMembers = L10n.tr("Localizable", "swarm.inviteMembers", fallback: "Invite members")
     /// Not selected
     internal static let inviteMembersNotSelected = L10n.tr("Localizable", "swarm.inviteMembersNotSelected", fallback: "Not selected")
     /// Selected
     internal static let inviteMembersSelected = L10n.tr("Localizable", "swarm.inviteMembersSelected", fallback: "Selected")
+    /// Invite 1 member
+    internal static let inviteOneMember = L10n.tr("Localizable", "swarm.inviteOneMember", fallback: "Invite 1 member")
     /// Invite selected contacts
     internal static let inviteSelectedMembers = L10n.tr("Localizable", "swarm.inviteSelectedMembers", fallback: "Invite selected contacts")
     /// Private group
