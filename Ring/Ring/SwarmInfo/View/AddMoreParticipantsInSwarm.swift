@@ -50,6 +50,9 @@ struct InviteParticipantsSheet: View {
                         .padding()
                 }
             }
+            .searchable(text: $viewModel.inviteSearchText,
+                        prompt: L10n.Smartlist.searchBarPlaceholder)
+            .autocorrectionDisabled()
             .navigationTitle(L10n.Swarm.inviteMembers)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
