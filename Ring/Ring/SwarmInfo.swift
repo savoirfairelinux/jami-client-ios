@@ -36,6 +36,7 @@ protocol SwarmInfoProtocol {
     var finalAvatarData: Observable<Data?> { get }
 
     var participants: BehaviorRelay<[ParticipantInfo]> { get }
+    var bannedParticipants: BehaviorRelay<[ParticipantInfo]> { get }
     var conversation: ConversationModel { get }
     var conversationEnded: BehaviorRelay<Bool> { get }
     var id: String { get }
@@ -164,6 +165,7 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
     }()
 
     let participants = BehaviorRelay(value: [ParticipantInfo]()) // participants already added to swarm
+    let bannedParticipants = BehaviorRelay(value: [ParticipantInfo]())
     var nonLocalParticipants: [ParticipantInfo] {
         return participants.value.filter { $0.jamiId != localJamiId }
     }
@@ -361,6 +363,9 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
         var currentValue = [ParticipantInfo]()
         currentValue.append(contentsOf: participants)
         currentValue = currentValue.filter({ [.invited, .member, .admin, .left].contains($0.role) })
+        self.bannedParticipants.accept(participants
+            .filter { $0.role == .banned }
+            .sorted { $0.finalName.value > $1.finalName.value })
         currentValue.sort { participant1, participant2 in
             if participant1.role == participant2.role {
                 return participant1.finalName.value > participant2.finalName.value

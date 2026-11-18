@@ -408,6 +408,37 @@ final class SwarmInfoTests: XCTestCase {
         XCTAssertFalse(swarmInfo.conversationEnded.value)
     }
 
+    func testBannedMembersAreKeptApartFromParticipants() {
+        let swarmInfo = makeSwarmInfo(type: .invitesOnly,
+                                      members: [(jamiId1, "admin"), (jamiId2, "member"), (jamiId3, "banned")])
+
+        XCTAssertEqual(Set(swarmInfo.participants.value.map(\.jamiId)), [jamiId1, jamiId2])
+        XCTAssertEqual(swarmInfo.bannedParticipants.value.map(\.jamiId), [jamiId3])
+    }
+
+    func testBlockedMembersAreShownOnlyToUsersAllowedToUnban() {
+        let banned = createParticipant(jamiId: jamiId3, role: .banned, registeredName: "", profileName: "Al")
+        var restricted = ConversationInfo(type: .invitesOnly)
+        restricted.permissions = ConversationPermissions(names: ["text"])
+        let cases: [(info: ConversationInfo, expected: [String])] = [
+            (ConversationInfo(type: .invitesOnly), [jamiId3]),
+            (restricted, [])
+        ]
+
+        for testCase in cases {
+            let swarmInfo = TestableSwarmInfo(participants: [], containsSearchQuery: false,
+                                              hasParticipantWithRegisteredName: false)
+            swarmInfo.conversation = ConversationModel(id: conversationId1, accountId: accountId1,
+                                                       info: testCase.info)
+            swarmInfo.bannedParticipants.accept([banned])
+
+            let viewModel = SwarmInfoVM(with: injectionBag, swarmInfo: swarmInfo)
+
+            XCTAssertEqual(viewModel.blockedMembers.map(\.jamiId), testCase.expected)
+            XCTAssertTrue(viewModel.members.isEmpty)
+        }
+    }
+
     private func makeSwarmInfo(type: ConversationType, members: [(uri: String, role: String)]) -> SwarmInfo {
         var info = ConversationInfo(type: type)
         info.setParticipants(from: members.map { ["uri": $0.uri, "role": $0.role] }, accountURI: jamiId1)

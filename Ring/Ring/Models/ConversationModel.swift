@@ -57,6 +57,7 @@ enum ConversationMemberEvent: Int {
     case joins
     case leave
     case banned
+    case unbanned
 }
 
 enum FileTransferType: Int {

@@ -34,6 +34,7 @@ class SwarmInfoVM: ObservableObject {
     @Published private(set) var symbol = ConversationPreferences.defaultSymbol
     @Published private(set) var permissions = ConversationPermissions.unrestricted
     @Published private(set) var members = [ParticipantInfo]()
+    @Published private(set) var blockedMembers = [ParticipantInfo]()
 
     let swarmInfo: SwarmInfoProtocol
     var conversation: ConversationModel {
@@ -53,6 +54,7 @@ class SwarmInfoVM: ObservableObject {
     private let disposeBag = DisposeBag()
     private var contactsSubscriptionsDisposeBag = DisposeBag()
     private var inviteCandidates: SwarmInviteCandidates?
+    private var bannedMembers = [ParticipantInfo]()
 
     private let accountService: AccountsService
     let profileService: ProfilesService
@@ -156,6 +158,8 @@ class SwarmInfoVM: ObservableObject {
         )
         self.permissions = swarmInfo.conversation.permissions
         self.members = swarmInfo.participants.value
+        self.bannedMembers = swarmInfo.bannedParticipants.value
+        updateBlockedMembers()
 
         setupBindings()
     }
@@ -163,10 +167,13 @@ class SwarmInfoVM: ObservableObject {
     // MARK: - Setup
 
     private func setupBindings() {
-        swarmInfo.participants
+        Observable.combineLatest(swarmInfo.participants.asObservable(),
+                                 swarmInfo.bannedParticipants.asObservable())
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] participants in
+            .subscribe(onNext: { [weak self] participants, banned in
                 self?.members = participants
+                self?.bannedMembers = banned
+                self?.updateBlockedMembers()
             })
             .disposed(by: disposeBag)
 
@@ -176,6 +183,7 @@ class SwarmInfoVM: ObservableObject {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] permissions in
                 self?.permissions = permissions
+                self?.updateBlockedMembers()
             })
             .disposed(by: disposeBag)
 
@@ -257,7 +265,9 @@ class SwarmInfoVM: ObservableObject {
         self.contactsSubscriptionsDisposeBag = DisposeBag()
         let inviteCandidates = SwarmInviteCandidates(injectionBag: injectionBag,
                                                      accountId: conversation.accountId,
-                                                     members: swarmInfo.participants.asObservable())
+                                                     members: Observable.combineLatest(
+                                                        swarmInfo.participants.asObservable(),
+                                                        swarmInfo.bannedParticipants.asObservable()) { $0 + $1 })
         self.inviteCandidates = inviteCandidates
 
         let contactUpdates = inviteCandidates.candidates
@@ -284,6 +294,17 @@ class SwarmInfoVM: ObservableObject {
             conversationService.addConversationMember(accountId: conversation.accountId, conversationId: conversation.id, memberId: participant)
         }
         selections.removeAll()
+    }
+
+    private func updateBlockedMembers() {
+        blockedMembers = canRemoveMembers ? bannedMembers : []
+    }
+
+    func reinstateMember(jamiId: String) {
+        guard canRemoveMembers else { return }
+        conversationService.addConversationMember(accountId: conversation.accountId,
+                                                  conversationId: conversation.id,
+                                                  memberId: jamiId)
     }
 
     func removeMember(indexOffset: IndexSet) {

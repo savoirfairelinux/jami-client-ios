@@ -43,6 +43,24 @@ struct MemberList: View {
                 editMode = .inactive
             }
         }
+        if !viewModel.blockedMembers.isEmpty {
+            Section(header: Text(L10n.Swarm.blocked)) {
+                ForEach(viewModel.blockedMembers, id: \.self) { participant in
+                    HStack(spacing: ContactRowLayout.avatarSpacing) {
+                        MemberItem(participant: participant, isInvited: false, isLocalParticipant: false)
+                        Button(L10n.AccountPage.unblockContact) {
+                            viewModel.reinstateMember(jamiId: participant.jamiId)
+                        }
+                        .buttonStyle(.bordered)
+                        .buttonBorderShape(.capsule)
+                        .controlSize(.small)
+                        .tint(.jami)
+                    }
+                    .listRowInsets(ContactRowLayout.insets)
+                    .contactRowSeparatorLeading()
+                }
+            }
+        }
     }
 
     // MARK: - Methods
@@ -64,6 +82,10 @@ struct MemberItem: View {
 
     private var roleText: String {
         participant.role == .member ? "" : participant.role.stringValue
+    }
+
+    private var visibleRoleText: String {
+        participant.role == .banned ? "" : roleText
     }
 
     // MARK: - Body
@@ -96,7 +118,7 @@ struct MemberItem: View {
     }
 
     private var roleLabel: some View {
-        Text(roleText)
+        Text(visibleRoleText)
             .font(.footnote)
             .foregroundColor(.secondary)
     }
