@@ -25,4 +25,13 @@ extension XCTestCase {
         DispatchQueue.main.async { delivered.fulfill() }
         wait(for: [delivered], timeout: timeout)
     }
+
+    func waitUntil(timeout: TimeInterval = 3, file: StaticString = #filePath, line: UInt = #line,
+                   _ condition: () -> Bool) {
+        let deadline = Date().addingTimeInterval(timeout)
+        while !condition() && Date() < deadline {
+            RunLoop.main.run(until: Date().addingTimeInterval(0.05))
+        }
+        XCTAssertTrue(condition(), "condition not met within \(timeout) seconds", file: file, line: line)
+    }
 }

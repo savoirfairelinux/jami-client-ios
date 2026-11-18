@@ -23,6 +23,7 @@ import RxSwift
 class ParticipantRow: Identifiable, ObservableObject {
     @Published var id: String
     @Published var name: String = ""
+    private var registeredName: String = ""
 
     let disposeBag = DisposeBag()
     let avatarProvider: AvatarProvider
@@ -42,8 +43,16 @@ class ParticipantRow: Identifiable, ObservableObject {
 
             }
             .disposed(by: self.disposeBag)
+        participantData.registeredName
+            .observe(on: MainScheduler.instance)
+            .startWith(participantData.registeredName.value)
+            .subscribe(onNext: { [weak self] registeredName in
+                self?.registeredName = registeredName
+            })
+            .disposed(by: self.disposeBag)
     }
     func match(string: String) -> Bool {
-        return name.lowercased().contains(string.lowercased()) || id.lowercased().contains(string.lowercased())
+        let query = string.lowercased()
+        return [name, registeredName, id].contains { $0.lowercased().contains(query) }
     }
 }

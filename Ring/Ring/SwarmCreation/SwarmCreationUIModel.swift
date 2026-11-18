@@ -25,7 +25,8 @@ import SwiftUI
 
 class SwarmCreationUIModel: ObservableObject {
     @Published var participantsRows = [ParticipantRow]()
-    var filteredArray = [ParticipantRow]()
+    private var allRows = [ParticipantRow]()
+    private var searchText = ""
     let disposeBag = DisposeBag()
     private let accountId: String
     private let conversationService: ConversationsService
@@ -44,35 +45,34 @@ class SwarmCreationUIModel: ObservableObject {
         self.inviteCandidates = SwarmInviteCandidates(injectionBag: injectionBag,
                                                       accountId: accountId,
                                                       members: .just([]))
-        // 1 member is administrtor so remove 1 from maximum limit
-        strSearchText.subscribe { searchText in
-            if !searchText.isEmpty {
-                let flatArr = self.filteredArray.compactMap { $0 }
-                self.participantsRows = flatArr.filter { (item) -> Bool in
-                    return item.match(string: searchText)
-                }
-            } else {
-                self.participantsRows = self.filteredArray
-            }
-        } onError: { _ in
-
-        }
-        .disposed(by: disposeBag)
+        strSearchText
+            .subscribe(onNext: { [weak self] searchText in
+                guard let self = self else { return }
+                self.searchText = searchText
+                self.applySearch()
+            })
+            .disposed(by: disposeBag)
 
         self.inviteCandidates.candidates
             .observe(on: MainScheduler.instance)
-            .subscribe { [weak self] infos in
-                guard let self = self else { return }
-                self.participantsRows = [ParticipantRow]()
-                for info in infos {
-                    let participant = ParticipantRow(participantData: info)
-                    self.participantsRows.append(participant)
-                    self.filteredArray.append(participant)
-                }
-            } onError: { _ in
-
-            }
+            .subscribe(onNext: { [weak self] infos in
+                self?.updateCandidates(infos)
+            })
             .disposed(by: self.disposeBag)
+    }
+
+    private func updateCandidates(_ infos: [ParticipantInfo]) {
+        let existing = Dictionary(allRows.map { ($0.id, $0) }, uniquingKeysWith: { first, _ in first })
+        allRows = infos.map { existing[$0.jamiId] ?? ParticipantRow(participantData: $0) }
+        let candidateIds = Set(allRows.map(\.id))
+        selections.removeAll { !candidateIds.contains($0) }
+        applySearch()
+    }
+
+    private func applySearch() {
+        participantsRows = searchText.isEmpty
+            ? allRows
+            : allRows.filter { $0.match(string: searchText) }
     }
 
     func createTheSwarm() {
@@ -99,7 +99,7 @@ class SwarmCreationUIModel: ObservableObject {
     }
 
     func getParticipant(id: String) -> ParticipantRow? {
-        return participantsRows.first { participant in
+        return allRows.first { participant in
             participant.id == id
         }
     }
