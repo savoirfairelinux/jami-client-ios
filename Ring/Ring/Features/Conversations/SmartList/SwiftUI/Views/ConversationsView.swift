@@ -93,7 +93,7 @@ struct ConversationsView: View {
                 .buttonStyle(.plain)
                 .accessibilityAddTraits(model.isSelected(conversation) ? .isSelected : [])
                 .conditionalSmartListSwipeActions(conversation: conversation, model: model)
-                .listRowInsets(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15))
+                .listRowInsets(ContactRowLayout.insets)
                 .listRowBackground(rowBackground(isSelected: model.isSelected(conversation)))
                 .conversationRowSeparator(isFirstRow: conversation.id == model.filteredConversations.first?.id)
             }
@@ -176,7 +176,7 @@ struct ConversationRowView: View {
                     presenceIndicator
                 }
                 Spacer()
-                    .frame(width: 12)
+                    .frame(width: ContactRowLayout.avatarSpacing)
                 nameAndStatus
                 Spacer()
                 if model.hasIncomingCall {
@@ -193,7 +193,7 @@ struct ConversationRowView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
                 }
             }
-            .padding(.vertical, 8)
+            .padding(.vertical, ContactRowLayout.verticalPadding)
             if withSeparator {
                 Divider()
                     .padding(.leading, Constants.defaultAvatarSize)

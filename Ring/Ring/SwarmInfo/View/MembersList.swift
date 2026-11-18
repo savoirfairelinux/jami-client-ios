@@ -32,6 +32,8 @@ struct MemberList: View {
                     isLocalParticipant: participant.jamiId == localJamiId
                 )
                 .deleteDisabled(participant.role == .admin)
+                .listRowInsets(ContactRowLayout.insets)
+                .contactRowSeparatorLeading()
             }
             .onDelete(perform: viewModel.canRemoveMembers ? delete : nil)
         }
@@ -66,12 +68,13 @@ struct MemberItem: View {
 
     // MARK: - Body
     var body: some View {
-        HStack(alignment: .center, spacing: 12) {
+        HStack(alignment: .center, spacing: ContactRowLayout.avatarSpacing) {
             profileImage
             nameLabel
             Spacer()
             roleLabel
         }
+        .padding(.vertical, ContactRowLayout.verticalPadding)
         .opacity(isInvited ? 0.5 : 1)
         .accessibilityElement(children: .combine)
         .accessibilityLabel("\(displayName), \(roleText)")
@@ -86,6 +89,7 @@ struct MemberItem: View {
 
     private var nameLabel: some View {
         Text(displayName)
+            .foregroundColor(.primary)
             .lineLimit(1)
             .truncationMode(.middle)
             .textSelection(.enabled)
@@ -93,8 +97,7 @@ struct MemberItem: View {
 
     private var roleLabel: some View {
         Text(roleText)
-            .font(.system(.callout, design: .rounded))
-            .fontWeight(.light)
+            .font(.footnote)
             .foregroundColor(.secondary)
     }
 }
