@@ -29,7 +29,9 @@ struct InviteParticipantsSheet: View {
             VStack {
                 List {
                     ForEach(viewModel.participantsRows) { contact in
-                        ParticipantListCell(participant: contact, isSelected: viewModel.selections.contains(contact.id)) {
+                        ParticipantListCell(participant: contact,
+                                            isSelected: viewModel.selections.contains(contact.id),
+                                            isFirstRow: contact.id == viewModel.participantsRows.first?.id) {
                             if viewModel.selections.contains(contact.id) {
                                 viewModel.selections.removeAll(where: { $0 == contact.id })
                             } else {

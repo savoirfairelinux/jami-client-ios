@@ -18,16 +18,26 @@
 
 import SwiftUI
 
+enum ContactRowLayout {
+    static let insets = EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15)
+    static let avatarSpacing: CGFloat = 12
+    static let verticalPadding: CGFloat = 8
+}
+
 extension View {
     func smartListRowStyle() -> some View {
         self
-            .listRowInsets(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15))
+            .listRowInsets(ContactRowLayout.insets)
             .listRowBackground(Color.clear)
             .hideRowSeparator()
     }
 
     func conversationRowSeparator(isFirstRow: Bool = false) -> some View {
         self.modifier(ConversationRowSeparatorModifier(isFirstRow: isFirstRow))
+    }
+
+    func contactRowSeparatorLeading() -> some View {
+        self.modifier(ContactRowSeparatorLeadingModifier())
     }
 }
 
@@ -57,12 +67,23 @@ private struct ConversationRowSeparatorModifier: ViewModifier {
                 .listRowSeparator(showsSeparators ? .visible : .hidden, edges: .bottom)
                 // Hide the top separator the plain List draws above the first row.
                 .listRowSeparator(isFirstRow || !showsSeparators ? .hidden : .automatic, edges: .top)
+                .contactRowSeparatorLeading()
+        } else {
+            content
+                .listRowSeparator(showsSeparators ? .automatic : .hidden)
+        }
+    }
+}
+
+private struct ContactRowSeparatorLeadingModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        if #available(iOS 16.0, *) {
+            content
                 .alignmentGuide(.listRowSeparatorLeading) { _ in
                     Constants.defaultAvatarSize
                 }
         } else {
             content
-                .listRowSeparator(showsSeparators ? .automatic : .hidden)
         }
     }
 }

@@ -29,14 +29,15 @@ enum PhotoSheetType: Identifiable {
 struct ParticipantListCell: View {
     @StateObject var participant: ParticipantRow
     var isSelected: Bool
+    var isFirstRow = false
     var action: () -> Void
 
     @ViewBuilder var body: some View {
         Button(action: self.action) {
-            HStack(alignment: .center, spacing: nil) {
+            HStack(alignment: .center, spacing: ContactRowLayout.avatarSpacing) {
                 AvatarSwiftUIView(source: participant.avatarProvider)
                 Text(participant.name)
-                    .padding(.leading, 8.0)
+                    .foregroundColor(.primary)
                     .lineLimit(1)
                     .truncationMode(.tail)
                 Spacer()
@@ -52,7 +53,11 @@ struct ParticipantListCell: View {
                         .frame(width: 15, height: 15)
                 }
             }
+            .padding(.vertical, ContactRowLayout.verticalPadding)
+            .contentShape(Rectangle())
         }
+        .listRowInsets(ContactRowLayout.insets)
+        .conversationRowSeparator(isFirstRow: isFirstRow)
     }
 }
 
@@ -113,7 +118,9 @@ struct SwarmCreationUI: View {
             }
             List {
                 ForEach(list.participantsRows) { contact in
-                    ParticipantListCell(participant: contact, isSelected: list.selections.contains(contact.id)) {
+                    ParticipantListCell(participant: contact,
+                                        isSelected: list.selections.contains(contact.id),
+                                        isFirstRow: contact.id == list.participantsRows.first?.id) {
                         if list.selections.contains(contact.id) {
                             list.selections.removeAll(where: { $0 == contact.id })
                         } else {
