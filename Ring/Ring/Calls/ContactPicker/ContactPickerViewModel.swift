@@ -78,10 +78,17 @@ final class ContactPickerViewModel: ObservableObject, ViewModel {
     }
 
     private func bindContactSections() {
-        let contactsObservable = contactsService.contacts.asObservable()
-            .map { [weak self] contacts -> [ContactPickerSection] in
+        let callService = self.callService
+        let peersInCalls = callService.callsUpdated
+            .startWith(())
+            .map { callService.stateMirror.peerHashesInCalls }
+            .distinctUntilChanged()
+        let contactsObservable = Observable
+            .combineLatest(contactsService.contacts.asObservable(), peersInCalls)
+            .map { [weak self] contacts, peersInCalls -> [ContactPickerSection] in
                 guard let self = self else { return [] }
-                return self.buildContactSections(contacts: contacts)
+                let pickable = Self.pickableContacts(contacts, excluding: peersInCalls)
+                return self.buildContactSections(contacts: pickable)
             }
 
         contactsObservable
@@ -180,6 +187,15 @@ final class ContactPickerViewModel: ObservableObject, ViewModel {
         conversationSelectedCB?(Array(selectedConversationIds))
     }
 
+    static func pickableContacts(_ contacts: [ContactModel],
+                                 excluding peersInCalls: Set<String>) -> [ContactModel] {
+        return contacts.filter { contact in
+            guard !contact.banned, let uri = contact.uriString else { return false }
+            return !peersInCalls.contains(contact.hash)
+                && !peersInCalls.contains(CallState.hash(fromUri: uri))
+        }
+    }
+
     // MARK: - Computed Properties
 
     var isSearchActive: Bool {
@@ -210,11 +226,10 @@ private extension ContactPickerViewModel {
         return sections
     }
 
-    func buildContactItems(from contacts: [ContactModel], excluding uris: [String] = []) -> [ConferencableItem] {
+    func buildContactItems(from contacts: [ContactModel]) -> [ConferencableItem] {
         guard let currentAccount = accountService.currentAccount else { return [] }
-        let excludeSet = Set(uris)
         return contacts.compactMap { contact in
-            guard let contactUri = contact.uriString, !excludeSet.contains(contactUri) else { return nil }
+            guard let contactUri = contact.uriString else { return nil }
             let contactObj = Contact(
                 contactUri: contactUri,
                 accountId: currentAccount.id,

@@ -92,7 +92,11 @@ struct CallState: Sendable, Identifiable, Equatable {
     }
 
     var peerHash: String {
-        return peerUri.filterOutHost()
+        return Self.hash(fromUri: peerUri)
+    }
+
+    static func hash(fromUri uri: String) -> String {
+        return uri.filterOutHost()
             .replacingOccurrences(of: "jami:", with: "")
             .replacingOccurrences(of: "sip:", with: "")
     }
@@ -189,6 +193,20 @@ struct CallSystemState: Sendable {
 
     func call(_ id: CallId) -> CallState? {
         return calls[id]
+    }
+
+    /// Peers of every live call, plus the participants of their conferences.
+    var peerHashesInCalls: Set<String> {
+        var hashes = Set<String>()
+        for call in calls.values where !call.status.isTerminal {
+            hashes.insert(call.peerHash)
+            guard let confId = call.conferenceId,
+                  let conference = conferences[confId] else { continue }
+            for participant in conference.participants {
+                hashes.insert(CallState.hash(fromUri: participant.uri))
+            }
+        }
+        return hashes
     }
 
     func call(withPeer peerHash: String, accountId: String) -> CallState? {
