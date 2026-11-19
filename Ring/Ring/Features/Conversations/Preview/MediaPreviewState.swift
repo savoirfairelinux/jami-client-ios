@@ -55,6 +55,9 @@ class MediaPreviewPresenter: ObservableObject {
     private let dismissAnimationDuration: TimeInterval = 0.35
     private var overlayWindow: PassthroughWindow?
     private weak var previousKeyWindow: UIWindow?
+    private var isKeyboardShown = false
+    private var restoresKeyWindowWhenKeyboardHides = false
+    private var keyboardObservers = [NSObjectProtocol]()
     private var dismissGeneration: UInt = 0
     private var dismissCompletion: (() -> Void)?
 
@@ -96,18 +99,48 @@ class MediaPreviewPresenter: ObservableObject {
         return overlap.isNull ? 0 : window.bounds.maxY - overlap.minY
     }
 
+    init() {
+        let center = NotificationCenter.default
+        keyboardObservers = [
+            center.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { [weak self] _ in
+                MainActor.assumeIsolated { self?.isKeyboardShown = true }
+            },
+            center.addObserver(forName: UIResponder.keyboardDidHideNotification, object: nil, queue: .main) { [weak self] _ in
+                MainActor.assumeIsolated { self?.keyboardDidHide() }
+            }
+        ]
+    }
+
+    deinit {
+        keyboardObservers.forEach(NotificationCenter.default.removeObserver)
+    }
+
     func setAcceptsKeyboard(_ accepts: Bool) {
         guard let window = overlayWindow, window.acceptsKeyboard != accepts else { return }
         window.acceptsKeyboard = accepts
         if accepts {
-            previousKeyWindow = UIWindow.currentKeyWindow
+            if restoresKeyWindowWhenKeyboardHides {
+                restoresKeyWindowWhenKeyboardHides = false
+            } else {
+                previousKeyWindow = UIWindow.currentKeyWindow
+            }
             window.makeKey()
+        } else if isKeyboardShown {
+            restoresKeyWindowWhenKeyboardHides = true
         } else {
             restoreKeyWindow()
         }
     }
 
+    private func keyboardDidHide() {
+        isKeyboardShown = false
+        if restoresKeyWindowWhenKeyboardHides {
+            restoreKeyWindow()
+        }
+    }
+
     private func restoreKeyWindow() {
+        restoresKeyWindowWhenKeyboardHides = false
         guard let previous = previousKeyWindow, !previous.isHidden else { return }
         previous.makeKey()
         previousKeyWindow = nil
@@ -203,7 +236,7 @@ class MediaPreviewPresenter: ObservableObject {
     }
 
     private func tearDown() {
-        if overlayWindow?.acceptsKeyboard == true {
+        if overlayWindow?.acceptsKeyboard == true || restoresKeyWindowWhenKeyboardHides {
             overlayWindow?.acceptsKeyboard = false
             restoreKeyWindow()
         }
