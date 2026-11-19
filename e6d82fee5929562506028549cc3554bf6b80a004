@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3125bdb_3bae0ab8",
+        "filename": "Ring/Ring/Features/Conversations/Preview/ImagePreviewScreen.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-19T14:16:28Z",
+      "side": 1,
+      "message": "[warning] Line 113: 🟡 `pendingSingleTap` is cancelled in `shouldReceive` before the second touch is confirmed as a tap. If that touch becomes a pan/pinch (tap recognizer fails), the first single-tap action is lost and controls won’t toggle. Move the double-tap promotion/cancellation logic into `handleTap(_:)` (on actual tap recognition) or restore a dedicated double-tap recognizer so cancellation only happens after a real second tap.",
+      "revId": "e6d82fee5929562506028549cc3554bf6b80a004",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
