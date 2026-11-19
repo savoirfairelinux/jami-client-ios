@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95cb4401_66a8bc33",
+        "filename": "Ring/Ring/Resources/ar.lproj/Localizable.strings",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-19T20:49:45Z",
+      "side": 1,
+      "message": "[warning] Line 98: 🟡 New UI keys are added but remain English in this localized file (for example `swarm.quickSendEmoji`, `swarm.inviteOneMember`, `calls.returnToCall`, and multiple `mediaPreview.*` entries). This produces mixed-language UI for Arabic users. Import completed translations for these keys, or temporarily omit untranslated entries so fallback behavior is consistent from the base localization.",
+      "revId": "1f5f9df73957da71b5428e7e2afa2d33f5ed5ab1",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a053d38d_e6c829e9",
+        "filename": "Ring/Ring/Resources/sq-AL.lproj/Localizable.strings",
+        "patchSetId": 1
+      },
+      "lineNbr": 847,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-19T20:49:45Z",
+      "side": 1,
+      "message": "[warning] Line 847: 🟡 `collab.versionDeltas` now contains malformed user-visible text (`%3$d ndryshime(e)`), which will display a typo in the version history UI. Replace with grammatically correct Albanian wording (ideally via plural rules in `.stringsdict` if count-dependent).",
+      "revId": "1f5f9df73957da71b5428e7e2afa2d33f5ed5ab1",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd7516f4_50e5c389",
+        "filename": "Ring/Ring/Resources/zh-Hans-CN.lproj/Localizable.strings",
+        "patchSetId": 1
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-19T20:49:45Z",
+      "side": 1,
+      "message": "[warning] Line 359: 🟡 Some newly added labels are semantically/script inconsistent for this locale (e.g. `calls.speaker \u003d \"演讲者\"` means “presenter”, and `calls.hold \u003d \"通話保留\"` uses Traditional wording). These are likely incorrect for call controls and can mislead users. Re-translate call-control keys with locale-appropriate Simplified Chinese terms.",
+      "revId": "1f5f9df73957da71b5428e7e2afa2d33f5ed5ab1",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
