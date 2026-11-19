@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ad1104a_3dfd5096",
+        "filename": "Ring/Ring/Features/Conversations/Preview/ImagePreviewScreen.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-19T15:38:50Z",
+      "side": 1,
+      "message": "[warning] Line 254: 🟡 `onTextAvailable` is only updated when async analysis completes, so `model.canShowText` can stay `true` from the previous image while a new image is loading/cancelled, leaving a stale Live Text button that may toggle to an inactive state. Reset availability immediately on image switch/cancel (e.g., call `onTextAvailable?(false)` in `analyze(_:)` before starting a new task and in `cancelPendingAnalysis()`, and clear `isShowingText` when availability becomes false).",
+      "revId": "3dc5bfceb2861dad183bc2048e5fbe89f6837e73",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
