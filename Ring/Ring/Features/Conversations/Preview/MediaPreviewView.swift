@@ -48,6 +48,7 @@ struct MediaPreviewShell<Media: View, Controls: View>: View {
 
     @StateObject private var keyboard = KeyboardFrameObserver()
     @SwiftUI.State private var bottomChromeHeight: CGFloat = 0
+    @SwiftUI.State private var topChromeHeight: CGFloat = 0
 
     private let thumbnailCornerRadius: CGFloat = 15
     private let dismissThreshold: CGFloat = 120
@@ -174,7 +175,7 @@ struct MediaPreviewShell<Media: View, Controls: View>: View {
         ZStack {
             VStack(spacing: 0) {
                 if showsHeader {
-                    MediaPreviewScrim(edge: .top, chromeHeight: safeArea.top + MediaPreviewLayout.control)
+                    MediaPreviewScrim(edge: .top, chromeHeight: topChromeHeight)
                         .transition(.opacity)
                 }
                 Spacer(minLength: 0)
@@ -185,11 +186,7 @@ struct MediaPreviewShell<Media: View, Controls: View>: View {
             }
             VStack(spacing: 0) {
                 if showsHeader {
-                    MediaPreviewHeader(title: model.title,
-                                       subtitle: model.subtitle,
-                                       menuActions: menuActions,
-                                       onClose: close)
-                        .padding(.top, safeArea.top)
+                    topChrome
                         .transition(.opacity)
                 }
                 Spacer(minLength: 0)
@@ -200,6 +197,29 @@ struct MediaPreviewShell<Media: View, Controls: View>: View {
             }
         }
         .frame(width: size.width, height: size.height)
+    }
+
+    private var reactionsSummaryMaxWidth: CGFloat {
+        size.width - 2 * (MediaPreviewLayout.sideInset + MediaPreviewLayout.control + MediaPreviewLayout.headerSpacing)
+    }
+
+    private var topChrome: some View {
+        VStack(spacing: MediaPreviewLayout.reactionsTopSpacing) {
+            MediaPreviewHeader(title: model.title,
+                               subtitle: model.subtitle,
+                               menuActions: menuActions,
+                               onClose: close)
+            if showsBottomChrome, let reactions = model.reactions {
+                MediaPreviewReactionsSummary(reactions: reactions, maxWidth: reactionsSummaryMaxWidth)
+                    .transition(.opacity)
+            }
+        }
+        .padding(.top, safeArea.top)
+        .background(GeometryReader { proxy in
+            Color.clear.preference(key: MediaPreviewTopChromeHeightKey.self,
+                                   value: proxy.frame(in: .global).maxY)
+        })
+        .onPreferenceChange(MediaPreviewTopChromeHeightKey.self) { topChromeHeight = $0 }
     }
 
     private var bottomChrome: some View {
@@ -226,10 +246,6 @@ struct MediaPreviewShell<Media: View, Controls: View>: View {
                                            model.react(emoji)
                                        })
                 .transition(.scale(scale: 0.9).combined(with: .opacity))
-        } else if let reactions = model.reactions {
-            MediaPreviewReactionsSummary(reactions: reactions,
-                                         maxWidth: size.width - 2 * MediaPreviewLayout.sideInset)
-                .transition(.opacity)
         }
     }
 
@@ -357,6 +373,14 @@ extension MediaPreviewPresenter {
 // MARK: - Layout keys
 
 private struct MediaPreviewBottomChromeHeightKey: PreferenceKey {
+    static var defaultValue: CGFloat = 0
+
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = max(value, nextValue())
+    }
+}
+
+private struct MediaPreviewTopChromeHeightKey: PreferenceKey {
     static var defaultValue: CGFloat = 0
 
     static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
