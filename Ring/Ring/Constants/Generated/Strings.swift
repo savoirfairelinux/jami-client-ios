@@ -1481,6 +1481,8 @@ internal enum L10n {
     }
     /// File
     internal static let file = L10n.tr("Localizable", "mediaPreview.file", fallback: "File")
+    /// Live Text
+    internal static let liveText = L10n.tr("Localizable", "mediaPreview.liveText", fallback: "Live Text")
     /// Message
     internal static let message = L10n.tr("Localizable", "mediaPreview.message", fallback: "Message")
     /// More
