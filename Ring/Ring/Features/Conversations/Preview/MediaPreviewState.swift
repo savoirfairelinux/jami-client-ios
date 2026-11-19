@@ -97,14 +97,10 @@ class MediaPreviewPresenter: ObservableObject {
     }
 
     func setAcceptsKeyboard(_ accepts: Bool) {
-        guard let window = overlayWindow, window.acceptsKeyboard != accepts else { return }
-        window.acceptsKeyboard = accepts
-        if accepts {
-            previousKeyWindow = UIWindow.currentKeyWindow
-            window.makeKey()
-        } else {
-            restoreKeyWindow()
-        }
+        guard accepts, let window = overlayWindow, !window.acceptsKeyboard else { return }
+        window.acceptsKeyboard = true
+        previousKeyWindow = UIWindow.currentKeyWindow
+        window.makeKey()
     }
 
     private func restoreKeyWindow() {
