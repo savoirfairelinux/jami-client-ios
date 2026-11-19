@@ -81,6 +81,8 @@ class MediaPreviewModel: ObservableObject {
     @Published var needsPhotoPermission: Bool = false
     @Published var isReplying = false
     @Published var isReacting = false
+    @Published private(set) var canShowText = false
+    @Published var isShowingText = false
 
     var isImagePreview: Bool {
         if case .image = content { return true }
@@ -107,12 +109,14 @@ class MediaPreviewModel: ObservableObject {
     func share() {
         guard let url = fileURL else { return }
         isReacting = false
+        isShowingText = false
         activeSheet = .share(url: url)
     }
 
     func forward() {
         guard let bag = injectionBag, let callback = forwardCallback else { return }
         isReacting = false
+        isShowingText = false
         activeSheet = .forward(injectionBag: bag, callback: callback)
     }
 
@@ -171,7 +175,18 @@ class MediaPreviewModel: ObservableObject {
         guard let messageId = messageId,
               let choices = conversationActions?.reactionChoices(forMessage: messageId) else { return }
         reactionChoices = choices
+        isShowingText = false
         isReacting = true
+    }
+
+    func updateTextAvailability(_ available: Bool) {
+        guard canShowText != available else { return }
+        canShowText = available
+    }
+
+    func toggleShowingText() {
+        isReacting = false
+        isShowingText.toggle()
     }
 
     func react(_ emoji: String) {
@@ -184,6 +199,7 @@ class MediaPreviewModel: ObservableObject {
         guard let messageId = messageId, let actions = conversationActions,
               actions.beginReply(toMessage: messageId) else { return }
         isReacting = false
+        isShowingText = false
         isReplying = true
     }
 

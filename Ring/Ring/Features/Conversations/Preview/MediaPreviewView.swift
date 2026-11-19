@@ -153,8 +153,8 @@ struct MediaPreviewShell<Media: View, Controls: View>: View {
                 chromeVisible = true
             }
         }
-        .onChange(of: model.isReplying) { replying in
-            overlayState.setAcceptsKeyboard(replying)
+        .onChange(of: model.isReplying || model.isShowingText) { acceptsKeyboard in
+            overlayState.setAcceptsKeyboard(acceptsKeyboard)
         }
         .onChange(of: model.activeSheet?.id) { sheetID in
             if sheetID != nil {
@@ -294,6 +294,10 @@ struct MediaPreviewShell<Media: View, Controls: View>: View {
         }
         if model.isReacting {
             model.isReacting = false
+            return
+        }
+        if model.isShowingText {
+            model.isShowingText = false
             return
         }
         chromeVisible.toggle()
