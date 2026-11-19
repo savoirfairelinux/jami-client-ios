@@ -386,10 +386,14 @@ final class KeyboardFrameObserver: ObservableObject {
 
     private func update(with notification: Notification) {
         guard let frame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
-        if let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double, duration > 0 {
-            animationDuration = duration
+        let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self, self.frame != frame else { return }
+            if let duration = duration, duration > 0 {
+                self.animationDuration = duration
+            }
+            self.frame = frame
         }
-        self.frame = frame
     }
 }
 
