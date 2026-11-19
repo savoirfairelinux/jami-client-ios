@@ -31,7 +31,7 @@ enum MediaPreviewLayout {
     static let scrimOpacity: Double = 0.16
     static let scrimStops = 12
     static let glassTint: Double = 0.2
-    static let chromeAnimation = Animation.easeInOut(duration: 0.25)
+    static let chromeAnimation = Animation.easeInOut(duration: 0.2)
 }
 
 // MARK: - Glass
