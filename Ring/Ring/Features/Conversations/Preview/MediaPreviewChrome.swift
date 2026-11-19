@@ -32,7 +32,6 @@ enum MediaPreviewLayout {
     static let scrimFade: CGFloat = 24
     static let scrimOpacity: Double = 0.16
     static let scrimStops = 12
-    static let glassTint: Double = 0.2
     static let chromeAnimation = Animation.easeInOut(duration: 0.2)
 }
 
@@ -45,7 +44,7 @@ struct MediaPreviewGlass<S: Shape>: ViewModifier {
     @ViewBuilder
     func body(content: Content) -> some View {
         if #available(iOS 26.0, *) {
-            let glass = Glass.clear.tint(.black.opacity(MediaPreviewLayout.glassTint))
+            let glass = Glass.regular
             content.glassEffect(interactive ? glass.interactive() : glass, in: shape)
         } else {
             content.background(VisualEffect(style: .systemUltraThinMaterialDark).clipShape(shape))
