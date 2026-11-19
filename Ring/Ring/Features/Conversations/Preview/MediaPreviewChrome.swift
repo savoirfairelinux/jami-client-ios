@@ -196,7 +196,7 @@ struct MediaPreviewActionCapsule: View {
 
     private let dimmedOpacity = 0.45
 
-    private var othersOpacity: Double { model.isReacting ? dimmedOpacity : 1 }
+    private var othersOpacity: Double { model.isReacting || model.isShowingText ? dimmedOpacity : 1 }
 
     var body: some View {
         HStack(spacing: 0) {
@@ -224,6 +224,7 @@ struct MediaPreviewActionCapsule: View {
             }
             if model.canReact {
                 iconButton("face.smiling", label: L10n.MediaPreview.react, isSelected: model.isReacting, action: model.toggleReacting)
+                    .opacity(model.isShowingText ? dimmedOpacity : 1)
             }
             Group {
                 iconButton("arrowshape.turn.up.forward", label: L10n.Global.forward, action: model.forward)
@@ -248,6 +249,32 @@ struct MediaPreviewActionCapsule: View {
         .accessibilityLabel(label)
         .accessibilityShowsLargeContentViewer { Label(label, systemImage: systemName) }
         .accessibilityAddTraits(isSelected ? .isSelected : [])
+    }
+}
+
+// MARK: - Live Text
+
+struct MediaPreviewLiveTextButton: View {
+    let isActive: Bool
+    let action: () -> Void
+
+    private let systemName = "text.viewfinder"
+
+    var body: some View {
+        Button(action: action) {
+            Image(systemName: systemName)
+                .font(.system(size: NavBarIcon.glyphSize))
+                .foregroundColor(isActive ? .black : .white)
+                .frame(width: MediaPreviewLayout.control, height: MediaPreviewLayout.control)
+                .background(Circle().fill(Color.white.opacity(isActive ? 1 : 0)))
+                .contentShape(Circle())
+                .animation(MediaPreviewLayout.chromeAnimation, value: isActive)
+        }
+        .buttonStyle(ScaleButtonStyle())
+        .mediaPreviewGlass(in: Circle(), interactive: true)
+        .accessibilityLabel(L10n.MediaPreview.liveText)
+        .accessibilityAddTraits(isActive ? .isSelected : [])
+        .accessibilityShowsLargeContentViewer { Label(L10n.MediaPreview.liveText, systemImage: systemName) }
     }
 }
 

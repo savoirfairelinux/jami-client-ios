@@ -17,6 +17,7 @@
  */
 
 import SwiftUI
+import VisionKit
 
 struct ImagePreviewScreen: View {
     let image: UIImage
@@ -26,31 +27,58 @@ struct ImagePreviewScreen: View {
 
     @SwiftUI.State private var chromeVisible = false
     @SwiftUI.State private var isZoomed = false
+    @SwiftUI.State private var analyzesText = false
 
     var body: some View {
         MediaPreviewShell(model: model,
                           overlayState: overlayState,
                           size: size,
                           chromeVisible: $chromeVisible,
-                          allowsDismissDrag: !isZoomed,
+                          allowsDismissDrag: !isZoomed && !model.isShowingText,
                           menuActions: model.menuActions(onDelete: { overlayState.deleteAndDismiss(model) }),
                           media: { onTap in
                               ZoomableImageView(image: image,
                                                 collapsedSize: overlayState.hasSourceFrame ? overlayState.sourceFrame.size : nil,
                                                 expandedSize: size,
+                                                analyzesText: analyzesText,
+                                                showsText: model.isShowingText,
                                                 isZoomed: $isZoomed,
+                                                onTextAvailable: textAvailabilityChanged,
                                                 onSingleTap: onTap)
                                   .accessibilityElement()
                                   .accessibilityLabel(L10n.Conversation.replyQuotePhoto)
                                   .accessibilityAddTraits([.isButton, .isImage])
                                   .accessibilityAction(named: L10n.Global.close) { overlayState.dismiss() }
                           },
-                          controls: { EmptyView() })
+                          controls: {
+                              if model.canShowText && !model.isReacting {
+                                  HStack(spacing: 0) {
+                                      Spacer(minLength: 0)
+                                      MediaPreviewLiveTextButton(isActive: model.isShowingText,
+                                                                 action: model.toggleShowingText)
+                                  }
+                                  .transition(.opacity)
+                              }
+                          })
+            .onChange(of: chromeVisible) { visible in
+                if visible && !overlayState.isDismissing {
+                    analyzesText = true
+                }
+            }
             .onChange(of: overlayState.isDismissing) { dismissing in
                 if dismissing {
                     isZoomed = false
+                    analyzesText = false
+                    model.isShowingText = false
                 }
             }
+    }
+
+    private func textAvailabilityChanged(_ available: Bool) {
+        guard model.canShowText != available else { return }
+        withAnimation(MediaPreviewLayout.chromeAnimation) {
+            model.canShowText = available
+        }
     }
 }
 
@@ -58,7 +86,10 @@ struct ZoomableImageView: UIViewRepresentable {
     let image: UIImage
     let collapsedSize: CGSize?
     let expandedSize: CGSize
+    let analyzesText: Bool
+    let showsText: Bool
     @Binding var isZoomed: Bool
+    let onTextAvailable: (Bool) -> Void
     let onSingleTap: () -> Void
 
     func makeCoordinator() -> Coordinator {
@@ -82,6 +113,8 @@ struct ZoomableImageView: UIViewRepresentable {
         if !isZoomed && scrollView.zoomScale > scrollView.minimumZoomScale {
             scrollView.setZoomScale(scrollView.minimumZoomScale, animated: false)
         }
+        context.coordinator.updateLiveText(image: image, imageView: scrollView.imageView,
+                                           analyzes: analyzesText, showsText: showsText)
     }
 
     final class Coordinator: NSObject, UIScrollViewDelegate, UIGestureRecognizerDelegate {
@@ -92,6 +125,7 @@ struct ZoomableImageView: UIViewRepresentable {
         private var pendingSingleTap: DispatchWorkItem?
         private var lastTapLocation: CGPoint = .zero
         private var isSecondTap = false
+        private var liveText: AnyObject?
 
         init(_ parent: ZoomableImageView) {
             self.parent = parent
@@ -111,6 +145,9 @@ struct ZoomableImageView: UIViewRepresentable {
         }
 
         func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+            if liveTextHandles(touch) {
+                return false
+            }
             let location = touch.location(in: nil)
             isSecondTap = pendingSingleTap != nil
                 && hypot(location.x - lastTapLocation.x, location.y - lastTapLocation.y) < doubleTapSlop
@@ -119,6 +156,34 @@ struct ZoomableImageView: UIViewRepresentable {
                 pendingSingleTap = nil
             }
             return true
+        }
+
+        func updateLiveText(image: UIImage, imageView: UIImageView, analyzes: Bool, showsText: Bool) {
+            guard #available(iOS 16.0, *), ImageAnalyzer.isSupported else { return }
+            let session = liveText as? ImageLiveTextSession ?? makeLiveTextSession()
+            if analyzes {
+                session.analyze(image)
+            } else {
+                session.cancelPendingAnalysis()
+            }
+            session.setActive(showsText, on: imageView)
+        }
+
+        @available(iOS 16.0, *)
+        private func makeLiveTextSession() -> ImageLiveTextSession {
+            let session = ImageLiveTextSession()
+            session.onTextAvailable = { [weak self] available in
+                self?.parent.onTextAvailable(available)
+            }
+            liveText = session
+            return session
+        }
+
+        private func liveTextHandles(_ touch: UITouch) -> Bool {
+            if #available(iOS 16.0, *), let session = liveText as? ImageLiveTextSession {
+                return session.handlesTouch(touch)
+            }
+            return false
         }
 
         @objc
@@ -149,6 +214,85 @@ struct ZoomableImageView: UIViewRepresentable {
                               width: size.width, height: size.height)
             scrollView.zoom(to: rect, animated: true)
         }
+    }
+}
+
+@available(iOS 16.0, *)
+@MainActor
+private final class ImageLiveTextSession: NSObject, ImageAnalysisInteractionDelegate {
+    private static let analyzer = ImageAnalyzer()
+
+    var onTextAvailable: ((Bool) -> Void)?
+    private let interaction = ImageAnalysisInteraction()
+    private var image: UIImage?
+    private var analysis: ImageAnalysis?
+    private var analysisTask: Task<Void, Never>?
+
+    override init() {
+        super.init()
+        interaction.delegate = self
+        interaction.preferredInteractionTypes = []
+        interaction.isSupplementaryInterfaceHidden = true
+    }
+
+    deinit {
+        analysisTask?.cancel()
+    }
+
+    func analyze(_ image: UIImage) {
+        guard image !== self.image else { return }
+        self.image = image
+        analysis = nil
+        analysisTask?.cancel()
+        analysisTask = Task { [weak self] in
+            let configuration = ImageAnalyzer.Configuration([.text])
+            let result = try? await Self.analyzer.analyze(image, configuration: configuration)
+            guard let self = self, !Task.isCancelled, image === self.image else { return }
+            self.analysisTask = nil
+            self.analysis = result
+            self.onTextAvailable?(result?.hasResults(for: .text) ?? false)
+        }
+    }
+
+    func cancelPendingAnalysis() {
+        guard let task = analysisTask else { return }
+        task.cancel()
+        analysisTask = nil
+        image = nil
+    }
+
+    func setActive(_ active: Bool, on imageView: UIImageView) {
+        guard active != (interaction.view != nil) else { return }
+        if active {
+            guard let analysis = analysis else { return }
+            imageView.isUserInteractionEnabled = true
+            imageView.addInteraction(interaction)
+            interaction.analysis = analysis
+            interaction.preferredInteractionTypes = .automatic
+            interaction.selectableItemsHighlighted = true
+        } else {
+            interaction.resetTextSelection()
+            interaction.selectableItemsHighlighted = false
+            interaction.preferredInteractionTypes = []
+            interaction.analysis = nil
+            imageView.removeInteraction(interaction)
+            imageView.isUserInteractionEnabled = false
+        }
+    }
+
+    func handlesTouch(_ touch: UITouch) -> Bool {
+        guard let view = interaction.view else { return false }
+        return handles(touch.location(in: view))
+    }
+
+    private func handles(_ point: CGPoint) -> Bool {
+        interaction.hasActiveTextSelection || interaction.hasInteractiveItem(at: point)
+    }
+
+    func interaction(_ interaction: ImageAnalysisInteraction,
+                     shouldBeginAt point: CGPoint,
+                     for interactionType: ImageAnalysisInteraction.InteractionTypes) -> Bool {
+        handles(point)
     }
 }
 
