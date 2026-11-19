@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34a13ccd_fb8a1861",
+        "filename": "Ring/Ring/Calls/ContactPicker/ContactPickerViewModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-19T16:14:19Z",
+      "side": 1,
+      "message": "[warning] Line 150: 🟡 The search behavior changed to normalized matching in ContactPicker, but there’s no accompanying test coverage here (only SwarmCreation got new accent-insensitive tests). Add a ContactPickerViewModel test that verifies diacritic/case-insensitive matches (e.g., `José` vs `jose`) to prevent regressions and keep behavior consistent across search surfaces.",
+      "revId": "86aa021862dda03169b08576ae84dd6563781491",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
