@@ -27,6 +27,8 @@ enum MediaPreviewLayout {
     static let reactionsHeight: CGFloat = 30
     static let reactionRowHeight: CGFloat = 50
     static let bottomStackSpacing: CGFloat = 12
+    static let headerSpacing: CGFloat = 12
+    static let reactionsTopSpacing: CGFloat = 8
     static let scrimFade: CGFloat = 24
     static let scrimOpacity: Double = 0.16
     static let scrimStops = 12
@@ -117,7 +119,7 @@ struct MediaPreviewHeader: View {
     let onClose: () -> Void
 
     var body: some View {
-        HStack(spacing: 12) {
+        HStack(spacing: MediaPreviewLayout.headerSpacing) {
             MediaPreviewGlassButton(systemName: "xmark", accessibilityLabel: L10n.Global.close, action: onClose)
             Spacer(minLength: 0)
             if !menuActions.isEmpty {
@@ -126,7 +128,7 @@ struct MediaPreviewHeader: View {
                     .mediaPreviewGlass(in: Circle(), interactive: true)
             }
         }
-        .overlay(titleCapsule.padding(.horizontal, MediaPreviewLayout.control + 12))
+        .overlay(titleCapsule.padding(.horizontal, MediaPreviewLayout.control + MediaPreviewLayout.headerSpacing))
         .padding(.horizontal, MediaPreviewLayout.sideInset)
     }
 
