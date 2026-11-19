@@ -99,6 +99,7 @@
 "swarm.conversationEnded" = "会話が終了しました";
 "swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
 "swarm.chooseColor" = "会話の色";
+"swarm.quickSendEmoji" = "Quick send emoji";
 "swarm.typeOfSwarm" = "会話の種類";
 "swarm.identifier" = "識別子";
 "swarm.conversationId" = "会話ID";
@@ -127,6 +128,8 @@
 "swarm.invite" = "Invite";
 "swarm.inviteMembers" = "メンバーを招待";
 "swarm.inviteSelectedMembers" = "選択した連絡先を招待";
+"swarm.inviteOneMember" = "Invite 1 member";
+"swarm.inviteMemberCount" = "Invite %d members";
 "swarm.inviteMembersSelected" = "選択済み";
 "swarm.inviteMembersNotSelected" = "未選択";
 "swarm.confirmLeaveConversation" = "この会話から退出しますか？";
@@ -352,12 +355,17 @@
 "calls.currentCallWith" = "連絡する";
 "calls.maximize" = "最大化";
 "calls.minimize" = "最小化";
+"calls.returnToCall" = "通話に戻る";
 "calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "調停者を設定";
 "calls.removeModerator" = "調停者を取り消し";
 "calls.muteAudio" = "マイクをミュート";
 "calls.unmuteAudio" = "マイクのミュートを解除";
 "calls.raiseHand" = "手を挙げる";
+"calls.moreOptions" = "詳細な設定";
+"calls.speaker" = "Speaker";
+"calls.hold" = "保留";
+"calls.showFullVideo" = "Show full video";
 "calls.lowerHand" = "手を下げる";
 "calls.inThisCall" = "In this call (%@)";
 "calls.participantsInCall" = "%@ in call";
@@ -890,3 +898,16 @@
 "collab.documentRemovedLocally" = "Document removed from this device";
 "collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";
 "collab.documentShared" = "New document: %@";
+
+// Media preview
+"mediaPreview.dateTime" = "%1$@, %2$@";
+"mediaPreview.react" = "React";
+"mediaPreview.moreActions" = "更に";
+"mediaPreview.moreEmoji" = "More emoji";
+"mediaPreview.liveText" = "Live Text";
+"mediaPreview.replyTo" = "Reply to %@";
+"mediaPreview.voice" = "Voice";
+"mediaPreview.video" = "動画";
+"mediaPreview.photos" = "Photos";
+"mediaPreview.file" = "File";
+"mediaPreview.message" = "Message";

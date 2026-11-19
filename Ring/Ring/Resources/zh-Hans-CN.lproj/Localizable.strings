@@ -99,6 +99,7 @@
 "swarm.conversationEnded" = "聊天已终止";
 "swarm.conversationEndedMessage" = "此对话中你已无法再发送消息。";
 "swarm.chooseColor" = "聊天颜色";
+"swarm.quickSendEmoji" = "Quick send emoji";
 "swarm.typeOfSwarm" = "聊天类型";
 "swarm.identifier" = "标识符";
 "swarm.conversationId" = "聊天 ID";
@@ -127,6 +128,8 @@
 "swarm.invite" = "邀请";
 "swarm.inviteMembers" = "邀请成员";
 "swarm.inviteSelectedMembers" = "邀请选中的联络人<br>";
+"swarm.inviteOneMember" = "Invite 1 member";
+"swarm.inviteMemberCount" = "Invite %d members";
 "swarm.inviteMembersSelected" = "已选择";
 "swarm.inviteMembersNotSelected" = "未选择";
 "swarm.confirmLeaveConversation" = "离开此聊天？";
@@ -352,12 +355,17 @@
 "calls.currentCallWith" = "通话到";
 "calls.maximize" = "最大化";
 "calls.minimize" = "最小化";
+"calls.returnToCall" = "返回通话";
 "calls.startPictureInPicture" = "开启画中画";
 "calls.setModerator" = "设置管理员";
 "calls.removeModerator" = "取消设置管理员";
 "calls.muteAudio" = "关闭麦克风";
 "calls.unmuteAudio" = "麦克风静音";
 "calls.raiseHand" = "举手";
+"calls.moreOptions" = "更多选项";
+"calls.speaker" = "演讲者";
+"calls.hold" = "通話保留";
+"calls.showFullVideo" = "全屏显示";
 "calls.lowerHand" = "放下手";
 "calls.inThisCall" = "本次通话中（%@）";
 "calls.participantsInCall" = "%@正在通话";
@@ -890,3 +898,16 @@
 "collab.documentRemovedLocally" = "文档已从此设备移除";
 "collab.documentRemovedLocallyMessage" = "\"%@\"已不在当前设备中，重新打开即可再次下载";
 "collab.documentShared" = "新文档: %@";
+
+// Media preview
+"mediaPreview.dateTime" = "%1$@, %2$@";
+"mediaPreview.react" = "React";
+"mediaPreview.moreActions" = "更多";
+"mediaPreview.moreEmoji" = "More emoji";
+"mediaPreview.liveText" = "Live Text";
+"mediaPreview.replyTo" = "Reply to %@";
+"mediaPreview.voice" = "Voice";
+"mediaPreview.video" = "视频";
+"mediaPreview.photos" = "Photos";
+"mediaPreview.file" = "File";
+"mediaPreview.message" = "消息";

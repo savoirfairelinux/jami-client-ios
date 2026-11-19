@@ -99,6 +99,7 @@
 "swarm.conversationEnded" = "Conversation terminée";
 "swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
 "swarm.chooseColor" = "Couleur de la conversation";
+"swarm.quickSendEmoji" = "Quick send emoji";
 "swarm.typeOfSwarm" = "Type de conversation";
 "swarm.identifier" = "Identifiant ";
 "swarm.conversationId" = "ID de conversation";
@@ -127,6 +128,8 @@
 "swarm.invite" = "Invite";
 "swarm.inviteMembers" = "Inviter des membres";
 "swarm.inviteSelectedMembers" = "Inviter les contacts sélectionnés.";
+"swarm.inviteOneMember" = "Invite 1 member";
+"swarm.inviteMemberCount" = "Invite %d members";
 "swarm.inviteMembersSelected" = "Sélectionné";
 "swarm.inviteMembersNotSelected" = "Non sélectionné";
 "swarm.confirmLeaveConversation" = "Souhaitez-vous quitter cette conversation ?";
@@ -352,12 +355,17 @@
 "calls.currentCallWith" = "Appel avec";
 "calls.maximize" = "Agrandir";
 "calls.minimize" = "Minimiser";
+"calls.returnToCall" = "Return to call";
 "calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Définir un modérateur";
 "calls.removeModerator" = "Supprimer un modérateur";
 "calls.muteAudio" = "Couper le microphone";
 "calls.unmuteAudio" = "Réouvrir le microphone";
 "calls.raiseHand" = "Lever la main";
+"calls.moreOptions" = "Plus d'options";
+"calls.speaker" = "Speaker";
+"calls.hold" = "Patientez";
+"calls.showFullVideo" = "Show full video";
 "calls.lowerHand" = "Baisser la main";
 "calls.inThisCall" = "In this call (%@)";
 "calls.participantsInCall" = "%@ in call";
@@ -890,3 +898,16 @@
 "collab.documentRemovedLocally" = "Document removed from this device";
 "collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";
 "collab.documentShared" = "New document: %@";
+
+// Media preview
+"mediaPreview.dateTime" = "%1$@, %2$@";
+"mediaPreview.react" = "React";
+"mediaPreview.moreActions" = "More";
+"mediaPreview.moreEmoji" = "More emoji";
+"mediaPreview.liveText" = "Live Text";
+"mediaPreview.replyTo" = "Reply to %@";
+"mediaPreview.voice" = "Voice";
+"mediaPreview.video" = "Video";
+"mediaPreview.photos" = "Photos";
+"mediaPreview.file" = "File";
+"mediaPreview.message" = "Message";

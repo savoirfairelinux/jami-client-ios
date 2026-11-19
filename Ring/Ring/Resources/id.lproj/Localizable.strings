@@ -99,6 +99,7 @@
 "swarm.conversationEnded" = "Conversation ended";
 "swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
 "swarm.chooseColor" = "Warna percakapan";
+"swarm.quickSendEmoji" = "Quick send emoji";
 "swarm.typeOfSwarm" = "Jenis percakapan";
 "swarm.identifier" = "Pengidentifikasi";
 "swarm.conversationId" = "Conversation ID";
@@ -127,6 +128,8 @@
 "swarm.invite" = "Invite";
 "swarm.inviteMembers" = "Undang anggota";
 "swarm.inviteSelectedMembers" = "Invite selected contacts";
+"swarm.inviteOneMember" = "Invite 1 member";
+"swarm.inviteMemberCount" = "Invite %d members";
 "swarm.inviteMembersSelected" = "Selected";
 "swarm.inviteMembersNotSelected" = "Not selected";
 "swarm.confirmLeaveConversation" = "Apakah Anda ingin meninggalkan percakapan ini?";
@@ -352,12 +355,17 @@
 "calls.currentCallWith" = "Telepon dengan";
 "calls.maximize" = "Maksimalkan";
 "calls.minimize" = "Minimalkan";
+"calls.returnToCall" = "Kembali ke panggilan";
 "calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Atur moderator";
 "calls.removeModerator" = "Batal atur moderator";
 "calls.muteAudio" = "Senyapkan mikrofon";
 "calls.unmuteAudio" = "Suarakan mikrofon";
 "calls.raiseHand" = "Angkat";
+"calls.moreOptions" = "Opsi lainnya";
+"calls.speaker" = "Speaker";
+"calls.hold" = "Tahan";
+"calls.showFullVideo" = "Show full video";
 "calls.lowerHand" = "Turunkan tangan";
 "calls.inThisCall" = "In this call (%@)";
 "calls.participantsInCall" = "%@ in call";
@@ -890,3 +898,16 @@
 "collab.documentRemovedLocally" = "Document removed from this device";
 "collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";
 "collab.documentShared" = "New document: %@";
+
+// Media preview
+"mediaPreview.dateTime" = "%1$@, %2$@";
+"mediaPreview.react" = "React";
+"mediaPreview.moreActions" = "Lainnya";
+"mediaPreview.moreEmoji" = "More emoji";
+"mediaPreview.liveText" = "Live Text";
+"mediaPreview.replyTo" = "Reply to %@";
+"mediaPreview.voice" = "Voice";
+"mediaPreview.video" = "Video";
+"mediaPreview.photos" = "Photos";
+"mediaPreview.file" = "File";
+"mediaPreview.message" = "Message";

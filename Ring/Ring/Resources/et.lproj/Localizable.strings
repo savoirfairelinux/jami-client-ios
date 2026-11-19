@@ -99,6 +99,7 @@
 "swarm.conversationEnded" = "Vestlus on lõppenud";
 "swarm.conversationEndedMessage" = "Sa ei saa enam saata sõnumeid siia vestlusesse.";
 "swarm.chooseColor" = "Vestluse värv";
+"swarm.quickSendEmoji" = "Quick send emoji";
 "swarm.typeOfSwarm" = "Vestluse tüüp";
 "swarm.identifier" = "Tunnus";
 "swarm.conversationId" = "Vestluse tunnus";
@@ -127,6 +128,8 @@
 "swarm.invite" = "Kutsu";
 "swarm.inviteMembers" = "Kutsu osalejaid";
 "swarm.inviteSelectedMembers" = "Saada kutse valitud kontaktidele";
+"swarm.inviteOneMember" = "Invite 1 member";
+"swarm.inviteMemberCount" = "Invite %d members";
 "swarm.inviteMembersSelected" = "Valitud";
 "swarm.inviteMembersNotSelected" = "Pole valitud";
 "swarm.confirmLeaveConversation" = "Kas soovid sellest vestlusest lahkuda?";
@@ -352,12 +355,17 @@
 "calls.currentCallWith" = "Helista kasutajale";
 "calls.maximize" = "Maksimeeri";
 "calls.minimize" = "Minimeeri";
+"calls.returnToCall" = "Return to call";
 "calls.startPictureInPicture" = "Käivita pilt-pildis režiim";
 "calls.setModerator" = "Määra moderaator";
 "calls.removeModerator" = "Eemalda moderaator";
 "calls.muteAudio" = "Summuta mikrofon";
 "calls.unmuteAudio" = "Lõpeta mikrofoni summutamine";
 "calls.raiseHand" = "Anna käega märku";
+"calls.moreOptions" = "Lisavõimalused";
+"calls.speaker" = "Speaker";
+"calls.hold" = "Pane ootele";
+"calls.showFullVideo" = "Show full video";
 "calls.lowerHand" = "Lase käsi alla";
 "calls.inThisCall" = "Selles kõnes (%@)";
 "calls.participantsInCall" = "%@ on helistamas";
@@ -890,3 +898,16 @@
 "collab.documentRemovedLocally" = "Dokument on sellest seadmest eemaldatud.";
 "collab.documentRemovedLocallyMessage" = "„%@“ dokumenti enam ei leidu selles seadmes. Tema uuesti avamisel laaditakse ta uuesti alla.";
 "collab.documentShared" = "Uus dokument: %@";
+
+// Media preview
+"mediaPreview.dateTime" = "%1$@, %2$@";
+"mediaPreview.react" = "React";
+"mediaPreview.moreActions" = "More";
+"mediaPreview.moreEmoji" = "More emoji";
+"mediaPreview.liveText" = "Live Text";
+"mediaPreview.replyTo" = "Reply to %@";
+"mediaPreview.voice" = "Voice";
+"mediaPreview.video" = "Video";
+"mediaPreview.photos" = "Photos";
+"mediaPreview.file" = "File";
+"mediaPreview.message" = "Message";

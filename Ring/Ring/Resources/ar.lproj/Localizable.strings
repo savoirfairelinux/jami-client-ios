@@ -99,6 +99,7 @@
 "swarm.conversationEnded" = "انتهت المحادثة";
 "swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
 "swarm.chooseColor" = "لون المحادثة";
+"swarm.quickSendEmoji" = "Quick send emoji";
 "swarm.typeOfSwarm" = "نوع المحادثة";
 "swarm.identifier" = "المعرف";
 "swarm.conversationId" = "معرّف المحادثة";
@@ -127,6 +128,8 @@
 "swarm.invite" = "Invite";
 "swarm.inviteMembers" = "دعوة الأعضاء";
 "swarm.inviteSelectedMembers" = "دعوة جهات الاتصال المحددة";
+"swarm.inviteOneMember" = "Invite 1 member";
+"swarm.inviteMemberCount" = "Invite %d members";
 "swarm.inviteMembersSelected" = "محدد";
 "swarm.inviteMembersNotSelected" = "غير محدد";
 "swarm.confirmLeaveConversation" = "هل تريد مغادرة هذه المحادثة؟";
@@ -352,12 +355,17 @@
 "calls.currentCallWith" = "اتصل بـ";
 "calls.maximize" = "تكبير";
 "calls.minimize" = "خفض";
+"calls.returnToCall" = "Return to call";
 "calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "حدد المدير";
 "calls.removeModerator" = "إزالة المدير";
 "calls.muteAudio" = "كتم ميكروفون";
 "calls.unmuteAudio" = "إلغاء كتم الميكروفون";
 "calls.raiseHand" = "رفع اليد";
+"calls.moreOptions" = "More options";
+"calls.speaker" = "Speaker";
+"calls.hold" = "Hold";
+"calls.showFullVideo" = "Show full video";
 "calls.lowerHand" = "اليد السفلى";
 "calls.inThisCall" = "In this call (%@)";
 "calls.participantsInCall" = "%@ in call";
@@ -890,3 +898,16 @@
 "collab.documentRemovedLocally" = "Document removed from this device";
 "collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";
 "collab.documentShared" = "New document: %@";
+
+// Media preview
+"mediaPreview.dateTime" = "%1$@, %2$@";
+"mediaPreview.react" = "React";
+"mediaPreview.moreActions" = "More";
+"mediaPreview.moreEmoji" = "More emoji";
+"mediaPreview.liveText" = "Live Text";
+"mediaPreview.replyTo" = "Reply to %@";
+"mediaPreview.voice" = "Voice";
+"mediaPreview.video" = "Video";
+"mediaPreview.photos" = "Photos";
+"mediaPreview.file" = "File";
+"mediaPreview.message" = "Message";

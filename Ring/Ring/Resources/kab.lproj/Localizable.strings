@@ -99,6 +99,7 @@
 "swarm.conversationEnded" = "Conversation ended";
 "swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
 "swarm.chooseColor" = "Ini n udiwenni";
+"swarm.quickSendEmoji" = "Quick send emoji";
 "swarm.typeOfSwarm" = "Anaw n udiwenni";
 "swarm.identifier" = "Asulay";
 "swarm.conversationId" = "Conversation ID";
@@ -127,6 +128,8 @@
 "swarm.invite" = "Invite";
 "swarm.inviteMembers" = "Invite members";
 "swarm.inviteSelectedMembers" = "Invite selected contacts";
+"swarm.inviteOneMember" = "Invite 1 member";
+"swarm.inviteMemberCount" = "Invite %d members";
 "swarm.inviteMembersSelected" = "Selected";
 "swarm.inviteMembersNotSelected" = "Not selected";
 "swarm.confirmLeaveConversation" = "Do you want to leave this conversation?";
@@ -352,12 +355,17 @@
 "calls.currentCallWith" = "Call with ";
 "calls.maximize" = "Semɣer";
 "calls.minimize" = "Minimize";
+"calls.returnToCall" = "Tuɣalin ɣer tiɣri";
 "calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Set moderator";
 "calls.removeModerator" = "Unset moderator";
 "calls.muteAudio" = "Sgugem amikrufun";
 "calls.unmuteAudio" = "Unmute microphone";
 "calls.raiseHand" = "Rfed afus-ik-im";
+"calls.moreOptions" = "Ugar n textiṛiyin";
+"calls.speaker" = "Speaker";
+"calls.hold" = "Tettṛaǧu";
+"calls.showFullVideo" = "Show full video";
 "calls.lowerHand" = "Lower hand";
 "calls.inThisCall" = "In this call (%@)";
 "calls.participantsInCall" = "%@ in call";
@@ -890,3 +898,16 @@
 "collab.documentRemovedLocally" = "Document removed from this device";
 "collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";
 "collab.documentShared" = "New document: %@";
+
+// Media preview
+"mediaPreview.dateTime" = "%1$@, %2$@";
+"mediaPreview.react" = "React";
+"mediaPreview.moreActions" = "Ugar";
+"mediaPreview.moreEmoji" = "More emoji";
+"mediaPreview.liveText" = "Live Text";
+"mediaPreview.replyTo" = "Reply to %@";
+"mediaPreview.voice" = "Voice";
+"mediaPreview.video" = "tavidyut ";
+"mediaPreview.photos" = "Photos";
+"mediaPreview.file" = "File";
+"mediaPreview.message" = "Message";

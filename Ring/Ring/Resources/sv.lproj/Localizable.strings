@@ -99,6 +99,7 @@
 "swarm.conversationEnded" = "Konversationen avslutades";
 "swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
 "swarm.chooseColor" = "Konversationsfärg";
+"swarm.quickSendEmoji" = "Quick send emoji";
 "swarm.typeOfSwarm" = "Konversationstyp";
 "swarm.identifier" = "identifierare";
 "swarm.conversationId" = "Konversations-ID";
@@ -127,6 +128,8 @@
 "swarm.invite" = "Invite";
 "swarm.inviteMembers" = "Bjud in medlemmar";
 "swarm.inviteSelectedMembers" = "Bjud in valda kontakter";
+"swarm.inviteOneMember" = "Invite 1 member";
+"swarm.inviteMemberCount" = "Invite %d members";
 "swarm.inviteMembersSelected" = "Vald";
 "swarm.inviteMembersNotSelected" = "Inte vald";
 "swarm.confirmLeaveConversation" = "Vill du lämna den här konversationen?";
@@ -352,12 +355,17 @@
 "calls.currentCallWith" = "Ring upp med";
 "calls.maximize" = "Maximera";
 "calls.minimize" = "Minimera";
+"calls.returnToCall" = "Återgå till samtal";
 "calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Ange moderator. ";
 "calls.removeModerator" = "Moderator inte åsatt. ";
 "calls.muteAudio" = "Stäng av mikrofon";
 "calls.unmuteAudio" = "Sluta tysta mikrofon";
 "calls.raiseHand" = "Räck upp handen";
+"calls.moreOptions" = "Fler alternativ";
+"calls.speaker" = "Speaker";
+"calls.hold" = "Parkera";
+"calls.showFullVideo" = "Show full video";
 "calls.lowerHand" = "Ta ned handen ";
 "calls.inThisCall" = "In this call (%@)";
 "calls.participantsInCall" = "%@ in call";
@@ -890,3 +898,16 @@
 "collab.documentRemovedLocally" = "Document removed from this device";
 "collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";
 "collab.documentShared" = "New document: %@";
+
+// Media preview
+"mediaPreview.dateTime" = "%1$@, %2$@";
+"mediaPreview.react" = "React";
+"mediaPreview.moreActions" = "Mer";
+"mediaPreview.moreEmoji" = "More emoji";
+"mediaPreview.liveText" = "Live Text";
+"mediaPreview.replyTo" = "Reply to %@";
+"mediaPreview.voice" = "Voice";
+"mediaPreview.video" = "Video";
+"mediaPreview.photos" = "Photos";
+"mediaPreview.file" = "File";
+"mediaPreview.message" = "Meddelande";

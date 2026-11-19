@@ -97,8 +97,9 @@
 "swarm.removeContact" = "Entferne Kontakt";
 "swarm.restartConversation" = "Unterhaltung neu starten";
 "swarm.conversationEnded" = "Unterhaltung beendet";
-"swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
+"swarm.conversationEndedMessage" = "Sie können in dieser Unterhaltung keine Nachrichten mehr senden.";
 "swarm.chooseColor" = "Farbe der Unterhaltung";
+"swarm.quickSendEmoji" = "Quick send emoji";
 "swarm.typeOfSwarm" = "Unterhaltungstyp";
 "swarm.identifier" = "Identifikator";
 "swarm.conversationId" = "Unterhaltungs-ID";
@@ -127,6 +128,8 @@
 "swarm.invite" = "Einladen";
 "swarm.inviteMembers" = "Mitglieder einladen";
 "swarm.inviteSelectedMembers" = "Ausgewählte Kontakte einladen";
+"swarm.inviteOneMember" = "Invite 1 member";
+"swarm.inviteMemberCount" = "Invite %d members";
 "swarm.inviteMembersSelected" = "Ausgewählt";
 "swarm.inviteMembersNotSelected" = "Nicht ausgewählt";
 "swarm.confirmLeaveConversation" = "Möchten Sie diese Unterhaltung verlassen?";
@@ -154,7 +157,7 @@
 "smartlist.noConversationsFound" = "Keine Unterhaltungen entsprechen der Suche.";
 "smartlist.newContact" = "Neuer Kontakt";
 "smartlist.newGroup" = "Neue Gruppe";
-"smartlist.newConversation" = "New conversation";
+"smartlist.newConversation" = "Neue Unterhaltung";
 "smartlist.accounts" = "Ihre Konten";
 "smartlist.invitationReceived" = "Einladungen erhalten";
 "smartlist.noResults" = "Keine Ergebnisse";
@@ -174,7 +177,7 @@
 "smartlist.donationExplanation" = "Wenn Sie gerne Jami nutzen und an unsere Mission glauben, möchten Sie eine Spende tätigen?";
 "smartlist.inSynchronization" = "Wird synchronisiert…";
 "smartlist.noConversations" = "Noch keine Unterhaltungen";
-"smartlist.noConversationSelected" = "No conversation selected";
+"smartlist.noConversationSelected" = "Keine Unterhaltung ausgewählt";
 "smartlist.noConversationsSubtitle" = "Finden Sie jemanden, um eine Unterhaltung zu starten, oder teilen Sie Ihre Jami-ID.";
 "smartlist.noConversationsSubtitleSip" = "Finden Sie eine Nummer, um eine Unterhaltung zu starten.";
 "smartlist.addContact" = "Kontakt hinzufügen";
@@ -352,12 +355,17 @@
 "calls.currentCallWith" = "Anrufen mit";
 "calls.maximize" = "Maximieren";
 "calls.minimize" = "Minimieren";
+"calls.returnToCall" = "Return to call";
 "calls.startPictureInPicture" = "Bild-in-Bild starten";
 "calls.setModerator" = "Moderator festlegen";
 "calls.removeModerator" = "Moderator entfernen";
 "calls.muteAudio" = "Mikrofon stummschalten";
 "calls.unmuteAudio" = "Mikrofon-Stummschaltung aufheben";
 "calls.raiseHand" = "Hand heben";
+"calls.moreOptions" = "More options";
+"calls.speaker" = "Speaker";
+"calls.hold" = "Hold";
+"calls.showFullVideo" = "Show full video";
 "calls.lowerHand" = "Hand senken";
 "calls.inThisCall" = "In diesem Anruf (%@)";
 "calls.participantsInCall" = "%@ im Anruf";
@@ -890,3 +898,16 @@
 "collab.documentRemovedLocally" = "Dokument von diesem Gerät entfernt";
 "collab.documentRemovedLocallyMessage" = "\"%@\" ist nicht mehr auf diesem Gerät. Beim erneuten Öffnen wird es wieder heruntergeladen.";
 "collab.documentShared" = "Neues Dokument: %@";
+
+// Media preview
+"mediaPreview.dateTime" = "%1$@, %2$@";
+"mediaPreview.react" = "React";
+"mediaPreview.moreActions" = "More";
+"mediaPreview.moreEmoji" = "More emoji";
+"mediaPreview.liveText" = "Live Text";
+"mediaPreview.replyTo" = "Reply to %@";
+"mediaPreview.voice" = "Voice";
+"mediaPreview.video" = "Video";
+"mediaPreview.photos" = "Photos";
+"mediaPreview.file" = "File";
+"mediaPreview.message" = "Message";

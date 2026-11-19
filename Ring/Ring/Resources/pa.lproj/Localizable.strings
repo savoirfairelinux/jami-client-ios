@@ -99,6 +99,7 @@
 "swarm.conversationEnded" = "Conversation ended";
 "swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
 "swarm.chooseColor" = "ਗੱਲਬਾਤ ਦਾ ਰੰਗ";
+"swarm.quickSendEmoji" = "Quick send emoji";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Identifier";
 "swarm.conversationId" = "Conversation ID";
@@ -127,6 +128,8 @@
 "swarm.invite" = "Invite";
 "swarm.inviteMembers" = "Invite members";
 "swarm.inviteSelectedMembers" = "Invite selected contacts";
+"swarm.inviteOneMember" = "Invite 1 member";
+"swarm.inviteMemberCount" = "Invite %d members";
 "swarm.inviteMembersSelected" = "Selected";
 "swarm.inviteMembersNotSelected" = "Not selected";
 "swarm.confirmLeaveConversation" = "Do you want to leave this conversation?";
@@ -352,12 +355,17 @@
 "calls.currentCallWith" = "Call with ";
 "calls.maximize" = "ਵੱਡਾ ਕਰੋ";
 "calls.minimize" = "Minimize";
+"calls.returnToCall" = "Return to call";
 "calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Set moderator";
 "calls.removeModerator" = "Unset moderator";
 "calls.muteAudio" = "ਮਾਈਕ੍ਰੋਫ਼ੋਨ ਬੰਦ ਕਰੋ";
 "calls.unmuteAudio" = "Unmute microphone";
 "calls.raiseHand" = "Raise hand";
+"calls.moreOptions" = "More options";
+"calls.speaker" = "Speaker";
+"calls.hold" = "ਰੋਕ ਕੇ ਰੱਖੀ";
+"calls.showFullVideo" = "Show full video";
 "calls.lowerHand" = "Lower hand";
 "calls.inThisCall" = "In this call (%@)";
 "calls.participantsInCall" = "%@ in call";
@@ -890,3 +898,16 @@
 "collab.documentRemovedLocally" = "Document removed from this device";
 "collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";
 "collab.documentShared" = "New document: %@";
+
+// Media preview
+"mediaPreview.dateTime" = "%1$@, %2$@";
+"mediaPreview.react" = "React";
+"mediaPreview.moreActions" = "More";
+"mediaPreview.moreEmoji" = "More emoji";
+"mediaPreview.liveText" = "Live Text";
+"mediaPreview.replyTo" = "Reply to %@";
+"mediaPreview.voice" = "Voice";
+"mediaPreview.video" = "ਵੀਡੀਓ";
+"mediaPreview.photos" = "Photos";
+"mediaPreview.file" = "File";
+"mediaPreview.message" = "Message";

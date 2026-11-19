@@ -99,6 +99,7 @@
 "swarm.conversationEnded" = "Conversation ended";
 "swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
 "swarm.chooseColor" = "Elkarrizketaren kolorea";
+"swarm.quickSendEmoji" = "Quick send emoji";
 "swarm.typeOfSwarm" = "Elkarrizketa-mota";
 "swarm.identifier" = "Identifikatzailea";
 "swarm.conversationId" = "Conversation ID";
@@ -127,6 +128,8 @@
 "swarm.invite" = "Invite";
 "swarm.inviteMembers" = "Gonbidatu kideak";
 "swarm.inviteSelectedMembers" = "Invite selected contacts";
+"swarm.inviteOneMember" = "Invite 1 member";
+"swarm.inviteMemberCount" = "Invite %d members";
 "swarm.inviteMembersSelected" = "Selected";
 "swarm.inviteMembersNotSelected" = "Not selected";
 "swarm.confirmLeaveConversation" = "Elkarrizketa hau utzi nahi duzu?";
@@ -352,12 +355,17 @@
 "calls.currentCallWith" = "Deitu.";
 "calls.maximize" = "Maximizatu";
 "calls.minimize" = "Minimizatu";
+"calls.returnToCall" = "Return to call";
 "calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Moderatzailea ezarri";
 "calls.removeModerator" = "Moderatzailea desfinkatu";
 "calls.muteAudio" = "Mututu mikrofonoa";
 "calls.unmuteAudio" = "Kendu mutua mikrofonoari";
 "calls.raiseHand" = "Altxa eskua.";
+"calls.moreOptions" = "Aukera gehiago";
+"calls.speaker" = "Speaker";
+"calls.hold" = "Esperoan";
+"calls.showFullVideo" = "Show full video";
 "calls.lowerHand" = "Beheko eskua";
 "calls.inThisCall" = "In this call (%@)";
 "calls.participantsInCall" = "%@ in call";
@@ -890,3 +898,16 @@
 "collab.documentRemovedLocally" = "Document removed from this device";
 "collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";
 "collab.documentShared" = "New document: %@";
+
+// Media preview
+"mediaPreview.dateTime" = "%1$@, %2$@";
+"mediaPreview.react" = "React";
+"mediaPreview.moreActions" = "More";
+"mediaPreview.moreEmoji" = "More emoji";
+"mediaPreview.liveText" = "Live Text";
+"mediaPreview.replyTo" = "Reply to %@";
+"mediaPreview.voice" = "Voice";
+"mediaPreview.video" = "Video";
+"mediaPreview.photos" = "Photos";
+"mediaPreview.file" = "File";
+"mediaPreview.message" = "Message";

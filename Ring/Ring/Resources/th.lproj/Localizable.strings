@@ -99,6 +99,7 @@
 "swarm.conversationEnded" = "Conversation ended";
 "swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
 "swarm.chooseColor" = "สีของการสนทนา";
+"swarm.quickSendEmoji" = "Quick send emoji";
 "swarm.typeOfSwarm" = "ประเภทการสนทนา";
 "swarm.identifier" = "ตัวประจําตัว";
 "swarm.conversationId" = "Conversation ID";
@@ -127,6 +128,8 @@
 "swarm.invite" = "Invite";
 "swarm.inviteMembers" = "เชิญสมาชิก";
 "swarm.inviteSelectedMembers" = "Invite selected contacts";
+"swarm.inviteOneMember" = "Invite 1 member";
+"swarm.inviteMemberCount" = "Invite %d members";
 "swarm.inviteMembersSelected" = "Selected";
 "swarm.inviteMembersNotSelected" = "Not selected";
 "swarm.confirmLeaveConversation" = "คุณต้องการออกจากการสนทนานี้หรือไม่?";
@@ -352,12 +355,17 @@
 "calls.currentCallWith" = "โทรมา ";
 "calls.maximize" = "ทำให้สูงสุด";
 "calls.minimize" = "ลดน้อยลง";
+"calls.returnToCall" = "กลับสู่การโทร";
 "calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "กําหนดผู้ปรับ";
 "calls.removeModerator" = "ปฏิทินไม่ตั้ง";
 "calls.muteAudio" = "ปิดเสียงไมโครโฟน";
 "calls.unmuteAudio" = "เปิดเสียงไมโครโฟน";
 "calls.raiseHand" = "ยกมือ";
+"calls.moreOptions" = "ช่องทางเพิ่มเติม";
+"calls.speaker" = "Speaker";
+"calls.hold" = "ถือ";
+"calls.showFullVideo" = "Show full video";
 "calls.lowerHand" = "มือต่ํา";
 "calls.inThisCall" = "In this call (%@)";
 "calls.participantsInCall" = "%@ in call";
@@ -890,3 +898,16 @@
 "collab.documentRemovedLocally" = "Document removed from this device";
 "collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";
 "collab.documentShared" = "New document: %@";
+
+// Media preview
+"mediaPreview.dateTime" = "%1$@, %2$@";
+"mediaPreview.react" = "React";
+"mediaPreview.moreActions" = "มากกว่า";
+"mediaPreview.moreEmoji" = "More emoji";
+"mediaPreview.liveText" = "Live Text";
+"mediaPreview.replyTo" = "Reply to %@";
+"mediaPreview.voice" = "Voice";
+"mediaPreview.video" = "วีดีโอ";
+"mediaPreview.photos" = "Photos";
+"mediaPreview.file" = "File";
+"mediaPreview.message" = "Message";

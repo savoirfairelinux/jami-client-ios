@@ -99,6 +99,7 @@
 "swarm.conversationEnded" = "Görüşme sona erdi";
 "swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
 "swarm.chooseColor" = "Görüşme rengi";
+"swarm.quickSendEmoji" = "Quick send emoji";
 "swarm.typeOfSwarm" = "Görüşme tipi";
 "swarm.identifier" = "Tanımlayıcı";
 "swarm.conversationId" = "Görüşme kimliği";
@@ -127,6 +128,8 @@
 "swarm.invite" = "Invite";
 "swarm.inviteMembers" = "Üyeleri davet et";
 "swarm.inviteSelectedMembers" = "Seçili kişileri davet et";
+"swarm.inviteOneMember" = "Invite 1 member";
+"swarm.inviteMemberCount" = "Invite %d members";
 "swarm.inviteMembersSelected" = "Seçildi";
 "swarm.inviteMembersNotSelected" = "Seçilmedi";
 "swarm.confirmLeaveConversation" = "Sohbetten ayrılmak istiyor musun?";
@@ -352,12 +355,17 @@
 "calls.currentCallWith" = "İle çağrı yap";
 "calls.maximize" = "En büyük";
 "calls.minimize" = "En küçük";
+"calls.returnToCall" = "Çağrıya dön";
 "calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Oturum başkanı ayarla";
 "calls.removeModerator" = "Oturum başkanı ayarını kaldır";
 "calls.muteAudio" = "Mikrofon sessiz";
 "calls.unmuteAudio" = "Mikrofonun sesini aç";
 "calls.raiseHand" = "El kaldır";
+"calls.moreOptions" = "Daha fazla seçenek";
+"calls.speaker" = "Speaker";
+"calls.hold" = "Beklet";
+"calls.showFullVideo" = "Show full video";
 "calls.lowerHand" = "Elini indir";
 "calls.inThisCall" = "In this call (%@)";
 "calls.participantsInCall" = "%@ in call";
@@ -890,3 +898,16 @@
 "collab.documentRemovedLocally" = "Document removed from this device";
 "collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";
 "collab.documentShared" = "New document: %@";
+
+// Media preview
+"mediaPreview.dateTime" = "%1$@, %2$@";
+"mediaPreview.react" = "React";
+"mediaPreview.moreActions" = "Daha fazla";
+"mediaPreview.moreEmoji" = "More emoji";
+"mediaPreview.liveText" = "Live Text";
+"mediaPreview.replyTo" = "Reply to %@";
+"mediaPreview.voice" = "Voice";
+"mediaPreview.video" = "Görüntü";
+"mediaPreview.photos" = "Photos";
+"mediaPreview.file" = "File";
+"mediaPreview.message" = "İleti";

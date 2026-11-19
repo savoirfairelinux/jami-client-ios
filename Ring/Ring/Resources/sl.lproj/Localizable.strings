@@ -99,6 +99,7 @@
 "swarm.conversationEnded" = "Pogovor končan";
 "swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
 "swarm.chooseColor" = "Barva pogovora";
+"swarm.quickSendEmoji" = "Quick send emoji";
 "swarm.typeOfSwarm" = "Vrsta pogovora";
 "swarm.identifier" = "identifikator";
 "swarm.conversationId" = "ID pogovora";
@@ -127,6 +128,8 @@
 "swarm.invite" = "Invite";
 "swarm.inviteMembers" = "Povabi člane";
 "swarm.inviteSelectedMembers" = "Povabi izbrane stike";
+"swarm.inviteOneMember" = "Invite 1 member";
+"swarm.inviteMemberCount" = "Invite %d members";
 "swarm.inviteMembersSelected" = "Izbrano";
 "swarm.inviteMembersNotSelected" = "Ni izbrano";
 "swarm.confirmLeaveConversation" = "Ali želite zapustiti ta pogovor?";
@@ -352,12 +355,17 @@
 "calls.currentCallWith" = "Klic z";
 "calls.maximize" = "Povečaj";
 "calls.minimize" = "Zmanjšaj";
+"calls.returnToCall" = "Vrni se na klic";
 "calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Nastavi moderatorja";
 "calls.removeModerator" = "Odstavi moderatorja";
 "calls.muteAudio" = "Izključi mikrofon";
 "calls.unmuteAudio" = "Vključi mikrofon";
 "calls.raiseHand" = "Dvigni roko";
+"calls.moreOptions" = "Več možnosti";
+"calls.speaker" = "Speaker";
+"calls.hold" = "Zadrži";
+"calls.showFullVideo" = "Show full video";
 "calls.lowerHand" = "Spusti roko";
 "calls.inThisCall" = "In this call (%@)";
 "calls.participantsInCall" = "%@ in call";
@@ -890,3 +898,16 @@
 "collab.documentRemovedLocally" = "Document removed from this device";
 "collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";
 "collab.documentShared" = "New document: %@";
+
+// Media preview
+"mediaPreview.dateTime" = "%1$@, %2$@";
+"mediaPreview.react" = "React";
+"mediaPreview.moreActions" = "Dodatno";
+"mediaPreview.moreEmoji" = "More emoji";
+"mediaPreview.liveText" = "Live Text";
+"mediaPreview.replyTo" = "Reply to %@";
+"mediaPreview.voice" = "Voice";
+"mediaPreview.video" = "Video";
+"mediaPreview.photos" = "Photos";
+"mediaPreview.file" = "File";
+"mediaPreview.message" = "Sporočilo";

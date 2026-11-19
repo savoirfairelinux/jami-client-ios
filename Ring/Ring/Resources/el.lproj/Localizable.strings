@@ -99,6 +99,7 @@
 "swarm.conversationEnded" = "Η συνομιλία έληξε";
 "swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
 "swarm.chooseColor" = "Χρώμα συνομιλίας";
+"swarm.quickSendEmoji" = "Quick send emoji";
 "swarm.typeOfSwarm" = "Τύπος συνομιλίας";
 "swarm.identifier" = "Ταυτοποιητής";
 "swarm.conversationId" = "Αναγνωριστικό συνομιλίας";
@@ -127,6 +128,8 @@
 "swarm.invite" = "Invite";
 "swarm.inviteMembers" = "Πρόσκληση μελών";
 "swarm.inviteSelectedMembers" = "Πρόσκληση επιλεγμένων επαφών";
+"swarm.inviteOneMember" = "Invite 1 member";
+"swarm.inviteMemberCount" = "Invite %d members";
 "swarm.inviteMembersSelected" = "Επιλεγμένο";
 "swarm.inviteMembersNotSelected" = "Μη επιλεγμένο";
 "swarm.confirmLeaveConversation" = "Θέλετε να αποχωρήσετε από αυτήν τη συνομιλία;";
@@ -352,12 +355,17 @@
 "calls.currentCallWith" = "Τηλεφώνησε με";
 "calls.maximize" = "Μεγιστοποίηση";
 "calls.minimize" = "Ελαχιστοποίηση";
+"calls.returnToCall" = "Return to call";
 "calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Ρυθμίστε τον διαχειριστή";
 "calls.removeModerator" = "Ανακατάσταση διαχειριστή";
 "calls.muteAudio" = "Σίγαση μικροφώνου";
 "calls.unmuteAudio" = "Κατάργηση σίγασης μικροφώνου";
 "calls.raiseHand" = "Σηκώστε το χέρι σας";
+"calls.moreOptions" = "More options";
+"calls.speaker" = "Speaker";
+"calls.hold" = "Hold";
+"calls.showFullVideo" = "Show full video";
 "calls.lowerHand" = "Κάτω χέρι";
 "calls.inThisCall" = "In this call (%@)";
 "calls.participantsInCall" = "%@ in call";
@@ -890,3 +898,16 @@
 "collab.documentRemovedLocally" = "Document removed from this device";
 "collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";
 "collab.documentShared" = "New document: %@";
+
+// Media preview
+"mediaPreview.dateTime" = "%1$@, %2$@";
+"mediaPreview.react" = "React";
+"mediaPreview.moreActions" = "More";
+"mediaPreview.moreEmoji" = "More emoji";
+"mediaPreview.liveText" = "Live Text";
+"mediaPreview.replyTo" = "Reply to %@";
+"mediaPreview.voice" = "Voice";
+"mediaPreview.video" = "Video";
+"mediaPreview.photos" = "Photos";
+"mediaPreview.file" = "File";
+"mediaPreview.message" = "Message";

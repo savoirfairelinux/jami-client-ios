@@ -99,6 +99,7 @@
 "swarm.conversationEnded" = "Conversación finalizada";
 "swarm.conversationEndedMessage" = "Ya no puedes enviar mensajes en esta conversación.";
 "swarm.chooseColor" = "Color de la conversación";
+"swarm.quickSendEmoji" = "Quick send emoji";
 "swarm.typeOfSwarm" = "Tipo de conversación";
 "swarm.identifier" = "Identificador";
 "swarm.conversationId" = "Conversación ID";
@@ -127,6 +128,8 @@
 "swarm.invite" = "Invitar";
 "swarm.inviteMembers" = "Invitar a miembros";
 "swarm.inviteSelectedMembers" = "Invitar a contactos seleccionados";
+"swarm.inviteOneMember" = "Invite 1 member";
+"swarm.inviteMemberCount" = "Invite %d members";
 "swarm.inviteMembersSelected" = "Invitar a contactos seleccionados";
 "swarm.inviteMembersNotSelected" = "No seleccionados";
 "swarm.confirmLeaveConversation" = "¿Quieres abandonar esta conversación?";
@@ -352,12 +355,17 @@
 "calls.currentCallWith" = "Llamar con";
 "calls.maximize" = "Maximizar";
 "calls.minimize" = "Minimizar";
+"calls.returnToCall" = "Return to call";
 "calls.startPictureInPicture" = "Iniciar Imagen a imagen";
 "calls.setModerator" = "Asignar moderador";
 "calls.removeModerator" = "Desasignar moderador";
 "calls.muteAudio" = "Silenciar micrófono";
 "calls.unmuteAudio" = "Activar micrófono";
 "calls.raiseHand" = "Levanta tu mano";
+"calls.moreOptions" = "More options";
+"calls.speaker" = "Speaker";
+"calls.hold" = "Hold";
+"calls.showFullVideo" = "Show full video";
 "calls.lowerHand" = "Bajar la mano";
 "calls.inThisCall" = "En esta llamada (%@)";
 "calls.participantsInCall" = "%@ en llamada";
@@ -890,3 +898,16 @@
 "collab.documentRemovedLocally" = "Documento eliminado de este dispositivo";
 "collab.documentRemovedLocallyMessage" = "\"%@\" ya no está en este dispositivo. Al abrirlo otra vez se descarga de nuevo.";
 "collab.documentShared" = "Nuevo documento: %@";
+
+// Media preview
+"mediaPreview.dateTime" = "%1$@, %2$@";
+"mediaPreview.react" = "React";
+"mediaPreview.moreActions" = "More";
+"mediaPreview.moreEmoji" = "More emoji";
+"mediaPreview.liveText" = "Live Text";
+"mediaPreview.replyTo" = "Reply to %@";
+"mediaPreview.voice" = "Voice";
+"mediaPreview.video" = "Video";
+"mediaPreview.photos" = "Photos";
+"mediaPreview.file" = "File";
+"mediaPreview.message" = "Message";

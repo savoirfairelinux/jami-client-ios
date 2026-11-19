@@ -99,6 +99,7 @@
 "swarm.conversationEnded" = "Samtalen er avsluttet";
 "swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
 "swarm.chooseColor" = "Conversation color";
+"swarm.quickSendEmoji" = "Quick send emoji";
 "swarm.typeOfSwarm" = "Samtaletype";
 "swarm.identifier" = "Identifikator";
 "swarm.conversationId" = "Samtale-ID";
@@ -127,6 +128,8 @@
 "swarm.invite" = "Invite";
 "swarm.inviteMembers" = "Inviter medlemmer";
 "swarm.inviteSelectedMembers" = "Inviter valgte kontakter";
+"swarm.inviteOneMember" = "Invite 1 member";
+"swarm.inviteMemberCount" = "Invite %d members";
 "swarm.inviteMembersSelected" = "Valgt";
 "swarm.inviteMembersNotSelected" = "Ikke valgt";
 "swarm.confirmLeaveConversation" = "Vil du forlate denne samtalen?";
@@ -352,12 +355,17 @@
 "calls.currentCallWith" = "Call with ";
 "calls.maximize" = "Maksimer";
 "calls.minimize" = "Minimize";
+"calls.returnToCall" = "Gå tilbake til anrop";
 "calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Angi ordstyrer";
 "calls.removeModerator" = "Avløs ordstyrer";
 "calls.muteAudio" = "Koble ut mikrofon";
 "calls.unmuteAudio" = "Opphev demping av mikrofon";
 "calls.raiseHand" = "Rekk opp hånden";
+"calls.moreOptions" = "Flere alternativer";
+"calls.speaker" = "Speaker";
+"calls.hold" = "Parker";
+"calls.showFullVideo" = "Show full video";
 "calls.lowerHand" = "Ta ned hånden";
 "calls.inThisCall" = "In this call (%@)";
 "calls.participantsInCall" = "%@ in call";
@@ -890,3 +898,16 @@
 "collab.documentRemovedLocally" = "Document removed from this device";
 "collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";
 "collab.documentShared" = "New document: %@";
+
+// Media preview
+"mediaPreview.dateTime" = "%1$@, %2$@";
+"mediaPreview.react" = "React";
+"mediaPreview.moreActions" = "Mer";
+"mediaPreview.moreEmoji" = "More emoji";
+"mediaPreview.liveText" = "Live Text";
+"mediaPreview.replyTo" = "Reply to %@";
+"mediaPreview.voice" = "Voice";
+"mediaPreview.video" = "Video";
+"mediaPreview.photos" = "Photos";
+"mediaPreview.file" = "File";
+"mediaPreview.message" = "Melding";

@@ -99,6 +99,7 @@
 "swarm.conversationEnded" = "Razgovor je završen";
 "swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
 "swarm.chooseColor" = "Boja razgovora";
+"swarm.quickSendEmoji" = "Quick send emoji";
 "swarm.typeOfSwarm" = "Vrsta razgovora";
 "swarm.identifier" = "Identifikator";
 "swarm.conversationId" = "ID razgovora";
@@ -127,6 +128,8 @@
 "swarm.invite" = "Invite";
 "swarm.inviteMembers" = "Pozovi članove";
 "swarm.inviteSelectedMembers" = "Pozovi izabrane kontakte";
+"swarm.inviteOneMember" = "Invite 1 member";
+"swarm.inviteMemberCount" = "Invite %d members";
 "swarm.inviteMembersSelected" = "Izabrano";
 "swarm.inviteMembersNotSelected" = "Nije izabrano";
 "swarm.confirmLeaveConversation" = "Да ли желите да напустите овај разговор?";
@@ -352,12 +355,17 @@
 "calls.currentCallWith" = "Pozovite sa ";
 "calls.maximize" = "Uvećaj";
 "calls.minimize" = "Smanji";
+"calls.returnToCall" = "Vrati se na poziv";
 "calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Postavite moderatora";
 "calls.removeModerator" = "Ukloni moderatora";
 "calls.muteAudio" = "Isključi mikrofon";
 "calls.unmuteAudio" = "Uključi mikrofon";
 "calls.raiseHand" = "Podigni ruku";
+"calls.moreOptions" = "Више опција";
+"calls.speaker" = "Speaker";
+"calls.hold" = "Pauziraj";
+"calls.showFullVideo" = "Show full video";
 "calls.lowerHand" = "Spusti ruku";
 "calls.inThisCall" = "In this call (%@)";
 "calls.participantsInCall" = "%@ in call";
@@ -890,3 +898,16 @@
 "collab.documentRemovedLocally" = "Document removed from this device";
 "collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";
 "collab.documentShared" = "New document: %@";
+
+// Media preview
+"mediaPreview.dateTime" = "%1$@, %2$@";
+"mediaPreview.react" = "React";
+"mediaPreview.moreActions" = "Više";
+"mediaPreview.moreEmoji" = "More emoji";
+"mediaPreview.liveText" = "Live Text";
+"mediaPreview.replyTo" = "Reply to %@";
+"mediaPreview.voice" = "Voice";
+"mediaPreview.video" = "Video";
+"mediaPreview.photos" = "Photos";
+"mediaPreview.file" = "File";
+"mediaPreview.message" = "Message";

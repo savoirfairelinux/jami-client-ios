@@ -99,6 +99,7 @@
 "swarm.conversationEnded" = "Konverzácia skončila";
 "swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
 "swarm.chooseColor" = "Farba konverzácie";
+"swarm.quickSendEmoji" = "Quick send emoji";
 "swarm.typeOfSwarm" = "Typ konverzácie";
 "swarm.identifier" = "Identifikátor";
 "swarm.conversationId" = "ID konverzácie";
@@ -127,6 +128,8 @@
 "swarm.invite" = "Invite";
 "swarm.inviteMembers" = "Pozvať členov";
 "swarm.inviteSelectedMembers" = "Pozvať vybrané kontakty";
+"swarm.inviteOneMember" = "Invite 1 member";
+"swarm.inviteMemberCount" = "Invite %d members";
 "swarm.inviteMembersSelected" = "Vybrané";
 "swarm.inviteMembersNotSelected" = "Nevybrané";
 "swarm.confirmLeaveConversation" = "Chcete opustiť túto konverzáciu?";
@@ -352,12 +355,17 @@
 "calls.currentCallWith" = "Hovor s";
 "calls.maximize" = "Maximálne";
 "calls.minimize" = "Minimalizovať";
+"calls.returnToCall" = "Vrátiť sa k hovoru";
 "calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Nastaviť moderátor";
 "calls.removeModerator" = "Odstaviť moderátor";
 "calls.muteAudio" = "Stlmiť mikrofón";
 "calls.unmuteAudio" = "Zrušiť stlmenie mikrofónu";
 "calls.raiseHand" = "Zdvihnite ruku";
+"calls.moreOptions" = "Viac možností";
+"calls.speaker" = "Speaker";
+"calls.hold" = "Podržať";
+"calls.showFullVideo" = "Show full video";
 "calls.lowerHand" = "Dolná ruka";
 "calls.inThisCall" = "In this call (%@)";
 "calls.participantsInCall" = "%@ in call";
@@ -890,3 +898,16 @@
 "collab.documentRemovedLocally" = "Document removed from this device";
 "collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";
 "collab.documentShared" = "New document: %@";
+
+// Media preview
+"mediaPreview.dateTime" = "%1$@, %2$@";
+"mediaPreview.react" = "React";
+"mediaPreview.moreActions" = "Viac";
+"mediaPreview.moreEmoji" = "More emoji";
+"mediaPreview.liveText" = "Live Text";
+"mediaPreview.replyTo" = "Reply to %@";
+"mediaPreview.voice" = "Voice";
+"mediaPreview.video" = "Video";
+"mediaPreview.photos" = "Photos";
+"mediaPreview.file" = "File";
+"mediaPreview.message" = "Správa";

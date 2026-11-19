@@ -99,6 +99,7 @@
 "swarm.conversationEnded" = "Розмову завершено";
 "swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
 "swarm.chooseColor" = "Колір розмови";
+"swarm.quickSendEmoji" = "Quick send emoji";
 "swarm.typeOfSwarm" = "Тип розмови";
 "swarm.identifier" = "Ідентифікатор";
 "swarm.conversationId" = "Ідентифікатор розмови";
@@ -127,6 +128,8 @@
 "swarm.invite" = "Invite";
 "swarm.inviteMembers" = "Запросити учасників";
 "swarm.inviteSelectedMembers" = "Запросити вибрані контакти";
+"swarm.inviteOneMember" = "Invite 1 member";
+"swarm.inviteMemberCount" = "Invite %d members";
 "swarm.inviteMembersSelected" = "Вибрано";
 "swarm.inviteMembersNotSelected" = "Не вибрано";
 "swarm.confirmLeaveConversation" = "Бажаєте покинути цю розмову?";
@@ -352,12 +355,17 @@
 "calls.currentCallWith" = "Звони з ";
 "calls.maximize" = "Збільшити";
 "calls.minimize" = "Зменьшити";
+"calls.returnToCall" = "Повернутися до дзвінка";
 "calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Наведіть модератор";
 "calls.removeModerator" = "Не встановлюється модератор";
 "calls.muteAudio" = "Відключити мікрофон";
 "calls.unmuteAudio" = "Увімкнути звук мікрофона";
 "calls.raiseHand" = "Підняти руку";
+"calls.moreOptions" = "Більше параметрів";
+"calls.speaker" = "Speaker";
+"calls.hold" = "Режим очікування";
+"calls.showFullVideo" = "Show full video";
 "calls.lowerHand" = "Нижня рука";
 "calls.inThisCall" = "In this call (%@)";
 "calls.participantsInCall" = "%@ in call";
@@ -890,3 +898,16 @@
 "collab.documentRemovedLocally" = "Document removed from this device";
 "collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";
 "collab.documentShared" = "New document: %@";
+
+// Media preview
+"mediaPreview.dateTime" = "%1$@, %2$@";
+"mediaPreview.react" = "React";
+"mediaPreview.moreActions" = "Більше";
+"mediaPreview.moreEmoji" = "More emoji";
+"mediaPreview.liveText" = "Live Text";
+"mediaPreview.replyTo" = "Reply to %@";
+"mediaPreview.voice" = "Voice";
+"mediaPreview.video" = "Відео";
+"mediaPreview.photos" = "Photos";
+"mediaPreview.file" = "File";
+"mediaPreview.message" = "Повідомлення";

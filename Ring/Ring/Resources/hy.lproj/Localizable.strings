@@ -99,6 +99,7 @@
 "swarm.conversationEnded" = "Conversation ended";
 "swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
 "swarm.chooseColor" = "Զրույցի գույնը";
+"swarm.quickSendEmoji" = "Quick send emoji";
 "swarm.typeOfSwarm" = "Զրույցի տեսակ";
 "swarm.identifier" = "Հնազեկիչ";
 "swarm.conversationId" = "Conversation ID";
@@ -127,6 +128,8 @@
 "swarm.invite" = "Invite";
 "swarm.inviteMembers" = "Հրավիրել անդամներ";
 "swarm.inviteSelectedMembers" = "Invite selected contacts";
+"swarm.inviteOneMember" = "Invite 1 member";
+"swarm.inviteMemberCount" = "Invite %d members";
 "swarm.inviteMembersSelected" = "Selected";
 "swarm.inviteMembersNotSelected" = "Not selected";
 "swarm.confirmLeaveConversation" = "Ցանկանո՞ւմ եք լքել այս զրույցը։";
@@ -352,12 +355,17 @@
 "calls.currentCallWith" = "Զանգահարեք ";
 "calls.maximize" = "Մաքսիմալացնել";
 "calls.minimize" = "Մինիմինացնել";
+"calls.returnToCall" = "Վերադառնալ զանգին";
 "calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Կազմել մոդերատոր";
 "calls.removeModerator" = "Կարգավորիչը անսահմանված";
 "calls.muteAudio" = "Միկրոֆոն անջատ";
 "calls.unmuteAudio" = "Միացնել խոսափողի ձայնը";
 "calls.raiseHand" = "Բարձրացրեք ձեռքը";
+"calls.moreOptions" = "Ավելի շատ տարբերակներ";
+"calls.speaker" = "Speaker";
+"calls.hold" = "Պահպանեք";
+"calls.showFullVideo" = "Show full video";
 "calls.lowerHand" = "Նվազագույն ձեռքը";
 "calls.inThisCall" = "In this call (%@)";
 "calls.participantsInCall" = "%@ in call";
@@ -890,3 +898,16 @@
 "collab.documentRemovedLocally" = "Document removed from this device";
 "collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";
 "collab.documentShared" = "New document: %@";
+
+// Media preview
+"mediaPreview.dateTime" = "%1$@, %2$@";
+"mediaPreview.react" = "React";
+"mediaPreview.moreActions" = "Ավելի շատ";
+"mediaPreview.moreEmoji" = "More emoji";
+"mediaPreview.liveText" = "Live Text";
+"mediaPreview.replyTo" = "Reply to %@";
+"mediaPreview.voice" = "Voice";
+"mediaPreview.video" = "Տեսանյութ";
+"mediaPreview.photos" = "Photos";
+"mediaPreview.file" = "File";
+"mediaPreview.message" = "Message";

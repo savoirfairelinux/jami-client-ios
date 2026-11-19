@@ -99,6 +99,7 @@
 "swarm.conversationEnded" = "Разговор завершён";
 "swarm.conversationEndedMessage" = "You can no longer send messages in this conversation.";
 "swarm.chooseColor" = "Цвет беседы";
+"swarm.quickSendEmoji" = "Quick send emoji";
 "swarm.typeOfSwarm" = "Тип беседы";
 "swarm.identifier" = "Идентификатор";
 "swarm.conversationId" = "Идентификатор разговора";
@@ -127,6 +128,8 @@
 "swarm.invite" = "Invite";
 "swarm.inviteMembers" = "Пригласить участников";
 "swarm.inviteSelectedMembers" = "Пригласить выбранные контакты";
+"swarm.inviteOneMember" = "Invite 1 member";
+"swarm.inviteMemberCount" = "Invite %d members";
 "swarm.inviteMembersSelected" = "Выбрано";
 "swarm.inviteMembersNotSelected" = "Не выбрано";
 "swarm.confirmLeaveConversation" = "Хотите покинуть эту беседу?";
@@ -352,12 +355,17 @@
 "calls.currentCallWith" = "Вызов с";
 "calls.maximize" = "Максимизировать";
 "calls.minimize" = "Свернуть";
+"calls.returnToCall" = "Вернуться к звонку";
 "calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Установить модератора";
 "calls.removeModerator" = "Отменить установку модератора";
 "calls.muteAudio" = "Выключить микрофон";
 "calls.unmuteAudio" = "Включить микрофон";
 "calls.raiseHand" = "Поднять руку";
+"calls.moreOptions" = "Дополнительные опции";
+"calls.speaker" = "Speaker";
+"calls.hold" = "Удерживать";
+"calls.showFullVideo" = "Show full video";
 "calls.lowerHand" = "Опущенная рука";
 "calls.inThisCall" = "In this call (%@)";
 "calls.participantsInCall" = "%@ in call";
@@ -890,3 +898,16 @@
 "collab.documentRemovedLocally" = "Document removed from this device";
 "collab.documentRemovedLocallyMessage" = "\"%@\" is no longer on this device. Opening it again downloads it back.";
 "collab.documentShared" = "New document: %@";
+
+// Media preview
+"mediaPreview.dateTime" = "%1$@, %2$@";
+"mediaPreview.react" = "React";
+"mediaPreview.moreActions" = "Подробнее";
+"mediaPreview.moreEmoji" = "More emoji";
+"mediaPreview.liveText" = "Live Text";
+"mediaPreview.replyTo" = "Reply to %@";
+"mediaPreview.voice" = "Voice";
+"mediaPreview.video" = "Видео";
+"mediaPreview.photos" = "Photos";
+"mediaPreview.file" = "File";
+"mediaPreview.message" = "Сообщение";
