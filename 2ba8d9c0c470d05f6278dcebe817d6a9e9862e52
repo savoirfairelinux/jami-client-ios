@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c8466ad_f333526f",
+        "filename": "Ring/Ring/Features/Conversations/Preview/ImagePreviewScreen.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-19T16:01:59Z",
+      "side": 1,
+      "message": "[warning] Line 53: 🟡 The Live Text button is hidden when VoiceOver is enabled, but existing `isShowingText` state is not forcibly cleared on VoiceOver changes. A user can remain in text mode (dimmed actions + dismiss drag paused) with no visible toggle to exit. Add an `onChange` for `voiceOverEnabled` that disables text mode (or keep an always-accessible exit control).",
+      "revId": "2ba8d9c0c470d05f6278dcebe817d6a9e9862e52",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d7f8c92_9241a49f",
+        "filename": "Ring/Ring/Features/Conversations/Preview/ImagePreviewScreen.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-19T16:01:59Z",
+      "side": 1,
+      "message": "[error] Line 282: 🔴 `handles(_:)` returns `true` whenever `hasActiveTextSelection` is set, so after any selection the gesture delegate treats *all* taps as Live Text-handled. That prevents the shell tap handler from receiving \u0027tap away\u0027 events and breaks the promised exit path (\u0027tap photo away from text leaves text mode\u0027). Restrict this check to interactive content at the tapped point (or clear selection before evaluating) so non-text-area taps can propagate and exit text mode.",
+      "revId": "2ba8d9c0c470d05f6278dcebe817d6a9e9862e52",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
