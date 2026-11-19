@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "959f00e9_92b4851b",
+        "filename": "Ring/Ring/Features/Conversations/Preview/MediaPreviewState.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-19T19:35:33Z",
+      "side": 1,
+      "message": "[error] Line 59: 🔴 `isKeyboardShown` is initialized to `false` and only updated by `keyboardWillShow`/`keyboardDidHide` notifications, so if the presenter is created while the keyboard is already visible, state stays stale and `setAcceptsKeyboard(false)` can restore the previous key window immediately (reintroducing the light-keyboard flicker this change is trying to prevent). Initialize this flag from current keyboard visibility (for example via the existing overlap/frame check) or query visibility directly when deciding whether to defer restoration.",
+      "revId": "b0237b2661a79be1a462960f3fc48a54745974d1",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
