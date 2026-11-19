@@ -68,14 +68,10 @@ struct ZoomableImageView: UIViewRepresentable {
     func makeUIView(context: Context) -> ZoomableImageScrollView {
         let scrollView = ZoomableImageScrollView()
         scrollView.delegate = context.coordinator
-        let doubleTap = UITapGestureRecognizer(target: context.coordinator,
-                                               action: #selector(Coordinator.handleDoubleTap(_:)))
-        doubleTap.numberOfTapsRequired = 2
-        let singleTap = UITapGestureRecognizer(target: context.coordinator,
-                                               action: #selector(Coordinator.handleSingleTap))
-        singleTap.require(toFail: doubleTap)
-        scrollView.addGestureRecognizer(doubleTap)
-        scrollView.addGestureRecognizer(singleTap)
+        let tap = UITapGestureRecognizer(target: context.coordinator,
+                                         action: #selector(Coordinator.handleTap(_:)))
+        tap.delegate = context.coordinator
+        scrollView.addGestureRecognizer(tap)
         return scrollView
     }
 
@@ -88,9 +84,14 @@ struct ZoomableImageView: UIViewRepresentable {
         }
     }
 
-    final class Coordinator: NSObject, UIScrollViewDelegate {
+    final class Coordinator: NSObject, UIScrollViewDelegate, UIGestureRecognizerDelegate {
         var parent: ZoomableImageView
         private let doubleTapZoomScale: CGFloat = 3
+        private let singleTapDelay: TimeInterval = 0.2
+        private let doubleTapSlop: CGFloat = 44
+        private var pendingSingleTap: DispatchWorkItem?
+        private var lastTapLocation: CGPoint = .zero
+        private var isSecondTap = false
 
         init(_ parent: ZoomableImageView) {
             self.parent = parent
@@ -109,13 +110,33 @@ struct ZoomableImageView: UIViewRepresentable {
             }
         }
 
-        @objc
-        func handleSingleTap() {
-            parent.onSingleTap()
+        func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+            let location = touch.location(in: nil)
+            isSecondTap = pendingSingleTap != nil
+                && hypot(location.x - lastTapLocation.x, location.y - lastTapLocation.y) < doubleTapSlop
+            if isSecondTap {
+                pendingSingleTap?.cancel()
+                pendingSingleTap = nil
+            }
+            return true
         }
 
         @objc
-        func handleDoubleTap(_ recognizer: UITapGestureRecognizer) {
+        func handleTap(_ recognizer: UITapGestureRecognizer) {
+            if isSecondTap {
+                handleDoubleTap(recognizer)
+                return
+            }
+            lastTapLocation = recognizer.location(in: nil)
+            let singleTap = DispatchWorkItem { [weak self] in
+                self?.pendingSingleTap = nil
+                self?.parent.onSingleTap()
+            }
+            pendingSingleTap = singleTap
+            DispatchQueue.main.asyncAfter(deadline: .now() + singleTapDelay, execute: singleTap)
+        }
+
+        private func handleDoubleTap(_ recognizer: UITapGestureRecognizer) {
             guard let scrollView = recognizer.view as? ZoomableImageScrollView else { return }
             if scrollView.zoomScale > scrollView.minimumZoomScale {
                 scrollView.setZoomScale(scrollView.minimumZoomScale, animated: true)
