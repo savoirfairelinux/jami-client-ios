@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b49175b7_540f7221",
+        "filename": "Ring/Ring/Features/Conversations/Preview/MediaPreviewView.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-19T15:37:33Z",
+      "side": 1,
+      "message": "[warning] Line 220: 🟡 `proxy.frame(in: .global).maxY` captures an absolute screen Y, not the chrome’s intrinsic height. If this view is ever presented in a non-zero global origin context (container offsets, transitions, multitasking/split layouts), the top scrim can become too tall and dim extra content. Store `proxy.size.height` (or `proxy.frame(in: .local).height`) in the preference key instead, so scrim height tracks only the top chrome content.",
+      "revId": "81e9c98e5d1d7ba10e0df7d87974cfc123689a1c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
