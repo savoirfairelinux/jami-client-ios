@@ -88,4 +88,15 @@ final class SwarmCreationUIModelTests: XCTestCase {
 
         XCTAssertTrue(row.match(string: "ALI"))
     }
+
+    func testSearchIgnoresAccents() {
+        let info = ParticipantInfo(jamiId: jamiId2, role: .unknown,
+                                   profileService: injectionBag.profileService)
+        info.profileName.accept("José")
+
+        let row = ParticipantRow(participantData: info)
+
+        XCTAssertTrue(row.match(string: "jose"))
+        XCTAssertTrue(row.match(string: "JOSÉ"))
+    }
 }

@@ -52,7 +52,7 @@ class ParticipantRow: Identifiable, ObservableObject {
             .disposed(by: self.disposeBag)
     }
     func match(string: String) -> Bool {
-        let query = string.lowercased()
-        return [name, registeredName, id].contains { $0.lowercased().contains(query) }
+        let query = string.normalized()
+        return [name, registeredName, id].contains { $0.normalized().containsCaseInsensitive(string: query) }
     }
 }

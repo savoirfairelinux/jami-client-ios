@@ -148,14 +148,14 @@ final class ContactPickerViewModel: ObservableObject, ViewModel {
 
     private func filterContactSections(_ sections: [ContactPickerSection], query: String) -> [ContactPickerSection] {
         guard !query.isEmpty else { return sections }
-        let lowered = query.lowercased()
+        let normalizedQuery = query.normalized()
         return sections.compactMap { section in
             let filtered = section.items.compactMap { item -> ConferencableItem? in
                 var copy = item
                 copy.contacts = item.contacts.filter { contact in
-                    contact.firstLine.value.lowercased().contains(lowered)
-                        || contact.secondLine.lowercased().contains(lowered)
-                        || contact.hash.lowercased().contains(lowered)
+                    [contact.firstLine.value, contact.secondLine, contact.hash].contains {
+                        $0.normalized().containsCaseInsensitive(string: normalizedQuery)
+                    }
                 }
                 return copy.contacts.isEmpty ? nil : copy
             }
