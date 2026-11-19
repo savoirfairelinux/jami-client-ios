@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51bf35fe_6d81a24f",
+        "filename": "Ring/Ring/Features/Conversations/Preview/MediaPreviewState.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-19T20:45:32Z",
+      "side": 1,
+      "message": "[error] Line 98: 🔴 `setAcceptsKeyboard(_:)` now ignores `accepts \u003d\u003d false` (`guard accepts, ...`), which removes the previous restore path and causes key-window restoration to happen only via teardown. In cancel/dismiss flows while the keyboard is still visible, this regresses the dark-keyboard fix by restoring key window at the wrong time. Reintroduce an explicit `false` path that defers `restoreKeyWindow()` until keyboard hide when needed, instead of making disable a no-op.",
+      "revId": "5fdd4bc73af3bd12704664fc68fe18852a43532c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
