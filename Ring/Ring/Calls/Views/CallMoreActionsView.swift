@@ -26,6 +26,7 @@ struct CallMoreActionsView: View {
         static let glyphSpacing: CGFloat = 14
         static let grabberClearance: CGFloat = 10
         static let verticalInset: CGFloat = 8
+        static let sectionTitleSpacing: CGFloat = 8
 
         static let topPadding = grabberClearance + verticalInset
         static let bottomPadding = verticalInset
@@ -40,8 +41,15 @@ struct CallMoreActionsView: View {
 
     var body: some View {
         let actions = model.controlsPlan?.more ?? []
+        let outputs = model.audioOutputs
         ScrollView {
             VStack(spacing: 0) {
+                if outputs.available.count > 1 {
+                    audioOutputSection(outputs)
+                    if !actions.isEmpty {
+                        Divider()
+                    }
+                }
                 ForEach(actions) { action in
                     row(action)
                     if action.id != actions.last?.id {
@@ -85,6 +93,21 @@ struct CallMoreActionsView: View {
         }
     }
 
+    // MARK: - Audio output
+
+    private func audioOutputSection(_ state: AudioOutputState) -> some View {
+        VStack(alignment: .leading, spacing: Metrics.sectionTitleSpacing) {
+            Text(L10n.Calls.audioOutput)
+                .font(.footnote)
+                .foregroundColor(.secondary)
+                .textCase(.uppercase)
+                .accessibilityHidden(true)
+            AudioOutputPicker(state: state, onSelect: model.selectAudioOutput)
+        }
+        .padding(.horizontal, Metrics.margin)
+        .padding(.bottom, Metrics.margin - Metrics.verticalInset)
+    }
+
     private func rowInsets<Content: View>(_ content: Content) -> some View {
         content
             .padding(.horizontal, Metrics.margin)
@@ -101,6 +124,27 @@ struct CallMoreActionsView: View {
                 .font(.body)
         }
         .foregroundColor(.primary)
+    }
+}
+
+private extension AudioOutput {
+    var displayName: String {
+        switch self {
+        case .iPhone: return UIDevice.current.localizedModel
+        case .speaker: return L10n.Calls.speaker
+        case .wired: return L10n.Calls.headphones
+        case let .bluetooth(_, name): return name
+        }
+    }
+
+    var systemImage: String {
+        switch self {
+        case .iPhone: return "iphone"
+        case .speaker: return "speaker.wave.2.fill"
+        case .wired: return "headphones"
+        case let .bluetooth(_, name):
+            return name.localizedCaseInsensitiveContains("AirPods") ? "airpods" : "headphones"
+        }
     }
 }
 
@@ -127,5 +171,111 @@ private extension View {
         } else {
             background(Color(UIColor.jamiCallCanvas).ignoresSafeArea())
         }
+    }
+}
+
+/// One round button per output, or plain rows at accessibility text sizes.
+struct AudioOutputPicker: View {
+
+    private enum Metrics {
+        static let maxPerRow = 4
+        static let columnSpacing: CGFloat = 8
+        static let rowSpacing: CGFloat = 14
+        static let nameSpacing: CGFloat = 8
+        static let rowHeight: CGFloat = 52
+        static let rowGlyphSpacing: CGFloat = 14
+    }
+
+    let state: AudioOutputState
+    let onSelect: (AudioOutput) -> Void
+
+    @Environment(\.dynamicTypeSize)
+    private var dynamicTypeSize
+    @ScaledMetric(relativeTo: .title3)
+    private var circle: CGFloat = 56
+    @ScaledMetric(relativeTo: .body)
+    private var glyph: CGFloat = 24
+
+    var body: some View {
+        Group {
+            if dynamicTypeSize.isAccessibilitySize {
+                VStack(spacing: 0) {
+                    ForEach(state.available, id: \.self, content: row)
+                }
+            } else {
+                LazyVGrid(columns: columns, spacing: Metrics.rowSpacing) {
+                    ForEach(state.available, id: \.self, content: button)
+                }
+            }
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel(L10n.Calls.audioOutput)
+        .animation(.default, value: state.available)
+        .animation(.default, value: state.current)
+    }
+
+    private var columns: [GridItem] {
+        let count = min(max(state.available.count, 1), Metrics.maxPerRow)
+        return Array(repeating: GridItem(.flexible(), spacing: Metrics.columnSpacing, alignment: .top),
+                     count: count)
+    }
+
+    private func button(_ output: AudioOutput) -> some View {
+        let isSelected = output == state.current
+        return Button {
+            onSelect(output)
+        } label: {
+            VStack(spacing: Metrics.nameSpacing) {
+                Image(systemName: output.systemImage)
+                    .font(.title3)
+                    .foregroundColor(isSelected ? .black : .white)
+                    .frame(width: circle, height: circle)
+                    .background(Circle().fill(isSelected ? Color.white : Color.white.opacity(0.14)))
+                    .accessibilityHidden(true)
+                // Two lines are always reserved so names in a row line up.
+                ZStack(alignment: .top) {
+                    Text(verbatim: " \n ")
+                        .hidden()
+                    Text(output.displayName)
+                        .lineLimit(2)
+                        .multilineTextAlignment(.center)
+                }
+                .font(.caption.weight(isSelected ? .semibold : .regular))
+                .foregroundColor(.primary)
+            }
+            .frame(maxWidth: .infinity)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(PlainButtonStyle())
+        .accessibilityLabel(output.displayName)
+        .accessibilityAddTraits(isSelected ? .isSelected : [])
+    }
+
+    private func row(_ output: AudioOutput) -> some View {
+        let isSelected = output == state.current
+        return Button {
+            onSelect(output)
+        } label: {
+            HStack(spacing: Metrics.rowGlyphSpacing) {
+                Image(systemName: output.systemImage)
+                    .font(.body)
+                    .frame(width: glyph, height: glyph)
+                    .accessibilityHidden(true)
+                Text(output.displayName)
+                    .font(.body)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                if isSelected {
+                    Image(systemName: "checkmark")
+                        .font(.body.weight(.semibold))
+                        .accessibilityHidden(true)
+                }
+            }
+            .foregroundColor(.primary)
+            .frame(minHeight: Metrics.rowHeight)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(PlainButtonStyle())
+        .accessibilityLabel(output.displayName)
+        .accessibilityAddTraits(isSelected ? .isSelected : [])
     }
 }

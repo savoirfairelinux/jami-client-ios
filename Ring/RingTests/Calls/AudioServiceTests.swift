@@ -123,16 +123,16 @@ final class AudioServiceTests: XCTestCase {
         XCTAssertTrue(state.isDefault)
     }
 
-    func testSpeakerToggleReturnsToConnectedHeadset() {
+    func testSpeakerCanReturnToConnectedHeadset() {
         session.bluetooth = philips
         startCall(video: false)
         XCTAssertEqual(state.current, philipsOutput)
 
-        perform { $0.toggleSpeaker() }
+        perform { $0.select(.speaker) }
         XCTAssertEqual(state.current, .speaker)
         XCTAssertFalse(state.isDefault)
 
-        perform { $0.toggleSpeaker() }
+        perform { $0.select(philipsOutput) }
         XCTAssertEqual(state.current, philipsOutput)
     }
 

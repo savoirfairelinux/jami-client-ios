@@ -38,7 +38,6 @@ final class CallControlsLayoutTests: XCTestCase {
                       canMinimize: Bool = true,
                       handRaised: Bool = false) -> CallControlsLayout.Plan {
         CallControlsLayout.plan(.init(model: model ?? self.model(),
-                                      speakerActive: false,
                                       canMinimize: canMinimize,
                                       canAddParticipant: true,
                                       isHandRaised: handRaised,
@@ -142,8 +141,6 @@ final class CallControlsLayoutTests: XCTestCase {
         let layoutPlan = plan(model(canToggleMedia: false))
         XCTAssertEqual(action(.toggleMic, in: layoutPlan)?.isEnabled, false)
         XCTAssertEqual(action(.toggleCamera, in: layoutPlan)?.isEnabled, false)
-        XCTAssertEqual(action(.toggleAudioOutput, in: layoutPlan)?.isEnabled, true,
-                       "audio output is independent of the media re-invite gate")
     }
 
     func testBarNeverOutgrowsTheWidthItIsGiven() {
