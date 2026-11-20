@@ -77,6 +77,7 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
     @Published var showsMoreActions = false
     private var pendingMoreAction: CallControlIntent?
     @Published private(set) var speakerActive = false
+    private var localCameraOn: Bool?
     @Published private(set) var chromeVisible = true
     @Published private(set) var contentHidden = false
     @Published private(set) var primaryVideo: PrimaryVideo?
@@ -358,6 +359,11 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
 
     private func apply(call: CallState) {
         self.call = call
+        let cameraOn = !call.effectiveMedia(in: conference).isVideoMuted
+        if localCameraOn == false && cameraOn {
+            audio.cameraTurnedOn()
+        }
+        localCameraOn = cameraOn
         configureIdentity(for: call)
         rebuildRows()
         rebuildControlsAndCapabilities()

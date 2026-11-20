@@ -134,6 +134,20 @@ final class AudioService {
         }
     }
 
+    /// An audio call turned its camera on: it now defaults to the speaker
+    /// and leaves the earpiece once. Headsets and later choices stay.
+    func cameraTurnedOn() {
+        queue.async { [self] in
+            guard inCall, !callHasVideo else { return }
+            callHasVideo = true
+            if currentState().current == .iPhone {
+                apply(.speaker)
+            } else {
+                refresh()
+            }
+        }
+    }
+
     func select(_ output: AudioOutput) {
         queue.async { [self] in apply(output) }
     }

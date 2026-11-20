@@ -161,6 +161,27 @@ final class AudioServiceTests: XCTestCase {
         XCTAssertTrue(state.isDefault)
     }
 
+    func testCameraOnMovesAudioCallFromEarpieceOnce() {
+        startCall(video: false)
+
+        perform { $0.cameraTurnedOn() }
+        XCTAssertEqual(state.current, .speaker)
+        XCTAssertTrue(state.isDefault)
+
+        perform { $0.select(.iPhone) }
+        perform { $0.cameraTurnedOn() }
+        XCTAssertEqual(state.current, .iPhone, "a later choice is kept")
+    }
+
+    func testCameraOnKeepsHeadset() {
+        session.bluetooth = philips
+        startCall(video: false)
+
+        perform { $0.cameraTurnedOn() }
+
+        XCTAssertEqual(state.current, philipsOutput)
+    }
+
     func testRouteChangesOutsideTheAppAreFollowed() {
         session.bluetooth = philips
         startCall(video: false)
