@@ -364,6 +364,8 @@
 "calls.raiseHand" = "Raise hand";
 "calls.moreOptions" = "More options";
 "calls.speaker" = "Speaker";
+"calls.headphones" = "Headphones";
+"calls.audioOutput" = "Audio output";
 "calls.hold" = "Hold";
 "calls.showFullVideo" = "Show full video";
 "calls.lowerHand" = "Lower hand";

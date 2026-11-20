@@ -70,11 +70,6 @@ final class AudioService {
         stateSubject.removeDuplicates().eraseToAnyPublisher()
     }
 
-    /// Emits on an unspecified queue; receive on main before binding to the UI.
-    var speakerActive: AnyPublisher<Bool, Never> {
-        stateSubject.map { $0.current == .speaker }.removeDuplicates().eraseToAnyPublisher()
-    }
-
     convenience init() {
         self.init(session: SystemCallAudioSession(), notificationCenter: .default)
     }
@@ -150,24 +145,6 @@ final class AudioService {
 
     func select(_ output: AudioOutput) {
         queue.async { [self] in apply(output) }
-    }
-
-    /// Speaker on, or back to where the call would go without it: a
-    /// connected headset first, otherwise the earpiece.
-    func toggleSpeaker() {
-        queue.async { [self] in
-            let state = currentState()
-            let target: AudioOutput?
-            if state.current == .speaker {
-                target = state.available.first(where: \.isHeadset)
-                    ?? state.available.first { $0 == .iPhone }
-            } else {
-                target = .speaker
-            }
-            if let target = target {
-                apply(target)
-            }
-        }
     }
 
     /// Waits for queued routing work; for tests.

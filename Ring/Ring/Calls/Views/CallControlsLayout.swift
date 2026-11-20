@@ -21,7 +21,6 @@ import Foundation
 enum CallControlIntent: Hashable {
     case toggleMic
     case toggleCamera
-    case toggleAudioOutput
     case hangUp
     case flipCamera
     case toggleHold
@@ -126,7 +125,6 @@ enum CallControlsLayout {
 
     struct Context {
         let model: CallControlsModel
-        let speakerActive: Bool
         let canMinimize: Bool
         let canAddParticipant: Bool
         let isHandRaised: Bool
@@ -160,12 +158,6 @@ enum CallControlsLayout {
                 : L10n.Accessibility.Calls.Alter.toggleVideo,
             style: cameraTurnedOff ? .active : .normal,
             isEnabled: model.canToggleMedia)
-
-        let audioOutput = ControlAction(
-            intent: .toggleAudioOutput,
-            systemImage: "speaker.wave.2.fill",
-            accessibilityLabel: L10n.Calls.speaker,
-            isOn: context.speakerActive)
 
         let hangUp = ControlAction(
             intent: .hangUp,
@@ -205,7 +197,7 @@ enum CallControlsLayout {
             sip = [holdAction(model), dialpad]
         }
 
-        let more = [audioOutput] + [fullVideo, addParticipant].compactMap { $0 } + sip
+        let more = [fullVideo, addParticipant].compactMap { $0 } + sip
         let primary = [mic, camera,
                        flipCameraAction(isEnabled: model.canSwitchCamera), hangUp]
         return Plan(primary: primary, more: more,

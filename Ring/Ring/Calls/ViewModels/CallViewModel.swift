@@ -76,7 +76,7 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
     @Published private(set) var canAddParticipant = false
     @Published var showsMoreActions = false
     private var pendingMoreAction: CallControlIntent?
-    @Published private(set) var speakerActive = false
+    @Published private(set) var audioOutputs = AudioOutputState.idle
     private var localCameraOn: Bool?
     @Published private(set) var chromeVisible = true
     @Published private(set) var contentHidden = false
@@ -88,7 +88,6 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
         controls.map { controls in
             CallControlsLayout.plan(
                 .init(model: controls,
-                      speakerActive: speakerActive,
                       canMinimize: call?.status.isTerminal == false,
                       canAddParticipant: canAddParticipant,
                       isHandRaised: localHandRaised,
@@ -183,10 +182,10 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
                                              localJamiId: localJamiId,
                                              localDeviceId: localDeviceId)
 
-        audioCancellable = audio.speakerActive
+        audioCancellable = audio.outputState
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] active in
-                self?.speakerActive = active
+            .sink { [weak self] state in
+                self?.audioOutputs = state
             }
         pip.onDidFailToStart = { [weak self] in
             self?.fallBackToReturnCapsule()
@@ -486,13 +485,11 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
 
     // MARK: - Intents
 
-    // swiftlint:disable:next cyclomatic_complexity
     func perform(_ intent: CallControlIntent) {
         registerChromeInteraction()
         switch intent {
         case .toggleMic: toggleMuteAudio()
         case .toggleCamera: toggleMuteVideo()
-        case .toggleAudioOutput: toggleSpeaker()
         case .hangUp: hangUp()
         case .flipCamera: switchCamera()
         case .toggleHold: toggleHold()
@@ -560,8 +557,8 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
         Task { await callService.hold(callId, hold) }
     }
 
-    func toggleSpeaker() {
-        audio.toggleSpeaker()
+    func selectAudioOutput(_ output: AudioOutput) {
+        audio.select(output)
     }
 
     func switchCamera() {

@@ -26,6 +26,10 @@ struct CallMoreActionsView: View {
         static let glyphSpacing: CGFloat = 14
         static let grabberClearance: CGFloat = 10
         static let verticalInset: CGFloat = 8
+        static let tileSpacing: CGFloat = 8
+        static let tileMinHeight: CGFloat = 72
+        static let tileCornerRadius: CGFloat = 14
+        static let sectionTitleSpacing: CGFloat = 8
 
         static let topPadding = grabberClearance + verticalInset
         static let bottomPadding = verticalInset
@@ -33,6 +37,10 @@ struct CallMoreActionsView: View {
 
     @ObservedObject var model: CallViewModel
     @SwiftUI.State private var contentHeight: CGFloat?
+    @Environment(\.dynamicTypeSize)
+    private var dynamicTypeSize
+    @Environment(\.horizontalSizeClass)
+    private var horizontalSizeClass
     @ScaledMetric(relativeTo: .body)
     private var glyph: CGFloat = 24
 
@@ -40,8 +48,15 @@ struct CallMoreActionsView: View {
 
     var body: some View {
         let actions = model.controlsPlan?.more ?? []
+        let outputs = model.audioOutputs
         ScrollView {
             VStack(spacing: 0) {
+                if outputs.available.count > 1 {
+                    audioOutputSection(outputs)
+                    if !actions.isEmpty {
+                        Divider()
+                    }
+                }
                 ForEach(actions) { action in
                     row(action)
                     if action.id != actions.last?.id {
@@ -85,6 +100,104 @@ struct CallMoreActionsView: View {
         }
     }
 
+    // MARK: - Audio output
+
+    private func audioOutputSection(_ state: AudioOutputState) -> some View {
+        VStack(alignment: .leading, spacing: Metrics.sectionTitleSpacing) {
+            Text(L10n.Calls.audioOutput)
+                .font(.footnote)
+                .foregroundColor(.secondary)
+                .textCase(.uppercase)
+                .padding(.horizontal, Metrics.margin)
+                .accessibilityHidden(true)
+            Group {
+                if dynamicTypeSize.isAccessibilitySize {
+                    VStack(spacing: 0) {
+                        ForEach(state.available, id: \.self) { output in
+                            outputRow(output, isSelected: output == state.current)
+                        }
+                    }
+                } else {
+                    LazyVGrid(columns: tileColumns(count: state.available.count),
+                              spacing: Metrics.tileSpacing) {
+                        ForEach(state.available, id: \.self) { output in
+                            outputTile(output, isSelected: output == state.current)
+                        }
+                    }
+                    .padding(.horizontal, Metrics.margin)
+                    .padding(.bottom, Metrics.margin - Metrics.verticalInset)
+                }
+            }
+            .accessibilityElement(children: .contain)
+            .accessibilityLabel(L10n.Calls.audioOutput)
+        }
+        .animation(.default, value: state.available)
+    }
+
+    private func tileColumns(count: Int) -> [GridItem] {
+        let perRow = count <= 3 ? count : (horizontalSizeClass == .regular ? min(count, 4) : 2)
+        return Array(repeating: GridItem(.flexible(), spacing: Metrics.tileSpacing), count: perRow)
+    }
+
+    private func outputTile(_ output: AudioOutput, isSelected: Bool) -> some View {
+        Button {
+            model.selectAudioOutput(output)
+        } label: {
+            VStack(spacing: 7) {
+                Image(systemName: output.systemImage)
+                    .font(.title3)
+                    .accessibilityHidden(true)
+                // Two lines are always reserved so tiles in a row match.
+                ZStack {
+                    Text(verbatim: " \n ")
+                        .hidden()
+                    Text(output.displayName)
+                        .lineLimit(2)
+                        .multilineTextAlignment(.center)
+                }
+                .font(.footnote.weight(isSelected ? .semibold : .regular))
+            }
+            .foregroundColor(isSelected ? .white : .primary)
+            .padding(.horizontal, 6)
+            .padding(.vertical, 12)
+            .frame(maxWidth: .infinity, minHeight: Metrics.tileMinHeight)
+            .background(RoundedRectangle(cornerRadius: Metrics.tileCornerRadius, style: .continuous)
+                            .fill(isSelected ? Color.jami : Color.jamiCallControl))
+            .contentShape(RoundedRectangle(cornerRadius: Metrics.tileCornerRadius,
+                                           style: .continuous))
+        }
+        .buttonStyle(PlainButtonStyle())
+        .accessibilityLabel(output.displayName)
+        .accessibilityAddTraits(isSelected ? .isSelected : [])
+    }
+
+    private func outputRow(_ output: AudioOutput, isSelected: Bool) -> some View {
+        Button {
+            model.selectAudioOutput(output)
+        } label: {
+            rowInsets(HStack(spacing: Metrics.glyphSpacing) {
+                Image(systemName: output.systemImage)
+                    .font(.body)
+                    .frame(width: glyph, height: glyph)
+                    .accessibilityHidden(true)
+                Text(output.displayName)
+                    .font(.body)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                if isSelected {
+                    Image(systemName: "checkmark")
+                        .font(.body.weight(.semibold))
+                        .foregroundColor(Color.jami)
+                        .accessibilityHidden(true)
+                }
+            }
+            .foregroundColor(.primary))
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(PlainButtonStyle())
+        .accessibilityLabel(output.displayName)
+        .accessibilityAddTraits(isSelected ? .isSelected : [])
+    }
+
     private func rowInsets<Content: View>(_ content: Content) -> some View {
         content
             .padding(.horizontal, Metrics.margin)
@@ -101,6 +214,27 @@ struct CallMoreActionsView: View {
                 .font(.body)
         }
         .foregroundColor(.primary)
+    }
+}
+
+private extension AudioOutput {
+    var displayName: String {
+        switch self {
+        case .iPhone: return UIDevice.current.localizedModel
+        case .speaker: return L10n.Calls.speaker
+        case .wired: return L10n.Calls.headphones
+        case let .bluetooth(_, name): return name
+        }
+    }
+
+    var systemImage: String {
+        switch self {
+        case .iPhone: return "iphone"
+        case .speaker: return "speaker.wave.2.fill"
+        case .wired: return "headphones"
+        case let .bluetooth(_, name):
+            return name.localizedCaseInsensitiveContains("AirPods") ? "airpods" : "headphones"
+        }
     }
 }
 
