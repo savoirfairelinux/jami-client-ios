@@ -35,7 +35,7 @@ struct BarMetrics {
             : Self.preferredButton
         let button = max(Self.minimumButton, min(Self.preferredButton, fitting))
         self.button = button
-        self.gap = (button * Self.gapRatio).rounded()
+        self.gap = (button * Self.gapRatio).rounded(.down)
         self.icon = (button * Self.iconRatio).rounded()
     }
 

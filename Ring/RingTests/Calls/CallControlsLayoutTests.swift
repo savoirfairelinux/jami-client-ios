@@ -150,7 +150,8 @@ final class CallControlsLayoutTests: XCTestCase {
         let docks = [Array(plan().more.prefix(1)) + plan().primary]
         for actions in docks {
             for width in stride(from: 280.0, through: 1366.0, by: 1.0) {
-                let metrics = BarMetrics(availableWidth: CGFloat(width))
+                let metrics = BarMetrics(availableWidth: CGFloat(width),
+                                         buttonCount: actions.count)
                 let rowWidth = metrics.rowWidth(for: actions)
                 XCTAssertLessThanOrEqual(rowWidth, CGFloat(width) + 0.001,
                                          "\(actions.count) controls in \(width) pt render "
@@ -161,12 +162,13 @@ final class CallControlsLayoutTests: XCTestCase {
     }
 
     func testUnmeasuredBarStillRendersButFitsTheNarrowestPhone() {
-        let metrics = BarMetrics(availableWidth: 0)
+        let actions = Array(plan().more.prefix(1)) + plan().primary
+        let metrics = BarMetrics(availableWidth: 0, buttonCount: actions.count)
 
         XCTAssertGreaterThanOrEqual(metrics.button, 44,
                                     "the bar must be laid out — and tappable — "
                                         + "before it has been measured")
-        XCTAssertLessThanOrEqual(metrics.rowWidth(for: Array(plan().more.prefix(1)) + plan().primary), 320,
+        XCTAssertLessThanOrEqual(metrics.rowWidth(for: actions), 320,
                                  "an unmeasured bar must fit the narrowest phone, "
                                     + "or it widens the whole call screen")
     }
