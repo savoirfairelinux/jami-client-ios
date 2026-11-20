@@ -24,16 +24,16 @@ struct BarMetrics {
     let gap: CGFloat
 
     static let minimumButton: CGFloat = 44
-    static let maximumButton: CGFloat = 64
-    static let widthRatio: CGFloat = 0.142
+    static let preferredButton: CGFloat = 50
     static let gapRatio: CGFloat = 0.26
     static let iconRatio: CGFloat = 0.35
 
-    init(availableWidth: CGFloat) {
-        let button = availableWidth > 0
-            ? min(Self.maximumButton,
-                  max(Self.minimumButton, (availableWidth * Self.widthRatio).rounded(.down)))
-            : Self.minimumButton
+    init(availableWidth: CGFloat, buttonCount: Int) {
+        let rowUnits = CGFloat(buttonCount) + CGFloat(max(0, buttonCount - 1)) * Self.gapRatio
+        let fitting = availableWidth > 0 && rowUnits > 0
+            ? (availableWidth / rowUnits).rounded(.down)
+            : Self.preferredButton
+        let button = max(Self.minimumButton, min(Self.preferredButton, fitting))
         self.button = button
         self.gap = (button * Self.gapRatio).rounded()
         self.icon = (button * Self.iconRatio).rounded()
@@ -112,9 +112,10 @@ struct CallControlsView: View {
     let availableWidth: CGFloat
 
     var body: some View {
-        let metrics = BarMetrics(availableWidth: availableWidth)
         Group {
             if let plan = model.controlsPlan {
+                let metrics = BarMetrics(availableWidth: availableWidth,
+                                         buttonCount: plan.primary.count + 1)
                 HStack(spacing: metrics.gap) {
                     MoreActionsButton(metrics: metrics) {
                         model.showsMoreActions = true
