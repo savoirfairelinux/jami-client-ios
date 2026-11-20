@@ -78,6 +78,7 @@ final class CallKitService: NSObject {
         let update = CXCallUpdate()
         update.remoteHandle = CXHandle(type: .phoneNumber, value: peerId)
         configure(update, callerName: displayName, hasVideo: hasVideo)
+        reapplyProviderConfiguration()
         provider.reportNewIncomingCall(with: uuid, update: update) { [weak self] error in
             if error != nil, let self = self {
                 switch self.directory.recordCallAction(uuid: uuid, .declined) {
@@ -128,6 +129,7 @@ final class CallKitService: NSObject {
         update.remoteHandle = CXHandle(type: handle.isPhoneNumber ? .phoneNumber : .generic,
                                        value: handle.value)
         configure(update, callerName: handle.displayName, hasVideo: !call.isAudioOnly)
+        reapplyProviderConfiguration()
         provider.reportNewIncomingCall(with: uuid, update: update) { [weak self] error in
             if error != nil {
                 self?.directory.remove(uuid: uuid)
@@ -145,6 +147,7 @@ final class CallKitService: NSObject {
         let action = CXStartCallAction(call: uuid, handle: cxHandle)
         action.isVideo = !call.isAudioOnly
         action.contactIdentifier = handle.displayName
+        reapplyProviderConfiguration()
         callController.request(CXTransaction(action: action)) { [weak self] error in
             guard let self = self else { return }
             if let error = error {
@@ -213,6 +216,10 @@ final class CallKitService: NSObject {
     }
 
     // MARK: - Private
+
+    private func reapplyProviderConfiguration() {
+        provider.configuration = provider.configuration
+    }
 
     private func configure(_ update: CXCallUpdate, callerName: String, hasVideo: Bool) {
         update.localizedCallerName = callerName
