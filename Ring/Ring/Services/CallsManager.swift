@@ -192,6 +192,8 @@ final class CallsManager: CallCameraCoordinating {
                 guard call.effectiveAudioMuted(in: conference) != muted else { return }
                 await self.callService.toggleMute(callId, label: .defaultAudio)
             }
+        case let .prepareAudioSession(hasVideo):
+            audioService.prepareForCall(hasVideo: hasVideo)
         case .audioSessionActivated:
             Task { [weak self] in
                 guard let self = self else { return }
@@ -199,11 +201,10 @@ final class CallsManager: CallCameraCoordinating {
                 let call = snapshot.ongoingCalls.first
                     ?? snapshot.calls.values.first { !$0.status.isTerminal }
                 self.audioService.callKitActivated(
-                    callHasVideo: call.map { !$0.isAudioOnly || $0.hasVideo } ?? false,
-                    direction: call?.direction ?? .outgoing)
+                    callHasVideo: call.map { !$0.isAudioOnly || $0.hasVideo } ?? false)
             }
         case .audioSessionDeactivated:
-            break
+            audioService.callKitDeactivated()
         }
     }
 

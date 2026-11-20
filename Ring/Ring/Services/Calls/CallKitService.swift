@@ -33,6 +33,8 @@ enum CallKitAction {
     case end(callId: CallId)
     case declinePending(peerId: String, accountId: String)
     case setMuted(callId: CallId, muted: Bool)
+    /// CallKit is about to activate the audio session for this call.
+    case prepareAudioSession(hasVideo: Bool)
     case audioSessionActivated(AVAudioSession)
     case audioSessionDeactivated(AVAudioSession)
 }
@@ -42,6 +44,7 @@ final class CallKitService: NSObject {
     private let provider: CXProvider
     private let callController: CXCallController
     private(set) var directory = CallKitDirectory()
+    private var videoCalls: [UUID: Bool] = [:]
     private let placeholderTimeout: TimeInterval
 
     /// Set by the facade; receives every CallKit-initiated action.
@@ -72,6 +75,7 @@ final class CallKitService: NSObject {
                                                             hasVideo: hasVideo) {
                 self.endCallKitCall(uuid: replaced, isRemoteEnd: false)
             }
+            self.videoCalls[uuid] = hasVideo
             self.scheduleExpiry(uuid: uuid)
         }
 
@@ -124,6 +128,7 @@ final class CallKitService: NSObject {
 
         let uuid = UUID()
         directory.attach(uuid: uuid, to: call.id)
+        videoCalls[uuid] = !call.isAudioOnly
         let update = CXCallUpdate()
         update.remoteHandle = CXHandle(type: handle.isPhoneNumber ? .phoneNumber : .generic,
                                        value: handle.value)
@@ -140,6 +145,7 @@ final class CallKitService: NSObject {
     func reportOutgoingCallStarted(_ call: CallState, handle: CallKitHandle) {
         let uuid = UUID()
         directory.attach(uuid: uuid, to: call.id)
+        videoCalls[uuid] = !call.isAudioOnly
         let cxHandle = CXHandle(type: handle.isPhoneNumber ? .phoneNumber : .generic,
                                 value: handle.value)
         let action = CXStartCallAction(call: uuid, handle: cxHandle)
@@ -177,6 +183,7 @@ final class CallKitService: NSObject {
 
     func updateDisplayName(_ callId: CallId, handle: CallKitHandle, hasVideo: Bool) {
         guard let uuid = directory.uuid(for: callId) else { return }
+        videoCalls[uuid] = hasVideo
         let update = CXCallUpdate()
         update.remoteHandle = CXHandle(type: handle.isPhoneNumber ? .phoneNumber : .generic,
                                        value: handle.value)
@@ -223,6 +230,7 @@ final class CallKitService: NSObject {
     }
 
     private func endCallKitCall(uuid: UUID, isRemoteEnd: Bool) {
+        videoCalls[uuid] = nil
         let isOutgoing = callController.callObserver.calls
             .first { $0.uuid == uuid }?.isOutgoing ?? false
         if isRemoteEnd && !isOutgoing {
@@ -245,6 +253,7 @@ extension CallKitService: CXProviderDelegate {
 
     func provider(_ provider: CXProvider, perform action: CXAnswerCallAction) {
         defer { action.fulfill() }
+        onAction?(.prepareAudioSession(hasVideo: videoCalls[action.callUUID] ?? false))
         switch directory.recordCallAction(uuid: action.callUUID, .accepted(withVideo: true)) {
         case .applyToCall(let callId):
             onAction?(.answer(callId: callId, withVideo: true))
@@ -277,6 +286,7 @@ extension CallKitService: CXProviderDelegate {
 
     func provider(_ provider: CXProvider, perform action: CXStartCallAction) {
         defer { action.fulfill() }
+        onAction?(.prepareAudioSession(hasVideo: action.isVideo))
         // Report the display name so call history shows it correctly.
         let update = CXCallUpdate()
         update.remoteHandle = action.handle

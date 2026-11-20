@@ -19,60 +19,77 @@
 import Foundation
 import AVFoundation
 import Combine
+import UIKit
 
-struct AudioRouteState: Sendable, Equatable {
-    let speakerActive: Bool
-    let bluetoothConnected: Bool
-    let headphonesConnected: Bool
+struct AudioOutputState: Equatable, Sendable {
+    var available: [AudioOutput]
+    var current: AudioOutput?
+    /// Whether `current` is where the call goes without the user's choice.
+    var isDefault: Bool
+
+    static let idle = AudioOutputState(available: [], current: nil, isDefault: true)
 }
 
+/// How the PlayAndRecord session is set up for a call.
+struct CallAudioConfiguration: Equatable, Sendable {
+    var videoMode: Bool
+    var allowsBluetooth: Bool
+}
+
+/// The parts of the audio session call routing uses.
+protocol CallAudioSession: AnyObject {
+    func snapshot() -> AudioRouteSnapshot
+    /// Nil while the session isn't set up for a call.
+    func configuration() -> CallAudioConfiguration?
+    func configure(_ configuration: CallAudioConfiguration)
+    func overrideToSpeaker(_ enabled: Bool)
+    func preferInput(id: String?)
+    /// Back to the app's state outside calls.
+    func reset()
+}
+
+/// Owns call audio routing. libjami plays and records through the
+/// session this service configures and doesn't change its routing.
 final class AudioService {
 
-    private let audio: LibJamiAudioAPI
-    private let currentRoute: () -> AudioRouteState
+    private let session: CallAudioSession
     private let notificationCenter: NotificationCenter
-    private let lock = NSLock()
-    private var prefersSpeaker = true
-    private let speakerActiveSubject = CurrentValueSubject<Bool, Never>(false)
-    private let routeQueue = DispatchQueue(label: "com.savoirfairelinux.jami.audio.route")
+    private let queue = DispatchQueue(label: "com.savoirfairelinux.jami.audio.route")
+    private let stateSubject = CurrentValueSubject<AudioOutputState, Never>(.idle)
     private var observer: NSObjectProtocol?
+
+    // Confined to `queue`.
+    private var inCall = false
+    private var callHasVideo = false
+    /// Bluetooth inputs disappear while the session disallows Bluetooth to
+    /// reach the earpiece; they stay offered so the user can switch back.
+    private var hiddenBluetooth: [AudioPort] = []
+
+    /// Emits on an unspecified queue; receive on main before binding to the UI.
+    var outputState: AnyPublisher<AudioOutputState, Never> {
+        stateSubject.removeDuplicates().eraseToAnyPublisher()
+    }
 
     /// Emits on an unspecified queue; receive on main before binding to the UI.
     var speakerActive: AnyPublisher<Bool, Never> {
-        speakerActiveSubject.removeDuplicates().eraseToAnyPublisher()
+        stateSubject.map { $0.current == .speaker }.removeDuplicates().eraseToAnyPublisher()
     }
 
-    convenience init(audioAdapter: AudioAdapter = AudioAdapter()) {
-        self.init(audio: LibJamiAudioClient(adapter: audioAdapter))
+    convenience init() {
+        self.init(session: SystemCallAudioSession(), notificationCenter: .default)
     }
 
-    convenience init(audio: LibJamiAudioAPI) {
-        self.init(audio: audio,
-                  currentRoute: { AudioService.systemRouteState() },
-                  notificationCenter: .default)
-    }
-
-    init(audio: LibJamiAudioAPI,
-         currentRoute: @escaping () -> AudioRouteState,
-         notificationCenter: NotificationCenter) {
-        self.audio = audio
-        self.currentRoute = currentRoute
+    init(session: CallAudioSession, notificationCenter: NotificationCenter) {
+        self.session = session
         self.notificationCenter = notificationCenter
-        refreshRouteState()
+        // Every reason matters: turning Bluetooth off mid-call is reported
+        // as `.override`, not as the device becoming unavailable.
         observer = notificationCenter.addObserver(
             forName: AVAudioSession.routeChangeNotification,
             object: nil,
             queue: nil
-        ) { [weak self] notification in
-            guard let reasonValue = notification
-                    .userInfo?[AVAudioSessionRouteChangeReasonKey] as? UInt,
-                  let reason = AVAudioSession.RouteChangeReason(rawValue: reasonValue),
-                  reason == .newDeviceAvailable
-                    || reason == .oldDeviceUnavailable
-                    || reason == .categoryChange else {
-                return
-            }
-            self?.routeQueue.async { self?.applyAutomaticRoute() }
+        ) { [weak self] _ in
+            self?.queue.async { self?.refresh() }
         }
     }
 
@@ -82,62 +99,202 @@ final class AudioService {
         }
     }
 
-    func callKitActivated(callHasVideo: Bool, direction: CallDirection) {
-        setPrefersSpeaker(AudioRoutePolicy.defaultSpeakerPreference(callHasVideo: callHasVideo))
-        if AudioRoutePolicy.shouldOverrideOnActivation(direction: direction) {
-            applyAutomaticRoute()
-        } else {
-            refreshRouteState()
+    /// Called before CallKit activates the session, so the call starts
+    /// in the right mode. The starting route is left to iOS, which
+    /// honors connected headsets and the Call Audio Routing setting.
+    func prepareForCall(hasVideo: Bool) {
+        queue.sync {
+            guard !inCall else { return }
+            callHasVideo = hasVideo
+            hiddenBluetooth = []
+            session.configure(CallAudioConfiguration(videoMode: hasVideo, allowsBluetooth: true))
+            session.overrideToSpeaker(false)
+            session.preferInput(id: nil)
         }
     }
 
+    func callKitActivated(callHasVideo: Bool) {
+        queue.async { [self] in
+            inCall = true
+            self.callHasVideo = callHasVideo
+            if session.configuration() == nil {
+                session.configure(CallAudioConfiguration(videoMode: callHasVideo,
+                                                         allowsBluetooth: true))
+            }
+            refresh()
+        }
+    }
+
+    func callKitDeactivated() {
+        queue.async { [self] in
+            inCall = false
+            hiddenBluetooth = []
+            session.reset()
+            stateSubject.send(.idle)
+        }
+    }
+
+    func select(_ output: AudioOutput) {
+        queue.async { [self] in apply(output) }
+    }
+
+    /// Speaker on, or back to where the call would go without it: a
+    /// connected headset first, otherwise the earpiece.
     func toggleSpeaker() {
-        // A button tap is an explicit override: match the old client behavior
-        // and invert the real route even when a headset is connected.
-        let route: AudioRoute = speakerActiveSubject.value
-            ? .receiver : .builtinSpeaker
-        setPrefersSpeaker(route == .builtinSpeaker)
-        select(route)
+        queue.async { [self] in
+            let state = currentState()
+            let target: AudioOutput?
+            if state.current == .speaker {
+                target = state.available.first(where: \.isHeadset)
+                    ?? state.available.first { $0 == .iPhone }
+            } else {
+                target = .speaker
+            }
+            if let target = target {
+                apply(target)
+            }
+        }
     }
 
-    private func applyAutomaticRoute() {
-        let current = currentRoute()
-        let route = AudioRoutePolicy.route(bluetoothConnected: current.bluetoothConnected,
-                                           headphonesConnected: current.headphonesConnected,
-                                           prefersSpeaker: currentPrefersSpeaker())
-        select(route)
+    /// Waits for queued routing work; for tests.
+    func waitUntilIdle() {
+        queue.sync {}
     }
 
-    private func select(_ route: AudioRoute) {
-        audio.setAudioOutputDevice(route.rawValue)
-        speakerActiveSubject.send(route == .builtinSpeaker)
+    // MARK: - Queue-confined
+
+    private func apply(_ output: AudioOutput) {
+        let snapshot = session.snapshot()
+        switch output {
+        case .iPhone:
+            let bluetooth = snapshot.availableInputs.filter { $0.kind == .bluetooth }
+            if !bluetooth.isEmpty {
+                hiddenBluetooth = bluetooth
+            }
+            // Mode and category changes drop the speaker override, so they
+            // come first. The earpiece needs voiceChat, and Bluetooth
+            // disallowed when a headset is connected.
+            ensure(CallAudioConfiguration(videoMode: false,
+                                          allowsBluetooth: hiddenBluetooth.isEmpty))
+            session.overrideToSpeaker(false)
+        case .speaker:
+            ensure(CallAudioConfiguration(videoMode: callHasVideo,
+                                          allowsBluetooth: hiddenBluetooth.isEmpty))
+            session.overrideToSpeaker(true)
+        case .wired, .bluetooth:
+            let input = (snapshot.availableInputs + hiddenBluetooth).first {
+                Self.port($0, belongsTo: output)
+            }
+            hiddenBluetooth = []
+            ensure(CallAudioConfiguration(videoMode: callHasVideo, allowsBluetooth: true))
+            session.overrideToSpeaker(false)
+            session.preferInput(id: input?.id)
+        }
+        refresh()
     }
 
-    private func refreshRouteState() {
-        speakerActiveSubject.send(currentRoute().speakerActive)
+    private func ensure(_ configuration: CallAudioConfiguration) {
+        if session.configuration() != configuration {
+            session.configure(configuration)
+        }
     }
 
-    private func setPrefersSpeaker(_ value: Bool) {
-        lock.lock()
-        defer { lock.unlock() }
-        prefersSpeaker = value
+    private func refresh() {
+        guard inCall else { return }
+        stateSubject.send(currentState())
     }
 
-    private func currentPrefersSpeaker() -> Bool {
-        lock.lock()
-        defer { lock.unlock() }
-        return prefersSpeaker
+    private func currentState() -> AudioOutputState {
+        var snapshot = session.snapshot()
+        snapshot.availableInputs += hiddenBluetooth
+        let available = AudioOutputs.available(in: snapshot)
+        let current = AudioOutputs.current(in: snapshot)
+        let isDefault = current.map {
+            AudioOutputs.isDefault($0, among: available, callHasVideo: callHasVideo)
+        } ?? true
+        return AudioOutputState(available: available, current: current, isDefault: isDefault)
     }
 
-    private static func systemRouteState() -> AudioRouteState {
-        let outputs = AVAudioSession.sharedInstance().currentRoute.outputs
-        return AudioRouteState(
-            speakerActive: outputs.contains { $0.portType == .builtInSpeaker },
-            bluetoothConnected: outputs.contains {
-                $0.portType == .bluetoothA2DP || $0.portType == .bluetoothHFP
-                    || $0.portType == .bluetoothLE
-            },
-            headphonesConnected: outputs.contains { $0.portType == .headphones }
-        )
+    private static func port(_ port: AudioPort, belongsTo output: AudioOutput) -> Bool {
+        switch output {
+        case .wired:
+            return port.kind == .wired
+        case let .bluetooth(id, name):
+            return port.kind == .bluetooth && (port.id == id || port.name == name)
+        case .iPhone, .speaker:
+            return false
+        }
+    }
+}
+
+final class SystemCallAudioSession: CallAudioSession {
+
+    private let hasReceiver: Bool
+    private var session: AVAudioSession { .sharedInstance() }
+
+    init(hasReceiver: Bool = UIDevice.current.userInterfaceIdiom == .phone) {
+        self.hasReceiver = hasReceiver
+    }
+
+    func snapshot() -> AudioRouteSnapshot {
+        AudioRouteSnapshot(outputs: session.currentRoute.outputs.map(Self.port),
+                           availableInputs: (session.availableInputs ?? []).map(Self.port),
+                           hasReceiver: hasReceiver)
+    }
+
+    func configuration() -> CallAudioConfiguration? {
+        guard session.category == .playAndRecord else { return nil }
+        return CallAudioConfiguration(
+            videoMode: session.mode == .videoChat,
+            allowsBluetooth: session.categoryOptions.contains(.allowBluetoothHFP))
+    }
+
+    func configure(_ configuration: CallAudioConfiguration) {
+        do {
+            try session.setCategory(.playAndRecord,
+                                    mode: configuration.videoMode ? .videoChat : .voiceChat,
+                                    options: configuration.allowsBluetooth ? [.allowBluetoothHFP] : [])
+        } catch {
+            NSLog("Audio session configuration failed: %@", error.localizedDescription)
+        }
+    }
+
+    func overrideToSpeaker(_ enabled: Bool) {
+        do {
+            try session.overrideOutputAudioPort(enabled ? .speaker : .none)
+        } catch {
+            NSLog("Audio output override failed: %@", error.localizedDescription)
+        }
+    }
+
+    func preferInput(id: String?) {
+        let input = id.flatMap { id in session.availableInputs?.first { $0.uid == id } }
+        do {
+            try session.setPreferredInput(input)
+        } catch {
+            NSLog("Preferred audio input failed: %@", error.localizedDescription)
+        }
+    }
+
+    func reset() {
+        try? session.overrideOutputAudioPort(.none)
+        try? session.setPreferredInput(nil)
+        try? session.setCategory(.soloAmbient, mode: .default, options: [])
+    }
+
+    private static func port(_ description: AVAudioSessionPortDescription) -> AudioPort {
+        AudioPort(kind: kind(of: description.portType),
+                  id: description.uid,
+                  name: description.portName)
+    }
+
+    private static func kind(of type: AVAudioSession.Port) -> AudioPort.Kind {
+        switch type {
+        case .builtInReceiver: return .receiver
+        case .builtInSpeaker: return .speaker
+        case .headphones, .headsetMic, .usbAudio: return .wired
+        case .bluetoothHFP, .bluetoothA2DP, .bluetoothLE, .carAudio: return .bluetooth
+        default: return .other
+        }
     }
 }

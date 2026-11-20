@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     private let nameService = NameService(withNameRegistrationAdapter: NameRegistrationAdapter())
     private let presenceService = PresenceService(withPresenceAdapter: PresenceAdapter())
     private let videoService = VideoService(videoAdapter: VideoAdapter())
-    private let audioService = AudioService(audioAdapter: AudioAdapter())
+    private let audioService = AudioService()
     private let callService = CallService(callsAdapter: CallsAdapter())
     private let callKitService = CallKitService()
     private var callsManager: CallsManager?
