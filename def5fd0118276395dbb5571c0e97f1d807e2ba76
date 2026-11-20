@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ea54d9f_a1556fac",
+        "filename": "Ring/Ring.xcodeproj/project.pbxproj",
+        "patchSetId": 1
+      },
+      "lineNbr": 4973,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-20T20:54:30Z",
+      "side": 1,
+      "message": "[error] Line 4973: 🔴 `CURRENT_PROJECT_VERSION` is changed from `3` to `0`, and the same downgrade is repeated in other build configurations in this patch. Build numbers must be monotonically increasing for distribution/update workflows, and resetting to `0` can cause archive/TestFlight/App Store upload failures or version regression issues. Set this to the next higher build number consistently across all affected configs (e.g., `4` if `3` was the previous value).",
+      "revId": "def5fd0118276395dbb5571c0e97f1d807e2ba76",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
