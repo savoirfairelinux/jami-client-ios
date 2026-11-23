@@ -36,12 +36,19 @@ final class CallControlsLayoutTests: XCTestCase {
 
     private func plan(_ model: CallControlsModel? = nil,
                       canMinimize: Bool = true,
-                      handRaised: Bool = false) -> CallControlsLayout.Plan {
+                      handRaised: Bool = false,
+                      outputs: AudioOutputState = .idle) -> CallControlsLayout.Plan {
         CallControlsLayout.plan(.init(model: model ?? self.model(),
                                       canMinimize: canMinimize,
                                       canAddParticipant: true,
                                       isHandRaised: handRaised,
-                                      showsFullVideo: nil))
+                                      showsFullVideo: nil,
+                                      audioOutputs: outputs))
+    }
+
+    private func outputs(_ available: [AudioOutput], current: AudioOutput,
+                         isDefault: Bool = true) -> AudioOutputState {
+        AudioOutputState(available: available, current: current, isDefault: isDefault)
     }
 
     private func action(_ intent: CallControlIntent,
@@ -105,6 +112,43 @@ final class CallControlsLayoutTests: XCTestCase {
         XCTAssertEqual(available?.isEnabled, true)
         XCTAssertEqual(available?.accessibilityLabel,
                        L10n.Accessibility.Calls.Default.switchCamera)
+    }
+
+    func testAudioOutputTakesFlipSlotOnlyWhileCameraIsOff() {
+        let phone = outputs([.iPhone, .speaker], current: .iPhone)
+
+        let cameraOff = plan(model(videoMute: true), outputs: phone)
+        XCTAssertEqual(cameraOff.primary.map(\.intent),
+                       [.toggleMic, .toggleCamera, .audioOutput, .hangUp])
+
+        XCTAssertNotNil(action(.flipCamera, in: plan(model(videoMute: false), outputs: phone)))
+        XCTAssertNotNil(action(.flipCamera,
+                               in: plan(model(videoMute: true),
+                                        outputs: outputs([.speaker], current: .speaker))),
+                        "a single output leaves nothing to switch")
+    }
+
+    func testAudioOutputButtonStyle() {
+        let earpiece = action(.audioOutput,
+                              in: plan(model(videoMute: true),
+                                       outputs: outputs([.iPhone, .speaker], current: .iPhone)))
+        XCTAssertEqual(earpiece?.style, .normal)
+        XCTAssertEqual(earpiece?.opensChoices, false)
+
+        let speakerInAudioCall = action(.audioOutput,
+                                        in: plan(model(videoMute: true),
+                                                 outputs: outputs([.iPhone, .speaker],
+                                                                  current: .speaker,
+                                                                  isDefault: false)))
+        XCTAssertEqual(speakerInAudioCall?.style, .active, "white marks a non-default output")
+
+        let headset = AudioOutput.bluetooth(id: "a", name: "AirPods Pro")
+        let threeOutputs = action(.audioOutput,
+                                  in: plan(model(videoMute: true),
+                                           outputs: outputs([.iPhone, .speaker, headset],
+                                                            current: headset)))
+        XCTAssertEqual(threeOutputs?.opensChoices, true)
+        XCTAssertEqual(threeOutputs?.accessibilityValue, "AirPods Pro")
     }
 
     func testPrimaryControlsRemainStableWhenCapabilitiesChange() {

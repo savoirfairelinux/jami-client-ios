@@ -23,6 +23,7 @@ enum CallControlIntent: Hashable {
     case toggleCamera
     case hangUp
     case flipCamera
+    case audioOutput
     case toggleHold
     case minimize
     case showDialpad
@@ -100,22 +101,29 @@ struct ControlAction: Identifiable, Equatable {
     let intent: CallControlIntent
     let systemImage: String
     let accessibilityLabel: String
+    let accessibilityValue: String?
     let isOn: Bool?
     let style: Style
     let isEnabled: Bool
+    /// A tap opens a list of choices instead of acting right away.
+    let opensChoices: Bool
 
     init(intent: CallControlIntent,
          systemImage: String,
          accessibilityLabel: String,
+         accessibilityValue: String? = nil,
          isOn: Bool? = nil,
          style: Style = .normal,
-         isEnabled: Bool = true) {
+         isEnabled: Bool = true,
+         opensChoices: Bool = false) {
         self.intent = intent
         self.systemImage = systemImage
         self.accessibilityLabel = accessibilityLabel
+        self.accessibilityValue = accessibilityValue
         self.isOn = isOn
         self.style = style
         self.isEnabled = isEnabled
+        self.opensChoices = opensChoices
     }
 
     var id: CallControlIntent { intent }
@@ -129,6 +137,7 @@ enum CallControlsLayout {
         let canAddParticipant: Bool
         let isHandRaised: Bool
         let showsFullVideo: Bool?
+        var audioOutputs: AudioOutputState = .idle
     }
 
     struct Plan: Equatable {
@@ -198,8 +207,13 @@ enum CallControlsLayout {
         }
 
         let more = [fullVideo, addParticipant].compactMap { $0 } + sip
-        let primary = [mic, camera,
-                       flipCameraAction(isEnabled: model.canSwitchCamera), hangUp]
+        // Flip is useless while the camera is off, so its slot becomes the
+        // audio output shortcut when there is more than one output.
+        let outputs = context.audioOutputs
+        let slot = model.isVideoMuted && outputs.available.count > 1
+            ? audioOutputAction(outputs)
+            : flipCameraAction(isEnabled: model.canSwitchCamera)
+        let primary = [mic, camera, slot, hangUp]
         return Plan(primary: primary, more: more,
                     minimize: minimize, raiseHand: raiseHand)
     }
@@ -212,6 +226,17 @@ enum CallControlsLayout {
                 ? L10n.Accessibility.Calls.Alter.raiseHand
                 : L10n.Accessibility.Calls.Default.raiseHand,
             style: isRaised ? .active : .normal)
+    }
+
+    private static func audioOutputAction(_ state: AudioOutputState) -> ControlAction {
+        let current = state.current ?? .speaker
+        return ControlAction(intent: .audioOutput,
+                             systemImage: current.buttonSystemImage,
+                             accessibilityLabel: L10n.Calls.audioOutput,
+                             accessibilityValue: current.displayName,
+                             style: state.isDefault ? .normal : .active,
+                             opensChoices: AudioOutputs.toggleTarget(from: state.current,
+                                                                     among: state.available) == nil)
     }
 
     private static func flipCameraAction(isEnabled: Bool) -> ControlAction {

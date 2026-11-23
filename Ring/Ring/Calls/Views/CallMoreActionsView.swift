@@ -47,7 +47,7 @@ struct CallMoreActionsView: View {
     private var textLeading: CGFloat { Metrics.margin + glyph + Metrics.glyphSpacing }
 
     var body: some View {
-        let actions = model.controlsPlan?.more ?? []
+        let actions = model.showsAudioOutputsOnly ? [] : model.controlsPlan?.more ?? []
         let outputs = model.audioOutputs
         ScrollView {
             VStack(spacing: 0) {
@@ -214,27 +214,6 @@ struct CallMoreActionsView: View {
                 .font(.body)
         }
         .foregroundColor(.primary)
-    }
-}
-
-private extension AudioOutput {
-    var displayName: String {
-        switch self {
-        case .iPhone: return UIDevice.current.localizedModel
-        case .speaker: return L10n.Calls.speaker
-        case .wired: return L10n.Calls.headphones
-        case let .bluetooth(_, name): return name
-        }
-    }
-
-    var systemImage: String {
-        switch self {
-        case .iPhone: return "iphone"
-        case .speaker: return "speaker.wave.2.fill"
-        case .wired: return "headphones"
-        case let .bluetooth(_, name):
-            return name.localizedCaseInsensitiveContains("AirPods") ? "airpods" : "headphones"
-        }
     }
 }
 
