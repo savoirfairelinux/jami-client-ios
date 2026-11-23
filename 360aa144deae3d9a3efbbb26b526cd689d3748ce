@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b565bc76_03f73395",
+        "filename": "Ring/Ring/Calls/Views/CallMoreActionsView.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-23T21:26:42Z",
+      "side": 1,
+      "message": "[error] Line 136: 🔴 `tileColumns(count:)` allows 4 columns on regular width (`min(count, 4)`), but this change’s intended behavior says rows should have at most 3 items and overflow should wrap in 2 columns. This creates inconsistent layout rules across size classes and can compress labels too much. Use a consistent cap (max 3) and switch to 2 columns when count \u003e 3 for all size classes.",
+      "revId": "360aa144deae3d9a3efbbb26b526cd689d3748ce",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46429c51_c3d17931",
+        "filename": "Ring/Ring/Calls/Views/CallMoreActionsView.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-23T21:26:42Z",
+      "side": 1,
+      "message": "[warning] Line 223: 🟡 For `.bluetooth(_, name)`, returning `name` directly can surface an empty/whitespace label from route metadata, producing blank tile text and poor accessibility labels. Add a fallback to `L10n.Calls.headphones` when `name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty`.",
+      "revId": "360aa144deae3d9a3efbbb26b526cd689d3748ce",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
