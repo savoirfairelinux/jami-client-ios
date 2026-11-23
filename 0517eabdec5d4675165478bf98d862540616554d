@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5445191_75a39dd7",
+        "filename": "Ring/Ring/Calls/Views/CallControlsView.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-23T21:27:42Z",
+      "side": 1,
+      "message": "[warning] Line 95: 🟡 Applying `.accessibilityValue(action.accessibilityValue ?? \"\")` sets an explicit empty value on every control, not just the audio-output button. For VoiceOver this can override default value/state announcements and may produce a degraded experience. Set the modifier conditionally only when `action.accessibilityValue` is non-nil (or provide per-intent values) so unaffected buttons keep their native accessibility behavior.",
+      "revId": "0517eabdec5d4675165478bf98d862540616554d",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
