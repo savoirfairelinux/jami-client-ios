@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16c23398_5b7a0ac9",
+        "filename": "Ring/Ring/Resources/ast_ES.lproj/Localizable.strings",
+        "patchSetId": 1
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-23T08:24:33Z",
+      "side": 1,
+      "message": "[error] Line 367: 🔴 `calls.hold` is mistranslated as an unrelated sentence (`\"El so nome ye John.\"`). This is a clear user-facing localization defect in a core call control. Replace it with the correct Asturian equivalent of “Hold” (or keep the previous source text until a verified translation is available).",
+      "revId": "659b16391b3590dbccd1eed79871fc7a37acbf99",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42e6ba6c_208f81be",
+        "filename": "Ring/Ring/Resources/es.lproj/Localizable.strings",
+        "patchSetId": 1
+      },
+      "lineNbr": 904,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-23T08:24:33Z",
+      "side": 1,
+      "message": "[warning] Line 904: 🟡 `mediaPreview.replyTo` was changed to `\"Responder a%@\"` (missing space before `%@`), which will render glued text (e.g., `Responder aCarlos`). Use `\"Responder a %@\"` and apply the same fix consistently in the Spanish variants updated in this patchset (`es_419`, `es_AR`, `es_CO`, `es_ES`, `es_MX`, `es_VE`).",
+      "revId": "659b16391b3590dbccd1eed79871fc7a37acbf99",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3aee79d_4f1fb75b",
+        "filename": "Ring/Ring/Resources/es_CO.lproj/Localizable.strings",
+        "patchSetId": 1
+      },
+      "lineNbr": 901,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-23T08:24:33Z",
+      "side": 1,
+      "message": "[warning] Line 901: 🟡 `mediaPreview.moreActions` is set to `\"Maś\"`, which appears to be a typo/encoding error in Spanish. Use `\"Más\"` (and fix the same issue in `es_MX` where the same incorrect value appears).",
+      "revId": "659b16391b3590dbccd1eed79871fc7a37acbf99",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
