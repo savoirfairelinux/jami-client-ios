@@ -75,7 +75,7 @@ enum LibJamiCallState: String, CaseIterable {
     case over = "OVER"
 }
 
-/// Keys of one entry of the `OnConferenceInfosUpdated` participant list.
+/// Keys of one entry of the `ConferenceInfosUpdated` participant list.
 enum ConfInfoKey: String {
     case uri
     case device
