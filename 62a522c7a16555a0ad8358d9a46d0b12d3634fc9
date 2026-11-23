@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b83d975_5b904c35",
+        "filename": "Ring/Ring/Services/Audio/AudioService.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-23T21:24:22Z",
+      "side": 1,
+      "message": "[warning] Line 270: 🟡 `reset()` suppresses all `AVAudioSession` failures with `try?`, so the app can silently remain in an inconsistent audio-session state after a call. Use explicit `do/catch` per operation (as done in `configure`, `overrideToSpeaker`, and `preferInput`) and log failures so routing regressions are diagnosable.",
+      "revId": "62a522c7a16555a0ad8358d9a46d0b12d3634fc9",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d0e4336_c09d579e",
+        "filename": "Ring/Ring/Services/Calls/CallKitService.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-23T21:24:22Z",
+      "side": 1,
+      "message": "[warning] Line 252: 🟡 `providerDidReset(_:)` is empty, but this patch introduces `videoCalls` state keyed by UUID. When CallKit resets the provider, that state should be cleared (and associated in-memory call mapping reset) to avoid stale metadata surviving a reset path.",
+      "revId": "62a522c7a16555a0ad8358d9a46d0b12d3634fc9",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
