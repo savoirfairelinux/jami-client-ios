@@ -86,9 +86,23 @@ private struct ControlButton: View {
         Button(action: onTap) {
             CallControlIcon(systemImage: action.systemImage, style: action.style,
                             isEnabled: action.isEnabled, metrics: metrics)
+                .overlay(choicesBadge, alignment: .bottomTrailing)
         }
         .disabled(!action.isEnabled)
         .accessibilityLabel(action.accessibilityLabel)
+        .accessibilityValue(action.accessibilityValue ?? "")
+    }
+
+    @ViewBuilder private var choicesBadge: some View {
+        if action.opensChoices {
+            let size = (metrics.button * 0.34).rounded()
+            Image(systemName: "chevron.down")
+                .font(.system(size: size * 0.5, weight: .bold))
+                .foregroundColor(.white)
+                .frame(width: size, height: size)
+                .background(Circle().fill(Color(white: 0.38)))
+                .accessibilityHidden(true)
+        }
     }
 }
 

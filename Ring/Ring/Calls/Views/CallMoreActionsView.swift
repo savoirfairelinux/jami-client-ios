@@ -33,6 +33,8 @@ struct CallMoreActionsView: View {
     }
 
     @ObservedObject var model: CallViewModel
+    /// Opened from the audio button: only the outputs, closing after a pick.
+    var showsOnlyAudioOutputs = false
     @SwiftUI.State private var contentHeight: CGFloat?
     @ScaledMetric(relativeTo: .body)
     private var glyph: CGFloat = 24
@@ -40,7 +42,7 @@ struct CallMoreActionsView: View {
     private var textLeading: CGFloat { Metrics.margin + glyph + Metrics.glyphSpacing }
 
     var body: some View {
-        let actions = model.controlsPlan?.more ?? []
+        let actions = showsOnlyAudioOutputs ? [] : model.controlsPlan?.more ?? []
         let outputs = model.audioOutputs
         ScrollView {
             VStack(spacing: 0) {
@@ -68,7 +70,8 @@ struct CallMoreActionsView: View {
             if height > 0, height != contentHeight { contentHeight = height }
         }
         .fittedSheetHeight(contentHeight ?? Metrics.topPadding + Metrics.bottomPadding
-                            + CGFloat(actions.count) * Metrics.rowHeight)
+                            + CGFloat(actions.count) * Metrics.rowHeight,
+                           systemGlass: showsOnlyAudioOutputs)
     }
 
     @ViewBuilder
@@ -127,27 +130,6 @@ struct CallMoreActionsView: View {
     }
 }
 
-private extension AudioOutput {
-    var displayName: String {
-        switch self {
-        case .iPhone: return UIDevice.current.localizedModel
-        case .speaker: return L10n.Calls.speaker
-        case .wired: return L10n.Calls.headphones
-        case let .bluetooth(_, name): return name
-        }
-    }
-
-    var systemImage: String {
-        switch self {
-        case .iPhone: return "iphone"
-        case .speaker: return "speaker.wave.2.fill"
-        case .wired: return "headphones"
-        case let .bluetooth(_, name):
-            return name.localizedCaseInsensitiveContains("AirPods") ? "airpods" : "headphones"
-        }
-    }
-}
-
 private struct ContentHeightKey: PreferenceKey {
     static var defaultValue: CGFloat { 0 }
 
@@ -157,9 +139,15 @@ private struct ContentHeightKey: PreferenceKey {
 }
 
 private extension View {
+    /// With `systemGlass`, iOS 26 draws its own Liquid Glass sheet behind the
+    /// content instead of the call canvas color.
     @ViewBuilder
-    func fittedSheetHeight(_ height: CGFloat) -> some View {
-        if #available(iOS 16.4, *) {
+    func fittedSheetHeight(_ height: CGFloat, systemGlass: Bool) -> some View {
+        if #available(iOS 26.0, *), systemGlass {
+            presentationDetents([.height(height)])
+                .presentationDragIndicator(.visible)
+                .scrollBounceBehavior(.basedOnSize)
+        } else if #available(iOS 16.4, *) {
             presentationDetents([.height(height)])
                 .presentationDragIndicator(.visible)
                 .presentationBackground(Color(UIColor.jamiCallCanvas))

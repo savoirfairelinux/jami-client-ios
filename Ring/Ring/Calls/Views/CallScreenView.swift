@@ -105,6 +105,10 @@ struct CallScreenView: View {
             CallMoreActionsView(model: model)
                 .preferredColorScheme(.dark)
         }
+        .sheet(isPresented: $model.showsAudioPicker) {
+            CallMoreActionsView(model: model, showsOnlyAudioOutputs: true)
+                .preferredColorScheme(.dark)
+        }
         .sheet(isPresented: $model.showsParticipants,
                onDismiss: model.participantsDismissed) {
             ConferenceParticipantsView(model: model)

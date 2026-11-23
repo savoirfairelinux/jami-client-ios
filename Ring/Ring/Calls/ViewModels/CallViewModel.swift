@@ -76,6 +76,8 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
     @Published private(set) var canAddParticipant = false
     @Published var showsMoreActions = false
     private var pendingMoreAction: CallControlIntent?
+    /// The outputs-only sheet opened from the audio button.
+    @Published var showsAudioPicker = false
     @Published private(set) var audioOutputs = AudioOutputState.idle
     private var localCameraOn: Bool?
     @Published private(set) var chromeVisible = true
@@ -91,7 +93,8 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
                       canMinimize: call?.status.isTerminal == false,
                       canAddParticipant: canAddParticipant,
                       isHandRaised: localHandRaised,
-                      showsFullVideo: primaryVideo?.showsWholeFrame))
+                      showsFullVideo: primaryVideo?.showsWholeFrame,
+                      audioOutputs: audioOutputs))
         }
     }
 
@@ -212,9 +215,9 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
         chromeCancellable = $chromeVisible
             .removeDuplicates()
             .sink { [weak self] visible in self?.setDurationTicking(visible) }
-        chromePinCancellable = Publishers.CombineLatest3($showsMoreActions, $showsParticipants,
-                                                         $showsDialpad)
-            .map { $0 || $1 || $2 }
+        chromePinCancellable = Publishers.CombineLatest4($showsMoreActions, $showsParticipants,
+                                                         $showsDialpad, $showsAudioPicker)
+            .map { $0 || $1 || $2 || $3 }
             .removeDuplicates()
             .dropFirst()
             .sink { [weak self] pinned in self?.chromePinChanged(pinned) }
@@ -492,6 +495,7 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
         case .toggleCamera: toggleMuteVideo()
         case .hangUp: hangUp()
         case .flipCamera: switchCamera()
+        case .audioOutput: audioOutputTapped()
         case .toggleHold: toggleHold()
         case .minimize: minimize()
         case .showDialpad: showsDialpad = true
@@ -559,6 +563,17 @@ final class CallViewModel: ObservableObject { // swiftlint:disable:this type_bod
 
     func selectAudioOutput(_ output: AudioOutput) {
         audio.select(output)
+        showsAudioPicker = false
+    }
+
+    /// Two outputs switch in place; more open a sheet of the outputs.
+    private func audioOutputTapped() {
+        if let target = AudioOutputs.toggleTarget(from: audioOutputs.current,
+                                                  among: audioOutputs.available) {
+            audio.select(target)
+        } else {
+            showsAudioPicker = true
+        }
     }
 
     func switchCamera() {
