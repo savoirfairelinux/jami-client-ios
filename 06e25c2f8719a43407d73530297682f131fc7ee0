@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f629d49a_5d59ba16",
+        "filename": "Ring/jamiNotificationExtension/AdapterService.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-23T18:59:55Z",
+      "side": 1,
+      "message": "[error] Line 300: 🔴 `outgoingFileTransferEvent` now maps every non-`.ongoing` transfer event to `.fileUploadEnded`. `DataTransferEvent` has intermediate and non-terminal states, so this can emit a synthetic end before an upload actually completes, dropping the hold too early and allowing the extension to exit during an active/requested transfer. Restore explicit completion filtering (e.g., decode to `DataTransferEvent` and use `isCompleted()`), and ignore unknown/non-terminal codes.",
+      "revId": "06e25c2f8719a43407d73530297682f131fc7ee0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
