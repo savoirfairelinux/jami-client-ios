@@ -902,12 +902,12 @@
 // Media preview
 "mediaPreview.dateTime" = "%1$@, %2$@";
 "mediaPreview.react" = "React";
-"mediaPreview.moreActions" = "More";
+"mediaPreview.moreActions" = "Plus";
 "mediaPreview.moreEmoji" = "More emoji";
 "mediaPreview.liveText" = "Live Text";
 "mediaPreview.replyTo" = "Reply to %@";
 "mediaPreview.voice" = "Voice";
-"mediaPreview.video" = "Video";
+"mediaPreview.video" = "Vidéo";
 "mediaPreview.photos" = "Photos";
 "mediaPreview.file" = "File";
 "mediaPreview.message" = "Message";

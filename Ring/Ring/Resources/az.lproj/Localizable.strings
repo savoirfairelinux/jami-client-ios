@@ -362,9 +362,9 @@
 "calls.muteAudio" = "Mikrofonu səssiz et";
 "calls.unmuteAudio" = "Unmute microphone";
 "calls.raiseHand" = "ال قالديريب";
-"calls.moreOptions" = "More options";
+"calls.moreOptions" = "داها چوخ سئچیش";
 "calls.speaker" = "Speaker";
-"calls.hold" = "Hold";
+"calls.hold" = "صبر کن";
 "calls.showFullVideo" = "Show full video";
 "calls.lowerHand" = "آلتی ال";
 "calls.inThisCall" = "In this call (%@)";
@@ -902,12 +902,12 @@
 // Media preview
 "mediaPreview.dateTime" = "%1$@, %2$@";
 "mediaPreview.react" = "React";
-"mediaPreview.moreActions" = "More";
+"mediaPreview.moreActions" = "داها چوخ";
 "mediaPreview.moreEmoji" = "More emoji";
 "mediaPreview.liveText" = "Live Text";
 "mediaPreview.replyTo" = "Reply to %@";
 "mediaPreview.voice" = "Voice";
-"mediaPreview.video" = "Video";
+"mediaPreview.video" = "ویدئو";
 "mediaPreview.photos" = "Photos";
 "mediaPreview.file" = "File";
 "mediaPreview.message" = "Message";

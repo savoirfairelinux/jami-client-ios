@@ -362,9 +362,9 @@
 "calls.muteAudio" = "ميكروفون خاموش";
 "calls.unmuteAudio" = "Unmute microphone";
 "calls.raiseHand" = "كرانڽ";
-"calls.moreOptions" = "More options";
+"calls.moreOptions" = "ڤرليندوڠ لبيه";
 "calls.speaker" = "Speaker";
-"calls.hold" = "Hold";
+"calls.hold" = "منتظره";
 "calls.showFullVideo" = "Show full video";
 "calls.lowerHand" = "يڠ دالم لالو";
 "calls.inThisCall" = "In this call (%@)";
@@ -907,7 +907,7 @@
 "mediaPreview.liveText" = "Live Text";
 "mediaPreview.replyTo" = "Reply to %@";
 "mediaPreview.voice" = "Voice";
-"mediaPreview.video" = "Video";
+"mediaPreview.video" = "ڤيديو";
 "mediaPreview.photos" = "Photos";
 "mediaPreview.file" = "File";
 "mediaPreview.message" = "Message";

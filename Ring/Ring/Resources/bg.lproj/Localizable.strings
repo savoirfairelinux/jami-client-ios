@@ -355,16 +355,16 @@
 "calls.currentCallWith" = "Обади се с ";
 "calls.maximize" = "Максимизирайте";
 "calls.minimize" = "Минимизиране";
-"calls.returnToCall" = "Return to call";
+"calls.returnToCall" = "Връщане към обаждането";
 "calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Настройка на модератор";
 "calls.removeModerator" = "Изключен модератор";
 "calls.muteAudio" = "Заглушаване на микрофона";
 "calls.unmuteAudio" = "Премахване на заглушаването на микрофона";
 "calls.raiseHand" = "Вдигнете ръка";
-"calls.moreOptions" = "More options";
+"calls.moreOptions" = "Повече възможности";
 "calls.speaker" = "Speaker";
-"calls.hold" = "Hold";
+"calls.hold" = "Задържане";
 "calls.showFullVideo" = "Show full video";
 "calls.lowerHand" = "Ниска ръка";
 "calls.inThisCall" = "In this call (%@)";
@@ -902,12 +902,12 @@
 // Media preview
 "mediaPreview.dateTime" = "%1$@, %2$@";
 "mediaPreview.react" = "React";
-"mediaPreview.moreActions" = "More";
+"mediaPreview.moreActions" = "Повече";
 "mediaPreview.moreEmoji" = "More emoji";
 "mediaPreview.liveText" = "Live Text";
 "mediaPreview.replyTo" = "Reply to %@";
 "mediaPreview.voice" = "Voice";
-"mediaPreview.video" = "Video";
+"mediaPreview.video" = "Видео";
 "mediaPreview.photos" = "Photos";
 "mediaPreview.file" = "File";
-"mediaPreview.message" = "Message";
+"mediaPreview.message" = "Съобщение";

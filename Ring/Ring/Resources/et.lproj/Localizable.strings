@@ -99,7 +99,7 @@
 "swarm.conversationEnded" = "Vestlus on lõppenud";
 "swarm.conversationEndedMessage" = "Sa ei saa enam saata sõnumeid siia vestlusesse.";
 "swarm.chooseColor" = "Vestluse värv";
-"swarm.quickSendEmoji" = "Quick send emoji";
+"swarm.quickSendEmoji" = "Emoji kiirsaatmine";
 "swarm.typeOfSwarm" = "Vestluse tüüp";
 "swarm.identifier" = "Tunnus";
 "swarm.conversationId" = "Vestluse tunnus";
@@ -128,8 +128,8 @@
 "swarm.invite" = "Kutsu";
 "swarm.inviteMembers" = "Kutsu osalejaid";
 "swarm.inviteSelectedMembers" = "Saada kutse valitud kontaktidele";
-"swarm.inviteOneMember" = "Invite 1 member";
-"swarm.inviteMemberCount" = "Invite %d members";
+"swarm.inviteOneMember" = "Kutsu üht osalejat";
+"swarm.inviteMemberCount" = "Kutsu %d osalejat";
 "swarm.inviteMembersSelected" = "Valitud";
 "swarm.inviteMembersNotSelected" = "Pole valitud";
 "swarm.confirmLeaveConversation" = "Kas soovid sellest vestlusest lahkuda?";
@@ -355,7 +355,7 @@
 "calls.currentCallWith" = "Helista kasutajale";
 "calls.maximize" = "Maksimeeri";
 "calls.minimize" = "Minimeeri";
-"calls.returnToCall" = "Return to call";
+"calls.returnToCall" = "Tagasi kõne juurde";
 "calls.startPictureInPicture" = "Käivita pilt-pildis režiim";
 "calls.setModerator" = "Määra moderaator";
 "calls.removeModerator" = "Eemalda moderaator";
@@ -363,9 +363,9 @@
 "calls.unmuteAudio" = "Lõpeta mikrofoni summutamine";
 "calls.raiseHand" = "Anna käega märku";
 "calls.moreOptions" = "Lisavõimalused";
-"calls.speaker" = "Speaker";
+"calls.speaker" = "Kõlar";
 "calls.hold" = "Pane ootele";
-"calls.showFullVideo" = "Show full video";
+"calls.showFullVideo" = "Näita täiskaadris videot";
 "calls.lowerHand" = "Lase käsi alla";
 "calls.inThisCall" = "Selles kõnes (%@)";
 "calls.participantsInCall" = "%@ on helistamas";
@@ -901,13 +901,13 @@
 
 // Media preview
 "mediaPreview.dateTime" = "%1$@, %2$@";
-"mediaPreview.react" = "React";
-"mediaPreview.moreActions" = "More";
-"mediaPreview.moreEmoji" = "More emoji";
-"mediaPreview.liveText" = "Live Text";
-"mediaPreview.replyTo" = "Reply to %@";
-"mediaPreview.voice" = "Voice";
+"mediaPreview.react" = "Reageeri";
+"mediaPreview.moreActions" = "Rohkem";
+"mediaPreview.moreEmoji" = "Rohkem emojisid";
+"mediaPreview.liveText" = "Sõnumid reaalajas";
+"mediaPreview.replyTo" = "Vasta kasutajale %@";
+"mediaPreview.voice" = "Häälsõnum";
 "mediaPreview.video" = "Video";
-"mediaPreview.photos" = "Photos";
-"mediaPreview.file" = "File";
-"mediaPreview.message" = "Message";
+"mediaPreview.photos" = "Fotod";
+"mediaPreview.file" = "Fail";
+"mediaPreview.message" = "Sõnum";

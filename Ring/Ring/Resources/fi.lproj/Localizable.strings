@@ -355,7 +355,7 @@
 "calls.currentCallWith" = "Soita";
 "calls.maximize" = "Suurenna";
 "calls.minimize" = "Pienennä";
-"calls.returnToCall" = "Return to call";
+"calls.returnToCall" = "Palaa puheluun";
 "calls.startPictureInPicture" = "Aloita kuva kuvassa";
 "calls.setModerator" = "Aseta valvoja";
 "calls.removeModerator" = "Poista valvoja";
@@ -363,9 +363,9 @@
 "calls.unmuteAudio" = "Poista mikrofonin mykistys";
 "calls.raiseHand" = "Nosta käsi";
 "calls.moreOptions" = "Lisää vaihtoehtoja";
-"calls.speaker" = "Speaker";
+"calls.speaker" = "Kaiutin";
 "calls.hold" = "Pidossa";
-"calls.showFullVideo" = "Show full video";
+"calls.showFullVideo" = "Näytä koko video";
 "calls.lowerHand" = "Käsi alas";
 "calls.inThisCall" = "Tässä puhelussa (%@)";
 "calls.participantsInCall" = "%@ puhelussa";
@@ -902,7 +902,7 @@
 // Media preview
 "mediaPreview.dateTime" = "%1$@, %2$@";
 "mediaPreview.react" = "React";
-"mediaPreview.moreActions" = "More";
+"mediaPreview.moreActions" = "Lisää";
 "mediaPreview.moreEmoji" = "More emoji";
 "mediaPreview.liveText" = "Live Text";
 "mediaPreview.replyTo" = "Reply to %@";
@@ -910,4 +910,4 @@
 "mediaPreview.video" = "Video";
 "mediaPreview.photos" = "Photos";
 "mediaPreview.file" = "File";
-"mediaPreview.message" = "Message";
+"mediaPreview.message" = "Viesti";

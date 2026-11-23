@@ -355,7 +355,7 @@
 "calls.currentCallWith" = "Deitu.";
 "calls.maximize" = "Maximizatu";
 "calls.minimize" = "Minimizatu";
-"calls.returnToCall" = "Return to call";
+"calls.returnToCall" = "Itzuli deira";
 "calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Moderatzailea ezarri";
 "calls.removeModerator" = "Moderatzailea desfinkatu";
@@ -902,12 +902,12 @@
 // Media preview
 "mediaPreview.dateTime" = "%1$@, %2$@";
 "mediaPreview.react" = "React";
-"mediaPreview.moreActions" = "More";
+"mediaPreview.moreActions" = "Gehiago";
 "mediaPreview.moreEmoji" = "More emoji";
 "mediaPreview.liveText" = "Live Text";
 "mediaPreview.replyTo" = "Reply to %@";
 "mediaPreview.voice" = "Voice";
-"mediaPreview.video" = "Video";
+"mediaPreview.video" = "Bideoa";
 "mediaPreview.photos" = "Photos";
 "mediaPreview.file" = "File";
 "mediaPreview.message" = "Message";

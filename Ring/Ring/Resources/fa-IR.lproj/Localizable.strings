@@ -355,7 +355,7 @@
 "calls.currentCallWith" = "تماس با";
 "calls.maximize" = "به حداکثر رساندن";
 "calls.minimize" = "کمینه کردن";
-"calls.returnToCall" = "Return to call";
+"calls.returnToCall" = "بازگشت به تماس";
 "calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "تعیین مدیر";
 "calls.removeModerator" = "لغو میدیریت";
@@ -902,12 +902,12 @@
 // Media preview
 "mediaPreview.dateTime" = "%1$@, %2$@";
 "mediaPreview.react" = "React";
-"mediaPreview.moreActions" = "More";
+"mediaPreview.moreActions" = "بیشتر";
 "mediaPreview.moreEmoji" = "More emoji";
 "mediaPreview.liveText" = "Live Text";
 "mediaPreview.replyTo" = "Reply to %@";
 "mediaPreview.voice" = "Voice";
-"mediaPreview.video" = "Video";
+"mediaPreview.video" = "ویدیو";
 "mediaPreview.photos" = "Photos";
 "mediaPreview.file" = "File";
-"mediaPreview.message" = "Message";
+"mediaPreview.message" = "پیام";

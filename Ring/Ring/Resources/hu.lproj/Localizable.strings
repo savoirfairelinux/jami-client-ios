@@ -902,7 +902,7 @@
 // Media preview
 "mediaPreview.dateTime" = "%1$@, %2$@";
 "mediaPreview.react" = "React";
-"mediaPreview.moreActions" = "More";
+"mediaPreview.moreActions" = "Több";
 "mediaPreview.moreEmoji" = "More emoji";
 "mediaPreview.liveText" = "Live Text";
 "mediaPreview.replyTo" = "Reply to %@";
@@ -910,4 +910,4 @@
 "mediaPreview.video" = "Videó";
 "mediaPreview.photos" = "Photos";
 "mediaPreview.file" = "File";
-"mediaPreview.message" = "Message";
+"mediaPreview.message" = "Üzenet";

@@ -99,7 +99,7 @@
 "swarm.conversationEnded" = "對話已終止";
 "swarm.conversationEndedMessage" = "此对话中你已无法再发送消息。";
 "swarm.chooseColor" = "对话框颜色";
-"swarm.quickSendEmoji" = "Quick send emoji";
+"swarm.quickSendEmoji" = "快速发送表情";
 "swarm.typeOfSwarm" = "对话类型";
 "swarm.identifier" = "标识符";
 "swarm.conversationId" = "對話 ID";
@@ -128,8 +128,8 @@
 "swarm.invite" = "邀请";
 "swarm.inviteMembers" = "邀请成员";
 "swarm.inviteSelectedMembers" = "邀請選擇的聯絡人<br>";
-"swarm.inviteOneMember" = "Invite 1 member";
-"swarm.inviteMemberCount" = "Invite %d members";
+"swarm.inviteOneMember" = "邀请1位成员";
+"swarm.inviteMemberCount" = "邀请%d位成员";
 "swarm.inviteMembersSelected" = "已選擇";
 "swarm.inviteMembersNotSelected" = "未選擇";
 "swarm.confirmLeaveConversation" = "您要退出对话吗？";
@@ -901,13 +901,13 @@
 
 // Media preview
 "mediaPreview.dateTime" = "%1$@, %2$@";
-"mediaPreview.react" = "React";
+"mediaPreview.react" = "回应表情";
 "mediaPreview.moreActions" = "更多";
-"mediaPreview.moreEmoji" = "More emoji";
-"mediaPreview.liveText" = "Live Text";
-"mediaPreview.replyTo" = "Reply to %@";
-"mediaPreview.voice" = "Voice";
+"mediaPreview.moreEmoji" = "更多表情";
+"mediaPreview.liveText" = "实况文本";
+"mediaPreview.replyTo" = "回复%@";
+"mediaPreview.voice" = "语音";
 "mediaPreview.video" = "视频";
-"mediaPreview.photos" = "Photos";
-"mediaPreview.file" = "File";
+"mediaPreview.photos" = "照片";
+"mediaPreview.file" = "文件";
 "mediaPreview.message" = "訊息";

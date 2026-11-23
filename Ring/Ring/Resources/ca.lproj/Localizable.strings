@@ -355,16 +355,16 @@
 "calls.currentCallWith" = "Llamem amb ";
 "calls.maximize" = "Maximitza";
 "calls.minimize" = "Minimitza";
-"calls.returnToCall" = "Return to call";
+"calls.returnToCall" = "Torna a la trucada";
 "calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Configuració de moderador";
 "calls.removeModerator" = "Moderador desactivat";
 "calls.muteAudio" = "Silencia el micròfon";
 "calls.unmuteAudio" = "Activa el so del micròfon";
 "calls.raiseHand" = "Aixeca la mà";
-"calls.moreOptions" = "More options";
+"calls.moreOptions" = "Més opcions";
 "calls.speaker" = "Speaker";
-"calls.hold" = "Hold";
+"calls.hold" = "En espera";
 "calls.showFullVideo" = "Show full video";
 "calls.lowerHand" = "Man baixa";
 "calls.inThisCall" = "In this call (%@)";
@@ -902,12 +902,12 @@
 // Media preview
 "mediaPreview.dateTime" = "%1$@, %2$@";
 "mediaPreview.react" = "React";
-"mediaPreview.moreActions" = "More";
+"mediaPreview.moreActions" = "Més";
 "mediaPreview.moreEmoji" = "More emoji";
 "mediaPreview.liveText" = "Live Text";
 "mediaPreview.replyTo" = "Reply to %@";
 "mediaPreview.voice" = "Voice";
-"mediaPreview.video" = "Video";
+"mediaPreview.video" = "Vídeo";
 "mediaPreview.photos" = "Photos";
 "mediaPreview.file" = "File";
 "mediaPreview.message" = "Message";

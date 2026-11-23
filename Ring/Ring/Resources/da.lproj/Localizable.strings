@@ -355,16 +355,16 @@
 "calls.currentCallWith" = "Opkald med";
 "calls.maximize" = "Maksimer";
 "calls.minimize" = "Minimer";
-"calls.returnToCall" = "Return to call";
+"calls.returnToCall" = "Vend tilbage til opkald";
 "calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Indstilling af moderator";
 "calls.removeModerator" = "Moderator";
 "calls.muteAudio" = "Sluk mikrofon";
 "calls.unmuteAudio" = "Slå mikrofon til";
 "calls.raiseHand" = "Løft hånden.";
-"calls.moreOptions" = "More options";
+"calls.moreOptions" = "Flere muligheder";
 "calls.speaker" = "Speaker";
-"calls.hold" = "Hold";
+"calls.hold" = "I kø";
 "calls.showFullVideo" = "Show full video";
 "calls.lowerHand" = "Nedre hånd";
 "calls.inThisCall" = "In this call (%@)";
@@ -902,7 +902,7 @@
 // Media preview
 "mediaPreview.dateTime" = "%1$@, %2$@";
 "mediaPreview.react" = "React";
-"mediaPreview.moreActions" = "More";
+"mediaPreview.moreActions" = "Mere";
 "mediaPreview.moreEmoji" = "More emoji";
 "mediaPreview.liveText" = "Live Text";
 "mediaPreview.replyTo" = "Reply to %@";
@@ -910,4 +910,4 @@
 "mediaPreview.video" = "Video";
 "mediaPreview.photos" = "Photos";
 "mediaPreview.file" = "File";
-"mediaPreview.message" = "Message";
+"mediaPreview.message" = "Besked";

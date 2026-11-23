@@ -355,16 +355,16 @@
 "calls.currentCallWith" = "Volat s ";
 "calls.maximize" = "Maximalizovat";
 "calls.minimize" = "Zmenšit";
-"calls.returnToCall" = "Return to call";
+"calls.returnToCall" = "Návrat k hovoru";
 "calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Nastavit moderátora";
 "calls.removeModerator" = "Nenastavený moderátor";
 "calls.muteAudio" = "Ztlumit mikrofon";
 "calls.unmuteAudio" = "Zrušit ztlumení mikrofonu";
 "calls.raiseHand" = "Zvednout ruku";
-"calls.moreOptions" = "More options";
+"calls.moreOptions" = "Více možností";
 "calls.speaker" = "Speaker";
-"calls.hold" = "Hold";
+"calls.hold" = "Pozastavit";
 "calls.showFullVideo" = "Show full video";
 "calls.lowerHand" = "Dát ruku dolů";
 "calls.inThisCall" = "In this call (%@)";
@@ -902,7 +902,7 @@
 // Media preview
 "mediaPreview.dateTime" = "%1$@, %2$@";
 "mediaPreview.react" = "React";
-"mediaPreview.moreActions" = "More";
+"mediaPreview.moreActions" = "Více";
 "mediaPreview.moreEmoji" = "More emoji";
 "mediaPreview.liveText" = "Live Text";
 "mediaPreview.replyTo" = "Reply to %@";
@@ -910,4 +910,4 @@
 "mediaPreview.video" = "Video";
 "mediaPreview.photos" = "Photos";
 "mediaPreview.file" = "File";
-"mediaPreview.message" = "Message";
+"mediaPreview.message" = "Zpráva";

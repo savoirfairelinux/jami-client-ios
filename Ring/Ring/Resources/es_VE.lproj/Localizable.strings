@@ -99,7 +99,7 @@
 "swarm.conversationEnded" = "Conversation ended";
 "swarm.conversationEndedMessage" = "Ya no puedes enviar mensajes en esta conversación.";
 "swarm.chooseColor" = "Conversation color";
-"swarm.quickSendEmoji" = "Quick send emoji";
+"swarm.quickSendEmoji" = "Emoji de envío rápido";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Identifier";
 "swarm.conversationId" = "Conversation ID";
@@ -128,8 +128,8 @@
 "swarm.invite" = "Invitar";
 "swarm.inviteMembers" = "Invite members";
 "swarm.inviteSelectedMembers" = "Invite selected contacts";
-"swarm.inviteOneMember" = "Invite 1 member";
-"swarm.inviteMemberCount" = "Invite %d members";
+"swarm.inviteOneMember" = "1 Miembro invitado";
+"swarm.inviteMemberCount" = "%d Miembros invitados";
 "swarm.inviteMembersSelected" = "Selected";
 "swarm.inviteMembersNotSelected" = "Not selected";
 "swarm.confirmLeaveConversation" = "Do you want to leave this conversation?";
@@ -355,7 +355,7 @@
 "calls.currentCallWith" = "Call with ";
 "calls.maximize" = "Maximize";
 "calls.minimize" = "Minimize";
-"calls.returnToCall" = "Return to call";
+"calls.returnToCall" = "Volver a llamar";
 "calls.startPictureInPicture" = "Iniciar Imagen a imagen";
 "calls.setModerator" = "Set moderator";
 "calls.removeModerator" = "Unset moderator";
@@ -363,9 +363,9 @@
 "calls.unmuteAudio" = "Unmute microphone";
 "calls.raiseHand" = "Levanta tu mano";
 "calls.moreOptions" = "Más opciones";
-"calls.speaker" = "Speaker";
+"calls.speaker" = "altavoz";
 "calls.hold" = "En espera";
-"calls.showFullVideo" = "Show full video";
+"calls.showFullVideo" = "Mostrar video completo";
 "calls.lowerHand" = "Lower hand";
 "calls.inThisCall" = "En esta llamada (%@)";
 "calls.participantsInCall" = "%@ en llamada";
@@ -901,13 +901,13 @@
 
 // Media preview
 "mediaPreview.dateTime" = "%1$@, %2$@";
-"mediaPreview.react" = "React";
-"mediaPreview.moreActions" = "More";
-"mediaPreview.moreEmoji" = "More emoji";
-"mediaPreview.liveText" = "Live Text";
-"mediaPreview.replyTo" = "Reply to %@";
-"mediaPreview.voice" = "Voice";
-"mediaPreview.video" = "Video";
-"mediaPreview.photos" = "Photos";
-"mediaPreview.file" = "File";
-"mediaPreview.message" = "Message";
+"mediaPreview.react" = "Reacción";
+"mediaPreview.moreActions" = "Más";
+"mediaPreview.moreEmoji" = "Más emoji";
+"mediaPreview.liveText" = "Texto en directo";
+"mediaPreview.replyTo" = "Responder a%@";
+"mediaPreview.voice" = "Voz";
+"mediaPreview.video" = "Vídeo";
+"mediaPreview.photos" = "Fotos";
+"mediaPreview.file" = "Archivo";
+"mediaPreview.message" = "Mensaje";

@@ -355,16 +355,16 @@
 "calls.currentCallWith" = "Τηλεφώνησε με";
 "calls.maximize" = "Μεγιστοποίηση";
 "calls.minimize" = "Ελαχιστοποίηση";
-"calls.returnToCall" = "Return to call";
+"calls.returnToCall" = "Επιστροφή στην κλήση";
 "calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Ρυθμίστε τον διαχειριστή";
 "calls.removeModerator" = "Ανακατάσταση διαχειριστή";
 "calls.muteAudio" = "Σίγαση μικροφώνου";
 "calls.unmuteAudio" = "Κατάργηση σίγασης μικροφώνου";
 "calls.raiseHand" = "Σηκώστε το χέρι σας";
-"calls.moreOptions" = "More options";
+"calls.moreOptions" = "Περισσότερες επιλογές";
 "calls.speaker" = "Speaker";
-"calls.hold" = "Hold";
+"calls.hold" = "Αναμονή";
 "calls.showFullVideo" = "Show full video";
 "calls.lowerHand" = "Κάτω χέρι";
 "calls.inThisCall" = "In this call (%@)";
@@ -902,12 +902,12 @@
 // Media preview
 "mediaPreview.dateTime" = "%1$@, %2$@";
 "mediaPreview.react" = "React";
-"mediaPreview.moreActions" = "More";
+"mediaPreview.moreActions" = "Περισσότερα";
 "mediaPreview.moreEmoji" = "More emoji";
 "mediaPreview.liveText" = "Live Text";
 "mediaPreview.replyTo" = "Reply to %@";
 "mediaPreview.voice" = "Voice";
-"mediaPreview.video" = "Video";
+"mediaPreview.video" = "Βίντεο";
 "mediaPreview.photos" = "Photos";
 "mediaPreview.file" = "File";
-"mediaPreview.message" = "Message";
+"mediaPreview.message" = "Μήνυμα";

@@ -362,9 +362,9 @@
 "calls.muteAudio" = "Muta mikrofono";
 "calls.unmuteAudio" = "Unmute microphone";
 "calls.raiseHand" = "Levu la manon";
-"calls.moreOptions" = "More options";
+"calls.moreOptions" = "Pli da ebloj";
 "calls.speaker" = "Speaker";
-"calls.hold" = "Hold";
+"calls.hold" = "Deteni";
 "calls.showFullVideo" = "Show full video";
 "calls.lowerHand" = "Malsupra mano";
 "calls.inThisCall" = "In this call (%@)";
@@ -902,7 +902,7 @@
 // Media preview
 "mediaPreview.dateTime" = "%1$@, %2$@";
 "mediaPreview.react" = "React";
-"mediaPreview.moreActions" = "More";
+"mediaPreview.moreActions" = "Pli";
 "mediaPreview.moreEmoji" = "More emoji";
 "mediaPreview.liveText" = "Live Text";
 "mediaPreview.replyTo" = "Reply to %@";
@@ -910,4 +910,4 @@
 "mediaPreview.video" = "Video";
 "mediaPreview.photos" = "Photos";
 "mediaPreview.file" = "File";
-"mediaPreview.message" = "Message";
+"mediaPreview.message" = "Mesaĝo";

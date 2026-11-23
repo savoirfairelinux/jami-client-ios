@@ -362,9 +362,9 @@
 "calls.muteAudio" = "Micrófonos silenciosos";
 "calls.unmuteAudio" = "Unmute microphone";
 "calls.raiseHand" = "Ellí ye la mano.";
-"calls.moreOptions" = "More options";
+"calls.moreOptions" = "Más opciones";
 "calls.speaker" = "Speaker";
-"calls.hold" = "Hold";
+"calls.hold" = "El so nome ye John.";
 "calls.showFullVideo" = "Show full video";
 "calls.lowerHand" = "La mano inferior";
 "calls.inThisCall" = "In this call (%@)";
@@ -902,7 +902,7 @@
 // Media preview
 "mediaPreview.dateTime" = "%1$@, %2$@";
 "mediaPreview.react" = "React";
-"mediaPreview.moreActions" = "More";
+"mediaPreview.moreActions" = "Más";
 "mediaPreview.moreEmoji" = "More emoji";
 "mediaPreview.liveText" = "Live Text";
 "mediaPreview.replyTo" = "Reply to %@";

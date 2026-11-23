@@ -355,16 +355,16 @@
 "calls.currentCallWith" = "Звяжыцеся з ";
 "calls.maximize" = "Максімальнае";
 "calls.minimize" = "Мінімізаваць";
-"calls.returnToCall" = "Return to call";
+"calls.returnToCall" = "Вярнуцца да выкліку";
 "calls.startPictureInPicture" = "Start Picture in Picture";
 "calls.setModerator" = "Падставіце мадэратар";
 "calls.removeModerator" = "Адключыць модулятар";
 "calls.muteAudio" = "Непаўны мікрафон";
 "calls.unmuteAudio" = "Зняць заглушэнне мікрафона";
 "calls.raiseHand" = "Падыміце руку";
-"calls.moreOptions" = "More options";
+"calls.moreOptions" = "Больш варыянтаў";
 "calls.speaker" = "Speaker";
-"calls.hold" = "Hold";
+"calls.hold" = "Пачакайце";
 "calls.showFullVideo" = "Show full video";
 "calls.lowerHand" = "Ніжняя рука";
 "calls.inThisCall" = "In this call (%@)";
@@ -902,12 +902,12 @@
 // Media preview
 "mediaPreview.dateTime" = "%1$@, %2$@";
 "mediaPreview.react" = "React";
-"mediaPreview.moreActions" = "More";
+"mediaPreview.moreActions" = "Больш";
 "mediaPreview.moreEmoji" = "More emoji";
 "mediaPreview.liveText" = "Live Text";
 "mediaPreview.replyTo" = "Reply to %@";
 "mediaPreview.voice" = "Voice";
-"mediaPreview.video" = "Video";
+"mediaPreview.video" = "Відэа";
 "mediaPreview.photos" = "Photos";
 "mediaPreview.file" = "File";
 "mediaPreview.message" = "Message";
