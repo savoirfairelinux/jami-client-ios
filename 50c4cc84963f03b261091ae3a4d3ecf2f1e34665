@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "551134b8_8a12a026",
+        "filename": "Ring/Ring/Models/Calls/AudioOutput.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-23T21:22:56Z",
+      "side": 1,
+      "message": "[warning] Line 89: 🟡 `isDefault` currently returns `true` for **every** headset (`if output.isHeadset { return true }`). If multiple headsets are available at once (e.g., wired + Bluetooth), the UI can mark more than one output as default, which conflicts with the idea of a single default route. Consider deriving one default headset deterministically (for example, prioritize the currently routed headset, or first headset in `available`) and return `true` only for that one.",
+      "revId": "50c4cc84963f03b261091ae3a4d3ecf2f1e34665",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa1ca7b0_2f0219f9",
+        "filename": "Ring/Ring/Models/Calls/AudioOutput.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-23T21:22:56Z",
+      "side": 1,
+      "message": "[warning] Line 101: 🟡 `toggleTarget` returns the first entry when `current` is `nil` or not present in `available`, because both outputs satisfy `$0 !\u003d current`. That can route audio to an arbitrary output instead of \"the other one\". Gate this with `guard let current, available.contains(current)` before selecting the alternate output, otherwise return `nil`.",
+      "revId": "50c4cc84963f03b261091ae3a4d3ecf2f1e34665",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
