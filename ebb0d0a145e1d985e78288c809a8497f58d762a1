@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae00ee90_daa5b086",
+        "filename": "Ring/Ring/Calls/ViewModels/CallViewModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-23T21:25:39Z",
+      "side": 1,
+      "message": "[error] Line 361: 🔴 `audio.cameraTurnedOn()` is fired purely on media-state transition, even when the call is not yet connected. Because `AudioService.cameraTurnedOn()` currently ignores events when `inCall \u003d\u003d false`, turning camera on during dialing/ringing can drop the one-time switch-to-speaker behavior permanently for that call. Trigger this only once the call is connected, or persist a pending camera-on transition in `AudioService` and apply it when call audio session enters `inCall`.",
+      "revId": "ebb0d0a145e1d985e78288c809a8497f58d762a1",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9718794_05cafbbc",
+        "filename": "Ring/RingTests/Calls/AudioServiceTests.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-23T21:25:39Z",
+      "side": 1,
+      "message": "[warning] 🟡 The new tests cover only the connected-call path (`startCall(video: false)` before `cameraTurnedOn()`). Add a regression test for camera enablement before `inCall` (e.g., camera-on event first, then call start/connection) to lock in the intended behavior and prevent the dropped-event case.",
+      "revId": "ebb0d0a145e1d985e78288c809a8497f58d762a1",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
