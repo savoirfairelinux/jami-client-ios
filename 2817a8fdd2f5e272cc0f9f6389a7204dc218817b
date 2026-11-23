@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45f441a8_7259d6a2",
+        "filename": "Ring/jamiNotificationExtension/FileUploadHold.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-23T17:39:38Z",
+      "side": 1,
+      "message": "[warning] Line 36: 🟡 `started(conversationId:)` always removes the first queued deadline, but expired deadlines are never pruned. If older requests have already timed out, a new upload can consume an expired slot and leave a valid pending request behind, which keeps the extension running longer than needed. Prune expired entries before consuming one (or pass current uptime into `started` and remove the first unexpired deadline).",
+      "revId": "2817a8fdd2f5e272cc0f9f6389a7204dc218817b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
