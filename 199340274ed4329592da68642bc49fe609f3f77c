@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "154ba9b7_a398a5c2",
+        "filename": "Ring/Ring/Calls/ViewModels/CallViewModel.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-24T14:15:16Z",
+      "side": 1,
+      "message": "[warning] Line 566: 🟡 The new audio-picker flow is only validated via layout tests; there is no ViewModel-level test for the state transitions here (`2 outputs -\u003e toggle immediately`, `\u003e2 outputs -\u003e open picker`, `select -\u003e close picker`). Please add a focused `CallViewModel` test to lock this behavior, otherwise regressions in sheet state handling can slip through without failing tests.",
+      "revId": "199340274ed4329592da68642bc49fe609f3f77c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
