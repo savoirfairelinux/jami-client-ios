@@ -689,11 +689,10 @@ actor CallStore { // swiftlint:disable:this type_body_length
             applyIncomingCall(accountId: accountId, callId: callId,
                               peerUri: peerUri, media: media, details: details)
         case let .callStateChanged(callId, libJamiState, rawState, _, _,
-                                   negotiatedMedia, videoCodec):
+                                   negotiatedMedia):
             applyStateChange(callId: CallId(raw: callId),
                              libJamiState: libJamiState, rawState: rawState,
-                             negotiatedMedia: negotiatedMedia,
-                             videoCodec: videoCodec)
+                             negotiatedMedia: negotiatedMedia)
         case let .mediaChangeRequested(accountId, callId, media):
             applyMediaChangeRequest(accountId: accountId,
                                     callId: CallId(raw: callId), requested: media)
@@ -755,8 +754,7 @@ actor CallStore { // swiftlint:disable:this type_body_length
     }
 
     private func applyStateChange(callId: CallId, libJamiState: LibJamiCallState?,
-                                  rawState: String, negotiatedMedia: [MediaItem],
-                                  videoCodec: String?) {
+                                  rawState: String, negotiatedMedia: [MediaItem]) {
         guard var call = state.calls[callId] else { return }
         guard let libJamiState = libJamiState else {
             NSLog("CallStore: unknown call state '%@' for %@", rawState, callId.raw)
@@ -791,9 +789,6 @@ actor CallStore { // swiftlint:disable:this type_body_length
                 if !negotiatedMedia.isEmpty {
                     call.media = negotiatedMedia
                 }
-            }
-            if let videoCodec = videoCodec, !videoCodec.isEmpty {
-                call.videoCodec = videoCodec
             }
         }
         call.status = newStatus

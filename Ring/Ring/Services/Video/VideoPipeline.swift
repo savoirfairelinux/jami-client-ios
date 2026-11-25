@@ -34,9 +34,6 @@ final class VideoPipeline: NSObject {
     var localLayerTransform: CGAffineTransform { locked { orientationState.layerTransform } }
     var localImageOrientation: UIImage.Orientation { locked { orientationState.imageOrientation } }
 
-    /// Asks the call layer to re-invite with a new video source after a
-    /// quality downgrade
-    var onSourceDowngraded: ((SinkId, String) -> Void)?
     /// libjami media player reported a file opened (media messages).
     var onFileOpened: ((String, [String: String]) -> Void)?
 
@@ -44,8 +41,6 @@ final class VideoPipeline: NSObject {
     private var orientationState = CameraOrientationState.make(orientation: .portrait,
                                                                cameraPosition: .front)
     private var currentDeviceId = ""
-    private var codecByCallId: [String: String] = [:]
-    private var decodingSinks: Set<SinkId> = []
 
     private func locked<T>(_ body: () -> T) -> T {
         stateLock.lock()
@@ -113,15 +108,6 @@ final class VideoPipeline: NSObject {
         setCurrentDeviceId(video.defaultDevice())
     }
 
-    /// After a VP8 call downgraded capture quality, restore the high-
-    /// resolution device for the next call.
-    func restoreDefaultDevice() {
-        if video.encodingAccelerated() && video.defaultDevice() == CameraDevice.medium {
-            video.setDefaultDevice(CameraDevice.high)
-        }
-        setCurrentDeviceId(video.defaultDevice())
-    }
-
     // MARK: - Capture
 
     /// Current video source URI for media lists ("camera://<device>").
@@ -131,30 +117,6 @@ final class VideoPipeline: NSObject {
 
     private func setCurrentDeviceId(_ identifier: String) {
         locked { currentDeviceId = identifier }
-    }
-
-    func setVideoCodec(_ codec: String?, forCallId callId: String) {
-        let sinks: [SinkId] = locked {
-            guard let codec = codec, !codec.isEmpty else {
-                codecByCallId[callId] = nil
-                return []
-            }
-            codecByCallId[callId] = codec
-            return decodingSinks.filter { $0.baseId == callId }
-        }
-        sinks.forEach(downgradeCaptureIfSoftwareEncoded)
-    }
-
-    private func downgradeCaptureIfSoftwareEncoded(_ sink: SinkId) {
-        let codec = locked { codecByCallId[sink.baseId] }
-        guard let codec = codec, !codec.isEmpty,
-              codec != "H264", codec != "H265" else { return }
-        Task {
-            guard await capturer.currentQuality() == .high else { return }
-            video.setDefaultDevice(CameraDevice.medium)
-            setCurrentDeviceId(video.defaultDevice())
-            onSourceDowngraded?(sink, Self.cameraSourceURI(from: CameraDevice.medium))
-        }
     }
 
     static func cameraSourceURI(from source: String) -> String {
@@ -298,8 +260,6 @@ extension VideoPipeline: DecodingAdapterDelegate {
     func decodingStarted(withSinkId sinkId: String, withWidth width: Int, withHeight height: Int) {
         let sink = SinkId(raw: sinkId)
         sinkRegistry.handleDecodingStarted(sinkId: sink)
-        locked { _ = decodingSinks.insert(sink) }
-        downgradeCaptureIfSoftwareEncoded(sink)
 
         video.registerSink(sink, width: width, height: height,
                            hasListeners: sinkRegistry.hasListeners(sink))
@@ -309,7 +269,6 @@ extension VideoPipeline: DecodingAdapterDelegate {
     func decodingStopped(withSinkId sinkId: String) {
         let sink = SinkId(raw: sinkId)
         sinkRegistry.handleDecodingStopped(sinkId: sink)
-        locked { decodingSinks.remove(sink) }
         video.removeSink(sink)
     }
 }

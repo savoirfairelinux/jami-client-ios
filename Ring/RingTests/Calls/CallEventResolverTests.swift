@@ -106,8 +106,8 @@ final class CallEventResolverTests: XCTestCase {
                                   accountId: accountId1, stateCode: 7)
 
         let events = try await collect(count: 2)
-        guard case let .callStateChanged(_, state1, raw1, _, _, _, _) = events[0],
-              case let .callStateChanged(_, state2, raw2, _, code2, _, _) = events[1] else {
+        guard case let .callStateChanged(_, state1, raw1, _, _, _) = events[0],
+              case let .callStateChanged(_, state2, raw2, _, code2, _) = events[1] else {
             return XCTFail("wrong events")
         }
         XCTAssertEqual(state1, .current)
@@ -123,7 +123,7 @@ final class CallEventResolverTests: XCTestCase {
                                   accountId: accountId1, stateCode: 0)
 
         let events = try await collect(count: 1)
-        guard case let .callStateChanged(_, _, _, _, _, negotiated, _) = events[0] else {
+        guard case let .callStateChanged(_, _, _, _, _, negotiated) = events[0] else {
             return XCTFail("wrong event")
         }
         XCTAssertEqual(negotiated.map(\.label), [.audio(0), .video(0)])
@@ -135,7 +135,7 @@ final class CallEventResolverTests: XCTestCase {
                                   accountId: accountId1, stateCode: 0)
 
         let events = try await collect(count: 1)
-        guard case let .callStateChanged(_, _, _, _, _, negotiated, _) = events[0] else {
+        guard case let .callStateChanged(_, _, _, _, _, negotiated) = events[0] else {
             return XCTFail("wrong event")
         }
         XCTAssertTrue(negotiated.isEmpty)

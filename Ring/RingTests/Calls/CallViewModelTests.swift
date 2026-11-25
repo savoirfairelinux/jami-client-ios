@@ -389,7 +389,7 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
         harness.send(.callStateChanged(callId: harness.callId.raw, state: .over,
                                        rawState: LibJamiCallState.over.rawValue,
                                        accountId: Harness.accountId,
-                                       code: 0, negotiatedMedia: [], videoCodec: nil))
+                                       code: 0, negotiatedMedia: []))
         await harness.waitForEnded(model)
 
         XCTAssertEqual(model.canvas.style, .plain,
@@ -828,7 +828,7 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
         harness.send(.callStateChanged(callId: survivorId, state: .current,
                                        rawState: LibJamiCallState.current.rawValue,
                                        accountId: Harness.accountId,
-                                       code: 0, negotiatedMedia: [.audio()], videoCodec: nil))
+                                       code: 0, negotiatedMedia: [.audio()]))
         harness.send(.conferenceCreated(conferenceId: conferenceId, conversationId: "",
                                         accountId: Harness.accountId,
                                         state: ConferenceLifecycle.activeAttached.rawValue,
@@ -839,7 +839,7 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
         harness.send(.callStateChanged(callId: harness.callId.raw, state: .over,
                                        rawState: LibJamiCallState.over.rawValue,
                                        accountId: Harness.accountId,
-                                       code: 0, negotiatedMedia: [], videoCodec: nil))
+                                       code: 0, negotiatedMedia: []))
         await Harness.wait {
             model.currentCallId == CallId(raw: survivorId)
                 && model.call?.peerUri == CallTestFixtures.tertiaryPeerUri
@@ -902,7 +902,7 @@ final class CallViewModelTests: XCTestCase { // swiftlint:disable:this type_body
                                peerUri: peerUri, media: media, details: nil))
             send(.callStateChanged(callId: callId.raw, state: .current,
                                    rawState: LibJamiCallState.current.rawValue, accountId: Self.accountId,
-                                   code: 0, negotiatedMedia: media, videoCodec: nil))
+                                   code: 0, negotiatedMedia: media))
             self.call = await Self.waitForCall(callService, callId) { $0.status == .current }
         }
 

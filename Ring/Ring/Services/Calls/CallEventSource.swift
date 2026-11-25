@@ -42,8 +42,7 @@ enum LibJamiCallEvent: Sendable {
     /// `negotiatedMedia` is libjami's confirmed media list, resolved when the
     /// call reaches `current` and empty otherwise.
     case callStateChanged(callId: String, state: LibJamiCallState?, rawState: String,
-                          accountId: String, code: Int, negotiatedMedia: [MediaItem],
-                          videoCodec: String?)
+                          accountId: String, code: Int, negotiatedMedia: [MediaItem])
     case incomingCall(accountId: String, callId: String, peerUri: String,
                       media: [MediaItem], details: CallDetails?)
     case mediaChangeRequested(accountId: String, callId: String, media: [MediaItem])

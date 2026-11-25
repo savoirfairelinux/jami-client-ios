@@ -75,7 +75,6 @@ struct CallState: Sendable, Identifiable, Equatable {
     var callKitUUID: UUID?
     var conferenceId: ConfId?
     var peerIsRecording: Bool = false
-    var videoCodec: String?
     /// Tracked separately from `status` so local and peer hold can be
     /// merged into `held(side:)` and correctly unwound.
     var peerHolding: Bool = false

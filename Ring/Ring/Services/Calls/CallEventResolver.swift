@@ -55,13 +55,9 @@ final class CallEventResolver: @unchecked Sendable {
             let negotiated = parsed == .current
                 ? api.currentMedia(callId: callId, accountId: accountId)
                 : []
-            let codec = parsed == .current
-                ? api.callDetails(callId: callId, accountId: accountId)?.videoCodec
-                : nil
             return .callStateChanged(callId: callId, state: parsed, rawState: state,
                                      accountId: accountId, code: code,
-                                     negotiatedMedia: negotiated,
-                                     videoCodec: codec)
+                                     negotiatedMedia: negotiated)
 
         case let .incomingCall(accountId, callId, peerUri, media):
             return .incomingCall(accountId: accountId, callId: callId, peerUri: peerUri,

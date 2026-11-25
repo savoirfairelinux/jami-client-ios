@@ -53,7 +53,6 @@ final class CallsManager: CallCameraCoordinating {
 
         self.subscribeCallEvents()
         self.subscribeCallKitActions()
-        self.subscribeCaptureQuality()
         // Last: the store only begins consuming once every domain above is
         // wired, so no call event can be handled unwired.
         callService.start()
@@ -70,12 +69,6 @@ final class CallsManager: CallCameraCoordinating {
     private func subscribeCallKitActions() {
         callKit.onAction = { [weak self] action in
             self?.handleCallKitAction(action)
-        }
-    }
-
-    private func subscribeCaptureQuality() {
-        videoService.onSourceDowngraded = { [weak self] sinkId, source in
-            self?.reinviteWithDowngradedSource(sinkId: sinkId, source: source)
         }
     }
 
@@ -97,7 +90,6 @@ final class CallsManager: CallCameraCoordinating {
                 callToPresent.onNext(call)
             }
         case let .callUpdated(call):
-            videoService.setVideoCodec(call.videoCodec, forCallId: call.id.raw)
             guard call.direction == .outgoing else { return }
             switch call.status {
             case .ringing:
@@ -118,7 +110,6 @@ final class CallsManager: CallCameraCoordinating {
             callKit.reportCallEnded(call.id,
                                     isRemoteEnd: call.status != .terminated(.endedLocally))
             performBoothModeCleanup(accountId: call.accountId)
-            videoService.restoreDefaultDevice()
         default:
             break
         }
@@ -227,20 +218,6 @@ final class CallsManager: CallCameraCoordinating {
         guard !hasLiveCall else { return }
         videoService.stopPreviewCapture()
         Task { await videoService.resetCameraPosition() }
-    }
-
-    // MARK: - Capture quality
-
-    /// Hardware acceleration only covers H264/H265; the pipeline drops to
-    /// the medium camera for anything else, which needs the call's codec.
-
-    /// libjami cannot hot-swap the capture device, so a downgraded call has
-    /// to be re-invited with the new source.
-    private func reinviteWithDowngradedSource(sinkId: SinkId, source: String) {
-        let callId = CallId(raw: sinkId.raw)
-        Task { [weak self] in
-            await self?.callService.updateVideoSource(callId, source: source)
-        }
     }
 
     // MARK: - Push placeholders

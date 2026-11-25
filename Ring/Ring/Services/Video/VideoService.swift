@@ -82,19 +82,6 @@ final class VideoService {
         pipeline.attachToAdapter()
     }
 
-    /// Codec of a decoding sink, supplied by the calls domain for the
-    /// software-encoding quality downgrade.
-    func setVideoCodec(_ codec: String?, forCallId callId: String) {
-        pipeline.setVideoCodec(codec, forCallId: callId)
-    }
-
-    /// Reports that capture dropped to a lower-resolution device and the
-    /// call must be re-invited with the new source.
-    var onSourceDowngraded: ((SinkId, String) -> Void)? {
-        get { pipeline.onSourceDowngraded }
-        set { pipeline.onSourceDowngraded = newValue }
-    }
-
     // MARK: - Frame sources
 
     /// Camera frames, for local preview tiles.
@@ -125,11 +112,6 @@ final class VideoService {
 
     func resetCameraPosition() async {
         await pipeline.resetCameraPosition()
-    }
-
-    /// Restores the high-resolution capture device after a downgraded call.
-    func restoreDefaultDevice() {
-        pipeline.restoreDefaultDevice()
     }
 
     // MARK: - Camera (media-message recording UI)
