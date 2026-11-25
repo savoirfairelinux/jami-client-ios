@@ -44,7 +44,6 @@ final class PiPController: NSObject, PiPControlling {
 
     private enum StopCause {
         case restore
-        case sourceRetired
     }
 
     private var pipController: AVPictureInPictureController?
@@ -84,12 +83,13 @@ final class PiPController: NSObject, PiPControlling {
 
     func stop() {
         guard let controller = pipController else { return }
-        guard controller.isPictureInPictureActive else {
-            pipController = nil
-            return
-        }
-        stopCause = .sourceRetired
-        controller.stopPictureInPicture()
+        pipController = nil
+        guard controller.isPictureInPictureActive else { return }
+        controller.delegate = nil
+        controller.contentSource = nil
+        stopCause = nil
+        sourceView.setRendersUpright(false)
+        onDidStop?()
     }
 
     private func clearSource() {
@@ -137,10 +137,6 @@ extension PiPController: AVPictureInPictureControllerDelegate {
         _ pictureInPictureController: AVPictureInPictureController,
         restoreUserInterfaceForPictureInPictureStopWithCompletionHandler
             completionHandler: @escaping (Bool) -> Void) {
-        guard stopCause != .sourceRetired else {
-            completionHandler(false)
-            return
-        }
         stopCause = .restore
         guard let onRestoreRequested = onRestoreRequested else {
             completionHandler(false)
@@ -161,11 +157,6 @@ extension PiPController: AVPictureInPictureControllerDelegate {
         sourceView.setRendersUpright(false)
         onDidStop?()
         switch cause {
-        case .sourceRetired:
-            pipController = nil
-            if distributor != nil {
-                bindController()
-            }
         case .restore:
             break
         case nil:
