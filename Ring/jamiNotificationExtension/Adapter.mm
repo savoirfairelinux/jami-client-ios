@@ -182,7 +182,7 @@ std::map<std::string, std::string> nameServers;
         }
     }));
 
-    confHandlers.insert(exportable_callback<DataTransferSignal::OutgoingFileTransferEvent>([weakDelegate = Adapter.delegate](const std::string& account_id, const std::string& conversation_id, const std::string&, int eventCode) {
+    confHandlers.insert(exportable_callback<DataTransferSignal::OutgoingFileTransferEvent>([weakDelegate = Adapter.delegate](const std::string& account_id, const std::string& conversation_id, const std::string&, const std::string&, int eventCode) {
         id<AdapterDelegate> delegate = weakDelegate;
         if (delegate) {
             NSString* accountId = [NSString stringWithUTF8String:account_id.c_str()];
