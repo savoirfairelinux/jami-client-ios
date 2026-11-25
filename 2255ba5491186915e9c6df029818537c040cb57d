@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a33c977_69cc95c9",
+        "filename": "daemon",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-25T15:38:28Z",
+      "side": 1,
+      "message": "[error] Line 1: 🔴 This submodule SHA bump is opaque as submitted: there is no accompanying summary of upstream daemon commits, security-impact assessment, or compatibility notes for iOS client integration. Reviewers cannot validate security/performance/regression risk from the pointer change alone. Please include the daemon commit range changelog (old..new), highlight breaking/behavioral changes, and link/attach upstream validation evidence before merge.",
+      "revId": "2255ba5491186915e9c6df029818537c040cb57d",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
