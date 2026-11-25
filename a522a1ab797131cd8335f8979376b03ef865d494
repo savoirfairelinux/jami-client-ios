@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c95b820e_42e34cdb",
+        "filename": "daemon",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2026-11-25T20:50:13Z",
+      "side": 1,
+      "message": "[error] Line 1: 🔴 The patchset currently has a failing CI result (`client-ios/1220`), so this submodule bump is not merge-ready as-is. Please provide the failing stage/log root cause and either fix it in this change or document why it is unrelated before landing; otherwise we risk introducing a regression without a green verification signal.",
+      "revId": "a522a1ab797131cd8335f8979376b03ef865d494",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
