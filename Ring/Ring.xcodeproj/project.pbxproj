@@ -218,8 +218,6 @@
 		26001CD02D79248F009A8E23 /* RxDataSources.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB38F288704600023878C /* RxDataSources.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		26001CD12D792490009A8E23 /* RxCocoa.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB3962887047E0023878C /* RxCocoa.xcframework */; };
 		26001CD22D792490009A8E23 /* RxCocoa.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB3962887047E0023878C /* RxCocoa.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		26001CD32D792492009A8E23 /* RxBlocking.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB390288704640023878C /* RxBlocking.xcframework */; };
-		26001CD42D792492009A8E23 /* RxBlocking.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB390288704640023878C /* RxBlocking.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		26001CD52D792494009A8E23 /* Reusable.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB395288704790023878C /* Reusable.xcframework */; };
 		26001CD62D792494009A8E23 /* Reusable.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB395288704790023878C /* Reusable.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		26069B6724C9FCE8002361A3 /* ObjCHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 26069B6624C9FCE8002361A3 /* ObjCHandler.m */; };
@@ -501,8 +499,6 @@
 		44DFB3A9288704900023878C /* Differentiator.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB391288704690023878C /* Differentiator.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		44DFB3AC288704900023878C /* GSKStretchyHeaderView.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB393288704710023878C /* GSKStretchyHeaderView.xcframework */; };
 		44DFB3AD288704900023878C /* GSKStretchyHeaderView.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB393288704710023878C /* GSKStretchyHeaderView.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		44DFB3AE288704900023878C /* AMPopTip.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB394288704750023878C /* AMPopTip.xcframework */; };
-		44DFB3AF288704900023878C /* AMPopTip.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB394288704750023878C /* AMPopTip.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		501BD34220906BB4ED10657C /* ConversationRowVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E28423D964515DF1212415 /* ConversationRowVM.swift */; };
 		5516C29F1E71CEFF009D3D2D /* AccountModelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5516C29E1E71CEFF009D3D2D /* AccountModelHelper.swift */; };
 		5557FD4A1E81AE850043E394 /* AccountModelHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5557FD491E81AE850043E394 /* AccountModelHelperTests.swift */; };
@@ -706,9 +702,7 @@
 				26001CCA2D792489009A8E23 /* SQLite.xcframework in Embed Frameworks */,
 				26001CCC2D79248B009A8E23 /* RxSwift.xcframework in Embed Frameworks */,
 				26001CD22D792490009A8E23 /* RxCocoa.xcframework in Embed Frameworks */,
-				44DFB3AF288704900023878C /* AMPopTip.xcframework in Embed Frameworks */,
 				44DFB3AD288704900023878C /* GSKStretchyHeaderView.xcframework in Embed Frameworks */,
-				26001CD42D792492009A8E23 /* RxBlocking.xcframework in Embed Frameworks */,
 				26001CCE2D79248D009A8E23 /* RxRelay.xcframework in Embed Frameworks */,
 				26001CD62D792494009A8E23 /* Reusable.xcframework in Embed Frameworks */,
 			);
@@ -723,7 +717,6 @@
 		024B612E1DF7656A00C4F9DE /* FixtureFailInitDRingAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = FixtureFailInitDRingAdapter.mm; path = Fixtures/DRingAdaptor/FixtureFailInitDRingAdapter.mm; sourceTree = "<group>"; };
 		024B612F1DF7656A00C4F9DE /* FixtureFailStartDRingAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FixtureFailStartDRingAdapter.h; path = Fixtures/DRingAdaptor/FixtureFailStartDRingAdapter.h; sourceTree = "<group>"; };
 		024B61301DF7656A00C4F9DE /* FixtureFailStartDRingAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = FixtureFailStartDRingAdapter.mm; path = Fixtures/DRingAdaptor/FixtureFailStartDRingAdapter.mm; sourceTree = "<group>"; };
-		02674C801E0C757B0065EDF9 /* RxBlocking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxBlocking.framework; path = Carthage/Build/iOS/RxBlocking.framework; sourceTree = "<group>"; };
 		02674C811E0C757B0065EDF9 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		02674C821E0C757B0065EDF9 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		02674C831E0C757B0065EDF9 /* RxTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxTest.framework; path = Carthage/Build/iOS/RxTest.framework; sourceTree = "<group>"; };
@@ -789,7 +782,6 @@
 		0EBB72A82034F44200D88F46 /* ProfilesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilesService.swift; sourceTree = "<group>"; };
 		0ECB4E2922B2D4BB0097CD7B /* CallKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CallKit.framework; path = System/Library/Frameworks/CallKit.framework; sourceTree = SDKROOT; };
 		0ECEE9A2220D1935000E1CF4 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
-		0ED6660F1F9FED1C00743D42 /* AMPopTip.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPopTip.framework; path = Carthage/Build/iOS/AMPopTip.framework; sourceTree = "<group>"; };
 		0EDA00010000000000001001 /* ConversationDestructiveAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationDestructiveAction.swift; sourceTree = "<group>"; };
 		0EDA00030000000000001003 /* SmartListRowModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SmartListRowModifiers.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Views/SmartListRowModifiers.swift; sourceTree = SOURCE_ROOT; };
 		0EDA00050000000000001005 /* ConversationDestructiveActionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationDestructiveActionTests.swift; sourceTree = "<group>"; };
@@ -1691,11 +1683,9 @@
 		44DFB38D288704570023878C /* RxRealm.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxRealm.xcframework; path = Carthage/Build/RxRealm.xcframework; sourceTree = "<group>"; };
 		44DFB38E2887045B0023878C /* Reachability.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Reachability.xcframework; path = Carthage/Build/Reachability.xcframework; sourceTree = "<group>"; };
 		44DFB38F288704600023878C /* RxDataSources.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxDataSources.xcframework; path = Carthage/Build/RxDataSources.xcframework; sourceTree = "<group>"; };
-		44DFB390288704640023878C /* RxBlocking.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxBlocking.xcframework; path = Carthage/Build/RxBlocking.xcframework; sourceTree = "<group>"; };
 		44DFB391288704690023878C /* Differentiator.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Differentiator.xcframework; path = Carthage/Build/Differentiator.xcframework; sourceTree = "<group>"; };
 		44DFB3922887046D0023878C /* Realm.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Realm.xcframework; path = Carthage/Build/Realm.xcframework; sourceTree = "<group>"; };
 		44DFB393288704710023878C /* GSKStretchyHeaderView.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GSKStretchyHeaderView.xcframework; path = Carthage/Build/GSKStretchyHeaderView.xcframework; sourceTree = "<group>"; };
-		44DFB394288704750023878C /* AMPopTip.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AMPopTip.xcframework; path = Carthage/Build/AMPopTip.xcframework; sourceTree = "<group>"; };
 		44DFB395288704790023878C /* Reusable.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Reusable.xcframework; path = Carthage/Build/Reusable.xcframework; sourceTree = "<group>"; };
 		44DFB3962887047E0023878C /* RxCocoa.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxCocoa.xcframework; path = Carthage/Build/RxCocoa.xcframework; sourceTree = "<group>"; };
 		44DFB397288704820023878C /* RxRelay.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxRelay.xcframework; path = Carthage/Build/RxRelay.xcframework; sourceTree = "<group>"; };
@@ -1957,7 +1947,6 @@
 				26001C462D78E1A3009A8E23 /* libopus.xcframework in Frameworks */,
 				26001CC92D792489009A8E23 /* SQLite.xcframework in Frameworks */,
 				26001C342D78E1A2009A8E23 /* libx264.xcframework in Frameworks */,
-				44DFB3AE288704900023878C /* AMPopTip.xcframework in Frameworks */,
 				26001C142D78E1A1009A8E23 /* libswscale.xcframework in Frameworks */,
 				26001C302D78E1A2009A8E23 /* libavcodec.xcframework in Frameworks */,
 				26001C4E2D78E1A3009A8E23 /* libpjsip.xcframework in Frameworks */,
@@ -1968,7 +1957,6 @@
 				26001C5E2D78E1A4009A8E23 /* libfmt.xcframework in Frameworks */,
 				26001C382D78E1A2009A8E23 /* libopendht.xcframework in Frameworks */,
 				26001C242D78E1A2009A8E23 /* libsecp256k1.xcframework in Frameworks */,
-				26001CD32D792492009A8E23 /* RxBlocking.xcframework in Frameworks */,
 				26001CC42D7918BD009A8E23 /* libvpx.xcframework in Frameworks */,
 				26001CCD2D79248D009A8E23 /* RxRelay.xcframework in Frameworks */,
 				44DFB3A8288704900023878C /* Differentiator.xcframework in Frameworks */,
@@ -2757,7 +2745,6 @@
 				26EB61382B7675FB00183FF4 /* Embassy.xcframework */,
 				26CA4C562AB23A9200AEF8F5 /* libxml2.2.tbd */,
 				269DA08428D0DA18007D51D6 /* libyaml-cpp.a */,
-				44DFB394288704750023878C /* AMPopTip.xcframework */,
 				44DFB391288704690023878C /* Differentiator.xcframework */,
 				44DFB393288704710023878C /* GSKStretchyHeaderView.xcframework */,
 				44DFB38A2887044A0023878C /* PKHUD.xcframework */,
@@ -2765,7 +2752,6 @@
 				44DFB3922887046D0023878C /* Realm.xcframework */,
 				44DFB3992887048A0023878C /* RealmSwift.xcframework */,
 				44DFB395288704790023878C /* Reusable.xcframework */,
-				44DFB390288704640023878C /* RxBlocking.xcframework */,
 				44DFB3962887047E0023878C /* RxCocoa.xcframework */,
 				44DFB38F288704600023878C /* RxDataSources.xcframework */,
 				44DFB38D288704570023878C /* RxRealm.xcframework */,
@@ -2838,7 +2824,6 @@
 				0E3BD4312044A41D00A50DDF /* GSKStretchyHeaderView.framework */,
 				0E0FF1A61FC38070003898C2 /* SQLite.framework */,
 				5C093F001FB495830011D90E /* Differentiator.framework */,
-				0ED6660F1F9FED1C00743D42 /* AMPopTip.framework */,
 				62DFAB2B1F9FF030002D6F9C /* Reachability.framework */,
 				0EEFBA3B1F83DA21000EDBAD /* libsecp256k1.a */,
 				1A3CA32A1F102BB700283748 /* Chameleon.framework */,
@@ -2848,7 +2833,6 @@
 				564775811EE5CFC500A0C855 /* Realm.framework */,
 				564775821EE5CFC500A0C855 /* RealmSwift.framework */,
 				568F56721EA7E38F00132D7D /* PKHUD.framework */,
-				02674C801E0C757B0065EDF9 /* RxBlocking.framework */,
 				02674C811E0C757B0065EDF9 /* RxCocoa.framework */,
 				02674C821E0C757B0065EDF9 /* RxSwift.framework */,
 				02674C831E0C757B0065EDF9 /* RxTest.framework */,
