@@ -36,6 +36,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         self.window = window
 
+        _ = ScreenDimensionsManager.shared
+
         // Start the app coordinator now that window is ready
         appDelegate.startAppCoordinator()
 
